@@ -4375,6 +4375,9 @@ void inc_hp(int hp_gain, bool max_too)
     if (hp_gain < 1)
         return;
 
+    if (you.species == SP_DEEP_DWARF)
+        hp_gain = div_rand_round(hp_gain, 2);
+
     bool wasnt_max = (you.hp < you.hp_max);
 
     you.hp += hp_gain;

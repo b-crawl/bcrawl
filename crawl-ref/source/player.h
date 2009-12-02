@@ -58,8 +58,6 @@ public:
   double elapsed_time;        // total amount of elapsed time in the game
   // This is NOT a fraction; double is merely used as a portable long long here
 
-  unsigned char synch_time;   // amount to wait before calling handle_time()
-
   int disease;
 
   char max_level;
@@ -426,7 +424,9 @@ public:
     void backlight();
     void banish(const std::string &who = "");
     void blink(bool allow_partial_control = true);
-    void teleport(bool right_now = false, bool abyss_shift = false);
+    void teleport(bool right_now = false,
+                  bool abyss_shift = false,
+                  bool wizard_tele = false);
     void drain_stat(int stat, int amount, actor* attacker);
 
     void expose_to_element(beam_type element, int strength = 0);

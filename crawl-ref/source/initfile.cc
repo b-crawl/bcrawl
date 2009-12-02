@@ -52,10 +52,10 @@
 #ifdef TARGET_OS_WINDOWS
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#elif defined ( __APPLE__ )
+extern char **NXArgv;
 #elif defined ( __linux__ )
 #include <unistd.h>
-#elif defined ( __MACH__ )
-extern char **NXArgv;
 #endif
 
 const std::string game_options::interrupt_prefix = "interrupt_";
@@ -222,8 +222,6 @@ int str_to_fprop ( const std::string &str)
 {
     if (str == "bloody")
         return (FPROP_BLOODY);
-    if (str == "force_exclude")
-        return (FPROP_FORCE_EXCLUDE);
     if (str == "no_cloud_gen")
         return (FPROP_NO_CLOUD_GEN);
     if (str == "no_rtele_into")
@@ -451,7 +449,6 @@ void game_options::set_default_activity_interrupts()
         "interrupt_butcher = interrupt_armour_on, teleport, stat",
         "interrupt_bottle_blood = interrupt_butcher",
         "interrupt_vampire_feed = interrupt_butcher",
-        "interrupt_passwall = interrupt_butcher",
         "interrupt_multidrop = interrupt_butcher",
         "interrupt_macro = interrupt_multidrop",
         "interrupt_travel = interrupt_butcher, statue, hungry, "

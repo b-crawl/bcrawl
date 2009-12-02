@@ -267,7 +267,6 @@ MARKER: # = lua:fog_machine { \
 KFEAT:  # = l
 FTILE:  ' = floor_rough_red
 COLOUR: ' = red
-KPROP:  ' = force_exclude
 SUBST:  ' = .
 MAP
 bbbbbbbbb
@@ -3509,7 +3508,11 @@ ORIENT:  float
 FTILE:   1234+ABCDEabcdem = floor_dirt
 SHUFFLE: abcde / fghij
 # Don't let auto-explore open the door and unleash the caged monsters.
-KPROP:   + = force_exclude
+MARKER:   + = lua:props_marker { \
+            door_open_prompt="This door is covered in warnings.  Open " .. \
+                             "it anyways?", \
+            door_description_prefix="warning scrawled " \
+         }
 SUBST:   f=A, g=B, h=C, i=D, j=E
 SUBST:   abcde = mx
 SUBST:   ABCDE : mx
@@ -4491,7 +4494,7 @@ MONS:    hog / jackal / wolf / hound / war dog
 MONS:    giant cockroach / giant ant / butterfly / killer bee / bumblebee /\
          redback / giant mite
 MONS:    swamp worm / lindwurm / worm / spiny worm
-MONS:    swamp drake / hydra / wyvern / firedrake
+MONS:    swamp drake / hydra / wyvern / fire drake
 MONS:    bear / polar bear / grizzly bear / black bear
 MONS:    black mamba / water moccasin / grey snake / salamander / viper
 MAP

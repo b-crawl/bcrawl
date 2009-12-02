@@ -5353,7 +5353,6 @@ void player::init()
     elapsed_time    = 0;
     rotting         = 0;
     unrand_reacts   = 0;
-    synch_time      = 0;
 
     magic_contamination = 0;
 
@@ -6654,12 +6653,12 @@ void player::blink(bool allow_partial_control)
     random_blink(allow_partial_control);
 }
 
-void player::teleport(bool now, bool abyss_shift)
+void player::teleport(bool now, bool abyss_shift, bool wizard_tele)
 {
     ASSERT(!crawl_state.arena);
 
     if (now)
-        you_teleport_now(true, abyss_shift);
+        you_teleport_now(true, abyss_shift, wizard_tele);
     else
         you_teleport();
 }

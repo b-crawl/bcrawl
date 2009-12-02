@@ -1410,13 +1410,44 @@ void you_teleport(void)
     }
 }
 
-static bool _teleport_player(bool allow_control, bool new_abyss_area)
+// Should return true if we don't want anyone to teleport here.
+bool _cell_vetoes_teleport (const coord_def cell)
+{
+    // Monsters always veto teleport.
+    if (monster_at(cell))
+        return (true);
+
+    // As do all clouds; this may change.
+    if (env.cgrid(cell) != EMPTY_CLOUD)
+        return (true);
+
+    // But not all features.
+    switch (grd(cell))
+    {
+    case DNGN_FLOOR:
+    case DNGN_SHALLOW_WATER:
+        return (false);
+
+    case DNGN_DEEP_WATER:
+        if (you.species == SP_MERFOLK)
+            return (false);
+
+    default:
+        return (true);
+    }
+}
+
+static bool _teleport_player(bool allow_control, bool new_abyss_area, bool wizard_tele)
 {
     bool is_controlled = (allow_control && !you.confused()
                           && player_control_teleport()
                           && allow_control_teleport());
 
-    if (scan_artefacts(ARTP_PREVENT_TELEPORTATION))
+    // All wizard teleports are automatically controlled.
+    if (wizard_tele)
+        is_controlled = true;
+
+    if (scan_artefacts(ARTP_PREVENT_TELEPORTATION) && !wizard_tele)
     {
         mpr("You feel a strange sense of stasis.");
         return (false);
@@ -1456,7 +1487,10 @@ static bool _teleport_player(bool allow_control, bool new_abyss_area)
         mpr("You may choose your destination (press '.' or delete to select).");
         mpr("Expect minor deviation.");
         check_ring_TC = true;
-        more();
+
+        // Only have the more prompt for non-wizard.
+        if (!wizard_tele)
+            more();
 
         while (true)
         {
@@ -1483,15 +1517,16 @@ static bool _teleport_player(bool allow_control, bool new_abyss_area)
 
             if (pos == you.pos() || pos == coord_def(-1,-1))
             {
-                if (!yesno("Are you sure you want to cancel this teleport?",
-                           true, 'n'))
-                    continue;
+                if (!wizard_tele)
+                    if (!yesno("Are you sure you want to cancel this teleport?",
+                               true, 'n'))
+                        continue;
                 you.turn_is_over = false;
                 return (false);
             }
 
             monsters *beholder = you.get_beholder(pos);
-            if (beholder)
+            if (beholder && !wizard_tele)
             {
                 mprf("You cannot teleport away from %s!",
                      beholder->name(DESC_NOCAP_THE, true).c_str());
@@ -1503,13 +1538,21 @@ static bool _teleport_player(bool allow_control, bool new_abyss_area)
             break;
         }
 
-        pos.x += random2(3) - 1;
-        pos.y += random2(3) - 1;
-
-        if (one_chance_in(4))
+        // Don't randomly walk wizard teleports.
+        if (!wizard_tele)
         {
             pos.x += random2(3) - 1;
             pos.y += random2(3) - 1;
+
+            if (one_chance_in(4))
+            {
+                pos.x += random2(3) - 1;
+                pos.y += random2(3) - 1;
+            }
+#if DEBUG_DIAGNOSTICS
+        mprf(MSGCH_DIAGNOSTICS,
+             "Scattered target square (%d, %d)", pos.x, pos.y);
+#endif
         }
 
         if (!in_bounds(pos))
@@ -1518,28 +1561,22 @@ static bool _teleport_player(bool allow_control, bool new_abyss_area)
             is_controlled = false;
         }
 
-#if DEBUG_DIAGNOSTICS
-        mprf(MSGCH_DIAGNOSTICS,
-             "Scattered target square (%d, %d)", pos.x, pos.y);
-#endif
-
         if (is_controlled)
         {
             if (!you.see_cell(pos))
                 large_change = true;
 
             // Merfolk should be able to control-tele into deep water.
-            if (grd(pos) != DNGN_FLOOR
-                    && grd(pos) != DNGN_SHALLOW_WATER
-                    && (you.species != SP_MERFOLK
-                        || grd(pos) != DNGN_DEEP_WATER)
-                || monster_at(pos)
-                || env.cgrid(pos) != EMPTY_CLOUD)
+            if (_cell_vetoes_teleport(pos))
             {
+#if DEBUG_DIAGNOSTICS
+                mprf(MSGCH_DIAGNOSTICS,
+                    "Target square (%d, %d) vetoed, now random teleport.", pos.x, pos.y);
+#endif
                 is_controlled = false;
                 large_change  = false;
             }
-            else if (testbits(env.pgrid(pos), FPROP_NO_CTELE_INTO))
+            else if (testbits(env.pgrid(pos), FPROP_NO_CTELE_INTO) && !wizard_tele)
             {
                 is_controlled = false;
                 large_change = false;
@@ -1552,7 +1589,8 @@ static bool _teleport_player(bool allow_control, bool new_abyss_area)
 
                 // Controlling teleport contaminates the player. - bwr
                 move_player_to_grid(pos, false, true, true);
-                contaminate_player(1, true);
+                if (!wizard_tele)
+                    contaminate_player(1, true);
             }
         }
     }
@@ -1653,9 +1691,10 @@ static bool _teleport_player(bool allow_control, bool new_abyss_area)
     return (!is_controlled);
 }
 
-void you_teleport_now(bool allow_control, bool new_abyss_area)
+void you_teleport_now(bool allow_control, bool new_abyss_area, bool wizard_tele)
 {
-    const bool randtele = _teleport_player(allow_control, new_abyss_area);
+    const bool randtele = _teleport_player(allow_control, new_abyss_area, 
+                                           wizard_tele);
 
     // Xom is amused by uncontrolled teleports that land you in a
     // dangerous place, unless the player is in the Abyss and

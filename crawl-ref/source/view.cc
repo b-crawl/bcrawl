@@ -660,12 +660,19 @@ static void _debug_pane_bounds()
 #endif
 }
 
+enum update_flags
+{
+    UF_AFFECT_EXCLUDES = (1 << 0),
+    UF_ADDED_EXCLUDE   = (1 << 1)
+};
+
 // Do various updates when the player sees a cell. Returns whether
 // exclusion LOS might have been affected.
-static bool player_view_update_at(const coord_def &gc)
+static int player_view_update_at(const coord_def &gc)
 {
     const coord_def ep = grid2show(gc);
     maybe_remove_autoexclusion(gc);
+    int ret = 0;
 
     // Set excludes in a radius of 1 around harmful clouds genereated
     // by neither monsters nor the player.
@@ -681,8 +688,12 @@ static bool player_view_update_at(const coord_def &gc)
         {
             for (adjacent_iterator ai(gc, false); ai; ++ai)
             {
+                // Optionally add exclude, deferring updates.
                 if (!cell_is_solid(*ai) && !is_exclude_root(*ai))
-                    set_exclude(*ai, 0);
+                {
+                    set_exclude(*ai, 0, false, false, true);
+                    ret |= UF_ADDED_EXCLUDE;
+                }
             }
         }
     }
@@ -692,12 +703,13 @@ static bool player_view_update_at(const coord_def &gc)
         tutorial_observe_cell(gc);
 
     if (!player_in_mappable_area())
-        return (false);
+        return (ret);
 
-    bool need_excl_update = is_terrain_changed(gc) || !is_terrain_seen(gc);
+    if (is_terrain_changed(gc) || !is_terrain_seen(gc))
+        ret |= UF_AFFECT_EXCLUDES;
 
     set_terrain_seen(gc);
-    set_map_knowledge_obj(gc, env.show(ep));
+    set_map_knowledge_obj(gc, to_knowledge(env.show(ep), emphasise(gc)));
     set_map_knowledge_detected_mons(gc, false);
     set_map_knowledge_detected_item(gc, false);
 
@@ -712,18 +724,29 @@ static bool player_view_update_at(const coord_def &gc)
 #endif
 
     if (Options.clean_map && env.show.get_backup(ep))
-        set_map_knowledge_obj(gc, env.show.get_backup(ep));
+        set_map_knowledge_obj(gc, to_knowledge(env.show.get_backup(ep),
+                                               emphasise(gc)));
 
-    return (need_excl_update);
+    return (ret);
 }
 
 static void player_view_update()
 {
     std::vector<coord_def> update_excludes;
+    bool need_update = false;
     for (radius_iterator ri(&you.get_los()); ri; ++ri)
-        if (player_view_update_at(*ri))
+    {
+        int flags = player_view_update_at(*ri);
+        if (flags & UF_AFFECT_EXCLUDES)
             update_excludes.push_back(*ri);
+        if (flags & UF_ADDED_EXCLUDE)
+            need_update = true;
+    }
+    // Update exclusion LOS for possibly affected excludes.
     update_exclusion_los(update_excludes);
+    // Catch up on deferred updates for cloud excludes.
+    if (need_update)
+        deferred_exclude_update();
 }
 
 #ifdef USE_TILE
@@ -772,9 +795,8 @@ static void draw_outside_los(screen_buffer_t* buffy, const coord_def &gc)
     // Outside the env.show area.
     buffy[0] = get_map_knowledge_char(gc);
     buffy[1] = DARKGREY;
-
     if (Options.colour_map)
-        buffy[1] = colour_code_map(gc, Options.item_colour);
+        buffy[1] = real_colour(get_map_knowledge_col(gc));
 #else
     unsigned int bg = env.tile_bk_bg(gc);
     unsigned int fg = env.tile_bk_fg(gc);
@@ -829,7 +851,7 @@ static void draw_los_backup(screen_buffer_t* buffy,
     buffy[1] = DARKGREY;
 
     if (Options.colour_map)
-        buffy[1] = colour_code_map(gc, Options.item_colour);
+        buffy[1] = real_colour(get_map_knowledge_col(gc));
 #else
     if (env.tile_bk_fg(gc) != 0
         || env.tile_bk_bg(gc) != 0)

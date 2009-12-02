@@ -551,7 +551,7 @@ ifneq ($(strip $(DATADIR)),)
 	override DATADIR := $(strip $(prefix))/$(strip $(DATADIR))
     endif
   endif
-  CFOTHERS_L += -DDATA_DIR_PATH=\"$(abspath $(DATADIR))\"
+  CFOTHERS_L += -DDATA_DIR_PATH=\"$(abspath $(DATADIR))/\"
 else
   ifneq ($(prefix),)
 	DATADIR := $(strip $(prefix))/$(strip $(DATADIR))
@@ -698,11 +698,11 @@ CONTRIB_LIBS += $(LIBSDL)
 endif
 ifdef BUILD_LIBPNG
 CONTRIBS += libpng
-# Links to rltiles, not to Crawl itself
+CONTRIB_LIBS += $(LIBPNG)
 endif
 ifdef BUILD_ZLIB
 CONTRIBS += zlib
-# Links to rltiles, not to Crawl itself
+CONTRIB_LIBS += $(LIBZ)
 endif
 ifdef BUILD_LUA
 CONTRIBS += lua/src
@@ -723,7 +723,7 @@ PKG_SRC_DIR  := $(SRC_PKG_BASE)-$(SRC_VERSION)
 SRC_PKG_TAR  := $(PKG_SRC_DIR).tar.bz2
 SRC_PKG_ZIP  := $(PKG_SRC_DIR).zip
 
-.PHONY: all test install clean clean-contrib distclean debug profile wizard package-source
+.PHONY: all test install clean clean-contrib distclean debug profile wizard package-source source
 
 all: $(GAME)
 
@@ -953,7 +953,10 @@ clean-rltiles:
 
 # To package, you *must* have lex and yacc to generate the intermediates.
 BSRC = build/crawl-ref/source/
-package-source: prebuildyacc depend removeold
+package-source: prebuildyacc
+	+@$(MAKE) source
+
+source: depend removeold
 	@git branch >/dev/null 2>/dev/null || (echo You can package source only from git. && false)
 	rm -rf build
 	mkdir build
@@ -973,7 +976,12 @@ package-source: prebuildyacc depend removeold
 	  > $(BSRC)util/release_ver
 	cd build && mv crawl-ref $(PKG_SRC_DIR)
 	cd build && tar cfj ../../../$(SRC_PKG_TAR) $(PKG_SRC_DIR)
-	cd build && zip -rq ../../../$(SRC_PKG_ZIP) $(PKG_SRC_DIR)
+	@if which zip >/dev/null; then \
+	  @echo "cd build && zip -rq ../../../$(SRC_PKG_ZIP) $(PKG_SRC_DIR)"; \
+	  cd build && zip -rq ../../../$(SRC_PKG_ZIP) $(PKG_SRC_DIR); \
+	else \
+	  echo "**** No ZIP installed -- not creating the zipball."; \
+	fi
 	rm -rf build
 
 removeold:

@@ -323,6 +323,8 @@ size_type species_size(species_type species, size_part_type psize)
         return ((psize == PSIZE_TORSO) ? SIZE_MEDIUM : SIZE_LARGE);
     case SP_HALFLING:
     case SP_KOBOLD:
+    case SP_MOUNTAIN_DWARF:
+    case SP_DEEP_DWARF:
         return (SIZE_SMALL);
     case SP_SPRIGGAN:
         return (SIZE_LITTLE);

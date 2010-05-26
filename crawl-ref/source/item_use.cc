@@ -1324,7 +1324,7 @@ int launcher_shield_slowdown(const item_def &launcher, const item_def *shield)
         return (speed_adjust);
 
     const int shield_type = shield->sub_type;
-    hands_reqd_type hands = hands_reqd(launcher, you.body_size());
+    hands_reqd_type hands = hands_reqd(launcher, &you);
 
     switch (hands)
     {

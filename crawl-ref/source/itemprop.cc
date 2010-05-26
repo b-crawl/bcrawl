@@ -1387,21 +1387,13 @@ int single_damage_type(const item_def &item)
     return (ret);
 }
 
-hands_reqd_type hands_reqd(object_class_type base_type, int sub_type,
-                           size_type size)
-{
-    item_def item;
-    item.base_type = base_type;
-    item.sub_type  = sub_type;
-    return hands_reqd(item, size);
-}
-
-// Give hands required to wield weapon for a torso of "size".
-hands_reqd_type hands_reqd( const item_def &item, size_type size )
+// Give hands required to wield weapon for the given person.
+hands_reqd_type hands_reqd(const item_def &item, const actor *whom)
 {
     int         ret = HANDS_ONE;
     int         fit;
     bool        doub = false;
+    size_type   size = whom->body_size();
 
     switch (item.base_type)
     {
@@ -1452,6 +1444,17 @@ hands_reqd_type hands_reqd( const item_def &item, size_type size )
 
             // Note the stretching of double weapons for larger characters
             // by one level since they tend to be larger weapons.
+            skill_type sk = weapon_skill(item);
+            if (sk == SK_AXES || sk == SK_MACES_FLAILS)
+            {
+                if ((whom->atype() == ACT_PLAYER) ? player_genus(GENPC_DWARVEN)
+                        : (mons_genus(mons_base_type(whom->as_monster()))
+                          == MONS_DWARF)
+                    && fit > 0)
+                {
+                    fit--;
+                }
+            }
             if (size < SIZE_MEDIUM && fit > 0)
                 ret += fit;
             else if (size > SIZE_MEDIUM && fit < 0)
@@ -2509,7 +2512,7 @@ bool is_shield_incompatible(const item_def &weapon, const item_def *shield)
     if (!shield && !(shield = you.shield()))
         return (false);
 
-    hands_reqd_type hand = hands_reqd(weapon, you.body_size());
+    hands_reqd_type hand = hands_reqd(weapon, &you);
     return (hand == HANDS_TWO
             && !item_is_rod(weapon)
             && !is_range_weapon(weapon));

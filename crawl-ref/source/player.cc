@@ -6170,7 +6170,7 @@ bool player::has_usable_offhand() const
 
     const item_def* wp = slot_item(EQ_WEAPON);
     return (!wp
-            || hands_reqd(*wp, body_size()) != HANDS_TWO
+            || hands_reqd(*wp, this) != HANDS_TWO
             || wp->base_type == OBJ_STAVES
             || weapon_skill(*wp) == SK_STAVES);
 }

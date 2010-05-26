@@ -915,7 +915,7 @@ static std::string _describe_weapon(const item_def &item, bool verbose)
 
         if (!launcher)
         {
-            switch (hands_reqd(item, you.body_size()))
+            switch (hands_reqd(item, &you))
             {
             case HANDS_ONE:
                 description += "It is a one handed weapon";

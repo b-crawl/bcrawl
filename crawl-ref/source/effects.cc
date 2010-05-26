@@ -1166,7 +1166,7 @@ static bool _try_give_plain_armour(item_def &arm)
 
             // Two-handed weapons and ranged weapons conflict with shields.
             if (weapon
-                && (hands_reqd(*weapon, you.body_size()) == HANDS_TWO
+                && (hands_reqd(*weapon, &you) == HANDS_TWO
                     || is_range_weapon(*weapon)))
             {
                 continue;
@@ -1326,7 +1326,7 @@ static int _acquirement_weapon_subtype(bool divine)
             continue;
 
         // HANDS_DOUBLE > HANDS_TWO
-        const bool two_handed = hands_reqd(item_considered, you.body_size()) >= HANDS_TWO;
+        const bool two_handed = hands_reqd(item_considered, &you) >= HANDS_TWO;
 
         // For non-Trog/Okawaru acquirements, give a boost to high-end items.
         if (!divine && !is_range_weapon(item_considered))

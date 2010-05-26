@@ -321,7 +321,7 @@ void melee_attack::init_attack()
     wpn_skill = weapon ? weapon_skill(*weapon) : SK_UNARMED_COMBAT;
     if (weapon)
     {
-        hands = hands_reqd(*weapon, attacker->body_size());
+        hands = hands_reqd(*weapon, attacker);
 
         switch (single_damage_type(*weapon))
         {
@@ -4173,7 +4173,7 @@ int melee_attack::player_calc_base_weapon_damage()
     // effective.
     if (shield && weapon->base_type == OBJ_WEAPONS
         && weapon_skill(*weapon) == SK_STAVES
-        && hands_reqd(*weapon, you.body_size()) == HANDS_HALF)
+        && hands_reqd(*weapon, &you) == HANDS_HALF)
     {
         damage /= 2;
     }
@@ -5930,7 +5930,10 @@ int weapon_str_weight( object_class_type wpn_class, int wpn_type )
     int  ret;
 
     const int wpn_skill  = weapon_skill( wpn_class, wpn_type );
-    const int hands      = hands_reqd( wpn_class, wpn_type, you.body_size() );
+    item_def dummy;
+    dummy.base_type = wpn_class;
+    dummy.sub_type  = wpn_type;
+    const int hands      = hands_reqd(dummy, &you);
 
     // These are low values, because we'll be adding some bonus to the
     // larger weapons later.  Remember also that 1-1/2-hand weapons get
@@ -6001,7 +6004,7 @@ static inline int player_weapon_str_weight()
 
     int ret = weapon_str_weight(weapon->base_type, weapon->sub_type);
 
-    if (hands_reqd(*weapon, you.body_size()) == HANDS_HALF && !you.shield())
+    if (hands_reqd(*weapon, &you) == HANDS_HALF && !you.shield())
         ret += 1;
 
     return (ret);

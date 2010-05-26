@@ -1282,8 +1282,8 @@ void give_shield(monsters *mon, int level)
     // If the monster is already wielding/carrying a two-handed weapon,
     // it doesn't get a shield.  (Monsters always prefer raw damage to
     // protection!)
-    if (main_weap && hands_reqd(*main_weap, mon->body_size()) == HANDS_TWO
-        || alt_weap && hands_reqd(*alt_weap, mon->body_size()) == HANDS_TWO)
+    if (main_weap && hands_reqd(*main_weap, mon) == HANDS_TWO
+        || alt_weap && hands_reqd(*alt_weap, mon) == HANDS_TWO)
     {
         return;
     }

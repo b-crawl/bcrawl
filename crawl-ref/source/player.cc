@@ -5877,6 +5877,8 @@ int player::mons_species() const
         return (MONS_ORC);
     case SP_HIGH_ELF: case SP_DEEP_ELF: case SP_SLUDGE_ELF:
         return (MONS_ELF);
+    case SP_MOUNTAIN_DWARF: case SP_DEEP_DWARF:
+        return (MONS_DWARF);
 
     default:
         return (MONS_HUMAN);

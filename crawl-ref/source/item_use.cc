@@ -157,7 +157,8 @@ bool can_wield(item_def *weapon, bool say_reason,
 
     // Small species wielding large weapons...
     if (you.body_size(PSIZE_BODY) < SIZE_MEDIUM
-        && !check_weapon_wieldable_size(*weapon, you.body_size(PSIZE_BODY)))
+        && !check_weapon_wieldable_size(*weapon, you.body_size(PSIZE_BODY),
+                                        player_genus(GENPC_DWARVEN)))
     {
         SAY(mpr("That's too large for you to wield."));
         return (false);

@@ -92,7 +92,7 @@ int weapon_rarity( int w_type );
 
 int   cmp_weapon_size( const item_def &item, size_type size );
 int   fit_weapon_wieldable_size( const item_def &item, size_type size );
-bool  check_weapon_wieldable_size( const item_def &item, size_type size );
+bool  check_weapon_wieldable_size(const item_def &item, size_type size, bool dwarf);
 
 int   fit_item_throwable_size( const item_def &item, size_type size );
 

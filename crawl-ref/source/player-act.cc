@@ -297,7 +297,8 @@ bool player::could_wield(const item_def &item, bool ignore_brand,
 
     // Small species wielding large weapons...
     if (body_size(PSIZE_BODY) < SIZE_MEDIUM
-        && !check_weapon_wieldable_size(item, body_size(PSIZE_BODY)))
+        && !check_weapon_wieldable_size(item, body_size(PSIZE_BODY),
+                                        player_genus(GENPC_DWARVEN)))
     {
         return (false);
     }

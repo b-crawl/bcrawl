@@ -578,7 +578,8 @@ bool monsters::could_wield(const item_def &item, bool ignore_brand,
         return (false);
 
     // Wimpy monsters (e.g. kobolds, goblins) can't use halberds, etc.
-    if (!check_weapon_wieldable_size(item, body_size()))
+    if (!check_weapon_wieldable_size(item, body_size(),
+            mons_genus(mons_base_type(this)) == MONS_DWARF))
         return (false);
 
     if (!ignore_brand)

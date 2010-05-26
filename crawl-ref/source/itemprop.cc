@@ -1820,7 +1820,7 @@ int fit_item_throwable_size( const item_def &item, size_type size )
 }
 
 // Returns true if weapon is usable as a weapon.
-bool check_weapon_wieldable_size( const item_def &item, size_type size )
+bool check_weapon_wieldable_size(const item_def &item, size_type size, bool dwarf)
 {
     ASSERT( item.base_type == OBJ_WEAPONS || item.base_type == OBJ_STAVES );
 
@@ -1829,6 +1829,14 @@ bool check_weapon_wieldable_size( const item_def &item, size_type size )
         return (true);
 
     int fit = fit_weapon_wieldable_size( item, size );
+
+    // Dwarves are good at using heavy short-hafted weapons.
+    if (item.base_type == OBJ_WEAPONS && dwarf && (weapon_skill(item) == SK_AXES
+        || weapon_skill(item) == SK_MACES_FLAILS))
+    {
+        if (fit > 0)
+            fit--;
+    }
 
     // Adjust fit for size.
     if (size < SIZE_SMALL && fit > 0)

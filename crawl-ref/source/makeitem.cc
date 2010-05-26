@@ -2169,7 +2169,7 @@ static item_status_flag_type _determine_armour_race(const item_def& item,
                 rc = ISFLAG_ORCISH;
             if (one_chance_in(4))
                 rc = ISFLAG_ELVEN;
-            if (one_chance_in(3))
+            if (one_chance_in(3) && item.sub_type != ARM_LARGE_SHIELD)
                 rc = ISFLAG_DWARVEN;
             break;
 

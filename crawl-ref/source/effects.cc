@@ -1063,6 +1063,9 @@ static armour_type _acquirement_armour_subtype(bool divine)
         }
         else
         {
+            // Small (but not little) races may get dwarven gear, so they are
+            // included here.  Spriggans are not -- dwarven ring/scale mail is
+            // bad for them so it's definitely not acquirement material.
             if (divine)
             {
                 const armour_type armours[] = { ARM_ROBE, ARM_LEATHER_ARMOUR,
@@ -1623,6 +1626,9 @@ static int _find_acquirement_subtype(object_class_type class_wanted,
         dummy.sub_type = type_wanted;
         dummy.plus = 1; // empty wands would be useless
         dummy.flags |= ISFLAG_IDENT_MASK;
+        // For small folks, dwarven stuff is never worse.
+        if (you.body_size() == SIZE_SMALL)
+            dummy.flags |= ISFLAG_DWARVEN;
 
         if (is_useless_item(dummy, false) && useless_count++ < 200)
             goto again;
@@ -2054,6 +2060,20 @@ int acquirement_create_item(object_class_type class_wanted,
             }
         }
 
+        // Not done with MAKE_ITEM_DWARVEN because:
+        // 1. some items ignore race settings
+        // 2. we don't want the enchantment bonus
+        if (doodad.base_type == OBJ_ARMOUR
+            && get_armour_slot(doodad) == EQ_BODY_ARMOUR
+            && !can_wear_armour(doodad, false, true)
+            && you.body_size(PSIZE_TORSO, true) == SIZE_SMALL
+            && !is_unrandom_artefact(doodad))
+        {
+            // Only dwarves make rigid armour of that size, so kobolds and
+            // halflings get a free ride.  Spriggans are excluded on purpose.
+            set_equip_race(doodad, ISFLAG_DWARVEN);
+        }
+
         if (doodad.base_type == OBJ_WEAPONS
                && !can_wield(&doodad, false, true)
             || doodad.base_type == OBJ_ARMOUR
@@ -2280,7 +2300,6 @@ int acquirement_create_item(object_class_type class_wanted,
                 thing.plus2 = std::max(static_cast<int>(thing.plus2), 0);
         }
     }
-
     if (agent > GOD_NO_GOD && agent < NUM_GODS && agent == you.religion)
         thing.inscription = "god gift";
 

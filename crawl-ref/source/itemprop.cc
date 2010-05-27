@@ -1093,6 +1093,13 @@ int fit_armour_size( const item_def &item, size_type size )
     const size_type min = Armour_prop[ Armour_index[item.sub_type] ].fit_min;
     const size_type max = Armour_prop[ Armour_index[item.sub_type] ].fit_max;
 
+    // Dwarven body armour is one size smaller.
+    if (get_equip_race(item) == ISFLAG_DWARVEN
+        && get_armour_slot(item) == EQ_BODY_ARMOUR)
+    {
+        size = static_cast<size_type>(size + 1);
+    }
+
     if (size < min)
         return (min - size);    // -'ve means levels too small
     else if (size > max)

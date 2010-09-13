@@ -1185,7 +1185,7 @@ void direction_chooser::draw_beam_if_needed()
 
 bool direction_chooser::in_range(const coord_def& p) const
 {
-    return (range < 0 || distance(p, you.pos()) <= range*range + 1);
+    return (range < 0 || grid_distance(p, you.pos()) <= range);
 }
 
 // Cycle to either the next (dir == 1) or previous (dir == -1) object

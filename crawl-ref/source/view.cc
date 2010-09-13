@@ -937,9 +937,8 @@ void viewwindow(bool show_updates)
         }
         else if (crawl_state.darken_range >= 0)
         {
-            const int rsq = (crawl_state.darken_range
-                             * crawl_state.darken_range) + 1;
-            bool out_of_range = distance(you.pos(), gc) > rsq
+            bool out_of_range = grid_distance(you.pos(), gc) >
+                                    crawl_state.darken_range
                                 || !you.see_cell(gc);
             if (out_of_range)
             {

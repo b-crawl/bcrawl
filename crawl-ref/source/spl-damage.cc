@@ -969,7 +969,6 @@ static int _shatter_walls(coord_def where, int pow, int, actor *)
 
 void cast_shatter(int pow)
 {
-    int damage = 0;
     const bool silence = silenced(you.pos());
 
     if (silence)
@@ -979,35 +978,6 @@ void cast_shatter(int pow)
         noisy(30, you.pos());
         mpr("The dungeon rumbles!", MSGCH_SOUND);
     }
-
-    switch (you.attribute[ATTR_TRANSFORMATION])
-    {
-    case TRAN_NONE:
-    case TRAN_SPIDER:
-    case TRAN_LICH:
-    case TRAN_DRAGON:
-    case TRAN_BAT:
-        break;
-
-    case TRAN_STATUE:           // full damage
-        damage = 15 + random2avg( (pow / 5), 4 );
-        break;
-
-    case TRAN_ICE_BEAST:        // 1/2 damage
-        damage = 10 + random2avg( (pow / 5), 4 ) / 2;
-        break;
-
-    case TRAN_BLADE_HANDS:      // 2d3 damage
-        mpr("Your scythe-like blades vibrate painfully!");
-        damage = 2 + random2avg(5, 2);
-        break;
-
-    default:
-        mpr("cast_shatter(): unknown transformation in spl-damage.cc");
-    }
-
-    if (damage > 0)
-        ouch(damage, NON_MONSTER, KILLED_BY_TARGETING);
 
     int rad = 3 + (you.skills[SK_EARTH_MAGIC] / 5);
 

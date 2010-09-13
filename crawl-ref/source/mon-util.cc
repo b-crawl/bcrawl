@@ -4137,7 +4137,7 @@ bool mons_landlubbers_in_reach(const monster* mons)
 
 int get_dist_to_nearest_monster()
 {
-    int minRange = LOS_RADIUS_SQ + 1;
+    int minRange = get_los_radius_sq() + 1;
     for (radius_iterator ri(you.get_los_no_trans(), true); ri; ++ri)
     {
         const monster* mon = monster_at(*ri);

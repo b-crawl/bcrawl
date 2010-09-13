@@ -31,7 +31,7 @@ circle_def::circle_def()
     : los_radius(true), origin(coord_def(0,0)), check_bounds(false)
 {
     // Set up bounding box and shape.
-    init(LOS_MAX_RADIUS, C_ROUND);
+    init(LOS_MAX_RADIUS, C_SQUARE);
 }
 
 circle_def::circle_def(const coord_def& origin_, const circle_def& bds)
@@ -112,12 +112,12 @@ bool circle_def::contains(const coord_def &p) const
     switch (shape)
     {
     case SH_SQUARE:
-        return ((p - origin).rdist() <= radius);
-    case SH_CIRCLE:
     {
-        int r_sq = los_radius ? get_los_radius_sq() : radius_sq;
-        return ((p - origin).abs() <= r_sq);
+        int r = los_radius ? get_los_radius() : radius;
+        return ((p - origin).rdist() <= r);
     }
+    case SH_CIRCLE:
+        return ((p - origin).abs() <= radius_sq);
     default:
         return (false);
     }

@@ -963,7 +963,7 @@ static bool _valid_monster_generation_location( const mgen_data &mg,
     // XXX: This is a little redundant with proximity checks in
     // place_monster.
     if (mg.proximity == PROX_AWAY_FROM_PLAYER
-        && distance(you.pos(), mg_pos) <= LOS_RADIUS_SQ)
+        && grid_distance(you.pos(), mg_pos) <= get_los_radius())
     {
         return (false);
     }
@@ -1125,8 +1125,8 @@ int place_monster(mgen_data mg, bool force_pos)
             case PROX_AWAY_FROM_PLAYER:
                 // If this is supposed to measure los vs not los,
                 // then see_cell(mg.pos) should be used instead. (jpeg)
-                close_to_player = (distance(you.pos(), mg.pos) <=
-                                   LOS_RADIUS_SQ);
+                close_to_player = (grid_distance(you.pos(), mg.pos) <=
+                                   get_los_radius());
 
                 if (mg.proximity == PROX_CLOSE_TO_PLAYER && !close_to_player
                     || mg.proximity == PROX_AWAY_FROM_PLAYER && close_to_player)

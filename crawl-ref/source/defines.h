@@ -110,7 +110,7 @@ const int LABYRINTH_BORDER = 4;
 #define Y_WIDTH                 (Y_BOUND_2 - Y_BOUND_1 + 1)
 
 // default LOS radius
-#define LOS_RADIUS 8
+#define LOS_RADIUS 7
 // maximal LOS radius
 #define LOS_MAX_RADIUS LOS_RADIUS
 // maximal horizontal or vertical LOS range:

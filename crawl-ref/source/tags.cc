@@ -1726,6 +1726,9 @@ static void tag_read_you(reader &th, int minorVersion)
 
     you.normal_vision  = unmarshallByte(th);
     you.current_vision = unmarshallByte(th);
+    if (minorVersion < TAG_MINOR_REDUCED_LOS)
+        you.current_vision -= 1;
+
     you.hell_exit      = unmarshallByte(th);
     you.hell_branch = static_cast<branch_type>( unmarshallByte(th) );
 

@@ -1086,9 +1086,9 @@ static bool _check_ability_possible(const ability_def& abil,
 
     case ABIL_EVOKE_BERSERK:
     case ABIL_TROG_BERSERK:
-        if (you.hunger_state < HS_SATIATED)
+        if (you.hunger_state < HS_SATIATED && !you.is_undead)
         {
-            mpr("You're too hungry to berserk.");
+            mpr("You're too hungry to go berserk.");
             return (false);
         }
         return (you.can_go_berserk(true) && berserk_check_wielded_weapon());
@@ -1107,7 +1107,7 @@ static bool _check_ability_possible(const ability_def& abil,
         return (true);
 
     case ABIL_EVOKE_TURN_INVISIBLE:     // ring, randarts, darkness items
-        if (you.hunger_state < HS_SATIATED && you.species != SP_VAMPIRE)
+        if (you.hunger_state < HS_SATIATED && !you.is_undead)
         {
             mpr("You're too hungry to turn invisible.");
             return (false);

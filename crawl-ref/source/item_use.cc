@@ -1417,7 +1417,6 @@ static bool _item_penetrates_victim(const bolt &beam, const actor *victim,
 static bool _silver_damages_victim(bolt &beam, actor* victim, int &dmg,
                                    std::string &dmg_msg)
 {
-
     int mutated = 0;
 
     // For mutation damage, we want to count innate mutations for
@@ -1443,9 +1442,7 @@ static bool _silver_damages_victim(bolt &beam, actor* victim, int &dmg,
         dmg = (dmg * multiplier) / 100;
     }
     else
-    {
         return (false);
-    }
 
     if (!beam.is_tracer && you.can_see(victim))
        dmg_msg = "The silver sears " + victim->name(DESC_NOCAP_THE) + "!";
@@ -2640,8 +2637,13 @@ bool throw_it(bolt &pbolt, int throw_2, bool teleport, int acc_bonus,
             dice_mult = dice_mult * 130 / 100;
         }
 
-        if (ammo_brand == SPMSL_STEEL)
+        // Note that branded missile damage goes through defender
+        // resists.
+        if (ammo_brand == SPMSL_STEEL || ammo_brand == SPMSL_FROST
+            || ammo_brand == SPMSL_FLAME)
+        {
             dice_mult = dice_mult * 150 / 100;
+        }
 
         // ID check. Can't ID off teleported projectiles, uh, because
         // it's too weird. Also it messes up the messages.

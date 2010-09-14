@@ -1522,11 +1522,9 @@ int player_res_acid(bool calc_unid, bool items)
             res++;
     }
 
-    if (you.religion == GOD_JIYVA && x_chance_in_y(you.piety, MAX_PIETY))
-        res++;
-
     // mutations:
-    res += floor(player_mutation_level(MUT_YELLOW_SCALES) / 3);
+    if (player_mutation_level(MUT_YELLOW_SCALES) == 3)
+        res++;
 
     return (res);
 }
@@ -3695,9 +3693,7 @@ void display_char_status()
 bool player_item_conserve(bool calc_unid)
 {
     return (player_equip(EQ_AMULET, AMU_CONSERVATION, calc_unid)
-            || player_equip_ego_type(EQ_CLOAK, SPARM_PRESERVATION)
-            || (you.religion == GOD_JIYVA
-                && you.piety >= piety_breakpoint(4)));
+            || player_equip_ego_type(EQ_CLOAK, SPARM_PRESERVATION));
 }
 
 int player_mental_clarity(bool calc_unid, bool items)
@@ -3734,9 +3730,7 @@ bool extrinsic_amulet_effect(jewellery_type amulet)
             return (true);
         // else fall-through
     case AMU_CONSERVATION:
-        return (player_equip_ego_type(EQ_CLOAK, SPARM_PRESERVATION) > 0
-                || (you.religion == GOD_JIYVA
-                     && you.piety >= piety_breakpoint(4)));
+        return (player_equip_ego_type(EQ_CLOAK, SPARM_PRESERVATION) > 0);
     case AMU_THE_GOURMAND:
         return (player_mutation_level(MUT_GOURMAND) > 0);
     default:
@@ -4334,10 +4328,10 @@ int get_real_mp(bool include_items)
         enp += player_magical_power();
 
     // Analogous to ROBUST/FRAIL
-    enp *= 10 + player_mutation_level(MUT_HIGH_MAGIC)
-              + you.attribute[ATTR_DIVINE_VIGOUR]
-              - player_mutation_level(MUT_LOW_MAGIC);
-    enp /= 10;
+    enp *= 100 + (player_mutation_level(MUT_HIGH_MAGIC) * 10)
+               + (you.attribute[ATTR_DIVINE_VIGOUR] * 5)
+               - (player_mutation_level(MUT_LOW_MAGIC) * 10);
+    enp /= 100;
 
     if (enp > 50)
         enp = 50 + ((enp - 50) / 2);
@@ -5723,6 +5717,7 @@ int player::res_asphyx() const
     case TRAN_LICH:
     case TRAN_STATUE:
         return 1;
+    default:
         break;
     }
 

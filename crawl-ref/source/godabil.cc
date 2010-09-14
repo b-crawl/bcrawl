@@ -924,8 +924,9 @@ void yred_make_enslaved_soul(monster* mon, bool force_hostile,
         mon->base_monster = soul_type;
     }
 
-    // For abominations, drop all equipment.  For spectral things, drop
-    // all holy equipment and keep wielding the rest.
+    // For abominations, drop all of the monster's equipment.  For
+    // spectral things, drop the monster's holy equipment, and keep
+    // wielding the rest.
     monster_drop_things(mon, false, twisted ? is_any_item : is_holy_item);
 
     // Recreate the monster, based on its changed type.
@@ -943,8 +944,8 @@ void yred_make_enslaved_soul(monster* mon, bool force_hostile,
     }
     else
     {
-        // If the original monster type can use spellcasting or priestly
-        // abilities, make sure its spectral thing can as well.
+        // If the original monster type has spellcasting or priestly
+        // abilities, make sure its spectral thing has them as well.
         mon->spells = orig.spells;
         mon->flags |=
             orig.flags & (MF_SPELLCASTER | MF_ACTUAL_SPELLS | MF_PRIEST);

@@ -137,6 +137,17 @@ bool can_wield(item_def *weapon, bool say_reason,
         }
     }
 
+    // Only ogres and trolls can wield giant clubs (>= 30 aum)
+    // and large rocks (60 aum).
+    if (you.body_size(PSIZE_TORSO) < SIZE_LARGE
+                      && (item_mass(*weapon) >= 500
+                          || weapon->base_type == OBJ_WEAPONS
+                             && item_mass(*weapon) >= 300))
+    {
+        SAY(mpr("That's too large and heavy for you to wield."));
+        return (false);
+    }
+
     // All non-weapons only need a shield check.
     if (weapon->base_type != OBJ_WEAPONS)
     {
@@ -147,12 +158,6 @@ bool can_wield(item_def *weapon, bool say_reason,
         }
         else
             return (true);
-    }
-
-    if (you.body_size(PSIZE_TORSO) < SIZE_LARGE && item_mass(*weapon) >= 300)
-    {
-        SAY(mpr("That's too large and heavy for you to wield."));
-        return (false);
     }
 
     // Small species wielding large weapons...
@@ -228,7 +233,7 @@ static bool _valid_weapon_swap(const item_def &item)
     // Some missiles need to be wielded for spells.
     if (item.base_type == OBJ_MISSILES)
     {
-        if (item.sub_type == MI_STONE)
+        if (item.sub_type == MI_STONE || item.sub_type == MI_LARGE_ROCK)
             return (you.has_spell(SPELL_SANDBLAST));
 
         if (item.sub_type == MI_ARROW)

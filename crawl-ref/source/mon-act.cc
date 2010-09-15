@@ -1111,7 +1111,8 @@ static bool _mons_throw(monster* mons, struct bolt &pbolt, int msl)
     mon_inv_type slot = get_mon_equip_slot(mons, mitm[msl]);
     ASSERT(slot != NUM_MONSTER_SLOTS);
 
-    const bool skilled = mons_class_flag(mons->type, M_FIGHTER);
+    const bool skilled = mons->flags & MF_FIGHTER;
+    const bool archer  = mons->flags & MF_ARCHER;
 
     mons->lose_energy(EUT_MISSILE);
     const int throw_energy = mons->action_energy(EUT_MISSILE);
@@ -1147,7 +1148,7 @@ static bool _mons_throw(monster* mons, struct bolt &pbolt, int msl)
     ammoDamBonus = item.plus2;
 
     // Archers get a boost from their melee attack.
-    if (mons_class_flag(mons->type, M_ARCHER))
+    if (archer)
     {
         const mon_attack_def attk = mons_attack_spec(mons, 0);
         if (attk.type == AT_SHOOT)
@@ -1498,7 +1499,8 @@ static bool _handle_throw(monster* mons, bolt & beem)
     if (mons_itemuse(mons) < MONUSE_STARTING_EQUIPMENT)
         return (false);
 
-    const bool archer = mons_class_flag(mons->type, M_ARCHER);
+    const bool archer = mons->flags & MF_ARCHER;
+
     // Highly-specialised archers are more likely to shoot than talk. (?)
     if (one_chance_in(archer? 9 : 5))
         return (false);
@@ -2278,6 +2280,9 @@ static bool _monster_eat_item(monster* mons, bool nearby)
         if (quant >= si->quantity)
             item_was_destroyed(*si, mons->mindex());
 
+        if (is_blood_potion(*si))
+            for (int i = 0; i < quant; ++i)
+                remove_oldest_blood_potion(*si);
         dec_mitm_item_quantity(si.link(), quant);
     }
 

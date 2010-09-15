@@ -971,7 +971,7 @@ static bool _orc_battle_cry(monster* chief)
             // Disabling detailed frenzy announcement because it's so spammy.
             const msg_channel_type channel =
                         chief->friendly() ? MSGCH_MONSTER_ENCHANT
-                                                  : MSGCH_FRIEND_ENCHANT;
+                                          : MSGCH_FRIEND_ENCHANT;
 
             if (!seen_affected.empty())
             {
@@ -1749,7 +1749,7 @@ bool mon_special_ability(monster* mons, bolt & beem)
     }
 
     const msg_channel_type spl = (mons->friendly() ? MSGCH_FRIEND_SPELL
-                                                         : MSGCH_MONSTER_SPELL);
+                                                   : MSGCH_MONSTER_SPELL);
 
     spell_type spell = SPELL_NO_SPELL;
 
@@ -2275,8 +2275,9 @@ void mon_nearby_ability(monster* mons)
     maybe_mons_speaks(mons);
 
     if (monster_can_submerge(mons, grd(mons->pos()))
-        && !mons->caught()             // No submerging while caught.
-        && !you.beheld_by(mons) // No submerging if player entranced.
+        && !mons->caught()         // No submerging while caught.
+        && !mons->asleep()         // No submerging when asleep.
+        && !you.beheld_by(mons)    // No submerging if player entranced.
         && !mons_is_lurking(mons)  // Handled elsewhere.
         && mons->wants_submerge())
     {

@@ -978,7 +978,7 @@ bool apply_berserk_penalty = false;
 static void _center_cursor()
 {
 #ifndef USE_TILE
-    const coord_def cwhere = grid2view(you.pos());
+    const coord_def cwhere = crawl_view.grid2screen(you.pos());
     cgotoxy(cwhere.x, cwhere.y);
 #endif
 }
@@ -2172,6 +2172,16 @@ static void _decrement_durations()
                           "You feel conductive.", coinflip(),
                           "You start to feel a little less insulated.");
 
+    _decrement_a_duration(DUR_RESIST_FIRE, delay,
+                          "Your fire resistance expires.", coinflip(),
+                          "You start to feel less resistant to fire.");
+    _decrement_a_duration(DUR_RESIST_COLD, delay,
+                          "Your cold resistance expires.", coinflip(),
+                          "You start to feel less resistant to cold.");
+    _decrement_a_duration(DUR_RESIST_POISON, delay,
+                          "Your poison resistance expires.", coinflip(),
+                          "You start to feel less resistant to poison.");
+
     if (_decrement_a_duration(DUR_STONEMAIL, delay,
                               "Your scaly stone armour disappears.",
                               coinflip(),
@@ -2195,7 +2205,9 @@ static void _decrement_durations()
     if (you.duration[DUR_POWERED_BY_DEATH] > 0)
         handle_pbd_corpses(true);
 
-    if (_decrement_a_duration(DUR_SEE_INVISIBLE, delay)
+    if (_decrement_a_duration(DUR_SEE_INVISIBLE, delay, NULL,
+                              coinflip(),
+                              "You begin to squint at shadows.")
         && !you.can_see_invisible())
     {
         mpr("Your eyesight blurs momentarily.", MSGCH_DURATION);
@@ -2241,9 +2253,6 @@ static void _decrement_durations()
 
     _decrement_a_duration(DUR_SAGE, delay, "You feel less studious.");
     _decrement_a_duration(DUR_STEALTH, delay, "You feel less stealthy.");
-    _decrement_a_duration(DUR_RESIST_FIRE, delay, "Your fire resistance expires.");
-    _decrement_a_duration(DUR_RESIST_COLD, delay, "Your cold resistance expires.");
-    _decrement_a_duration(DUR_RESIST_POISON, delay, "Your poison resistance expires.");
     _decrement_a_duration(DUR_SLAYING, delay, "You feel less lethal.");
 
     if (_decrement_a_duration(DUR_INVIS, delay, "You flicker back into view.",

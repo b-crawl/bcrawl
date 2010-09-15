@@ -30,6 +30,7 @@
 #include "mon-abil.h"
 #include "mon-act.h"
 #include "mon-behv.h"
+#include "mon-death.h"
 #include "mon-place.h"
 #include "mon-stuff.h"
 #include "mon-transit.h"
@@ -660,6 +661,20 @@ bool monster::has_spell_of_type(unsigned disciplines) const
             return (true);
     }
     return (false);
+}
+
+void monster::bind_melee_flags()
+{
+    // Bind fighter / dual-wielder / archer flags from the base type.
+
+    // Alas, we don't know if the mon is zombified at the moment, if it
+    // is, the flags will be removed later.
+    if (mons_class_flag(type, M_FIGHTER))
+        flags |= MF_FIGHTER;
+    if (mons_class_flag(type, M_TWOWEAPON))
+        flags |= MF_TWOWEAPON;
+    if (mons_class_flag(type, M_ARCHER))
+        flags |= MF_ARCHER;
 }
 
 void monster::bind_spell_flags()
@@ -2985,9 +3000,6 @@ bool monster::is_chaotic() const
 
 bool monster::is_insubstantial() const
 {
-    if (mons_enslaved_twisted_soul(this))
-        return (true);
-
     return (mons_class_flag(type, M_INSUBSTANTIAL));
 }
 
@@ -4548,6 +4560,14 @@ void monster::timeout_enchantments(int levels)
                 monster_die(this, KILL_MISC, NON_MONSTER, true);
             break;
         }
+
+        case ENCH_FADING_AWAY:
+        {
+            const int actdur = speed_to_duration(speed) * levels;
+            if (lose_ench_duration(i->first, actdur))
+                spirit_fades(this);
+            break;
+        }
         default:
             break;
         }
@@ -4967,6 +4987,14 @@ void monster::apply_enchantment(const mon_enchant &me)
             }
 
             monster_die(this, KILL_MISC, NON_MONSTER, true);
+        }
+        break;
+
+    case ENCH_FADING_AWAY:
+        // Summon a nasty!
+        if (decay_enchantment(me))
+        {
+            spirit_fades(this);
         }
         break;
 
@@ -6241,7 +6269,7 @@ int mon_enchant::calc_duration(const monster* mons,
     case ENCH_FADING_AWAY:
         // Also used as a simple timer. When it runs out, it will summon a
         // greater holy being.
-        return (random_range(800, 1300) * 10);
+        return (random_range(180, 230) * 10);
 
     case ENCH_PREPARING_RESURRECT:
         // A timer. When it runs out, the creature will cast resurrect.

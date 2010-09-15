@@ -885,51 +885,29 @@ void yred_drain_life(int pow)
     }
 }
 
-void yred_make_enslaved_soul(monster* mon, bool force_hostile,
-                             bool quiet, bool unrestricted)
+void yred_make_enslaved_soul(monster* mon, bool force_hostile)
 {
-    if (!unrestricted)
-        add_daction(DACT_OLD_ENSLAVED_SOULS_POOF);
+    add_daction(DACT_OLD_ENSLAVED_SOULS_POOF);
 
     const monster_type soul_type = mons_species(mon->type);
     const std::string whose =
         you.can_see(mon) ? apostrophise(mon->name(DESC_CAP_THE))
                          : mon->pronoun(PRONOUN_CAP_POSSESSIVE);
-    const bool twisted =
-        !unrestricted ? !x_chance_in_y(you.skills[SK_INVOCATIONS] * 20 / 9 + 20,
-                                       100)
-                      : false;
 
     // If the monster's held in a net, get it out.
     mons_clear_trapping_net(mon);
 
-    // If the monster has spellcasting or priestly abilities, save them.
-    mon->bind_spell_flags();
+    // Drop the monster's holy equipment, and keep wielding the rest.
+    monster_drop_things(mon, false, is_holy_item);
 
     const monster orig = *mon;
 
-    if (twisted)
-    {
-        // Turn the monster into a small or large abomination, based on
-        // its zombie size.
-        mon->type = mons_zombie_size(soul_type) == Z_BIG ?
-            MONS_ABOMINATION_LARGE : MONS_ABOMINATION_SMALL;
-        mon->base_monster = MONS_NO_MONSTER;
-    }
-    else
-    {
-        // Turn the monster into a spectral thing, minus the usual
-        // adjustments for zombified monsters.
-        mon->type = MONS_SPECTRAL_THING;
-        mon->base_monster = soul_type;
-    }
+    // Turn the monster into a spectral thing, minus the usual
+    // adjustments for zombified monsters.
+    mon->type = MONS_SPECTRAL_THING;
+    mon->base_monster = soul_type;
 
-    // For abominations, drop all of the monster's equipment.  For
-    // spectral things, drop the monster's holy equipment, and keep
-    // wielding the rest.
-    monster_drop_things(mon, false, twisted ? is_any_item : is_holy_item);
-
-    // Recreate the monster, based on its changed type.
+    // Recreate the monster as a spectral thing.
     define_monster(mon);
 
     mon->colour = ETC_UNHOLY;
@@ -937,29 +915,16 @@ void yred_make_enslaved_soul(monster* mon, bool force_hostile,
     mon->flags |= MF_NO_REWARD;
     mon->flags |= MF_ENSLAVED_SOUL;
 
-    if (twisted)
-    {
-        // Mark abominations as undead.
-        mon->flags |= MF_HONORARY_UNDEAD;
-    }
-    else
-    {
-        // If the original monster type has spellcasting or priestly
-        // abilities, make sure its spectral thing has them as well.
-        mon->spells = orig.spells;
-        mon->flags |=
-            orig.flags & (MF_SPELLCASTER | MF_ACTUAL_SPELLS | MF_PRIEST);
-
-        // If the original monster type can wield two weapons, make sure
-        // its spectral thing can as well.  This is needed for e.g.
-        // deep elf blademasters, who otherwise act as plain spectral
-        // elves when equipped.
-        if (mons_class_flag(orig.type, M_TWOWEAPON)
-            && !mons_class_flag(soul_type, M_TWOWEAPON))
-        {
-            mon->flags |= MF_TWOWEAPON;
-        }
-    }
+    // If the original monster type has melee, spellcasting or priestly
+    // abilities, make sure its spectral thing has them as well.
+#if TAG_MAJOR_VERSION == 30
+    mon->flags |=
+        orig.flags & (MF_FIGHTER | MF_TWOWEAPON | MF_ARCHER
+                      | MF_SPELLCASTER | MF_ACTUAL_SPELLS | MF_PRIEST);
+#else
+    mon->flags |= orig.flags & (MF_MELEE_MASK | MF_SPELL_MASK);
+#endif
+    mon->spells = orig.spells;
 
     name_zombie(mon, &orig);
 
@@ -968,12 +933,8 @@ void yred_make_enslaved_soul(monster* mon, bool force_hostile,
     mon->attitude = !force_hostile ? ATT_FRIENDLY : ATT_HOSTILE;
     behaviour_event(mon, ME_ALERT, !force_hostile ? MHITNOT : MHITYOU);
 
-    if (!quiet)
-    {
-        mprf("%s soul %s, and %s.", whose.c_str(),
-             twisted        ? "becomes twisted" : "remains intact",
-             !force_hostile ? "is now yours"    : "fights you");
-    }
+    mprf("%s soul %s.", whose.c_str(),
+         !force_hostile ? "is now yours" : "fights you");
 }
 
 bool kiku_receive_corpses(int pow, coord_def where)
@@ -2242,12 +2203,8 @@ bool fedhas_evolve_flora()
     return (true);
 }
 
-static int _lugonu_warp_monster(coord_def where, int pow, int, actor *)
+static int _lugonu_warp_monster(monster* mon, int pow)
 {
-    if (!in_bounds(where))
-        return (0);
-
-    monster* mon = monster_at(where);
     if (mon == NULL)
         return (0);
 
@@ -2278,7 +2235,7 @@ static int _lugonu_warp_monster(coord_def where, int pow, int, actor *)
 
 static void _lugonu_warp_area(int pow)
 {
-    apply_area_around_square(_lugonu_warp_monster, you.pos(), pow);
+    apply_monsters_around_square(_lugonu_warp_monster, you.pos(), pow);
 }
 
 void lugonu_bend_space()

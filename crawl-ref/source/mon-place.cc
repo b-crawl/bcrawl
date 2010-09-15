@@ -1525,6 +1525,9 @@ static int _place_monster_aux(const mgen_data &mg,
     if (mg.cls == MONS_GLOWING_SHAPESHIFTER)
         mon->add_ench(ENCH_GLOWING_SHAPESHIFTER);
 
+    if (mg.cls == MONS_SPIRIT)
+        mon->add_ench(ENCH_FADING_AWAY);
+
     if (mg.cls == MONS_TOADSTOOL)
     {
         // This enchantment is a timer that counts down until death.
@@ -1889,10 +1892,21 @@ static void _define_zombie(monster* mon, monster_type ztype, monster_type cs,
     mon->colour       = mons_class_colour(cs);
     mon->speed        = mons_class_zombie_base_speed(mon->base_monster);
 
-    // Turn off all spellcasting flags.
+    // Turn off all melee ability flags except dual-wielding.
+#if TAG_MAJOR_VERSION == 30
+    mon->flags       &= ~(MF_FIGHTER | MF_ARCHER);
+#else
+    mon->flags       &= (~MF_MELEE_MASK | MF_TWOWEAPON);
+#endif
+
+    // Turn off all spellcasting and priestly ability flags.
     // Hack - kraken get to keep their spell-like ability.
     if (mon->base_monster != MONS_KRAKEN)
-        mon->flags   &= ~MF_SPELLCASTER & ~MF_ACTUAL_SPELLS & ~MF_PRIEST;
+#if TAG_MAJOR_VERSION == 30
+        mon->flags   &= ~(MF_SPELLCASTER | MF_ACTUAL_SPELLS | MF_PRIEST);
+#else
+        mon->flags   &= ~MF_SPELL_MASK;
+#endif
 
     int hp = 0;
     int acmod = 0, evmod = 0;

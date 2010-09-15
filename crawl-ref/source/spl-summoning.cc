@@ -1422,15 +1422,11 @@ static bool _raise_remains(const coord_def &pos, int corps, beh_type beha,
             name_zombie(&menv[mons], monnum, name);
     }
 
-    // If the original monster type can wield two weapons, make sure its
-    // zombie can as well.  This is needed for e.g. deep elf
-    // blademasters, who otherwise act as plain elf zombies when
-    // equipped.
-    if (mons_class_flag(monnum, M_TWOWEAPON)
-        && !mons_class_flag(zombie_type, M_TWOWEAPON))
-    {
+    // If the original monster type has dual-wielding, make sure its
+    // zombie has it as well.  This is needed for e.g. equipped deep elf
+    // blademaster zombies.
+    if (mons_class_flag(monnum, M_TWOWEAPON))
         menv[mons].flags |= MF_TWOWEAPON;
-    }
 
     // Re-equip the zombie.
     equip_undead(pos, corps, mons, monnum);
@@ -1725,8 +1721,8 @@ bool cast_twisted_resurrection(int pow, god_type god)
     if (mon == MONS_ABOMINATION_LARGE)
     {
         menv[mons].hit_dice = 8 + total_mass / ((colour == LIGHTRED) ? 500 :
-                                                   (colour == RED)      ? 1000
-                                                                        : 2500);
+                                                (colour == RED)      ? 1000
+                                                                     : 2500);
 
         menv[mons].hit_dice = std::min(30, menv[mons].hit_dice);
 

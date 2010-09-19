@@ -670,6 +670,7 @@ bool did_god_conduct(conduct_type thing_done, int level, bool known,
         case DID_DEMON_KILLED_BY_UNDEAD_SLAVE:
             switch (you.religion)
             {
+            case GOD_KIKUBAAQUDGHA:
             case GOD_MAKHLEB:
             case GOD_BEOGH:
                 simple_god_message(" accepts your slave's kill.");
@@ -815,11 +816,25 @@ bool did_god_conduct(conduct_type thing_done, int level, bool known,
                 if (thing_done == DID_CAUSE_GLOWING)
                 {
                     static long last_glowing_lecture = -1L;
-                    if (last_glowing_lecture != you.num_turns)
+                    if (!level)
                     {
-                        simple_god_message(" does not appreciate the mutagenic "
-                                           "glow surrounding you!");
+                        simple_god_message(" is not enthusiastic about the "
+                                           "mutagenic glow surrounding you.");
+                    }
+                    else if (last_glowing_lecture != you.num_turns)
+                    {
                         last_glowing_lecture = you.num_turns;
+                        if (get_contamination_level() == 1)
+                        {
+                            // Increase contamination within gray glow.
+                            simple_god_message(" does not appreciate the extra "
+                                               "mutagenic glow.");
+                        }
+                        else
+                        {
+                            simple_god_message(" does not appreciate the "
+                                               "mutagenic glow surrounding you!");
+                        }
                     }
                 }
 

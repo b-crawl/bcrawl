@@ -1567,7 +1567,10 @@ static int _place_monster_aux(const mgen_data &mg,
 
     if (mg.cls == MONS_DANCING_WEAPON)
     {
-        give_item(mon->mindex(), mg.power, summoned);
+        if (mg.props.exists(TUKIMA_WEAPON))
+            give_specific_item(mon, mg.props[TUKIMA_WEAPON].get_item());
+        else
+            give_item(mon->mindex(), mg.power, summoned);
 
         // Dancing weapons *always* have a weapon. Fail to create them
         // otherwise.
@@ -1637,7 +1640,8 @@ static int _place_monster_aux(const mgen_data &mg,
 
     if (summoned)
     {
-        mon->mark_summoned(mg.abjuration_duration, true,
+        mon->mark_summoned(mg.abjuration_duration,
+                           mg.cls != MONS_DANCING_WEAPON,
                            mg.summon_type);
     }
     ASSERT(!invalid_monster_index(mg.foe)
@@ -1738,7 +1742,12 @@ static int _place_monster_aux(const mgen_data &mg,
     if (crawl_state.game_is_arena())
         arena_placed_monster(mon);
     else if (!Generating_Level && you.can_see(mon))
+    {
+        // FIXME: This causes "comes into view" messages at the
+        //        wrong time, since code checks for placement
+        //        success before printing messages.
         handle_seen_interrupt(mon);
+    }
 
     return (mon->mindex());
 }

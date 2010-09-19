@@ -2644,8 +2644,8 @@ bool throw_it(bolt &pbolt, int throw_2, bool teleport, int acc_bonus,
 
         // Note that branded missile damage goes through defender
         // resists.
-        if (ammo_brand == SPMSL_STEEL || ammo_brand == SPMSL_FROST
-            || ammo_brand == SPMSL_FLAME)
+        if (ammo_brand == SPMSL_STEEL
+            || elemental_missile_beam(bow_brand, ammo_brand))
         {
             dice_mult = dice_mult * 150 / 100;
         }
@@ -4450,8 +4450,6 @@ static bool _scroll_modify_item(item_def scroll)
     case SCR_RECHARGING:
         if (item_is_rechargeable(item, false, true))
         {
-            // Might still fail on highly enchanted weapons of electrocution.
-            // (If so, already prints the "Nothing happens" message.)
             if (recharge_wand(item_slot, false))
                 return (true);
             return (false);

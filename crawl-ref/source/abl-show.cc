@@ -111,8 +111,8 @@ ability_type god_abilities[MAX_NUM_GODS][MAX_GOD_ABILITIES] =
     { ABIL_KIKU_RECEIVE_CORPSES, ABIL_NON_ABILITY, ABIL_NON_ABILITY,
       ABIL_NON_ABILITY, ABIL_NON_ABILITY },
     // Yredelemnul
-    { ABIL_YRED_ANIMATE_REMAINS, ABIL_YRED_RECALL_UNDEAD_SLAVES,
-      ABIL_YRED_ANIMATE_DEAD, ABIL_YRED_DRAIN_LIFE, ABIL_YRED_ENSLAVE_SOUL },
+    { ABIL_YRED_ANIMATE_REMAINS_OR_DEAD, ABIL_YRED_RECALL_UNDEAD_SLAVES,
+      ABIL_NON_ABILITY, ABIL_YRED_DRAIN_LIFE, ABIL_YRED_ENSLAVE_SOUL },
     // Xom
     { ABIL_NON_ABILITY, ABIL_NON_ABILITY, ABIL_NON_ABILITY, ABIL_NON_ABILITY,
       ABIL_NON_ABILITY },
@@ -243,12 +243,15 @@ static const ability_def Ability_List[] =
 
     // Yredelemnul
     { ABIL_YRED_INJURY_MIRROR, "Injury Mirror", 0, 0, 0, 0, ABFLAG_PIETY },
-    { ABIL_YRED_ANIMATE_REMAINS, "Animate Remains", 1, 0, 100, 0, ABFLAG_NONE },
+    { ABIL_YRED_ANIMATE_REMAINS, "Animate Remains", 2, 0, 100, 0, ABFLAG_NONE },
     { ABIL_YRED_RECALL_UNDEAD_SLAVES, "Recall Undead Slaves",
       2, 0, 50, 0, ABFLAG_NONE },
-    { ABIL_YRED_ANIMATE_DEAD, "Animate Dead", 3, 0, 100, 1, ABFLAG_NONE },
+    { ABIL_YRED_ANIMATE_DEAD, "Animate Dead", 2, 0, 100, 0, ABFLAG_NONE },
     { ABIL_YRED_DRAIN_LIFE, "Drain Life", 6, 0, 200, 2, ABFLAG_NONE },
     { ABIL_YRED_ENSLAVE_SOUL, "Enslave Soul", 8, 0, 150, 4, ABFLAG_NONE },
+    // Placeholder for Animate Remains or Animate Dead.
+    { ABIL_YRED_ANIMATE_REMAINS_OR_DEAD, "Animate Remains or Dead",
+      2, 0, 100, 0, ABFLAG_NONE },
 
     // Okawaru
     { ABIL_OKAWARU_MIGHT, "Might", 2, 0, 50, 1, ABFLAG_NONE },
@@ -332,7 +335,6 @@ static const ability_def Ability_List[] =
     { ABIL_FEDHAS_PLANT_RING, "Growth", 2, 0, 0, 0, ABFLAG_FRUIT},
     { ABIL_FEDHAS_SPAWN_SPORES, "Reproduction", 4, 0, 100, 0, ABFLAG_NONE},
     { ABIL_FEDHAS_RAIN, "Rain", 4, 0, 150, 4, ABFLAG_NONE},
-
 
     // Cheibriados
     { ABIL_CHEIBRIADOS_PONDEROUSIFY, "Make Ponderous",
@@ -506,12 +508,30 @@ const std::string make_cost_description(ability_type ability)
     return (ret.str());
 }
 
+static ability_type _fixup_ability(ability_type ability)
+{
+    switch (ability)
+    {
+    case ABIL_YRED_ANIMATE_REMAINS_OR_DEAD:
+        // Placeholder for Animate Remains or Animate Dead.
+        if (yred_can_animate_dead())
+            return (ABIL_YRED_ANIMATE_DEAD);
+        else
+            return (ABIL_YRED_ANIMATE_REMAINS);
+
+    default:
+        return (ability);
+    }
+}
+
 static talent _get_talent(ability_type ability, bool check_confused)
 {
     ASSERT(ability != ABIL_NON_ABILITY);
 
     talent result;
-    result.which = ability;
+    // Only replace placeholder abilities here, so that the replaced
+    // abilities keep the same slots if they change.
+    result.which = _fixup_ability(ability);
 
     int failure = 0;
     bool perfect = false;  // is perfect
@@ -715,8 +735,14 @@ static talent _get_talent(ability_type ability, bool check_confused)
         break;
 
     case ABIL_YRED_ANIMATE_REMAINS:
+    case ABIL_YRED_ANIMATE_DEAD:
         invoc = true;
-        failure = 40 - (you.piety / 20) - (3 * you.skills[SK_INVOCATIONS]);
+        failure = 40 - (you.piety / 20) - (4 * you.skills[SK_INVOCATIONS]);
+        break;
+
+    // Placeholder for Animate Remains or Animate Dead.
+    case ABIL_YRED_ANIMATE_REMAINS_OR_DEAD:
+        invoc = true;
         break;
 
     case ABIL_ZIN_VITALISATION:
@@ -725,7 +751,6 @@ static talent _get_talent(ability_type ability, bool check_confused)
     case ABIL_MAKHLEB_MINOR_DESTRUCTION:
     case ABIL_SIF_MUNA_FORGET_SPELL:
     case ABIL_KIKU_RECEIVE_CORPSES:
-    case ABIL_YRED_ANIMATE_DEAD:
     case ABIL_MAKHLEB_LESSER_SERVANT_OF_MAKHLEB:
     case ABIL_ELYVILON_GREATER_HEALING_SELF:
     case ABIL_ELYVILON_GREATER_HEALING_OTHERS:
@@ -836,12 +861,17 @@ static talent _get_talent(ability_type ability, bool check_confused)
     return result;
 }
 
+const char* ability_name(ability_type ability)
+{
+    return get_ability_def(ability).name;
+}
+
 std::vector<const char*> get_ability_names()
 {
     std::vector<talent> talents = your_talents(false);
     std::vector<const char*> result;
     for (unsigned int i = 0; i < talents.size(); ++i)
-        result.push_back(get_ability_def(talents[i].which).name);
+        result.push_back(ability_name(talents[i].which));
     return result;
 }
 
@@ -849,7 +879,7 @@ static void _print_talent_description(const talent& tal)
 {
     clrscr();
 
-    const std::string& name = get_ability_def(tal.which).name;
+    const std::string& name = ability_name(tal.which);
 
     // XXX: The suffix is necessary to distinguish between similarly
     // named spells.  Yes, this is a hack.
@@ -1568,28 +1598,16 @@ static bool _do_ability(const ability_def& abil)
         break;
 
     case ABIL_YRED_ANIMATE_REMAINS:
-        mpr("You attempt to give life to the dead...");
-
-        if (animate_remains(you.pos(), CORPSE_BODY, BEH_FRIENDLY,
-                            MHITYOU, &you, "", GOD_YREDELEMNUL) < 0)
-        {
-            mpr("There are no remains here to animate!");
-        }
+    case ABIL_YRED_ANIMATE_DEAD:
+        yred_animate_remains_or_dead();
         break;
 
     case ABIL_YRED_RECALL_UNDEAD_SLAVES:
         recall(1);
         break;
 
-    case ABIL_YRED_ANIMATE_DEAD:
-        mpr("You call on the dead to rise...");
-
-        animate_dead(&you, 1 + you.skills[SK_INVOCATIONS], BEH_FRIENDLY,
-                     MHITYOU, &you, "", GOD_YREDELEMNUL);
-        break;
-
     case ABIL_YRED_DRAIN_LIFE:
-        yred_drain_life(you.skills[SK_INVOCATIONS]);
+        yred_drain_life();
         break;
 
     case ABIL_YRED_ENSLAVE_SOUL:
@@ -2144,11 +2162,6 @@ int choose_ability_menu(const std::vector<talent>& talents)
         else
             return (*(static_cast<int*>(sel[0]->data)));
     }
-}
-
-const char* ability_name(ability_type ability)
-{
-    return get_ability_def(ability).name;
 }
 
 static std::string _describe_talent(const talent& tal)

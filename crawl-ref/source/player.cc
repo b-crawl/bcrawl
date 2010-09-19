@@ -466,6 +466,11 @@ bool is_player_same_species(const int mon, bool transform)
     if (you.species == SP_GHOUL)
         return (mons_species(mon) == MONS_GHOUL);
 
+    // Note that these are currently considered to be the same species:
+    // * halflings and humans
+    // * dwarves and deep dwarves
+    // * all elf races
+
     if (you.species == SP_MERFOLK && mons_genus(mon) == MONS_MERMAID)
         return (true);
 
@@ -4438,7 +4443,7 @@ void contaminate_player(int change, bool controlled, bool msg)
     if (you.religion == GOD_ZIN)
     {
         // Whenever the glow status is first reached, give a warning message.
-        if (old_level < 1 && new_level >= 1)
+        if (old_level < 1 && new_level == 1)
             did_god_conduct(DID_CAUSE_GLOWING, 0, false);
         // If the player actively did something to increase glowing,
         // Zin is displeased.
@@ -6285,6 +6290,11 @@ bool player::can_see_invisible(bool calc_unid, bool transient) const
 bool player::can_see_invisible() const
 {
     return (can_see_invisible(true));
+}
+
+bool player::are_charming() const
+{
+    return player_equip(EQ_RINGS, RING_CHARM, true);
 }
 
 bool player::invisible() const

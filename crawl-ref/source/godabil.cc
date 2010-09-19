@@ -697,18 +697,11 @@ bool trog_burn_spellbooks()
     }
 
     int totalpiety = 0;
+    int totalblocked = 0;
 
     for (radius_iterator ri(you.pos(), LOS_RADIUS, true, true, true); ri; ++ri)
     {
-        // If a grid is blocked, books lying there will be ignored.
-        // Allow bombing of monsters.
         const unsigned short cloud = env.cgrid(*ri);
-        if (feat_is_solid(grd(*ri))
-            || cloud != EMPTY_CLOUD && env.cloud[cloud].type != CLOUD_FIRE)
-        {
-            continue;
-        }
-
         int count = 0;
         int rarity = 0;
         for (stack_iterator si(*ri); si; ++si)
@@ -717,6 +710,15 @@ bool trog_burn_spellbooks()
                 || si->sub_type == BOOK_MANUAL
                 || si->sub_type == BOOK_DESTRUCTION)
             {
+                continue;
+            }
+
+            // If a grid is blocked, books lying there will be ignored.
+            // Allow bombing of monsters.
+            if (feat_is_solid(grd(*ri))
+                || cloud != EMPTY_CLOUD && env.cloud[cloud].type != CLOUD_FIRE)
+            {
+                totalblocked++;
                 continue;
             }
 
@@ -761,15 +763,23 @@ bool trog_burn_spellbooks()
         }
     }
 
-    if (!totalpiety)
+    if (totalpiety)
     {
-         mpr("You cannot see a spellbook to ignite!");
-         return (false);
+        simple_god_message(" is delighted!", GOD_TROG);
+        gain_piety(totalpiety);
+    }
+    else if (totalblocked)
+    {
+        if (totalblocked == 1)
+            mpr("The spellbook fails to ignite!");
+        else
+            mpr("The spellbooks fail to ignite!");
+        return (false);
     }
     else
     {
-         simple_god_message(" is delighted!", GOD_TROG);
-         gain_piety(totalpiety);
+        mpr("You cannot see a spellbook to ignite!");
+        return (false);
     }
 
     return (true);
@@ -837,19 +847,41 @@ bool yred_injury_mirror(bool actual)
             && (!actual || you.duration[DUR_PRAYER]));
 }
 
-void yred_drain_life(int pow)
+bool yred_can_animate_dead()
+{
+    return (you.piety >= piety_breakpoint(2));
+}
+
+void yred_animate_remains_or_dead()
+{
+    if (yred_can_animate_dead())
+    {
+        mpr("You call on the dead to rise...");
+
+        animate_dead(&you, you.skills[SK_INVOCATIONS] + 1, BEH_FRIENDLY,
+                     MHITYOU, &you, "", GOD_YREDELEMNUL);
+    }
+    else
+    {
+        mpr("You attempt to give life to the dead...");
+
+        if (animate_remains(you.pos(), CORPSE_BODY, BEH_FRIENDLY,
+                            MHITYOU, &you, "", GOD_YREDELEMNUL) < 0)
+        {
+            mpr("There are no remains here to animate!");
+        }
+    }
+}
+
+void yred_drain_life()
 {
     mpr("You draw life from your surroundings.");
-
-    // Incoming power to this function is skill in INVOCATIONS, so
-    // we'll add an assert here to warn anyone who tries to use
-    // this function with spell level power.
-    ASSERT(pow <= 27);
 
     flash_view(DARKGREY);
     more();
     mesclr();
 
+    const int pow = you.skills[SK_INVOCATIONS];
     int hp_gain = 0;
 
     for (monster_iterator mi(you.get_los()); mi; ++mi)

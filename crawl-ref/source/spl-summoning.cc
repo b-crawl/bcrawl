@@ -1389,8 +1389,8 @@ static bool _raise_remains(const coord_def &pos, int corps, beh_type beha,
     // If the original monster type has dual-wielding, make sure its
     // zombie has it as well.  This is needed for e.g. equipped deep elf
     // blademaster zombies.
-    if (mons_class_flag(monnum, M_TWOWEAPON))
-        menv[mons].flags |= MF_TWOWEAPON;
+    if (mons_class_flag(monnum, M_TWO_WEAPONS))
+        menv[mons].flags |= MF_TWO_WEAPONS;
 
     // Re-equip the zombie.
     equip_undead(pos, corps, mons, monnum);
@@ -1675,7 +1675,7 @@ bool cast_twisted_resurrection(int pow, god_type god)
     }
 
     // Mark this abomination as undead.
-    menv[mons].flags |= MF_HONORARY_UNDEAD;
+    make_fake_undead(&menv[mons], mon);
 
     mpr("The heap of corpses melds into an agglomeration of writhing flesh!");
 

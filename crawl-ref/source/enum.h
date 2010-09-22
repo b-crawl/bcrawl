@@ -1303,6 +1303,10 @@ enum enchant_type
     ENCH_ANTIMAGIC,
     ENCH_FADING_AWAY,
     ENCH_PREPARING_RESURRECT,
+    ENCH_REGENERATION,
+    ENCH_RAISED_MR,
+    ENCH_MIRROR_DAMAGE,
+    ENCH_STONESKIN,
 
     // Update enchantment names in monster.cc when adding or removing
     // enchantments.
@@ -1949,7 +1953,7 @@ enum monster_type                      // (int) menv[].type
       MONS_UNUSED_256,
       MONS_UNUSED_257,
       MONS_UNUSED_258,
-      MONS_UNUSED_259,
+    MONS_PARACELSUS,
 // BCR - End first batch of uniques.
     MONS_NAGA_MAGE,                    //  260
     MONS_NAGA_WARRIOR,
@@ -2034,14 +2038,15 @@ enum monster_type                      // (int) menv[].type
 
     MONS_DEEP_ELF_BLADEMASTER,
     MONS_DEEP_ELF_MASTER_ARCHER,
+
     MONS_DEEP_DWARF,
-      MONS_UNUSED_331,
-      MONS_UNUSED_332,
-      MONS_UNUSED_333,
-      MONS_UNUSED_334,
-      MONS_UNUSED_335,
-      MONS_UNUSED_336,
-      MONS_UNUSED_337,
+    MONS_DEEP_DWARF_SCION,
+    MONS_DEEP_DWARF_ARTIFICER,
+    MONS_DEEP_DWARF_NECROMANCER,
+    MONS_DEEP_DWARF_BERSERKER,
+    MONS_DEEP_DWARF_DEATH_KNIGHT,
+    MONS_DEEP_DWARF_UNBORN,
+    MONS_NISSE,
       MONS_UNUSED_338,
       MONS_UNUSED_339,
 
@@ -2213,12 +2218,13 @@ enum monster_type                      // (int) menv[].type
     MONS_JUMPING_SPIDER,
     MONS_TARANTELLA,                   // 492
     MONS_SILENT_SPECTRE,
-      MONS_UNUSED_494,
-      MONS_UNUSED_495,
-      MONS_UNUSED_496,
-      MONS_UNUSED_497,
-      MONS_UNUSED_498,
-      MONS_UNUSED_499,
+    // Dwarf Hall monsters
+    MONS_WITCH,
+    MONS_EVIL_WITCH,
+    MONS_FOREST_WITCH,
+    MONS_HULDRA,
+    MONS_TROLLKONOR,
+    MONS_GREATER_WRAITH,
 
     // Spriggans:
     MONS_SPRIGGAN,
@@ -2324,10 +2330,8 @@ enum monster_flag_type
 
     MF_BAND_MEMBER        = 0x1000,  // Created as a member of a band
     MF_GOT_HALF_XP        = 0x2000,  // Player already got half xp value earlier
-    MF_HONORARY_UNDEAD    = 0x4000,  // Consider this monster to have MH_UNDEAD
-                                     // holiness, regardless of its actual type;
-                                     // currently used for abominations created
-                                     // via Twisted Resurrection
+    MF_FAKE_UNDEAD        = 0x4000,  // Consider this monster to have MH_UNDEAD
+                                     // holiness, regardless of its actual type
     MF_ENSLAVED_SOUL      = 0x8000,  // An undead monster soul enslaved by
                                      // Yredelemnul's power
 
@@ -2349,7 +2353,7 @@ enum monster_flag_type
     MF_PRIEST             = 0x800000, // Is a priest (divine spells)
                                       // for the conduct.
 
-    MF_GOING_BERSERK      = 0x1000000,// Is about to go berserk!
+    MF_NO_REGEN           = 0x1000000,// This monster cannot regenerate.
 
     MF_NAME_DESCRIPTOR    = 0x2000000,// mname should be treated with normal
                                       // grammar, ie, prevent "You hit red rat"
@@ -2362,7 +2366,7 @@ enum monster_flag_type
     MF_DEMONIC_GUARDIAN = 0x10000000, // is a demonic_guardian
     MF_NAME_SPECIES     = 0x20000000, // mname should be used for corpses as well,
                                       // preventing "human corpse of halfling"
-    MF_TWOWEAPON        = 0x40000000, // Monster wields two weapons.
+    MF_TWO_WEAPONS      = 0x40000000, // Monster wields two weapons.
     MF_ARCHER           = 0x80000000, // Monster gets various archery boosts.
 #else
     MF_KNOWN_MIMIC        = 0x20,    // Mimic that has taken a swing at the PC,
@@ -2380,10 +2384,8 @@ enum monster_flag_type
 
     MF_BAND_MEMBER        = 0x800,   // Created as a member of a band
     MF_GOT_HALF_XP        = 0x1000,  // Player already got half xp value earlier
-    MF_HONORARY_UNDEAD    = 0x2000,  // Consider this monster to have MH_UNDEAD
-                                     // holiness, regardless of its actual type;
-                                     // currently used for abominations created
-                                     // via Twisted Resurrection
+    MF_FAKE_UNDEAD        = 0x2000,  // Consider this monster to have MH_UNDEAD
+                                     // holiness, regardless of its actual type
     MF_ENSLAVED_SOUL      = 0x4000,  // An undead monster soul enslaved by
                                      // Yredelemnul's power
 
@@ -2400,7 +2402,7 @@ enum monster_flag_type
     // These are based on the flags in monster class, but can be set for
     // monsters that are not normally fighters.
     MF_FIGHTER            = 0x100000, // Monster is skilled fighter.
-    MF_TWOWEAPON          = 0x200000, // Monster wields two weapons.
+    MF_TWO_WEAPONS        = 0x200000, // Monster wields two weapons.
     MF_ARCHER             = 0x400000, // Monster gets various archery boosts.
     MF_MELEE_MASK         = 0x700000,
 
@@ -2413,7 +2415,7 @@ enum monster_flag_type
                                       // for the conduct.
     MF_SPELL_MASK         = 0x3800000,
 
-    MF_GOING_BERSERK      = 0x4000000,// Is about to go berserk!
+    MF_NO_REGEN           = 0x4000000,// This monster cannot regenerate.
 
     MF_NAME_DESCRIPTOR    = 0x8000000,// mname should be treated with normal
                                       // grammar, ie, prevent "You hit red rat"
@@ -2454,6 +2456,12 @@ enum mon_spellbook_type
     MST_ORC_WIZARD_I     = 0,
     MST_ORC_WIZARD_II,
     MST_ORC_WIZARD_III,
+    MST_NISSE,
+    MST_DEEP_DWARF_NECROMANCER,
+    MST_DEEP_DWARF_UNBORN,
+    MST_BK_TROG,
+    MST_BK_YREDELEMNUL,
+    MST_PARACELSUS,
     MST_GUARDIAN_SERPENT    = 10,
     MST_LICH_I           = 20,
     MST_LICH_II,
@@ -2481,7 +2489,12 @@ enum mon_spellbook_type
     MST_WIZARD_III,
     MST_WIZARD_IV,
     MST_WIZARD_V,
-    MST_ORC_PRIEST       = 80,
+    MST_TROLLKONOR,
+    MST_HULDRA,
+    MST_WITCH_I,
+    MST_WITCH_II,
+    MST_WITCH_III,
+    MST_ORC_PRIEST,                    //  80
     MST_ORC_HIGH_PRIEST,
     MST_MOTTLED_DRAGON,
     MST_ICE_FIEND,
@@ -2574,7 +2587,7 @@ enum mon_spellbook_type
     MST_ALLIGATOR,
     MST_BORIS,
     MST_FREDERICK,
-    MST_WIGLAF,                        // 180
+    MST_BK_OKAWARU,                    // 180
     MST_SPRIGGAN_DRUID,
     MST_THE_ENCHANTRESS,
     MST_HELLEPHANT,
@@ -3210,6 +3223,15 @@ enum spell_type
     SPELL_SACRIFICE,
     SPELL_HOLY_FLAMES,
     SPELL_HOLY_BREATH,
+    SPELL_BURN_SPELLBOOK,
+    SPELL_TROGS_HAND,
+    SPELL_BROTHERS_IN_ARMS,
+    SPELL_MIRROR_DAMAGE,
+    SPELL_DRAIN_LIFE,
+    SPELL_MIASMA_CLOUD,
+    SPELL_POISON_CLOUD,
+    SPELL_FIRE_CLOUD,
+    SPELL_STEAM_CLOUD,
 
     NUM_SPELLS
 };

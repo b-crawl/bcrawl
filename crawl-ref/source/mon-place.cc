@@ -1424,7 +1424,14 @@ static int _place_monster_aux(const mgen_data &mg,
     // Not a god gift, give priestly monsters a god.
     else if (mons_class_flag(mg.cls, M_PRIEST))
     {
-        if (mg.cls == MONS_WIGLAF)
+        // Deep dwarf berserkers belong to Trog.
+        if (mg.cls == MONS_DEEP_DWARF_BERSERKER)
+            mon->god = GOD_TROG;
+        // Deep dwarf death knights belong to Yredelemnul.
+        else if (mg.cls == MONS_DEEP_DWARF_DEATH_KNIGHT)
+            mon->god = GOD_YREDELEMNUL;
+        // Wiglaf belongs to Okawaru.
+        else if (mg.cls == MONS_WIGLAF)
             mon->god = GOD_OKAWARU;
         else
         {
@@ -1905,7 +1912,7 @@ static void _define_zombie(monster* mon, monster_type ztype, monster_type cs,
 #if TAG_MAJOR_VERSION == 30
     mon->flags       &= ~(MF_FIGHTER | MF_ARCHER);
 #else
-    mon->flags       &= (~MF_MELEE_MASK | MF_TWOWEAPON);
+    mon->flags       &= (~MF_MELEE_MASK | MF_TWO_WEAPONS);
 #endif
 
     // Turn off all spellcasting and priestly ability flags.
@@ -1916,6 +1923,12 @@ static void _define_zombie(monster* mon, monster_type ztype, monster_type cs,
 #else
         mon->flags   &= ~MF_SPELL_MASK;
 #endif
+
+    // Turn off regeneration if the original monster cannot regenerate.
+    // This is needed for e.g. spectral things of non-regenerating
+    // monsters.
+    if (!mons_class_can_regenerate(mon->base_monster))
+        mon->flags   |= MF_NO_REGEN;
 
     int hp = 0;
     int acmod = 0, evmod = 0;
@@ -2058,6 +2071,20 @@ static band_type _choose_band(int mon_type, int power, int &band_size,
     case MONS_GNOLL:
         band = BAND_GNOLLS;
         band_size = (coinflip() ? 3 : 2);
+        break;
+    case MONS_TROLLKONOR:
+        natural_leader = true;
+        band = BAND_TROLLKONOR;
+        band_size = 1;
+        break;
+    case MONS_DEEP_DWARF_SCION:
+        band = BAND_DEEP_DWARF;
+        band_size = (one_chance_in(5)? 2: 1) + random2(3);
+        break;
+    case MONS_DEEP_DWARF_ARTIFICER:
+    case MONS_DEEP_DWARF_DEATH_KNIGHT:
+        band = BAND_DEEP_DWARF;
+        band_size = 3 + random2(4);
         break;
     case MONS_GRUM:
         natural_leader = true;
@@ -2454,6 +2481,20 @@ static monster_type _band_member(band_type band, int power)
 
     case BAND_GNOLLS:
         mon_type = MONS_GNOLL;
+        break;
+
+    case BAND_TROLLKONOR:
+        mon_type = (power > 11 && one_chance_in(4)) ?
+                   MONS_ROCK_TROLL: MONS_TROLL;
+        break;
+
+    case BAND_DEEP_DWARF:
+        mon_type = static_cast<monster_type>(random_choose_weighted(
+                                           2, MONS_DEEP_DWARF_BERSERKER,
+                                           1, MONS_DEEP_DWARF_DEATH_KNIGHT,
+                                           6, MONS_DEEP_DWARF_NECROMANCER,
+                                          31, MONS_DEEP_DWARF,
+                                           0));
         break;
 
     case BAND_BUMBLEBEES:

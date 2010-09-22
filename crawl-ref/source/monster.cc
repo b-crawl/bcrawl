@@ -671,8 +671,8 @@ void monster::bind_melee_flags()
     // is, the flags will be removed later.
     if (mons_class_flag(type, M_FIGHTER))
         flags |= MF_FIGHTER;
-    if (mons_class_flag(type, M_TWOWEAPON))
-        flags |= MF_TWOWEAPON;
+    if (mons_class_flag(type, M_TWO_WEAPONS))
+        flags |= MF_TWO_WEAPONS;
     if (mons_class_flag(type, M_ARCHER))
         flags |= MF_ARCHER;
 }
@@ -1534,6 +1534,13 @@ bool monster::wants_weapon(const item_def &weap) const
         return (false);
     }
 
+    // deep dwarf artificers
+    if (weap.base_type == OBJ_STAVES
+        && type == MONS_DEEP_DWARF_ARTIFICER)
+    {
+        return (true);
+    }
+
     // Nobody picks up giant clubs. Starting equipment is okay, of course.
     if (weap.sub_type == WPN_GIANT_CLUB
         || weap.sub_type == WPN_GIANT_SPIKED_CLUB)
@@ -1815,7 +1822,7 @@ bool monster::pickup_potion(item_def &item, int near)
     // them.
     const potion_type ptype = static_cast<potion_type>(item.sub_type);
 
-    if (!can_drink_potion(ptype))
+    if (type != MONS_PARACELSUS && !can_drink_potion(ptype))
         return (false);
 
     return (pickup(item, MSLOT_POTION, near));
@@ -1919,6 +1926,7 @@ bool monster::pickup_item(item_def &item, int near, bool force)
         return pickup_gold(item, near);
     // Fleeing monsters won't pick up these.
     // Hostiles won't pick them up if they were ever dropped/thrown by you.
+    case OBJ_STAVES:
     case OBJ_WEAPONS:
         return pickup_weapon(item, near, force);
     case OBJ_MISSILES:
@@ -2864,7 +2872,7 @@ bool monster::heal(int amount, bool max_too)
 
 mon_holy_type monster::holiness() const
 {
-    if (testbits(flags, MF_HONORARY_UNDEAD))
+    if (testbits(flags, MF_FAKE_UNDEAD))
         return (MH_UNDEAD);
 
     return (mons_class_holiness(type));
@@ -3331,6 +3339,9 @@ int monster::res_magic() const
     if (has_ench(ENCH_LOWERED_MR))
         u /= 2;
 
+    if (has_ench(ENCH_RAISED_MR)) //trog's hand
+        u += 70;
+
     return (u);
 }
 
@@ -3455,11 +3466,23 @@ bool monster::rot(actor *agent, int amount, int immediate, bool quiet)
 int monster::hurt(const actor *agent, int amount, beam_type flavour,
                    bool cleanup_dead)
 {
+    const int initial_damage = amount;
     if (mons_is_projectile(type))
         return (0);
 
     if (alive())
     {
+        if (amount != INSTANT_DEATH
+            && ::mons_species(mons_base_type(this)) == MONS_DEEP_DWARF)
+        {
+            // Deep Dwarves get to shave _any_ hp loss. Player version:
+            int shave = 1 + random2(2 + random2(1 + this->hit_dice / 3));
+            dprf("(mon) HP shaved: %d.", shave);
+            amount -= shave;
+            if (amount <= 0)
+                return (0);
+        }
+
         if (amount == INSTANT_DEATH)
             amount = hit_points;
         else if (hit_dice <= 0)
@@ -3495,6 +3518,20 @@ int monster::hurt(const actor *agent, int amount, beam_type flavour,
         // Allow the victim to exhibit passive damage behaviour (e.g.
         // the royal jelly).
         react_to_damage(agent, amount, flavour);
+
+        if (has_ench(ENCH_MIRROR_DAMAGE))
+        {
+            if (agent->atype() == ACT_PLAYER)
+            {
+                mpr("It reflects your damage back at you!");
+                ouch(initial_damage, NON_MONSTER, KILLED_BY_REFLECTION);
+            }
+            else
+            {
+                monster* mon = monster_at(agent->pos());
+                mon->hurt(this, initial_damage, flavour, cleanup_dead);
+            }
+        }
     }
 
     if (cleanup_dead && (hit_points <= 0 || hit_dice <= 0) && type != -1)
@@ -3961,6 +3998,17 @@ void monster::add_enchantment_effect(const mon_enchant &ench, bool quiet)
 
         break;
 
+    case ENCH_STONESKIN:
+        {
+            // player gets 2+earth/5
+            const int ac_bonus = hit_dice / 2;
+
+            ac += ac_bonus;
+            // the monster may get drained or level up, we need to store the bonus
+            props["stoneskin_ac"].get_byte() = ac_bonus;
+        }
+        break;
+
     case ENCH_SUBMERGED:
         mons_clear_trapping_net(this);
 
@@ -4197,6 +4245,11 @@ void monster::remove_enchantment_effect(const mon_enchant &me, bool quiet)
         else
             speed *= 2;
 
+        break;
+
+    case ENCH_STONESKIN:
+        if (props.exists("stoneskin_ac"))
+            ac -= props["stoneskin_ac"].get_byte();
         break;
 
     case ENCH_PARALYSIS:
@@ -5795,6 +5848,8 @@ bool monster::can_drink_potion(potion_type ptype) const
         case POT_BLOOD:
         case POT_BLOOD_COAGULATED:
             return (mons_species() == MONS_VAMPIRE);
+        case POT_PORRIDGE:
+            return (mons_species() == MONS_NISSE);
         case POT_SPEED:
         case POT_MIGHT:
         case POT_BERSERK_RAGE:
@@ -6105,7 +6160,8 @@ static const char *enchant_names[] =
     "petrified", "lowered_mr", "soul_ripe", "slowly_dying", "eat_items",
     "aquatic_land", "spore_production", "slouch", "swift", "tide",
     "insane", "silenced", "awaken_forest", "exploding", "bleeding",
-    "antimagic", "fading_away", "preparing_resurrect", "buggy",
+    "antimagic", "fading_away", "preparing_resurrect", "regen", "magic_res",
+    "mirror_dam", "stoneskin", "buggy",
 };
 
 static const char *_mons_enchantment_name(enchant_type ench)

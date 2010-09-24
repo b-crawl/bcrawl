@@ -1235,7 +1235,7 @@ A weirdly shaped demon, pulsing and shifting with mutagenic energies, its belly 
 %%%%
 nisse
 
-Nisse take care of a lord's home and children and protect them from misfortune, in particular at night, when the housefolk are asleep. Since nisse are thought to be skilled in illusions and sometimes able to become invisible, one is unlikely to get more than brief glimpses of him. Nisse have four fingers, and are hairy all over, with pointed ears. Nisse's eyes glow in the dark.
+Nisse take care of a lord's home and children and protect them from misfortune, in particular at night, when the housefolk are asleep. Since nisse are thought to be skilled in illusions and sometimes able to become invisible, getting more than brief glimpses of one is unlikely. Nisse have four fingers, and are hairy all over, with pointed ears. Their eyes glow in the dark.
 %%%%
 witch
 
@@ -1243,7 +1243,7 @@ A rather eccentric person, dabbling in all sorts of arcanities.
 %%%%
 huldra
 
-Huldra are dangerous seductresses who live in the forest. The Huldra lures men into the forest in order to secure her freedom or sometimes to suck the life out of a man. One of her methods is to appear suddenly out of the rain and mist, friendly and enticing to the point that no man can resist her charms.
+Huldra are dangerous seductresses who live in the forest. The huldra lures men into the forest in order to secure her freedom or sometimes to suck the life out of a man. One of her methods is to appear suddenly out of the rain and mist, friendly and enticing to the point that no man can resist her charms.
 %%%%
 trollkonor
 

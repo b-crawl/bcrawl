@@ -2879,9 +2879,10 @@ static std::string _monster_stat_description(const monster_info& mi)
     if (mons_class_flag(mi.type, M_STATIONARY))
         result << pronoun << " cannot move.\n";
 
+    // Monsters can glow from both light and radiation.
     if (mons_class_flag(mi.type, M_GLOWS_LIGHT))
         result << pronoun << " is outlined in light.\n";
-    else if (mons_class_flag(mi.type, M_GLOWS_RADIATION))
+    if (mons_class_flag(mi.type, M_GLOWS_RADIATION))
         result << pronoun << " is glowing with mutagenic radiation.\n";
 
     // These differ between ghost demon monsters, so would be spoily.
@@ -3118,6 +3119,8 @@ void get_monster_db_desc(const monster_info& mi, describe_info &inf,
         inf.quote += "\n";
 
 #ifdef DEBUG_DIAGNOSTICS
+    if (mi.pos.origin())
+        return; // not a real monster
     struct monster& mons = *mi.mon();
     const actor *mfoe = mons.get_foe();
     inf.body << "\nMonster foe: "

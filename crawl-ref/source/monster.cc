@@ -568,27 +568,31 @@ bool monster::could_wield(const item_def &item, bool ignore_brand,
         if (brand == SPWPN_ORC_SLAYING && is_orckind(this))
             return (false);
 
-        // Undead and demonic monsters won't use holy weapons.
-        if (undead_or_demonic() && is_holy_item(item))
+        // Undead and demonic monsters and monsters that are
+        // gifts/worshippers of Yredelemnul won't use holy weapons.
+        if ((undead_or_demonic() || god == GOD_YREDELEMNUL)
+            && is_holy_item(item))
+        {
             return (false);
+        }
 
-        // Holy monsters that aren't gifts of chaotic gods and monsters
-        // that are gifts of good gods won't use potentially unholy
-        // weapons.
+        // Holy monsters that aren't gifts/worshippers of chaotic gods
+        // and monsters that are gifts/worshippers of good gods won't
+        // use potentially unholy weapons.
         if (((is_holy() && !is_chaotic_god(god)) || is_good_god(god))
             && is_potentially_unholy_item(item))
         {
             return (false);
         }
 
-        // Holy monsters and monsters that are gifts of good gods won't
-        // use unholy weapons.
+        // Holy monsters and monsters that are gifts/worshippers of good
+        // gods won't use unholy weapons.
         if ((is_holy() || is_good_god(god)) && is_unholy_item(item))
             return (false);
 
-        // Holy monsters that aren't gifts of chaotic gods and monsters
-        // that are gifts of good gods or Fedhas won't use potentially
-        // evil weapons.
+        // Holy monsters that aren't gifts/worshippers of chaotic gods
+        // and monsters that are gifts/worshippers of good gods won't
+        // use potentially evil weapons.
         if (((is_holy() && !is_chaotic_god(god))
                 || is_good_god(god))
             && is_potentially_evil_item(item))
@@ -596,26 +600,30 @@ bool monster::could_wield(const item_def &item, bool ignore_brand,
             return (false);
         }
 
-        // Holy monsters and monsters that are gifts of good gods or
-        // Fedhas won't use evil weapons.
+        // Holy monsters and monsters that are gifts/worshippers of good
+        // gods won't use evil weapons.
         if (((is_holy() || is_good_god(god)))
             && is_evil_item(item))
         {
             return (false);
         }
 
+        // Monsters that are gifts/worshippers of Fedhas won't use
+        // corpse-violating weapons.
         if (god == GOD_FEDHAS && is_corpse_violating_item(item))
             return (false);
 
-        // Holy monsters that aren't gifts of chaotic gods and monsters
-        // that are gifts of good gods won't use chaotic weapons.
+        // Holy monsters that aren't gifts/worshippers of chaotic gods
+        // and monsters that are gifts/worshippers of good gods won't
+        // use chaotic weapons.
         if (((is_holy() && !is_chaotic_god(god)) || is_good_god(god))
             && is_chaotic_item(item))
         {
             return (false);
         }
 
-        // Monsters that are gifts of Zin won't use unclean weapons.
+        // Monsters that are gifts/worshippers of Zin won't use unclean
+        // weapons.
         if (god == GOD_ZIN && is_unclean_item(item))
             return (false);
     }
@@ -723,6 +731,10 @@ bool monster::can_use_missile(const item_def &item) const
     {
         return (is_throwable(this, item));
     }
+
+    // Rods are always non-throwable.
+    if (item_is_rod(item))
+        return (false);
 
     // Stones are allowed even without launcher.
     if (item.sub_type == MI_STONE)
@@ -4568,7 +4580,7 @@ void monster::timeout_enchantments(int levels)
         case ENCH_PETRIFYING: case ENCH_PETRIFIED: case ENCH_SWIFT:
         case ENCH_BATTLE_FRENZY: case ENCH_TEMP_PACIF: case ENCH_SILENCE:
         case ENCH_LOWERED_MR: case ENCH_SOUL_RIPE: case ENCH_BLEED:
-        case ENCH_ANTIMAGIC:
+        case ENCH_ANTIMAGIC: case ENCH_FEAR_INSPIRING:
             lose_ench_levels(i->second, levels);
             break;
 
@@ -4744,6 +4756,7 @@ void monster::apply_enchantment(const mon_enchant &me)
     case ENCH_SOUL_RIPE:
     case ENCH_TIDE:
     case ENCH_ANTIMAGIC:
+    case ENCH_FEAR_INSPIRING:
         decay_enchantment(me);
         break;
 
@@ -6161,7 +6174,7 @@ static const char *enchant_names[] =
     "aquatic_land", "spore_production", "slouch", "swift", "tide",
     "insane", "silenced", "awaken_forest", "exploding", "bleeding",
     "antimagic", "fading_away", "preparing_resurrect", "regen", "magic_res",
-    "mirror_dam", "stoneskin", "buggy",
+    "mirror_dam", "stoneskin", "fear inspiring", "buggy",
 };
 
 static const char *_mons_enchantment_name(enchant_type ench)
@@ -6267,6 +6280,7 @@ int mon_enchant::calc_duration(const monster* mons,
     case ENCH_HASTE:
     case ENCH_MIGHT:
     case ENCH_INVIS:
+    case ENCH_FEAR_INSPIRING:
         cturn = 1000 / _mod_speed(25, mons->speed);
         break;
     case ENCH_SILENCE:

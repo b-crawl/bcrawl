@@ -462,18 +462,24 @@ bool is_player_same_species(const int mon, bool transform)
         }
     }
 
+    // Genus would include nisse.
+    if (you.species == SP_KOBOLD)
+    {
+        return (mons_species(mon) == MONS_KOBOLD
+                || mons_species(mon) == MONS_BIG_KOBOLD);
+    }
+
     // Genus would include necrophage and rotting hulk.
     if (you.species == SP_GHOUL)
         return (mons_species(mon) == MONS_GHOUL);
+
+    if (you.species == SP_MERFOLK && mons_genus(mon) == MONS_MERMAID)
+        return (true);
 
     // Note that these are currently considered to be the same species:
     // * halflings and humans
     // * dwarves and deep dwarves
     // * all elf races
-
-    if (you.species == SP_MERFOLK && mons_genus(mon) == MONS_MERMAID)
-        return (true);
-
     return (mons_genus(mon) == mons_genus(player_mons(false)));
 }
 
@@ -3675,6 +3681,7 @@ void display_char_status()
         DUR_DIVINE_VIGOUR, DUR_DIVINE_STAMINA, DUR_BERSERKER,
         STATUS_AIRBORNE, STATUS_NET, DUR_POISONING, STATUS_SICK,
         STATUS_ROT, STATUS_GLOW, DUR_CONFUSING_TOUCH, DUR_SURE_BLADE,
+        DUR_AFRAID,
     };
 
     status_info inf;
@@ -5124,6 +5131,7 @@ void player::init()
     props.clear();
 
     beholders.clear();
+    fearmongers.clear();
     dactions.clear();
 
 

@@ -1406,6 +1406,7 @@ int monster_die(monster* mons, killer_type killer,
     mons_clear_trapping_net(mons);
 
     you.remove_beholder(mons);
+    you.remove_fearmonger(mons);
 
     // Monsters haloes should be removed when they die.
     if (mons->holiness() == MH_HOLY)
@@ -2304,7 +2305,7 @@ static bool _valid_morph(monster* mons, monster_type new_mclass)
 
     // Various inappropriate polymorph targets.
     if (mons_class_holiness(new_mclass) != mons->holiness()
-        || mons_class_flag(new_mclass, M_NO_POLY_TO)  // explicitely disallowed
+        || mons_class_flag(new_mclass, M_NO_POLY_TO)  // explicitly disallowed
         || mons_class_flag(new_mclass, M_UNIQUE)      // no uniques
         || mons_class_flag(new_mclass, M_NO_EXP_GAIN) // not helpless
         || new_mclass == mons_species(mons->type)  // must be different
@@ -2465,6 +2466,7 @@ bool monster_polymorph(monster* mons, monster_type targetc,
     // changing mons->type, since unbeholding can only happen while
     // the monster is still a mermaid/siren.
     you.remove_beholder(mons);
+    you.remove_fearmonger(mons);
 
     if (mons->type == MONS_KRAKEN)
         _destroy_tentacles(mons);
@@ -2475,8 +2477,7 @@ bool monster_polymorph(monster* mons, monster_type targetc,
     // the actual polymorphing:
     uint64_t flags =
         mons->flags & ~(MF_INTERESTING | MF_SEEN | MF_ATT_CHANGE_ATTEMPT
-                           | MF_WAS_IN_VIEW | MF_BAND_MEMBER
-                           | MF_KNOWN_MIMIC);
+                           | MF_WAS_IN_VIEW | MF_BAND_MEMBER | MF_KNOWN_MIMIC);
 
     std::string name;
 

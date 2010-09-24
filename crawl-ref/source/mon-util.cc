@@ -3144,7 +3144,13 @@ const char *mons_pronoun(monster_type mon_type, pronoun_type variant,
 {
     gender_type gender = GENDER_NEUTER;
 
-    if (mons_genus(mon_type) == MONS_MERMAID || mon_type == MONS_HARPY
+    if (mons_genus(mon_type) == MONS_MERMAID
+        || mon_type == MONS_HARPY
+        || mon_type == MONS_TROLLKONOR
+        || mon_type == MONS_HULDRA
+        || mon_type == MONS_WITCH
+        || mon_type == MONS_EVIL_WITCH
+        || mon_type == MONS_FOREST_WITCH
         || mon_type == MONS_SPHINX)
     {
         gender = GENDER_FEMALE;

@@ -8,8 +8,9 @@
 enum tag_minor_version
 {
     TAG_MINOR_RESET        = 0, // Minor tags were reset
-    TAG_MINOR_VERSION      = 1, // Current version.  (Keep equal to max.)
     TAG_MINOR_REDUCED_LOS  = 1, // LOS radius reduced.
+    TAG_MINOR_FEAR         = 2, // fear_mongers
+    TAG_MINOR_VERSION      = 2, // Current version.  (Keep equal to max.)
 };
 
 #endif

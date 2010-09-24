@@ -14,8 +14,8 @@
 #include "database.h"
 #include "effects.h"
 #include "env.h"
-#include "fprop.h"
 #include "fight.h"
+#include "fprop.h"
 #include "ghost.h"
 #include "items.h"
 #include "libutil.h"
@@ -242,22 +242,23 @@ bolt mons_spells( monster* mons, spell_type spell_cast, int power,
      {
         int cloud = random2(5);
         switch (cloud)
-          {
-              case 0:
-                  real_spell = SPELL_MEPHITIC_CLOUD;
-                  break;
-              case 1:
-                  real_spell = SPELL_MIASMA_CLOUD;
-                  break;
-              case 2:
-                  real_spell = SPELL_POISON_CLOUD;
-                  break;
-              case 3:
-                  real_spell = SPELL_FIRE_CLOUD;
-                  break;
-              default:
-                  real_spell = SPELL_STEAM_CLOUD;
-          }
+        {
+            case 0:
+                real_spell = SPELL_MEPHITIC_CLOUD;
+                break;
+            case 1:
+                real_spell = SPELL_MIASMA_CLOUD;
+                break;
+            case 2:
+                real_spell = SPELL_POISON_CLOUD;
+                break;
+            case 3:
+                real_spell = SPELL_FIRE_CLOUD;
+                break;
+            default:
+                real_spell = SPELL_STEAM_CLOUD;
+                break;
+        }
     }
 
     beam.glyph = dchar_glyph(DCHAR_FIRED_ZAP); // default
@@ -655,9 +656,9 @@ bolt mons_spells( monster* mons, spell_type spell_cast, int power,
 
     case SPELL_MEPHITIC_CLOUD:
           if (spell_cast == SPELL_EVAPORATE)
-            beam.name     = "potion";
+              beam.name     = "potion";
           else
-            beam.name     = "foul vapour";
+              beam.name     = "foul vapour";
         beam.damage   = dice_def(1,0);
         beam.colour   = GREEN;
         // Well, it works, even if the name isn't quite intuitive.
@@ -670,9 +671,9 @@ bolt mons_spells( monster* mons, spell_type spell_cast, int power,
 
     case SPELL_STEAM_CLOUD:
           if (spell_cast == SPELL_EVAPORATE)
-            beam.name     = "potion";
+              beam.name     = "potion";
           else
-            beam.name     = "cloud of steam";
+              beam.name     = "cloud of steam";
         beam.damage   = dice_def(1,0);
         beam.colour   = LIGHTGREY;
         beam.flavour  = BEAM_POTION_STEAM;
@@ -684,9 +685,9 @@ bolt mons_spells( monster* mons, spell_type spell_cast, int power,
 
     case SPELL_FIRE_CLOUD:
           if (spell_cast == SPELL_EVAPORATE)
-            beam.name     = "potion";
+              beam.name     = "potion";
           else
-            beam.name     = "cloud of fire";
+              beam.name     = "cloud of fire";
         beam.damage   = dice_def(1,0);
         beam.colour   = RED;
         beam.flavour  = BEAM_POTION_FIRE;
@@ -698,9 +699,9 @@ bolt mons_spells( monster* mons, spell_type spell_cast, int power,
 
     case SPELL_POISON_CLOUD:
           if (spell_cast == SPELL_EVAPORATE)
-            beam.name     = "potion";
+              beam.name     = "potion";
           else
-            beam.name     = "cloud of poison";
+              beam.name     = "cloud of poison";
         beam.damage   = dice_def(1,0);
         beam.colour   = LIGHTGREEN;
         beam.flavour  = BEAM_POTION_POISON;
@@ -712,9 +713,9 @@ bolt mons_spells( monster* mons, spell_type spell_cast, int power,
 
     case SPELL_MIASMA_CLOUD:
           if (spell_cast == SPELL_EVAPORATE)
-            beam.name     = "potion";
+              beam.name     = "potion";
           else
-            beam.name     = "foul vapour";
+              beam.name     = "foul vapour";
         beam.damage   = dice_def(1,0);
         beam.colour   = DARKGREY;
         beam.flavour  = BEAM_POTION_MIASMA;
@@ -978,6 +979,7 @@ bool setup_mons_cast(monster* mons, bolt &pbolt, spell_type spell_cast,
     case SPELL_SUMMON_HORRIBLE_THINGS:
     case SPELL_HAUNT:
     case SPELL_SYMBOL_OF_TORMENT:
+    case SPELL_CAUSE_FEAR:
     case SPELL_HOLY_WORD:
     case SPELL_DRAIN_LIFE:
     case SPELL_SUMMON_GREATER_DEMON:
@@ -1959,9 +1961,10 @@ static bool _mons_vamp_drain(monster *mons)
     else
     {
         monster* mtarget = target->as_monster();
+        const std::string targname = mtarget->name(DESC_NOCAP_ITS);
         mtarget->hurt(mons, hp_cost);
         simple_monster_message(mons, (std::string(" draws the life force from ")
-                                     + mtarget->name(DESC_NOCAP_ITS)
+                                     + targname
                                      + " and is healed!").c_str());
         if (mtarget->alive())
             print_wounds(mtarget);
@@ -2651,6 +2654,70 @@ void mons_cast(monster* mons, bolt &pbolt, spell_type spell_cast,
     case SPELL_HOLY_WORD:
         holy_word(0, mons->mindex(), mons->pos());
         return;
+
+    case SPELL_CAUSE_FEAR:
+    {
+        const int pow = std::min(mons->hit_dice * 12, 200);
+        const bool unseen = you.can_see(mons);
+
+        if (monsterNearby)
+        {
+            if (!unseen)
+                simple_monster_message(mons, " radiates an aura of fear!");
+            else
+                mprf("An aura of fear fills the air!");
+
+            flash_view(DARKGREY);
+
+            if (you.check_res_magic(pow))
+                canned_msg(MSG_YOU_RESIST);
+            else
+            {
+                you.add_fearmonger(mons);
+                you.increase_duration(DUR_AFRAID, 10 + random2avg(pow, 4));
+
+                if (!mons->has_ench(ENCH_FEAR_INSPIRING))
+                    mons->add_ench(ENCH_FEAR_INSPIRING);
+            }
+        }
+
+        for (monster_iterator mi(mons->get_los()); mi; ++mi)
+        {
+            if (*mi == mons)
+                continue;
+
+            // Same-aligned intelligent monsters are unaffected, as are magic-immune (regardless).
+            if (mons_intel(*mi) > I_ANIMAL && mons->temp_attitude() == mons->temp_attitude()
+                || mons_immune_magic(*mi))
+            {
+                if (you.can_see(*mi))
+                    simple_monster_message(*mi, mons_immune_magic(mons) ? " is unaffected." : " resists.");
+
+                continue;
+            }
+
+            // Check to see if they can get scared, magic immune already dealt with.
+            if (mi->check_res_magic(pow))
+            {
+                simple_monster_message(*mi, " resists.");
+                continue;
+            }
+
+            // Otherwise, try to scare them.
+            if (mi->add_ench(mon_enchant(ENCH_FEAR, 0, mons->kill_alignment())))
+            {
+                if (!mons->has_ench(ENCH_FEAR_INSPIRING))
+                    mons->add_ench(ENCH_FEAR_INSPIRING);
+
+                if (you.can_see(*mi))
+                    simple_monster_message(*mi, " looks frightened!");
+
+                behaviour_event(*mi, ME_SCARE, mons->kill_alignment() == KC_YOU ? MHITYOU : MHITNOT);
+            }
+        }
+
+        return;
+    }
 
     case SPELL_DRAIN_LIFE:
     {

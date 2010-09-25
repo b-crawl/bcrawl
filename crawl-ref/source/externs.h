@@ -762,4 +762,12 @@ struct mon_display
        : type(m), glyph(gly), colour(col), detected(d) { }
 };
 
+struct final_effect
+{
+    final_effect_flavour flavour;
+    short att, def;
+    coord_def pos;
+    int x;
+};
+
 #endif // EXTERNS_H

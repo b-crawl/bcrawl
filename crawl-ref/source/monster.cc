@@ -18,6 +18,7 @@
 #include "directn.h"
 #include "env.h"
 #include "fight.h"
+#include "fineff.h"
 #include "fprop.h"
 #include "ghost.h"
 #include "godabil.h"
@@ -733,7 +734,7 @@ bool monster::can_use_missile(const item_def &item) const
     }
 
     // Rods are always non-throwable.
-    if (item_is_rod(item))
+    if (item_is_rod(item) || item_is_staff(item))
         return (false);
 
     // Stones are allowed even without launcher.
@@ -2592,13 +2593,8 @@ void monster::banish(const std::string &)
 
     if (mons_is_projectile(type))
         return;
-    if (!silenced(pos()) && can_speak())
-        simple_monster_message(this, (" screams as " + pronoun(PRONOUN_NOCAP)
-            + " is devoured by a tear in reality.").c_str(),
-            MSGCH_BANISHMENT);
-    else
-        simple_monster_message(this, " is devoured by a tear in reality.",
-            MSGCH_BANISHMENT);
+    simple_monster_message(this, " is devoured by a tear in reality.",
+                           MSGCH_BANISHMENT);
     monster_die(this, KILL_RESET, NON_MONSTER);
 
     place_cloud(CLOUD_TLOC_ENERGY, old_pos, 5 + random2(8), KC_OTHER);
@@ -3532,18 +3528,8 @@ int monster::hurt(const actor *agent, int amount, beam_type flavour,
         react_to_damage(agent, amount, flavour);
 
         if (has_ench(ENCH_MIRROR_DAMAGE))
-        {
-            if (agent->atype() == ACT_PLAYER)
-            {
-                mpr("It reflects your damage back at you!");
-                ouch(initial_damage, NON_MONSTER, KILLED_BY_REFLECTION);
-            }
-            else
-            {
-                monster* mon = monster_at(agent->pos());
-                mon->hurt(this, initial_damage, flavour, cleanup_dead);
-            }
-        }
+            add_final_effect(FINEFF_MIRROR_DAMAGE, agent, this,
+                             coord_def(0,0), initial_damage);
     }
 
     if (cleanup_dead && (hit_points <= 0 || hit_dice <= 0) && type != -1)
@@ -4581,6 +4567,8 @@ void monster::timeout_enchantments(int levels)
         case ENCH_BATTLE_FRENZY: case ENCH_TEMP_PACIF: case ENCH_SILENCE:
         case ENCH_LOWERED_MR: case ENCH_SOUL_RIPE: case ENCH_BLEED:
         case ENCH_ANTIMAGIC: case ENCH_FEAR_INSPIRING:
+        case ENCH_REGENERATION: case ENCH_RAISED_MR: case ENCH_MIRROR_DAMAGE:
+        case ENCH_STONESKIN:
             lose_ench_levels(i->second, levels);
             break;
 
@@ -4756,6 +4744,10 @@ void monster::apply_enchantment(const mon_enchant &me)
     case ENCH_SOUL_RIPE:
     case ENCH_TIDE:
     case ENCH_ANTIMAGIC:
+    case ENCH_REGENERATION:
+    case ENCH_RAISED_MR:
+    case ENCH_MIRROR_DAMAGE:
+    case ENCH_STONESKIN:
     case ENCH_FEAR_INSPIRING:
         decay_enchantment(me);
         break;
@@ -6281,9 +6273,13 @@ int mon_enchant::calc_duration(const monster* mons,
     case ENCH_MIGHT:
     case ENCH_INVIS:
     case ENCH_FEAR_INSPIRING:
+    case ENCH_STONESKIN:
         cturn = 1000 / _mod_speed(25, mons->speed);
         break;
     case ENCH_SILENCE:
+    case ENCH_REGENERATION:
+    case ENCH_RAISED_MR:
+    case ENCH_MIRROR_DAMAGE:
         cturn = 300 / _mod_speed(25, mons->speed);
         break;
     case ENCH_SLOW:

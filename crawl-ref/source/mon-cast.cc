@@ -6,6 +6,7 @@
 #include "AppHdr.h"
 #include "mon-cast.h"
 
+#include "act-iter.h"
 #include "beam.h"
 #include "cloud.h"
 #include "colour.h"
@@ -59,6 +60,8 @@
 const int MAX_ACTIVE_KRAKEN_TENTACLES = 4;
 
 static bool _valid_mon_spells[NUM_SPELLS];
+
+static bool _mons_drain_life(monster* mons, bool actual = true);
 
 void init_mons_spells()
 {
@@ -1153,7 +1156,7 @@ static bool _is_emergency_spell(const monster_spells &msp, int spell)
 
 // Function should return false if friendlies shouldn't animate any dead.
 // Currently, this only happens if the player is in the middle of butchering
-// a corpse (infurating), or if they are less than satiated.  Only applies
+// a corpse (infuriating), or if they are less than satiated.  Only applies
 // to friendly corpse animators. {due}
 static bool _animate_dead_okay()
 {
@@ -1570,6 +1573,12 @@ bool handle_mon_spell(monster* mons, bolt &beem)
                 return (false);
             }
         }
+        // Try to drain life: if nothing is drained, pretend we didn't cast it.
+        else if (spell_cast == SPELL_DRAIN_LIFE)
+        {
+            if (!_mons_drain_life(mons, false))
+                return (false);
+        }
 
         if (mons->type == MONS_BALL_LIGHTNING)
             mons->hit_points = -1;
@@ -1925,18 +1934,17 @@ void mons_cast_spectral_orcs(monster* mons)
     }
 }
 
-static bool _mons_vamp_drain(monster *mons)
+static bool _mons_vampiric_drain(monster *mons)
 {
     actor *target = mons->get_foe();
     if (grid_distance(mons->pos(), target->pos()) > 1)
-        return false;
-
+        return (false);
     if (target->undead_or_demonic())
-        return false;
+        return (false);
 
     int fnum = 5;
     int fden = 5;
-    if (mons_class_flag(mons->type, M_ACTUAL_SPELLS))
+    if (mons->is_actual_spellcaster())
         fnum = 8;
     int pow = random2((mons->hit_dice * fnum)/fden);
     int hp_cost = 3 + random2avg(9, 2) + 1 + pow / 7;
@@ -1944,14 +1952,16 @@ static bool _mons_vamp_drain(monster *mons)
     hp_cost = std::min(hp_cost, target->stat_hp());
     hp_cost = std::min(hp_cost, mons->max_hit_points - mons->hit_points);
     if (!hp_cost)
-        return false;
-
-    const bool unseen = you.can_see(mons);
+        return (false);
 
     dprf("vamp draining: %d damage, %d healing", hp_cost, hp_cost/2);
-    if (!unseen)
-        mons_speaks_msg(mons, " is infused with unholy energy.",
-                              MSGCH_MONSTER_SPELL, silenced(mons->pos()));
+
+    if (you.can_see(mons))
+        simple_monster_message(mons,
+                               " is infused with unholy energy.",
+                               MSGCH_MONSTER_SPELL);
+    else
+        mpr("Unholy energy fills the air.");
 
     if (target->atype() == ACT_PLAYER)
     {
@@ -1968,10 +1978,80 @@ static bool _mons_vamp_drain(monster *mons)
                                      + " and is healed!").c_str());
         if (mtarget->alive())
             print_wounds(mtarget);
-
-        mons->heal(hp_cost/2);
+        mons->heal(hp_cost / 2);
     }
-    return true;
+
+    return (true);
+}
+
+static bool _mons_drain_life(monster* mons, bool actual)
+{
+    if (actual)
+    {
+        if (you.can_see(mons))
+            simple_monster_message(mons, " draws from the surrounding life force!");
+        else
+            mpr("The surrounding life force dissipates!");
+
+        flash_view_delay(DARKGREY, 300);
+    }
+
+    const int pow = mons->hit_dice;
+    const int hurted = 3 + random2(7) + random2(pow);
+    int hp_gain = 0;
+
+    for (actor_iterator ai(mons->get_los()); ai; ++ai)
+    {
+        if (ai->holiness() != MH_NATURAL
+            || ai->res_negative_energy())
+        {
+            continue;
+        }
+
+        if (ai->atype() == ACT_PLAYER)
+        {
+            if (actual)
+            {
+                ouch(hurted, mons->mindex(), KILLED_BY_BEAM, mons->name(DESC_NOCAP_A).c_str());
+
+                simple_monster_message(mons, " draws from your life force!");
+            }
+
+            hp_gain += hurted;
+        }
+        else
+        {
+            monster* m = ai->as_monster();
+
+            if (m == mons)
+                continue;
+
+            if (actual)
+            {
+                m->hurt(mons, hurted);
+
+                if (m->alive())
+                    print_wounds(m);
+            }
+
+            if (!m->is_summoned())
+                hp_gain += hurted;
+        }
+    }
+
+    hp_gain /= 2;
+
+    hp_gain = std::min(pow * 2, hp_gain);
+
+    if (hp_gain && mons->heal(hp_gain))
+    {
+        if (actual)
+            simple_monster_message(mons, " is healed.");
+
+        return (true);
+    }
+
+    return (false);
 }
 
 bool _mon_spell_bail_out_early(monster* mons, spell_type spell_cast)
@@ -1984,23 +2064,25 @@ bool _mon_spell_bail_out_early(monster* mons, spell_type spell_cast)
     case SPELL_ANIMATE_DEAD:
         // see special handling in mon-stuff::handle_spell() {dlb}
         if (mons->friendly() && !_animate_dead_okay())
-            return true;
+            return (true);
         break;
 
     case SPELL_CHAIN_LIGHTNING:
     case SPELL_SYMBOL_OF_TORMENT:
     case SPELL_HOLY_WORD:
-        if (!monsterNearby ||
+        if (!monsterNearby
             // friendly holies don't care if you are friendly
-            (mons->friendly() && spell_cast != SPELL_HOLY_WORD))
-            return true;
+            || (mons->friendly() && spell_cast != SPELL_HOLY_WORD))
+        {
+            return (true);
+        }
         break;
 
     default:
         break;
     }
 
-    return false;
+    return (false);
 }
 
 void mons_cast(monster* mons, bolt &pbolt, spell_type spell_cast,
@@ -2028,11 +2110,13 @@ void mons_cast(monster* mons, bolt &pbolt, spell_type spell_cast,
     if (_mon_spell_bail_out_early(mons, spell_cast))
         return;
 
-    if ((spell_cast == SPELL_CANTRIP)
-        || (spell_cast == SPELL_VAMPIRIC_DRAINING)
-        || (spell_cast == SPELL_MIRROR_DAMAGE)
-        || (spell_cast == SPELL_DRAIN_LIFE))
+    if (spell_cast == SPELL_CANTRIP
+        || spell_cast == SPELL_VAMPIRIC_DRAINING
+        || spell_cast == SPELL_MIRROR_DAMAGE
+        || spell_cast == SPELL_DRAIN_LIFE)
+    {
         do_noise = false;       // Spell itself does the messaging.
+    }
 
     if (_los_free_spell(spell_cast) && !spell_is_direct_explosion(spell_cast))
     {
@@ -2102,7 +2186,7 @@ void mons_cast(monster* mons, bolt &pbolt, spell_type spell_cast,
     }
 
     case SPELL_VAMPIRIC_DRAINING:
-        _mons_vamp_drain(mons);
+        _mons_vampiric_drain(mons);
         return;
 
     case SPELL_BERSERKER_RAGE:
@@ -2655,16 +2739,15 @@ void mons_cast(monster* mons, bolt &pbolt, spell_type spell_cast,
     case SPELL_CAUSE_FEAR:
     {
         const int pow = std::min(mons->hit_dice * 12, 200);
-        const bool unseen = you.can_see(mons);
 
         if (monsterNearby)
         {
-            if (!unseen)
+            if (you.can_see(mons))
                 simple_monster_message(mons, " radiates an aura of fear!");
             else
-                mprf("An aura of fear fills the air!");
+                mpr("An aura of fear fills the air!");
 
-            flash_view(DARKGREY);
+            flash_view_delay(DARKGREY, 300);
 
             if (you.check_res_magic(pow))
                 canned_msg(MSG_YOU_RESIST);
@@ -2717,51 +2800,8 @@ void mons_cast(monster* mons, bolt &pbolt, spell_type spell_cast,
     }
 
     case SPELL_DRAIN_LIFE:
-    {
-        const int pow = mons->hit_dice;
-        const bool unseen = you.can_see(mons);
-        if (!unseen)
-        {
-            simple_monster_message(mons, " draws from the surrounding life force.");
-            flash_view(DARKGREY);
-        }
-
-        int hp_gain = 0;
-
-        for (monster_iterator mi(mons->get_los()); mi; ++mi)
-        {
-            if (mi->holiness() != MH_NATURAL
-                || mi->res_negative_energy())
-            {
-                continue;
-            }
-
-            const int hurted = 3 + random2(7) + random2(pow);
-            behaviour_event(*mi, ME_WHACK, MHITYOU, mons->pos());
-            if (!mi->is_summoned())
-                hp_gain += hurted;
-
-            mi->hurt(mons, hurted);
-
-            if (mi->alive())
-                print_wounds(*mi);
-        }
-
-        hp_gain /= 2;
-
-        hp_gain = std::min(pow * 2, hp_gain);
-
-        if (hp_gain)
-        {
-            if (mons->heal(hp_gain))
-            {
-                if (!unseen)
-                    simple_monster_message(mons, " is healed.");
-            }
-        }
-
+        _mons_drain_life(mons);
         return;
-    }
 
     case SPELL_SUMMON_GREATER_DEMON:
         if (_mons_abjured(mons, monsterNearby))
@@ -3226,7 +3266,7 @@ static unsigned int _noise_keys(std::vector<std::string>& key_list,
     {
         // A real spell being cast by something with no hands?  Maybe
         // it's a polymorphed spellcaster which kept its original spells.
-        // If so, the cast message for it's new type/species/genus probably
+        // If so, the cast message for its new type/species/genus probably
         // won't look right.
         if (!mons_class_flag(mons->type, M_ACTUAL_SPELLS | M_PRIEST))
         {
@@ -3619,7 +3659,7 @@ void mons_cast_noise(monster* mons, const bolt &pbolt,
 
     const msg_channel_type chan =
         (unseen              ? MSGCH_SOUND :
-         mons->friendly() ? MSGCH_FRIEND_SPELL
+         mons->friendly()    ? MSGCH_FRIEND_SPELL
                              : MSGCH_MONSTER_SPELL);
 
     if (silent)

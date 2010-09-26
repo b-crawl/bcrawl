@@ -614,6 +614,11 @@ bool monster::could_wield(const item_def &item, bool ignore_brand,
         if (god == GOD_FEDHAS && is_corpse_violating_item(item))
             return (false);
 
+        // Monsters that are gifts/worshippers of Zin won't use unclean
+        // weapons.
+        if (god == GOD_ZIN && is_unclean_item(item))
+            return (false);
+
         // Holy monsters that aren't gifts/worshippers of chaotic gods
         // and monsters that are gifts/worshippers of good gods won't
         // use chaotic weapons.
@@ -623,9 +628,9 @@ bool monster::could_wield(const item_def &item, bool ignore_brand,
             return (false);
         }
 
-        // Monsters that are gifts/worshippers of Zin won't use unclean
+        // Monsters that are gifts/worshippers of TSO won't use poisoned
         // weapons.
-        if (god == GOD_ZIN && is_unclean_item(item))
+        if (god == GOD_SHINING_ONE && is_poisoned_item(item))
             return (false);
     }
 

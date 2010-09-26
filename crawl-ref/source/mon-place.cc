@@ -1283,8 +1283,9 @@ int place_monster(mgen_data mg, bool force_pos)
         {
             menv[band_id].flags |= MF_BAND_MEMBER;
             // Priestly band leaders should have an entourage of the
-            // same religion.
-            if (priest)
+            // same religion, unless members of that entourage already
+            // have a different one.
+            if (priest && menv[band_id].god == GOD_NO_GOD)
                 menv[band_id].god = mon->god;
 
             if (mon->type == MONS_PIKEL)
@@ -1647,8 +1648,12 @@ static int _place_monster_aux(const mgen_data &mg,
 
     if (summoned)
     {
+        // Instead of looking for dancing weapons, look for Tukima's dance.
+        // Dancing weapons can be created with shadow creatures. {due}
+        bool mark_items = mg.summon_type != SPELL_TUKIMAS_DANCE;
+
         mon->mark_summoned(mg.abjuration_duration,
-                           mg.cls != MONS_DANCING_WEAPON,
+                           mark_items,
                            mg.summon_type);
     }
     ASSERT(!invalid_monster_index(mg.foe)

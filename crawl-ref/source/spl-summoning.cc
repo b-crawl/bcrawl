@@ -951,7 +951,7 @@ spret_type cast_tukimas_ball(actor *caster, int pow, god_type god,
     bool some_weapon_was_animated = false;
     const int dur = std::min(2 + (random2(pow) / 5), 6);
 
-    radius_iterator ri(caster->pos(), 6, C_ROUND,
+    radius_iterator ri(caster->pos(), 5, C_SQUARE,
                        caster->get_los_no_trans());
     //iterate over all weapons in view
     for (; ri; ++ri)
@@ -1098,7 +1098,7 @@ spret_type cast_conjure_ball_lightning(int pow, god_type god, bool fail)
         for (int j = 0; j < 10; ++j)
         {
             if (random_near_space(you.pos(), target, true, true, false)
-                && distance(you.pos(), target) <= 5)
+                && grid_distance(you.pos(), target) <= 2)
             {
                 found = true;
                 break;
@@ -1874,7 +1874,7 @@ int animate_dead(actor *caster, int pow, beh_type beha, unsigned short hitting,
     int number_seen   = 0;
     int motions       = 0;
 
-    radius_iterator ri(caster->pos(), LOS_RADIUS, C_ROUND,
+    radius_iterator ri(caster->pos(), LOS_RADIUS, C_SQUARE,
                        caster->get_los_no_trans());
 
     for (; ri; ++ri)

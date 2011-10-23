@@ -102,7 +102,7 @@ end
 
 local function find_next_monster()
   local r, x, y
-  for r = 1,8 do
+  for r = 1,7 do
     for x = -r,r do
       for y = -r,r do
         m = monster.get_monster_at(x, y)

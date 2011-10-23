@@ -66,7 +66,7 @@
 // precalculations (only positive quadrant used).
 // For the LOS code to work correctly, any LOS shape that
 // is used needs to be contained in bds_precalc.
-const circle_def bds_precalc = circle_def(LOS_MAX_RANGE, C_ROUND);
+const circle_def bds_precalc = circle_def(LOS_MAX_RANGE, C_SQUARE);
 
 // These determine what rays are cast in the precomputation,
 // and affect start-up time significantly.
@@ -122,23 +122,27 @@ void clear_rays_on_exit()
        delete blockrays(*qi);
 }
 
-// Pre-squared LOS radius.
-int _los_radius_sq = LOS_RADIUS_SQ;
+// Current LOS radius.
+int _los_radius = LOS_RADIUS;
 
 static void _handle_los_change();
 
 void set_los_radius(int r)
 {
     ASSERT(r <= LOS_MAX_RADIUS);
-    _los_radius_sq = r * r + 1;
+    _los_radius = r;
     invalidate_los();
     _handle_los_change();
 }
 
-// XXX: just for monster_los
+int get_los_radius()
+{
+    return _los_radius;
+}
+
 int get_los_radius_sq()
 {
-    return _los_radius_sq;
+    return (_los_radius * _los_radius + 1);
 }
 
 bool double_is_zero(const double x)

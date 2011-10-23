@@ -17,12 +17,13 @@ struct ray_def;
 bool double_is_zero(const double x);
 
 void set_los_radius(int r);
-int get_los_radius_sq(); // XXX
+int get_los_radius();
+int get_los_radius_sq(); // XXX; legacy
 
 // Default bounds that tracks global LOS radius.
 #define BDS_DEFAULT (circle_def())
 // Default bounds for find_ray, used for beams.
-#define BDS_CONSTANT (circle_def(LOS_MAX_RANGE, C_ROUND))
+#define BDS_CONSTANT (circle_def(LOS_MAX_RANGE, C_SQUARE))
 
 bool find_ray(const coord_def& source, const coord_def& target,
               ray_def& ray, const opacity_func &opc = opc_solid,

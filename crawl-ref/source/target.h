@@ -57,7 +57,7 @@ public:
     bool valid_aim(coord_def a);
     aff_type is_affected(coord_def loc);
 private:
-    int range2;
+    int range;
     // assumes exp_map is valid only if >0, so let's keep it private
     int exp_range_min, exp_range_max;
     explosion_map exp_map_min, exp_map_max;
@@ -76,12 +76,12 @@ public:
 class targetter_cloud : public targetter
 {
 public:
-    targetter_cloud(const actor* act, int range = LOS_RADIUS,
+    targetter_cloud(const actor* act, int ran = LOS_RADIUS,
                     int count_min = 8, int count_max = 10);
     bool set_aim(coord_def a);
     bool valid_aim(coord_def a);
     aff_type is_affected(coord_def loc);
-    int range2;
+    int range;
     int cnt_min, cnt_max;
     std::map<coord_def, aff_type> seen;
     std::vector<std::vector<coord_def> > queue;

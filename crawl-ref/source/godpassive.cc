@@ -586,7 +586,7 @@ int ash_detect_portals(bool all)
     }
     else
     {
-        for (radius_iterator ri(you.pos(), map_radius, C_ROUND); ri; ++ri)
+        for (radius_iterator ri(you.pos(), map_radius, C_SQUARE); ri; ++ri)
         {
             if (_check_portal(*ri))
                 portals_found++;

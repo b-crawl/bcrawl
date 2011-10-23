@@ -2202,7 +2202,7 @@ static void _decrement_petrification(int delay)
 
 static void _check_invisibles()
 {
-    for (radius_iterator ri(you.pos(), LOS_RADIUS, C_ROUND); ri; ++ri)
+    for (radius_iterator ri(you.pos(), LOS_RADIUS, C_SQUARE); ri; ++ri)
     {
         if (!cell_see_cell(you.pos(), *ri, LOS_DEFAULT))
             continue;
@@ -2921,10 +2921,8 @@ static void _update_mold()
             for (radius_iterator rad_it(mon_it->pos(),
                                         2, true, false); rad_it; ++rad_it)
             {
-                // A threshold greater than 5, less than 8 on distance
-                // matches the blast of a radius 2 explosion.
-                int range = distance(mon_it->pos(), *rad_it);
-                if (range < 6 && is_moldy(*rad_it))
+                int range = grid_distance(mon_it->pos(), *rad_it);
+                if (range < 3 && is_moldy(*rad_it))
                 {
                     env.pgrid(*rad_it) |= FPROP_MOLD;
                     env.pgrid(*rad_it) |= FPROP_GLOW_MOLD;

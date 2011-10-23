@@ -136,10 +136,12 @@ static opacity_excl opc_excl;
 // this doesn't work well for radius 0, but then we want to
 // skip LOS calculation in that case anyway since it doesn't
 // currently short-cut for small bounds. So radius 0, 1 are special-cased.
+
+// C_ROUND being bad with radius 0 isn't relevant any more. -- elliptic
 travel_exclude::travel_exclude(const coord_def &p, int r,
                                bool autoexcl, std::string dsc, bool vaultexcl)
     : pos(p), radius(r),
-      los(los_def(p, opc_excl, circle_def(r, C_ROUND))),
+      los(los_def(p, opc_excl, circle_def(r, C_SQUARE))),
       uptodate(false), autoex(autoexcl), desc(dsc), vault(vaultexcl)
 {
     set_los();
@@ -148,7 +150,7 @@ travel_exclude::travel_exclude(const coord_def &p, int r,
 // For exclude_map[p] = foo;
 travel_exclude::travel_exclude()
     : pos(-1, -1), radius(-1),
-      los(coord_def(-1, -1), opc_excl, circle_def(-1, C_ROUND)),
+      los(coord_def(-1, -1), opc_excl, circle_def(-1, C_SQUARE)),
       uptodate(false), autoex(false), desc(""), vault(false)
 {
 }
@@ -161,7 +163,7 @@ void travel_exclude::set_los()
     if (radius > 1)
     {
         // Radius might have been changed, and this is cheap.
-        los.set_bounds(circle_def(radius, C_ROUND));
+        los.set_bounds(circle_def(radius, C_SQUARE));
         los.update();
     }
 }
@@ -240,7 +242,7 @@ void exclude_set::add_exclude_points(travel_exclude& ex)
     else
         ex.los.update();
 
-    for (radius_iterator ri(ex.pos, ex.radius, C_ROUND); ri; ++ri)
+    for (radius_iterator ri(ex.pos, ex.radius, C_SQUARE); ri; ++ri)
         if (ex.affects(*ri))
             exclude_points.insert(*ri);
 }

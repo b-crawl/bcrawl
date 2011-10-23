@@ -601,7 +601,7 @@ static bool _teleport_player(bool allow_control, bool new_abyss_area,
         do
             newpos = random_in_bounds();
         while (_cell_vetoes_teleport(newpos)
-               || need_distance_check && (newpos - centre).abs() < 34*34
+               || need_distance_check && (newpos - centre).rdist() < 30
                || testbits(env.pgrid(newpos), FPROP_NO_RTELE_INTO));
 
         if (newpos == old_pos)
@@ -923,7 +923,7 @@ static int _quadrant_blink(coord_def where, int pow, int, actor *)
     if (pow > 100)
         pow = 100;
 
-    const int dist = random2(6) + 2;  // 2-7
+    const int dist = random2(5) + 2;  // 2-6
 
     // This is where you would *like* to go.
     const coord_def base = you.pos() + (where - you.pos()) * dist;
@@ -944,7 +944,7 @@ static int _quadrant_blink(coord_def where, int pow, int, actor *)
         }
 
         // ... which is close enough, but also far enough from us.
-        if (distance(base, target) > 10 || distance(you.pos(), target) < 8)
+        if (grid_distance(base, target) > 2 || grid_distance(you.pos(), target) < 3)
             continue;
 
         if (!you.see_cell_no_trans(target))

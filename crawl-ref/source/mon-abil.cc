@@ -1056,7 +1056,7 @@ static bool _moth_incite_monsters(const monster* mon)
         return false;
 
     int goaded = 0;
-    circle_def c(mon->pos(), 4, C_ROUND);
+    circle_def c(mon->pos(), 2, C_SQUARE);
     for (monster_iterator mi(&c); mi; ++mi)
     {
         if (*mi == mon || !mi->needs_berserk())
@@ -2184,14 +2184,14 @@ bool mon_special_ability(monster* mons, bolt & beem)
             break;
 
         if (mons->attitude == ATT_HOSTILE
-            && distance(you.pos(), mons->pos()) <= 5)
+            && grid_distance(you.pos(), mons->pos()) <= 2)
         {
             mons->suicide();
             used = true;
             break;
         }
 
-        c = circle_def(mons->pos(), 4, C_CIRCLE);
+        c = circle_def(mons->pos(), 3, C_SQUARE);
         for (monster_iterator targ(&c); targ; ++targ)
         {
             if (mons_aligned(mons, *targ))

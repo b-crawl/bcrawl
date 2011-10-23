@@ -269,7 +269,7 @@ retry:
         if (!_diggable(map, c))
             continue;
 
-        if ((c - center).abs() > 2
+        if ((c - center).rdist() > 1
             || ngb_count(map, c) > ngb_max
             || (ngb_groups(map, c) > 1 && !x_chance_in_y(connchance, 100)))
         {

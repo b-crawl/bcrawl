@@ -59,14 +59,14 @@ targetter_smite::targetter_smite(const actor* act, int ran,
     ASSERT(exp_min <= exp_max);
     agent = act;
     origin = aim = act->pos();
-    range2 = dist_range(ran);
+    range = ran;
 }
 
 bool targetter_smite::valid_aim(coord_def a)
 {
     if (a != origin && !cell_see_cell(origin, a, LOS_DEFAULT))
         return notify_fail("You cannot see that place.");
-    if ((origin - a).abs() > range2)
+    if ((origin - a).rdist() > range)
         return notify_fail("Out of range.");
     if (!affects_walls && feat_is_solid(grd(a)))
         return notify_fail(_wallmsg(a));
@@ -160,7 +160,7 @@ aff_type targetter_reach::is_affected(coord_def loc)
 }
 
 
-targetter_cloud::targetter_cloud(const actor* act, int range,
+targetter_cloud::targetter_cloud(const actor* act, int ran,
                                  int count_min, int count_max) :
     cnt_min(count_min), cnt_max(count_max)
 {
@@ -169,7 +169,7 @@ targetter_cloud::targetter_cloud(const actor* act, int range,
     ASSERT(cnt_min <= cnt_max);
     if (agent = act)
         origin = aim = act->pos();
-    range2 = dist_range(range);
+    range = ran;
 }
 
 static bool _cloudable(coord_def loc)
@@ -181,7 +181,7 @@ static bool _cloudable(coord_def loc)
 
 bool targetter_cloud::valid_aim(coord_def a)
 {
-    if (agent && (origin - a).abs() > range2)
+    if (agent && (origin - a).rdist() > range)
         return notify_fail("Out of range.");
     if (!map_bounds(a)
         || agent
@@ -307,16 +307,16 @@ targetter_los::targetter_los(const actor *act, los_type _los,
     agent = act;
     origin = aim = act->pos();
     los = _los;
-    range2 = range * range + 1;
+    range2 = range;
     if (!range_max)
         range_max = range;
     ASSERT(range_max >= range);
-    range_max2 = range_max * range_max + 1;
+    range_max2 = range_max;
 }
 
 bool targetter_los::valid_aim(coord_def a)
 {
-    if ((a - origin).abs() > range_max2)
+    if ((a - origin).rdist() > range_max2)
         return notify_fail("Out of range.");
     // If this message ever becomes used, please improve it.  I did not
     // bother adding complexity just for monsters and "hit allies" prompts
@@ -331,11 +331,11 @@ aff_type targetter_los::is_affected(coord_def loc)
     if (loc == aim)
         return AFF_YES;
 
-    if ((loc - origin).abs() > range_max2)
+    if ((loc - origin).rdist() > range_max2)
         return AFF_NO;
 
     if (!cell_see_cell(loc, origin, los))
         return AFF_NO;
 
-    return (loc - origin).abs() > range_max2 ? AFF_MAYBE : AFF_YES;
+    return (loc - origin).rdist() > range_max2 ? AFF_MAYBE : AFF_YES;
 }

@@ -346,7 +346,7 @@ static bool _tag_follower_at(const coord_def &pos, bool &real_follower)
 
     // Monsters that are not directly adjacent are subject to more
     // stringent checks.
-    if ((pos - you.pos()).abs() > 2)
+    if ((pos - you.pos()).rdist() > 1)
     {
         if (!fmenv->friendly())
             return (false);

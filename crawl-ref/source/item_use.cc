@@ -1648,7 +1648,7 @@ static bool _dispersal_hit_victim(bolt& beam, actor* victim, int dmg,
     // Pick the square further away from the agent.
     const coord_def from = agent->pos();
     if (in_bounds(pos2)
-        && distance(pos2, from) > distance(pos, from))
+        && grid_distance(pos2, from) > grid_distance(pos, from))
     {
         pos = pos2;
     }

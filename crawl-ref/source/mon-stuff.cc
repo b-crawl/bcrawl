@@ -3454,7 +3454,7 @@ bool can_go_straight(const monster* mon, const coord_def& p1,
     if (p1 == p2)
         return (true);
 
-    if (distance(p1, p2) > get_los_radius_sq())
+    if (grid_distance(p1, p2) > get_los_radius())
         return (false);
 
     // XXX: Hack to improve results for now. See FIXME above.

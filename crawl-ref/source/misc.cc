@@ -1960,7 +1960,7 @@ void bring_to_safety()
             || monster_at(pos)
             || env.pgrid(pos) & FPROP_NO_TELE_INTO
             || crawl_state.game_is_sprint()
-               && distance(pos, you.pos()) > dist_range(10))
+               && grid_distance(pos, you.pos()) > 9)
         {
             tries++;
             continue;

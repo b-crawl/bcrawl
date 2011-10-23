@@ -1252,7 +1252,7 @@ bool vitrify_area(int radius)
         return (false);
 
     bool something_happened = false;
-    for (radius_iterator ri(you.pos(), radius, C_POINTY); ri; ++ri)
+    for (radius_iterator ri(you.pos(), radius, C_SQUARE); ri; ++ri)
     {
         const dungeon_feature_type grid = grd(*ri);
         const dungeon_feature_type newgrid = _vitrified_feature(grid);

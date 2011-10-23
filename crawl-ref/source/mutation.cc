@@ -2013,7 +2013,7 @@ void check_antennae_detect()
         return;
     radius = std::min(radius, LOS_RADIUS);
 
-    for (radius_iterator ri(you.pos(), radius, C_ROUND); ri; ++ri)
+    for (radius_iterator ri(you.pos(), radius, C_SQUARE); ri; ++ri)
     {
         discover_mimic(*ri);
         monster* mon = monster_at(*ri);

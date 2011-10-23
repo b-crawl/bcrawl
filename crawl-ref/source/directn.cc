@@ -476,7 +476,7 @@ static bool _is_target_in_range(const coord_def& where, int range,
     if (hitfunc)
         return hitfunc->valid_aim(where);
     // range == -1 means that range doesn't matter.
-    return (range == -1 || distance(you.pos(), where) <= range*range + 1);
+    return (range == -1 || grid_distance(you.pos(), where) <= range);
 }
 
 targeting_behaviour direction_chooser::stock_behaviour;
@@ -1257,7 +1257,7 @@ bool direction_chooser::in_range(const coord_def& p) const
 {
     if (hitfunc)
         return hitfunc->valid_aim(p);
-    return (range < 0 || distance(p, you.pos()) <= range*range + 1);
+    return (range < 0 || grid_distance(p, you.pos()) <= range);
 }
 
 // Cycle to either the next (dir == 1) or previous (dir == -1) object

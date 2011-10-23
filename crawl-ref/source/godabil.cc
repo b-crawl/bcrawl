@@ -1722,7 +1722,7 @@ bool kiku_receive_corpses(int pow, coord_def where)
     // We should get the same number of corpses
     // in a hallway as in an open room.
     int spaces_for_corpses = 0;
-    for (radius_iterator ri(where, corpse_delivery_radius, C_ROUND,
+    for (radius_iterator ri(where, corpse_delivery_radius, C_SQUARE,
                             you.get_los(), true); ri; ++ri)
     {
         if (mons_class_can_pass(MONS_HUMAN, grd(*ri)))
@@ -1737,7 +1737,7 @@ bool kiku_receive_corpses(int pow, coord_def where)
 
     int corpses_created = 0;
 
-    for (radius_iterator ri(where, corpse_delivery_radius, C_ROUND,
+    for (radius_iterator ri(where, corpse_delivery_radius, C_SQUARE,
                             you.get_los()); ri; ++ri)
     {
         bool square_is_walkable = mons_class_can_pass(MONS_HUMAN, grd(*ri));

@@ -6935,7 +6935,7 @@ bool player::visible_to(const actor *looker) const
             || in_water()
             || mon->can_see_invisible()
             || mons_sense_invis(mon)
-               && circle_def(pos(), 4, C_ROUND).contains(mon->pos()));
+               && circle_def(pos(), 3, C_SQUARE).contains(mon->pos()));
 }
 
 bool player::backlit(bool check_haloed, bool self_halo) const

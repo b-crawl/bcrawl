@@ -164,7 +164,7 @@ LUAFN(dgn_distance)
 {
     COORDS(p1, 1, 2);
     COORDS(p2, 3, 4);
-    lua_pushnumber(ls, distance(p1, p2));
+    lua_pushnumber(ls, grid_distance(p1, p2));
     return (1);
 }
 

@@ -4604,8 +4604,8 @@ std::string melee_attack::mons_attack_desc(const mon_attack_def &attk)
         return ("");
 
     std::string ret;
-    int dist = (attacker->pos() - defender->pos()).abs();
-    if (dist > 2)
+    int dist = (attacker->pos() - defender->pos()).rdist();
+    if (dist > 1)
     {
         ASSERT(attk.flavour == AF_REACH || weapon && weapon_reach(*weapon));
         ret = " from afar";

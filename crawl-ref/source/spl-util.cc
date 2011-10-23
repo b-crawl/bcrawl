@@ -769,7 +769,7 @@ int apply_area_within_radius(cell_func cf, const coord_def& where,
 {
     int rv = 0;
 
-    for (radius_iterator ri(where, radius, false, false); ri; ++ri)
+    for (radius_iterator ri(where, radius, true, false); ri; ++ri)
         rv += cf(*ri, pow, ctype, agent);
 
     return (rv);
@@ -1326,8 +1326,7 @@ bool spell_no_hostile_in_range(spell_type spell, int minRange)
     if (range < 0)
         return (false);
 
-    const int rsq = (range + bonus) * (range + bonus) + 1;
-    if (rsq < minRange)
+    if (range + bonus < minRange)
         return (true);
 
     return (false);

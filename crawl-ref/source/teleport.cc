@@ -231,7 +231,7 @@ bool random_near_space(const coord_def& origin, coord_def& target,
             || grd(target) < limit
             || actor_at(target)
             || mimic_at(target)
-            || !allow_adjacent && distance(origin, target) <= 2
+            || !allow_adjacent && grid_distance(origin, target) <= 1
             || forbid_sanctuary && is_sanctuary(target))
         {
             continue;

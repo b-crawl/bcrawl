@@ -283,7 +283,7 @@ bool pacified_leave_level(monster* mon, std::vector<level_exit> e,
     // player, make it leave the level.
     if (_is_level_exit(mon->pos())
         || (e_index != -1 && mon->pos() == e[e_index].target)
-        || distance(mon->pos(), you.pos()) >= dist_range(LOS_RADIUS * 4))
+        || grid_distance(mon->pos(), you.pos()) >= LOS_RADIUS * 4)
     {
         make_mons_leave_level(mon);
         return (true);
@@ -638,7 +638,7 @@ static bool _choose_random_patrol_target_grid(monster* mon)
         return (true);
 
     // If there's no chance we'll find the patrol point, quit right away.
-    if (distance(mon->pos(), mon->patrol_point) > dist_range(2 * LOS_RADIUS))
+    if (grid_distance(mon->pos(), mon->patrol_point) > 2 * LOS_RADIUS)
         return (false);
 
     // Can the monster see the patrol point from its current position?
@@ -654,11 +654,11 @@ static bool _choose_random_patrol_target_grid(monster* mon)
     // While the patrol point is in easy reach, monsters of insect/plant
     // intelligence will only use a range of 5 (distance from the patrol point).
     // Otherwise, try to get back using the full LOS.
-    const int  rad      = (intel >= I_ANIMAL || !patrol_seen) ? LOS_RADIUS : 5;
+    const int  rad      = (intel >= I_ANIMAL || !patrol_seen) ? LOS_RADIUS : 4;
     const bool is_smart = (intel >= I_NORMAL);
 
     los_def patrol(mon->patrol_point, opacity_monmove(*mon),
-                   circle_def(rad, C_ROUND));
+                   circle_def(rad, C_SQUARE));
     patrol.update();
     los_def lm(mon->pos(), opacity_monmove(*mon));
     if (is_smart || !patrol_seen)
@@ -1103,11 +1103,11 @@ void set_random_slime_target(monster* mon)
 {
     // Strictly neutral slimes will go for the nearest item.
     const coord_def pos = mon->pos();
-    int mindist = LOS_MAX_RADIUS_SQ + 1;
+    int mindist = get_los_radius_sq() + 1;
     for (radius_iterator ri(mon->get_los()); ri; ++ri)
     {
         // XXX: an iterator that spirals out would be nice.
-        if (!in_bounds(*ri) || distance(pos, *ri) >= mindist)
+        if (!in_bounds(*ri) || grid_distance(pos, *ri) >= mindist)
             continue;
         if (testbits(env.pgrid(*ri), FPROP_NO_JIYVA))
             continue;
@@ -1118,7 +1118,7 @@ void set_random_slime_target(monster* mon)
             if (is_item_jelly_edible(item))
             {
                 mon->target = *ri;
-                mindist = distance(pos, *ri);
+                mindist = grid_distance(pos, *ri);
                 break;
             }
         }

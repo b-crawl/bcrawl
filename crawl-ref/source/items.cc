@@ -199,7 +199,7 @@ static int _cull_items(void)
     {
         for (rectangle_iterator ri(1); ri; ++ri)
         {
-            if (distance(you.pos(), *ri) <= dist_range(9))
+            if (grid_distance(you.pos(), *ri) <= 8)
                 continue;
 
             for (stack_iterator si(*ri); si; ++si)

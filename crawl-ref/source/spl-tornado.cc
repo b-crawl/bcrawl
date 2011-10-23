@@ -62,7 +62,7 @@ int WindSystem::visit(coord_def c, int d, coord_def parent)
 
     for (adjacent_iterator ai(c); ai; ++ai)
     {
-        if ((*ai - org).abs() > dist_range(TORNADO_RADIUS) || _airtight(*ai))
+        if ((*ai - org).abs() > dist_range_sq(TORNADO_RADIUS) || _airtight(*ai))
             continue;
         if (depth(*ai - org) == -1)
         {

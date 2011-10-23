@@ -111,7 +111,7 @@ void setup_fire_storm(const actor *source, int pow, bolt &beam)
 
 spret_type cast_fire_storm(int pow, bolt &beam, bool fail)
 {
-    if (distance(beam.target, beam.source) > dist_range(beam.range))
+    if (grid_distance(beam.target, beam.source) > beam.range)
     {
         mpr("That is beyond the maximum range.");
         return SPRET_ABORT;
@@ -1002,8 +1002,8 @@ static bool _shatterable(const actor *act)
 spret_type cast_shatter(int pow, bool fail)
 {
     {
-        int r_min = 3 + you.skill(SK_EARTH_MAGIC) / 5;
-        targetter_los hitfunc(&you, LOS_ARENA, r_min, std::min(r_min + 1, 8));
+        int r_min = 2 + you.skill(SK_EARTH_MAGIC) / 5;
+        targetter_los hitfunc(&you, LOS_ARENA, r_min, std::min(r_min + 1, 7));
         if (stop_attack_prompt(hitfunc, "harm", _shatterable))
             return SPRET_ABORT;
     }
@@ -1019,7 +1019,7 @@ spret_type cast_shatter(int pow, bool fail)
         mpr("The dungeon rumbles!", MSGCH_SOUND);
     }
 
-    int rad = 3 + you.skill_rdiv(SK_EARTH_MAGIC, 1, 5);
+    int rad = 2 + you.skill_rdiv(SK_EARTH_MAGIC, 1, 5);
 
     apply_area_within_radius(_shatter_items, you.pos(), pow, rad, 0, &you);
     apply_area_within_radius(_shatter_monsters, you.pos(), pow, rad, 0, &you);

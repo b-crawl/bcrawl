@@ -1061,12 +1061,9 @@ void bolt::nuke_wall_effect()
     finish_beam();
 }
 
-// integer square root, such that _length((8,1)) == 8.
 static int _length(const coord_def& c)
 {
-    if (c.origin())
-        return (0);
-    return (int)(ceil(sqrt(c.abs()-1)));
+    return (c.rdist());
 }
 
 int bolt::range_used(bool leg_only) const
@@ -5457,7 +5454,7 @@ void bolt::determine_affected_cells(explosion_map& m, const coord_def& delta,
 
     // A bunch of tests for edge cases.
     if (delta.rdist() > centre.rdist()
-        || (delta.abs() > r*(r+1))
+        || (delta.rdist() > r)
         || (count > 10*r)
         || !map_bounds(loc)
         || is_sanctuary(loc))

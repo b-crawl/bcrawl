@@ -255,8 +255,8 @@ void tornado_damage(actor *caster, int dur)
     int cnt_open = 0;
     int cnt_all  = 0;
 
-    distance_iterator count_i(org, false, true, true);
-    distance_iterator dam_i(org, true, true, true);
+    distance_iterator count_i(org, false);
+    distance_iterator dam_i(org, true);
     for (int r = 1; r <= TORNADO_RADIUS; r++)
     {
         while (count_i && count_i.radius() == r)

@@ -107,7 +107,7 @@ public:
     distance_iterator(const coord_def& _center,
                     bool _fair = true,
                     bool exclude_center = true,
-		    bool _roguelike_metric = false,
+		    bool _roguelike_metric = true,
                     int _max_radius = GDM);
     operator bool() const;
     coord_def operator *() const;

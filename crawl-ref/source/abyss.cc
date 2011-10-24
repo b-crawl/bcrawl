@@ -621,7 +621,7 @@ static void _push_items()
         if (grd(item.pos) == DNGN_FLOOR)
             continue;
 
-        for (distance_iterator di(item.pos, true, true, true); di; ++di)
+        for (distance_iterator di(item.pos); di; ++di)
             if (grd(*di) == DNGN_FLOOR)
             {
                 move_item_to_grid(&i, *di, true);

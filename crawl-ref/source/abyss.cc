@@ -73,14 +73,13 @@ static bool _place_feature_near(const coord_def &centre,
                                 dungeon_feature_type replacement,
                                 int tries, bool not_seen = false)
 {
-    const int radius2 = radius * radius + 1;
     for (int i = 0; i < tries; ++i)
     {
         const coord_def &cp =
             centre + coord_def(random_range(-radius, radius),
                                random_range(-radius, radius));
 
-        if (cp == centre || (cp - centre).abs() > radius2 || !in_bounds(cp))
+        if (cp == centre || !in_bounds(cp))
             continue;
 
         if (not_seen && cell_see_cell_nocache(cp, centre))
@@ -120,13 +119,13 @@ static void _write_abyssal_features()
     const int count = abyssal_features.size();
     const int scalar = 0xFF;
     int index = 0;
-    for (radius_iterator ri(ABYSS_CENTRE, LOS_RADIUS, C_ROUND); ri; ++ri)
+    for (radius_iterator ri(ABYSS_CENTRE, LOS_RADIUS, C_SQUARE); ri; ++ri)
     {
-        const int dist = distance(ABYSS_CENTRE, *ri);
-        int chance = pow(0.98, dist) * scalar;
+        const int dist = grid_distance(ABYSS_CENTRE, *ri);
+        int chance = pow(0.98, dist * dist) * scalar;
         if (!map_masked(*ri, MMT_VAULT))
         {
-            if (dist < 4 || x_chance_in_y(chance, scalar))
+            if (dist < 2 || x_chance_in_y(chance, scalar))
             {
                 if (abyssal_features[index] != DNGN_UNSEEN)
                 {
@@ -622,7 +621,7 @@ static void _push_items()
         if (grd(item.pos) == DNGN_FLOOR)
             continue;
 
-        for (distance_iterator di(item.pos); di; ++di)
+        for (distance_iterator di(item.pos, true, true, true); di; ++di)
             if (grd(*di) == DNGN_FLOOR)
             {
                 move_item_to_grid(&i, *di, true);
@@ -1609,22 +1608,22 @@ static void _corrupt_level_features(const corrupt_env &cenv)
 
     for (rectangle_iterator ri(MAPGEN_BORDER); ri; ++ri)
     {
-        int idistance2 = GXM * GXM + GYM * GYM;
+        int idistance = GDM;
         for (int i = 0, size = corrupt_seeds.size(); i < size; ++i)
         {
-            const int idist2 = (*ri - corrupt_seeds[i]).abs();
-            if (idist2 < idistance2)
-                idistance2 = idist2;
+            const int idist = (*ri - corrupt_seeds[i]).rdist();
+            if (idist < idistance)
+                idistance = idist;
         }
 
         const int ground_zero_radius2 = 7;
 
-        // Corruption odds are 100% within about 2 squares, decaying to 30%
-        // at LOS range (radius 8). Even if the corruption roll is made,
+        // Corruption odds are 100% within 2 squares, decaying to 30%
+        // at LOS range (radius 7). Even if the corruption roll is made,
         // the feature still gets a chance to resist if it's a wall.
         const int corrupt_perc_chance =
-            idistance2 <= ground_zero_radius2 ? 100 :
-            std::max(1, 100 - (idistance2 - ground_zero_radius2) * 70 / 57);
+            idistance * idistance <= ground_zero_radius2 ? 100 :
+            std::max(1, 100 - (idistance * idistance - ground_zero_radius2) * 70 / 42);
 
         if (random2(100) < corrupt_perc_chance && _is_grid_corruptible(*ri))
             _corrupt_square(cenv, *ri);

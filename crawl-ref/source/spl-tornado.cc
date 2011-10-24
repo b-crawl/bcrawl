@@ -185,7 +185,7 @@ static coord_def _rotate(coord_def org, coord_def from,
     double hiscore = 1e38;
 
     double dist0 = (from - org).rdist();
-    double ang0 = _get_ang(from.x - org.x, from.y - org.y) - rdur * 0.01 * 4 / PI;
+    double ang0 = _get_ang(from.x - org.x, from.y - org.y) - rdur * 0.01 * 4 / 3;
     for (unsigned int i = 0; i < avail.size(); i++)
     {
         double dist = (avail[i] - org).rdist();
@@ -193,7 +193,7 @@ static coord_def _rotate(coord_def org, coord_def from,
         double ang = _get_ang(avail[i].x - org.x, avail[i].y - org.y);
         double angdiff = std::min(fabs(ang - ang0), fabs(ang - ang0 - 8));
 
-        double score = distdiff + angdiff * PI / 2;
+        double score = distdiff + angdiff * 3 / 2;
         if (score < hiscore)
             best = avail[i], hiscore = score;
     }

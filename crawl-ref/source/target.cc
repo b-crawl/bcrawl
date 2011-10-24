@@ -224,7 +224,7 @@ bool targetter_cloud::set_aim(coord_def a)
             for(adjacent_iterator ai(c); ai; ++ai)
                 if (_cloudable(*ai) && seen.find(*ai) == seen.end())
                 {
-                    unsigned int d2 = d1 + ((*ai - c).abs() == 1 ? 5 : 7);
+                    unsigned int d2 = d1 + 1;
                     if (d2 >= queue.size())
                         queue.resize(d2 + 1);
                     queue[d2].push_back(*ai);

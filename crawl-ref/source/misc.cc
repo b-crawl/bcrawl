@@ -1076,7 +1076,7 @@ static void _maybe_bloodify_square(const coord_def& where, int amount,
 #endif
 
             if (smell_alert && in_bounds(where))
-                blood_smell(12, where);
+                blood_smell(11, where);
         }
 
         if (spatter)

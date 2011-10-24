@@ -597,10 +597,10 @@ static const char* _player_vampire_smells_blood(int dist)
     if (you.hunger_state >= HS_SATIATED)
         return "";
 
-    if (dist < 16) // 4*4
+    if (dist < 4) // 4*4
         return " near-by";
 
-    if (you.hunger_state <= HS_NEAR_STARVING && dist > get_los_radius_sq())
+    if (you.hunger_state <= HS_NEAR_STARVING && dist > get_los_radius())
         return " in the distance";
 
     return "";
@@ -608,10 +608,10 @@ static const char* _player_vampire_smells_blood(int dist)
 
 static const char* _player_spider_senses_web(int dist)
 {
-    if (dist < 4)
+    if (dist < 2)
         return " near-by";
 
-    if (dist > LOS_RADIUS)
+    if (dist > get_los_radius())
         return " in the distance";
 
     return "";
@@ -619,7 +619,7 @@ static const char* _player_spider_senses_web(int dist)
 
 void check_player_sense(sense_type sense, int range, const coord_def& where)
 {
-    const int player_distance = distance(you.pos(), where);
+    const int player_distance = grid_distance(you.pos(), where);
 
     if (player_distance <= range)
     {
@@ -628,7 +628,7 @@ void check_player_sense(sense_type sense, int range, const coord_def& where)
         case SENSE_SMELL_BLOOD:
              dprf("Player smells blood, pos: (%d, %d), dist = %d)",
                   you.pos().x, you.pos().y, player_distance);
-             you.check_awaken(range - player_distance);
+             you.check_awaken(range*range - player_distance*player_distance);
              // Don't message if you can see the square.
              if (!you.see_cell(where))
              {
@@ -641,7 +641,7 @@ void check_player_sense(sense_type sense, int range, const coord_def& where)
              // Spider form
              if (you.can_cling_to_walls())
              {
-                 you.check_awaken(range - player_distance);
+                 you.check_awaken(range*range - player_distance*player_distance);
                  // Don't message if you can see the square.
                  if (!you.see_cell(where))
                  {
@@ -656,7 +656,7 @@ void check_player_sense(sense_type sense, int range, const coord_def& where)
 
 void check_monsters_sense(sense_type sense, int range, const coord_def& where)
 {
-    circle_def c(where, range, C_CIRCLE);
+    circle_def c(where, range, C_SQUARE);
     for (monster_iterator mi(&c); mi; ++mi)
     {
         switch(sense)
@@ -746,7 +746,7 @@ void check_monsters_sense(sense_type sense, int range, const coord_def& where)
 
 void blood_smell(int strength, const coord_def& where)
 {
-    const int range = strength * strength;
+    const int range = strength;
     dprf("blood stain at (%d, %d), range of smell = %d",
          where.x, where.y, range);
 
@@ -757,7 +757,7 @@ void blood_smell(int strength, const coord_def& where)
         int vamp_strength = strength - 2 * (you.hunger_state - 1);
         if (vamp_strength > 0)
         {
-            int vamp_range = vamp_strength * vamp_strength;
+            int vamp_range = vamp_strength;
             check_player_sense(SENSE_SMELL_BLOOD, vamp_range, where);
         }
         check_monsters_sense(SENSE_SMELL_BLOOD, range, where);

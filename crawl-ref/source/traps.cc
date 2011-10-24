@@ -890,7 +890,7 @@ void trap_def::trigger(actor& triggerer, bool flat_footed)
 
                 if (player_caught_in_web())
                 {
-                    check_monsters_sense(SENSE_WEB_VIBRATION, 100, you.pos());
+                    check_monsters_sense(SENSE_WEB_VIBRATION, 9, you.pos());
                     if (player_in_a_dangerous_place())
                         xom_is_stimulated(50);
                 }
@@ -921,8 +921,8 @@ void trap_def::trigger(actor& triggerer, bool flat_footed)
                 m->add_ench(ENCH_HELD);
 
                 // Alert both monsters and player
-                check_monsters_sense(SENSE_WEB_VIBRATION, 100, triggerer.position);
-                check_player_sense(SENSE_WEB_VIBRATION, 100, triggerer.position);
+                check_monsters_sense(SENSE_WEB_VIBRATION, 9, triggerer.position);
+                check_player_sense(SENSE_WEB_VIBRATION, 9, triggerer.position);
             }
         }
         break;

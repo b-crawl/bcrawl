@@ -4231,7 +4231,7 @@ bool monster_random_space(const monster* mons, coord_def& target,
 bool shove_monster(monster* mons)
 {
     const coord_def pos = mons->pos();
-    for (distance_iterator di(pos); di; ++di)
+    for (distance_iterator di(pos, true, true, true); di; ++di)
         if (_monster_space_valid(mons, *di, false))
         {
             mons->moveto(*di);

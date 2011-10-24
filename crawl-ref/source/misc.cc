@@ -1935,7 +1935,7 @@ void bring_to_safety()
     if (crawl_state.game_is_zotdef() && !orb_position().origin())
     {
         // In ZotDef, it's not the safety of your sorry butt that matters.
-        for (distance_iterator di(env.orb_pos, true, false); di; ++di)
+        for (distance_iterator di(env.orb_pos, true, false, true); di; ++di)
             if (!monster_at(*di)
                 && !(env.pgrid(*di) & FPROP_NO_TELE_INTO))
             {
@@ -2280,7 +2280,7 @@ bool stop_attack_prompt(targetter &hitfunc, std::string verb,
 
     std::string adj, suffix;
     counted_monster_list victims;
-    for (distance_iterator di(hitfunc.origin, false, true, false, LOS_RADIUS); di; ++di)
+    for (distance_iterator di(hitfunc.origin, false, true, true, LOS_RADIUS); di; ++di)
     {
         if (hitfunc.is_affected(*di) <= AFF_NO)
             continue;

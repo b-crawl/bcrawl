@@ -667,7 +667,7 @@ void shedu_do_actual_resurrection (monster* mons)
     new_shedu.god = mons->god;
 
     int id = -1;
-    for (distance_iterator di(place_at, true, false); di; ++di)
+    for (distance_iterator di(place_at, true, false, true); di; ++di)
     {
         if (monster_at(*di) || !monster_habitable_grid(mons, grd(*di)))
             continue;

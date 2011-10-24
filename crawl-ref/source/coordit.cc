@@ -181,9 +181,9 @@ void radius_iterator::operator++(int dummy)
  *  spiral iterator
  */
 distance_iterator::distance_iterator(const coord_def& _center, bool _fair,
-                                 bool exclude_center, int _max_radius) :
+		 bool exclude_center, bool _roguelike_metric, int _max_radius) :
     center(_center), current(_center), r(0), max_radius(_max_radius),
-    threshold(0), icur(0), iend(0), fair(_fair)
+    threshold(0), icur(0), iend(0), fair(_fair), roguelike_metric(_roguelike_metric)
 {
     vcur  = lists + 0;
     vnear = lists + 1;
@@ -231,7 +231,7 @@ again:
             vcur->clear();
             return false;
         }
-        threshold = (r+1) * (r+1) + 1;
+        threshold = (roguelike_metric) ? r+1 : ((r+1) * (r+1) + 1);
     }
 
     coord_def d = (*vcur)[icur];
@@ -265,7 +265,7 @@ void distance_iterator::push_neigh(coord_def d, int dx, int dy)
 {
     d.x += dx;
     d.y += dy;
-    ((d.abs() <= threshold) ? vnear : vfar)->push_back(d);
+    (((roguelike_metric ? d.rdist() : d.abs()) <= threshold) ? vnear : vfar)->push_back(d);
 }
 
 distance_iterator::operator bool() const

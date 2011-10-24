@@ -2317,21 +2317,21 @@ MONS:  statue generate_awake n_rpl name:diamond_obelisk hp:10000 \
 KPROP: .d1 = no_tele_into
 MAP
       ccc
-     ccdcc
-   ccc...ccc
-  cc.......cc
- cc.........cc
- c...........c
-cc...........cc
+cccccccdccccccc
+c.............c
+c.............c
+c.............c
+c.............c
+c.............c
 c.............c
 c......1......c
 c.............c
-cc...........cc
- c...........c
- cc.........cc
-  cc.......cc
-   ccc...ccc
-     c.@.c
+c.............c
+c.............c
+c.............c
+c.............c
+c.............c
+cccccc.@.cccccc
 ENDMAP
 
 

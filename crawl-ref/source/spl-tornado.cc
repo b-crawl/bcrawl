@@ -62,7 +62,7 @@ int WindSystem::visit(coord_def c, int d, coord_def parent)
 
     for (adjacent_iterator ai(c); ai; ++ai)
     {
-        if ((*ai - org).abs() > dist_range_sq(TORNADO_RADIUS) || _airtight(*ai))
+        if ((*ai - org).rdist() > TORNADO_RADIUS || _airtight(*ai))
             continue;
         if (depth(*ai - org) == -1)
         {
@@ -110,7 +110,7 @@ static void _set_tornado_durations(int powc)
 spret_type cast_tornado(int powc, bool fail)
 {
     bool friendlies = false;
-    for (radius_iterator ri(you.pos(), TORNADO_RADIUS, C_ROUND); ri; ++ri)
+    for (radius_iterator ri(you.pos(), TORNADO_RADIUS, C_SQUARE); ri; ++ri)
     {
         const monster_info* m = env.map_knowledge(*ri).monsterinfo();
         if (!m)
@@ -157,6 +157,24 @@ static bool _mons_is_unmovable(const monster *mons)
     return false;
 }
 
+static double _get_ang(int x, int y)
+{
+    if (abs(x) > abs(y))
+    {
+	if (x > 0)
+	    return (double(y)/double(x));
+	else
+	    return (4 + double(y)/double(x));
+    }
+    else
+    {
+	if (y > 0)
+	    return (2 - double(x)/double(y));
+        else
+	    return (-2 - double(x)/double(y));
+    }
+}
+
 static coord_def _rotate(coord_def org, coord_def from,
                          std::vector<coord_def> &avail, int rdur)
 {
@@ -166,18 +184,16 @@ static coord_def _rotate(coord_def org, coord_def from,
     coord_def best;
     double hiscore = 1e38;
 
-    double dist0 = sqrt((from - org).abs());
-    double ang0 = atan2(from.x - org.x, from.y - org.y) + rdur * 0.01;
-    if (ang0 > PI)
-        ang0 -= 2 * PI;
+    double dist0 = (from - org).rdist();
+    double ang0 = _get_ang(from.x - org.x, from.y - org.y) - rdur * 0.01 * 4 / PI;
     for (unsigned int i = 0; i < avail.size(); i++)
     {
-        double dist = sqrt((avail[i] - org).abs());
+        double dist = (avail[i] - org).rdist();
         double distdiff = fabs(dist - dist0);
-        double ang = atan2(avail[i].x - org.x, avail[i].y - org.y);
-        double angdiff = std::min(fabs(ang - ang0), fabs(ang - ang0 + 2 * PI));
+        double ang = _get_ang(avail[i].x - org.x, avail[i].y - org.y);
+        double angdiff = std::min(fabs(ang - ang0), fabs(ang - ang0 - 8));
 
-        double score = distdiff + angdiff * 2;
+        double score = distdiff + angdiff * PI / 2;
         if (score < hiscore)
             best = avail[i], hiscore = score;
     }
@@ -239,8 +255,8 @@ void tornado_damage(actor *caster, int dur)
     int cnt_open = 0;
     int cnt_all  = 0;
 
-    distance_iterator count_i(org, false);
-    distance_iterator dam_i(org, true);
+    distance_iterator count_i(org, false, true, true);
+    distance_iterator dam_i(org, true, true, true);
     for (int r = 1; r <= TORNADO_RADIUS; r++)
     {
         while (count_i && count_i.radius() == r)
@@ -402,7 +418,7 @@ void tornado_damage(actor *caster, int dur)
         coord_def pos = move_dest[move_act[i]->mid];
         int r;
         for (r = 0; r <= TORNADO_RADIUS; r++)
-            if ((pos - org).abs() < sqr(r + 1) + 1)
+            if ((pos - org).rdist() < r + 1)
                 break;
         coord_def dest = _rotate(org, pos, move_avail, rdurs[r]);
         for (unsigned int j = 0; j < move_avail.size(); j++)
@@ -470,13 +486,9 @@ void tornado_move(const coord_def &p)
         return;
 
     int age = _tornado_age(&you);
-    int dist2 = (you.pos() - p).abs();
-    if (dist2 <= 2)
+    int dist = (you.pos() - p).rdist();
+    if (dist <= 1)
         return;
-
-    int dist = 0;
-    while (dist * dist + 1 < dist2)
-        dist++;
 
     if (!you.duration[DUR_TORNADO])
     {

@@ -2280,7 +2280,7 @@ bool stop_attack_prompt(targetter &hitfunc, std::string verb,
 
     std::string adj, suffix;
     counted_monster_list victims;
-    for (distance_iterator di(hitfunc.origin, false, true, LOS_RADIUS); di; ++di)
+    for (distance_iterator di(hitfunc.origin, false, true, false, LOS_RADIUS); di; ++di)
     {
         if (hitfunc.is_affected(*di) <= AFF_NO)
             continue;

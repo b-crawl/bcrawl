@@ -107,6 +107,7 @@ public:
     distance_iterator(const coord_def& _center,
                     bool _fair = true,
                     bool exclude_center = true,
+		    bool _roguelike_metric = false,
                     int _max_radius = GDM);
     operator bool() const;
     coord_def operator *() const;
@@ -122,6 +123,7 @@ private:
     int threshold;
     unsigned int icur, iend;
     bool fair;
+    bool roguelike_metric;
     bool advance();
     void push_neigh(coord_def from, int dx, int dy);
 };

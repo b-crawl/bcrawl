@@ -286,13 +286,11 @@ public:
     virtual bool haloed() const;
     // Within an umbra?
     virtual bool umbraed() const;
-    // Squared halo radius.
-    virtual int halo_radius2() const = 0;
-    // Squared silence radius.
-    virtual int silence_radius2() const = 0;
-    // Squared liquefying radius
-    virtual int liquefying_radius2 () const = 0;
-    virtual int umbra_radius2 () const = 0;
+
+    virtual int halo_radius() const = 0;
+    virtual int silence_radius() const = 0;
+    virtual int liquefying_radius() const = 0;
+    virtual int umbra_radius() const = 0;
 
     virtual bool glows_naturally() const = 0;
 

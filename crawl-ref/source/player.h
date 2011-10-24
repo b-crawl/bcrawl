@@ -623,10 +623,10 @@ public:
     bool caught() const;
     bool backlit(bool check_haloed = true, bool self_halo = true) const;
     bool umbra(bool check_haloed = true, bool self_halo = true) const;
-    int halo_radius2() const;
-    int silence_radius2() const;
-    int liquefying_radius2 () const;
-    int umbra_radius2 () const;
+    int halo_radius() const;
+    int silence_radius() const;
+    int liquefying_radius() const;
+    int umbra_radius() const;
     bool glows_naturally() const;
     bool petrifying() const;
     bool petrified() const;

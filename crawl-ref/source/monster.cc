@@ -2895,7 +2895,7 @@ bool monster::backlit(bool check_haloed, bool self_halo) const
         return (true);
     if (check_haloed)
         return (!umbraed() && haloed() &&
-                (self_halo || halo_radius2() == -1));
+                (self_halo || halo_radius() == -1));
     return (false);
 }
 
@@ -2903,7 +2903,7 @@ bool monster::umbra(bool check_haloed, bool self_halo) const
 {
     if (check_haloed)
         return (umbraed() && !haloed() &&
-                (self_halo || umbra_radius2() == -1));
+                (self_halo || umbra_radius() == -1));
     return (false);
 }
 

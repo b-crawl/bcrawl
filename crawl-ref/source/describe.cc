@@ -3908,7 +3908,7 @@ static std::string _religion_help(god_type god)
 
     case GOD_SHINING_ONE:
     {
-        int halo_size = you.halo_radius2();
+        int halo_size = you.halo_radius();
         if (halo_size >= 0)
         {
             if (!result.empty())
@@ -3916,9 +3916,9 @@ static std::string _religion_help(god_type god)
 
             result += "You radiate a ";
 
-            if (halo_size > 37)
+            if (halo_size > 5)
                 result += "large ";
-            else if (halo_size > 10)
+            else if (halo_size > 2)
                 result += "";
             else
                 result += "small ";

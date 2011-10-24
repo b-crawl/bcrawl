@@ -90,7 +90,7 @@ spret_type cast_delayed_fireball(bool fail)
 void setup_fire_storm(const actor *source, int pow, bolt &beam)
 {
     beam.name         = "great blast of fire";
-    beam.ex_size      = 2 + (random2(pow) > 75);
+    beam.ex_size      = 2 + (random2(1000) < pow);
     beam.flavour      = BEAM_LAVA;
     beam.real_flavour = beam.flavour;
     beam.glyph        = dchar_glyph(DCHAR_FIRED_ZAP);

@@ -565,8 +565,8 @@ bool noisy(int original_loudness, const coord_def& where,
     // that soft noises can be drowned out by loud noises. For both
     // these reasons, use the simple old noise system to check if the
     // player heard the noise:
-    const int dist = loudness * loudness + 1;
-    const int player_distance = distance(you.pos(), where);
+    const int dist = loudness;
+    const int player_distance = grid_distance(you.pos(), where);
 
     // Message the player.
     if (player_distance <= dist && player_can_hear(where))
@@ -946,10 +946,6 @@ bool noise_grid::propagate_noise_to_neighbour(int base_attenuation,
     if (!neighbour.can_apply_noise(cell.noise_intensity_millis -
                                    base_attenuation))
         return (false);
-
-    // Diagonals cost more.
-    if ((next_pos - current_pos).abs() == 2)
-        base_attenuation = base_attenuation * 141 / 100;
 
     const int noise_turn_angle = cell.turn_angle(next_pos - current_pos);
     const int turn_attenuation =

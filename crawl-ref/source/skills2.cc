@@ -185,8 +185,6 @@ static std::string _stk_adj_cap()
 
 static std::string _stk_genus_cap()
 {
-    if (Skill_Species == SP_FELID)
-        return "Cat";
     return species_name(Skill_Species, true, false);
 }
 
@@ -199,15 +197,13 @@ static std::string _stk_genus_nocap()
 static std::string _stk_genus_short_cap()
 {
     return (Skill_Species == SP_DEMIGOD ? "God" :
-            Skill_Species == SP_FELID   ? "Cat" :
-            Skill_Species == SP_OCTOPODE ? "Octopus" :
             _stk_genus_cap());
 }
 
 static std::string _stk_walker()
 {
     return (Skill_Species == SP_NAGA    ? "Slider" :
-            Skill_Species == SP_KENKU   ? "Glider" :
+            Skill_Species == SP_TENGU   ? "Glider" :
             Skill_Species == SP_OCTOPODE ? "Wriggler"
                                         : "Walker");
 }
@@ -230,7 +226,7 @@ static std::string _stk_weight()
     case SP_HIGH_ELF:
     case SP_DEEP_ELF:
     case SP_SLUDGE_ELF:
-    case SP_KENKU:
+    case SP_TENGU:
         return "Light";
 
     case SP_HALFLING:
@@ -389,14 +385,16 @@ std::string player_title()
 skill_type best_skill(skill_type min_skill, skill_type max_skill,
                       skill_type excl_skill)
 {
+    ASSERT(min_skill < NUM_SKILLS);
+    ASSERT(max_skill < NUM_SKILLS);
     skill_type ret = SK_FIGHTING;
     unsigned int best_skill_level = 0;
     unsigned int best_position = 1000;
 
-    for (int i = min_skill; i <= max_skill; i++)    // careful!!!
+    for (int i = min_skill; i <= max_skill; i++)
     {
         skill_type sk = static_cast<skill_type>(i);
-        if (sk == excl_skill || is_invalid_skill(sk))
+        if (sk == excl_skill)
             continue;
 
         const unsigned int skill_level = you.skill(sk, 10, true);
@@ -435,11 +433,6 @@ void init_skill_order(void)
     for (int i = SK_FIRST_SKILL; i < NUM_SKILLS; i++)
     {
         skill_type si = static_cast<skill_type>(i);
-        if (is_invalid_skill(si))
-        {
-            you.skill_order[si] = MAX_SKILL_ORDER;
-            continue;
-        }
 
         const unsigned int i_points = you.skill_points[si]
                                       / species_apt_factor(si);
@@ -449,7 +442,7 @@ void init_skill_order(void)
         for (int j = SK_FIRST_SKILL; j < NUM_SKILLS; j++)
         {
             skill_type sj = static_cast<skill_type>(j);
-            if (si == sj || is_invalid_skill(sj))
+            if (si == sj)
                 continue;
 
             const unsigned int j_points = you.skill_points[sj]
@@ -641,7 +634,7 @@ static skill_type _get_opposite(skill_type sk)
  * @param sk2 Second skill.
  * @return Whether first skill is higher than second skill.
  */
-bool compare_skills(skill_type sk1, skill_type sk2)
+static bool _compare_skills(skill_type sk1, skill_type sk2)
 {
     if (is_invalid_skill(sk1))
         return false;
@@ -659,7 +652,7 @@ bool is_antitrained(skill_type sk)
     if (opposite == SK_NONE || you.skills[sk] >= 27)
         return false;
 
-    return compare_skills(opposite, sk) && you.skills[opposite];
+    return _compare_skills(opposite, sk) && you.skills[opposite];
 }
 
 bool antitrain_other(skill_type sk, bool show_zero)
@@ -669,35 +662,28 @@ bool antitrain_other(skill_type sk, bool show_zero)
         return false;
 
     return ((you.skills[opposite] > 0 || show_zero) && you.skills[sk] > 0
-            && you.skills[opposite] < 27 && compare_skills(sk, opposite));
-}
-
-bool is_invalid_skill(skill_type skill)
-{
-    if (skill < 0 || skill >= NUM_SKILLS)
-        return (true);
-
-    if (skill > SK_UNARMED_COMBAT && skill < SK_SPELLCASTING)
-        return (true);
-
-    return (false);
+            && you.skills[opposite] < 27 && _compare_skills(sk, opposite));
 }
 
 void dump_skills(std::string &text)
 {
     for (uint8_t i = 0; i < NUM_SKILLS; i++)
     {
-        if (you.skills[i] > 0)
+        int real = you.skill((skill_type)i, 10, true);
+        int cur  = you.skill((skill_type)i, 10);
+        if (real > 0)
         {
-            skill_type sk = skill_type(i);
-            text += make_stringf(" %c Level %d%s %s\n",
-                                 (you.skills[i] == 27 ? 'O' :
-                                  you.train[i] == 2   ? '*' :
-                                  you.train[i]        ? '+'
-                                                      : '-'),
-                                 you.skills[i],
-                                 you.skill(sk) != you.skills[i]
-                                     ? make_stringf("(%d)", you.skill(sk)).c_str()
+            text += make_stringf(" %c Level %.*f%s %s\n",
+                                 real == 270       ? 'O' :
+                                 you.train[i] == 2 ? '*' :
+                                 you.train[i]      ? '+' :
+                                                     '-',
+                                 real == 270 ? 0 : 1,
+                                 real * 0.1,
+                                 real != cur
+                                     ? make_stringf("(%.*f)",
+                                           cur == 270 ? 0 : 1,
+                                           cur * 0.1).c_str()
                                      : "",
                                  skill_name(static_cast<skill_type>(i)));
         }

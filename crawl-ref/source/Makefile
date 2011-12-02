@@ -46,6 +46,10 @@
 #    NOWIZARD      -- set to disable wizard mode.  Use if you have untrusted
 #                     remote players without DGL.
 #
+#    WEBTILES      -- set to anything to compile for Webtiles
+#    WEBDIR        -- place to hold the Webtiles client data. Can be either
+#                     relative to prefix or absolute.
+#
 #
 # Requirements:
 #    For tile builds, you need pkg-config.
@@ -109,6 +113,8 @@ CFWARN := -Wall
 CFWARN_L := -Wundef
 
 DEFINES := $(EXTERNAL_DEFINES)
+
+LDFLAGS := $(EXTERNAL_LDFLAGS)
 
 #
 # The GCC and GXX variables are set later.
@@ -330,7 +336,7 @@ endif
 # To get stack trace symbols.
 # Note that MinGW doesn't support -rdynamic.
 ifndef NO_RDYNAMIC
-LDFLAGS := -rdynamic
+LDFLAGS += -rdynamic
 endif
 
 ifdef USE_MERGE_BASE
@@ -625,7 +631,7 @@ endif # TILES
 # On clang, unknown -Wfoo is merely a warning, thus -Werror.
 CFWARN_L += $(shell w=-Wno-array-bounds;echo|$(GCC) -E - -Werror $$w >/dev/null 2>&1 && echo $$w)
 
-CFWARN_L += -Wno-parentheses -Wwrite-strings -Wshadow
+CFWARN_L += -Wno-parentheses -Wno-unused-parameter -Wwrite-strings -Wshadow
 CFOTHERS_L = $(EXTERNAL_FLAGS_L) $(EXTRA_FLAGS) $(DEFINES) $(SDL_CFLAGS)
 
 ifndef NO_LUA_BINDINGS
@@ -764,6 +770,21 @@ else
   endif
 endif
 datadir_fp := $(abspath $(strip $(DESTDIR))$(strip $(DATADIR)))
+
+ifneq ($(strip $(WEBDIR)),)
+  ifeq ($(filter /%,$(WEBDIR)),)
+    #relative WEBDIR
+    ifneq ($(prefix),)
+	override WEBDIR := $(strip $(prefix))/$(strip $(WEBDIR))
+    endif
+  endif
+  CFOTHERS_L += -DWEB_DIR_PATH=\"$(abspath $(WEBDIR))/\"
+else
+  ifneq ($(prefix),)
+	WEBDIR := $(strip $(prefix))/$(strip $(WEBDIR))
+  endif
+endif
+webdir_fp := $(abspath $(strip $(DESTDIR))$(strip $(WEBDIR)))
 
 ifndef NO_NCURSES
 
@@ -922,9 +943,10 @@ DOC_BASE        := ../docs
 DOC_TEMPLATES   := $(DOC_BASE)/template
 GENERATED_DOCS  := $(DOC_BASE)/aptitudes.txt $(DOC_BASE)/FAQ.html $(DOC_BASE)/crawl_manual.txt
 GENERATED_HEADERS := art-enum.h #the rest are private
-GENERATED_FILES := $(GENERATED_HEADERS) art-data.h mon-mst.h $(RLTILES)/dc-unrand.txt build.h compflag.h
+GENERATED_FILES := $(GENERATED_HEADERS) art-data.h mon-mst.h \
+                   $(RLTILES)/dc-unrand.txt build.h compflag.h dat/dlua/tags.lua
 
-GAME_DEPENDS  := $(OBJECTS) $(EXTRA_OBJECTS) $(CONTRIB_LIBS)
+GAME_DEPENDS  := $(OBJECTS) $(EXTRA_OBJECTS) $(CONTRIB_LIBS) dat/dlua/tags.lua
 SRC_PKG_BASE  := stone_soup
 SRC_VERSION   := $(shell git describe --tags $(MERGE_BASE) 2>/dev/null || cat util/release_ver)
 
@@ -961,12 +983,15 @@ webserver/game_data/static/%.png: dat/tiles/%.png
 	$(QUIET_COPY)$(COPY) $< webserver/game_data/static/
 
 TILEINFOJS = $(TILEIMAGEFILES) dngn
+TITLEIMGS = denzi_dragon denzi_kitchen_duty denzi_summoner \
+            denzi_undead_warrior omndra_zot_demon
 
 STATICFILES = $(TILEIMAGEFILES:%=webserver/game_data/static/%.png) \
               webserver/static/stone_soup_icon-32x32.png \
+              $(TITLEIMGS:%=webserver/static/title_%.png) \
               $(TILEINFOJS:%=webserver/game_data/static/tileinfo-%.js)
 
-$(TILEINFOJS:%=$(RLTILES)/tileinfo-%.js): rltile-build
+$(TILEINFOJS:%=$(RLTILES)/tileinfo-%.js): build-rltiles
 
 webserver/game_data/static/%.js: $(RLTILES)/%.js
 	$(QUIET_COPY)$(COPY) $< webserver/game_data/static/
@@ -1140,6 +1165,10 @@ ifndef MONOSPACED_FONT
 	$(COPY) dat/tiles/VeraMono.ttf $(datadir_fp)/dat/tiles/
 endif
 endif
+ifdef WEBTILES
+	mkdir -p $(webdir_fp)
+	$(COPY_R) webserver/game_data/* $(webdir_fp)/
+endif
 ifneq ($(savedir_fp),)
 	mkdir -p $(savedir_fp)/saves
 	mkdir -p $(savedir_fp)/morgue
@@ -1269,6 +1298,9 @@ art-enum.h: art-data.h
 mon-mst.h: mon-spll.h util/gen-mst.pl
 	$(QUIET_GEN)util/gen-mst.pl
 
+dat/dlua/tags.lua: tag-version.h util/gen-luatags.pl
+	$(QUIET_GEN)util/gen-luatags.pl
+
 $(RLTILES)/dc-unrand.txt: art-data.h
 
 artefact.o: art-data.h art-enum.h
@@ -1279,13 +1311,13 @@ mon-util.d: mon-mst.h
 # RLTiles
 #
 
-.PHONY: rltile-build
-rltile-build: .contrib-libs $(RLTILES)/dc-unrand.txt
+.PHONY: build-rltiles
+build-rltiles: .contrib-libs $(RLTILES)/dc-unrand.txt
 	+$(MAKE) -C $(RLTILES) all ARCH=$(ARCH)
 
-$(TILEDEFSRCS): rltile-build
-$(TILEDEFHDRS): rltile-build
-$(ORIGTILEFILES): rltile-build
+$(TILEDEFSRCS): build-rltiles
+$(TILEDEFHDRS): build-rltiles
+$(ORIGTILEFILES): build-rltiles
 
 dat/tiles/%.png: $(RLTILES)/%.png
 	$(QUIET_PNGCRUSH)$(PNGCRUSH) $< $@

@@ -793,7 +793,7 @@ static void _clear_net_trapping_status(coord_def c)
     {
         monster* mvictim = victim->as_monster();
         if (you.can_see(mvictim))
-            mprf("The net is swept off %s.", mvictim->name(DESC_NOCAP_THE).c_str());
+            mprf("The net is swept off %s.", mvictim->name(DESC_THE).c_str());
         mons_clear_trapping_net(mvictim);
     }
     else
@@ -969,17 +969,11 @@ static int _shoals_tide_at(coord_def pos, int base_tide)
     if (!tide_caller)
         return base_tide;
 
-    // try to avoid the costly sqrt() call
-    const int rl_distance = grid_distance(pos, tide_caller_pos);
-    if (rl_distance > TIDE_CALL_RADIUS)
+    pos -= tide_caller->pos();
+    if (pos.abs() > sqr(TIDE_CALL_RADIUS) + 1)
         return base_tide;
 
-    const int distance =
-        static_cast<int>(sqrt((float)(pos - tide_caller->pos()).abs()));
-    if (distance > TIDE_CALL_RADIUS)
-        return base_tide;
-
-    return (base_tide + std::max(0, tide_called_peak - distance * 3));
+    return (base_tide + std::max(0, tide_called_peak - pos.range() * 3));
 }
 
 static std::vector<coord_def> _shoals_extra_tide_seeds()
@@ -1152,7 +1146,7 @@ void shoals_release_tide(monster* mons)
         if (player_can_hear(mons->pos()))
         {
             mprf(MSGCH_SOUND, "The tide is released from %s call.",
-                 apostrophise(mons->name(DESC_NOCAP_YOUR, true)).c_str());
+                 apostrophise(mons->name(DESC_YOUR, true)).c_str());
             if (you.see_cell(mons->pos()))
                 flash_view_delay(ETC_WATER, 150);
         }

@@ -367,11 +367,11 @@
 { MUT_DEFORMED,                   8,  3,  true,  true,
   "deformed body",
 
-  {"Armour fits poorly on your unusually shaped body.",
+  {"Armour fits poorly on your strangely shaped body.",
    "Armour fits poorly on your deformed body.",
    "Armour fits poorly on your badly deformed body."},
 
-  {"Your body twists unusually.",
+  {"Your body twists strangely.",
    "Your body twists and deforms.",
    "Your body twists and deforms."},
 
@@ -592,6 +592,24 @@
   "mutation resistance"
 },
 
+{ MUT_EVOLUTION,                  4,  2, false, false,
+  "evolution",
+
+  {"You evolve.",
+   "You rapidly evolve.",
+   ""},
+
+  {"You feel nature experimenting on you. Don't worry, failures die fast.",
+   "Your genes go into a fast flux.",
+   ""},
+
+  {"Your wild genetic ride slows down.",
+   "You feel genetically stable.",
+   ""},
+
+  "evolution"
+},
+
 { MUT_FRAIL,                     10,  3,  true,  true,
   NULL,
 
@@ -631,7 +649,7 @@
 { MUT_UNBREATHING,                0,  1, false, false,
   "unbreathing",
 
-  {"You do not need to breathe.", "", ""},
+  {"You can survive without breathing.", "", ""},
   {"You feel breathless.", "", ""},
   {"", "", ""},
 
@@ -899,7 +917,11 @@
   {"You can tolerate rotten meat.",
    "You can eat rotten meat.",
    "You thrive on rotten meat."},
-  {"", "", ""},
+
+  {"You hunger for rotting flesh.",
+   "You hunger for rotting flesh.",
+   "You hunger for rotting flesh."},
+
   {"", "", ""},
 
   "saprovorous"
@@ -1143,7 +1165,7 @@
     "Your body becomes viscous."},
 
    {"Your body returns to its normal consistency.",
-    "Your body becomes less viscous.",
+    "Your body becomes less malleable.",
     "Your body becomes less viscous."},
 
     "gelatinous body"
@@ -1438,6 +1460,32 @@
    "Your natural camouflage becomes less effective."},
 
    "camouflage"
+},
+
+{ MUT_IGNITE_BLOOD,              0,  1, false, false,
+  "ignite blood",
+
+  {"Your demonic aura causes spilled blood to erupt in flames.", "", ""},
+  {"Your blood runs red-hot!", "", ""},
+  {"", "", ""},
+
+  "ignite blood"
+},
+
+{ MUT_FOUL_STENCH,              0,  2, false, false,
+  "foul stench",
+
+  {"You emit a foul stench, and are resistant to rotting and decay.",
+   "You radiate miasma, and are resistant to rotting and decay.",
+   ""},
+
+  {"You begin to emit a foul stench of rot and decay.",
+   "You begin to radiate miasma.",
+   ""},
+
+  {"", "", ""},
+
+  "foul stench"
 },
 
 #endif

@@ -585,6 +585,8 @@ static monster_type _get_zotdef_monster(level_id &place, int power)
             continue;        // No uniques here!
         if (mons_class_is_stationary(mon_type))
             continue;        // Must be able to move!
+        if (mons_is_mimic(mon_type))
+            continue;
 
         int strength = _mon_strength(mon_type);
 
@@ -855,7 +857,7 @@ static rune_type _get_rune(int runenumber)
 // Dowan is automatically placed together with Duvessa.
 static monster_type _choose_unique_by_depth(int step)
 {
-    int ret;
+    monster_type ret;
     switch (step)
     {
     case 0: // depth <= 3
@@ -901,7 +903,7 @@ static monster_type _choose_unique_by_depth(int step)
                             MONS_MARGERY, MONS_BORIS, MONS_SAINT_ROKA, -1);
     }
 
-    return static_cast<monster_type>(ret);
+    return ret;
 }
 
 static monster_type _pick_unique(int level)

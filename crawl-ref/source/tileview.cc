@@ -76,23 +76,33 @@ void tile_default_flv(level_area_type lev, branch_type br, tile_flavour &flv)
 
     if (lev == LEVEL_PANDEMONIUM)
     {
-        flv.floor = TILE_FLOOR_TOMB;
-        switch (random2(7))
+        switch (random2(9))
         {
-        default:
-        case 0: flv.wall = TILE_WALL_ZOT_BLUE; break;
-        case 1: flv.wall = TILE_WALL_ZOT_RED; break;
-        case 2: flv.wall = TILE_WALL_ZOT_MAGENTA; break;
-        case 3: flv.wall = TILE_WALL_ZOT_GREEN; break;
-        case 4: flv.wall = TILE_WALL_ZOT_CYAN; break;
-        case 5: flv.wall = TILE_WALL_ZOT_YELLOW; break;
-        case 6: flv.wall = TILE_WALL_ZOT_WHITE; break;
+            default:
+            case 0: flv.wall = TILE_WALL_BARS_RED; break;
+            case 1: flv.wall = TILE_WALL_BARS_BLUE; break;
+            case 2: flv.wall = TILE_WALL_BARS_CYAN; break;
+            case 3: flv.wall = TILE_WALL_BARS_GREEN; break;
+            case 4: flv.wall = TILE_WALL_BARS_MAGENTA; break;
+            case 5: flv.wall = TILE_WALL_BARS_BROWN; break;
+            case 6: flv.wall = TILE_WALL_BARS_LIGHTGRAY; break;
+            case 7: flv.wall = TILE_WALL_BARS_DARKGRAY; break;
+            // Wall_flesh used to have a 1/3 chance
+            case 8: flv.wall = TILE_WALL_FLESH; break;
         }
 
-        if (one_chance_in(3))
-            flv.wall = TILE_WALL_FLESH;
-        if (one_chance_in(3))
-            flv.floor = TILE_FLOOR_NERVES;
+        switch (random2(8))
+        {
+            default:
+            case 0: flv.floor = TILE_FLOOR_DEMONIC_RED; break;
+            case 1: flv.floor = TILE_FLOOR_DEMONIC_BLUE; break;
+            case 2: flv.floor = TILE_FLOOR_DEMONIC_GREEN; break;
+            case 3: flv.floor = TILE_FLOOR_DEMONIC_CYAN; break;
+            case 4: flv.floor = TILE_FLOOR_DEMONIC_MAGENTA; break;
+            case 5: flv.floor = TILE_FLOOR_DEMONIC_BROWN; break;
+            case 6: flv.floor = TILE_FLOOR_DEMONIC_LIGHTGRAY; break;
+            case 7: flv.floor = TILE_FLOOR_DEMONIC_DARKGRAY; break;
+        }
 
         return;
     }
@@ -155,8 +165,8 @@ void tile_default_flv(level_area_type lev, branch_type br, tile_flavour &flv)
         return;
 
     case BRANCH_TARTARUS:
-        flv.wall  = TILE_WALL_UNDEAD;
-        flv.floor = TILE_FLOOR_TOMB;
+        flv.wall  = TILE_WALL_COBALT_ROCK;
+        flv.floor = TILE_FLOOR_BLACK_COBALT;
         return;
 
     case BRANCH_CRYPT:
@@ -165,7 +175,7 @@ void tile_default_flv(level_area_type lev, branch_type br, tile_flavour &flv)
         return;
 
     case BRANCH_TOMB:
-        flv.wall  = TILE_WALL_LAB_ROCK;
+        flv.wall  = TILE_WALL_UNDEAD;
         flv.floor = TILE_FLOOR_TOMB;
         return;
 
@@ -176,7 +186,7 @@ void tile_default_flv(level_area_type lev, branch_type br, tile_flavour &flv)
 
     case BRANCH_DIS:
         flv.wall  = TILE_WALL_ZOT_CYAN;
-        flv.floor = TILE_FLOOR_TOMB;
+        flv.floor = TILE_FLOOR_IRON;
         return;
 
     case BRANCH_GEHENNA:
@@ -186,7 +196,7 @@ void tile_default_flv(level_area_type lev, branch_type br, tile_flavour &flv)
 
     case BRANCH_COCYTUS:
         flv.wall  = TILE_WALL_ICE;
-        flv.floor = TILE_FLOOR_ICE;
+        flv.floor = TILE_FLOOR_FROZEN;
         return;
 
     case BRANCH_ORCISH_MINES:
@@ -196,7 +206,6 @@ void tile_default_flv(level_area_type lev, branch_type br, tile_flavour &flv)
 
     case BRANCH_LAIR:
     case BRANCH_FOREST:
-    case BRANCH_SPIDER_NEST:
         flv.wall  = TILE_WALL_LAIR;
         flv.floor = TILE_FLOOR_LAIR;
         return;
@@ -208,7 +217,7 @@ void tile_default_flv(level_area_type lev, branch_type br, tile_flavour &flv)
 
     case BRANCH_SNAKE_PIT:
         flv.wall  = TILE_WALL_SNAKE;
-        flv.floor = TILE_FLOOR_SNAKE;
+        flv.floor = TILE_FLOOR_SNAKE_A + random2(3) * 4;
         return;
 
     case BRANCH_SWAMP:
@@ -219,6 +228,11 @@ void tile_default_flv(level_area_type lev, branch_type br, tile_flavour &flv)
     case BRANCH_SHOALS:
         flv.wall  = TILE_WALL_YELLOW_ROCK;
         flv.floor = TILE_FLOOR_SAND_STONE;
+        return;
+
+    case BRANCH_SPIDER_NEST:
+        flv.wall  = TILE_WALL_LAIR;
+        flv.floor = TILE_FLOOR_SPIDER;
         return;
 
     case BRANCH_HALL_OF_ZOT:
@@ -974,6 +988,27 @@ static inline void _apply_variations(const tile_flavour &flv, tileidx_t *bg,
     {
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_WALL_TOMB;
+    }
+    else if (player_in_branch(BRANCH_DIS))
+    {
+        if (orig == TILE_DNGN_METAL_WALL)
+            orig = TILE_DNGN_METAL_IRON;
+        else if (orig == TILE_DNGN_CRYSTAL)
+            orig = TILE_WALL_EMERALD;
+    }
+    else if (player_in_branch(BRANCH_COCYTUS))
+    {
+        if (orig == TILE_DNGN_STONE_WALL)
+            orig = TILE_WALL_ICY_STONE;
+    }
+    else if (player_in_branch(BRANCH_TARTARUS))
+    {
+        if (orig == TILE_DNGN_STONE_WALL)
+            orig = TILE_WALL_COBALT_STONE;
+        else if (orig == TILE_DNGN_CRYSTAL)
+            orig = TILE_WALL_EMERALD;
+        else if (orig == TILE_DNGN_METAL_WALL)
+            orig = TILE_DNGN_METAL_WALL_DARKGRAY;
     }
 
     const bool mimic = monster_at(gc) && mons_is_feat_mimic(monster_at(gc)->type);

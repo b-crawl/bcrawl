@@ -3112,8 +3112,6 @@ static void _place_traps(int level_number)
     }
     else if (player_in_branch(BRANCH_CRYPT))
         place_webs(random2(20));
-    else if (player_in_branch(BRANCH_MAIN_DUNGEON) && you.absdepth0 == 12)
-        place_webs(300);
 }
 
 static void _dgn_place_feature_at_random_floor_square(dungeon_feature_type feat,
@@ -3437,7 +3435,7 @@ static int _place_monster_vector(std::vector<monster_type> montypes,
     {
         mg.cls = montypes[random2(montypes.size())];
 
-        if (player_in_branch(BRANCH_COCYTUS) &&
+        if (player_in_hell() &&
             mons_class_can_be_zombified(mg.cls))
         {
             static const monster_type lut[3][2] =
@@ -3518,7 +3516,7 @@ static void _place_aquatic_monsters(int level_number, level_area_type level_type
 
             if (player_in_branch(BRANCH_SWAMP) && !one_chance_in(3))
                 swimming_things[i] = MONS_SWAMP_WORM;
-            else if (player_in_branch(BRANCH_COCYTUS))
+            else if (player_in_hell())
             {
                 // Eels are useless when zombified
                 if (swimming_things[i] == MONS_ELECTRIC_EEL)
@@ -4507,7 +4505,7 @@ int dgn_place_monster(mons_spec &mspec,
         item_def *wpn = mons.mslot_item(MSLOT_WEAPON);
         ASSERT(wpn);
         mons.ghost->init_dancing_weapon(*wpn, 180);
-        mons.dancing_weapon_init();
+        mons.ghost_demon_init();
     }
 
     for (unsigned int i = 0; i < mspec.ench.size(); i++)
@@ -4705,14 +4703,14 @@ static void _vault_grid_glyph(vault_placement &place, const coord_def& where,
         }
         else if (vgrid == '|')
         {
-            which_class = static_cast<object_class_type>(random_choose_weighted(
+            which_class = random_choose_weighted(
                             2, OBJ_WEAPONS,
                             1, OBJ_ARMOUR,
                             1, OBJ_JEWELLERY,
                             1, OBJ_BOOKS,
                             1, OBJ_STAVES,
                             1, OBJ_MISCELLANY,
-                            0));
+                            0);
             which_depth = MAKE_GOOD_ITEM;
         }
         else if (vgrid == '*')
@@ -4763,7 +4761,7 @@ static void _vault_grid_glyph(vault_placement &place, const coord_def& where,
             {
                 mprf(MSGCH_ERROR, "ERROR: %s already generated somewhere "
                      "else; please file a bug report.",
-                     mons_type_name(mt, DESC_CAP_THE).c_str());
+                     mons_type_name(mt, DESC_THE).c_str());
                 // Force it to be generated anyway.
                 you.unique_creatures[mt] = false;
             }

@@ -571,6 +571,8 @@ int monster::halo_radius() const
         return (4);
     case MONS_DAEVA:
         return (5);
+    case MONS_SERAPH:
+        return (6);
     case MONS_PEARL_DRAGON:
         return (2);
     case MONS_OPHAN:

@@ -790,6 +790,7 @@ static void _handle_wizard_command(void)
         take_note(Note(NOTE_MESSAGE, 0, 0, "Entered wizard mode."));
 
         you.wizard = true;
+        save_game(false);
         redraw_screen();
 
         if (crawl_state.cmd_repeat_start)
@@ -1302,7 +1303,7 @@ static bool _stairs_check_mesmerised()
     {
         const monster* beholder = you.get_any_beholder();
         mprf("You cannot move away from %s!",
-             beholder->name(DESC_NOCAP_THE, true).c_str());
+             beholder->name(DESC_THE, true).c_str());
         return (true);
     }
 
@@ -1566,16 +1567,37 @@ static void _experience_check()
          you.experience_level,
          species_name(you.species).c_str(),
          you.class_name.c_str());
+    int perc = get_exp_progress();
 
     if (you.experience_level < 27)
     {
-        mprf("You are %d%% of the way to level %d.", get_exp_progress(),
+        mprf("You are %d%% of the way to level %d.", perc,
               you.experience_level + 1);
     }
     else
     {
         mpr("I'm sorry, level 27 is as high as you can go.");
         mpr("With the way you've been playing, I'm surprised you got this far.");
+    }
+
+    if (you.species == SP_FELID)
+    {
+        int xl = you.experience_level;
+        // calculate the "real" level
+        while (you.experience >= exp_needed(xl + 1))
+            xl++;
+        int nl = you.max_level;
+        // and the next level you'll get a life
+        do nl++; while (!will_gain_life(nl));
+
+        // old value was capped at XL27
+        perc = (you.experience - exp_needed(xl)) * 100
+             / (exp_needed(xl + 1) - exp_needed(xl));
+        perc = (nl - xl) * 100 - perc;
+        mprf(you.lives < 2 ?
+             "You'll get an extra life in %d.%02d levels worth of XP." :
+             "If you died right now, you'd get an extra life in %d.%02d levels worth of XP.",
+             perc / 100, perc % 100);
     }
 
     handle_real_time();
@@ -2035,7 +2057,7 @@ void process_command(command_type cmd)
         // because we want to have CTRL-Y available...
         // and unfortunately they tend to be stuck together.
         clrscr();
-#ifndef USE_TILE_LOCAL
+#if !defined(USE_TILE_LOCAL) && !defined(TARGET_OS_WINDOWS)
         console_shutdown();
         kill(0, SIGTSTP);
         console_startup();
@@ -2101,6 +2123,19 @@ static void _prep_input()
             mpr("You have a vision of multiple gates.", MSGCH_GOD);
 
         you.seen_portals = 0;
+    }
+    if (you.seen_invis)
+    {
+        if (!you.can_see_invisible(false, true))
+        {
+            item_def *ring = get_only_unided_ring();
+            if (ring && !is_artefact(*ring)
+                && ring->sub_type == RING_SEE_INVISIBLE)
+            {
+                wear_id_type(*ring);
+            }
+        }
+        you.seen_invis = false;
     }
 }
 
@@ -2192,7 +2227,7 @@ static void _decrement_petrification(int delay)
             dur = 0;
             // If we'd kill the player when active flight stops, this will
             // need to pass the killer.  Unlike monsters, almost all cFly is
-            // magical (sans kenku) so there's no flapping of wings, though.
+            // magical (sans tengu) so there's no flapping of wings, though.
             you.fully_petrify(NULL);
         }
         else if (dur < 15 && old_dur >= 15)
@@ -2295,6 +2330,9 @@ static void _decrement_durations()
 
     _decrement_a_duration(DUR_JELLY_PRAYER, delay, "Your prayer is over.");
 
+    if (_decrement_a_duration(DUR_NAUSEA, delay))
+        end_nausea();
+
     if (you.duration[DUR_DIVINE_SHIELD] > 0)
     {
         if (you.duration[DUR_DIVINE_SHIELD] > 1)
@@ -2332,7 +2370,7 @@ static void _decrement_durations()
             const int temp_effect = get_weapon_brand(weapon);
 
             set_item_ego_type(weapon, OBJ_WEAPONS, SPWPN_NORMAL);
-            std::string msg = weapon.name(DESC_CAP_YOUR);
+            std::string msg = weapon.name(DESC_YOUR);
 
             switch (temp_effect)
             {
@@ -2848,7 +2886,7 @@ static void _regenerate_hp_and_mp(int delay)
 
     if (you.hp < you.hp_max && !you.disease && !you.duration[DUR_DEATHS_DOOR])
     {
-        int base_val = player_regen();
+        const int base_val = player_regen();
         tmp += div_rand_round(base_val * delay, BASELINE_DELAY);
     }
 
@@ -2858,12 +2896,12 @@ static void _regenerate_hp_and_mp(int delay)
         tmp -= 100;
     }
 
+    ASSERT(tmp >= 0 && tmp < 100);
+    you.hit_points_regeneration = tmp;
+
     // XXX: Don't let DD use guardian spirit for free HP. (due, dpeg)
     if (player_spirit_shield() && you.species == SP_DEEP_DWARF)
         return;
-
-    ASSERT(tmp >= 0 && tmp < 100);
-    you.hit_points_regeneration = tmp;
 
     // XXX: Doing the same as the above, although overflow isn't an
     // issue with magic point regeneration, yet. -- bwr
@@ -2871,7 +2909,7 @@ static void _regenerate_hp_and_mp(int delay)
 
     if (you.magic_points < you.max_magic_points)
     {
-        int base_val = 7 + you.max_magic_points / 2;
+        const int base_val = 7 + you.max_magic_points / 2;
         tmp += div_rand_round(base_val * delay, BASELINE_DELAY);
     }
 
@@ -3334,7 +3372,7 @@ static bool _untrap_target(const coord_def move, bool check_confused)
         {
             const std::string prompt =
                 make_stringf("Do you want to try to take the net off %s?",
-                             mon->name(DESC_NOCAP_THE).c_str());
+                             mon->name(DESC_THE).c_str());
 
             if (yesno(prompt.c_str(), true, 'n'))
             {
@@ -3344,7 +3382,7 @@ static bool _untrap_target(const coord_def move, bool check_confused)
         }
 
         you.turn_is_over = true;
-        you_attack(mon->mindex(), true);
+        fight_melee(&you, mon);
 
         if (you.berserk_penalty != NO_BERSERK_PENALTY)
             you.berserk_penalty = 0;
@@ -4135,7 +4173,7 @@ static void _move_player(coord_def move)
             // the player to figure out which adjacent wall an invis
             // monster is in "for free".
             you.turn_is_over = true;
-            you_attack(targ_monst->mindex(), true);
+            fight_melee(&you, targ_monst);
 
             // We don't want to create a penalty if there isn't
             // supposed to be one.
@@ -4256,13 +4294,13 @@ static void _move_player(coord_def move)
     else if (beholder && !attacking)
     {
         mprf("You cannot move away from %s!",
-            beholder->name(DESC_NOCAP_THE, true).c_str());
+            beholder->name(DESC_THE, true).c_str());
         return;
     }
     else if (fmonger && !attacking)
     {
         mprf("You cannot move closer to %s!",
-            fmonger->name(DESC_NOCAP_THE, true).c_str());
+            fmonger->name(DESC_THE, true).c_str());
         return;
     }
 
@@ -4527,12 +4565,6 @@ static void _update_replay_state()
 
 static void _compile_time_asserts()
 {
-    // Check that the numbering comments in enum.h haven't been
-    // disturbed accidentally.
-    COMPILE_CHECK(SK_UNARMED_COMBAT == 17);
-    COMPILE_CHECK(SK_EVOCATIONS == 32);
-    COMPILE_CHECK(SP_VAMPIRE == 30);
-
     //jmf: NEW ASSERTS: we ought to do a *lot* of these
     COMPILE_CHECK(NUM_SPECIES < SP_UNKNOWN);
     COMPILE_CHECK(NUM_JOBS < JOB_UNKNOWN);

@@ -172,10 +172,7 @@ static std::string _desc_mons_type_map(std::map<monster_type, int> types)
         std::string name;
         description_level_type desc;
         if (it->second == 1)
-        {
-            desc = (it == types.begin() ? DESC_CAP_A
-                                                : DESC_NOCAP_A);
-        }
+            desc = DESC_A;
         else
             desc = DESC_PLAIN;
 
@@ -328,13 +325,13 @@ void update_monsters_in_view()
                 warning = true;
 
             if (size == 1)
-                warning_msg += mon->pronoun(PRONOUN_CAP);
+                warning_msg += mon->pronoun(PRONOUN);
             else if (mon->type == MONS_DANCING_WEAPON)
                 warning_msg += "There";
             else if (types[mon->type] == 1)
-                warning_msg += mon->full_name(DESC_CAP_THE);
+                warning_msg += mon->full_name(DESC_THE);
             else
-                warning_msg += mon->full_name(DESC_CAP_A);
+                warning_msg += mon->full_name(DESC_A);
 
             warning_msg += " is";
             warning_msg += get_monster_equipment_desc(mon, DESC_IDENTIFIED,
@@ -856,13 +853,17 @@ static int player_view_update_at(const coord_def &gc)
         cloud_type   ctype = cl.type;
 
         bool did_exclude = false;
-        if (cl.whose  == KC_OTHER
-            && cl.killer == KILL_MISC
-            && is_damaging_cloud(cl.type, false))
+        if (!cl.temporary() && is_damaging_cloud(cl.type, false))
         {
+            int size;
+
             // Steam clouds are less dangerous than the other ones,
             // so don't exclude the neighbour cells.
-            const int size = (ctype == CLOUD_STEAM ? 0 : 1);
+            if (ctype == CLOUD_STEAM && cl.exclusion_radius() == 1)
+                size = 0;
+            else
+                size = cl.exclusion_radius();
+
             bool was_exclusion = is_exclude_root(gc);
             set_exclude(gc, size, false, false, true);
             if (!did_exclude && !was_exclusion)

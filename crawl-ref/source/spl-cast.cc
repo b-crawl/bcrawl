@@ -312,7 +312,6 @@ static int _apply_spellcasting_success_boosts(spell_type spell, int chance)
 int spell_fail(spell_type spell)
 {
     int chance = 60;
-    int chance2 = 0;
 
     // Don't cap power for failure rate purposes.
     chance -= 6 * calc_spell_power(spell, false, true, false);
@@ -339,7 +338,7 @@ int spell_fail(spell_type spell)
     default: chance += 750; break;
     }
 
-    chance2 = chance;
+    int chance2 = chance;
 
     const int chance_breaks[][2] = {
         {45, 45}, {42, 43}, {38, 41}, {35, 40}, {32, 38}, {28, 36},
@@ -936,7 +935,7 @@ static int _setup_evaporate_cast()
     else
     {
         mprf(MSGCH_PROMPT, "Where do you want to aim %s?",
-             you.inv[rc].name(DESC_NOCAP_YOUR).c_str());
+             you.inv[rc].name(DESC_YOUR).c_str());
     }
     return rc;
 }
@@ -983,12 +982,6 @@ static bool _spellcasting_aborted(spell_type spell,
         && !corpse_at(you.pos()))
     {
         mpr("There aren't any corpses here.");
-        return (true);
-    }
-
-    if (spell == SPELL_GOLUBRIAS_PASSAGE && !can_cast_golubrias_passage())
-    {
-        mpr("Only one passage may be opened at a time.");
         return (true);
     }
 
@@ -1068,9 +1061,6 @@ spret_type your_spells(spell_type spell, int powc,
 
         if (spell == SPELL_DISPEL_UNDEAD)
             targ = TARG_HOSTILE_UNDEAD;
-
-        if (spell == SPELL_FRAGMENTATION)
-            targ = TARG_ANY;
 
         targeting_type dir  =
             (testbits(flags, SPFLAG_TARG_OBJ) ? DIR_TARGET_OBJECT :
@@ -1456,19 +1446,19 @@ static spret_type _do_cast(spell_type spell, int powc,
         return cast_confusing_touch(powc, fail);
 
     case SPELL_CAUSE_FEAR:
-        return mass_enchantment(ENCH_FEAR, powc, NULL, NULL, fail);
+        return mass_enchantment(ENCH_FEAR, powc, fail);
 
     case SPELL_INTOXICATE:
         return cast_intoxicate(powc, fail);
 
     case SPELL_MASS_CONFUSION:
-        return mass_enchantment(ENCH_CONFUSION, powc, NULL, NULL, fail);
+        return mass_enchantment(ENCH_CONFUSION, powc, fail);
 
     case SPELL_ENGLACIATION:
-        return cast_mass_sleep(powc, fail);
+        return cast_englaciation(powc, fail);
 
     case SPELL_CONTROL_UNDEAD:
-        return mass_enchantment(ENCH_CHARM, powc, NULL, NULL, fail);
+        return mass_enchantment(ENCH_CHARM, powc, fail);
 
     case SPELL_ABJURATION:
         return cast_abjuration(powc, monster_at(target), fail);
@@ -1477,7 +1467,7 @@ static spret_type _do_cast(spell_type spell, int powc,
         return cast_mass_abjuration(powc, fail);
 
     case SPELL_OLGREBS_TOXIC_RADIANCE:
-        return cast_toxic_radiance(false, fail);
+        return cast_toxic_radiance(powc, false, fail);
 
     // XXX: I don't think any call to healing goes through here. --rla
     case SPELL_MINOR_HEALING:
@@ -1796,21 +1786,6 @@ std::string spell_noise_string(spell_type spell)
         return desc;
 }
 
-int spell_power_colour(spell_type spell)
-{
-    const int powercap = spell_power_cap(spell);
-    if (powercap == 0)
-        return DARKGREY;
-    const int power = calc_spell_power(spell, true);
-    if (power >= powercap)
-        return WHITE;
-    if (power * 3 < powercap)
-        return RED;
-    if (power * 3 < powercap * 2)
-        return YELLOW;
-    return GREEN;
-}
-
 static int _power_to_barcount(int power)
 {
     if (power == -1)
@@ -1820,7 +1795,7 @@ static int _power_to_barcount(int power)
     return (breakpoint_rank(power, breakpoints, ARRAYSZ(breakpoints)) + 1);
 }
 
-int spell_power_bars(spell_type spell, bool rod)
+static int _spell_power_bars(spell_type spell, bool rod)
 {
     const int cap = spell_power_cap(spell);
     if (cap == 0)
@@ -1847,7 +1822,7 @@ std::string spell_power_string(spell_type spell, bool rod)
         return _wizard_spell_power_numeric_string(spell, rod);
 #endif
 
-    const int numbars = spell_power_bars(spell, rod);
+    const int numbars = _spell_power_bars(spell, rod);
     const int capbars = _power_to_barcount(spell_power_cap(spell));
     ASSERT(numbars <= capbars);
     if (numbars < 0)

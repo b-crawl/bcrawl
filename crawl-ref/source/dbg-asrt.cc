@@ -201,8 +201,6 @@ static void _dump_player(FILE *file)
     for (size_t i = 0; i < NUM_SKILLS; ++i)
     {
         const skill_type sk = skill_type(i);
-        if (is_invalid_skill(sk))
-            continue;
         int needed_min = 0, needed_max = 0;
         if (sk >= 0 && you.skills[sk] <= 27)
             needed_min = skill_exp_needed(you.skills[sk], sk);
@@ -744,15 +742,13 @@ static NORETURN void _BreakStrToDebugger(const char *mesg, bool assert)
     *p = 0;
     abort();
 
-#elif defined(TARGET_OS_MACOSX) || defined(TARGET_COMPILER_MINGW)
-    fprintf(stderr, "%s", mesg);
+#else
+    fprintf(stderr, "%s\n", mesg);
+#if defined(TARGET_OS_MACOSX) || defined(TARGET_COMPILER_MINGW)
 // raise(SIGINT);               // this is what DebugStr() does on OS X according to Tech Note 2030
     int* p = NULL;              // but this gives us a stack crawl...
     *p = 0;
-    abort();                    // just to be sure
-
-#else
-    fprintf(stderr, "%s\n", mesg);
+#endif
     abort();
 #endif
 }

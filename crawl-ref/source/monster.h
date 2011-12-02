@@ -105,6 +105,7 @@ public:
     void apply_location_effects(const coord_def &oldpos,
                                 killer_type killer = KILL_NONE,
                                 int killernum = -1);
+    bool self_destructs();
 
     void moveto(const coord_def& c, bool clear_net = true);
     bool move_to_pos(const coord_def &newpos, bool clear_net = true);
@@ -142,6 +143,7 @@ public:
     bool lose_ench_duration(const mon_enchant &e, int levels);
     bool lose_ench_levels(const mon_enchant &e, int lev);
     void lose_energy(energy_use_type et, int div = 1, int mult = 1);
+    void gain_energy(energy_use_type et, int div = 1, int mult = 1);
 
     void scale_hp(int num, int den);
     bool gain_exp(int exp);
@@ -170,11 +172,9 @@ public:
     bool find_home_near_player();
     bool find_home_anywhere();
 
-    void set_ghost(const ghost_demon &ghost, bool has_name = true);
+    void set_ghost(const ghost_demon &ghost);
     void ghost_init(bool need_pos = true);
-    void pandemon_init();
-    void dancing_weapon_init();
-    void labrat_init();
+    void ghost_demon_init();
     void uglything_init(bool only_mutate = false);
     void uglything_mutate(uint8_t force_colour = BLACK);
     void uglything_upgrade();
@@ -192,20 +192,20 @@ public:
     bool      swimming() const;
     bool      wants_submerge() const;
 
-    bool      submerged() const;
-    bool      can_drown() const;
-    bool      floundering_at(const coord_def p) const;
-    bool      floundering() const;
-    bool      extra_balanced_at(const coord_def p) const;
-    bool      extra_balanced() const;
-    bool      can_pass_through_feat(dungeon_feature_type grid) const;
-    bool      is_habitable_feat(dungeon_feature_type actual_grid) const;
-    size_type body_size(size_part_type psize = PSIZE_TORSO,
-                        bool base = false) const;
-    int       body_weight(bool base = false) const;
-    int       total_weight() const;
-    int       damage_brand(int which_attack = -1);
-    int       damage_type(int which_attack = -1);
+    bool        submerged() const;
+    bool        can_drown() const;
+    bool        floundering_at(const coord_def p) const;
+    bool        floundering() const;
+    bool        extra_balanced_at(const coord_def p) const;
+    bool        extra_balanced() const;
+    bool        can_pass_through_feat(dungeon_feature_type grid) const;
+    bool        is_habitable_feat(dungeon_feature_type actual_grid) const;
+    size_type   body_size(size_part_type psize = PSIZE_TORSO,
+                          bool base = false) const;
+    int         body_weight(bool base = false) const;
+    int         total_weight() const;
+    brand_type  damage_brand(int which_attack = -1);
+    int         damage_type(int which_attack = -1);
 
     item_def *slot_item(equipment_type eq, bool include_melded=false);
     item_def *mslot_item(mon_inv_type sl) const;
@@ -243,6 +243,7 @@ public:
     void      equip(item_def &item, int slot, int near = -1);
     bool      unequip(item_def &item, int slot, int near = -1,
                       bool force = false);
+    void      steal_item_from_player();
 
     bool      can_use_missile(const item_def &item) const;
 
@@ -317,6 +318,7 @@ public:
     flight_type flight_mode() const;
     bool is_levitating() const;
     bool can_cling_to_walls() const;
+    bool is_banished() const;
     bool is_web_immune() const;
     bool invisible() const;
     bool can_see_invisible() const;
@@ -400,10 +402,18 @@ public:
     int stat_maxhp() const { return max_hit_points; }
     int stealth () const;
 
-    int shield_bonus() const;
-    int shield_block_penalty() const;
-    void shield_block_succeeded(actor *foe);
-    int shield_bypass_ability(int tohit) const;
+    int     shield_bonus() const;
+    int     shield_block_penalty() const;
+    void    shield_block_succeeded(actor *foe);
+    int     shield_bypass_ability(int tohit) const;
+    int     missile_deflection() const;
+
+    // Combat-related class methods
+    int     unadjusted_body_armour_penalty() const { return 0; }
+    int     adjusted_body_armour_penalty(int, bool) const { return 0; }
+    int     adjusted_shield_penalty(int) const { return 0; }
+    int     armour_tohit_penalty(bool) const { return 0; }
+    int     shield_tohit_penalty(bool) const { return 0; }
 
     actor_type atype() const { return ACT_MONSTER; }
     monster* as_monster() { return this; }

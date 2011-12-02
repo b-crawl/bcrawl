@@ -11,7 +11,7 @@
  * cell in between, and if the cells are in LOS range of each
  * other.
  *
- * Here, to "meet" a cell means to intersect the interiour. In
+ * Here, to "meet" a cell means to intersect the interior. In
  * particular, rays can pass between to diagonally adjacent
  * walls (as can the player).
  *
@@ -466,8 +466,8 @@ static int _gcd(int x, int y)
     return x;
 }
 
-bool complexity_lt(const std::pair<int,int>& lhs,
-                    const std::pair<int,int>& rhs)
+static bool _complexity_lt(const std::pair<int,int>& lhs,
+                           const std::pair<int,int>& rhs)
 {
     return lhs.first * lhs.second < rhs.first * rhs.second;
 }
@@ -504,7 +504,7 @@ static void raycast()
                 xyangles.push_back(std::pair<int,int>(xangle, yangle));
         }
 
-    std::sort(xyangles.begin(), xyangles.end(), complexity_lt);
+    std::sort(xyangles.begin(), xyangles.end(), _complexity_lt);
     for (unsigned int i = 0; i < xyangles.size(); ++i)
     {
         const int xangle = xyangles[i].first;

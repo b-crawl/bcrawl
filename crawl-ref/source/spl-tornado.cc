@@ -416,10 +416,7 @@ void tornado_damage(actor *caster, int dur)
     for (unsigned int i = 0; i < move_act.size(); i++)
     {
         coord_def pos = move_dest[move_act[i]->mid];
-        int r;
-        for (r = 0; r <= TORNADO_RADIUS; r++)
-            if ((pos - org).rdist() < r + 1)
-                break;
+	int r = pos.distance_from(org);
         coord_def dest = _rotate(org, pos, move_avail, rdurs[r]);
         for (unsigned int j = 0; j < move_avail.size(); j++)
             if (move_avail[j] == dest)

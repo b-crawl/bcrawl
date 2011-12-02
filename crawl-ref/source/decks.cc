@@ -403,7 +403,9 @@ static const deck_archetype* _random_sub_deck(uint8_t deck_type)
 static card_type _choose_from_archetype(const deck_archetype* pdeck,
                                         deck_rarity_type rarity)
 {
-    // We assume here that common == 0, rare == 1, legendary == 2.
+    // Random rarity should have been replaced by one of the others by now.
+    ASSERT(rarity >= DECK_RARITY_COMMON);
+    ASSERT(rarity <= DECK_RARITY_LEGENDARY);
 
     // FIXME: We should use one of the various choose_random_weighted
     // functions here, probably with an iterator, instead of
@@ -416,8 +418,8 @@ static card_type _choose_from_archetype(const deck_archetype* pdeck,
         const card_with_weights& cww = pdeck[i];
         if (_card_forbidden(cww.card))
             continue;
-        totalweight += cww.weight[rarity];
-        if (x_chance_in_y(cww.weight[rarity], totalweight))
+        totalweight += cww.weight[rarity - DECK_RARITY_COMMON];
+        if (x_chance_in_y(cww.weight[rarity - DECK_RARITY_COMMON], totalweight))
             result = cww.card;
     }
     return result;
@@ -779,7 +781,7 @@ static void _deck_ident(item_def& deck)
     if (in_inventory(deck) && !item_ident(deck, ISFLAG_KNOW_TYPE))
     {
         set_ident_flags(deck, ISFLAG_KNOW_TYPE);
-        mprf("This is %s.", deck.name(DESC_NOCAP_A).c_str());
+        mprf("This is %s.", deck.name(DESC_A).c_str());
         you.wield_change = true;
     }
 }
@@ -1497,12 +1499,12 @@ static void _velocity_card(int power, deck_rarity_type rarity)
 {
     const int power_level = get_power_level(power, rarity);
     if (power_level >= 2)
-        potion_effect(POT_SPEED, random2(power / 4));
-    else if (power_level == 1)
     {
-        cast_fly(random2(power / 4));
+        potion_effect(POT_SPEED, random2(power / 4));
         cast_swiftness(random2(power / 4));
     }
+    else if (power_level == 1)
+        potion_effect(POT_SPEED, random2(power / 4));
     else
         cast_swiftness(random2(power / 4));
 }
@@ -1931,7 +1933,7 @@ static void _blade_card(int power, deck_rarity_type rarity)
         if (wpn)
         {
             mprf("%s vibrate%s crazily for a second.",
-                 wpn->name(DESC_CAP_YOUR).c_str(),
+                 wpn->name(DESC_YOUR).c_str(),
                  wpn->quantity == 1 ? "s" : "");
         }
         else
@@ -2654,8 +2656,7 @@ static void _summon_dancing_weapon(int power, deck_rarity_type rarity)
         ASSERT(menv[mon].weapon() != NULL);
         item_def& wpn(*menv[mon].weapon());
 
-        // FIXME: Mega-hack (breaks encapsulation too).
-        wpn.flags &= ~ISFLAG_RACIAL_MASK;
+        set_equip_race(wpn, ISFLAG_NO_RACE);
 
         if (power_level == 0)
         {
@@ -2700,7 +2701,7 @@ static void _summon_dancing_weapon(int power, deck_rarity_type rarity)
         newstats.init_dancing_weapon(wpn, power / 4);
 
         menv[mon].set_ghost(newstats);
-        menv[mon].dancing_weapon_init();
+        menv[mon].ghost_demon_init();
     }
     else
         mpr("You see a puff of smoke.");

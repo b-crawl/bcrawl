@@ -25,6 +25,7 @@ void emergency_untransform();
 void merfolk_start_swimming(bool step = false);
 void merfolk_stop_swimming();
 void trackers_init_new_level(bool transit);
+void maybe_drop_monster_hide(const item_def corpse);
 int get_max_corpse_chunks(int mons_class);
 void turn_corpse_into_skeleton(item_def &item);
 void turn_corpse_into_chunks(item_def &item, bool bloodspatter = true,
@@ -132,6 +133,9 @@ void handle_real_time(time_t t = time(0));
 std::string part_stack_string(const int num, const int total);
 unsigned int breakpoint_rank(int val, const int breakpoints[],
                              unsigned int num_breakpoints);
+
+bool move_stairs(coord_def orig, coord_def dest);
+
 #define DISCONNECT_DIST (INT_MAX - 1000)
 
 struct position_node
@@ -353,6 +357,6 @@ struct counted_monster_list
     void add(const monster* mons);
     int count();
     bool empty() { return list.empty(); }
-    std::string describe(description_level_type desc = DESC_CAP_THE);
+    std::string describe(description_level_type desc = DESC_THE);
 };
 #endif

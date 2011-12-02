@@ -168,12 +168,14 @@ The secrets of the gateways died with him when his fellow thieves, disgusted at 
             overview = "Trove",
             dst = "trove",
             dstorigin = "in a treasure trove",
-            floor = "floor",
+            floor = "expired_portal",
+            feat_tile = "dngn_portal_trove_gone",
         }
     end
     e.lua_marker("O", stair)
     e.kfeat("O = enter_portal_vault")
     e.colour("O = blue")
+    e.tile("O = dngn_portal_trove")
 end
 
 -- Use the following line in destination maps after all SUBSTs
@@ -802,11 +804,11 @@ WEIGHT:  1
 ORIENT:  encompass
 ######## There should be a better way than listing all of the unrandarts...
 ITEM:    chain mail unrand:lears_chain_mail                                  /\
- randart plate mail w:50                                                     /\
-         plate mail unrand:maxwells_patent_armour                            /\
+ randart plate armour w:50                                                   /\
+         plate armour unrand:maxwells_patent_armour                          /\
  randart fire dragon armour                                                  /\
          gold dragon armour unrand:armour_of_the_dragon_king                 /\
- randart crystal plate mail                                                  /\
+ randart crystal plate armour                                                       /\
  randart robe w:50                                                           /\
          leather armour unrand:salamander_hide_armour / robe unrand:robe_of_night /\
          robe unrand:robe_of_misfortune / animal skin unrand:skin_of_zhor    /\

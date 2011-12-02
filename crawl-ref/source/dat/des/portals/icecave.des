@@ -60,7 +60,7 @@ function ice_cave_portal(e)
   e.lua_marker('O',
       timed_marker {
         disappear = "The archway melts and disappears.",
-        desc = "A frozen archway",
+        desc = "a frozen archway",
         desc_long = desc_long,
         entity = 'archway',
         dst = difficulty,
@@ -70,14 +70,15 @@ function ice_cave_portal(e)
         overview = "frozen archway",
         turns = timeout_turns_long,
         turns_short = timeout_turns_short,
-        floor = "floor",
+        floor = "expired_portal",
+        feat_tile = "dngn_portal_ice_cave_gone",
         msg = messager })
   e.kfeat("O = enter_portal_vault")
   e.colour("O = white")
   e.tile("O = dngn_portal_ice_cave")
   e.colour("X = white")
   e.kfeat("X = x")
-  e.rtile("X = wall_ice")
+  e.rtile("X = wall_zot_cyan")
   e.colour(".1234 = blue")
   e.ftile(".1234O+ = floor_ice")
 end
@@ -128,7 +129,7 @@ function ice_cave_colours(e)
   e.tile("< = dngn_portal_ice_cave")
   e.lrockcol("white")
   e.lfloorcol("blue")
-  e.lrocktile("wall_ice")
+  e.lrocktile("wall_zot_cyan")
   e.lfloortile("floor_ice")
 end
 }}
@@ -140,7 +141,7 @@ end
 function place_fog(e, type, strength)
    e.lua_marker("!", fog_machine { pow_max = strength, cloud_type = type,
                      delay_min = 50, delay_max = 300, size = 12,
-                     start_clouds = 1 } )
+                     start_clouds = 1, excl_rad = -1 } )
 end
 }}
 
@@ -453,9 +454,9 @@ ITEM:    battleaxe ego:freezing / glaive ego:freezing / halberd ego:freezing / \
          great sword ego:freezing / battleaxe ego:freezing good_item / \
          glaive ego:freezing good_item / halberd ego:freezing good_item / \
          great sword ego:freezing good_item / nothing w:80
-ITEM:    cap ego:cold_resistance w:9 / cap ego:resistance w:1 / \
-         cloak ego:cold_resistance w:9 / cloak ego:resistance w:1 / \
-         shield ego:cold_resistance w:9 / shield ego:protection w:1 / \
+ITEM:    cap ego:cold_resistance w:10 / \
+         cloak ego:cold_resistance w:10 / \
+         shield ego:cold_resistance w:10 / \
          large shield ego:cold_resistance w:5 / \
          animal skin ego:cold_resistance / nothing w:60
 ITEM:    potion of resistance w:5 / potion of gain strength / \
@@ -605,13 +606,11 @@ ITEM:    nothing
 ITEM:    book of ice / book of frost / book of conjurations
 ITEM:    book of ice / book of frost / book of conjurations
 : end
-ITEM:    cap ego:cold_resistance w:9 / \
-         pair of gloves ego:cold_resistance w:9 / \
-         cloak ego:cold_resistance w:9 / \
+ITEM:    cap ego:cold_resistance w:10 / \
+         pair of gloves ego:cold_resistance w:10 / \
+         cloak ego:cold_resistance w:10 / \
          naga barding ego:cold_resistance w:5 / \
          centaur barding ego:cold_resistance w:5 / \
-         cap ego:resistance w:1 / pair of gloves ego:resistance w:1 / \
-         cloak ego:resistance w:1 / \
          buckler ego:cold_resistance / helmet ego:cold_resistance
 MAP
                           xxxxxx
@@ -710,12 +709,12 @@ ITEM: demon whip good_item / demon blade good_item / demon trident good_item
 ITEM: cap ego:cold_resistance / pair of gloves ego:cold_resistance / \
       cloak ego:cold_resistance / buckler ego:cold_resistance / \
       pair of boots ego:cold_resistance
-ITEM: crystal plate mail ego:cold_resistance / \
+ITEM: crystal plate armour ego:cold_resistance / \
       troll leather armour ego:cold_resistance / \
       ice dragon armour good_item / robe ego:resistance / \
       naga barding ego:cold_resistance good_item w:5 / \
       centaur barding ego:cold_resistance good_item w:5 / \
-      crystal plate mail ego:cold_resistance good_item / \
+      crystal plate armour ego:cold_resistance good_item / \
       troll leather armour ego:cold_resistance good_item
 MAP
                     xxxxxx

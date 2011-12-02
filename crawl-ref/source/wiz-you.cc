@@ -65,7 +65,8 @@ void wizard_change_species(void)
         }
     }
 
-    if (sp == SP_UNKNOWN)
+    // Can't use magic cookies or placeholder species.
+    if (!is_valid_species(sp) || !species_exp_modifier(sp))
     {
         mpr("That species isn't available.");
         return;
@@ -185,6 +186,7 @@ void wizard_change_species(void)
     calc_mp();
 
     burden_change();
+    // The player symbol depends on species.
     update_player_symbol();
 #ifdef USE_TILE
     init_player_doll();
@@ -752,6 +754,7 @@ static const char* dur_names[] =
     "petrifying",
     "shrouded",
     "tornado cooldown",
+    "nausea",
 };
 
 void wizard_edit_durations(void)

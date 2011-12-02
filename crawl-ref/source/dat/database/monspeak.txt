@@ -1901,7 +1901,7 @@ VISUAL SPELL:@The_monster@ gestures.
 %%%%
 _visual_fake_spell_effect_
 
-VISUAL WARN:You feel drained.
+VISUAL WARN:You feel disoriented.
 
 VISUAL WARN:You feel weakened.
 
@@ -4042,7 +4042,7 @@ VISUAL:@The_monster@ bares @possessive@ teeth.
 
 @The_monster@ grunts.
 
-@The_monster@ says @at_foe@, "Me and my dogs will have a feast tonight..."
+@The_monster@ says @at_foe@, "My dogs and I will have a feast tonight..."
 
 @The_monster@ says @at_foe@, "You look like good eating."
 %%%%
@@ -6596,7 +6596,7 @@ w:5
 @The_monster@ @shouts@, "Smite the @orc_heathen@s!"
 
 # messages submitted by Lemuel
-@The_monster@ @says_or_shouts@, "I'm proud to serve, I'm ready to die."
+@The_monster@ @says_or_shouts@, "I'm proud to serve; I'm ready to die."
 
 @The_monster@ says, "May Beogh smile on you, @player_name@."
 

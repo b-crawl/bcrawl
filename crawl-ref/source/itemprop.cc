@@ -64,19 +64,21 @@ static armour_def Armour_prop[NUM_ARMOURS] =
     { ARM_LEATHER_ARMOUR,       "leather armour",         3, -1,  150,
         true,  EQ_BODY_ARMOUR, SIZE_SMALL,  SIZE_MEDIUM },
 
-    { ARM_RING_MAIL,            "ring mail",              4, -2,  250,
+    { ARM_RING_MAIL,            "ring mail",              5, -2,  250,
         false, EQ_BODY_ARMOUR, SIZE_SMALL,  SIZE_MEDIUM },
-    { ARM_SCALE_MAIL,           "scale mail",             5, -3,  350,
+    { ARM_SCALE_MAIL,           "scale mail",             6, -3,  350,
         false, EQ_BODY_ARMOUR, SIZE_SMALL,  SIZE_MEDIUM },
-    { ARM_CHAIN_MAIL,           "chain mail",             6, -4,  400,
+    { ARM_CHAIN_MAIL,           "chain mail",             7, -4,  400,
         false, EQ_BODY_ARMOUR, SIZE_SMALL,  SIZE_MEDIUM },
-    { ARM_BANDED_MAIL,          "banded mail",            7, -5,  500,
+#if TAG_MAJOR_VERSION == 32
+    { ARM_BANDED_MAIL,          "banded mail",            8, -5,  500,
         false, EQ_BODY_ARMOUR, SIZE_SMALL, SIZE_MEDIUM },
+#endif
     { ARM_SPLINT_MAIL,          "splint mail",            8, -5,  550,
         false, EQ_BODY_ARMOUR, SIZE_SMALL, SIZE_MEDIUM },
-    { ARM_PLATE_MAIL,           "plate mail",            10, -6,  650,
+    { ARM_PLATE_ARMOUR,         "plate armour",          10, -6,  650,
         false, EQ_BODY_ARMOUR, SIZE_SMALL, SIZE_MEDIUM },
-    { ARM_CRYSTAL_PLATE_MAIL,   "crystal plate mail",    14, -8, 1200,
+    { ARM_CRYSTAL_PLATE_ARMOUR, "crystal plate armour",  14, -8, 1200,
         false, EQ_BODY_ARMOUR, SIZE_SMALL, SIZE_MEDIUM },
 
     { ARM_TROLL_HIDE,           "troll hide",             2, -1,  220,
@@ -85,13 +87,12 @@ static armour_def Armour_prop[NUM_ARMOURS] =
         true,  EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
     { ARM_STEAM_DRAGON_HIDE,    "steam dragon hide",      2,  0,  120,
         true,  EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
-    { ARM_STEAM_DRAGON_ARMOUR,  "steam dragon armour",    4,  0,  120,
+    { ARM_STEAM_DRAGON_ARMOUR,  "steam dragon armour",    5,  0,  120,
         true,  EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
     { ARM_MOTTLED_DRAGON_HIDE,  "mottled dragon hide",    3, -1,  150,
         true,  EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
-    { ARM_MOTTLED_DRAGON_ARMOUR,"mottled dragon armour",  5, -1,  150,
+    { ARM_MOTTLED_DRAGON_ARMOUR,"mottled dragon armour",  6, -1,  150,
         true,  EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
-
     { ARM_SWAMP_DRAGON_HIDE,    "swamp dragon hide",      3, -2,  200,
         false, EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
     { ARM_SWAMP_DRAGON_ARMOUR,  "swamp dragon armour",    7, -2,  200,
@@ -106,15 +107,15 @@ static armour_def Armour_prop[NUM_ARMOURS] =
         false, EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
     { ARM_PEARL_DRAGON_HIDE,    "pearl dragon hide",      3, -3,  400,
         false, EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
-    { ARM_PEARL_DRAGON_ARMOUR,  "pearl dragon armour",    10, -3, 400,
+    { ARM_PEARL_DRAGON_ARMOUR,  "pearl dragon armour",   10, -3,  400,
         false, EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
     { ARM_STORM_DRAGON_HIDE,    "storm dragon hide",      4, -3,  600,
         false, EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
-    { ARM_STORM_DRAGON_ARMOUR,  "storm dragon armour",    10, -5,  600,
+    { ARM_STORM_DRAGON_ARMOUR,  "storm dragon armour",   10, -5,  600,
         false, EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
     { ARM_GOLD_DRAGON_HIDE,     "gold dragon hide",       4, -5, 1100,
         false, EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
-    { ARM_GOLD_DRAGON_ARMOUR,   "gold dragon armour",   11, -9, 1100,
+    { ARM_GOLD_DRAGON_ARMOUR,   "gold dragon armour",    12, -9, 1100,
         false, EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT },
 
     { ARM_CLOAK,                "cloak",                  1,  0,   40,
@@ -194,7 +195,7 @@ static weapon_def Weapon_prop[NUM_WEAPONS] =
         DAMV_CRUSHING, 10 },
     { WPN_ANKUS,             "ankus",               9,  2, 14, 120,  8,
         SK_MACES_FLAILS, HANDS_ONE,    SIZE_MEDIUM, MI_NONE, false,
-        DAMV_PIERCING | DAM_BLUDGEON, 10 },
+        DAMV_PIERCING | DAM_BLUDGEON,  1 },
     { WPN_MORNINGSTAR,       "morningstar",        10, -1, 15, 140,  8,
         SK_MACES_FLAILS, HANDS_ONE,    SIZE_MEDIUM, MI_NONE, false,
         DAMV_PIERCING | DAM_BLUDGEON, 10 },
@@ -520,7 +521,8 @@ void do_curse_item(item_def &item, bool quiet)
 
     // Neither can pearl dragon hides
     if (item.base_type == OBJ_ARMOUR
-        && (item.sub_type == ARM_PEARL_DRAGON_HIDE || item.sub_type == ARM_PEARL_DRAGON_ARMOUR))
+        && (item.sub_type == ARM_PEARL_DRAGON_HIDE
+            || item.sub_type == ARM_PEARL_DRAGON_ARMOUR))
     {
         if (!quiet)
         {
@@ -655,7 +657,7 @@ static bool _is_affordable(const item_def &item)
     if (in_shop(item))
         return (int)item_value(item) < you.gold;
 
-    // Explicitely marked by a vault.
+    // Explicitly marked by a vault.
     if (item.flags & ISFLAG_UNOBTAINABLE)
         return false;
 
@@ -706,7 +708,7 @@ void set_ident_flags(item_def &item, iflags_t flags)
             && is_interesting_item(item))
         {
             // Make a note of it.
-            take_note(Note(NOTE_ID_ITEM, 0, 0, item.name(DESC_NOCAP_A).c_str(),
+            take_note(Note(NOTE_ID_ITEM, 0, 0, item.name(DESC_A).c_str(),
                            origin_desc(item).c_str()));
 
             // Sometimes (e.g. shops) you can ID an item before you get it;
@@ -856,8 +858,10 @@ void set_equip_race(item_def &item, iflags_t flags)
             break;
         case OBJ_ARMOUR:
             if (item.sub_type == ARM_SPLINT_MAIL
+#if TAG_MAJOR_VERSION == 32
                 || item.sub_type == ARM_BANDED_MAIL
-                || item.sub_type == ARM_PLATE_MAIL
+#endif
+                || item.sub_type == ARM_PLATE_ARMOUR
                 || is_hard_helmet(item))
             {
                 return;
@@ -1029,7 +1033,7 @@ bool set_item_ego_type(item_def &item, int item_type, int ego_type)
     return (false);
 }
 
-int get_weapon_brand(const item_def &item)
+brand_type get_weapon_brand(const item_def &item)
 {
     // Weapon ego types are "brands", so we do the randart lookup here.
 
@@ -1038,9 +1042,9 @@ int get_weapon_brand(const item_def &item)
         return (SPWPN_NORMAL);
 
     if (is_artefact(item))
-        return (artefact_wpn_property(item, ARTP_BRAND));
+        return static_cast<brand_type>(artefact_wpn_property(item, ARTP_BRAND));
 
-    return (item.special);
+    return static_cast<brand_type>(item.special);
 }
 
 bool missile_brand_obvious(special_missile_type brand)
@@ -1615,6 +1619,12 @@ bool is_whip_type(int wpn_type)
             || wpn_type == WPN_SACRED_SCOURGE);
 }
 
+bool is_giant_club_type(int wpn_type)
+{
+    return (wpn_type == WPN_GIANT_CLUB
+            || wpn_type == WPN_GIANT_SPIKED_CLUB);
+}
+
 bool is_demonic(const item_def &item)
 {
     if (item.base_type == OBJ_WEAPONS)
@@ -1878,7 +1888,7 @@ skill_type range_skill(object_class_type wclass, int wtype)
 // Check whether an item can be easily and quickly equipped. This needs to
 // know which slot we're considering for cases like where we're already
 // wielding a cursed non-weapon.
-static bool _item_is_swappable(const item_def &item, equipment_type slot)
+static bool _item_is_swappable(const item_def &item, equipment_type slot, bool swap_in)
 {
     if (get_item_slot(item) != slot)
         return true;
@@ -1890,23 +1900,23 @@ static bool _item_is_swappable(const item_def &item, equipment_type slot)
     {
         if (item.sub_type == AMU_FAITH && you.religion != GOD_NO_GOD)
             return false;
-        return (item.sub_type != AMU_THE_GOURMAND
-                && item.sub_type != AMU_GUARDIAN_SPIRIT
-                && item.sub_type != RING_MAGICAL_POWER);
+        return !((item.sub_type == AMU_THE_GOURMAND && !swap_in)
+                || item.sub_type == AMU_GUARDIAN_SPIRIT
+                || (item.sub_type == RING_MAGICAL_POWER && !swap_in));
     }
 
-    if (item.base_type == OBJ_STAVES && item.sub_type == STAFF_POWER)
+    if (item.base_type == OBJ_STAVES && item.sub_type == STAFF_POWER && !swap_in)
         return false;
 
-    const int brand = get_weapon_brand(item);
+    const brand_type brand = get_weapon_brand(item);
     return (brand != SPWPN_DISTORTION
            && (brand != SPWPN_VAMPIRICISM || you.is_undead != US_ALIVE)
            && (brand != SPWPN_HOLY_WRATH || you.is_undead == US_ALIVE));
 }
 
-static bool _item_is_swappable(const item_def &item)
+static bool _item_is_swappable(const item_def &item, bool swap_in)
 {
-    return _item_is_swappable(item, get_item_slot(item));
+    return _item_is_swappable(item, get_item_slot(item), swap_in);
 }
 
 // Check whether the equipment slot of an item is occupied by an item which
@@ -1919,6 +1929,9 @@ static bool _slot_blocked(const item_def &item)
 
     if (eq == EQ_RINGS)
     {
+        if (you.equip[EQ_GLOVES] >= 0 && you.inv[you.equip[EQ_GLOVES]].cursed())
+            return true;
+
         equipment_type eq_from = EQ_LEFT_RING;
         equipment_type eq_to = EQ_RIGHT_RING;
         if (you.species == SP_OCTOPODE)
@@ -1928,14 +1941,21 @@ static bool _slot_blocked(const item_def &item)
         }
 
         for (int i = eq_from; i <= eq_to; ++i)
-            if (you.equip[i] == -1 || _item_is_swappable(you.inv[you.equip[i]]))
+            if (you.equip[i] == -1 || _item_is_swappable(you.inv[you.equip[i]], false))
                 return false;
 
         // No free slot found.
         return true;
     }
 
-    return (you.equip[eq] != -1 && !_item_is_swappable(you.inv[you.equip[eq]], eq));
+    if (eq == EQ_WEAPON && you.equip[EQ_SHIELD] >= 0
+        && you.inv[you.equip[EQ_SHIELD]].cursed()
+        && is_shield_incompatible(item, &you.inv[you.equip[EQ_SHIELD]]))
+    {
+        return true;
+    }
+
+    return (you.equip[eq] != -1 && !_item_is_swappable(you.inv[you.equip[eq]], eq, false));
 }
 
 bool item_skills(const item_def &item, std::set<skill_type> &skills)
@@ -1952,8 +1972,8 @@ bool item_skills(const item_def &item, std::set<skill_type> &skills)
     // - quick to equip (no armour)
     // - no effect that suffer from swapping (distortion, vampirism, faith,...)
     // - slot easily accessible (item in slot needs to meet the same conditions)
-    if (!equipped && (!_item_is_swappable(item) || _slot_blocked(item)))
-        return false;
+    if (!equipped && (!_item_is_swappable(item, true) || _slot_blocked(item)))
+        return !skills.empty();
 
     // Evokables that need to be equipped to be evoked. They can train
     // evocations just by being carried, but they need to pass the equippable
@@ -1990,10 +2010,15 @@ void maybe_change_train(const item_def& item, bool start)
         return;
 
     for (int i = 0; i < ENDOFPACK; ++i)
-        if (item.link != i && you.inv[i].defined()
-            && get_item_slot(you.inv[i]) == eq)
+        if (item.link != i && you.inv[i].defined())
         {
-            item_skills(you.inv[i], start ? you.start_train : you.stop_train);
+            equipment_type islot = get_item_slot(you.inv[i]);
+            if (islot == eq
+                || (eq == EQ_GLOVES && islot == EQ_RINGS)
+                || (eq == EQ_SHIELD && islot == EQ_WEAPON))
+            {
+                item_skills(you.inv[i], start ? you.start_train : you.stop_train);
+            }
         }
 }
 
@@ -3099,4 +3124,14 @@ void seen_item(const item_def &item)
         ((item_def*)&item)->flags |= ISFLAG_KNOW_CURSE;
     if (item.base_type == OBJ_GOLD && !item.plus)
         ((item_def*)&item)->plus = (you.religion == GOD_ZIN) ? 2 : 1;
+
+    if (item_type_has_ids(item.base_type) && !is_artefact(item)
+        && item_ident(item, ISFLAG_KNOW_TYPE)
+        && you.type_ids[item.base_type][item.sub_type] != ID_KNOWN_TYPE)
+    {
+        // Can't cull shop items here -- when called from view, we shouldn't
+        // access the UI.  Old ziggurat prompts are a very minor case of what
+        // could go wrong.
+        set_ident_type(item.base_type, item.sub_type, ID_KNOWN_TYPE);
+    }
 }

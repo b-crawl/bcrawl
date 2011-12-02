@@ -249,7 +249,7 @@ static species_type _get_hints_species(unsigned int type)
           return SP_CENTAUR;
       default:
           // Use something fancy for debugging.
-          return SP_KENKU;
+          return SP_TENGU;
     }
 }
 
@@ -1126,7 +1126,7 @@ void hints_first_item(const item_def &item)
 #else
     const coord_def gc = item.pos;
     tiles.place_cursor(CURSOR_TUTORIAL, gc);
-    tiles.add_text_tag(TAG_TUTORIAL, item.name(DESC_CAP_A), gc);
+    tiles.add_text_tag(TAG_TUTORIAL, item.name(DESC_A), gc);
 #endif
 
     text += "is an item. If you move there and press <w>g</w> or "
@@ -1477,11 +1477,6 @@ void learned_something_new(hints_event_type seen_what, coord_def gc)
                     "<w>%</w>bility.";
             cmd.push_back(CMD_USE_ABILITY);
         }
-        else if (!you.skills[SK_SPELLCASTING])
-        {
-            text << "\nHowever, first you will have to get accustomed to "
-                    "spellcasting by reading lots of scrolls.";
-        }
         text << "\nIn hint mode you can reread this information at "
                 "any time by "
 #ifndef USE_TILE
@@ -1644,7 +1639,7 @@ void learned_something_new(hints_event_type seen_what, coord_def gc)
                 text << " ";
 #else
                 tiles.place_cursor(CURSOR_TUTORIAL, gc);
-                tiles.add_text_tag(TAG_TUTORIAL, mitm[i].name(DESC_CAP_A), gc);
+                tiles.add_text_tag(TAG_TUTORIAL, mitm[i].name(DESC_A), gc);
 #endif
 
                 text << "is a corpse.";
@@ -2224,16 +2219,11 @@ void learned_something_new(hints_event_type seen_what, coord_def gc)
 
     case HINT_CONTAMINATED_CHUNK:
         text << "Chunks that are described as <brown>contaminated</brown> will "
-                "occasionally make you sick when eaten. However, since food is "
-                "scarce in the dungeon, you'll often have to risk it.";
-
-        // Break if we've seen the sickness hint before.
-        if (!Hints.hints_events[HINT_YOU_SICK])
+                "occasionally make you nauseated when eaten. However, since food is "
+                "scarce in the dungeon, you'll often have to risk it.\n"
+                "While nauseated, you can't stomach anything, and your attributes "
+                "may occasionally decrease. Just go around, hunt for better food.";
             break;
-
-        // Mark HINT_YOU_SICK as seen, and fall through.
-        text << "\n";
-        Hints.hints_events[HINT_YOU_SICK] = false;
 
     case HINT_YOU_SICK:
         if (crawl_state.game_is_hints())
@@ -2938,7 +2928,7 @@ void learned_something_new(hints_event_type seen_what, coord_def gc)
 #ifdef USE_TILE
         tiles.place_cursor(CURSOR_TUTORIAL, gc);
         if (const monster* m = monster_at(gc))
-            tiles.add_text_tag(TAG_TUTORIAL, m->name(DESC_CAP_A), gc);
+            tiles.add_text_tag(TAG_TUTORIAL, m->name(DESC_A), gc);
 #endif
         text << "That monster looks a bit unusual. You might wish to examine "
                 "it a bit more closely by "
@@ -2959,7 +2949,7 @@ void learned_something_new(hints_event_type seen_what, coord_def gc)
 
 #ifdef USE_TILE
         tiles.place_cursor(CURSOR_TUTORIAL, gc);
-        tiles.add_text_tag(TAG_TUTORIAL, m->name(DESC_CAP_A), gc);
+        tiles.add_text_tag(TAG_TUTORIAL, m->name(DESC_A), gc);
 #endif
         text << "That monster is friendly to you and will attack your "
                 "enemies, though you'll get only part of the experience for "
@@ -2998,7 +2988,7 @@ void learned_something_new(hints_event_type seen_what, coord_def gc)
         if (vis)
         {
             tiles.place_cursor(CURSOR_TUTORIAL, gc);
-            tiles.add_text_tag(TAG_TUTORIAL, m->name(DESC_CAP_A), gc);
+            tiles.add_text_tag(TAG_TUTORIAL, m->name(DESC_A), gc);
         }
 #endif
         if (!vis)
@@ -3034,7 +3024,7 @@ void learned_something_new(hints_event_type seen_what, coord_def gc)
         if (!m || !you.can_see(m))
             DELAY_EVENT;
 
-        text << m->name(DESC_CAP_THE, true) << " didn't vanish, but merely "
+        text << m->name(DESC_THE, true) << " didn't vanish, but merely "
                 "moved onto a square which you can't currently see. It's still "
                 "nearby, unless something happens to it in the short amount of "
                 "time it's out of sight.";
@@ -3675,7 +3665,7 @@ void hints_describe_item(const item_def &item)
        case OBJ_MISSILES:
             if (is_throwable(&you, item))
             {
-                ostr << item.name(DESC_CAP_YOUR)
+                ostr << item.name(DESC_YOUR)
                      << " can be <w>%</w>ired without the use of a launcher. ";
                 ostr << _hints_throw_stuff(item);
                 cmd.push_back(CMD_FIRE);
@@ -4009,18 +3999,7 @@ void hints_describe_item(const item_def &item)
                     ostr << "This magical item can cause great destruction "
                             "- to you, or your surroundings. Use with care!";
                 }
-                else if (!you.skills[SK_SPELLCASTING])
-                {
-                    ostr << "A spellbook! You could <w>%</w>emorise some "
-                            "spells and then cast them with <w>%</w>. ";
-                    cmd.push_back(CMD_MEMORISE_SPELL);
-                    cmd.push_back(CMD_CAST_SPELL);
-
-                    ostr << "\nFor now, however, that will have to wait until "
-                            "you've learned the basics of Spellcasting by "
-                            "reading lots of scrolls.";
-                }
-                else // You actually can cast spells.
+                else
                 {
                     if (player_can_memorise(item))
                     {
@@ -4806,7 +4785,7 @@ void hints_describe_monster(const monster_info& mi, bool has_stat_desc)
              && mi.is(MB_STABBABLE))
     {
         ostr << "Apparently "
-             << mons_pronoun((monster_type) mi.type, PRONOUN_NOCAP)
+             << mons_pronoun((monster_type) mi.type, PRONOUN)
              << " has not noticed you - yet. Note that you do not have to "
                 "engage every monster you meet. Sometimes, discretion is the "
                 "better part of valour.";
@@ -4815,7 +4794,7 @@ void hints_describe_monster(const monster_info& mi, bool has_stat_desc)
              && mi.is(MB_DISTRACTED))
     {
         ostr << "Apparently "
-             << mons_pronoun((monster_type) mi.type, PRONOUN_NOCAP)
+             << mons_pronoun((monster_type) mi.type, PRONOUN)
              << " has been distracted by something. You could use this "
                 "opportunity to sneak up on this monster - or to sneak away.";
     }

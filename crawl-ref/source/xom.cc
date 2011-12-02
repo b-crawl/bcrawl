@@ -109,9 +109,9 @@ static const spell_type _xom_tension_spells[] =
     SPELL_SUMMON_BUTTERFLIES, SPELL_SUMMON_SMALL_MAMMALS,
     SPELL_SUMMON_SCORPIONS, SPELL_SUMMON_SWARM, SPELL_FLY,
     SPELL_BEASTLY_APPENDAGE, SPELL_SPIDER_FORM, SPELL_STATUE_FORM,
-    SPELL_ICE_FORM, SPELL_DRAGON_FORM, SPELL_ANIMATE_DEAD,
-    SPELL_SHADOW_CREATURES, SPELL_SUMMON_HORRIBLE_THINGS,
-    SPELL_CALL_CANINE_FAMILIAR, SPELL_SUMMON_ICE_BEAST, SPELL_SUMMON_UGLY_THING,
+    SPELL_ICE_FORM, SPELL_DRAGON_FORM, SPELL_SHADOW_CREATURES,
+    SPELL_SUMMON_HORRIBLE_THINGS, SPELL_CALL_CANINE_FAMILIAR,
+    SPELL_SUMMON_ICE_BEAST, SPELL_SUMMON_UGLY_THING,
     SPELL_CONJURE_BALL_LIGHTNING, SPELL_SUMMON_HYDRA, SPELL_SUMMON_DRAGON,
     SPELL_DEATH_CHANNEL, SPELL_NECROMUTATION
 };
@@ -1063,8 +1063,8 @@ static void _do_chaos_upgrade(item_def &item, const monster* mon)
     {
         seen = true;
 
-        description_level_type desc = mon->friendly() ? DESC_CAP_YOUR :
-                                                        DESC_CAP_THE;
+        description_level_type desc = mon->friendly() ? DESC_YOUR :
+                                                        DESC_THE;
         std::string msg = apostrophise(mon->name(desc));
 
         msg += " ";
@@ -1150,11 +1150,10 @@ static int _xom_do_potion(bool debug = false)
     potion_type pot = POT_CURING;
     while (true)
     {
-        pot = static_cast<potion_type>(
-                random_choose(POT_CURING, POT_HEAL_WOUNDS, POT_MAGIC,
+        pot = random_choose(POT_CURING, POT_HEAL_WOUNDS, POT_MAGIC,
                               POT_SPEED, POT_MIGHT, POT_AGILITY, POT_BRILLIANCE,
                               POT_INVISIBILITY, POT_BERSERK_RAGE,
-                              POT_EXPERIENCE, -1));
+                            POT_EXPERIENCE, -1);
 
         if (pot == POT_EXPERIENCE && !one_chance_in(6))
             pot = POT_BERSERK_RAGE;
@@ -1647,8 +1646,8 @@ static int _xom_swap_weapons(bool debug = false)
     mitm[index].flags |= ISFLAG_THROWN;
 
     mprf("%s wields %s!",
-         mon->name(DESC_CAP_THE).c_str(),
-         myweapon.name(DESC_NOCAP_YOUR).c_str());
+         mon->name(DESC_THE).c_str(),
+         myweapon.name(DESC_YOUR).c_str());
     mon->equip(myweapon, MSLOT_WEAPON, 0);
 
     // Item is gone from player's inventory.
@@ -1683,7 +1682,7 @@ static int _xom_swap_weapons(bool debug = false)
     burden_change();
 
     mprf("You wield %s %s!",
-         mon->name(DESC_NOCAP_ITS).c_str(),
+         mon->name(DESC_ITS).c_str(),
          you.inv[freeslot].name(DESC_PLAIN).c_str());
 
     equip_item(EQ_WEAPON, freeslot);
@@ -1758,12 +1757,17 @@ static int _xom_rearrange_pieces(int sever, bool debug = false)
 static int _xom_random_stickable(const int HD)
 {
     int c;
-    static const int arr[13] = {WPN_CLUB, WPN_STAFF, WPN_QUARTERSTAFF, WPN_BOW,
-                                WPN_SPEAR, WPN_BLOWGUN, WPN_GLAIVE, WPN_HALBERD,
-                                WPN_ANKUS, WPN_SCYTHE, WPN_LONGBOW,
-                                WPN_GIANT_CLUB, WPN_GIANT_SPIKED_CLUB};
+    // XXX: Unify this with the list in spl-summoning:_snakable_weapon().
+    // It has everything but tridents, demon tridents and bardiches, and
+    // puts the giant club types at the end as special cases.
+    static const int arr[13] = {
+        WPN_CLUB,    WPN_ANKUS,      WPN_SPEAR,        WPN_HALBERD,
+        WPN_SCYTHE,  WPN_GLAIVE,     WPN_STAFF,        WPN_QUARTERSTAFF,
+        WPN_BLOWGUN, WPN_BOW,        WPN_LONGBOW,      WPN_GIANT_CLUB,
+        WPN_GIANT_SPIKED_CLUB
+    };
 
-    // Maximum snake hd is 11 (anaconda) so random2(hd) gives us 0-10
+    // Maximum snake hd is 11 (anaconda) so random2(hd) gives us 0-10, and
     // weapon_rarity also gives us 1-10.
     do
         c = random2(HD);
@@ -1804,8 +1808,10 @@ static int _xom_snakes_to_sticks(int sever, bool debug = false)
                     x_chance_in_y(3,5) ? OBJ_MISSILES
                                        : OBJ_WEAPONS;
 
-            const int sub_type  = (base_type == OBJ_MISSILES ? MI_ARROW
-                                        : _xom_random_stickable(mi->hit_dice));
+            const int sub_type =
+                    (base_type == OBJ_MISSILES ?
+                        (x_chance_in_y(3,5) ? MI_ARROW : MI_JAVELIN)
+                            : _xom_random_stickable(mi->hit_dice));
 
             int thing_created = items(0, base_type, sub_type, true,
                                       mi->hit_dice / 3 - 1, MAKE_ITEM_NO_RACE,
@@ -1820,35 +1826,13 @@ static int _xom_snakes_to_sticks(int sever, bool debug = false)
             doodad.quantity = 1;
 
             // Output some text since otherwise snakes will disappear silently.
-            mprf("%s reforms as %s.", mi->name(DESC_CAP_THE).c_str(),
-                 doodad.name(DESC_NOCAP_A).c_str());
+            mprf("%s reforms as %s", mi->name(DESC_THE).c_str(),
+                 doodad.name(DESC_A).c_str());
 
             // Dismiss monster silently.
             move_item_to_grid(&thing_created, mi->pos());
             monster_die(*mi, KILL_DISMISSED, NON_MONSTER, true, false);
         }
-#if 0
-        // Polymorph naga into wood golem, undecided as to whether it will
-        // remain or not.
-        else if (mons_genus(mi->type) == MONS_NAGA)
-        {
-            if (!action)
-            {
-                if (debug)
-                    return (XOM_GOOD_SNAKES);
-
-                take_note(Note(NOTE_XOM_EFFECT, you.piety, -1,
-                               "snakes to sticks"), true);
-                god_speaks(GOD_XOM, _get_xom_speech("snakes to sticks").c_str());
-                action = true;
-            }
-
-            // MONS_WOOD_GOLEM is not normally a suitable polymorph form
-            // so we have to force it using the last 'true' in the parameter
-            // list
-            monster_polymorph(*mi, MONS_WOOD_GOLEM, PPT_SAME, false, true);
-        }
-#endif
     }
 
     if (action)
@@ -1919,7 +1903,7 @@ static int _xom_animate_monster_weapon(int sever, bool debug = false)
     mon->inv[MSLOT_WEAPON] = NON_ITEM;
 
     mprf("%s %s dances into the air!",
-         apostrophise(mon->name(DESC_CAP_THE)).c_str(),
+         apostrophise(mon->name(DESC_THE)).c_str(),
          mitm[wpn].name(DESC_PLAIN).c_str());
 
     destroy_item(menv[mons].inv[MSLOT_WEAPON]);
@@ -2596,14 +2580,14 @@ static void _xom_zero_miscast()
         && feat != DNGN_OPEN_DOOR && feat != DNGN_ABANDONED_SHOP)
     {
         const std::string feat_name =
-            feature_description(you.pos(), false, DESC_CAP_THE, false);
+            feature_description(you.pos(), false, DESC_THE, false);
 
         if (you.airborne())
         {
-            // Kenku fly a lot, so don't put airborne messages into the
+            // Tengu fly a lot, so don't put airborne messages into the
             // priority vector for them.
             std::vector<std::string>* vec;
-            if (you.species == SP_KENKU)
+            if (you.species == SP_TENGU)
                 vec = &messages;
             else
                 vec = &priority;
@@ -2636,11 +2620,11 @@ static void _xom_zero_miscast()
 
         std::string name;
         if (item.quantity == 1)
-            name = item.name(DESC_CAP_YOUR, false, false, false);
+            name = item.name(DESC_YOUR, false, false, false);
         else
         {
             name  = "One of ";
-            name += item.name(DESC_NOCAP_YOUR, false, false, false);
+            name += item.name(DESC_YOUR, false, false, false);
         }
         messages.push_back(name + " falls out of your pack, then "
                            "immediately jumps back in!");
@@ -2664,7 +2648,7 @@ static void _xom_zero_miscast()
                 str += " primary";
             else
             {
-                str += random_choose_string(" front", " middle", " rear");
+                str += random_choose(" front", " middle", " rear");
                 str += " secondary";
             }
         str += " eye.";
@@ -2763,7 +2747,7 @@ static void _xom_zero_miscast()
             str += ".";
         }
         else if (item->sub_type >= ARM_RING_MAIL
-                 && item->sub_type <= ARM_PLATE_MAIL)
+                 && item->sub_type <= ARM_PLATE_ARMOUR)
         {
             str  = "Your ";
             str += name;
@@ -2782,7 +2766,7 @@ static void _xom_zero_miscast()
 
         item = &you.inv[idx];
 
-        std::string name = item->name(DESC_CAP_YOUR, false, false, false);
+        std::string name = item->name(DESC_YOUR, false, false, false);
         std::string verb = coinflip() ? "glow" : "vibrate";
 
         if (item->quantity == 1)
@@ -3201,7 +3185,7 @@ bool move_stair(coord_def stair_pos, bool away, bool allow_under)
     ASSERT(stair_pos != ray.pos());
 
     std::string stair_str =
-        feature_description(stair_pos, false, DESC_CAP_THE, false);
+        feature_description(stair_pos, false, DESC_THE, false);
 
     mprf("%s slides %s you!", stair_str.c_str(),
          away ? "away from" : "towards");

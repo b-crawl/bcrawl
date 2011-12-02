@@ -377,14 +377,10 @@ typedef FixedVector<int, NUM_RECITE_TYPES> recite_counts;
 // Returns 0, if no monster found.
 // Returns 1, if eligible monster found.
 // Returns -1, if monster already affected or too dumb to understand.
-static int _zin_check_recite_to_single_monster(const coord_def& where,
+static int _zin_check_recite_to_single_monster(const monster *mon,
                                                recite_counts &eligibility)
 {
-    monster* mon = monster_at(where);
-
-    // Can't recite at nothing!
-    if (mon == NULL || !you.can_see(mon))
-        return 0;
+    ASSERT(mon);
 
     // Can't recite if they were recently recited to.
     if (mon->has_ench(ENCH_RECITE_TIMER))
@@ -499,6 +495,10 @@ static int _zin_check_recite_to_single_monster(const coord_def& where,
         if (mon->is_priest())
             eligibility[RECITE_HERETIC]++;
 
+        // Or those who believe in themselves...
+        if (mon->type == MONS_DEMIGOD)
+            eligibility[RECITE_HERETIC]++;
+
         // ...but chaotic gods are worse...
         if (is_chaotic_god(mon->god))
             eligibility[RECITE_HERETIC]++;
@@ -577,7 +577,7 @@ bool zin_check_able_to_recite()
         return (false);
     }
 
-        return (true);
+    return (true);
 }
 
 static const char* zin_book_desc[NUM_RECITE_TYPES] =
@@ -597,8 +597,12 @@ int zin_check_recite_to_monsters(recite_type *prayertype)
 
     for (radius_iterator ri(you.pos(), LOS_RADIUS); ri; ++ri)
     {
+        const monster *mon = monster_at(*ri);
+        if (!mon || !you.can_see(mon))
+            continue;
+
         recite_counts retval;
-        switch (_zin_check_recite_to_single_monster(*ri, retval))
+        switch (_zin_check_recite_to_single_monster(mon, retval))
         {
         case -1:
             found_ineligible = true;
@@ -708,13 +712,14 @@ bool zin_recite_to_single_monster(const coord_def& where,
 
     monster* mon = monster_at(where);
 
-    if (!mon)
+    // Once you're already reciting, invis is ok.
+    if (!mon || !cell_see_cell(where, you.pos(), LOS_DEFAULT))
         return (false);
 
     recite_counts eligibility;
     bool affected = false;
 
-    if (_zin_check_recite_to_single_monster(where, eligibility) < 1)
+    if (_zin_check_recite_to_single_monster(mon, eligibility) < 1)
         return (false);
 
     // First check: are they even eligible for this kind of recitation?
@@ -1010,8 +1015,8 @@ bool zin_recite_to_single_monster(const coord_def& where,
                 else
                 {
                     mprf("%s bleeds profusely from %s eyes and ears.",
-                         mon->name(DESC_CAP_THE).c_str(),
-                         mons_pronoun(mon->type, PRONOUN_NOCAP_POSSESSIVE));
+                         mon->name(DESC_THE).c_str(),
+                         mon->pronoun(PRONOUN_POSSESSIVE).c_str());
                 }
                 break;
             case RECITE_CHAOTIC:
@@ -1276,7 +1281,7 @@ bool zin_sanctuary()
 
     flash_view(WHITE);
 
-    holy_word(100, HOLY_WORD_ZIN, you.pos(), true);
+    holy_word(100, HOLY_WORD_ZIN, you.pos(), true, &you);
 
 #ifndef USE_TILE_LOCAL
     // Allow extra time for the flash to linger.
@@ -1341,8 +1346,9 @@ void elyvilon_purification()
     you.duration[DUR_CONF] = 0;
     you.duration[DUR_SLOW] = 0;
     you.duration[DUR_PETRIFYING] = 0;
+    you.duration[DUR_NAUSEA] = 0;
     restore_stat(STAT_ALL, 0, false);
-    unrot_hp(10000);
+    unrot_hp(9999);
 }
 
 bool elyvilon_divine_vigour()
@@ -1623,7 +1629,7 @@ void yred_drain_life()
             continue;
 
         mprf("You draw life from %s.",
-             mi->name(DESC_NOCAP_THE).c_str());
+             mi->name(DESC_THE).c_str());
 
         behaviour_event(*mi, ME_WHACK, MHITYOU, you.pos());
 
@@ -1654,8 +1660,8 @@ void yred_make_enslaved_soul(monster* mon, bool force_hostile)
     add_daction(DACT_OLD_ENSLAVED_SOULS_POOF);
 
     const std::string whose =
-        you.can_see(mon) ? apostrophise(mon->name(DESC_CAP_THE))
-                         : mon->pronoun(PRONOUN_CAP_POSSESSIVE);
+        you.can_see(mon) ? apostrophise(mon->name(DESC_THE))
+                         : mon->pronoun(PRONOUN_POSSESSIVE);
 
     // Remove the monster's soul-enslaving enchantment, as it's no
     // longer needed.
@@ -3005,7 +3011,7 @@ static int _lugonu_warp_monster(monster* mon, int pow)
     if (res_margin > 0)
     {
         mprf("%s%s",
-             mon->name(DESC_CAP_THE).c_str(),
+             mon->name(DESC_THE).c_str(),
              mons_resist_string(mon, res_margin).c_str());
         return (1);
     }
@@ -3040,7 +3046,7 @@ void lugonu_bend_space()
     if (area_warp)
         _lugonu_warp_area(pow);
 
-    random_blink(false, true);
+    random_blink(false, true, true);
 
     const int damage = roll_dice(1, 4);
     ouch(damage, NON_MONSTER, KILLED_BY_WILD_MAGIC, "a spatial distortion");
@@ -3059,14 +3065,14 @@ void cheibriados_time_bend(int pow)
             if (res_margin > 0)
             {
                 mprf("%s%s",
-                     mon->name(DESC_CAP_THE).c_str(),
+                     mon->name(DESC_THE).c_str(),
                      mons_resist_string(mon, res_margin).c_str());
                 continue;
             }
 
             simple_god_message(
                 make_stringf(" rebukes %s.",
-                             mon->name(DESC_NOCAP_THE).c_str()).c_str(),
+                             mon->name(DESC_THE).c_str()).c_str(),
                              GOD_CHEIBRIADOS);
             do_slow_monster(mon, &you);
         }
@@ -3128,6 +3134,38 @@ bool cheibriados_slouch(int pow)
 
     apply_area_visible(_slouch_monsters, pow, true, &you);
     return true;
+}
+
+// A low-duration step from time, allowing monsters to get closer
+// to the player safely.
+void cheibriados_temporal_distortion()
+{
+    const coord_def old_pos = you.pos();
+
+    const int time = 3 + random2(3);
+    you.moveto(coord_def(0, 0));
+    you.duration[DUR_TIME_STEP] = time;
+
+    do
+    {
+        run_environment_effects();
+        handle_monsters();
+        manage_clouds();
+    }
+    while (--you.duration[DUR_TIME_STEP] > 0);
+
+    monster* mon;
+    if (mon = monster_at(old_pos))
+    {
+        mon->blink();
+        if (mon = monster_at(old_pos))
+            mon->teleport(true);
+    }
+
+    you.moveto(old_pos);
+    you.duration[DUR_TIME_STEP] = 0;
+
+    mpr("You warp the flow of time around you!");
 }
 
 void cheibriados_time_step(int pow) // pow is the number of turns to skip

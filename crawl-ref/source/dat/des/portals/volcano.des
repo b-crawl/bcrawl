@@ -90,7 +90,7 @@ function volcano_portal (e)
       timed_marker {
         disappear = "There is a deep roar from within the tunnel. Moments " ..
                     "later, a river of lava pours forth, sealing it permanently.",
-        desc = "A dark tunnel",
+        desc = "a dark tunnel",
         desc_long = desc_long,
         entity = 'tunnel',
         dst = "volcano",
@@ -99,6 +99,8 @@ function volcano_portal (e)
         overview = "dark tunnel",
         turns = timeout_turns_long,
         turns_short = timeout_turns_short,
+        floor = "expired_portal",
+        feat_tile = "dngn_portal_volcano_gone",
         msg = messager })
     e.kfeat("O = enter_portal_vault")
     e.tile("O = dngn_portal_volcano")
@@ -122,8 +124,8 @@ function volcano_setup (e, metal, subvault)
     setup_loot(e)
     e.kfeat("< = exit_portal_vault")
     e.kfeat("I = exit_portal_vault")
-    e.tile("< = dngn_portal_volcano")
-    e.tile("I = dngn_portal_volcano")
+    e.tile("< = dngn_exit_volcano")
+    e.tile("I = dngn_exit_volcano")
     e.kfeat("^ = known alarm trap")
     e.subst("L : LLL.l")
     e.subst("L = lll.")
@@ -172,14 +174,14 @@ function place_large_volcano(e)
     e.kfeat("V = l")
     e.lua_marker('V', fog_machine { cloud_type = "flame", walk_dist=15, pow_max=6,
                                    delay = 300, size = 10000, spread_rate = 30,
-                                   listener = large_warning})
+                                   listener = large_warning, excl_rad = -1 })
 end
 
 function place_chained_volcano(e)
     e.kfeat("V = l")
     e.lua_marker('V', chained_fog_machine { cloud_type = "flame", walk_dist=15, pow_max=6,
-                                            delay = 300, size = 3000, spread_rate = 30,
-                                            listener = large_warning } )
+                                            delay = 300, size = 100, spread_rate = 30,
+                                            listener = large_warning, excl_rad = -1 } )
 end
 
 
@@ -187,7 +189,7 @@ function place_small_volcano(e)
     e.kfeat("V = l")
     e.lua_marker('V', fog_machine { cloud_type = "flame", walk_dist=15, pow_max=6,
                                    delay = 300, size = 800, spread_rate = 30,
-                                   listener = small_warning})
+                                   listener = small_warning, excl_rad = -1 })
 end
 
 function place_lake_volcanoes (e, glyphs)
@@ -200,15 +202,15 @@ function place_lake_volcano (e, glyph)
     e.kfeat(glyph .. " = l")
     e.lua_marker(glyph, chained_fog_machine { cloud_type = "flame", walk_dist=0,
                             pow_max=6, delay_min = 300, delay_max = 800,
-                            size = 300, spread_rate = 5,
-                            listener = small_warning})
+                            size = 125, spread_rate = 5,
+                            listener = small_warning, excl_rad = -1 })
 end
 
 function place_tiny_volcano(e)
     e.kfeat("V = l")
     e.lua_marker('V', fog_machine { cloud_type = "flame", walk_dist=10, pow_max=6,
                                    delay = 800, size = 80, spread_rate = 10,
-                                   listener = large_warning})
+                                   listener = large_warning, excl_rad = -1 })
 end
 -- #
 -- ###
@@ -239,7 +241,7 @@ end
 function setup_loot (e)
     e.item(make_fiery_armour(e,  {"robe w:30", "animal skin w:30", "leather armour w:30",
                                   "ring mail w:30", "scale mail w:20", "chain mail w:20",
-                                  "banded mail w:20", "plate mail w:10", "pair of gloves w:5",
+                                  "splint mail w:20", "plate armour w:10", "pair of gloves w:5",
                                   "helmet w:6", "pair of boots w:3", "cap w:2", "wizard hat w:2",
                                   "shield w:1", "buckler w:3"}) ..
                                   " / fire dragon armour w:5")
@@ -341,9 +343,9 @@ function fiery_guardians (e)
             e.mons("Sonja / big kobold ; long sword ego:flaming . ring mail ego:fire_resistance")
         elseif unq_weight <= 40 then
             e.mons("gnoll ; halberd ego:flaming | w:2 scythe ego:flaming . scale mail ego:fire_resistance | \
-                    banded mail ego:fire_resistance")
-            e.mons(grum .. " / gnoll ; glaive ego:flaming . banded mail \
-                            ego:fire_resistance | plate mail ego:fire_resistance")
+                    splint mail ego:fire_resistance")
+            e.mons(grum .. " / gnoll ; glaive ego:flaming . splint mail \
+                            ego:fire_resistance | plate armour ego:fire_resistance")
         end
     end
 
@@ -351,7 +353,7 @@ function fiery_guardians (e)
     if you.in_branch("orc") then
         e.mons("orc warrior ; spear race:orcish ego:flaming . leather armour ego:fire_resistance")
         e.mons("orc warrior ; trident race:orcish ego:flaming . ring mail ego:fire_resistance / \
-                orc knight ; scythe race:orcish ego:flaming . banded mail ego:fire_resistance")
+                orc knight ; scythe race:orcish ego:flaming . splint mail ego:fire_resistance")
         return
     end
 
@@ -359,7 +361,7 @@ function fiery_guardians (e)
     if crawl.one_chance_in(10) then
         -- It's a lone minotaur! labyrinth-esque.
         e.mons("nothing")
-        e.mons("minotaur ; trident ego:flaming . banded mail ego:fire_resistance")
+        e.mons("minotaur ; trident ego:flaming . splint mail ego:fire_resistance")
         return
     end
 
@@ -930,14 +932,11 @@ NSUBST:     B = 1:A / *:.
 #           Loot + 10 trashy items.
 SUBST:      R = h
 NSUBST:     Y = 2:1 / *:.
-#           And the exit
-SHUFFLE:    <<<
-NSUBST:     < = 4:.
 :           volcano_setup(_G)
 :           place_tiny_volcano(_G)
 KFEAT:      J = l
 MARKER:     J = lua:fog_machine { size = 3, pow_min = 7, pow_max = 7, delay = 80, \
-                                  start_clouds = 1, cloud_type = "flame"}
+                                  start_clouds = 1, cloud_type = "flame", excl_rad = -1 }
 epilogue{{
 volcano_milestone(_G)
 }}
@@ -1038,9 +1037,9 @@ MONS:    mummy
 SHUFFLE: 12K
 KFEAT:   JK = l
 MARKER:  J = lua:fog_machine { size = 3, pow_min = 7, pow_max = 7, delay = 80, \
-                               start_clouds = 1, cloud_type = "flame"}
+                               start_clouds = 1, cloud_type = "flame", excl_rad = -1 }
 MARKER:  K = lua:fog_machine { size = 3, pow_min = 7, pow_max = 7, delay = 80, \
-                               start_clouds = 1, cloud_type = "flame"}
+                               start_clouds = 1, cloud_type = "flame", excl_rad = -1 }
 MAP
 xxxxxxxxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxyyxxx
@@ -1079,7 +1078,7 @@ KFEAT:   s = axe trap
 #        "answering" the alarm traps though.
 MONS:    patrolling mummy
 MONS:    human skeleton / elf skeleton / dwarf skeleton / merfolk skeleton / \
-         kenku skeleton
+         tengu skeleton
 MONS:    ogre skeleton / troll skeleton / draconian skeleton / naga skeleton / \
          minotaur skeleton
 MONS:    patrolling menkaure / patrolling guardian mummy
@@ -1128,10 +1127,10 @@ TAGS:       volcano no_item_gen no_monster_gen
 :           volcano_setup(_G)
 :           place_small_volcano(_G)
 MARKER:     J = lua:fog_machine { size = 3, pow_min = 7, pow_max = 7, delay = 80, \
-                                  start_clouds = 1, cloud_type = "flame"}
+                                  start_clouds = 1, cloud_type = "flame", excl_rad = -1 }
 KFEAT:      K = l
 MARKER:     K = lua:fog_machine { size = 3, pow_min = 7, pow_max = 7, delay = 80, \
-                                  start_clouds = 1, cloud_type = "flame"}
+                                  start_clouds = 1, cloud_type = "flame", excl_rad = -1 }
 # Sides:    Lindwurm # Vortex/elemental
 epilogue{{
 volcano_milestone(_G)

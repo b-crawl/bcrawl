@@ -102,13 +102,12 @@ static bool _place_feature_near(const coord_def &centre,
 // Returns a feature suitable for use in the proto-Abyss level.
 static dungeon_feature_type _abyss_proto_feature()
 {
-    return static_cast<dungeon_feature_type>(
-        random_choose_weighted(3000, DNGN_FLOOR,
-                               600, DNGN_ROCK_WALL,
-                               300, DNGN_STONE_WALL,
-                               100, DNGN_METAL_WALL,
-                               1, DNGN_CLOSED_DOOR,
-                               0));
+    return random_choose_weighted(3000, DNGN_FLOOR,
+                                   600, DNGN_ROCK_WALL,
+                                   300, DNGN_STONE_WALL,
+                                   100, DNGN_METAL_WALL,
+                                     1, DNGN_CLOSED_DOOR,
+                                     0);
 }
 
 static void _write_abyssal_features()
@@ -1038,7 +1037,7 @@ static void _abyss_apply_terrain(const map_mask &abyss_genlevel_mask,
         if (you.pos() == p || !abyss_genlevel_mask(p))
             continue;
 
-        // Dont' decay vaults.
+        // Don't decay vaults.
         if (map_masked(p, MMT_VAULT))
             continue;
 

@@ -73,20 +73,18 @@ static bool _evoke_sceptre_of_asmodeus()
     bool rc = false;
     if (one_chance_in(3))
     {
-        const monster_type mon = static_cast<monster_type>(
-                random_choose_weighted(3, MONS_EFREET,
+        const monster_type mon = random_choose_weighted(
+                                       3, MONS_EFREET,
                                        3, MONS_SUN_DEMON,
                                        2, MONS_BALRUG,
                                        2, MONS_HELLION,
                                        1, MONS_PIT_FIEND,
                                        1, MONS_BRIMSTONE_FIEND,
-                                       0));
+                                       0);
 
         mgen_data mg(mon, BEH_CHARMED, &you,
                      0, 0, you.pos(), MHITYOU,
                      MG_FORCE_BEH, you.religion);
-
-        mg.extra_flags |= (MF_NO_REWARD | MF_HARD_RESET);
 
         const int mons = create_monster(mg);
 
@@ -96,7 +94,10 @@ static bool _evoke_sceptre_of_asmodeus()
             mpr("The Sceptre summons one of its servants.");
             did_god_conduct(DID_UNHOLY, 3);
 
-            if (!player_angers_monster(&menv[mons]))
+            monster* m = &menv[mons];
+            m->add_ench(mon_enchant(ENCH_FAKE_ABJURATION, 6));
+
+            if (!player_angers_monster(m))
             {
                 mpr("You don't feel so good about this...");
             }
@@ -309,7 +310,7 @@ static void _SINGING_SWORD_equip(item_def *item, bool *show_msgs, bool unmeld)
     if (!item_type_known(*item))
     {
         mprf(MSGCH_TALK, "%s says, \"Hi!  I'm the Singing Sword!\"",
-             item->name(DESC_CAP_THE).c_str());
+             item->name(DESC_THE).c_str());
     }
     else
         mpr("The Singing Sword hums in delight!", MSGCH_TALK);
@@ -458,7 +459,7 @@ static bool _WUCAD_MU_evoke(item_def *item, int* pract, bool* did_work,
         return (false);
     }
 
-    if (one_chance_in(5))
+    if (one_chance_in(4))
     {
         _wucad_miscast(&you, random2(9), random2(70));
         return (false);
@@ -609,35 +610,26 @@ static void _DEMON_AXE_melee_effect(item_def* item, actor* attacker,
 
 static void _DEMON_AXE_world_reacts(item_def *item)
 {
-    std::vector<monster_info> targets;
-    get_monster_info(targets);
-
-    int dist = LOS_RADIUS + 1;
-
-    if (targets.empty())
-        return;
-
     monster* closest = NULL;
 
-    std::vector<monster_info>::const_iterator mi;
-
-    for (mi = targets.begin(); mi != targets.end(); ++mi)
+    for (distance_iterator di(you.pos(), true, true, LOS_RADIUS); di; ++di)
     {
-        if (grid_distance(you.pos(), mi->mon()->pos()) < dist
-            && you.possible_beholder(mi->mon()))
+        monster *mon = monster_at(*di);
+        if (mon && you.can_see(mon)
+            && you.possible_beholder(mon)
+            && !mons_is_firewood(mon))
         {
-            dist = grid_distance(you.pos(), mi->mon()->pos());
-            closest = mi->mon();
+            closest = mon;
+            goto found;
         }
     }
-
-    if (!closest)
-        return;
+    return;
+found:
 
     if (!you.beheld_by(closest))
     {
          mprf("Visions of slaying %s flood into your mind.",
-              closest->name(DESC_NOCAP_THE).c_str());
+              closest->name(DESC_THE).c_str());
 
          // The monsters (if any) currently mesmerising the player do not include
          // this monster. To avoid trapping the player, all other beholders
@@ -716,7 +708,7 @@ static void _UNDEADHUNTER_melee_effect(item_def* item, actor* attacker,
     if (defender->holiness() == MH_UNDEAD && !one_chance_in(3) && !mondied)
     {
         mprf("%s %s blasted by disruptive energy!",
-              defender->name(DESC_CAP_THE).c_str(),
+              defender->name(DESC_THE).c_str(),
               defender->atype() == ACT_PLAYER ? "are" : "is");
         defender->hurt(attacker, random2avg((1 + (dam * 3)), 3));
     }
@@ -752,10 +744,10 @@ static void _DEVASTATOR_melee_effect(item_def* item, actor* attacker,
 ///////////////////////////////////////////////////
 static void _DRAGONSKIN_equip(item_def *item, bool *show_msgs, bool unmeld)
 {
-    _equip_mpr(show_msgs, "You feel oddly protected from elements.");
+    _equip_mpr(show_msgs, "You feel oddly protected from the elements.");
 }
 
 static void _DRAGONSKIN_unequip(item_def *item, bool *show_msgs)
 {
-    _equip_mpr(show_msgs, "You feel no longer protected from elements.");
+    _equip_mpr(show_msgs, "You no longer feel protected from the elements.");
 }

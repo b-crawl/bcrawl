@@ -1145,7 +1145,7 @@ static void _announce_swap_real(coord_def orig_pos, coord_def dest_pos)
 
     const std::string orig_name =
         feature_description(dest_pos, false,
-                            you.see_cell(orig_pos) ? DESC_CAP_THE : DESC_CAP_A,
+                            you.see_cell(orig_pos) ? DESC_THE : DESC_A,
                             false);
 
     std::string prep = feat_preposition(orig_feat, false);
@@ -1156,7 +1156,7 @@ static void _announce_swap_real(coord_def orig_pos, coord_def dest_pos)
     else if (const monster* m = monster_at(orig_pos))
     {
         if (you.can_see(m))
-            orig_actor = m->name(DESC_NOCAP_THE);
+            orig_actor = m->name(DESC_THE);
     }
 
     if (dest_pos == you.pos())
@@ -1164,7 +1164,7 @@ static void _announce_swap_real(coord_def orig_pos, coord_def dest_pos)
     else if (const monster* m = monster_at(dest_pos))
     {
         if (you.can_see(m))
-            dest_actor = m->name(DESC_NOCAP_THE);
+            dest_actor = m->name(DESC_THE);
     }
 
     std::ostringstream str;
@@ -1413,7 +1413,7 @@ static bool _ok_dest_cell(const actor* orig_actor,
     return (true);
 }
 
-bool slide_feature_over(const coord_def &src, coord_def prefered_dest,
+bool slide_feature_over(const coord_def &src, coord_def preferred_dest,
                         bool announce)
 {
     ASSERT(in_bounds(src));
@@ -1421,10 +1421,10 @@ bool slide_feature_over(const coord_def &src, coord_def prefered_dest,
     const dungeon_feature_type orig_feat = grd(src);
     const actor* orig_actor = actor_at(src);
 
-    if (in_bounds(prefered_dest)
-        && _ok_dest_cell(orig_actor, orig_feat, prefered_dest))
+    if (in_bounds(preferred_dest)
+        && _ok_dest_cell(orig_actor, orig_feat, preferred_dest))
     {
-        ASSERT(prefered_dest != src);
+        ASSERT(preferred_dest != src);
     }
     else
     {
@@ -1434,16 +1434,16 @@ bool slide_feature_over(const coord_def &src, coord_def prefered_dest,
             if (_ok_dest_cell(orig_actor, orig_feat, *ai)
                 && one_chance_in(++squares))
             {
-                prefered_dest = *ai;
+                preferred_dest = *ai;
             }
         }
     }
 
-    if (!in_bounds(prefered_dest))
+    if (!in_bounds(preferred_dest))
         return (false);
 
-    ASSERT(prefered_dest != src);
-    return swap_features(src, prefered_dest, false, announce);
+    ASSERT(preferred_dest != src);
+    return swap_features(src, preferred_dest, false, announce);
 }
 
 // Returns true if we manage to scramble free.
@@ -1717,7 +1717,8 @@ const char *dngn_feature_names[] =
 "return_from_swamp", "return_from_shoals", "return_from_spider_nest",
 "return_from_forest", "return_reserved_1", "", "", "", "", "",
 "", "", "", "", "", "", "", "enter_portal_vault", "exit_portal_vault",
-"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+"malign_gateway", "expired_portal", "", "", "", "", "",
+"", "", "", "", "", "", "", "", "",
 "", "", "altar_zin", "altar_the_shining_one", "altar_kikubaaqudgha",
 "altar_yredelemnul", "altar_xom", "altar_vehumet",
 "altar_okawaru", "altar_makhleb", "altar_sif_muna", "altar_trog",

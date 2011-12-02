@@ -111,12 +111,11 @@ bool TilesFramework::initialise()
     if (m_await_connection)
         _await_connection();
 
-    std::string title = CRAWL " " + Version::Long();
-    send_message("document.title = \"%s\";", title.c_str());
+    _send_version();
 
     // Do our initialization here.
     m_active_layer = LAYER_CRT;
-    send_message("set_layer('crt');");
+    send_message("{msg:'layer',layer:'crt'}");
 
     cgotoxy(1, 1, GOTO_CRT);
 
@@ -143,6 +142,10 @@ void TilesFramework::write_message(const char *format, ...)
 
 void TilesFramework::finish_message()
 {
+    m_prefixes.clear();
+    if (m_msg_buf.size() == 0)
+        return;
+
     m_msg_buf.append("\n");
     const char* fragment_start = m_msg_buf.data();
     const char* data_end = m_msg_buf.data() + m_msg_buf.size();
@@ -170,7 +173,6 @@ void TilesFramework::finish_message()
 
         fragment_start += fragment_size;
     }
-    m_prefixes.clear();
     m_msg_buf.clear();
 }
 
@@ -338,6 +340,17 @@ bool TilesFramework::prefix_popped()
     return m_prefixes.empty();
 }
 
+void TilesFramework::_send_version()
+{
+    std::string title = CRAWL " " + Version::Long();
+    send_message("{msg:\"version\",text:\"%s\"}", title.c_str());
+
+#ifdef WEB_DIR_PATH
+    // The star signals a message to the server
+    send_message("*{\"msg\":\"client_path\",\"path\":\"%s\"}", WEB_DIR_PATH);
+#endif
+}
+
 static void _send_doll(const dolls_data &doll, bool submerged, bool ghost)
 {
     // Ordered from back to front.
@@ -458,6 +471,19 @@ static bool _needs_flavour(const packed_cell &cell)
     return false;
 }
 
+inline unsigned _get_brand(int col)
+{
+    return (col & COLFLAG_FRIENDLY_MONSTER) ? Options.friend_brand :
+           (col & COLFLAG_NEUTRAL_MONSTER)  ? Options.neutral_brand :
+           (col & COLFLAG_ITEM_HEAP)        ? Options.heap_brand :
+           (col & COLFLAG_WILLSTAB)         ? Options.stab_brand :
+           (col & COLFLAG_MAYSTAB)          ? Options.may_stab_brand :
+           (col & COLFLAG_FEATURE_ITEM)     ? Options.feature_item_brand :
+           (col & COLFLAG_TRAP_ITEM)        ? Options.trap_item_brand :
+           (col & COLFLAG_REVERSE)          ? CHATTR_REVERSE
+                                            : CHATTR_NORMAL;
+}
+
 void TilesFramework::_send_cell(const coord_def &gc,
                                 const screen_cell_t &current_sc, const screen_cell_t &next_sc,
                                 const map_cell &current_mc, const map_cell &next_mc,
@@ -471,6 +497,31 @@ void TilesFramework::_send_cell(const coord_def &gc,
         _send_monster(gc, next_mc.monsterinfo(), new_monster_locs, force_full);
     else if (!force_full && current_mc.monsterinfo())
         write_message("mon:null,");
+
+    map_feature mf = get_cell_map_feature(next_mc);
+    if ((force_full && mf)
+        || (get_cell_map_feature(current_mc) != mf))
+    {
+        write_message("mf:%u,", mf);
+    }
+
+    // Glyph and colour
+    ucs_t glyph = next_sc.glyph;
+    if (force_full ? (glyph != ' ') : (current_sc.glyph != glyph))
+    {
+        if (glyph == '\\')
+            write_message("g:'\\\\',");
+        else if (glyph == '\'')
+            write_message("g:'\\'',");
+        else
+            write_message("g:'%lc',", glyph);
+    }
+    if (force_full ? (next_sc.colour != 7) : (current_sc.colour != next_sc.colour))
+    {
+        int col = next_sc.colour;
+        col = (_get_brand(col) << 4) | (col & 0xF);
+        write_message("col:%d,", col);
+    }
 
     push_prefix("t:{");
     {
@@ -622,15 +673,17 @@ void TilesFramework::_send_map(bool force_full)
     force_full = force_full || m_need_full_map;
     m_need_full_map = false;
 
+    push_prefix("{msg:\"map\",");
+
     if (force_full)
     {
-        write_message("clear_map();");
+        write_message("clear:1,");
     }
 
     coord_def last_gc(0, 0);
     bool send_gc = true;
 
-    write_message("m([");
+    push_prefix("cells:[");
     for (int y = 0; y < GYM; y++)
         for (int x = 0; x < GXM; x++)
         {
@@ -663,7 +716,8 @@ void TilesFramework::_send_map(bool force_full)
             }
             pop_prefix("},");
         }
-    send_message("]);");
+    pop_prefix("]");
+    pop_prefix("}");
 
     m_current_map_knowledge = env.map_knowledge;
     m_current_view = m_next_view;
@@ -748,7 +802,7 @@ void TilesFramework::load_dungeon(const crawl_view_buffer &vbuf,
     if (m_active_layer != LAYER_NORMAL)
     {
         m_active_layer = LAYER_NORMAL;
-        write_message("set_layer(\"normal\");\n");
+        send_message("{msg:\"layer\",layer:\"normal\"}");
     }
 
     m_next_flash_colour = you.flash_colour;
@@ -815,9 +869,9 @@ static const int stat_width = 42;
 
 static void _send_layout_data()
 {
-    tiles.send_message("layout({view_max_width:%u,view_max_height:%u,\
+    tiles.send_message("{msg:\"layout\",view_max_width:%u,view_max_height:%u,\
 force_overlay:%u,show_diameter:%u,msg_min_height:%u,stat_width:%u,   \
-min_stat_height:%u,gxm:%u,gym:%u});",
+min_stat_height:%u,gxm:%u,gym:%u}",
                        Options.view_max_width, Options.view_max_height,
                        Options.tile_force_overlay, ENV_SHOW_DIAMETER,
                        Options.msg_min_height, stat_width,
@@ -840,23 +894,24 @@ void TilesFramework::resize()
  */
 void TilesFramework::_send_everything()
 {
-    std::string title = CRAWL " " + Version::Long();
-    send_message("document.title = \"%s\";", title.c_str());
+    _send_version();
     m_text_crt.send(true);
     m_text_stat.send(true);
     m_text_message.send(true);
     _send_layout_data();
-    send_message("vgrdc(%d,%d);",
+    send_message("{msg:\"vgrdc\",x:%d,y:%d}",
                  m_current_gc.x - m_origin.x, m_current_gc.y - m_origin.y);
-    send_message("set_flash(%d);", m_current_flash_colour);
+    send_message("{msg:\"flash\",col:%d}", m_current_flash_colour);
     _send_map(true);
+    finish_message();
+    send_message("{msg:'redraw'}");
     switch (m_active_layer)
     {
     case LAYER_CRT:
-        send_message("set_layer('crt');");
+        send_message("{msg:'layer',layer:'crt'}");
         break;
     case LAYER_NORMAL:
-        send_message("set_layer('normal');");
+        send_message("{msg:'layer',layer:'normal'}");
         break;
     default:
         // Cannot happen
@@ -866,8 +921,6 @@ void TilesFramework::_send_everything()
 
 void TilesFramework::clrscr()
 {
-    // TODO: Clear cursor
-
     m_text_crt.clear();
 
     this->cgotoxy(1, 1);
@@ -895,7 +948,7 @@ void TilesFramework::cgotoxy(int x, int y, GotoRegion region)
         if (m_crt_enabled > 0)
         {
             if (m_active_layer != LAYER_CRT)
-                send_message("set_layer(\"crt\");");
+                send_message("{msg:'layer',layer:'crt'}");
             m_active_layer = LAYER_CRT;
             m_print_area = &m_text_crt;
         }
@@ -906,13 +959,13 @@ void TilesFramework::cgotoxy(int x, int y, GotoRegion region)
         break;
     case GOTO_MSG:
         if (m_active_layer != LAYER_NORMAL)
-            send_message("set_layer(\"normal\");");
+            send_message("{msg:'layer',layer:'normal'}");
         m_active_layer = LAYER_NORMAL;
         m_print_area = &m_text_message;
         break;
     case GOTO_STAT:
         if (m_active_layer != LAYER_NORMAL)
-            send_message("set_layer(\"normal\");");
+            send_message("{msg:'layer',layer:'normal'}");
         m_active_layer = LAYER_NORMAL;
         m_print_area = &m_text_stat;
         break;
@@ -931,11 +984,12 @@ void TilesFramework::redraw()
 
     if (m_need_redraw)
     {
+        push_prefix("{msg:'multi',msgs:[");
         if (m_current_gc != m_next_gc)
         {
             if (m_origin.equals(-1, -1))
                 m_origin = m_next_gc;
-            write_message("vgrdc(%d,%d);",
+            write_message("{msg:'vgrdc',x:%d,y:%d},",
                           m_next_gc.x - m_origin.x,
                           m_next_gc.y - m_origin.y);
             m_current_gc = m_next_gc;
@@ -943,13 +997,19 @@ void TilesFramework::redraw()
 
         if (m_current_flash_colour != m_next_flash_colour)
         {
-            write_message("set_flash(%d);",
+            write_message("{msg:'flash',col:%d},",
                           m_next_flash_colour);
             m_current_flash_colour = m_next_flash_colour;
         }
 
         if (m_view_loaded)
+        {
+            push_prefix("");
             _send_map(false);
+            pop_prefix(",");
+        }
+        pop_prefix("{msg:'redraw'}]}");
+        finish_message();
     }
 
     m_need_redraw = false;
@@ -1026,12 +1086,12 @@ void TilesFramework::place_cursor(cursor_type type, const coord_def &gc)
 
         if (result == NO_CURSOR)
         {
-            send_message("remove_cursor(%d);", type);
+            send_message("{msg:\"cursor\",id:%d}", type);
             return;
         }
         else
         {
-            send_message("place_cursor(%d,%d,%d);", type,
+            send_message("{msg:\"cursor\",id:%d,loc:{x:%d,y:%d}}", type,
                     result.x - m_origin.x, result.y - m_origin.y);
         }
     }
@@ -1062,14 +1122,14 @@ void TilesFramework::add_overlay(const coord_def &gc, tileidx_t idx)
 
     m_has_overlays = true;
 
-    send_message("add_overlay(%d,%d,%d);", idx,
+    send_message("{msg:'overlay',idx:%d,x:%d,y:%d}", idx,
             gc.x - m_origin.x, gc.y - m_origin.y);
 }
 
 void TilesFramework::clear_overlays()
 {
     if (m_has_overlays)
-        send_message("clear_overlays();");
+        send_message("{msg:'clear_overlays'}");
 
     m_has_overlays = false;
 }
@@ -1155,13 +1215,10 @@ void TilesFramework::put_ucs_string(ucs_t *str)
                 m_print_y++;
             }
 
-            if (m_print_y >= m_print_area->my)
-            {
-                // TODO Scroll?
-                m_print_y = 0;
-            }
+            if (m_print_y < m_print_area->my)
+                m_print_area->put_character(*str, m_print_fg, m_print_bg,
+                                            m_print_x, m_print_y);
 
-            m_print_area->put_character(*str, m_print_fg, m_print_bg, m_print_x, m_print_y);
             m_print_x++;
         }
 
@@ -1171,7 +1228,8 @@ void TilesFramework::put_ucs_string(ucs_t *str)
 
 void TilesFramework::clear_to_end_of_line()
 {
-    if (m_print_area == NULL)
+    if (m_print_area == NULL ||
+        m_print_y >= m_print_area->my)
         return;
 
     for (int x = m_print_x; x < m_print_area->mx; ++x)

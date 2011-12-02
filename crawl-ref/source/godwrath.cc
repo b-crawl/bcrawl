@@ -48,8 +48,6 @@
 
 #include <sstream>
 
-#define random_mons(...) static_cast<monster_type>(random_choose(__VA_ARGS__))
-
 static void _god_smites_you(god_type god, const char *message = NULL,
                             kill_method_type death_type = NUM_KILLBY);
 static bool _beogh_idol_revenge();
@@ -422,7 +420,7 @@ static bool _makhleb_retribution()
     if (random2(you.experience_level) > 7 && !one_chance_in(5))
     {
         mgen_data temp =
-            mgen_data::hostile_at(random_mons(MONS_EXECUTIONER, MONS_GREEN_DEATH,
+            mgen_data::hostile_at(random_choose(MONS_EXECUTIONER, MONS_GREEN_DEATH,
                                   MONS_BLIZZARD_DEMON, MONS_BALRUG, MONS_CACODEMON, -1),
                                   "the fury of Makhleb",
                                   true, 0, 0, you.pos(), 0, god);
@@ -443,7 +441,7 @@ static bool _makhleb_retribution()
         for (; how_many > 0; --how_many)
         {
             mgen_data temp =
-                mgen_data::hostile_at(random_mons(MONS_HELLWING, MONS_NEQOXEC,
+                mgen_data::hostile_at(random_choose(MONS_HELLWING, MONS_NEQOXEC,
                                       MONS_ORANGE_DEMON, MONS_SMOKE_DEMON,
                                       MONS_YNOXINUL, -1),
                                       "the fury of Makhleb",
@@ -703,13 +701,14 @@ static bool _beogh_retribution()
                 ASSERT(menv[mon].weapon() != NULL);
                 item_def& wpn(*menv[mon].weapon());
 
-                // FIXME: Mega-hack (breaks encapsulation too).
-                wpn.flags &= ~ISFLAG_RACIAL_MASK;
                 if (am_orc)
+                {
+                    set_equip_race(wpn, ISFLAG_NO_RACE);
                     set_item_ego_type(wpn, OBJ_WEAPONS, SPWPN_ORC_SLAYING);
+                }
                 else
                 {
-                    wpn.flags |= ISFLAG_ORCISH;
+                    set_equip_race(wpn, ISFLAG_ORCISH);
                     set_item_ego_type(wpn, OBJ_WEAPONS, SPWPN_ELECTROCUTION);
                 }
 
@@ -731,7 +730,7 @@ static bool _beogh_retribution()
                                              you.experience_level * 50 / 9);
 
                 menv[mon].set_ghost(newstats);
-                menv[mon].dancing_weapon_init();
+                menv[mon].ghost_demon_init();
 
                 num_created++;
             }
@@ -889,7 +888,7 @@ static bool _lugonu_retribution()
     if (random2(you.experience_level) > 7 && !one_chance_in(5))
     {
         mgen_data temp =
-            mgen_data::hostile_at(random_mons(MONS_GREEN_DEATH,
+            mgen_data::hostile_at(random_choose(MONS_GREEN_DEATH,
                                   MONS_BLIZZARD_DEMON, MONS_BALRUG, -1),
                                   "the touch of Lugonu",
                                   true, 0, 0, you.pos(), 0, god);
@@ -909,7 +908,7 @@ static bool _lugonu_retribution()
         for (; how_many > 0; --how_many)
         {
             mgen_data temp =
-                mgen_data::hostile_at(random_mons(MONS_HELLWING, MONS_NEQOXEC,
+                mgen_data::hostile_at(random_choose(MONS_HELLWING, MONS_NEQOXEC,
                                       MONS_ORANGE_DEMON, MONS_SMOKE_DEMON,
                                       MONS_YNOXINUL, -1),
                                       "the touch of Lugonu",
@@ -991,8 +990,8 @@ static bool _jiyva_retribution()
 
         if (found_one)
         {
-            mprf(MSGCH_GOD, "Jiyva's putrescence saturates the %s!",
-                 mon->name(DESC_NOCAP_THE).c_str());
+            mprf(MSGCH_GOD, "Jiyva's putrescence saturates %s!",
+                 mon->name(DESC_THE).c_str());
 
             slimify_monster(mon, true);
         }

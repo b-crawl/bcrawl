@@ -237,7 +237,7 @@ struct map_cell
 public:
     uint32_t flags;   // Flags describing the mappedness of this square.
 private:
-//TODO fix when the MSVC is standart-compliant.
+//TODO fix when the MSVC is standard-compliant.
 #ifdef TARGET_COMPILER_VC
     dungeon_feature_type _feat;
 #else
@@ -275,6 +275,8 @@ void clear_terrain_visibility();
 int count_detected_mons(void);
 void map_knowledge_forget_mons(const coord_def &c);
 
-void clear_map(bool clear_items = true, bool clear_mons = true);
+void clear_map(bool clear_items = false, bool clear_mons = true);
+
+map_feature get_cell_map_feature(const map_cell& cell);
 
 #endif

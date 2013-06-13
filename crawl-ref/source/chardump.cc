@@ -1154,8 +1154,8 @@ static string _describe_action_subtype(caction_type type, int subtype)
         case EVOC_MISC:
             return "Miscellaneous";
 #endif
-        case EVOC_TOME:
-            return "tome";
+        case EVOC_SHARD:
+            return "Shard";
         default:
             return "Error";
         }

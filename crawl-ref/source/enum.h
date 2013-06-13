@@ -545,8 +545,10 @@ enum book_type
     BOOK_RANDART_THEME,
 
     BOOK_MANUAL,
+    NUM_BOOKS,
+#if TAG_MAJOR_VERSION == 34
     BOOK_DESTRUCTION,
-    NUM_BOOKS
+#endif
 };
 
 #define NUM_NORMAL_BOOKS     (MAX_NORMAL_BOOK + 1)
@@ -1192,7 +1194,7 @@ enum evoc_type
 #if TAG_MAJOR_VERSION == 34
     EVOC_MISC,
 #endif
-    EVOC_TOME,
+    EVOC_SHARD,
 };
 
 enum game_direction_type

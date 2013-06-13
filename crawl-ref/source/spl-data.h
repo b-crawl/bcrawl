@@ -450,7 +450,7 @@ static const struct spell_desc spelldata[] =
 {
     SPELL_BOLT_OF_INACCURACY, "Bolt of Inaccuracy",
      SPTYP_CONJURATION,
-     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER, // rod/tome of destruction
+     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER, // rod/shard of destruction
      3,
      1000,
      7, 7,

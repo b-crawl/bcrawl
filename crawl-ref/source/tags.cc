@@ -3965,6 +3965,15 @@ void unmarshallItem(reader &th, item_def &item)
         if (item.base_type == OBJ_WEAPONS && item.sub_type == WPN_CUTLASS)
             item.sub_type = WPN_RAPIER;
     }
+
+    // Convert Tome of Destruction to Shard
+    if (th.getMinorVersion() < TAG_MINOR_TOME_OVERHAUL
+        && item.base_type == OBJ_BOOKS && item.sub_type == BOOK_DESTRUCTION)
+    {
+        item.base_type = OBJ_MISCELLANY;
+        item.sub_type = MISC_SHARD_OF_DESTRUCTION;
+        item.plus = random_range(5,15,2);
+    }
 #endif
 
     if (is_unrandom_artefact(item))

@@ -3752,7 +3752,8 @@ bool get_item_by_name(item_def *item, char* specs,
 
     case OBJ_MISCELLANY:
         if (item->sub_type == MISC_BOX_OF_BEASTS
-            || item->sub_type == MISC_SACK_OF_SPIDERS)
+            || item->sub_type == MISC_SACK_OF_SPIDERS
+            || item->sub_type == MISC_SHARD_OF_DESTRUCTION)
         {
             item->plus = 50;
         }

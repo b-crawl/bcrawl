@@ -49,7 +49,7 @@ function callback.tgw_lugonu_bribe_lugonu_item (data, triggerable,
                        numspells:2 /\
               rat corpse w:5 / kobold corpse w:5 / ugly thing corpse",
          Lugonu="no",
-         Makhleb="no",
+         Makhleb="shard of destruction",
          ["Nemelex Xobeh"]="scroll of random uselessness ident:type q:5-10",
          Okawaru="no",
          Qazlal="no",

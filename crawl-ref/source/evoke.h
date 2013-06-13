@@ -15,8 +15,6 @@ string manual_skill_names(bool short_text=false);
 
 void wind_blast(actor* agent, int pow, coord_def target);
 
-void tome_of_power(int slot);
-
 bool can_flood_feature(dungeon_feature_type feat);
 
 bool evoke_item(int slot = -1, bool check_range = false);

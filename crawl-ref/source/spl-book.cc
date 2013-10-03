@@ -48,12 +48,6 @@
 
 #define SPELL_LIST_KEY "spell_list"
 
-#define RANDART_BOOK_TYPE_KEY  "randart_book_type"
-#define RANDART_BOOK_LEVEL_KEY "randart_book_level"
-
-#define RANDART_BOOK_TYPE_LEVEL "level"
-#define RANDART_BOOK_TYPE_THEME "theme"
-
 // The list of spells in spellbooks:
 static spell_type spellbook_template_array[][SPELLBOOK_SIZE] =
 {
@@ -309,12 +303,9 @@ void init_spell_rarities()
     for (int i = 0; i < NUM_SPELLS; ++i)
         _lowest_rarity[i] = 255;
 
+    // Manuals and books of destruction are not even part of this loop.
     for (int i = 0; i < NUM_FIXED_BOOKS; ++i)
     {
-        // Manuals and books of destruction are not even part of this loop.
-        if (i >= MIN_RARE_BOOK && i <= MAX_RARE_BOOK)
-            continue;
-
         for (int j = 0; j < SPELLBOOK_SIZE; ++j)
         {
             spell_type spell = which_spell_in_book(i, j);
@@ -1471,31 +1462,6 @@ static void _get_spell_list(vector<spell_type> &spells, int level,
                             int &god_discard, int &uncastable_discard,
                             bool avoid_known = false)
 {
-    // For randarts handed out by Sif Muna, spells contained in the
-    // special books are fair game.
-    // We store them in an extra vector that (once sorted) can later
-    // be checked for each spell with a rarity -1 (i.e. not normally
-    // appearing randomly).
-    vector<spell_type> special_spells;
-    if (god == GOD_SIF_MUNA)
-    {
-        for (int i = MIN_RARE_BOOK; i <= MAX_RARE_BOOK; ++i)
-            for (int j = 0; j < SPELLBOOK_SIZE; ++j)
-            {
-                spell_type spell = which_spell_in_book(i, j);
-                if (spell == SPELL_NO_SPELL)
-                    continue;
-
-                if (spell_rarity(spell) != -1)
-                    continue;
-
-                special_spells.push_back(spell);
-            }
-
-        sort(special_spells.begin(), special_spells.end());
-    }
-
-    int specnum = 0;
     for (int i = 0; i < NUM_SPELLS; ++i)
     {
         const spell_type spell = (spell_type) i;
@@ -1506,18 +1472,7 @@ static void _get_spell_list(vector<spell_type> &spells, int level,
         // Only use spells available in books you might find lying about
         // the dungeon.
         if (spell_rarity(spell) == -1)
-        {
-            bool skip_spell = true;
-            while ((unsigned int) specnum < special_spells.size()
-                   && spell == special_spells[specnum])
-            {
-                specnum++;
-                skip_spell = false;
-            }
-
-            if (skip_spell)
-                continue;
-        }
+            continue;
 
         if (avoid_known && you.seen_spell[spell])
             continue;

@@ -55,6 +55,7 @@ static armour_type _pick_wearable_armour(const armour_type arm)
     case SP_OGRE:
     case SP_TROLL:
     case SP_SPRIGGAN:
+    case SP_IMP:
         if (arm == ARM_GLOVES
             || arm == ARM_BOOTS
             || arm == ARM_CENTAUR_BARDING
@@ -64,7 +65,7 @@ static armour_type _pick_wearable_armour(const armour_type arm)
         }
         else if (arm == ARM_SHIELD)
         {
-            if (you.species == SP_SPRIGGAN)
+            if (you.species == SP_SPRIGGAN || you.species == SP_IMP)
                 result = ARM_BUCKLER;
             else if (x_chance_in_y(5 + you.skills[SK_SHIELDS], 20))
                 result = ARM_LARGE_SHIELD; // prefer big shields for giant races

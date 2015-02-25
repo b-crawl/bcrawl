@@ -1219,6 +1219,7 @@ static string _stk_weight()
         return "Feather";
 
     case SP_SPRIGGAN:
+    case SP_IMP:
         return "Fly";
 
     case SP_FELID:

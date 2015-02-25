@@ -2767,7 +2767,8 @@ static string _status_mut_abilities(int sw)
 
     // a bit more stuff
     if (you.species == SP_OGRE || you.species == SP_TROLL
-        || player_genus(GENPC_DRACONIAN) || you.species == SP_SPRIGGAN)
+        || player_genus(GENPC_DRACONIAN) || you.species == SP_SPRIGGAN
+        || you.species == SP_IMP)
     {
         mutations.emplace_back("unfitting armour");
     }

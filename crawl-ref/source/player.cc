@@ -735,7 +735,8 @@ bool you_can_wear(int eq, bool special_armour)
             || you.species == SP_OGRE
             || you.species == SP_SPRIGGAN
             || you.species == SP_FELID
-            || you.species == SP_OCTOPODE)
+            || you.species == SP_OCTOPODE
+            || you.species == SP_IMP)
         {
             return false;
         }
@@ -758,7 +759,8 @@ bool you_can_wear(int eq, bool special_armour)
 #endif
             || you.species == SP_OGRE
             || you.species == SP_FELID
-            || you.species == SP_OCTOPODE)
+            || you.species == SP_OCTOPODE
+            || you.species == SP_IMP)
         {
             return false;
         }
@@ -782,7 +784,8 @@ bool you_can_wear(int eq, bool special_armour)
         /// big & tiny races can only wear some shield types.
         if (you.species == SP_TROLL
             || you.species == SP_SPRIGGAN
-            || you.species == SP_OGRE)
+            || you.species == SP_OGRE
+            || you.species == SP_IMP)
         {
             return special_armour;
         }
@@ -817,7 +820,8 @@ bool you_can_wear(int eq, bool special_armour)
             || you.species == SP_SPRIGGAN
             || you.species == SP_OGRE
             || you.species == SP_OCTOPODE
-            || player_genus(GENPC_DRACONIAN))
+            || player_genus(GENPC_DRACONIAN)
+            || you.species == SP_IMP)
         {
             return false;
         }

@@ -1498,7 +1498,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_IMP,            SK_SLINGS,          1),
     APT(SP_IMP,            SK_BOWS,           -3),
     APT(SP_IMP,            SK_CROSSBOWS,      -3),
-    APT(SP_IMP,            SK_THROWING,       -1),
+    APT(SP_IMP,            SK_THROWING,        1),
     APT(SP_IMP,            SK_ARMOUR,         -2),
     APT(SP_IMP,            SK_DODGING,         3),
     APT(SP_IMP,            SK_STEALTH,         2),

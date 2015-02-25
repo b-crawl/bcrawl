@@ -65,6 +65,12 @@ Human
 
 Mundane and average.
 %%%%
+Imp
+
+Tiny warlike demons. They gain fire resistance and wings as they gain
+experience. They are skilled in fire magic, and often wield whips and
+tridents.
+%%%%
 Tengu
 
 Bird-people who love to fight, both with weapons and spells. They are quite

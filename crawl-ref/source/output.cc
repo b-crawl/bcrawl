@@ -2749,6 +2749,11 @@ static string _status_mut_abilities(int sw)
                        + max(0, you.experience_level - 7) * 2 / 5;
         break;
 
+    case SP_IMP:
+        if (you.experience_level >= 14)
+            mutations.push_back("able to fly continuously");
+        break;
+
 #if TAG_MAJOR_VERSION == 34
     case SP_DJINNI:
         mutations.emplace_back("fire immunity");

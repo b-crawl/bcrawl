@@ -1808,6 +1808,7 @@ int player_res_poison(bool calc_unid, bool temp, bool items)
     if (you.is_artificial(temp)
         || temp && get_form()->res_pois() == 3
         || items && player_equip_unrand(UNRAND_OLGREB)
+        || you.species == SP_IMP
         || temp && you.duration[DUR_DIVINE_STAMINA])
     {
         return 3;
@@ -3392,6 +3393,33 @@ void level_change(bool skip_attribute_increase)
                     perma_mutate(MUT_REGENERATION, 1, "vine stalker growth");
                 break;
 
+            case SP_IMP:
+                if (!(you.experience_level % 4))
+                {
+                    modify_stat((coinflip() ? STAT_INT
+                                            : STAT_DEX), 1, false,
+                                "level gain");
+                }
+
+                if (you.experience_level == 7 || you.experience_level == 14)
+                {
+                    mprf(MSGCH_INTRINSIC_GAIN,
+                         "Your demonic attributes increase your resistance to fire.");
+                    perma_mutate(MUT_HEAT_RESISTANCE, 1, "demonic growth");
+                }
+                if (you.experience_level == 7)
+                {
+                    mprf(MSGCH_INTRINSIC_GAIN,
+                         "Your demonic attributes make you vulnerable to cold.");
+                    perma_mutate(MUT_COLD_VULNERABILITY, 1, "demonic growth");
+                }
+                if (you.experience_level == 14)
+                {
+                    perma_mutate(MUT_BIG_WINGS, 1, "demonic growth");
+                    mprf(MSGCH_INTRINSIC_GAIN, "You can now fly continuously.");
+                }
+                break;
+
             default:
                 break;
             }
@@ -3596,6 +3624,7 @@ static int _species_stealth_mod()
         case SP_NAGA:       // not small but very good at stealth
         case SP_FELID:
         case SP_OCTOPODE:
+        case SP_IMP:
             return 18;
 
         default:
@@ -6646,7 +6675,7 @@ mon_holy_type player::holiness(bool temp) const
 bool player::undead_or_demonic() const
 {
     // This is only for TSO-related stuff, so demonspawn are included.
-    return undead_state() || species == SP_DEMONSPAWN;
+    return undead_state() || species == SP_DEMONSPAWN || species == SP_IMP;
 }
 
 bool player::holy_wrath_susceptible() const
@@ -6664,7 +6693,7 @@ bool player::is_holy(bool check_spells) const
 
 bool player::is_unholy(bool check_spells) const
 {
-    return species == SP_DEMONSPAWN;
+    return species == SP_DEMONSPAWN || species == SP_IMP;
 }
 
 bool player::is_evil(bool check_spells) const
@@ -6778,7 +6807,7 @@ int player::res_poison(bool temp) const
 int player::res_rotting(bool temp) const
 {
     if (player_mutation_level(MUT_ROT_IMMUNITY)
-        || temp && (is_artificial() || get_form()->res_rot()))
+        || temp && (is_artificial() || species == SP_IMP || get_form()->res_rot()))
     {
         return 3;
     }
@@ -6879,6 +6908,7 @@ int player_res_magic(bool calc_unid, bool temp)
     case SP_DEMIGOD:
     case SP_OGRE:
     case SP_FORMICID:
+    case SP_IMP:
         rm = you.experience_level * 4;
         break;
     case SP_NAGA:
@@ -7090,7 +7120,8 @@ bool player::racial_permanent_flight() const
         || species == SP_DJINNI
 #endif
         || species == SP_BLACK_DRACONIAN && experience_level >= 14
-        || species == SP_GARGOYLE && experience_level >= 14;
+        || species == SP_GARGOYLE && experience_level >= 14
+        || species == SP_IMP && experience_level >= 14;
 }
 
 bool player::tengu_flight() const

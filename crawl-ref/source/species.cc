@@ -25,7 +25,7 @@ static const char * Species_Abbrev_List[NUM_SPECIES] =
 #if TAG_MAJOR_VERSION == 34
       "Dj", "LO",
 #endif
-      "Gr", "Fo", "VS",
+      "Gr", "Fo", "VS", "Im",
 };
 
 const char *get_species_abbrev(species_type which_species)
@@ -156,6 +156,7 @@ string species_name(species_type speci, bool genus, bool adj)
         case SP_TENGU:    res = "Tengu";    break;
         case SP_GARGOYLE: res = "Gargoyle"; break;
         case SP_FORMICID: res = "Formicid"; break;
+        case SP_IMP:      res = "Imp";      break;
 
         case SP_VINE_STALKER:
             res = (adj ? "Vine" : genus ? "Vine" : "Vine Stalker");
@@ -336,6 +337,7 @@ size_type species_size(species_type species, size_part_type psize)
         return SIZE_SMALL;
     case SP_SPRIGGAN:
     case SP_FELID:
+    case SP_IMP:
         return SIZE_LITTLE;
 
     default:
@@ -427,6 +429,8 @@ monster_type player_species_to_mons_species(species_type species)
         return MONS_FORMICID;
     case SP_VINE_STALKER:
         return MONS_VINE_STALKER;
+    case SP_IMP:
+        return MONS_CRIMSON_IMP;
     case NUM_SPECIES:
     case SP_UNKNOWN:
     case SP_RANDOM:
@@ -507,6 +511,7 @@ int species_exp_modifier(species_type species)
 #if TAG_MAJOR_VERSION == 34
     case SP_DJINNI:
     case SP_LAVA_ORC:
+    case SP_IMP:
         return -1;
 #endif
     case SP_DEMIGOD:
@@ -529,6 +534,7 @@ int species_hp_modifier(species_type species)
     case SP_TENGU:
     case SP_KOBOLD:
     case SP_GARGOYLE:
+    case SP_IMP:
         return -2;
     case SP_HIGH_ELF:
 #if TAG_MAJOR_VERSION == 34

@@ -607,6 +607,14 @@ string describe_mutations(bool center_title)
         break;
     }
 
+    case SP_IMP:
+    {
+        result += "You are immune to poison.\n";
+        if (you.experience_level >= 14)
+            result += "You can fly continuously.\n";
+        break;
+    }
+
     default:
         break;
     }
@@ -1280,8 +1288,8 @@ bool physiology_mutation_conflict(mutation_type mutat)
     if (you.species == SP_GREEN_DRACONIAN && mutat == MUT_SPIT_POISON)
         return true;
 
-    // Only Draconians (and gargoyles) can get wings.
-    if (!player_genus(GENPC_DRACONIAN) && you.species != SP_GARGOYLE
+    // Only Draconians, Gargoyles, and Imps can get wings.
+    if (!player_genus(GENPC_DRACONIAN) && you.species != SP_GARGOYLE && you.species != SP_IMP
         && mutat == MUT_BIG_WINGS)
     {
         return true;
@@ -1340,6 +1348,10 @@ bool physiology_mutation_conflict(mutation_type mutat)
 
     // Already immune.
     if (you.species == SP_GARGOYLE && mutat == MUT_POISON_RESISTANCE)
+        return true;
+
+    // Also immune.
+    if (you.species == SP_IMP && mutat == MUT_POISON_RESISTANCE)
         return true;
 
     // Can't worship gods.

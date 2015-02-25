@@ -76,6 +76,7 @@ static void _species_stat_init(species_type which_species)
     case SP_TENGU:              s =  8; i =  8; d =  9;      break;  // 25
     case SP_FORMICID:           s = 12; i =  7; d =  6;      break;  // 25
     case SP_VINE_STALKER:       s = 10; i =  8; d =  9;      break;  // 27
+    case SP_IMP:                s =  7; i =  7; d = 11;      break;  // 25
 
     case SP_KOBOLD:             s =  6; i =  6; d = 11;      break;  // 23
     case SP_HALFLING:           s =  8; i =  7; d =  9;      break;  // 24
@@ -319,6 +320,13 @@ void give_basic_mutations(species_type speci)
         you.mutation[MUT_MANA_SHIELD]    = 1;
         you.mutation[MUT_NO_DEVICE_HEAL] = 3;
         you.mutation[MUT_ROT_IMMUNITY]   = 1;
+        break;
+    case SP_IMP:
+        you.mutation[MUT_TELEPORT]                   = 2;
+        you.mutation[MUT_BLINK]                      = 2;
+        you.mutation[MUT_SCREAM]                     = 3;
+        you.mutation[MUT_NEGATIVE_ENERGY_RESISTANCE] = 3;
+        you.mutation[MUT_TORMENT_RESISTANCE]         = 1;
         break;
     default:
         break;

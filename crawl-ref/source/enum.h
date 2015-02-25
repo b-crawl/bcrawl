@@ -4014,6 +4014,7 @@ enum species_type
     SP_GARGOYLE,
     SP_FORMICID,
     SP_VINE_STALKER,
+    SP_IMP,
     NUM_SPECIES,
 
     SP_UNKNOWN  = 100,

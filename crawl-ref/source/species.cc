@@ -529,12 +529,12 @@ int species_hp_modifier(species_type species)
         return -4;
     case SP_SPRIGGAN:
     case SP_VINE_STALKER:
+    case SP_IMP:
         return -3;
     case SP_DEEP_ELF:
     case SP_TENGU:
     case SP_KOBOLD:
     case SP_GARGOYLE:
-    case SP_IMP:
         return -2;
     case SP_HIGH_ELF:
 #if TAG_MAJOR_VERSION == 34

@@ -325,6 +325,7 @@ void give_basic_mutations(species_type speci)
         you.mutation[MUT_TELEPORT]                   = 2;
         you.mutation[MUT_BLINK]                      = 2;
         you.mutation[MUT_SCREAM]                     = 3;
+        you.mutation[MUT_REGENERATION]               = 1;
         you.mutation[MUT_NEGATIVE_ENERGY_RESISTANCE] = 3;
         you.mutation[MUT_TORMENT_RESISTANCE]         = 1;
         break;

@@ -1006,6 +1006,7 @@ char_choice_restriction weapon_restriction(weapon_type wpn,
 #endif
         case SP_SPRIGGAN:
         case SP_TROLL:
+        case SP_IMP:
             return CC_RESTRICTED;
         case SP_FELID:
             return CC_BANNED;
@@ -1027,6 +1028,7 @@ char_choice_restriction weapon_restriction(weapon_type wpn,
 #endif
         case SP_FORMICID:
         case SP_SPRIGGAN:
+        case SP_IMP:
             return CC_RESTRICTED;
         case SP_FELID:
             return CC_BANNED;
@@ -1048,7 +1050,6 @@ char_choice_restriction weapon_restriction(weapon_type wpn,
 #endif
         case SP_TROLL:
         case SP_GARGOYLE:
-        case SP_IMP:
             return CC_RESTRICTED;
         case SP_FELID:
             return CC_BANNED;

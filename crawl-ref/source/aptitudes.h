@@ -1490,14 +1490,14 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     // SP_IMP
     APT(SP_IMP,            SK_FIGHTING,        2),
     APT(SP_IMP,            SK_SHORT_BLADES,    0),
-    APT(SP_IMP,            SK_LONG_BLADES,    -1),
+    APT(SP_IMP,            SK_LONG_BLADES,     0),
     APT(SP_IMP,            SK_AXES,           -2),
-    APT(SP_IMP,            SK_MACES_FLAILS,    2),
+    APT(SP_IMP,            SK_MACES_FLAILS,    1),
     APT(SP_IMP,            SK_POLEARMS,        2),
     APT(SP_IMP,            SK_STAVES,         -1),
     APT(SP_IMP,            SK_SLINGS,          1),
-    APT(SP_IMP,            SK_BOWS,           -3),
-    APT(SP_IMP,            SK_CROSSBOWS,      -3),
+    APT(SP_IMP,            SK_BOWS,           -2),
+    APT(SP_IMP,            SK_CROSSBOWS,      -2),
     APT(SP_IMP,            SK_THROWING,        1),
     APT(SP_IMP,            SK_ARMOUR,         -2),
     APT(SP_IMP,            SK_DODGING,         3),
@@ -1506,7 +1506,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_IMP,            SK_UNARMED_COMBAT,  0),
     APT(SP_IMP,            SK_SPELLCASTING,   -1),
     APT(SP_IMP,            SK_CONJURATIONS,   -2),
-    APT(SP_IMP,            SK_HEXES,          -1),
+    APT(SP_IMP,            SK_HEXES,           1),
     APT(SP_IMP,            SK_CHARMS,         -1),
     APT(SP_IMP,            SK_SUMMONINGS,      1),
     APT(SP_IMP,            SK_NECROMANCY,      0),
@@ -1518,7 +1518,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_IMP,            SK_EARTH_MAGIC,    -2),
     APT(SP_IMP,            SK_POISON_MAGIC,   -1),
     APT(SP_IMP,            SK_INVOCATIONS,     1),
-    APT(SP_IMP,            SK_EVOCATIONS,     -1),
+    APT(SP_IMP,            SK_EVOCATIONS,      0),
 
 };
 

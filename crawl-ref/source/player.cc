@@ -3405,14 +3405,11 @@ void level_change(bool skip_attribute_increase)
                                 "level gain");
                 }
 
-                if (you.experience_level == 7 || you.experience_level == 14)
+                if (you.experience_level == 7)
                 {
                     mprf(MSGCH_INTRINSIC_GAIN,
                          "Your demonic attributes increase your resistance to fire.");
                     perma_mutate(MUT_HEAT_RESISTANCE, 1, "demonic growth");
-                }
-                if (you.experience_level == 7)
-                {
                     mprf(MSGCH_INTRINSIC_GAIN,
                          "Your demonic attributes make you vulnerable to cold.");
                     perma_mutate(MUT_COLD_VULNERABILITY, 1, "demonic growth");

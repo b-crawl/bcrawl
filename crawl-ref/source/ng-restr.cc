@@ -342,6 +342,7 @@ char_choice_restriction species_allowed(job_type job, species_type speci)
         case SP_OGRE:
         case SP_TROLL:
         case SP_CENTAUR:
+        case SP_IMP:
             return CC_UNRESTRICTED;
         default:
             return CC_RESTRICTED;
@@ -797,6 +798,7 @@ char_choice_restriction job_allowed(species_type speci, job_type job)
             case JOB_WARPER:
             case JOB_SUMMONER:
             case JOB_FIRE_ELEMENTALIST:
+            case JOB_HUNTER:
                 return CC_UNRESTRICTED;
             default:
                 return CC_RESTRICTED;
@@ -960,6 +962,7 @@ char_choice_restriction weapon_restriction(weapon_type wpn,
         case SP_FORMICID:
         case SP_VINE_STALKER:
         case SP_HALFLING:
+        case SP_IMP:
             return CC_UNRESTRICTED;
 
         default:

@@ -896,6 +896,12 @@ char_choice_restriction weapon_restriction(weapon_type wpn,
         case SP_VINE_STALKER:
             return CC_UNRESTRICTED;
 
+        case SP_IMP:
+            if (ng.job == JOB_FIGHTER)
+                return CC_BANNED;
+            else
+                return CC_RESTRICTED;
+
         default:
             return CC_RESTRICTED;
         }

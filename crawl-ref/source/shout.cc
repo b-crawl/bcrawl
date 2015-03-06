@@ -521,7 +521,38 @@ static void _set_allies_withdraw(const coord_def &target)
     }
 }
 
-void yell(const actor* mon)
+/**
+ * Impitis dialogue, to be shouted at an unruly foe.
+ *
+ * A small subset of do_mon_str_replacements, basically.
+ *
+ * @param foe       The foe to be shouted at.
+ * @return          An impish sort of insult, surrounded by punctuation.
+ *                  E.g. ', "Scamper hence, thou jarring miscreant tiler!"'
+ *                  Returns "!" if it fails (but it shouldn't?)
+ */
+string _imp_insult(const actor &foe)
+{
+    const string raw_insult = getSpeakString("imp_taunt");
+    if (raw_insult.empty())
+        return "!TEST!";
+
+    const string genus = mons_type_name(mons_genus(foe.type), DESC_PLAIN);
+
+    string msg = raw_insult;
+    if (msg.find("@species_insult_") != string::npos)
+    {
+        msg = replace_all(msg, "@species_insult_adj1@",
+                          get_species_insult(genus, "adj1"));
+        msg = replace_all(msg, "@species_insult_adj2@",
+                          get_species_insult(genus, "adj2"));
+        msg = replace_all(msg, "@species_insult_noun@",
+                          get_species_insult(genus, "noun"));
+    }
+    return make_stringf(", \"%s!\"", msg.c_str());
+}
+
+void yell(const actor *mon)
 {
     ASSERT(!crawl_state.game_is_arena());
 
@@ -559,10 +590,11 @@ void yell(const actor* mon)
 
     if (mon)
     {
-        mprf("You %s%s at %s!",
+        mprf("You %s%s at %s%s",
              shout_verb.c_str(),
              you.duration[DUR_RECITE] ? " your recitation" : "",
-             mon->name(DESC_THE).c_str());
+             mon->name(DESC_THE).c_str(),
+             you.species == SP_IMP ? _imp_insult(*mon).c_str() : "!");
         noisy(noise_level, you.pos());
         return;
     }

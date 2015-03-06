@@ -3899,7 +3899,7 @@ static string _replace_god_name(god_type god, bool need_verb = false,
     return result;
 }
 
-static string _get_species_insult(const string &species, const string &type)
+string get_species_insult(const string &species, const string &type)
 {
     string insult;
     string lookup;
@@ -4254,11 +4254,11 @@ string do_mon_str_replacements(const string &in_msg, const monster* mons,
     if (msg.find("@species_insult_") != string::npos)
     {
         msg = replace_all(msg, "@species_insult_adj1@",
-                               _get_species_insult(foe_species, "adj1"));
+                               get_species_insult(foe_species, "adj1"));
         msg = replace_all(msg, "@species_insult_adj2@",
-                               _get_species_insult(foe_species, "adj2"));
+                               get_species_insult(foe_species, "adj2"));
         msg = replace_all(msg, "@species_insult_noun@",
-                               _get_species_insult(foe_species, "noun"));
+                               get_species_insult(foe_species, "noun"));
     }
 
     static const char * sound_list[] =

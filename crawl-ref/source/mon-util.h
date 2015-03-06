@@ -430,6 +430,7 @@ monster_type random_monster_at_grid(const coord_def& p, bool species = false);
 void         init_mon_name_cache();
 monster_type get_monster_by_name(string name, bool substring = false);
 
+string get_species_insult(const string &species, const string &type);
 string do_mon_str_replacements(const string &msg, const monster* mons,
                                int s_type = -1);
 

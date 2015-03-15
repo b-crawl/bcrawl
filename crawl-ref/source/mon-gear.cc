@@ -622,6 +622,13 @@ static void _give_weapon(monster* mon, int level, bool melee_only = false,
         level = ISPEC_GOOD_ITEM;
         break;
 
+    case MONS_MYRMECIA:
+        item.base_type = OBJ_WEAPONS;
+        item.sub_type  = random_choose(WPN_GREAT_SWORD, WPN_BATTLEAXE,
+                                       WPN_GLAIVE, WPN_GREAT_MACE);
+        level = ISPEC_GOOD_ITEM;
+        break;
+
     case MONS_WIGLAF:
         item.base_type = OBJ_WEAPONS;
         // speech references an axe
@@ -1859,6 +1866,12 @@ static void _give_shield(monster* mon, int level)
         }
         break;
 
+
+    case MONS_MYRMECIA:
+        make_item_for_monster(mon, OBJ_ARMOUR, ARM_LARGE_SHIELD,
+                              level * 4 + 2, 2);
+        break;
+
     case MONS_WIGLAF:
         make_item_for_monster(mon, OBJ_ARMOUR, ARM_SHIELD,
                               level * 2 + 1, 1);
@@ -2060,6 +2073,14 @@ static void _give_armour(monster* mon, int level, bool spectral_orcs)
                                        ARM_SCALE_MAIL,     ARM_CHAIN_MAIL);
         break;
     }
+
+    case MONS_MYRMECIA:
+        item.base_type = OBJ_ARMOUR;
+        item.sub_type = random_choose_weighted(6, ARM_STORM_DRAGON_ARMOUR,
+                                               4, ARM_SHADOW_DRAGON_ARMOUR,
+                                               2, ARM_CRYSTAL_PLATE_ARMOUR,
+                                               0);
+        break;
 
     case MONS_WIGLAF:
         if (one_chance_in(3))

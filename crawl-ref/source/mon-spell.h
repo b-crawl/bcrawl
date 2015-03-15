@@ -737,6 +737,12 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
+    {  MST_MYRMECIA,
+      {
+       { SPELL_SWIFTNESS, 30, MON_SPELL_PRIEST },
+      }
+    },
+
     {  MST_RUPERT,
       {
        { SPELL_PARALYSE, 16, MON_SPELL_MAGICAL | MON_SPELL_NO_SILENT },

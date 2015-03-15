@@ -1347,6 +1347,7 @@ tileidx_t tileidx_monster_base(int type, bool in_water, int colour, int number,
                                  number <= 5 ?
                                  number - 1 : 4 + (number - 1)/5);
 
+
     // draconian ('d')
     case MONS_TIAMAT:
     {

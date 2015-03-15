@@ -2276,6 +2276,7 @@ static const map<monster_type, band_set> bands_by_leader = {
             || !vault_mon_types.empty();
     }},                           {{ BAND_RANDOM_SINGLE, {1, 2} }}}},
     { MONS_MELIAI,          { {}, {{ BAND_MELIAI, {2, 3} }}}},
+    { MONS_MYRMECIA,        { {}, {{ BAND_MELIAI, {3, 4} }}}},
 
     // special-cased band-sizes
     { MONS_SPRIGGAN_DRUID,  { {3}, {{ BAND_SPRIGGAN_DRUID, {0, 1} }}}},

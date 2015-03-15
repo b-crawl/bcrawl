@@ -407,6 +407,13 @@ An unusually thin troll.
 
 You feel a lump in the pit of your stomach.
 %%%%
+Myrmecia
+
+A formicid warrior. Myrmecia is on a mission from her god, the Queen of All
+that Buzzes and Crawls, to find the Orb of Zot. It's possible that she has her
+own plans for what to do with it, but she won't let anyone stand in her way
+until she find it.
+%%%%
 Robin
 
 A mountain hobgoblin, recently come in search of the legendary Orb. Not

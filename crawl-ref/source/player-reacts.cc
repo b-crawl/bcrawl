@@ -1342,6 +1342,8 @@ void player_reacts()
         // this is instantaneous
         if (teleportitis_level > 0 && one_chance_in(100 / teleportitis_level))
         {
+            if (you.species == SP_IMP && you.stasis())
+                confuse_player(5 + random2(3));
             if (teleportitis_level >= 8)
                 you_teleport_now(false);
             else

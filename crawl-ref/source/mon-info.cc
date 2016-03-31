@@ -914,6 +914,7 @@ static string _mutant_beast_tier_name(short xl_tier)
     return mutant_beast_tier_names[xl_tier];
 }
 
+#ifndef CHAOS_CRAWL
 /**
  * Name the given mutant beast facet.
  *
@@ -926,7 +927,7 @@ static string _mutant_beast_facet(int facet)
         return "buggy";
     return mutant_beast_facet_names[facet];
 }
-
+#endif
 
 string monster_info::db_name() const
 {
@@ -1086,11 +1087,19 @@ string monster_info::common_name(description_level_type desc) const
 
     if (type == MONS_MUTANT_BEAST && !is(MB_NAME_REPLACE))
     {
+#ifdef CHAOS_CRAWL
+        const int tier = BT_PRIMAL;
+#else
         const int xl = props[MUTANT_BEAST_TIER].get_short();
         const int tier = mutant_beast_tier(xl);
+#endif
         ss << _mutant_beast_tier_name(tier) << " ";
+#ifdef CHAOS_CRAWL
+        ss << "shockbatweird";
+#else
         for (auto facet : props[MUTANT_BEAST_FACETS].get_vector())
             ss << _mutant_beast_facet(facet.get_int()); // no space between
+#endif
         ss << " beast";
     }
 

@@ -488,13 +488,7 @@ monster_info::monster_info(const monster* m, int milev)
 
     const string mtyp_key = make_stringf("%d", m->type);
     if (mon_mapping.exists(mtyp_key))
-    {
         type = (monster_type)mon_mapping[mtyp_key].get_int();
-        dprf("type: %s (%s) -> %s",
-             mons_type_name(m->type, DESC_PLAIN).c_str(),
-             mtyp_key.c_str(),
-             mons_type_name(type, DESC_PLAIN).c_str());
-    }
     else
 #endif
         type = m->type;
@@ -523,12 +517,7 @@ monster_info::monster_info(const monster* m, int milev)
                  (monster_type)job_mapping[styp_key].get_int() :
                   type;
     if (job_mapping.exists(styp_key))
-    {
         const string draco_name = mons_type_name(draco_type, DESC_PLAIN);
-        dprf("job: %s is %s (%d)",
-             mons_type_name(type, DESC_PLAIN).c_str(), draco_name.c_str(),
-             job_mapping[styp_key].get_int());
-    }
 #else
     draco_type =
         (mons_genus(type) == MONS_DRACONIAN
@@ -548,13 +537,7 @@ monster_info::monster_info(const monster* m, int milev)
     if (mons_is_job(type)) //ds/dr
         base_type = draco_type;
     else if (mon_mapping.exists(btyp_key)) // zombie
-    {
         base_type = (monster_type)mon_mapping[btyp_key].get_int();
-        dprf("base type: %s (%s) -> %s",
-             mons_type_name(m->base_monster, DESC_PLAIN).c_str(),
-             btyp_key.c_str(),
-             mons_type_name(base_type, DESC_PLAIN).c_str());
-    }
     else
         base_type = type;
 #else

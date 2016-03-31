@@ -196,6 +196,72 @@ static bool _is_public_key(string key)
     return false;
 }
 
+#ifdef CHAOS_CRAWL
+
+#define CHAOS_MON_MAP "chaos_mon_map_key"
+#define CHAOS_JOB_MAP "chaos_job_map_key"
+
+/// Setup the mapping
+static void _build_mon_mapping()
+{
+    if (you.props.exists(CHAOS_MON_MAP))
+        return;
+
+    vector<monster_type> mapped_mons;
+    for (int i = 0; i < NUM_MONSTERS; ++i)
+    {
+        const monster_type mon = static_cast<monster_type>(i);
+        if (mons_class_flag(mon, M_CANT_SPAWN)
+            || mons_class_is_zombified(mon)
+            || mons_is_tentacle_or_tentacle_segment(mon)
+            || mons_is_pghost(mon))
+        {
+            continue;
+        }
+
+        mapped_mons.push_back(mon);
+    }
+
+    vector<monster_type> shuffled_mons = mapped_mons;
+    shuffle_array(shuffled_mons);
+
+    CrawlHashTable &mon_mapping = you.props[CHAOS_MON_MAP].get_table();
+    CrawlHashTable &job_mapping = you.props[CHAOS_JOB_MAP].get_table();
+    for (int i = 0; i < (int)mapped_mons.size(); ++i)
+    {
+        const monster_type orig = mapped_mons[i];
+        const monster_type sub = shuffled_mons[i];
+        dprf("%s -> %s",
+             mons_type_name(orig, DESC_PLAIN).c_str(),
+             mons_type_name(sub, DESC_PLAIN).c_str());
+        mon_mapping[make_stringf("%d", orig)].get_int() = sub;
+
+        if (mons_is_draconian_job(sub) || sub == MONS_TIAMAT)
+        {
+            job_mapping[make_stringf("%d", sub)].get_int()
+                = random_range(MONS_FIRST_BASE_DRACONIAN,
+                               MONS_LAST_BASE_DRACONIAN);
+        }
+        else if (mons_is_demonspawn_job(sub))
+        {
+            job_mapping[make_stringf("%d", sub)].get_int()
+                = random_range(MONS_FIRST_BASE_DEMONSPAWN,
+                               MONS_LAST_BASE_DEMONSPAWN);
+        }
+    }
+}
+monster_type map_mon_type(monster_type type)
+{
+    _build_mon_mapping();
+    CrawlHashTable &mon_mapping = you.props[CHAOS_MON_MAP].get_table();
+    const string mkey = make_stringf("%d", type);
+    if (mon_mapping.exists(mkey))
+        return (monster_type)mon_mapping[mkey].get_int();
+    return type;
+}
+
+#endif
+
 static int quantise(int value, int stepsize)
 {
     return value + stepsize - value % stepsize;
@@ -415,7 +481,24 @@ monster_info::monster_info(const monster* m, int milev)
 
     bool nomsg_wounds = false;
 
-    type = m->type;
+#ifdef CHAOS_CRAWL
+    _build_mon_mapping();
+    CrawlHashTable &mon_mapping = you.props[CHAOS_MON_MAP].get_table();
+    CrawlHashTable &job_mapping = you.props[CHAOS_JOB_MAP].get_table();
+
+    const string mtyp_key = make_stringf("%d", m->type);
+    if (mon_mapping.exists(mtyp_key))
+    {
+        type = (monster_type)mon_mapping[mtyp_key].get_int();
+        dprf("type: %s (%s) -> %s",
+             mons_type_name(m->type, DESC_PLAIN).c_str(),
+             mtyp_key.c_str(),
+             mons_type_name(type, DESC_PLAIN).c_str());
+    }
+    else
+#endif
+        type = m->type;
+
     threat = mons_threat_level(m);
 
     props.clear();
@@ -434,11 +517,25 @@ monster_info::monster_info(const monster* m, int milev)
         _translate_tentacle_ref(*this, m, "outwards");
     }
 
+#ifdef CHAOS_CRAWL
+    const string styp_key = make_stringf("%d", type);
+    draco_type = job_mapping.exists(styp_key) ?
+                 (monster_type)job_mapping[styp_key].get_int() :
+                  type;
+    if (job_mapping.exists(styp_key))
+    {
+        const string draco_name = mons_type_name(draco_type, DESC_PLAIN);
+        dprf("job: %s is %s (%d)",
+             mons_type_name(type, DESC_PLAIN).c_str(), draco_name.c_str(),
+             job_mapping[styp_key].get_int());
+    }
+#else
     draco_type =
         (mons_genus(type) == MONS_DRACONIAN
         || mons_genus(type) == MONS_DEMONSPAWN)
             ? ::draco_or_demonspawn_subspecies(m)
             : type;
+#endif
 
     if (!mons_can_display_wounds(m)
         || !mons_class_can_display_wounds(type))
@@ -446,18 +543,49 @@ monster_info::monster_info(const monster* m, int milev)
         nomsg_wounds = true;
     }
 
+#ifdef CHAOS_CRAWL
+    const string btyp_key = make_stringf("%d", m->base_monster);
+    if (mons_is_job(type)) //ds/dr
+        base_type = draco_type;
+    else if (mon_mapping.exists(btyp_key)) // zombie
+    {
+        base_type = (monster_type)mon_mapping[btyp_key].get_int();
+        dprf("base type: %s (%s) -> %s",
+             mons_type_name(m->base_monster, DESC_PLAIN).c_str(),
+             btyp_key.c_str(),
+             mons_type_name(base_type, DESC_PLAIN).c_str());
+    }
+    else
+        base_type = type;
+#else
     base_type = m->base_monster;
     if (base_type == MONS_NO_MONSTER)
         base_type = type;
+#endif
 
     if (type == MONS_SLIME_CREATURE)
+#ifdef CHAOS_CRAWL
+        slime_size = 5;
+#else
         slime_size = m->blob_size;
+#endif
     else if (type == MONS_BALLISTOMYCETE)
+#ifdef CHAOS_CRAWL
+        is_active = true;
+#else
         is_active = !!m->ballisto_activity;
+#endif
     else if (mons_genus(type) == MONS_HYDRA
              || mons_genus(base_type) == MONS_HYDRA)
     {
+#ifdef CHAOS_CRAWL
+        if (type == MONS_LERNAEAN_HYDRA || base_type == MONS_LERNAEAN_HYDRA)
+            num_heads = 27;
+        else
+            num_heads = 9;
+#else
         num_heads = m->num_heads;
+#endif
     }
     // others use number for internal information
     else

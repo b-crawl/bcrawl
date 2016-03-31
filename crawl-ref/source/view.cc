@@ -183,7 +183,11 @@ static string _desc_mons_type_map(map<monster_type, int> types)
         else
             desc = DESC_PLAIN;
 
-        name = mons_type_name(entry.first, desc);
+        monster_type type = entry.first;
+#ifdef CHAOS_CRAWL
+        type = map_mon_type(type);
+#endif
+        name = mons_type_name(type, desc);
         if (entry.second > 1)
         {
             name = make_stringf("%d %s", entry.second,

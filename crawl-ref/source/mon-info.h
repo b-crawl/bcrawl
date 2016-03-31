@@ -5,6 +5,8 @@
 
 #define SPECIAL_WEAPON_KEY "special_weapon_name"
 
+#define CHAOS_CRAWL
+
 enum monster_info_flags
 {
     MB_STABBABLE,
@@ -373,4 +375,8 @@ void clear_monster_list_colours();
 void get_monster_info(vector<monster_info>& mons);
 
 typedef function<vector<string> (const monster_info& mi)> (desc_filter);
+
+#ifdef CHAOS_CRAWL
+monster_type map_mon_type(monster_type type);
+#endif
 #endif

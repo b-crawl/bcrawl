@@ -5,7 +5,9 @@
 
 #define SPECIAL_WEAPON_KEY "special_weapon_name"
 
+#ifndef USE_TILE_LOCAL
 #define CHAOS_CRAWL
+#endif
 
 enum monster_info_flags
 {

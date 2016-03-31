@@ -236,17 +236,22 @@ static void _build_mon_mapping()
              mons_type_name(sub, DESC_PLAIN).c_str());
         mon_mapping[make_stringf("%d", orig)].get_int() = sub;
 
+        const string skey = make_stringf("%d", sub);
         if (mons_is_draconian_job(sub) || sub == MONS_TIAMAT)
         {
-            job_mapping[make_stringf("%d", sub)].get_int()
+            job_mapping[skey].get_int()
                 = random_range(MONS_FIRST_BASE_DRACONIAN,
                                MONS_LAST_BASE_DRACONIAN);
         }
         else if (mons_is_demonspawn_job(sub))
         {
-            job_mapping[make_stringf("%d", sub)].get_int()
+            job_mapping[skey].get_int()
                 = random_range(MONS_FIRST_BASE_DEMONSPAWN,
                                MONS_LAST_BASE_DEMONSPAWN);
+        } else if (sub == MONS_PILLAR_OF_SALT || sub == MONS_BLOCK_OF_ICE)
+        {
+            job_mapping[skey].get_int()
+                = mapped_mons[random2(mapped_mons.size())];
         }
     }
 }
@@ -516,8 +521,6 @@ monster_info::monster_info(const monster* m, int milev)
     draco_type = job_mapping.exists(styp_key) ?
                  (monster_type)job_mapping[styp_key].get_int() :
                   type;
-    if (job_mapping.exists(styp_key))
-        const string draco_name = mons_type_name(draco_type, DESC_PLAIN);
 #else
     draco_type =
         (mons_genus(type) == MONS_DRACONIAN
@@ -534,7 +537,7 @@ monster_info::monster_info(const monster* m, int milev)
 
 #ifdef CHAOS_CRAWL
     const string btyp_key = make_stringf("%d", m->base_monster);
-    if (mons_is_job(type)) //ds/dr
+    if (draco_type != type) //ds/dr
         base_type = draco_type;
     else if (mon_mapping.exists(btyp_key)) // zombie
         base_type = (monster_type)mon_mapping[btyp_key].get_int();

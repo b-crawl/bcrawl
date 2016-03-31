@@ -605,7 +605,7 @@ public:
                           bool quiet = true) const override;
 
     string name(description_level_type type, bool force_visible = false,
-                bool force_article = false) const override;
+                bool force_article = false, bool /*force_real*/ = false) const override;
     string pronoun(pronoun_type pro, bool force_visible = false) const override;
     string conj_verb(const string &verb) const override;
     string hand_name(bool plural, bool *can_plural = nullptr) const override;

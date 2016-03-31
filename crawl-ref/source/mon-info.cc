@@ -476,7 +476,7 @@ static description_level_type _article_for(const actor* a)
     return m && m->friendly() ? DESC_YOUR : DESC_A;
 }
 
-monster_info::monster_info(const monster* m, int milev)
+monster_info::monster_info(const monster* m, int milev, bool force_real)
 {
     mb.reset();
     attitude = ATT_HOSTILE;
@@ -492,7 +492,7 @@ monster_info::monster_info(const monster* m, int milev)
     CrawlHashTable &job_mapping = you.props[CHAOS_JOB_MAP].get_table();
 
     const string mtyp_key = make_stringf("%d", m->type);
-    if (mon_mapping.exists(mtyp_key))
+    if (!force_real && mon_mapping.exists(mtyp_key))
         type = (monster_type)mon_mapping[mtyp_key].get_int();
     else
 #endif
@@ -518,7 +518,7 @@ monster_info::monster_info(const monster* m, int milev)
 
 #ifdef CHAOS_CRAWL
     const string styp_key = make_stringf("%d", type);
-    draco_type = job_mapping.exists(styp_key) ?
+    draco_type = !force_real && job_mapping.exists(styp_key) ?
                  (monster_type)job_mapping[styp_key].get_int() :
                   type;
 #else
@@ -536,17 +536,24 @@ monster_info::monster_info(const monster* m, int milev)
     }
 
 #ifdef CHAOS_CRAWL
-    const string btyp_key = make_stringf("%d", m->base_monster);
-    if (draco_type != type) //ds/dr
-        base_type = draco_type;
-    else if (mon_mapping.exists(btyp_key)) // zombie
-        base_type = (monster_type)mon_mapping[btyp_key].get_int();
+    if (!force_real)
+    {
+        const string btyp_key = make_stringf("%d", m->base_monster);
+        if (draco_type != type) //ds/dr
+            base_type = draco_type;
+        else if (mon_mapping.exists(btyp_key)) // zombie
+            base_type = (monster_type)mon_mapping[btyp_key].get_int();
+        else
+            base_type = type;
+    }
     else
-        base_type = type;
-#else
-    base_type = m->base_monster;
-    if (base_type == MONS_NO_MONSTER)
-        base_type = type;
+    {
+#endif
+        base_type = m->base_monster;
+        if (base_type == MONS_NO_MONSTER)
+            base_type = type;
+#ifdef CHAOS_CRAWL
+    }
 #endif
 
     if (type == MONS_SLIME_CREATURE)

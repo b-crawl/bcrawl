@@ -353,6 +353,13 @@ static void _translate_tentacle_ref(monster_info& mi, const monster* m,
     }
 }
 
+/// is the given monster_info a hydra, zombie hydra, lerny, etc?
+static bool _is_hydra(const monster_info &mi)
+{
+    return mons_genus(mi.type) == MONS_HYDRA
+           || mons_genus(mi.base_type) == MONS_HYDRA;
+}
+
 monster_info::monster_info(monster_type p_type, monster_type p_base_type)
 {
     mb.reset();
@@ -360,13 +367,15 @@ monster_info::monster_info(monster_type p_type, monster_type p_base_type)
     pos = coord_def(0, 0);
 
     type = p_type;
-    base_type = p_base_type;
 
-    draco_type = mons_genus(type) == MONS_DRACONIAN  ? MONS_DRACONIAN :
-                 mons_genus(type) == MONS_DEMONSPAWN ? MONS_DEMONSPAWN
-                                                     : type;
+    // give 'job' monsters a default race.
+    const bool classy_drac = mons_is_draconian_job(type) || type == MONS_TIAMAT;
+    base_type = p_base_type != MONS_NO_MONSTER ? p_base_type
+                : classy_drac ? MONS_DRACONIAN
+                : mons_is_demonspawn_job(type) ? MONS_DEMONSPAWN
+                : type;
 
-    if (mons_genus(type) == MONS_HYDRA || mons_genus(base_type) == MONS_HYDRA)
+    if (_is_hydra(*this))
         num_heads = 1;
     else
         number = 0;
@@ -424,16 +433,10 @@ monster_info::monster_info(monster_type p_type, monster_type p_base_type)
         i_ghost.damage = 5;
     }
 
-    // Don't put a bad base type on ?/mdraconian annihilator etc.
-    if (base_type == MONS_NO_MONSTER && !mons_is_job(type))
-        base_type = type;
-
     if (mons_is_job(type))
     {
-        const monster_type race = (base_type == MONS_NO_MONSTER) ? draco_type
-                                                                 : base_type;
-        ac += get_mons_class_ac(race);
-        ev += get_mons_class_ev(race);
+        ac += get_mons_class_ac(base_type);
+        ev += get_mons_class_ev(base_type);
     }
 
     if (mons_is_unique(type))
@@ -516,19 +519,6 @@ monster_info::monster_info(const monster* m, int milev, bool force_real)
         _translate_tentacle_ref(*this, m, "outwards");
     }
 
-#ifdef CHAOS_CRAWL
-    const string styp_key = make_stringf("%d", type);
-    draco_type = !force_real && job_mapping.exists(styp_key) ?
-                 (monster_type)job_mapping[styp_key].get_int() :
-                  type;
-#else
-    draco_type =
-        (mons_genus(type) == MONS_DRACONIAN
-        || mons_genus(type) == MONS_DEMONSPAWN)
-            ? ::draco_or_demonspawn_subspecies(m)
-            : type;
-#endif
-
     if (!mons_can_display_wounds(m)
         || !mons_class_can_display_wounds(type))
     {
@@ -538,10 +528,11 @@ monster_info::monster_info(const monster* m, int milev, bool force_real)
 #ifdef CHAOS_CRAWL
     if (!force_real)
     {
+        const string styp_key = make_stringf("%d", type);
         const string btyp_key = make_stringf("%d", m->base_monster);
-        if (draco_type != type) //ds/dr
-            base_type = draco_type;
-        else if (mon_mapping.exists(btyp_key)) // zombie
+        if (job_mapping.exists(styp_key)) // ds/dr, salt, ice
+            base_type = (monster_type)job_mapping[styp_key].get_int();
+        else if (mon_mapping.exists(btyp_key)) // derived undead
             base_type = (monster_type)mon_mapping[btyp_key].get_int();
         else
             base_type = type;
@@ -568,8 +559,7 @@ monster_info::monster_info(const monster* m, int milev, bool force_real)
 #else
         is_active = !!m->ballisto_activity;
 #endif
-    else if (mons_genus(type) == MONS_HYDRA
-             || mons_genus(base_type) == MONS_HYDRA)
+    else if (_is_hydra(*this))
     {
 #ifdef CHAOS_CRAWL
         if (type == MONS_LERNAEAN_HYDRA || base_type == MONS_LERNAEAN_HYDRA)
@@ -1064,7 +1054,7 @@ string monster_info::common_name(description_level_type desc) const
     if (type == MONS_BALLISTOMYCETE)
         ss << (is_active ? "active " : "");
 
-    if ((mons_genus(type) == MONS_HYDRA || mons_genus(base_type) == MONS_HYDRA)
+    if (_is_hydra(*this)
         && type != MONS_SENSED
         && type != MONS_BLOCK_OF_ICE
         && type != MONS_PILLAR_OF_SALT)
@@ -1278,7 +1268,7 @@ bool monster_info::less_than(const monster_info& m1, const monster_info& m2,
         }
 
         // Both monsters are hydras or hydra zombies, sort by number of heads.
-        if (mons_genus(m1.type) == MONS_HYDRA || mons_genus(m1.base_type) == MONS_HYDRA)
+        if (_is_hydra(m1))
         {
             if (m1.num_heads > m2.num_heads)
                 return true;

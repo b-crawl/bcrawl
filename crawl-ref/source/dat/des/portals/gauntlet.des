@@ -15,7 +15,7 @@
 # Thanks to dracoomega, gammafunk, pleasingfungus, and chequers for feedback,
 # re-writes, and code.
 #
-# == TODO == 
+# == TODO ==
 # -- required --
 # * Visible no teleport status
 #   (alongside changing -TELE properties to permit blink?)
@@ -433,12 +433,11 @@ SUBST:    ~ = ., H : x., I : x., J : x.
 # XXX: Lowercase plates should remove uppercase walls.
 # Pressing either of a pair of MN -> RS -> YZ removes the other plate
 # in the pair, and reveals the next pair of plates.
-#KFEAT:    pqrsyz = known pressure plate trap
-#SUBST:    PQRSYZ = o
-: gauntlet_setup(_G)
-: gauntlet_place_grate_trap_pair(_G, {"m", "n"}, {"M", "N"}, {1, 2})
-: gauntlet_place_grate_trap_pair(_G, {"r", "s"}, {"R", "S"}, {3, 4})
-: gauntlet_place_grate_trap_pair(_G, {"y", "z"}, {"Y", "Z"}, {5, 6})
+{{
+gauntlet_setup(_G)
+gauntlet_place_wall_traps(_G, { {"m", "n"}, {"r", "s"}, {"y", "z"} },
+                              { {"M", "N"}, {"R", "S"}, {"Y", "Z"} })
+}}
 MAP
                XXXXXXXXXXXXXXXXXXX
          XXXXXXX.....X.....X.....XXXXXXX

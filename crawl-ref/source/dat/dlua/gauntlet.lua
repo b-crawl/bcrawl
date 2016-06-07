@@ -165,52 +165,92 @@ function gauntlet_setup(e)
   e.colour('" = red')
 end
 
-function gauntlet_place_grate_trap_pair(e, plate_glyphs, wall_glyphs,
-                                        trigger_values)
-  for i = 1, 2 do
-    pair_index = i == 1 and 2 or 1
-    local tm = TriggerableFunction:new{
-      func="callback.gauntlet_lower_wall", repeated=true,
-      data={triggered=false, trigger_value = trigger_values[i],
-            pair_value = trigger_values[pair_index]} }
-    tm:add_triggerer(DgnTriggerer:new{type="pressure_plate"})
-    e.lua_marker(plate_glyphs[i], tm)
-    e.lua_marker(plate_glyphs[i], props_marker { plate = trigger_values[i] })
-    e.kfeat(plate_glyphs[i] .. " = known pressure plate trap")
-
-    e.lua_marker(wall_glyphs[i],
-                 props_marker { trap_wall = trigger_values[i]})
-    e.kfeat(wall_glyphs[i] .. " = clear_permarock_wall")
+-- Places sequential pairs of pressure plate traps that lower corresponding
+-- walls. Each pair is placed and activated after previous pair is
+-- triggered. When one trap of a pair is triggered, the other trap is removed,
+-- so the player can only trigger one trap in a pair.
+--
+-- Arguments
+-- * plate_glyphs: An array of arrays with one array for each pair of
+-- traps. Each inner array should have two entries, the first and second
+-- glyph for the traps in the pair.
+-- * wall_glyphs: An array of arrays matched with plate_glyphs, but giving the
+-- pairs of glyphs used for each wall in the trap pair.
+function gauntlet_place_wall_traps(e, plate_glyphs, wall_glyphs)
+  -- Only one pair of plate traps is active at a time, beginning the first
+  -- pair.
+  local shared_data = {num_pairs = #plate_glyphs, active_pair = 1,
+                       triggered = { } }
+  for i = 1, #plate_glyphs do
+    shared_data.triggered[i] = false
+    for j = 1, 2 do
+      trigger_value = 2 * (i - 1) + j
+      local tm = TriggerableFunction:new{
+        func="callback.gauntlet_lower_trap_wall", repeated=true,
+        data={shared=shared_data, trigger_value=trigger_value} }
+      tm:add_triggerer(DgnTriggerer:new{type="pressure_plate"})
+      e.lua_marker(plate_glyphs[i][j], tm)
+      e.lua_marker(plate_glyphs[i][j], props_marker {plate = trigger_value})
+      e.kfeat(plate_glyphs[i][j] .. " = floor")
+      e.lua_marker(wall_glyphs[i][j], props_marker {trap_wall = trigger_value})
+      e.kfeat(wall_glyphs[i][j] .. " = clear_permarock_wall")
+    end
   end
+  -- The initial plate traps
+  e.kfeat(plate_glyphs[1][1] .. " = known pressure plate trap")
+  e.kfeat(plate_glyphs[1][2] .. " = known pressure plate trap")
 end
 
-function callback.gauntlet_lower_wall(data, triggerable, triggerer, marker, ev)
-    if data.triggered == true then
-        return
+-- Lower the wall of a triggered trap, deactivate the other trap in the pair,
+-- and activate the next pair of traps.
+function callback.gauntlet_lower_trap_wall(data, triggerable, triggerer, marker,
+                                           ev)
+  -- Don't trigger if we have already or if we're not the active trap pair.
+  local pair_number = math.floor((data.trigger_value + 1) / 2)
+  crawl.mpr("pn: " .. pair_number .. "; tv: " .. data.trigger_value)
+  if (data.shared.active_pair ~= pair_number
+      or data.shared.triggered[pair_number] == true) then
+    return
+  end
+  crawl.mpr("yo2")
+  local x, y = marker:pos()
+  local you_x, you_y = you.pos()
+  local seen = false
+  for slave in iter.slave_iterator("trap_wall", data.trigger_value) do
+    dgn.terrain_changed(slave.x, slave.y, "floor", false, false)
+    if (you.see_cell(slave.x, slave.y)) then
+      seen = true
     end
+  end
 
-    local x, y = marker:pos()
-    local you_x, you_y = you.pos()
-    local seen = false
-    for slave in iter.slave_iterator("trap_wall", data.trigger_value) do
-      dgn.terrain_changed(slave.x, slave.y, "floor", false, false, false)
-      if (you.see_cell(slave.x, slave.y)) then
-        seen = true
-      end
-    end
+  if seen then
+    crawl.mpr("The pressure plate clicks, and a section of wall lowers!")
+  else
+    crawl.mpr("The pressure plate clicks, and you hear a wall moving!")
+  end
 
-    if seen then
-      crawl.mpr("The pressure plate clicks, and a section of wall lowers!")
-    else
-      crawl.mpr("The pressure plate clicks, and you hear a wall moving!")
-    end
+  -- Remove pressure plates.
+  for slave in iter.slave_iterator("plate", data.trigger_value) do
+    dgn.grid(slave.x, slave.y, "floor")
+  end
+  -- To calculate the trigger value of this trap's pair
+  local offset = data.trigger_value % 2 == 1 and 1 or -1
+  for slave in iter.slave_iterator("plate", data.trigger_value + offset) do
+    dgn.grid(slave.x, slave.y, "floor")
+  end
 
-    -- Remove pressure plates.
-    for slave in iter.slave_iterator("plate", data.trigger_value) do
-      dgn.grid(slave.x, slave.y, "floor")
-    end
-    for slave in iter.slave_iterator("plate", data.pair_value) do
-      dgn.grid(slave.x, slave.y, "floor")
-    end
-    data.triggered = true
+  data.shared.triggered[pair_number] = true
+  if pair_number == data.shared.num_pairs then
+    return
+  end
+
+  -- Place the plate trap features for the next trap pair.
+  local next_pair = pair_number + 1
+  for slave in iter.slave_iterator("plate", 2 * (next_pair - 1) + 1) do
+    dgn.place_specific_trap(slave.x, slave.y, "pressure plate", true)
+  end
+  for slave in iter.slave_iterator("plate", 2 * next_pair) do
+    dgn.place_specific_trap(slave.x, slave.y, "pressure plate", true)
+  end
+  data.shared.active_pair = next_pair
 end

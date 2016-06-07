@@ -10,6 +10,7 @@
 #include "colour.h"
 #include "coord.h"
 #include "coordit.h"
+#include "describe.h"
 #include "dgn-shoals.h"
 #include "directn.h"
 #include "dungeon.h"
@@ -24,6 +25,7 @@
 #include "stringutil.h"
 #include "tiledef-dngn.h"
 #include "tileview.h"
+#include "traps.h"
 #include "view.h"
 
 static const char *VAULT_PLACEMENT_METATABLE = "crawl.vault-placement";
@@ -872,6 +874,56 @@ static int dgn_terrain_changed(lua_State *ls)
                                        luaL_checkint(ls, 2)),
                             type, affect_player,
                             preserve_features, preserve_items);
+    return 0;
+}
+
+static int dgn_place_specific_trap(lua_State *ls)
+{
+    trap_type type = TRAP_UNASSIGNED;
+    coord_def pos(luaL_checkint(ls, 1), luaL_checkint(ls, 2));
+
+    if (lua_isnumber(ls, 3))
+        type = static_cast<trap_type>(luaL_checkint(ls, 3));
+    else if (lua_isstring(ls, 3))
+    {
+        string spec = lowercase_string(lua_tostring(ls, 3));
+        for (int t =
+#if TAG_MAJOR_VERSION == 34
+                 TRAP_DART
+#else
+                 TRAP_ARROW
+#endif
+                 ; t < TRAP_UNASSIGNED; ++t)
+        {
+            const trap_type tr = static_cast<trap_type>(t);
+            string tname = lowercase_string(trap_name(tr));
+            if (spec.find(tname) != spec.npos)
+            {
+                type = tr;
+                break;
+            }
+        }
+        if (type == TRAP_UNASSIGNED)
+        {
+            luaL_error(ls, ("unknown trap type '" + spec + "'.").c_str());
+            return 0;
+        }
+    }
+
+    const bool reveal =
+        lua_isboolean(ls, 4)? lua_toboolean(ls, 4) : false;
+
+    if (grd(pos) != DNGN_FLOOR)
+    {
+        luaL_error(ls, "tried to place trap non-floor feature %s at (%d, %d)",
+                   feat_type_name(grd(pos)), pos.x, pos.y);
+        return 0;
+    }
+
+    place_specific_trap(pos, type);
+    if (reveal)
+        trap_at(pos)->reveal();
+
     return 0;
 }
 
@@ -1834,6 +1886,7 @@ const struct luaL_reg dgn_dlib[] =
 { "cloud_at", dgn_cloud_at },
 
 { "terrain_changed", dgn_terrain_changed },
+{ "place_specific_trap", dgn_place_specific_trap },
 { "fprop_changed", dgn_fprop_changed },
 { "points_connected", dgn_points_connected },
 { "any_point_connected", dgn_any_point_connected },

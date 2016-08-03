@@ -3799,6 +3799,18 @@ static const struct spell_desc spelldata[] =
     TILEG_INFESTATION,
 },
 
+
+{
+    SPELL_EXPLOSIVE_THAW, "Explosive Thaw",
+    SPTYP_ICE | SPTYP_FIRE,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER,
+    5,
+    200,
+    2, 2,
+    5, 0,
+    TILEG_ERROR,
+},
+
 {
     SPELL_NO_SPELL, "nonexistent spell",
     SPTYP_NONE,

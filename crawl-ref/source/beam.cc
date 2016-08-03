@@ -2820,6 +2820,12 @@ void bolt::affect_ground()
         }
     }
 
+    if (origin_spell == SPELL_EXPLOSIVE_THAW)
+    {
+        temp_change_terrain(pos(), DNGN_SHALLOW_WATER, 20 + random2(50),
+                            TERRAIN_CHANGE_FLOOD);
+    }
+
     affect_place_clouds();
 }
 
@@ -5950,6 +5956,10 @@ const map<spell_type, explosion_sfx> spell_explosions = {
         "a sharp crackling", // radiation = geiger counter
     } },
     { SPELL_ICEBLAST, {
+        "The mass of ice explodes!",
+        "an explosion",
+    } },
+    { SPELL_EXPLOSIVE_THAW, {
         "The mass of ice explodes!",
         "an explosion",
     } },

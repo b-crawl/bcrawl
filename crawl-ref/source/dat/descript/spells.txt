@@ -533,6 +533,13 @@ Explosive Bolt spell
 Fires a bolt containing fiery energy; on piercing a target, it lets loose an
 explosion that harms nearby creatures as well.
 %%%%
+Explosive Thaw spell
+
+Hurls a short-ranged, unstable ball of fire surrounded by ice. On reaching its
+target, the ice thaws explosively, blasting its surroundings with water. The
+water lingers for a short period before evaporating, rendering movement and
+combat difficult.
+%%%%
 Flay spell
 
 Opens painful illusionary wounds on the target's body, which disappear after

@@ -1414,4 +1414,22 @@ static const zap_info zap_data[] =
     false,
     1
 },
+
+{
+    ZAP_EXPLOSIVE_THAW,
+    "explosive thaw",
+    200,
+    new calcdice_calculator<3, 7, 1, 3>,
+    new tohit_calculator<40>,
+    nullptr,
+    nullptr,
+    LIGHTBLUE,
+    false,
+    BEAM_WATER,
+    DCHAR_WAVY,
+    false,
+    false,
+    true,
+    0 // Noise comes from explosion
+},
 };

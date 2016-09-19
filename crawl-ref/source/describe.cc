@@ -3127,12 +3127,38 @@ static void _print_bar(int value, int scale, string name,
 /**
  * Append information about a given monster's HP to the provided stream.
  *
+ * E.g.: "Max HP █████ ██░ (145)" (parenthetical in debug builds only)
+ *
  * @param mi[in]            Player-visible info about the monster in question.
  * @param result[in,out]    The stringstream to append to.
  */
 static void _describe_monster_hp(const monster_info& mi, ostringstream &result)
 {
-    result << "Max HP: about " << mons_avg_hp(mi.type) << "\n";
+    // 1-5 hp, 6-10, 11-15, 16-20
+    static const vector<string> glyphs = {"░", "▒", "▓", "█"};
+    // hp per glyph
+    static const int step_size = 5;
+
+    result << "Max HP ";
+
+    const int mhp = mons_avg_hp(mi.type);
+    int remaining_hp = mhp;
+    for (int i = 0; remaining_hp > 0; ++i)
+    {
+        const int glyph_index = min((int)glyphs.size() - 1,
+                                    remaining_hp / step_size);
+        result << glyphs[glyph_index];
+        remaining_hp -= (glyph_index + 1) * step_size;
+
+        if (i % 5 == 4)
+            result << " ";
+    }
+
+#ifdef DEBUG_DIAGNOSTICS
+    result << " (" << mhp << ")";
+#endif
+
+    result << "\n";
 }
 
 /**

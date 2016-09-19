@@ -3132,7 +3132,32 @@ static void _print_bar(int value, int scale, string name,
  */
 static void _describe_monster_hp(const monster_info& mi, ostringstream &result)
 {
-    result << "Max HP: about " << mons_avg_hp(mi.type) << "\n";
+    static const vector<monster_type> monster_tiers = {
+        MONS_BUTTERFLY, MONS_BAT, MONS_GIANT_COCKROACH, MONS_ADDER,
+        MONS_IGUANA, MONS_BULLFROG,  MONS_OGRE, MONS_BLINK_FROG, MONS_YAK,
+        MONS_POLAR_BEAR, MONS_MANTICORE, MONS_SNAPPING_TURTLE,
+        MONS_SKELETAL_WARRIOR, MONS_HYDRA, MONS_DEATH_YAK,
+        MONS_ORB_GUARDIAN, MONS_FIRE_GIANT, MONS_STORM_DRAGON,
+        MONS_DIRE_ELEPHANT, MONS_TENTACLED_MONSTROSITY, MONS_LERNAEAN_HYDRA,
+        MONS_JUGGERNAUT, MONS_GREATER_MUMMY,
+    };
+
+    const int mhp = mons_avg_hp(mi.type);
+    result << "Max HP: about " << mhp;
+
+    for (monster_type comparison: monster_tiers)
+    {
+        if (mi.type == comparison)
+            break;
+
+        if (mhp <= mons_avg_hp(comparison))
+        {
+            result << " (" << mons_type_name(comparison, DESC_PLAIN) << ")";
+            break;
+        }
+    }
+
+    result << "\n";
 }
 
 /**

@@ -571,7 +571,6 @@ enum attribute_type
 #endif
     ATTR_PAKELLAS_EXTRA_MP,    // MP to be collected to get a !magic from P
     ATTR_DIVINE_ENERGY,        // Divine energy from Sif to cast with no MP.
-    ATTR_SPWPN_PROTECTION,     // Bonus AC from the SPWPN brand.
     NUM_ATTRIBUTES
 };
 
@@ -935,7 +934,7 @@ enum cloud_type
     CLOUD_MUTAGENIC,
     CLOUD_MAGIC_TRAIL,
     CLOUD_TORNADO,
-    CLOUD_DUST_TRAIL,
+    CLOUD_DUST,
     CLOUD_SPECTRAL,
     CLOUD_ACID,
     CLOUD_STORM,
@@ -1308,7 +1307,6 @@ enum conduct_type
     DID_UNCLEAN,                          // Zin (used unclean weapon/magic)
     DID_CHAOS,                            // Zin (used chaotic weapon/magic)
     DID_DESECRATE_ORCISH_REMAINS,         // Beogh
-    DID_DESTROY_ORCISH_IDOL,              // Beogh
     DID_KILL_SLIME,                       // Jiyva
     DID_KILL_PLANT,                       // Fedhas
     DID_HASTY,                            // Cheibriados
@@ -2003,8 +2001,8 @@ enum enchant_type
 #endif
     ENCH_FEAR_INSPIRING,
     ENCH_PORTAL_PACIFIED,
-    ENCH_WITHDRAWN,
 #if TAG_MAJOR_VERSION == 34
+    ENCH_WITHDRAWN,
     ENCH_ATTACHED,
 #endif
     ENCH_LIFE_TIMER,     // Minimum time demonic guardian must exist.
@@ -2026,8 +2024,8 @@ enum enchant_type
     ENCH_BREATH_WEAPON,  // timer for breathweapon/similar spam
 #if TAG_MAJOR_VERSION == 34
     ENCH_DEATHS_DOOR,
-#endif
     ENCH_ROLLING,        // Boulder Beetle in ball form
+#endif
     ENCH_OZOCUBUS_ARMOUR,
     ENCH_WRETCHED,       // An abstract placeholder for monster mutations
     ENCH_SCREAMED,       // Starcursed scream timer
@@ -2717,11 +2715,11 @@ enum monster_type                      // menv[].type
 #if TAG_MAJOR_VERSION > 34
     MONS_SPARK_WASP,
 #endif
-    MONS_BEETLE,
 #if TAG_MAJOR_VERSION == 34
+    MONS_BEETLE,
     MONS_BORING_BEETLE,
-#endif
     MONS_BOULDER_BEETLE,
+#endif
 #if TAG_MAJOR_VERSION > 34
     MONS_DEATH_SCARAB,
 #endif

@@ -1196,8 +1196,8 @@ static void _catchup_monster_moves(monster* mon, int turns)
     if (mon->type == MONS_BALLISTOMYCETE_SPORE)
         return;
 
-    // special movement code for ioods, boulder beetles...
-    if (mon->is_projectile())
+    // special movement code for ioods
+    if (mons_is_projectile(*mon))
     {
         iood_catchup(mon, turns);
         return;
@@ -1283,16 +1283,6 @@ void monster::timeout_enchantments(int levels)
     {
         switch (entry.first)
         {
-        case ENCH_WITHDRAWN:
-            if (hit_points >= (max_hit_points - max_hit_points / 4)
-                && !one_chance_in(3))
-            {
-                del_ench(entry.first);
-                break;
-            }
-            lose_ench_levels(entry.second, levels);
-            break;
-
         case ENCH_POISON: case ENCH_CORONA:
         case ENCH_STICKY_FLAME: case ENCH_ABJ: case ENCH_SHORT_LIVED:
         case ENCH_HASTE: case ENCH_MIGHT: case ENCH_FEAR:
@@ -1337,7 +1327,6 @@ void monster::timeout_enchantments(int levels)
         case ENCH_INSANE:
         case ENCH_BERSERK:
         case ENCH_INNER_FLAME:
-        case ENCH_ROLLING:
         case ENCH_MERFOLK_AVATAR_SONG:
         case ENCH_INFESTATION:
             del_ench(entry.first);

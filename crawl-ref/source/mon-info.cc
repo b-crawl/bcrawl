@@ -68,7 +68,6 @@ static map<enchant_type, monster_info_flags> trivial_ench_mb_mappings = {
     { ENCH_RAISED_MR,       MB_RAISED_MR },
     { ENCH_MIRROR_DAMAGE,   MB_MIRROR_DAMAGE },
     { ENCH_FEAR_INSPIRING,  MB_FEAR_INSPIRING },
-    { ENCH_WITHDRAWN,       MB_WITHDRAWN },
     { ENCH_DAZED,           MB_DAZED },
     { ENCH_MUTE,            MB_MUTE },
     { ENCH_BLIND,           MB_BLIND },
@@ -76,7 +75,6 @@ static map<enchant_type, monster_info_flags> trivial_ench_mb_mappings = {
     { ENCH_MAD,             MB_MAD },
     { ENCH_INNER_FLAME,     MB_INNER_FLAME },
     { ENCH_BREATH_WEAPON,   MB_BREATH_WEAPON },
-    { ENCH_ROLLING,         MB_ROLLING },
     { ENCH_OZOCUBUS_ARMOUR, MB_OZOCUBUS_ARMOUR },
     { ENCH_WRETCHED,        MB_WRETCHED },
     { ENCH_SCREAMED,        MB_SCREAMED },
@@ -1208,8 +1206,6 @@ static string _verbose_info0(const monster_info& mi)
         return "sleeping";
     if (mi.is(MB_UNAWARE))
         return "unaware";
-    if (mi.is(MB_WITHDRAWN))
-        return "withdrawn";
     if (mi.is(MB_DAZED))
         return "dazed";
     if (mi.is(MB_MUTE))
@@ -1426,12 +1422,6 @@ vector<string> monster_info::attributes() const
         v.push_back(string("catching ")
                     + pronoun(PRONOUN_POSSESSIVE) + " breath");
     }
-    if (is(MB_WITHDRAWN))
-    {
-        v.emplace_back("regenerating health quickly");
-        v.push_back(string("protected by ")
-                    + pronoun(PRONOUN_POSSESSIVE) + " shell");
-    }
     if (is(MB_DAZED))
         v.emplace_back("dazed");
     if (is(MB_MUTE))
@@ -1446,8 +1436,6 @@ vector<string> monster_info::attributes() const
         v.emplace_back("regenerating");
     if (is(MB_RAISED_MR))
         v.emplace_back("resistant to hostile enchantments");
-    if (is(MB_ROLLING))
-        v.emplace_back("rolling");
     if (is(MB_OZOCUBUS_ARMOUR))
         v.emplace_back("covered in an icy film");
     if (is(MB_WRETCHED))

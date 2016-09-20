@@ -290,10 +290,6 @@ void monster::add_enchantment_effect(const mon_enchant &ench, bool quiet)
         invalidate_agrid(true);
         break;
 
-    case ENCH_ROLLING:
-        calc_speed();
-        break;
-
     case ENCH_FROZEN:
         calc_speed();
         break;
@@ -740,11 +736,6 @@ void monster::remove_enchantment_effect(const mon_enchant &me, bool quiet)
             forest_message(pos(), "The forest calms down.");
         break;
 
-    case ENCH_WITHDRAWN:
-        if (!quiet)
-            simple_monster_message(*this, " emerges from its shell.");
-        break;
-
     case ENCH_LIQUEFYING:
         invalidate_agrid();
 
@@ -764,12 +755,6 @@ void monster::remove_enchantment_effect(const mon_enchant &me, bool quiet)
     case ENCH_INNER_FLAME:
         if (!quiet && alive())
             simple_monster_message(*this, "'s inner flame fades away.");
-        break;
-
-    case ENCH_ROLLING:
-        calc_speed();
-        if (!quiet && alive())
-            simple_monster_message(*this, " stops rolling.");
         break;
 
     //The following should never happen, but just in case...
@@ -1227,7 +1212,7 @@ static bool _merfolk_avatar_movement_effect(const monster* mons)
                 coord_def swapdest;
                 if (mon->wont_attack()
                     && !mon->is_stationary()
-                    && !mon->is_projectile()
+                    && !mons_is_projectile(*mon)
                     && !mon->cannot_act()
                     && !mon->asleep()
                     && swap_check(mon, swapdest, true))
@@ -1395,17 +1380,6 @@ void monster::apply_enchantment(const mon_enchant &me)
             simple_monster_message(*this, " looks more energetic.");
             del_ench(ENCH_SLOW, true);
         }
-        break;
-
-    case ENCH_WITHDRAWN:
-        if (hit_points >= (max_hit_points - max_hit_points / 4)
-                && !one_chance_in(3))
-        {
-            del_ench(ENCH_WITHDRAWN);
-            break;
-        }
-
-        decay_enchantment(en);
         break;
 
     case ENCH_SLOW:
@@ -2111,9 +2085,8 @@ static const char *enchant_names[] =
     "stoneskin",
 #endif
     "fear inspiring", "temporarily pacified",
-    "withdrawn",
 #if TAG_MAJOR_VERSION == 34
-    "attached",
+    "withdrawn", "attached",
 #endif
     "guardian_timer", "flight", "liquefying", "tornado", "fake_abjuration",
     "dazed", "mute", "blind", "dumb", "mad", "silver_corona", "recite timer",
@@ -2123,10 +2096,10 @@ static const char *enchant_names[] =
 #endif
     "breath timer",
 #if TAG_MAJOR_VERSION == 34
-    "deaths_door",
+    "deaths_door", "rolling",
 #endif
-    "rolling", "ozocubus_armour", "wretched", "screamed", "rune_of_recall",
-    "injury bond", "drowning", "flayed", "haunting",
+    "ozocubus_armour", "wretched", "screamed", "rune_of_recall", "injury bond",
+    "drowning", "flayed", "haunting",
 #if TAG_MAJOR_VERSION == 34
     "retching",
 #endif
@@ -2294,10 +2267,6 @@ int mon_enchant::calc_duration(const monster* mons,
     // monster HD via modded_speed(). Use _mod_speed instead!
     switch (ench)
     {
-    case ENCH_WITHDRAWN:
-        cturn = 5000 / _mod_speed(25, mons->speed);
-        break;
-
     case ENCH_SWIFT:
         cturn = 1000 / _mod_speed(25, mons->speed);
         break;
@@ -2417,9 +2386,6 @@ int mon_enchant::calc_duration(const monster* mons,
         return random_range(25, 35) * 10;
     case ENCH_BERSERK:
         return (16 + random2avg(13, 2)) * 10;
-    case ENCH_ROLLING:
-        cturn = 10000 / _mod_speed(25, mons->speed);
-        break;
     case ENCH_WRETCHED:
         cturn = (20 + roll_dice(3, 10)) * 10 / _mod_speed(10, mons->speed);
         break;

@@ -147,9 +147,7 @@ death_scarab MONS_DEATH_SCARAB
 crocodile MONS_CROCODILE
 alligator MONS_ALLIGATOR
 snapping_turtle MONS_SNAPPING_TURTLE
-snapping_turtle_shell
 alligator_snapping_turtle MONS_ALLIGATOR_SNAPPING_TURTLE
-alligator_snapping_turtle_shell
 %rim 0
 fire_crab MONS_FIRE_CRAB
 ghost_crab MONS_GHOST_CRAB
@@ -184,14 +182,6 @@ electric_eel MONS_ELECTRIC_EEL
 %rim 1
 
 %include dc-tentacles.txt
-
-## Beetles ('B')
-%sdir mon/animals
-boulder_beetle MONS_BOULDER_BEETLE
-boulder_beetle_rolling0 MONS_BOULDER_BEETLE_ROLLING
-boulder_beetle_rolling1
-boulder_beetle_rolling2
-boulder_beetle_rolling3
 
 ## Frogs ('F')
 %sdir mon/unique

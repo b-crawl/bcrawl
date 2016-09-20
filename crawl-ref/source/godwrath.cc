@@ -1606,7 +1606,7 @@ static const pop_entry pop_qazlal_wrath[] =
 
   {  0, 12, 25, SEMI, MONS_EARTH_ELEMENTAL },
   {  2, 10, 50, FLAT, MONS_BASILISK },
-  {  4, 14, 30, FLAT, MONS_BOULDER_BEETLE },
+  {  4, 14, 30, FLAT, MONS_CATOBLEPAS },
   { 18, 27, 50, RISE, MONS_IRON_DRAGON },
 
   { 0,0,0,FLAT,MONS_0 }
@@ -1840,43 +1840,6 @@ bool divine_retribution(god_type god, bool no_bonus, bool force)
     dec_penance(god, 1 + random2(3));
 
     return true;
-}
-
-// Currently only used when orcish idols have been destroyed.
-static string _get_beogh_speech(const string &key)
-{
-    string result = getSpeakString("Beogh " + key);
-
-    if (result.empty())
-        return "Beogh is angry!";
-
-    return result;
-}
-
-// Destroying orcish idols (a.k.a. idols of Beogh) may anger Beogh.
-void beogh_idol_revenge()
-{
-    god_acting gdact(GOD_BEOGH, true);
-
-    // Beogh watches his charges closely, but for others doesn't always
-    // notice.
-    if (!you_worship(GOD_BEOGH)
-        && (!species_is_orcish(you.species) || coinflip())
-        && x_chance_in_y(2, 3))
-    {
-        return;
-    }
-
-    string revenge;
-
-    if (you_worship(GOD_BEOGH))
-        revenge = _get_beogh_speech("idol follower");
-    else if (species_is_orcish(you.species))
-        revenge = _get_beogh_speech("idol orc");
-    else
-        revenge = _get_beogh_speech("idol other");
-
-    _god_smites_you(GOD_BEOGH, revenge.c_str());
 }
 
 static void _tso_blasts_cleansing_flame(const char *message)

@@ -1628,10 +1628,6 @@ static tileidx_t _tileidx_monster_no_props(const monster_info& mon)
         case MONS_BALLISTOMYCETE:
             return base + (mon.is_active ? 1 : 0);
 
-        case MONS_SNAPPING_TURTLE:
-        case MONS_ALLIGATOR_SNAPPING_TURTLE:
-            return base + (mon.is(MB_WITHDRAWN) ? 1 : 0);
-
         case MONS_DUVESSA:
         case MONS_DOWAN:
             return mon.props.exists(ELVEN_IS_ENERGIZED_KEY) ? base + 1 : base;
@@ -1667,11 +1663,6 @@ static tileidx_t _tileidx_monster_no_props(const monster_info& mon)
             if (env.map_knowledge(mon.pos).cloud() == CLOUD_FIRE)
                 return TILEP_MONS_BUSH_BURNING;
             return base;
-
-        case MONS_BOULDER_BEETLE:
-            return mon.is(MB_ROLLING)
-                   ? _mon_random(TILEP_MONS_BOULDER_BEETLE_ROLLING)
-                   : base;
 
         case MONS_DANCING_WEAPON:
         {

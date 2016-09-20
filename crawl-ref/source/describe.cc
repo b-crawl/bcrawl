@@ -3135,10 +3135,11 @@ static void _print_bar(int value, int scale, string name,
  */
 static void _describe_monster_hp(const monster_info& mi, ostringstream &result)
 {
-    // 1-5 hp, 6-10, 11-15, 16-20
-    static const vector<string> glyphs = {"░", "▒", "▓", "█"};
+    // 1-3, 4-6... 22-24
+    static const vector<string> glyphs = {"▏", "▎", "▍", "▌",
+                                          "▋", "▊", "▉", "█", };
     // hp per glyph
-    static const int step_size = 5;
+    static const int step_size = 3;
 
     result << "Max HP ";
 

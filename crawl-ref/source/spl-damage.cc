@@ -138,7 +138,7 @@ spret_type cast_fire_storm(int pow, bolt &beam, bool fail)
 
 /**
  * Find a nearby tile for a Reckless Fragmentation explosion to go off in.
- * Must be in LOS of the original target, and within 2 tiles' distance.
+ * Must be in LOS of the original target, and within 1 tile's distance.
  *
  * @param center    The original target of the spell.
  * @return          The new, final origin of the spell's explosion.
@@ -147,7 +147,7 @@ static coord_def _get_reckless_fragmentation_target(coord_def center)
 {
     coord_def chosen = center;
     int seen = 0;
-    for (radius_iterator ri(center, 2, C_SQUARE, LOS_SOLID); ri; ++ri)
+    for (adjacent_iterator ri(center); ri; ++ri)
         if (!cell_is_solid(*ri) && one_chance_in(++seen))
             chosen = *ri;
     return chosen;
@@ -185,7 +185,7 @@ spret_type cast_reckless_fragmentation(int pow, bolt &beam, bool fail)
     beam.origin_spell = SPELL_RECKLESS_FRAGMENTATION;
 
     bolt tempbeam = beam;
-    tempbeam.ex_size = 4;
+    tempbeam.ex_size = 2;
     tempbeam.is_tracer = true;
 
     tempbeam.explode(false);
@@ -197,7 +197,6 @@ spret_type cast_reckless_fragmentation(int pow, bolt &beam, bool fail)
     // randomize the actual targeting
     beam.target = _get_reckless_fragmentation_target(beam.target);
 
-    beam.ex_size = 2;
     beam.refine_for_explosion();
     beam.explode(false);
 

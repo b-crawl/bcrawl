@@ -404,6 +404,7 @@ static bool _is_appropriate_spell(spell_type spell, const actor* target)
         case SPELL_HAUNT:
         case SPELL_FIRE_STORM:
         case SPELL_AIRSTRIKE:
+        case SPELL_RECKLESS_FRAGMENTATION:
             break;
 
         default:

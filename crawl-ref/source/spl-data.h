@@ -3859,6 +3859,17 @@ static const struct spell_desc spelldata[] =
 },
 
 {
+    SPELL_RECKLESS_FRAGMENTATION, "Reckless Fragmentation",
+    SPTYP_CONJURATION | SPTYP_EARTH,
+    SPFLAG_TARGET | SPFLAG_AREA | SPFLAG_NEEDS_TRACER,
+    7,
+    200,
+    5, 5,
+    7, 0,
+    TILEG_RECKLESS_FRAGMENTATION,
+},
+
+{
     SPELL_NO_SPELL, "nonexistent spell",
     SPTYP_NONE,
     SPFLAG_TESTING,

@@ -1144,6 +1144,8 @@ static unique_ptr<targetter> _spell_targetter(spell_type spell, int pow,
         return make_unique<targetter_imb>(&you, pow, range);
     case SPELL_FIRE_STORM:
         return make_unique<targetter_smite>(&you, range, 2, pow > 76 ? 3 : 2);
+    case SPELL_RECKLESS_FRAGMENTATION:
+        return make_unique<targetter_smite>(&you, range, 0, 4);
     case SPELL_FREEZING_CLOUD:
     case SPELL_POISONOUS_CLOUD:
     case SPELL_HOLY_BREATH:
@@ -1629,6 +1631,9 @@ static spret_type _do_cast(spell_type spell, int powc,
 
     case SPELL_FIRE_STORM:
         return cast_fire_storm(powc, beam, fail);
+
+    case SPELL_RECKLESS_FRAGMENTATION:
+        return cast_reckless_fragmentation(powc, beam, fail);
 
     // Demonspawn ability, no failure.
     case SPELL_CALL_DOWN_DAMNATION:

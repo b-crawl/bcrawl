@@ -1358,4 +1358,22 @@ _mon_hex_zap(ZAP_DRAIN_MAGIC, BEAM_DRAIN_MAGIC),
     0
 },
 
+{
+    ZAP_RECKLESS_FRAGMENTATION,
+    "blast of shrapnel", // orb of fragmentation ;)
+    200,
+    new calcdice_calculator<5, 5, 3, 4>,
+    new tohit_calculator<40>,
+    nullptr,
+    nullptr,
+    BROWN,
+    false,
+    BEAM_FRAG,
+    DCHAR_FIRED_ZAP,
+    true,
+    false,
+    true,
+    0 // noise handled by explosion
+},
+
 };

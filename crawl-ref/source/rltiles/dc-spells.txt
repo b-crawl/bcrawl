@@ -25,6 +25,7 @@ searing_ray SEARING_RAY
 iron_shot IRON_SHOT
 dig DIG
 lees_rapid_deconstruction LEES_RAPID_DECONSTRUCTION
+reckless_fragmentation RECKLESS_FRAGMENTATION
 lehudibs_crystal_spear LEHUDIBS_CRYSTAL_SPEAR
 ledas_liquefaction LEDAS_LIQUEFACTION
 passwall PASSWALL

@@ -80,6 +80,7 @@ spret_type cast_delayed_fireball(bool fail)
 
 void setup_fire_storm(const actor *source, int pow, bolt &beam)
 {
+    // TODO: move most of this into a zap
     beam.name         = "great blast of fire";
     beam.ex_size      = 2 + (random2(1000) < pow);
     beam.flavour      = BEAM_LAVA;
@@ -132,6 +133,74 @@ spret_type cast_fire_storm(int pow, bolt &beam, bool fail)
     beam.explode(false);
 
     viewwindow();
+    return SPRET_SUCCESS;
+}
+
+/**
+ * Find a nearby tile for a Reckless Fragmentation explosion to go off in.
+ * Must be in LOS of the original target, and within 2 tiles' distance.
+ *
+ * @param center    The original target of the spell.
+ * @return          The new, final origin of the spell's explosion.
+ */
+static coord_def _get_reckless_fragmentation_target(coord_def center)
+{
+    coord_def chosen = center;
+    int seen = 0;
+    for (radius_iterator ri(center, 2, C_SQUARE, LOS_SOLID); ri; ++ri)
+        if (!cell_is_solid(*ri) && one_chance_in(++seen))
+            chosen = *ri;
+    return chosen;
+}
+
+/**
+ * Casts Reckless Fragmentation at the given target, blasting an area near
+ * the target with fragmentation damage.
+ *
+ * @param pow       The power with which the spell is being cast.
+ * @param beam[in]  A pre-targetted beam. May be used up (fired).
+ * @param fail      Whether the player failed to cast the spell, and it should
+ *                  return SPRET_FAIL after targetting.
+ * @return          SPRET_ABORT if the targetting was invalid, SPRET_FAIL
+ *                  if fail is true otherwise, or SPRET_SUCCESS.
+ */
+spret_type cast_reckless_fragmentation(int pow, bolt &beam, bool fail)
+{
+    // XXX: deduplicate with fire storm
+    if (grid_distance(beam.target, beam.source) > beam.range)
+    {
+        mpr("That is beyond the maximum range.");
+        return SPRET_ABORT;
+    }
+
+    if (cell_is_solid(beam.target))
+    {
+        const char *feat = feat_type_name(grd(beam.target));
+        mprf("There's %s there.", article_a(feat).c_str());
+        return SPRET_ABORT;
+    }
+
+    zappy(ZAP_RECKLESS_FRAGMENTATION, pow, false, beam);
+    beam.thrower = KILL_YOU_MISSILE;
+    beam.origin_spell = SPELL_RECKLESS_FRAGMENTATION;
+
+    bolt tempbeam = beam;
+    tempbeam.ex_size = 4;
+    tempbeam.is_tracer = true;
+
+    tempbeam.explode(false);
+    if (tempbeam.beam_cancelled)
+        return SPRET_ABORT;
+
+    fail_check();
+
+    // randomize the actual targeting
+    beam.target = _get_reckless_fragmentation_target(beam.target);
+
+    beam.ex_size = 2;
+    beam.refine_for_explosion();
+    beam.explode(false);
+
     return SPRET_SUCCESS;
 }
 

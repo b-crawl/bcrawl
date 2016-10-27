@@ -185,7 +185,7 @@ spret_type cast_reckless_fragmentation(int pow, bolt &beam, bool fail)
     beam.origin_spell = SPELL_RECKLESS_FRAGMENTATION;
 
     bolt tempbeam = beam;
-    tempbeam.ex_size = 2;
+    tempbeam.ex_size = 3;
     tempbeam.is_tracer = true;
 
     tempbeam.explode(false);
@@ -197,6 +197,7 @@ spret_type cast_reckless_fragmentation(int pow, bolt &beam, bool fail)
     // randomize the actual targeting
     beam.target = _get_reckless_fragmentation_target(beam.target);
 
+    beam.ex_size = 2;
     beam.refine_for_explosion();
     beam.explode(false);
 

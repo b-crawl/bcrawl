@@ -1740,6 +1740,58 @@ LUAFN(dgn_apply_tide)
     return 0;
 }
 
+LUAFN(dgn_add_cloud_gen)
+{
+    int arg_index = 0;
+    const int x = luaL_checkint(ls, ++arg_index);
+    const int y = luaL_checkint(ls, ++arg_index);
+
+    if (!in_bounds(x, y))
+    {
+        char buf[80];
+        sprintf(buf, "Point (%d,%d) isn't in bounds.", x, y);
+        luaL_argerror(ls, arg_index-1, buf);
+        return 0;
+    }
+
+    const string cloud_type_name = luaL_checkstring(ls, ++arg_index);
+    const cloud_type type = cloud_name_to_type(cloud_type_name);
+    if (type == CLOUD_NONE)
+    {
+        char buf[80];
+        sprintf(buf, "'%s' is not a valid cloud type", cloud_type_name.c_str());
+        luaL_argerror(ls, arg_index-1, buf);
+        return 0;
+    }
+
+    const int pow_max = luaL_checkint(ls, ++arg_index);
+    if (pow_max < 1)
+    {
+        luaL_argerror(ls, arg_index-1, "pow_max must be positive.");
+        return 0;
+    }
+
+    const int delay_max = luaL_checkint(ls, ++arg_index);
+    if (delay_max < 1)
+    {
+        luaL_argerror(ls, arg_index-1, "delay_max must be positive.");
+        return 0;
+    }
+
+    const int size_max = luaL_checkint(ls, ++arg_index);
+    if (size_max < 1)
+    {
+        luaL_argerror(ls, arg_index-1, "size_max must be positive.");
+        return 0;
+    }
+
+    env.cloud_generators.push_back({{x, y}, type,
+                                    pow_max, delay_max, size_max});
+
+    lua_pushnumber(ls, env.cloud_generators.size() - 1);
+    return 1;
+}
+
 const struct luaL_reg dgn_dlib[] =
 {
 { "reset_level", _dgn_reset_level },
@@ -1849,6 +1901,8 @@ const struct luaL_reg dgn_dlib[] =
 { "fill_grd_area", dgn_fill_grd_area },
 
 { "apply_tide", dgn_apply_tide },
+
+{ "add_cloud_gen", dgn_add_cloud_gen },
 
 { nullptr, nullptr }
 };

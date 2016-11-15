@@ -806,4 +806,38 @@ void wizard_abyss_speed()
 
     canned_msg(MSG_OK);
 }
+
+static void _edit_cloud_generator(CloudGenerator &cloudGenerator)
+{
+    mprf("Editing a %s generator (TODO)",
+         cloud_type_name(cloudGenerator.getType()).c_str());
+}
+
+void wizard_tweak_cloud_generators(coord_def pos)
+{
+    for (CloudGenerator &cloudGenerator : env.cloud_generators)
+    {
+        if (cloudGenerator.getLoc() != pos)
+            continue;
+        const string prompt =
+            make_stringf("Edit a %s generator?",
+                         cloud_type_name(cloudGenerator.getType()).c_str());
+
+        if (yesno(prompt.c_str(), true, 'y'))
+        {
+            _edit_cloud_generator(cloudGenerator);
+            return;
+        }
+        else
+            canned_msg(MSG_OK);
+    }
+
+    if (yesno("Create a new cloud generator?", true, 'n'))
+    {
+        env.cloud_generators.push_back({ pos, CLOUD_MIST, 1, 10, 1 });
+        _edit_cloud_generator(env.cloud_generators.back());
+    }
+    else
+        canned_msg(MSG_OK);
+}
 #endif

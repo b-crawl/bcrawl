@@ -1685,6 +1685,10 @@ void direction_chooser::handle_wizard_command(command_type key_command,
         }
         return;
 
+    case CMD_TARGET_WIZARD_CLOUD_GEN:
+        wizard_tweak_cloud_generators(target());
+        break;
+
     default:
         break;
     }

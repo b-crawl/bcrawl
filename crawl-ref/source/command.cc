@@ -335,6 +335,7 @@ static const char *targeting_help_wiz =
     "<w>(</w>: place a mimic\n"
     "<w>Ctrl-B</w>: banish monster\n"
     "<w>Ctrl-K</w>: kill monster\n"
+    "<w>C</w>: Place or edit a cloud generator\n"
 ;
 #endif
 

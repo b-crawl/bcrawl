@@ -80,6 +80,9 @@ public:
 
     void run();
 
+    coord_def getLoc() const { return loc; }
+    cloud_type getType() const { return type; }
+
 private:
     /// Center of cloud generation.
     coord_def loc;

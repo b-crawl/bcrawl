@@ -18,6 +18,7 @@
 #include "files.h"
 #include "items.h"
 #include "libutil.h"
+#include "macro.h" // get_ch
 #include "maps.h"
 #include "message.h"
 #include "misc.h"
@@ -807,10 +808,60 @@ void wizard_abyss_speed()
     canned_msg(MSG_OK);
 }
 
+static void _edit_cloud_gen_type(CloudGenerator &cloudGenerator)
+{
+    mpr("TODO: type");
+}
+
+static void _edit_cloud_gen_walk_dist(CloudGenerator &cloudGenerator)
+{
+    mpr("TODO: walk_dist");
+}
+
+/// what letter or other character can the player use to choose item # i?
+static int _selector_for_index(int i)
+{
+    if (i < 26)
+        return 'a' + i;
+    if (i < 'A' - '0' + 26)
+    {
+        // 0-9 then :;<=>?@ . Any higher would collide with letters.
+        return '0' + i - 26;
+    }
+    return '-'; // Too many choices!
+}
+
 static void _edit_cloud_generator(CloudGenerator &cloudGenerator)
 {
-    mprf("Editing a %s generator (TODO)",
-         cloud_type_name(cloudGenerator.getType()).c_str());
+    typedef pair<string, function<void(CloudGenerator &)>> named_option;
+    static const vector<named_option> opts = {
+        { "type", _edit_cloud_gen_type },
+        { "walk", _edit_cloud_gen_walk_dist },
+    };
+
+    map<char, named_option> options_by_char;
+    for (int i = 0; i < (int)opts.size(); ++i)
+    {
+        const char opt_selector = _selector_for_index(i);
+        options_by_char[opt_selector] = opts[i]; // copies - slightly wasteful
+    }
+
+    string prompt = "Edit: ";
+    for (auto &char_opt : options_by_char)
+    {
+        prompt += make_stringf("%c) %s ",
+                               char_opt.first, char_opt.second.first.c_str());
+    }
+    prompt += "(esc to cancel)";
+
+    mprf(MSGCH_PROMPT, "%s", prompt.c_str());
+
+    char keyin = toalower(get_ch());
+    named_option* chosen = map_find(options_by_char, keyin);
+    if (chosen)
+        chosen->second(cloudGenerator);
+    else
+        canned_msg(MSG_OK);
 }
 
 void wizard_tweak_cloud_generators(coord_def pos)

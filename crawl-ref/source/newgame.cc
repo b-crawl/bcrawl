@@ -154,34 +154,27 @@ void choose_tutorial_character(newgame_def& ng_choice)
     ng_choice.weapon = WPN_FLAIL;
 }
 
-// March 2008: change order of species and jobs on character selection
-// screen as suggested by Markus Maier.
-// We have subsequently added a few new categories.
 static const species_type species_order[] =
 {
-    // comparatively human-like looks
-    SP_HUMAN,          SP_DEEP_ELF,
-    SP_DEEP_DWARF,     SP_HILL_ORC,
-    // small species
-    SP_HALFLING,       SP_KOBOLD,
-    SP_SPRIGGAN,
-    // large species
-    SP_OGRE,           SP_TROLL,
-    // significantly different body type from human ("monstrous")
-    SP_NAGA,           SP_CENTAUR,
-    SP_MERFOLK,        SP_MINOTAUR,
-    SP_TENGU,          SP_BASE_DRACONIAN,
-    SP_GARGOYLE,       SP_FORMICID,
-    SP_BARACHIAN,
-    // mostly human shape but made of a strange substance
-    SP_VINE_STALKER,
-    // celestial species
+    // simple and easy
+    SP_MINOTAUR,       SP_GARGOYLE,
+    SP_TROLL,          SP_HILL_ORC,
+    SP_SPRIGGAN,       SP_DEEP_ELF,
+    // not trivial, not super hard
+    SP_HUMAN,
     SP_DEMIGOD,        SP_DEMONSPAWN,
-    // undead species
-    SP_MUMMY,          SP_GHOUL,
-    SP_VAMPIRE,
-    // not humanoid at all
+    SP_NAGA,           SP_CENTAUR,
+    SP_MERFOLK,        SP_VINE_STALKER,
+    SP_TENGU,          SP_BASE_DRACONIAN,
+    SP_FORMICID,
+    SP_HALFLING,       SP_KOBOLD,
+    // harder or more 'advanced' species
+    SP_BARACHIAN,
+    SP_OGRE,           SP_DEEP_DWARF,
     SP_FELID,          SP_OCTOPODE,
+    SP_GHOUL,          SP_VAMPIRE,
+    // mummies
+    SP_MUMMY,
 };
 COMPILE_CHECK(ARRAYSZ(species_order) <= NUM_SPECIES);
 

@@ -1,5 +1,4 @@
-#ifndef MON_PATHFIND_H
-#define MON_PATHFIND_H
+#pragma once
 
 class monster;
 
@@ -13,7 +12,6 @@ public:
 
     // public methods
     void set_range(int r);
-    void set_monster(const monster *mon);
     coord_def next_pos(const coord_def &p) const;
     bool init_pathfind(const monster* mon, coord_def dest,
                        bool diag = true, bool msg = false,
@@ -68,5 +66,3 @@ protected:
 
     FixedVector<vector<coord_def>, GXM * GYM> hash;
 };
-
-#endif

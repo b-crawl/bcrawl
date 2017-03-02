@@ -28,6 +28,7 @@ int branch_ood_cap(branch_type branch)
     case BRANCH_DEPTHS:
         return 14;
     case BRANCH_VAULTS:
+    case BRANCH_LAIR:
         return 12;
     case BRANCH_ELF:
         return 7;
@@ -225,14 +226,6 @@ void debug_monpick()
         }
     }
 
-    if (!fails.empty())
-    {
-        FILE *f = fopen("mon-pick.out", "w");
-        if (!f)
-            sysfail("can't write test output");
-        fprintf(f, "%s", fails.c_str());
-        fclose(f);
-        fail("mon-pick mismatches (dumped to mon-pick.out)");
-    }
+    dump_test_fails(fails, "mon-pick");
 }
 #endif

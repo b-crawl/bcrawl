@@ -27,7 +27,7 @@
 #include "end.h"
 #include "errors.h"
 #include "files.h"
-#include "itemname.h"
+#include "item-name.h"
 #include "jobs.h"
 #include "libutil.h"
 #include "maps.h"
@@ -38,6 +38,7 @@
 #include "ng-init.h"
 #include "state.h"
 #include "stringutil.h"
+#include "xom.h"
 
 static const string test_dir = "test";
 static const string script_dir = "scripts";
@@ -152,9 +153,11 @@ static void _run_test(const string &name, void (*func)())
     if (!_has_test(name))
         return;
 
+    ++ntests;
     try
     {
         (*func)();
+        ++nsuccess;
     }
     catch (const ext_fail_exception &E)
     {
@@ -184,6 +187,7 @@ void run_tests()
     _run_test("makename", make_name_tests);
     _run_test("job-data", debug_jobdata);
     _run_test("mon-bands", debug_bands);
+    _run_test("xom-data", validate_xom_events);
 
     // Get a list of Lua files in test.
     {

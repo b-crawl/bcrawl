@@ -3,8 +3,9 @@
  * @brief Functions for generating random spellbooks.
 **/
 
-#ifndef RANDBOOK_H
-#define RANDBOOK_H
+#pragma once
+
+#include <functional>
 
 #include "spl-util.h"
 
@@ -47,6 +48,9 @@ void build_themed_book(item_def &book,
                        int num_spells = -1,
                        string owner = "", string subject = "");
 
+void fixup_randbook_disciplines(spschool_flag_type &discipline_1,
+                                spschool_flag_type &discipline_2,
+                                const vector<spell_type> &spells);
 void init_book_theme_randart(item_def &book, vector<spell_type> spells);
 void name_book_theme_randart(item_def &book, spschool_flag_type discipline_1,
                              spschool_flag_type discipline_2,
@@ -56,5 +60,3 @@ bool make_book_level_randart(item_def &book, int level = -1);
 void make_book_roxanne_special(item_def *book);
 void make_book_kiku_gift(item_def &book, bool first);
 void acquire_themed_randbook(item_def &book, int agent);
-
-#endif

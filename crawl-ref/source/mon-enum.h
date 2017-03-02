@@ -6,8 +6,7 @@
  * dependencies.
 **/
 
-#ifndef MON_ENUM_H
-#define MON_ENUM_H
+#pragma once
 
 #define HERD_COMFORT_RANGE 6
 
@@ -60,6 +59,7 @@ enum attack_type
 #endif
     AT_WEAP_ONLY,   // AT_HIT if wielding a melee weapon, AT_NONE otherwise
     AT_RANDOM,      // Anything but AT_SHOOT and AT_WEAP_ONLY.
+    NUM_ATTACK_TYPES,
 };
 
 // When adding an attack flavour, give it a short description in
@@ -83,7 +83,7 @@ enum attack_flavour
     AF_FIRE,
     AF_HUNGER,
     AF_MUTATE,
-    AF_PARALYSE,
+    AF_POISON_PARALYSE,
     AF_POISON,
 #if TAG_MAJOR_VERSION == 34
     AF_POISON_NASTY,
@@ -132,7 +132,9 @@ enum attack_flavour
     AF_SWOOP, // Swoops in to perform a melee attack if far away.
     AF_TRAMPLE, // Trampling effect.
     AF_WEAKNESS,
+#if TAG_MAJOR_VERSION == 34
     AF_MIASMATA,
+#endif
 };
 
 // Non-spell "summoning" types to give to monster::mark_summoned(), or
@@ -200,7 +202,6 @@ enum mon_resist_flags
     MR_RES_ELEC          = 1 << 0,
     MR_RES_POISON        = 1 << 3,
     MR_RES_FIRE          = 1 << 6,
-    MR_RES_DAMNATION      = mrd(MR_RES_FIRE, 4), // XXX: ???
     MR_RES_COLD          = 1 << 9,
     MR_RES_NEG           = 1 << 12,
     MR_RES_ROTTING       = 1 << 15,
@@ -210,11 +211,10 @@ enum mon_resist_flags
 
     MR_RES_TORMENT       = 1 << 22,
     MR_RES_PETRIFY       = 1 << 23,
+    MR_RES_DAMNATION     = 1 << 24,
 #if TAG_MAJOR_VERSION == 34
-    MR_OLD_RES_ASPHYX    = 1 << 24,
     MR_OLD_RES_ACID      = 1 << 25,
 #else
-    // unused 1 << 24,
     // unused 1 << 25,
 #endif
     MR_RES_STICKY_FLAME  = 1 << 26,
@@ -239,6 +239,7 @@ enum shout_type
     S_ROAR,                 // roar
     S_SCREAM,               // scream
     S_BELLOW,               // bellow (yaks)
+    S_BLEAT,                // bleat (sheep)
     S_TRUMPET,              // trumpets (elephants)
     S_SCREECH,              // screech
     S_BUZZ,                 // buzz
@@ -246,16 +247,15 @@ enum shout_type
     S_GURGLE,               // gurgle
     S_CROAK,                // frog croak
     S_GROWL,                // for bears
-    S_HISS,                 // for snakes and lizards
+    S_HISS,                 // for reptiles & arachnids. quiet!
     S_DEMON_TAUNT,          // for pandemonium lords
-#if TAG_MAJOR_VERSION == 34
-    S_CAW,                  // for ravens
-#endif
     S_CHERUB,               // for cherubs
-    S_RUMBLE,               // for ushabti
+    S_SQUEAL,               // pigs
+    S_LOUD_ROAR,            // dragons, &c. loud!
     NUM_SHOUTS,
 
     // Loudness setting for shouts that are only defined in dat/shout.txt
+    // Only used for the verb/volume of random demon taunts
     S_VERY_SOFT,
     S_SOFT,
     S_NORMAL,
@@ -282,16 +282,19 @@ enum mon_body_shape
 {
     MON_SHAPE_BUGGY,
     MON_SHAPE_HUMANOID,
+    MON_SHAPE_FIRST_HUMANOID = MON_SHAPE_HUMANOID,
     MON_SHAPE_HUMANOID_WINGED,
     MON_SHAPE_HUMANOID_TAILED,
     MON_SHAPE_HUMANOID_WINGED_TAILED,
     MON_SHAPE_CENTAUR,
     MON_SHAPE_NAGA,
-    // Everything before this should have arms
+    MON_SHAPE_LAST_HUMANOID = MON_SHAPE_NAGA,
+    // Everything before this should have at least a humanoid upper body
     MON_SHAPE_QUADRUPED,
     MON_SHAPE_QUADRUPED_TAILLESS,
     MON_SHAPE_QUADRUPED_WINGED,
     MON_SHAPE_BAT,
+    MON_SHAPE_BIRD,
     MON_SHAPE_SNAKE, // Including eels and worms
     MON_SHAPE_FISH,
     MON_SHAPE_INSECT,
@@ -305,5 +308,3 @@ enum mon_body_shape
     MON_SHAPE_BLOB,
     MON_SHAPE_MISC,
 };
-
-#endif

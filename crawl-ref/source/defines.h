@@ -5,8 +5,7 @@
  * A variety of miscellaneous constant values are found here.
 **/
 
-#ifndef DEFINES_H
-#define DEFINES_H
+#pragma once
 
 // Minimum terminal size allowed.
 #define MIN_COLS  79
@@ -25,8 +24,6 @@
      #define FALSE 0
     #endif
 #endif
-
-typedef uint32_t ucs_t;
 
 // max size of inventory array {dlb}:
 #define ENDOFPACK 52
@@ -99,8 +96,11 @@ const int LABYRINTH_BORDER = 4;
 #define Y_BOUND_2               (GYM - BOUNDARY_BORDER)
 #define Y_WIDTH                 (Y_BOUND_2 - Y_BOUND_1 + 1)
 
-// maximal LOS radius
-#define LOS_RADIUS 7
+// maximal LOS radius.
+// XXX: a noble soul should find-replace this with LOS_MAX_RANGE
+#define LOS_RADIUS 8
+// LOS radius for 'normal' characters
+#define LOS_DEFAULT_RANGE 7
 
 // maximal horizontal or vertical LOS range:
 //   a quadrant needs to fit inside an 2D array with
@@ -125,17 +125,12 @@ const int LABYRINTH_BORDER = 4;
 
 const int MAX_SKILL_LEVEL = 27;
 const int MAX_EXP_TOTAL = 8999999;
-const int HIGH_EXP_POOL = 20000;
 const int EXERCISE_QUEUE_SIZE = 100;
 
 const int MIN_HIT_MISS_PERCENTAGE = 5;
 
-// grids that monsters can see
-const int MONSTER_LOS_RANGE = LOS_RADIUS;
-
-// Maximum charge level for rods
-const int MAX_ROD_CHARGE  = 17;
-const int ROD_CHARGE_MULT = 100;
+const int LIGHTNING_CHARGE_MULT = 100;
+const int LIGHTNING_MAX_CHARGE = 4;
 
 // evoker_debt for evoking one XP evoker
 const int XP_EVOKE_DEBT   = 10;
@@ -168,6 +163,8 @@ const int MAX_KNOWN_SPELLS = 21;
 const int INVALID_ABSDEPTH = -1000;
 
 const int UNUSABLE_SKILL = -99;
+
+const int WU_JIAN_HEAVEN_TICK_TIME = 10;
 
 //#define DEBUG_MIMIC
 #ifdef DEBUG_MIMIC
@@ -226,7 +223,7 @@ enum COLOURS
     LIGHTMAGENTA,
     YELLOW,
     WHITE,
-    MAX_TERM_COLOUR
+    NUM_TERM_COLOURS
 };
 
 // Many, MANY places currently hard-code this to 8 bits, but we need to
@@ -238,7 +235,7 @@ typedef uint8_t colour_t;
 
 // This is used to signal curses (which has seven base colours) to
 // try to get a brighter version using recommissioned attribute flags.
-#define COLFLAG_CURSES_BRIGHTEN          0x0080
+#define COLFLAG_CURSES_BRIGHTEN          0x0008
 
 #define COLFLAG_FRIENDLY_MONSTER         0x0100
 #define COLFLAG_NEUTRAL_MONSTER          0x0200
@@ -324,6 +321,4 @@ const int DEFAULT_VIEW_DELAY = 600;
 
 #ifdef __ANDROID__
 #define ANDROID_ASSETS "ANDROID_ASSETS"
-#endif
-
 #endif

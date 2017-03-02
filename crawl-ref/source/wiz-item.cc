@@ -18,9 +18,10 @@
 #include "dbg-util.h"
 #include "decks.h"
 #include "env.h"
-#include "godpassive.h"
+#include "god-passive.h"
 #include "invent.h"
-#include "itemprop.h"
+#include "item-prop.h"
+#include "item-status-flag-type.h"
 #include "items.h"
 #include "jobs.h"
 #include "libutil.h"
@@ -31,6 +32,7 @@
 #include "misc.h"
 #include "mon-death.h"
 #include "options.h"
+#include "orb-type.h"
 #include "output.h"
 #include "player-equip.h"
 #include "prompt.h"
@@ -92,15 +94,15 @@ void wizard_create_spec_object_by_name()
 
 void wizard_create_spec_object()
 {
-    char           specs[80];
-    ucs_t          keyin;
+    char specs[80];
+    char32_t keyin;
     object_class_type class_wanted;
 
     do
     {
         mprf(MSGCH_PROMPT, ") - weapons     ( - missiles  [ - armour  / - wands    ?  - scrolls");
-        mprf(MSGCH_PROMPT, "= - jewellery   ! - potions   : - books   | - staves   \\  - rods");
-        mprf(MSGCH_PROMPT, "} - miscellany  X - corpses   %% - food    $ - gold     0  - the Orb");
+        mprf(MSGCH_PROMPT, "= - jewellery   ! - potions   : - books   | - staves   }  - miscellany");
+        mprf(MSGCH_PROMPT, "X - corpses     %% - food      $ - gold    0  - the Orb");
         mprf(MSGCH_PROMPT, "ESC - exit");
 
         msgwin_prompt("What class of item? ");
@@ -178,7 +180,10 @@ void wizard_create_spec_object()
         dummy.position = you.pos();
 
         if (mons_genus(mon) == MONS_HYDRA)
-            dummy.num_heads = prompt_for_int("How many heads? ", false);
+        {
+            dummy.num_heads
+                =  max(1, min(27, prompt_for_int("How many heads? ", false)));
+        }
 
         if (!place_monster_corpse(dummy, false, true))
         {
@@ -342,6 +347,40 @@ static void _tweak_randart(item_def &item)
                              val);
         break;
     }
+
+    case ARTP_VAL_BRAND:
+    {
+        mprf(MSGCH_PROMPT, "%s was %s.", artp_name(prop),
+             props[prop] ? ego_type_string(item, false).c_str() : "normal");
+
+        char specs[80];
+        msgwin_get_line("New ego? ", specs, sizeof(specs));
+        if (specs[0] == '\0')
+        {
+            canned_msg(MSG_OK);
+            break;
+        }
+
+        const int ego = str_to_ego(item.base_type, specs);
+
+        if (ego == 0 && string(specs) != "normal") // this is secretly a hack
+        {
+            mprf("No such ego as: %s", specs);
+            break;
+        }
+        if (ego == -1)
+        {
+            mprf("Ego '%s' is invalid for %s.",
+                 specs, item.name(DESC_A).c_str());
+            break;
+        }
+
+        // XXX: validate ego further? (is_weapon_brand_ok etc)
+
+        artefact_set_property(item, static_cast<artefact_prop_type>(prop),
+                              ego);
+        break;
+    }
     }
 }
 
@@ -476,18 +515,21 @@ static bool _make_book_randart(item_def &book)
     return true;
 }
 
-void wizard_value_artefact()
+/// Prompt for an item in inventory & print its base shop value.
+void wizard_value_item()
 {
-    int i = prompt_invent_item("Value of which artefact?", MT_INVLIST, -1);
+    const int i = prompt_invent_item("Value of which item?", MT_INVLIST, -1);
 
-    if (!prompt_failed(i))
-    {
-        const item_def& item(you.inv[i]);
-        if (!is_artefact(item))
-            mpr("That item is not an artefact!");
-        else
-            mpr(debug_art_val_str(item));
-    }
+    if (prompt_failed(i))
+        return;
+
+    const item_def& item(you.inv[i]);
+    const int real_value = item_value(item, true);
+    const int known_value = item_value(item, false);
+    if (real_value != known_value)
+        mprf("Real value: %d (known: %d)", real_value, known_value);
+    else
+        mprf("Value: %d", real_value);
 }
 
 void wizard_create_all_artefacts()
@@ -631,7 +673,7 @@ void wizard_make_object_randart()
 static bool _item_type_can_be_cursed(int type)
 {
     return type == OBJ_WEAPONS || type == OBJ_ARMOUR || type == OBJ_JEWELLERY
-           || type == OBJ_STAVES || type == OBJ_RODS;
+           || type == OBJ_STAVES;
 }
 
 void wizard_uncurse_item()
@@ -720,6 +762,57 @@ void wizard_list_items()
     }
 }
 
+static int _subtype_index(int acq_type, const item_def &item)
+{
+    // Certain acquirement types can acquire different classes of items than
+    // they claim to, so... pack them in at the end, as a hack.
+    switch (acq_type)
+    {
+        case OBJ_MISCELLANY:
+            if (item.base_type == OBJ_WANDS)
+                return NUM_MISCELLANY + item.sub_type;
+            break;
+        case OBJ_STAVES:
+            if (item.base_type == OBJ_WEAPONS) // unrand staff
+                return NUM_STAVES;
+            break;
+        default:
+            break;
+    }
+
+    return item.sub_type;
+}
+
+/// Reverse the _subtype_index() hack.
+static void _fill_item_from_subtype(object_class_type acq_type, int subtype,
+                                    item_def &item)
+{
+    switch (acq_type)
+    {
+        case OBJ_MISCELLANY:
+            if (subtype >= NUM_MISCELLANY)
+            {
+                item.base_type = OBJ_WANDS;
+                item.sub_type = subtype - NUM_MISCELLANY;
+                return;
+            }
+            break;
+        case OBJ_STAVES:
+            if (subtype == NUM_STAVES) // unrand staff
+            {
+                item.base_type = OBJ_WEAPONS;
+                item.sub_type = WPN_STAFF;
+                return;
+            }
+            break;
+        default:
+            break;
+    }
+
+    item.base_type = acq_type;
+    item.sub_type = subtype;
+}
+
 static void _debug_acquirement_stats(FILE *ostat)
 {
     int p = get_mitm_slot(11);
@@ -731,8 +824,8 @@ static void _debug_acquirement_stats(FILE *ostat)
     mitm[p].base_type = OBJ_UNASSIGNED;
 
     clear_messages();
-    mpr("[a] Weapons [b] Armours [c] Jewellery      [d] Books");
-    mpr("[e] Staves  [f] Wands   [g] Miscellaneous  [h] Food");
+    mpr("[a] Weapons [b] Armours   [c] Jewellery [d] Books");
+    mpr("[e] Staves  [f] Evocables [g] Food");
     mprf(MSGCH_PROMPT, "What kind of item would you like to get acquirement stats on? ");
 
     object_class_type type;
@@ -744,9 +837,8 @@ static void _debug_acquirement_stats(FILE *ostat)
     case 'c': type = OBJ_JEWELLERY;  break;
     case 'd': type = OBJ_BOOKS;      break;
     case 'e': type = OBJ_STAVES;     break;
-    case 'f': type = OBJ_WANDS;      break;
-    case 'g': type = OBJ_MISCELLANY; break;
-    case 'h': type = OBJ_FOOD;       break;
+    case 'f': type = OBJ_MISCELLANY; break;
+    case 'g': type = OBJ_FOOD;       break;
     default:
         canned_msg(MSG_OK);
         return;
@@ -797,7 +889,10 @@ static void _debug_acquirement_stats(FILE *ostat)
 
         acq_calls++;
         total_quant += item.quantity;
-        subtype_quants[item.sub_type] += item.quantity;
+        // hack alert: put unrands into the end of staff acq
+        // and wands into the end of misc acq
+        const int subtype_index = _subtype_index(type, item);
+        subtype_quants[subtype_index] += item.quantity;
 
         max_plus    = max(max_plus, item.plus);
         total_plus += item.plus;
@@ -885,7 +980,7 @@ static void _debug_acquirement_stats(FILE *ostat)
     };
 
     bool naked = true;
-    for (int i = 0; i < NUM_EQUIP; i++)
+    for (int i = EQ_FIRST_EQUIP; i < NUM_EQUIP; i++)
     {
         int eqslot = e_order[i];
 
@@ -938,8 +1033,6 @@ static void _debug_acquirement_stats(FILE *ostat)
             for (int d = 0; d <= SPTYP_LAST_EXPONENT; ++d)
             {
                 const auto disc = spschools_type::exponent(d);
-                if (disc & SPTYP_DIVINATION)
-                    continue;
 
                 if (disciplines & disc)
                 {
@@ -952,8 +1045,6 @@ static void _debug_acquirement_stats(FILE *ostat)
         for (int d = 0; d <= SPTYP_LAST_EXPONENT; ++d)
         {
             const auto disc = spschools_type::exponent(d);
-            if (disc & SPTYP_DIVINATION)
-                continue;
 
             fprintf(ostat, "%-13s:  %2d/%2d spells unseen\n",
                     spelltype_long_name(disc),
@@ -1065,6 +1156,7 @@ static void _debug_acquirement_stats(FILE *ostat)
 #if TAG_MAJOR_VERSION == 34
             "jumping",
 #endif
+            "repulsion",
         };
 
         const int non_art = acq_calls - num_arts;
@@ -1096,7 +1188,6 @@ static void _debug_acquirement_stats(FILE *ostat)
                 "transmutation",
                 "necromancy",
                 "summoning",
-                "divination",
                 "translocation",
                 "poison magic",
                 "earth magic",
@@ -1149,8 +1240,6 @@ static void _debug_acquirement_stats(FILE *ostat)
     item.quantity  = 1;
     item.base_type = type;
 
-    const description_level_type desc = (type == OBJ_BOOKS ? DESC_PLAIN
-                                                           : DESC_DBNAME);
     const bool terse = (type == OBJ_BOOKS ? false : true);
 
     // First, get the maximum name length.
@@ -1164,7 +1253,7 @@ static void _debug_acquirement_stats(FILE *ostat)
             continue;
 
         item.sub_type = i;
-        string name = item.name(desc, terse, true);
+        string name = item.name(DESC_DBNAME, terse, true);
 
         max_width = max(max_width, strwidth(name));
     }
@@ -1181,8 +1270,9 @@ static void _debug_acquirement_stats(FILE *ostat)
         if (subtype_quants[i] == 0)
             continue;
 
-        item.sub_type = i;
-        string name = item.name(desc, terse, true);
+        _fill_item_from_subtype(type, i, item);
+
+        const string name = item.name(DESC_DBNAME, terse, true);
 
         fprintf(ostat, format_str, name.c_str(),
                 (float) subtype_quants[i] * 100.0 / (float) total_quant);
@@ -1398,7 +1488,9 @@ static void _debug_rap_stats(FILE *ostat)
         "ARTP_FOG",
 #endif
         "ARTP_REGENERATION",
+#if TAG_MAJOR_VERSION == 34
         "ARTP_SUSTAT",
+#endif
         "ARTP_NO_UPGRADE",
         "ARTP_RCORR",
         "ARTP_RMUT",
@@ -1407,7 +1499,7 @@ static void _debug_rap_stats(FILE *ostat)
 #endif
         "ARTP_CORRODE",
         "ARTP_DRAIN",
-        "ARTP_CONFUSE",
+        "ARTP_SLOW",
         "ARTP_FRAGILE",
         "ARTP_SHIELDING",
     };
@@ -1532,4 +1624,22 @@ void wizard_unidentify_all_items()
     }
 }
 
+void wizard_recharge_evokers()
+{
+    for (int i = 0; i < NUM_MISCELLANY; ++i)
+    {
+        item_def dummy;
+        dummy.base_type = OBJ_MISCELLANY;
+        dummy.sub_type = i;
+
+        if (!is_xp_evoker(dummy))
+            continue;
+
+        evoker_debt(dummy.sub_type) = 0;
+
+        if (dummy.sub_type == MISC_LIGHTNING_ROD)
+            you.props["thunderbolt_charge"].get_int() = 0;
+    }
+    mpr("Evokers recharged.");
+}
 #endif

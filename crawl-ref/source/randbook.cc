@@ -7,11 +7,14 @@
 
 #include "randbook.h"
 
+#include <functional>
+
 #include "artefact.h"
 #include "database.h"
 #include "english.h"
-#include "goditem.h"
-#include "itemname.h"
+#include "god-item.h"
+#include "item-name.h"
+#include "item-status-flag-type.h"
 #include "items.h"
 #include "religion.h"
 #include "spl-book.h"
@@ -38,8 +41,7 @@ spschool_flag_type random_book_theme()
 {
     vector<spschool_flag_type> disciplines;
     for (auto discipline : spschools_type::range())
-        if (!(discipline & SPTYP_DIVINATION))
-            disciplines.push_back(discipline);
+        disciplines.push_back(discipline);
     return disciplines[random2(disciplines.size())];
 }
 
@@ -128,7 +130,7 @@ static bool _agent_spell_filter(int agent, spell_type spell)
     // Don't include spells a god dislikes, if this is an acquirement
     // or a god gift.
     const god_type god = agent >= AQ_SCROLL ? you.religion : (god_type)agent;
-    if (god_dislikes_spell_type(spell, god))
+    if (god_hates_spell(spell, god))
         return false;
 
     return true;
@@ -263,6 +265,40 @@ void theme_book_spells(spschool_flag_type discipline_1,
 }
 
 /**
+ * Try to remove any discipline that's not actually being used by a given
+ * randbook, setting it to the other (used) discipline.
+ *
+ * E.g., if a cj/ne randbook is generated with only cj spells, set discipline_2
+ * to cj as well.
+ *
+ * @param discipline_1[in,out]      The first book discipline.
+ * @param discipline_1[in,out]      The second book discipline.
+ * @param spells[in]                The list of spells the book should contain.
+ */
+void fixup_randbook_disciplines(spschool_flag_type &discipline_1,
+                                spschool_flag_type &discipline_2,
+                                const vector<spell_type> &spells)
+{
+    bool has_d1 = false, has_d2 = false;
+    for (auto spell : spells)
+    {
+        const spschools_type disciplines = get_spell_disciplines(spell);
+        if (disciplines & discipline_1)
+            has_d1 = true;
+        if (disciplines & discipline_2)
+            has_d2 = true;
+    }
+
+    if (has_d1 == has_d2)
+        return; // both schools or neither used; can't do anything regardless
+
+    if (has_d1)
+        discipline_2 = discipline_1;
+    else
+        discipline_1 = discipline_2;
+}
+
+/**
  * Turn a given book into a themed spellbook.
  *
  * @param book[in,out]      The book in question.
@@ -280,8 +316,8 @@ void build_themed_book(item_def &book, themed_spell_filter filter,
     if (num_spells < 1)
         num_spells = theme_book_size();
 
-    const spschool_flag_type discipline_1 = get_discipline();
-    const spschool_flag_type discipline_2 = get_discipline();
+    spschool_flag_type discipline_1 = get_discipline();
+    spschool_flag_type discipline_2 = get_discipline();
 
     item_source_type agent;
     if (!origin_is_acquirement(book, &agent))
@@ -290,6 +326,7 @@ void build_themed_book(item_def &book, themed_spell_filter filter,
     vector<spell_type> spells;
     theme_book_spells(discipline_1, discipline_2, filter, agent, num_spells,
                       spells);
+    fixup_randbook_disciplines(discipline_1, discipline_2, spells);
     init_book_theme_randart(book, spells);
     name_book_theme_randart(book, discipline_1, discipline_2, owner, subject);
 }
@@ -402,7 +439,7 @@ static void _get_spell_list(vector<spell_type> &spells, int level,
             continue;
         }
 
-        if (god_dislikes_spell_type(spell, god))
+        if (god_hates_spell(spell, god))
         {
             god_discard++;
             continue;
@@ -918,7 +955,7 @@ static string _gen_randbook_owner(god_type god, spschool_flag_type disc1,
 // that includes Statue Form and is named after her.
 void make_book_roxanne_special(item_def *book)
 {
-    spschool_flag_type disc = coinflip() ? SPTYP_TRANSMUTATION : SPTYP_EARTH;
+    spschool_flag_type disc = random_choose(SPTYP_TRANSMUTATION, SPTYP_EARTH);
     vector<spell_type> forced_spell = {SPELL_STATUE_FORM};
     build_themed_book(*book,
                       forced_spell_filter(forced_spell,
@@ -1026,7 +1063,7 @@ static int _randbook_spell_weight(spell_type spell, int agent)
 
     // prefer spells roughly approximating the player's overall spellcasting
     // ability (?????)
-    const int Spc = you.skills[SK_SPELLCASTING];
+    const int Spc = div_rand_round(you.skill(SK_SPELLCASTING, 256, true), 256);
     const int difficult_weight = 5 - abs(3 * spell_difficulty(spell) - Spc) / 7;
 
     // prefer spells in disciplines the player is skilled with
@@ -1037,7 +1074,8 @@ static int _randbook_spell_weight(spell_type spell, int agent)
     {
         if (disciplines & disc)
         {
-            total_skill += you.skills[spell_type2skill(disc)];
+            const skill_type sk = spell_type2skill(disc);
+            total_skill += div_rand_round(you.skill(sk, 256, true), 256);
             num_skills++;
         }
     }
@@ -1134,7 +1172,7 @@ static void _choose_themed_randbook_spells(weighted_spells &possible_spells,
                                            spschool_flag_type discipline_2,
                                            int size, vector<spell_type> &spells)
 {
-    for (auto weighted_spell : possible_spells)
+    for (auto &weighted_spell : possible_spells)
     {
         const spell_type spell = weighted_spell.first;
         const spschools_type disciplines = get_spell_disciplines(spell);
@@ -1168,14 +1206,16 @@ void acquire_themed_randbook(item_def &book, int agent)
     ASSERT(size);
 
     // XXX: we could cache this...
-    const spschool_flag_type discipline_1
+    spschool_flag_type discipline_1
         = _choose_randbook_discipline(possible_spells, agent);
-    const spschool_flag_type discipline_2
+    spschool_flag_type discipline_2
         = _choose_randbook_discipline(possible_spells, agent);
 
     vector<spell_type> spells;
     _choose_themed_randbook_spells(possible_spells, discipline_1, discipline_2,
                                    size, spells);
+
+    fixup_randbook_disciplines(discipline_1, discipline_2, spells);
 
     // Acquired randart books have a chance of being named after the player.
     const string owner = agent == AQ_SCROLL && one_chance_in(12) ?

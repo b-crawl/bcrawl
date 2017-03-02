@@ -4,9 +4,9 @@
  *             unexpected way.
 **/
 
-#ifndef FINEFF_H
-#define FINEFF_H
+#pragma once
 
+#include "beh-type.h"
 #include "mon-util.h"
 
 class final_effect
@@ -230,7 +230,7 @@ protected:
                                    coord_def pos, int pow)
         : final_effect(0, serpent, coord_def()), oppressor(rudedude),
           position(pos), power(pow),
-        attitude(mons_attitude(serpent->as_monster()))
+        attitude(mons_attitude(*serpent->as_monster()))
     {
     }
     const actor &oppressor;
@@ -319,6 +319,22 @@ protected:
     unsigned short foe;
 };
 
-void fire_final_effects();
+class infestation_death_fineff : public final_effect
+{
+public:
+    bool mergeable(const final_effect &a) const override { return false; }
+    void fire() override;
 
-#endif
+    static void schedule(coord_def pos, const string &name)
+    {
+        final_effect::schedule(new infestation_death_fineff(pos, name));
+    }
+protected:
+    infestation_death_fineff(coord_def pos, const string &_name)
+        : final_effect(0, 0, pos), name(_name)
+    {
+    }
+    string name;
+};
+
+void fire_final_effects();

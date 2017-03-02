@@ -1,10 +1,9 @@
-#ifndef TILEFONT_H
-#define TILEFONT_H
+#pragma once
 
 #include "defines.h"
 #include "glwrapper.h"
 
-extern const VColour term_colours[MAX_TERM_COLOUR];
+extern const VColour term_colours[NUM_TERM_COLOURS];
 
 class FontBuffer;
 class formatted_string;
@@ -26,7 +25,7 @@ public:
 
     // render just text
     virtual void render_textblock(unsigned int x, unsigned int y,
-                                  ucs_t *chars, uint8_t *colours,
+                                  char32_t *chars, uint8_t *colours,
                                   unsigned int width, unsigned int height,
                                   bool drop_shadow = false) = 0;
 
@@ -46,7 +45,7 @@ public:
                        const string &s, const VColour &c) = 0;
     virtual void store(FontBuffer &buf, float &x, float &y,
                        const formatted_string &fs) = 0;
-    virtual void store(FontBuffer &buf, float &x, float &y, ucs_t c,
+    virtual void store(FontBuffer &buf, float &x, float &y, char32_t c,
                        const VColour &col) = 0;
 
     virtual unsigned int char_width() const = 0;
@@ -64,5 +63,3 @@ public:
 
    virtual const GenericTexture *font_tex() const = 0;
 };
-
-#endif

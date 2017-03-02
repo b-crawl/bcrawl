@@ -3,8 +3,7 @@
  * @brief Shop keeper functions.
 **/
 
-#ifndef SHOPPING_H
-#define SHOPPING_H
+#pragma once
 
 int artefact_value(const item_def &item);
 
@@ -43,6 +42,7 @@ void list_shop_types();
 struct level_pos;
 class  Menu;
 
+typedef pair<string, int> shoplist_entry;
 class ShoppingList
 {
 public:
@@ -76,6 +76,8 @@ public:
 
     bool empty() const { return !list || list->empty(); };
     int size() const;
+
+    vector<shoplist_entry> entries();
 
     static bool items_are_same(const item_def& item_a,
                                const item_def& item_b);
@@ -114,6 +116,4 @@ extern ShoppingList shopping_list;
 
 #if TAG_MAJOR_VERSION == 34
 #define REMOVED_DEAD_SHOPS_KEY "removed_dead_shops"
-#endif
-
 #endif

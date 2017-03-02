@@ -1,6 +1,8 @@
-#ifndef MON_INFO_H
-#define MON_INFO_H
+#pragma once
 
+#include <functional>
+
+#include "enchant-type.h"
 #include "mon-util.h"
 
 #define SPECIAL_WEAPON_KEY "special_weapon_name"
@@ -49,7 +51,9 @@ enum monster_info_flags
     MB_INSANE,
     MB_SILENCING,
     MB_MESMERIZING,
+#if TAG_MAJOR_VERSION == 34
     MB_EVIL_ATTACK,
+#endif
     MB_SHAPESHIFTER,
     MB_CHAOTIC,
     MB_SUBMERGED,
@@ -75,8 +79,8 @@ enum monster_info_flags
     MB_MOSTLY_FADED,
 #endif
     MB_FEAR_INSPIRING,
-    MB_WITHDRAWN,
 #if TAG_MAJOR_VERSION == 34
+    MB_WITHDRAWN,
     MB_ATTACHED,
 #endif
     MB_DAZED,
@@ -93,18 +97,22 @@ enum monster_info_flags
     MB_OLD_ROUSED,
 #endif
     MB_BREATH_WEAPON,
+#if TAG_MAJOR_VERSION == 34
     MB_DEATHS_DOOR,
+#endif
     MB_FIREWOOD,
     MB_TWO_WEAPONS,
     MB_NO_REGEN,
 #if TAG_MAJOR_VERSION == 34
     MB_SUPPRESSED,
-#endif
     MB_ROLLING,
+#endif
     MB_RANGED_ATTACK,
     MB_NO_NAME_TAG,
     MB_OZOCUBUS_ARMOUR,
+#if TAG_MAJOR_VERSION == 34
     MB_MAGIC_ARMOUR,
+#endif
     MB_WRETCHED,
     MB_SCREAMED,
     MB_WORD_OF_RECALL,
@@ -117,8 +125,8 @@ enum monster_info_flags
 #endif
     MB_WEAK,
     MB_DIMENSION_ANCHOR,
-    MB_CONTROL_WINDS,
 #if TAG_MAJOR_VERSION == 34
+    MB_CONTROL_WINDS,
     MB_WIND_AIDED,
     MB_SUMMONED_NO_STAIRS, // Temp. summoned and capped monsters
 #endif
@@ -159,6 +167,15 @@ enum monster_info_flags
     MB_READY_TO_HOWL,
     MB_PARTIALLY_CHARGED,
     MB_FULLY_CHARGED,
+    MB_GOZAG_INCITED,
+    MB_PAIN_BOND,
+    MB_IDEALISED,
+    MB_BOUND_SOUL,
+    MB_INFESTATION,
+    MB_NO_REWARD,
+    MB_STILL_WINDS,
+    MB_SLOWLY_DYING,
+    MB_DISTRACTED_ACROBATICS,
     NUM_MB_FLAGS
 };
 
@@ -274,6 +291,7 @@ struct monster_info : public monster_info_base
     {
         return get_damage_level_string(holi, dam);
     }
+    string get_max_hp_desc() const;
 
     inline bool neutral() const
     {
@@ -285,24 +303,18 @@ struct monster_info : public monster_info_base
     string pluralised_name(bool fullname = true) const;
     string common_name(description_level_type desc = DESC_PLAIN) const;
     string proper_name(description_level_type desc = DESC_PLAIN) const;
-    string full_name(description_level_type desc = DESC_PLAIN, bool use_comma = false) const;
+    string full_name(description_level_type desc = DESC_PLAIN) const;
 
     vector<string> attributes() const;
 
-    const char *pronoun(pronoun_type variant) const
-    {
-        return mons_pronoun(type, variant, true);
-    }
+    const char *pronoun(pronoun_type variant) const;
 
     string wounds_description_sentence() const;
     string wounds_description(bool colour = false) const;
 
     string constriction_description() const;
 
-    monster_type draco_or_demonspawn_subspecies() const
-    {
-        return ::draco_or_demonspawn_subspecies(type, base_type);
-    }
+    monster_type draco_or_demonspawn_subspecies() const;
 
     mon_intel_type intel() const
     {
@@ -358,6 +370,7 @@ struct monster_info : public monster_info_base
     }
 
     bool has_spells() const;
+    int spell_hd() const;
     unsigned colour(bool base_colour = false) const;
     void set_colour(int colour);
 
@@ -380,5 +393,4 @@ typedef function<vector<string> (const monster_info& mi)> (desc_filter);
 
 #ifdef CHAOS_CRAWL
 monster_type map_mon_type(monster_type type);
-#endif
 #endif

@@ -3,8 +3,7 @@
  * @brief Monster death functionality.
 **/
 
-#ifndef MONDEATH_H
-#define MONDEATH_H
+#pragma once
 
 #define ORIG_MONSTER_KEY "orig_monster_key"
 #define ELVEN_ENERGIZE_KEY "elven_twin_energize"
@@ -47,6 +46,7 @@ void monster_cleanup(monster* mons);
 void setup_spore_explosion(bolt & beam, const monster& origin);
 void record_monster_defeat(const monster* mons, killer_type killer);
 void unawaken_vines(const monster* mons, bool quiet);
+int mummy_curse_power(monster_type type);
 void fire_monster_death_event(monster* mons, killer_type killer, int i, bool polymorph);
 void heal_flayed_effect(actor* act, bool quiet = false, bool blood_only = false);
 void end_flayed_effect(monster* ghost);
@@ -78,4 +78,3 @@ bool mons_felid_can_revive(const monster* mons);
 void mons_felid_revive(monster* mons);
 
 bool mons_bennu_can_revive(const monster* mons);
-#endif

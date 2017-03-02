@@ -2,16 +2,17 @@
  * @file
  * @brief Travel stuff
 **/
-#ifndef TRAVEL_H
-#define TRAVEL_H
+#pragma once
 
 #include <cstdio>
 #include <map>
 #include <string>
 #include <vector>
 
+#include "command-type.h"
+#include "daction-type.h"
 #include "exclude.h"
-#include "travel_defs.h"
+#include "travel-defs.h"
 
 class reader;
 class writer;
@@ -53,7 +54,7 @@ enum run_mode_type
 /* ***********************************************************************
  * Initialises the travel subsystem.
  */
-void stop_running();
+void stop_running(bool clear_delays = true);
 void travel_init_load_level();
 void travel_init_new_level();
 
@@ -205,8 +206,8 @@ public:
     void found_feature(const coord_def &pos, dungeon_feature_type grid);
     void found_item(const coord_def &pos, const item_def &item);
 
-    // Reports discoveries and prompts the player to stop (if necessary).
-    bool prompt_stop() const;
+    // Reports discoveries and stops exploration (if necessary).
+    bool stop_explore() const;
 
 private:
     template <class Z> struct named_thing
@@ -599,5 +600,3 @@ void clear_level_target();
 
 void clear_travel_trail();
 int travel_trail_index(const coord_def& gc);
-
-#endif // TRAVEL_H

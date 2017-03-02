@@ -3,13 +3,13 @@
  * @brief Functions used to print messages.
 **/
 
-#ifndef MESSAGE_H
-#define MESSAGE_H
+#pragma once
 
 #include <iostream>
 #include <streambuf>
 #include <string>
 
+#include "canned-message-type.h"
 #include "enum.h"
 #include "player.h"
 
@@ -27,11 +27,12 @@ void more(bool user_forced = false);
 
 void canned_msg(canned_message_type which_message);
 
-bool simple_monster_message(const monster* mons, const char *event,
+bool simple_monster_message(const monster& mons, const char *event,
                             msg_channel_type channel = MSGCH_PLAIN,
                             int param = 0,
                             description_level_type descrip = DESC_THE);
 void simple_god_message(const char *event, god_type which_deity = you.religion);
+void wu_jian_sifu_message(const char *event);
 
 class formatted_string;
 
@@ -175,5 +176,3 @@ ostream& operator<<(ostream& os, const msg::setparam& sp);
 ostream& operator<<(ostream& os, const msg::capitalisation& cap);
 
 void set_msg_dump_file(FILE* file);
-
-#endif

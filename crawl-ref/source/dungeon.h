@@ -3,8 +3,7 @@
  * @brief Functions used when building new levels.
 **/
 
-#ifndef DUNGEON_H
-#define DUNGEON_H
+#pragma once
 
 #include <algorithm>
 #include <set>
@@ -222,8 +221,7 @@ void place_spec_shop(const coord_def& where, shop_type force_type);
 void place_spec_shop(const coord_def& where, shop_spec &spec, int shop_level = 0);
 int greed_for_shop_type(shop_type shop, int level_number);
 object_class_type item_in_shop(shop_type shop_type);
-bool seen_replace_feat(dungeon_feature_type replace,
-                       dungeon_feature_type feature);
+bool seen_destroy_feat(dungeon_feature_type old_feat);
 bool map_masked(const coord_def &c, unsigned mask);
 coord_def dgn_find_nearby_stair(dungeon_feature_type stair_to_find,
                                 coord_def base_pos, bool find_closest);
@@ -289,4 +287,3 @@ int count_feature_in_box(int x0, int y0, int x1, int y1,
 bool door_vetoed(const coord_def pos);
 
 void fixup_misplaced_items();
-#endif

@@ -3,14 +3,14 @@
  * @brief Classes tracking player stashes
 **/
 
-#ifndef STASH_H
-#define STASH_H
+#pragma once
 
 #include <map>
 #include <string>
 #include <vector>
 
 #include "shopping.h"
+#include "trap-type.h"
 
 class input_history;
 class reader;
@@ -31,6 +31,8 @@ public:
     bool unmark_trapping_nets();
     void save(writer&) const;
     void load(reader&);
+
+    void rot_all_corpses();
 
     string description() const;
     string feature_description() const;
@@ -175,6 +177,8 @@ public:
 
     // Update stash at (x,y).
     bool  update_stash(const coord_def& c);
+
+    void rot_all_corpses();
 
     // Mark nets at (x,y) as no longer trapping an actor.
     bool unmark_trapping_nets(const coord_def &c);
@@ -334,5 +338,3 @@ string stash_annotate_item(const char *s, const item_def *item,
 
 #define STASH_LUA_SEARCH_ANNOTATE "ch_stash_search_annotate_item"
 #define STASH_LUA_DUMP_ANNOTATE   "ch_stash_dump_annotate_item"
-
-#endif

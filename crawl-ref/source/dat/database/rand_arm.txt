@@ -119,6 +119,10 @@ Sparrow
 
 Swan
 
+Robin
+
+Shrike
+
 # mammals
 Hare
 
@@ -154,6 +158,8 @@ Okapi
 
 # not strictly an animal... :)
 Monkey's Uncle
+
+Circus Animal
 
 #classical mythical animals
 Cockatrice
@@ -237,6 +243,10 @@ Insecurity
 Vexation
 
 Disappointment
+
+Entitlement
+
+Bad Feelings
 
 # inaction
 Lifelessness
@@ -336,6 +346,14 @@ Contentment
 
 Mirth
 
+Tender Moments
+
+Lucidity
+
+Knowledge
+
+New Discoveries
+
 # divine events
 Divine Compulsion
 
@@ -370,6 +388,8 @@ the Saviour
 the Untouchables
 
 the Armoured One
+
+the Unbroken
 
 Exclusion
 
@@ -411,6 +431,12 @@ Resilience
 Fashionability
 
 Impressiveness
+
+Gravitas
+
+Resonance
+
+Polish
 %%%%
 _wacky_armour_name_
 
@@ -489,6 +515,17 @@ Forking Paths
 the Pink Corner
 
 Philately
+
+Precision Catastrophes
+
+Poor Excuses
+
+Dramatic Exits
+
+the True Pharaoh
+
+the Unemployed Unperson
+
 %%%%
 # Lemuel's suggestions
 _celestial_bodies_
@@ -509,6 +546,8 @@ Evening Star
 
 Comet
 
+Constellations
+
 w:5
 Midnight Sun
 
@@ -522,6 +561,12 @@ Harvest Moon
 Black Moon
 %%%%
 _instrument_name_
+
+the Fiddle
+
+the Fife
+
+Pan-Flutes
 
 Trumpets
 
@@ -542,8 +587,18 @@ the Flute
 the Harp
 
 the Gusle
+
+the Trombone
 %%%%
 _evil_being_
+
+Tempters
+
+the Tormentor
+
+Vampiric Thralls
+
+the Lich-sworn
 
 the Devil
 
@@ -556,6 +611,8 @@ Greater Demons
 the Iron Devil
 
 the Devil's Advocate
+
+the Devil's Team
 
 the Demon Prince
 
@@ -595,6 +652,10 @@ Pleasant Breezes
 the Blizzard
 
 Chill Winds
+
+Spring Thaw
+
+Cloud Cover
 %%%%
 _profession_name_
 
@@ -653,6 +714,15 @@ Pirate
 Buccaneer
 
 Moneychanger
+
+Thinker
+
+Learner
+
+Teacher
+
+Monk
+
 %%%%
 # something for Xom
 _game_name_
@@ -667,6 +737,8 @@ the Game Afoot
 Parlour Games
 
 the Game of Kings
+
+Dice, Bag, and Bottle
 
 # children's games
 Peek-a-Boo
@@ -696,7 +768,7 @@ Jigsaw
 
 Whack-A-Mole
 
-Ladders and Snakes
+Snakes and Ladders
 
 Marbles
 
@@ -765,6 +837,11 @@ the Burgomaster
 the Failed Coup
 
 Sovereignty
+
+the Greedy
+
+Democracy
+
 %%%%
 _other_armour_name_
 
@@ -787,6 +864,14 @@ Sorcery
 Broken Taboos
 
 Bedevilment
+
+Muttered Phrases
+
+the Arcane
+
+Words of Power
+
+Gestures
 
 # other
 Crawling
@@ -826,6 +911,26 @@ Wasted Space
 the Other World
 
 Inevitability
+
+Perfidy
+
+Dogmatism
+
+Happy Babbling
+
+the Slightly Bent
+
+the Moon Troll
+
+Time Monsters
+
+the Sacrificial Victim
+
+Undesirable Species
+
+Going Fast
+
+Insurance
 %%%%
 _card_
 
@@ -875,4 +980,10 @@ Forget-Me-Not
 Hero's Friend
 
 Trusted Companion
+
+Damnable Contraption
+
+Earthly Heaven
+
+Put-Me-On
 %%%%

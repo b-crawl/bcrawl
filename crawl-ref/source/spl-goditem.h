@@ -1,7 +1,10 @@
-#ifndef SPL_GODITEM_H
-#define SPL_GODITEM_H
+#pragma once
 
+#include "enchant-type.h"
+#include "holy-word-source-type.h"
+#include "spell-type.h"
 #include "spl-cast.h"
+#include "torment-source-type.h"
 
 spret_type cast_healing(int pow, int max_pow, bool fail);
 bool heal_monster(monster& patient, int amount);
@@ -28,7 +31,6 @@ const enchant_type dispellable_enchantments[] =
     ENCH_OZOCUBUS_ARMOUR,
     ENCH_INJURY_BOND,
     ENCH_DIMENSION_ANCHOR,
-    ENCH_CONTROL_WINDS,
     ENCH_TOXIC_RADIANCE,
     ENCH_AGILE,
     ENCH_BLACK_MARK,
@@ -38,6 +40,10 @@ const enchant_type dispellable_enchantments[] =
     ENCH_DEFLECT_MISSILES,
     ENCH_RESISTANCE,
     ENCH_HEXED,
+    ENCH_PAIN_BOND,
+    ENCH_IDEALISED,
+    ENCH_INSANE,
+    ENCH_BOUND_SOUL,
 };
 
 bool player_is_debuffable();
@@ -45,7 +51,6 @@ void debuff_player();
 bool monster_is_debuffable(const monster &mon);
 void debuff_monster(monster &mon);
 
-int detect_traps(int pow);
 int detect_items(int pow);
 int detect_creatures(int pow, bool telepathic = false);
 bool remove_curse(bool alreadyknown = true, const string &pre_msg = "");
@@ -58,7 +63,7 @@ bool cast_imprison(int pow, monster* mons, int source);
 
 bool cast_smiting(int pow, monster* mons);
 
-int is_pacifiable(const monster* mon);
+string unpacifiable_reason(const monster &mon);
 
 struct bolt;
 
@@ -67,6 +72,7 @@ void holy_word(int pow, holy_word_source_type source, const coord_def& where,
 
 void holy_word_monsters(coord_def where, int pow, holy_word_source_type source,
                         actor *attacker = nullptr);
+void holy_word_player(holy_word_source_type source);
 
 void torment(actor *attacker, torment_source_type taux, const coord_def& where);
 void torment_cell(coord_def where, actor *attacker, torment_source_type taux);
@@ -77,4 +83,4 @@ void setup_cleansing_flame_beam(bolt &beam, int pow, int caster,
 void cleansing_flame(int pow, int caster, coord_def where,
                      actor *attacker = nullptr);
 
-#endif
+spret_type cast_random_effects(int pow, bolt& beam, bool fail);

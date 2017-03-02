@@ -1,6 +1,8 @@
-#ifndef FEATURE_H
-#define FEATURE_H
+#pragma once
 
+#include "dungeon-char-type.h"
+#include "dungeon-feature-type.h"
+#include "map-feature.h"
 #include "show.h"
 
 enum feature_flag_type
@@ -45,8 +47,8 @@ struct feature_def
     {}
 
     bool is_notable() const { return flags & FFT_NOTABLE; }
-    ucs_t symbol() const;
-    ucs_t magic_symbol() const;
+    char32_t symbol() const;
+    char32_t magic_symbol() const;
     colour_t colour() const;
     colour_t map_colour() const;
     colour_t seen_colour() const;
@@ -66,5 +68,3 @@ static inline bool is_notable_terrain(dungeon_feature_type ftype)
 }
 
 dungeon_feature_type magic_map_base_feat(dungeon_feature_type feat);
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef RANDOM_H
-#define RANDOM_H
+#pragma once
 
 #include <algorithm>  // iter_swap
 #include <iterator>   // advance
@@ -7,6 +6,7 @@
 #include <vector>
 
 #include "hash.h"
+#include "rng-type.h"
 
 void seed_rng();
 void seed_rng(uint32_t seed);
@@ -16,6 +16,7 @@ uint32_t get_uint32(int generator = RNG_GAMEPLAY);
 uint64_t get_uint64(int generator = RNG_GAMEPLAY);
 bool coinflip();
 int div_rand_round(int num, int den);
+int rand_round(double x);
 int div_round_up(int num, int den);
 bool one_chance_in(int a_million);
 bool x_chance_in_y(int x, int y);
@@ -138,41 +139,31 @@ int random_choose_weighted(const FixedVector<T, SIZE>& choices)
 }
 
 template <typename T>
-T random_choose_weighted(int weight, T first, ...)
+T random_choose_weighted(int cweight, T curr)
 {
-    va_list args;
-    va_start(args, first);
-    T chosen = first;
-    int cweight = weight, nargs = 100;
-
-    while (nargs-- > 0)
-    {
-        const int nweight = va_arg(args, int);
-        if (!nweight)
-            break;
-
-        const int choice = va_arg(args, int);
-        if (random2(cweight += nweight) < nweight)
-            chosen = static_cast<T>(choice);
-    }
-
-    va_end(args);
-    ASSERT(nargs > 0);
-
-    return chosen;
+    return curr;
 }
 
-const char* random_choose_weighted(int weight, const char* first, ...);
+template <typename T, typename... Args>
+T random_choose_weighted(int cweight, T curr, int nweight, T next, Args... args)
+{
+    return random_choose_weighted<T>(cweight + nweight,
+                                     random2(cweight+nweight) < nweight ? next
+                                                                        : curr,
+                                     args...);
+}
 
 struct dice_def
 {
     int num;
     int size;
 
-    dice_def() : num(0), size(0) {}
-    dice_def(int n, int s) : num(n), size(s) {}
+    constexpr dice_def() : num(0), size(0) {}
+    constexpr dice_def(int n, int s) : num(n), size(s) {}
     int roll() const;
 };
+
+constexpr dice_def CONVENIENT_NONZERO_DAMAGE{42, 1};
 
 dice_def calc_dice(int num_dice, int max_damage);
 
@@ -259,5 +250,3 @@ int choose_random_weighted(Iterator beg, const Iterator end)
     ASSERT(result >= 0);
     return result;
 }
-
-#endif

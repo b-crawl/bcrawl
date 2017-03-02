@@ -3,12 +3,11 @@
  * @brief Functions used to help determine which monsters should appear.
 **/
 
-#ifndef MONPICK_H
-#define MONPICK_H
+#pragma once
 
 #include "random-pick.h"
 
-#define pop_entry random_pick_entry<monster_type>
+typedef random_pick_entry<monster_type> pop_entry;
 
 typedef bool (*mon_pick_vetoer)(monster_type);
 typedef bool (*mon_pick_pos_vetoer)(monster_type, coord_def);
@@ -82,5 +81,3 @@ monster_type pick_monster(level_id place, monster_picker &picker,
                           mon_pick_vetoer veto = nullptr);
 monster_type pick_monster_all_branches(int absdepth0, monster_picker &picker,
                                        mon_pick_vetoer veto = nullptr);
-
-#endif

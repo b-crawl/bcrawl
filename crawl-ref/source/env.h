@@ -1,12 +1,11 @@
-#ifndef ENV_H
-#define ENV_H
+#pragma once
 
 #include <set>
 #include <memory> // unique_ptr
 
-#include "map_knowledge.h"
+#include "map-knowledge.h"
 #include "monster.h"
-#include "trap_def.h"
+#include "trap-def.h"
 
 typedef FixedArray<short, GXM, GYM> grid_heightmap;
 typedef uint32_t terrain_property_t;
@@ -138,4 +137,15 @@ struct crawl_environment
 #endif
 extern struct crawl_environment env;
 
-#endif
+/**
+ * Range proxy to iterate over only "real" menv slots, skipping anon slots.
+ *
+ * Use as the range expression in a for loop:
+ *     for (auto &mons : menv_real)
+ */
+static const struct menv_range_proxy
+{
+    menv_range_proxy() {}
+    monster *begin() const { return &menv[0]; }
+    monster *end()   const { return &menv[MAX_MONSTERS]; }
+} menv_real;

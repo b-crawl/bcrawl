@@ -1,5 +1,4 @@
-#ifndef __FORMAT_H__
-#define __FORMAT_H__
+#pragma once
 
 #include <string>
 #include <vector>
@@ -48,22 +47,19 @@ public:
 public:
     static formatted_string parse_string(
             const string &s,
-            bool  eot_ends_format = true,
-            bool (*process_tag)(const string &tag) = nullptr,
             int main_colour = LIGHTGREY);
 
     static void parse_string_to_multiple(const string &s,
                                          vector<formatted_string> &out,
                                          int wrap_col = 0);
 
-    static int get_colour(const string &tag);
 
 private:
+    static int get_colour(const string &tag);
     int find_last_colour() const;
 
     static void parse_string1(const string &s, formatted_string &fs,
-                              vector<int> &colour_stack,
-                              bool (*process_tag)(const string &tag));
+                              vector<int> &colour_stack);
 
 public:
     struct fs_op
@@ -100,5 +96,3 @@ int tagged_string_tag_length(const string& s);
 int printed_width(const string& s);
 
 void display_tagged_block(const string& s);
-
-#endif

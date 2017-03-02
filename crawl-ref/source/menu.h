@@ -3,8 +3,7 @@
  * @brief Menus and associated malarkey.
 **/
 
-#ifndef __MENU_H__
-#define __MENU_H__
+#pragma once
 
 #include <algorithm>
 #include <cstdio>
@@ -520,8 +519,6 @@ public:
     void add_formatted(int ncol,
             const string &tagged_text,
             bool  add_separator = true,
-            bool  eol_ends_format = true,
-            bool (*text_filter)(const string &tag) = nullptr,
             int   margin = -1);
 
     vector<formatted_string> formatted_lines() const;
@@ -1204,6 +1201,4 @@ protected:
 private:
     unsigned int m_curr;
 };
-#endif
-
 #endif

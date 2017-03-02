@@ -4,7 +4,7 @@
 #
 # 1) The name of the spell being cast:
 #   a) First try with the type, then the species, the the genus.
-#   b) If a wizard, "wizard"; similarly for priest, demon, and innate.
+#   b) If a wizard, "wizard"; similarly for priest, magical, and natural.
 #   c) If being cast by a wizard or priest monster with arms, first try
 #      with the suffix "real".
 #   d) If being cast by a monster of normal or higher intelligence with arms,
@@ -12,7 +12,7 @@
 #   e) Next, try without any suffix.
 # 2) The name of the monster's type, then species, then genus.
 # 3) "priest" if the spell is an invocation, "wizard" if it's a wizard spell,
-#    or "demon" if it's demonic.
+#    or "magical" if it's magical.
 # 4) If the spell uses a targeted, visible beam:
 #   a) "<beam_short_name> beam".
 #   b) "beam catchall".
@@ -23,29 +23,29 @@
 # For any of them, if a wizard has no arms, it will use "non-humanoid wizard"
 # instead of "wizard."
 #
-# For example, a greater naga casting Teleport Self:
-# * Teleport Self greater naga cast
+# For example, a nagaraja casting Teleport Self:
+# * Teleport Self nagaraja cast
 # * Teleport Self naga cast
 # * Teleport Self naga cast
 # * Teleport Self wizard cast
 # * Teleport Self cast real
 # * Teleport Self cast gestures
 # * Teleport Self cast
-# * greater naga cast
+# * nagaraja cast
 # * naga cast
 # * naga cast
 # * wizard cast
 #
 # And one "casting" Spit Poison:
-# * Spit Poison greater naga cast
+# * Spit Poison nagaraja cast
 # * Spit Poison naga cast
 # * Spit Poison naga cast
 # * Spit Poison naga cast
-# * Spit Poison innate cast
+# * Spit Poison natural cast
 # * Spit Poison cast gestures
 # * Spit Poison cast
-# * greater naga cast targeted
-# * greater naga cast
+# * nagaraja cast targeted
+# * nagaraja cast
 # * naga cast targeted
 # * naga cast
 # * naga cast targeted
@@ -199,7 +199,7 @@ unseen Call of Chaos cast
 %%%%
 Wind Blast cast
 
-@The_monster@ summons a fierce blast of wind!
+@The_monster@ conjures a fierce blast of wind!
 #################################################
 # These have special hard-coded messaging.
 #################################################
@@ -216,7 +216,7 @@ Seal Doors cast
 
 __NONE
 #####################################################
-# Individual innate spells (breathing and spitting).
+# Individual natural spells (breathing and spitting).
 #####################################################
 %%%%
 Spit Acid cast
@@ -244,23 +244,23 @@ Chilling Breath cast
 @The_monster@ breathes @beam@ @at@ @target@.
 %%%%
 # Drac ghost breath
-Bolt of Draining innate cast
+Bolt of Draining natural cast
 
 @The_monster@ breathes @beam@ @at@ @target@.
 %%%%
-Lightning Bolt innate cast
+Lightning Bolt natural cast
 
 @The_monster@ breathes @beam@ @at@ @target@.
 %%%%
-Steam Ball innate cast
+Steam Ball natural cast
 
 @The_monster@ breathes @beam@ @at@ @target@.
 %%%%
-Quicksilver Bolt innate cast
+Quicksilver Bolt natural cast
 
 @The_monster@ breathes @beam@ @at@ @target@.
 %%%%
-Poisonous Cloud innate cast
+Poisonous Cloud natural cast
 
 @The_monster@ breathes @beam@ @at@ @target@.
 %%%%
@@ -327,6 +327,10 @@ You hear a loud warning cry!
 Slug Dart cast
 
 @The_monster@ launches a dart @at@ @target@.
+%%%%
+Paralysis Gaze cast
+
+@The_monster@ gazes piercingly through @target@!
 ########################################################################
 # Unique monsters
 ########################################################################
@@ -377,22 +381,6 @@ unseen Geryon cast
 
 You hear a weird and mournful sound.
 %%%%
-Wiglaf cast
-
-@The_monster@ raises a hand and says an invocation.
-
-@The_monster@'s eyes glow as he invokes the power of @possessive_God@.
-
-@The_monster@ prays in loud words.
-%%%%
-unseen Wiglaf cast
-
-You hear an invocation said in the dwarven tongue.
-
-You see a slight glow in a spot of thin air.
-
-Someone prays in loud words.
-%%%%
 # Roxanne can't gesture or point either.
 Roxanne cast
 
@@ -430,10 +418,16 @@ Mennas cast
 
 VISUAL:@The_monster@ gestures frantically.
 %%%%
+Paralyse Xtahua cast
+
+@The_monster@ roars overwhelmingly @at@ @target@!
+
+@The_monster@ thunders ferociously @at@ @target@!
+%%%%
 ########################################################################
 # Individual monsters
 ########################################################################
-giant orange brain cast
+glowing orange brain cast
 
 @The_monster@ pulsates.
 %%%%
@@ -492,7 +486,11 @@ eidolon cast targeted
 %%%%
 basilisk cast targeted
 
-@giant eyeball cast targeted@
+@floating eye cast targeted@
+%%%%
+basilisk cast
+
+@floating eye cast@
 %%%%
 wretched star cast
 
@@ -534,6 +532,10 @@ Sleep satyr cast
 
 @The_monster@ plays a lulling melody on his pipes!
 %%%%
+Sleep dream sheep cast
+
+@The_monster@ suddenly materializes a large amount of dream dust!
+%%%%
 Metal Splinters war gargoyle cast
 
 @The_monster@ launches @beam@ @at@ @target@.
@@ -556,7 +558,7 @@ Bolt of Magma molten gargoyle cast
 %%%%
 Primal Wave elemental wellspring cast
 
-A great wave of water rises up through @the_monster@!
+A torrent of water rises up through @the_monster@!
 %%%%
 Invisibility shadow cast
 
@@ -578,17 +580,21 @@ golden eye cast targeted
 
 @The_monster@ blinks @at@ @target@.
 %%%%
-Blink golden eye cast
-
-__NONE
-%%%%
-ushabti cast
+Death Rattle ushabti cast
 
 @The_monster@ shakes and rattles.
 %%%%
-Bolt of Draining anubis guard cast
+Warning Cry ushabti cast
 
-@The_monster@ breathes @beam@ @at@ @target@.
+@The_monster@ shakes and rattles deafeningly!
+%%%%
+unseen Warning Cry ushabti cast
+
+You hear a deafening rattling sound!
+%%%%
+ushabti cast targeted
+
+@The_monster@ gestures slowly @at@ @target@.
 %%%%
 Ghostly Fireball revenant cast
 
@@ -654,6 +660,10 @@ Fireball hell hog cast
 
 @The_monster@ breathes @beam@ @at@ @target@.
 %%%%
+Throw Barbs peacekeeper cast
+
+@The_monster@ hurls a @beam@ @at@ @target@.
+%%%%
 ########################################################################
 # Monster species and genus messages.
 ########################################################################
@@ -694,15 +704,15 @@ unseen curse skull cast
 
 You hear the clattering of teeth.
 %%%%
-giant eyeball cast targeted
+floating eye cast targeted
 
 @The_monster@ gazes @at@ @target@.
 %%%%
-giant eyeball cast
+floating eye cast
 
 @The_monster@ looks around.
 %%%%
-unseen giant eyeball cast targeted
+unseen floating eye cast targeted
 
 You feel something staring at you. @player_only@
 %%%%
@@ -758,7 +768,7 @@ polymorphed unseen wizard cast
 
 You hear some strange, mumbled words.
 ######################################################
-# Generic priest, wizard and demonic casting messages.
+# Generic priest, wizard and magical casting messages.
 ######################################################
 %%%%
 Haste Other priest cast
@@ -776,6 +786,10 @@ Might Other priest cast
 Malign Offering priest cast
 
 @The_monster@ utters a dark prayer and points @at@ @target@.
+%%%%
+Blink magical cast
+
+__NONE
 %%%%
 priest cast targeted
 
@@ -841,11 +855,11 @@ unseen wizard cast
 
 You hear some strange, mumbled words.
 %%%%
-demon cast targeted
+magical cast targeted
 
 @The_monster@ gestures @at@ @target@.
 %%%%
-demon cast
+magical cast
 
 @The_monster@ gestures.
 %%%%

@@ -51,6 +51,10 @@ Mastery
 Superiority
 
 Magnificence
+
+Hubris
+
+Big Damage
 %%%%
 _conflict_name_
 
@@ -58,7 +62,7 @@ Conflict
 
 Tension
 
-Dischord
+Discord
 
 Division
 
@@ -71,6 +75,18 @@ Contention
 Dissent
 
 Quarrel
+
+Resumed Hostilities
+
+Fighting Over It
+
+a Spat
+
+Kerfluffle
+
+Brawl
+
+Melee
 %%%%
 _anger_name_
 
@@ -95,6 +111,14 @@ Indignation
 Outrage
 
 Scorn
+
+Disproportionate Response
+
+No More Talking
+
+the Extremely Mad
+
+the Absolute Madman
 %%%%
 _battle_or_war_
 
@@ -133,11 +157,15 @@ the Pyrrhic Victory
 #killing
 Blood-Lust
 
+Callousness
+
 Joyful Slaughter
 
 Wounding
 
 Blood
+
+Diet Blood
 
 Fear
 
@@ -348,6 +376,8 @@ Trial by Ordeal
 Blind Justice
 
 Judgement
+
+Accidental Termination
 %%%%
 _diviner_name_
 
@@ -450,6 +480,8 @@ Eel
 
 Salmon
 
+Big Fish
+
 # birds
 Penguin
 
@@ -468,6 +500,8 @@ Owl
 Stork
 
 Vulture
+
+Shrike
 
 # mammals
 w:5
@@ -521,6 +555,9 @@ Whelk
 
 #fungus and similar
 Mushroom
+
+w:5
+Magic Mushroom
 
 Toadstool
 
@@ -1079,6 +1116,10 @@ Morality
 Mysticism
 
 Rationality
+
+Mutualism
+
+Syndicalism
 %%%%
 _science_name_
 
@@ -1319,9 +1360,27 @@ Hard Scrabble
 
 Red Wine
 
+Vodka
+
+Gin and Tonic
+
 Undoing
 
 the Unkillable
+
+Checkmate
+
+Traps
+
+Doors
+
+Butchery
+
+the Real Monster
+
+False Hope
+
+the Pharaoh's Fist
 
 # akrasiac patch
 Irrepressible Laughter

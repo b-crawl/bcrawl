@@ -9,13 +9,15 @@
 
 #include <algorithm>
 
+#include "beh-type.h"
 #include "cluautil.h"
 #include "coordit.h"
 #include "dlua.h"
 #include "end.h"
 #include "env.h"
 #include "libutil.h"
-#include "l_libs.h"
+#include "l-libs.h"
+#include "map-marker-type.h"
 #include "stringutil.h"
 #include "terrain.h"
 #include "unwind.h"

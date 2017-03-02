@@ -8,8 +8,9 @@
 #include "libutil.h"
 #include "options.h"
 #include "output.h"
-#include "process_desc.h"
+#include "process-desc.h"
 #include "skills.h"
+#include "tile-inventory-flags.h"
 #include "tiledef-icons.h"
 #include "tilepick.h"
 #include "viewgeom.h"
@@ -77,9 +78,12 @@ int SkillRegion::handle_mouse(MouseEvent &event)
         {
             tiles.set_need_redraw();
             if (Options.skill_focus == SKM_FOCUS_OFF)
-                you.train[skill] = !you.train[skill];
+                you.train[skill] = (training_status)!you.train[skill];
             else
-                you.train[skill] = (you.train[skill] + 1) % 3;
+            {
+                you.train[skill] = (training_status)
+                    ((you.train[skill] + 1) % NUM_TRAINING_STATUSES);
+            }
             reset_training();
         }
         return CK_MOUSE_CMD;
@@ -235,9 +239,9 @@ void SkillRegion::update()
             continue;
         InventoryTile desc;
         if (you.skills[skill] >= 27)
-            desc.tile = tileidx_skill(skill, -1);
+            desc.tile = tileidx_skill(skill, TRAINING_MASTERED);
         else if (!you.training[skill])
-            desc.tile = tileidx_skill(skill, 0);
+            desc.tile = tileidx_skill(skill, TRAINING_INACTIVE);
         else
             desc.tile = tileidx_skill(skill, you.train[skill]);
         desc.idx      = idx;

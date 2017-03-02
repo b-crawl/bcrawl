@@ -3,8 +3,7 @@
  * @brief Parameters for the LOS algorithm
 **/
 
-#ifndef LOSPARAM_H
-#define LOSPARAM_H
+#pragma once
 
 // Note: find_ray relies on the fact that 2*OPC_HALF == OPC_OPAQUE.
 // On the other hand, losight tracks this explicitly.
@@ -65,7 +64,8 @@ public:
 extern const opacity_no_trans opc_no_trans;
 
 // Make immobile monsters block in addition to no_trans.
-// This is used for monster movement.
+// This is used for spellforged servitor AI.
+// XXX: could use opacity_mons_immob? should?
 class opacity_immob : public opacity_func
 {
 public:
@@ -74,6 +74,22 @@ public:
     opacity_type operator()(const coord_def& p) const override;
 };
 extern const opacity_immob opc_immob;
+
+// Make aligned immobile monsters block in addition to no_trans.
+// This is used for monster movement.
+class opacity_mons_immob : public opacity_func
+{
+public:
+    opacity_mons_immob(const monster* mons) : mon(mons) {}
+    opacity_func* clone() const override
+    {
+        return new opacity_mons_immob(mon);
+    }
+
+    opacity_type operator()(const coord_def& p) const override;
+private:
+    const monster* mon;
+};
 
 // Line of effect.
 class opacity_solid : public opacity_func
@@ -122,6 +138,17 @@ public:
 };
 extern const opacity_no_actor opc_no_actor;
 
+// A cell is considered clear unless the player knows it's
+// opaque.
+class opacity_excl : public opacity_func
+{
+public:
+    CLONE(opacity_excl)
+
+    opacity_type operator()(const coord_def& p) const override;
+};
+extern const opacity_excl opc_excl;
+
 // Subclasses of this are passed to losight() to modify the
 // LOS calculation. Implementations will have to translate between
 // relative coordinates (-8,-8)..(8,8) and real coordinates,
@@ -138,5 +165,3 @@ public:
 
     virtual opacity_type opacity(const coord_def& p) const = 0;
 };
-
-#endif

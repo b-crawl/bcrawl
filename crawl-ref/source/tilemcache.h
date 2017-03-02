@@ -4,8 +4,7 @@
 **/
 
 #ifdef USE_TILE
-#ifndef TILEMCACHE_H
-#define TILEMCACHE_H
+#pragma once
 
 #include <vector>
 
@@ -45,7 +44,8 @@ public:
     enum
     {
         // The maximum number of values written in the info function.
-        MAX_INFO_COUNT = 4
+        // XXX: just use a vector?
+        MAX_INFO_COUNT = 9
     };
 
     virtual int info(tile_draw_info *dinfo) const { return 0; }
@@ -79,5 +79,4 @@ protected:
 // The global monster cache.
 extern mcache_manager mcache;
 
-#endif
 #endif

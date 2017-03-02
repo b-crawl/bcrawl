@@ -3,13 +3,12 @@
  * @brief Monster abilities.
 **/
 
-#ifndef MONABIL_H
-#define MONABIL_H
+#pragma once
 
 class monster;
 struct bolt;
 
-bool mon_special_ability(monster* mons, bolt & beem);
+bool mon_special_ability(monster* mons);
 
 void draconian_change_colour(monster* drac);
 
@@ -23,5 +22,3 @@ void treant_release_fauna(monster* mons);
 void check_grasping_roots(actor* act, bool quiet = false);
 
 void guardian_golem_bond(monster* mons);
-
-#endif

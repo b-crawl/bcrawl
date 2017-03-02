@@ -1,9 +1,10 @@
-#ifndef SPL_SUMMONING_H
-#define SPL_SUMMONING_H
+#pragma once
 
 #include "beam.h"
+#include "beh-type.h"
 #include "enum.h"
-#include "itemprop-enum.h"
+#include "god-type.h"
+#include "item-prop-enum.h"
 #include "spl-cast.h"
 
 //Bitfield for animate dead messages
@@ -117,10 +118,10 @@ bool trigger_spectral_weapon(actor* agent, const actor* target);
 bool confirm_attack_spectral_weapon(monster* mons, const actor *defender);
 void reset_spectral_weapon(monster* mons);
 
+spret_type cast_infestation(int pow, bolt &beam, bool fail);
+
 void summoned_monster(const monster* mons, const actor* caster,
                       spell_type spell);
 bool summons_are_capped(spell_type spell);
 int summons_limit(spell_type spell);
 int count_summons(const actor *summoner, spell_type spell);
-
-#endif

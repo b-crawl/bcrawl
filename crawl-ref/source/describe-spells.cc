@@ -574,6 +574,9 @@ void describe_spellset(const spellset &spells,
 
     for (auto book : spells)
         _describe_book(book, spell_letters, source_item, description, mon_owner);
+    if (mon_owner)
+        description.cprintf("\n(x%%) indicates the chance to beat your MR"
+                ", and (y) indicates the spell range.\n");
 }
 
 /**

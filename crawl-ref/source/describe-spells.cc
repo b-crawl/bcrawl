@@ -510,7 +510,7 @@ static void _describe_book(const spellbook_contents &book,
             && mon_owner->attitude != ATT_FRIENDLY
 #endif
             && (get_spell_flags(spell) & SPFLAG_MR_CHECK);
-        string hex_str = hex ? make_stringf("(%d%%) ", hex_chance(spell, hd)) : "";
+        string hex_str = hex ? make_stringf(" (%d%%)", hex_chance(spell, hd)) : "";
 
         int pow = mons_power_for_hd(spell, hd, false);
         int range = spell_range(spell, pow, false);
@@ -521,9 +521,9 @@ static void _describe_book(const spellbook_contents &book,
 
         int hex_len = hex_str.length(), range_len = 4;
 
-        description.cprintf("%c - %s%s%s", spell_letter, hex_str.c_str(),
+        description.cprintf("%c - %s%s%s", spell_letter,
                 chop_string(spell_title(spell), 29-hex_len-range_len).c_str(),
-                range_str.c_str());
+                hex_str.c_str(), range_str.c_str());
 
         // only display type & level for book spells
         if (doublecolumn)

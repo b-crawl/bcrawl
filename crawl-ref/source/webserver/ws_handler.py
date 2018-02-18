@@ -142,6 +142,7 @@ class CrawlWebSocket(tornado.websocket.WebSocketHandler):
             "token_login": self.token_login,
             "set_login_cookie": self.set_login_cookie,
             "forget_login_cookie": self.forget_login_cookie,
+            "restore_mutelist": self.set_mutelist_from_cookie,
             "play": self.start_crawl,
             "pong": self.pong,
             "watch": self.watch,
@@ -424,6 +425,28 @@ class CrawlWebSocket(tornado.websocket.WebSocketHandler):
                 del login_tokens[(token, username)]
         except ValueError:
             return
+
+    def set_mutelist_from_cookie(self, cookie):
+        if not self.username or cookie is None:
+            return
+        receiver = None
+        if self.process:
+            receiver = self.process
+        elif self.watched_game:
+            receiver = self.watched_game
+
+        if not receiver:
+            return
+
+        muted = cookie.strip().split(' ')
+        receiver.restore_mutelist(self.username, muted)
+
+    def update_mutelist_cookie(self, muted):
+        cookie = " ".join(muted).strip()
+        if len(cookie) == 0:
+            cooke = None
+        self.send_message("mute_cookie", cookie=" ".join(muted),
+                                        expires = config.login_token_lifetime)
 
     def pong(self):
         self.received_pong = True

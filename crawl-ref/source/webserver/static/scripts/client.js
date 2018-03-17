@@ -475,19 +475,6 @@ function (exports, $, key_conversion, chat, comm) {
         return $.cookie("login");
     }
 
-    function set_mute_cookie(data)
-    {
-        if (data && data.cookie)
-            $.cookie("dcss_mutelist", data.cookie, { expires: data.expires });
-        else
-            $.cookie("dcss_mutelist", null);
-    }
-
-    function get_mute_cookie()
-    {
-        return $.cookie("dcss_mutelist");
-    }
-
     function logout()
     {
         if (get_login_cookie())
@@ -989,7 +976,6 @@ function (exports, $, key_conversion, chat, comm) {
     {
         playing = true;
         watching = false;
-        send_message("restore_mutelist", {cookie: get_mute_cookie()});
     }
 
     function crawl_ended(data)
@@ -1175,8 +1161,6 @@ function (exports, $, key_conversion, chat, comm) {
         "login_fail": login_failed,
         "login_cookie": set_login_cookie,
         "register_fail": register_failed,
-
-        "mute_cookie": set_mute_cookie,
 
         "watching_started": watching_started,
 

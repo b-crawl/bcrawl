@@ -249,15 +249,17 @@ class CrawlProcessHandlerBase(object):
         if len(l) == 0:
             return
         self.muted = {u for u in l if u != source}
-        self.handle_notification(source, "Restoring mute list from cookie.")
+        self.handle_notification(source, "Restoring mute list.")
         self.show_mute_list(source)
         self.logger.info("Player '%s' restoring mutelist %s" %
                                             (source, repr(list(self.muted))))
 
-    def save_mutelist(self):
+    def save_mutelist(self, source):
+        if not self.is_player(source):
+            return
         receiver = self.get_primary_receiver()
         if receiver is not None:
-            receiver.update_mutelist_cookie(list(self.muted))
+            receiver.save_mutelist(list(self.muted))
 
     def mute(self, source, target):
         if not self.is_player(source):
@@ -276,7 +278,7 @@ class CrawlProcessHandlerBase(object):
         self.handle_notification(source,
                             "Spectator '%s' has now been muted." % target)
         self.muted |= {target}
-        self.save_mutelist()
+        self.save_mutelist(source)
         return True
 
     def unmute(self, source, target):
@@ -296,7 +298,7 @@ class CrawlProcessHandlerBase(object):
         self.logger.info("Player '%s' has unmuted '%s'" % (source, target))
         self.handle_notification(source, "You have unmuted '%s'." % target)
         self.muted -= {target}
-        self.save_mutelist()
+        self.save_mutelist(source)
         return True
 
     def show_mute_list(self, source):

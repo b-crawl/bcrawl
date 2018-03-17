@@ -14,7 +14,7 @@ import zlib
 
 import config
 import checkoutput
-from userdb import *
+import userdb
 from util import *
 
 sockets = set()
@@ -142,7 +142,6 @@ class CrawlWebSocket(tornado.websocket.WebSocketHandler):
             "token_login": self.token_login,
             "set_login_cookie": self.set_login_cookie,
             "forget_login_cookie": self.forget_login_cookie,
-            "restore_mutelist": self.set_mutelist_from_cookie,
             "play": self.start_crawl,
             "pong": self.pong,
             "watch": self.watch,
@@ -303,6 +302,7 @@ class CrawlWebSocket(tornado.websocket.WebSocketHandler):
                 return
 
             self.send_message("game_started")
+            self.restore_mutelist()
 
             if config.dgl_mode:
                 if self.process.where == {}:
@@ -383,7 +383,7 @@ class CrawlWebSocket(tornado.websocket.WebSocketHandler):
             self.send_game_links()
 
     def login(self, username, password):
-        real_username = user_passwd_match(username, password)
+        real_username = userdb.user_passwd_match(username, password)
         if real_username:
             self.logger.info("User %s logged in.", real_username)
             self.do_login(real_username)
@@ -426,8 +426,8 @@ class CrawlWebSocket(tornado.websocket.WebSocketHandler):
         except ValueError:
             return
 
-    def set_mutelist_from_cookie(self, cookie):
-        if not self.username or cookie is None:
+    def restore_mutelist(self):
+        if not self.username:
             return
         receiver = None
         if self.process:
@@ -438,15 +438,16 @@ class CrawlWebSocket(tornado.websocket.WebSocketHandler):
         if not receiver:
             return
 
-        muted = cookie.strip().split(' ')
+        db_string = userdb.get_mutelist(self.username)
+        if db_string is None:
+            db_string = ""
+        # list constructor here is for forward compatibility with python 3.
+        muted = list(filter(None, db_string.strip().split(' ')))
         receiver.restore_mutelist(self.username, muted)
 
-    def update_mutelist_cookie(self, muted):
-        cookie = " ".join(muted).strip()
-        if len(cookie) == 0:
-            cooke = None
-        self.send_message("mute_cookie", cookie=" ".join(muted),
-                                        expires = config.login_token_lifetime)
+    def save_mutelist(self, muted):
+        db_string = " ".join(muted).strip()
+        userdb.set_mutelist(self.username, db_string)
 
     def pong(self):
         self.received_pong = True
@@ -529,7 +530,7 @@ class CrawlWebSocket(tornado.websocket.WebSocketHandler):
                 receiver.handle_chat_message(self.username, text)
 
     def register(self, username, password, email):
-        error = register_user(username, password, email)
+        error = userdb.register_user(username, password, email)
         if error is None:
             self.logger.info("Registered user %s.", username)
             self.do_login(username)

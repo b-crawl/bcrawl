@@ -290,11 +290,20 @@ class CrawlProcessHandlerBase(object):
             self.handle_notification(source,
                                     "You can't unmute (or mute) yourself!")
             return False
-        player_name, watchers = self.get_watchers()
-        watchers = set(watchers)
+        if target == "*":
+            if (len(self.muted) == 0):
+                self.handle_notification(source, "No one is muted!")
+                return False
+            self.logger.info("Player '%s' has cleared their mute list." % (source))
+            self.handle_notification(source, "You have cleared your mute list.")
+            self.muted = set()
+            self.save_mutelist(source)
+            return True
+
         if not target in self.muted:
             self.handle_notification(source, "Unmute who??")
             return False
+
         self.logger.info("Player '%s' has unmuted '%s'" % (source, target))
         self.handle_notification(source, "You have unmuted '%s'." % target)
         self.muted -= {target}

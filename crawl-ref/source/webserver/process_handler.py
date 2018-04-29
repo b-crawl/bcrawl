@@ -162,6 +162,7 @@ class CrawlProcessHandlerBase(object):
         # to not do a linewrap
         self.handle_notification(source, "The following chat commands are available:")
         self.chat_help_message(source, "/help", "show chat command help.")
+        self.chat_help_message(source, "/hide", "hide the chat window.")
         if self.is_player(source):
             self.chat_help_message(source, "/mute <name>", "add <name> to the mute list.")
             self.chat_help_message(source, "", "Must be present in channel.")
@@ -169,7 +170,8 @@ class CrawlProcessHandlerBase(object):
             self.chat_help_message(source, "/unmute <name>", "remove <name> from the mute list.")
             self.chat_help_message(source, "/unmute *", "clear your mute list.")
 
-    def handle_chat_command(self, source, text):
+    def handle_chat_command(self, source_ws, text):
+        source = source_ws.username
         text = text.strip()
         if len(text) == 0 or text[0] != '/':
             return False
@@ -189,6 +191,8 @@ class CrawlProcessHandlerBase(object):
             self.show_mute_list(source)
         elif command == "/help":
             self.chat_command_help(source)
+        elif command == "/hide":
+            self.hide_chat(source_ws, remainder.strip())
         else:
             return False
         return True
@@ -271,6 +275,12 @@ class CrawlProcessHandlerBase(object):
         # TODO: let admin accounts mute as well?
         player_name, watchers = self.get_watchers()
         return (username == player_name)
+
+    def hide_chat(self, receiver, param):
+        if param == "forever":
+            receiver.send_message("super_hide_chat")
+        else:
+            receiver.send_message("toggle_chat")
 
     def restore_mutelist(self, source, l):
         if not self.is_player(source) or l is None:

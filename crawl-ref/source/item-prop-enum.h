@@ -104,6 +104,9 @@ enum armour_type
     ARM_IRON_DRAGON_ARMOUR,
 #endif
     ARM_SCARF,
+    ARM_DEEP_TROLL_LEATHER_ARMOUR,
+    ARM_TROLL_IRON_ARMOUR,
+
     NUM_ARMOURS
 };
 

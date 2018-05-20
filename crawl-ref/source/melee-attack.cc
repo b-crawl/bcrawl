@@ -689,6 +689,7 @@ bool melee_attack::handle_phase_killed()
 {
     if (attacker->is_player()
        && ( you.species == SP_DUSK_WALKER
+            && x_chance_in_y(1,3)
             || you.form == transformation::hydra)
         && defender->is_monster() // better safe than sorry
         && defender->type != MONS_NO_MONSTER) // already reset
@@ -1365,7 +1366,7 @@ bool melee_attack::player_aux_apply(unarmed_attack_type atk)
                 poison_monster(defender->as_monster(), &you);
 
             if (damage_brand == SPWPN_DRAINING)
-                bite_drain_defender();        
+                bite_drain_defender();
 
             // Normal vampiric biting attack, not if already got stabbing special.
             if (damage_brand == SPWPN_VAMPIRISM && you.species == SP_VAMPIRE

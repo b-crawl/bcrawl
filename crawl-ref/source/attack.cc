@@ -949,9 +949,7 @@ void attack::bite_drain_defender()
     if (defender->drain_exp(attacker, true, 20 + min(35, damage_done))
         && defender_visible)
     {
-        mprf("Your bite %s %s!",
-             attacker->conj_verb("drains").c_str(),
-             defender_name(true).c_str());
+        mprf("Your bite drains %s!", defender_name(true).c_str());
     }
 }
 

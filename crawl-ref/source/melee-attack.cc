@@ -1364,6 +1364,9 @@ bool melee_attack::player_aux_apply(unarmed_attack_type atk)
             if (damage_brand == SPWPN_VENOM && coinflip())
                 poison_monster(defender->as_monster(), &you);
 
+            if (damage_brand == SPWPN_DRAINING && coinflip())
+                drain_defender();
+
             // Normal vampiric biting attack, not if already got stabbing special.
             if (damage_brand == SPWPN_VAMPIRISM && you.species == SP_VAMPIRE
                 && (!stab_attempt || stab_bonus <= 0))

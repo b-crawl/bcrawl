@@ -687,7 +687,9 @@ static void _hydra_consider_devouring(monster &defender)
  */
 bool melee_attack::handle_phase_killed()
 {
-    if (attacker->is_player() && ( you.species == SP_DUSK_WALKER || you.form == transformation::hydra)
+    if (attacker->is_player()
+       && ( you.species == SP_DUSK_WALKER
+            || you.form == transformation::hydra)
         && defender->is_monster() // better safe than sorry
         && defender->type != MONS_NO_MONSTER) // already reset
     {
@@ -1114,8 +1116,6 @@ public:
         const int str_damage = div_rand_round(max(you.strength()-10, 0), 5);
 
         if (you.get_mutation_level(MUT_ACIDIC_BITE))
-            return fang_damage + str_damage;
-        if (you.get_mutation_level(MUT_DRAIN_BITE))
             return fang_damage + str_damage;
 
         return fang_damage + str_damage;
@@ -3445,7 +3445,6 @@ bool melee_attack::_extra_aux_attack(unarmed_attack_type atk)
                || (you.has_usable_fangs()
                    || you.get_mutation_level(MUT_ACIDIC_BITE))
                    && x_chance_in_y(2, 5);
-
 
     case UNAT_PUNCH:
         return player_gets_aux_punch();

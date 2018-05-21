@@ -3083,10 +3083,10 @@ bool player_can_join_god(god_type which_god)
 
     if (which_god == GOD_YREDELEMNUL && you.is_nonliving())
         return false;
-    
+
     if (which_god == GOD_BEOGH && !species_is_orcish(you.species))
         return false;
-    
+
     // Fedhas hates undead, but will accept demonspawn.
     if (which_god == GOD_FEDHAS && you.holiness() & MH_UNDEAD)
         return false;
@@ -3095,6 +3095,9 @@ bool player_can_join_god(god_type which_god)
         return false;
 
     if (you.get_mutation_level(MUT_NO_LOVE) && _god_rejects_loveless(which_god))
+        return false;
+
+    if (which_god == GOD_ZIN && you.species == SP_CHIMERA)
         return false;
 
     if (you.get_mutation_level(MUT_NO_ARTIFICE)

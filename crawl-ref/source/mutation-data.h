@@ -1927,6 +1927,14 @@ static const mutation_def mut_data[] =
   {"Your thirst for living beings wanes.", "", ""},
 },
 
+{ MUT_CHAOS_BITE, 0, 1, mutflag::good, true,
+  "chaotic bite",
+
+  {"Your bite causes unpredictable effects", "", ""},
+  {"Your fangs feel infused with the power of Xom", "", ""},
+  {"Your fangs are no longer touched upon by Xom", "", ""},
+},
+
 };
 
 static const mutation_category_def category_mut_data[] =

@@ -186,6 +186,7 @@ static const species_type species_order[] =
     SP_SPRIGGAN,       SP_FAIRY,
     // large species
     SP_OGRE,           SP_TROLL,
+    SP_CHIMERA,
     // significantly different body type from human ("monstrous")
     SP_NAGA,           SP_CENTAUR,
     SP_MERFOLK,        SP_MINOTAUR,
@@ -986,6 +987,7 @@ static species_group species_groups[] =
             SP_FORMICID,
             SP_NAGA,
             SP_OCTOPODE,
+            SP_CHIMERA,
             SP_FELID,
             SP_BARACHI,
             SP_MUMMY,

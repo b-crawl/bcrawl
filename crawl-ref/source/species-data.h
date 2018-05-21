@@ -678,6 +678,23 @@ static const map<species_type, species_def> species_data =
     { SK_STAVES, SK_AXES, SK_SLINGS, SK_CROSSBOWS},
 } },
 
+{ SP_CHIMERA, {
+    "Ch",
+    "Chimera", nullptr, nullptr,
+    SPF_NONE,
+    0, 1, 0, 4,
+    MONS_SHAPESHIFTER,
+    HT_LAND, US_ALIVE, SIZE_MEDIUM,
+    11, 9, 8, // 28
+    { STAT_STR, STAT_INT, STAT_DEX }, 4,
+    { { MUT_CHAOS_BITE, 1, 1 }, { MUT_EVOLUTION, 2, 1 }, { MUT_FANGS, 3, 1 },
+      { MUT_HORNS , 2 , 1 }  },
+    {},
+    {},
+    { JOB_MONK, JOB_TRANSMUTER, JOB_FIGHTER, JOB_VENOM_MAGE, JOB_ASSASSIN },
+    { SK_LONG_BLADES, SK_UNARMED_COMBAT },
+} },
+
 { SP_VAMPIRE, {
     "Vp",
     "Vampire", "Vampiric", nullptr,

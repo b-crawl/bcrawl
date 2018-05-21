@@ -9,6 +9,11 @@ Centaur
 Swift, strong and bulky, Centaurs are particularly skilled with ranged
 weaponry.
 %%%%
+Chimera
+
+Chimera are a species blessed by Xom. His chaotic power lends their bite
+unpredictable effects.
+%%%%
 Deep Dwarf
 
 Deep Dwarves live underground and cannot regenerate health naturally, but they
@@ -35,7 +40,7 @@ a colour.
 %%%%
 Dusk walker
 
-Dusk walkers are ravenous predators who were cursed long ago for an ancient crime. 
+Dusk walkers are ravenous predators who were cursed long ago for an ancient crime.
 They hide in the shadows to avoid the wrathful gaze of the gods.
 %%%%
 Fairy

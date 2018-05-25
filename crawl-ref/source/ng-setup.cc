@@ -344,7 +344,6 @@ static skill_type _setup_archaeologist_crate(item_def& crate)
     switch (type)
     {
     case UNRAND_PONDERING:
-    case UNRAND_MAXWELL:
     case UNRAND_FOLLY:
     case UNRAND_HIGH_COUNCIL:
     case UNRAND_MAJIN:

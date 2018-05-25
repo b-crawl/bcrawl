@@ -37,6 +37,7 @@
 #include "item-prop.h"
 #include "items.h"
 #include "item-use.h"
+#include "job-type.h"
 #include "libutil.h"
 #include "losglobal.h"
 #include "mapmark.h"
@@ -565,7 +566,7 @@ void finish_manual(int slot)
         {
             mprf("As you finish your manual of %s, you suddenly remember the ancient crate it was unearthed with."
                  " You are certain you could open it now, if only you could find it again...",
-                 skill_name(skill)); 
+                 skill_name(skill));
             you.props[ARCHAEOLOGIST_TRIGGER_CRATE_ON_PICKUP] = true;
         }
     }

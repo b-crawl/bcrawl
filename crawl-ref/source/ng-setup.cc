@@ -259,10 +259,10 @@ static const unrand_type _archa_unrands[_archa_num_unrands]
     UNRAND_MORG,                        // dagger "Morg"
     UNRAND_FINISHER,                    // scythe "Finisher"
     UNRAND_PUNK,                        // sling "Punk"
-    UNRAND_KRISHNA,                     // bow of Krishna "Sharnga"
+    UNRAND_ZEPHYR,                     // Longbow "Zephyr"
     UNRAND_SKULLCRUSHER,                // giant club "Skullcrusher"
     UNRAND_GUARD,                       // glaive of the Guard
-    UNRAND_JIHAD,                       // sword of Jihad
+    UNRAND_ZEALOT_SWORD,                 // Zealot Sword
     UNRAND_DAMNATION,                   // arbalest "Damnation"
     UNRAND_DOOM_KNIGHT,                 // sword of the Doom Knight
     UNRAND_EOS,                         // morningstar "Eos"
@@ -438,7 +438,7 @@ static void _give_items_skills(const newgame_def& ng)
         else
             you.skills[SK_ARMOUR]++;
 
-        break;          
+        break;
 
     case JOB_WANDERER:
         create_wanderer();

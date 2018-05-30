@@ -113,6 +113,24 @@ static const map<species_type, species_def> species_data =
     { SK_MACES_FLAILS, SK_AXES, SK_LONG_BLADES, SK_CROSSBOWS, SK_SLINGS },
 } },
 
+{ SP_DUSK_WALKER, {
+    "Du",
+    "Dusk Walker", nullptr, nullptr,
+    SPF_NONE,
+    -1, -1, 0, 6,
+    MONS_SHADOW,
+    HT_LAND, US_ALIVE, SIZE_MEDIUM,
+    12, 8, 8, // 28
+    { STAT_STR, STAT_INT, STAT_DEX }, 4,
+    {{ MUT_NIGHTSTALKER, 1, 4}, {MUT_DRAIN_BITE, 1 ,1}, { MUT_FANGS, 2, 1 },
+      { MUT_FANGS, 1, 8 }, { MUT_NIGHTSTALKER, 1, 12}, { MUT_NIGHTSTALKER, 1, 20}, },
+    { "You devour your enemies" },
+    { "devour" },
+    { JOB_VENOM_MAGE, JOB_GLADIATOR, JOB_NECROMANCER, JOB_ICE_ELEMENTALIST,
+      JOB_ASSASSIN, JOB_ARTIFICER },
+    { SK_STAVES, SK_AXES, SK_SLINGS, SK_CROSSBOWS },
+} },
+
 { SP_DEEP_ELF, {
     "DE",
     "Deep Elf", "Elven", "Elf",
@@ -658,24 +676,6 @@ static const map<species_type, species_def> species_data =
     { JOB_FIGHTER, JOB_MONK, JOB_HUNTER, JOB_BERSERKER, JOB_WARPER,
       JOB_EARTH_ELEMENTALIST, JOB_WIZARD },
     { SK_UNARMED_COMBAT, SK_MACES_FLAILS },
-} },
-
-{ SP_DUSK_WALKER, {
-    "Du",
-    "Duskwalker", nullptr, nullptr,
-    SPF_NONE,
-    -1, -1, 0, 6,
-    MONS_SHADOW,
-    HT_LAND, US_ALIVE, SIZE_MEDIUM,
-    12, 8, 8, // 28
-    { STAT_STR, STAT_INT, STAT_DEX }, 4,
-    {{ MUT_NIGHTSTALKER, 1, 4}, {MUT_DRAIN_BITE, 1 ,1}, { MUT_FANGS, 2, 1 },
-      { MUT_FANGS, 1, 8 }, { MUT_NIGHTSTALKER, 1, 12}, { MUT_NIGHTSTALKER, 1, 20}},
-    {"You devour your enemies"},
-    {"devour"},
-    { JOB_VENOM_MAGE, JOB_GLADIATOR, JOB_NECROMANCER, JOB_ICE_ELEMENTALIST,
-      JOB_ASSASSIN, JOB_ARTIFICER },
-    { SK_STAVES, SK_AXES, SK_SLINGS, SK_CROSSBOWS},
 } },
 
 { SP_VAMPIRE, {

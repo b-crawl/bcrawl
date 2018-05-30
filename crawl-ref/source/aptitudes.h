@@ -1268,13 +1268,13 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_DUSK_WALKER,      SK_ARMOUR,          0),
     APT(SP_DUSK_WALKER,      SK_DODGING,         2),
     APT(SP_DUSK_WALKER,      SK_STEALTH,         5),
-    #if TAG_MAJOR_VERSION == 34
+#if TAG_MAJOR_VERSION == 34
     APT(SP_DUSK_WALKER,      SK_STABBING,      UNUSABLE_SKILL),
-    #endif
+#endif
     APT(SP_DUSK_WALKER,      SK_SHIELDS,         0),
-    #if TAG_MAJOR_VERSION == 34
+#if TAG_MAJOR_VERSION == 34
     APT(SP_DUSK_WALKER,      SK_TRAPS,         UNUSABLE_SKILL),
-    #endif
+#endif
     APT(SP_DUSK_WALKER,      SK_UNARMED_COMBAT,  0),
     APT(SP_DUSK_WALKER,      SK_SPELLCASTING,   -1),
     APT(SP_DUSK_WALKER,      SK_CONJURATIONS,   -1),

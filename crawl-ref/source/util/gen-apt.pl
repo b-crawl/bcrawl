@@ -263,11 +263,11 @@ sub load_mods
         my $sp = $_;
         $sp =~ s/Base //;
         my ($xp, $hp, $mp, $mr) = $file =~ /$sp.*\n.*\n *(-?\d), (-?\d), (-?\d), (\d),/;
-
         $SPECIES_SKILLS{$_}{"Experience"} = $xp;
         $SPECIES_SKILLS{$_}{"Hit Points"} = $hp;
         $SPECIES_SKILLS{$_}{"Magic Points"} = $mp;
         $SPECIES_SKILLS{$_}{"Magic Resistance"} = $mr;
+        print STDERR "$sp: xp=$xp hp=$hp mp=$mp mr=$mr\n";
         die "couldn't parse mods for $_" unless defined $xp
                                                 && defined $hp
                                                 && defined $mp

@@ -1373,6 +1373,17 @@ static const struct spell_desc spelldata[] =
 },
 
 {
+    SPELL_CALL_APOCRITA_FAMILIAR, "Call Apocrita Familiar",
+    SPTYP_SUMMONING | SPTYP_POISON,
+    SPFLAG_NONE,
+    4,
+    160,
+    -1, -1,
+    3, 0,
+    TILEG_CALL_APOCRITA_FAMILIAR,
+},
+
+{
     SPELL_CALL_CANINE_FAMILIAR, "Call Canine Familiar",
     SPTYP_SUMMONING,
     SPFLAG_NONE,
@@ -1381,6 +1392,17 @@ static const struct spell_desc spelldata[] =
     -1, -1,
     3, 0,
     TILEG_CALL_CANINE_FAMILIAR,
+},
+
+{
+    SPELL_SUMMON_APOCRITA_SWARM, "Summon Apocrita Swarm",
+    SPTYP_SUMMONING | SPTYP_POISON,
+    SPFLAG_NONE,
+    8,
+    200,
+    -1, -1,
+    6, 0,
+    TILEG_SUMMON_APOCRITA_SWARM,
 },
 
 {

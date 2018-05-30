@@ -247,6 +247,84 @@ spret_type cast_call_canine_familiar(int pow, god_type god, bool fail)
     return SPRET_SUCCESS;
 }
 
+spret_type cast_call_apocrita_familiar(int pow, god_type god, bool fail)
+{
+    fail_check();
+    monster_type mon = MONS_PROGRAM_BUG;
+
+    const int chance = pow + random_range(-20, 10);
+
+    if (chance > 120)
+        mon = MONS_MELIAI;
+    else if (chance > 80)
+        mon = MONS_HORNET;
+    else
+        mon = MONS_KILLER_BEE;
+
+    const int dur = min(2 + (random2(pow) / 4)/2, 6);
+
+    if (!create_monster(_pal_data(mon, dur, god, SPELL_CALL_APOCRITA_FAMILIAR)))
+        canned_msg(MSG_NOTHING_HAPPENS);
+
+    return SPRET_SUCCESS;
+}
+
+spret_type cast_summon_apocrita_swarm(actor* caster, int pow, god_type god, bool fail)
+{
+    fail_check();
+    monster_type type = MONS_PROGRAM_BUG;
+
+    int num_bees = 2 + x_chance_in_y(pow, 100);
+    int num_meliai = 0;
+    if (pow > 150)
+        num_meliai = num_bees;
+    
+    int num_queen_bees = div_rand_round(pow - 50, 100);
+    num_bees -= (num_meliai - num_queen_bees);
+    bool success = false;
+
+    while (num_bees-- > 0)
+    {
+        mgen_data mdata = _summon_data(*caster, MONS_KILLER_BEE, 4, god,
+                                        SPELL_SUMMON_APOCRITA_SWARM);
+
+        mdata.flags |= MG_DONT_CAP;
+        if (caster->is_player())
+            mdata.hd = get_monster_data(type)->HD + div_rand_round(pow - 50, 25);
+        
+        success |= (create_monster(mdata)) ? true : false;
+    }
+    while (num_meliai-- > 0)
+    {
+        mgen_data mdata = _summon_data(*caster, MONS_MELIAI, 4, god,
+                                        SPELL_SUMMON_APOCRITA_SWARM);
+
+        mdata.flags |= MG_DONT_CAP;
+        if (caster->is_player())
+            mdata.hd = get_monster_data(type)->HD + div_rand_round(pow - 50, 25);
+        
+        success |= (create_monster(mdata)) ? true : false;
+    }
+    while (num_queen_bees-- > 0)
+    {
+        mgen_data mdata = _summon_data(*caster, MONS_QUEEN_BEE, 4, god,
+                                        SPELL_SUMMON_APOCRITA_SWARM);
+
+        mdata.flags |= MG_DONT_CAP;
+        if (caster->is_player())
+            mdata.hd = get_monster_data(type)->HD + div_rand_round(pow - 50, 25);
+        
+        success |= (create_monster(mdata)) ? true : false;
+    }
+
+    if (!success)
+        canned_msg(MSG_NOTHING_HAPPENS);
+    else
+        mpr("A buzzing swarm of bees appear.");
+
+    return SPRET_SUCCESS;
+}
+
 spret_type cast_summon_ice_beast(int pow, god_type god, bool fail)
 {
     fail_check();
@@ -3263,6 +3341,8 @@ static const map<spell_type, summon_cap> summonsdata =
     { SPELL_SUMMON_ICE_BEAST,           { 3, 3 } },
     { SPELL_SUMMON_HYDRA,               { 3, 2 } },
     { SPELL_SUMMON_MANA_VIPER,          { 2, 2 } },
+    { SPELL_CALL_APOCRITA_FAMILIAR,     { 1, 2 } },
+    { SPELL_SUMMON_APOCRITA_SWARM,      { 8, 8 } },
     // Demons
     { SPELL_CALL_IMP,                   { 3, 3 } },
     { SPELL_SUMMON_DEMON,               { 3, 2 } },

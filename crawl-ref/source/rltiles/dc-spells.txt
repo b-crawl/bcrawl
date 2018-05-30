@@ -117,12 +117,14 @@ poisonous_vapours POISONOUS_VAPOURS
 %sdir gui/spells/summoning
 mass_abjuration MASS_ABJURATION
 call_canine_familiar CALL_CANINE_FAMILIAR
+call_apocrita_familiar CALL_APOCRITA_FAMILIAR
 call_imp CALL_IMP
 malign_gateway MALIGN_GATEWAY
 recall RECALL
 sticks_to_snakes STICKS_TO_SNAKES
 summon_butterflies SUMMON_BUTTERFLIES
 summon_demon SUMMON_DEMON
+summon_apocrita_swarm SUMMON_APOCRITA_SWARM
 summon_dragon SUMMON_DRAGON
 summon_greater_demon SUMMON_GREATER_DEMON
 summon_horrible_things SUMMON_HORRIBLE_THINGS

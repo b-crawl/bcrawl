@@ -87,6 +87,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_MEPHITIC_CLOUD,
     SPELL_OLGREBS_TOXIC_RADIANCE,
     SPELL_VENOM_BOLT,
+    SPELL_CALL_APOCRITA_FAMILIAR,
 },
 
 {   // Book of the Tempests
@@ -355,6 +356,7 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Grand Grimoire
+    SPELL_SUMMON_APOCRITA_SWARM,
     SPELL_MONSTROUS_MENAGERIE,
     SPELL_SUMMON_GREATER_DEMON,
     SPELL_MALIGN_GATEWAY,

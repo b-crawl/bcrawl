@@ -7150,7 +7150,7 @@ bool wu_jian_can_wall_jump(const coord_def& target, string &error_ret)
 {
     if (target.distance_from(you.pos()) != 1)
     {
-        error_ret = "You can only wall jump against adjacent positions.";
+        error_ret = "Please select an adjacent position to wall jump against.";
         return false;
     }
 
@@ -7288,6 +7288,11 @@ bool wu_jian_wall_jump_ability()
         crawl_state.cancel_cmd_again();
         crawl_state.cancel_cmd_repeat();
         return false;
+    }
+    if (you.digging)
+    {
+        you.digging = false;
+        mpr("You retract your mandibles.");
     }
     string wj_error;
     bool has_targets = false;

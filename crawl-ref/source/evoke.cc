@@ -531,6 +531,7 @@ void archaeologist_open_crate(item_def& crate)
     mprf("The crate's locking mechanism finally gives in, revealing %s!",
         crate.name(DESC_THE).c_str());
     crate.props.erase(ARCHAEOLOGIST_CRATE_ITEM);
+    you.props[ARCHAEOLOGIST_TRIGGER_CRATE_ON_PICKUP] = false;
 }
 
 void archaeologist_read_tome(item_def& tome)
@@ -544,6 +545,9 @@ void archaeologist_read_tome(item_def& tome)
     mprf("You have an epiphany! "
          "The dusty tome is %s! Reading it may be key to unlocking the crate...",
          tome.name(DESC_A).c_str());
+    you.start_train.insert(tome.skill);
+    update_can_train();
+    you.props[ARCHAEOLOGIST_TRIGGER_TOME_ON_PICKUP] = false;
 }
 
 void finish_manual(int slot)

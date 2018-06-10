@@ -1548,7 +1548,7 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_ORB_DEMON,
       {
-       { SPELL_QUICKSILVER_BOLT, 44, MON_SPELL_MAGICAL },
+       { SPELL_ENERGY_BOLT, 44, MON_SPELL_MAGICAL },
        { SPELL_DEFLECT_MISSILES, 11, MON_SPELL_MAGICAL },
        { SPELL_IOOD, 22 , MON_SPELL_MAGICAL},
        { SPELL_BLINK_RANGE, 11, MON_SPELL_MAGICAL },

@@ -157,8 +157,8 @@ resisted by usual means of magic resistance.
 %%%%
 Blink Other spell
 
-Randomly translocates a targeted enemy a short distance. It cannot be resisted
-by usual means of magic resistance.
+Randomly translocates a targeted enemy a short distance. When used by residents
+of the dungeon, it cannot be resisted by usual means of magic resistance.
 %%%%
 Blink Range spell
 
@@ -907,6 +907,12 @@ Summons a powerful exotic creature to the caster's aid. It may call forth a
 harpy, manticore or lindwurm, and at high power may summon a sphinx, or an
 entire pack of harpies. With high power the individual creatures will also gain
 increased strength.
+%%%%
+Mystic Mark spell
+
+Fills an enemy with a precisely built enchantment. When the subject is hit by
+a ranged weapon fired by the caster, a burst of arcane energy releases itself
+upon anyone standing near them. This spell does not harm the original caster.
 %%%%
 Necromutation spell
 

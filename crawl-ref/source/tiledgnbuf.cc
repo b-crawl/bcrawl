@@ -442,6 +442,11 @@ void DungeonCellBuffer::pack_foreground(int x, int y, const packed_cell &cell)
         m_buf_icons.add(TILEI_INNER_FLAME, x, y, -status_shift, 0);
         status_shift += 7;
     }
+    if (fg & TILE_FLAG_MYSTIC_MARK)
+    {
+        m_buf_icons.add(TILEI_MYSTIC_MARK, x, y, -status_shift, 0);
+        status_shift += 7;
+    }
     if (fg & TILE_FLAG_CONSTRICTED)
     {
         m_buf_icons.add(TILEI_CONSTRICTED, x, y, -status_shift, 0);

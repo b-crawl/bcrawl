@@ -12,6 +12,7 @@
 #include "coord.h"
 #include "english.h"
 #include "env.h"
+#include "fineff.h"
 #include "fprop.h"
 #include "god-conduct.h"
 #include "item-prop.h"
@@ -302,6 +303,12 @@ bool ranged_attack::handle_phase_hit()
                  attack_verb.c_str(),
                  defender->name(DESC_THE).c_str());
         }
+    }
+
+    if (attacker->is_player() && defender->is_monster()
+        && defender->as_monster()->has_ench(ENCH_MYSTIC_MARK))
+    {
+        mystic_mark_fineff::schedule(defender, defender->pos());
     }
 
     if (using_weapon() || launch_type == launch_retval::THROWN)

@@ -60,6 +60,8 @@ static pair<spell_type, zap_type> _spl_zaps[] =
     { SPELL_TUKIMAS_DANCE, ZAP_TUKIMAS_DANCE },
     { SPELL_CORROSIVE_BOLT, ZAP_CORROSIVE_BOLT },
     { SPELL_BECKONING, ZAP_BECKONING },
+    { SPELL_BLINK_OTHER, ZAP_BLINK },
+    { SPELL_MYSTIC_MARK, ZAP_MYSTIC_MARK },
     { SPELL_DEBUGGING_RAY, ZAP_DEBUGGING_RAY },
 
     // monster-specific

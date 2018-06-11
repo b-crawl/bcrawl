@@ -337,4 +337,22 @@ protected:
     string name;
 };
 
+class mystic_mark_fineff : public final_effect
+{
+public:
+    bool mergeable(const final_effect &a) const override { return false; }
+    void fire() override;
+
+    static void schedule(const actor* monster, coord_def pos)
+    {
+        final_effect::schedule(new mystic_mark_fineff(monster, pos));
+    }
+protected:
+    mystic_mark_fineff(const actor* monster, coord_def pos)
+        : final_effect(0, monster, coord_def()), position(pos)
+    {
+    }
+    coord_def position;
+};
+
 void fire_final_effects();

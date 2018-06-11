@@ -3092,6 +3092,9 @@ static vector<string> _get_monster_desc_vector(const monster_info& mi)
     if (mi.is(MB_INNER_FLAME))
         descs.emplace_back("inner flame");
 
+    if (mi.is(MB_MYSTIC_MARK))
+        descs.emplace_back("marked");
+
     if (mi.fire_blocker)
     {
         descs.push_back("fire blocked by " // FIXME, renamed features
@@ -3177,6 +3180,9 @@ static string _get_monster_desc(const monster_info& mi)
 
     if (mi.is(MB_INNER_FLAME))
         text += pronoun + " is filled with an inner flame.\n";
+
+    if (mi.is(MB_MYSTIC_MARK))
+        text += pronoun + " is mystically marked by you.\n";
 
     if (mi.fire_blocker)
     {

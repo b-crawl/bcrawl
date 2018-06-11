@@ -1304,4 +1304,40 @@ _mon_hex_zap(ZAP_DRAIN_MAGIC, BEAM_DRAIN_MAGIC),
     0 // handled by explosion
 },
 
+{
+    ZAP_BLINK,
+    "blinking",
+    200,
+    nullptr,
+    nullptr,
+    nullptr,
+    nullptr,
+    ETC_WARP,
+    true,
+    BEAM_BLINK,
+    DCHAR_FIRED_ZAP,
+    false,
+    false,
+    false,
+    0
+},
+
+{
+    ZAP_MYSTIC_MARK,
+    "",
+    100,
+    nullptr,
+    nullptr,
+    nullptr,
+    nullptr,
+    BLUE,
+    true,
+    BEAM_MYSTIC_MARK,
+    NUM_DCHAR_TYPES,
+    false,
+    false,
+    false,
+    0
+},
+
 };

@@ -47,6 +47,7 @@ haste HASTE
 infusion INFUSION
 invisibility INVISIBILITY
 mass_confusion MASS_CONFUSION
+mystic_mark MYSTIC_MARK
 slow SLOW
 song_of_slaying SONG_OF_SLAYING
 spectral_weapon SPECTRAL_WEAPON
@@ -141,6 +142,7 @@ spellforged_servitor SPELLFORGED_SERVITOR
 apportation APPORTATION
 beckoning BECKONING
 blink BLINK
+blink_other BLINK_OTHER
 controlled_blink CONTROLLED_BLINK
 disjunction DISJUNCTION
 dispersal DISPERSAL
@@ -172,7 +174,6 @@ iceblast ICEBLAST
 %sdir gui/spells/monster
 generic GENERIC_MONSTER_SPELL
 air_elementals AIR_ELEMENTALS
-blink_other BLINK_OTHER
 brain_feed BRAIN_FEED
 cantrip CANTRIP
 cold_breath COLD_BREATH

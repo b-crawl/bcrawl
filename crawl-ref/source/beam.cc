@@ -3272,7 +3272,8 @@ void bolt::affect_player_enchantment(bool resistible)
     }
 
     // Never affects the player.
-    if (flavour == BEAM_INFESTATION || flavour == BEAM_VILE_CLUTCH)
+    if (flavour == BEAM_INFESTATION || flavour == BEAM_VILE_CLUTCH
+     || flavour == BEAM_MYSTIC_MARK)
         return;
 
     // You didn't resist it.
@@ -3642,6 +3643,10 @@ void bolt::affect_player()
 
     // Digging -- don't care.
     if (flavour == BEAM_DIGGING)
+        return;
+
+    // Mystic mark bursts don't hurt the player
+    if (origin_spell == SPELL_MYSTIC_MARK)
         return;
 
     if (is_tracer)
@@ -4978,7 +4983,6 @@ bool bolt::has_saving_throw() const
     case BEAM_INVISIBILITY:
     case BEAM_DISPEL_UNDEAD:
     case BEAM_BLINK_CLOSE:
-    case BEAM_BLINK:
     case BEAM_BECKONING:
     case BEAM_MALIGN_OFFERING:
     case BEAM_AGILITY:
@@ -4990,7 +4994,10 @@ bool bolt::has_saving_throw() const
     case BEAM_INFESTATION:
     case BEAM_IRRESISTIBLE_CONFUSION:
     case BEAM_VILE_CLUTCH:
+    case BEAM_MYSTIC_MARK:
         return false;
+    case BEAM_BLINK: // resistable only if used by the player
+        return (agent() && agent()->is_player());
     case BEAM_VULNERABILITY:
         return !one_chance_in(3);  // Ignores MR 1/3 of the time
     case BEAM_PARALYSIS:        // Giant eyeball paralysis is irresistible
@@ -5617,6 +5624,15 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         return MON_AFFECTED;
     }
 
+    case BEAM_MYSTIC_MARK:
+    {
+        const int dur = (4 + random2avg(4 + (ench_power / 2), 2)) * BASELINE_DELAY;
+        mon->add_ench(mon_enchant(ENCH_MYSTIC_MARK, 0, &you, dur));
+        if (simple_monster_message(*mon, " is mystically marked."))
+            obvious_effect = true;
+        return MON_AFFECTED;
+    }
+
     default:
         break;
     }
@@ -5709,6 +5725,10 @@ const map<spell_type, explosion_sfx> spell_explosions = {
     { SPELL_GHOSTLY_SACRIFICE, {
         "The ghostly flame explodes!",
         "the shriek of haunting fire",
+    } },
+    { SPELL_MYSTIC_MARK, {
+        "Your mystic mark releases energy!",
+        "your mystic mark reacting",
     } },
 };
 
@@ -6098,6 +6118,7 @@ bool bolt::nasty_to(const monster* mon) const
             // Co-aligned inner flame is fine.
             return !mons_aligned(mon, agent());
         case BEAM_TELEPORT:
+        case BEAM_BLINK:
         case BEAM_BECKONING:
             // Friendly and good neutral monsters don't mind being teleported.
             return !mon->wont_attack();
@@ -6385,7 +6406,7 @@ static string _beam_type_name(beam_type type)
     case BEAM_IRRESISTIBLE_CONFUSION:return "confusion";
     case BEAM_INFESTATION:           return "infestation";
     case BEAM_VILE_CLUTCH:           return "vile clutch";
-
+    case BEAM_MYSTIC_MARK:           return "mystic mark";
     case NUM_BEAMS:                  die("invalid beam type");
     }
     die("unknown beam type");

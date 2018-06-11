@@ -2671,6 +2671,9 @@ static int _hex_pow(const spell_type spell, const int hd)
  */
 int hex_chance(const spell_type spell, const int hd)
 {
+    if (spell == SPELL_BLINK_OTHER)
+        return 100;
+
     const int capped_pow = _hex_pow(spell, hd);
     const int chance = hex_success_chance(you.res_magic(), capped_pow,
                                           100, true);

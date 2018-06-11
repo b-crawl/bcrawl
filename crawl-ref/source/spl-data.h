@@ -1915,10 +1915,10 @@ static const struct spell_desc spelldata[] =
 {
     SPELL_BLINK_OTHER, "Blink Other",
     SPTYP_TRANSLOCATION,
-    SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_ESCAPE | SPFLAG_MONSTER
-        | SPFLAG_EMERGENCY | SPFLAG_NEEDS_TRACER,
-    2,
-    0,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_ESCAPE
+        | SPFLAG_EMERGENCY | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK,
+    1,
+    50,
     LOS_RADIUS, LOS_RADIUS,
     2, 0,
     TILEG_BLINK_OTHER,
@@ -3969,6 +3969,17 @@ static const struct spell_desc spelldata[] =
     -1, -1,
     3, 0,
     TILEG_PIERCING_SHOT,
+},
+
+{
+    SPELL_MYSTIC_MARK, "Mystic Mark",
+    SPTYP_HEXES | SPTYP_CONJURATION,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEUTRAL,
+    4,
+    200,
+    LOS_RADIUS, LOS_RADIUS,
+    3, 0,
+    TILEG_MYSTIC_MARK,
 },
 
 {

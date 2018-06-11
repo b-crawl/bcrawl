@@ -550,6 +550,26 @@ void infestation_death_fineff::fire()
     }
 }
 
+void mystic_mark_fineff::fire()
+{
+    // Don't need to announce it, explosion in beam.cc does that
+    mprf("Your mystic mark reacts!");
+    bolt beam;
+    beam.name = "mystic burst";
+    beam.flavour = BEAM_MMISSILE;
+    beam.origin_spell = SPELL_MYSTIC_MARK;
+    beam.colour = LIGHTMAGENTA;
+    beam.range = 0;
+    beam.is_explosion = true;
+    beam.ex_size = 2;
+    beam.set_agent(&you);
+    beam.source = position;
+    beam.target = position;
+    beam.damage = calc_dice(2, 3 + div_rand_round(calc_spell_power(SPELL_MYSTIC_MARK, true), 8) );
+    beam.effect_wanton = true;
+    beam.explode(true, true);
+}
+
 // Effects that occur after all other effects, even if the monster is dead.
 // For example, explosions that would hit other creatures, but we want
 // to deal with only one creature at a time, so that's handled last.

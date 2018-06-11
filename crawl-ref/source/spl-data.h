@@ -2529,7 +2529,7 @@ static const struct spell_desc spelldata[] =
 {
     SPELL_INNER_FLAME, "Inner Flame",
     SPTYP_HEXES | SPTYP_FIRE,
-    SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEUTRAL | SPFLAG_MR_CHECK,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEUTRAL,
     3,
     200,
     LOS_RADIUS, LOS_RADIUS,
@@ -3176,6 +3176,7 @@ static const struct spell_desc spelldata[] =
     TILEG_SUMMON_LIGHTNING_SPIRE,
 },
 
+#if TAG_MAJOR_VERSION == 34
 {
     SPELL_SUMMON_GUARDIAN_GOLEM, "Summon Guardian Golem",
     SPTYP_SUMMONING | SPTYP_HEXES,
@@ -3186,6 +3187,7 @@ static const struct spell_desc spelldata[] =
     3, 0,
     TILEG_SUMMON_GUARDIAN_GOLEM,
 },
+#endif
 
 {
     SPELL_SHADOW_SHARD, "Shadow Shard",

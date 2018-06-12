@@ -3974,17 +3974,6 @@ static const struct spell_desc spelldata[] =
 },
 
 {
-    SPELL_MYSTIC_MARK, "Mystic Mark",
-    SPTYP_HEXES | SPTYP_CONJURATION,
-    SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEUTRAL,
-    4,
-    200,
-    LOS_RADIUS, LOS_RADIUS,
-    3, 0,
-    TILEG_MYSTIC_MARK,
-},
-
-{
     SPELL_SHACKLE, "Shackle",
     SPTYP_HEXES,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK,

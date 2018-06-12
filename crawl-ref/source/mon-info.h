@@ -174,7 +174,6 @@ enum monster_info_flags
     MB_SLOWLY_DYING,
     MB_PINNED,
     MB_VILE_CLUTCH,
-    MB_MYSTIC_MARK,
     MB_SHACKLE,
     NUM_MB_FLAGS
 };

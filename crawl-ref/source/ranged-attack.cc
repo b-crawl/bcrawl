@@ -305,12 +305,6 @@ bool ranged_attack::handle_phase_hit()
         }
     }
 
-    if (attacker->is_player() && defender->is_monster()
-        && defender->as_monster()->has_ench(ENCH_MYSTIC_MARK))
-    {
-        mystic_mark_fineff::schedule(defender, defender->pos());
-    }
-
     if (using_weapon() || launch_type == launch_retval::THROWN)
     {
         if (using_weapon()

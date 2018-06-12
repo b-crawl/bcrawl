@@ -3272,8 +3272,7 @@ void bolt::affect_player_enchantment(bool resistible)
     }
 
     // Never affects the player.
-    if (flavour == BEAM_INFESTATION || flavour == BEAM_VILE_CLUTCH
-     || flavour == BEAM_MYSTIC_MARK)
+    if (flavour == BEAM_INFESTATION || flavour == BEAM_VILE_CLUTCH)
         return;
 
     // You didn't resist it.
@@ -3643,10 +3642,6 @@ void bolt::affect_player()
 
     // Digging -- don't care.
     if (flavour == BEAM_DIGGING)
-        return;
-
-    // Mystic mark bursts don't hurt the player
-    if (origin_spell == SPELL_MYSTIC_MARK)
         return;
 
     if (is_tracer)
@@ -4994,7 +4989,6 @@ bool bolt::has_saving_throw() const
     case BEAM_INFESTATION:
     case BEAM_IRRESISTIBLE_CONFUSION:
     case BEAM_VILE_CLUTCH:
-    case BEAM_MYSTIC_MARK:
     case BEAM_INNER_FLAME:
         return false;
     case BEAM_BLINK: // resistable only if used by the player
@@ -5625,18 +5619,9 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         return MON_AFFECTED;
     }
 
-    case BEAM_MYSTIC_MARK:
-    {
-        const int dur = (4 + random2avg(4 + (ench_power / 2), 2)) * BASELINE_DELAY;
-        mon->add_ench(mon_enchant(ENCH_MYSTIC_MARK, 0, &you, dur));
-        if (simple_monster_message(*mon, " is mystically marked."))
-            obvious_effect = true;
-        return MON_AFFECTED;
-    }
-
     case BEAM_SHACKLE:
     {
-        const int dur = (ench_power * BASELINE_DELAY / 3);
+        const int dur = 1 + random2avg(ench_power * BASELINE_DELAY / 3, 2);
         mon->add_ench(mon_enchant(ENCH_SHACKLE, 0, &you, dur));
         if (simple_monster_message(*mon, " is shackled."))
             obvious_effect = true;
@@ -5735,10 +5720,6 @@ const map<spell_type, explosion_sfx> spell_explosions = {
     { SPELL_GHOSTLY_SACRIFICE, {
         "The ghostly flame explodes!",
         "the shriek of haunting fire",
-    } },
-    { SPELL_MYSTIC_MARK, {
-        "Your mystic mark releases energy!",
-        "your mystic mark reacting",
     } },
 };
 
@@ -6416,7 +6397,6 @@ static string _beam_type_name(beam_type type)
     case BEAM_IRRESISTIBLE_CONFUSION:return "confusion";
     case BEAM_INFESTATION:           return "infestation";
     case BEAM_VILE_CLUTCH:           return "vile clutch";
-    case BEAM_MYSTIC_MARK:           return "mystic mark";
     case BEAM_SHACKLE:               return "shackles";
     case NUM_BEAMS:                  die("invalid beam type");
     }

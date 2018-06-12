@@ -1323,24 +1323,6 @@ _mon_hex_zap(ZAP_DRAIN_MAGIC, BEAM_DRAIN_MAGIC),
 },
 
 {
-    ZAP_MYSTIC_MARK,
-    "",
-    100,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    BLUE,
-    true,
-    BEAM_MYSTIC_MARK,
-    NUM_DCHAR_TYPES,
-    false,
-    false,
-    false,
-    0
-},
-
-{
     ZAP_SHACKLE,
     "",
     100,

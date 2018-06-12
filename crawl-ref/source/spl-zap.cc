@@ -62,6 +62,7 @@ static pair<spell_type, zap_type> _spl_zaps[] =
     { SPELL_BECKONING, ZAP_BECKONING },
     { SPELL_BLINK_OTHER, ZAP_BLINK },
     { SPELL_MYSTIC_MARK, ZAP_MYSTIC_MARK },
+    { SPELL_SHACKLE, ZAP_SHACKLE },
     { SPELL_DEBUGGING_RAY, ZAP_DEBUGGING_RAY },
 
     // monster-specific

@@ -468,5 +468,6 @@ enum spell_type : int
     SPELL_HARPOON_SHOT,
     SPELL_PIERCING_SHOT,
     SPELL_MYSTIC_MARK,
+    SPELL_SHACKLE,
     NUM_SPELLS
 };

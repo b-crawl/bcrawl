@@ -48,6 +48,7 @@ infusion INFUSION
 invisibility INVISIBILITY
 mass_confusion MASS_CONFUSION
 mystic_mark MYSTIC_MARK
+shackle SHACKLE
 slow SLOW
 song_of_slaying SONG_OF_SLAYING
 spectral_weapon SPECTRAL_WEAPON

@@ -295,7 +295,7 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Debilitation
     SPELL_CORONA,
-    SPELL_SLOW,
+    SPELL_SHACKLE,
     SPELL_INNER_FLAME,
     SPELL_MYSTIC_MARK,
     SPELL_CAUSE_FEAR,

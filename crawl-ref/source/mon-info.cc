@@ -116,6 +116,7 @@ static map<enchant_type, monster_info_flags> trivial_ench_mb_mappings = {
     { ENCH_WHIRLWIND_PINNED, MB_PINNED },
     { ENCH_VILE_CLUTCH, MB_VILE_CLUTCH},
     { ENCH_MYSTIC_MARK,     MB_MYSTIC_MARK },
+    { ENCH_SHACKLE,         MB_SHACKLE },
 };
 
 static monster_info_flags ench_to_mb(const monster& mons, enchant_type ench)
@@ -1244,6 +1245,8 @@ static string _verbose_info0(const monster_info& mi)
         return "invisible";
     if (mi.is(MB_MYSTIC_MARK))
         return "marked"; // monsters can't have sentinel's mark so this is fine i hope
+    if (mi.is(MB_SHACKLE))
+        return "shackled";
 
     return "";
 }

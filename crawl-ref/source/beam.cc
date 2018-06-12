@@ -5634,6 +5634,14 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         return MON_AFFECTED;
     }
 
+    case BEAM_SHACKLE:
+    {
+        mon->add_ench(mon_enchant(ENCH_SHACKLE, 0, &you, 50));
+        if (simple_monster_message(*mon, " is shackled."))
+            obvious_effect = true;
+        return MON_AFFECTED;
+    }
+
     default:
         break;
     }
@@ -6408,6 +6416,7 @@ static string _beam_type_name(beam_type type)
     case BEAM_INFESTATION:           return "infestation";
     case BEAM_VILE_CLUTCH:           return "vile clutch";
     case BEAM_MYSTIC_MARK:           return "mystic mark";
+    case BEAM_SHACKLE:               return "shackles";
     case NUM_BEAMS:                  die("invalid beam type");
     }
     die("unknown beam type");

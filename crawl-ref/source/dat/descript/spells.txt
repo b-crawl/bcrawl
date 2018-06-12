@@ -1141,6 +1141,17 @@ Sentinel's Mark spell
 Bestows a strong beacon upon a targeted creature. It announces the presence
 and location of the marked creature to everyone on the same level.
 %%%%
+Shackle spell
+
+Magically chains a creature to the ground, seafloor, or other surface below
+it, preventing it from leaving its tile. Unlike paralysis, this does not
+prevent the creature from taking other actions, nor does it impair the
+creature's evasion.
+
+The shackles are not strong enough to prevent creatures from blinking or
+teleporting, but they will follow a creature that does so and bind them to
+their new location.
+%%%%
 Shadow Bolt spell
 
 Mimics a penetrating damaging spell cast by a Dithmenos worshipper, firing a

@@ -1873,6 +1873,8 @@ tileidx_t tileidx_monster(const monster_info& mons)
         ch |= TILE_FLAG_INNER_FLAME;
     if (mons.is(MB_MYSTIC_MARK))
         ch |= TILE_FLAG_MYSTIC_MARK;
+    if (mons.is(MB_SHACKLE))
+        ch |= TILE_FLAG_SHACKLE;
     if (!mons.constrictor_name.empty())
         ch |= TILE_FLAG_CONSTRICTED;
     if (mons.is(MB_BERSERK))

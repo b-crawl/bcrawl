@@ -712,7 +712,6 @@ static const char* scroll_type_name(int scrolltype)
     case SCR_ENCHANT_WEAPON:     return "enchant weapon";
     case SCR_ENCHANT_ARMOUR:     return "enchant armour";
     case SCR_TORMENT:            return "torment";
-    case SCR_RANDOM_USELESSNESS: return "random uselessness";
     case SCR_IMMOLATION:         return "immolation";
     case SCR_BLINKING:           return "blinking";
     case SCR_MAGIC_MAPPING:      return "magic mapping";
@@ -724,6 +723,7 @@ static const char* scroll_type_name(int scrolltype)
     case SCR_SILENCE:            return "silence";
     case SCR_AMNESIA:            return "amnesia";
 #if TAG_MAJOR_VERSION == 34
+    case SCR_RANDOM_USELESSNESS: return "random uselessness";
     case SCR_CURSE_WEAPON:       return "curse weapon";
     case SCR_CURSE_ARMOUR:       return "curse armour";
     case SCR_CURSE_JEWELLERY:    return "curse jewellery";
@@ -754,6 +754,7 @@ const char* jewellery_effect_name(int jeweltype, bool terse)
         case RING_PROTECTION:            return "protection";
         case RING_PROTECTION_FROM_FIRE:  return "protection from fire";
         case RING_POISON_RESISTANCE:     return "poison resistance";
+        case RING_ELEC_RESISTANCE:       return "insulation";
         case RING_PROTECTION_FROM_COLD:  return "protection from cold";
         case RING_STRENGTH:              return "strength";
         case RING_SLAYING:               return "slaying";
@@ -775,9 +776,6 @@ const char* jewellery_effect_name(int jeweltype, bool terse)
         case RING_PROTECTION_FROM_MAGIC: return "protection from magic";
         case RING_FIRE:                  return "fire";
         case RING_ICE:                   return "ice";
-#if TAG_MAJOR_VERSION == 34
-        case RING_TELEPORT_CONTROL:      return "teleport control";
-#endif
         case AMU_RAGE:              return "rage";
         case AMU_HARM:              return "harm";
         case AMU_MANA_REGENERATION: return "magic regeneration";
@@ -808,6 +806,7 @@ const char* jewellery_effect_name(int jeweltype, bool terse)
         case RING_PROTECTION:            return "AC";
         case RING_PROTECTION_FROM_FIRE:  return "rF+";
         case RING_POISON_RESISTANCE:     return "rPois";
+        case RING_ELEC_RESISTANCE:       return "rElec";
         case RING_PROTECTION_FROM_COLD:  return "rC+";
         case RING_STRENGTH:              return "Str";
         case RING_SLAYING:               return "Slay";
@@ -1006,6 +1005,8 @@ static string misc_type_name(int type, bool known)
 #if TAG_MAJOR_VERSION == 34
     case MISC_XOMS_CHESSBOARD:           return "removed chess piece";
 #endif
+    case MISC_ANCIENT_CRATE:             return "ancient crate";
+    case MISC_DUSTY_TOME:                     return "dusty tome";
 
     default:
         return "buggy miscellaneous item";
@@ -1575,7 +1576,7 @@ static string _name_weapon(const item_def &weap, description_level_type desc,
         // (since showing 'eudaemon blade' is unhelpful in the former case, and
         // showing 'broad axe' is misleading in the latter)
         // could be a flag, but doesn't seem worthwhile for only two items
-        if (is_unrandom_artefact(weap, UNRAND_ZEALOT_SWORD)
+        if (is_unrandom_artefact(weap, UNRAND_JIHAD)
             || is_unrandom_artefact(weap, UNRAND_DEMON_AXE))
         {
             return long_name;
@@ -3459,8 +3460,10 @@ bool is_useless_item(const item_def &item, bool temp)
 
         switch (item.sub_type)
         {
+#if TAG_MAJOR_VERSION == 34
         case SCR_RANDOM_USELESSNESS:
             return true;
+#endif
         case SCR_TELEPORTATION:
             return you.species == SP_FORMICID
                    || crawl_state.game_is_sprint();
@@ -3625,6 +3628,9 @@ bool is_useless_item(const item_def &item, bool temp)
         case RING_POISON_RESISTANCE:
             return player_res_poison(false, temp, false) > 0
                    && (temp || you.species != SP_VAMPIRE);
+
+        case RING_ELEC_RESISTANCE:
+            return player_res_electricity(false, temp, false) > 0;
 
         case RING_WIZARDRY:
             return you_worship(GOD_TROG);

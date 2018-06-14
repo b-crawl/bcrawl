@@ -215,9 +215,7 @@ enum jewellery_type
     RING_PROTECTION_FROM_MAGIC,
     RING_FIRE,
     RING_ICE,
-#if TAG_MAJOR_VERSION == 34
-    RING_TELEPORT_CONTROL,
-#endif
+    RING_ELEC_RESISTANCE,
     NUM_RINGS,                         //   keep as last ring; should not overlap
                                        //   with amulets!
     // RINGS after num_rings are for unique types for artefacts
@@ -227,7 +225,9 @@ enum jewellery_type
 
     AMU_RAGE = 35,
     AMU_FIRST_AMULET = AMU_RAGE,
+#if TAG_MAJOR_VERSION == 34
     AMU_HARM,
+#endif
     AMU_ACROBAT,
     AMU_MANA_REGENERATION,
     AMU_THE_GOURMAND,
@@ -307,6 +307,10 @@ enum misc_item_type
     MISC_XOMS_CHESSBOARD,
 #endif
 
+    // Archaeologist
+    MISC_ANCIENT_CRATE,
+    MISC_DUSTY_TOME,
+
     NUM_MISCELLANY,
     MISC_DECK_UNKNOWN = NUM_MISCELLANY,
 };
@@ -340,8 +344,10 @@ const vector<misc_item_type> misc_types =
 #endif
     MISC_ZIGGURAT,
 #if TAG_MAJOR_VERSION == 34
-    MISC_BOTTLED_EFREET, MISC_BUGGY_EBONY_CASKET
+    MISC_BOTTLED_EFREET, MISC_BUGGY_EBONY_CASKET,
 #endif
+    MISC_ANCIENT_CRATE,
+    MISC_DUSTY_TOME
 };
 
 enum missile_type
@@ -405,8 +411,8 @@ enum scroll_type
     SCR_ENCHANT_WEAPON,
     SCR_ENCHANT_ARMOUR,
     SCR_TORMENT,
-    SCR_RANDOM_USELESSNESS,
 #if TAG_MAJOR_VERSION == 34
+    SCR_RANDOM_USELESSNESS,
     SCR_CURSE_WEAPON,
     SCR_CURSE_ARMOUR,
 #endif

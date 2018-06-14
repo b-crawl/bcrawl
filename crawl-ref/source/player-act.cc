@@ -219,6 +219,9 @@ brand_type player::damage_brand(int)
     if (duration[DUR_CONFUSING_TOUCH])
         return SPWPN_CONFUSE;
 
+    if (player_equip_unrand(UNRAND_FISTS_OF_THUNDER))
+        return SPWPN_ELECTROCUTION;
+
     return get_form()->get_uc_brand();
 }
 
@@ -338,8 +341,10 @@ hands_reqd_type player::hands_reqd(const item_def &item, bool base) const
                                                         : WPN_UNKNOWN;
     // All weapons except gc and gsc are one-handed for Fo
     if (species == SP_FORMICID)
+    {
         return wpn_type == WPN_GIANT_CLUB || wpn_type == WPN_GIANT_SPIKED_CLUB
                ? HANDS_TWO : HANDS_ONE;
+    }
     else
         return actor::hands_reqd(item, base);
 }
@@ -633,6 +638,9 @@ string player::unarmed_attack_name() const
     else if (has_usable_tentacles(true))
         default_name = "Tentacles";
 
+    if (player_equip_unrand(UNRAND_FISTS_OF_THUNDER))
+        default_name += " (elec)";
+
     return get_form()->get_uc_attack_name(default_name);
 }
 
@@ -757,7 +765,7 @@ bool player::go_berserk(bool intentional, bool potion)
 
     you.redraw_quiver = true; // Account for no firing.
 
-    if (player_equip_unrand(UNRAND_ZEALOT_SWORD))
+    if (player_equip_unrand(UNRAND_JIHAD))
         for (monster_near_iterator mi(you.pos(), LOS_NO_TRANS); mi; ++mi)
             if (mi->friendly())
                 mi->go_berserk(false);

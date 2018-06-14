@@ -35,7 +35,7 @@ a colour.
 %%%%
 Dusk walker
 
-Dusk walkers are ravenous predators who were cursed long ago for an ancient crime. 
+Dusk walkers are stealthy predators who were cursed long ago for an ancient crime.
 They hide in the shadows to avoid the wrathful gaze of the gods.
 %%%%
 Fairy
@@ -120,6 +120,11 @@ Ogre
 
 Large, strong, and extremely robust, Ogres are competent at all forms of melee.
 They are not merely brutes, as they are comfortable with spellcasting.
+%%%%
+Sand Dwarf
+
+Sand Dwarves are hardy, skilled with axes and maces, and can use magic
+while wearing heavy armour. However, having short legs, they move slowly.
 %%%%
 Spriggan
 

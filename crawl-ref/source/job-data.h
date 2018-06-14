@@ -54,6 +54,15 @@ static const map<job_type, job_def> job_data =
       { SK_HEXES, 3 }, { SK_WEAPON, 2 }, },
 } },
 
+{ JOB_ARCHAEOLOGIST, {
+    "Ac", "Archaeologist",
+    3, 6, 3,
+    { SP_HUMAN, SP_TENGU, SP_DEEP_ELF, SP_DEEP_DWARF, SP_DEMONSPAWN},
+    { "robe plus:1", "hat plus:1", "pair of boots plus:1", "pair of gloves plus:1", "dusty tome", "ancient crate" },
+    WCHOICE_NONE,
+    { { SK_STEALTH, 3}, { SK_DODGING, 3}, { SK_FIGHTING, 1} },
+} },
+
 { JOB_ARTIFICER, {
     "Ar", "Artificer",
     4, 3, 5,
@@ -115,7 +124,7 @@ static const map<job_type, job_def> job_data =
     0, 7, 5,
     { SP_DEEP_ELF, SP_DEEP_DWARF, SP_SPRIGGAN, SP_GARGOYLE, SP_DEMIGOD,
       SP_GHOUL, SP_OCTOPODE, SP_FAIRY },
-    { "book of Geomancy", "stone q:30", "robe", },
+    { "book of Geomancy", "stone q:300", "robe", },
     WCHOICE_NONE,
     { { SK_TRANSMUTATIONS, 1 }, { SK_EARTH_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
       { SK_DODGING, 2 }, { SK_STEALTH, 2 }, }
@@ -216,7 +225,7 @@ static const map<job_type, job_def> job_data =
     { { SK_FIGHTING, 2 }, { SK_ARMOUR, 1 }, { SK_DODGING, 2 },
       { SK_SPELLCASTING, 2 }, { SK_CHARMS, 3 }, { SK_WEAPON, 2 }, },
 } },
- 
+
  { JOB_SUMMONER, {
     "Su", "Summoner",
     0, 7, 5,
@@ -233,7 +242,7 @@ static const map<job_type, job_def> job_data =
     2, 5, 5,
     { SP_NAGA, SP_MERFOLK, SP_BASE_DRACONIAN, SP_DEMIGOD, SP_DEMONSPAWN,
       SP_TROLL, },
-    { "arrow q:12", "robe", "book of Changes" },
+    { "arrow q:120", "robe", "book of Changes" },
     WCHOICE_NONE,
     { { SK_FIGHTING, 1 }, { SK_UNARMED_COMBAT, 3 }, { SK_DODGING, 2 },
       { SK_SPELLCASTING, 2 }, { SK_TRANSMUTATIONS, 2 }, },

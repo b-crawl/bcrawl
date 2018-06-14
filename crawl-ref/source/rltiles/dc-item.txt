@@ -732,8 +732,7 @@ i-life-protection RING_LIFE_PROTECTION
 i-r-magic RING_PROTECTION_FROM_MAGIC
 i-fire RING_FIRE
 i-ice RING_ICE
-# remove teleport control when TAG_MAJOR_VERSION > 34 and mark ice as last
-i-c-teleport RING_TELEPORT_CONTROL RING_ID_LAST
+i-r-elec RING_ELEC_RESISTANCE RING_ID_LAST
 
 ############amulets
 %sdir item/amulet
@@ -783,7 +782,7 @@ sun
 # These must be in the same order as the enum in item-prop-enum.h!
 # remove REMOVEMEs when TAG_MAJOR_VERSION > 34
 i-rage AMU_RAGE AMU_ID_FIRST
-i-harm AMU_HARM
+i-harm AMU_REMOVEME3
 i-acrobat AMU_ACROBAT
 i-m-regeneration AMU_MANA_REGENERATION
 i-gourmand AMU_THE_GOURMAND
@@ -994,6 +993,8 @@ misc_lightning_rod_inert MISC_LIGHTNING_ROD_INERT
 misc_lantern MISC_LANTERN_OF_SHADOWS
 misc_horn MISC_HORN_OF_GERYON
 misc_box MISC_BOX_OF_BEASTS
+misc_ancient_crate MISC_ANCIENT_CRATE
+misc_dusty_tome MISC_DUSTY_TOME
 %rim 0
 misc_sack MISC_SACK_OF_SPIDERS
 misc_phantom_mirror MISC_PHANTOM_MIRROR

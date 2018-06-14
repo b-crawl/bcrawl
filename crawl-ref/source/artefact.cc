@@ -373,7 +373,9 @@ static map<jewellery_type, vector<jewellery_fake_artp>> jewellery_artps = {
     { AMU_RAGE, { { ARTP_BERSERK, 1 } } },
     { AMU_REGENERATION, { { ARTP_REGENERATION, 1 } } },
     { AMU_REFLECTION, { { ARTP_SHIELDING, 0 } } },
+#if TAG_MAJOR_VERSION == 34
     { AMU_HARM, { { ARTP_DRAIN, 1 } } },
+#endif
 
     { RING_MAGICAL_POWER, { { ARTP_MAGICAL_POWER, 9 } } },
     { RING_FLIGHT, { { ARTP_FLY, 1 } } },
@@ -384,6 +386,7 @@ static map<jewellery_type, vector<jewellery_fake_artp>> jewellery_artps = {
     { RING_PROTECTION_FROM_FIRE, { { ARTP_FIRE, 1 } } },
     { RING_PROTECTION_FROM_COLD, { { ARTP_COLD, 1 } } },
     { RING_POISON_RESISTANCE, { { ARTP_POISON, 1 } } },
+    { RING_ELEC_RESISTANCE, { { ARTP_ELECTRICITY, 1 } } },
     { RING_LIFE_PROTECTION, { { ARTP_NEGATIVE_ENERGY, 1 } } },
     { RING_PROTECTION_FROM_MAGIC, { { ARTP_MAGIC_RESISTANCE, 1 } } },
 
@@ -1426,6 +1429,10 @@ static bool _randart_is_redundant(const item_def &item,
         provides = ARTP_POISON;
         break;
 
+    case RING_ELEC_RESISTANCE:
+        provides = ARTP_ELECTRICITY;
+        break;
+
     case RING_ICE:
     case RING_PROTECTION_FROM_COLD:
         provides = ARTP_COLD;
@@ -1495,9 +1502,11 @@ static bool _randart_is_redundant(const item_def &item,
         provides = ARTP_SHIELDING;
         break;
 
+#if TAG_MAJOR_VERSION == 34
     case AMU_HARM:
         provides = ARTP_DRAIN;
         break;
+#endif
     }
 
     if (provides == ARTP_NUM_PROPERTIES)
@@ -1542,7 +1551,6 @@ static bool _randart_is_conflicting(const item_def &item,
         break;
 
     case RING_TELEPORTATION:
-    case RING_TELEPORT_CONTROL:
         conflicts = ARTP_PREVENT_TELEPORTATION;
         break;
 
@@ -1848,4 +1856,38 @@ void artefact_fixup_props(item_def &item)
 
     if (props.exists(KNOWN_PROPS_KEY))
         artefact_pad_store_vector(props[KNOWN_PROPS_KEY], false);
+}
+
+// Initialise the eligible unrands for archaeologist
+const vector<int> archaeologist_unrands()
+{
+    vector<int> eligible_unrands;
+
+    for (int i = 0; i < NUM_UNRANDARTS; ++i)
+    {
+        const int index = i + UNRAND_START;
+        const unrandart_entry *entry = &unranddata[i];
+
+        if (entry->base_type == OBJ_UNASSIGNED)
+            continue;
+
+        if (entry->flags & UNRAND_FLAG_NOGEN
+            || entry->flags & UNRAND_FLAG_NOTAC)
+        {
+            continue;
+        }
+
+        // As a non-felid: jewellery does not shape a character enough
+        // As a felid: we have no choice but to give jewellery
+        // XXX: This seems like a really convoluted way to do XNOR -- NP7.
+        if (you.species == SP_FELID && entry->base_type != OBJ_JEWELLERY
+            || you.species != SP_FELID && entry->base_type == OBJ_JEWELLERY)
+        {
+            continue;
+        }
+
+        eligible_unrands.push_back(index);
+    }
+
+    return eligible_unrands;
 }

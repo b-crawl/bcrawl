@@ -135,7 +135,7 @@ static const map<species_type, species_def> species_data =
     "Dg",
     "Demigod", "Divine", nullptr,
     SPF_NONE,
-    -2, 1, 2, 4,
+    -1, 1, 2, 4,
     MONS_DEMIGOD,
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
     11, 12, 11, // 34
@@ -350,7 +350,7 @@ static const map<species_type, species_def> species_data =
       { MUT_SHAGGY_FUR, 1, 1 }, { MUT_ACUTE_VISION, 1, 1 }, { MUT_PAWS, 1, 1 },
       { MUT_SLOW_METABOLISM, 1, 1 }, { MUT_CLAWS, 1, 1 },
       { MUT_SHAGGY_FUR, 1, 6 }, { MUT_SHAGGY_FUR, 1, 12 }, },
-    { "You cannot wear armour.",
+    { "You cannot wear almost all types of armour.",
       "You are incapable of wielding weapons or throwing items.",
       "Your paws allow you to move quietly. (Stealth)" },
     { "no armour", "no weapons or thrown items", "stealth" },
@@ -645,7 +645,7 @@ static const map<species_type, species_def> species_data =
 } },
 
 { SP_DUSK_WALKER, {
-    "Du",
+    "DW",
     "Dusk Walker", nullptr, nullptr,
     SPF_NONE,
     -1, -1, 0, 6,
@@ -653,13 +653,30 @@ static const map<species_type, species_def> species_data =
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
     12, 8, 8, // 28
     { STAT_STR, STAT_INT, STAT_DEX }, 4,
-    {{ MUT_NIGHTSTALKER, 1, 4}, {MUT_DRAIN_BITE, 1 ,1}, { MUT_FANGS, 2, 1 },
-      { MUT_FANGS, 1, 8 }, { MUT_NIGHTSTALKER, 1, 12}, { MUT_NIGHTSTALKER, 1, 20}},
-    {"You devour your enemies"},
-    {"devour"},
+    {{ MUT_NIGHTSTALKER, 1, 4}, { MUT_FANGS, 2, 1 },
+    { MUT_FANGS, 1, 8 }, { MUT_NIGHTSTALKER, 1, 12}, { MUT_NIGHTSTALKER, 1, 20}},
+    {"Your attacks drain your enemies"},
+    {"draining touch"},
     { JOB_VENOM_MAGE, JOB_GLADIATOR, JOB_NECROMANCER, JOB_ICE_ELEMENTALIST,
-      JOB_ASSASSIN, JOB_ARTIFICER },
-    { SK_STAVES, SK_AXES, SK_SLINGS, SK_CROSSBOWS},
+      JOB_ASSASSIN, JOB_EARTH_ELEMENTALIST },
+    { SK_STAVES, SK_SHORT_BLADES},
+} },
+
+{ SP_SAND_DWARF, {
+    "SD",
+    "Sand Dwarf", "Dwarven", nullptr,
+    SPF_NONE,
+    0, 1, 0, 5,
+    MONS_DWARF,
+    HT_LAND, US_ALIVE, SIZE_SMALL,
+    12, 8, 6, // 26
+    { STAT_STR, STAT_INT }, 4,
+    { { MUT_SLOW, 1, 1 }, { MUT_NO_ARMOUR_CAST_PENALTY, 1, 1} },
+    {},
+    {},
+    { JOB_FIGHTER, JOB_GLADIATOR, JOB_HUNTER, JOB_BERSERKER,
+      JOB_SKALD, JOB_WIZARD, JOB_EARTH_ELEMENTALIST, JOB_ARTIFICER },
+    { SK_MACES_FLAILS, SK_AXES, SK_CROSSBOWS, SK_SLINGS },
 } },
 
 { SP_VAMPIRE, {

@@ -688,7 +688,7 @@ static int armour_equip_delay(const item_def &item)
 bool can_wear_armour(const item_def &item, bool verbose, bool ignore_temporary)
 {
     const object_class_type base_type = item.base_type;
-    if (base_type != OBJ_ARMOUR || you.species == SP_FELID)
+    if (base_type != OBJ_ARMOUR)
     {
         if (verbose)
             mpr("You can't wear that.");
@@ -698,8 +698,11 @@ bool can_wear_armour(const item_def &item, bool verbose, bool ignore_temporary)
 
     const int sub_type = item.sub_type;
     const equipment_type slot = get_armour_slot(item);
-
-    if (you.species == SP_OCTOPODE && slot != EQ_HELMET && slot != EQ_SHIELD)
+        // Octopodes can
+    if (you.species == SP_OCTOPODE && slot != EQ_HELMET
+                                   && slot != EQ_SHIELD
+                                   && slot != EQ_CLOAK
+        || you.species == SP_FELID && slot != EQ_CLOAK)
     {
         if (verbose)
             mpr("You can't wear that!");
@@ -758,6 +761,9 @@ bool can_wear_armour(const item_def &item, bool verbose, bool ignore_temporary)
         {
             if (you.species == SP_OCTOPODE)
                 mpr("You need the rest of your tentacles for walking.");
+            // Formicids wielding giant (spiked) clubs
+            else if (you.species == SP_FORMICID)
+                mpr("You'd need six hands to do that!");
             else
             {
                 // Singular hand should have already been handled above.
@@ -972,6 +978,15 @@ bool can_wear_armour(const item_def &item, bool verbose, bool ignore_temporary)
         }
     }
 
+    // Felids and octopodes can wear scarves
+    if ((you.species == SP_FELID || you.species == SP_OCTOPODE)
+        && sub_type == ARM_CLOAK)
+    {
+        if (verbose)
+            mpr("You can't wear that!");
+        return false;
+    }
+
     // Can't just use Form::slot_available because of shroom caps.
     if (!ignore_temporary && !get_form()->can_wear_item(item))
     {
@@ -1013,11 +1028,6 @@ bool wear_armour(int item)
     // conditions that would make it impossible to wear any type of armour.
     // TODO: perhaps also worth checking here whether all available armour slots
     // are cursed. Same with jewellery.
-    if (you.species == SP_FELID)
-    {
-        mpr("You can't wear anything.");
-        return false;
-    }
 
     if (!form_can_wear())
     {
@@ -2502,6 +2512,7 @@ static int _handle_enchant_armour(bool alreadyknown, const string &pre_msg)
     return result ? 1 : 0;
 }
 
+#if TAG_MAJOR_VERSION == 34
 void random_uselessness()
 {
     ASSERT(!crawl_state.game_is_arena());
@@ -2554,6 +2565,7 @@ void random_uselessness()
         break;
     }
 }
+#endif
 
 static void _handle_read_book(item_def& book)
 {
@@ -2857,9 +2869,11 @@ void read_scroll(item_def& scroll)
 
     switch (which_scroll)
     {
+#if TAG_MAJOR_VERSION == 34
     case SCR_RANDOM_USELESSNESS:
         random_uselessness();
         break;
+#endif
 
     case SCR_BLINKING:
     {

@@ -32,6 +32,7 @@
 #include "english.h"
 #include "env.h"
 #include "errors.h"
+#include "evoke.h"
 #include "exercise.h"
 #include "food.h"
 #include "god-abil.h"
@@ -47,6 +48,7 @@
 #include "kills.h"
 #include "libutil.h"
 #include "macro.h"
+#include "makeitem.h"
 #include "melee-attack.h"
 #include "message.h"
 #include "mon-place.h"
@@ -1523,6 +1525,8 @@ int player_res_electricity(bool calc_unid, bool temp, bool items)
     {
         // staff
         re += you.wearing(EQ_STAFF, STAFF_AIR, calc_unid);
+        
+        re += you.wearing(EQ_RINGS, RING_ELEC_RESISTANCE, calc_unid);
 
         // body armour:
         const item_def *body_armour = you.slot_item(EQ_BODY_ARMOUR);
@@ -2265,8 +2269,12 @@ int player_armour_shield_spell_penalty()
 {
     const int scale = 100;
 
-    const int body_armour_penalty =
-        max(19 * you.adjusted_body_armour_penalty(scale), 0);
+    int body_armour_penalty = 0;
+    if(!you.get_mutation_level(MUT_NO_ARMOUR_CAST_PENALTY))
+    {
+        body_armour_penalty =
+            max(19 * you.adjusted_body_armour_penalty(scale), 0);
+    }
 
     const int total_penalty = body_armour_penalty
                  + 19 * you.adjusted_shield_penalty(scale);
@@ -2404,8 +2412,8 @@ void forget_map(bool rot)
             continue;
 
         env.map_knowledge(p).clear();
-        if (env.map_forgotten.get())
-            (*env.map_forgotten.get())(p).clear();
+        if (env.map_forgotten)
+            (*env.map_forgotten)(p).clear();
         StashTrack.update_stash(p);
 #ifdef USE_TILE
         tile_forget_map(p);
@@ -3037,6 +3045,23 @@ void level_change(bool skip_attribute_increase)
         learned_something_new(HINT_NEW_LEVEL);
     }
 
+    if (you.char_class == JOB_ARCHAEOLOGIST && you.experience_level >= 3)
+    {
+        int tome_index = -1;
+        for (int i = 0; i < ENDOFPACK; i++)
+            if (you.inv[i].defined() && you.inv[i].is_type(OBJ_MISCELLANY, MISC_DUSTY_TOME))
+                tome_index = i;
+
+        if (tome_index != -1)
+            archaeologist_read_tome(you.inv[tome_index]);
+        else if (!you.props.exists(ARCHAEOLOGIST_TRIGGER_TOME_ON_PICKUP))
+            mpr("You suddenly remember the dusty tome you brought into the dungeon! "
+                 "You feel able to decipher it now. "
+                 "If only you could remember where you put it...");
+
+        you.props[ARCHAEOLOGIST_TRIGGER_TOME_ON_PICKUP] = true;
+    }
+
     while (you.experience >= exp_needed(you.max_level + 1))
     {
         ASSERT(you.experience_level == you.get_max_xl());
@@ -3144,8 +3169,9 @@ int player_stealth()
         // Now 2 * EP^2 / 3 after EP rescaling.
         const int evp = you.unadjusted_body_armour_penalty();
         const int penalty = evp * evp * 2 / 3;
-        stealth -= penalty;
-
+        if (you.species == SP_DUSK_WALKER)
+            stealth -= (penalty / 2);
+        else stealth -= penalty;
         const int pips = armour_type_prop(arm->sub_type, ARMF_STEALTH);
         stealth += pips * STEALTH_PIP;
     }
@@ -3198,7 +3224,9 @@ int player_stealth()
     //Fairies' bright wings reduce stealth.
     if (you.species == SP_FAIRY
         && !(player_is_shapechanged() && you.form == transformation::dragon))
+    {
         stealth -= STEALTH_PIP;
+    }
 
     if (!you.airborne())
     {
@@ -5932,7 +5960,7 @@ int player::racial_ac(bool temp) const
                        + 100 * max(0, experience_level - 7) * 2 / 5;
         }
         else if (species == SP_FAIRY)
-	        return 300 + 100 * experience_level / 3;
+                return 300 + 100 * experience_level / 3;
     }
 
     return 0;
@@ -6831,7 +6859,9 @@ int player::has_claws(bool allow_tran) const
 
 bool player::has_usable_claws(bool allow_tran) const
 {
-    return !slot_item(EQ_GLOVES) && has_claws(allow_tran);
+    return !(slot_item(EQ_GLOVES)
+             && !player_equip_unrand(UNRAND_FISTS_OF_THUNDER))
+           && has_claws(allow_tran);
 }
 
 int player::has_talons(bool allow_tran) const

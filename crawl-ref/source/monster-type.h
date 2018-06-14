@@ -844,6 +844,7 @@ enum monster_type                      // menv[].type
 #if TAG_MAJOR_VERSION > 34
     MONS_FULMINANT_PRISM,
     MONS_BATTLESPHERE,
+    MONS_FALSE_IMAGE,
 #endif
     MONS_PILLAR_OF_SALT,
 #if TAG_MAJOR_VERSION > 34
@@ -1049,6 +1050,7 @@ enum monster_type                      // menv[].type
     MONS_BARACHI,
     MONS_BULTUNGIN,             // remove this someday
     MONS_TEST_STATUE,
+    MONS_FALSE_IMAGE,
 #endif
 
     NUM_MONSTERS,               // used for polymorph

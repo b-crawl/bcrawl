@@ -6712,6 +6712,7 @@ bool monster::angered_by_attacks() const
     return !has_ench(ENCH_INSANE)
             && !mons_is_avatar(type)
             && type != MONS_SPELLFORGED_SERVITOR
+            && type != MONS_FALSE_IMAGE
             && !testbits(flags, MF_DEMONIC_GUARDIAN)
             && !mons_is_hepliaklqana_ancestor(type);
 }

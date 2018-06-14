@@ -1067,6 +1067,10 @@ eye of draining
 
 A hovering horror that waxes strong on magic.
 %%%%
+false image
+
+An ugly illusion that looks just like you.
+%%%%
 faun
 
 A hybrid with the torso of a human atop the forelegs of a goat. It is fabled

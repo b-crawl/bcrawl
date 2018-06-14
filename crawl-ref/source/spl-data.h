@@ -3985,6 +3985,17 @@ static const struct spell_desc spelldata[] =
 },
 
 {
+    SPELL_FALSE_IMAGE, "False Image",
+    SPTYP_SUMMONING | SPTYP_HEXES,
+    SPFLAG_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEUTRAL,
+    4,
+    100,
+    2, 2,
+    2, 0,
+    TILEG_FALSE_IMAGE,
+},
+
+{
     SPELL_NO_SPELL, "nonexistent spell",
     SPTYP_NONE,
     SPFLAG_TESTING,

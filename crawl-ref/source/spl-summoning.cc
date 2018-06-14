@@ -969,7 +969,56 @@ spret_type cast_summon_lightning_spire(int pow, const coord_def& where, god_type
         canned_msg(MSG_NOTHING_HAPPENS);
 
     return SPRET_SUCCESS;
+}
 
+spret_type cast_false_image(int pow, const coord_def& where, god_type god, bool fail)
+{
+    const int dur = 2;
+
+    if (grid_distance(where, you.pos()) > spell_range(SPELL_FALSE_IMAGE, pow)
+        || !in_bounds(where))
+    {
+        mpr("That's too far away.");
+        return SPRET_ABORT;
+    }
+
+    if (!monster_habitable_grid(MONS_FALSE_IMAGE, grd(where)))
+    {
+        mpr("You can't cast it there.");
+        return SPRET_ABORT;
+    }
+
+    monster* mons = monster_at(where);
+    if (mons)
+    {
+        if (you.can_see(*mons))
+        {
+            mpr("That space is already occupied.");
+            return SPRET_ABORT;
+        }
+
+        fail_check();
+
+        // invisible monster
+        mpr("Something you can't see is blocking your illusion!");
+        return SPRET_SUCCESS;
+    }
+
+    fail_check();
+
+    mgen_data image(MONS_FALSE_IMAGE, BEH_FRIENDLY, where, MHITYOU,
+                    MG_FORCE_BEH | MG_FORCE_PLACE | MG_AUTOFOE);
+    image.set_summoned(&you, dur, SPELL_FALSE_IMAGE,  god);
+    image.hd = max(1, div_rand_round(pow, 10));
+
+    if (create_monster(image))
+    {
+        mpr("You stand beside yourself.");
+    }
+    else
+        canned_msg(MSG_NOTHING_HAPPENS);
+
+    return SPRET_SUCCESS;
 }
 
 #if TAG_MAJOR_VERSION == 34
@@ -3275,6 +3324,7 @@ static const map<spell_type, summon_cap> summonsdata =
     { SPELL_SUMMON_HORRIBLE_THINGS,     { 8, 8 } },
     { SPELL_SHADOW_CREATURES,           { 4, 2 } },
     { SPELL_SUMMON_LIGHTNING_SPIRE,     { 1, 2 } },
+    { SPELL_FALSE_IMAGE,                { 1, 2 } },
 #if TAG_MAJOR_VERSION == 34
     { SPELL_SUMMON_GUARDIAN_GOLEM,      { 1, 2 } },
 #endif

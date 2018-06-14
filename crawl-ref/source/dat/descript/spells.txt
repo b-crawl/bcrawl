@@ -532,6 +532,11 @@ Excruciating Wounds spell
 Temporarily infuses the weapon held by the caster with the essence of pain
 itself. It will not affect artefact weapons.
 %%%%
+False Image spell
+
+Creates an illusory duplicate of the caster. This illusion cannot attack
+and does not move, but the caster can fire missiles and spells through it.
+%%%%
 Flay spell
 
 Opens painful illusionary wounds on the target's body, which disappear after

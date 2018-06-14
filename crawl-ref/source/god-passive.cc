@@ -34,7 +34,9 @@
 #include "mon-cast.h"
 #include "mon-place.h"
 #include "mon-util.h"
+#include "ouch.h"
 #include "output.h"
+#include "player.h"
 #include "religion.h"
 #include "shout.h"
 #include "skills.h"
@@ -422,7 +424,7 @@ static const vector<god_passive> god_passives[] =
     // Wu Jian
     {
         { 0, passive_t::wu_jian_lunge, "perform damaging attacks by moving towards foes." },
-        { 1, passive_t::wu_jian_whirlwind, "lightly attack and pin monsters in place by moving around them." },
+        { 1, passive_t::wu_jian_whirlwind, "lightly attack enemies by moving around them." },
         { 2, passive_t::wu_jian_wall_jump, "perform airborne attacks by moving against a solid obstacle." },
     },
 };
@@ -1535,7 +1537,9 @@ static void _wu_jian_trigger_serpents_lash(const coord_def& old_pos,
 
     if (you.attribute[ATTR_SERPENTS_LASH] == 0)
     {
-        you.increase_duration(DUR_EXHAUSTED, 12 + random2(5));
+        int mv = player_movement_speed();
+        you.increase_duration(DUR_EXHAUSTED, div_rand_round(mv*3, 10));
+        drain_player(mv, false, true);
         mpr("Your supernatural speed expires.");
     }
 
@@ -1704,9 +1708,12 @@ static bool _wu_jian_whirlwind(const coord_def& old_pos)
         // before its duration expires by wu_jian_end_of_turn_effects. This is
         // necessary to make sure it works well with Wall Jump's longer aut
         // count.
-        mons->del_ench(ENCH_WHIRLWIND_PINNED);
-        mons->add_ench(mon_enchant(ENCH_WHIRLWIND_PINNED, 2, nullptr,
-                                   BASELINE_DELAY * 5));
+        if(wu_jian_has_momentum(WU_JIAN_ATTACK_WHIRLWIND))
+        {
+            mons->del_ench(ENCH_WHIRLWIND_PINNED);
+            mons->add_ench(mon_enchant(ENCH_WHIRLWIND_PINNED, 2, nullptr,
+                                       BASELINE_DELAY * 5));
+        }
 
         you.apply_berserk_penalty = false;
 

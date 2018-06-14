@@ -637,9 +637,10 @@ static const ability_def Ability_List[] =
 
     // Wu Jian
     { ABIL_WU_JIAN_SERPENTS_LASH, "Serpent's Lash",
-        0, 0, 0, 2, {fail_basis::invo}, abflag::exhaustion | abflag::instant },
+        0, 0, 0, 0, {fail_basis::invo}, abflag::exhaustion | abflag::instant
+        | abflag::skill_drain },
     { ABIL_WU_JIAN_HEAVENLY_STORM, "Heavenly Storm",
-        0, 0, 0, 20, {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::none },
+        0, 0, 0, 26, {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::none },
     { ABIL_WU_JIAN_LUNGE, "Lunge", 0, 0, 0, 0, {}, abflag::none },
     { ABIL_WU_JIAN_WHIRLWIND, "Whirlwind", 0, 0, 0, 0, {}, abflag::none },
     { ABIL_WU_JIAN_WALLJUMP, "Wall Jump", 0, 0, 0, 0, {}, abflag::none },

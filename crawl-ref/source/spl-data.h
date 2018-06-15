@@ -2440,7 +2440,7 @@ static const struct spell_desc spelldata[] =
     SPELL_LEDAS_LIQUEFACTION, "Leda's Liquefaction",
     SPTYP_EARTH | SPTYP_HEXES,
     SPFLAG_AREA,
-    4,
+    3,
     200,
     -1, -1,
     3, 0,

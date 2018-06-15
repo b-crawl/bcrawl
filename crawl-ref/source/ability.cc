@@ -783,7 +783,7 @@ const string make_cost_description(ability_type ability)
         ret += ", Piety or 2 Rations";
 
     if (abil.flags & abflag::skill_drain)
-        ret += ", Skill drain";
+        ret += ", Drain";
 
     if (abil.flags & abflag::remove_curse_scroll)
         ret += ", Scroll of remove curse";

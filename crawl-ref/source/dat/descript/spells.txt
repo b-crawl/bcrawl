@@ -1149,7 +1149,8 @@ creature's evasion.
 
 The shackles are not strong enough to prevent creatures from blinking or
 teleporting, but they will follow a creature that does so and bind them to
-their new location.
+their new location. Some insubstantial and gelatinous creatures are immune
+to this spell.
 %%%%
 Shadow Bolt spell
 

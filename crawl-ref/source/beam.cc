@@ -5075,6 +5075,10 @@ bool ench_flavour_affects_monster(beam_type flavour, const monster* mon,
         rc = !mons_aligned(&you, mon) && you.can_constrict(mon, false);
         break;
 
+    case BEAM_SHACKLE:
+        rc = !(mons_is_slime(*mon) || mon->is_insubstantial());
+        break;
+
     default:
         break;
     }
@@ -6123,6 +6127,7 @@ bool bolt::nasty_to(const monster* mon) const
         case BEAM_PAIN:
         case BEAM_AGONY:
         case BEAM_HIBERNATION:
+        case BEAM_SHACKLE:
             return ench_flavour_affects_monster(flavour, mon);
         case BEAM_TUKIMAS_DANCE:
             return tukima_affects(*mon); // XXX: move to ench_flavour_affects?

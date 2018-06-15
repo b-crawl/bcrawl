@@ -1663,7 +1663,7 @@ static const struct spell_desc spelldata[] =
     SPELL_GOLUBRIAS_PASSAGE, "Passage of Golubria",
     SPTYP_TRANSLOCATION,
     SPFLAG_TARGET | SPFLAG_NEUTRAL | SPFLAG_ESCAPE | SPFLAG_SELFENCH,
-    4,
+    5,
     0,
     LOS_RADIUS, LOS_RADIUS,
     3, 8, // when it closes

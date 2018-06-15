@@ -1539,7 +1539,7 @@ static void _wu_jian_trigger_serpents_lash(const coord_def& old_pos,
     {
         int mv = player_movement_speed();
         you.increase_duration(DUR_EXHAUSTED, div_rand_round(mv*3, 10));
-        drain_player(mv, false, true);
+        drain_player(div_rand_round(mv*180, you.piety), false, true);
         mpr("Your supernatural speed expires.");
     }
 

@@ -216,21 +216,21 @@ static void _give_ammo(weapon_type weapon, int plus)
     {
     case WPN_THROWN:
         if (species_can_throw_large_rocks(you.species))
-            newgame_make_item(OBJ_MISSILES, MI_LARGE_ROCK, 75 + (plus * 5));
+            newgame_make_item(OBJ_MISSILES, MI_LARGE_ROCK, 100 + (plus * 20));
         else if (you.body_size(PSIZE_TORSO) <= SIZE_SMALL)
-            newgame_make_item(OBJ_MISSILES, MI_TOMAHAWK, 160 + (40 * plus));
+            newgame_make_item(OBJ_MISSILES, MI_TOMAHAWK, 240 + (60 * plus));
         else
-            newgame_make_item(OBJ_MISSILES, MI_JAVELIN, 100 + (20 * plus));
+            newgame_make_item(OBJ_MISSILES, MI_JAVELIN, 150 + (30 * plus));
         newgame_make_item(OBJ_MISSILES, MI_THROWING_NET, 2);
         break;
     case WPN_SHORTBOW:
-        newgame_make_item(OBJ_MISSILES, MI_ARROW, 160);
+        newgame_make_item(OBJ_MISSILES, MI_ARROW, 240);
         break;
     case WPN_HAND_CROSSBOW:
-        newgame_make_item(OBJ_MISSILES, MI_BOLT, 160);
+        newgame_make_item(OBJ_MISSILES, MI_BOLT, 240);
         break;
     case WPN_HUNTING_SLING:
-        newgame_make_item(OBJ_MISSILES, MI_SLING_BULLET, 160);
+        newgame_make_item(OBJ_MISSILES, MI_SLING_BULLET, 240);
         break;
     default:
         break;

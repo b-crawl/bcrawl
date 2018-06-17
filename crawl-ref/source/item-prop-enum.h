@@ -572,6 +572,9 @@ enum weapon_type
     WPN_EVENINGSTAR,
     WPN_GREAT_MACE,
 
+#if TAG_MAJOR_VERSION > 34
+    WPN_KNIFE,
+#endif
     WPN_DAGGER,
     WPN_QUICK_BLADE,
     WPN_SHORT_SWORD,
@@ -649,6 +652,7 @@ enum weapon_type
     WPN_TRIPLE_CROSSBOW,
 
     WPN_CUTLASS,
+    WPN_KNIFE,
 #endif
 
     NUM_WEAPONS,

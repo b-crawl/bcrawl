@@ -3376,9 +3376,6 @@ int melee_attack::martial_damage_mod(int dam)
     if (wu_jian_attack == WU_JIAN_ATTACK_LUNGE)
         dam = div_rand_round(dam * 12, 10);
 
-    if (wu_jian_attack == WU_JIAN_ATTACK_WHIRLWIND)
-        dam = div_rand_round(dam * 8, 10);
-
     return dam;
 }
 

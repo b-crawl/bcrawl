@@ -334,7 +334,7 @@ const vector<god_power> god_powers[NUM_GODS] =
            "perform lunging strikes" },
       { 1, "lightly attack enemies by moving around them",
            "perform spinning attacks" },
-      { 2, ABIL_WU_JIAN_WALLJUMP,
+      { 2, ABIL_WU_JIAN_WALLJUMP, "jump off walls to either attack an area or evade attacks",
            "perform airborne attacks" },
       { 3, ABIL_WU_JIAN_SERPENTS_LASH, "move at supernatural speeds, pinning foes you attack",
            "move at supernatural speeds" },

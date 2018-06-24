@@ -1770,14 +1770,23 @@ static bool _wu_jian_trigger_martial_arts(const coord_def& old_pos)
 void wu_jian_wall_jump_effects(const coord_def& old_pos)
 {
     vector<monster*> targets;
+    int target_count = 0;
     for (adjacent_iterator ai(you.pos(), true); ai; ++ai)
     {
         monster* target = monster_at(*ai);
         if (target && _can_attack_martial(target) && target->alive())
+        {
             targets.push_back(target);
+            target_count++;
+        }
 
         if (!cell_is_solid(*ai))
             check_place_cloud(CLOUD_DUST, *ai, 1 + random2(3) , &you, 0, -1);
+    }
+    
+    if (target_count == 0 && you.duration[DUR_AGILITY] <= 0)
+    {
+        you.increase_duration(DUR_AGILITY, 4, 100);
     }
 
     for (auto target : targets)

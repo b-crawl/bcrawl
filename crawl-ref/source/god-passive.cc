@@ -423,7 +423,7 @@ static const vector<god_passive> god_passives[] =
 
     // Wu Jian
     {
-        { 0, passive_t::wu_jian_lunge, "perform damaging attacks by moving towards foes." },
+        { 0, passive_t::wu_jian_lunge, "do at least one heavy attack when moving towards foes." },
         { 1, passive_t::wu_jian_whirlwind, "attack enemies by moving around them." },
         { 2, passive_t::wu_jian_wall_jump, "perform airborne attacks by moving against a solid obstacle." },
     },
@@ -1640,22 +1640,14 @@ static bool _wu_jian_lunge(const coord_def& old_pos)
 
     you.apply_berserk_penalty = false;
 
-    const int number_of_attacks = _wu_jian_number_of_attacks(false);
+    int number_of_attacks = _wu_jian_number_of_attacks(false);
+    number_of_attacks = max(1, number_of_attacks);
 
-    if (number_of_attacks == 0)
-    {
-        mprf("You lunge at %s, but your attack speed is too slow for a blow "
-             "to land.", mons->name(DESC_THE).c_str());
-        return false;
-    }
-    else
-    {
-        mprf("You lunge%s at %s%s.",
-             wu_jian_has_momentum(WU_JIAN_ATTACK_LUNGE) ?
-                 " with incredible momentum" : "",
-             mons->name(DESC_THE).c_str(),
-             number_of_attacks > 1 ? ", in a flurry of attacks" : "");
-    }
+    mprf("You lunge%s at %s%s.",
+         wu_jian_has_momentum(WU_JIAN_ATTACK_LUNGE) ?
+             " with incredible momentum" : "",
+         mons->name(DESC_THE).c_str(),
+         number_of_attacks > 1 ? ", in a flurry of attacks" : "");
 
     count_action(CACT_INVOKE, ABIL_WU_JIAN_LUNGE);
 

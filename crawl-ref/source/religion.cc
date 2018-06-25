@@ -330,7 +330,7 @@ const vector<god_power> god_powers[NUM_GODS] =
     },
 
     // Wu Jian
-    { { 0, "perform damaging attacks by moving towards foes",
+    { { 0, "do at least one heavy attack when moving towards foes",
            "perform lunging strikes" },
       { 1, "attack enemies by moving around them",
            "perform spinning attacks" },

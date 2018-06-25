@@ -1786,7 +1786,7 @@ void wu_jian_wall_jump_effects(const coord_def& old_pos)
     
     if (target_count == 0 && you.duration[DUR_AGILITY] <= 0)
     {
-        you.increase_duration(DUR_AGILITY, 4, 100);
+        you.increase_duration(DUR_AGILITY, 3, 100);
     }
 
     for (auto target : targets)

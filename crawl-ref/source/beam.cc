@@ -2963,9 +2963,6 @@ bool bolt::is_harmless(const monster* mon) const
     case BEAM_ACID:
         return mon->res_acid() >= 3;
 
-    case BEAM_PETRIFY:
-        return mon->res_petrify() || mon->petrified();
-
     case BEAM_MEPHITIC:
         return mon->res_poison() > 0 || mon->is_unbreathing();
 
@@ -5101,6 +5098,10 @@ bool ench_flavour_affects_monster(beam_type flavour, const monster* mon,
         rc = !(mon->is_summoned() || mon->has_ench(ENCH_INNER_FLAME));
         break;
 
+    case BEAM_PETRIFY:
+        rc = !mon->res_petrify();
+        break;
+
     case BEAM_INFESTATION:
         rc = mons_gives_xp(*mon, you) && !mon->has_ench(ENCH_INFESTATION);
         break;
@@ -6169,6 +6170,7 @@ bool bolt::nasty_to(const monster* mon) const
         case BEAM_VILE_CLUTCH:
         case BEAM_SLOW:
         case BEAM_PARALYSIS:
+        case BEAM_PETRIFY:
         case BEAM_DISPEL_UNDEAD:
         case BEAM_PAIN:
         case BEAM_AGONY:

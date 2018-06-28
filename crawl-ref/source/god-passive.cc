@@ -37,6 +37,7 @@
 #include "ouch.h"
 #include "output.h"
 #include "player.h"
+#include "player-stats.h"
 #include "religion.h"
 #include "shout.h"
 #include "skills.h"
@@ -1779,6 +1780,7 @@ void wu_jian_wall_jump_effects(const coord_def& old_pos)
     if (target_count == 0 && you.duration[DUR_AGILITY] <= 0)
     {
         you.increase_duration(DUR_AGILITY, 3, 100);
+        notify_stat_change(STAT_DEX, 5, true);
     }
 
     for (auto target : targets)

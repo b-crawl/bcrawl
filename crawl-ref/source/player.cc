@@ -5832,10 +5832,26 @@ int player::shield_tohit_penalty(bool random_factor, int scale) const
  * @param drained whether to include modification by draining.
  * @param temp whether to include modification by other temporary factors (e.g. heroism)
  */
-int player::skill(skill_type sk, int scale, bool real, bool drained, bool temp) const
+int player::skill(skill_type sk_input, int scale, bool real, bool drained, bool temp) const
 {
     // If you add another enhancement/reduction, be sure to change
     // SkillMenuSwitch::get_help() to reflect that
+    skill_type sk = sk_input;
+    if(you.species == SP_HILL_ORC)
+        switch (sk_input)
+        {
+        case SK_SHORT_BLADES:
+        case SK_LONG_BLADES:
+        case SK_AXES:
+        case SK_MACES_FLAILS:
+        case SK_POLEARMS:
+        case SK_STAVES:
+        case SK_UNARMED_COMBAT:
+            sk = SK_FIGHTING;
+            break;
+        default:
+            break;
+        }
 
     // wizard racechange, or upgraded old save
     if (is_useless_skill(sk))

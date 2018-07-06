@@ -353,8 +353,9 @@ void attack::init_attack(skill_type unarmed_skill, int attack_number)
     weapon          = attacker->weapon(attack_number);
 
     wpn_skill       = weapon ? item_attack_skill(*weapon) : unarmed_skill;
-    if (attacker->is_player() && you.form_uses_xl())
-        wpn_skill = SK_FIGHTING; // for stabbing, mostly
+    if (attacker->is_player())
+        if(you.form_uses_xl() || you.species == SP_HILL_ORC)
+            wpn_skill = SK_FIGHTING;
 
     attacker_armour_tohit_penalty =
         div_rand_round(attacker->armour_tohit_penalty(true, 20), 20);

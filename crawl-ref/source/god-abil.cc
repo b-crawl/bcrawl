@@ -59,6 +59,7 @@
 #include "mon-poly.h"
 #include "mon-tentacle.h"
 #include "mon-util.h"
+#include "movement.h"
 #include "mutation.h"
 #include "notes.h"
 #include "ouch.h"
@@ -76,9 +77,9 @@
 #include "spl-goditem.h"
 #include "spl-monench.h"
 #include "spl-summoning.h"
-#include "spl-wpnench.h"
 #include "spl-transloc.h"
 #include "spl-util.h"
+#include "spl-wpnench.h"
 #include "sprint.h"
 #include "state.h"
 #include "stringutil.h"
@@ -3415,8 +3416,9 @@ spret_type fedhas_evolve_flora(bool fail)
 
         return SPRET_ABORT;
     }
-
-    monster_conversion upgrade = *map_find(conversions, plant->type);
+    auto upgrade_ptr = map_find(conversions, plant->type);
+    ASSERT(upgrade_ptr);
+    monster_conversion upgrade = *upgrade_ptr;
 
     vector<pair<int, int> > collected_rations;
     if (upgrade.ration_cost)
@@ -3799,19 +3801,15 @@ bool ashenzari_end_transfer(bool finished, bool force)
  * Give a prompt to curse an item.
  *
  * This is the core logic behind Ash's Curse Item ability.
- * Player can abort without penalty.
+ * It is a free ability.
  * Player can curse any cursable item (not just worn ones).
  *
- * @param num_rc Number of remove curse scrolls available.
  * @return       Whether the player cursed anything.
  */
-bool ashenzari_curse_item(int num_rc)
+bool ashenzari_curse_item()
 {
-    ASSERT(num_rc > 0);
-    const string prompt_msg = make_stringf(
-            "Curse which item? (%d remove curse scroll%s left)"
-            " (Esc to abort)",
-            num_rc, num_rc == 1 ? "" : "s");
+    const string prompt_msg = "Curse which item? (Esc to abort)";
+
     const int item_slot = prompt_invent_item(prompt_msg.c_str(), MT_INVLIST,
                                              OSEL_CURSABLE, OPER_ANY,
                                              invprompt_flag::escape_only);
@@ -4939,6 +4937,7 @@ spret_type qazlal_elemental_force(bool fail)
     mg.summon_type = MON_SUMM_AID;
     mg.abjuration_duration = 1;
     mg.flags |= MG_FORCE_PLACE | MG_AUTOFOE;
+    mg.summoner = &you;
     int placed = 0;
     for (unsigned int i = 0; placed < count && i < targets.size(); i++)
     {
@@ -4947,7 +4946,12 @@ spret_type qazlal_elemental_force(bool fail)
         const cloud_struct &cl = *cloud_at(pos);
         mg.behaviour = BEH_FRIENDLY;
         mg.pos       = pos;
-        mg.cls = *map_find(elemental_clouds, cl.type);
+        auto mons_type = map_find(elemental_clouds, cl.type);
+        // it is not impossible that earlier placements caused new clouds not
+        // in the map.
+        if (!mons_type)
+            continue;
+        mg.cls = *mons_type;
         if (!create_monster(mg))
             continue;
         delete_cloud(pos);
@@ -7278,6 +7282,7 @@ bool wu_jian_do_wall_jump(coord_def targ, bool ability)
 bool wu_jian_wall_jump_ability()
 {
     // This needs to be kept in sync with direct walljumping via movement.
+    // TODO: Refactor to call the same code.
     ASSERT(!crawl_state.game_is_arena());
 
     if (crawl_state.is_repeating_cmd())
@@ -7287,11 +7292,16 @@ bool wu_jian_wall_jump_ability()
         crawl_state.cancel_cmd_repeat();
         return false;
     }
+
+    if (cancel_barbed_move())
+        return false;
+
     if (you.digging)
     {
         you.digging = false;
         mpr("You retract your mandibles.");
     }
+
     string wj_error;
     bool has_targets = false;
 
@@ -7355,5 +7365,7 @@ bool wu_jian_wall_jump_ability()
     crawl_state.cancel_cmd_again();
     crawl_state.cancel_cmd_repeat();
 
+    apply_barbs_damage();
+    remove_ice_armour_movement();
     return true;
 }

@@ -72,6 +72,7 @@
     Mike Adams
     Aj Adamson
     Nikhil Addleman
+    Alcon
     Brandon Allbery
     Warwick Allison
     Austin Appleby
@@ -202,6 +203,7 @@
     Naruni
     neofelis
     nicolae
+    Nikolai Lavsky
     NormalPerson7
     Erkki Nurmi
     Mattias Nyberg

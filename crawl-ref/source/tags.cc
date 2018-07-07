@@ -4869,7 +4869,11 @@ void unmarshallItem(reader &th, item_def &item)
     };
     // ASSUMPTION: there was no such thing as an artefact hide
     if (item.base_type == OBJ_ARMOUR && hide_to_armour.count(item.sub_type))
-        item.sub_type = *map_find(hide_to_armour, item.sub_type);
+    {
+        auto subtype_ptr = map_find(hide_to_armour, item.sub_type);
+        ASSERT(subtype_ptr);
+        item.sub_type = *subtype_ptr;
+    }
 
     if (th.getMinorVersion() < TAG_MINOR_HIDE_TO_SCALE && armour_is_hide(item))
     {
@@ -5802,6 +5806,19 @@ static void tag_read_level(reader &th)
             const coord_def dest = get_transporter_dest(tr);
             if (dest != INVALID_COORD)
                 grd(dest) = DNGN_TRANSPORTER_LANDING;
+        }
+    }
+    if (th.getMinorVersion() < TAG_MINOR_VETO_DISINT)
+    {
+        for (map_marker *mark : env.markers.get_all(MAT_ANY))
+        {
+            if (mark->property("veto_disintegrate") == "veto")
+            {
+                map_wiz_props_marker *marker =
+                    new map_wiz_props_marker(mark->pos);
+                marker->set_property("veto_dig", "veto");
+                env.markers.add(marker);
+            }
         }
     }
 #endif

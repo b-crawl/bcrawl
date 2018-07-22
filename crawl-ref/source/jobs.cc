@@ -131,11 +131,15 @@ void give_job_skills(job_type job)
         {
             const item_def *weap = you.weapon();
             skill = weap ? item_attack_skill(*weap) : SK_UNARMED_COMBAT;
-            //XXX: WTF?
+            bool ranged_job = job_gets_ranged_weapons(job);
+            
             if (you.species == SP_FELID && job == JOB_FIGHTER)
                 amount += 2;
+            if (you.species == SP_HILL_ORC && !ranged_job)
+                skill = SK_FIGHTING;
+            
             // Don't give throwing hunters Short Blades skill.
-            if (job_gets_ranged_weapons(job) && !(weap && is_range_weapon(*weap)))
+            if (ranged_job && !(weap && is_range_weapon(*weap)))
                 skill = SK_THROWING;
         }
         you.skills[skill] += amount;

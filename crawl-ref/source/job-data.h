@@ -274,7 +274,7 @@ static const map<job_type, job_def> job_data =
     3, 5, 4,
     { SP_KOBOLD, SP_DEEP_DWARF, SP_SPRIGGAN, SP_CENTAUR,
       SP_BARACHI, SP_HUMAN },
-    { "dagger", "robe", "book of Spatial Translocations" },
+    { "dagger", "robe", "book of Spatial Translocations", "scroll of blinking" },
     WCHOICE_RANGED,
     { { SK_FIGHTING, 1 }, { SK_DODGING, 2 }, { SK_SPELLCASTING, 1 },
       { SK_TRANSLOCATIONS, 3 }, { SK_WEAPON, 2 }, },

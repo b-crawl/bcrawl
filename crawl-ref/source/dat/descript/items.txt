@@ -550,10 +550,6 @@ A lightweight spear, designed for throwing.
     end
 }}
 %%%%
-knife
-
-A simple survival knife, designed more for utility than combat.
-%%%%
 lajatang
 
 A very rare and extremely effective weapon, featuring a pole with half-moon

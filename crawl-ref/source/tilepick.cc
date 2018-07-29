@@ -2068,7 +2068,6 @@ static tileidx_t _tileidx_weapon_base(const item_def &item)
 {
     switch (item.sub_type)
     {
-    case WPN_KNIFE:                return TILE_WPN_KNIFE;
     case WPN_DAGGER:                return TILE_WPN_DAGGER;
     case WPN_SHORT_SWORD:           return TILE_WPN_SHORT_SWORD;
     case WPN_QUICK_BLADE:           return TILE_WPN_QUICK_BLADE;

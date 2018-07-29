@@ -65,7 +65,6 @@ rapier3
 quickblade1 WPN_QUICK_BLADE
 quickblade2
 quickblade3
-knife WPN_KNIFE
 
 ##Long Blades
 falchion1 WPN_FALCHION

@@ -141,9 +141,6 @@ tileidx_t tilep_equ_weapon(const item_def &item)
         break;
 
     // Edge
-    case WPN_KNIFE:
-        tile = TILEP_HAND1_KNIFE;
-        break;
     case WPN_DAGGER:
         tile = TILEP_HAND1_DAGGER_SLANT;
         break;

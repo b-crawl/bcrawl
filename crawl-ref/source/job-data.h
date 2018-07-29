@@ -50,7 +50,7 @@ static const map<job_type, job_def> job_data =
     { SP_FORMICID, SP_DEEP_ELF, SP_KOBOLD, SP_SPRIGGAN, SP_TROLL, SP_CENTAUR, },
     { "dagger", "robe", "book of Debilitation" },
     WCHOICE_RANGED,
-    { { SK_FIGHTING, 1 }, { SK_DODGING, 2 }, { SK_SPELLCASTING, 1 },
+    { { SK_FIGHTING, 1 }, { SK_DODGING, 2 }, { SK_SPELLCASTING, 2 },
       { SK_HEXES, 3 }, { SK_WEAPON, 2 }, },
 } },
 
@@ -276,7 +276,7 @@ static const map<job_type, job_def> job_data =
       SP_BARACHI, SP_HUMAN },
     { "dagger", "robe", "book of Spatial Translocations", "scroll of blinking" },
     WCHOICE_RANGED,
-    { { SK_FIGHTING, 1 }, { SK_DODGING, 2 }, { SK_SPELLCASTING, 1 },
+    { { SK_FIGHTING, 2 }, { SK_DODGING, 2 }, { SK_SPELLCASTING, 1 },
       { SK_TRANSLOCATIONS, 3 }, { SK_WEAPON, 2 }, },
 } },
 

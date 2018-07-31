@@ -399,6 +399,8 @@ static void _give_items_skills(const newgame_def& ng)
     case JOB_REAVER:
         you.religion = GOD_VEHUMET;
         you.piety = 18;
+        
+        you.spell_library.set(SPELL_BATTLESPHERE, true);
         break;
 
     case JOB_WANDERER:

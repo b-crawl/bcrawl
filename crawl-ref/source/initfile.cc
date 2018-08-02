@@ -196,7 +196,6 @@ const vector<GameOption*> game_options::build_options_list()
         new BoolGameOption(SIMPLE_NAME(use_fake_player_cursor), true),
         new BoolGameOption(SIMPLE_NAME(show_player_species), false),
         new BoolGameOption(SIMPLE_NAME(use_modifier_prefix_keys), true),
-        new BoolGameOption(SIMPLE_NAME(easy_exit_menu), false),
         new BoolGameOption(SIMPLE_NAME(ability_menu), true),
         new BoolGameOption(SIMPLE_NAME(easy_floor_use), true),
         new BoolGameOption(SIMPLE_NAME(dos_use_background_intensity), true),
@@ -3374,6 +3373,12 @@ void game_options::read_option_line(const string &str, bool runscript)
     {
         if (field == "tiles" || field == "glyphs" || field == "hybrid")
             tile_display_mode = field;
+        else
+        {
+            mprf(MSGCH_ERROR, "Unknown value for tile_display_mode: '%s'"
+                              " (possible values: tiles/glyphs/hybrid",
+                                                                field.c_str());
+        }
     }
 #endif
 #endif // USE_TILE

@@ -1684,13 +1684,12 @@ bool monster::pickup_armour(item_def &item, bool msg, bool force)
     // HACK to allow nagas/centaurs to wear bardings. (jpeg)
     switch (item.sub_type)
     {
-    case ARM_NAGA_BARDING:
-        if (genus == MONS_NAGA || genus == MONS_SALAMANDER)
+    case ARM_BARDING:
+        if (genus == MONS_NAGA || genus == MONS_SALAMANDER
+            || genus == MONS_CENTAUR || genus == MONS_YAKTAUR)
+        {
             eq = EQ_BODY_ARMOUR;
-        break;
-    case ARM_CENTAUR_BARDING:
-        if (genus == MONS_CENTAUR || genus == MONS_YAKTAUR)
-            eq = EQ_BODY_ARMOUR;
+        }
         break;
     // And another hack or two...
     case ARM_HAT:
@@ -6159,9 +6158,12 @@ void monster::react_to_damage(const actor *oppressor, int damage,
 
         if (observable())
         {
-            mprf(MSGCH_WARN, "%s roars in fury and transforms into a fierce dragon!",
-                 name(DESC_THE).c_str());
+            mprf(MSGCH_WARN,
+                "%s roars in fury and transforms into a fierce dragon!",
+                name(DESC_THE).c_str());
         }
+        if (caught())
+            check_net_will_hold_monster(this);
 
         add_ench(ENCH_RING_OF_THUNDER);
     }
@@ -6579,10 +6581,11 @@ bool monster::check_clarity(bool silent) const
     return true;
 }
 
-bool monster::stasis() const
+bool monster::stasis(bool calc_unid, bool items) const
 {
     return mons_genus(type) == MONS_FORMICID
-           || type == MONS_PLAYER_GHOST && ghost->species == SP_FORMICID;
+           || type == MONS_PLAYER_GHOST && ghost->species == SP_FORMICID
+           || actor::stasis(calc_unid, items);
 }
 
 bool monster::cloud_immune(bool calc_unid, bool items) const

@@ -237,8 +237,11 @@ monster_type get_monster_by_name(string name, bool substring)
 
     size_t idx = find_earliest_match(name, (size_t) 0, ARRAYSZ(mondata),
                                      always_true<size_t>, _mon_entry_name);
-    return idx == ARRAYSZ(mondata) ? MONS_PROGRAM_BUG
-                                   : (monster_type) mondata[idx].mc;
+    monster_type mon = idx == ARRAYSZ(mondata) ? MONS_PROGRAM_BUG
+                                               : (monster_type) mondata[idx].mc;
+    if (mon == MONS_ORB_OF_FIRE && crawl_state.is_orb_of_ice_game)
+        mon = MONS_ORB_OF_ICE;
+    return mon;
 }
 
 void init_monsters()
@@ -2407,7 +2410,6 @@ int exper_value(const monster& mon, bool real)
             case SPELL_AGONY:
             case SPELL_LRD:
             case SPELL_DIG:
-            case SPELL_CHAIN_OF_CHAOS:
             case SPELL_FAKE_MARA_SUMMON:
                 diff += 10;
                 break;
@@ -2704,7 +2706,7 @@ mon_spell_slot drac_breath(monster_type drac_type)
     case MONS_YELLOW_DRACONIAN:  sp = SPELL_ACID_SPLASH; break;
     case MONS_GREEN_DRACONIAN:   sp = SPELL_POISONOUS_CLOUD; break;
     case MONS_PURPLE_DRACONIAN:  sp = SPELL_QUICKSILVER_BOLT; break;
-    case MONS_RED_DRACONIAN:     sp = SPELL_SEARING_BREATH; break;
+    case MONS_RED_DRACONIAN:     sp = SPELL_FLAMING_BREATH; break;
     case MONS_WHITE_DRACONIAN:   sp = SPELL_CHILLING_BREATH; break;
     case MONS_DRACONIAN:
     case MONS_GREY_DRACONIAN:    sp = SPELL_NO_SPELL; break;
@@ -4176,12 +4178,12 @@ bool mons_can_traverse(const monster& mon, const coord_def& p,
     if (only_in_sight && !you.see_cell_no_trans(p))
         return false;
 
-    if ((grd(p) == DNGN_CLOSED_DOOR
-        || grd(p) == DNGN_SEALED_DOOR)
-            && _mons_can_pass_door(&mon, p))
-    {
+    if (cell_is_runed(p))
+        return false;
+
+    // Includes sealed doors.
+    if (feat_is_closed_door(grd(p)) && _mons_can_pass_door(&mon, p))
         return true;
-    }
 
     if (!mon.is_habitable(p))
         return false;

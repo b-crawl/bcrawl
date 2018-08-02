@@ -2017,12 +2017,10 @@ static bool _restore_game(const string& filename)
     if (Options.no_save)
         return false;
 
-#ifdef USE_TILE_WEB
-    // a more before the player is loaded will crash when it tries to send
-    // enough information to the webtiles client to render the display.
-    // TODO: is there a good way to do any mores in load_messages?
+    // In webtiles, a more before the player is loaded will crash when it tries
+    // to send enough information to the webtiles client to render the display.
+    // This is just cosmetic for other build targets.
     unwind_bool save_more(crawl_state.show_more_prompt, false);
-#endif
 
     clear_message_store();
 
@@ -2057,7 +2055,7 @@ static bool _restore_game(const string& filename)
         && version_is_stable(you.prev_save_version.c_str()))
     {
         if (!yesno(("This game comes from a previous release of Crawl (" +
-                    you.prev_save_version + "). If you load it now,"
+                    you.prev_save_version + ").\n\nIf you load it now,"
                     " you won't be able to go back. Continue?").c_str(),
                     true, 'n'))
         {

@@ -60,6 +60,8 @@ struct game_state
 
     string force_map;       // Set if we're forcing a specific map to generate.
 
+    bool is_orb_of_ice_game; // Generate orbs of ice instead of orbs of fire?
+
     game_type type;
     game_type last_type;
     game_ended_condition last_game_exit;
@@ -99,6 +101,8 @@ struct game_state
     bool            cmd_repeat_started_unsafe;
     int             lua_calls_no_turn;
     bool            stat_gain_prompt;
+
+    bool            simulating_xp_gain; // is the skill menu in xp potion mode?
 
     vector<string> startup_errors;
 

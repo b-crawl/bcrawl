@@ -767,8 +767,7 @@ static bool _try_make_armour_artefact(item_def& item, int force_type,
         // 10% of boots become barding.
         if (item.sub_type == ARM_BOOTS && one_chance_in(10))
         {
-            item.sub_type = random_choose(ARM_NAGA_BARDING,
-                                          ARM_CENTAUR_BARDING);
+            item.sub_type = ARM_BARDING;
         }
 
         // Determine enchantment and cursedness.
@@ -840,7 +839,8 @@ static special_armour_type _generate_armour_type_ego(armour_type type,
         return random_choose_weighted(1, SPARM_SPIRIT_SHIELD,
                                       1, SPARM_RESISTANCE,
                                       1, SPARM_REPULSION,
-                                      1, SPARM_CLOUD_IMMUNE);
+                                      1, SPARM_CLOUD_IMMUNE,
+                                      1, SPARM_STASIS);
 
     case ARM_CLOAK:
         return random_choose(SPARM_POISON_RESISTANCE,
@@ -862,8 +862,11 @@ static special_armour_type _generate_armour_type_ego(armour_type type,
     case ARM_BOOTS:
         return random_choose(SPARM_RUNNING, SPARM_FLYING, SPARM_STEALTH);
 
+#if TAG_MAJOR_VERSION == 34
     case ARM_NAGA_BARDING:
     case ARM_CENTAUR_BARDING:
+#endif
+    case ARM_BARDING:
         return random_choose(SPARM_FLYING, SPARM_STEALTH,
                              SPARM_COLD_RESISTANCE, SPARM_FIRE_RESISTANCE);
 
@@ -1017,6 +1020,7 @@ bool is_armour_brand_ok(int type, int brand, bool strict)
 
     case SPARM_REPULSION:
     case SPARM_CLOUD_IMMUNE:
+    case SPARM_STASIS:
         return type == ARM_SCARF;
 
     case NUM_SPECIAL_ARMOURS:
@@ -1068,19 +1072,19 @@ static armour_type _get_random_armour_type(int item_level)
     // Secondary armours.
     if (one_chance_in(5))
     {
-        // Total weight is 30, each slot has a weight of 6
-        armtype = random_choose_weighted(6, ARM_BOOTS,
-                                         6, ARM_GLOVES,
+        // Total weight is 60, each slot has a weight of 12
+        armtype = random_choose_weighted(12, ARM_BOOTS,
+                                         12, ARM_GLOVES,
                                          // Cloak slot
-                                         3, ARM_CLOAK,
-                                         1, ARM_SCARF,
+                                         9, ARM_CLOAK,
+                                         3, ARM_SCARF,
                                          // Head slot
-                                         5, ARM_HELMET,
-                                         1, ARM_HAT,
+                                         10, ARM_HELMET,
+                                         2, ARM_HAT,
                                          // Shield slot
-                                         2, ARM_SHIELD,
-                                         3, ARM_BUCKLER,
-                                         1, ARM_LARGE_SHIELD);
+                                         4, ARM_SHIELD,
+                                         6, ARM_BUCKLER,
+                                         2, ARM_LARGE_SHIELD);
     }
     else if (x_chance_in_y(11 + item_level, 10000))
     {
@@ -1742,7 +1746,7 @@ static void _generate_jewellery_item(item_def& item, bool allow_uniques,
     {
         make_item_randart(item);
     }
-    else if (item.sub_type == RING_LOUDNESS
+    else if (item.sub_type == RING_ATTENTION
              || item.sub_type == RING_TELEPORTATION
              || item.sub_type == AMU_INACCURACY
              || one_chance_in(50))

@@ -25,6 +25,7 @@
 #include "notes.h"
 #include "output.h"
 #include "religion.h"
+#include "scroller.h"
 #include "sound.h"
 #include "state.h"
 #include "stringutil.h"
@@ -798,7 +799,8 @@ public:
         // of space and have to display --more-- instead
         unwind_bool dontsend(send_ignore_one, true);
 #endif
-        msgwin.add_item(msg.full_text(), p, _temporary);
+        if (crawl_state.io_inited)
+            msgwin.add_item(msg.full_text(), p, _temporary);
     }
 
     void roll_back()
@@ -1350,16 +1352,12 @@ static void _mpr(string text, msg_channel_type channel, int param, bool nojoin,
         die_noline("%s", text.c_str());
 #endif
 
-    if (!crawl_state.io_inited)
-    {
-        if (channel == MSGCH_ERROR)
-            fprintf(stderr, "%s\n", text.c_str());
-        return;
-    }
+    if (!crawl_state.io_inited && channel == MSGCH_ERROR)
+        fprintf(stderr, "%s\n", text.c_str());
 
     // Flush out any "comes into view" monster announcements before the
     // monster has a chance to give any other messages.
-    if (!_updating_view)
+    if (!_updating_view && crawl_state.io_inited)
     {
         _updating_view = true;
         flush_comes_into_view();
@@ -1375,7 +1373,7 @@ static void _mpr(string text, msg_channel_type channel, int param, bool nojoin,
 
     msg_colour_type colour = prepare_message(text, channel, param);
 
-    if (colour == MSGCOL_MUTED)
+    if (colour == MSGCOL_MUTED && crawl_state.io_inited)
     {
         if (channel == MSGCH_PROMPT)
             msgwin.show();
@@ -1392,6 +1390,8 @@ static void _mpr(string text, msg_channel_type channel, int param, bool nojoin,
     text = "<" + col + ">" + text + "</" + col + ">"; // XXX
 
     formatted_string fs = formatted_string::parse_string(text);
+
+    // TODO: this kind of check doesn't really belong in logging code...
     if (you.duration[DUR_QUAD_DAMAGE])
         fs.all_caps(); // No sound, so we simulate the reverb with all caps.
     else if (cap)
@@ -1402,6 +1402,10 @@ static void _mpr(string text, msg_channel_type channel, int param, bool nojoin,
 
     message_line msg = message_line(text, channel, param, join);
     buffer.add(msg);
+
+    if (!crawl_state.io_inited)
+        return;
+
     _last_msg_turn = msg.turn;
 
     if (channel == MSGCH_ERROR)
@@ -1450,11 +1454,67 @@ void msgwin_got_input()
 int msgwin_get_line(string prompt, char *buf, int len,
                     input_history *mh, const string &fill)
 {
-    if (!prompt.empty())
-        msgwin_prompt(prompt);
+#ifdef TOUCH_UI
+    bool use_popup = true;
+#else
+    bool use_popup = !crawl_state.need_save || ui::has_layout();
+#endif
 
-    int ret = cancellable_get_line(buf, len, mh, nullptr, fill);
-    msgwin_reply(buf);
+    int ret;
+    if (use_popup)
+    {
+        mouse_control mc(MOUSE_MODE_PROMPT);
+        resumable_line_reader reader(buf, len);
+        reader.set_input_history(mh);
+        reader.read_line(fill);
+        reader.putkey(CK_END);
+
+        msg_colour_type colour = prepare_message(prompt, MSGCH_PROMPT, 0);
+        const string colour_prompt = colour_string(prompt, colour_msg(colour));
+
+        bool done = false;
+        auto text = make_shared<ui::Text>();
+        auto popup = make_shared<ui::Popup>(text);
+        auto update_text = [&]() {
+            formatted_string p = formatted_string::parse_string(colour_prompt);
+            p.cprintf("\n\n%s", reader.get_text().c_str());
+            text->set_text(p);
+#ifdef USE_TILE_WEB
+            tiles.json_open_object();
+            tiles.json_write_string("text", reader.get_text().c_str());
+            tiles.ui_state_change("msgwin-get-line", 0);
+#endif
+        };
+        popup->on(ui::Widget::slots.event, [&](wm_event ev) {
+            if (ev.type != WME_KEYDOWN)
+                return false;
+            ret = reader.putkey(ev.key.keysym.sym);
+            if (ret != -1)
+                done = true;
+            update_text();
+            return true;
+        });
+
+#ifdef USE_TILE_WEB
+        tiles.json_open_object();
+        tiles.json_write_string("prompt", colour_prompt);
+        tiles.json_write_string("text", fill);
+        tiles.push_ui_layout("msgwin-get-line", 1);
+#endif
+        update_text();
+        ui::run_layout(move(popup), done);
+#ifdef USE_TILE_WEB
+    tiles.pop_ui_layout();
+#endif
+    }
+    else
+    {
+        if (!prompt.empty())
+            msgwin_prompt(prompt);
+        ret = cancellable_get_line(buf, len, mh, nullptr, fill);
+        msgwin_reply(buf);
+    }
+
     return ret;
 }
 
@@ -1554,7 +1614,7 @@ static msg_colour_type prepare_message(const string& imsg,
     if (suppress_messages)
         return MSGCOL_MUTED;
 
-    if (silenced(you.pos())
+    if (you.num_turns > 0 && silenced(you.pos())
         && (channel == MSGCH_SOUND || channel == MSGCH_TALK))
     {
         return MSGCOL_MUTED;
@@ -1931,6 +1991,25 @@ void get_recent_messages(vector<string> &mess,
     }
 }
 
+bool recent_error_messages()
+{
+    // TODO: track whether player has seen error messages so this can be
+    // more generally useful?
+    flush_prev_message();
+
+    const store_t& msgs = buffer.get_store();
+    int mcount = NUM_STORED_MESSAGES;
+    for (int i = -1; mcount > 0; --i, --mcount)
+    {
+        const message_line msg = msgs[i];
+        if (!msg)
+            break;
+        if (msg.channel == MSGCH_ERROR)
+            return true;
+    }
+    return false;
+}
+
 // We just write out the whole message store including empty/unused
 // messages. They'll be ignored when restoring.
 void save_messages(writer& outf)
@@ -1980,32 +2059,35 @@ void load_messages(reader& inf)
 
 void replay_messages()
 {
-    formatted_scroller hist(MF_START_AT_END | MF_ALWAYS_SHOW_MORE, "");
+    flush_prev_message();
+    formatted_scroller hist(FS_START_AT_END | FS_PREWRAPPED_TEXT);
     hist.set_more();
 
     const store_t msgs = buffer.get_store();
+    formatted_string lines;
     for (int i = 0; i < msgs.size(); ++i)
         if (channel_message_history(msgs[i].channel))
         {
             string text = msgs[i].full_text();
             linebreak_string(text, cgetsize(GOTO_CRT).x - 1);
             vector<formatted_string> parts;
-            formatted_string::parse_string_to_multiple(text, parts);
+            formatted_string::parse_string_to_multiple(text, parts, 80);
             for (unsigned int j = 0; j < parts.size(); ++j)
             {
-                formatted_string line;
                 prefix_type p = prefix_type::none;
                 if (j == parts.size() - 1 && i + 1 < msgs.size()
                     && msgs[i+1].turn > msgs[i].turn)
                 {
                     p = prefix_type::turn_end;
                 }
-                line.add_glyph(_prefix_glyph(p));
-                line += parts[j];
-                hist.add_item_formatted_string(line);
+                if (!lines.empty())
+                    lines.add_glyph('\n');
+                lines.add_glyph(_prefix_glyph(p));
+                lines += parts[j];
             }
         }
 
+    hist.add_formatted_string(lines, !lines.empty());
     hist.show();
 }
 

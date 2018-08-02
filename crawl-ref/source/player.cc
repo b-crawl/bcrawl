@@ -64,6 +64,7 @@
 #include "religion.h"
 #include "shout.h"
 #include "skills.h"
+#include "spl-book.h"
 #include "spl-damage.h"
 #include "spl-transloc.h"
 #include "spl-util.h"
@@ -724,10 +725,11 @@ maybe_bool you_can_wear(equipment_type eq, bool temp)
 
     case EQ_BOOTS: // And bardings
         dummy.sub_type = ARM_BOOTS;
-        if (you.species == SP_NAGA)
-            alternate.sub_type = ARM_NAGA_BARDING;
-        if (you.species == SP_CENTAUR)
-            alternate.sub_type = ARM_CENTAUR_BARDING;
+        if (you.species == SP_NAGA
+            || you.species == SP_CENTAUR)
+        {
+            alternate.sub_type = ARM_BARDING;
+        }
         break;
 
     case EQ_BODY_ARMOUR:
@@ -2757,18 +2759,35 @@ void recalc_and_scale_hp()
 int xp_to_level_diff(int xp, int scale)
 {
     ASSERT(xp >= 0);
-    int adjusted_xp = you.experience + xp;
-    int level = you.experience_level;
-    while (adjusted_xp >= (int) exp_needed(level + 1))
-        level++;
+    const int adjusted_xp = you.experience + xp;
+    int projected_level = you.experience_level;
+    while (you.experience >= exp_needed(projected_level + 1))
+        projected_level++; // handle xl 27 chars
+    int adjusted_level = projected_level;
+
+    // closest whole number level, rounding down
+    while (adjusted_xp >= (int) exp_needed(adjusted_level + 1))
+        adjusted_level++;
     if (scale > 1)
     {
-        unsigned int remainder = adjusted_xp - (int) exp_needed(level);
-        unsigned int denom = exp_needed(level + 1) - (int) exp_needed(level);
-        return (level - you.experience_level) * scale +
-                    (remainder * scale / denom);
+        // TODO: what is up with all the casts here?
+
+        // decimal scaled version of current level including whatever fractional
+        // part scale can handle
+        const int cur_level_scaled = projected_level * scale
+                + (you.experience - (int) exp_needed(projected_level)) * scale /
+                    ((int) exp_needed(projected_level + 1)
+                                    - (int) exp_needed(projected_level));
+
+        // decimal scaled version of what adjusted_xp would get you
+        const int adjusted_level_scaled = adjusted_level * scale
+                + (adjusted_xp - (int) exp_needed(adjusted_level)) * scale /
+                    ((int) exp_needed(adjusted_level + 1)
+                                    - (int) exp_needed(adjusted_level));
+        // TODO: this would be more usable with better rounding behavior
+        return adjusted_level_scaled - cur_level_scaled;
     } else
-        return level - you.experience_level;
+        return adjusted_level - projected_level;
 }
 
 /**
@@ -3022,7 +3041,55 @@ void level_change(bool skip_attribute_increase)
                 _felid_extra_life();
                 break;
 
+            case SP_ONI:
+            {
+                int const min_lev[] = {1,2,2,3,4,5,6,6,6,7,7,8,9};
+                int const max_lev[] = {1,2,3,4,5,5,6,7,7,8,8,9,9};
+
+                if (!(you.experience_level % 2))
+                {
+                    int const g = (you.experience_level / 2) - 1;
+
+                    vector<spell_type> possible_spells;
+                    for (int s = 0; s < NUM_SPELLS; ++s)
+                    {
+                        const spell_type spell = static_cast<spell_type>(s);
+
+                        if (!is_player_spell(spell) || you.has_spell(spell))
+                            continue;
+
+                        const int lev = spell_difficulty(spell);
+                        if (lev >= min_lev[g] && lev <= max_lev[g])
+                            possible_spells.push_back(spell);
+                    }
+
+                    shuffle_array(possible_spells);
+
+                    while (possible_spells.size())
+                    {
+                        const spell_type spell = possible_spells.back();
+                        possible_spells.pop_back();
+
+                        if (you.spell_library[spell])
+                            continue;
+
+                        you.spell_library.set(spell, true);
+
+                        mprf(MSGCH_INTRINSIC_GAIN,
+                             "You have discovered the spell %s.", 
+                             spell_title(spell));
+
+                        goto finish;
+                    }
+
+                    mprf(MSGCH_INTRINSIC_GAIN,
+                         "You were unable to discover any spells.");
+                    break;
+                }
+            }
+
             default:
+            finish:
                 break;
             }
 
@@ -3179,7 +3246,7 @@ int player_stealth()
     stealth += STEALTH_PIP * you.scan_artefacts(ARTP_STEALTH);
 
     stealth += STEALTH_PIP * you.wearing(EQ_RINGS, RING_STEALTH);
-    stealth -= STEALTH_PIP * you.wearing(EQ_RINGS, RING_LOUDNESS);
+    stealth -= STEALTH_PIP * you.wearing(EQ_RINGS, RING_ATTENTION);
 
     if (you.duration[DUR_STEALTH])
         stealth += STEALTH_PIP * 2;
@@ -3524,9 +3591,10 @@ bool player::gourmand(bool calc_unid, bool items) const
            || actor::gourmand(calc_unid, items);
 }
 
-bool player::stasis() const
+bool player::stasis(bool calc_unid, bool items) const
 {
-    return species == SP_FORMICID;
+    return species == SP_FORMICID
+           || actor::stasis(calc_unid, items);
 }
 
 bool player::cloud_immune(bool calc_unid, bool items) const
@@ -6172,7 +6240,7 @@ mon_holy_type player::holiness(bool temp) const
     if (is_good_god(religion))
         holi |= MH_HOLY;
 
-    if (is_evil_god(religion) || species == SP_DEMONSPAWN)
+    if (is_evil_god(religion) || species == SP_DEMONSPAWN || species == SP_ONI)
         holi |= MH_EVIL;
 
     // possible XXX: Monsters get evil/unholy bits set on spell selection
@@ -6182,8 +6250,8 @@ mon_holy_type player::holiness(bool temp) const
 
 bool player::undead_or_demonic() const
 {
-    // This is only for TSO-related stuff, so demonspawn are included.
-    return undead_state() || species == SP_DEMONSPAWN;
+    // This is only for TSO-related stuff, so demonspawn and oni are included.
+    return undead_state() || species == SP_DEMONSPAWN || species == SP_ONI;
 }
 
 bool player::is_holy(bool check_spells) const
@@ -6891,7 +6959,7 @@ bool player::has_usable_hooves(bool allow_tran) const
 {
     return has_hooves(allow_tran)
            && (!slot_item(EQ_BOOTS)
-               || wearing(EQ_BOOTS, ARM_CENTAUR_BARDING, true));
+               || wearing(EQ_BOOTS, ARM_BARDING, true));
 }
 
 int player::has_fangs(bool allow_tran) const

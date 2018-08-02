@@ -40,6 +40,7 @@
 #include "player-stats.h"
 #include "prompt.h"
 #include "religion.h"
+#include "scroller.h"
 #include "showsymb.h"
 #include "skills.h"
 #include "state.h"
@@ -1489,7 +1490,8 @@ void redraw_screen(bool show_updates)
     }
 
 #ifdef USE_TILE_WEB
-    tiles.close_all_menus();
+    if (!ui::has_layout())
+        tiles.pop_all_ui_layouts();
 #endif
 
     draw_border();
@@ -2370,7 +2372,7 @@ static vector<formatted_string> _get_overview_resistances(
     const int rmagi = player_res_magic(calc_unid) / MR_PIP;
     out += _resist_composer("MR", cwidth, rmagi, 5) + "\n";
 
-    out += _stealth_bar(get_number_of_cols()) + "\n";
+    out += _stealth_bar(20) + "\n";
 
     const int regen = player_regen(); // round up
     out += make_stringf("HPRegen  %d.%d%d/turn\n", regen/100, regen/10%10, regen%10);
@@ -2441,41 +2443,51 @@ static vector<formatted_string> _get_overview_resistances(
     return cols.formatted_lines();
 }
 
-// New scrollable status overview screen, including stats, mutations etc.
-static char _get_overview_screen_results()
+class overview_popup : public formatted_scroller
 {
-    bool calc_unid = false;
-    formatted_scroller overview;
+public:
+    overview_popup() {};
+    vector<char> equip_chars;
+private:
+    bool process_key(int ch) override
+    {
+        if (find(equip_chars.begin(), equip_chars.end(), ch) != equip_chars.end())
+        {
+            item_def& item = you.inv[letter_to_index(ch)];
+            describe_item(item);
+            return true;
+        }
+        return formatted_scroller::process_key(ch);
+    };
+};
 
-    overview.set_flags(MF_SINGLESELECT | MF_ALWAYS_SHOW_MORE | MF_NOWRAP);
+void print_overview_screen()
+{
+    // TODO: this should handle window resizes
+    constexpr int num_cols = 80;
+    bool calc_unid = false;
+    overview_popup overview;
+
     overview.set_more();
     overview.set_tag("resists");
 
-    overview.add_text(_overview_screen_title(get_number_of_cols()));
+    overview.add_text(_overview_screen_title(num_cols));
 
     for (const formatted_string &bline : _get_overview_stats())
-        overview.add_item_formatted_string(bline);
-    overview.add_text(" ");
+        overview.add_formatted_string(bline, true);
+    overview.add_text("\n");
 
     {
-        vector<char> equip_chars;
         vector<formatted_string> blines =
-            _get_overview_resistances(equip_chars, calc_unid, get_number_of_cols());
+            _get_overview_resistances(overview.equip_chars, calc_unid, num_cols);
 
         for (unsigned int i = 0; i < blines.size(); ++i)
-        {
-            // Kind of a hack -- we don't really care what items these
-            // hotkeys go to. So just pick the first few.
-            const char hotkey = (i < equip_chars.size()) ? equip_chars[i] : 0;
-            overview.add_item_formatted_string(blines[i], hotkey);
-        }
+            overview.add_text(blines[i].to_colour_string() + "\n");
     }
 
-    overview.add_text(" ");
-    overview.add_text(_status_mut_rune_list(get_number_of_cols()));
-
-    vector<MenuEntry *> results = overview.show();
-    return (!results.empty()) ? results[0]->hotkeys[0] : 0;
+    overview.add_text("\n");
+    overview.add_text(_status_mut_rune_list(num_cols));
+    overview.show();
 }
 
 string dump_overview_screen(bool full_id)
@@ -2508,22 +2520,6 @@ string dump_overview_screen(bool full_id)
     text += "\n";
 
     return text;
-}
-
-void print_overview_screen()
-{
-    while (true)
-    {
-        char c = _get_overview_screen_results();
-        if (!c)
-            break;
-
-        item_def& item = you.inv[letter_to_index(c)];
-        if (!describe_item(item))
-            break;
-        // loop around for another go.
-    }
-    redraw_screen();
 }
 
 static string _annotate_form_based(string desc, bool suppressed)

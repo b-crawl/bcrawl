@@ -1,6 +1,6 @@
 define(["jquery", "comm", "client", "./dungeon_renderer", "./display",
         "./minimap", "./enums", "./messages", "./options", "./text", "./menu",
-        "./player", "./mouse_control"],
+        "./player", "./mouse_control", "./ui", "./ui-layouts"],
 function ($, comm, client, dungeon_renderer, display, minimap, enums, messages,
           options) {
     "use strict";
@@ -162,6 +162,8 @@ function ($, comm, client, dungeon_renderer, display, minimap, enums, messages,
             toggle_full_window_dungeon_view(true);
             break;
         }
+        document.querySelector("#ui-stack").classList.toggle("hidden",
+            ui_state == enums.ui.VIEW_MAP);
     }
 
     function handle_set_layout(data)
@@ -187,6 +189,14 @@ function ($, comm, client, dungeon_renderer, display, minimap, enums, messages,
     function handle_set_ui_state(data)
     {
         set_ui_state(data.state);
+    }
+
+    function handle_set_ui_cutoff(data)
+    {
+        var popups = document.querySelectorAll("#ui-stack > .ui-popup");
+        Array.from(popups).forEach(function (p, i) {
+            p.classList.toggle("hidden", i <= data.cutoff);
+        });
     }
 
     function set_input_mode(mode)
@@ -238,6 +248,7 @@ function ($, comm, client, dungeon_renderer, display, minimap, enums, messages,
         "version": handle_version,
         "layout": handle_set_layout,
         "ui_state": handle_set_ui_state,
+        "ui_cutoff": handle_set_ui_cutoff,
         "input_mode": handle_set_input_mode,
     });
 });

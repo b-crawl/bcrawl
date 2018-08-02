@@ -1463,114 +1463,6 @@ bool vehumet_supports_spell(spell_type spell)
     return false;
 }
 
-// Returns false if the invocation fails (no spellbooks in sight, etc.).
-bool trog_burn_spellbooks()
-{
-    if (!you_worship(GOD_TROG))
-        return false;
-
-    god_acting gdact;
-
-    // XXX: maybe this should be allowed with less than immunity.
-    if (player_res_fire(false) <= 3)
-    {
-        for (stack_iterator si(you.pos()); si; ++si)
-        {
-            if (item_is_spellbook(*si))
-            {
-                mprf("Burning your own %s might not be such a smart idea!",
-                        you.foot_name(true).c_str());
-                return false;
-            }
-        }
-    }
-
-    int totalpiety = 0;
-    int totalblocked = 0;
-    vector<coord_def> mimics;
-
-    for (radius_iterator ri(you.pos(), LOS_NO_TRANS); ri; ++ri)
-    {
-        cloud_struct* cloud = cloud_at(*ri);
-        int count = 0;
-        for (stack_iterator si(*ri); si; ++si)
-        {
-            if (!item_is_spellbook(*si))
-                continue;
-
-            // If a grid is blocked, books lying there will be ignored.
-            // Allow bombing of monsters.
-            if (cell_is_solid(*ri)
-                || cloud && cloud->type != CLOUD_FIRE)
-            {
-                totalblocked++;
-                continue;
-            }
-
-            if (si->flags & ISFLAG_MIMIC)
-            {
-                totalblocked++;
-                mimics.push_back(*ri);
-                continue;
-            }
-
-            // Ignore {!D} inscribed books.
-            if (!check_warning_inscriptions(*si, OPER_DESTROY))
-            {
-                mpr("Won't ignite {!D} inscribed spellbook.");
-                continue;
-            }
-
-            totalpiety += 2;
-            item_was_destroyed(*si);
-            destroy_item(si.index());
-            count++;
-        }
-
-        if (count)
-        {
-            if (cloud)
-            {
-                // Reinforce the cloud.
-                mpr("The fire blazes with new energy!");
-                const int extra_dur = count + random2(6);
-                cloud->decay += extra_dur * 5;
-                cloud->set_whose(KC_YOU);
-                continue;
-            }
-
-            const int duration = min(4 + count + random2(6), 20);
-            place_cloud(CLOUD_FIRE, *ri, duration, &you);
-
-            mprf(MSGCH_GOD, "The spellbook%s burst%s into flames.",
-                 count == 1 ? ""  : "s",
-                 count == 1 ? "s" : "");
-        }
-    }
-
-    if (totalpiety)
-    {
-        simple_god_message(" is delighted!", GOD_TROG);
-        gain_piety(totalpiety);
-    }
-    else if (totalblocked)
-    {
-        mprf("The spellbook%s fail%s to ignite!",
-             totalblocked == 1 ? ""  : "s",
-             totalblocked == 1 ? "s" : "");
-        for (auto c : mimics)
-            discover_mimic(c);
-        return !mimics.empty();
-    }
-    else
-    {
-        mpr("You cannot see a spellbook to ignite!");
-        return false;
-    }
-
-    return true;
-}
-
 void trog_do_trogs_hand(int pow)
 {
     you.increase_duration(DUR_TROGS_HAND,
@@ -5958,6 +5850,8 @@ bool ru_do_sacrifice(ability_type sac)
     // get confirmation that the sacrifice is desired.
     if (!_execute_sacrifice(sac, offer_text.c_str()))
         return false;
+    // save piety gain, since sacrificing skills can lower the piety gain
+    const int piety_gain = _ru_get_sac_piety_gain(sac);
     // Apply the sacrifice, starting by mutating the player.
     if (variable_sac)
     {
@@ -6018,8 +5912,7 @@ bool ru_do_sacrifice(ability_type sac)
         you.props["num_sacrifice_muts"] = num_sacrifices;
 
     // Actually give the piety for this sacrifice.
-    set_piety(min(piety_breakpoint(5),
-                  you.piety + _ru_get_sac_piety_gain(sac)));
+    set_piety(min(piety_breakpoint(5), you.piety + piety_gain));
 
     if (you.piety == piety_breakpoint(5))
         simple_god_message(" indicates that your awakening is complete.");

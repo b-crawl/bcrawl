@@ -726,10 +726,9 @@ bool can_wear_armour(const item_def &item, bool verbose, bool ignore_temporary)
         return false;
     }
 
-    if (sub_type == ARM_NAGA_BARDING || sub_type == ARM_CENTAUR_BARDING)
+    if (sub_type == ARM_BARDING)
     {
-        if (you.species == SP_NAGA && sub_type == ARM_NAGA_BARDING
-            || you.species == SP_CENTAUR && sub_type == ARM_CENTAUR_BARDING)
+        if (you.species == SP_NAGA || you.species == SP_CENTAUR)
         {
             if (ignore_temporary || !player_is_shapechanged())
                 return true;
@@ -1273,7 +1272,7 @@ static int _prompt_ring_to_remove(int new_ring)
         slot_chars.push_back(index_to_letter(rings.back()->link));
     }
 
-    if (slot_chars.size() + 2 > msgwin_lines())
+    if (slot_chars.size() + 2 > msgwin_lines() || ui::has_layout())
     {
         // force a menu rather than a more().
         return EQ_NONE;
@@ -2569,6 +2568,12 @@ void random_uselessness()
 
 static void _handle_read_book(item_def& book)
 {
+    if (you.species == SP_ONI)
+    {
+        mpr("You don't believe in learning magic that way.");
+        return;
+    }
+
     if (you.berserk())
     {
         canned_msg(MSG_TOO_BERSERK);

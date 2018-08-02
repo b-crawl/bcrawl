@@ -510,7 +510,7 @@ void zappy(zap_type z_type, int power, bool is_monster, bolt &pbolt)
     if (z_type == ZAP_BREATHE_FIRE && you.species == SP_RED_DRACONIAN
         && !is_monster)
     {
-        pbolt.origin_spell = SPELL_SEARING_BREATH;
+        pbolt.origin_spell = SPELL_FLAMING_BREATH;
     }
 
     if (pbolt.loudness == 0)
@@ -538,38 +538,51 @@ bool bolt::can_affect_actor(const actor *act) const
     return !act->submerged();
 }
 
+// Choose the beam effect for BEAM_CHAOS that's analogous to the effect used by
+// SPWPN_CHAOS, with weightings similar to those use by that brand. XXX: Rework
+// this and SPWPN_CHAOS to use the same tables.
 static beam_type _chaos_beam_flavour(bolt* beam)
 {
     beam_type flavour;
-    do
-    {
-        flavour = random_choose_weighted(
-            10, BEAM_FIRE,
-            10, BEAM_COLD,
-            10, BEAM_ELECTRICITY,
-            10, BEAM_POISON,
-            10, BEAM_NEG,
-            10, BEAM_ACID,
-            10, BEAM_DAMNATION,
-            10, BEAM_STICKY_FLAME,
-            10, BEAM_SLOW,
-            10, BEAM_HASTE,
-            10, BEAM_MIGHT,
-            10, BEAM_BERSERK,
-            10, BEAM_HEALING,
-            10, BEAM_PARALYSIS,
-            10, BEAM_CONFUSION,
-            10, BEAM_INVISIBILITY,
-            10, BEAM_POLYMORPH,
-            10, BEAM_BANISH,
-            10, BEAM_DISINTEGRATION,
-            10, BEAM_PETRIFY,
-            10, BEAM_AGILITY,
-             2, BEAM_ENSNARE);
-    }
-    while (beam->origin_spell == SPELL_CHAIN_OF_CHAOS
-           && (flavour == BEAM_BANISH
-               || flavour == BEAM_POLYMORPH));
+    flavour = random_choose_weighted(
+         // SPWPN_CHAOS randomizes to brands analogous to these beam effects
+         // with similar weights.
+         70, BEAM_FIRE,
+         70, BEAM_COLD,
+         70, BEAM_ELECTRICITY,
+         70, BEAM_POISON,
+         // Combined weight from drain + vamp.
+         70, BEAM_NEG,
+         35, BEAM_HOLY,
+         14, BEAM_CONFUSION,
+         // We don't have a distortion beam, so choose from the three effects
+         // we can use, based on the lower weight distortion has.
+          5, BEAM_BANISH,
+          5, BEAM_BLINK,
+          5, BEAM_TELEPORT,
+         // From here are beam effects analogous to effects that happen when
+         // SPWPN_CHAOS chooses itself again as the ego (roughly 1/7 chance).
+         // Weights similar to those from chaos_effects in attack.cc
+         10, BEAM_SLOW,
+         10, BEAM_HASTE,
+         10, BEAM_INVISIBILITY,
+          5, BEAM_PARALYSIS,
+          5, BEAM_PETRIFY,
+          5, BEAM_BERSERK,
+         // Combined weight for poly, clone, and "shapeshifter" effects.
+          5, BEAM_POLYMORPH,
+         // Seen through miscast effects.
+          5, BEAM_ACID,
+          5, BEAM_DAMNATION,
+          5, BEAM_STICKY_FLAME,
+          5, BEAM_DISINTEGRATION,
+         // These are not actualy used by SPWPN_CHAOS, but are here to augment
+         // the list of effects, since not every SPWN_CHAOS effect has an
+         // analogous BEAM_ type.
+          4, BEAM_MIGHT,
+          4, BEAM_HEALING,
+          4, BEAM_AGILITY,
+          4, BEAM_ENSNARE);
 
     return flavour;
 }
@@ -911,8 +924,7 @@ void bolt::affect_wall()
             finish_beam();
 
         // potentially warn about offending your god by burning trees
-        const bool god_relevant = (you.religion == GOD_DITHMENOS
-                                   || you.religion == GOD_FEDHAS)
+        const bool god_relevant = you.religion == GOD_FEDHAS
                                   && can_burn_trees();
         const bool vetoed = env.markers.property_at(pos(), MAT_ANY, "veto_fire")
                             == "veto";
@@ -1442,7 +1454,7 @@ int mons_adjust_flavoured(monster* mons, bolt &pbolt, int hurted,
                                    (original > 0) ? " completely resists."
                                                   : " appears unharmed.");
         }
-        else if (doFlavouredEffects && !one_chance_in(3))
+        else if (doFlavouredEffects)
             poison_monster(mons, pbolt.agent());
 
         break;
@@ -2493,9 +2505,32 @@ void bolt::affect_endpoint()
     }
 
     case SPELL_SEARING_BREATH:
+    {
+        // Xtahua's searing breath applies fire vulnerability for 5-11 turns
+        if (pos() == you.pos()
+            && you.res_fire() <= 3
+            && !you.duration[DUR_FIRE_VULN])
+        {
+            mpr("The searing breath burns away your fire resistance.");
+            you.increase_duration(DUR_FIRE_VULN, 5 + random2avg(7, 2), 11);
+        }
+        monster *mon = monster_at(pos());
+        if (mon && !mon->has_ench(ENCH_FIRE_VULN))
+        {
+            if (you.can_see(*mon))
+            {
+                mprf("The searing breath burns away %s fire resistance.",
+                     mon->name(DESC_ITS).c_str());
+            }
+            mon->add_ench(mon_enchant(ENCH_FIRE_VULN, 1, nullptr,
+                                      5 + random2avg(7, 2)));
+        }
+    }
+    // fall-through
+    case SPELL_FLAMING_BREATH:
         if (!path_taken.empty())
             place_cloud(CLOUD_FIRE, pos(), 5 + random2(5), agent());
-
+        break;
     default:
         break;
     }
@@ -6021,8 +6056,15 @@ void bolt::determine_affected_cells(explosion_map& m, const coord_def& delta,
 
     bool at_wall = false;
 
-    // Check to see if we're blocked by a wall.
+    // Check to see if we're blocked by a wall or a tree. Can't use
+    // feat_is_solid here, since that includes statues which are a separate
+    // check, nor feat_is_opaque, since that excludes transparent walls, which
+    // we want. -ebering
+    // XXX: We could just include trees as wall features, but this currently
+    // would have some unintended side-effects. Would be ideal to deal with
+    // those and simplify feat_is_wall() to return true for trees. -gammafunk
     if (feat_is_wall(dngn_feat)
+        || feat_is_tree(dngn_feat)
         || feat_is_closed_door(dngn_feat))
     {
         // Special case: explosion originates from rock/statue

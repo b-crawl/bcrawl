@@ -392,7 +392,8 @@ bool is_evil_god(god_type god)
            || god == GOD_MAKHLEB
            || god == GOD_YREDELEMNUL
            || god == GOD_BEOGH
-           || god == GOD_LUGONU;
+           || god == GOD_LUGONU
+           || god == GOD_DITHMENOS;
 }
 
 bool is_good_god(god_type god)
@@ -1529,6 +1530,9 @@ static bool _gift_sif_kiku_gift(bool forced)
 
 static bool _handle_veh_gift(bool forced)
 {
+    if (you.species == SP_ONI)
+        return false;
+
     bool success = false;
     const int gifts = you.num_total_gifts[you.religion];
     if (forced || !you.duration[DUR_VEHUMET_GIFT]
@@ -2391,9 +2395,9 @@ static void _gain_piety_point()
                                "Slime Pits.");
             dlua.callfn("dgn_set_persistent_var", "sb",
                         "fix_slime_vaults", true);
-            // If we're on Slime:6, pretend we just entered the level
+            // If we're on Slime:$, pretend we just entered the level
             // in order to bring down the vault walls.
-            if (level_id::current() == level_id(BRANCH_SLIME, 6))
+            if (level_id::current() == level_id(BRANCH_SLIME, brdepth[BRANCH_SLIME]))
                 dungeon_events.fire_event(DET_ENTERED_LEVEL);
 
             you.one_time_ability_used.set(you.religion);

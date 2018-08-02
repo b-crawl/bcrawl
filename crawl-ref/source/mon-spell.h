@@ -1672,6 +1672,14 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
+    {  MST_ORB_OF_ICE,
+      {
+       { SPELL_BOLT_OF_COLD, 32, MON_SPELL_MAGICAL },
+//       { SPELL_FIREBALL, 32, MON_SPELL_MAGICAL },
+       { SPELL_MALMUTATE, 16, MON_SPELL_MAGICAL },
+      }
+    },
+
     // ---------------------
     // Uniques' spellbooks
     // ---------------------
@@ -1724,7 +1732,7 @@ static const mon_spellbook mspell_list[] =
     {  MST_JORGRUN,
       {
        { SPELL_LRD, 16, MON_SPELL_WIZARD },
-       { SPELL_SHATTER, 16, MON_SPELL_WIZARD },
+       { SPELL_IRON_SHOT, 16, MON_SPELL_WIZARD },
        { SPELL_PETRIFY, 16, MON_SPELL_WIZARD },
        { SPELL_DIG, 16, MON_SPELL_WIZARD },
       }

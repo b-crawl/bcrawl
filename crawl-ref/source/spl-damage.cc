@@ -307,7 +307,7 @@ spret_type cast_chain_spell(spell_type spell_cast, int pow,
             case SPELL_CHAIN_OF_CHAOS:
                 beam.colour       = ETC_RANDOM;
                 beam.ench_power   = pow;
-                beam.damage       = calc_dice(3, 5 + pow / 2);
+                beam.damage       = calc_dice(3, 5 + pow / 6);
                 beam.real_flavour = BEAM_CHAOS;
                 beam.flavour      = BEAM_CHAOS;
             default:
@@ -317,6 +317,14 @@ spret_type cast_chain_spell(spell_type spell_cast, int pow,
         // Be kinder to the caster.
         if (target == caster->pos())
         {
+            if (spell_cast == SPELL_CHAIN_OF_CHAOS)
+            {
+                // This should not hit the caster, too scary as a player effect
+                // and too kind to the player as a monster effect.
+                // Mnoleg and Chaos Champions should not paralyse themselves.
+                beam.real_flavour = BEAM_VISUAL;
+                beam.flavour      = BEAM_VISUAL;
+            }
             if (!(beam.damage.num /= 2))
                 beam.damage.num = 1;
             if ((beam.damage.size /= 2) < 3)
@@ -1531,8 +1539,8 @@ static int _ignite_poison_monsters(coord_def where, int pow, actor *agent)
     const int pois_str = ench.ench == ENCH_NONE ? 0 : ench.degree;
 
     // poison currently does roughly 6 damage per degree (over its duration)
-    // do roughly 2x to 3x that much, scaling with spellpower
-    const dice_def dam_dice(pois_str * 2, 12 + div_rand_round(pow * 6, 100));
+    // do roughly 1.5x to 4.5x that much, scaling with spellpower
+    const dice_def dam_dice(pois_str * 2, 9 + div_rand_round(pow * 18, 100));
 
     const int base_dam = dam_dice.roll();
     const int damage = mons_adjust_flavoured(mon, beam, base_dam, false);

@@ -106,6 +106,10 @@ item_def* newgame_make_item(object_class_type base,
     if (sub_type == WPN_UNARMED)
         return nullptr;
 
+    // Oni are known for wearing animal skins (see Wikipedia).
+    if (you.species == SP_ONI && base == OBJ_ARMOUR && sub_type == ARM_ROBE)
+        sub_type = ARM_ANIMAL_SKIN;
+
     int slot;
     for (slot = 0; slot < ENDOFPACK; ++slot)
     {
@@ -150,7 +154,7 @@ item_def* newgame_make_item(object_class_type base,
     ASSERT(item.quantity == 1 || is_stackable_item(item));
 
     // If that didn't help, nothing will.
-    if (is_useless_item(item))
+    if (item.base_type != OBJ_BOOKS && is_useless_item(item))
     {
         item = item_def();
         return nullptr;
@@ -502,6 +506,7 @@ void setup_game(const newgame_def& ng)
 {
     crawl_state.type = ng.type;
     crawl_state.map  = ng.map;
+    crawl_state.is_orb_of_ice_game = coinflip();
 
     switch (crawl_state.type)
     {

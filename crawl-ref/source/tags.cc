@@ -1809,6 +1809,8 @@ static void tag_construct_you_dungeon(writer &th)
                       marshallString);
     marshallMap(th, you.vault_list, marshall_level_id, marshallStringVector);
 
+    marshallBoolean(th, crawl_state.is_orb_of_ice_game);
+
     write_level_connectivity(th);
 }
 
@@ -2197,7 +2199,8 @@ void tag_read_char(reader &th, uint8_t format, uint8_t major, uint8_t minor)
     // be forward-compatible. We validate them only on an actual restore.
     you.your_name         = unmarshallString2(th);
     you.prev_save_version = unmarshallString2(th);
-    dprf("Last save Crawl version: %s", you.prev_save_version.c_str());
+    dprf("Saved character %s, version: %s", you.your_name.c_str(),
+                                            you.prev_save_version.c_str());
 
     you.species           = static_cast<species_type>(unmarshallUByte(th));
     you.char_class        = static_cast<job_type>(unmarshallUByte(th));
@@ -4179,6 +4182,11 @@ static void tag_read_you_dungeon(reader &th)
     unmarshallMap(th, you.vault_list, unmarshall_level_id,
                   unmarshallStringVector);
 
+    if (th.getMinorVersion() >= TAG_MINOR_OOI_IN_ZOT)
+        crawl_state.is_orb_of_ice_game = unmarshallBoolean(th);
+    else
+        crawl_state.is_orb_of_ice_game = false;
+
     read_level_connectivity(th);
 }
 
@@ -4638,9 +4646,10 @@ void unmarshallItem(reader &th, item_def &item)
         }
 
         // Make sure no weird fake-rap combinations are produced by the upgrade
-        // from rings of sustenance/hunger with {Stlth} to stealth/loudness
+        // from rings of sustenance/hunger with {Stlth} to stealth/attention
         if (item.base_type == OBJ_JEWELLERY
-            && (item.sub_type == RING_STEALTH || item.sub_type == RING_LOUDNESS))
+            && (item.sub_type == RING_STEALTH
+                || item.sub_type == RING_ATTENTION))
         {
             artefact_set_property(item, ARTP_STEALTH, 0);
         }
@@ -6439,6 +6448,33 @@ static void tag_read_level_monsters(reader &th)
         if (!m.alive())
             continue;
 
+        monster *dup_m = monster_by_mid(m.mid);
+
+#if TAG_MAJOR_VERSION == 34
+        // clear duplicates of followers who got their god cleared as the result
+        // of a bad polymorph prior to e6d7efa92cb0. This only fires on level
+        // load *when there are duplicate mids*, because otherwise the clones
+        // aren't uniquely identifiable. This fix may still result in duplicate
+        // mid errors from time to time, but should never crash; saving and
+        // loading will fix up the duplicate errors. A similar check also
+        // happens in follower::place (since that runs after the level is
+        // loaded).
+        if (dup_m)
+        {
+            if (maybe_bad_priest_monster(*dup_m))
+                fixup_bad_priest_monster(*dup_m);
+            else if (maybe_bad_priest_monster(m))
+            {
+                fixup_bad_priest_monster(m);
+                env.mid_cache[dup_m->mid] = dup_m->mindex();
+                // dup_m should already be placed, so nothing else is needed.
+                continue;
+            }
+            // we could print an error on the else case, but this is already
+            // going to be handled by debug_mons_scan.
+        }
+#endif
+
         // companion_is_elsewhere checks the mid cache
         env.mid_cache[m.mid] = i;
         if (m.is_divine_companion() && companion_is_elsewhere(m.mid))
@@ -6447,6 +6483,13 @@ static void tag_read_level_monsters(reader &th)
                     m.name(DESC_PLAIN, true).c_str(), m.mid,
                     level_id::current().describe(false, true).c_str());
             monster_die(m, KILL_RESET, -1, true, false);
+            // avoid "mid cache bogosity" if there's an unhandled clone bug
+            if (dup_m && dup_m->alive())
+            {
+                mprf(MSGCH_ERROR, "elsewhere companion has duplicate mid %d: %s",
+                    dup_m->mid, dup_m->full_name(DESC_PLAIN).c_str());
+                env.mid_cache[dup_m->mid] = dup_m->mindex();
+            }
             continue;
         }
 

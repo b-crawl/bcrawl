@@ -425,18 +425,16 @@ static const struct spell_desc spelldata[] =
     TILEG_MASS_ABJURATION,
 },
 
-#if TAG_MAJOR_VERSION == 34
 {
     SPELL_SUMMON_SCORPIONS, "Summon Scorpions",
     SPTYP_SUMMONING | SPTYP_POISON,
     SPFLAG_NONE,
     4,
-    200,
+    100,
     -1, -1,
     3, 0,
-    TILEG_ERROR,
+    TILEG_SUMMON_SCORPIONS,
 },
-#endif
 
 {
     SPELL_BOLT_OF_DRAINING, "Bolt of Draining",
@@ -2000,6 +1998,19 @@ static const struct spell_desc spelldata[] =
     5, 0,
     TILEG_FIRE_BREATH,
 },
+
+#if TAG_MAJOR_VERSION > 34
+{
+    SPELL_FLAMING_BREATH, "Flaming Breath",
+    SPTYP_CONJURATION | SPTYP_FIRE,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_MONSTER | SPFLAG_NOISY | SPFLAG_NEEDS_TRACER,
+    5,
+    0,
+    5, 5,
+    5, 0,
+    TILEG_FIRE_BREATH,
+},
+#endif
 
 {
     SPELL_CHAOS_BREATH, "Chaos Breath",
@@ -3972,6 +3983,19 @@ static const struct spell_desc spelldata[] =
     3, 0,
     TILEG_PIERCING_SHOT,
 },
+
+#if TAG_MAJOR_VERSION == 34
+{
+    SPELL_FLAMING_BREATH, "Flaming Breath",
+    SPTYP_CONJURATION | SPTYP_FIRE,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_MONSTER | SPFLAG_NOISY | SPFLAG_NEEDS_TRACER,
+    5,
+    0,
+    5, 5,
+    5, 0,
+    TILEG_FIRE_BREATH,
+},
+#endif
 
 {
     SPELL_NO_SPELL, "nonexistent spell",

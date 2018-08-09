@@ -175,7 +175,7 @@ void choose_tutorial_character(newgame_def& ng_choice)
 static const species_type species_order[] =
 {
     // comparatively human-like looks
-    SP_HUMAN,          SP_DEEP_ELF,
+    SP_HUMAN,          SP_AVARIEL,
     SP_DEEP_DWARF,     SP_HILL_ORC,
     SP_DUSK_WALKER,
     // small species
@@ -186,7 +186,7 @@ static const species_type species_order[] =
     // significantly different body type from human ("monstrous")
     SP_NAGA,           SP_CENTAUR,
     SP_MERFOLK,        SP_MINOTAUR,
-    SP_TENGU,          SP_BASE_DRACONIAN,
+    SP_BASE_DRACONIAN,
     SP_GARGOYLE,       SP_FORMICID,
     SP_BARACHI,        SP_GNOLL,
     // mostly human shape but made of a strange substance
@@ -567,6 +567,7 @@ static void _choose_char(newgame_def& ng, newgame_def& choice,
     }
 }
 
+#ifndef DGAMELAUNCH
 /**
  * Attempt to generate a random name for a character that doesn't collide with
  * an existing save name.
@@ -587,7 +588,6 @@ static string _random_name()
     return "";
 }
 
-#ifndef DGAMELAUNCH
 static void _choose_name(newgame_def& ng, newgame_def& choice)
 {
     char buf[MAX_NAME_LENGTH + 1]; // FIXME: make line_reader handle widths
@@ -676,14 +676,11 @@ bool choose_game(newgame_def& ng, newgame_def& choice,
                  const newgame_def& defaults)
 {
 #ifdef USE_TILE_WEB
-    tiles_crt_control show_as_menu(CRT_MENU);
+    tiles_crt_popup show_as_popup;
+    tiles.set_ui_state(UI_CRT);
 #endif
 
     clrscr();
-
-    // XXX: this should be somewhere else.
-    if (!crawl_state.startup_errors.empty() && !Options.suppress_startup_errors)
-        crawl_state.show_startup_errors();
 
     textcolour(LIGHTGREY);
 
@@ -1039,14 +1036,15 @@ static species_group species_groups[] =
         coord_def(0, 0),
         20,
         {
-            SP_HILL_ORC,
             SP_MINOTAUR,
+            SP_HILL_ORC,
             SP_MERFOLK,
             SP_GARGOYLE,
-            SP_BASE_DRACONIAN,
-            SP_KOBOLD,
             SP_TROLL,
+            SP_GNOLL,
             SP_GHOUL,
+            SP_KOBOLD,
+            SP_DUSK_WALKER,
             SP_FAIRY,
         }
     },
@@ -1056,17 +1054,15 @@ static species_group species_groups[] =
         20,
         {
             SP_HUMAN,
+            SP_BASE_DRACONIAN,
             SP_DEMONSPAWN,
             SP_CENTAUR,
-            SP_SAND_DWARF,
             SP_SPRIGGAN,
-            SP_TENGU,
-            SP_DEEP_ELF,
+            SP_AVARIEL,
             SP_OGRE,
+            SP_VINE_STALKER,
+            SP_SAND_DWARF,
             SP_DEEP_DWARF,
-            SP_DUSK_WALKER,
-            SP_GNOLL,
-            SP_ONI,
         }
     },
     {
@@ -1074,14 +1070,14 @@ static species_group species_groups[] =
         coord_def(50, 0),
         20,
         {
-            SP_VINE_STALKER,
+            SP_ONI,
             SP_VAMPIRE,
-            SP_DEMIGOD,
             SP_FORMICID,
             SP_NAGA,
+            SP_BARACHI,
             SP_OCTOPODE,
             SP_FELID,
-            SP_BARACHI,
+            SP_DEMIGOD,
             SP_MUMMY,
         }
     },

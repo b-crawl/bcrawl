@@ -85,7 +85,6 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_HIGH_ELF,        SK_POISON_MAGIC,   -2),
     APT(SP_HIGH_ELF,        SK_INVOCATIONS,     1),
     APT(SP_HIGH_ELF,        SK_EVOCATIONS,      0),
-#endif
 
     // SP_DEEP_ELF
     APT(SP_DEEP_ELF,        SK_FIGHTING,       -2),
@@ -102,13 +101,9 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_DEEP_ELF,        SK_ARMOUR,         -2),
     APT(SP_DEEP_ELF,        SK_DODGING,         2),
     APT(SP_DEEP_ELF,        SK_STEALTH,         3),
-#if TAG_MAJOR_VERSION == 34
     APT(SP_DEEP_ELF,        SK_STABBING,      UNUSABLE_SKILL),
-#endif
     APT(SP_DEEP_ELF,        SK_SHIELDS,        -2),
-#if TAG_MAJOR_VERSION == 34
     APT(SP_DEEP_ELF,        SK_TRAPS,         UNUSABLE_SKILL),
-#endif
     APT(SP_DEEP_ELF,        SK_UNARMED_COMBAT, -2),
     APT(SP_DEEP_ELF,        SK_SPELLCASTING,    3),
     APT(SP_DEEP_ELF,        SK_CONJURATIONS,    1),
@@ -125,6 +120,47 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_DEEP_ELF,        SK_POISON_MAGIC,    1),
     APT(SP_DEEP_ELF,        SK_INVOCATIONS,     1),
     APT(SP_DEEP_ELF,        SK_EVOCATIONS,      1),
+#endif
+
+    // SP_AVARIEL
+    APT(SP_AVARIEL,       SK_FIGHTING,       -1),
+    APT(SP_AVARIEL,       SK_SHORT_BLADES,    1),
+    APT(SP_AVARIEL,       SK_LONG_BLADES,     1),
+    APT(SP_AVARIEL,       SK_AXES,           -2),
+    APT(SP_AVARIEL,       SK_MACES_FLAILS,   -2),
+    APT(SP_AVARIEL,       SK_POLEARMS,       -1),
+    APT(SP_AVARIEL,       SK_STAVES,          0),
+    APT(SP_AVARIEL,       SK_SLINGS,         -1),
+    APT(SP_AVARIEL,       SK_BOWS,            1),
+    APT(SP_AVARIEL,       SK_CROSSBOWS,       1),
+    APT(SP_AVARIEL,       SK_THROWING,        0),
+    APT(SP_AVARIEL,       SK_ARMOUR,          1),
+    APT(SP_AVARIEL,       SK_DODGING,         1),
+    APT(SP_AVARIEL,       SK_STEALTH,         1),
+#if TAG_MAJOR_VERSION == 34
+    APT(SP_AVARIEL,       SK_STABBING,      UNUSABLE_SKILL),
+#endif
+    APT(SP_AVARIEL,       SK_SHIELDS,        -1),
+#if TAG_MAJOR_VERSION == 34
+    APT(SP_AVARIEL,       SK_TRAPS,         UNUSABLE_SKILL),
+#endif
+    APT(SP_AVARIEL,       SK_UNARMED_COMBAT, -1),
+    APT(SP_AVARIEL,       SK_SPELLCASTING,    2),
+    APT(SP_AVARIEL,       SK_CONJURATIONS,    3),
+    APT(SP_AVARIEL,       SK_HEXES,           2),
+    APT(SP_AVARIEL,       SK_CHARMS,          2),
+    APT(SP_AVARIEL,       SK_SUMMONINGS,      2),
+    APT(SP_AVARIEL,       SK_NECROMANCY,      1),
+    APT(SP_AVARIEL,       SK_TRANSLOCATIONS, -1),
+    APT(SP_AVARIEL,       SK_TRANSMUTATIONS, -1),
+    APT(SP_AVARIEL,       SK_FIRE_MAGIC,      1),
+    APT(SP_AVARIEL,       SK_ICE_MAGIC,       0),
+    APT(SP_AVARIEL,       SK_AIR_MAGIC,       3),
+    APT(SP_AVARIEL,       SK_EARTH_MAGIC,    -3),
+    APT(SP_AVARIEL,       SK_POISON_MAGIC,    1),
+    APT(SP_AVARIEL,       SK_INVOCATIONS,     1),
+    APT(SP_AVARIEL,       SK_EVOCATIONS,      1),
+
 
 #if TAG_MAJOR_VERSION == 34
     // SP_SLUDGE_ELF

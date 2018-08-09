@@ -5008,9 +5008,14 @@ void float_player()
     else
         mpr("You fly up into the air.");
 
-    if (you.species == SP_TENGU || you.species == SP_FAIRY)
-
+    if (you.species == SP_AVARIEL
+#if TAG_MAJOR_VERSION == 34
+        || you.species == SP_TENGU
+#endif
+        || you.species == SP_FAIRY)
+    {
         you.redraw_evasion = true;
+    }
 }
 
 // Fairies start the game flying.
@@ -5069,8 +5074,14 @@ bool land_player(bool quiet)
 
     if (!quiet)
         mpr("You float gracefully downwards.");
-    if (you.species == SP_TENGU || you.species == SP_FAIRY)
+    if (you.species == SP_AVARIEL
+#if TAG_MAJOR_VERSION == 34
+        || you.species == SP_TENGU
+#endif
+        || you.species == SP_FAIRY)
+    {
         you.redraw_evasion = true;
+    }
 
     you.attribute[ATTR_FLIGHT_UNCANCELLABLE] = 0;
     // Re-enter the terrain.
@@ -6581,7 +6592,7 @@ bool player::permanent_flight() const
 
 bool player::racial_permanent_flight() const
 {
-    return get_mutation_level(MUT_TENGU_FLIGHT) >= 2
+    return get_mutation_level(MUT_TENGU_FLIGHT)
         || get_mutation_level(MUT_BIG_WINGS)
         || get_mutation_level(MUT_FAIRY_FLIGHT);
 }
@@ -6589,7 +6600,11 @@ bool player::racial_permanent_flight() const
  // Only Tengu and Fairies get perks for flying.
 bool player::tengu_flight() const
 {
-    return species == SP_TENGU && airborne();
+    return (
+#if TAG_MAJOR_VERSION == 34
+        species == SP_TENGU ||
+#endif
+        species == SP_AVARIEL) && airborne();
 }
 
 bool player::fairy_flight() const

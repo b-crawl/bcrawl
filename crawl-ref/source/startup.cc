@@ -66,7 +66,14 @@
 
 using namespace ui;
 
-static void _cio_init();
+static void _loading_message(string m)
+{
+    mpr(m.c_str());
+#ifdef USE_TILE_LOCAL
+    if (!crawl_state.tiles_disabled && crawl_state.title_screen)
+        loading_screen_update_msg(m.c_str());
+#endif
+}
 
 // Initialise a whole lot of stuff...
 static void _initialize()
@@ -119,28 +126,20 @@ static void _initialize()
     // may take awhile and it's better if the player can look at a pretty
     // screen while this happens.
     if (!crawl_state.tiles_disabled && crawl_state.title_screen)
-    {
         loading_screen_open();
-        loading_screen_update_msg("Loading databases...");
-    }
 #endif
 
     // Initialise internal databases.
+    _loading_message("Loading databases...");
     databaseSystemInit();
-#ifdef USE_TILE_LOCAL
-    if (!crawl_state.tiles_disabled && crawl_state.title_screen)
-        loading_screen_update_msg("Loading spells and features...");
-#endif
 
+    _loading_message("Loading spells and features...");
     init_feat_desc_cache();
     init_spell_name_cache();
     init_spell_rarities();
-#ifdef USE_TILE_LOCAL
-    if (!crawl_state.tiles_disabled && crawl_state.title_screen)
-        loading_screen_update_msg("Loading maps...");
-#endif
 
     // Read special levels and vaults.
+    _loading_message("Loading maps...");
     read_maps();
     run_map_global_preludes();
 
@@ -173,7 +172,7 @@ static void _initialize()
     if (!crawl_state.test_list)
     {
         if (!crawl_state.io_inited)
-            _cio_init();
+            cio_init();
         clrscr();
     }
 
@@ -246,7 +245,7 @@ static void _post_init(bool newc)
     // Load macros
     macro_init();
 
-    crawl_state.need_save = true;
+    crawl_state.need_save = crawl_state.game_started = true;
     crawl_state.last_type = crawl_state.type;
     crawl_state.marked_as_won = false;
 
@@ -814,7 +813,7 @@ void UIStartupMenu::_allocate_region()
     if (recent_error_messages())
     {
         descriptor->override_description(
-            "Errors during initialization; press ctrl-p to view.");
+            "Errors during initialization; press ctrl-p to view the full log.");
     }
     else
         descriptor->override_description(crawl_state.last_game_exit.message);
@@ -882,7 +881,7 @@ bool UIStartupMenu::on_event(const wm_event& ev)
     }
     else if (keyn == CONTROL('P'))
     {
-        replay_messages();
+        replay_messages_during_startup();
         MenuItem *active = menu.get_active_item();
         if (active && active->get_id() >= NUM_GAME_TYPE)
             startup_menu_game_type = GAME_TYPE_UNSPECIFIED;
@@ -1052,7 +1051,7 @@ static void _show_startup_menu(newgame_def& ng_choice,
 #if defined(USE_TILE_LOCAL) && defined(TOUCH_UI)
     wm->show_keyboard();
 #elif defined(USE_TILE_WEB)
-    tiles_crt_control show_as_menu(CRT_MENU);
+    tiles_crt_popup show_as_popup;
 #endif
 
 
@@ -1075,7 +1074,7 @@ static void _choose_arena_teams(newgame_def& choice,
                                 const newgame_def& defaults)
 {
 #ifdef USE_TILE_WEB
-    tiles_crt_control show_as_menu(CRT_MENU);
+    tiles_crt_popup show_as_popup;
 #endif
 
     if (!choice.arena_teams.empty())
@@ -1176,6 +1175,9 @@ bool startup_step()
 
 #ifndef DGAMELAUNCH
 
+    if (recent_error_messages() && !Options.suppress_startup_errors)
+        replay_messages_during_startup();
+
     // startup
 
     // These conditions are ignored for tutorial or sprint, which always trigger
@@ -1234,6 +1236,7 @@ bool startup_step()
     }
     else
     {
+        clear_message_store();
         setup_game(ng);
         newchar = true;
         write_newgame_options_file(choice);
@@ -1247,7 +1250,7 @@ bool startup_step()
 
 
 
-static void _cio_init()
+void cio_init()
 {
     crawl_state.io_inited = true;
     console_startup();

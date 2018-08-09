@@ -517,14 +517,22 @@ void SDLWrapper::set_window_title(const char *title)
 
 bool SDLWrapper::set_window_icon(const char* icon_name)
 {
-    SDL_Surface *surf =load_image(datafile_path(icon_name, true, true).c_str());
+    string icon_path = datafile_path(icon_name, false, true);
+    if (!icon_path.size())
+    {
+        mprf(MSGCH_ERROR, "Unable to find window icon '%s'", icon_name);
+        return false;
+    }
+
+    SDL_Surface *surf = load_image(icon_path.c_str());
     if (!surf)
     {
 #ifdef __ANDROID__
         __android_log_print(ANDROID_LOG_INFO, "Crawl",
                             "Failed to load icon: %s", SDL_GetError());
 #endif
-        printf("Failed to load icon: %s\n", SDL_GetError());
+        mprf(MSGCH_ERROR, "Failed to load icon '%s': %s\n", icon_path.c_str(),
+                                                                SDL_GetError());
         return false;
     }
     SDL_SetWindowIcon(m_window, surf);
@@ -1002,7 +1010,7 @@ bool SDLWrapper::load_texture(GenericTexture *tex, const char *filename,
     }
 
     unsigned int bpp = img->format->BytesPerPixel;
-    glmanager->pixelstore_unpack_alignment(bpp);
+    glmanager->pixelstore_unpack_alignment(1);
 
     // Determine texture format
     unsigned char *pixels = (unsigned char*)img->pixels;

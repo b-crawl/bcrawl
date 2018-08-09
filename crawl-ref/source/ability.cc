@@ -503,10 +503,10 @@ static const ability_def Ability_List[] =
     // Fedhas
     { ABIL_FEDHAS_FUNGAL_BLOOM, "Fungal Bloom",
       0, 0, 0, 0, {fail_basis::invo}, abflag::none },
-    { ABIL_FEDHAS_EVOLUTION, "Evolution",
-      2, 0, 0, 0, {fail_basis::invo, 30, 6, 20}, abflag::rations_or_piety },
     { ABIL_FEDHAS_SUNLIGHT, "Sunlight",
       2, 0, 50, 0, {fail_basis::invo, 30, 6, 20}, abflag::none },
+    { ABIL_FEDHAS_EVOLUTION, "Evolution",
+      2, 0, 0, 0, {fail_basis::invo, 30, 6, 20}, abflag::rations_or_piety },
     { ABIL_FEDHAS_PLANT_RING, "Growth",
       2, 0, 0, 0, {fail_basis::invo, 40, 5, 20}, abflag::rations },
     { ABIL_FEDHAS_SPAWN_SPORES, "Reproduction",
@@ -1988,23 +1988,13 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
 
     case ABIL_FLY:
         fail_check();
-        // FD, high level Te, or Dr/Gr wings
+        // FD, Te, or Dr/Gr wings
         if (you.racial_permanent_flight())
         {
             you.attribute[ATTR_PERM_FLIGHT] = 1;
             float_player();
         }
         // low level Te
-        else
-        {
-            int power = you.experience_level * 4;
-            const int dur_change = 25 + random2(power) + random2(power);
-
-            you.increase_duration(DUR_FLIGHT, dur_change, 100);
-            you.attribute[ATTR_FLIGHT_UNCANCELLABLE] = 1;
-
-            float_player();
-        }
         if (you.species == SP_TENGU)
             mpr("You feel very comfortable in the air.");
         break;
@@ -3095,7 +3085,7 @@ static void _pay_ability_costs(const ability_def& abil)
 int choose_ability_menu(const vector<talent>& talents)
 {
     ToggleableMenu abil_menu(MF_SINGLESELECT | MF_ANYPRINTABLE
-                             | MF_TOGGLE_ACTION | MF_ALWAYS_SHOW_MORE);
+            | MF_NO_WRAP_ROWS | MF_TOGGLE_ACTION | MF_ALWAYS_SHOW_MORE);
 
     abil_menu.set_highlighter(nullptr);
 #ifdef USE_TILE_LOCAL
@@ -3116,7 +3106,7 @@ int choose_ability_menu(const vector<talent>& talents)
                                 "Cost                          Failure",
                                 "Ability - describe what?            "
                                 "Cost                          Failure",
-                                MEL_TITLE));
+                                MEL_TITLE), true, true);
 #endif
     abil_menu.set_tag("ability");
     abil_menu.add_toggle_key('!');
@@ -3240,7 +3230,7 @@ string describe_talent(const talent& tal)
          << chop_string(ability_name(tal.which), 32)
          << chop_string(make_cost_description(tal.which), 30)
          << chop_string(failure, 12);
-    return desc.str();
+    return trimmed_string(desc.str());
 }
 
 static void _add_talent(vector<talent>& vec, const ability_type ability,
@@ -3303,14 +3293,9 @@ vector<talent> your_talents(bool check_confused, bool include_unusable)
         _add_talent(talents, ABIL_TRAN_BAT, check_confused);
     }
 
-    if (you.get_mutation_level(MUT_TENGU_FLIGHT) && !you.airborne()
-        || you.racial_permanent_flight() && !you.attribute[ATTR_PERM_FLIGHT])
+    if (you.racial_permanent_flight() && !you.attribute[ATTR_PERM_FLIGHT])
     {
-        // Tengu can fly, but only from the ground
-        // (until level 14, when it becomes permanent until revoked).
-        // Black draconians and gargoyles get permaflight at XL 14, but they
-        // don't get the tengu movement/evasion bonuses and they don't get
-        // temporary flight before then.
+        // Avariel, black draconians and gargoyles get permaflight at XL 9/14/14.
         // Other dracs can mutate big wings whenever as well.
         _add_talent(talents, ABIL_FLY, check_confused);
     }

@@ -1937,13 +1937,13 @@ void game_options::fixup_options()
 {
     // Validate save_dir
     if (!check_mkdir("Save directory", &save_dir))
-        end(1);
+        end(1, false, "Cannot create save directory '%s'", save_dir.c_str());
 
     if (!SysEnv.morgue_dir.empty())
         morgue_dir = SysEnv.morgue_dir;
 
     if (!check_mkdir("Morgue directory", &morgue_dir))
-        end(1);
+        end(1, false, "Cannot create morgue directory '%s'", morgue_dir.c_str());
 }
 
 static int _str_to_killcategory(const string &s)
@@ -3689,20 +3689,8 @@ void game_options::report_error(const char* format, ...)
     string error = vmake_stringf(format, args);
     va_end(args);
 
-    // If called before game starts, log a startup error,
-    // otherwise spam the warning channel.
-    if (crawl_state.need_save)
-    {
-        mprf(MSGCH_ERROR, "Warning: %s (%s:%d)", error.c_str(),
-             basefilename.c_str(), line_num);
-    }
-    else
-    {
-        crawl_state.add_startup_error(make_stringf("%s (%s:%d)",
-                                                   error.c_str(),
-                                                   basefilename.c_str(),
-                                                   line_num));
-    }
+    mprf(MSGCH_ERROR, "Warning: %s (%s:%d)", error.c_str(),
+         basefilename.c_str(), line_num);
 }
 
 static string check_string(const char *s)
@@ -3719,7 +3707,7 @@ void get_system_environment()
     // This should end with the appropriate path delimiter.
     SysEnv.crawl_dir = check_string(getenv("CRAWL_DIR"));
 
-#if defined(TARGET_OS_MACOSX)
+#if defined(TARGET_OS_MACOSX) && !defined(DGAMELAUNCH)
     if (SysEnv.crawl_dir.empty())
     {
         SysEnv.crawl_dir
@@ -4409,30 +4397,24 @@ bool parse_args(int argc, char **argv, bool rc_only)
                 }
                 catch (const bad_level_id &err)
                 {
-                    fprintf(stderr, "Error parsing depths: %s\n", err.what());
-                    end(1);
+                    end(1, false, "Error parsing depths: %s\n", err.what());
                 }
                 nextUsed = true;
             }
             break;
 #else
-            fprintf(stderr, "%s", dbg_stat_err);
-            end(1);
+            end(1, false, "%s", dbg_stat_err);
 #endif
         case CLO_MAPSTAT_DUMP_DISCONNECT:
 #ifdef DEBUG_STATISTICS
             crawl_state.map_stat_dump_disconnect = true;
 #else
-            fprintf(stderr, "%s", dbg_stat_err);
-            end(1);
+            end(1, false, "%s", dbg_stat_err);
 #endif
         case CLO_ITERATIONS:
 #ifdef DEBUG_STATISTICS
             if (!next_is_param || !isadigit(*next_arg))
-            {
-                fprintf(stderr, "Integer argument required for -%s\n", arg);
-                end(1);
-            }
+                end(1, false, "Integer argument required for -%s\n", arg);
             else
             {
                 SysEnv.map_gen_iters = atoi(next_arg);
@@ -4443,26 +4425,21 @@ bool parse_args(int argc, char **argv, bool rc_only)
                 nextUsed = true;
             }
 #else
-            fprintf(stderr, "%s", dbg_stat_err);
-            end(1);
+            end(1, false, "%s", dbg_stat_err);
 #endif
             break;
 
         case CLO_FORCE_MAP:
 #ifdef DEBUG_STATISTICS
             if (!next_is_param)
-            {
-                fprintf(stderr, "String argument required for -%s\n", arg);
-                end(1);
-            }
+                end(1, false, "String argument required for -%s\n", arg);
             else
             {
                 crawl_state.force_map = next_arg;
                 nextUsed = true;
             }
 #else
-            fprintf(stderr, "%s", dbg_stat_err);
-            end(1);
+            end(1, false, "%s", dbg_stat_err);
 #endif
             break;
 

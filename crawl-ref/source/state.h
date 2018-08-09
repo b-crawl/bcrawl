@@ -46,7 +46,8 @@ struct game_state
     time_t last_winch;       // Time of last resize, for crash dumps.
 
     bool io_inited;         // Is curses or the equivalent initialised?
-    bool need_save;         // Set to true when game has started.
+    bool need_save;         // Set to true when game can be saved, false when the game ends.
+    bool game_started;      // Set to true when a game has started.
     bool saving_game;       // Set to true while in save_game.
     bool updating_scores;   // Set to true while updating hiscores.
     const char* no_gdb;     // reason for not running gdb
@@ -104,8 +105,6 @@ struct game_state
 
     bool            simulating_xp_gain; // is the skill menu in xp potion mode?
 
-    vector<string> startup_errors;
-
     bool level_annotation_shown;
     bool viewport_monster_hp;
     bool viewport_weapons;
@@ -154,7 +153,6 @@ public:
     void reset_game();
 
     void add_startup_error(const string &error);
-    void show_startup_errors();
 
     bool is_replaying_keys() const;
 

@@ -306,6 +306,9 @@ int main(int argc, char *argv[])
     init_properties();
     init_item_name_cache();
 
+    // make sure all the expected data directories exist
+    validate_basedirs();
+
     // Read the init file.
     read_init_file();
 

@@ -30,7 +30,8 @@
 game_state::game_state()
     : game_crashed(false), mouse_enabled(false), waiting_for_command(false),
       terminal_resized(false), last_winch(0), io_inited(false),
-      need_save(false), saving_game(false), updating_scores(false),
+      need_save(false), game_started(false), saving_game(false),
+      updating_scores(false),
       seen_hups(0), map_stat_gen(false), map_stat_dump_disconnect(false),
       obj_stat_gen(false), type(GAME_TYPE_NORMAL),
       last_type(GAME_TYPE_UNSPECIFIED), last_game_exit(game_exit::unknown),
@@ -75,29 +76,13 @@ game_state::game_state()
  */
 void game_state::reset_game()
 {
-    // Unset by death, but not by saving with restart_after_save.
+    game_started = false;
+    // need_save is unset by death, but not by saving with restart_after_save.
     need_save = false;
     type = GAME_TYPE_UNSPECIFIED;
     updating_scores = false;
     reset_cmd_repeat();
     reset_cmd_again();
-}
-
-void game_state::add_startup_error(const string &err)
-{
-    startup_errors.push_back(err);
-}
-
-void game_state::show_startup_errors()
-{
-    formatted_scroller error_menu;
-    error_menu.set_more( formatted_string::parse_string(
-        "<cyan>Press Esc or Enter to continue."));
-    error_menu.set_title(formatted_string::parse_string(
-        "<yellow>Warning: Crawl encountered errors during startup:"));
-    for (const string &err : startup_errors)
-        error_menu.add_raw_text(err + "\n");
-    error_menu.show();
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -504,14 +489,6 @@ void game_state::dump()
     // to asserts.
     unwind_var<game_type> _type(type, GAME_TYPE_NORMAL);
     unwind_bool _arena_suspended(arena_suspended, false);
-
-    if (!startup_errors.empty())
-    {
-        fprintf(stderr, "Startup errors:\n");
-        for (const string &err : startup_errors)
-            fprintf(stderr, "%s\n", err.c_str());
-        fprintf(stderr, "\n");
-    }
 
     fprintf(stderr, "prev_cmd = %s\n", command_to_name(prev_cmd).c_str());
 

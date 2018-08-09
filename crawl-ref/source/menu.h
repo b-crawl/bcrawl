@@ -267,7 +267,7 @@ enum MenuFlag
                                     ///< select the appropriate items.
     MF_ALLOW_FORMATTING = 0x0200,   ///< Parse index for formatted-string
     MF_TOGGLE_ACTION    = 0x0400,   ///< ToggleableMenu toggles action as well
-    //                    0x0800,
+    MF_NO_WRAP_ROWS     = 0x0800,   ///< For menus used as tables (eg. ability)
     MF_START_AT_END     = 0x1000,   ///< Scroll to end of list
     MF_PRESELECTED      = 0x2000,   ///< Has a preselected entry.
     MF_QUIET_SELECT     = 0x4000,   ///< No selection box and no count.
@@ -286,15 +286,9 @@ class UIShowHide;
 
 #define NUMBUFSIZ 10
 
-// FIXME: MenuEntry is a large object, and shouldn't be used for
-// showing text files.
-
 class Menu
 {
     friend class UIMenu;
-#ifdef USE_TILE_LOCAL
-    friend class menu_filter_line_reader;
-#endif
 public:
     Menu(int flags = MF_MULTISELECT, const string& tagname = "", KeymapContext kmc = KMC_MENU);
 
@@ -344,8 +338,6 @@ public:
     // Get entry index, skipping quantity 0 entries. Returns -1 if not found.
     int get_entry_index(const MenuEntry *e) const;
 
-    int get_first_visible() const;
-
     virtual int item_colour(const MenuEntry *me) const;
 
     typedef string (*selitem_tfn)(const vector<MenuEntry*> *sel);
@@ -375,6 +367,7 @@ protected:
     int num_pages;
 
     formatted_string more;
+    bool m_keyhelp_more;
 
     vector<MenuEntry*>  items;
     vector<MenuEntry*>  sel;
@@ -437,6 +430,7 @@ protected:
     virtual int post_process(int key);
 
     bool in_page(int index) const;
+    int get_first_visible() const;
 
     void deselect_all(bool update_view = true);
     virtual void select_items(int key, int qty = -1);

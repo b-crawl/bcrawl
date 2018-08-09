@@ -82,7 +82,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         $body.html(fmt_body_txt(desc.body + desc.footer));
         var s = scroller($popup.children(".body")[0]);
         s.contentElement.className += " describe-generic-body";
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             scroller_handle_key(s, event);
         });
 
@@ -120,7 +120,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
             $popup.append($feat);
         });
         var s = scroller($popup[0]);
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             scroller_handle_key(s, event);
         });
         return $popup;
@@ -134,7 +134,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         $body.html(_fmt_spellset_html(desc.body));
         _fmt_spells_list($body, desc.spellset, true);
         var s = scroller($body[0]);
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             scroller_handle_key(s, event);
         });
         if (desc.actions !== "")
@@ -169,7 +169,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         $popup.find(".header > span").html(desc.title);
         $popup.find(".body").html(format_spell_html(desc.desc));
         var s = scroller($popup.find(".body")[0]);
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             scroller_handle_key(s, event);
         });
         if (desc.can_mem)
@@ -202,7 +202,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
             $popup.append($card);
         });
         var s = scroller($popup[0]);
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             scroller_handle_key(s, event);
         });
         return $popup;
@@ -216,7 +216,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         var $muts = $body.children().first(), $vamp = $body.children().last();
         $muts.html(fmt_body_txt(util.formatted_string_to_html(desc.mutations)));
         var s = scroller($muts[0]);
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             scroller_handle_key(s, event);
         });
         paneset_cycle($body);
@@ -228,7 +228,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
             css = css.replace(/%d/g, desc.vampire + 1);
             $vamp.children("style").html(css);
             var vs = scroller($vamp[0]);
-            $popup.on("keydown", function (event) {
+            $popup.on("keydown keypress", function (event) {
                 scroller_handle_key(vs, event);
             });
             paneset_cycle($footer);
@@ -239,7 +239,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
             $footer.remove();
         }
 
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             if (event.key === "!" || event.key === "^")
             {
                 paneset_cycle($body);
@@ -297,12 +297,12 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         for (var i = 0; i < 3; i++)
             scroller($panes.eq(i)[0]);
 
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             var s = scroller($panes.filter(".current")[0]);
             scroller_handle_key(s, event);
         });
 
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             if (event.key === "!" || event.key === "^")
             {
                 paneset_cycle($body);
@@ -375,6 +375,12 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
                 }
             });
         }
+        else if (desc.fg_idx > 0 && desc.fg_idx <= main.MAIN_MAX)
+        {
+            renderer.draw_foreground(0, 0, { t: {
+                fg: { value: desc.fg_idx }, bg: 0,
+            }});
+        }
 
         renderer.draw_foreground(0, 0, { t: {
             fg: enums.prepare_fg_flags(desc.flag),
@@ -382,7 +388,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         }});
 
         var s = scroller($popup.find(".body")[0]);
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             scroller_handle_key(s, event);
         });
         return $popup;
@@ -395,7 +401,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         var $body = $popup.find(".body");
         $body.html(fmt_body_txt(desc.features) + fmt_body_txt(desc.changes));
         var s = scroller($body[0]);
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             scroller_handle_key(s, event);
         });
 
@@ -422,41 +428,46 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
 
         var handled = true;
 
-        switch (event.which)
-        {
-            case 33: // page up
-                scroller_scroll_page(scroller, -1);
-                break;
-            case 34: // page down
-                scroller_scroll_page(scroller, 1);
-                break;
-            case 35: // end
-                scroller_scroll_to_line(scroller, 2147483647);
-                break;
-            case 36: // home
-                scroller_scroll_to_line(scroller, 0);
-                break;
-            case 38: // up
-                scroller_scroll_line(scroller, -1);
-                break;
-            case 40: // down
-                scroller_scroll_line(scroller, 1);
-                break;
-            default:
-                handled = false;
-                break;
-        }
-
-        if (!handled)
-        switch (String.fromCharCode(event.which))
-        {
-            case " ": case ">": case "+": case '\'':
-                scroller_scroll_page(scroller, 1);
-                break;
-            case "-": case "<": case ";":
-                scroller_scroll_page(scroller, -1);
-                break;
-        }
+        if (event.type === "keydown")
+            switch (event.which)
+            {
+                case 33: // page up
+                    scroller_scroll_page(scroller, -1);
+                    break;
+                case 34: // page down
+                    scroller_scroll_page(scroller, 1);
+                    break;
+                case 35: // end
+                    scroller_scroll_to_line(scroller, 2147483647);
+                    break;
+                case 36: // home
+                    scroller_scroll_to_line(scroller, 0);
+                    break;
+                case 38: // up
+                    scroller_scroll_line(scroller, -1);
+                    break;
+                case 40: // down
+                    scroller_scroll_line(scroller, 1);
+                    break;
+                default:
+                    handled = false;
+                    break;
+            }
+        else if (event.type === "keypress")
+            switch (String.fromCharCode(event.which))
+            {
+                case " ": case ">": case "+": case '\'':
+                    scroller_scroll_page(scroller, 1);
+                    break;
+                case "-": case "<": case ";":
+                    scroller_scroll_page(scroller, -1);
+                    break;
+                default:
+                    handled = false;
+                    break;
+            }
+        else
+            handled = false;
 
         if (handled)
         {
@@ -559,7 +570,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         var s = scroller($body[0]);
         var scroll_elem = s.scrollElement;
         scroll_elem.addEventListener("scroll", scroller_onscroll);
-        $popup.on("keydown", function (event) {
+        $popup.on("keydown keypress", function (event) {
             if (event.which !== 36 || desc.tag !== "help")
                 scroller_handle_key(s, event);
         });

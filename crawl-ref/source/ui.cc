@@ -59,6 +59,9 @@ static inline bool pos_in_rect(i2 pos, i4 rect)
 static void clear_text_region(i4 region);
 #endif
 
+// must be before ui_root declaration for correct destruction order
+vector<Widget*> prev_hover_path;
+
 static struct UIRoot
 {
 public:
@@ -98,8 +101,6 @@ protected:
     Stack m_root;
     bool m_needs_layout{false};
 } ui_root;
-
-static vector<Widget*> prev_hover_path;
 
 static stack<i4> scissor_stack;
 
@@ -1870,6 +1871,23 @@ void ui_delay(unsigned int ms)
         if (kbhit())
             pump_events();
     }
+#endif
+}
+
+/**
+ * Is it possible to use UI calls, e.g. push_layout? The answer can be different
+ * on different build targets; it is earlier on console than on local tiles.
+ */
+bool is_available()
+{
+#ifdef USE_TILE_LOCAL
+    // basically whether TilesFramework::initialise() has been called. This
+    // isn't precisely right, so (TODO) some more work needs to be
+    // done to figure out exactly what is needed to use the UI api minimally
+    // without crashing.
+    return wm && tiles.fonts_initialized();
+#else
+    return crawl_state.io_inited;
 #endif
 }
 

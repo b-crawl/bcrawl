@@ -799,7 +799,7 @@ public:
         // of space and have to display --more-- instead
         unwind_bool dontsend(send_ignore_one, true);
 #endif
-        if (crawl_state.io_inited)
+        if (crawl_state.io_inited && crawl_state.game_started)
             msgwin.add_item(msg.full_text(), p, _temporary);
     }
 
@@ -869,6 +869,9 @@ public:
         prev_msg = message_line();
         last_of_turn = false;
         temp = 0;
+#ifdef USE_TILE_WEB
+        unsent = 0;
+#endif
     }
 
 #ifdef USE_TILE_WEB
@@ -905,10 +908,11 @@ bool _more = false, _last_more = false;
 
 void webtiles_send_messages()
 {
-    webtiles_send_last_messages(0);
-}
-void webtiles_send_last_messages(int n)
-{
+    // defer sending any messages to client in this form until a game is
+    // started up. It's still possible to send them as a popup. When this is
+    // eventually called, it'll send any queued messages.
+    if (!crawl_state.io_inited || !crawl_state.game_started)
+        return;
     tiles.json_open_object();
     tiles.json_write_string("msg", "msgs");
     tiles.json_treat_as_empty();
@@ -923,7 +927,6 @@ void webtiles_send_last_messages(int n)
 }
 #else
 void webtiles_send_messages() { }
-void webtiles_send_last_messages(int n) { }
 #endif
 
 static FILE* _msg_dump_file = nullptr;
@@ -1352,8 +1355,12 @@ static void _mpr(string text, msg_channel_type channel, int param, bool nojoin,
         die_noline("%s", text.c_str());
 #endif
 
-    if (!crawl_state.io_inited && channel == MSGCH_ERROR)
+    if (channel == MSGCH_ERROR &&
+        (!crawl_state.io_inited || crawl_state.test || crawl_state.script
+         || crawl_state.build_db))
+    {
         fprintf(stderr, "%s\n", text.c_str());
+    }
 
     // Flush out any "comes into view" monster announcements before the
     // monster has a chance to give any other messages.
@@ -1416,6 +1423,7 @@ static void _mpr(string text, msg_channel_type channel, int param, bool nojoin,
 
     if (domore)
         more(true);
+
     if (do_flash_screen)
         flash_view_delay(UA_ALWAYS_ON, YELLOW, 50);
 
@@ -2057,11 +2065,9 @@ void load_messages(reader& inf)
     clear_messages(); // check for Options.message_clear
 }
 
-void replay_messages()
+static void _replay_messages_core(formatted_scroller &hist)
 {
     flush_prev_message();
-    formatted_scroller hist(FS_START_AT_END | FS_PREWRAPPED_TEXT);
-    hist.set_more();
 
     const store_t msgs = buffer.get_store();
     formatted_string lines;
@@ -2089,6 +2095,27 @@ void replay_messages()
 
     hist.add_formatted_string(lines, !lines.empty());
     hist.show();
+}
+
+void replay_messages()
+{
+    formatted_scroller hist(FS_START_AT_END | FS_PREWRAPPED_TEXT);
+    hist.set_more();
+
+    _replay_messages_core(hist);
+}
+
+void replay_messages_during_startup()
+{
+    formatted_scroller hist(FS_PREWRAPPED_TEXT);
+    hist.set_more();
+    hist.set_more(formatted_string::parse_string(
+                        "<cyan>Press Esc or Enter to continue, "
+                        "arrows/pgup/pgdn to scroll.</cyan>"));
+    hist.set_title(formatted_string::parse_string(recent_error_messages()
+        ? "<yellow>Crawl encountered errors during initialization:</yellow>"
+        : "<yellow>Initialization log:</yellow>"));
+    _replay_messages_core(hist);
 }
 
 void set_msg_dump_file(FILE* file)

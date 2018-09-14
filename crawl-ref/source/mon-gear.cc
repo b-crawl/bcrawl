@@ -137,7 +137,7 @@ static void _give_wand(monster* mon, int level)
         return;
 
     // Don't give top-tier wands before 5 HD or in sprint.
-    bool no_high_tier;
+    bool no_high_tier = false;
     int idx;
     
     if(mon->type == MONS_IJYB)

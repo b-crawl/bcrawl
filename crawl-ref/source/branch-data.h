@@ -125,7 +125,7 @@ const Branch branches[NUM_BRANCHES] =
       LIGHTGREY, BROWN,
       'C', {}, BRANCH_NOISE_QUIET },
 
-    { BRANCH_TOMB, BRANCH_CRYPT, 3, 3, 3, 21,
+    { BRANCH_TOMB, BRANCH_CRYPT, 2, 2, 3, 21,
       BFLAG_ISLANDED | BFLAG_DANGEROUS_END | BFLAG_NO_SHAFTS,
       DNGN_ENTER_TOMB, DNGN_EXIT_TOMB, NUM_FEATURES,
       "Tomb", "the Tomb of the Ancients", "Tomb",

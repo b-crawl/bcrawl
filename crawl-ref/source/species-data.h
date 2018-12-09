@@ -33,7 +33,7 @@ static const map<species_type, species_def> species_data =
     { },
     { JOB_SKALD, JOB_ARCANE_MARKSMAN, JOB_WIZARD, JOB_CONJURER, 
       JOB_SUMMONER, JOB_FIRE_ELEMENTALIST, JOB_AIR_ELEMENTALIST,
-	  JOB_VENOM_MAGE, JOB_REAVER },
+      JOB_VENOM_MAGE, JOB_REAVER },
     { SK_SHORT_BLADES, SK_LONG_BLADES, SK_STAVES, SK_BOWS, SK_CROSSBOWS },
 } },
 
@@ -338,7 +338,7 @@ static const map<species_type, species_def> species_data =
     { "no armour", "no weapons or thrown items", "stealth" },
     { JOB_BERSERKER, JOB_ENCHANTER, JOB_TRANSMUTER, JOB_ICE_ELEMENTALIST,
       JOB_CONJURER, JOB_SUMMONER, JOB_AIR_ELEMENTALIST, JOB_VENOM_MAGE,
-	  JOB_REAVER },
+      JOB_REAVER },
     { SK_UNARMED_COMBAT },
 } },
 

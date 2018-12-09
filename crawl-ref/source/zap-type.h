@@ -88,5 +88,6 @@ enum zap_type
     ZAP_HARPOON_SHOT,
     ZAP_BLINK,
     ZAP_SHACKLE,
+    ZAP_FREEZING_BLAST,
     NUM_ZAPS
 };

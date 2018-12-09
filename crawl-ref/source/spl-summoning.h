@@ -48,6 +48,7 @@ bool tukima_affects(const actor &target);
 void cast_tukimas_dance(int pow, actor *target);
 spret_type cast_conjure_ball_lightning(int pow, god_type god, bool fail);
 spret_type cast_summon_lightning_spire(int pow, const coord_def& where, god_type god, bool fail);
+spret_type cast_false_image(int pow, const coord_def& where, god_type god, bool fail);
 
 spret_type cast_call_imp(int pow, god_type god, bool fail);
 bool summon_demon_type(monster_type mon, int pow, god_type god = GOD_NO_GOD,

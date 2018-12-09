@@ -46,6 +46,8 @@ enslavement ENSLAVEMENT
 haste HASTE
 infusion INFUSION
 invisibility INVISIBILITY
+mass_confusion MASS_CONFUSION
+shackle SHACKLE
 slow SLOW
 song_of_slaying SONG_OF_SLAYING
 spectral_weapon SPECTRAL_WEAPON
@@ -117,6 +119,7 @@ poisonous_vapours POISONOUS_VAPOURS
 mass_abjuration MASS_ABJURATION
 call_canine_familiar CALL_CANINE_FAMILIAR
 call_imp CALL_IMP
+false_image FALSE_IMAGE
 malign_gateway MALIGN_GATEWAY
 recall RECALL
 sticks_to_snakes STICKS_TO_SNAKES
@@ -141,6 +144,7 @@ spellforged_servitor SPELLFORGED_SERVITOR
 apportation APPORTATION
 beckoning BECKONING
 blink BLINK
+blink_other BLINK_OTHER
 controlled_blink CONTROLLED_BLINK
 disjunction DISJUNCTION
 dispersal DISPERSAL
@@ -173,7 +177,6 @@ bolt_energy ENERGY_BOLT
 %sdir gui/spells/monster
 generic GENERIC_MONSTER_SPELL
 air_elementals AIR_ELEMENTALS
-blink_other BLINK_OTHER
 brain_feed BRAIN_FEED
 cantrip CANTRIP
 cold_breath COLD_BREATH

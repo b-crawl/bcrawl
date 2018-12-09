@@ -47,9 +47,9 @@ static const map<job_type, job_def> job_data =
     "AM", "Arcane Marksman",
     2, 5, 5,
     { SP_FORMICID, SP_AVARIEL, SP_KOBOLD, SP_SPRIGGAN, SP_TROLL, SP_CENTAUR, },
-    { "robe", "book of Debilitation" },
+    { "dagger", "robe", "book of Debilitation" },
     WCHOICE_RANGED,
-    { { SK_FIGHTING, 1 }, { SK_DODGING, 2 }, { SK_SPELLCASTING, 1 },
+    { { SK_FIGHTING, 1 }, { SK_DODGING, 2 }, { SK_SPELLCASTING, 2 },
       { SK_HEXES, 3 }, { SK_WEAPON, 2 }, },
 } },
 
@@ -282,14 +282,12 @@ static const map<job_type, job_def> job_data =
 { JOB_WARPER, {
     "Wr", "Warper",
     3, 5, 4,
-    { SP_FELID, SP_KOBOLD, SP_DEEP_DWARF, SP_SPRIGGAN, SP_CENTAUR,
-      SP_BASE_DRACONIAN, },
-    { "leather armour", "book of Spatial Translocations", "scroll of blinking",
-      "tomahawk ego:dispersal q:5" },
-    WCHOICE_PLAIN,
-    { { SK_FIGHTING, 2 }, { SK_ARMOUR, 1 }, { SK_DODGING, 2 },
-      { SK_SPELLCASTING, 2 }, { SK_TRANSLOCATIONS, 3 }, { SK_THROWING, 1 },
-      { SK_WEAPON, 2 }, },
+    { SP_KOBOLD, SP_DEEP_DWARF, SP_SPRIGGAN, SP_CENTAUR,
+      SP_BARACHI, SP_HUMAN },
+    { "dagger", "robe", "book of Spatial Translocations", "scroll of blinking" },
+    WCHOICE_RANGED,
+    { { SK_FIGHTING, 2 }, { SK_DODGING, 2 }, { SK_SPELLCASTING, 1 },
+      { SK_TRANSLOCATIONS, 3 }, { SK_WEAPON, 2 }, },
 } },
 
 { JOB_WIZARD, {

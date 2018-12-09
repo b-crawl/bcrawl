@@ -997,6 +997,12 @@ void monster::remove_enchantment_effect(const mon_enchant &me, bool quiet)
         end_still_winds();
         break;
 
+    case ENCH_SHACKLE:
+        if (!quiet)
+            simple_monster_message(*this, "'s shackles fade away.");
+        break;
+    
+
     default:
         break;
     }
@@ -1482,6 +1488,7 @@ void monster::apply_enchantment(const mon_enchant &me)
     case ENCH_RING_OF_THUNDER:
     case ENCH_WHIRLWIND_PINNED:
     case ENCH_VILE_CLUTCH:
+    case ENCH_SHACKLE:
         decay_enchantment(en);
         break;
 
@@ -2173,7 +2180,7 @@ static const char *enchant_names[] =
     "aura_of_brilliance", "empowered_spells", "gozag_incite", "pain_bond",
     "idealised", "bound_soul", "infestation",
     "stilling the winds", "thunder_ringed", "pinned_by_whirlwind",
-    "vortex", "vortex_cooldown", "vile_clutch",
+    "vortex", "vortex_cooldown", "vile_clutch", "shackled",
     "buggy",
 };
 

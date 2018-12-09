@@ -1637,7 +1637,7 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_PORTAL_PROJECTILE, "Portal Projectile",
-    SPTYP_TRANSLOCATION | SPTYP_HEXES,
+    SPTYP_TRANSLOCATION,
     SPFLAG_NONE,
     3,
     50,
@@ -1661,7 +1661,7 @@ static const struct spell_desc spelldata[] =
     SPELL_GOLUBRIAS_PASSAGE, "Passage of Golubria",
     SPTYP_TRANSLOCATION,
     SPFLAG_TARGET | SPFLAG_NEUTRAL | SPFLAG_ESCAPE | SPFLAG_SELFENCH,
-    4,
+    5,
     0,
     LOS_RADIUS, LOS_RADIUS,
     3, 8, // when it closes
@@ -1913,10 +1913,10 @@ static const struct spell_desc spelldata[] =
 {
     SPELL_BLINK_OTHER, "Blink Other",
     SPTYP_TRANSLOCATION,
-    SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_ESCAPE | SPFLAG_MONSTER
-        | SPFLAG_EMERGENCY | SPFLAG_NEEDS_TRACER,
-    2,
-    0,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_ESCAPE
+        | SPFLAG_EMERGENCY | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK,
+    1,
+    50,
     LOS_RADIUS, LOS_RADIUS,
     2, 0,
     TILEG_BLINK_OTHER,
@@ -2451,7 +2451,7 @@ static const struct spell_desc spelldata[] =
     SPELL_LEDAS_LIQUEFACTION, "Leda's Liquefaction",
     SPTYP_EARTH | SPTYP_HEXES,
     SPFLAG_AREA,
-    4,
+    3,
     200,
     -1, -1,
     3, 0,
@@ -3712,7 +3712,7 @@ static const struct spell_desc spelldata[] =
     SPELL_VIOLENT_UNRAVELLING, "Yara's Violent Unravelling",
     SPTYP_HEXES | SPTYP_TRANSMUTATION,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_NO_GHOST | SPFLAG_CHAOTIC,
-    5,
+    4,
     200,
     LOS_RADIUS, LOS_RADIUS,
     5, 0,
@@ -4006,6 +4006,28 @@ static const struct spell_desc spelldata[] =
     5, 5,
     5, 0,
     TILEG_ICEBLAST,
+},
+
+{
+    SPELL_SHACKLE, "Shackle",
+    SPTYP_HEXES,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK,
+    2,
+    200,
+    LOS_RADIUS, LOS_RADIUS,
+    2, 0,
+    TILEG_SHACKLE,
+},
+
+{
+    SPELL_FALSE_IMAGE, "False Image",
+    SPTYP_SUMMONING | SPTYP_HEXES,
+    SPFLAG_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEUTRAL,
+    3,
+    100,
+    2, 2,
+    2, 0,
+    TILEG_FALSE_IMAGE,
 },
 
 {

@@ -1322,4 +1322,40 @@ _mon_hex_zap(ZAP_DRAIN_MAGIC, BEAM_DRAIN_MAGIC),
     0 // handled by explosion
 },
 
+{
+    ZAP_BLINK,
+    "blinking",
+    200,
+    nullptr,
+    nullptr,
+    nullptr,
+    nullptr,
+    ETC_WARP,
+    true,
+    BEAM_BLINK,
+    DCHAR_FIRED_ZAP,
+    false,
+    false,
+    false,
+    0
+},
+
+{
+    ZAP_SHACKLE,
+    "",
+    100,
+    nullptr,
+    new tohit_calculator<0, 3, 2>,
+    nullptr,
+    new tohit_calculator<0, 1, 3>,
+    BLACK,
+    true,
+    BEAM_SHACKLE,
+    NUM_DCHAR_TYPES,
+    false,
+    false,
+    false,
+    0
+},
+
 };

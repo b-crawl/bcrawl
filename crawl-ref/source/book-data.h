@@ -63,10 +63,9 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Spatial Translocations
+    SPELL_BLINK_OTHER,
     SPELL_BLINK,
-    SPELL_SHROUD_OF_GOLUBRIA,
-    SPELL_BECKONING,
-    SPELL_GRAVITAS,
+    SPELL_PORTAL_PROJECTILE,
     SPELL_TELEPORT_OTHER,
     SPELL_GOLUBRIAS_PASSAGE,
 },
@@ -296,11 +295,11 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Debilitation
     SPELL_CORONA,
-    SPELL_SLOW,
+    SPELL_SHACKLE,
     SPELL_INNER_FLAME,
-    SPELL_PORTAL_PROJECTILE,
+    SPELL_FALSE_IMAGE,
     SPELL_CAUSE_FEAR,
-    SPELL_LEDAS_LIQUEFACTION,
+    SPELL_VIOLENT_UNRAVELLING,
 },
 
 {   // Book of the Dragon

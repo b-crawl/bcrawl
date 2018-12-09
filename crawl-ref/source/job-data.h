@@ -217,6 +217,16 @@ static const map<job_type, job_def> job_data =
       { SK_STEALTH, 2 }, },
 } },
 
+{ JOB_REAVER, {
+    "Re", "Reaver",
+    3, 6, 3,
+    { SP_KOBOLD, SP_CENTAUR, SP_MERFOLK, SP_BASE_DRACONIAN, SP_VAMPIRE, },
+    { "steam dragon scales", "potion of haste", "scroll of immolation" },
+    WCHOICE_GOOD,
+    { { SK_FIGHTING, 3 }, { SK_DODGING, 3 }, { SK_SPELLCASTING, 2 },
+      { SK_WEAPON, 3}, },
+} },
+
 { JOB_SKALD, {
     "Sk", "Skald",
     3, 5, 4,

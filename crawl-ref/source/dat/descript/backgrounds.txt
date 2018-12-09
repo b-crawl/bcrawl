@@ -83,6 +83,11 @@ Necromancer
 Necromancers are wizards specializing in the practice of death magic. They
 start out with the Pain spell.
 %%%%
+Reaver
+
+Reavers are the martial branch of a cult of Vehumet, aspiring to someday
+call the same destructive forces as the mages they serve.
+%%%%
 Rogue
 
 Rogues carry a blowgun with poisoned needles, as well as a small number of

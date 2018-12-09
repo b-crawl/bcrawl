@@ -54,7 +54,6 @@ public:
 private:
     /* Attack phases */
     bool handle_phase_attempted() override;
-    bool handle_phase_blocked() override;
     bool handle_phase_dodged() override;
     bool handle_phase_hit() override;
     bool handle_phase_damaged() override;

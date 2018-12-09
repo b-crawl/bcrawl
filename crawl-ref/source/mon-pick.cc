@@ -15,7 +15,6 @@
 #include "libutil.h"
 #include "mon-place.h"
 #include "place.h"
-#include "state.h"
 #include "stringutil.h"
 
 int branch_ood_cap(branch_type branch)
@@ -64,22 +63,13 @@ monster_type pick_monster(level_id place, mon_pick_vetoer veto)
     if (!place.is_valid())
         die("trying to pick a monster from %s", place.describe().c_str());
 #endif
-    monster_type mon = pick_monster_from(population[place.branch].pop,
-                                         place.depth, veto);
-    if (mon == MONS_ORB_OF_FIRE && crawl_state.is_orb_of_ice_game)
-        mon = MONS_ORB_OF_ICE;
-    return mon;
+    return pick_monster_from(population[place.branch].pop, place.depth, veto);
 }
 
-monster_type pick_monster(level_id place, monster_picker &picker,
-                          mon_pick_vetoer veto)
+monster_type pick_monster(level_id place, monster_picker &picker, mon_pick_vetoer veto)
 {
     ASSERT(place.is_valid());
-    monster_type mon = picker.pick_with_veto(population[place.branch].pop,
-                                             place.depth, MONS_0, veto);
-    if (mon == MONS_ORB_OF_FIRE && crawl_state.is_orb_of_ice_game)
-        mon = MONS_ORB_OF_ICE;
-    return mon;
+    return picker.pick_with_veto(population[place.branch].pop, place.depth, MONS_0, veto);
 }
 
 monster_type pick_monster_from(const pop_entry *fpop, int depth,

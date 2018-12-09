@@ -1673,14 +1673,6 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
-    {  MST_ORB_OF_ICE,
-      {
-       { SPELL_BOLT_OF_COLD, 32, MON_SPELL_MAGICAL },
-       { SPELL_FREEZING_BLAST, 32, MON_SPELL_MAGICAL },
-       { SPELL_MALMUTATE, 16, MON_SPELL_MAGICAL },
-      }
-    },
-
     // ---------------------
     // Uniques' spellbooks
     // ---------------------

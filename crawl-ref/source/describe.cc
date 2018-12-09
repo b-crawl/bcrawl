@@ -1160,8 +1160,8 @@ static string _describe_weapon(const item_def &item, bool verbose)
                            "dealing less damage to those not targeted.";
             break;
         case SK_LONG_BLADES:
-            description += "\n\nIt can be used to riposte, swiftly "
-                           "retaliating against a missed attack.";
+            description += "\n\nIt can be used to deflect attacks "
+                           "by skilled and dexterous wielders.";
             break;
         case SK_SHORT_BLADES:
             {

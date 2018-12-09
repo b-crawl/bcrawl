@@ -2348,6 +2348,11 @@ int player_shield_class()
     shield += tso_sh_boost() * 100;
     shield += you.wearing(EQ_AMULET_PLUS, AMU_REFLECTION) * 200;
     shield += you.scan_artefacts(ARTP_SHIELDING) * 200;
+    
+    // if using a long blade, add dex*skill/50 to SH
+    const item_def* weap = you.slot_item(EQ_WEAPON, false);
+    if(weap && item_attack_skill(*weap) == SK_LONG_BLADES)
+        shield += (you.dex() * you.skill(SK_LONG_BLADES, 10) * 20) / 50;
 
     // Fairies get bonus SH from shimmering scales
     if (you.species == SP_FAIRY)

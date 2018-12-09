@@ -259,8 +259,8 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Power
     SPELL_BATTLESPHERE,
-    SPELL_POISON_ARROW,
     SPELL_BOLT_OF_MAGMA,
+    SPELL_POISON_ARROW,
     SPELL_IRON_SHOT,
     SPELL_IOOD,
     SPELL_SPELLFORGED_SERVITOR,

@@ -639,7 +639,8 @@ static const ability_def Ability_List[] =
 
     // Wu Jian
     { ABIL_WU_JIAN_SERPENTS_LASH, "Serpent's Lash",
-        0, 0, 0, 2, {fail_basis::invo}, abflag::exhaustion | abflag::instant },
+        0, 0, 0, 0, {fail_basis::invo}, abflag::exhaustion | abflag::instant
+        | abflag::skill_drain },
     { ABIL_WU_JIAN_HEAVENLY_STORM, "Heavenly Storm",
         0, 0, 0, 20, {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::none },
     // Lunge and Whirlwind abilities aren't menu abilities but currently need
@@ -786,7 +787,7 @@ const string make_cost_description(ability_type ability)
         ret += ", Piety or 2 Rations";
 
     if (abil.flags & abflag::skill_drain)
-        ret += ", Skill drain";
+        ret += ", Drain";
 
     if (abil.flags & abflag::remove_curse_scroll)
         ret += ", Scroll of remove curse";

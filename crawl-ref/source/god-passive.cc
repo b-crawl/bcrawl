@@ -1553,17 +1553,9 @@ void wu_jian_heaven_tick()
     if (you.attribute[ATTR_HEAVENLY_STORM] == 0)
         return;
 
-    // TODO: this is still ridiculous. REWRITEME!
-    if (you.attribute[ATTR_HEAVENLY_STORM] <= 10)
+    if (you.attribute[ATTR_HEAVENLY_STORM] <= 2)
         you.attribute[ATTR_HEAVENLY_STORM] -= 1;
-    else if (you.attribute[ATTR_HEAVENLY_STORM] <= 15)
-        you.attribute[ATTR_HEAVENLY_STORM] -= 2;
-    else if (you.attribute[ATTR_HEAVENLY_STORM] <= 20)
-        you.attribute[ATTR_HEAVENLY_STORM] -= 3;
-    else if (you.attribute[ATTR_HEAVENLY_STORM] <= 30)
-        you.attribute[ATTR_HEAVENLY_STORM] -= 5;
-    else
-        you.attribute[ATTR_HEAVENLY_STORM] -= 10;
+    else you.attribute[ATTR_HEAVENLY_STORM] -= 2;
 
     for (radius_iterator ai(you.pos(), 2, C_SQUARE, LOS_SOLID); ai; ++ai)
     {

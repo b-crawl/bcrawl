@@ -80,8 +80,8 @@ to mutagenic effects.
 %%%%
 Hill Orc
 
-Orcs are skilled in close combat, and often dabble in offensive magic. Hated by
-most, orcs are very proud and many of them feel superior.
+Orcs are instinctive fighters, training fighting in general rather than specific
+melee weapons. Some are skilled in offensive magic.
 %%%%
 Human
 

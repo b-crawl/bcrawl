@@ -642,7 +642,7 @@ static const ability_def Ability_List[] =
         0, 0, 0, 0, {fail_basis::invo}, abflag::exhaustion | abflag::instant
         | abflag::skill_drain },
     { ABIL_WU_JIAN_HEAVENLY_STORM, "Heavenly Storm",
-        0, 0, 0, 8, {fail_basis::invo, piety_breakpoint(4), 0, 1}, abflag::none },
+        0, 0, 0, 6, {fail_basis::invo, piety_breakpoint(4), 0, 1}, abflag::none },
     // Lunge and Whirlwind abilities aren't menu abilities but currently need
     // to exist for action counting, hence need enums/entries.
     { ABIL_WU_JIAN_LUNGE, "Lunge", 0, 0, 0, 0, {}, abflag::none },

@@ -136,13 +136,21 @@ static void _give_wand(monster* mon, int level)
     if (!give_wand)
         return;
 
-    // Don't give top-tier wands before 5 HD, except to Ijyb and not in sprint.
-    const bool no_high_tier =
-            (mon->get_experience_level() < 5
-                || mons_class_flag(mon->type, M_NO_HT_WAND))
-            && (mon->type != MONS_IJYB || crawl_state.game_is_sprint());
-
-    const int idx = items(false, OBJ_WANDS, OBJ_RANDOM, level);
+    // Don't give top-tier wands before 5 HD or in sprint.
+    bool no_high_tier = false;
+    int idx;
+    
+    if(mon->type == MONS_IJYB)
+    {
+        idx = items(false, OBJ_WANDS, WAND_POLYMORPH, level);
+    }
+    else
+    {
+        no_high_tier = (mon->get_experience_level() < 5
+            || mons_class_flag(mon->type, M_NO_HT_WAND))
+            && crawl_state.game_is_sprint();
+        idx = items(false, OBJ_WANDS, OBJ_RANDOM, level);
+    }
 
     if (idx == NON_ITEM)
         return;
@@ -465,7 +473,11 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         } } },
         { MONS_GOBLIN,                  { GOBLIN_WEAPONS } },
         { MONS_JESSICA,                 { GOBLIN_WEAPONS } },
-        { MONS_IJYB,                    { GOBLIN_WEAPONS } },
+        { MONS_IJYB, { { { WPN_DAGGER, 1 } }, { 1, 0, 2 }, {
+            { SPWPN_VENOM, 1 },
+            { SPWPN_CHAOS, 1 },
+            { SPWPN_ELECTROCUTION, 1 },
+        } } },
         { MONS_WIGHT,
             { { { WPN_MORNINGSTAR,      4 },
                 { WPN_DIRE_FLAIL,       4 },
@@ -915,6 +927,7 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         { NUM_WEAPONS,                  8 }, }; // 1/9 chance of ranged weapon
 
     static const map<monster_type, mon_weapon_spec> secondary_weapon_specs = {
+        { MONS_IJYB, { { { WPN_HUNTING_SLING, 1 } } } },
         { MONS_JOSEPH, { { { WPN_HUNTING_SLING, 1 } } } },
         { MONS_DEEP_ELF_ARCHER, // XXX: merge w/centaur warrior primary?
             { { { WPN_SHORTBOW,         2 },
@@ -1317,6 +1330,7 @@ static void _give_ammo(monster* mon, int level, bool mons_summoned)
 
         if (xitt == MI_STONE
             && (mon->type == MONS_JOSEPH
+                || mon->type == MONS_IJYB
                 || mon->type == MONS_SATYR
                 || (mon->type == MONS_FAUN && one_chance_in(3))
                 || one_chance_in(15)))

@@ -637,6 +637,8 @@ static void _equip_weapon_effect(item_def& item, bool showMsgs, bool unmeld)
     }
     default:
         break;
+    
+    you.redraw_armour_class = true;
     }
 }
 
@@ -789,6 +791,8 @@ static void _unequip_weapon_effect(item_def& real_item, bool showMsgs,
              meld ? "your weapon melds" : "you unwield");
         end_spectral_weapon(spectral_weapon, false, true);
     }
+    
+    you.redraw_armour_class = true;
 }
 
 static void _spirit_shield_message(bool unmeld)

@@ -425,8 +425,8 @@ static const vector<god_passive> god_passives[] =
     // Wu Jian
     {
         { 0, passive_t::wu_jian_lunge, "do at least one heavy attack when moving towards foes." },
-        { 1, passive_t::wu_jian_whirlwind, "attack enemies by moving around them." },
-        { 2, passive_t::wu_jian_wall_jump, "perform airborne attacks by moving against a solid obstacle." },
+        { 0, passive_t::wu_jian_whirlwind, "attack enemies by moving around them." },
+        { 1, passive_t::wu_jian_wall_jump, "perform airborne attacks by moving against a solid obstacle." },
     },
 };
 COMPILE_CHECK(ARRAYSZ(god_passives) == NUM_GODS);

@@ -235,29 +235,29 @@ static const species_skill_aptitude species_skill_aptitudes[] =
 #endif
 
     // SP_HILL_ORC
-    APT(SP_HILL_ORC,        SK_FIGHTING,        2),
-    APT(SP_HILL_ORC,        SK_SHORT_BLADES,    0),
-    APT(SP_HILL_ORC,        SK_LONG_BLADES,     1),
-    APT(SP_HILL_ORC,        SK_AXES,            3),
-    APT(SP_HILL_ORC,        SK_MACES_FLAILS,    1),
-    APT(SP_HILL_ORC,        SK_POLEARMS,        1),
-    APT(SP_HILL_ORC,        SK_STAVES,         -1),
+    APT(SP_HILL_ORC,        SK_FIGHTING,       -2),
+    APT(SP_HILL_ORC,        SK_SHORT_BLADES,   UNUSABLE_SKILL),
+    APT(SP_HILL_ORC,        SK_LONG_BLADES,    UNUSABLE_SKILL),
+    APT(SP_HILL_ORC,        SK_AXES,           UNUSABLE_SKILL),
+    APT(SP_HILL_ORC,        SK_MACES_FLAILS,   UNUSABLE_SKILL),
+    APT(SP_HILL_ORC,        SK_POLEARMS,       UNUSABLE_SKILL),
+    APT(SP_HILL_ORC,        SK_STAVES,         UNUSABLE_SKILL),
     APT(SP_HILL_ORC,        SK_SLINGS,         -1),
     APT(SP_HILL_ORC,        SK_BOWS,           -1),
-    APT(SP_HILL_ORC,        SK_CROSSBOWS,      -1),
-    APT(SP_HILL_ORC,        SK_THROWING,       -1),
+    APT(SP_HILL_ORC,        SK_CROSSBOWS,       0),
+    APT(SP_HILL_ORC,        SK_THROWING,        0),
     APT(SP_HILL_ORC,        SK_ARMOUR,          1),
     APT(SP_HILL_ORC,        SK_DODGING,        -2),
     APT(SP_HILL_ORC,        SK_STEALTH,        -1),
 #if TAG_MAJOR_VERSION == 34
-    APT(SP_HILL_ORC,        SK_STABBING,      UNUSABLE_SKILL),
+    APT(SP_HILL_ORC,        SK_STABBING,       UNUSABLE_SKILL),
 #endif
     APT(SP_HILL_ORC,        SK_SHIELDS,         1),
 #if TAG_MAJOR_VERSION == 34
-    APT(SP_HILL_ORC,        SK_TRAPS,         UNUSABLE_SKILL),
+    APT(SP_HILL_ORC,        SK_TRAPS,          UNUSABLE_SKILL),
 #endif
-    APT(SP_HILL_ORC,        SK_UNARMED_COMBAT,  1),
-    APT(SP_HILL_ORC,        SK_SPELLCASTING,   -3),
+    APT(SP_HILL_ORC,        SK_UNARMED_COMBAT, UNUSABLE_SKILL),
+    APT(SP_HILL_ORC,        SK_SPELLCASTING,   -1),
     APT(SP_HILL_ORC,        SK_CONJURATIONS,    0),
     APT(SP_HILL_ORC,        SK_HEXES,           0),
     APT(SP_HILL_ORC,        SK_CHARMS,         -1),

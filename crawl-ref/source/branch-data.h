@@ -26,7 +26,7 @@ const Branch branches[NUM_BRANCHES] =
       LIGHTGREY, BROWN,
       'T', {}, BRANCH_NOISE_NORMAL },
 
-    { BRANCH_ORC, BRANCH_DUNGEON, 8, 11, 2, 10,
+    { BRANCH_ORC, BRANCH_DUNGEON, 8, 11, 1, 10,
       BFLAG_SPOTTY,
       DNGN_ENTER_ORC, DNGN_EXIT_ORC, NUM_FEATURES,
       "Orcish Mines", "the Orcish Mines", "Orc",
@@ -34,7 +34,7 @@ const Branch branches[NUM_BRANCHES] =
       BROWN, BROWN,
       'O', {}, BRANCH_NOISE_NORMAL },
 
-    { BRANCH_ELF, BRANCH_ORC, 2, 2, 3, 15,
+    { BRANCH_ELF, BRANCH_ORC, 1, 1, 3, 15,
       BFLAG_DANGEROUS_END,
       DNGN_ENTER_ELF, DNGN_EXIT_ELF, NUM_FEATURES,
       "Elven Halls", "the Elven Halls", "Elf",
@@ -100,7 +100,7 @@ const Branch branches[NUM_BRANCHES] =
       GREEN, BROWN,
       'M', { RUNE_SLIME }, BRANCH_NOISE_QUIET },
 
-    { BRANCH_VAULTS, BRANCH_DUNGEON, 11, 12, 5, 19,
+    { BRANCH_VAULTS, BRANCH_DUNGEON, 11, 12, 3, 19,
       BFLAG_DANGEROUS_END,
       DNGN_ENTER_VAULTS, DNGN_EXIT_VAULTS, NUM_FEATURES,
       "Vaults", "the Vaults", "Vaults",
@@ -108,7 +108,7 @@ const Branch branches[NUM_BRANCHES] =
       LIGHTGREY, BROWN,
       'V', { RUNE_VAULTS }, BRANCH_NOISE_NORMAL },
 #if TAG_MAJOR_VERSION == 34
-    { BRANCH_BLADE, BRANCH_VAULTS, 3, 4, 1, 21,
+    { BRANCH_BLADE, BRANCH_VAULTS, 2, 2, 1, 21,
       BFLAG_NO_ITEMS,
       DNGN_ENTER_BLADE, DNGN_EXIT_BLADE, NUM_FEATURES,
       "Hall of Blades", "the Hall of Blades", "Blade",
@@ -117,7 +117,7 @@ const Branch branches[NUM_BRANCHES] =
       'B', {}, BRANCH_NOISE_QUIET },
 #endif
 
-    { BRANCH_CRYPT, BRANCH_VAULTS, 2, 3, 3, 19,
+    { BRANCH_CRYPT, BRANCH_VAULTS, 1, 2, 2, 19,
       BFLAG_DANGEROUS_END,
       DNGN_ENTER_CRYPT, DNGN_EXIT_CRYPT, NUM_FEATURES,
       "Crypt", "the Crypt", "Crypt",

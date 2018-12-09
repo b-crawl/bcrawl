@@ -166,8 +166,8 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SUMMON_SMALL_MAMMAL,
     SPELL_CALL_IMP,
     SPELL_CALL_CANINE_FAMILIAR,
-    SPELL_SUMMON_LIGHTNING_SPIRE,
     SPELL_SUMMON_ICE_BEAST,
+    SPELL_SUMMON_LIGHTNING_SPIRE,
 },
 
 {   // Book of Maledictions

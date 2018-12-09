@@ -12,6 +12,7 @@
 #include "coord.h"
 #include "english.h"
 #include "env.h"
+#include "fineff.h"
 #include "fprop.h"
 #include "god-conduct.h"
 #include "item-prop.h"

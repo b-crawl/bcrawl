@@ -157,8 +157,8 @@ resisted by usual means of magic resistance.
 %%%%
 Blink Other spell
 
-Randomly translocates a targeted enemy a short distance. It cannot be resisted
-by usual means of magic resistance.
+Randomly translocates a targeted enemy a short distance. When used by residents
+of the dungeon, it cannot be resisted by usual means of magic resistance.
 %%%%
 Blink Range spell
 
@@ -533,6 +533,11 @@ Excruciating Wounds spell
 
 Temporarily infuses the weapon held by the caster with the essence of pain
 itself. It will not affect artefact weapons.
+%%%%
+False Image spell
+
+Creates an illusory duplicate of the caster. This illusion cannot attack
+and does not move, but the caster can fire missiles and spells through it.
 %%%%
 Flay spell
 
@@ -1144,6 +1149,18 @@ Sentinel's Mark spell
 
 Bestows a strong beacon upon a targeted creature. It announces the presence
 and location of the marked creature to everyone on the same level.
+%%%%
+Shackle spell
+
+Magically chains a creature to the ground, seafloor, or other surface below
+it, preventing it from leaving its tile. Unlike paralysis, this does not
+prevent the creature from taking other actions, nor does it impair the
+creature's evasion.
+
+The shackles are not strong enough to prevent creatures from blinking or
+teleporting, but they will follow a creature that does so and bind them to
+their new location. Some insubstantial and gelatinous creatures are immune
+to this spell.
 %%%%
 Shadow Bolt spell
 

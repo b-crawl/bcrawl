@@ -268,7 +268,7 @@ int attack::calc_to_hit(bool random)
             mhit -= 2 * how_transparent;
 
         if (defender->backlit(false))
-            mhit += 2 + random2(8);
+            mhit += random2(12) + random2(12);
         else if (!attacker->nightvision()
                  && defender->umbra())
             mhit -= 2 + random2(4);

@@ -115,6 +115,7 @@ static map<enchant_type, monster_info_flags> trivial_ench_mb_mappings = {
     { ENCH_SLOWLY_DYING,    MB_SLOWLY_DYING },
     { ENCH_WHIRLWIND_PINNED, MB_PINNED },
     { ENCH_VILE_CLUTCH, MB_VILE_CLUTCH},
+    { ENCH_SHACKLE,         MB_SHACKLE },
 };
 
 static monster_info_flags ench_to_mb(const monster& mons, enchant_type ench)
@@ -1243,6 +1244,8 @@ static string _verbose_info0(const monster_info& mi)
         return "burning";
     if (mi.is(MB_INVISIBLE))
         return "invisible";
+    if (mi.is(MB_SHACKLE))
+        return "shackled";
 
     return "";
 }

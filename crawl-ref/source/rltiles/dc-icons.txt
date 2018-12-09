@@ -35,6 +35,7 @@ summoned_durable PERM_SUMMON
 poison POISON
 sticky_flame STICKY_FLAME
 inner_flame INNER_FLAME
+shackle SHACKLE
 constricted CONSTRICTED
 berserk BERSERK
 glowing GLOWING

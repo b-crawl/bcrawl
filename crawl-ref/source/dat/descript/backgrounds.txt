@@ -119,8 +119,8 @@ Wanderers start with random equipment and skills.
 %%%%
 Warper
 
-Warpers start with a weapon of their choice and a scroll of blinking. They
-begin with a number of Translocations spells in their library.
+Warpers carry ranged weapons, and use spells from the Translocations school
+to reposition their foes and themselves as desired.
 %%%%
 Wizard
 

@@ -107,10 +107,9 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Book of Misfortune
     SPELL_CONFUSING_TOUCH,
     SPELL_CONFUSE,
-    SPELL_GRAVITAS,
     SPELL_PETRIFY,
-    SPELL_ENGLACIATION,
     SPELL_VIOLENT_UNRAVELLING,
+    SPELL_ENGLACIATION,
 },
 
 {   // Book of Changes
@@ -196,7 +195,6 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of the Warp
-    SPELL_GRAVITAS,
     SPELL_PORTAL_PROJECTILE,
     SPELL_FORCE_LANCE,
     SPELL_DISPERSAL,

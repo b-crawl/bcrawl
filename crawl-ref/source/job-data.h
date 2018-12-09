@@ -220,7 +220,7 @@ static const map<job_type, job_def> job_data =
 { JOB_REAVER, {
     "Re", "Reaver",
     3, 6, 3,
-    { SP_KOBOLD, SP_CENTAUR, SP_MERFOLK, SP_BASE_DRACONIAN, SP_VAMPIRE, },
+    { SP_GARGOYLE, SP_AVARIEL, SP_OGRE, SP_GNOLL, SP_FELID, },
     { "steam dragon scales", "potion of haste", "scroll of immolation" },
     WCHOICE_GOOD,
     { { SK_FIGHTING, 3 }, { SK_DODGING, 3 }, { SK_SPELLCASTING, 2 },

@@ -395,7 +395,7 @@ KFEAT:    S = any shop
 : line_setup(_G)
 : general_item_setup(_G)
 : lua_marker('~', props_marker {
-:           door_description_suffix=" to Orc:2",
+:           door_description_suffix=" to Orc:1",
 :           })
 MAP
 xxxxxxxxxxxxxxxxxx
@@ -564,7 +564,7 @@ ENDMAP
 NAME:     vaults_1
 TAGS:     vaults_1
 KMONS:    1 = place:Vaults:1
-KMONS:    2 = place:Vaults:4
+KMONS:    2 = place:Vaults:2
 KFEAT:    v = permarock_wall
 COLOUR:   v = cyan
 : line_setup(_G)
@@ -751,7 +751,7 @@ COLOUR:   v = cyan
 : line_setup(_G)
 : general_item_setup(_G)
 : lua_marker('~', props_marker {
-:           door_description_suffix=" to Vaults:5",
+:           door_description_suffix=" to Vaults:3",
 :           })
 MAP
 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv

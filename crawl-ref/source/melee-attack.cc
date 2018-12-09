@@ -3369,7 +3369,7 @@ int melee_attack::cleave_damage_mod(int dam)
 int melee_attack::martial_damage_mod(int dam)
 {
     if (wu_jian_has_momentum(wu_jian_attack))
-        dam = div_rand_round(dam * 14, 10);
+        dam = div_rand_round(dam * 12, 10);
 
     if (wu_jian_attack == WU_JIAN_ATTACK_LUNGE)
         dam = div_rand_round(dam * 12, 10);

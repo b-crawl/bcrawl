@@ -78,7 +78,7 @@ spret_type ice_armour(int pow, bool fail)
         mpr("Your corpse armour falls away.");
     }
 
-    int dur = 1 + div_rand_round(pow, 25);
+    int dur = 2 + div_rand_round(pow, 20);
     you.increase_duration(DUR_ICY_ARMOUR, dur, dur);
     you.props[ICY_ARMOUR_KEY] = pow;
     you.redraw_armour_class = true;

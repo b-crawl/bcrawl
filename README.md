@@ -23,6 +23,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Archaeologists start with a crate and a dusty tome. The tome reveals itself to be a random skill manual at XL 3, and when the manual is finished, the crate unlocks and gives the player a related artifact.
   - Necromancers start with Bolt of Draining.
   - 'Assassin' has been renamed to 'Rogue'.
+  - v1.1: Skalds have a reworked Ozocubu's Armour instead of Shroud of Golubria.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -87,6 +88,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Lee's Rapid Deconstruction still breaks walls.
   - Bolt of Cold and Throw Frost have +1 range.
   - Lightning Bolt has better accuracy.
+  - v1.1: Ozocubu's Armour now works with any armour and freezes melee attackers, but only lasts a few turns and gives a smaller AC bonus.
 
 #### Removed Spells
   - Summon Guardian Golem

@@ -6154,7 +6154,7 @@ int player::armour_class(bool /*calc_unid*/) const
     int AC = base_ac(scale);
 
     if (duration[DUR_ICY_ARMOUR])
-        AC += 500 + you.props[ICY_ARMOUR_KEY].get_int() * 8;
+        AC += 400;
 
     if (has_mutation(MUT_ICEMAIL))
         AC += 100 * player_icemail_armour_class();

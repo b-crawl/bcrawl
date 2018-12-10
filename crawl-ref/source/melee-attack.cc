@@ -251,6 +251,13 @@ bool melee_attack::handle_phase_attempted()
     return true;
 }
 
+bool melee_attack::handle_phase_blocked()
+{
+    do_passive_freeze();
+
+    return attack::handle_phase_blocked();
+}
+
 bool melee_attack::handle_phase_dodged()
 {
     did_hit = false;
@@ -3047,7 +3054,7 @@ void melee_attack::do_passive_freeze()
         if (!hurted)
             return;
 
-        simple_monster_message(*mon, " is very cold.");
+        simple_monster_message(*mon, " is frozen.");
 
 #ifndef USE_TILE_LOCAL
         flash_monster_colour(mon, LIGHTBLUE, 200);

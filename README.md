@@ -95,10 +95,10 @@ https://github.com/b-crawl/bcrawl/releases
 
 #### Gods
   - Ashenzari now curses items for free, but it costs a large amount of piety to uncurse items.
-  - The piety cost of Qazlal's Upheaval is significantly reduced.
+  - Qazlal's Upheaval has a much lower piety cost.
   - Makhleb's Major Destruction is now more powerful.
-  - Jiyva & Lugonu appear in the Temple.
-  - Yredelemnul allows worship from Gargoyles and allows use of 'Statue Form'.
+  - Lugonu appears in the Temple.
+  - Yredelemnul allows Statue Form and worship from Gargoyles.
 
 #### Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

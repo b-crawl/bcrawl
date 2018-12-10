@@ -7305,7 +7305,7 @@ bool player::polymorph(int pow)
 {
     ASSERT(!crawl_state.game_is_arena());
 
-    if (!can_polymorph())
+    if (is_lifeless_undead())
         return false;
 
     transformation f = transformation::none;

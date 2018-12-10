@@ -3031,7 +3031,7 @@ void melee_attack::mons_apply_attack_flavour()
 
 void melee_attack::do_passive_freeze()
 {
-    if ((you.has_mutation(MUT_PASSIVE_FREEZE) || duration[DUR_ICY_ARMOUR])
+    if ((you.has_mutation(MUT_PASSIVE_FREEZE) || you.duration[DUR_ICY_ARMOUR])
         && attacker->alive()
         && adjacent(you.pos(), attacker->as_monster()->pos()))
     {

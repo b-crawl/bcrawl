@@ -140,10 +140,10 @@ static const vector<spell_type> spellbook_templates[] =
 #if TAG_MAJOR_VERSION > 34
 {   // Book of Battle
     SPELL_INFUSION,
-    SPELL_SHROUD_OF_GOLUBRIA,
     SPELL_SONG_OF_SLAYING,
     SPELL_SPECTRAL_WEAPON,
     SPELL_REGENERATION,
+    SPELL_OZOCUBUS_ARMOUR,
 },
 #endif
 {   // Book of Clouds
@@ -226,10 +226,10 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Battle
     SPELL_INFUSION,
-    SPELL_SHROUD_OF_GOLUBRIA,
     SPELL_SONG_OF_SLAYING,
     SPELL_SPECTRAL_WEAPON,
     SPELL_REGENERATION,
+    SPELL_OZOCUBUS_ARMOUR,
 },
 #endif
 

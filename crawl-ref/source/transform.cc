@@ -1602,7 +1602,7 @@ bool transform(int pow, transformation which_trans, bool involuntary,
     if (!involuntary && crawl_state.is_god_acting())
         involuntary = true;
 
-    if (you.transform_uncancellable)
+    if (you.transform_uncancellable && !involuntary)
     {
         msg = "You are stuck in your current form!";
         success = false;

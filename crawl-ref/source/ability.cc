@@ -639,9 +639,10 @@ static const ability_def Ability_List[] =
 
     // Wu Jian
     { ABIL_WU_JIAN_SERPENTS_LASH, "Serpent's Lash",
-        0, 0, 0, 2, {fail_basis::invo}, abflag::exhaustion | abflag::instant },
+        0, 0, 0, 0, {fail_basis::invo}, abflag::exhaustion | abflag::instant
+        | abflag::skill_drain },
     { ABIL_WU_JIAN_HEAVENLY_STORM, "Heavenly Storm",
-        0, 0, 0, 20, {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::none },
+        0, 0, 0, 6, {fail_basis::invo, piety_breakpoint(4), 0, 1}, abflag::none },
     // Lunge and Whirlwind abilities aren't menu abilities but currently need
     // to exist for action counting, hence need enums/entries.
     { ABIL_WU_JIAN_LUNGE, "Lunge", 0, 0, 0, 0, {}, abflag::none },
@@ -786,7 +787,7 @@ const string make_cost_description(ability_type ability)
         ret += ", Piety or 2 Rations";
 
     if (abil.flags & abflag::skill_drain)
-        ret += ", Skill drain";
+        ret += ", Drain";
 
     if (abil.flags & abflag::remove_curse_scroll)
         ret += ", Scroll of remove curse";
@@ -2988,7 +2989,7 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
                 place_cloud(CLOUD_GOLD_DUST, *ai, 5 + random2(5), &you);
         }
 
-        you.attribute[ATTR_HEAVENLY_STORM] = 12;
+        you.attribute[ATTR_HEAVENLY_STORM] = 6;
         you.duration[DUR_HEAVENLY_STORM] = WU_JIAN_HEAVEN_TICK_TIME;
         invalidate_agrid(true);
         break;

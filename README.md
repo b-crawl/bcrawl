@@ -87,6 +87,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Lee's Rapid Deconstruction still breaks walls.
   - Bolt of Cold and Throw Frost have +1 range.
   - Lightning Bolt has better accuracy.
+  - v1.1: Ozocubu's Armour now works with any armour and freezes melee attackers, but only lasts a few turns and gives a smaller AC bonus.
 
 #### Removed Spells
   - Summon Guardian Golem

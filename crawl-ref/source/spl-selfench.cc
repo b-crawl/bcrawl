@@ -70,7 +70,7 @@ spret_type ice_armour(int pow, bool fail)
     else if (you.form == transformation::ice_beast)
         mpr("Your icy body feels more resilient.");
     else
-        mpr("A film of ice covers your body!");
+        mpr("A cloud of ice covers your body!");
 
     if (you.attribute[ATTR_BONE_ARMOUR] > 0)
     {
@@ -78,7 +78,8 @@ spret_type ice_armour(int pow, bool fail)
         mpr("Your corpse armour falls away.");
     }
 
-    you.increase_duration(DUR_ICY_ARMOUR, random_range(40, 50), 50);
+    int dur = 1 + div_rand_round(pow, 25);
+    you.increase_duration(DUR_ICY_ARMOUR, dur, dur);
     you.props[ICY_ARMOUR_KEY] = pow;
     you.redraw_armour_class = true;
 

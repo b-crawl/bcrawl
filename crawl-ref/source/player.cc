@@ -7326,7 +7326,7 @@ bool player::polymorph(int pow)
         f = transformation::none;
     }
 
-    if (f != transformation::none && transform(pow, f))
+    if (f != transformation::none && transform(pow, f, true, false))
     {
         transform_uncancellable = true;
         return true;

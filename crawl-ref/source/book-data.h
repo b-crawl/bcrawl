@@ -125,6 +125,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_STATUE_FORM,
     SPELL_HYDRA_FORM,
     SPELL_DRAGON_FORM,
+    SPELL_NECROMUTATION,
 },
 
 {   // Fen Folio

@@ -2011,7 +2011,7 @@ int items(bool allow_uniques,
         if (force_good)
             item.quantity = 100 + random2(400);
         else
-            item.quantity = 1 + random2avg(19, 2) + random2(item_level);
+            item.quantity = 1 + random2avg(26, 2) + random2(item_level);
         break;
     }
 

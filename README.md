@@ -94,11 +94,12 @@ https://github.com/b-crawl/bcrawl/releases
   - Excruciating Wounds
 
 #### Gods
-  - Ashenzari now curses items for free, but it costs a large amount of piety to uncurse items.
+  - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.
   - Qazlal's Upheaval has a much lower piety cost.
   - Makhleb's Major Destruction is now more powerful.
   - Lugonu appears in the Temple.
   - Yredelemnul allows Statue Form and worship from Gargoyles.
+  - v1.1: Wu Jian is reworked: abilities require less piety, Serpent's Lash only costs drain (scaling down with piety), Whirlwind does full dmg but only pins with Serpent's Lash, and Heavenly Storm starts out weaker but costs much less piety.
 
 #### Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

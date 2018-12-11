@@ -36,11 +36,10 @@ trap_type get_trap_type(const coord_def& where);
 
 bool is_valid_shaft_level();
 bool is_valid_shaft_effect_level();
-void roll_trap_effects();
 void do_trap_effects();
 level_id generic_shaft_dest(coord_def pos, bool known);
 
-int       trap_rate_for_place();
+int       num_traps_for_place();
 trap_type random_trap_for_place();
 trap_type random_vault_trap();
 

@@ -2301,9 +2301,9 @@ MONS:   gnoll ; club ego:chaos | dagger ego:chaos | spear ego:chaos
 MONS:   boggart ; flail ego:chaos | long sword ego:chaos | trident ego:chaos
 MONS:   rakshasa ; flail ego:chaos | long sword ego:chaos | trident ego:chaos
 :  if you.depth() == dgn.br_depth(you.branch()) then
-KFEAT:  ~ = teleport trap w:20 / alarm trap w:3 / dispersal trap
+KFEAT:  ~ = teleport trap w:20 / alarm trap w:3
 :  else
-KFEAT:  ~ = known shaft trap / teleport trap / alarm trap w:3 / dispersal trap
+KFEAT:  ~ = known shaft trap / teleport trap / alarm trap w:3
 :  end
 # Previously on raw average 5.17 M glyphs.
 NSUBST: ' = 1:_ / *:.
@@ -2411,7 +2411,7 @@ SUBST:   . = lWwtm_~......
 KFEAT:   _ = altar_xom
 NSUBST:  T = 3:T / .
 KFEAT:   T = known teleport trap
-KFEAT:   ~ = shaft trap / alarm trap / teleport trap / dispersal trap
+KFEAT:   ~ = shaft trap / alarm trap / teleport trap
 : interest_check(_G)
 MAP
       @
@@ -2431,7 +2431,7 @@ NAME:   led_xom_imps
 DEPTH:  D:3-5
 TAGS:   temple_overflow_1 temple_overflow_xom uniq_altar_xom
 KFEAT:  _ = altar_xom
-KFEAT:  T = known teleport trap / dispersal trap
+KFEAT:  T = known teleport trap
 NSUBST: I = 1:1 / 3:2
 MONS: crimson imp ; dagger ego:chaos ident:type, crimson imp ; nothing
 MAP

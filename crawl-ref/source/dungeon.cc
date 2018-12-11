@@ -3191,7 +3191,7 @@ static bool _builder_normal()
 
 static void _place_traps()
 {
-    const int num_traps = random2avg(2 * trap_rate_for_place(), 2);
+    const int num_traps = num_traps_for_place();
 
     ASSERT(num_traps >= 0);
     dprf("attempting to place %d traps", num_traps);

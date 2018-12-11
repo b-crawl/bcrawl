@@ -586,8 +586,6 @@ void trap_def::trigger(actor& triggerer)
     case TRAP_ALARM:
         if (in_sight)
         {
-            // Don't let wandering monsters set off meaningless alarms.
-            trap_destroyed = true;
             if (you_trigger)
                 mprf("You set off the alarm!");
             else
@@ -1467,41 +1465,29 @@ static level_id _generic_shaft_dest(level_pos lpos, bool known = false)
 }
 
 /***
- * The player rolled a new tile, see if they deserve to be trapped.
- */
-void roll_trap_effects()
-{
-    int trap_rate = trap_rate_for_place();
-
-    you.trapped = you.trapped || x_chance_in_y(trap_rate, 9 * env.density);
-}
-
-/***
- * Separate from the previous function so the trap triggers when crawl is in an
- * appropriate state
- */
+ * The player rolled a new tile, try to trap them maybe.
+ * */
 void do_trap_effects()
 {
     const level_id place = level_id::current();
     const Branch &branch = branches[place.branch];
 
-    // Either try to shaft or try to alarm the player.
-    if (coinflip())
+    int trap_count = div_rand_round(num_traps_for_place(),5);
+
+    // Chance to trigger a trap effect
+    if (x_chance_in_y(trap_count, env.density))
     {
         // Don't shaft the player when we can't, and also when it would be into a
         // dangerous end.
-        if (is_valid_shaft_level()
-           && !(branch.branch_flags & BFLAG_DANGEROUS_END
-                && brdepth[place.branch] - place.depth == 1))
+        if (coinflip() && is_valid_shaft_level()
+            && !(branch.branch_flags & BFLAG_DANGEROUS_END
+                 && brdepth[place.branch] - place.depth == 1))
         {
             dprf("Attempting to shaft player.");
             you.do_shaft();
         }
-    }
-    else
-    {
         // No alarms on the first 3 floors
-        if (env.absdepth0 > 3)
+        else if (env.absdepth0 > 3)
         {
             // Alarm effect alarms are always noisy, even if the player is
             // silenced, to avoid "travel only while silenced" behavior.
@@ -1520,16 +1506,16 @@ level_id generic_shaft_dest(coord_def pos, bool known = false)
 }
 
 /**
- * Get the trap effect rate for the current level.
+ * Get a number of traps to place on the current level.
  *
- * No traps effects occur in either Temple or disconnected branches other than
- * Pandemonium. For other branches, this value starts at 1. It is increased for
- * deeper levels; by one for every 10 levels of absdepth,
- * capping out at max 9.
+ * No traps are placed in either Temple or disconnected branches other than
+ * Pandemonium. For other branches, we place 0-2 traps per level, averaged over
+ * two dice. This value is increased for deeper levels; roughly one additional
+ * trap for every 10 levels of absdepth, capping out at max 9 traps in a level.
  *
- * @return  The trap rate for the current level.
+ * @return  A number of traps to be placed.
 */
-int trap_rate_for_place()
+int num_traps_for_place()
 {
     if (player_in_branch(BRANCH_TEMPLE)
         || (!player_in_connected_branch()
@@ -1538,7 +1524,8 @@ int trap_rate_for_place()
         return 0;
     }
 
-    return 1 + env.absdepth0 / 10;
+    const int depth_bonus = div_rand_round(env.absdepth0, 5);
+    return random2avg(3 + depth_bonus, 2);
 }
 
 /**

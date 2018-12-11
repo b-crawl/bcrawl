@@ -474,19 +474,12 @@ static int _exploration_estimate(bool seen_only = false)
     return seen;
 }
 
-static bool _teleportation_check(const spell_type spell = SPELL_TELEPORT_SELF)
+static bool _teleportation_check()
 {
     if (crawl_state.game_is_sprint())
         return false;
 
-    switch (spell)
-    {
-    case SPELL_BLINK:
-    case SPELL_TELEPORT_SELF:
-        return !you.no_tele(false, false, spell == SPELL_BLINK);
-    default:
-        return true;
-    }
+    return !you.no_tele(false, false);
 }
 
 static bool _transformation_check(const spell_type spell)
@@ -3555,7 +3548,6 @@ static void _xom_good_teleport(int /*sever*/)
     {
         count++;
         you_teleport_now();
-        search_around();
         more();
         if (one_chance_in(10) || count >= 7 + random2(5))
             break;
@@ -3586,7 +3578,6 @@ static void _xom_bad_teleport(int sever)
     do
     {
         you_teleport_now();
-        search_around();
         more();
         if (count++ >= 7 + random2(5))
             break;

@@ -22,7 +22,7 @@
 #   include <SDL.h>
 #   include <GLES/gl.h>
 #  else
-#   include <SDL2/SDL_opengl.h>
+#   include <SDL_opengl.h>
 #   if defined(__MACOSX__)
 #    include <OpenGL/glu.h>
 #   else
@@ -51,7 +51,8 @@ namespace opengl
         {
             mprf(MSGCH_ERROR,
                 "Texture %s is bigger than maximum driver texture size "
-                "(%d,%d vs. %d)",
+                "(%d,%d vs. %d). Sprites from this texture will not display "
+                "properly.",
                 name, width, height, max_texture_size);
             return false;
         }

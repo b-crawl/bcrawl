@@ -262,7 +262,7 @@ enum MenuFlag
     MF_SELECT_BY_PAGE   = 0x0020,   ///< Allow selections to occur only on
                                     ///< currently-visible page.
     MF_ALWAYS_SHOW_MORE = 0x0040,   ///< Always show the -more- footer
-    MF_NOWRAP           = 0x0080,   ///< Paging past the end will not wrap back.
+    MF_WRAP             = 0x0080,   ///< Paging past the end will wrap back.
     MF_ALLOW_FILTER     = 0x0100,   ///< Control-F will ask for regex and
                                     ///< select the appropriate items.
     MF_ALLOW_FORMATTING = 0x0200,   ///< Parse index for formatted-string
@@ -276,7 +276,9 @@ enum MenuFlag
 };
 
 class UIMenu;
+class UIMenuPopup;
 class UIShowHide;
+class UIMenuMore;
 
 ///////////////////////////////////////////////////////////////////////
 // NOTE
@@ -289,6 +291,7 @@ class UIShowHide;
 class Menu
 {
     friend class UIMenu;
+    friend class UIMenuPopup;
 public:
     Menu(int flags = MF_MULTISELECT, const string& tagname = "", KeymapContext kmc = KMC_MENU);
 
@@ -392,7 +395,7 @@ protected:
         shared_ptr<UIMenu> menu;
         shared_ptr<ui::Scroller> scroller;
         shared_ptr<ui::Text> title;
-        shared_ptr<ui::Text> more;
+        shared_ptr<UIMenuMore> more;
         shared_ptr<UIShowHide> more_bin;
         shared_ptr<ui::Box> vbox;
     } m_ui;

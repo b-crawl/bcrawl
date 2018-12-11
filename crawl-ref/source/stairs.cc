@@ -421,11 +421,6 @@ static void _new_level_amuses_xom(dungeon_feature_type feat,
         xom_is_stimulated(50);
         break;
 
-    case BRANCH_LABYRINTH:
-        // Finding the way out of a labyrinth interests Xom.
-        xom_is_stimulated(75);
-        break;
-
     case BRANCH_PANDEMONIUM:
         xom_is_stimulated(100);
         break;
@@ -473,7 +468,7 @@ static level_id _travel_destination(const dungeon_feature_type how,
     // going up; everything else is going down. This mostly affects which way you
     // fall if confused.
     if (feat_is_bidirectional_portal(how))
-        going_up = (how == DNGN_ENTER_HELL && player_in_hell());
+        going_up = (how == DNGN_ENTER_HELL && player_in_hell(false));
 
     if (_stair_moves_pre(how))
         return dest;
@@ -567,6 +562,19 @@ void floor_transition(dungeon_feature_type how,
     // Magical level changes (which currently only exist "downwards") need this.
     clear_trapping_net();
     end_searing_ray();
+    you.stop_constricting_all();
+    you.stop_being_constricted();
+    you.clear_beholders();
+    you.clear_fearmongers();
+
+    if (!forced)
+    {
+        // Break ice armour
+        remove_ice_armour_movement();
+
+        // Check for barbs and apply
+        apply_barbs_damage();
+    }
 
     if (!forced)
     {
@@ -623,7 +631,7 @@ void floor_transition(dungeon_feature_type how,
         ouch(INSTANT_DEATH, KILLED_BY_LEAVING);
     }
 
-    if (how == DNGN_ENTER_LABYRINTH || how == DNGN_ENTER_ZIGGURAT)
+    if (how == DNGN_ENTER_ZIGGURAT)
         dungeon_terrain_changed(you.pos(), DNGN_STONE_ARCH);
 
     if (how == DNGN_ENTER_PANDEMONIUM
@@ -731,9 +739,14 @@ void floor_transition(dungeon_feature_type how,
                 mprf("Welcome to %s!", branches[branch].longname);
         }
 
+        const set<branch_type> boring_branch_exits = {
+            BRANCH_TEMPLE,
+            BRANCH_BAZAAR,
+            BRANCH_TROVE
+        };
+
         // Did we leave a notable branch for the first time?
-        if ((brdepth[old_level.branch] > 1
-             || old_level.branch == BRANCH_VESTIBULE)
+        if (boring_branch_exits.count(old_level.branch) == 0
             && !you.branches_left[old_level.branch])
         {
             string old_branch_string = branches[old_level.branch].longname;
@@ -782,20 +795,9 @@ void floor_transition(dungeon_feature_type how,
 
     new_level();
 
-    // Dunno why this is on going down only.
-    if (!going_up)
-    {
-        moveto_location_effects(whence);
+    moveto_location_effects(whence);
 
-        // Clear list of beholding and constricting/constricted monsters.
-        you.clear_beholders();
-        you.stop_constricting_all();
-        you.stop_being_constricted();
-
-        trackers_init_new_level(true);
-    }
-
-    you.clear_fearmongers();
+    trackers_init_new_level(true);
 
     if (update_travel_cache && !shaft)
         _update_travel_cache(old_level, stair_pos);
@@ -811,6 +813,7 @@ void floor_transition(dungeon_feature_type how,
     else
         maybe_update_stashes();
 
+    autotoggle_autopickup(false);
     request_autopickup();
 }
 
@@ -830,8 +833,7 @@ void take_stairs(dungeon_feature_type force_stair, bool going_up,
 
     // Taking a shaft manually (stepping on a known shaft, or using shaft ability)
     const bool known_shaft = (!force_stair
-                              && get_trap_type(you.pos()) == TRAP_SHAFT
-                              && how != DNGN_UNDISCOVERED_TRAP)
+                              && get_trap_type(you.pos()) == TRAP_SHAFT)
                              || (force_stair == DNGN_TRAP_SHAFT
                                  && force_known_shaft);
     // Latter case is falling down a shaft.

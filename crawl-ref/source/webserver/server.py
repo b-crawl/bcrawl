@@ -22,8 +22,18 @@ class MainHandler(tornado.web.RequestHandler):
             protocol = "wss://"
         else:
             protocol = "ws://"
+
+        recovery_token = None
+        recovery_token_error = None
+
+        if getattr(config, "allow_password_reset", False):
+            recovery_token = self.get_argument("ResetToken",None)
+            if recovery_token:
+                recovery_token_error = userdb.find_recovery_token(recovery_token)[2]
+
         self.render("client.html", socket_server = protocol + host + "/socket",
-                    username = None, config = config)
+                    username = None, config = config,
+                    reset_token = recovery_token, reset_token_error = recovery_token_error)
 
 class NoCacheHandler(tornado.web.StaticFileHandler):
     def set_extra_headers(self, path):
@@ -187,8 +197,11 @@ def check_config():
             not os.path.exists(game_data["client_path"])):
             logging.warning("Client data path %s doesn't exist!", game_data["client_path"])
             success = False
-    return success
 
+    if getattr(config, "allow_password_reset", False) and not config.lobby_url:
+        logging.warning("Lobby URL needs to be defined!")
+        success = False
+    return success
 
 if __name__ == "__main__":
     if chroot:
@@ -216,6 +229,7 @@ if __name__ == "__main__":
 
     if dgl_mode:
         userdb.ensure_user_db_exists()
+        userdb.upgrade_user_db()
     userdb.ensure_settings_db_exists()
 
     ioloop = tornado.ioloop.IOLoop.instance()

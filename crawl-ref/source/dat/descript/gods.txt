@@ -251,11 +251,10 @@ Dithmenos powers
 Followers of Dithmenos are constantly surrounded in an aura of shadow, the
 extent of which is reflective of their level of devotion. Dithmenos grants
 followers the ability to instantly step into the shadow of nearby creatures,
-provided the shadow is still enough to do so. Dithmenos protects followers by
-occasionally shrouding those struck by attacks in dark smoke. Sufficiently
-pious followers of Dithmenos will find their own shadow will begin to attack on
-its own, and eventually gain the ability to assume the form of a shadow
-themself.
+and protects followers by occasionally shrouding those struck by attacks in
+dark smoke. Sufficiently pious followers of Dithmenos will find their own
+shadow will begin to attack on its own, and eventually gain the ability to
+assume the form of a shadow themself.
 %%%%
 Elyvilon powers
 
@@ -324,11 +323,9 @@ precision and damage for as long as they keep using martial attacks.
   ...<lightred>@</lightred>O..  -->  ....O.. an enemy to strike them lightly. The dizzying
   .......       ....... motion pins monsters in place for one action.
 
-  ..#....       ..#.... (**) <lightred>Wall Jump</lightred>: Move into a wall to vault off it and
+  ..#....       ..#.... (**) <lightred>Wall Jump</lightred>: Vault off a nearby wall and
   ..#<lightred>@</lightred>O..  -->  ..#.O<lightred>@</lightred>. strike enemies adjacent to the landing spot. Vaulting
-  ..#....       ..#.... takes two turns. Can also be activated via the
-                        (a)bility menu. Set the config option <lightred>wall_jump_move =
-                        false</lightred> to disable movement-activated wall jump.
+  ..#....       ..#.... takes two turns. Activated via the (a)bility menu.
 
 %%%%
 Kikubaaqudgha powers

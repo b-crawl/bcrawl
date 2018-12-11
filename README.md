@@ -115,4 +115,3 @@ https://github.com/b-crawl/bcrawl/releases
   - Xtahua now drops the +8 fire dragon scales of Xtahua {rF+++ rC- MR+} when he drops a corpse.
   - Harold is as he was before, with Bolt of Fire and Blink.
 
-

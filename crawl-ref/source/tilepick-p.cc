@@ -744,9 +744,12 @@ void tilep_race_default(int sp, int level, dolls_data *doll)
         case SP_GNOLL:
         case SP_GARGOYLE:
         case SP_VINE_STALKER:
+<<<<<<< HEAD
             hair = 0;
             break;
         case SP_FAIRY:
+=======
+>>>>>>> 30802b1d75c0d272370f13e7685b8601975f22d6
             hair = 0;
             break;
         default:

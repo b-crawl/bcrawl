@@ -1020,7 +1020,7 @@ command_type travel()
         return CMD_NO_CMD;
 
     if (result != CMD_NO_CMD)
-        return result;
+        return result; // TODO: apparently unreachable?
 
     return direction_to_command(*move_x, *move_y);
 }
@@ -3030,8 +3030,6 @@ void do_explore_cmd()
         mpr("You need to eat something NOW!");
     else if (you.berserk())
         mpr("Calm down first, please.");
-    else if (player_in_branch(BRANCH_LABYRINTH))
-        mpr("No exploration algorithm can help you here.");
     else                        // Start exploring
         start_explore(Options.explore_greedy);
 }
@@ -4136,6 +4134,7 @@ void runrest::initialise(int dir, int mode)
     direction = dir;
     notified_hp_full = false;
     notified_mp_full = false;
+    notified_ancestor_hp_full = false;
     init_travel_speed();
 
     if (dir == RDIR_REST)
@@ -4355,6 +4354,7 @@ void runrest::clear()
     mp = hp = travel_speed = 0;
     notified_hp_full = false;
     notified_mp_full = false;
+    notified_ancestor_hp_full = false;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -4424,8 +4424,7 @@ void explore_discoveries::found_feature(const coord_def &pos,
         add_stair(stair);
         es_flags |= ES_BRANCH;
     }
-    else if ((feat_is_portal(feat) || feat == DNGN_ENTER_LABYRINTH)
-             && ES_portal)
+    else if (feat_is_portal(feat) && ES_portal)
     {
         const named_thing<int> portal(cleaned_feature_description(pos), 1);
         add_stair(portal);

@@ -1052,6 +1052,7 @@ ShopMenu::ShopMenu(shop_struct& _shop, const level_pos& _pos, bool _can_purchase
       can_purchase(_can_purchase)
 {
     menu_action = can_purchase ? ACT_EXECUTE : ACT_EXAMINE;
+    set_flags(get_flags() & ~MF_USE_TWO_COLUMNS);
 
     set_tag("shop");
 
@@ -2351,10 +2352,10 @@ void ShoppingList::display(bool view_only)
             }
 
             del_thing_at_index(index);
-            mtitle->quantity = list->size();
+            mtitle->quantity = this->list->size();
             shopmenu.set_title(mtitle);
 
-            if (list->empty())
+            if (this->list->empty())
             {
                 mpr("Your shopping list is now empty.");
                 return false;

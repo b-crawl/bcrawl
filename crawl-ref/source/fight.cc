@@ -875,12 +875,10 @@ int mons_usable_missile(monster* mons, item_def **launcher)
 
 
 bool bad_attack(const monster *mon, string& adj, string& suffix,
-                bool& would_cause_penance, coord_def attack_pos,
-                bool check_landing_only)
+                bool& would_cause_penance, coord_def attack_pos)
 {
     ASSERT(mon); // XXX: change to const monster &mon
     ASSERT(!crawl_state.game_is_arena());
-    bool bad_landing = false;
 
     if (!you.can_see(*mon))
         return false;
@@ -892,18 +890,15 @@ bool bad_attack(const monster *mon, string& adj, string& suffix,
     suffix.clear();
     would_cause_penance = false;
 
-    if (!check_landing_only
-        && (is_sanctuary(mon->pos()) || is_sanctuary(attack_pos)))
-    {
+    if (is_sanctuary(mon->pos()) || is_sanctuary(attack_pos))
         suffix = ", despite your sanctuary";
-    }
-    else if (check_landing_only && is_sanctuary(attack_pos))
+
+    if (you.duration[DUR_LIFESAVING]
+        && mon->holiness() & (MH_NATURAL | MH_PLANT))
     {
-        suffix = ", when you might land in your sanctuary";
-        bad_landing = true;
+        suffix = " while asking for your life to be spared";
+        would_cause_penance = true;
     }
-    if (check_landing_only)
-        return bad_landing;
 
     if (you_worship(GOD_JIYVA) && mons_is_slime(*mon)
         && !(mon->is_shapeshifter() && (mon->flags & MF_KNOWN_SHIFTER)))
@@ -955,7 +950,7 @@ bool bad_attack(const monster *mon, string& adj, string& suffix,
 
 bool stop_attack_prompt(const monster* mon, bool beam_attack,
                         coord_def beam_target, bool *prompted,
-                        coord_def attack_pos, bool check_landing_only)
+                        coord_def attack_pos)
 {
     ASSERT(mon); // XXX: change to const monster &mon
     bool penance = false;
@@ -970,7 +965,7 @@ bool stop_attack_prompt(const monster* mon, bool beam_attack,
         return false;
 
     string adj, suffix;
-    if (!bad_attack(mon, adj, suffix, penance, attack_pos, check_landing_only))
+    if (!bad_attack(mon, adj, suffix, penance, attack_pos))
         return false;
 
     // Listed in the form: "your rat", "Blork the orc".
@@ -1012,7 +1007,8 @@ bool stop_attack_prompt(const monster* mon, bool beam_attack,
 }
 
 bool stop_attack_prompt(targeter &hitfunc, const char* verb,
-                        bool (*affects)(const actor *victim), bool *prompted)
+                        function<bool(const actor *victim)> affects,
+                        bool *prompted, const monster *defender)
 {
     if (crawl_state.disables[DIS_CONFIRMATIONS])
         return false;
@@ -1025,16 +1021,20 @@ bool stop_attack_prompt(targeter &hitfunc, const char* verb,
 
     string adj, suffix;
     bool penance = false;
+    bool defender_ok = true;
     counted_monster_list victims;
     for (distance_iterator di(hitfunc.origin, false, true, LOS_RADIUS); di; ++di)
     {
         if (hitfunc.is_affected(*di) <= AFF_NO)
             continue;
+
         const monster* mon = monster_at(*di);
         if (!mon || !you.can_see(*mon))
             continue;
+
         if (affects && !affects(mon))
             continue;
+
         string adjn, suffixn;
         bool penancen = false;
         if (bad_attack(mon, adjn, suffixn, penancen))
@@ -1043,7 +1043,11 @@ bool stop_attack_prompt(targeter &hitfunc, const char* verb,
             // first that would cause penance
             if (victims.empty() || penancen && !penance)
                 adj = adjn, suffix = suffixn, penance = penancen;
+
             victims.add(mon);
+
+            if (defender && defender == mon)
+                defender_ok = false;
         }
     }
 
@@ -1058,8 +1062,9 @@ bool stop_attack_prompt(targeter &hitfunc, const char* verb,
         adj = "the " + adj;
     mon_name = adj + mon_name;
 
-    const string prompt = make_stringf("Really %s %s%s?%s",
-             verb, mon_name.c_str(), suffix.c_str(),
+    const string prompt = make_stringf("Really %s%s %s%s?%s",
+             verb, defender_ok ? " near" : "", mon_name.c_str(),
+             suffix.c_str(),
              penance ? " This attack would place you under penance!" : "");
 
     if (prompted)

@@ -6,7 +6,7 @@
 #include "spl-cast.h"
 #include "torment-source-type.h"
 
-spret_type cast_healing(int pow, int max_pow, bool fail);
+spret_type cast_healing(int pow, bool fail);
 bool heal_monster(monster& patient, int amount);
 
 /// List of monster enchantments which can be dispelled.
@@ -63,7 +63,8 @@ bool cast_imprison(int pow, monster* mons, int source);
 
 bool cast_smiting(int pow, monster* mons);
 
-string unpacifiable_reason(const monster &mon);
+string unpacifiable_reason(const monster& mon);
+string unpacifiable_reason(const monster_info& mi);
 
 struct bolt;
 

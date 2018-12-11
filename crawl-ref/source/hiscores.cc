@@ -1718,7 +1718,7 @@ void scorefile_entry::init(time_t dt)
 
     final_hp         = you.hp;
     final_max_hp     = you.hp_max;
-    final_max_max_hp = get_real_hp(true, true);
+    final_max_max_hp = get_real_hp(true, false);
 
     final_mp          = you.magic_points;
     final_max_mp      = you.max_magic_points;
@@ -1999,7 +1999,7 @@ scorefile_entry::character_description(death_desc_verbosity verbosity) const
         {
             if (god == GOD_XOM)
             {
-                desc + make_stringf("Was a %sPlaything of Xom.",
+                desc += make_stringf("Was a %sPlaything of Xom.",
                                     (lvl >= 20) ? "Favourite " : "");
 
                 desc += _hiscore_newline_string();

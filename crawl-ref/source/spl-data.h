@@ -3974,6 +3974,7 @@ static const struct spell_desc spelldata[] =
 },
 
 {
+<<<<<<< HEAD
     SPELL_PIERCING_SHOT, "Piercing Shot",
     SPTYP_CHARMS,
     SPFLAG_NONE,
@@ -4028,6 +4029,17 @@ static const struct spell_desc spelldata[] =
     2, 2,
     2, 0,
     TILEG_FALSE_IMAGE,
+},
+
+{
+    SPELL_GRASPING_ROOTS, "Grasping Roots",
+    SPTYP_EARTH,
+    SPFLAG_TARGET | SPFLAG_NOT_SELF | SPFLAG_MONSTER,
+    5,
+    200,
+    LOS_RADIUS, LOS_RADIUS,
+    5, 0,
+    TILEG_GRASPING_ROOTS,
 },
 
 {

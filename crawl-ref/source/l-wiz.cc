@@ -1,8 +1,3 @@
-/**
- * @file
- * @brief Wizmode-specific bindings
-**/
-
 /*
 --- General game bindings
 
@@ -20,11 +15,7 @@ module "crawl"
 
 #ifdef WIZARD
 
-/////////////////////////////////////////////////////////////////////
-// User accessible
 //
-
-/////////////////////////////////////////////////////////////////////
 // Non-user-accessible bindings (dlua).
 //
 

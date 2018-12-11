@@ -1020,6 +1020,8 @@ static dungeon_feature_type rewrite_feature(dungeon_feature_type x,
         x = DNGN_CLEAR_STONE_WALL;
     }
 
+    if (x == DNGN_ENTER_LABYRINTH)
+        x = DNGN_ENTER_GAUNTLET;
 #endif
 
     return x;
@@ -1114,9 +1116,9 @@ static void _add_missing_branches()
                     map_feature_marker *featm =
                         dynamic_cast<map_feature_marker*>(marker);
                     // [ds] Ensure we're activating the correct feature
-                    // markers. Feature markers are also used for other
-                    // things, notably to indicate the return point from
-                    // a labyrinth or portal vault.
+                    // markers. Feature markers are also used for other things,
+                    // notably to indicate the return point from a portal
+                    // vault.
                     switch (featm->feat)
                     {
                     case DNGN_ENTER_COCYTUS:
@@ -1286,6 +1288,21 @@ void tag_read(reader &inf, tag_type tag_id)
         }
         tag_read_level_tiles(th);
 #if TAG_MAJOR_VERSION == 34
+        if (you.where_are_you == BRANCH_GAUNTLET
+            && th.getMinorVersion() < TAG_MINOR_GAUNTLET_TRAPPED)
+        {
+            vault_placement *place = dgn_vault_at(you.pos());
+            if (place && place->map.desc_or_name()
+                         == "gammafunk_gauntlet_branching")
+            {
+                auto exit = DNGN_EXIT_GAUNTLET;
+                grd(you.pos()) = exit;
+                // Announce the repair even in non-debug builds.
+                mprf(MSGCH_ERROR, "Placing emergency exit: %s.",
+                     dungeon_feature_name(exit));
+            }
+        }
+
         // We can't do this when we unmarshall shops, since we haven't
         // unmarshalled items yet...
         if (th.getMinorVersion() < TAG_MINOR_SHOP_HACK)
@@ -1743,11 +1760,10 @@ static void marshallLevelXPInfo(writer &th, LevelXPInfo xp_info)
 {
     marshall_level_id(th, xp_info.level);
 
-    marshallInt(th, xp_info.spawn_xp);
-    marshallInt(th, xp_info.generated_xp);
-    marshallInt(th, xp_info.spawn_count);
-    marshallInt(th, xp_info.generated_count);
-    marshallInt(th, xp_info.turns);
+    marshallInt(th, xp_info.non_vault_xp);
+    marshallInt(th, xp_info.non_vault_count);
+    marshallInt(th, xp_info.vault_xp);
+    marshallInt(th, xp_info.vault_count);
 }
 
 static void tag_construct_you_dungeon(writer &th)
@@ -3974,13 +3990,30 @@ static LevelXPInfo unmarshallLevelXPInfo(reader &th)
 
     xp_info.level = unmarshall_level_id(th);
 
-    xp_info.spawn_xp        = unmarshallInt(th);
-    xp_info.generated_xp    = unmarshallInt(th);
-
-    xp_info.spawn_count     = unmarshallInt(th);
-    xp_info.generated_count = unmarshallInt(th);
-
-    xp_info.turns           = unmarshallInt(th);
+#if TAG_MAJOR_VERSION == 34
+    // Track monster placement from vaults instead of tracking spawns.
+    if (th.getMinorVersion() < TAG_MINOR_LEVEL_XP_VAULTS)
+    {
+        // Spawned/generated xp and counts have to be combined as non-vault
+        // info. We have no vault info on dead monsters, so this is the best we
+        // can do.
+        xp_info.non_vault_xp     = unmarshallInt(th);
+        xp_info.non_vault_xp    += unmarshallInt(th);
+        xp_info.non_vault_count  = unmarshallInt(th);
+        xp_info.non_vault_count += unmarshallInt(th);
+        // turns spent on level, which we don't need.
+        unmarshallInt(th);
+    }
+    else
+    {
+#endif
+    xp_info.non_vault_xp    = unmarshallInt(th);
+    xp_info.non_vault_count = unmarshallInt(th);
+    xp_info.vault_xp        = unmarshallInt(th);
+    xp_info.vault_count     = unmarshallInt(th);
+#if TAG_MAJOR_VERSION == 34
+    }
+#endif
 
     return xp_info;
 }
@@ -5899,6 +5932,7 @@ static spell_type _fixup_soh_breath(monster_type mtyp)
 
 static void tag_read_level_items(reader &th)
 {
+    unwind_bool dont_scan(crawl_state.crash_debug_scans_safe, false);
     env.trap.clear();
     // how many traps?
     const int trap_count = unmarshallShort(th);
@@ -5917,6 +5951,8 @@ static void tag_read_level_items(reader &th)
 #if TAG_MAJOR_VERSION == 34
         if (th.getMinorVersion() == TAG_MINOR_0_11 && trap.type >= TRAP_TELEPORT)
             trap.type = (trap_type)(trap.type - 1);
+        if (th.getMinorVersion() < TAG_MINOR_REVEAL_TRAPS)
+            grd(trap.pos) = trap.category();
         if (th.getMinorVersion() < TAG_MINOR_TRAPS_DETERM
             || th.getMinorVersion() == TAG_MINOR_0_11)
         {
@@ -5935,9 +5971,10 @@ static void tag_read_level_items(reader &th)
         for (int j = 0; j < GYM; j++)
         {
             coord_def pos(i, j);
-            if (feat_is_trap(grd(pos), true) && !map_find(env.trap, pos))
+            if (feat_is_trap(grd(pos)) && !map_find(env.trap, pos))
                 grd(pos) = DNGN_FLOOR;
         }
+
 #endif
 
     // how many items?
@@ -5995,7 +6032,13 @@ void unmarshallMonster(reader &th, monster& m)
     {
         // This was monster::is_spawn before the level XP info fix.
         if (th.getMinorVersion() < TAG_MINOR_LEVEL_XP_INFO_FIX)
-            m.xp_tracking = unmarshallByte(th) ? XP_SPAWNED : XP_GENERATED;
+        {
+            // We no longer track spawns but instead whether the monster comes
+            // from a vault. This gets determined from props below for
+            // transferred games.
+            unmarshallByte(th);
+            m.xp_tracking = XP_NON_VAULT;
+        }
         else
 #endif
     m.xp_tracking     = static_cast<xp_tracking_type>(unmarshallUByte(th));
@@ -6398,6 +6441,12 @@ void unmarshallMonster(reader &th, monster& m)
         m.props.erase("given beogh weapon");
         m.props[BEOGH_MELEE_WPN_GIFT_KEY] = true;
     }
+
+    if (th.getMinorVersion() < TAG_MINOR_LEVEL_XP_VAULTS
+        && m.props.exists("map"))
+    {
+        m.xp_tracking = XP_VAULT;
+    }
 #endif
 
     if (m.type != MONS_PROGRAM_BUG && mons_species(m.type) == MONS_PROGRAM_BUG)
@@ -6414,6 +6463,7 @@ void unmarshallMonster(reader &th, monster& m)
 
 static void tag_read_level_monsters(reader &th)
 {
+    unwind_bool dont_scan(crawl_state.crash_debug_scans_safe, false);
     int count;
 
     reset_all_monsters();
@@ -6839,6 +6889,7 @@ static void unmarshallSpells(reader &th, monster_spells &spells
 
 static void marshallGhost(writer &th, const ghost_demon &ghost)
 {
+    // save compat changes with minor tags here must be added to bones_minor_tags
     marshallString(th, ghost.name);
 
     marshallShort(th, ghost.species);
@@ -6866,6 +6917,7 @@ static void marshallGhost(writer &th, const ghost_demon &ghost)
 
 static ghost_demon unmarshallGhost(reader &th)
 {
+    // save compat changes with minor tags here must be added to bones_minor_tags
     ghost_demon ghost;
 
     ghost.name             = unmarshallString(th);
@@ -6938,7 +6990,11 @@ static vector<ghost_demon> tag_read_ghost(reader &th)
     int nghosts = unmarshallShort(th);
 
     if (nghosts < 1 || nghosts > MAX_GHOSTS)
-        return result;
+    {
+        string error = "Bones file has an invalid ghost count (" +
+                                                    to_string(nghosts) + ")";
+        throw corrupted_save(error);
+    }
 
     for (int i = 0; i < nghosts; ++i)
         result.push_back(unmarshallGhost(th));

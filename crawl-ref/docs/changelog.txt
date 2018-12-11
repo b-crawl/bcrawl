@@ -1,5 +1,100 @@
-Stone Soup 0.22 (through 0.22-a0-900-g8945bfbd8a)
--------------------------------------------------
+Stone Soup 0.23 (up to 0.23-a0-550-g7de1f8ee)
+---------------------------------------------
+
+Branches, Environment
+---------------------
+* Traps have been reworked:
+  - Traps that generate on the ground are always revealed.
+  - Exploration has a chance to trigger a "trap effect" independent from
+    terrain traps. The possible effects are alarm, shaft, and teleport near
+    monsters.
+  - Alarm traps only trigger in LOS, and always Mark the player when
+    triggered.
+  - New trap: dispersal trap. When triggered every actor in sight of the trap
+    is blinked.
+* A new Gauntlet portal that replaces Labyrinths:
+   - Gauntlets have the player choose a path through several combat arenas,
+     each of which contains (sometimes exotic) monsters and loot.
+   - Arena access is one-way using transporters, and teleports are disabled.
+   - All paths lead to the minotaur who guards the exit and a pile of treasure.
+   - Gauntlets are found where Labyrinths previously generated.
+* New early vaults featuring thematic item shops and monsters guarding
+  manuals.
+* Layouts:
+  - Concentric octagons is enabled for Lair.
+  - Cave pools (with adjusted parameters) is enabled for the Dungeon.
+
+Character
+---------
+* Wanderer starting spell libraries are announced along with equipment.
+* Wanderers that start with exactly one level 1 spell start with it memorized.
+* The player can no longer be put to sleep when paralyzed or petrified.
+
+Gods
+----
+* Monster conversion for Beogh, Gozag's Bribe, and Jiyva is attempted upon
+  sight instead of on the turn after the monster enters LOS.
+* The acid damage from Makhleb's Minor Destruction has been reduced.
+* Elyvilon's Heal Other's is adjusted.
+  - The formula depends only on monster type, not specific monster maxhp.
+  - Player Ghosts and Pandemonium Lords are now immune.
+  - The targeter displays the pacification chance.
+* Exploration-based piety is no longer granted for the Temple, deep water, or
+  lava.
+
+Interface
+---------
+* The Hepliakqana ancestor reaching full health interrupts resting. The exact
+  behavior of this interrupt can be configured by rest_wait_ancestor.
+* WebTiles users can use a "Forgot Password" link to reset their password
+  via a link sent to their registration email address. This feature is not yet
+  enabled on most official servers.
+
+Items
+-----
+* Stash search can now search by handedness.
+* Butchering a corpse always leaves a skeleton.
+* Wand charges for wands of digging, enslavement, flame, paralysis, polymorph,
+  and random effects have been reduced.
+* The blowgun targeter now displays the chance to affect the target
+* Unrandarts:
+  - The Singing Sword is now vorpal, and its sonic damage effect is stronger
+    and triggers on-hit instead of while wielded.
+  - The Spriggan's Knife loses Dex+4 and MR+ and converts all stabs to
+    sleep-tier stabs.
+  - The robe of Misfortune is now identified, and is +5 {*Contam *Corrode
+    *Drain Harm *Slow and EV+5}.
+  - The sceptre of Torment is now a +7 eveningstar of pain, and its torment
+    does not affect the wielder.
+  - The arc blade's effect now casts static discharge only once, but at very
+    high spellpower. The weapon's enchantment is now +8.
+  - Finisher loses Str+3 and gains a chance to instant-explode the target.
+  - Unrandarts with melee effects that could anger nearby allies give a proper
+    warning.
+  - The robe of Clouds is now +3 {+Thunder rCloud rElec}, providing evocable
+    storm clouds in place of its old mist
+  - The storm bow no longer occasionally creates rain clouds
+
+Monsters
+--------
+* Monster weapons, armour, and wands are identified and revealed to the player
+  when the monster is first seen.
+* The shambling mangrove Grasping Roots ability now performs smite-targeted
+  constriction instead of applying a 'Roots' status.
+* Jorgrun gains the Grasping Roots spell and can now spawn in Swamp.
+* Orb run spawns are more frequently near the player and more dangerous.
+* Pandemonium lords' spell sets and attack brands are revealed.
+* Monster summons disappear whenever the summoner changes alignment from being
+  charmed/uncharmed, pacified, or slimified.
+* Confused monsters now get a 1 in 3 chance to move normally, like players do
+
+Spells
+------
+* Confusing touch works with a weapon wielded
+
+
+Stone Soup 0.22 (20180810)
+--------------------------
 
 Highlights
 ----------
@@ -19,6 +114,10 @@ Branches, Environment
 * Players on Abyss:1-4 will sometimes be drawn a level deeper, with the chance
   increasing based on XL and decreasing based on current depth.
 * The Hall of the Hellbinder WizLab has fewer higher-tier demons.
+<<<<<<< HEAD
+=======
+* Two-headed ogres are less common in earlier dungeon levels.
+>>>>>>> 30802b1d75c0d272370f13e7685b8601975f22d6
 
 Character
 ---------
@@ -51,6 +150,11 @@ Interface
   - The chat window has a minimize button that removes message notification.
   - The `/hide' and `/hide forever` commands minimize/remove the chat window.
 * Wands of digging now have a targeter showing the dig range.
+<<<<<<< HEAD
+=======
+* Updated visual theme for Tiles and WebTiles.
+* Tiles and WebTiles informational screens now show tiles where appropriate.
+>>>>>>> 30802b1d75c0d272370f13e7685b8601975f22d6
 
 Items
 -----
@@ -72,8 +176,12 @@ Monsters
 * Harold has better melee damage and armour, and he places earlier. His Bolt
   of Fire and Blink spells are replaced with Harpoon Shot and Sentinel's Mark.
 * Jorgrun has Iron Shot instead of Shatter and places earlier.
+<<<<<<< HEAD
 * Ilsuiw spawns on Shoals:2-4 with chances similar to other branch-specific
   uniques instead of nearly always spawning on Shoals:4.
+=======
+* Ilsuiw spawns on Shoals:2-4 instead of nearly always spawning on Shoals:4.
+>>>>>>> 30802b1d75c0d272370f13e7685b8601975f22d6
 * Engulf status from Water Elementals now blocks god abilities but no longer
   slows movement.
 * The Barb status from manticore barbs now counts any non-movement actions

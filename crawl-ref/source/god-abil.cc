@@ -30,6 +30,7 @@
 #include "english.h"
 #include "fight.h"
 #include "files.h"
+#include "fineff.h"
 #include "food.h"
 #include "format.h" // formatted_string
 #include "god-blessing.h"
@@ -1625,10 +1626,42 @@ bool beogh_gift_item()
                               && is_range_weapon(gift) !=
                                  is_range_weapon(*mons_weapon);
 
-    mons->take_item(item_slot, body_armour ? MSLOT_ARMOUR :
+    const auto mslot = body_armour ? MSLOT_ARMOUR :
                                     shield ? MSLOT_SHIELD :
                               use_alt_slot ? MSLOT_ALT_WEAPON :
-                                             MSLOT_WEAPON);
+                                             MSLOT_WEAPON;
+
+    // need to remove any curses so that drop_item won't fail
+    item_def* item_to_drop = mons->mslot_item(mslot);
+    if (item_to_drop && item_to_drop->cursed())
+    {
+        mprf("%s removes the curse on %s.", god_name(GOD_BEOGH).c_str(),
+                                item_to_drop->name(DESC_THE).c_str());
+        do_uncurse_item(*item_to_drop);
+    }
+
+    item_def *shield_slot = mons->mslot_item(MSLOT_SHIELD);
+    if ((mslot == MSLOT_WEAPON || mslot == MSLOT_ALT_WEAPON)
+        && shield_slot
+        && mons->hands_reqd(gift) == HANDS_TWO
+        && shield_slot->cursed())
+    {
+        // TODO: this doesn't seem to describe the shield as uncursed to the
+        // player. The weapon case works properly.
+        mprf("%s removes the curse on %s.", god_name(GOD_BEOGH).c_str(),
+                                shield_slot->name(DESC_THE).c_str());
+        do_uncurse_item(*shield_slot);
+    }
+
+    item_def *floor_item = mons->take_item(item_slot, mslot);
+    if (!floor_item)
+    {
+        // this probably means move_to_grid in drop_item failed?
+        mprf(MSGCH_ERROR, "Gift failed: %s is unable to take %s.",
+                                        mons->name(DESC_THE, false).c_str(),
+                                        gift.name(DESC_THE, false).c_str());
+        return false;
+    }
     if (use_alt_slot)
         mons->swap_weapons();
 
@@ -1785,7 +1818,7 @@ void yred_make_enslaved_soul(monster* mon, bool force_hostile)
     }
     monster_drop_things(mon, false, [](const item_def& item)
                                     { return is_holy_item(item); });
-    mon->remove_avatars();
+    mon->remove_summons();
 
     const monster orig = *mon;
 
@@ -3568,8 +3601,8 @@ void cheibriados_temporal_distortion()
 {
     const coord_def old_pos = you.pos();
 
-    you.moveto(coord_def(0, 0));
     you.duration[DUR_TIME_STEP] = 3 + random2(3);
+    you.moveto(coord_def(0, 0));
 
     _run_time_step();
 
@@ -3597,8 +3630,8 @@ void cheibriados_time_step(int pow) // pow is the number of turns to skip
 
     mpr("You step out of the flow of time.");
     flash_view(UA_PLAYER, LIGHTBLUE);
-    you.moveto(coord_def(0, 0));
     you.duration[DUR_TIME_STEP] = pow;
+    you.moveto(coord_def(0, 0));
 
     you.time_taken = 10;
     _run_time_step();
@@ -3837,8 +3870,7 @@ bool dithmenos_shadow_step()
         if (!zot_trap_prompted)
         {
             trap_def* trap = trap_at(site);
-            if (trap && env.grid(site) != DNGN_UNDISCOVERED_TRAP
-                && trap->type == TRAP_ZOT)
+            if (trap && trap->type == TRAP_ZOT)
             {
                 if (!check_moveto_trap(site, "shadow step",
                                        &trap_prompted))
@@ -4908,21 +4940,22 @@ bool qazlal_disaster_area()
 
     mprf(MSGCH_GOD, "Nature churns violently around you!");
 
+    // TODO: should count get a cap proportional to targets.size()?
     int count = max(1, min((int)targets.size(),
                             max(you.skill_rdiv(SK_INVOCATIONS, 1, 2),
                                 random2avg(you.skill(SK_INVOCATIONS, 2), 2))));
-    vector<coord_def> victims;
+
     for (int i = 0; i < count; i++)
     {
         if (targets.size() == 0)
             break;
         int which = choose_random_weighted(weights.begin(), weights.end());
-        unsigned int j = 0;
-        for (; j < victims.size(); j++)
-            if (adjacent(targets[which], victims[j]))
-                break;
-        if (j == victims.size())
-            qazlal_upheaval(targets[which], true);
+        // Downweight adjacent potential targets (but don't rule them out
+        // entirely).
+        for (unsigned int j = 0; j < targets.size(); j++)
+            if (adjacent(targets[which], targets[j]))
+                weights[j] = max(weights[j] / 2, 1);
+        qazlal_upheaval(targets[which], true);
         targets.erase(targets.begin() + which);
         weights.erase(weights.begin() + which);
     }
@@ -5049,6 +5082,10 @@ static mutation_type _random_valid_sacrifice(const vector<mutation_type> &muts)
         {
             continue;
         }
+
+        // No potion heal doesn't affect mummies since they can't quaff potions
+        if (mut == MUT_NO_POTION_HEAL && you.species == SP_MUMMY)
+            continue;
 
         // The Grunt Algorithm
         // (choose a random element from a set of unknown size without building
@@ -5780,6 +5817,9 @@ static int _ru_get_sac_piety_gain(ability_type sac)
 
 string ru_sacrifice_description(ability_type sac)
 {
+    if (!you_worship(GOD_RU))
+        return "";
+
     const int piety_gain = _ru_get_sac_piety_gain(sac);
     return make_stringf("This is %s sacrifice. Piety after sacrifice: %s",
                         _describe_sacrifice_piety_gain(piety_gain),
@@ -6678,7 +6718,15 @@ spret_type uskayaw_grand_finale(bool fail)
     ASSERT(mons);
 
     // kill the target
-    mprf("%s explodes violently!", mons->name(DESC_THE, false).c_str());
+    if (mons->type == MONS_ROYAL_JELLY && !mons->is_summoned())
+    {
+        // need to do this here, because react_to_damage is never called
+        mprf("%s explodes violently into a cloud of jellies!",
+                                        mons->name(DESC_THE, false).c_str());
+        trj_spawn_fineff::schedule(&you, mons, mons->pos(), mons->hit_points);
+    }
+    else
+        mprf("%s explodes violently!", mons->name(DESC_THE, false).c_str());
     mons->flags |= MF_EXPLODE_KILL;
     if (!mons->is_insubstantial())
     {
@@ -7173,7 +7221,7 @@ bool wu_jian_do_wall_jump(coord_def targ, bool ability)
     return true;
 }
 
-bool wu_jian_wall_jump_ability()
+spret_type wu_jian_wall_jump_ability()
 {
     // This needs to be kept in sync with direct walljumping via movement.
     // TODO: Refactor to call the same code.
@@ -7184,11 +7232,11 @@ bool wu_jian_wall_jump_ability()
         crawl_state.cant_cmd_repeat("You can't repeat a wall jump.");
         crawl_state.cancel_cmd_again();
         crawl_state.cancel_cmd_repeat();
-        return false;
+        return SPRET_ABORT;
     }
 
     if (cancel_barbed_move())
-        return false;
+        return SPRET_ABORT;
 
     if (you.digging)
     {
@@ -7209,14 +7257,24 @@ bool wu_jian_wall_jump_ability()
     if (!has_targets)
     {
         mpr("There is nothing to wall jump against here.");
-        return false;
+        return SPRET_ABORT;
     }
 
     if (you.is_nervous())
     {
         mpr("You are too terrified to wall jump!");
-        return false;
+        return SPRET_ABORT;
     }
+
+    if (you.attribute[ATTR_HELD])
+    {
+        mprf("You cannot wall jump while caught in a %s.",
+             get_trapping_net(you.pos()) == NON_ITEM ? "web" : "net");
+        return SPRET_ABORT;
+    }
+
+    if (!you.attempt_escape())
+        return SPRET_FAIL;
 
     // query for location:
     dist beam;
@@ -7243,23 +7301,23 @@ bool wu_jian_wall_jump_ability()
         {
             clear_messages();
             mpr("Cancelling wall jump due to HUP.");
-            return false;
+            return SPRET_ABORT;
         }
 
         if (!beam.isValid || beam.target == you.pos())
-            return false; // early return
+            return SPRET_ABORT; // early return
 
         if (wu_jian_can_wall_jump(beam.target, wj_error))
             break;
     }
 
     if (!wu_jian_do_wall_jump(beam.target, true))
-        return false;
+        return SPRET_ABORT;
 
     crawl_state.cancel_cmd_again();
     crawl_state.cancel_cmd_repeat();
 
     apply_barbs_damage();
     remove_ice_armour_movement();
-    return true;
+    return SPRET_SUCCESS;
 }

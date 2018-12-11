@@ -1,0 +1,908 @@
+###############################################################################
+# gauntlet.des: Vaults particular to Gauntlets.
+#
+# <<1>>      Gauntlet arena subvaults.
+# <<2>>      Gauntlet exit subvaults.
+# <<3>>      Gauntlet main maps.
+###############################################################################
+
+: require("dlua/gauntlet.lua")
+{{
+function gauntlet_portal(e)
+  local timeout_turns = crawl.random_range(400, 600)
+
+  local messager =
+    timed_msg {
+      initmsg = { "You hear a distant snort.",
+                  "Hark! There is an gateway to a gauntlet on this level. " ..
+                  "Find the entrance quickly before the gate is sealed!" },
+      finalmsg = "After a thunderous strike, the drumbeats cease.",
+      verb = 'beating',
+      noisemaker = 'drum',
+      ranges = {
+        { 5000, 'faint ' },  { 4000, '' }, { 2500, 'loud ' },
+        { 1500, 'thunderous ' }, { 0, 'deafening ' }
+      }
+    }
+
+    e.lua_marker('O',
+      timed_marker {
+        turns = timeout_turns,
+        msg = messager,
+        floor = 'stone_arch',
+        feat_tile = 'dngn_portal_gauntlet_gone',
+        single_timed = true,
+        dstname = 'gauntlet' })
+    e.kfeat("O = enter_gauntlet")
+    e.tile("O = dngn_portal_gauntlet")
+end
+
+function gauntlet_appearance(e)
+  e.kfeat("< = exit_gauntlet")
+end
+}}
+
+#############################################################################
+# Gauntlet entry vaults
+
+NAME:   gauntlet_entry_generic
+TAGS:   transparent extra uniq_gauntlet
+CHANCE: 5%
+DEPTH:  D:11-, Orc:$, Lair
+: gauntlet_portal(_G)
+MAP
+O
+ENDMAP
+
+default-depth: Gauntlet
+
+#############################################################################
+# <<1>> Gauntlet arena subvaults
+#############################################################################
+# Each vault should have tags 'gauntlet_arena_first' and 'gauntlet_arena_second' assuming
+# its viable for both tiers. Two tags exist in case a vault wants to specify
+# custom terrain for specific monsters and loot and is only appropriate for one
+# tier.
+#
+# The vaults must must have the same shape as one of the templates below. These
+# all have one side that is tapered so that the vaults exit transporter landing
+# site in the parent map will be close to the exit transporter. It represents
+# the "end" of the vault and is where the exit tranporter 'Q' glyph, '1' glyph,
+# and 'd' loot glyphs should generally be (see below). As the templates below
+# show, the vault can be any rotation of this basic shape.
+#
+# n.........n  nnnnnn      ...dQd...      nnnnnn
+# n.........n  .........   ....1....   .........
+# n.........n  .........   .........   .........
+# n.........n  .........  n.........n  .........
+# n....P....n  ........d  n....P....n  d........
+# n.........n  ....P..1Q  n.........n  Q1..P....
+#  .........   ........d  n.........n  d........
+#  ....1....   .........  n.........n  .........
+#  ...dQd...   .........  n.........n  .........
+#              .........               .........
+#              nnnnnn                     nnnnnn
+#
+# The 'n' tiles shown # are part of the transparent arena walls and must always
+# be present. Ideally nearly every location in the subvault is visible from at
+# least one of the three window areas on the walls.
+#
+# All vaults must call gauntlet_arena_subvault_setup(_G) to set up the
+# features, monsters, and items for these glyphs. All subvaults are required to
+# place the following glyphs:
+#
+# 'P' : Entry transporter landing site. Central locations or locations somewhat
+#       far away the center of the top are best. Monsters inside the arena will
+#       try to be close to the player at the top-center as they take the
+#       transporter, and ideally the player has some turns to move after
+#       transporting.
+# 'Q' : Exit transporter. Needs to be located near the tapered side of the
+#       vault where it will be close to the exit transporter landing site in
+#       the parent vault.
+# '1' : At least one glyph for the strongest type of monster. Should be an
+#       ideal location if the monster should be station (i.e. statue or oklob).
+#       If multiple are placed, only one at random will be used.
+# '2' : At least six of this glyph for the middle tier monsters. Unused
+#       instances will become floor.
+# '3' : At least ten of this glyph for the weakest tier monsters. Unused
+#       instances will become floor.
+# 'd' : At least four of this glyph for loot items. Unused instances will
+#       become floor. Tier 1 arenas place two items and tier 2 place 3. See
+#       gauntlet_arena_item_setup() for details on what's placed.
+#
+# For terrain, use 'x' for any walls and these will collectively randomized to
+# appropriate walls for the tier: either rock or stone for first tier and
+# stone, metal, or crystal for the second tier. To prevent this, give a second
+# argument of true to gauntlet_arena_subvault_setup().
+#############################################################################
+
+NAME: gammafunk_gauntlet_arena_open
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+WEIGHT: 5
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n.........n
+n.........n
+n..33333..n
+n..3...3..n
+n..3.P.3..n
+n..2...2..n
+ ..22322..
+ ....1....
+ ..ddQdd..
+ENDMAP
+
+NAME: gammafunk_gauntlet_arena_corners
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n.3.3.3.3.n
+n.xx...xx.n
+n3x3xnx3x3n
+n..xx.xx..n
+n.3..P..3.n
+n..xx.xx..n
+ 2x2xnx2x2
+ .xx.1.xx.
+ .2ddQdd2.
+ENDMAP
+
+NAME: gammafunk_gauntlet_arena_hedges
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+KMONS: p = plant w:20 / nothing
+KMONS: q = plant
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n3.3.3.3.3n
+n.ppp3ppp.n
+n3pxqqqxp3n
+n.ppp.ppp.n
+n3...P...3n
+n.ppp.ppp.n
+ 2pxqqqxp2
+ .pp212pp.
+ .2ddQdd2.
+ENDMAP
+
+NAME: gammafunk_gauntlet_arena_split_x
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n3.......3n
+n.x3...3x.n
+n.xx3.3xx.n
+n.3xx.xx3.n
+n....P....n
+n.3xxnxx3.n
+ .xx2.2xx.
+ 2x2.1.2x2
+ ..ddQdd..
+ENDMAP
+
+NAME: gammafunk_gauntlet_arena_grid
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n3.3.3.3.3n
+n.x.x.x.x.n
+n.3x3n3x3.n
+n.x.x.x.x.n
+n.3n.P.n3.n
+n.x.x.x.x.n
+ .2x2n2x2.
+ .x.x1x.x.
+ .2ddQdd2.
+ENDMAP
+
+NAME: gammafunk_gauntlet_arena_split_diamond
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n...3.3...n
+n.3xx.xx3.n
+n.xx3.3xx.n
+n3x.....x3n
+n..3.P.3..n
+n2x.....x2n
+ .xx2.2xx.
+ .2xx1xx2.
+ ..ddQdd..
+ENDMAP
+
+NAME: nicolae_gauntlet_arena_t_cross
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+NSUBST: P = P / .
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n3.3.3.3.3n
+n...nnn...n
+n3.3.x.3.3n
+n.n.PxP.n.n
+n3nxxxxxn3n
+n.n.2x2.n.n
+ .2..x..2.
+ ...n1n...
+ .2ddQdd2.
+ENDMAP
+
+NAME: nicolae_gauntlet_arena_x
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+: gauntlet_arena_subvault_setup(_G)
+MAP
+nx.3.3.3.xn
+n.x.....x.n
+n.3x3.3x3.n
+n...xPx...n
+n.3..x..3.n
+n...x.x...n
+ .2x2.2x2.
+ .x.d1d.x.
+ x.2dQd2.x
+ENDMAP
+
+NAME: nicolae_gauntlet_arena_flowing_pool
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup no_pool_fixup
+NSUBST: P = P / -, - = 10=3 / ., ' = 6=2 / .
+SUBST: w : wwwl
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n--ww---w-n
+n-w--w--w-n
+nPw-ww-wwPn
+nw-w---w--n
+nw--wPw-wwn
+n-w-www-w-n
+ 'ww'''w''
+ 'w''1w'w'
+ d'wdQd'wd
+ENDMAP
+
+NAME: nicolae_gauntlet_arena_quarters
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+NSUBST: P = P / .
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n3.3...3.3n
+n..nx3xn..n
+n3n3.x.3n3n
+n.x.PxP.x.n
+n3.xxxxx.3n
+n.x..x..x.n
+ 2n2.x.2n2
+ ..nx1xn..
+ .2ddQdd2.
+ENDMAP
+
+NAME: nicolae_gauntlet_arena_blocks
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n.3..3..3.n
+n.x.....x.n
+n.3xxnxx3.n
+n..xx.xx..n
+n3.3.P.3.3n
+n..xx.xx..n
+ 2.xxnxx.2
+ .x.212.x.
+ .2ddQdd2.
+ENDMAP
+
+NAME: nicolae_gauntlet_arena_grate_2
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+KFEAT: pq = iron_grate
+SUBST: q = qq.
+NSUBST: - = 10=3 / ., ' = 6=2 / .
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n---------n
+n-xqx---x-n
+n---xpx---n
+n-x---xqx-n
+n-xqxP--x-n
+n'''xpx'''n
+ 'x'''xqx'
+ 'xqx1''x'
+ ''ddQdd''
+ENDMAP
+
+NAME: nicolae_gauntlet_swirl
+TAGS: gauntlet_arena_first gauntlet_arena_second allow_dup
+NSUBST: P = P / -, - = 10=3 / ., ' = 6=2 / .
+: gauntlet_arena_subvault_setup(_G)
+MAP
+n--x------n
+n---x-----n
+n---x----xn
+n---PnPxx-n
+n---nnn---n
+n'xx'n''''n
+ x''''x'''
+ ''''1x'''
+ d''dQdx'd
+ENDMAP
+
+#############################################################################
+# <<2>> Gauntlet exit subvaults
+#############################################################################
+# The vaults exit subvaults that place an exit, a boss, and its loot pile.
+# These vaults must have tag 'gauntlet_exit'. Vaults not defining their own custom
+# loot set can place exactly one '<' and call gauntlet_exit_loot(G_) to place
+# loot there. Otherwise the map must place its own loot and exit_gauntlet
+# feature. The vault must also place exactly one patrolling awake minotaur.
+#
+# These vaults must have the same shape as the template below. This is so that
+# they place in the parent vault with the subvault entrance in the right
+# relative location. The entrance must place in the first row at the wider top
+# section, relative to the template below.
+#
+# ...............
+# ...............
+# ...............
+# ...............
+# ...............
+# ...............
+# ...............
+# ...............
+# ...............
+# ...............
+#  .............
+#  .............
+#  .............
+#
+# The vault will be surrounded by metal walls in the parent map. Hence the
+# subvault should fill the shape above with 'v' metal wall glyphs for areas
+# that are meant to be part of that surrounding wall.
+#############################################################################
+
+# Adapted from the labyrinth_watery minotaur exit vault.
+NAME:    gauntlet_exit_watery
+TAGS:    gauntlet_exit no_pool_fixup
+MONS:    patrolling generate_awake minotaur
+KFEAT:   < = exit_gauntlet
+SHUFFLE: def, ghi
+SUBST:   dg = ., efhi = v
+: gauntlet_exit_loot(_G)
+MAP
+vvv.vvv.vvv.vvv
+vvv.vvv.vvv.vvv
+v.............v
+v.vvv.vvv.vvv.v
+v.vvv.vvv.vvv.v
+v.............v
+vvvvbbb+bbbvvvv
+vvvvb.....bvvvv
+vvvvbbb1bbbvvvv
+vvvvbw...wbvvvv
+ vvvbww<wwbvvv
+ vvvbwwwwwbvvv
+ vvvbbbbbbbvvv
+ENDMAP
+
+# Adapted from labyrinth_green minotaur.
+NAME:   gauntlet_exit_green
+TAGS:   gauntlet_exit
+WEIGHT: 2
+MONS:   patrolling generate_awake minotaur
+KFEAT:  < = exit_gauntlet
+: gauntlet_exit_loot(_G)
+MAP
+v.vv.vv.vv.vv.v
+v.vv.vv.vv.vv.v
+...............
+.vv.vv.vv.vv.vv
+.vv.vv.vv.vv.vv
+...............
+vv.vv.b+bvv.vv.
+vv.vv.b.bvv.vv.
+......b.b......
+v.vv.vb1bv.vv.v
+ .vv.vb<bv.vv.
+ .....bbb.....
+ vv.vv.vv.vv.v
+ENDMAP
+
+# Adapted from labyrinth_spiral.
+NAME:   gauntlet_exit_spiral
+TAGS:   gauntlet_exit
+MONS:   patrolling generate_awake minotaur
+SUBST:  b : bvz, z = vb
+KFEAT:  < = exit_gauntlet
+: gauntlet_exit_loot(_G)
+MAP
+vvvvvvv.vvvvvvv
+vvvvvvv.vvvvvvv
+vvv.....vvvvvvv
+vvb.bbbbbbbvvvv
+vvb.b.....bvvvv
+vvb.b.bbb.bvvvv
+vvb.b.b<b.bvvvv
+vvb.b.b1b.bvvvv
+vvb.b.b.b.bvvvv
+vvb.b...b.bvvvv
+ vb.bbbbb.bvvv
+ vb.......bvvv
+ vbbbbbbbbbvvv
+ENDMAP
+
+# Adapted from labyrinth_hidden_loot.
+NAME:   gauntlet_exit_hidden_loot
+TAGS:   gauntlet_exit
+MONS:   patrolling generate_awake minotaur, minotaur zombie
+SUBST:  d = 2%*
+SUBST:  b : bvv
+KFEAT:  < = exit_gauntlet
+: gauntlet_exit_loot(_G)
+MAP
+vvv.vvv.vvv.vvv
+vvv.vvv.vvv.vvv
+v.............v
+v.vvv.vvv.vvv.v
+v.............v
+vvvvxxx+xxxxvvv
+vvvvxxx.xxxxvvv
+vvvvxx..<.xxvvv
+vvvvd+U...xxvvv
+vvvvxx...U+dvvv
+ vvvxx.U.1xxvv
+ vvvxxx+xxxxvv
+ vvvxxxdxxxxvv
+ENDMAP
+
+# Adapted from labyrinth_mini_lab.
+NAME:    gauntlet_exit_mini_maze
+TAGS:    gauntlet_exit
+SHUFFLE: def, ghi, klm
+SUBST:   d : b, e : ., f : b
+SUBST:   g : b, h : ., i : b
+SUBST:   k = <, l = ., m = .
+KMONS:   < = patrolling generate_awake minotaur
+KFEAT:   < = exit_gauntlet
+SUBST:   b : vvb
+: gauntlet_exit_loot(_G)
+# should not be necessary
+validate {{ return has_exit_from_glyph('<') }}
+MAP
+vbfbbbbbebbbdbv
+vbfg.......b.bv
+vbfb.bhbdb.b.bv
+vbfb.b.b.g.b.bv
+vbfb.f.b.b.b.bv
+vbfbii.b.b...bv
+vbfb.h.b.bbebbv
+vb...b.b.....bv
+vbbbbb.bfbbb.bv
+vb.........b.bv
+ bfbbdbbbbebgb
+ bl....k....mb
+ bbbbbbbbbbbbb
+ENDMAP
+
+#############################################################################
+# Chooses four corpses, each with their own set of loot, themed around some
+# particular archetypical species/background. Each set of loot has at least
+# three guaranteed items.
+# The dead octopode has a 62% chance of generating only 3 rings,
+# a 93% chance of generating 4 or less rings, and a 99% chance of
+# 5 or less. The chance of all 8 is 0.0006%.
+NAME:    nicolae_gauntlet_exit_dead_adventurers
+TAGS:    gauntlet_exit
+KMONS:   1 = patrolling generate_awake minotaur
+KPROP:   ABCD'1 = bloody
+KFEAT:   ' = floor
+SHUFFLE: bvc, ABCDEFHIJKLM
+{{
+ -- Dwarven fighter. Maybe the minotaur got the last MD. 3 items.
+dgn.delayed_decay_extra(_G, 'A', 'dwarf skeleton', 'battleaxe / '
+   .. "eveningstar / executioner's axe w:2 / "
+   .. 'great mace w:2, helmet good_item / '
+   .. 'pair of gloves good_item / pair of boots good_item, '
+   .. 'plate armour / crystal plate armour w:2' )
+
+ -- Elf caster. 4 items.
+dgn.delayed_decay_extra(_G, 'B', 'elf skeleton', 'robe, randbook, '
+   .. 'any magical staff, any jewellery' )
+
+ -- Spriggan stabber. 4 items.
+dgn.delayed_decay_extra(_G, 'C', 'spriggan skeleton', 'dagger good_item / '
+   .. 'quick blade w:1, ration, cloak, randbook disc:hexes / any book' )
+
+ -- Centaur hunter of Fedhas. 3-4 (stacks of) items.
+dgn.delayed_decay_extra(_G, 'D', 'centaur skeleton', 'shortbow good_item / longbow w:2, '
+   .. 'arrow good_item, ration / nothing, '
+   .. 'helmet / centaur barding / pair of gloves' )
+
+ -- Dwarven artificer. 3 items.
+dgn.delayed_decay_extra(_G, 'E', 'dwarf skeleton', 'any wand, any wand, '
+   .. 'any wand / any misc w:20' )
+
+ -- Dead octopode. 3 rings, possibly up to 8, though with a very low chance.
+dgn.delayed_decay_extra(_G, 'F', 'octopode corpse', 'any ring good_item, '
+   .. 'any ring good_item / any ring, any ring, any ring w:1 / nothing w:10, '
+   .. 'any ring w:1 / nothing w:10, any ring w:1 / nothing w:10, '
+   .. 'any ring w:1 / nothing w:10, any ring w:1 / nothing w:10' )
+
+ -- Merfolk skald. 3 items.
+dgn.delayed_decay_extra(_G, 'H', 'merfolk skeleton', 'leather armour good_item w:30 / '
+   .. 'swamp dragon scales w:2 / fire dragon scales w:2 / '
+   .. 'ice dragon scales w:2, trident / demon trident / glaive / bardiche, '
+   .. 'randbook disc:charms / any book' )
+
+ -- Human wanderer. 3-5 items.
+dgn.delayed_decay_extra(_G, 'I', 'human skeleton', 'any armour, any weapon, '
+   .. 'any good_item / any book / any jewellery, '
+   .. 'nothing / any scroll, nothing / any potion' )
+
+ -- Orc fighter. 3 items.
+dgn.delayed_decay_extra(_G, 'J', 'orc skeleton', 'shield / large shield w:2, '
+   .. 'long sword / eveningstar / broad axe / demon blade, '
+   .. 'plate armour / crystal plate armour w:2' )
+
+ -- Dwarven heavy armour earth elementalist. 3-4 items.
+dgn.delayed_decay_extra(_G, 'K', 'dwarf skeleton', 'plate armour, '
+   .. 'randbook disc:earth / any book, staff of earth / any magical staff, '
+   .. 'ring of wizardry / any jewellery / nothing w:20' )
+
+ -- Halfling warper. 4-5 items.
+dgn.delayed_decay_extra(_G, 'L', 'halfling skeleton', 'tomahawk ego:dispersal / sling bullet, '
+   .. 'randbook disc:translocation / any book, scroll of blinking / '
+   .. 'scroll of teleportation / nothing w:45, '
+   .. 'robe / leather armour, short sword good_item' )
+
+ -- Ogre, maybe an ogre mage of some kind. 4-5 items.
+dgn.delayed_decay_extra(_G, 'M', 'ogre skeleton', 'giant club good_item / '
+   .. 'giant spiked club good_item, robe, large rock, ration, '
+   .. 'any book / nothing' )
+}}
+MAP
+v.v.vvvvvvv.v.v
+v.v....v....v.v
+v.v.vv.v.vv.v.v
+v.............v
+v.v..bb+bb..v.v
+v.v..bG.Gb..v.v
+v....b...b....v
+vvvG.bG1Gb.Gvvv
+vvvvvbB'Dbvvvvv
+vvvvvbG'Gbvvvvv
+ vvvvbA'Cbvvvv
+ vvvvbG<Gbvvvv
+ vvvvbbbbbvvvv
+ENDMAP
+
+#############################################################################
+# <<3>> Gauntlet main maps.
+#############################################################################
+# These are encompass maps that place the arena and exit subvaults. These maps
+# should show the player all arenas and give the player some kind of path
+# through those arenas based on choice. The number of arenas taken should be
+# anywhere from 2-4 to avoid these from completely overshadowing the reward
+# from the boss fight.
+#
+# Before any arena subvault statements, call the setup function:
+#
+#    gauntlet_arena_setup(_G, entry_glyphs, exit_glyphs)
+#
+# The map should place the arena entry transporters on the glyphs in the string
+# 'entry_glyphs' and the arena exit transporter landing sites on the glyphs in
+# the string 'exit_glyphs'.
+
+# The glyphs in these strings must be in the same order of the subvault
+# transporter satements so that the transporters go to their intended
+# destinations.
+#
+# Gauntlet arenas have two tiers for easier and harder difficulties. To set a
+# subvault's difficulty, call gauntlet_arena_set_tier(n) before the subvault
+# statement and use tags gauntlet_arena_first and gauntlet_arena_second. The
+# gauntlet_arena_setup() function will initialize difficulty to the first tier.
+#
+# The map should place exactly one subvault with tag 'gauntlet_exit', which will
+# place and exit features. Call gauntlet_appearance(_G) to set the exit feature on
+# the '<' and for any other common visual changes.
+NAME:   gammafunk_gauntlet_branching
+ORIENT: encompass
+TAGS:   no_item_gen no_monster_gen no_trap_gen
+: gauntlet_arena_setup(_G, "DFJLNPRp", "EHKMOQSq")
+SUBVAULT: a : gauntlet_arena_first
+SUBVAULT: d : gauntlet_arena_first
+: if crawl.coinflip() then
+SUBVAULT: e : gauntlet_arena_first
+SUBVAULT: f : gauntlet_arena_first
+SUBVAULT: g : gauntlet_arena_first
+SUBVAULT: h : gauntlet_arena_first
+: else
+:     gauntlet_arena_set_tier(2)
+SUBVAULT: e : gauntlet_arena_second
+SUBVAULT: f : gauntlet_arena_second
+SUBVAULT: g : gauntlet_arena_second
+SUBVAULT: h : gauntlet_arena_second
+: end
+: gauntlet_arena_set_tier(2)
+SUBVAULT: i : gauntlet_arena_second
+SUBVAULT: j : gauntlet_arena_second
+SUBVAULT: y : gauntlet_exit
+: gauntlet_appearance(_G)
+MAP
+            ccccccccccccccccccccccccccccccc
+            cG.............<.............Gc
+            c.............................c
+            c..nnnnaaaaaan...nddddddnnnn..c
+          ccc..naaaaaaaaan...ndddddddddn..ccc
+          cG...naaaaaaaaan.A.ndddddddddn...Gc
+          c....naaaaaaaaan...ndddddddddn....c
+          c..nnnaaaaaaaaan...ndddddddddnnn..c
+          c..nEnaaaaaaaaanD.FndddddddddnHn..c
+          c..n.naaaaaaaaan...ndddddddddn.n..c
+          c..n.naaaaaaaaan...ndddddddddn.n..c
+          c..n.naaaaaaaaan...ndddddddddn.n..c
+    ccccccc..n.naaaaaaaaan...ndddddddddn.n..ccccccc
+    cG.......n.nnnnaaaaaan...nddddddnnnn.n.......Gc
+ccccc........n.n.......................n.n........ccccc
+cG.....nnnnnnn.nnnnnnn.....T.....nnnnnnn.nnnnnnn.....Gc
+c......nJ...........Ln...........nN...........Pn......c
+c..nnnnnnnnnnnnnnnnnnnnnnn...nnnnnnnnnnnnnnnnnnnnnnn..c
+c..eeeeeeeeeee.fffffffffff...ggggggggggg.hhhhhhhhhhh..c
+c..eeeeeeeeeee.fffffffffff...ggggggggggg.hhhhhhhhhhh..c
+c..eeeeeeeeeee.fffffffffff...ggggggggggg.hhhhhhhhhhh..c
+c..eeeeeeeeeee.fffffffffff...ggggggggggg.hhhhhhhhhhh..c
+c..eeeeeeeeeee.fffffffffff...ggggggggggg.hhhhhhhhhhh..c
+c..eeeeeeeeeee.fffffffffff...ggggggggggg.hhhhhhhhhhh..c
+c..neeeeeeeeen.nfffffffffn...ngggggggggn.nhhhhhhhhhn..c
+c..neeeeeeeeen.nfffffffffn...ngggggggggn.nhhhhhhhhhn..c
+c..neeeeeeeeen.nfffffffffn...ngggggggggn.nhhhhhhhhhn..c
+c..nnnnnnnnnnnnnnnnnnnnnnn...nnnnnnnnnnnnnnnnnnnnnnn..c
+c......nK...........Mn...........nO...........Qn......c
+cG.....nnnnnnn.nnnnnnn.....T.....nnnnnnn.nnnnnnn.....Gc
+ccccc........n.n.......................n.n........ccccc
+    cG.......n.niiiiiinnnn...nnnnjjjjjjn.n.......Gc
+    ccccccc..n.niiiiiiiiin...njjjjjjjjjn.n..ccccccc
+          c..n.niiiiiiiiin...njjjjjjjjjn.n..c
+          c..n.niiiiiiiiin...njjjjjjjjjn.n..c
+          c..n.niiiiiiiiin...njjjjjjjjjn.n..c
+          c..nRniiiiiiiiin...njjjjjjjjjnpn..c
+          c..nnniiiiiiiiin...njjjjjjjjjnnn..c
+          c....niiiiiiiiin...njjjjjjjjjn....c
+          cG...niiiiiiiiin...njjjjjjjjjn...Gc
+          ccc..niiiiiiiiin...njjjjjjjjjn..ccc
+            c..niiiiiinnnn...nnnnjjjjjjn..c
+            c........nSn.......nqn........c
+            cG.......n.n..GTG..n.n.......Gc
+            vvvvvvvvvv.vvvvvvvvv.vvvvvvvvvv
+                   v...............v
+                   v...............v
+                   vyyyyyyyyyyyyyyyv
+                   vyyyyyyyyyyyyyyyv
+                   vyyyyyyyyyyyyyyyv
+                   vyyyyyyyyyyyyyyyv
+                   vyyyyyyyyyyyyyyyv
+                   vyyyyyyyyyyyyyyyv
+                   vyyyyyyyyyyyyyyyv
+                   vyyyyyyyyyyyyyyyv
+                   vyyyyyyyyyyyyyyyv
+                   vyyyyyyyyyyyyyyyv
+                   vvyyyyyyyyyyyyyvv
+                   vvyyyyyyyyyyyyyvv
+                   vvyyyyyyyyyyyyyvv
+                   vvvvvvvvvvvvvvvvv
+ENDMAP
+
+NAME:   gammafunk_gauntlet_hard_choice
+ORIENT: encompass
+TAGS:   no_item_gen no_monster_gen no_trap_gen
+: gauntlet_arena_setup(_G, "DFJLNP", "EHKMOQ")
+SUBVAULT: a : gauntlet_arena_first
+SUBVAULT: p : gauntlet_arena_first
+# 50% chance to make the second fight harder.
+: if crawl.coinflip() then
+SUBVAULT: q : gauntlet_arena_first
+SUBVAULT: r : gauntlet_arena_first
+: else
+:   gauntlet_arena_set_tier(2)
+SUBVAULT: q : gauntlet_arena_second
+SUBVAULT: r : gauntlet_arena_second
+: end
+: gauntlet_arena_set_tier(2)
+SUBVAULT: s : gauntlet_arena_second
+SUBVAULT: u : gauntlet_arena_second
+SUBVAULT: y : gauntlet_exit
+: gauntlet_appearance(_G)
+MAP
+ccccccccccccccccccccccccccccccc
+cG.............A.............Gc
+c.......D.............F.......c
+c..nnnnnnnnnnn...nnnnnnnnnnn..c
+c..aaaaaaaaaaa...ppppppppppp..c
+c..aaaaaaaaaaa...ppppppppppp..c
+c..aaaaaaaaaaa...ppppppppppp..c
+c..aaaaaaaaaaa...ppppppppppp..c
+c..aaaaaaaaaaa.<.ppppppppppp..c
+c..aaaaaaaaaaa...ppppppppppp..c
+c..naaaaaaaaan...npppppppppn..c
+c..naaaaaaaaan...npppppppppn..c
+c..naaaaaaaaan...npppppppppn..c
+c..nnnnnnnnnnn...nnnnnnnnnnn..c
+c.....n.E.n.........n.H.n.....c
+cG....n...n....T....n...n....Gc
+c.....n.J.n.........n.L.n.....c
+c..nnnnnnnnnnn...nnnnnnnnnnn..c
+c..qqqqqqqqqqq...rrrrrrrrrrr..c
+c..qqqqqqqqqqq...rrrrrrrrrrr..c
+c..qqqqqqqqqqq...rrrrrrrrrrr..c
+c..qqqqqqqqqqq...rrrrrrrrrrr..c
+c..qqqqqqqqqqq...rrrrrrrrrrr..c
+c..qqqqqqqqqqq...rrrrrrrrrrr..c
+c..nqqqqqqqqqn...nrrrrrrrrrn..c
+c..nqqqqqqqqqn...nrrrrrrrrrn..c
+c..nqqqqqqqqqn...nrrrrrrrrrn..c
+c..nnnnnnnnnnn...nnnnnnnnnnn..c
+c.....n.K.n.........n.M.n.....c
+cG....n...n....T....n...n....Gc
+c.....n.N.n.........n.P.n.....c
+c..nnnnnnnnnnn...nnnnnnnnnnn..c
+c..sssssssssss...uuuuuuuuuuu..c
+c..sssssssssss...uuuuuuuuuuu..c
+c..sssssssssss...uuuuuuuuuuu..c
+c..sssssssssss...uuuuuuuuuuu..c
+c..sssssssssss...uuuuuuuuuuu..c
+c..sssssssssss...uuuuuuuuuuu..c
+c..nsssssssssn...nuuuuuuuuun..c
+c..nsssssssssn...nuuuuuuuuun..c
+c..nsssssssssn...nuuuuuuuuun..c
+c..nnnnnnnnnnn...nnnnnnnnnnn..c
+c.............................c
+cG............GTG............Gc
+vvvvvvvnnnvvvvvvvvvvvnnnvvvvvvv
+      v.O.............Q.v
+      v.................v
+      vvyyyyyyyyyyyyyyyvv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vvyyyyyyyyyyyyyvv
+       vvyyyyyyyyyyyyyvv
+       vvyyyyyyyyyyyyyvv
+       vvvvvvvvvvvvvvvvv
+ENDMAP
+
+NAME:   gammafunk_gauntlet_shortcut
+ORIENT: encompass
+TAGS:   no_item_gen no_monster_gen no_trap_gen
+: gauntlet_arena_setup(_G, "DFJLN", "EHKMO")
+: gauntlet_arena_set_tier(2)
+SUBVAULT: a : gauntlet_arena_second
+SUBVAULT: p : gauntlet_arena_second
+: gauntlet_arena_set_tier(1)
+SUBVAULT: q : gauntlet_arena_first
+SUBVAULT: r : gauntlet_arena_first
+: if crawl.coinflip() then
+SUBVAULT: s : gauntlet_arena_first
+: else
+:   gauntlet_arena_set_tier(2)
+SUBVAULT: s : gauntlet_arena_second
+: end
+SUBVAULT: y : gauntlet_exit
+: gauntlet_appearance(_G)
+MAP
+ccccccccccccccccccccccccccccccc
+cG.............A.............Gc
+c.......D.............J.......c
+c..nnnnnnnnnnn...nnnnnnnnnnn..c
+c..aaaaaaaaaaa...qqqqqqqqqqq..c
+c..aaaaaaaaaaa...qqqqqqqqqqq..c
+c..aaaaaaaaaaa...qqqqqqqqqqq..ccccccccccc
+c..aaaaaaaaaaa...qqqqqqqqqqq...........Gc
+c..aaaaaaaaaaa.<.qqqqqqqqqqq............ccccc
+c..aaaaaaaaaaa...qqqqqqqqqqqnnnnnnnnnn.....Gc
+c..naaaaaaaaan...nqqqqqqqqqn........Ln......c
+c..naaaaaaaaan...nqqqqqqqqqn.nnnnnnnnnnnnn..c
+c..naaaaaaaaan...nqqqqqqqqqn.n.rrrrrrrrrrr..c
+c..nnnnnnnnnnn...nnnnnnnnnnn.n.rrrrrrrrrrr..c
+c.....n.E.n..........nK......n.rrrrrrrrrrr..c
+cG....n...n..........nnnnnnnnn.rrrrrrrrrrr..c
+cT....n...n....T...............rrrrrrrrrrr.Tc
+cG....n...n..........nnnnnnnnn.rrrrrrrrrrr..c
+c.....n.F.n..........nN......n.nrrrrrrrrrn..c
+c..nnnnnnnnnnn...nnnnnnnnnnn.n.nrrrrrrrrrn..c
+c..ppppppppppp...sssssssssss.n.nrrrrrrrrrn..c
+c..ppppppppppp...sssssssssss.nnnnnnnnnnnnn..c
+c..ppppppppppp...sssssssssss........Mn......c
+c..ppppppppppp...sssssssssssnnnnnnnnnn.....Gc
+c..ppppppppppp...sssssssssss............ccccc
+c..ppppppppppp...sssssssssss...........Gc
+c..npppppppppn...nsssssssssn..ccccccccccc
+c..npppppppppn...nsssssssssn..c
+c..npppppppppn...nsssssssssn..c
+c..nnnnnnnnnnn...nnnnnnnnnnn..c
+c.............................c
+cG............GTG............Gc
+ccccccvnnnvvvvvvvvvvvnnnvcccccc
+      v.H.............O.v
+      v.................v
+      vvyyyyyyyyyyyyyyyvv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vyyyyyyyyyyyyyyyv
+       vvyyyyyyyyyyyyyvv
+       vvyyyyyyyyyyyyyvv
+       vvyyyyyyyyyyyyyvv
+       vvvvvvvvvvvvvvvvv
+ENDMAP
+
+NAME:   gammafunk_gauntlet_one_two_three
+ORIENT: encompass
+TAGS:   no_item_gen no_monster_gen no_trap_gen
+: gauntlet_arena_setup(_G, "DFJLNPRpr", "EHKMOQSqs")
+SUBVAULT: a : gauntlet_arena_first
+SUBVAULT: d : gauntlet_arena_first
+SUBVAULT: e : gauntlet_arena_first
+: gauntlet_arena_set_tier(2)
+SUBVAULT: f : gauntlet_arena_second
+SUBVAULT: g : gauntlet_arena_second
+SUBVAULT: h : gauntlet_arena_second
+SUBVAULT: i : gauntlet_arena_second
+SUBVAULT: j : gauntlet_arena_second
+SUBVAULT: k : gauntlet_arena_second
+SUBVAULT: y : gauntlet_exit
+: gauntlet_appearance(_G)
+MAP
+                                     ccc
+                  cccccccccccccccccccc<cccccccccccccccccccc
+                  cG..................A..................Gc
+                  c...................D...................c
+                  c..nnnnddddddn.nnnnnnnnnnn.neeeeeennnn..c
+                ccc..ndddddddddn.aaaaaaaaaaa.neeeeeeeeen..ccc
+                cG...ndddddddddn.aaaaaaaaaaa.neeeeeeeeen...Gc
+                c....ndddddddddn.aaaaaaaaaaa.neeeeeeeeen....c
+                c..nnndddddddddn.aaaaaaaaaaa.neeeeeeeeennn..c
+                c..nHndddddddddn.aaaaaaaaaaa.neeeeeeeeenKn..c
+                c..n.ndddddddddn.aaaaaaaaaaa.neeeeeeeeen.n..c
+                c..n.ndddddddddn.naaaaaaaaan.neeeeeeeeen.n..c
+                c..n.ndddddddddn.naaaaaaaaan.neeeeeeeeen.n..c
+    ccccccccccccc..n.ndddddddddn.naaaaaaaaan.neeeeeeeeen.n..ccccccccccccc
+    cG.............n.nnnnddddddnnnnnnnnnnnnnnneeeeeennnn.n.............Gc
+ccccc..............n.n.....nF.........E.........Jn.....n.n..............ccccc
+cG.....nnnnnnnnnnnnn.nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn.nnnnnnnnnnnnn.....Gc
+c......nL...........N...........Pn.........nR...........p...........rn......c
+c..nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn.nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn..c
+c..fffffffffff.ggggggggggg.hhhhhhhhhhh.iiiiiiiiiii.jjjjjjjjjjj.kkkkkkkkkkk..c
+c..fffffffffff.ggggggggggg.hhhhhhhhhhh.iiiiiiiiiii.jjjjjjjjjjj.kkkkkkkkkkk..c
+c..fffffffffff.ggggggggggg.hhhhhhhhhhh.iiiiiiiiiii.jjjjjjjjjjj.kkkkkkkkkkk..c
+c..fffffffffff.ggggggggggg.hhhhhhhhhhh.iiiiiiiiiii.jjjjjjjjjjj.kkkkkkkkkkk..c
+c..fffffffffff.ggggggggggg.hhhhhhhhhhh.iiiiiiiiiii.jjjjjjjjjjj.kkkkkkkkkkk..c
+c..fffffffffff.ggggggggggg.hhhhhhhhhhh.iiiiiiiiiii.jjjjjjjjjjj.kkkkkkkkkkk..c
+c..nfffffffffn.ngggggggggn.nhhhhhhhhhn.niiiiiiiiin.njjjjjjjjjn.nkkkkkkkkkn..c
+c..nfffffffffn.ngggggggggn.nhhhhhhhhhn.niiiiiiiiin.njjjjjjjjjn.nkkkkkkkkkn..c
+c..nfffffffffn.ngggggggggn.nhhhhhhhhhn.niiiiiiiiin.njjjjjjjjjn.nkkkkkkkkkn..c
+c..nnnnnnnnnnn.nnnnnnnnnnn.nnnnnnnnnnn.nnnnnnnnnnn.nnnnnnnnnnn.nnnnnnnnnnn..c
+c...........................................................................c
+cG...................................GTG...................................Gc
+vvvvvvvnnnvvvvvvvvvnnnvvvvvvvvvnnnvvvvvvvvvnnnvvvvvvvvvnnnvvvvvvvvvnnnvvvvvvv
+      v.M...........O...........Q...........S...........q...........s.v
+      v...............................................................v
+      vvvvvvvvvvvvvvvvvvvvvvvvvyyyyyyyyyyyyyyyvvvvvvvvvvvvvvvvvvvvvvvvvv
+                              vyyyyyyyyyyyyyyyv
+                              vyyyyyyyyyyyyyyyv
+                              vyyyyyyyyyyyyyyyv
+                              vyyyyyyyyyyyyyyyv
+                              vyyyyyyyyyyyyyyyv
+                              vyyyyyyyyyyyyyyyv
+                              vyyyyyyyyyyyyyyyv
+                              vyyyyyyyyyyyyyyyv
+                              vyyyyyyyyyyyyyyyv
+                              vvyyyyyyyyyyyyyvv
+                              vvyyyyyyyyyyyyyvv
+                              vvyyyyyyyyyyyyyvv
+                              vvvvvvvvvvvvvvvvv
+ENDMAP

@@ -474,5 +474,7 @@ enum spell_type : int
     SPELL_FLAMING_BREATH,
 #endif
     SPELL_FREEZING_BLAST,
+    SPELL_GRASPING_ROOTS,
+    SPELL_SONIC_WAVE,
     NUM_SPELLS
 };

@@ -2769,7 +2769,7 @@ void describe_floor()
         return;
 
     mprf(channel, "%s%s here.", prefix, feat.c_str());
-    if (grid == DNGN_ENTER_LABYRINTH)
+    if (grid == DNGN_ENTER_GAUNTLET)
         mprf(MSGCH_EXAMINE, "Beware, the minotaur awaits!");
 }
 
@@ -2984,12 +2984,18 @@ static string _describe_monster_weapon(const monster_info& mi, bool ident)
     }
 
     if (mi.props.exists(SPECIAL_WEAPON_KEY))
-        name1 = mi.props[SPECIAL_WEAPON_KEY].get_string();
+    {
+        name1 = article_a(ghost_brand_name(
+            (brand_type) mi.props[SPECIAL_WEAPON_KEY].get_int(), mi.type));
+    }
 
     if (name1.empty())
         return desc;
 
-    desc += " wielding ";
+    if (mi.type == MONS_PANDEMONIUM_LORD)
+        desc += " armed with ";
+    else
+        desc += " wielding ";
     desc += name1;
 
     if (!name2.empty())
@@ -3059,7 +3065,7 @@ static vector<string> _get_monster_desc_vector(const monster_info& mi)
 
     _append_container(descs, _get_monster_behaviour_vector(mi));
 
-    if (you.duration[DUR_CONFUSING_TOUCH] && !you.weapon()
+    if (you.duration[DUR_CONFUSING_TOUCH]
         || you.form == transformation::fungus && !mons_is_unbreathing(mi.type))
     {
         descs.emplace_back(make_stringf("chance to confuse on hit: %d%%",
@@ -3292,12 +3298,6 @@ string get_monster_equipment_desc(const monster_info& mi,
 
     if (mi.type != MONS_DANCING_WEAPON && mi.type != MONS_SPECTRAL_WEAPON)
         weap = _describe_monster_weapon(mi, level == DESC_IDENTIFIED);
-    else if (level == DESC_IDENTIFIED || level == DESC_WEAPON_WARNING
-             // dancing weapons' names already include this information
-             || level == DESC_WEAPON && mi.type != MONS_DANCING_WEAPON)
-    {
-        return " " + mi.full_name(DESC_A);
-    }
 
     // Print the rest of the equipment only for full descriptions.
     if (level == DESC_WEAPON || level == DESC_WEAPON_WARNING)
@@ -3334,7 +3334,7 @@ string get_monster_equipment_desc(const monster_info& mi,
     if (mi.wields_two_weapons())
         mon_alt = 0;
 
-    const bool mon_has_wand = mi.props.exists("wand_known") && mon_wnd;
+    const bool mon_has_wand = mon_wnd;
     const bool mon_carry = mon_alt || mon_has_wand;
 
     vector<string> item_descriptions;
@@ -3382,12 +3382,7 @@ string get_monster_equipment_desc(const monster_info& mi,
         }
 
         if (mon_has_wand)
-        {
-            if (mi.props["wand_known"])
-                carried_desc += mon_wnd->name(DESC_A);
-            else
-                carried_desc += "a wand";
-        }
+            carried_desc += mon_wnd->name(DESC_A);
 
         item_descriptions.push_back(carried_desc);
     }

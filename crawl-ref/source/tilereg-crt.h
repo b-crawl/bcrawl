@@ -16,7 +16,7 @@ class CRTRegion : public TextRegion
 {
 public:
 
-    CRTRegion(FontWrapper *font);
+    CRTRegion(FontWrapper *font_arg);
     virtual ~CRTRegion();
 
     virtual void render() override;

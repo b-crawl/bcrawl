@@ -104,7 +104,7 @@ KMONS:   p = withered plant
 SHUFFLE: FfrHhs / ZyzHhs / ZyzHhs / FfrZyz / FfrZyz / FfrZyz / ZyzZyz / \
          ZyzZyz / ZyzZyz / ZyzZyz / ZyzZyz / ZyzZyz
 : ghost_good_loot(_G)
-# 1.5 items per ghost. One 'd' glyphs and one 'e' glyph are used by the good
+# 1.5 items per ghost. One 'd' glyph and one 'e' glyph are used by the good
 # loot items, so we don't replace those.
 NSUBST:  d = d / |*.., e = e / |*.., f = |* / |*.., h = 2=|* / |*..
 SUBST:   qrs = G, Z = ., y = p, z = V, t : tp
@@ -113,16 +113,15 @@ TILE:    t = dngn_tree_dead
 : set_feature_name("granite_statue", "a gravestone")
 : vaults_ghost_setup(_G)
 MAP
-qd--frf--eq
-dD---F---De
------------
------------
-h---------h
-sH-------Hs
-h---------h
-xxnn===nnxx
-...........
-...........
+qd-frf-eq
+dD--F--De
+---------
+h-------h
+sH-----Hs
+h-------h
+xnn===nnx
+.........
+.........
 ENDMAP
 
 NAME:   gammafunk_vaults_ghost_necromancy
@@ -179,11 +178,7 @@ KITEM:  O = hat cursed ident:all / cloak cursed ident:all / \
         dagger cursed ident:all / hand axe cursed ident:all / \
         scythe cursed ident:all / club cursed ident:all / \
         hunting sling cursed ident:all
-: if you.unrands("robe_of_misfortune") then
 KITEM:  P = robe cursed plus:-8 randart ident:all
-: else
-KITEM:  P = robe_of_misfortune ident:all
-: end
 # An "Oka weapon gift" using the more useful types on 'd'
 ITEM:   quick blade good_item w:5 / rapier good_item / scimitar good_item / \
         double sword good_item w:5 / demon blade good_item w:5 / \
@@ -283,7 +278,7 @@ xnn==nnx
 ENDMAP
 
 NAME:   ebering_vaults_ghost_gozag
-: kitem("D = " .. ghost_loot_potions)
+: kitem("D = " .. dgn.loot_potions)
 # If ghost selectors ever happen this should be a gozag ghost
 KMONS:  O = player_ghost
 # D and F place an 8 monster plus potion or shop, respectively. D and J place
@@ -339,7 +334,7 @@ TAGS:   vaults_orient_s
 ITEM:   boots good_item / helmet good_item / hat good_item / \
         gloves good_item / cloak good_item
 ITEM:   any armour good_item, any weapon good_item, any jewellery good_item
-: item(ghost_loot_potions .. " / " .. ghost_loot_scrolls)
+: item(dgn.loot_potions .. " / " .. dgn.loot_scrolls)
 KMONS:  O = player ghost
 MONS:   orc, orc warrior, orc knight, orc high priest, stone giant, orc warlord
 : setup_armoury_orcs(_G)
@@ -363,7 +358,7 @@ NAME:   ploomutoo_gammafunk_vaults_potion_laboratory
 TAGS:   vaults_orient_s
 WEIGHT: 5
 ITEM:   potion of mutation ident:type q:1
-: item(ghost_loot_potions)
+: item(dgn.loot_potions)
 ITEM:   hat randart / robe randart / gloves randart / boots randart / \
         cloak randart
 KITEM:  O = potion of cancellation q:2 ident:type

@@ -186,7 +186,7 @@ static bool _floor_mf(map_feature mf)
 bool is_explore_horizon(const coord_def& c)
 {
     // Not useful when there's maprot destroying your exploration anyway.
-    if (player_in_branch(BRANCH_LABYRINTH) || player_in_branch(BRANCH_ABYSS))
+    if (player_in_branch(BRANCH_ABYSS))
         return false;
 
     if (env.map_knowledge(c).feat() != DNGN_UNSEEN)
@@ -199,8 +199,7 @@ bool is_explore_horizon(const coord_def& c)
             const auto& cell = env.map_knowledge(*ai);
             dungeon_feature_type feat = cell.feat();
             if (feat != DNGN_UNSEEN
-                && !feat_is_solid(feat)
-                && !feat_is_door(feat)
+                && (!feat_is_solid(feat) || feat_is_door(feat))
                 && !(cell.flags & MAP_MAGIC_MAPPED_FLAG))
             {
                 return true;

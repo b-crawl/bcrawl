@@ -148,7 +148,7 @@ DEPTH:  D:3-6
 : place_unique(_G, "Grinder")
 
 NAME:   uniq_harold
-DEPTH:  D:10-12, Orc, !Orc:$, Lair:1-4
+DEPTH:  D:7-11, Orc:1, Lair:1-2
 : place_unique(_G, "Harold")
 
 NAME:   uniq_ijyb
@@ -161,7 +161,7 @@ DEPTH:  D:2-3
 
 NAME:   uniq_jorgrun
 DEPTH:  D:12-, Orc, Elf, !Elf:$, Snake, !Snake:$, Shoals, !Shoals:$
-DEPTH:  Spider, !Spider:$
+DEPTH:  Spider, !Spider:$, Swamp, !Swamp:$
 : place_unique(_G, "Jorgrun")
 
 NAME:   uniq_joseph

@@ -254,7 +254,7 @@ NAME:   ebering_ghost_gozag
 DEPTH:  D:3-, Orc, Shoals, Snake, Elf, Crypt, Depths, Zot
 WEIGHT: 5 (D:3-7)
 ORIENT: float
-: kitem("DE = " .. ghost_loot_potions)
+: kitem("DE = " .. dgn.loot_potions)
 # If ghost selectors ever happen this should be a gozag ghost
 KMONS:  O = player_ghost
 # D and F place an 8 monster plus potion or shop, E and H place the potion/shop
@@ -357,7 +357,7 @@ NAME:   hellmonk_ghost_happy_afterlife
 DEPTH:  D:3-, Lair
 ORIENT: float
 ITEM:   ration, any potion
-: item(ghost_loot_potions)
+: item(dgn.loot_potions)
 KMONS:  O = player ghost
 : if you.absdepth() < 6 then
 SUBST:  g = -
@@ -546,7 +546,7 @@ MONS:   jelly, slime creature, death ooze
 :     if you.depth() < 10 then
 SUBST:  d = *, e = *%, f = %$--,  ghi = -
 NSUBST: - = 2=1 / 4=1. / 2 / 2=2. / .
-:     elseif you.depth() < 12 then
+:     elseif you.depth() < 11 then
 SUBST:  e = *, f = %$,  ghi = -
 NSUBST: - = 2=1 / 4=1. / 2=2 / 2=2. / .
 :     else
@@ -733,7 +733,7 @@ ENDMAP
 NAME:   gammafunk_ghost_fury_of_okawaru
 DEPTH:  D:12-, Orc, Elf, Crypt
 ORIENT: float
-KFEAT:  O = altar_okawaru
+KFEAT:  OP = altar_okawaru
 KMONS:  OP = player ghost
 # Bad Oka gift.
 KITEM:  O = hat cursed ident:all / cloak cursed ident:all / \
@@ -743,11 +743,7 @@ KITEM:  O = hat cursed ident:all / cloak cursed ident:all / \
         dagger cursed ident:all / hand axe cursed ident:all / \
         scythe cursed ident:all / club cursed ident:all / \
         hunting sling cursed ident:all
-: if you.unrands("robe_of_misfortune") then
 KITEM:  P = robe cursed plus:-8 randart ident:all
-: else
-KITEM:  P = robe_of_misfortune ident:all
-: end
 # An "Oka weapon gift" using the more useful types on 'd'
 ITEM:   quick blade good_item w:5 / rapier good_item / scimitar good_item / \
         double sword good_item w:5 / demon blade good_item w:5 / \
@@ -950,7 +946,8 @@ G...@...G
 ENDMAP
 
 NAME:   ebering_ghost_funeral_grove
-DEPTH:  D:8-, Lair, Swamp
+# Don't place on Swamp:$ since Lerny can knock down the trees.
+DEPTH:  D:8-, Lair, Swamp, !Swamp:$
 ORIENT: float
 # Monsters and loot
 KITEM:  O = potion of lignification ident:all
@@ -1017,9 +1014,9 @@ ENDMAP
 
 NAME:   biasface_ghost_orc_armoury
 DEPTH:  D:3-, Orc
-ITEM:   boots / helmet / hat / gloves / cloak
-ITEM:   boots good_item / helmet good_item / hat good_item / \
-        gloves good_item / cloak good_item
+ITEM:   pair of boots / helmet / hat / pair of gloves / cloak
+ITEM:   pair of boots good_item / helmet good_item / hat good_item / \
+        pair of gloves good_item / cloak good_item
 ITEM:   any armour, any armour good_item, any weapon, any weapon good_item
 ITEM:   any jewellery, any jewellery good_item
 KMONS:  O = player ghost
@@ -1129,8 +1126,8 @@ MAP
     .............
 ENDMAP
 
-NAME:   maelrawn_ghost_labyrinth_escape
-# Same depths where labs can place
+NAME:   maelrawn_ghost_gauntlet_escape
+# Same depths where Gauntlets can place
 DEPTH:  D:11-, Lair, Orc:$
 ORIENT: float
 KPROP:  x = bloody
@@ -1155,7 +1152,7 @@ NSUBST: - = 2=0 / 2=0- / 2=9- / -
 : end
 SUBST:  a = c.
 KFEAT:  O = expired_portal
-FTILE:  O = dngn_portal_labyrinth_gone
+FTILE:  O = dngn_portal_gauntlet_gone
 : ghost_setup(_G)
 MAP
 ...........
@@ -1250,12 +1247,12 @@ NAME:   ploomutoo_gammafunk_ghost_potion_laboratory
 DEPTH:  D:8-, Elf, Depths
 ORIENT: float
 ITEM:   potion of mutation ident:type q:1
-: item(ghost_loot_potions)
-ITEM:   hat / robe good_item / gloves / boots / cloak
-ITEM:   hat good_item / robe good_item / gloves good_item / boots good_item / \
-        cloak good_item
-ITEM:   hat randart / robe randart / gloves randart / boots randart / \
-        cloak randart
+: item(dgn.loot_potions)
+ITEM:   hat / robe good_item / pair of gloves / pair of boots / cloak
+ITEM:   hat good_item / robe good_item / pair of gloves good_item \
+        / pair of boots good_item / cloak good_item
+ITEM:   hat randart / robe randart / pair of gloves randart \
+        / pair of boots randart / cloak randart
 KITEM:  O = potion of cancellation q:2 ident:type
 KMONS:  O = player ghost
 MONS:   ugly thing, neqoxec, shapeshifter, glowing orange brain
@@ -1531,4 +1528,64 @@ cprs-srpc
 cn-----nc
 .nn===nn.
 ....@....
+ENDMAP
+
+NAME:   gammafunk_ghost_hive
+DEPTH:  D:5-, Lair
+KITEM:  ' = ration
+KMONS:  O = player ghost
+MONS:   killer bee, queen bee, hornet, meliai
+# Chance to make a partial wall in each of the full cells. Add 0-4 rations.
+NSUBST: p = x- / -, q = x- / -, r = x- / -, s = x- / -, - = 4='- / -
+: ghost_good_loot(_G)
+: if you.in_branch("D") then
+:   if you.depth() < 6 then
+SUBST:  de = *%, f = %$, ghi= -
+NSUBST: - = 4=1 / 4=1. / 3... / .
+:   elseif you.depth() < 9 then
+SUBST:  de = *, f = *%, g = %$--, hi= -
+NSUBST: - = 4=1 / 4=1. / 2. / 3. / .
+:   elseif you.depth() < 12 then
+SUBST:  e = |*, f = *, g = %$, hi= -
+NSUBST: - = 4=1 / 4=1. / 2 / 2=3. / 4... / .
+:   elseif you.depth() < 14 then
+SUBST:  f = |*, g = *, h = %$, i= -
+NSUBST: - = 4=1 / 4=1. / 2 / 3 / 2=3. / 2=4. / .
+:   else
+SUBST:  fg = |*, h = *%, i = %$--
+NSUBST: - = 4=1 / 4=1. / 2 / 3 / 2=3. / 4 / 2=4. / .
+:   end
+# Lair
+: else
+:   if you.depth() < 4 then
+SUBST:  f = |*, g = *, h = %$--, i= -
+NSUBST: - = 4=1 / 4=1. / 2 / 3 / 3. / 4. / .
+:   else
+SUBST:  f = |*, g = *, h = %$, i= -
+NSUBST: - = 4=1 / 4=1. / 2 / 3 / 2=3. / 2=4. / .
+:   end
+: end
+COLOUR: x = yellow
+TILE:   x = wall_wax
+: ghost_setup(_G)
+MARKER: P = lua:transp_loc("ghost_hive_entry")
+MARKER: Q = lua:transp_dest_loc("ghost_hive_entry")
+MARKER: R = lua:transp_loc("ghost_hive_exit")
+MARKER: S = lua:transp_dest_loc("ghost_hive_exit")
+MAP
+         @
+  .......P.......
+ ..cccccnnnccccc..
+..cnxxxfdRegxxxnc..
+.cnx-q-xhOix-p-xnc.
+.cx--x--xxx--x--xc.
+.cnx-q-x---x-p-xnc.
+@.ccxxx--x--xxxcc.@
+.cnx-r-x---x-s-xnc.
+.cx--x--xxx--x--xc.
+.cnx-r-x---x-s-xnc.
+..cnxxx--Q--xxxnc..
+ ..cccccnnnccccc..
+  .......S.......
+         @
 ENDMAP

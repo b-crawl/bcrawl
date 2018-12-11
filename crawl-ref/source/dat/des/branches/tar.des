@@ -8,7 +8,7 @@
 
 {{
 function tar_setup(e)
-   e.place("Tar:7")
+   e.place("Tar:$")
    e.tags("no_rotate")
    e.kmask('O = no_item_gen')
    e.kitem('O = bone rune of Zot')
@@ -158,7 +158,8 @@ COLOUR: c = lightmagenta
 KPROP: "H-}]) = no_tele_into
 MARKER: H = lua:fog_machine { \
                 pow_min = 10, pow_max = 10, delay = 10, \
-                size = 3, walk_dist = 1, cloud_type = "purple smoke" }
+                size = 3, walk_dist = 1, spread_rate = 0, \
+                cloud_type = "purple smoke" }
 MAP
 cccccccccccccccccccccc.......
 c...2...............cG.5.....
@@ -808,7 +809,7 @@ TAGS:     tar_mu_maze no_rotate no_hmirror no_vmirror unrand
 : tar_dig_maze(_G, 0, 0)
 NSUBST:   L = 2:M / 3 = M. / 5:N / 5:P / 5:V / 1:L / *:.
 NSUBST:   . = 5:Q / *:.
-KFEAT:    L = permanent teleport trap
+KFEAT:    L = zot trap
 KMONS:    M = shadow fiend
 KFEAT:    N = floor
 KITEM:    N = superb_item

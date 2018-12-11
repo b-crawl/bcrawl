@@ -2169,7 +2169,6 @@ void bolt_parent_init(const bolt &parent, bolt &child)
     child.colour         = parent.colour;
 
     child.flavour        = parent.flavour;
-    child.origin_spell   = parent.origin_spell;
 
     // We don't copy target since that is often overriden.
     child.thrower        = parent.thrower;
@@ -2628,7 +2627,7 @@ void bolt::affect_ground()
             if (beh == BEH_FRIENDLY)
                 beh = BEH_GOOD_NEUTRAL;
 
-            const god_type god = agent() ? agent()->deity() : GOD_NO_GOD;
+            const god_type god = agent()->deity();
 
             if (create_monster(mgen_data(MONS_BALLISTOMYCETE,
                                          beh,
@@ -2824,8 +2823,7 @@ void bolt::affect_place_explosion_clouds()
 // A little helper function to handle the calling of ouch()...
 void bolt::internal_ouch(int dam)
 {
-    monster* monst = nullptr;
-    monst = monster_by_mid(source_id);
+    monster* monst = monster_by_mid(source_id);
 
     const char *what = aux_source.empty() ? name.c_str() : aux_source.c_str();
 
@@ -3199,11 +3197,10 @@ bool bolt::misses_player()
         dprf(DIAG_BEAM, "Beamshield: hit: %d, block %d", testhit, block);
         if ((testhit < block && hit != AUTOMATIC_HIT) || omnireflected)
         {
-            bool penet = false;
-
-            const string refl_name = name.empty() && origin_spell ?
-                                     spell_title(origin_spell) :
-                                     name;
+            const string refl_name = name.empty() &&
+                                     origin_spell != SPELL_NO_SPELL ?
+                                        spell_title(origin_spell) :
+                                        name;
 
             const item_def *shield = you.shield();
             if (is_reflectable(you))
@@ -3227,8 +3224,7 @@ bool bolt::misses_player()
                 finish_beam();
             }
             you.shield_block_succeeded(agent());
-            if (!penet)
-                return true;
+            return true;
         }
 
         // Some training just for the "attempt".
@@ -4209,7 +4205,6 @@ void bolt::tracer_affect_monster(monster* mon)
 void bolt::enchantment_affect_monster(monster* mon)
 {
     god_conduct_trigger conducts[3];
-    disable_attack_conducts(conducts);
 
     bool hit_woke_orc = false;
 
@@ -4222,7 +4217,7 @@ void bolt::enchantment_affect_monster(monster* mon)
             if (is_sanctuary(mon->pos()) || is_sanctuary(you.pos()))
                 remove_sanctuary(true);
 
-            set_attack_conducts(conducts, mon, you.can_see(*mon));
+            set_attack_conducts(conducts, *mon, you.can_see(*mon));
 
             if (have_passive(passive_t::convert_orcs)
                 && mons_genus(mon->type) == MONS_ORC
@@ -4235,8 +4230,6 @@ void bolt::enchantment_affect_monster(monster* mon)
     }
     else if (flavour != BEAM_HIBERNATION || !mon->asleep())
         behaviour_event(mon, ME_ALERT, agent());
-
-    enable_attack_conducts(conducts);
 
     // Doing this here so that the player gets to see monsters
     // "flicker and vanish" when turning invisible....
@@ -4767,7 +4760,6 @@ void bolt::affect_monster(monster* mon)
     // after all).
 
     god_conduct_trigger conducts[3];
-    disable_attack_conducts(conducts);
 
     if (nasty_to(mon))
     {
@@ -4777,7 +4769,7 @@ void bolt::affect_monster(monster* mon)
                 remove_sanctuary(true);
 
             // It's not the player's fault if the monster couldn't be seen
-            set_attack_conducts(conducts, mon, you.can_see(*mon));
+            set_attack_conducts(conducts, *mon, you.can_see(*mon));
         }
     }
 
@@ -4848,12 +4840,11 @@ void bolt::affect_monster(monster* mon)
     }
 
     update_hurt_or_helped(mon);
-    enable_attack_conducts(conducts);
 
-    // We'll say ballistomycete spore explosions don't trigger the ally attack conduct
-    // for Fedhas worshipers. Mostly because you can accidentally blow up a
-    // group of 8 plants and get placed under penance until the end of time
-    // otherwise. I'd prefer to do this elsewhere but the beam information
+    // We'll say ballistomycete spore explosions don't trigger the ally attack
+    // conduct for Fedhas worshipers. Mostly because you can accidentally blow
+    // up a group of 8 plants and get placed under penance until the end of
+    // time otherwise. I'd prefer to do this elsewhere but the beam information
     // goes out of scope.
     //
     // Also exempting miscast explosions from this conduct -cao
@@ -4862,7 +4853,7 @@ void bolt::affect_monster(monster* mon)
             || source_id == MID_PLAYER
                && aux_source.find("your miscasting") != string::npos))
     {
-        conducts[0].enabled = false;
+        conducts[0].set();
     }
 
     if (!is_explosion && !noise_generated)

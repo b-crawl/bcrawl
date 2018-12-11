@@ -16,7 +16,6 @@ struct bolt;
 class monster;
 struct trap_def;
 
-void search_around();
 void free_self_from_net();
 void mons_clear_trapping_net(monster* mon);
 void free_stationary_net(int item_index);
@@ -31,16 +30,17 @@ vector<coord_def> find_golubria_on_level();
 
 dungeon_feature_type trap_category(trap_type type);
 
-int reveal_traps(const int range);
 void destroy_trap(const coord_def& pos);
 trap_def* trap_at(const coord_def& where);
 trap_type get_trap_type(const coord_def& where);
 
-// known is relevant only during level-gen
-bool is_valid_shaft_level(bool known = false);
+bool is_valid_shaft_level();
+bool is_valid_shaft_effect_level();
+void roll_trap_effects();
+void do_trap_effects();
 level_id generic_shaft_dest(coord_def pos, bool known);
 
-int       num_traps_for_place();
+int       trap_rate_for_place();
 trap_type random_trap_for_place();
 trap_type random_vault_trap();
 
@@ -50,3 +50,5 @@ bool ensnare(actor *fly);
 void leave_web(bool quiet = false);
 void monster_web_cleanup(const monster &mons, bool quiet = false);
 void stop_being_held();
+
+bool is_regular_trap(trap_type trap);

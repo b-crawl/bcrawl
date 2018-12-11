@@ -401,9 +401,10 @@ ENDMAP
 
 NAME:   kennysheep_slug_shrine
 TAGS:   uniq_altar_cheibriados temple_overflow_1 temple_overflow_cheibriados
-TAGS:   no_pool_fixup no_monster_gen
+TAGS:   no_pool_fixup no_monster_gen transparent
 DEPTH:  D:2-6
 MONS:   patrolling dart slug
+KMASK:  1 = opaque
 KFEAT:  _ = altar_cheibriados
 MAP
   .WWW
@@ -586,7 +587,7 @@ ENDMAP
 
 NAME:   elyvilon_altar_3
 TAGS:   uniq_altar_elyvilon temple_overflow_1 temple_overflow_elyvilon
-TAGS:   no_pool_fixup decor
+TAGS:   no_pool_fixup decor transparent
 DEPTH:  D:2-
 KFEAT:  C = altar_elyvilon
 KMASK:  wW = no_monster_gen
@@ -631,7 +632,7 @@ xxx.@.xxx
 ENDMAP
 
 NAME:   elyvilon_altar_5
-TAGS:   uniq_altar_elyvilon temple_overflow_1 temple_overflow_elyvilon decor
+TAGS:   uniq_altar_elyvilon temple_overflow_1 temple_overflow_elyvilon decor transparent
 DEPTH:  D:2-
 KFEAT:  C = altar_elyvilon
 KMASK:  T = no_monster_gen
@@ -773,20 +774,20 @@ TAGS:  temple_overflow_1 temple_overflow_fedhas uniq_altar_fedhas no_monster_gen
 TAGS:  transparent
 DEPTH: D:2-9
 MONS:  plant / bush w:5
-KPROP: 1_ = no_tele_into
-SUBST: 1 = 111t...
+SUBST: 1 = 111t'''
 KFEAT: _ = altar_fedhas
+KMASK: _1'<> = opaque
 MAP
      .....
    ...www...
   ..wwwwwww..
  ..wwwwwwwww..
  .wwwwwwwwwww.
-..wwww111wwww..
+..wwww1<1wwww..
 .wwww11111wwww.
 .wwww11_11wwww.
 .wwww11111wwww.
-..wwww111wwww..
+..wwww1>1wwww..
  .wwwwwwwwwww.
  ..wwwwwwwww..
   ..wwwwwww..
@@ -826,7 +827,7 @@ xtttttdd@ddtttttx
 ENDMAP
 
 NAME:  fedhas_bush_and_centaur_altar
-TAGS:  temple_overflow_1 temple_overflow_fedhas uniq_altar_fedhas
+TAGS:  temple_overflow_1 temple_overflow_fedhas uniq_altar_fedhas transparent
 DEPTH: D:4-
 KFEAT: _ = altar_fedhas
 MONS:  centaur, bush
@@ -1147,7 +1148,7 @@ ENDMAP
 
 NAME:    demons_altar
 DEPTH:   D:3-11, Orc, !Orc:$
-TAGS:    no_monster_gen patrolling temple_overflow_1 temple_overflow_makhleb
+TAGS:    no_monster_gen patrolling temple_overflow_1 temple_overflow_makhleb transparent
 TAGS:    layout_rooms layout_city layout_open
 KFEAT:   _ = altar_makhleb
 # Either one type 3 or 4 demon (rust devil or smoke demon) or
@@ -1582,11 +1583,12 @@ ENDMAP
 
 NAME:   kennysheep_okawaru_gauntlet
 TAGS:   temple_overflow_1 temple_overflow_okawaru uniq_altar_okawaru
-TAGS:   no_pool_fixup
+TAGS:   no_pool_fixup transparent
 DEPTH:  D:2-9
 KFEAT:  _ = altar_okawaru
 KMONS:  1 = goblin ; spear
 KPROP:  1 = no_tele_into
+KMASK:  1 = opaque
 MAP
       vvvvvvv
  .....w1w...v
@@ -1688,10 +1690,11 @@ ENDMAP
 
 NAME:    nicolae_qazlal_style_of_elements
 TAGS:    temple_overflow_qazlal temple_overflow_1 uniq_altar_qazlal
-TAGS:    no_trap_gen no_item_gen no_monster_gen
+TAGS:    no_trap_gen no_item_gen no_monster_gen transparent
 DEPTH:   D:2-
 SHUFFLE: faew
 KPROP:   faew = no_tele_into
+KMASK:   faew = opaque
 KMONS:   f = fire elemental
 KMONS:   a = air elemental
 KMONS:   e = earth elemental
@@ -1721,14 +1724,15 @@ ENDMAP
 # general_overflow_altar cannot contain the power of Qazlal
 NAME:    nicolae_qazlal_general_emergency
 TAGS:    temple_overflow_qazlal temple_overflow_1 uniq_altar_qazlal
-TAGS:    no_monster_gen no_pool_fixup
+TAGS:    no_monster_gen no_pool_fixup transparent
 DEPTH:   D:2-
 SHUFFLE: xXY / xXY / xXY / abc
 SHUFFLE: XY
 SUBST:   z = w.., X = +++w., Y = xxxxw., x = wxxx, a = w, b = w, c = w
 SHUFFLE: ABCD
-SUBST:   A = >, C = .GTU, D = .
+SUBST:   A = >, C = 'GTU, D = '
 KFEAT:   B = altar_qazlal
+KMASK:   B>'GTU = opaque
 SHUFFLE: wll
 : interest_check(_G)
 MAP
@@ -2170,13 +2174,14 @@ ENDMAP
 
 NAME:   dancing_weapons_uskayaw
 DEPTH:  D:2-9
-TAGS:   temple_overflow_1 temple_overflow_uskayaw
+TAGS:   temple_overflow_1 temple_overflow_uskayaw transparent
 MONS:   generate_awake dancing weapon ; dagger | hand axe
 KFEAT:  _ = altar_uskayaw
 NSUBST: ' = 2:1 / *:'
 KMASK:  1' = no_monster_gen
 KMASK:  1' = no_item_gen
 KMASK:  1' = no_trap_gen
+KMASK:  1' = opaque
 KPROP:  1' = no_tele_into
 MAP
 .......
@@ -2191,7 +2196,7 @@ ENDMAP
 
 NAME:   eat_drink_and_be_merry_uskayaw
 DEPTH:  D:2-9
-TAGS:   temple_overflow_1 temple_overflow_uskayaw
+TAGS:   temple_overflow_1 temple_overflow_uskayaw transparent
 KFEAT:  _ = altar_uskayaw
 ITEM:   any potion q:1, any weapon
 ITEM:   ration
@@ -2296,9 +2301,9 @@ MONS:   gnoll ; club ego:chaos | dagger ego:chaos | spear ego:chaos
 MONS:   boggart ; flail ego:chaos | long sword ego:chaos | trident ego:chaos
 MONS:   rakshasa ; flail ego:chaos | long sword ego:chaos | trident ego:chaos
 :  if you.depth() == dgn.br_depth(you.branch()) then
-KFEAT:  ~ = teleport trap w:20 / alarm trap w:3
+KFEAT:  ~ = teleport trap w:20 / alarm trap w:3 / dispersal trap
 :  else
-KFEAT:  ~ = known shaft trap / teleport trap / alarm trap w:3
+KFEAT:  ~ = known shaft trap / teleport trap / alarm trap w:3 / dispersal trap
 :  end
 # Previously on raw average 5.17 M glyphs.
 NSUBST: ' = 1:_ / *:.
@@ -2399,14 +2404,14 @@ ENDMAP
 
 NAME:    xom_redecorated
 DEPTH:   D:2-, !D:$
-TAGS:    temple_overflow_1 temple_overflow_xom uniq_altar_xom decor
+TAGS:    temple_overflow_1 temple_overflow_xom uniq_altar_xom decor transparent
 SUBST:   x = ccbbbv
 NSUBST:  . = 2:T / .
 SUBST:   . = lWwtm_~......
 KFEAT:   _ = altar_xom
 NSUBST:  T = 3:T / .
 KFEAT:   T = known teleport trap
-KFEAT:   ~ = shaft trap / alarm trap / teleport trap
+KFEAT:   ~ = shaft trap / alarm trap / teleport trap / dispersal trap
 : interest_check(_G)
 MAP
       @
@@ -2426,7 +2431,7 @@ NAME:   led_xom_imps
 DEPTH:  D:3-5
 TAGS:   temple_overflow_1 temple_overflow_xom uniq_altar_xom
 KFEAT:  _ = altar_xom
-KFEAT:  T = known teleport trap
+KFEAT:  T = known teleport trap / dispersal trap
 NSUBST: I = 1:1 / 3:2
 MONS: crimson imp ; dagger ego:chaos ident:type, crimson imp ; nothing
 MAP
@@ -2460,7 +2465,7 @@ MAP
 ENDMAP
 
 NAME:    brannock_xom_greatest_gift
-TAGS:    temple_overflow_1 temple_overflow_xom uniq_altar_xom
+TAGS:    temple_overflow_1 temple_overflow_xom uniq_altar_xom transparent
 DEPTH:   D:2-
 WEIGHT:  2
 KFEAT:   _ = altar_xom
@@ -3269,7 +3274,7 @@ ENDMAP
 NAME:   kennysheep_ying_yang
 DEPTH:  D
 TAGS:   temple_overflow_2 temple_overflow_elyvilon temple_overflow_yredelemnul
-TAGS:   no_monster_gen no_trap_gen no_pool_fixup patrolling
+TAGS:   no_monster_gen no_trap_gen no_pool_fixup patrolling transparent
 KFEAT:  A = altar_elyvilon
 KFEAT:  B = altar_yredelemnul
 KFEAT:  D = tree
@@ -3713,7 +3718,7 @@ ccB.+.T.+.Bcc
 ENDMAP
 
 NAME:   gammafunk_temple_overflow_claw
-TAGS:   temple_overflow_generic_3
+TAGS:   temple_overflow_generic_3 transparent
 SUBST:  l : lw
 KMASK:  lw = no_monster_gen
 MAP
@@ -3971,8 +3976,8 @@ MAP
 ENDMAP
 
 NAME:   chequers_temple_overflow_statue_of_worship
-TAGS:   temple_overflow_generic_2 ttemple_overflow_generic_3
-TAGS:   temple_overflow_generic_4
+TAGS:   temple_overflow_generic_2 temple_overflow_generic_3
+TAGS:   temple_overflow_generic_4 transparent
 {{
   local altarcount = get_overflow_altar_count(_G)
   if altarcount == nil then

@@ -175,6 +175,10 @@ static const vector<string> monster_fields = {
     "TotalGhoulNutr",
 };
 
+static const vector<string> feature_fields = {
+    "Num", "NumNonVault", "NumVault", "NumMin", "NumMax", "NumSD",
+};
+
 static map<monster_type, int> valid_monsters;
 static map<level_id, map<int, map <string, double> > > monster_recs;
 
@@ -190,6 +194,9 @@ static void _init_monsters()
     // For the all-monster summary
     valid_monsters[NUM_MONSTERS] = num_mons;
 }
+
+typedef map<dungeon_feature_type, map <string, double> > feature_stats;
+static map<level_id, feature_stats> feature_recs;
 
 static item_base_type _item_base_type(const item_def &item)
 {
@@ -434,7 +441,7 @@ static void _init_stats()
                     item_recs[lev][i].emplace_back();
                     for (const string &field : item_fields[i])
                         item_recs[lev][i][j][field] = 0;
-                    // For determining the NumSD, NumMin and NumMax fields.
+
                     item_recs[lev][i][j]["NumForIter"] = 0;
                     item_recs[lev][i][j][min_field] = INFINITY;
                     item_recs[lev][i][j][max_field] = -1;
@@ -462,10 +469,26 @@ static void _init_stats()
             {
                 for (const string &field : monster_fields)
                     monster_recs[lev][mentry.second][field] = 0;
-                // For determining the NumMin and NumMax fields.
+
                 monster_recs[lev][mentry.second]["NumForIter"] = 0;
                 monster_recs[lev][mentry.second]["NumMin"] = INFINITY;
                 monster_recs[lev][mentry.second]["NumMax"] = -1;
+            }
+
+            for (int i = 0; i < NUM_FEATURES; i++)
+            {
+                const dungeon_feature_type feat_type =
+                    static_cast<dungeon_feature_type>(i);
+
+                if (!is_valid_feature_type(feat_type))
+                    continue;
+
+                for (const string &field : feature_fields)
+                    feature_recs[lev][feat_type][field] = 0;
+
+                feature_recs[lev][feat_type]["NumForIter"] = 0;
+                feature_recs[lev][feat_type]["NumMin"] = INFINITY;
+                feature_recs[lev][feat_type]["NumMax"] = -1;
             }
         }
     }
@@ -724,8 +747,6 @@ static void _record_monster_stat(const level_id &lev, int mons_ind, string field
 void objstat_record_monster(const monster *mons)
 {
     monster_type type;
-    bool from_vault = !mons->originating_map().empty();
-
     if (mons->has_ench(ENCH_GLOWING_SHAPESHIFTER))
         type = MONS_GLOWING_SHAPESHIFTER;
     else if (mons->has_ench(ENCH_SHAPESHIFTER))
@@ -736,17 +757,22 @@ void objstat_record_monster(const monster *mons)
     if (!valid_monsters.count(type))
         return;
 
-    int mons_ind = valid_monsters[type];
-    level_id lev = level_id::current();
+    const int mons_ind = valid_monsters[type];
+    const level_id lev = level_id::current();
 
     _record_monster_stat(lev, mons_ind, "Num", 1);
+
+    const bool from_vault = !mons->originating_map().empty();
     if (from_vault)
         _record_monster_stat(lev, mons_ind, "NumVault", 1);
     else
         _record_monster_stat(lev, mons_ind, "NumNonVault", 1);
+
     _record_monster_stat(lev, mons_ind, "NumForIter", 1);
+
     _record_monster_stat(lev, mons_ind, "MonsXP", exper_value(*mons));
     _record_monster_stat(lev, mons_ind, "TotalXP", exper_value(*mons));
+
     if (from_vault)
     {
         _record_monster_stat(lev, mons_ind, "TotalVaultXP",
@@ -757,6 +783,7 @@ void objstat_record_monster(const monster *mons)
         _record_monster_stat(lev, mons_ind, "TotalNonVaultXP",
                 exper_value(*mons));
     }
+
     _record_monster_stat(lev, mons_ind, "MonsHP", mons->max_hit_points);
     _record_monster_stat(lev, mons_ind, "MonsHD", mons->get_experience_level());
 
@@ -764,15 +791,15 @@ void objstat_record_monster(const monster *mons)
     // Record chunks/nutrition if monster leaves a corpse.
     if (chunk_effect != CE_NOCORPSE && mons_class_can_leave_corpse(type))
     {
-        // copied from turn_corpse_into_chunks()
-        double chunks = (1 + stepdown_value(max_corpse_chunks(type),
-                                            4, 4, 12, 12)) / 2.0;
         item_def chunk_item = _dummy_item(item_type(ITEM_FOOD, FOOD_CHUNK));
 
         you.mutation[MUT_CARNIVOROUS] = 1;
         int carn_value = food_value(chunk_item);
         you.mutation[MUT_CARNIVOROUS] = 0;
 
+        // copied from turn_corpse_into_chunks()
+        double chunks = (1 + stepdown_value(max_corpse_chunks(type),
+                                            4, 4, 12, 12)) / 2.0;
         _record_monster_stat(lev, mons_ind, "MonsNumChunks", chunks);
 
         if (chunk_effect == CE_CLEAN)
@@ -787,6 +814,31 @@ void objstat_record_monster(const monster *mons)
     }
 }
 
+static void _record_feature_stat(const level_id &lev,
+                                 dungeon_feature_type feat_type, string field,
+                                 double value)
+{
+    const level_id br_lev(lev.branch, -1);
+
+    feature_recs[lev][feat_type][field] += value;
+    feature_recs[br_lev][feat_type][field] += value;
+    feature_recs[all_lev][feat_type][field] += value;
+}
+
+void objstat_record_feature(dungeon_feature_type feat_type, bool vault)
+{
+    level_id lev = level_id::current();
+
+    _record_feature_stat(lev, feat_type, "Num", 1);
+
+    if (vault)
+        _record_feature_stat(lev, feat_type, "NumVault", 1);
+    else
+        _record_feature_stat(lev, feat_type, "NumNonVault", 1);
+
+    _record_feature_stat(lev, feat_type, "NumForIter", 1);
+}
+
 void objstat_iteration_stats()
 {
     for (const auto &entry : stat_branches)
@@ -798,29 +850,58 @@ void objstat_iteration_stats()
             {
                 if (entry.first == NUM_BRANCHES)
                     continue;
+
                 lev.branch = entry.first;
                 lev.depth = -1;
             }
             else
                 lev = (entry.second)[l];
 
+            for (int i = 0; i < NUM_FEATURES; i++)
+            {
+                dungeon_feature_type feat_type =
+                    static_cast<dungeon_feature_type>(i);
+
+                if (!is_valid_feature_type(feat_type))
+                    continue;
+
+                map<string, double> &stats = feature_recs[lev][feat_type];
+
+                if (stats["NumForIter"] > stats["NumMax"])
+                    stats["NumMax"] = stats["NumForIter"];
+
+                if (stats["NumForIter"] < stats["NumMin"])
+                    stats["NumMin"] = stats["NumForIter"];
+
+                stats["NumSD"] += stats["NumForIter"] * stats["NumForIter"];
+
+                stats["NumForIter"] = 0;
+            }
+
             for (int i = 0; i < NUM_ITEM_BASE_TYPES; i++)
             {
                 item_base_type base_type = static_cast<item_base_type>(i);
+
                 int num_entries = _item_max_sub_type(base_type);
                 num_entries = num_entries == 1 ? 1 : num_entries + 1;
+
                 for (int  j = 0; j < num_entries ; j++)
                 {
                     bool use_all = _item_has_antiquity(base_type);
                     string min_f = use_all ? "AllNumMin" : "NumMin";
                     string max_f = use_all ? "AllNumMax" : "NumMax";
                     string sd_f = use_all ? "AllNumSD" : "NumSD";
+
                     map<string, double> &stats = item_recs[lev][i][j];
+
                     if (stats["NumForIter"] > stats[max_f])
                         stats[max_f] = stats["NumForIter"];
+
                     if (stats["NumForIter"] < stats[min_f])
                         stats[min_f] = stats["NumForIter"];
+
                     stats[sd_f] += stats["NumForIter"] * stats["NumForIter"];
+
                     stats["NumForIter"] = 0;
                 }
             }
@@ -828,22 +909,28 @@ void objstat_iteration_stats()
             for (const auto &mentry : valid_monsters)
             {
                 map<string, double> &stats = monster_recs[lev][mentry.second];
+
                 if (stats["NumForIter"] > stats["NumMax"])
                     stats["NumMax"] = stats["NumForIter"];
+
                 if (stats["NumForIter"] < stats["NumMin"])
                     stats["NumMin"] = stats["NumForIter"];
+
                 stats["NumSD"] += stats["NumForIter"] * stats["NumForIter"];
+
                 stats["NumForIter"] = 0;
             }
         }
     }
 }
 
-static void _write_stat_headers(const vector<string> &fields, bool items = true)
+static void _write_stat_headers(const vector<string> &fields, string desc)
 {
-    fprintf(stat_outf, "%s\tLevel", items ? "Item" : "Monster");
+    fprintf(stat_outf, "%s\tLevel", desc.c_str());
+
     for (const string &field : fields)
         fprintf(stat_outf, "\t%s", field.c_str());
+
     fprintf(stat_outf, "\n");
 }
 
@@ -968,13 +1055,15 @@ static void _write_brand_stats(const vector<int> &brand_stats,
 {
     ASSERT(item.base_type == ITEM_WEAPONS || item.base_type == ITEM_ARMOUR
            || item.base_type == ITEM_MISSILES);
+
     const item_def dummy_item = _dummy_item(item);
     const unsigned int num_brands = brand_stats.size();
     bool first_brand = true;
-    ostringstream brand_summary;
 
+    ostringstream brand_summary;
     brand_summary.setf(ios_base::fixed);
     brand_summary.precision(STAT_PRECISION);
+
     for (unsigned int i = 0; i < num_brands; i++)
     {
         if (brand_stats[i] == 0)
@@ -990,6 +1079,7 @@ static void _write_brand_stats(const vector<int> &brand_stats,
         brand_name = _brand_name(item, i);
         brand_summary << brand_name.c_str() << ":" << value;
     }
+
     fprintf(stat_outf, "\t%s", brand_summary.str().c_str());
 }
 
@@ -1016,7 +1106,7 @@ static void _write_branch_item_stats(branch_type br, const item_type &item)
     vector<level_id>::const_iterator li;
     const string name = _item_name(item);
     const char *num_field = _item_has_antiquity(item.base_type) ? "AllNum"
-        : "Num";
+                                                                : "Num";
     const level_id br_lev(br, -1);
 
     for (level_id lid : stat_branches[br])
@@ -1024,14 +1114,19 @@ static void _write_branch_item_stats(branch_type br, const item_type &item)
         ++level_count;
         if (item_recs[lid][item.base_type][item.sub_type][num_field] < 1)
             continue;
+
         fprintf(stat_outf, "%s\t%s", name.c_str(), _level_name(lid).c_str());
+
         map <string, double> &item_stats =
             item_recs[lid][item.base_type][item.sub_type];
         for (const string &field : fields)
             _write_stat(item_stats, field);
+
         _write_level_brand_stats(lid, item);
         fprintf(stat_outf, "\n");
     }
+
+    // If there are multiple levels for this branch, print a branch summary.
     if (level_count > 1
         && item_recs[br_lev][item.base_type][item.sub_type][num_field] > 0)
     {
@@ -1050,31 +1145,71 @@ static void _write_branch_monster_stats(branch_type br, monster_type mons_type,
 {
     unsigned int level_count = 0;
     const vector<string> &fields = monster_fields;
-    string mons_name;
     const level_id br_lev(br, -1);
 
+    string mons_name;
     if (mons_ind == valid_monsters[NUM_MONSTERS])
         mons_name = "All Monsters";
     else
         mons_name = mons_type_name(mons_type, DESC_PLAIN);
+
     for (level_id lid : stat_branches[br])
     {
         ++level_count;
         if (monster_recs[lid][mons_ind]["Num"] < 1)
             continue;
+
         fprintf(stat_outf, "%s\t%s", mons_name.c_str(),
                 _level_name(lid).c_str());
+
         for (const string &field : fields)
             _write_stat(monster_recs[lid][mons_ind], field);
+
         fprintf(stat_outf, "\n");
     }
+
     // If there are multiple levels for this branch, print a branch summary.
     if (level_count > 1 && monster_recs[br_lev][mons_ind]["Num"] > 0)
     {
         fprintf(stat_outf, "%s\t%s", mons_name.c_str(),
                 _level_name(br_lev).c_str());
+
         for (const string &field : fields)
             _write_stat(monster_recs[br_lev][mons_ind], field);
+
+        fprintf(stat_outf, "\n");
+    }
+}
+
+static void _write_branch_feature_stats(branch_type br,
+                                        dungeon_feature_type feat_type)
+{
+    const level_id br_lev(br, -1);
+    unsigned int level_count = 0;
+    const char *feat_name = get_feature_def(feat_type).name;
+
+    for (level_id lid : stat_branches[br])
+    {
+        ++level_count;
+        if (feature_recs[lid][feat_type]["Num"] < 1)
+            continue;
+
+        fprintf(stat_outf, "%s\t%s", feat_name, _level_name(lid).c_str());
+
+        for (const string &field : feature_fields)
+            _write_stat(feature_recs[lid][feat_type], field);
+
+        fprintf(stat_outf, "\n");
+    }
+
+    // If there are multiple levels for this branch, print a branch summary.
+    if (level_count > 1 && feature_recs[br_lev][feat_type]["Num"] > 0)
+    {
+        fprintf(stat_outf, "%s\t%s", feat_name, _level_name(br_lev).c_str());
+
+        for (const string &field : feature_fields)
+            _write_stat(feature_recs[br_lev][feat_type], field);
+
         fprintf(stat_outf, "\n");
     }
 }
@@ -1083,23 +1218,24 @@ static FILE * _open_stat_file(string stat_file)
 {
     FILE *stat_fh = nullptr;
     stat_fh = fopen(stat_file.c_str(), "w");
+
     if (!stat_fh)
     {
         end(1, false, "Unable to open objstat output file: %s\n"
                 "Error: %s", stat_file.c_str(), strerror(errno));
     }
+
     return stat_fh;
 }
 
 static void _write_item_stats(item_base_type base_type)
 {
-    ostringstream out_file;
-    out_file << stat_out_prefix << _item_class_name(base_type).c_str()
-             << stat_out_ext;
-    stat_outf = _open_stat_file(out_file.str());
-    const int num_types = _item_max_sub_type(base_type);
+    const string out_file = make_stringf("%s%s%s", stat_out_prefix,
+                                         _item_class_name(base_type).c_str(),
+                                         stat_out_ext);
+    stat_outf = _open_stat_file(out_file.c_str());
+
     vector<string> fields = item_fields[base_type];
-    stat_outf = _open_stat_file(out_file.str());
     if (base_type == ITEM_WEAPONS || base_type == ITEM_ARMOUR)
     {
         for (int j = 0; j < 3; j++)
@@ -1108,9 +1244,11 @@ static void _write_item_stats(item_base_type base_type)
     else if (base_type == ITEM_MISSILES)
         fields.push_back(missile_brand_field);
 
-    _write_stat_headers(fields);
+    _write_stat_headers(fields, "Item");
+
     // If there is more than one subtype, we have an additional entry for
     // the sum across subtypes.
+    const int num_types = _item_max_sub_type(base_type);
     int num_entries = num_types == 1 ? 1 : num_types + 1;
     for (int j = 0; j < num_entries; j++)
     {
@@ -1118,9 +1256,10 @@ static void _write_item_stats(item_base_type base_type)
         for (const auto &br : stat_branches)
             _write_branch_item_stats(br.first, item);
     }
+
     fclose(stat_outf);
     printf("Wrote %s item stats to %s.\n", _item_class_name(base_type).c_str(),
-           out_file.str().c_str());
+           out_file.c_str());
 }
 
 static void _write_stat_info()
@@ -1134,9 +1273,11 @@ static void _write_stat_info()
             all_desc = "All Levels";
         all_desc = "Levels included in AllLevels: " + all_desc + "\n";
     }
-    ostringstream out_file;
-    out_file << stat_out_prefix << "Info" << stat_out_ext;
-    stat_outf = _open_stat_file(out_file.str());
+
+    const string out_file = make_stringf("%s%s%s", stat_out_prefix,
+                                         "Info", stat_out_ext);
+    stat_outf = _open_stat_file(out_file.c_str());
+
     fprintf(stat_outf, "Object Generation Stats\n"
             "Number of iterations: %d\n"
             "Number of branches: %d\n"
@@ -1144,29 +1285,56 @@ static void _write_stat_info()
             "Number of levels: %d\n"
             "Version: %s\n", SysEnv.map_gen_iters, num_branches,
             all_desc.c_str(), num_levels, Version::Long);
+
     fclose(stat_outf);
-    printf("Wrote Objstat Info to %s.\n", out_file.str().c_str());
+    printf("Wrote Objstat Info to %s.\n", out_file.c_str());
 }
 
 static void _write_object_stats()
 {
     string all_desc = "";
     _write_stat_info();
+
     for (int i = 0; i < NUM_ITEM_BASE_TYPES; i++)
     {
         item_base_type base_type = static_cast<item_base_type>(i);
         _write_item_stats(base_type);
     }
-    ostringstream out_file;
-    out_file << stat_out_prefix << "Monsters" << stat_out_ext;
-    stat_outf = _open_stat_file(out_file.str());
-    _write_stat_headers(monster_fields, false);
+
+    string out_file = make_stringf("%s%s%s", stat_out_prefix, "Monsters",
+                                   stat_out_ext);
+    stat_outf = _open_stat_file(out_file.c_str());
+
+    _write_stat_headers(monster_fields, "Monster");
+
     for (const auto &entry : valid_monsters)
+    {
         for (const auto &br : stat_branches)
             _write_branch_monster_stats(br.first, entry.first, entry.second);
-    printf("Wrote Monster stats to %s.\n", out_file.str().c_str());
-    fclose(stat_outf);
+    }
 
+    printf("Wrote Monster stats to %s.\n", out_file.c_str());
+
+    out_file = make_stringf("%s%s%s", stat_out_prefix, "Features",
+                            stat_out_ext);
+    stat_outf = _open_stat_file(out_file.c_str());
+
+    _write_stat_headers(feature_fields, "Feature");
+
+    for (int i = 0; i < NUM_FEATURES; i++)
+    {
+        const dungeon_feature_type feat_type =
+            static_cast<dungeon_feature_type>(i);
+
+        if (!is_valid_feature_type(feat_type))
+            continue;
+
+        for (const auto &br : stat_branches)
+            _write_branch_feature_stats(br.first, feat_type);
+    }
+
+    printf("Wrote Feature stats to %s.\n", out_file.c_str());
+    fclose(stat_outf);
 }
 
 void objstat_generate_stats()
@@ -1182,6 +1350,7 @@ void objstat_generate_stats()
 
     initialise_item_descriptions();
     initialise_branch_depths();
+
     // We have to run map preludes ourselves.
     run_map_global_preludes();
     run_map_local_preludes();
@@ -1212,17 +1381,21 @@ void objstat_generate_stats()
             levels.push_back(lid);
             ++num_levels;
         }
+
         if (levels.size())
         {
             stat_branches[br] = levels;
             ++num_branches;
         }
     }
+
     printf("Generating object statistics for %d iteration(s) of %d "
            "level(s) over %d branch(es).\n", SysEnv.map_gen_iters,
            num_levels, num_branches);
+
     _init_monsters();
     _init_stats();
+
     if (mapstat_build_levels())
     {
         _write_object_stats();

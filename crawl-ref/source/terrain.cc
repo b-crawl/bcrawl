@@ -467,15 +467,12 @@ bool feat_is_diggable(dungeon_feature_type feat)
 /** Is this feature a type of trap?
  *
  *  @param feat the feature.
- *  @param undiscovered_too whether a trap not yet found counts.
  *  @returns true if it's a trap.
  */
-bool feat_is_trap(dungeon_feature_type feat, bool undiscovered_too)
+bool feat_is_trap(dungeon_feature_type feat)
 {
     if (!is_valid_feature_type(feat))
         return false; // ???
-    if (feat == DNGN_UNDISCOVERED_TRAP)
-        return undiscovered_too;
     return get_feature_def(feat).flags & FFT_TRAP;
 }
 
@@ -1018,7 +1015,7 @@ void dgn_move_entities_at(coord_def src, coord_def dst,
         env.shop.erase(src);
         grd(src) = DNGN_FLOOR;
     }
-    else if (feat_is_trap(dfeat, true))
+    else if (feat_is_trap(dfeat))
     {
         ASSERT(trap_at(src));
         env.trap[dst] = env.trap[src];
@@ -1658,6 +1655,13 @@ dungeon_feature_type feat_by_desc(string desc)
     if (desc[desc.size() - 1] != '.')
         desc += ".";
 
+#if TAG_MAJOR_VERSION == 34
+    // hard-coded because all the dry fountain variants match this description,
+    // and they have a lower enum value, so the first is incorrectly returned
+    if (desc == "a dry fountain.")
+        return DNGN_DRY_FOUNTAIN;
+#endif
+
     return lookup(feat_desc_cache, desc, DNGN_UNSEEN);
 }
 
@@ -1965,6 +1969,20 @@ void set_terrain_changed(const coord_def p)
     for (orth_adjacent_iterator ai(p); ai; ++ai)
         if (actor *act = actor_at(*ai))
             act->check_clinging(false, feat_is_door(grd(p)));
+}
+
+/**
+ * Does this cell count for exploraation piety?
+ *
+ * Don't count: endless map borders, deep water, lava, and cells explicitly
+ * marked. (player_view_update_at in view.cc updates the flags)
+ */
+bool cell_triggers_conduct(const coord_def p)
+{
+    return !(feat_is_endless(grd(p))
+             || grd(p) == DNGN_LAVA
+             || grd(p) == DNGN_DEEP_WATER
+             || env.pgrid(p) & FPROP_SEEN_OR_NOEXP);
 }
 
 bool is_boring_terrain(dungeon_feature_type feat)

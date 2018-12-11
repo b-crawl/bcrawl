@@ -24,6 +24,7 @@
 #include "libutil.h"
 #include "message.h"
 #include "mon-death.h"
+#include "mon-gear.h"
 #include "mon-place.h"
 #include "mon-tentacle.h"
 #include "notes.h"
@@ -355,7 +356,7 @@ void change_monster_type(monster* mons, monster_type targetc)
     mons->props.erase("speech_prefix");
 
     // Make sure we have a god if we've been polymorphed into a priest.
-    mons->god = mons->is_priest() ? GOD_NAMELESS : god;
+    mons->god = (mons->is_priest() && god == GOD_NO_GOD) ? GOD_NAMELESS : god;
 
     mons->add_ench(abj);
     mons->add_ench(fabj);
@@ -572,7 +573,7 @@ bool mon_can_be_slimified(const monster* mons)
            && (holi & (MH_UNDEAD | MH_NATURAL) && !mons_is_slime(*mons));
 }
 
-void slimify_monster(monster* mon, bool hostile)
+void slimify_monster(monster* mon)
 {
     monster_type target = MONS_JELLY;
 
@@ -610,10 +611,7 @@ void slimify_monster(monster* mon, bool hostile)
 
     monster_polymorph(mon, target);
 
-    if (!hostile)
-        mon->attitude = ATT_STRICT_NEUTRAL;
-    else
-        mon->attitude = ATT_HOSTILE;
+    mon->attitude = ATT_STRICT_NEUTRAL;
 
     mons_make_god_gift(*mon, GOD_JIYVA);
 
@@ -631,10 +629,12 @@ void seen_monster(monster* mons)
     set_auto_exclude(mons);
     set_unique_annotation(mons);
 
+    // id equipment (do this every time we see them, it may have changed)
+    view_monster_equipment(mons);
+
     item_def* weapon = mons->weapon();
     if (weapon && is_range_weapon(*weapon))
         mons->flags |= MF_SEEN_RANGED;
-    mark_mon_equipment_seen(mons);
 
     // Monster was viewed this turn
     mons->flags |= MF_WAS_IN_VIEW;
@@ -658,6 +658,9 @@ void seen_monster(monster* mons)
         }
         take_note(Note(NOTE_SEEN_MONSTER, mons->type, 0, name));
     }
+
+    // attempt any god conversions on first sight
+    do_conversions(mons);
 
     if (!(mons->flags & MF_TSO_SEEN))
     {

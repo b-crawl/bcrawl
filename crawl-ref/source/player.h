@@ -406,6 +406,9 @@ public:
     string banished_by;
     int banished_power;
 
+    // If true, player has triggered a trap effect by exploring.
+    bool trapped;
+
     bool wield_change;          // redraw weapon
     bool redraw_quiver;         // redraw quiver
 
@@ -794,6 +797,7 @@ public:
     {
         return actor::incapacitated() || duration[DUR_CLUMSY];
     }
+    bool immune_to_hex(const spell_type hex) const;
 
     bool asleep() const override;
     void put_to_sleep(actor *, int power = 0, bool hibernate = false) override;
@@ -928,7 +932,7 @@ void move_player_to_grid(const coord_def& p, bool stepped);
 
 bool is_map_persistent();
 bool player_in_connected_branch();
-bool player_in_hell();
+bool player_in_hell(bool vestibule=false);
 bool player_in_starting_abyss();
 
 static inline bool player_in_branch(int branch)
@@ -1051,9 +1055,8 @@ bool player_has_feet(bool temp = true, bool include_mutations = true);
 bool enough_hp(int minimum, bool suppress_msg, bool abort_macros = true);
 bool enough_mp(int minimum, bool suppress_msg, bool abort_macros = true);
 
-void calc_hp();
+void calc_hp(bool scale = false, bool set = false);
 void calc_mp();
-void recalc_and_scale_hp();
 
 void dec_hp(int hp_loss, bool fatal, const char *aux = nullptr);
 void dec_mp(int mp_loss, bool silent = false);
@@ -1071,10 +1074,9 @@ void rot_mp(int mp_loss);
 void inc_max_hp(int hp_gain);
 void dec_max_hp(int hp_loss);
 
-void deflate_hp(int new_level, bool floor);
 void set_hp(int new_amount);
 
-int get_real_hp(bool trans, bool rotted = false);
+int get_real_hp(bool trans, bool rotted = true);
 int get_real_mp(bool include_items);
 
 int get_contamination_level();

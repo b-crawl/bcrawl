@@ -853,6 +853,7 @@ bool cast_a_spell(bool check_range, spell_type spell)
         crawl_state.zero_turns_taken();
         // Return the MP since the spell is aborted.
         inc_mp(cost, true);
+        redraw_screen();
         return false;
     }
 
@@ -1180,8 +1181,8 @@ static unique_ptr<targeter> _spell_targeter(spell_type spell, int pow,
                                              range);
     case SPELL_GRAVITAS:
         return make_unique<targeter_smite>(&you, range,
-                                           pow >= 80 ? 3 : 2,
-                                           pow >= 80 ? 3 : 2,
+                                           gravitas_range(pow),
+                                           gravitas_range(pow),
                                            false,
                                            [](const coord_def& p) -> bool {
                                               return you.pos() != p; });
@@ -1640,7 +1641,7 @@ static spret_type _do_cast(spell_type spell, int powc, const dist& spd,
 
     // other effects
     case SPELL_DISCHARGE:
-        return cast_discharge(powc, fail);
+        return cast_discharge(powc, you, fail);
 
     case SPELL_CHAIN_LIGHTNING:
         return cast_chain_spell(SPELL_CHAIN_LIGHTNING, powc, &you, fail);
@@ -1658,7 +1659,7 @@ static spret_type _do_cast(spell_type spell, int powc, const dist& spd,
         return cast_liquefaction(powc, fail);
 
     case SPELL_OZOCUBUS_REFRIGERATION:
-        return fire_los_attack_spell(spell, powc, &you, fail);
+        return fire_los_attack_spell(spell, powc, &you, nullptr, fail);
 
     case SPELL_OLGREBS_TOXIC_RADIANCE:
         return cast_toxic_radiance(&you, powc, fail);

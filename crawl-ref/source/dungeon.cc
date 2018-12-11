@@ -32,7 +32,6 @@
 #include "dbg-scan.h"
 #include "dgn-delve.h"
 #include "dgn-height.h"
-#include "dgn-labyrinth.h"
 #include "dgn-overview.h"
 #include "dgn-shoals.h"
 #include "end.h"
@@ -92,7 +91,7 @@ static void _builder_items();
 static void _builder_monsters();
 static coord_def _place_specific_feature(dungeon_feature_type feat);
 static void _place_specific_trap(const coord_def& where, trap_spec* spec,
-                                 int charges = 0, bool known = false);
+                                 int charges = 0);
 static void _place_branch_entrances(bool use_vaults);
 static void _place_extra_vaults();
 static void _place_chance_vaults();
@@ -665,8 +664,7 @@ static void _dgn_map_colour_fixup()
         for (int x = X_BOUND_1; x <= X_BOUND_2; ++x)
             if (dcgrid[x][y].colour != BLACK
                 && grd[x][y] != dcgrid[x][y].feature
-                && (grd[x][y] != DNGN_UNDISCOVERED_TRAP
-                    || dcgrid[x][y].feature != DNGN_FLOOR))
+                && dcgrid[x][y].feature != DNGN_FLOOR)
             {
                 env.grid_colours[x][y] = BLACK;
             }
@@ -1295,8 +1293,7 @@ void dgn_reset_level(bool enable_random_maps)
         env.spawn_random_rate = 50;
     }
     else
-        // No random monsters in Labyrinths and portal vaults if we don't have
-        // the orb.
+        // No random monsters in portal vaults if we don't have the orb.
         env.spawn_random_rate = 0;
     env.density = 0;
     env.forest_awoken_until = 0;
@@ -2369,9 +2366,6 @@ static void _build_dungeon_level(dungeon_feature_type dest_stairs_type)
 {
     bool place_vaults = _builder_by_type();
 
-    if (player_in_branch(BRANCH_LABYRINTH))
-        return;
-
     if (player_in_branch(BRANCH_SLIME))
         _slime_connectivity_fixup();
 
@@ -2667,14 +2661,7 @@ static bool _pan_level()
 // to place more vaults after this
 static bool _builder_by_type()
 {
-    if (player_in_branch(BRANCH_LABYRINTH))
-    {
-        dgn_build_labyrinth_level();
-        // Labs placed their minivaults already
-        _fixup_branch_stairs();
-        return false;
-    }
-    else if (player_in_branch(BRANCH_ABYSS))
+    if (player_in_branch(BRANCH_ABYSS))
     {
         generate_abyss();
         // Should place some vaults in abyss because
@@ -3202,26 +3189,9 @@ static bool _builder_normal()
     return true;
 }
 
-// Shafts can be generated visible.
-//
-// Starts about 50% of the time and approaches 0%
-static bool _shaft_known(int depth)
-{
-    return coinflip() && x_chance_in_y(3, depth);
-}
-
 static void _place_traps()
 {
-    // Never place traps on the first three floors
-    if (player_in_branch(BRANCH_DUNGEON) && you.depth < 4)
-    {
-        dprf("placing no traps because player at too low depth, "
-             "depth %d", you.depth);
-        return;
-    }
-
-    const int num_traps = num_traps_for_place();
-    int level_number = env.absdepth0;
+    const int num_traps = random2avg(2 * trap_rate_for_place(), 2);
 
     ASSERT(num_traps >= 0);
     dprf("attempting to place %d traps", num_traps);
@@ -3257,9 +3227,7 @@ static void _place_traps()
         }
 
         ts.type = type;
-        grd(ts.pos) = DNGN_UNDISCOVERED_TRAP;
-        if (ts.type == TRAP_SHAFT && _shaft_known(level_number))
-            ts.reveal();
+        grd(ts.pos) = ts.category();
         ts.prepare_ammo();
         env.trap[ts.pos] = ts;
         dprf("placed a trap");
@@ -4796,6 +4764,9 @@ monster* dgn_place_monster(mons_spec &mspec, coord_def where,
     mg.hp        = mspec.hp;
     mg.props     = mspec.props;
 
+    if (mg.props.exists(MAP_KEY))
+        mg.xp_tracking = XP_VAULT;
+
     // Marking monsters as summoned
     mg.abjuration_duration = mspec.abjuration_duration;
     mg.summon_type         = mspec.summon_type;
@@ -4908,7 +4879,7 @@ static bool _dgn_place_monster(const vault_placement &place, mons_spec &mspec,
     const bool patrolling
         = mspec.patrolling || place.map.has_tag("patrolling");
 
-    mspec.props["map"].get_string() = place.map_name_at(where);
+    mspec.props[MAP_KEY].get_string() = place.map_name_at(where);
     return dgn_place_monster(mspec, where, false, generate_awake, patrolling);
 }
 
@@ -4977,11 +4948,10 @@ dungeon_feature_type map_feature_at(map_def *map, const coord_def &c,
         feature_spec f = mapsp->get_feat();
         if (f.trap)
         {
-            // f.feat == 1 means trap is generated known.
-            if (f.feat == 1)
-                return trap_category(static_cast<trap_type>(f.trap->tr_type));
+            if (f.trap->tr_type >= NUM_TRAPS)
+                return DNGN_FLOOR;
             else
-                return DNGN_UNDISCOVERED_TRAP;
+                return trap_category(static_cast<trap_type>(f.trap->tr_type));
         }
         else if (f.feat >= 0)
             return static_cast<dungeon_feature_type>(f.feat);
@@ -5001,11 +4971,7 @@ static void _vault_grid_mapspec(vault_placement &place, const coord_def &where,
 {
     const feature_spec f = mapsp.get_feat();
     if (f.trap)
-    {
-        // f.feat == 1 means trap is generated known.
-        const bool known = f.feat == 1;
-        _place_specific_trap(where, f.trap.get(), 0, known);
-    }
+        _place_specific_trap(where, f.trap.get(), 0);
     else if (f.feat >= 0)
         grd(where) = static_cast<dungeon_feature_type>(f.feat);
     else if (f.glyph >= 0)
@@ -5368,12 +5334,10 @@ static dungeon_feature_type _pick_an_altar()
 {
     god_type god;
 
-    if (player_in_branch(BRANCH_TEMPLE)
-        || player_in_branch(BRANCH_LABYRINTH))
-    {
-        // No extra altars in Temple, none at all in Labyrinth.
+    // No extra altars in Temple.
+    if (player_in_branch(BRANCH_TEMPLE))
         god = GOD_NO_GOD;
-    }
+
     // Xom can turn up anywhere
     else if (one_chance_in(27))
         god = GOD_XOM;
@@ -5901,31 +5865,35 @@ void place_specific_trap(const coord_def& where, trap_type spec_type, int charge
 }
 
 static void _place_specific_trap(const coord_def& where, trap_spec* spec,
-                                 int charges, bool known)
+                                 int charges)
 {
     trap_type spec_type = spec->tr_type;
 
-    if (spec_type == TRAP_SHAFT && !is_valid_shaft_level(known))
+    if (spec_type == TRAP_SHAFT && !is_valid_shaft_level())
     {
         mprf(MSGCH_ERROR, "Vault %s tried to place a shaft at a branch end",
                 env.placing_vault.c_str());
     }
 
-    while (spec_type >= NUM_TRAPS
-#if TAG_MAJOR_VERSION == 34
-           || spec_type == TRAP_DART || spec_type == TRAP_GAS
-           || spec_type == TRAP_SHADOW || spec_type == TRAP_SHADOW_DORMANT
-#endif
-           || !is_valid_shaft_level(known) && spec_type == TRAP_SHAFT)
+    // find an appropriate trap for TRAP_RANDOM
+    if (spec_type == TRAP_RANDOM)
     {
-        spec_type = static_cast<trap_type>(random2(TRAP_MAX_REGULAR + 1));
+        do
+        {
+            spec_type = static_cast<trap_type>(random2(NUM_TRAPS));
+        }
+        while (!is_regular_trap(spec_type)
+#if TAG_MAJOR_VERSION == 34
+               || spec_type == TRAP_DART || spec_type == TRAP_GAS
+               || spec_type == TRAP_SHADOW || spec_type == TRAP_SHADOW_DORMANT
+#endif
+               || !is_valid_shaft_level() && spec_type == TRAP_SHAFT);
     }
 
     trap_def t;
     t.type = spec_type;
     t.pos = where;
-    grd(where) = known ? trap_category(spec_type)
-                       : DNGN_UNDISCOVERED_TRAP;
+    grd(where) = trap_category(spec_type);
     t.prepare_ammo(charges);
     env.trap[where] = t;
 }
@@ -6022,7 +5990,7 @@ static coord_def _get_feat_dest(coord_def base_pos, dungeon_feature_type feat,
     {
         coord_def dest_pos;
 
-        if (feat_is_escape_hatch(feat) and !hatch_name.empty())
+        if (feat_is_escape_hatch(feat) && !hatch_name.empty())
             dest_pos = _find_named_hatch_dest(hatch_name);
         else
         {
@@ -6073,11 +6041,6 @@ coord_def dgn_find_feature_marker(dungeon_feature_type feat)
     return coord_def();
 }
 
-static coord_def _dgn_find_labyrinth_entry_point()
-{
-    return dgn_find_feature_marker(DNGN_ENTER_LABYRINTH);
-}
-
 // Make hatches and shafts land the player a bit away from the wall.
 // Specifically, the adjacent cell with least slime walls next to it.
 // XXX: This can still give bad situations if the layout is not bubbly,
@@ -6124,17 +6087,6 @@ coord_def dgn_find_nearby_stair(dungeon_feature_type stair_to_find,
         const coord_def pos(dgn_find_feature_marker(stair_to_find));
         if (in_bounds(pos) && grd(pos) == stair_to_find)
             return pos;
-    }
-
-    if (player_in_branch(BRANCH_LABYRINTH))
-    {
-        const coord_def pos(_dgn_find_labyrinth_entry_point());
-        if (in_bounds(pos))
-            return pos;
-
-        // Couldn't find a good place, warn, and use old behaviour.
-        dprf(DIAG_DNGN, "Oops, couldn't find labyrinth entry marker.");
-        stair_to_find = DNGN_FLOOR;
     }
 
     if (stair_to_find == your_branch().exit_stairs)
@@ -6271,10 +6223,9 @@ coord_def dgn_find_nearby_stair(dungeon_feature_type stair_to_find,
     if (in_bounds(pos))
         return pos;
 
-    // Look for any clear terrain and abandon the idea of looking
-    // nearby now. This is used when taking transit Pandemonium gates,
-    // or landing in Labyrinths. Currently the player can land in vaults,
-    // which is considered acceptable.
+    // Look for any clear terrain and abandon the idea of looking nearby now.
+    // This is used when taking transit Pandemonium gates. Currently the player
+    // can land in vaults, which is considered acceptable.
     for (rectangle_iterator ri(0); ri; ++ri)
     {
         if (feat_has_dry_floor(grd(*ri)))
@@ -6293,8 +6244,6 @@ coord_def dgn_find_nearby_stair(dungeon_feature_type stair_to_find,
 
 void dgn_set_branch_epilogue(branch_type branch, string func_name)
 {
-    ASSERT(!func_name.empty());
-
     branch_epilogues[branch] = func_name;
 }
 

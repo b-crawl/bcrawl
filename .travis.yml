@@ -20,6 +20,10 @@ env:
 #    - WEBTILES=1 BUILD_ALL=1
 git:
     submodules: false
+matrix:
+    exclude:
+        - compiler: clang
+          env: CROSSCOMPILE=1
 install: perl .travis/deps.pl
 script: perl .travis/build.pl
 notifications:

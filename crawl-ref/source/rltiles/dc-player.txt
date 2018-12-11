@@ -33,6 +33,8 @@ gnoll2_m
 gnoll2_f
 gnoll3_m
 gnoll3_f
+gnoll4_m
+gnoll4_f
 gnome_f
 gnome_m
 halfling_m HALFLING
@@ -567,6 +569,7 @@ punk PUNK
 sniper SNIPER
 crossbow_fire FIERY_DEVIL
 zephyr ZEPHYR
+sceptre_of_torment SCEPTRE_OF_TORMENT
 
 %sdir player/hand1
 # blades

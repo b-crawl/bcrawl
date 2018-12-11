@@ -39,6 +39,7 @@
 #include "mon-tentacle.h"
 #include "religion.h"
 #include "shout.h"
+#include "spl-damage.h"
 #include "spl-summoning.h"
 #include "state.h"
 #include "stepdown.h"
@@ -107,22 +108,38 @@ bool melee_attack::handle_phase_attempted()
 
     if (attacker->is_player() && defender && defender->is_monster())
     {
+        // Unrands with secondary effects that can harm nearby friendlies.
         if (weapon && is_unrandom_artefact(*weapon, UNRAND_DEVASTATOR))
         {
-            const char* verb = "attack";
-            string junk1, junk2;
-            bool junk3 = false;
-            if (defender)
-            {
-                verb = (bad_attack(defender->as_monster(),
-                                   junk1, junk2, junk3)
-                        ? "attack" : "attack near");
-            }
 
             targeter_smite hitfunc(attacker, 1, 1, 1, false);
             hitfunc.set_aim(defender->pos());
 
-            if (stop_attack_prompt(hitfunc, verb))
+            if (stop_attack_prompt(hitfunc, "attack", nullptr, nullptr,
+                                   defender->as_monster()))
+            {
+                cancel_attack = true;
+                return false;
+            }
+        }
+        else if (weapon &&
+                (is_unrandom_artefact(*weapon, UNRAND_SINGING_SWORD)
+                 || is_unrandom_artefact(*weapon, UNRAND_VARIABILITY)
+                 || is_unrandom_artefact(*weapon, UNRAND_SPELLBINDER)))
+        {
+            targeter_los hitfunc(&you, LOS_NO_TRANS);
+
+            if (stop_attack_prompt(hitfunc, "attack", nullptr, nullptr,
+                                   defender->as_monster()))
+            {
+                cancel_attack = true;
+                return false;
+            }
+        }
+        else if (weapon && is_unrandom_artefact(*weapon, UNRAND_ARC_BLADE))
+        {
+            vector<const actor *> exclude;
+            if (!safe_discharge(defender->pos(), exclude))
             {
                 cancel_attack = true;
                 return false;
@@ -216,8 +233,8 @@ bool melee_attack::handle_phase_attempted()
         xom_is_stimulated(100);
 
     // Any attack against a monster we're afraid of has a chance to fail
-    if (attacker->is_player() && you.afraid_of(defender->as_monster())
-        && one_chance_in(3))
+    if (attacker->is_player() && defender &&
+        you.afraid_of(defender->as_monster()) && one_chance_in(3))
     {
         mprf("You attempt to attack %s, but flinch away in fear!",
              defender->name(DESC_THE).c_str());
@@ -245,7 +262,7 @@ bool melee_attack::handle_phase_attempted()
     attack_occurred = true;
 
     // Check for player practicing dodging
-    if (defender->is_player())
+    if (defender && defender->is_player())
         practise_being_attacked();
 
     return true;
@@ -807,11 +824,22 @@ bool melee_attack::attack()
 
     // Stuff for god conduct, this has to remain here for scope reasons.
     god_conduct_trigger conducts[3];
-    disable_attack_conducts(conducts);
+
+    // Remove sanctuary if - through some attack - it was violated.
+    if (env.sanctuary_time > 0 && attack_occurred && !cancel_attack
+        && attacker != defender
+        && (is_sanctuary(attack_position) || is_sanctuary(defender->pos()))
+        && (attacker->is_player()
+            // XXX: Can friendly monsters actually violate sanctuary?
+            || attacker->as_monster()->friendly() && !attacker->confused()))
+    {
+        remove_sanctuary(true);
+    }
 
     if (attacker->is_player() && attacker != defender)
     {
-        set_attack_conducts(conducts, defender->as_monster());
+        set_attack_conducts(conducts, *defender->as_monster(),
+                            you.can_see(*defender));
 
         if (player_under_penance(GOD_ELYVILON)
             && god_hates_your_god(GOD_ELYVILON)
@@ -870,16 +898,6 @@ bool melee_attack::attack()
             handle_phase_dodged();
     }
 
-    // Remove sanctuary if - through some attack - it was violated.
-    if (env.sanctuary_time > 0 && attack_occurred && !cancel_attack
-        && attacker != defender
-        && (is_sanctuary(attack_position) || is_sanctuary(defender->pos()))
-        && (attacker->is_player() || attacker->as_monster()->friendly()
-                                     && !attacker->confused()))
-    {
-        remove_sanctuary(true);
-    }
-
     if (attacker->is_player())
         do_miscast();
 
@@ -904,8 +922,6 @@ bool melee_attack::attack()
     handle_phase_aux();
 
     handle_phase_end();
-
-    enable_attack_conducts(conducts);
 
     return attack_occurred;
 }
@@ -1527,7 +1543,7 @@ int melee_attack::player_apply_final_multipliers(int damage)
     if (you.duration[DUR_WEAK])
         damage = div_rand_round(damage * 3, 4);
 
-    if (you.duration[DUR_CONFUSING_TOUCH] && wpn_skill == SK_UNARMED_COMBAT)
+    if (you.duration[DUR_CONFUSING_TOUCH])
         return 0;
 
     return damage;
@@ -2269,11 +2285,12 @@ int melee_attack::calc_to_hit(bool random)
 {
     int mhit = attack::calc_to_hit(random);
 
+    // Just trying to touch is easier than trying to damage.
+    if (you.duration[DUR_CONFUSING_TOUCH])
+        mhit += maybe_random2(you.dex(), random);
+
     if (attacker->is_player() && !weapon)
     {
-        // Just trying to touch is easier than trying to damage.
-        if (you.duration[DUR_CONFUSING_TOUCH])
-            mhit += maybe_random2(you.dex(), random);
 
         // TODO: Review this later (transformations getting extra hit
         // almost across the board seems bad) - Cryp71c
@@ -2988,6 +3005,9 @@ void melee_attack::mons_apply_attack_flavour()
             }
             else
             {
+                // Halving the MR of magic immune targets has no effect
+                if (defender->as_monster()->res_magic() == MAG_IMMUNE)
+                    break;
                 if (!defender->as_monster()->has_ench(ENCH_LOWERED_MR))
                     visible_effect = true;
                 mon_enchant lowered_mr(ENCH_LOWERED_MR, 1, attacker,

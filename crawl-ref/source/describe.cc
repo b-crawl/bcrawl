@@ -292,6 +292,7 @@ static vector<string> _randart_propnames(const item_def& item,
         { ARTP_ANGRY,                 prop_note::plain },
         { ARTP_CAUSE_TELEPORTATION,   prop_note::plain },
         { ARTP_NOISE,                 prop_note::plain },
+        { ARTP_HARM,                  prop_note::plain },
         { ARTP_CORRODE,               prop_note::plain },
         { ARTP_DRAIN,                 prop_note::plain },
         { ARTP_SLOW,                  prop_note::plain },
@@ -558,6 +559,7 @@ static string _randart_descrip(const item_def &item)
         { ARTP_SLOW, "It may slow you when you take damage.", false},
         { ARTP_FRAGILE, "It will be destroyed if unequipped.", false },
         { ARTP_SHIELDING, "It affects your SH (%d).", false},
+        { ARTP_HARM, "It increases damage dealt and taken.", false},
     };
 
     // Give a short description of the base type, for base types with no
@@ -629,6 +631,7 @@ static const char *trap_names[] =
 #endif
     "arrow", "spear",
 #if TAG_MAJOR_VERSION > 34
+    "dispersal",
     "teleport",
 #endif
     "permanent teleport",
@@ -637,7 +640,7 @@ static const char *trap_names[] =
     "shaft", "passage", "pressure plate", "web",
 #if TAG_MAJOR_VERSION == 34
     "gas", "teleport",
-    "shadow", "dormant shadow",
+    "shadow", "dormant shadow", "dispersal"
 #endif
 };
 
@@ -1342,7 +1345,8 @@ static string _describe_weapon(const item_def &item, bool verbose)
         else
         {
             description += " weapon of "
-                        + ego_type_string(item, false, you.props[ORIGINAL_BRAND_KEY])
+                        + ego_type_string(item, false,
+                           (brand_type) you.props[ORIGINAL_BRAND_KEY].get_int())
                         + ".";
         }
     }
@@ -2672,7 +2676,6 @@ static bool _do_action(item_def &item, const vector<command_type>& actions, int 
     case CMD_QUIVER_ITEM:      quiver_item(slot);                   break;
     case CMD_WEAR_ARMOUR:      wear_armour(slot);                   break;
     case CMD_REMOVE_ARMOUR:    takeoff_armour(slot);                break;
-    case CMD_EVOKE:            evoke_item(slot);                    break;
     case CMD_EAT:              eat_food(slot);                      break;
     case CMD_READ:             read(&item);                         break;
     case CMD_WEAR_JEWELLERY:   puton_ring(slot);                    break;
@@ -2682,6 +2685,12 @@ static bool _do_action(item_def &item, const vector<command_type>& actions, int 
     case CMD_INSCRIBE_ITEM:    inscribe_item(item);                 break;
     case CMD_ADJUST_INVENTORY: adjust_item(slot);                   break;
     case CMD_SET_SKILL_TARGET: target_item(item);                   break;
+    case CMD_EVOKE:
+#ifndef USE_TILE_LOCAL
+        redraw_console_sidebar();
+#endif
+        evoke_item(slot);
+        break;
     default:
         die("illegal inventory cmd %d", action);
     }
@@ -3124,7 +3133,7 @@ static bool _get_spell_description(const spell_type spell,
     if (mon_owner)
     {
         const int hd = mon_owner->spell_hd();
-        const int range = mons_spell_range(spell, hd);
+        const int range = mons_spell_range_for_hd(spell, hd);
         description += "\nRange : "
                        + range_string(range, range, mons_char(mon_owner->type))
                        + "\n";
@@ -3141,9 +3150,13 @@ static bool _get_spell_description(const spell_type spell,
             if (you.wizard)
                 wiz_info += make_stringf(" (pow %d)", _hex_pow(spell, hd));
 #endif
-            description += make_stringf("Chance to beat your MR: %d%%%s\n",
-                                        hex_chance(spell, hd),
-                                        wiz_info.c_str());
+            description += you.immune_to_hex(spell)
+                ? make_stringf("You cannot be affected by this "
+                               "spell right now. %s\n",
+                               wiz_info.c_str())
+                : make_stringf("Chance to beat your MR: %d%%%s\n",
+                               hex_chance(spell, hd),
+                               wiz_info.c_str());
         }
 
     }
@@ -3240,7 +3253,7 @@ void describe_spell(spell_type spell, const monster_info *mon_owner,
                     const item_def* item, bool show_booklist)
 {
     string desc;
-    bool can_mem = _get_spell_description(spell, mon_owner, desc, item);
+    const bool can_mem = _get_spell_description(spell, mon_owner, desc, item);
     if (show_booklist)
         desc += _spell_sources(spell);
 
@@ -3290,11 +3303,12 @@ void describe_spell(spell_type spell, const monster_info *mon_owner,
 
     bool done = false;
     int lastch;
-    popup->on(Widget::slots.event, [&done, &lastch](wm_event ev) {
+    popup->on(Widget::slots.event, [&done, &lastch, &can_mem](wm_event ev) {
         if (ev.type != WME_KEYDOWN)
             return false;
         lastch = ev.key.keysym.sym;
-        done = (toupper(lastch) == 'M' || lastch == CK_ESCAPE);
+        done = (toupper(lastch) == 'M' && can_mem || lastch == CK_ESCAPE
+            || lastch == CK_ENTER || lastch == ' ');
         return done;
     });
 
@@ -3319,7 +3333,7 @@ void describe_spell(spell_type spell, const monster_info *mon_owner,
     tiles.pop_ui_layout();
 #endif
 
-    if (toupper(lastch) == 'M')
+    if (toupper(lastch) == 'M' && can_mem)
     {
         redraw_screen(); // necessary to ensure stats is redrawn (!?)
         if (!learn_spell(spell) || !you.turn_is_over)
@@ -3653,6 +3667,13 @@ static string _monster_attacks_description(const monster_info& mi)
 {
     ostringstream result;
     map<mon_attack_info, int> attack_counts;
+    brand_type special_flavour = SPWPN_NORMAL;
+
+    if (mi.props.exists(SPECIAL_WEAPON_KEY))
+    {
+        ASSERT(mi.type == MONS_PANDEMONIUM_LORD || mons_is_pghost(mi.type));
+        special_flavour = (brand_type) mi.props[SPECIAL_WEAPON_KEY].get_int();
+    }
 
     for (int i = 0; i < MAX_NUM_ATTACKS; ++i)
     {
@@ -3676,11 +3697,15 @@ static string _monster_attacks_description(const monster_info& mi)
     {
         const mon_attack_info &info = attack_count.first;
         const mon_attack_def &attack = info.definition;
-        const string weapon_note
-            = info.weapon ? make_stringf(" plus %s %s",
-                                         mi.pronoun(PRONOUN_POSSESSIVE),
-                                         info.weapon->name(DESC_PLAIN).c_str())
-                          : "";
+
+        const string weapon_name =
+              info.weapon ? info.weapon->name(DESC_PLAIN).c_str()
+            : ghost_brand_name(special_flavour, mi.type).c_str();
+        const string weapon_note = weapon_name.size() ?
+            make_stringf(" plus %s %s",
+                        mi.pronoun(PRONOUN_POSSESSIVE), weapon_name.c_str())
+            : "";
+
         const string count_desc =
               attack_count.second == 1 ? "" :
               attack_count.second == 2 ? " twice" :
@@ -3717,7 +3742,6 @@ static string _monster_attacks_description(const monster_info& mi)
                          _flavour_effect(attack.flavour, mi.hd).c_str()));
     }
 
-
     if (!attack_descs.empty())
     {
         result << uppercase_first(mi.pronoun(PRONOUN_SUBJECTIVE));
@@ -3727,25 +3751,23 @@ static string _monster_attacks_description(const monster_info& mi)
         result << ".\n";
     }
 
+    if (mi.type == MONS_ROYAL_JELLY)
+    {
+        result << "It will release varied jellies when damaged or killed, with"
+            " the number of jellies proportional to the amount of damage.\n";
+        result << "It will release all of its jellies when polymorphed.\n";
+    }
+
     return result.str();
 }
 
 static string _monster_spells_description(const monster_info& mi)
 {
-    static const string panlord_desc =
-        "It may possess any of a vast number of diabolical powers.\n";
-
-    // Show a generic message for pan lords, since they're secret.
-    if (mi.type == MONS_PANDEMONIUM_LORD && !mi.props.exists(SEEN_SPELLS_KEY))
-        return panlord_desc;
-
     // Show monster spells and spell-like abilities.
     if (!mi.has_spells())
         return "";
 
     formatted_string description;
-    if (mi.type == MONS_PANDEMONIUM_LORD)
-        description.cprintf("%s", panlord_desc.c_str());
     describe_spellset(monster_spellset(mi), nullptr, description, &mi);
     description.cprintf("To read a description, press the key listed above.\n");
     return description.tostring();
@@ -4558,26 +4580,49 @@ int describe_monsters(const monster_info &mi, bool force_seen,
     title_hbox->set_margin_for_sdl({0, 0, 20, 0});
     vbox->add_child(move(title_hbox));
 
-    auto scroller = make_shared<Scroller>();
-    auto text = make_shared<Text>();
     desc += formatted_string(inf.body.str());
     if (crawl_state.game_is_hints())
         desc += formatted_string(hints_describe_monster(mi, has_stat_desc));
     desc += formatted_string(inf.footer);
     desc = formatted_string::parse_string(trimmed_string(desc));
 
-    text->set_text(desc);
-    text->wrap_text = true;
-    scroller->set_child(text);
-    vbox->add_child(scroller);
+    const formatted_string quote = formatted_string(trimmed_string(inf.quote));
 
-    if (!inf.quote.empty())
+    auto desc_sw = make_shared<Switcher>();
+    auto more_sw = make_shared<Switcher>();
+    desc_sw->current() = 0;
+    more_sw->current() = 0;
+
+#ifdef USE_TILE_LOCAL
+# define MORE_PREFIX "[<w>!</w>" "|<w>Right-click</w>" "]: "
+#else
+# define MORE_PREFIX "[<w>!</w>" "]: "
+#endif
+
+    const char* mores[2] = {
+        MORE_PREFIX "<w>Description</w>|Quote",
+        MORE_PREFIX "Description|<w>Quote</w>",
+    };
+
+    for (int i = 0; i < (inf.quote.empty() ? 1 : 2); i++)
     {
-        auto more = make_shared<Text>(_toggle_message);
-        more->set_margin_for_crt({1, 0, 0, 0});
-        more->set_margin_for_sdl({20, 0, 0, 0});
-        vbox->add_child(move(more));
+        const formatted_string *content[2] = { &desc, &quote };
+        auto scroller = make_shared<Scroller>();
+        auto text = make_shared<Text>(content[i]->trim());
+        text->wrap_text = true;
+        scroller->set_child(text);
+        desc_sw->add_child(move(scroller));
+
+        more_sw->add_child(make_shared<Text>(
+                formatted_string::parse_string(mores[i])));
     }
+
+    more_sw->set_margin_for_sdl({20, 0, 0, 0});
+    more_sw->set_margin_for_crt({1, 0, 0, 0});
+    desc_sw->expand_h = false;
+    vbox->add_child(desc_sw);
+    if (!inf.quote.empty())
+        vbox->add_child(more_sw);
 
 #ifdef USE_TILE_LOCAL
     vbox->max_size()[0] = tiles.get_crt_font()->char_width()*80;
@@ -4586,7 +4631,6 @@ int describe_monsters(const monster_info &mi, bool force_seen,
     auto popup = make_shared<ui::Popup>(move(vbox));
 
     bool done = false;
-    bool show_quote = false;
     int lastch;
     popup->on(Widget::slots.event, [&](wm_event ev) {
         if (ev.type != WME_KEYDOWN)
@@ -4596,8 +4640,13 @@ int describe_monsters(const monster_info &mi, bool force_seen,
         done = key == CK_ESCAPE;
         if (!inf.quote.empty() && (key == '!' || key == CK_MOUSE_CMD))
         {
-            show_quote = !show_quote;
-            text->set_text(show_quote ? formatted_string(trimmed_string(inf.quote)) : desc);
+            int n = (desc_sw->current() + 1) % 2;
+            desc_sw->current() = more_sw->current() = n;
+#ifdef USE_TILE_WEB
+            tiles.json_open_object();
+            tiles.json_write_int("pane", n);
+            tiles.ui_state_change("describe-monster", 0);
+#endif
         }
         const vector<pair<spell_type,char>> spell_map = map_chars_to_spells(spells, nullptr);
         auto entry = find_if(spell_map.begin(), spell_map.end(),
@@ -4620,6 +4669,7 @@ int describe_monsters(const monster_info &mi, bool force_seen,
                 needle, "SPELLSET_PLACEHOLDER");
     }
     tiles.json_write_string("body", desc_without_spells);
+    tiles.json_write_string("quote", quote);
     write_spellset(spells, nullptr, &mi);
 
     {
@@ -4657,7 +4707,7 @@ int describe_monsters(const monster_info &mi, bool force_seen,
             tiles.json_write_null("mcache");
         }
     }
-    tiles.push_ui_layout("describe-monster", 0);
+    tiles.push_ui_layout("describe-monster", 1);
 #endif
 
     ui::run_layout(move(popup), done);

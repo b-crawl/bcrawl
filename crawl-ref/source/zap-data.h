@@ -1358,4 +1358,57 @@ _mon_hex_zap(ZAP_DRAIN_MAGIC, BEAM_DRAIN_MAGIC),
     0
 },
 
+{
+    ZAP_REFRIGERATE,
+    "refrigeration",
+    200,
+    new calcdice_calculator<3, 5, 1, 10>,
+    new tohit_calculator<40>,
+    new calcdice_calculator<3, 5, 1, 10>,
+    new tohit_calculator<40>,
+    LIGHTCYAN,
+    false,
+    BEAM_COLD,
+    NUM_DCHAR_TYPES,
+    true,
+    false,
+    false,
+    0 // No additional effect noise.
+},
+
+{
+    ZAP_DRAIN_LIFE,
+    "drain life",
+    200,
+    new calcdice_calculator<1, 10, 1, 1>,
+    new tohit_calculator<40>,
+    new calcdice_calculator<1, 10, 1, 1>,
+    new tohit_calculator<40>,
+    DARKGREY,
+    false,
+    BEAM_NEG,
+    NUM_DCHAR_TYPES,
+    true,
+    false,
+    false,
+    0 // No additional effect noise.
+},
+
+{
+    ZAP_SONIC_WAVE,
+    "sonic wave",
+    200,
+    new calcdice_calculator<2, 5, 1, 10>,
+    new tohit_calculator<40>,
+    new calcdice_calculator<2, 5, 1, 10>,
+    new tohit_calculator<40>,
+    YELLOW,
+    false,
+    BEAM_MMISSILE,
+    NUM_DCHAR_TYPES,
+    true,
+    false,
+    false,
+    0 // No additional effect noise.
+},
 };

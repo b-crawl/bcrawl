@@ -114,6 +114,7 @@ enum class abflag
     sacrifice           = 0x00200000, // sacrifice (Ru)
     hostile             = 0x00400000, // failure summons a hostile (Makhleb)
     starve_ok           = 0x00800000, // can use even if starving
+    berserk_ok          = 0x01000000, // can use even if berserk
 };
 DEF_BITFIELD(ability_flags, abflag);
 
@@ -322,9 +323,12 @@ static const ability_def Ability_List[] =
 
     { ABIL_CANCEL_PPROJ, "Cancel Portal Projectile",
       0, 0, 0, 0, {}, abflag::instant | abflag::starve_ok },
+<<<<<<< HEAD
 
     { ABIL_CANCEL_PIERCE, "Cancel Piercing Shot",
       0, 0, 0, 0, {}, abflag::instant },
+=======
+>>>>>>> 30802b1d75c0d272370f13e7685b8601975f22d6
 
     { ABIL_DIG, "Dig", 0, 0, 0, 0, {}, abflag::instant | abflag::starve_ok },
     { ABIL_SHAFT_SELF, "Shaft Self", 0, 0, 250, 0, {}, abflag::delay },
@@ -358,6 +362,9 @@ static const ability_def Ability_List[] =
       2, 0, 250, 0, {fail_basis::evo, 50, 2}, abflag::none },
     { ABIL_EVOKE_RATSKIN, "Evoke Ratskin",
       3, 0, 200, 0, {fail_basis::evo, 50, 2}, abflag::none },
+    { ABIL_EVOKE_THUNDER, "Evoke Thunderclouds",
+      5, 0, 200, 0, {fail_basis::evo, 60, 2}, abflag::none },
+
 
     { ABIL_END_TRANSFORMATION, "End Transformation",
       0, 0, 0, 0, {}, abflag::starve_ok },
@@ -642,12 +649,22 @@ static const ability_def Ability_List[] =
         0, 0, 0, 0, {fail_basis::invo}, abflag::exhaustion | abflag::instant
         | abflag::skill_drain },
     { ABIL_WU_JIAN_HEAVENLY_STORM, "Heavenly Storm",
+<<<<<<< HEAD
         0, 0, 0, 6, {fail_basis::invo, piety_breakpoint(4), 0, 1}, abflag::none },
     // Lunge and Whirlwind abilities aren't menu abilities but currently need
     // to exist for action counting, hence need enums/entries.
     { ABIL_WU_JIAN_LUNGE, "Lunge", 0, 0, 0, 0, {}, abflag::none },
     { ABIL_WU_JIAN_WHIRLWIND, "Whirlwind", 0, 0, 0, 0, {}, abflag::none },
     { ABIL_WU_JIAN_WALLJUMP, "Wall Jump", 0, 0, 0, 0, {}, abflag::starve_ok },
+=======
+        0, 0, 0, 20, {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::none },
+    // Lunge and Whirlwind abilities aren't menu abilities but currently need
+    // to exist for action counting, hence need enums/entries.
+    { ABIL_WU_JIAN_LUNGE, "Lunge", 0, 0, 0, 0, {}, abflag::berserk_ok },
+    { ABIL_WU_JIAN_WHIRLWIND, "Whirlwind", 0, 0, 0, 0, {}, abflag::berserk_ok },
+    { ABIL_WU_JIAN_WALLJUMP, "Wall Jump",
+        0, 0, 0, 0, {}, abflag::starve_ok | abflag::berserk_ok },
+>>>>>>> 30802b1d75c0d272370f13e7685b8601975f22d6
 
     { ABIL_STOP_RECALL, "Stop Recall", 0, 0, 0, 0, {fail_basis::invo}, abflag::starve_ok },
     { ABIL_RENOUNCE_RELIGION, "Renounce Religion",
@@ -1091,6 +1108,9 @@ static string _sacrifice_desc(const ability_type ability)
     const string piety_info = ru_sacrifice_description(ability);
     const string desc = boilerplate + piety_info;
 
+    if (!you_worship(GOD_RU))
+        return desc;
+
     const string sac_vec_key = ru_sacrifice_vector(ability);
     if (sac_vec_key.empty())
         return desc;
@@ -1167,21 +1187,11 @@ void no_ability_msg()
 
 bool activate_ability()
 {
-    if (you.berserk())
-    {
-        canned_msg(MSG_TOO_BERSERK);
-        crawl_state.zero_turns_taken();
-        return false;
-    }
+    vector<talent> talents = your_talents(false);
 
-    const bool confused = you.confused();
-    vector<talent> talents = your_talents(confused);
     if (talents.empty())
     {
-        if (confused)
-            canned_msg(MSG_TOO_CONFUSED);
-        else
-            no_ability_msg();
+        no_ability_msg();
         crawl_state.zero_turns_taken();
         return false;
     }
@@ -1266,7 +1276,7 @@ static bool _can_hop(bool quiet)
 // TODO: Many more cases need to be added!
 static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
 {
-    if (you.berserk())
+    if (you.berserk() && !testbits(abil.flags, abflag::berserk_ok))
     {
         if (!quiet)
             canned_msg(MSG_TOO_BERSERK);
@@ -1635,6 +1645,42 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
             return false;
         }
         return true;
+
+    case ABIL_WU_JIAN_WALLJUMP:
+    {
+        // TODO: Add check for whether there is any valid landing spot
+        if (you.is_nervous())
+        {
+            if (!quiet)
+                mpr("You are too terrified to wall jump!");
+            return false;
+        }
+        if (you.attribute[ATTR_HELD])
+        {
+            if (!quiet)
+            {
+                mprf("You cannot wall jump while caught in a %s.",
+                     get_trapping_net(you.pos()) == NON_ITEM ? "web" : "net");
+            }
+            return false;
+        }
+        // Is there a valid place to wall jump?
+        bool has_targets = false;
+        for (adjacent_iterator ai(you.pos()); ai; ++ai)
+            if (feat_can_wall_jump_against(grd(*ai)))
+            {
+                has_targets = true;
+                break;
+            }
+
+        if (!has_targets)
+        {
+            if (!quiet)
+                mpr("There is nothing to wall jump against here.");
+            return false;
+        }
+        return true;
+    }
 
     default:
         return true;
@@ -2072,6 +2118,16 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
 
         break;
 
+    case ABIL_EVOKE_THUNDER: // robe of Clouds
+        fail_check();
+        mpr("The folds of your robe billow into a mighty storm.");
+
+        for (radius_iterator ri(you.pos(), 2, C_SQUARE); ri; ++ri)
+            if (!cell_is_solid(*ri))
+                place_cloud(CLOUD_STORM, *ri, 8 + random2avg(8,2), &you);
+
+        break;
+
     case ABIL_CANCEL_PPROJ:
         fail_check();
         you.duration[DUR_PORTAL_PROJECTILE] = 0;
@@ -2282,7 +2338,7 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
         const spret_type result =
             fire_los_attack_spell(SPELL_DRAIN_LIFE,
                                   you.skill_rdiv(SK_INVOCATIONS),
-                                  &you, fail, &damage);
+                                  &you, nullptr, fail, &damage);
         if (result != SPRET_SUCCESS)
             return result;
 
@@ -2390,7 +2446,7 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
         case 1: zapping(ZAP_PAIN, power, beam); break;
         case 2: zapping(ZAP_STONE_ARROW, power, beam); break;
         case 3: zapping(ZAP_SHOCK, power, beam); break;
-        case 4: zapping(ZAP_BREATHE_ACID, power / 2, beam); break;
+        case 4: zapping(ZAP_BREATHE_ACID, power / 7, beam); break;
         }
         break;
     }
@@ -2526,11 +2582,8 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
 
     case ABIL_ELYVILON_HEAL_OTHER:
     {
-        int pow = 10 + you.skill_rdiv(SK_INVOCATIONS, 1, 3);
-        pow = min(50, pow);
-        int max_pow = 10 + (int) ceil(you.skill(SK_INVOCATIONS, 1) / 3.0);
-        max_pow = min(50, max_pow);
-        return cast_healing(pow, max_pow, fail);
+        int pow = 30 + you.skill(SK_INVOCATIONS, 1);
+        return cast_healing(pow, fail);
     }
 
     case ABIL_ELYVILON_DIVINE_VIGOUR:
@@ -2996,7 +3049,7 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
 
     case ABIL_WU_JIAN_WALLJUMP:
         fail_check();
-        return wu_jian_wall_jump_ability() ? SPRET_SUCCESS : SPRET_ABORT;
+        return wu_jian_wall_jump_ability();
 
     case ABIL_RENOUNCE_RELIGION:
         fail_check();
@@ -3360,6 +3413,12 @@ vector<talent> your_talents(bool check_confused, bool include_unusable)
         && !you.get_mutation_level(MUT_NO_LOVE))
     {
         _add_talent(talents, ABIL_EVOKE_RATSKIN, check_confused);
+    }
+
+    if (player_equip_unrand(UNRAND_RCLOUDS)
+        && !you.get_mutation_level(MUT_NO_ARTIFICE))
+    {
+        _add_talent(talents, ABIL_EVOKE_THUNDER, check_confused);
     }
 
     if (you.evokable_berserk() && !you.get_mutation_level(MUT_NO_ARTIFICE))

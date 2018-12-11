@@ -242,9 +242,12 @@ void tile_default_flv(branch_type br, int depth, tile_flavour &flv)
         flv.floor = TILE_FLOOR_VAULT;
         return;
 
+#if TAG_MAJOR_VERSION == 34
     case BRANCH_LABYRINTH:
+#endif
+    case BRANCH_GAUNTLET:
         flv.wall  = TILE_WALL_LAB_ROCK;
-        flv.floor = TILE_FLOOR_LABYRINTH;
+        flv.floor = TILE_FLOOR_GAUNTLET;
         return;
 
     case BRANCH_SEWER:
@@ -784,6 +787,7 @@ void tile_floor_halo(dungeon_feature_type target, tileidx_t tile)
                 continue;
             }
 
+            // TODO: these conditions are guaranteed?
             int right_spc = x < GXM - 1 ? env.tile_flv[x+1][y].floor - tile
                                         : SPECIAL_FULL;
             int down_spc  = y < GYM - 1 ? env.tile_flv[x][y+1].floor - tile
@@ -1247,7 +1251,7 @@ void apply_variations(const tile_flavour &flv, tileidx_t *bg,
     tileidx_t flag = (*bg) & (~TILE_FLAG_MASK);
 
     // TODO: allow the stone type to be set in a cleaner way.
-    if (player_in_branch(BRANCH_LABYRINTH))
+    if (player_in_branch(BRANCH_GAUNTLET))
     {
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_WALL_LAB_STONE;

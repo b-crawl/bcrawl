@@ -2,8 +2,9 @@
  * @file
  * @brief Wizard mode command handling.
 **/
-#ifdef WIZARD
 #include "AppHdr.h"
+
+#ifdef WIZARD
 
 #include "wizard.h"
 
@@ -32,7 +33,6 @@
 #include "spl-transloc.h" // wizard_blink
 #include "stairs.h" // down_stairs
 #include "state.h"
-#include "timed-effects.h" // change_labyrinth
 #include "wizard-option-type.h"
 #include "wiz-dgn.h"
 #include "wiz-dump.h"
@@ -111,13 +111,7 @@ static void _do_wizard_command(int wiz_command)
     // case CONTROL('J'): break;
 
     case 'k': wizard_set_xl(true); break;
-    case 'K':
-        if (player_in_branch(BRANCH_LABYRINTH))
-            change_labyrinth(true);
-        else
-            mpr("This only makes sense in a labyrinth!");
-        break;
-    case CONTROL('K'): wizard_clear_used_vaults(); break;
+    case 'K': wizard_clear_used_vaults(); break;
 
     case 'l': wizard_set_xl(); break;
     case 'L': debug_place_map(false); break;
@@ -214,7 +208,6 @@ static void _do_wizard_command(int wiz_command)
         if (!wizard_add_mutation())
             mpr("Failure to give mutation.");
         break;
-    case '}': wizard_reveal_traps(); break;
 
     case '\\': debug_make_shop(); break;
     case '|': wizard_create_all_artefacts(); break;
@@ -432,14 +425,13 @@ int list_wizard_commands(bool do_redraw_screen)
                        "<w>,</w>/<w>.</w>    create up/down staircase\n"
                        "<w>(</w>      turn cell into feature\n"
                        "<w>\\</w>      make a shop\n"
-                       "<w>Ctrl-K</w> mark all vaults as unused\n"
+                       "<w>K</w> mark all vaults as unused\n"
                        "\n"
                        "<yellow>Other level related commands</yellow>\n"
                        "<w>Ctrl-A</w> generate new Abyss area\n"
                        "<w>b</w>      controlled blink\n"
                        "<w>B</w>      controlled teleport\n"
                        "<w>Ctrl-B</w> banish yourself to the Abyss\n"
-                       "<w>K</w>      shift section of a labyrinth\n"
                        "<w>R</w>      change monster spawn rate\n"
                        "<w>Ctrl-S</w> change Abyss speed\n"
                        "<w>u</w>/<w>d</w>    shift up/down one level\n"
@@ -448,7 +440,6 @@ int list_wizard_commands(bool do_redraw_screen)
                        "       temples in the dungeon\n"
                        "<w>;</w>      list known levels and counters\n"
                        "<w>{</w>      magic mapping\n"
-                       "<w>}</w>      detect all traps on level\n"
                        "<w>Ctrl-W</w> change Shoals' tide speed\n"
                        "<w>Ctrl-E</w> dump level builder information\n"
                        "<w>Ctrl-R</w> regenerate current level\n"

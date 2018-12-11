@@ -168,12 +168,14 @@ COLOUR: BLACK
 
 NAME:    Singing Sword
 OBJ:     OBJ_WEAPONS/WPN_DOUBLE_SWORD
+INSCRIP: sonic wave
 PLUS:    +7
 COLOUR:  ETC_GOLD
 TILE:    spwpn_singing_sword
 TILE_EQ: singing_sword
 VALUE:   1000
 BOOL:    special
+BRAND:   SPWPN_VORPAL
 
 NAME:    Wrath of Trog
 OBJ:     OBJ_WEAPONS/WPN_BATTLEAXE
@@ -253,11 +255,13 @@ VALUE:   800
 BOOL:    curse
 
 NAME:    sceptre of Torment
-OBJ:     OBJ_WEAPONS/WPN_STAFF
+INSCRIP: torment
+OBJ:     OBJ_WEAPONS/WPN_EVENINGSTAR
 PLUS:    +7
 COLOUR:  ETC_GOLD
 TILE:    spwpn_sceptre_of_torment
-TILE_EQ: mace_ruby
+TILE_EQ: sceptre_of_torment
+BRAND:   SPWPN_PAIN
 VALUE:   1200
 BOOL:    special, evil
 
@@ -386,12 +390,13 @@ MAGIC:    1
 
 NAME:    scythe "Finisher"
 OBJ:     OBJ_WEAPONS/WPN_SCYTHE
+INSCRIP: speed, eviscerate
 PLUS:    +5
 COLOUR:  ETC_DARK
 TILE:    urand_finisher
 TILE_EQ: finisher
 BRAND:   SPWPN_SPEED
-STR:     3
+BOOL:    skip_ego
 
 NAME:    sling "Punk"
 OBJ:     OBJ_WEAPONS/WPN_FUSTIBALUS
@@ -571,14 +576,13 @@ BOOL:    poison, no_upgrade
 
 NAME:     Spriggan's Knife
 OBJ:      OBJ_WEAPONS/WPN_DAGGER
+INSCRIP:  stab,
 TYPE:     knife
 PLUS:     +7
 COLOUR:   LIGHTCYAN
 TILE:     urand_spriggans_knife
 TILE_EQ:  spriggans_knife
 EV:       4
-DEX:      4
-MAGIC:    1
 STEALTH:  1
 
 NAME:    plutonium sword
@@ -713,13 +717,12 @@ LIFE:     1
 
 NAME:     robe of Misfortune
 OBJ:      OBJ_ARMOUR/ARM_ROBE
-PLUS:     -5
+PLUS:     5
 COLOUR:   LIGHTMAGENTA
 TILE:     urand_misfortune
 TILE_EQ:  robe_misfortune
-EV:       -5
-STEALTH:  -2
-BOOL:     nospell, rnd_tele, randapp, unided, mutate, drain, curse, notac
+EV:       5
+BOOL:     harm, mutate, drain, slow, corrode
 
 # TAG_MAJOR_VERSION == 34
 NAME:     cloak of Flash
@@ -850,7 +853,7 @@ BOOL:    elec, poison, rMut, rCorr
 
 ENUM:    FENCERS
 NAME:    fencer's gloves
-INSCRIP: +Riposte
+INSCRIP: Riposte
 OBJ:     OBJ_ARMOUR/ARM_GLOVES
 PLUS:    +0
 COLOUR:  WHITE
@@ -964,12 +967,13 @@ PLUS:     +8
 
 ENUM:     RCLOUDS
 NAME:     robe of Clouds
+INSCRIP:  +Thunder rCloud
 OBJ:      OBJ_ARMOUR/ARM_ROBE
 PLUS:     +3
 COLOUR:   ETC_MIST
 TILE:     urand_clouds
 TILE_EQ:  robe_clouds
-BOOL:     elec, fly
+BOOL:     elec
 
 NAME:     hat of Pondering
 OBJ:      OBJ_ARMOUR/ARM_HAT
@@ -1137,7 +1141,7 @@ BOOL:    nogen, notac
 NAME:     arc blade
 INSCRIP:  discharge,
 OBJ:      OBJ_WEAPONS/WPN_RAPIER
-PLUS:     +4
+PLUS:     +8
 COLOUR:   ETC_ELECTRICITY
 TILE:     urand_arc_blade
 TILE_EQ:  arc_blade

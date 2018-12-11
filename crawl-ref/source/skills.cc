@@ -327,14 +327,14 @@ static void _change_skill_level(skill_type exsk, int n)
     // calc_hp() has to be called here because it currently doesn't work
     // right if you.skills[] hasn't been updated yet.
     if (exsk == SK_FIGHTING)
-        recalc_and_scale_hp();
+        calc_hp(true, false);
 }
 
 // Called whenever a skill is trained.
 void redraw_skill(skill_type exsk, skill_type old_best_skill, bool recalculate_order)
 {
     if (exsk == SK_FIGHTING)
-        recalc_and_scale_hp();
+        calc_hp(true, false);
 
     if (exsk == SK_INVOCATIONS || exsk == SK_SPELLCASTING || exsk == SK_EVOCATIONS)
         calc_mp();
@@ -1095,13 +1095,18 @@ bool skill_trained(int i)
  *
  * @param sk the skill to check. This checks crosstraining and ash bonuses,
  * but not other skill modifiers.
+ * @param target the target to check against. Defaults to you.training_targets[sk]
  *
  * @return whether the skill target has been met.
  */
+bool target_met(skill_type sk, unsigned int target)
+{
+    return you.skill(sk, 10, false, false, false) >= (int) target;
+}
+
 bool target_met(skill_type sk)
 {
-    return you.skill(sk, 10, false, false, false) >=
-                                        (int) you.training_targets[sk];
+    return target_met(sk, you.training_targets[sk]);
 }
 
 /**
@@ -2117,7 +2122,7 @@ int transfer_skill_points(skill_type fsk, skill_type tsk, int skp_max,
 
         // If reducing fighting would reduce your maxHP to 0 or below,
         // we cancel the last step and end the transfer.
-        if (fsk == SK_FIGHTING && get_real_hp(false, true) <= 0)
+        if (fsk == SK_FIGHTING && get_real_hp(false, false) <= 0)
         {
             change_skill_points(fsk, skp_lost, false);
             total_skp_lost -= skp_lost;
@@ -2232,8 +2237,14 @@ void skill_state::restore_training()
 {
     for (skill_type sk = SK_FIRST_SKILL; sk < NUM_SKILLS; ++sk)
     {
-        if (you.skills[sk] < MAX_SKILL_LEVEL)
+        // Don't resume training if it's impossible or a target was met
+        // after our backup was made.
+        if (you.skills[sk] < MAX_SKILL_LEVEL
+            && !(training_targets[sk] &&
+                 target_met(sk, training_targets[sk])))
+        {
             you.train[sk] = train[sk];
+        }
     }
 
     you.can_train                   = can_train;

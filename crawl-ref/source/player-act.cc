@@ -206,6 +206,10 @@ int player::damage_type(int)
  */
 brand_type player::damage_brand(int)
 {
+    // confusing touch always overrides
+    if (duration[DUR_CONFUSING_TOUCH])
+        return SPWPN_CONFUSE;
+
     const int wpn = equip[EQ_WEAPON];
     if (wpn != -1 && !melded[EQ_WEAPON])
     {
@@ -215,12 +219,6 @@ brand_type player::damage_brand(int)
     }
 
     // unarmed
-
-    if (duration[DUR_CONFUSING_TOUCH])
-        return SPWPN_CONFUSE;
-
-    if (player_equip_unrand(UNRAND_FISTS_OF_THUNDER))
-        return SPWPN_ELECTROCUTION;
 
     return get_form()->get_uc_brand();
 }
@@ -753,10 +751,8 @@ bool player::go_berserk(bool intentional, bool potion)
 
     you.increase_duration(DUR_BERSERK, berserk_duration);
 
-    calc_hp();
-    set_hp(you.hp * 3 / 2);
-
-    deflate_hp(you.hp_max, false);
+    //Apply Berserk's +50% Current/Max HP
+    calc_hp(true, false);
 
     if (!you.duration[DUR_MIGHT])
         notify_stat_change(STAT_STR, 5, true);

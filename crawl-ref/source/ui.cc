@@ -108,10 +108,7 @@ struct Widget::slots Widget::slots = {};
 
 bool Widget::on_event(const wm_event& event)
 {
-    if (event.type == WME_KEYDOWN || event.type == WME_KEYUP)
-        return Widget::slots.event.emit(this, event);
-    else
-        return false;
+    return Widget::slots.event.emit(this, event);
 }
 
 static inline bool _maybe_propagate_event(wm_event event, shared_ptr<Widget> &child)
@@ -528,6 +525,8 @@ void Text::_render()
         region = aabb_intersect(region, scissor_stack.top());
     if (region[2] <= 0 || region[3] <= 0)
         return;
+
+    wrap_text_to_size(m_region[2], m_region[3]);
 
 #ifdef USE_TILE_LOCAL
     const int line_height = tiles.get_crt_font()->char_height();
@@ -1218,9 +1217,12 @@ void Scroller::_allocate_region()
         const int h = m_region[3]*min(max(0.05f, h_percent), 1.0f);
         const float scroll_percent = m_scroll/(float)(ch_reg[3]-m_region[3]);
         const int y = m_region[1] + (m_region[3]-h)*scroll_percent;
-        GLWPrim rect(x+10, y, x+12, y+h);
-        rect.set_col(VColour(158,124,75,200));
-        m_scrollbar_buf.add_primitive(rect);
+        GLWPrim bg_rect(x+10, m_region[1], x+12, m_region[1]+m_region[3]);
+        bg_rect.set_col(VColour(41,41,41));
+        m_scrollbar_buf.add_primitive(bg_rect);
+        GLWPrim fg_rect(x+10, y, x+12, y+h);
+        fg_rect.set_col(VColour(125, 98, 60));
+        m_scrollbar_buf.add_primitive(fg_rect);
     }
 #endif
 }
@@ -1297,6 +1299,15 @@ void Popup::_render()
 
 SizeReq Popup::_get_preferred_size(Direction dim, int prosp_width)
 {
+#ifdef USE_TILE_LOCAL
+    // can be called with a prosp_width that is narrower than the child's
+    // minimum width, since our returned SizeReq has a minimum of 0
+    if (dim == VERT)
+    {
+        SizeReq hsr = m_child->get_preferred_size(HORZ, -1);
+        prosp_width = max(prosp_width, hsr.min);
+    }
+#endif
     SizeReq sr = m_child->get_preferred_size(dim, prosp_width);
 #ifdef USE_TILE_LOCAL
     constexpr int pad = m_base_margin + m_padding;

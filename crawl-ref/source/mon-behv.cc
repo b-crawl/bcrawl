@@ -280,8 +280,8 @@ void handle_behaviour(monster* mon)
     //     mon->mindex(), mon->behaviour, mon->foe, mon->pos().x,
     //     mon->pos().y, mon->target.x, mon->target.y);
 
-    // Check for confusion -- early out.
-    if (mon->has_ench(ENCH_CONFUSION))
+    // Check for permanent confusion, early out.
+    if (mons_class_flag(mon->type, M_CONFUSED))
     {
         set_random_target(mon);
         return;
@@ -517,7 +517,8 @@ void handle_behaviour(monster* mon)
             {
                 // If their foe is marked, the monster always knows exactly
                 // where they are.
-                if (mons_foe_is_marked(*mon) || mon->has_ench(ENCH_HAUNTING))
+                if (afoe && (mons_foe_is_marked(*mon)
+                                            || mon->has_ench(ENCH_HAUNTING)))
                 {
                     mon->target = afoe->pos();
                     try_pathfind(mon);

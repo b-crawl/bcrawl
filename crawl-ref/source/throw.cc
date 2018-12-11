@@ -49,6 +49,7 @@
 
 static int  _fire_prompt_for_item();
 static bool _fire_validate_item(int selected, string& err);
+static int  _get_blowgun_chance(const int hd);
 
 static bool _is_always_penetrating_attack(const actor& attacker,
                          const item_def* weapon, const item_def& projectile)
@@ -302,12 +303,84 @@ vector<string> fire_target_behaviour::get_monster_desc(const monster_info& mi)
         {
             descs.emplace_back("immune to nets");
         }
+
+        // Display the chance for a needle of para/confuse/sleep/frenzy
+        // to affect monster
+        if (you.weapon() && you.weapon()->is_type(OBJ_WEAPONS, WPN_BLOWGUN))
+        {
+            special_missile_type brand = get_ammo_brand(*item);
+            if (brand == SPMSL_PARALYSIS || brand == SPMSL_CONFUSION
+                || brand == SPMSL_FRENZY || brand == SPMSL_SLEEP)
+            {
+                int chance = _get_blowgun_chance(mi.hd);
+                bool immune = false;
+                if (mi.holi & (MH_UNDEAD | MH_NONLIVING))
+                    immune = true;
+
+                string verb = brand == SPMSL_PARALYSIS ? "paralyse" :
+                              brand == SPMSL_CONFUSION ? "confuse"  :
+                              brand == SPMSL_FRENZY    ? "frenzy"
+                              /* SPMSL_SLEEP */        : "sleep";
+
+                string chance_string = immune ? "immune to needles" :
+                                       make_stringf("chance to %s on hit: %d%%",
+                                                    verb.c_str(), chance);
+                descs.emplace_back(chance_string);
+            }
+        }
     }
     return descs;
 }
 
+/**
+ *  Chance for a needle fired by the player to affect a monster of a particular
+ *  hit dice, given the player's throwing skill and blowgun enchantment.
+ *
+ *    @param hd     The monster's hit dice.
+ *    @return       The percentage chance for the player to affect the monster,
+ *                  rounded down.
+ *
+ *  This chance is rolled in ranged_attack::blowgun_check using this formula for
+ *  success:
+ *      if hd < 15, fixed 3% chance to succeed regardless of roll
+ *      else, or if the 3% chance fails,
+ *                      succeed if 2 + random2(4 + skill + enchantment) >= hd
+ */
+static int _get_blowgun_chance(const int hd)
+{
+    ASSERT(you.weapon()->is_type(OBJ_WEAPONS, WPN_BLOWGUN));
+    const int plus = you.weapon()->plus;
+    const int skill = you.skill_rdiv(SK_THROWING);
+
+    int chance = 10000 - 10000 * (hd - 2) / (4 + skill + plus);
+    chance = min(max(chance, 0), 10000);
+    if (hd < 15)
+    {
+        chance *= 97;
+        chance /= 100;
+        chance += 300; // 3% chance to ignore HD and affect enemy anyway
+    }
+    return chance / 100;
+}
+
+/**
+ *  Validate any item selected to be fired, and choose a target to fire at.
+ *
+ *  @param slot         The slot the item to be fired is in, or -1 if
+ *                      an item has not yet been chosen.
+ *  @param target       An empty variable of the dist class to store the
+ *                      target information in.
+ *  @param teleport     Does the player have portal projectile active?
+ *  @param fired_normally  True if the projectile was fired through the f
+ *                      command, false if fired through the F command.
+ *                      If true, if the player changes their mind about which
+ *                      item to fire, update the quivered item accordingly.
+ *  @return             Whether the item validation and target selection
+ *                      was successful.
+ */
 static bool _fire_choose_item_and_target(int& slot, dist& target,
-                                         bool teleport = false)
+                                         bool teleport = false,
+                                         bool fired_normally = true)
 {
     fire_target_behaviour beh;
     const bool was_chosen = (slot != -1);
@@ -349,8 +422,11 @@ static bool _fire_choose_item_and_target(int& slot, dist& target,
         return false;
     }
 
-    you.m_quiver.on_item_fired(*beh.active_item(), beh.chosen_ammo);
-    you.redraw_quiver = true;
+    if (fired_normally)
+    {
+        you.m_quiver.on_item_fired(*beh.active_item(), beh.chosen_ammo);
+        you.redraw_quiver = true;
+    }
     slot = beh.m_slot;
 
     return true;
@@ -561,8 +637,12 @@ void throw_item_no_quiver()
         return;
     }
 
+    dist target;
+    if (!_fire_choose_item_and_target(slot, target, is_pproj_active(), false))
+        return;
+
     bolt beam;
-    throw_it(beam, slot);
+    throw_it(beam, slot, &target);
 }
 
 static bool _setup_missile_beam(const actor *agent, bolt &beam, item_def &item,

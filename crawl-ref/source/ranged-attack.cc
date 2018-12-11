@@ -111,10 +111,20 @@ bool ranged_attack::attack()
     bool shield_blocked = attack_shield_blocked(false);
 
     god_conduct_trigger conducts[3];
-    disable_attack_conducts(conducts);
-
     if (attacker->is_player() && attacker != defender)
-        set_attack_conducts(conducts, defender->as_monster());
+    {
+        set_attack_conducts(conducts, *defender->as_monster(),
+                            you.can_see(*defender));
+    }
+
+    if (env.sanctuary_time > 0 && attack_occurred
+        && (is_sanctuary(attacker->pos()) || is_sanctuary(defender->pos()))
+        && (attacker->is_player()
+            // XXX: Can friendly monsters actually violate sanctuary?
+            || attacker->as_monster()->friendly() && !attacker->confused()))
+    {
+        remove_sanctuary(true);
+    }
 
     if (shield_blocked)
         handle_phase_blocked();
@@ -134,14 +144,6 @@ bool ranged_attack::attack()
             handle_phase_dodged();
     }
 
-    if (env.sanctuary_time > 0 && attack_occurred
-        && (is_sanctuary(attacker->pos()) || is_sanctuary(defender->pos()))
-        && (attacker->is_player() || attacker->as_monster()->friendly()
-                                     && !attacker->confused()))
-    {
-        remove_sanctuary(true);
-    }
-
     if (should_alert_defender)
         alert_defender();
 
@@ -155,8 +157,6 @@ bool ranged_attack::attack()
     }
 
     handle_phase_end();
-
-    enable_attack_conducts(conducts);
 
     return attack_occurred;
 }

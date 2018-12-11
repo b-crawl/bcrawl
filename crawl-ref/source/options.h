@@ -219,6 +219,7 @@ public:
     bool        show_newturn_mark;// Show underscore prefix in messages for new turn
     bool        show_game_time; // Show game time instead of player turns.
     bool        equip_bar; // Show equip bar instead of noise bar.
+    bool        animate_equip_bar; // Animate colours in equip bar.
 
     FixedBitVector<NUM_OBJECT_CLASSES> autopickups; // items to autopickup
     bool        auto_switch;     // switch melee&ranged weapons according to enemy range
@@ -451,6 +452,10 @@ public:
 
     bool        rest_wait_both; // Stop resting only when both HP and MP are
                                 // fully restored.
+
+    bool        rest_wait_ancestor;// Stop resting only if the ancestor's HP
+                                   // is fully restored.
+
     int         rest_wait_percent; // Stop resting after restoring this
                                    // fraction of HP or MP
 
@@ -520,6 +525,7 @@ public:
     string      tile_font_stat_file;
     string      tile_font_lbl_file;
     string      tile_font_tip_file;
+    bool        tile_single_column_menus;
 #endif
 #ifdef USE_TILE_WEB
     string      tile_font_crt_family;

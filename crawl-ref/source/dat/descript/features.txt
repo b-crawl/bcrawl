@@ -596,7 +596,8 @@ An alarm trap
 
 A trap that creates a loud noise to attract nearby monsters. In addition to the
 noise it creates, it will apply an enchantment making monsters all over the
-level aware of your location.
+level aware of your location. Hostile monsters may trigger this trap themselves
+to invoke its effects against you, but your allies will avoid stepping on it.
 %%%%
 An arrow trap
 
@@ -611,6 +612,12 @@ A bolt trap
 
 A well-concealed hole containing a crossbow-like contraption with a
 self-loading mechanism.
+%%%%
+A dispersal trap
+
+Anyone stepping on this trap will translocate themself and anyone else in view
+to a new location nearby. Hostile monsters may trigger this trap, but your
+allies will avoid stepping on it.
 %%%%
 A mechanical trap
 
@@ -658,8 +665,8 @@ A Zot trap
 A trap which inflicts dangerously unpredictable magical effects on those
 unlucky enough to step on it. You may find yourself thrown into the Abyss,
 contaminated with enormous amounts of wild magic, have mighty fiends summoned
-against you, or the like. The monsters of the dungeon may even trigger it
-themselves to invoke its effects against you.
+against you, or the like. Hostile monsters may trigger this trap themselves to
+invoke its effects against you, but your allies will avoid stepping on it.
 %%%%
 ########################################################################
 ### Portal vault entrances
@@ -669,9 +676,9 @@ A flagged portal
 A portal leading to a bailey, gradually fading away as the standard is lowered
 to the ground.
 %%%%
-A labyrinth entrance
+A gauntlet entrance
 
-A portal leading to a labyrinth.
+A portal leading to a gauntlet.
 %%%%
 # timed bazaar
 A flickering gateway to a bazaar

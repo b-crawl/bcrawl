@@ -45,7 +45,7 @@ static void _mark_unseen_monsters();
  */
 static void _calc_hp_artefact()
 {
-    recalc_and_scale_hp();
+    calc_hp();
     if (you.hp_max <= 0) // Borgnjor's abusers...
         ouch(0, KILLED_BY_DRAINING);
 }
@@ -1302,9 +1302,25 @@ static void _equip_jewellery_effect(item_def &item, bool unmeld,
         break;
 
     case AMU_THE_GOURMAND:
-        // What's this supposed to achieve? (jpeg)
-        you.duration[DUR_GOURMAND] = 0;
-        mpr("You feel a craving for the dungeon's cuisine.");
+        if (you.species == SP_VAMPIRE
+            || you_foodless() // Mummy or in lichform
+            || you.get_mutation_level(MUT_HERBIVOROUS) > 0) // Spriggan
+        {
+            mpr("After a brief, frighteningly intense craving, "
+                "your appetite remains unchanged.");
+        }
+        else if (you.get_mutation_level(MUT_CARNIVOROUS) > 0  // Fe, Ko, Gh
+                 || you.get_mutation_level(MUT_GOURMAND) > 0) // Troll
+        {
+            mpr("After a brief, strange feeling in your gut, "
+                "your appetite remains unchanged.");
+        }
+        else
+        {
+            mpr("You feel a craving for the dungeon's cuisine.");
+            // What's this supposed to achieve? (jpeg)
+            you.duration[DUR_GOURMAND] = 0;
+        }
         break;
 
     case AMU_REGENERATION:

@@ -239,7 +239,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
             $footer.remove();
         }
 
-        $popup.on("keydown keypress", function (event) {
+        $popup.on("keydown", function (event) {
             if (event.key === "!" || event.key === "^")
             {
                 paneset_cycle($body);
@@ -282,18 +282,29 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         $panes.eq(0).find(".desc").html(desc.description);
         $panes.eq(0).find(".god-favour td.title").addClass("fg"+desc.colour).html(desc.title);
         $panes.eq(0).find(".god-favour td.favour").addClass("fg"+desc.colour).html(desc.favour);
+        if (desc.bondage)
+            $panes.eq(0).find(".god-favour")
+                .after("<div class=tbl>" + util.formatted_string_to_html(desc.bondage) + "</div>");
         var powers_list = desc.powers_list.split("\n").slice(3, -1);
         var $powers = $panes.eq(0).find(".god-powers");
-        var re = /^(.*\.) *( \(.*\))?$/;
+        var re = /^(<[a-z]*>)?(.*\.) *( \(.*\))?$/;
         for (var i = 0; i < powers_list.length; i++)
         {
             var matches = powers_list[i].match(re);
-            var power = matches[1], cost = matches[2] || "";
-            $powers.append("<div class=power><div>"+power+"</div><div>"+cost+"</div></div>");
+            var colour = (matches.length == 4 && matches[1] === "<darkgrey>")
+                ? 8 : desc.colour;
+            var power = matches[2], cost = matches[3] || "";
+            $powers.append("<div class='power fg"+colour+"'><div>"
+                +power+"</div><div>"+cost+"</div></div>");
         }
 
-        $panes.eq(1).html(fmt_body_txt(util.formatted_string_to_html(desc.powers)));
+        desc.powers = fmt_body_txt(util.formatted_string_to_html(desc.powers));
+        if (desc.info_table.length !== "")
+            desc.powers += "<div class=tbl>" + util.formatted_string_to_html(desc.info_table) + "</div>";
+        $panes.eq(1).html(desc.powers);
+
         $panes.eq(2).html(fmt_body_txt(util.formatted_string_to_html(desc.wrath)));
+
         for (var i = 0; i < 3; i++)
             scroller($panes.eq(i)[0]);
 
@@ -302,7 +313,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
             scroller_handle_key(s, event);
         });
 
-        $popup.on("keydown keypress", function (event) {
+        $popup.on("keydown", function (event) {
             if (event.key === "!" || event.key === "^")
             {
                 paneset_cycle($body);
@@ -333,10 +344,22 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
 
     function describe_monster(desc)
     {
-        var $popup = $(".templates > .describe-generic").clone();
+        var $popup = $(".templates > .describe-monster").clone();
         $popup.find(".header > span").html(desc.title);
-        $popup.find(".body").html(_fmt_spellset_html(desc.body));
-        _fmt_spells_list($popup.find(".body"), desc.spellset, false);
+        var $body = $popup.find(".body.paneset");
+        var $footer = $popup.find(".footer > .paneset");
+        var $panes = $body.find(".pane");
+        $panes.eq(0).html(_fmt_spellset_html(desc.body));
+        _fmt_spells_list($panes.eq(0), desc.spellset, false);
+        var have_quote = desc.quote !== "";
+
+        if (have_quote)
+            $panes.eq(1).html(_fmt_spellset_html(desc.quote));
+        else
+        {
+            $footer.parent().remove();
+            $panes.eq(1).remove();
+        }
 
         var $canvas = $popup.find(".header > canvas");
         var renderer = new cr.DungeonCellRenderer();
@@ -387,11 +410,40 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
             bg: 0,
         }});
 
-        var s = scroller($popup.find(".body")[0]);
+        for (var i = 0; i < $panes.length; i++)
+            scroller($panes.eq(i)[0]);
+
         $popup.on("keydown keypress", function (event) {
+            var s = scroller($panes.filter(".current")[0]);
             scroller_handle_key(s, event);
         });
+        $popup.on("keydown", function (event) {
+            if (event.key === "!")
+            {
+                paneset_cycle($body);
+                if (have_quote)
+                    paneset_cycle($footer);
+            }
+        });
+        paneset_cycle($body);
+        if (have_quote)
+            paneset_cycle($footer);
+
         return $popup;
+    }
+
+    function describe_monster_update(msg)
+    {
+        var $popup = ui.top_popup();
+        if (!$popup.hasClass("describe-monster"))
+            return;
+        if (msg.pane !== undefined && client.is_watching())
+        {
+            paneset_cycle($popup.children(".body"), msg.pane);
+            var $footer = $popup.find(".footer > .paneset");
+            if ($footer.length > 0)
+                paneset_cycle($footer, msg.pane);
+        }
     }
 
     function version(desc)
@@ -556,11 +608,9 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         var body_html = util.formatted_string_to_html(desc.text);
         if (desc.highlight !== "")
         {
-            var rexp = '[^\n]*'+desc.highlight+'[^\n]*\n?';
+            var rexp = '[^\n]*('+desc.highlight+')[^\n]*\n?';
             var re = new RegExp(rexp, 'g');
-            console.log(rexp);
             body_html = body_html.replace(re, function (line) {
-                console.log(line)
                 return "<span class=highlight>" + line + "</span>";
             });
         }
@@ -587,6 +637,8 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         {
             var $body = $(s.contentElement);
             $body.html(util.formatted_string_to_html(msg.text));
+            var ss = $popup.find(".body").eq(0).data("scroller");
+            ss.recalculateImmediate();
         }
         if (msg.scroll !== undefined && (!msg.from_webtiles || client.is_watching()))
         {
@@ -655,6 +707,7 @@ function ($, comm, client, ui, enums, cr, util, scroller, main, gui, player) {
         var ui_handlers = {
             "mutations" : mutations_update,
             "describe-god" : describe_god_update,
+            "describe-monster" : describe_monster_update,
             "formatted-scroller" : formatted_scroller_update,
             "msgwin-get-line" : msgwin_get_line_update,
         };

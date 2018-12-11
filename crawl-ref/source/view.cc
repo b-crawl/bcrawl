@@ -103,8 +103,6 @@ bool handle_seen_interrupt(monster* mons, vector<string>* msgs_buf)
     if (!mons_is_safe(mons))
         return interrupt_activity(AI_SEE_MONSTER, aid, msgs_buf);
 
-    seen_monster(mons);
-
     return false;
 }
 
@@ -148,10 +146,6 @@ void seen_monsters_react(int stealth)
 
         if (!mi->visible_to(&you))
             continue;
-
-        beogh_follower_convert(*mi);
-        gozag_check_bribe(*mi);
-        slime_convert(*mi);
 
         if (!mi->has_ench(ENCH_INSANE) && mi->can_see(you))
         {
@@ -278,18 +272,17 @@ static string _monster_headsup(const vector<monster*> &monsters,
     string warning_msg = "";
     for (const monster* mon : monsters)
     {
-        const bool ash_ided = mon->props.exists("ash_id");
         const bool zin_ided = mon->props.exists("zin_id");
         const bool has_branded_weapon
             = _is_weapon_worth_listing(mon->weapon())
               || _is_weapon_worth_listing(mon->weapon(1));
-        if ((divine && !ash_ided && !zin_ided)
+        if ((divine && !zin_ided)
             || (!divine && !has_branded_weapon))
         {
             continue;
         }
 
-        if (!divine && (ash_ided || monsters.size() == 1))
+        if (!divine && monsters.size() == 1)
             continue; // don't give redundant warnings for enemies
 
         monster_info mi(mon);
@@ -502,6 +495,13 @@ void update_monsters_in_view()
         }
     }
 
+    // Summoners may have lost their summons upon seeing us and converting
+    // leaving invalid monsters in this vector.
+    monsters.erase(
+        std::remove_if(monsters.begin(), monsters.end(),
+            [](const monster * m) { return !m->alive(); }),
+        monsters.end());
+
     if (!msgs.empty())
     {
         _handle_comes_into_view(msgs, monsters);
@@ -523,31 +523,6 @@ void update_monsters_in_view()
     {
         you.attribute[ATTR_ABYSS_ENTOURAGE] = num_hostile;
         xom_is_stimulated(12 * num_hostile);
-    }
-}
-
-void mark_mon_equipment_seen(const monster *mons)
-{
-    // mark items as seen.
-    for (int slot = MSLOT_WEAPON; slot <= MSLOT_LAST_VISIBLE_SLOT; slot++)
-    {
-        int item_id = mons->inv[slot];
-        if (item_id == NON_ITEM)
-            continue;
-
-        item_def &item = mitm[item_id];
-
-        item.flags |= ISFLAG_SEEN;
-
-        // ID brands of weapons held by enemies.
-        if (slot == MSLOT_WEAPON
-            || slot == MSLOT_ALT_WEAPON && mons_wields_two_weapons(*mons))
-        {
-            if (is_artefact(item))
-                artefact_learn_prop(item, ARTP_BRAND);
-            else
-                item.flags |= ISFLAG_KNOW_TYPE;
-        }
     }
 }
 
@@ -652,8 +627,6 @@ bool magic_mapping(int map_radius, int proportion, bool suppress_msg,
             if (knowledge.seen())
             {
                 dungeon_feature_type newfeat = grd(pos);
-                if (newfeat == DNGN_UNDISCOVERED_TRAP)
-                    newfeat = DNGN_FLOOR;
                 trap_type tr = feat_is_trap(newfeat) ? get_trap_type(pos) : TRAP_UNASSIGNED;
                 knowledge.set_feature(newfeat, env.grid_colours(pos), tr);
             }
@@ -1041,13 +1014,16 @@ static update_flags player_view_update_at(const coord_def &gc)
 
     if (!(env.pgrid(gc) & FPROP_SEEN_OR_NOEXP))
     {
-        env.pgrid(gc) |= FPROP_SEEN_OR_NOEXP;
-        if (!crawl_state.game_is_arena())
+        if (!crawl_state.game_is_arena()
+            && cell_triggers_conduct(gc)
+            && !player_in_branch(BRANCH_TEMPLE))
         {
             did_god_conduct(DID_EXPLORATION, 2500);
             const int density = env.density ? env.density : 2000;
             you.exploration += div_rand_round(1<<16, density);
+            roll_trap_effects();
         }
+        env.pgrid(gc) |= FPROP_SEEN_OR_NOEXP;
     }
 
 #ifdef USE_TILE

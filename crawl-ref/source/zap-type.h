@@ -89,5 +89,8 @@ enum zap_type
     ZAP_BLINK,
     ZAP_SHACKLE,
     ZAP_FREEZING_BLAST,
+    ZAP_REFRIGERATE,
+    ZAP_DRAIN_LIFE,
+    ZAP_SONIC_WAVE,
     NUM_ZAPS
 };

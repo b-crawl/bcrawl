@@ -28,8 +28,8 @@
 // max size of inventory array {dlb}:
 #define ENDOFPACK 52
 
-// Max ghosts on a level.
-const int MAX_GHOSTS = 10;
+// Max ghosts in a bones file.
+const int MAX_GHOSTS = 127;
 
 enum extra_monster_index_type
 {
@@ -81,8 +81,6 @@ const int INFINITE_DISTANCE = 30000;
 // This is the border that must be left around the map. I'm not sure why it's
 // necessary, beyond hysterical raisins.
 const int MAPGEN_BORDER    = 2;
-
-const int LABYRINTH_BORDER = 4;
 
 // Now some defines about the actual play area:
 // Note: these boundaries are exclusive for the zone the player can move/dig,

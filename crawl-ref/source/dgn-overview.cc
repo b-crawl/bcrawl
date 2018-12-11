@@ -181,9 +181,8 @@ static string _portals_description_string()
         last_id.depth = 10000;
         for (const auto &entry : portals_present)
         {
-            // one line per region should be enough, they're all of
-            // the form D:XX, except for labyrinth portals, of which
-            // you would need 11 (at least) to have a problem.
+            // one line per region should be enough, they're all of the form
+            // Branch:XX.
             if (entry.second == it->id)
             {
                 if (last_id.depth == 10000)
@@ -198,7 +197,7 @@ static string _portals_description_string()
                 }
                 last_id = entry.first.id;
 
-                // Portals notes (Zig/Trovel price).
+                // Portals notes (Trove price).
                 const string note = portal_notes[entry.first];
                 if (!note.empty())
                     disp += " (" + note + ")";
@@ -479,7 +478,7 @@ static string _get_shops(bool display)
     // items from level). That makes a total of 17 characters per shop:
     //       1...5....0....5..
     // "D:8 *   Vaults:2 **([+   D:24 +";
-    const int maxcolumn = get_number_of_cols() - 17;
+    const int maxcolumn = 79 - 17;
     int column_count = 0;
 
     for (const auto &entry : shops_present)

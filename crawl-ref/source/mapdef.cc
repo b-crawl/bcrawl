@@ -784,7 +784,7 @@ static string _parse_weighted_str(const string &spec, T &list)
 
 bool map_colour_list::parse(const string &col, int weight)
 {
-    const int colour = col == "none" ? BLACK : str_to_colour(col, -1);
+    const int colour = col == "none" ? BLACK : str_to_colour(col, -1, false, true);
     if (colour == -1)
         return false;
 
@@ -3893,7 +3893,7 @@ mons_list::mons_spec_slot mons_list::parse_mons_spec(string spec)
                 mspec.colour = COLOUR_UNDEF;
             else
             {
-                mspec.colour = str_to_colour(colour, COLOUR_UNDEF);
+                mspec.colour = str_to_colour(colour, COLOUR_UNDEF, false, true);
                 if (mspec.colour == COLOUR_UNDEF)
                 {
                     error = make_stringf("bad monster colour \"%s\" in \"%s\"",
@@ -5912,7 +5912,8 @@ void keyed_mapspec::parse_features(const string &s)
 feature_spec keyed_mapspec::parse_trap(string s, int weight)
 {
     strip_tag(s, "trap");
-    const bool known = strip_tag(s, "known");
+    // All traps are known, strip this tag for compatibility
+    strip_tag(s, "known");
 
     trim_string(s);
     lowercase(s);
@@ -5921,7 +5922,7 @@ feature_spec keyed_mapspec::parse_trap(string s, int weight)
     if (trap == -1)
         err = make_stringf("bad trap name: '%s'", s.c_str());
 
-    feature_spec fspec(known ? 1 : -1, weight);
+    feature_spec fspec(1, weight);
     fspec.trap.reset(new trap_spec(static_cast<trap_type>(trap)));
     return fspec;
 }

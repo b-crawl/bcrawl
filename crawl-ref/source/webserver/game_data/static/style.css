@@ -353,12 +353,22 @@ body {
 .simplebar-track {
     background: #040204;
 }
+.simplebar-track.vertical::before {
+        position: absolute;
+        top: 0;
+        left: 4px;
+        right: 5px;
+        bottom: 0;
+        background: #292929;
+        content: ' ';
+}
+.simplebar-track .simplebar-scrollbar::before,
 .simplebar-track.horizontal {
     display: none;
 }
 [data-simplebar="init"] {
-    margin-right: -20px; /* matched in scroller.js */
-    padding-right: 20px; /* matched in scroller.js */
+    margin-right: -20px; /* matched in simplebar.js */
+    padding-right: 20px; /* matched in simplebar.js */
 }
 .scroller-lhd {
     visibility: hidden;
@@ -397,6 +407,7 @@ body {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    max-height: inherit;
 }
 
 .menu_title {
@@ -511,6 +522,7 @@ body {
     -ms-flex-direction: column;
     flex-direction: column;
     width: 100%; /* for IE11 */
+    max-height: inherit;
 }
 .describe-generic > .header {
     display: -webkit-box;
@@ -543,6 +555,7 @@ body {
     -ms-flex-direction: column;
     flex-direction: column;
     width: 100%; /* for IE11 */
+    max-height: inherit;
 }
 .describe-feature-feat {
     margin: 20px 0;
@@ -568,6 +581,7 @@ body {
     -ms-flex-direction: column;
     flex-direction: column;
     width: 100%; /* for IE11 */
+    max-height: inherit;
 }
 .describe-item > .header {
     display: -webkit-box;
@@ -585,6 +599,7 @@ body {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
+    white-space: pre-wrap;
 }
 .describe-item > .actions {
     margin-top: 15px;
@@ -601,6 +616,7 @@ body {
     -ms-flex-direction: column;
     flex-direction: column;
     width: 100%; /* for IE11 */
+    max-height: inherit;
 }
 .describe-spell > .header {
     display: -webkit-box;
@@ -633,6 +649,7 @@ body {
     -ms-flex-direction: column;
     flex-direction: column;
     width: 100%; /* for IE11 */
+    max-height: inherit;
 }
 .describe-card {
     margin: 20px 0;
@@ -660,6 +677,7 @@ body {
     -ms-flex-direction: column;
     flex-direction: column;
     min-width: 40em;
+    max-height: inherit;
 }
 .mutations > .header {
     margin-bottom: 15px;
@@ -717,6 +735,7 @@ body {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    max-height: inherit;
 }
 .describe-god > .header {
     margin-bottom: 15px;
@@ -766,9 +785,6 @@ body {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     overflow: hidden;
-    white-space: nowrap;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
 }
 .describe-god .god-powers > .power > :last-child {
     white-space: pre;
@@ -778,6 +794,50 @@ body {
 }
 .describe-god > body, .describe-god > .body .pane {
     width: 80ch; /* for IE11 */
+}
+.describe-god .body .tbl {
+    white-space: pre;
+}
+
+.describe-monster {
+    width: 80ch;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    max-height: inherit;
+}
+.describe-monster > .header {
+    margin-bottom: 20px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.describe-monster > .header > canvas {
+    margin-right: 10px;
+}
+.describe-monster > .body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+.describe-monster > .footer {
+    margin-top: 20px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
 }
 
 .formatted-scroller {
@@ -789,6 +849,7 @@ body {
     -ms-flex-direction: column;
     flex-direction: column;
     white-space: pre;
+    max-height: inherit;
 }
 .formatted-scroller > .body .highlight {
     background: rgba(255,255,0,0.196);

@@ -2,7 +2,9 @@
 Singing Sword
 
 An enchanted blade which loves nothing more than to sing to its owner, whether
-they want it to or not.
+they want it to or not. In combat involving dangerous or numerous foes, the
+sword may sing so intensely that it radiates damaging sonic waves as you
+strike.
 %%%%
 Sulking Sword
 
@@ -66,7 +68,7 @@ sceptre of Torment
 
 An accursed golden sceptre, created by some unknown hellish power. When used in
 combat, it causes agonising pain in all those unfortunate enough to gaze upon
-it.
+it, save for the wielder.
 %%%%
 sword of Zonguldrok
 
@@ -129,8 +131,9 @@ called Boris. He got lost in the Dungeon while seeking the Orb.
 %%%%
 scythe "Finisher"
 
-A long and exceedingly sharp scythe. Its extraordinary speed is the work of a
-mad wizard, who spent years refining it before discarding it in a fit of rage.
+A long and exceedingly sharp scythe, capable of eviscerating in a single blow.
+Its extraordinary speed is the work of a mad wizard, who spent years refining
+it before discarding it in a fit of rage.
 
 The blade looses a low keen as it cuts through the air.
 %%%%
@@ -237,7 +240,8 @@ Spriggan's Knife
 
 A dainty little knife which was made by Spriggans, or for Spriggans, or
 possibly from Spriggans. Anyway, it's in some way associated with those fey
-folk.
+folk. It carves into the world of dreams, and stabs any unaware enemy as if it
+were asleep.
 %%%%
 plutonium sword
 
@@ -322,7 +326,7 @@ an especially mighty bear.
 %%%%
 robe of Misfortune
 
-A splendid flowing robe of fur and silk.
+A splendid flowing robe of fur and silk whose lucky colour has faded.
 %%%%
 # TAG_MAJOR_VERSION == 34
 cloak of Flash
@@ -481,7 +485,8 @@ devices. That, and a pony.
 %%%%
 robe of Clouds
 
-A robe of a material as flimsy and insubstantial as the clouds.
+A robe of a material as nebulous and insubstantial as the clouds. The pleats
+and folds can be swirled into a furious storm.
 %%%%
 hat of Pondering
 
@@ -574,7 +579,11 @@ find it enhances the power of their spells.
 arc blade
 
 A blade somehow crafted from pure electricity. Striking an enemy with it
-occasionally unleashes a static discharge.
+occasionally unleashes powerful arcs of lightning.
+
+These may arc to other adjacent creatures, or back to the wielder, before
+eventually grounding out. It deals reduced damage when arcing to the wielder,
+and bypasses any armour the target may have.
 %%%%
 demon whip "Spellbinder"
 
@@ -632,7 +641,7 @@ robe of Vines
 
 A robe woven of living vines. The vines form a symbiotic relationship with
 their wearer, greatly increasing their regeneration, but preventing them from
-being healed by potions and wands.
+being healed by potions.
 %%%%
 Kryia's mail coat
 

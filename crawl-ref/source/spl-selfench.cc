@@ -11,7 +11,6 @@
 
 #include "areas.h"
 #include "art-enum.h"
-#include "butcher.h" // butcher_corpse
 #include "coordit.h" // radius_iterator
 #include "god-conduct.h"
 #include "god-passive.h"
@@ -21,10 +20,12 @@
 #include "macro.h"
 #include "message.h"
 #include "output.h"
+#include "prompt.h"
 #include "religion.h"
 #include "showsymb.h"
 #include "spl-transloc.h"
 #include "spl-util.h"
+#include "stringutil.h"
 #include "transform.h"
 #include "tilepick.h"
 #include "view.h"
@@ -43,11 +44,10 @@ spret_type cast_deaths_door(int pow, bool fail)
     mpr("You stand defiantly in death's doorway!");
     mprf(MSGCH_SOUND, "You seem to hear sand running through an hourglass...");
 
-    set_hp(allowed_deaths_door_hp());
-    deflate_hp(you.hp_max, false);
-
     you.set_duration(DUR_DEATHS_DOOR, 10 + random2avg(13, 3)
                                        + (random2(pow) / 10));
+
+    calc_hp(false, true);
 
     if (you.duration[DUR_DEATHS_DOOR] > 25 * BASELINE_DELAY)
         you.duration[DUR_DEATHS_DOOR] = (23 + random2(5)) * BASELINE_DELAY;
@@ -164,10 +164,21 @@ int cast_selective_amnesia(const string &pre_msg)
 
         if (spell != SPELL_NO_SPELL)
         {
-            if (!pre_msg.empty())
-                mpr(pre_msg);
-            del_spell_from_memory_by_slot(slot);
-            return 1;
+            const string prompt = make_stringf(
+                    "Forget %s, freeing %d spell level%s for a total of %d?%s",
+                    spell_title(spell), spell_levels_required(spell),
+                    spell_levels_required(spell) != 1 ? "s" : "",
+                    player_spell_levels() + spell_levels_required(spell),
+                    you.spell_library[spell] ? "" :
+                    " This spell is not in your library!");
+
+            if (yesno(prompt.c_str(), true, 'n', false))
+            {
+                if (!pre_msg.empty())
+                    mpr(pre_msg);
+                del_spell_from_memory_by_slot(slot);
+                return 1;
+            }
         }
     }
 

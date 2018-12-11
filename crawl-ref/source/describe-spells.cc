@@ -318,19 +318,8 @@ spellset monster_spellset(const monster_info &mi)
 
     spellset books;
 
-    if (mi.type != MONS_PANDEMONIUM_LORD)
-        for (auto book_flag : book_flags)
-            _monster_spellbooks(mi, book_flag, books);
-    else if (mi.props.exists(SEEN_SPELLS_KEY))
-    {
-        spellbook_contents output_book;
-        output_book.label
-          = make_stringf("You have seen %s using the following:",
-                         mi.pronoun(PRONOUN_SUBJECTIVE));
-        for (int spell : mi.props[SEEN_SPELLS_KEY].get_vector())
-            output_book.spells.emplace_back((spell_type)spell);
-        books.emplace_back(output_book);
-    }
+    for (auto book_flag : book_flags)
+        _monster_spellbooks(mi, book_flag, books);
 
     ASSERT(books.size());
     return books;
@@ -519,11 +508,20 @@ static void _describe_book(const spellbook_contents &book,
 #endif
             && (get_spell_flags(spell) & SPFLAG_MR_CHECK))
         {
-            int chance = hex_chance(spell, hd);
-            int ch_len = to_string(chance).length();
-            description.cprintf("%c - (%d%%) %s",
-                            spell_letter, chance,
-                            chop_string(spell_title(spell), 25-ch_len).c_str());
+            if (you.immune_to_hex(spell))
+            {
+                description.cprintf("%c - (immune) %s",
+                                spell_letter,
+                                chop_string(spell_title(spell), 20).c_str());
+            }
+            else
+            {
+                int chance = hex_chance(spell, hd);
+                int ch_len = to_string(chance).length();
+                description.cprintf("%c - (%d%%) %s",
+                    spell_letter, chance,
+                    chop_string(spell_title(spell), 25-ch_len).c_str());
+            }
         }
         else
         {

@@ -244,7 +244,7 @@ bool wizard_create_feature(const coord_def& pos)
     if (feat == DNGN_ENTER_SHOP)
         return debug_make_shop(pos);
 
-    if (feat_is_trap(feat, true))
+    if (feat_is_trap(feat))
         return debug_make_trap(pos);
 
     env.tile_flv(pos).feat = 0;
@@ -339,12 +339,6 @@ void wizard_list_branches()
                                   temple_strings.end(), "; ", "; ").c_str()
           );
     }
-}
-
-void wizard_reveal_traps()
-{
-    int traps_revealed = reveal_traps(1000);
-    mprf("Revealed %d traps.", traps_revealed);
 }
 
 void wizard_map_level()
@@ -640,7 +634,7 @@ void debug_place_map(bool primary)
 static void _debug_kill_traps()
 {
     for (rectangle_iterator ri(1); ri; ++ri)
-        if (feat_is_trap(grd(*ri), true))
+        if (feat_is_trap(grd(*ri)))
             destroy_trap(*ri);
 }
 

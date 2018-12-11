@@ -1330,6 +1330,13 @@ void msgwin_set_temporary(bool temp)
     }
 }
 
+bool msgwin_errors_to_stderr()
+{
+    return crawl_state.test || crawl_state.script
+            || crawl_state.build_db
+            || crawl_state.map_stat_gen || crawl_state.obj_stat_gen;
+}
+
 void msgwin_clear_temporary()
 {
     buffer.roll_back();
@@ -1356,8 +1363,7 @@ static void _mpr(string text, msg_channel_type channel, int param, bool nojoin,
 #endif
 
     if (channel == MSGCH_ERROR &&
-        (!crawl_state.io_inited || crawl_state.test || crawl_state.script
-         || crawl_state.build_db))
+        (!crawl_state.io_inited || msgwin_errors_to_stderr()))
     {
         fprintf(stderr, "%s\n", text.c_str());
     }
@@ -1477,6 +1483,7 @@ int msgwin_get_line(string prompt, char *buf, int len,
         reader.read_line(fill);
         reader.putkey(CK_END);
 
+        linebreak_string(prompt, 79);
         msg_colour_type colour = prepare_message(prompt, MSGCH_PROMPT, 0);
         const string colour_prompt = colour_string(prompt, colour_msg(colour));
 
@@ -1972,7 +1979,11 @@ string get_last_messages(int mcount, bool full)
         if (!msg)
             break;
         if (full || is_channel_dumpworthy(msg.channel))
-            text = msg.pure_text_with_repeats() + "\n" + text;
+        {
+            string line = msg.pure_text_with_repeats();
+            string wrapped = wordwrap_line(line, 79, false, true);
+            text = wrapped + "\n" + text;
+        }
         mcount--;
     }
 

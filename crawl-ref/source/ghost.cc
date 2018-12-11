@@ -277,7 +277,7 @@ void ghost_demon::init_player_ghost(bool actual_ghost)
     unwind_var<bool> fishtail(you.fishtail, false);
 
     name   = you.your_name;
-    max_hp = min(get_real_hp(false), MAX_GHOST_HP);
+    max_hp = min(get_real_hp(false, false), MAX_GHOST_HP);
     ev     = min(you.evasion(EV_IGNORE_HELPLESS), MAX_GHOST_EVASION);
     ac     = you.armour_class();
     dprf("ghost ac: %d, ev: %d", ac, ev);
@@ -735,9 +735,13 @@ int ghost_demon::max_ghosts_per_level(int absdepth)
 }
 
 static const set<branch_type> ghosts_banned =
-            { BRANCH_ABYSS, BRANCH_LABYRINTH, BRANCH_SEWER, BRANCH_OSSUARY,
+            { BRANCH_ABYSS, BRANCH_GAUNTLET, BRANCH_SEWER, BRANCH_OSSUARY,
               BRANCH_BAILEY, BRANCH_ICE_CAVE, BRANCH_VOLCANO, BRANCH_WIZLAB,
-              BRANCH_DESOLATION, BRANCH_TEMPLE };
+              BRANCH_DESOLATION, BRANCH_TEMPLE,
+#if TAG_MAJOR_VERSION == 34
+              BRANCH_LABYRINTH,
+#endif
+            };
 
 
 /// Is the current location eligible for ghosts?

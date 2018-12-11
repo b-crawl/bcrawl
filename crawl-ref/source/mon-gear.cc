@@ -12,6 +12,7 @@
 #include "artefact.h"
 #include "art-enum.h"
 #include "dungeon.h"
+#include "item-name.h"
 #include "item-prop.h"
 #include "item-status-flag-type.h"
 #include "items.h"
@@ -1777,11 +1778,6 @@ int make_mons_armour(monster_type type, int level)
         item.sub_type  = ARM_ROBE;
         break;
 
-    case MONS_HAROLD:
-        item.base_type = OBJ_ARMOUR;
-        item.sub_type  = ARM_RING_MAIL;
-        break;
-
     case MONS_GNOLL_SHAMAN:
     case MONS_MELIAI:
         item.base_type = OBJ_ARMOUR;
@@ -1808,6 +1804,7 @@ int make_mons_armour(monster_type type, int level)
 
     case MONS_TERENCE:
     case MONS_URUG:
+    case MONS_HAROLD:
         item.base_type = OBJ_ARMOUR;
         item.sub_type  = random_choose_weighted(1, ARM_RING_MAIL,
                                                 3, ARM_SCALE_MAIL,
@@ -2216,4 +2213,19 @@ void give_item(monster *mons, int level_number, bool mons_summoned)
     _give_ammo(mons, level_number, mons_summoned);
     _give_armour(mons, 1 + level_number / 2);
     _give_shield(mons, 1 + level_number / 2);
+}
+
+void view_monster_equipment(monster* mon)
+{
+    for (unsigned int i = 0; i <= MSLOT_LAST_VISIBLE_SLOT; ++i)
+    {
+        if (mon->inv[i] == NON_ITEM)
+            continue;
+
+        item_def &item = mitm[mon->inv[i]];
+        item.flags |= ISFLAG_SEEN;
+        set_ident_flags(item, ISFLAG_IDENT_MASK);
+        if (item.base_type == OBJ_WANDS)
+            set_ident_type(item, true);
+    }
 }

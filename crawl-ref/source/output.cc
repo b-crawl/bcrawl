@@ -594,6 +594,7 @@ static void _print_stats_equip(int x, int y)
             if (you.slot_item(eqslot))
             {
                 cglyph_t g = get_item_glyph(*(you.slot_item(eqslot)));
+                g.col = element_colour(g.col, !Options.animate_equip_bar);
                 formatted_string::parse_string(glyph_to_tagstr(g)).display();
             }
             else if (!you_can_wear(eqslot, true))
@@ -752,7 +753,7 @@ static void _print_stats_mp(int x, int y)
 
 static void _print_stats_hp(int x, int y)
 {
-    int max_max_hp = get_real_hp(true, true);
+    int max_max_hp = get_real_hp(true, false);
 
     // Calculate colour
     short hp_colour = HUD_VALUE_COLOUR;
@@ -764,7 +765,7 @@ static void _print_stats_hp(int x, int y)
     else
     {
         const int hp_percent =
-            (you.hp * 100) / get_real_hp(true, false);
+            (you.hp * 100) / get_real_hp(true, true);
 
         for (const auto &entry : Options.hp_colour)
             if (hp_percent <= entry.first)
@@ -872,10 +873,10 @@ static void _print_stats_ac(int x, int y)
 static void _print_stats_ev(int x, int y)
 {
     CGOTOXY(x+4, y, GOTO_STAT);
-    textcolour(you.duration[DUR_PETRIFYING] || you.duration[DUR_GRASPING_ROOTS]
-              || you.cannot_move() ? RED :
-              _boosted_ev()
-              ? LIGHTBLUE : HUD_VALUE_COLOUR);
+    textcolour(you.duration[DUR_PETRIFYING]
+               || you.cannot_move() ? RED
+                                    : _boosted_ev() ? LIGHTBLUE
+                                                    : HUD_VALUE_COLOUR);
     CPRINTF("%2d ", you.evasion());
 }
 
@@ -2171,7 +2172,7 @@ static vector<formatted_string> _get_overview_stats()
 
     entry.cprintf("%d/%d", you.hp, you.hp_max);
     if (player_rotted())
-        entry.cprintf(" (%d)", get_real_hp(true, true));
+        entry.cprintf(" (%d)", get_real_hp(true, false));
 
     cols.add_formatted(0, entry.to_colour_string(), false);
     entry.clear();

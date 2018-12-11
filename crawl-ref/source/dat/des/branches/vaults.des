@@ -321,6 +321,59 @@ MAP
 .................
 ENDMAP
 
+NAME:     skrybe_vaults_entry_preservation
+TAGS:     vaults_entry transparent
+ORIENT:   float
+MONS:     vault guard
+SHUFFLE:  AI , BJ , CK , DL
+SUBST:    A = v , B = v , C = v , D = v
+SUBST:    I = + , J = + , K = + , L = +
+SUBST:    E = vvm , F = vvm, G = vvm, H = vvm
+KFEAT:    O = enter_vaults
+KMONS:    O = ironheart preserver
+NSUBST:   $ = 1:O / *=.$%
+MAP
+        @@
+ vvvvvvv..vvvvvvv
+ v$....v..v....$v
+ v.....E..F.....v
+ v..0..v..v..0..v
+ v...0.A..B.0...v
+ v.....A..B.....v
+ vvEvIIv..vJJvFvv
+@................@
+@................@
+ vvGvKKv..vLLvHvv
+ v.....C..D.....v
+ v...0.C..D.0...v
+ v..0..v..v..0..v
+ v.....G..H.....v
+ v$....v..v....$v
+ vvvvvvv..vvvvvvv
+        @@
+ENDMAP
+
+NAME: ximxim_vaults_locker_room
+TAGS: vaults_entry no_monster_gen no_item_gen no_trap_gen
+MONS: human w:15 / vault guard w:5
+ITEM: w:30 plate armour / w:7 broad axe / glaive / shield \
+      / w:5 large shield / w:3 arbalest / great sword / great mace
+KFEAT: O = enter_vaults
+KFEAT: Z = shallow_water
+MARKER: Z = lua:fog_machine { cloud_type = "rain", \
+                pow_min = 10, pow_max = 10, delay = 10, \
+                size = 1, walk_dist = 0, start_clouds = 1, excl_rad = 0 }
+MAP
+vvvvvvvvvvvvv
+vZ1.ZZ.1..ZZv
+v+n+n+n+n+n+v
++.1.1..1.1..v
++.1..1..1.1Ov
++..1.....1..v
+v+v+v+v+v+v+v
+vdvdvdvdvdvdv
+vvvvvvvvvvvvv
+ENDMAP
 ###############################################################################
 # Vaults:$ last level of the vaults -- dungeon.cc will change all these 'x's
 ###############################################################################
@@ -2108,7 +2161,7 @@ TAGS:   vaults_end_quadrant_prize unrand
 NSUBST: ; = 3:l / 3:z / 3:A / *:.
 SUBST:  9 = 8 9
 SUBST:  $ = | * $
-KFEAT:  l = teleport trap
+KFEAT:  l = teleport trap / dispersal trap
 KFEAT:  z = zot trap
 KFEAT:  A = alarm trap
 SUBST:  s = x:250 +:1

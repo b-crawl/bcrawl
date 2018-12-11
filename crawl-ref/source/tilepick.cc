@@ -83,6 +83,8 @@ static tileidx_t _tileidx_trap(trap_type type)
         return TILE_DNGN_TRAP_ARROW;
     case TRAP_SPEAR:
         return TILE_DNGN_TRAP_SPEAR;
+    case TRAP_DISPERSAL:
+        return TILE_DNGN_TRAP_DISPERSAL;
     case TRAP_TELEPORT:
         return TILE_DNGN_TRAP_TELEPORT;
     case TRAP_TELEPORT_PERMANENT:
@@ -194,7 +196,6 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
     case DNGN_OPEN_SEA:
         return TILE_DNGN_OPEN_SEA;
     case DNGN_FLOOR:
-    case DNGN_UNDISCOVERED_TRAP:
         return TILE_FLOOR_NORMAL;
     case DNGN_ENDLESS_SALT:
         return TILE_DNGN_ENDLESS_SALT;
@@ -206,6 +207,8 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
         return TILE_DNGN_OPEN_DOOR;
     case DNGN_TRAP_MECHANICAL:
         return TILE_DNGN_TRAP_ARROW;
+    case DNGN_TRAP_DISPERSAL:
+        return TILE_DNGN_TRAP_DISPERSAL;
     case DNGN_TRAP_TELEPORT:
         return TILE_DNGN_TRAP_TELEPORT;
     case DNGN_TRAP_ALARM:
@@ -228,8 +231,8 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
         return TILE_SHOP_GENERAL;
     case DNGN_ABANDONED_SHOP:
         return TILE_DNGN_ABANDONED_SHOP;
-    case DNGN_ENTER_LABYRINTH:
-        return TILE_DNGN_PORTAL_LABYRINTH;
+    case DNGN_ENTER_GAUNTLET:
+        return TILE_DNGN_PORTAL_GAUNTLET;
     case DNGN_STONE_STAIRS_DOWN_I:
     case DNGN_STONE_STAIRS_DOWN_II:
     case DNGN_STONE_STAIRS_DOWN_III:
@@ -242,7 +245,7 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
     case DNGN_STONE_STAIRS_UP_II:
     case DNGN_STONE_STAIRS_UP_III:
         return TILE_DNGN_STONE_STAIRS_UP;
-    case DNGN_EXIT_LABYRINTH:
+    case DNGN_EXIT_GAUNTLET:
     case DNGN_ESCAPE_HATCH_UP:
         return TILE_DNGN_ESCAPE_HATCH_UP;
     case DNGN_SEALED_STAIRS_UP:
@@ -3401,6 +3404,8 @@ tileidx_t tileidx_ability(const ability_type ability)
         return TILEG_ABILITY_EVOKE_FOG;
     case ABIL_EVOKE_RATSKIN:
         return TILEG_ABILITY_EVOKE_RATSKIN;
+    case ABIL_EVOKE_THUNDER:
+        return TILEG_ABILITY_EVOKE_THUNDER;
 
     // Divine abilities
     // Zin
@@ -3653,6 +3658,8 @@ tileidx_t tileidx_ability(const ability_type ability)
    case ABIL_USKAYAW_GRAND_FINALE:
         return TILEG_ABILITY_USKAYAW_GRAND_FINALE;
      // Wu Jian
+    case ABIL_WU_JIAN_WALLJUMP:
+        return TILEG_ABILITY_WU_JIAN_WALL_JUMP;
     case ABIL_WU_JIAN_SERPENTS_LASH:
         return TILEG_ABILITY_WU_JIAN_SERPENTS_LASH;
     case ABIL_WU_JIAN_HEAVENLY_STORM:
@@ -3717,8 +3724,8 @@ tileidx_t tileidx_branch(const branch_type br)
         return TILE_DNGN_ENTER_PANDEMONIUM;
     case BRANCH_ZIGGURAT:
         return TILE_DNGN_PORTAL_ZIGGURAT;
-    case BRANCH_LABYRINTH:
-        return TILE_DNGN_PORTAL_LABYRINTH;
+    case BRANCH_GAUNTLET:
+        return TILE_DNGN_PORTAL_GAUNTLET;
     case BRANCH_BAZAAR:
         return TILE_DNGN_PORTAL_BAZAAR;
     case BRANCH_TROVE:

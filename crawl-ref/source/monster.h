@@ -32,6 +32,8 @@ const int KRAKEN_TENTACLE_RANGE = 3;
 
 #define DROPPER_MID_KEY "dropper_mid"
 
+#define MAP_KEY "map"
+
 typedef map<enchant_type, mon_enchant> mon_enchant_list;
 
 struct monsterentry;
@@ -240,6 +242,8 @@ public:
     void uglything_mutate(colour_t force_colour = COLOUR_UNDEF);
     void destroy_inventory();
     void load_ghost_spells();
+    brand_type ghost_brand() const;
+    bool has_ghost_brand() const;
 
     actor *get_foe() const;
 
@@ -553,8 +557,7 @@ public:
     bool is_jumpy() const;
 
     int  spell_hd(spell_type spell = SPELL_NO_SPELL) const;
-    void align_avatars(bool force_friendly = false);
-    void remove_avatars();
+    void remove_summons(bool check_attitude = false);
     void note_spell_cast(spell_type spell);
 
     bool clear_far_engulf() override;
@@ -581,10 +584,10 @@ private:
     bool pickup_misc(item_def &item, bool msg, bool force);
     bool pickup_missile(item_def &item, bool msg, bool force);
 
-    void equip(item_def &item, bool msg);
-    void equip_weapon(item_def &item, bool msg);
-    void equip_armour(item_def &item, bool msg);
-    void equip_jewellery(item_def &item, bool msg);
+    void equip_message(item_def &item);
+    void equip_weapon_message(item_def &item);
+    void equip_armour_message(item_def &item);
+    void equip_jewellery_message(item_def &item);
     void unequip_weapon(item_def &item, bool msg);
     void unequip_armour(item_def &item, bool msg);
     void unequip_jewellery(item_def &item, bool msg);

@@ -297,7 +297,7 @@ tier2_gauntlet_arenas = {
   {
     first   = {mons = "hydra simulacrum / harpy simulacrum " ..
                       "/ ice dragon simulacrum", min = 1, max = 1},
-    second  = {mons = "simulacrum place:D:15", min = 2, max = 4},
+    second  = {mons = "simulacrum place:D:12", min = 2, max = 4},
   },
   {
     first  = {mons = "dire elephant", min = 1, max = 1},
@@ -379,7 +379,7 @@ tier2_gauntlet_arenas = {
   },
   {
     first  = {mons = "death drake", min = 1, max = 1},
-    second = {mons = "zombie place:D:15 / spectre place:D:15", min = 2,
+    second = {mons = "zombie place:D:12 / spectre place:D:12", min = 2,
               max = 4},
   },
   {

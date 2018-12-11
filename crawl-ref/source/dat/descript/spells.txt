@@ -962,8 +962,7 @@ impact. Its damage partially bypasses armour.
 Ozocubu's Armour spell
 
 Envelops the caster's body in a freezing cloud of ice for a short time,
-granting a bonus to armour and freezing melee attackers.
-The spell will break if the caster moves to a new position.
+granting a bonus to armour and freezing melee attackers that hit or are blocked.
 %%%%
 Ozocubu's Refrigeration spell
 

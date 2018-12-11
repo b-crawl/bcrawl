@@ -44,7 +44,6 @@
 #include "religion.h"
 #include "shout.h"
 #include "spl-miscast.h"
-#include "spl-transloc.h"
 #include "stash.h"
 #include "state.h"
 #include "stringutil.h"
@@ -1474,8 +1473,7 @@ void roll_trap_effects()
 {
     int trap_rate = trap_rate_for_place();
 
-    you.trapped = you.num_turns &&
-        (you.trapped || x_chance_in_y(trap_rate, 9 * env.density));
+    you.trapped = you.trapped || x_chance_in_y(trap_rate, 9 * env.density);
 }
 
 /***
@@ -1487,38 +1485,32 @@ void do_trap_effects()
     const level_id place = level_id::current();
     const Branch &branch = branches[place.branch];
 
-    // Try to shaft, teleport, or alarm the player.
-    int roll = random2(3);
-    switch (roll)
+    // Either try to shaft or try to alarm the player.
+    if (coinflip())
     {
-        case 0:
-            // Don't shaft the player when we can't, and also when it would be into a
-            // dangerous end.
-            if (is_valid_shaft_level()
-               && !(branch.branch_flags & BFLAG_DANGEROUS_END
-                    && brdepth[place.branch] - place.depth == 1))
-            {
-                dprf("Attempting to shaft player.");
-                you.do_shaft();
-            }
-            break;
-        case 1:
-            // No alarms on the first 3 floors
-            if (env.absdepth0 > 3)
-            {
-                // Alarm effect alarms are always noisy, even if the player is
-                // silenced, to avoid "travel only while silenced" behavior.
-                // XXX: improve messaging to make it clear theres a wail outside of the
-                // player's silence
-                mprf("You set off the alarm!");
-                fake_noisy(40, you.pos());
-                you.sentinel_mark(true);
-            }
-            break;
-        case 2:
-            // Teleportitis
-            you_teleport_now(false, true, "You stumble into a teleport trap!");
-            break;
+        // Don't shaft the player when we can't, and also when it would be into a
+        // dangerous end.
+        if (is_valid_shaft_level()
+           && !(branch.branch_flags & BFLAG_DANGEROUS_END
+                && brdepth[place.branch] - place.depth == 1))
+        {
+            dprf("Attempting to shaft player.");
+            you.do_shaft();
+        }
+    }
+    else
+    {
+        // No alarms on the first 3 floors
+        if (env.absdepth0 > 3)
+        {
+            // Alarm effect alarms are always noisy, even if the player is
+            // silenced, to avoid "travel only while silenced" behavior.
+            // XXX: improve messaging to make it clear theres a wail outside of the
+            // player's silence
+            mprf("You set off the alarm!");
+            fake_noisy(40, you.pos());
+            you.sentinel_mark(true);
+        }
     }
 }
 
@@ -1535,18 +1527,13 @@ level_id generic_shaft_dest(coord_def pos, bool known = false)
  * deeper levels; by one for every 10 levels of absdepth,
  * capping out at max 9.
  *
- * No traps in tutorial, sprint, and arena.
- *
  * @return  The trap rate for the current level.
 */
 int trap_rate_for_place()
 {
     if (player_in_branch(BRANCH_TEMPLE)
         || (!player_in_connected_branch()
-            && !player_in_branch(BRANCH_PANDEMONIUM))
-        || crawl_state.game_is_sprint()
-        || crawl_state.game_is_tutorial()
-        || crawl_state.game_is_arena())
+            && !player_in_branch(BRANCH_PANDEMONIUM)))
     {
         return 0;
     }

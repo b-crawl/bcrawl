@@ -2108,8 +2108,8 @@ static void _check_trapped()
 {
     if (you.trapped)
     {
-        do_trap_effects();
         you.trapped = false;
+        do_trap_effects();
     }
 }
 

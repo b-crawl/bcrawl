@@ -625,7 +625,7 @@ SUBST:  f = |*, g = *, h = %$, ij = -
 NSUBST: D = 4=1 / 4=1- / 2 / 2=2- / -
 :     end
 : elseif you.in_branch("Swamp") then
-MONS:   spectre place:Swamp:4 / simulacrum place:Swamp:4 / shadow / \
+MONS:   spectre place:Swamp:3 / simulacrum place:Swamp:3 / shadow / \
         bog body / vampire mosquito band / tyrant leech
 MONS:   ghost crab / hydra spectre / hydra simulacrum
 SUBST:  fg = |*, h = *%, i = %$--, j = -

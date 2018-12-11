@@ -35,7 +35,7 @@ local function test_random_unique(branch, depth)
 end
 
 local function run_random_unique_tests()
-  for depth = 1, 15 do
+  for depth = 1, 12 do
     test_random_unique("D", depth, 3)
   end
 
@@ -47,7 +47,7 @@ local function run_random_unique_tests()
     test_random_unique("Dis", depth, 3)
   end
 
-  for depth = 1, 4 do
+  for depth = 1, 3 do
     test_random_unique("Swamp", depth, 5)
   end
 end

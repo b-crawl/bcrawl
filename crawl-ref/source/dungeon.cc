@@ -5875,19 +5875,14 @@ static void _place_specific_trap(const coord_def& where, trap_spec* spec,
                 env.placing_vault.c_str());
     }
 
-    // find an appropriate trap for TRAP_RANDOM
-    if (spec_type == TRAP_RANDOM)
-    {
-        do
-        {
-            spec_type = static_cast<trap_type>(random2(NUM_TRAPS));
-        }
-        while (!is_regular_trap(spec_type)
+    while (spec_type >= NUM_TRAPS
 #if TAG_MAJOR_VERSION == 34
-               || spec_type == TRAP_DART || spec_type == TRAP_GAS
-               || spec_type == TRAP_SHADOW || spec_type == TRAP_SHADOW_DORMANT
+           || spec_type == TRAP_DART || spec_type == TRAP_GAS
+           || spec_type == TRAP_SHADOW || spec_type == TRAP_SHADOW_DORMANT
 #endif
-               || !is_valid_shaft_level() && spec_type == TRAP_SHAFT);
+           || !is_valid_shaft_level() && spec_type == TRAP_SHAFT)
+    {
+        spec_type = static_cast<trap_type>(random2(TRAP_MAX_REGULAR + 1));
     }
 
     trap_def t;

@@ -1735,6 +1735,7 @@ bool ensnare(actor *fly)
     check_monsters_sense(SENSE_WEB_VIBRATION, 9, fly->pos());
     return true;
 }
+<<<<<<< HEAD
 
 // Whether this trap type can be placed in vaults by the ^ glphy
 bool is_regular_trap(trap_type trap)
@@ -1745,3 +1746,5 @@ bool is_regular_trap(trap_type trap)
     return trap <= TRAP_MAX_REGULAR;
 #endif
 }
+=======
+>>>>>>> parent of 873c05abb0... Add dispersal traps to Zot:5

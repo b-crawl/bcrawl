@@ -27,6 +27,7 @@ https://github.com/b-crawl/bcrawl/releases
 
 #### Features
   - All items are automatically identified if the player has a rune.
+  - v1.11: Like in mainline DCSS, all traps are revealed, but there are no trap effects from exploration.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.

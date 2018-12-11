@@ -323,12 +323,9 @@ static const ability_def Ability_List[] =
 
     { ABIL_CANCEL_PPROJ, "Cancel Portal Projectile",
       0, 0, 0, 0, {}, abflag::instant | abflag::starve_ok },
-<<<<<<< HEAD
 
     { ABIL_CANCEL_PIERCE, "Cancel Piercing Shot",
       0, 0, 0, 0, {}, abflag::instant },
-=======
->>>>>>> 30802b1d75c0d272370f13e7685b8601975f22d6
 
     { ABIL_DIG, "Dig", 0, 0, 0, 0, {}, abflag::instant | abflag::starve_ok },
     { ABIL_SHAFT_SELF, "Shaft Self", 0, 0, 250, 0, {}, abflag::delay },
@@ -649,22 +646,13 @@ static const ability_def Ability_List[] =
         0, 0, 0, 0, {fail_basis::invo}, abflag::exhaustion | abflag::instant
         | abflag::skill_drain },
     { ABIL_WU_JIAN_HEAVENLY_STORM, "Heavenly Storm",
-<<<<<<< HEAD
         0, 0, 0, 6, {fail_basis::invo, piety_breakpoint(4), 0, 1}, abflag::none },
-    // Lunge and Whirlwind abilities aren't menu abilities but currently need
-    // to exist for action counting, hence need enums/entries.
-    { ABIL_WU_JIAN_LUNGE, "Lunge", 0, 0, 0, 0, {}, abflag::none },
-    { ABIL_WU_JIAN_WHIRLWIND, "Whirlwind", 0, 0, 0, 0, {}, abflag::none },
-    { ABIL_WU_JIAN_WALLJUMP, "Wall Jump", 0, 0, 0, 0, {}, abflag::starve_ok },
-=======
-        0, 0, 0, 20, {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::none },
     // Lunge and Whirlwind abilities aren't menu abilities but currently need
     // to exist for action counting, hence need enums/entries.
     { ABIL_WU_JIAN_LUNGE, "Lunge", 0, 0, 0, 0, {}, abflag::berserk_ok },
     { ABIL_WU_JIAN_WHIRLWIND, "Whirlwind", 0, 0, 0, 0, {}, abflag::berserk_ok },
     { ABIL_WU_JIAN_WALLJUMP, "Wall Jump",
         0, 0, 0, 0, {}, abflag::starve_ok | abflag::berserk_ok },
->>>>>>> 30802b1d75c0d272370f13e7685b8601975f22d6
 
     { ABIL_STOP_RECALL, "Stop Recall", 0, 0, 0, 0, {fail_basis::invo}, abflag::starve_ok },
     { ABIL_RENOUNCE_RELIGION, "Renounce Religion",

@@ -104,6 +104,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Yredelemnul allows Statue Form and worship from Gargoyles.
   - v1.1: Wu Jian is reworked: abilities require less piety, Serpent's Lash only costs drain (scaling down with piety), Whirlwind does full dmg but only pins with Serpent's Lash, and Heavenly Storm starts out weaker but costs much less piety.
   - v1.2: Fedhas is reworked: piety is gained by killing natural and undead monsters, and abilities cost piety instead of rations.
+  - v1.3: Sif Muna has faster piety gain.
 
 #### Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

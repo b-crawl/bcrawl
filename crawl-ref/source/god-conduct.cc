@@ -675,6 +675,29 @@ static like_response okawaru_kill(const char* desc)
     };
 }
 
+static like_response fedhas_kill(const char* desc)
+{
+    return
+    {
+        desc, false,
+        0, 0, 0, nullptr, [] (int &piety, int &denom, const monster* victim)
+        {
+            piety = get_fuzzied_monster_difficulty(*victim);
+            dprf("fuzzied monster difficulty: %4.2f", piety * 0.01);
+            denom = 550;
+
+            if (piety > 3200)
+            {
+                mprf(MSGCH_GOD, you.religion,
+                     "<white>%s is impressed by your dedication.</white>",
+                     uppercase_first(god_name(you.religion)).c_str());
+            }
+            else if (piety > 9) // might still be miniscule
+                simple_god_message(" appreciates your composting.");
+        }
+    };
+}
+
 static const like_response EXPLORE_RESPONSE = {
     "you explore the world", false,
     0, 0, 0, nullptr,
@@ -873,9 +896,8 @@ static like_map divine_likes[] =
     like_map(),
     // GOD_FEDHAS,
     {
-        { DID_ROT_CARRION, {
-            "corpses rot away", false, 0, 0, 0, " appreciates ongoing decay."
-        } },
+        { DID_KILL_LIVING, fedhas_kill("you kill living beings") },
+        { DID_KILL_UNDEAD, fedhas_kill("you destroy the undead") },
     },
     // GOD_CHEIBRIADOS,
     {

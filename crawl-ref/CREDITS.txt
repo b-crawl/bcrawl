@@ -90,6 +90,7 @@
     Bill Beher
     Alexander Beisig
     biasface
+    bjobae
     Stu Black
     blackcustard
     Peter 'xFleury' Blain
@@ -260,6 +261,7 @@
     Roman Sêk
     Brennan Shacklett
     ShadyAmish
+    Umer Shaikh
     Evan Shaw
     Aditya Shevade
     Alexandra Shields

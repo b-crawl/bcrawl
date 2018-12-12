@@ -2928,10 +2928,6 @@ static void _decrease_amount(vector<pair<int, int> >& available, int amount)
 // consumed per plant, so a complete ring may not be formed.
 bool fedhas_plant_ring_from_rations()
 {
-    // How many rations is available?
-    vector<pair<int, int> > collected_rations;
-    int total_rations = _collect_rations(collected_rations);
-
     // How many adjacent open spaces are there?
     vector<coord_def> adjacent;
     for (adjacent_iterator adj_it(you.pos()); adj_it; ++adj_it)
@@ -2943,16 +2939,12 @@ bool fedhas_plant_ring_from_rations()
         }
     }
 
-    const int max_use = min(total_rations/2, static_cast<int>(adjacent.size()));
+    const int max_use = static_cast<int>(adjacent.size());
 
-    // Don't prompt if we can't do anything (due to having no rations or
-    // no squares to place plants on).
     if (max_use == 0)
     {
         if (adjacent.empty())
             mpr("No empty adjacent squares.");
-        else
-            mpr("Not enough rations available.");
 
         return false;
     }
@@ -2974,22 +2966,12 @@ bool fedhas_plant_ring_from_rations()
         tiles.add_overlay(adjacent[i], TILE_INDICATOR + i);
 #endif
     }
-
-    // And how many plants does the user want to create?
-    int target_count;
-    if (!_prompt_amount(max_use, target_count,
-                        "How many plants will you create?"))
-    {
-        // User cancelled at the prompt.
-        return false;
-    }
-
     const int hp_adjust = you.skill(SK_INVOCATIONS, 10);
 
     // The user entered a number, remove all number overlays which
     // are higher than that number.
 #ifndef USE_TILE_LOCAL
-    unsigned not_used = adjacent.size() - unsigned(target_count);
+    unsigned not_used = adjacent.size() - unsigned(max_use);
     for (unsigned i = adjacent.size() - not_used; i < adjacent.size(); i++)
         view_update_at(adjacent[i]);
 #endif
@@ -2997,12 +2979,12 @@ bool fedhas_plant_ring_from_rations()
     // For tiles we have to clear all overlays and redraw the ones
     // we want.
     tiles.clear_overlays();
-    for (int i = 0; i < target_count; ++i)
+    for (int i = 0; i < max_use; ++i)
         tiles.add_overlay(adjacent[i], TILE_INDICATOR + i);
 #endif
 
     int created_count = 0;
-    for (int i = 0; i < target_count; ++i)
+    for (int i = 0; i < max_use; ++i)
     {
         if (_create_plant(adjacent[i], hp_adjust))
             created_count++;
@@ -3012,17 +2994,12 @@ bool fedhas_plant_ring_from_rations()
         view_update_at(adjacent[i]);
 #ifdef USE_TILE
         tiles.clear_overlays();
-        for (int j = i + 1; j < target_count; ++j)
+        for (int j = i + 1; j < max_use; ++j)
             tiles.add_overlay(adjacent[j], TILE_INDICATOR + j);
         viewwindow(false);
 #endif
         scaled_delay(200);
     }
-
-    if (created_count)
-        _decrease_amount(collected_rations, 2 * created_count);
-    else
-        canned_msg(MSG_NOTHING_HAPPENS);
 
     return created_count;
 }

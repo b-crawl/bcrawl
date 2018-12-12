@@ -3001,14 +3001,6 @@ bool fedhas_plant_ring_from_rations()
         scaled_delay(200);
     }
 
-    if (created_count)
-        {
-        lose_piety(6);
-        mpr("Your piety has decreased.");
-        }
-    else
-        canned_msg(MSG_NOTHING_HAPPENS);
-
     return created_count;
 }
 

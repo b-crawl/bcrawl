@@ -28,6 +28,7 @@ https://github.com/b-crawl/bcrawl/releases
 #### Features
   - All items are automatically identified if the player has a rune.
   - v1.1.1: Like in mainline DCSS, all traps are revealed, but there are no trap effects from exploration.
+  - v1.3: To replace traps, when taking stairs there's a 4% chance of being teleported onto the lower floor.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.

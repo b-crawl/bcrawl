@@ -480,7 +480,13 @@ static level_id _travel_destination(const dungeon_feature_type how,
         // going 'down' into the vestibule are twice as likely to fall, because
         // they have to pass a check here, and later in floor_transition
         // Right solution is probably to use the canonicalized direction everywhere
+        return dest;    
+    else if(going_up && feat_is_staircase(how) && one_chance_in(25))
+        {
+        mpr("As you climb the stairs, a rune flashes!");
+        you.teleport(true, false);
         return dest;
+        }
 
     if (shaft)
     {
@@ -565,18 +571,6 @@ void floor_transition(dungeon_feature_type how,
 
     if (!forced)
     {
-        // Break ice armour
-        remove_ice_armour_movement();
-
-        // Check for barbs and apply
-        apply_barbs_damage();
-    }
-
-    if (!forced)
-    {
-        // Break ice armour
-        remove_ice_armour_movement();
-
         // Check for barbs and apply
         apply_barbs_damage();
     }
@@ -822,6 +816,12 @@ void floor_transition(dungeon_feature_type how,
 
     autotoggle_autopickup(false);
     request_autopickup();
+    
+    if(!going_up && feat_is_staircase(how) && one_chance_in(25))
+        {
+        mpr("As you exit the stairs, a rune flashes!");
+        you.teleport(true, false);
+        }
 }
 
 /**

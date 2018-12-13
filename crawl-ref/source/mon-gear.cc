@@ -479,6 +479,12 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
             { SPWPN_CHAOS, 1 },
             { SPWPN_ELECTROCUTION, 1 },
         } } },
+        { MONS_HAROLD, { { { WPN_TRIDENT, 1 } }, { 1, 0, 2 }, {
+            { SPWPN_VENOM, 1 },
+            { SPWPN_FLAMING, 1 },
+            { SPWPN_FREEZING, 1 },
+            { SPWPN_VORPAL, 1 },
+        } } },
         { MONS_WIGHT,
             { { { WPN_MORNINGSTAR,      4 },
                 { WPN_DIRE_FLAIL,       4 },
@@ -606,7 +612,6 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         { MONS_DANCING_WEAPON,          { NAGA_WEAPONS, {}, {}, 1 } },
         { MONS_SPECTRAL_WEAPON,         { NAGA_WEAPONS } }, // for mspec placement
         { MONS_FRANCES,                 { NAGA_WEAPONS } },
-        { MONS_HAROLD,                  { NAGA_WEAPONS } },
         { MONS_SKELETAL_WARRIOR,        { NAGA_WEAPONS } },
         { MONS_PALE_DRACONIAN,          { NAGA_WEAPONS } },
         { MONS_RED_DRACONIAN,           { NAGA_WEAPONS } },
@@ -1565,6 +1570,9 @@ static void _give_shield(monster* mon, int level)
     case MONS_ASTERION:
         make_item_for_monster(mon, OBJ_ARMOUR, ARM_SHIELD,
                               level * 2 + 1, 1);
+        break;
+    case MONS_HAROLD:
+        make_item_for_monster(mon, OBJ_ARMOUR, ARM_SHIELD, level);
         break;
     case MONS_DAEVA:
     case MONS_MENNAS:

@@ -19,10 +19,6 @@ Deep Dwarf
 Deep Dwarves live underground and cannot regenerate health naturally, but they
 are very resilient to damage, and have a limited ability to heal at will.
 %%%%
-Deep Elf
-
-Deep Elves have a strong affinity for all kinds of magic, but are very fragile.
-%%%%
 Demigod
 
 Demigods refuse to worship any god, but make up for this with divine attributes
@@ -73,11 +69,6 @@ Gnoll
 Gnolls are canine-like humanoids. They have incredible proficiency and
 excellent physical attributes, but must learn all skills at once.
 %%%%
-Halfling
-
-Small but hardy, Halflings excel with slings. They have an increased resistance
-to mutagenic effects.
-%%%%
 Hill Orc
 
 Orcs are instinctive fighters, training fighting in general rather than specific
@@ -86,11 +77,6 @@ melee weapons. Some are skilled in offensive magic.
 Human
 
 Humans advance quickly in levels and have equal abilities in most skills.
-%%%%
-Tengu
-
-Tengu are bird-people who love to fight, both with weapons and spells. They are
-quite fragile, but they learn to fly swiftly later on.
 %%%%
 Kobold
 

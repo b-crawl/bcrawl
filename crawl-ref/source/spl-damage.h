@@ -35,7 +35,8 @@ spret_type cast_discharge(int pow, const actor &agent, bool fail = false,
                           bool prompt = true);
 bool setup_fragmentation_beam(bolt &beam, int pow, const actor *caster,
                               const coord_def target, bool quiet,
-                              const char **what, bool &hole);
+                              const char **what,
+                              bool &should_destroy_wall, bool &hole);
 spret_type cast_fragmentation(int powc, const actor *caster,
                               const coord_def target, bool fail);
 spret_type cast_sandblast(int powc, bolt &beam, bool fail);

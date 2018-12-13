@@ -4534,9 +4534,9 @@ xx...lllll...xx
        @
 ENDMAP
 
-# It's intended that the loot item isn't obtainable without either entering los
-# of at least some of the monsters or breaking walls, either of which is very
-# likely to wake up these monsters.
+# The only ways I can think of to circumvent the alarm trap are to blow up
+# the door from a distance or LRD through to the item from outside; both
+# wake up the monsters anyway.
 NAME:   grunt_tough_drop
 TAGS:   no_monster_gen no_trap_gen transparent
 DEPTH:  D:4-, Depths

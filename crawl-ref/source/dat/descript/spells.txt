@@ -820,6 +820,11 @@ strongly reduced by armour.
 Targets made from rock, stone, ice or bone will cause a small explosion. Metal
 targets will cause a small but more damaging explosion, and targets made from
 crystal will cause a large and more damaging explosion.
+
+With at least 5 bars of power, this spell can destroy rock walls.
+With at least 6 bars of power, this spell can destroy stone walls.
+Crystal walls are particularly brittle and may be
+destroyed at any power level.
 %%%%
 Legendary Destruction spell
 

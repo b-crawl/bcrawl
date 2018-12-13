@@ -87,10 +87,10 @@ https://github.com/b-crawl/bcrawl/releases
   - Summon Lightning Spire is level 5.
   - Poisonous Vapours lasts longer at high power.
   - Poison Arrow is more common and less resistible.
-  - Lee's Rapid Deconstruction still breaks walls.
   - Bolt of Cold and Throw Frost have +1 range.
   - Lightning Bolt has better accuracy.
   - v1.1: Ozocubu's Armour now works with any armour and freezes melee attackers, but only lasts a few turns and gives a smaller AC bonus.
+  - v1.3.1: Lee's Rapid Deconstruction can break rock and stone walls, but not metal walls.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -117,5 +117,7 @@ https://github.com/b-crawl/bcrawl/releases
   - New monster spell: Freezing Blast, a cold equivalent to fireball that Frost Giants and Wizards can cast.
   - Xtahua's breath now applies fire vulnerability.
   - Xtahua now drops the +8 fire dragon scales of Xtahua {rF+++ rC- MR+} when he drops a corpse.
-  - Harold is as he was before, with Bolt of Fire and Blink.
+  - v1.3.1: Harold has Bolt of Fire, Blink, a branded trident, and a shield.
+
+
 

@@ -193,7 +193,7 @@ DEPTH:  D:2-4
 : place_unique(_G, "Natasha")
 
 NAME:   uniq_nergalle
-DEPTH:  D:10-12, Orc, !Orc:$, Lair:1-4
+DEPTH:  D:9-11, Orc, Lair:1-4
 : place_unique(_G, "Nergalle")
 
 NAME:   uniq_nessos

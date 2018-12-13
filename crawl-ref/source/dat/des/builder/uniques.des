@@ -127,7 +127,7 @@ DEPTH:  D:4-6
 : place_unique(_G, "Eustachio")
 
 NAME:   uniq_frances
-DEPTH:  D:12-14, Elf:1, Swamp:1-2, Snake:1-2, Shoals:1-2, Spider:1-2
+DEPTH:  D:12-, Elf:1, Swamp:1-2, Snake:1-2, Shoals:1-2, Spider:1-2
 : place_unique(_G, "Frances")
 
 NAME:   uniq_fannar
@@ -282,8 +282,7 @@ DEPTH:  Depths:1-3, Elf, Snake, Spider, Vaults:1-3
 : place_unique(_G, "Asterion")
 
 NAME:   uniq_bai_suzhen
-DEPTH:  Depths:1-3, Elf:$, Swamp:3-, Snake:3-, Shoals:3-, Spider:3-, Vaults:2-
-DEPTH:  Crypt
+DEPTH:  Depths:1-3, Elf, Swamp:2-, Snake:2-, Shoals:2-, Spider:2-, Vaults
 : place_unique(_G, "Bai Suzhen")
 
 # Do *not* change the name of this vault (uniq_boris) without changing the

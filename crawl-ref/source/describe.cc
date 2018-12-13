@@ -236,7 +236,6 @@ const char* jewellery_base_ability_string(int subtype)
     case RING_ICE:                return "Ice";
     case RING_TELEPORTATION:      return "*Tele";
     case RING_RESIST_CORROSION:   return "rCorr";
-    case RING_ELEC_RESISTANCE:    return "rElec";
     case AMU_HARM:                return "Harm";
     case AMU_MANA_REGENERATION:   return "RegenMP";
     case AMU_THE_GOURMAND:        return "Gourm";

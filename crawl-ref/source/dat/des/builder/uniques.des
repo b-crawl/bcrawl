@@ -372,7 +372,7 @@ NAME:   uniq_ilsuiw
 # Her placement on Shoals:$ is handled through the shoal_guardian tagged
 # vaults.
 DEPTH:  Shoals:2-, !Shoals:$
-WEIGHT: 50
+WEIGHT: 30
 : place_unique(_G, "Ilsuiw band")
 
 NAME:   uniq_arachne

@@ -356,7 +356,7 @@ bool is_channeling_item(const item_def& item, bool calc_unid)
     if (!calc_unid && !item_type_known(item))
         return false;
 
-    return item.base_type == OBJ_STAVES && item.sub_type == STAFF_ENERGY
+    return item.base_type == OBJ_STAVES && item.sub_type == STAFF_ENERGY;
 }
 
 bool is_corpse_violating_spell(spell_type spell)

@@ -106,6 +106,7 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.1: Wu Jian is reworked: abilities require less piety, Serpent's Lash only costs drain (scaling down with piety), Whirlwind does full dmg but only pins with Serpent's Lash, and Heavenly Storm starts out weaker but costs much less piety.
   - v1.2: Fedhas is reworked: piety is gained by killing natural and undead monsters, and abilities cost piety instead of rations.
   - v1.3: Sif Muna has faster piety gain.
+  - v1.3.2: ebering's Nemelex rework is merged: Nemelex decks now exist in an ability menu instead of your inventory.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -121,5 +122,3 @@ https://github.com/b-crawl/bcrawl/releases
   - Xtahua now drops the +8 fire dragon scales of Xtahua {rF+++ rC- MR+} when he drops a corpse.
   - v1.3.1: Harold has Bolt of Fire, Blink, a branded trident, and a shield.
   - v1.3.2: Boris has Haunt instead of Iron Shot, and casts spells more.
-
-

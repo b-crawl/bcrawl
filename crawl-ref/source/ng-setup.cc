@@ -6,7 +6,6 @@
 #include "adjust.h"
 #include "artefact.h"
 #include "art-enum.h"
-#include "decks.h"
 #include "dungeon.h"
 #include "end.h"
 #include "files.h"

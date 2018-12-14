@@ -20,7 +20,6 @@
 #include "chardump.h"
 #include "cloud.h"
 #include "coordit.h"
-#include "decks.h"
 #include "delay.h"
 #include "directn.h"
 #include "dungeon.h"
@@ -1637,7 +1636,6 @@ bool evoke_item(int slot, bool check_range)
 
         if ((you.get_mutation_level(MUT_NO_ARTIFICE)
              || player_under_penance(GOD_PAKELLAS))
-            && !is_deck(item)
             && item.sub_type != MISC_ZIGGURAT)
         {
             if (you.get_mutation_level(MUT_NO_ARTIFICE))
@@ -1648,14 +1646,6 @@ bool evoke_item(int slot, bool check_range)
                                    "devices!", GOD_PAKELLAS);
             }
             return false;
-        }
-
-        if (is_deck(item))
-        {
-            evoke_deck(item);
-            practise_using_deck();
-            count_action(CACT_EVOKE, EVOC_DECK);
-            break;
         }
 
         switch (item.sub_type)

@@ -3921,14 +3921,9 @@ static void tag_read_you_items(reader &th)
                                                            | (seed3 << 16);
         }
     }
-    // Remove any decks if no longer worshipping Nemelex, now that items have
-    // been loaded.
-    if (th.getMinorVersion() < TAG_MINOR_NEMELEX_WRATH
-        && !you_worship(GOD_NEMELEX_XOBEH)
-        && you.num_total_gifts[GOD_NEMELEX_XOBEH])
-    {
-        nemelex_reclaim_decks();
-    }
+    // Remove any decks now that items have been loaded.
+    if (th.getMinorVersion() < TAG_MINOR_REMOVE_DECKS)
+        reclaim_decks();
 
     // Reset training arrays for transfered gnolls that didn't train all skills.
     if (th.getMinorVersion() < TAG_MINOR_GNOLLS_REDUX)

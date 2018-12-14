@@ -15,8 +15,8 @@
 #include "art-enum.h"
 #include "cio.h"
 #include "coordit.h"
-#include "dbg-util.h"
 #include "decks.h"
+#include "dbg-util.h"
 #include "env.h"
 #include "god-passive.h"
 #include "invent.h"
@@ -1585,7 +1585,7 @@ void wizard_draw_card()
         lowercase(card);
         if (card.find(wanted) != string::npos)
         {
-            card_effect(c, DECK_RARITY_LEGENDARY);
+            card_effect(c);
             found_card = true;
             break;
         }

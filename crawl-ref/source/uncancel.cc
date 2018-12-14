@@ -49,7 +49,7 @@ void run_uncancels()
             break;
 
         case UNC_DRAW_THREE:
-            if (!draw_three(arg) && crawl_state.seen_hups)
+            if (!draw_three() && crawl_state.seen_hups)
                 return;
             break;
 
@@ -60,8 +60,6 @@ void run_uncancels()
 
 #if TAG_MAJOR_VERSION == 34
         case UNC_MERCENARY:
-            if (!recruit_mercenary(arg) && crawl_state.seen_hups)
-                return;
             break;
 #endif
 

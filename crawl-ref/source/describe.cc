@@ -1848,106 +1848,6 @@ static string _describe_jewellery(const item_def &item, bool verbose)
     return description;
 }
 
-static bool _compare_card_names(card_type a, card_type b)
-{
-    return string(card_name(a)) < string(card_name(b));
-}
-
-static bool _check_buggy_deck(const item_def &deck, string &desc)
-{
-    if (!is_deck(deck))
-    {
-        desc += "This isn't a deck at all!\n";
-        return true;
-    }
-
-    const CrawlHashTable &props = deck.props;
-
-    if (!props.exists(CARD_KEY)
-        || props[CARD_KEY].get_type() != SV_VEC
-        || props[CARD_KEY].get_vector().get_type() != SV_BYTE
-        || cards_in_deck(deck) == 0)
-    {
-        return true;
-    }
-
-    return false;
-}
-
-static string _describe_deck(const item_def &item)
-{
-    string description;
-
-    description.reserve(100);
-
-    description += "\n";
-
-    if (_check_buggy_deck(item, description))
-        return "";
-
-    if (item_type_known(item))
-        description += deck_contents(item.sub_type) + "\n";
-
-    description += make_stringf("\nMost decks begin with %d to %d cards.",
-                                MIN_STARTING_CARDS,
-                                MAX_STARTING_CARDS);
-
-    const vector<card_type> drawn_cards = get_drawn_cards(item);
-    if (!drawn_cards.empty())
-    {
-        description += "\n";
-        description += "Drawn card(s): ";
-        description += comma_separated_fn(drawn_cards.begin(),
-                                          drawn_cards.end(),
-                                          card_name);
-    }
-
-    const int num_cards = cards_in_deck(item);
-    // The list of known cards, ending at the first one not known to be at the
-    // top.
-    vector<card_type> seen_top_cards;
-    // Seen cards in the deck not necessarily contiguous with the start. (If
-    // Nemelex wrath shuffled a deck that you stacked, for example.)
-    vector<card_type> other_seen_cards;
-    bool still_contiguous = true;
-    for (int i = 0; i < num_cards; ++i)
-    {
-        uint8_t flags;
-        const card_type card = get_card_and_flags(item, -i-1, flags);
-        if (flags & CFLAG_SEEN)
-        {
-            if (still_contiguous)
-                seen_top_cards.push_back(card);
-            else
-                other_seen_cards.push_back(card);
-        }
-        else
-            still_contiguous = false;
-    }
-
-    if (!seen_top_cards.empty())
-    {
-        description += "\n";
-        description += "Next card(s): ";
-        description += comma_separated_fn(seen_top_cards.begin(),
-                                          seen_top_cards.end(),
-                                          card_name);
-    }
-    if (!other_seen_cards.empty())
-    {
-        description += "\n";
-        sort(other_seen_cards.begin(), other_seen_cards.end(),
-             _compare_card_names);
-
-        description += "Seen card(s): ";
-        description += comma_separated_fn(other_seen_cards.begin(),
-                                          other_seen_cards.end(),
-                                          card_name);
-    }
-
-    return description;
-}
-
 bool is_dumpable_artefact(const item_def &item)
 {
     return is_known_artefact(item) && item_ident(item, ISFLAG_KNOW_PROPERTIES);
@@ -2133,8 +2033,6 @@ string get_item_description(const item_def &item, bool verbose,
         break;
 
     case OBJ_MISCELLANY:
-        if (is_deck(item))
-            description << _describe_deck(item);
         if (item.sub_type == MISC_ZIGGURAT && you.zigs_completed)
         {
             const int zigs = you.zigs_completed;
@@ -3357,6 +3255,22 @@ void describe_ability(ability_type ability)
 #endif
 }
 
+/**
+ * Examine a given deck.
+ */
+void describe_deck(deck_type deck)
+{
+    describe_info inf;
+
+    if (deck == DECK_STACK)
+        inf.title = "A stacked deck";
+    else
+        inf.title = "The " + deck_name(deck);
+
+    inf.body << deck_description(deck);
+
+    show_description(inf);
+}
 
 static string _describe_draconian(const monster_info& mi)
 {

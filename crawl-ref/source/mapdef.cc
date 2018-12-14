@@ -20,7 +20,6 @@
 #include "cluautil.h"
 #include "colour.h"
 #include "coordit.h"
-#include "decks.h"
 #include "describe.h"
 #include "dgn-height.h"
 #include "dungeon.h"
@@ -5066,77 +5065,6 @@ bool item_list::parse_corpse_spec(item_spec &result, string s)
     return true;
 }
 
-// Strips the first word from s and returns it.
-static string _get_and_discard_word(string* s)
-{
-    string result;
-    const size_t spaceloc = s->find(' ');
-    if (spaceloc == string::npos)
-    {
-        result = *s;
-        s->clear();
-    }
-    else
-    {
-        result = s->substr(0, spaceloc);
-        s->erase(0, spaceloc + 1);
-    }
-
-    return result;
-}
-
-static deck_rarity_type _rarity_string_to_rarity(const string& s)
-{
-    if (s == "common")    return DECK_RARITY_COMMON;
-    if (s == "plain")     return DECK_RARITY_COMMON; // synonym
-    if (s == "rare")      return DECK_RARITY_RARE;
-    if (s == "ornate")    return DECK_RARITY_RARE; // synonym
-    if (s == "legendary") return DECK_RARITY_LEGENDARY;
-
-    mprf("Unknown deck rarity '%s'", s.c_str());
-    return DECK_RARITY_RANDOM;
-}
-
-void item_list::build_deck_spec(string s, item_spec* spec)
-{
-    spec->base_type = OBJ_MISCELLANY;
-    string word = _get_and_discard_word(&s);
-
-    // The deck description can start with either "[rarity] deck..." or
-    // just "deck".
-    if (word != "deck")
-    {
-        spec->ego = _rarity_string_to_rarity(word);
-        word = _get_and_discard_word(&s);
-    }
-    else
-        spec->ego = DECK_RARITY_RANDOM;
-
-    // Error checking.
-    if (word != "deck")
-    {
-        error = make_stringf("Bad spec: %s", s.c_str());
-        return;
-    }
-
-    word = _get_and_discard_word(&s);
-    if (word == "of")
-    {
-        string sub_type_str = _get_and_discard_word(&s);
-        const int sub_type = deck_type_by_name(sub_type_str);
-
-        if (sub_type == NUM_MISCELLANY)
-        {
-            error = make_stringf("Bad deck type: %s", sub_type_str.c_str());
-            return;
-        }
-
-        spec->sub_type = sub_type;
-    }
-    else
-        spec->sub_type = random_deck_type();
-}
-
 bool item_list::parse_single_spec(item_spec& result, string s)
 {
     // If there's a colon, this must be a generation weight.
@@ -5406,8 +5334,8 @@ bool item_list::parse_single_spec(item_spec& result, string s)
 
     if (s.find("deck") != string::npos)
     {
-        build_deck_spec(s, &result);
-        return true;
+        error = make_stringf("removed deck: \"%s\".", s.c_str());
+        return false;
     }
 
     string tile = strip_tag_prefix(s, "tile:");

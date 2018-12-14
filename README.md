@@ -107,17 +107,19 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.2: Fedhas is reworked: piety is gained by killing natural and undead monsters, and abilities cost piety instead of rations.
   - v1.3: Sif Muna has faster piety gain.
 
-#### Monsters
-  - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
+#### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
   - Hornets don't Paralyse anymore.
   - Naga Mages and Nagarajas have the 'Dimensional Anchor' spell that stops the player from Teleporting.
   - Death Drakes may spawn in Swamp.
   - The new 'Orb Demon' enemy appears in Zot.
   - New monster spell: Freezing Blast, a cold equivalent to fireball that Frost Giants and Wizards can cast.
-  - Xtahua's breath now applies fire vulnerability.
+
+#### Unique Monsters
+  - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
+  - Xtahua's breath now applies rF-.
   - Xtahua now drops the +8 fire dragon scales of Xtahua {rF+++ rC- MR+} when he drops a corpse.
   - v1.3.1: Harold has Bolt of Fire, Blink, a branded trident, and a shield.
-
+  - v1.3.2: Boris has Haunt instead of Iron Shot, and casts spells more.
 
 

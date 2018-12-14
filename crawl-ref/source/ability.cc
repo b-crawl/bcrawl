@@ -115,6 +115,7 @@ enum class abflag
     hostile             = 0x00400000, // failure summons a hostile (Makhleb)
     starve_ok           = 0x00800000, // can use even if starving
     berserk_ok          = 0x01000000, // can use even if berserk
+    card                = 0x02000000, // deck drawing (Nemelex)
 };
 DEF_BITFIELD(ability_flags, abflag);
 
@@ -479,10 +480,18 @@ static const ability_def Ability_List[] =
       {fail_basis::invo}, abflag::none },
 
     // Nemelex
+    { ABIL_NEMELEX_DRAW_DESTRUCTION, "Draw Destruction",
+      0, 0, 0, 0, {}, abflag::card },
+    { ABIL_NEMELEX_DRAW_ESCAPE, "Draw Escape",
+      0, 0, 0, 0, {}, abflag::card },
+    { ABIL_NEMELEX_DRAW_SUMMONING, "Draw Summoning",
+      0, 0, 0, 0, {}, abflag::card },
+    { ABIL_NEMELEX_DRAW_STACK, "Draw Stack",
+      0, 0, 0, 0, {}, abflag::card },
     { ABIL_NEMELEX_TRIPLE_DRAW, "Triple Draw",
-      2, 0, 0, 2, {fail_basis::invo, 60, 5, 20}, abflag::none },
+      2, 0, 0, 6, {fail_basis::invo, 60, 5, 20}, abflag::none },
     { ABIL_NEMELEX_DEAL_FOUR, "Deal Four",
-      8, 0, 0, 8, {fail_basis::invo, -1}, abflag::none }, // failure special-cased
+      8, 0, 0, 0, {fail_basis::invo, -1}, abflag::none }, // failure special-cased
     { ABIL_NEMELEX_STACK_FIVE, "Stack Five",
       5, 0, 0, 10, {fail_basis::invo, 80, 4, 25}, abflag::none },
 
@@ -744,6 +753,16 @@ int get_gold_cost(ability_type ability)
     }
 }
 
+static string _nemelex_card_text(ability_type ability)
+{
+    int cards = deck_cards(ability_deck(ability));
+
+    if (ability == ABIL_NEMELEX_DRAW_STACK)
+        return make_stringf("(next: %s)", stack_top().c_str());
+    else
+        return make_stringf("(%d in deck)", cards);
+}
+
 const string make_cost_description(ability_type ability)
 {
     const ability_def& abil = get_ability_def(ability);
@@ -814,6 +833,13 @@ const string make_cost_description(ability_type ability)
         const string prefix = "Sacrifice ";
         ret += string(ability_name(ability)).substr(prefix.size());
         ret += ru_sac_text(ability);
+    }
+
+    if (abil.flags & abflag::card)
+    {
+        ret += ", ";
+        ret += "A Card ";
+        ret += _nemelex_card_text(ability);
     }
 
     // If we haven't output anything so far, then the effect has no cost
@@ -1111,12 +1137,28 @@ static string _sacrifice_desc(const ability_type ability)
             + ".\n" + desc;
 }
 
+static string _nemelex_desc(ability_type ability)
+{
+    ostringstream desc;
+    deck_type deck = ability_deck(ability);
+
+    desc << "Draw a card from " << (deck == DECK_STACK ? "your " : "the ");
+    desc << deck_name(deck) << "; " << lowercase_first(deck_description(deck));
+
+    return desc.str();
+}
+
 // XXX: should this be in describe.cc?
 string get_ability_desc(const ability_type ability, bool need_title)
 {
     const string& name = ability_name(ability);
 
-    string lookup = getLongDescription(name + " ability");
+    string lookup;
+
+    if (testbits(get_ability_def(ability).flags, abflag::card))
+        lookup = _nemelex_desc(ability);
+    else
+        lookup = getLongDescription(name + " ability");
 
     if (lookup.empty()) // Nothing found?
         lookup = "No description found.\n";
@@ -1373,6 +1415,13 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
     {
         if (!quiet)
             canned_msg(MSG_GOD_DECLINES);
+        return false;
+    }
+
+    if (testbits(abil.flags, abflag::card) && !deck_cards(ability_deck(abil.ability)))
+    {
+        if (!quiet)
+            mpr("That deck is empty!");
         return false;
     }
 
@@ -2640,6 +2689,27 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
             return SPRET_ABORT;
         break;
 
+    case ABIL_NEMELEX_DRAW_DESTRUCTION:
+        fail_check();
+        if (!deck_draw(DECK_OF_DESTRUCTION))
+            return SPRET_ABORT;
+        break;
+    case ABIL_NEMELEX_DRAW_ESCAPE:
+        fail_check();
+        if (!deck_draw(DECK_OF_ESCAPE))
+            return SPRET_ABORT;
+        break;
+    case ABIL_NEMELEX_DRAW_SUMMONING:
+        fail_check();
+        if (!deck_draw(DECK_OF_SUMMONING))
+            return SPRET_ABORT;
+        break;
+    case ABIL_NEMELEX_DRAW_STACK:
+        fail_check();
+        if (!deck_draw(DECK_STACK))
+            return SPRET_ABORT;
+        break;
+
     case ABIL_NEMELEX_TRIPLE_DRAW:
         fail_check();
         if (!deck_triple_draw())
@@ -3659,6 +3729,17 @@ vector<ability_type> get_god_abilities(bool ignore_silence, bool ignore_piety,
         {
             abilities.push_back(static_cast<ability_type>(anc_type));
         }
+    }
+    if (you_worship(GOD_NEMELEX_XOBEH))
+    {
+        for (int deck = ABIL_NEMELEX_FIRST_DECK;
+             deck <= ABIL_NEMELEX_LAST_DECK;
+             ++deck)
+        {
+            abilities.push_back(static_cast<ability_type>(deck));
+        }
+        if (!you.props[NEMELEX_STACK_KEY].get_vector().empty())
+            abilities.push_back(ABIL_NEMELEX_DRAW_STACK);
     }
     if (you.transfer_skill_points > 0)
         abilities.push_back(ABIL_ASHENZARI_END_TRANSFER);

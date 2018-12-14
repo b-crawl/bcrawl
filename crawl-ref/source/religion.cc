@@ -188,10 +188,12 @@ const vector<god_power> god_powers[NUM_GODS] =
     },
 
     // Nemelex
-    { { 3, ABIL_NEMELEX_TRIPLE_DRAW, "choose one out of three cards" },
+    {
+      { 0, "draw from decks of power" },
+      { 3, ABIL_NEMELEX_TRIPLE_DRAW, "choose one out of three cards" },
       { 4, ABIL_NEMELEX_DEAL_FOUR, "deal four cards at a time" },
-      { 5, ABIL_NEMELEX_STACK_FIVE, "order the top five cards of a deck, losing the rest",
-                                    "stack decks" },
+      { 5, ABIL_NEMELEX_STACK_FIVE, "stack five cards from your decks",
+                                    "stack cards" },
     },
 
     // Elyvilon
@@ -941,68 +943,20 @@ static bool _need_missile_gift(bool forced)
 
 static bool _give_nemelex_gift(bool forced = false)
 {
-    // But only if you're not flying over deep water.
-    if (!(feat_has_solid_floor(grd(you.pos()))
-          || feat_is_watery(grd(you.pos())) && species_likes_water(you.species)))
-    {
-        return false;
-    }
-
     // Nemelex will give at least one gift early.
     if (forced
         || !you.num_total_gifts[GOD_NEMELEX_XOBEH]
            && x_chance_in_y(you.piety + 1, piety_breakpoint(1))
         || one_chance_in(3) && x_chance_in_y(you.piety + 1, MAX_PIETY))
     {
-
-        misc_item_type gift_type = random_choose_weighted(
-                                        5, MISC_DECK_OF_DESTRUCTION,
-                                        4, MISC_DECK_OF_SUMMONING,
-                                        2, MISC_DECK_OF_ESCAPE);
-
-        int thing_created = items(true, OBJ_MISCELLANY, gift_type, 1, 0,
-                                  GOD_NEMELEX_XOBEH);
-
-        move_item_to_grid(&thing_created, you.pos(), true);
-
-        if (thing_created != NON_ITEM)
-        {
-            // Piety|Common  | Rare  |Legendary
-            // --------------------------------
-            //     0:  95.00%,  5.00%,  0.00%
-            //    20:  86.00%, 10.50%,  3.50%
-            //    40:  77.00%, 16.00%,  7.00%
-            //    60:  68.00%, 21.50%, 10.50%
-            //    80:  59.00%, 27.00%, 14.00%
-            //   100:  50.00%, 32.50%, 17.50%
-            //   120:  41.00%, 38.00%, 21.00%
-            //   140:  32.00%, 43.50%, 24.50%
-            //   160:  23.00%, 49.00%, 28.00%
-            //   180:  14.00%, 54.50%, 31.50%
-            //   200:   5.00%, 60.00%, 35.00%
-            const int common_weight = 95 - (90 * you.piety / MAX_PIETY);
-            const int rare_weight   = 5  + (55 * you.piety / MAX_PIETY);
-            const int legend_weight = 0  + (35 * you.piety / MAX_PIETY);
-
-            const deck_rarity_type rarity = random_choose_weighted(
-                common_weight, DECK_RARITY_COMMON,
-                rare_weight,   DECK_RARITY_RARE,
-                legend_weight, DECK_RARITY_LEGENDARY);
-
-            item_def &deck(mitm[thing_created]);
-
-            deck.deck_rarity = rarity;
-            deck.flags |= ISFLAG_KNOW_TYPE;
-
-            simple_god_message(" grants you a gift!");
-            // included in default force_more_message
-            canned_msg(MSG_SOMETHING_APPEARS);
-
-            _inc_gift_timeout(5 + random2avg(9, 2));
-            you.num_current_gifts[you.religion]++;
-            you.num_total_gifts[you.religion]++;
-            take_note(Note(NOTE_GOD_GIFT, you.religion));
-        }
+        if (gift_cards())
+            simple_god_message(" deals you some cards!");
+        else
+            simple_god_message(" goes to deal, but finds you have enough cards.");
+        _inc_gift_timeout(5 + random2avg(9, 2));
+        you.num_current_gifts[you.religion]++;
+        you.num_total_gifts[you.religion]++;
+        take_note(Note(NOTE_GOD_GIFT, you.religion));
         return true;
     }
 
@@ -2815,7 +2769,7 @@ void excommunication(bool voluntary, god_type new_god)
         break;
 
     case GOD_NEMELEX_XOBEH:
-        nemelex_reclaim_decks();
+        reset_cards();
         mprf(MSGCH_GOD, old_god, "Your access to %s's decks is revoked.",
              god_name(old_god).c_str());
         break;

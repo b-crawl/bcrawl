@@ -116,6 +116,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Death Drakes may spawn in Swamp.
   - The new 'Orb Demon' enemy appears in Zot.
   - New monster spell: Freezing Blast, a cold equivalent to fireball that Frost Giants and Wizards can cast.
+  - v1.3.2: Neqoxecs and Shining Eyes have Corrupting Pulse instead of Malmutate.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

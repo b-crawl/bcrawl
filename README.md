@@ -50,9 +50,10 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.1: Players can use a Wand of Polymorph on themselves repeatedly.
 
 #### Removed Items
-  - Amulets of Harm
+  - Amulet of Harm
   - Needles of Sleeping
   - Scrolls of Random Uselessness
+  - Crystal Ball of Energy
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

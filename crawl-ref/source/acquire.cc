@@ -642,11 +642,6 @@ static int _acquirement_misc_subtype(bool /*divine*/, int & /*quantity*/)
     // invocations if we haven't seen one.
     int skills = _skill_rdiv(SK_EVOCATIONS)
         * max(_skill_rdiv(SK_SPELLCASTING), _skill_rdiv(SK_INVOCATIONS));
-    if (x_chance_in_y(skills, MAX_SKILL_LEVEL * MAX_SKILL_LEVEL)
-        && !you.seen_misc[MISC_CRYSTAL_BALL_OF_ENERGY])
-    {
-        return MISC_CRYSTAL_BALL_OF_ENERGY;
-    }
 
     const bool NO_LOVE = you.get_mutation_level(MUT_NO_LOVE);
 
@@ -673,7 +668,7 @@ static int _acquirement_misc_subtype(bool /*divine*/, int & /*quantity*/)
     const int * const choice = random_choose_weighted(choices);
 
     // Could be nullptr if all the weights were 0.
-    return choice ? *choice : MISC_CRYSTAL_BALL_OF_ENERGY;
+    return choice ? *choice : MISC_LIGHTNING_ROD;
 }
 
 /**
@@ -1205,19 +1200,6 @@ static string _why_reject(const item_def &item, int agent)
         ASSERT(item.base_type == OBJ_BOOKS);
         return "Destroying sif-gifted rarebook!";
     }
-
-#if TAG_MAJOR_VERSION == 34
-    // The crystal ball case should be handled elsewhere, but just in
-    // case, it's also handled here.
-    if (agent == GOD_PAKELLAS)
-    {
-        if (item.base_type == OBJ_MISCELLANY
-            && item.sub_type == MISC_CRYSTAL_BALL_OF_ENERGY)
-        {
-            return "Destroying CBoE that Pakellas hates!";
-        }
-    }
-#endif
 
     return ""; // all OK
 }

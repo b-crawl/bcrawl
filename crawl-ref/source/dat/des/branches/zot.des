@@ -1062,7 +1062,7 @@ WEIGHT: 5
 MONS:   oklob plant w:4 / lightning spire w:3
 MONS:   obsidian statue / orange crystal statue / curse skull
 # Not quite the orb, but but close enough
-ITEM:   crystal ball of energy
+ITEM:   potion of experience q:1
 NSUBST: 1 = 1:1 / 6 = 11. / *:., 3 = 1:1 / 4 = 11....... / *:.
 SUBST:  } = }:80 >, ) = ):80 >, ] = ]:80 >
 MAP
@@ -2118,7 +2118,7 @@ ORIENT: float
 # The refs:
 MONS:   Killer Klown
 # The ball / puck / whatever:
-ITEM:   crystal ball of energy
+ITEM:   sling bullet q:1
 
 KFEAT:  K = iron_grate
 NSUBST: @ = 2:@ / *:x

@@ -871,7 +871,7 @@ KITEM:    d = plate armour plus:6 not_cursed ident:all /\
     large shield plus:3 good_item not_cursed ident:all /\
     barding plus:4 not_cursed ident:all w:5
 KITEM:     e = potion of haste q:5 ident:all
-KITEM:     f = crystal ball of energy ident:all
+KITEM:     f = staff of energy ident:all
 : line_setup(_G)
 : general_item_setup(_G)
 MAP

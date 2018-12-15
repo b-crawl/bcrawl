@@ -361,7 +361,6 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Necronomicon
     SPELL_HAUNT,
     SPELL_BORGNJORS_REVIVIFICATION,
-    SPELL_DEATHS_DOOR,
     SPELL_INFESTATION,
     SPELL_NECROMUTATION,
 },

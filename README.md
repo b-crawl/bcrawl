@@ -94,11 +94,13 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.3.1: Lee's Rapid Deconstruction can break rock and stone walls, but not metal walls.
   - v1.3.3: Borgnjor's Vile Clutch is level 6.
   - v1.3.3: Haunt, Chain Lightning, and Fire Storm are more common.
+  - v1.3.3: Glaciate is a level 8 Ice/Air/Conjurations spell.
 
 #### Removed Spells
   - Summon Guardian Golem
   - Gell's Gravitas
   - Excruciating Wounds
+  - Death's Door
 
 #### Gods
   - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.

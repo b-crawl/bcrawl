@@ -3246,9 +3246,9 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_GLACIATE, "Glaciate",
-    SPTYP_CONJURATION | SPTYP_ICE,
+    SPTYP_CONJURATION | SPTYP_ICE | SPTYP_AIR,
     SPFLAG_DIR_OR_TARGET | SPFLAG_AREA | SPFLAG_NOT_SELF,
-    9,
+    8,
     200,
     6, 6,
     9, 25,

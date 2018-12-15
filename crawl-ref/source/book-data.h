@@ -91,6 +91,7 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Book of the Tempests
     SPELL_DISCHARGE,
     SPELL_LIGHTNING_BOLT,
+    SPELL_CHAIN_LIGHTNING,
     SPELL_IGNITION,
     SPELL_TORNADO,
     SPELL_SHATTER,
@@ -302,11 +303,11 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of the Dragon
-    SPELL_FLAME_TONGUE,
     SPELL_CAUSE_FEAR,
     SPELL_BOLT_OF_FIRE,
     SPELL_DRAGON_FORM,
     SPELL_DRAGON_CALL,
+    SPELL_FIRE_STORM,
 },
 
 {   // Book of Burglary

@@ -93,6 +93,7 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.1: Ozocubu's Armour now works with any armour and freezes melee attackers, but only lasts a few turns and gives a smaller AC bonus.
   - v1.3.1: Lee's Rapid Deconstruction can break rock and stone walls, but not metal walls.
   - v1.3.3: Borgnjor's Vile Clutch is level 6.
+  - v1.3.3: Haunt, Chain Lightning, and Fire Storm are more common.
 
 #### Removed Spells
   - Summon Guardian Golem

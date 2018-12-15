@@ -18,7 +18,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Orc is shortened to 1 floor.
   
 #### Backgrounds
-  - Venom Mage, Arcane Marksman, and Warper are completely reworked.
+  - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
   - Reaver is a melee background that starts the game worshipping Vehumet.
   - Archaeologists start with a crate and a dusty tome. The tome reveals itself to be a random skill manual at XL 3, and when the manual is finished, the crate unlocks and gives the player a related artifact.
   - Necromancers start with Bolt of Draining.
@@ -111,7 +111,7 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.1: Wu Jian is reworked: abilities require less piety, Serpent's Lash only costs drain (scaling down with piety), Whirlwind does full dmg but only pins with Serpent's Lash, and Heavenly Storm starts out weaker but costs much less piety.
   - v1.2: Fedhas is reworked: piety is gained by killing natural and undead monsters, and abilities cost piety instead of rations.
   - v1.3: Sif Muna has faster piety gain.
-  - v1.3.2: ebering's Nemelex rework is merged: Nemelex decks now exist in an ability menu instead of your inventory.
+  - v1.3.2: Nemelex decks now exist in an ability menu instead of your inventory. (based on ebering's work)
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

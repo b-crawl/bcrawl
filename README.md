@@ -9,7 +9,6 @@ https://github.com/b-crawl/bcrawl/releases
 
 ## Changes from Vanilla Crawl
 #### Branches
-  - Traps are not placed in the first 3 floors of the Dungeon.
   - Dungeon is shortened to 12 floors.
   - Vaults does not require any runes to enter.
   - Vaults is shortened to 3 floors.

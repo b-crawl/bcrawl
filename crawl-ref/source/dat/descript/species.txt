@@ -16,8 +16,8 @@ weaponry.
 %%%%
 Deep Dwarf
 
-Deep Dwarves live underground and cannot regenerate health naturally, but they
-are very resilient to damage, and have a limited ability to heal at will.
+Deep Dwarves live underground, and have lost the ability to heal in exchange for
+resistance to damage. Most worship Elyvilon.
 %%%%
 Demigod
 

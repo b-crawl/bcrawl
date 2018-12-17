@@ -343,8 +343,6 @@ static const ability_def Ability_List[] =
     // use or train Evocations (the others do).  -- bwr
     { ABIL_EVOKE_BLINK, "Evoke Blink",
       1, 0, 50, 0, {fail_basis::evo, 40, 2}, abflag::none },
-    { ABIL_HEAL_WOUNDS, "Heal Wounds",
-      0, 0, 0, 0, {fail_basis::xl, 45, 2}, abflag::none },
     { ABIL_EVOKE_BERSERK, "Evoke Berserk Rage",
       0, 0, 600, 0, {fail_basis::evo, 50, 2}, abflag::none },
 
@@ -773,9 +771,6 @@ const string make_cost_description(ability_type ability)
     if (abil.flags & abflag::variable_mp)
         ret += ", MP";
 
-    if (ability == ABIL_HEAL_WOUNDS)
-        ret += ", Permanent MP";
-
     if (abil.hp_cost)
         ret += make_stringf(", %d HP", abil.hp_cost.cost(you.hp_max));
 
@@ -949,12 +944,6 @@ static const string _detailed_cost_description(ability_type ability)
 
     if (abil.flags & abflag::skill_drain)
         ret << "\nIt will temporarily drain your skills when used.";
-
-    if (abil.ability == ABIL_HEAL_WOUNDS)
-    {
-        ret << "\nIt has a chance of reducing your maximum magic capacity "
-               "when used.";
-    }
 
     return ret.str();
 }
@@ -1586,21 +1575,6 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
         }
         return true;
 
-    case ABIL_HEAL_WOUNDS:
-        if (you.hp == you.hp_max)
-        {
-            if (!quiet)
-                canned_msg(MSG_FULL_HEALTH);
-            return false;
-        }
-        if (get_real_mp(false) < 1)
-        {
-            if (!quiet)
-                mpr("You don't have enough innate magic capacity.");
-            return false;
-        }
-        return true;
-
     case ABIL_SHAFT_SELF:
         return you.can_do_shaft_ability(quiet);
 
@@ -1859,16 +1833,6 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
     // statement... it's assumed that only failures have returned! - bwr
     switch (abil.ability)
     {
-    case ABIL_HEAL_WOUNDS:
-        fail_check();
-        if (one_chance_in(4))
-        {
-            mpr("Your magical essence is drained by the effort!");
-            rot_mp(1);
-        }
-        potionlike_effect(POT_HEAL_WOUNDS, 40);
-        break;
-
     case ABIL_DIG:
         fail_check();
         if (!you.digging)
@@ -3369,9 +3333,6 @@ vector<talent> your_talents(bool check_confused, bool include_unusable)
     vector<talent> talents;
 
     // Species-based abilities.
-    if (you.species == SP_DEEP_DWARF)
-        _add_talent(talents, ABIL_HEAL_WOUNDS, check_confused);
-
     if (you.species == SP_FORMICID
         && (form_keeps_mutations() || include_unusable))
     {

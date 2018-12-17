@@ -1058,10 +1058,10 @@ static species_group species_groups[] =
             SP_MERFOLK,
             SP_GARGOYLE,
             SP_TROLL,
-            SP_GNOLL,
             SP_GHOUL,
-            SP_KOBOLD,
             SP_DUSK_WALKER,
+            SP_KOBOLD,
+            SP_GNOLL,
             SP_FAIRY,
         }
     },
@@ -1073,13 +1073,12 @@ static species_group species_groups[] =
             SP_HUMAN,
             SP_BASE_DRACONIAN,
             SP_DEMONSPAWN,
+            SP_VINE_STALKER,
             SP_CENTAUR,
             SP_SPRIGGAN,
             SP_AVARIEL,
             SP_OGRE,
-            SP_VINE_STALKER,
             SP_SAND_DWARF,
-            SP_DEEP_DWARF,
         }
     },
     {
@@ -1096,6 +1095,7 @@ static species_group species_groups[] =
             SP_FELID,
             SP_DEMIGOD,
             SP_MUMMY,
+            SP_DEEP_DWARF,
         }
     },
 };

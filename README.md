@@ -63,7 +63,6 @@ https://github.com/b-crawl/bcrawl/releases
   - Duskwalker gains the Nightstalker mutation, has draining melee attacks, and has half the stealth penalty from armour.
   - Halflings have been merged into Kobolds.
   - Deep Elves and Tengu have been merged into Avariel, winged elves with good aptitudes for magic.
-  - Hill Orcs now use Fighting as their skill for all weapons.
 
 #### Species Changes
   - Humans have +1 to most aptitudes.
@@ -73,6 +72,8 @@ https://github.com/b-crawl/bcrawl/releases
   - Vine Stalkers start with Regeneration 1.
   - Demigod's XP modifier is -1.
   - Felids and Octopodes can wear scarves.
+  - Hill Orcs use Fighting as their skill for all weapons.
+  - Trolls have natural AC but can't wear body armour, and are slightly better at magic but worse with shields.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

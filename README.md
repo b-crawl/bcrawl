@@ -48,6 +48,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Centaur and Naga bardings have been merged.
   - Staves of Earth have a +3 AC bonus.
   - v1.1: Players can use a Wand of Polymorph on themselves repeatedly.
+  - v1.3.4: Some thrown weapon types are consolidated.
 
 #### Removed Items
   - Amulet of Harm

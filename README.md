@@ -95,6 +95,7 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.3.3: Borgnjor's Vile Clutch is level 6.
   - v1.3.3: Haunt, Chain Lightning, and Fire Storm are more common.
   - v1.3.3: Glaciate is a level 8 Ice/Air/Conjurations spell.
+  - v1.3.4: Statue Form does slightly less damage when unarmed.
 
 #### Removed Spells
   - Summon Guardian Golem

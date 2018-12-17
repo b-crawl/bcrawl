@@ -641,6 +641,7 @@ string describe_mutations(bool drop_title)
                     make_stringf("Your %s. (AC +%d)",
                        you.species == SP_NAGA ? "serpentine skin is tough" :
                        you.species == SP_GARGOYLE ? "stone body is resilient" :
+                       you.species == SP_TROLL ? "thick skin is tough" :
                                                     scale_clause.c_str(),
                        you.racial_ac(false) / 100),
                     player_is_shapechanged()

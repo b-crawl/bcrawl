@@ -674,15 +674,15 @@ static const map<species_type, species_def> species_data =
     -1, 3, -1, 3,
     MONS_TROLL,
     HT_LAND, US_ALIVE, SIZE_LARGE,
-    15, 4, 5, // 24
+    15, 5, 5, // 24
     { STAT_STR }, 3,
-    { { MUT_TOUGH_SKIN, 2, 1 }, { MUT_REGENERATION, 1, 1 }, { MUT_CLAWS, 3, 1 },
-      { MUT_GOURMAND, 1, 1 }, { MUT_FAST_METABOLISM, 3, 1 },
-      { MUT_SHAGGY_FUR, 1, 1 }, },
-    {},
-    {},
+    { { MUT_REGENERATION, 1, 4 }, { MUT_REGENERATION, 1, 12 },
+      { MUT_CLAWS, 3, 1 }, { MUT_GOURMAND, 1, 1 },
+      { MUT_FAST_METABOLISM, 3, 1 }, },
+    { "You cannot wear most types of armour.", },
+    { "almost no armour", },
     { JOB_FIGHTER, JOB_MONK, JOB_HUNTER, JOB_BERSERKER, JOB_WARPER },
-    { SK_UNARMED_COMBAT, SK_MACES_FLAILS },
+    { SK_UNARMED_COMBAT },
 } },
 
 { SP_VAMPIRE, {

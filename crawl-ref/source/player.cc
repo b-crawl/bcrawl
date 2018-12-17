@@ -1218,9 +1218,6 @@ int player_hunger_rate(bool temp)
 {
     int hunger = 3;
 
-    if (you.species == SP_TROLL)
-        hunger += 3;            // in addition to the +3 for fast metabolism
-
     if (temp
         && (you.duration[DUR_REGENERATION]
             || you.duration[DUR_TROGS_HAND])
@@ -2907,6 +2904,14 @@ void level_change(bool skip_attribute_increase)
 
             case SP_NAGA:
                 if (!(you.experience_level % 3))
+                {
+                    mprf(MSGCH_INTRINSIC_GAIN, "Your skin feels tougher.");
+                    you.redraw_armour_class = true;
+                }
+                break;
+
+            case SP_TROLL:
+                if ((you.experience_level % 2) == 1)
                 {
                     mprf(MSGCH_INTRINSIC_GAIN, "Your skin feels tougher.");
                     you.redraw_armour_class = true;
@@ -6046,7 +6051,9 @@ int player::racial_ac(bool temp) const
                        + 100 * max(0, experience_level - 7) * 2 / 5;
         }
         else if (species == SP_FAIRY)
-                return 300 + 100 * experience_level / 3;
+            return 300 + 100 * experience_level / 3;
+        else if (species == SP_TROLL)
+            return (300 + 100*((experience_level + 1) / 2));
     }
 
     return 0;

@@ -130,7 +130,7 @@ and spellcasters.
 Troll
 
 Trolls are monstrous creatures with powerful claws, always hungering for raw
-meat. They regenerate health rapidly.
+meat. They can't wear most armour, but have naturally tough skin.
 %%%%
 Vampire
 

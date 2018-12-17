@@ -453,7 +453,7 @@ static const ability_def Ability_List[] =
     { ABIL_ELYVILON_LIFESAVING, "Divine Protection",
       0, 0, 0, 0, {fail_basis::invo}, abflag::piety },
     { ABIL_ELYVILON_LESSER_HEALING, "Lesser Healing", 1, 0, 100,
-      generic_cost::range(0, 1), {fail_basis::invo, 30, 6, 20}, abflag::none },
+      generic_cost::fixed(1), {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_ELYVILON_HEAL_OTHER, "Heal Other",
       2, 0, 250, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_ELYVILON_PURIFICATION, "Purification",
@@ -2566,11 +2566,10 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
         fail_check();
         int pow = 0;
         if (abil.ability == ABIL_ELYVILON_LESSER_HEALING)
-            pow = 3 + you.skill_rdiv(SK_INVOCATIONS, 1, 6);
+            pow = 5 + you.skill_rdiv(SK_INVOCATIONS, 1, 3);
         else
-            pow = 10 + you.skill_rdiv(SK_INVOCATIONS, 1, 3);
-        pow = min(50, pow);
-        const int healed = pow + roll_dice(2, pow) - 2;
+            pow = 10 + you.skill_rdiv(SK_INVOCATIONS, 2, 3);
+        const int healed = pow + roll_dice(2, pow);
         mpr("You are healed.");
         inc_hp(healed);
         break;

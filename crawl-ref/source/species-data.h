@@ -679,7 +679,7 @@ static const map<species_type, species_def> species_data =
     { { MUT_REGENERATION, 1, 4 }, { MUT_REGENERATION, 1, 12 },
       { MUT_CLAWS, 3, 1 }, { MUT_GOURMAND, 1, 1 },
       { MUT_FAST_METABOLISM, 3, 1 },
-	  { MUT_COLD_RESISTANCE, 1, 16 }, { MUT_HEAT_RESISTANCE, 1, 20 }, },
+      { MUT_COLD_RESISTANCE, 1, 16 }, { MUT_HEAT_RESISTANCE, 1, 20 }, },
     { "You cannot wear most types of armour.", },
     { "almost no armour", },
     { JOB_FIGHTER, JOB_MONK, JOB_HUNTER, JOB_BERSERKER, JOB_WARPER },

@@ -353,7 +353,7 @@ for divine protection will cause penance.
 %%%%
 Lesser Healing ability
 
-Heals a small amount of health, depending on Invocations skill.
+Heals a moderate amount of health, increasing with Invocations skill.
 %%%%
 Purification ability
 
@@ -378,9 +378,9 @@ gain nothing.
 %%%%
 Greater Healing ability
 
-Heals a moderate amount of health, depending on Invocations skill. Greater
-Healing will heal approximately three times as much as Lesser Healing, but at a
-slightly higher total piety cost.
+Heals a significant amount of health, increasing with Invocations skill. Greater
+Healing will heal approximately twice as much as Lesser Healing, at approximately
+four times the piety cost.
 %%%%
 Divine Vigour ability
 

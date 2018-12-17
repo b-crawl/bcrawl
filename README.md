@@ -65,6 +65,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Deep Elves and Tengu have been merged into Avariel, winged elves with good aptitudes for magic.
 
 #### Species Changes
+  - Hill Orcs use Fighting as their skill for all weapons.
   - Humans have +1 to most aptitudes.
   - Mummies have Clarity, so they can't be confused.
   - Formicids can wield giant clubs, but can't use a shield with them.
@@ -72,8 +73,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Vine Stalkers start with Regeneration 1.
   - Demigod's XP modifier is -1.
   - Felids and Octopodes can wear scarves.
-  - Hill Orcs use Fighting as their skill for all weapons.
-  - Trolls have natural AC but can't wear body armour, and are slightly better at magic but worse with shields.
+  - v1.3.4: Trolls have natural AC but can't wear body armour, and are slightly better at magic but worse with shields.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

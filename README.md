@@ -48,7 +48,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Centaur and Naga bardings have been merged.
   - Staves of Earth have a +3 AC bonus.
   - v1.1: Players can use a Wand of Polymorph on themselves repeatedly.
-  - v1.3.4: Some thrown weapon types are consolidated.
+  - v1.4: Some thrown weapon types are consolidated.
 
 #### Removed Items
   - Amulet of Harm
@@ -73,7 +73,8 @@ https://github.com/b-crawl/bcrawl/releases
   - Vine Stalkers start with Regeneration 1.
   - Demigod's XP modifier is -1.
   - Felids and Octopodes can wear scarves.
-  - v1.3.4: Trolls have natural AC but can't wear body armour, and are slightly better at magic but worse with shields. They eventually gain Regen 2, rC+, and rF+.
+  - v1.4: Trolls have natural AC but can't wear body armour, and are slightly better at magic but worse with shields. They eventually gain Regen 2, rC+, and rF+.
+  - v1.4: Deep Dwarves lose their Heal Wounds ability and start the game with Elyvilon if their background doesn't start with a god. They also don't gain HP from vampiric effects.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -97,7 +98,7 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.3.3: Borgnjor's Vile Clutch is level 6.
   - v1.3.3: Haunt, Chain Lightning, and Fire Storm are more common.
   - v1.3.3: Glaciate is a level 8 Ice/Air/Conjurations spell.
-  - v1.3.4: Statue Form does slightly less damage when unarmed.
+  - v1.4: Statue Form does slightly less damage when unarmed.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -115,7 +116,7 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.2: Fedhas is reworked: piety is gained by killing natural and undead monsters, and abilities cost piety instead of rations.
   - v1.3: Sif Muna has faster piety gain.
   - v1.3.2: Nemelex decks now exist in an ability menu instead of your inventory. (based on ebering's work)
-  - v1.3.4: TSO's Cleansing Flame has 1/3 less damage scaling with invocations.
+  - v1.4: TSO's Cleansing Flame has 1/3 less damage scaling with invocations.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

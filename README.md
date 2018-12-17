@@ -112,6 +112,7 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.2: Fedhas is reworked: piety is gained by killing natural and undead monsters, and abilities cost piety instead of rations.
   - v1.3: Sif Muna has faster piety gain.
   - v1.3.2: Nemelex decks now exist in an ability menu instead of your inventory. (based on ebering's work)
+  - v1.3.4: TSO's Cleansing Flame has 1/3 less damage scaling with invocations.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

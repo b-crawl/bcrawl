@@ -73,7 +73,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Vine Stalkers start with Regeneration 1.
   - Demigod's XP modifier is -1.
   - Felids and Octopodes can wear scarves.
-  - v1.3.4: Trolls have natural AC but can't wear body armour, and are slightly better at magic but worse with shields.
+  - v1.3.4: Trolls have natural AC but can't wear body armour, and are slightly better at magic but worse with shields. They eventually gain Regen 2, rC+, and rF+.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

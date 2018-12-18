@@ -128,6 +128,7 @@ https://github.com/b-crawl/bcrawl/releases
   - The new 'Orb Demon' enemy appears in Zot.
   - New monster spell: Freezing Blast, a cold equivalent to fireball that Frost Giants and Wizards can cast.
   - v1.3.2: Neqoxecs and Shining Eyes have Corrupting Pulse instead of Malmutate.
+  - v1.4.1: Gnolls no longer sometimes spawn with nets.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

@@ -1079,6 +1079,7 @@ static species_group species_groups[] =
             SP_AVARIEL,
             SP_OGRE,
             SP_SAND_DWARF,
+            SP_DEEP_DWARF,
         }
     },
     {
@@ -1095,7 +1096,6 @@ static species_group species_groups[] =
             SP_FELID,
             SP_DEMIGOD,
             SP_MUMMY,
-            SP_DEEP_DWARF,
         }
     },
 };

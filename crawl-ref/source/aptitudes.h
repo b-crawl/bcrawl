@@ -1313,7 +1313,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_DEEP_DWARF,      SK_HEXES,           0),
     APT(SP_DEEP_DWARF,      SK_CHARMS,         -1),
     APT(SP_DEEP_DWARF,      SK_SUMMONINGS,     -1),
-    APT(SP_DEEP_DWARF,      SK_NECROMANCY,     -1),
+    APT(SP_DEEP_DWARF,      SK_NECROMANCY,      0),
     APT(SP_DEEP_DWARF,      SK_TRANSLOCATIONS,  1),
     APT(SP_DEEP_DWARF,      SK_TRANSMUTATIONS, -1),
     APT(SP_DEEP_DWARF,      SK_FIRE_MAGIC,     -1),

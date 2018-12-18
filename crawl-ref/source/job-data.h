@@ -211,7 +211,7 @@ static const map<job_type, job_def> job_data =
     0, 7, 5,
     { SP_AVARIEL, SP_DEEP_DWARF, SP_HILL_ORC, SP_DEMONSPAWN, SP_MUMMY,
       SP_VAMPIRE, SP_FAIRY },
-    { "robe", "book of Necromancy" },
+    { "dagger", "robe", "book of Necromancy" },
     WCHOICE_NONE,
     { { SK_SPELLCASTING, 2 }, { SK_NECROMANCY, 4 }, { SK_DODGING, 2 },
       { SK_STEALTH, 2 }, },

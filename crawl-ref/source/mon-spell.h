@@ -2073,6 +2073,17 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
+    {  MST_PSYCHE,
+      {
+       { SPELL_HASTE, 25, MON_SPELL_WIZARD },
+       { SPELL_POISON_ARROW, 25, MON_SPELL_WIZARD },
+       { SPELL_CANTRIP, 10, MON_SPELL_WIZARD },
+       { SPELL_SLEEP, 10, MON_SPELL_WIZARD },
+       { SPELL_TELEPORT_SELF, 3, MON_SPELL_WIZARD },
+       { SPELL_DEFLECT_MISSILES, 12, MON_SPELL_WIZARD },
+      }
+    },
+
     {  MST_MAURICE,
       {
        { SPELL_SPRINT, 14, MON_SPELL_WIZARD },

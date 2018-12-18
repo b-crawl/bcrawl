@@ -33,6 +33,7 @@ https://github.com/b-crawl/bcrawl/releases
   - The Paralyse spell duration is reduced to 2-4 turns.
   - Plain unidentified weapons are always +0.
   - Long Blades now give +SH instead of a chance to riposte.
+  - Distortion weapons can't banish on hit.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

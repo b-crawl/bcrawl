@@ -1181,9 +1181,7 @@ static void _generate_armour_item(item_def& item, bool allow_uniques,
     if (item.sub_type == ARM_BOOTS)
     {
         if (one_chance_in(8))
-            item.sub_type = ARM_NAGA_BARDING;
-        else if (one_chance_in(7))
-            item.sub_type = ARM_CENTAUR_BARDING;
+            item.sub_type = ARM_BARDING;
     }
 
     const bool force_good = item_level >= ISPEC_GIFT;

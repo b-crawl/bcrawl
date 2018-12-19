@@ -1068,7 +1068,6 @@ static armour_type _get_random_armour_type(int item_level)
     // Secondary armours.
     if (one_chance_in(5))
     {
-        // Total weight is 60, each slot has a weight of 12
         armtype = random_choose_weighted(12, ARM_BOOTS,
                                          12, ARM_GLOVES,
                                          // Cloak slot
@@ -1076,7 +1075,7 @@ static armour_type _get_random_armour_type(int item_level)
                                          3, ARM_SCARF,
                                          // Head slot
                                          10, ARM_HELMET,
-                                         2, ARM_HAT,
+                                         4, ARM_HAT,
                                          // Shield slot
                                          4, ARM_SHIELD,
                                          6, ARM_BUCKLER,

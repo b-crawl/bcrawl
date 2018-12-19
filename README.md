@@ -56,6 +56,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Needles of Sleeping
   - Scrolls of Random Uselessness
   - v1.3.2: Crystal Ball of Energy
+  - v1.4.2: Scrolls of Holy Word
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

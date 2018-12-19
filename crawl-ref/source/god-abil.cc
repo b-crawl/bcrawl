@@ -2854,42 +2854,6 @@ bool prioritise_adjacent(const coord_def &target, vector<coord_def>& candidates)
     return true;
 }
 
-static bool _prompt_amount(int max, int& selected, const string& prompt)
-{
-    selected = max;
-    while (true)
-    {
-        msg::streams(MSGCH_PROMPT) << prompt << " (" << max << " max) " << endl;
-
-        const int keyin = get_ch();
-
-        // Cancel
-        if (key_is_escape(keyin) || keyin == ' ' || keyin == '0')
-        {
-            canned_msg(MSG_OK);
-            return false;
-        }
-
-        // Default is max
-        if (keyin == '\n' || keyin == '\r')
-        {
-            selected = max;
-            return true;
-        }
-
-        // Otherwise they should enter a digit
-        if (isadigit(keyin))
-        {
-            selected = keyin - '0';
-            if (selected > 0 && selected <= max)
-                return true;
-        }
-        // else they entered some garbage?
-    }
-
-    return false;
-}
-
 static int _collect_rations(vector<pair<int,int> >& available_rations)
 {
     int total = 0;

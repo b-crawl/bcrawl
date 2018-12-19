@@ -638,11 +638,6 @@ static int _acquirement_staff_subtype(bool /*divine*/, int & /*quantity*/)
  */
 static int _acquirement_misc_subtype(bool /*divine*/, int & /*quantity*/)
 {
-    // Give a crystal ball based on both evocations and either spellcasting or
-    // invocations if we haven't seen one.
-    int skills = _skill_rdiv(SK_EVOCATIONS)
-        * max(_skill_rdiv(SK_SPELLCASTING), _skill_rdiv(SK_INVOCATIONS));
-
     const bool NO_LOVE = you.get_mutation_level(MUT_NO_LOVE);
 
     const vector<pair<int, int> > choices =

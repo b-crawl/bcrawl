@@ -548,7 +548,7 @@ static const ability_def Ability_List[] =
     // Dithmenos
     { ABIL_DITHMENOS_SHADOW_STEP, "Shadow Step",
       0, 0, 0, generic_cost::fixed(1),
-	  {fail_basis::invo, 30, 6, 20}, abflag::exhaustion },
+      {fail_basis::invo, 30, 6, 20}, abflag::exhaustion },
     { ABIL_DITHMENOS_SHADOW_FORM, "Shadow Form",
       9, 0, 0, 12, {fail_basis::invo, 80, 4, 25}, abflag::skill_drain },
 
@@ -2855,12 +2855,22 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
     case ABIL_DITHMENOS_SHADOW_STEP:
         if (_abort_if_stationary())
             return SPRET_ABORT;
+        if (you.duration[DUR_EXHAUSTED])
+        {
+            mpr("You are too exhausted.");
+            return SPRET_ABORT;
+        }
         fail_check();
+        
+        const coord_def old_pos = you.pos();
         if (!dithmenos_shadow_step())
         {
             canned_msg(MSG_OK);
             return SPRET_ABORT;
         }
+        
+        leave_player_shadow(old_pos);
+        you.increase_duration(DUR_EXHAUSTED, 4);
         break;
 
     case ABIL_DITHMENOS_SHADOW_FORM:

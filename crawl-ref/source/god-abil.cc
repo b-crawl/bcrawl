@@ -54,6 +54,7 @@
 #include "mon-act.h"
 #include "mon-behv.h"
 #include "mon-book.h"
+#include "mon-clone.h"
 #include "mon-death.h"
 #include "mon-gear.h" // H: give_weapon()/give_armour()
 #include "mon-place.h"
@@ -3849,7 +3850,8 @@ bool dithmenos_shadow_step()
     // Using 'stepped = true' here because it's Shadow *Step*.
     // This helps to evade splash upon landing on water.
     moveto_location_effects(grd(old_pos), true, old_pos);
-
+    
+    leave_player_shadow(old_pos);
     return true;
 }
 

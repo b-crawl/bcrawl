@@ -359,10 +359,6 @@ static const vector<god_passive> god_passives[] =
         {  1, passive_t::umbra, "are NOW surrounded by an umbra" },
         // TODO: this one should work regardless of penance.
         {  3, passive_t::hit_smoke, "emit smoke when hit" },
-        {  4, passive_t::shadow_attacks,
-              "Your attacks are NOW mimicked by a shadow" },
-        {  4, passive_t::shadow_spells,
-              "Your attack spells are NOW mimicked by a shadow" },
     },
 
     // Gozag
@@ -1271,24 +1267,6 @@ ru_interference get_ru_attack_interference_level()
         return DO_NOTHING;
 }
 
-static bool _shadow_acts(bool spell)
-{
-    const passive_t pasv = spell ? passive_t::shadow_spells
-                                 : passive_t::shadow_attacks;
-    if (!have_passive(pasv))
-        return false;
-
-    const int minpiety = piety_breakpoint(rank_for_passive(pasv) - 1);
-
-    // 10% chance at minimum piety; 50% chance at 200 piety.
-    const int range = MAX_PIETY - minpiety;
-    const int min   = range / 5;
-    return x_chance_in_y(min + ((range - min)
-                                * (you.piety - minpiety)
-                                / (MAX_PIETY - minpiety)),
-                         2 * range);
-}
-
 monster* shadow_monster(bool equip)
 {
     if (monster_at(you.pos()))
@@ -1362,126 +1340,6 @@ void shadow_monster_reset(monster *mon)
         destroy_item(mon->inv[MSLOT_MISSILE]);
 
     mon->reset();
-}
-
-/**
- * Check if the player is in melee range of the target.
- *
- * Certain effects, e.g. distortion blink, can cause monsters to leave melee
- * range between the initial hit & the shadow mimic.
- *
- * XXX: refactor this with attack/fight code!
- *
- * @param target    The creature to be struck.
- * @return          Whether the player is melee range of the target, using
- *                  their current weapon.
- */
-static bool _in_melee_range(actor* target)
-{
-    const int dist = (you.pos() - target->pos()).rdist();
-    return dist <= you.reach_range();
-}
-
-void dithmenos_shadow_melee(actor* target)
-{
-    if (!target
-        || !target->alive()
-        || !_in_melee_range(target)
-        || !_shadow_acts(false))
-    {
-        return;
-    }
-
-    monster* mon = shadow_monster();
-    if (!mon)
-        return;
-
-    mon->target     = target->pos();
-    mon->foe        = target->mindex();
-
-    fight_melee(mon, target);
-
-    shadow_monster_reset(mon);
-}
-
-void dithmenos_shadow_throw(const dist &d, const item_def &item)
-{
-    ASSERT(d.isValid);
-    if (!_shadow_acts(false))
-        return;
-
-    monster* mon = shadow_monster();
-    if (!mon)
-        return;
-
-    int ammo_index = get_mitm_slot(10);
-    if (ammo_index != NON_ITEM)
-    {
-        item_def& new_item = mitm[ammo_index];
-        new_item.base_type = item.base_type;
-        new_item.sub_type  = item.sub_type;
-        new_item.quantity  = 1;
-        new_item.rnd = 1;
-        new_item.flags    |= ISFLAG_SUMMONED;
-        mon->inv[MSLOT_MISSILE] = ammo_index;
-
-        mon->target = clamp_in_bounds(d.target);
-
-        bolt beem;
-        beem.set_target(d);
-        setup_monster_throw_beam(mon, beem);
-        beem.item = &mitm[mon->inv[MSLOT_MISSILE]];
-        mons_throw(mon, beem, mon->inv[MSLOT_MISSILE]);
-    }
-
-    shadow_monster_reset(mon);
-}
-
-void dithmenos_shadow_spell(bolt* orig_beam, spell_type spell)
-{
-    if (!orig_beam)
-        return;
-
-    const coord_def target = orig_beam->target;
-
-    if (orig_beam->target.origin()
-        || (orig_beam->is_enchantment() && !is_valid_mon_spell(spell))
-        || orig_beam->flavour == BEAM_ENSLAVE
-           && monster_at(target) && monster_at(target)->friendly()
-        || !_shadow_acts(true))
-    {
-        return;
-    }
-
-    monster* mon = shadow_monster();
-    if (!mon)
-        return;
-
-    // Don't let shadow spells get too powerful.
-    mon->set_hit_dice(max(1,
-                          min(3 * spell_difficulty(spell),
-                              you.experience_level) / 2));
-
-    mon->target = clamp_in_bounds(target);
-    if (actor_at(target))
-        mon->foe = actor_at(target)->mindex();
-
-    spell_type shadow_spell = spell;
-    if (!orig_beam->is_enchantment())
-    {
-        shadow_spell = (orig_beam->pierce) ? SPELL_SHADOW_BOLT
-                                           : SPELL_SHADOW_SHARD;
-    }
-
-    bolt beem;
-    beem.target = target;
-    beem.aimed_at_spot = orig_beam->aimed_at_spot;
-
-    mprf(MSGCH_FRIEND_SPELL, "%s mimicks your spell!",
-         mon->name(DESC_THE).c_str());
-    mons_cast(mon, beem, shadow_spell, MON_SPELL_WIZARD, false);
-
-    shadow_monster_reset(mon);
 }
 
 static void _wu_jian_trigger_serpents_lash(const coord_def& old_pos,

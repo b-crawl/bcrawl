@@ -547,7 +547,8 @@ static const ability_def Ability_List[] =
 
     // Dithmenos
     { ABIL_DITHMENOS_SHADOW_STEP, "Shadow Step",
-      4, 80, 0, 5, {fail_basis::invo, 30, 6, 20}, abflag::none },
+      0, 0, 0, generic_cost::fixed(1),
+      {fail_basis::invo, 30, 6, 20}, abflag::exhaustion },
     { ABIL_DITHMENOS_SHADOW_FORM, "Shadow Form",
       9, 0, 0, 12, {fail_basis::invo, 80, 4, 25}, abflag::skill_drain },
 
@@ -847,10 +848,10 @@ const string make_cost_description(ability_type ability)
 
 static string _get_piety_amount_str(int value)
 {
-    return value > 15 ? "extremely large" :
-           value > 10 ? "large" :
-           value > 5  ? "moderate" :
-                        "small";
+    return value > 12 ? "very large" :
+           value > 8 ? "large" :
+           value > 4 ? "moderate" :
+                       "small";
 }
 
 static const string _detailed_cost_description(ability_type ability)
@@ -2854,12 +2855,20 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
     case ABIL_DITHMENOS_SHADOW_STEP:
         if (_abort_if_stationary())
             return SPRET_ABORT;
+        if (you.duration[DUR_EXHAUSTED])
+        {
+            mpr("You are too exhausted.");
+            return SPRET_ABORT;
+        }
         fail_check();
+        
         if (!dithmenos_shadow_step())
         {
             canned_msg(MSG_OK);
             return SPRET_ABORT;
         }
+        
+        you.increase_duration(DUR_EXHAUSTED, 4);
         break;
 
     case ABIL_DITHMENOS_SHADOW_FORM:

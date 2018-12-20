@@ -139,6 +139,7 @@ static void _init_player_illusion_properties(monsterentry *me)
         me->holiness = MH_NATURAL;
 }
 
+
 // [ds] Not *all* appropriate enchantments are mapped -- only things
 // that are (presumably) internal to the body, like haste and
 // poisoning, and specifically not external effects like corona and
@@ -214,6 +215,29 @@ void mons_summon_illusion_from(monster* mons, actor *foe,
         monster* mfoe = foe->as_monster();
         _mons_summon_monster_illusion(mons, mfoe);
     }
+}
+
+void leave_player_shadow(coord_def pos)
+{
+    monster* mon = get_free_monster();
+    if (!mon || monster_at(pos))
+        return;
+    mon->type = MONS_PLAYER;
+
+    mgen_data shadow(MONS_PLAYER_ILLUSION, BEH_FRIENDLY, pos, MHITYOU,
+                    MG_FORCE_BEH | MG_FORCE_PLACE | MG_AUTOFOE);
+    
+    int duration = 2 + you.skill_rdiv(SK_INVOCATIONS, 1, 3);
+    if (monster *clone = create_monster(shadow))
+    {
+        _mons_load_player_enchantments(mon, clone);
+        mon->reset();
+        clone->add_ench(mon_enchant(ENCH_SHORT_LIVED, 1, nullptr, duration*10));
+        
+        mpr("You leave a shadowy clone behind.");
+    }
+    else
+        mpr("You leave a puff of smoke behind.");
 }
 
 bool mons_clonable(const monster* mon, bool needs_adjacent)

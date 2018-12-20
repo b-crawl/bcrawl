@@ -847,10 +847,10 @@ const string make_cost_description(ability_type ability)
 
 static string _get_piety_amount_str(int value)
 {
-    return value > 15 ? "extremely large" :
-           value > 10 ? "large" :
-           value > 5  ? "moderate" :
-                        "small";
+    return value > 12 ? "very large" :
+           value > 8 ? "large" :
+           value > 4 ? "moderate" :
+                       "small";
 }
 
 static const string _detailed_cost_description(ability_type ability)

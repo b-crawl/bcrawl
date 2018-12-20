@@ -51,7 +51,6 @@
 #include "maps.h"
 #include "menu.h"
 #include "message.h"
-#include "mon-clone.h"
 #include "mon-place.h"
 #include "mutation.h"
 #include "notes.h"
@@ -2863,14 +2862,12 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
         }
         fail_check();
         
-        const coord_def old_pos = you.pos();
         if (!dithmenos_shadow_step())
         {
             canned_msg(MSG_OK);
             return SPRET_ABORT;
         }
         
-        leave_player_shadow(old_pos);
         you.increase_duration(DUR_EXHAUSTED, 4);
         break;
 

@@ -568,7 +568,8 @@ Aborts an ongoing skill transfer.
 Shadow Step ability
 
 Allows you to step into the shadow of any hostile creature within your umbra,
-landing on a random spot adjacent to the target.
+landing on a random spot adjacent to the target. A shadow clone of yourself
+briefly remains behind, for a duration dependent on Invocations skill.
 %%%%
 Shadow Form ability
 

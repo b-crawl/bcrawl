@@ -220,28 +220,21 @@ void mons_summon_illusion_from(monster* mons, actor *foe,
 void leave_player_shadow(coord_def pos)
 {
     monster* mon = get_free_monster();
-
     if (!mon || monster_at(pos))
         return;
-
     mon->type = MONS_PLAYER;
-    mon->behaviour = BEH_SEEK;
-    mon->attitude = ATT_FRIENDLY;
-    mon->set_position(pos);
-    mon->mid = MID_PLAYER;
-    mgrd(pos) = mon->mindex();
 
+    mgen_data shadow(MONS_PLAYER_ILLUSION, BEH_FRIENDLY, pos, MHITYOU,
+                    MG_FORCE_BEH | MG_FORCE_PLACE | MG_AUTOFOE);
+    
     int duration = 2 + you.skill_rdiv(SK_INVOCATIONS, 1, 3);
-
-    if (monster *clone = create_monster(
-            mgen_data(MONS_PLAYER_ILLUSION, SAME_ATTITUDE(mon),
-                      mon->pos(), mon->foe)
-             .set_summoned(mon, duration, SPELL_NO_SPELL)))
+    if (monster *clone = create_monster(shadow))
     {
-        mpr("You leave a shadowy clone behind.");
-
         _mons_load_player_enchantments(mon, clone);
         mon->reset();
+        clone->add_ench(mon_enchant(ENCH_SHORT_LIVED, 1, nullptr, duration*10));
+        
+        mpr("You leave a shadowy clone behind.");
     }
     else
         mpr("You leave a puff of smoke behind.");

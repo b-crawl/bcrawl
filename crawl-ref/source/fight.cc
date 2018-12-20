@@ -23,7 +23,6 @@
 #include "fineff.h"
 #include "fprop.h"
 #include "god-abil.h"
-#include "god-passive.h" // passive_t::shadow_attacks
 #include "hints.h"
 #include "invent.h"
 #include "item-prop.h"
@@ -183,9 +182,6 @@ bool fight_melee(actor *attacker, actor *defender, bool *did_hit, bool simu)
         // A spectral weapon attacks whenever the player does
         if (!simu && you.props.exists("spectral_weapon"))
             trigger_spectral_weapon(&you, defender);
-
-        if (!simu && will_have_passive(passive_t::shadow_attacks))
-            dithmenos_shadow_melee(defender);
 
         return true;
     }

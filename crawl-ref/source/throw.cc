@@ -20,7 +20,6 @@
 #include "fight.h"
 #include "god-abil.h"
 #include "god-conduct.h"
-#include "god-passive.h" // passive_t::shadow_attacks
 #include "hints.h"
 #include "invent.h"
 #include "item-prop.h"
@@ -1092,15 +1091,6 @@ bool throw_it(bolt &pbolt, int throw_2, dist *target)
 
     if (pbolt.special_explosion != nullptr)
         delete pbolt.special_explosion;
-
-    if (!teleport
-        && projected != launch_retval::FUMBLED
-        && will_have_passive(passive_t::shadow_attacks)
-        && thrown.base_type == OBJ_MISSILES
-        && thrown.sub_type != MI_NEEDLE)
-    {
-        dithmenos_shadow_throw(thr, item);
-    }
 
     return hit;
 }

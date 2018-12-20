@@ -29,6 +29,7 @@
 #include "god-abil.h"
 #include "god-conduct.h"
 #include "god-item.h"
+#include "god-passive.h"
 #include "god-wrath.h"
 #include "hints.h"
 #include "item-prop.h"

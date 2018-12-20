@@ -120,6 +120,7 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.3.2: Nemelex decks now exist in an ability menu instead of your inventory. (based on ebering's work)
   - v1.4: TSO's Cleansing Flame has 1/3 less damage scaling with invocations.
   - v1.4: Elyvilon's self-healing abilities are better.
+  - v1.5: Dithmenos is reworked: Actions aren't mimicked at high piety, but Shadow Step is much cheaper and makes a short-lived shadow clone of the player.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

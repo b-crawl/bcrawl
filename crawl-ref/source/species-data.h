@@ -68,7 +68,7 @@ static const map<species_type, species_def> species_data =
       { MUT_HOOVES, 3, 1 }, },
     {},
     {},
-    { JOB_FIGHTER, JOB_GLADIATOR, JOB_HUNTER, JOB_WARPER, JOB_ARCANE_MARKSMAN,
+    { JOB_FIGHTER, JOB_HUNTER, JOB_WARPER, JOB_ARCANE_MARKSMAN,
     JOB_ARCHAEOLOGIST },
     { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS, SK_LONG_BLADES, SK_STAVES,
       SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
@@ -377,8 +377,8 @@ static const map<species_type, species_def> species_data =
     { "magic attunement", "unstealthy", "unfitting armour" },
     { JOB_AIR_ELEMENTALIST, JOB_FIRE_ELEMENTALIST, JOB_ICE_ELEMENTALIST,
       JOB_CONJURER, JOB_EARTH_ELEMENTALIST, JOB_VENOM_MAGE, JOB_WIZARD,
-      JOB_NECROMANCER },
-    { SK_SHORT_BLADES, SK_MACES_FLAILS, SK_SLINGS },
+      JOB_NECROMANCER, JOB_FIGHTER },
+    { SK_LONG_BLADES, SK_MACES_FLAILS, SK_STAVES, SK_SLINGS },
 } },
 
 { SP_GHOUL, {
@@ -415,7 +415,7 @@ static const map<species_type, species_def> species_data =
     { "Your experience applies equally to all skills."},
     { "distributed training", },
     { JOB_FIGHTER, JOB_SKALD, JOB_WARPER, JOB_ARCANE_MARKSMAN, JOB_TRANSMUTER,
-      JOB_WIZARD, JOB_ICE_ELEMENTALIST, JOB_WANDERER, JOB_REAVER },
+      JOB_WIZARD, JOB_ICE_ELEMENTALIST, JOB_REAVER },
     { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS, SK_LONG_BLADES, SK_STAVES,
       SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
 } },
@@ -434,7 +434,7 @@ static const map<species_type, species_def> species_data =
       { MUT_UNBREATHING, 1, 1 }, { MUT_BIG_WINGS, 1, 14 }, },
     { "You are resistant to torment." },
     {},
-    { JOB_FIGHTER, JOB_GLADIATOR, JOB_MONK, JOB_BERSERKER, JOB_CONJURER,
+    { JOB_FIGHTER, JOB_GLADIATOR, JOB_BERSERKER, JOB_CONJURER,
       JOB_FIRE_ELEMENTALIST, JOB_ICE_ELEMENTALIST, JOB_EARTH_ELEMENTALIST,
       JOB_VENOM_MAGE, JOB_REAVER },
     { SK_MACES_FLAILS, SK_STAVES, SK_BOWS, SK_CROSSBOWS },
@@ -452,8 +452,8 @@ static const map<species_type, species_def> species_data =
     {},
     {},
     {},
-    { JOB_FIGHTER, JOB_MONK, JOB_BERSERKER, JOB_ABYSSAL_KNIGHT, JOB_CONJURER,
-      JOB_SUMMONER, JOB_FIRE_ELEMENTALIST, JOB_EARTH_ELEMENTALIST },
+    { JOB_FIGHTER, JOB_BERSERKER, JOB_ABYSSAL_KNIGHT, JOB_SUMMONER,
+	JOB_FIRE_ELEMENTALIST, JOB_EARTH_ELEMENTALIST },
     { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS, SK_LONG_BLADES, SK_STAVES },
 } },
 
@@ -469,8 +469,10 @@ static const map<species_type, species_def> species_data =
     {},
     {},
     {},
-    { JOB_FIGHTER, JOB_GLADIATOR, JOB_BERSERKER, JOB_CONJURER, JOB_NECROMANCER,
-      JOB_FIRE_ELEMENTALIST, JOB_ICE_ELEMENTALIST },
+    { JOB_FIGHTER, JOB_GLADIATOR, JOB_BERSERKER, JOB_CONJURER, JOB_SUMMONER,
+      JOB_FIRE_ELEMENTALIST, JOB_ICE_ELEMENTALIST, JOB_EARTH_ELEMENTALIST,
+	  JOB_ABYSSAL_KNIGHT, JOB_HUNTER, JOB_ARCANE_MARKSMAN, JOB_VENOM_MAGE,
+	  JOB_AIR_ELEMENTALIST, JOB_NECROMANCER, JOB_REAVER, JOB_ARTIFICER },
     { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS, SK_LONG_BLADES, SK_STAVES,
       SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
 } },
@@ -487,9 +489,8 @@ static const map<species_type, species_def> species_data =
     { { MUT_CARNIVOROUS, 1, 1 }, { MUT_MUTATION_RESISTANCE, 1, 1 } },
     {},
     {},
-    { JOB_HUNTER, JOB_ASSASSIN, JOB_BERSERKER, JOB_WARPER, JOB_ARCANE_MARKSMAN,
-      JOB_FIRE_ELEMENTALIST, JOB_ICE_ELEMENTALIST, JOB_EARTH_ELEMENTALIST },
-    { SK_SHORT_BLADES, SK_LONG_BLADES, SK_SLINGS, SK_CROSSBOWS,  },
+    { JOB_HUNTER, JOB_REAVER, JOB_WARPER, JOB_ARCANE_MARKSMAN },
+    { SK_SHORT_BLADES, SK_LONG_BLADES, SK_SLINGS, SK_CROSSBOWS },
 } },
 
 { SP_MERFOLK, {
@@ -507,7 +508,7 @@ static const map<species_type, species_def> species_data =
       "You are very stealthy in the water. (Stealth+)" },
     { "change form in water", "swift swim", "stealthy swim" },
     { JOB_GLADIATOR, JOB_BERSERKER, JOB_SKALD, JOB_TRANSMUTER, JOB_SUMMONER,
-      JOB_ICE_ELEMENTALIST, JOB_VENOM_MAGE },
+      JOB_ICE_ELEMENTALIST },
     { SK_POLEARMS, SK_LONG_BLADES },
 } },
 
@@ -661,8 +662,8 @@ static const map<species_type, species_def> species_data =
       { MUT_ACUTE_VISION, 1, 1 }, { MUT_SLOW_METABOLISM, 2, 1 }, },
     {},
     {},
-    { JOB_ASSASSIN, JOB_ARTIFICER, JOB_ABYSSAL_KNIGHT, JOB_WARPER,
-      JOB_ENCHANTER, JOB_CONJURER, JOB_EARTH_ELEMENTALIST, JOB_VENOM_MAGE },
+    { JOB_ASSASSIN, JOB_ARCANE_MARKSMAN, JOB_ENCHANTER,
+	JOB_EARTH_ELEMENTALIST, JOB_VENOM_MAGE },
     { SK_SHORT_BLADES, SK_SLINGS },
 } },
 
@@ -673,7 +674,7 @@ static const map<species_type, species_def> species_data =
     -1, 3, -1, 3,
     MONS_TROLL,
     HT_LAND, US_ALIVE, SIZE_LARGE,
-    15, 5, 5, // 24
+    15, 5, 5, // 25
     { STAT_STR }, 3,
     { { MUT_REGENERATION, 1, 4 }, { MUT_REGENERATION, 1, 12 },
       { MUT_CLAWS, 3, 1 }, { MUT_GOURMAND, 1, 1 },
@@ -698,8 +699,8 @@ static const map<species_type, species_def> species_data =
       { MUT_UNBREATHING, 1, 1 }, },
     {},
     {},
-    { JOB_GLADIATOR, JOB_ASSASSIN, JOB_ENCHANTER, JOB_EARTH_ELEMENTALIST,
-      JOB_NECROMANCER, JOB_ICE_ELEMENTALIST },
+    { JOB_FIGHTER, JOB_GLADIATOR, JOB_ENCHANTER, JOB_NECROMANCER,
+	JOB_ICE_ELEMENTALIST, JOB_SUMMONER },
     { SK_SHORT_BLADES, SK_AXES, SK_LONG_BLADES, SK_BOWS, SK_CROSSBOWS,
       SK_SLINGS },
 } },
@@ -724,6 +725,7 @@ static const map<species_type, species_def> species_data =
     { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS, SK_LONG_BLADES, SK_STAVES,
       SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
 } },
+
 #if TAG_MAJOR_VERSION == 34
 { SP_SLUDGE_ELF, {
     "SE",
@@ -785,9 +787,8 @@ static const map<species_type, species_def> species_data =
     {},
     {},
     {},
-    { JOB_HUNTER, JOB_SKALD, JOB_WIZARD, JOB_CONJURER, JOB_FIRE_ELEMENTALIST,
-      JOB_ICE_ELEMENTALIST, JOB_AIR_ELEMENTALIST },
-    { SK_SHORT_BLADES, SK_LONG_BLADES, SK_STAVES, SK_BOWS },
+    {},
+    {},
 } },
 
 { SP_HALFLING, {
@@ -802,8 +803,7 @@ static const map<species_type, species_def> species_data =
     { { MUT_MUTATION_RESISTANCE, 1, 1 }, },
     {},
     {},
-    { JOB_FIGHTER, JOB_HUNTER, JOB_BERSERKER, JOB_ABYSSAL_KNIGHT, JOB_SKALD },
-    { SK_SHORT_BLADES, SK_LONG_BLADES, SK_AXES, SK_SLINGS },
+    {},
 } },
 
 { SP_DEEP_ELF, {
@@ -818,10 +818,8 @@ static const map<species_type, species_def> species_data =
     {},
     {},
     {},
-    { JOB_WIZARD, JOB_CONJURER, JOB_SUMMONER, JOB_NECROMANCER,
-      JOB_FIRE_ELEMENTALIST, JOB_ICE_ELEMENTALIST, JOB_AIR_ELEMENTALIST,
-      JOB_EARTH_ELEMENTALIST, JOB_VENOM_MAGE },
-    { SK_SHORT_BLADES, SK_STAVES, SK_BOWS },
+    {},
+    {},
 } },
 
 { SP_TENGU, {
@@ -837,10 +835,8 @@ static const map<species_type, species_def> species_data =
       { MUT_TENGU_FLIGHT, 1, 5 }, /* { MUT_TENGU_FLIGHT, 1, 14 }, */ },
     {},
     {},
-    { JOB_BERSERKER, JOB_WIZARD, JOB_CONJURER, JOB_SUMMONER,
-      JOB_FIRE_ELEMENTALIST, JOB_AIR_ELEMENTALIST, JOB_VENOM_MAGE },
-    { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS, SK_LONG_BLADES, SK_STAVES,
-      SK_BOWS, SK_CROSSBOWS },
+    {},
+    {},
 } },
 
 #endif

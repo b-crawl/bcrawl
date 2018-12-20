@@ -25,8 +25,7 @@ static const map<job_type, job_def> job_data =
 { JOB_ABYSSAL_KNIGHT, {
     "AK", "Abyssal Knight",
     4, 4, 4,
-    { SP_HILL_ORC, SP_SPRIGGAN, SP_TROLL, SP_MERFOLK, SP_BASE_DRACONIAN,
-      SP_DEMONSPAWN, },
+    { SP_DEMONSPAWN, SP_FORMICID, SP_GHOUL, SP_HILL_ORC, SP_HUMAN, SP_MINOTAUR, },
     { "leather armour" },
     WCHOICE_PLAIN,
     { { SK_FIGHTING, 3 }, { SK_ARMOUR, 1 }, { SK_DODGING, 1 },
@@ -36,7 +35,7 @@ static const map<job_type, job_def> job_data =
 { JOB_AIR_ELEMENTALIST, {
     "AE", "Air Elementalist",
     0, 7, 5,
-    { SP_AVARIEL, SP_BASE_DRACONIAN, SP_NAGA, SP_VINE_STALKER, SP_FAIRY },
+    { SP_AVARIEL, SP_BASE_DRACONIAN, SP_FELID, SP_FAIRY, SP_HUMAN },
     { "robe", "book of Air" },
     WCHOICE_NONE,
     { { SK_CONJURATIONS, 1 }, { SK_AIR_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
@@ -46,7 +45,8 @@ static const map<job_type, job_def> job_data =
 { JOB_ARCANE_MARKSMAN, {
     "AM", "Arcane Marksman",
     2, 5, 5,
-    { SP_FORMICID, SP_AVARIEL, SP_KOBOLD, SP_SPRIGGAN, SP_TROLL, SP_CENTAUR, },
+    { SP_AVARIEL, SP_CENTAUR, SP_DEEP_DWARF, SP_FORMICID, SP_GNOLL,
+	SP_HUMAN, SP_KOBOLD, SP_OGRE, SP_ONI, SP_SPRIGGAN, },
     { "dagger", "robe", "book of Debilitation" },
     WCHOICE_RANGED,
     { { SK_FIGHTING, 1 }, { SK_DODGING, 2 }, { SK_SPELLCASTING, 2 },
@@ -56,8 +56,7 @@ static const map<job_type, job_def> job_data =
 { JOB_ARCHAEOLOGIST, {
     "Ac", "Archaeologist",
     3, 6, 3,
-    { SP_HUMAN, SP_MINOTAUR, SP_FORMICID, SP_VINE_STALKER, SP_DEEP_DWARF,
-      SP_DEMONSPAWN },
+    { SP_CENTAUR, SP_DUSK_WALKER, SP_FORMICID, SP_MINOTAUR, SP_NAGA, SP_VINE_STALKER, },
     { "robe plus:1", "hat plus:1", "pair of boots plus:1",
       "pair of gloves plus:1", "dusty tome", "ancient crate" },
     WCHOICE_NONE,
@@ -67,8 +66,7 @@ static const map<job_type, job_def> job_data =
 { JOB_ARTIFICER, {
     "Ar", "Artificer",
     4, 3, 5,
-    { SP_DEEP_DWARF, SP_KOBOLD, SP_SPRIGGAN, SP_BASE_DRACONIAN,
-      SP_DEMONSPAWN, },
+    { SP_HUMAN, SP_KOBOLD, SP_SAND_DWARF, },
     { "short sword", "leather armour", "wand of flame charges:15",
       "wand of enslavement charges:15", "wand of random effects charges:15" },
     WCHOICE_NONE,

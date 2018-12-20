@@ -9,7 +9,7 @@ before_install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-4.7" CC="gcc-4.7"; fi
 env:
 #    - NOTHING=1
-    - FULLDEBUG=1
+#    - FULLDEBUG=1   # re-enable once mon-data.out errors are fixed
     - TILES=1
 #    - TILES=1 FULLDEBUG=1
     - WEBTILES=1

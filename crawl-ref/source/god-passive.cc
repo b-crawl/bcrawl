@@ -1267,6 +1267,81 @@ ru_interference get_ru_attack_interference_level()
         return DO_NOTHING;
 }
 
+monster* shadow_monster(bool equip)
+{
+    if (monster_at(you.pos()))
+        return nullptr;
+
+    int wpn_index  = NON_ITEM;
+
+    // Do a basic clone of the weapon.
+    item_def* wpn = you.weapon();
+    if (equip
+        && wpn
+        && is_weapon(*wpn))
+    {
+        wpn_index = get_mitm_slot(10);
+        if (wpn_index == NON_ITEM)
+            return nullptr;
+        item_def& new_item = mitm[wpn_index];
+        if (wpn->base_type == OBJ_STAVES)
+        {
+            new_item.base_type = OBJ_WEAPONS;
+            new_item.sub_type  = WPN_STAFF;
+        }
+        else
+        {
+            new_item.base_type = wpn->base_type;
+            new_item.sub_type  = wpn->sub_type;
+        }
+        new_item.quantity = 1;
+        new_item.rnd = 1;
+        new_item.flags   |= ISFLAG_SUMMONED;
+    }
+
+    monster* mon = get_free_monster();
+    if (!mon)
+    {
+        if (wpn_index)
+            destroy_item(wpn_index);
+        return nullptr;
+    }
+
+    mon->type       = MONS_PLAYER_SHADOW;
+    mon->behaviour  = BEH_SEEK;
+    mon->attitude   = ATT_FRIENDLY;
+    mon->flags      = MF_NO_REWARD | MF_JUST_SUMMONED | MF_SEEN
+                    | MF_WAS_IN_VIEW | MF_HARD_RESET;
+    mon->hit_points = you.hp;
+    mon->set_hit_dice(min(27, max(1,
+                                  you.skill_rdiv(wpn_index != NON_ITEM
+                                                 ? item_attack_skill(mitm[wpn_index])
+                                                 : SK_UNARMED_COMBAT, 10, 20)
+                                  + you.skill_rdiv(SK_FIGHTING, 10, 20))));
+    mon->set_position(you.pos());
+    mon->mid        = MID_PLAYER;
+    mon->inv[MSLOT_WEAPON]  = wpn_index;
+    mon->inv[MSLOT_MISSILE] = NON_ITEM;
+
+    mgrd(you.pos()) = mon->mindex();
+
+    return mon;
+}
+
+void shadow_monster_reset(monster *mon)
+{
+    if (mon->inv[MSLOT_WEAPON] != NON_ITEM)
+        destroy_item(mon->inv[MSLOT_WEAPON]);
+    // in case the shadow unwields for some reason, e.g. you clumsily bash with
+    // a ranged weapon:
+    if (mon->inv[MSLOT_ALT_WEAPON] != NON_ITEM)
+        destroy_item(mon->inv[MSLOT_ALT_WEAPON]);
+    if (mon->inv[MSLOT_MISSILE] != NON_ITEM)
+        destroy_item(mon->inv[MSLOT_MISSILE]);
+
+    mon->reset();
+}
+
 static void _wu_jian_trigger_serpents_lash(const coord_def& old_pos,
                                            bool wall_jump)
 {

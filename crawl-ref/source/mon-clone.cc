@@ -139,7 +139,7 @@ static void _init_player_illusion_properties(monsterentry *me)
         me->holiness = MH_NATURAL;
 }
 
-static void leave_player_shadow(coord_def pos)
+void leave_player_shadow(coord_def pos)
 {
     monster* mon = get_free_monster();
 

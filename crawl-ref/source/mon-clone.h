@@ -17,6 +17,6 @@ void mons_summon_illusion_from(monster* mons, actor *foe,
                                spell_type spell_cast = SPELL_NO_SPELL,
                                int card_power = -1);
 
-static void leave_player_shadow(coord_def pos);
+void leave_player_shadow(coord_def pos);
 
 bool actor_is_illusion_cloneable(actor *target);

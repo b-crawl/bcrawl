@@ -23,6 +23,7 @@
 #include "fineff.h"
 #include "fprop.h"
 #include "god-abil.h"
+#include "god-passive.h"   // passive_t::no_stabbing
 #include "hints.h"
 #include "invent.h"
 #include "item-prop.h"

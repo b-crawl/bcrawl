@@ -139,6 +139,37 @@ static void _init_player_illusion_properties(monsterentry *me)
         me->holiness = MH_NATURAL;
 }
 
+static void leave_player_shadow(coord_def pos)
+{
+    monster* mon = get_free_monster();
+
+    if (!mon || monster_at(pos))
+        return;
+
+    mon->type = MONS_PLAYER;
+    mon->behaviour = BEH_SEEK;
+    mon->attitude = ATT_FRIENDLY;
+    mon->set_position(pos);
+    mon->mid = MID_PLAYER;
+    mgrd(pos) = mon->mindex();
+
+    int duration = 2 + you.skill_rdiv(SK_INVOCATIONS, 1, 3);
+
+    if (monster *clone = create_monster(
+            mgen_data(MONS_PLAYER_ILLUSION, SAME_ATTITUDE(mon),
+                      mon->pos(), mon->(&you))
+             .set_summoned(mon, duration, SPELL_NO_SPELL)))
+    {
+        mpr("You leave a shadowy clone behind.");
+
+        _mons_load_player_enchantments(mon, clone);
+        mon->reset();
+    }
+    else
+        mpr("You leave a puff of smoke behind.");
+}
+
+
 // [ds] Not *all* appropriate enchantments are mapped -- only things
 // that are (presumably) internal to the body, like haste and
 // poisoning, and specifically not external effects like corona and

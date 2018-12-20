@@ -313,7 +313,12 @@ static skill_type _setup_archaeologist_crate(item_def& crate)
     if (unrand.base_type == OBJ_JEWELLERY)
         return SK_SPELLCASTING;
     else if (unrand.base_type == OBJ_WEAPONS)
-        return item_attack_skill(unrand);
+    {
+        if(you.species == SP_HILL_ORC)
+            return SK_FIGHTING;
+        else
+            return item_attack_skill(unrand);
+    }
     else if (is_shield(unrand))
         return SK_SHIELDS;
     else if (unrand.sub_type == ARM_ROBE || unrand.sub_type == ARM_ANIMAL_SKIN)

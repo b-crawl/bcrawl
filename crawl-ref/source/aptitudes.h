@@ -258,7 +258,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
 #endif
     APT(SP_HILL_ORC,        SK_UNARMED_COMBAT, UNUSABLE_SKILL),
     APT(SP_HILL_ORC,        SK_SPELLCASTING,   -1),
-    APT(SP_HILL_ORC,        SK_CONJURATIONS,    0),
+    APT(SP_HILL_ORC,        SK_CONJURATIONS,    1),
     APT(SP_HILL_ORC,        SK_HEXES,           0),
     APT(SP_HILL_ORC,        SK_CHARMS,         -1),
     APT(SP_HILL_ORC,        SK_SUMMONINGS,      0),

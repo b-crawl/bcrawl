@@ -268,11 +268,9 @@ const vector<god_power> god_powers[NUM_GODS] =
     },
 
     // Dithmenos
-    { { 2, ABIL_DITHMENOS_SHADOW_STEP, "step into the shadows of nearby creatures" },
+    { { 2, ABIL_DITHMENOS_SHADOW_STEP, "step into the shadows of enemies, leaving a shadow behind" },
       { 3, "You sometimes bleed smoke when heavily injured by enemies.",
            "You no longer bleed smoke." },
-      { 4, "Your shadow sometimes tangibly mimics your actions.",
-           "Your shadow no longer tangibly mimics your actions." },
       { 5, ABIL_DITHMENOS_SHADOW_FORM, "transform into a swirling mass of shadows" },
     },
 

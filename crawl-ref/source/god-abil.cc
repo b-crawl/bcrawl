@@ -3773,7 +3773,7 @@ bool dithmenos_shadow_step()
     direction_chooser_args args;
     args.hitfunc = &tgt;
     args.restricts = DIR_SHADOW_STEP;
-    args.mode = TARG_HOSTILE;
+    args.mode = TARG_HOSTILE_SHADOW;
     args.range = range;
     args.just_looking = false;
     args.needs_path = false;

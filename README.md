@@ -133,6 +133,8 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.3.2: Neqoxecs and Shining Eyes have Corrupting Pulse instead of Malmutate.
   - v1.4.1: Gnolls no longer sometimes spawn with nets.
   - v1.5: Nagaraja get a new spell set that includes Fireball.
+  - v1.5: Orc Priests cast 50% more often, but take 50% longer to cast.
+  - v1.5: "Orc Wizard II" gets a Cantrip spell.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

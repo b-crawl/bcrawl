@@ -422,10 +422,9 @@ static const mon_spellbook mspell_list[] =
     // ('o') Orcs.
     {  MST_ORC_PRIEST,
       {
-       { SPELL_CANTRIP, 13, MON_SPELL_PRIEST },
-       { SPELL_PAIN, 13, MON_SPELL_PRIEST },
-       { SPELL_SMITING, 13, MON_SPELL_PRIEST },
-       { SPELL_HEAL_OTHER, 13, MON_SPELL_PRIEST },
+       { SPELL_PAIN, 20, MON_SPELL_PRIEST },
+       { SPELL_SMITING, 20, MON_SPELL_PRIEST },
+       { SPELL_HEAL_OTHER, 20, MON_SPELL_PRIEST },
       }
     },
 
@@ -441,6 +440,7 @@ static const mon_spellbook mspell_list[] =
     // Shared with Sigmund.
     {  MST_ORC_WIZARD_II,
       {
+       { SPELL_CANTRIP, 9, MON_SPELL_WIZARD },
        { SPELL_MAGIC_DART, 9, MON_SPELL_WIZARD },
        { SPELL_THROW_FLAME, 9, MON_SPELL_WIZARD },
        { SPELL_CONFUSE, 18, MON_SPELL_WIZARD },

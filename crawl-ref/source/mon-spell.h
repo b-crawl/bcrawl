@@ -1118,15 +1118,22 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
-    // Shared with nagaraja.
     {  MST_NAGA_MAGE,
       {
        { SPELL_SPIT_POISON, 55, MON_SPELL_NATURAL | MON_SPELL_BREATH },
-       { SPELL_VENOM_BOLT, 10, MON_SPELL_WIZARD },
-       { SPELL_ISKENDERUNS_MYSTIC_BLAST, 10, MON_SPELL_WIZARD },
-       { SPELL_POISON_ARROW, 10, MON_SPELL_WIZARD },
+       { SPELL_VENOM_BOLT, 15, MON_SPELL_WIZARD },
+       { SPELL_ISKENDERUNS_MYSTIC_BLAST, 15, MON_SPELL_WIZARD },
        { SPELL_DIMENSION_ANCHOR, 10, MON_SPELL_WIZARD },
        { SPELL_HASTE, 10, MON_SPELL_WIZARD },
+      }
+    },
+
+    {  MST_NAGARAJA,
+      {
+       { SPELL_SPIT_POISON, 50, MON_SPELL_NATURAL | MON_SPELL_BREATH },
+       { SPELL_FIREBALL, 16, MON_SPELL_WIZARD },
+       { SPELL_POISON_ARROW, 16, MON_SPELL_WIZARD },
+       { SPELL_HASTE, 15, MON_SPELL_WIZARD },
       }
     },
 

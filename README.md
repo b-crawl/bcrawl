@@ -77,6 +77,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Felids and Octopodes can wear scarves.
   - v1.4: Trolls have natural AC but can't wear body armour, and are slightly better at magic but worse with shields. They eventually gain Regen 2, rC+, and rF+.
   - v1.4: Deep Dwarves lose their Heal Wounds ability and start the game with Elyvilon if their background doesn't start with a god. They also don't gain HP from vampiric effects.
+  - v1.5: Hill Orcs have a +1 Conjurations aptitude.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

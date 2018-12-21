@@ -6198,7 +6198,7 @@ int player::gdr_perc() const
         body_base_AC = 5; break;
     case SP_TROLL:
         body_base_AC = 6; break;
-    case default: break;
+    default: break;
     }
     
     const item_def *body_armour = slot_item(EQ_BODY_ARMOUR, false);

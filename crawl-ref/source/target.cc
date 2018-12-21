@@ -1311,7 +1311,8 @@ void targeter_shadow_step::get_additional_sites(coord_def a)
         || mons_is_firewood(*victim->as_monster())
         || victim->as_monster()->friendly()
         || !agent->can_see(*victim)
-        || !victim->umbraed())
+        || victim->is_insubstantial()
+        || !victim->umbraed() )
     {
         no_landing_reason = BLOCKED_NO_TARGET;
         return;

@@ -126,7 +126,7 @@ https://github.com/b-crawl/bcrawl/releases
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
   - Hornets don't Paralyse anymore.
-  - Naga Mages and Nagarajas have the 'Dimensional Anchor' spell that stops the player from Teleporting.
+  - Naga Mages have the 'Dimensional Anchor' spell that stops the player from Teleporting.
   - Death Drakes may spawn in Swamp.
   - The new 'Orb Demon' enemy appears in Zot.
   - New monster spell: Freezing Blast, a cold equivalent to fireball that Frost Giants and Wizards can cast.

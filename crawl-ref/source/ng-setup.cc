@@ -314,7 +314,7 @@ static skill_type _setup_archaeologist_crate(item_def& crate)
         return SK_SPELLCASTING;
     else if (unrand.base_type == OBJ_WEAPONS)
     {
-        if(you.species == SP_HILL_ORC)
+        if(you.species == SP_HILL_ORC && !is_range_weapon(unrand))
             return SK_FIGHTING;
         else
             return item_attack_skill(unrand);

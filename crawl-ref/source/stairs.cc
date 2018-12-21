@@ -482,11 +482,16 @@ static level_id _travel_destination(const dungeon_feature_type how,
         // Right solution is probably to use the canonicalized direction everywhere
         return dest;    
     else if(going_up && feat_is_staircase(how) && one_chance_in(25))
-        {
+    {
         mpr("As you climb the stairs, a rune flashes!");
-        you.teleport(true, false);
-        return dest;
+        if (you.no_tele(true, true))
+            canned_msg(MSG_STRANGE_STASIS);
+        else
+        {
+            you.teleport(true, false);
+            return dest;
         }
+    }
 
     if (shaft)
     {
@@ -819,8 +824,11 @@ void floor_transition(dungeon_feature_type how,
     
     if(!going_up && feat_is_staircase(how) && one_chance_in(25))
         {
-        mpr("As you exit the stairs, a rune flashes!");
-        you.teleport(true, false);
+        mpr("Near the exit of the stairs, a rune flashes!");
+        if (you.no_tele(true, true))
+            canned_msg(MSG_STRANGE_STASIS);
+        else
+            you.teleport(true, false);
         }
 }
 

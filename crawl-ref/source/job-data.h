@@ -46,7 +46,7 @@ static const map<job_type, job_def> job_data =
     "AM", "Arcane Marksman",
     2, 5, 5,
     { SP_AVARIEL, SP_CENTAUR, SP_DEEP_DWARF, SP_FORMICID, SP_GNOLL,
-	SP_HUMAN, SP_KOBOLD, SP_OGRE, SP_ONI, SP_SPRIGGAN, },
+    SP_HUMAN, SP_KOBOLD, SP_OGRE, SP_ONI, SP_SPRIGGAN, },
     { "dagger", "robe", "book of Debilitation" },
     WCHOICE_RANGED,
     { { SK_FIGHTING, 1 }, { SK_DODGING, 2 }, { SK_SPELLCASTING, 2 },
@@ -175,7 +175,8 @@ static const map<job_type, job_def> job_data =
 { JOB_HUNTER, {
     "Hu", "Hunter",
     4, 3, 5,
-    { SP_HILL_ORC, SP_KOBOLD, SP_OGRE, SP_TROLL, SP_CENTAUR, },
+    { SP_KOBOLD, SP_OGRE, SP_TROLL, SP_CENTAUR, SP_DEEP_DWARF,
+    SP_SAND_DWARF, SP_FORMICID, SP_HUMAN, SP_MINOTAUR },
     { "short sword", "leather armour" },
     WCHOICE_RANGED,
     { { SK_FIGHTING, 2 }, { SK_DODGING, 2 }, { SK_STEALTH, 1 },
@@ -298,6 +299,7 @@ static const map<job_type, job_def> job_data =
     { { SK_DODGING, 2 }, { SK_STEALTH, 2 }, { SK_SPELLCASTING, 3 },
       { SK_TRANSLOCATIONS, 1 }, { SK_CONJURATIONS, 1 }, { SK_SUMMONINGS, 1 }, },
 } },
+
 #if TAG_MAJOR_VERSION == 34
 { JOB_DEATH_KNIGHT, {
     "DK", "Death Knight",

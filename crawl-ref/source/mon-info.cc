@@ -900,7 +900,10 @@ string monster_info::_core_name() const
             s = apostrophise(mname) + " ghost";
             break;
         case MONS_PLAYER_ILLUSION:
-            s = apostrophise(mname) + " illusion";
+            if(you.religion == GOD_DITHMENOS)
+                s = apostrophise(mname) + " shadow";
+            else
+                s = apostrophise(mname) + " illusion";
             break;
         case MONS_PANDEMONIUM_LORD:
             s = mname;

@@ -990,9 +990,9 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_SPHINX,
       {
-       { SPELL_CONFUSE, 11, MON_SPELL_WIZARD },
-       { SPELL_SLOW, 11, MON_SPELL_WIZARD },
+       { SPELL_SENTINEL_MARK, 11, MON_SPELL_WIZARD },
        { SPELL_PARALYSE, 11, MON_SPELL_WIZARD },
+       { SPELL_SLOW, 11, MON_SPELL_WIZARD },
        { SPELL_SMITING, 11, MON_SPELL_WIZARD },
        { SPELL_MINOR_HEALING, 22, MON_SPELL_WIZARD },
       }

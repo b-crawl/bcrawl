@@ -761,6 +761,7 @@ COLOUR:  BROWN
 TILE:    urand_zhor
 TILE_EQ: zhor
 COLD:    3
+SLAY:    4
 
 ENUM:    SALAMANDER
 NAME:    salamander hide armour

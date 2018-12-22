@@ -21,8 +21,8 @@ https://github.com/b-crawl/bcrawl/releases
   - Reaver is a melee background that starts the game worshipping Vehumet.
   - Archaeologists start with a crate and a dusty tome. The tome reveals itself to be a random skill manual at XL 3, and when the manual is finished, the crate unlocks and gives the player a related artifact.
   - Necromancers start with Bolt of Draining.
-  - 'Assassin' has been renamed to 'Rogue'.
   - v1.1: Skalds have a reworked Ozocubu's Armour instead of Shroud of Golubria.
+  - v1.5.2: Assassin and Artificer have been merged into Rogue.
 
 #### Features
   - All items are automatically identified if the player has a rune.

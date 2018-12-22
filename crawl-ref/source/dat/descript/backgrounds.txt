@@ -90,8 +90,8 @@ call the same destructive forces as the mages they serve.
 %%%%
 Rogue
 
-Rogues carry a blowgun with poisoned needles, as well as a small number of
-nasty curare needles.
+Rogues are masters of stealth, but when noticed, they can rely on magical tools
+and poisoned needles.
 %%%%
 Skald
 

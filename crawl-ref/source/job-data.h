@@ -77,13 +77,11 @@ static const map<job_type, job_def> job_data =
 { JOB_ASSASSIN, {
     "Rg", "Rogue",
     3, 3, 6,
-    { SP_TROLL, SP_KOBOLD, SP_SPRIGGAN, SP_DEMONSPAWN, SP_VAMPIRE,
-      SP_VINE_STALKER, },
+    { SP_HUMAN, SP_KOBOLD, SP_SPRIGGAN, SP_VAMPIRE, SP_DUSK_WALKER, SP_VINE_STALKER, SP_SAND_DWARF, },
     { "dagger plus:2", "blowgun", "robe", "cloak", "needle ego:poisoned q:80",
       "wand of flame charges:15", "wand of enslavement charges:15" },
     WCHOICE_NONE,
-    { { SK_FIGHTING, 2 }, { SK_DODGING, 1 }, { SK_STEALTH, 4 },
-      { SK_THROWING, 2 }, { SK_WEAPON, 2 }, },
+    { { SK_STEALTH, 4 }, { SK_WEAPON, 2 }, { SK_THROWING, 2 }, { SK_EVOCATIONS, 2 }, },
 } },
 
 { JOB_BERSERKER, {

@@ -50,6 +50,7 @@ https://github.com/b-crawl/bcrawl/releases
   - Staves of Earth have a +3 AC bonus.
   - v1.1: Players can use a Wand of Polymorph on themselves repeatedly.
   - v1.4: Some thrown weapon types are consolidated.
+  - v1.5.2: The skin of Zhor gains +4 slaying.
 
 #### Removed Items
   - Amulet of Harm

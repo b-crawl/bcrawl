@@ -729,9 +729,6 @@ job_type str_to_job(const string &str)
     if (job == JOB_UNKNOWN)
         job = get_job_by_name(str.c_str());
 
-    if (!is_starting_job(job))
-        job = JOB_UNKNOWN;
-
     if (job == JOB_UNKNOWN)
         fprintf(stderr, "Unknown background choice: %s\n", str.c_str());
 

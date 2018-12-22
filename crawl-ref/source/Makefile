@@ -64,6 +64,7 @@
 #
 #    ANDROID       -- perform an Android build (see docs/develop/android.txt)
 #    TOUCH_UI      -- enable UI behaviour more compatible with touch-screens
+#    CCACHE        -- use compilation cache.
 #
 #
 # Requirements:
@@ -205,7 +206,7 @@ ifdef msys
 	NO_NCURSES = YesPlease
 	NEED_LIBW32C = YesPlease
 	BUILD_PCRE = YesPlease
-	BUILD_ZLIB = YesPlease
+#	BUILD_ZLIB = YesPlease
 	SOUND = YesPlease
 	DEFINES_L += -DWINMM_PLAY_SOUNDS -D__USE_MINGW_ANSI_STDIO
 	EXTRA_LIBS += -lwinmm
@@ -218,7 +219,7 @@ ifdef msys
 		COPY_FONTS = yes
 	endif
 	ifeq ($(shell gcc -v -static -static-libstdc++ 2>&1 | grep 'unrecognized option'),)
-		EXTRA_LIBS += -static -static-libgcc -static-libstdc++
+		EXTRA_LIBS += -static-libgcc -static-libstdc++
 	endif
 endif
 ifeq ($(uname_S),Darwin)
@@ -501,12 +502,6 @@ ifdef HURRY
 NO_AUTO_OPT = YesPlease
 endif
 
-ifdef AUTO_OPT
-ifndef NO_AUTO_OPT
-CFOPTIMIZE += -march=native
-endif
-endif
-
 ifdef USE_ICC
 # If you have a Core 2 processor, this _really_ makes things fly:
 #CFOPTIMIZE := -O2 -parallel -xT
@@ -526,6 +521,12 @@ else
   else
     CFOPTIMIZE := -O2
   endif
+endif
+
+ifdef AUTO_OPT
+ifndef NO_AUTO_OPT
+CFOPTIMIZE += -march=native -mtune=native -mmmx -m3dnow -msse -msse2 -msse3 -mfpmath=sse
+endif
 endif
 
 ifdef LTO
@@ -1488,7 +1489,11 @@ distclean: clean clean-contrib clean-rltiles
 	$(RM) -r $(DOXYGEN_HTML_GEN)
 
 $(GAME): $(GAME_OBJS) $(CONTRIB_LIBS) dat/dlua/tags.lua
+ifdef CCACHE
+	+$(QUIET_LINK)ccache $(CXX) $(LDFLAGS) $(GAME_OBJS) -o $(GAME) $(LIBS)
+else
 	+$(QUIET_LINK)$(CXX) $(LDFLAGS) $(GAME_OBJS) -o $(GAME) $(LIBS)
+endif
 
 util/monster/vault_monster_data.h: dat/des util/gather_mons
 	util/gather_mons -v > $@
@@ -1569,7 +1574,11 @@ $(TILEDEFOBJS): ALL_CFLAGS=$(RLTILES_CFLAGS)
 ifdef NO_INLINE_DEPGEN
 	$(QUIET_DEPEND)$(or $(DEPCXX),$(CXX)) -MM $(STDFLAG) $(ALL_CFLAGS) -MT $*.o $< > $*.d
 endif
+ifdef CCACHE
+	$(QUIET_CXX)ccache $(CXX) $(STDFLAG) $(ALL_CFLAGS) $(INLINE_DEPGEN_CFLAGS) -c $< -o $@
+else
 	$(QUIET_CXX)$(CXX) $(STDFLAG) $(ALL_CFLAGS) $(INLINE_DEPGEN_CFLAGS) -c $< -o $@
+endif
 ifndef NO_INLINE_DEPGEN
 	@if [ -f $(@:%.o=%.d) ]; then touch -r $@ $(@:%.o=%.d); fi
 endif

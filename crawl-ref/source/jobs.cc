@@ -28,8 +28,11 @@ const char *get_job_abbrev(job_type which_job)
 
 job_type get_job_by_abbrev(const char *abbrev)
 {
+    string lowercase_job = lowercase_string(abbrev);
+    if (lowercase_job == "ar")
+        lowercase_job = "rg";
     for (auto& entry : job_data)
-        if (lowercase_string(abbrev) == lowercase_string(entry.second.abbrev))
+        if (lowercase_job == lowercase_string(entry.second.abbrev))
             return entry.first;
 
     return JOB_UNKNOWN;

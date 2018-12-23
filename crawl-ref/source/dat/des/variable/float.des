@@ -9007,7 +9007,7 @@ ENDMAP
 
 NAME: gammafunk_its_a_trap
 TAGS: no_monster_gen no_trap_gen no_tele_into
-DEPTH: Crypt, D:$, Depths, Elf, Shoals, Spider, Snake, Swamp, Zot
+DEPTH: Crypt, Zot
 ORIENT: float
 KMASK: ^ = no_item_gen
 ITEM: any randart jewellery

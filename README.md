@@ -52,6 +52,7 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.1: Players can use a Wand of Polymorph on themselves repeatedly.
   - v1.4: Some thrown weapon types are consolidated.
   - v1.5.2: The skin of Zhor gains +4 slaying.
+  - v1.5.3: The dagger of Chilly Death does more damage and can slow enemies.
 
 #### Removed Items
   - Amulet of Harm

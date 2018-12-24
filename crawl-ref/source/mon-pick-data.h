@@ -165,9 +165,8 @@ static const pop_entry pop_orc[] =
   {  1,  4,    8, FLAT, MONS_TWO_HEADED_OGRE },
   {  1,  4,    1, FLAT, MONS_OGRE_MAGE },
   {  1,  4,   40, FLAT, MONS_TROLL },
-  {  1,  4,    8, FLAT, MONS_CYCLOPS },
+  {  1,  4,   12, FLAT, MONS_CYCLOPS },
   {  1,  4,    4, FLAT, MONS_ETTIN },
-  {  1,  4,    4, FLAT, MONS_STONE_GIANT },
   { 0,0,0,FLAT,MONS_0 }
 };
 

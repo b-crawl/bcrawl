@@ -58,8 +58,6 @@ stop += tutorial:
 
 ignore += You are feeling hungry.
 
-ignore += Your magical contamination has completely faded away
 ignore += You feel a little less mighty now
 ignore += You feel a little less agile now
-ignore += You feel your.*improve
 ignore += You feel like a meek peon again

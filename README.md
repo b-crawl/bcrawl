@@ -140,6 +140,7 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.5: Orc Priests cast 50% more often, but take 50% longer to cast.
   - v1.5: "Orc Wizard II" gets a Cantrip spell.
   - v1.5.2: Sphinxes have Sentinel's Mark instead of Confuse.
+  - v1.5.3: Skeletons now resist electricity.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

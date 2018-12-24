@@ -22,7 +22,8 @@ endif
 ifdef TILES
   ifndef NO_PKGCONFIG
     PNG_INCLUDE := $(shell $(PKGCONFIG) libpng --cflags 2> /dev/null || echo "-I../contrib/install/$(ARCH)/include")
-    PNG_LIB := $(shell $(PKGCONFIG) libpng --libs 2> /dev/null || echo "../contrib/install/$(ARCH)/lib/libpng.a ../contrib/install/$(ARCH)/lib/libz.a")
+    PNG_LIB := $(shell $(PKGCONFIG) libpng --libs 2> /dev/null || echo "../contrib/install/$(ARCH)/lib/libpng.a")
+    PNG_LIB += $(shell $(PKGCONFIG) zlib --libs 2> /dev/null || echo "../contrib/install/$(ARCH)/lib/libz.a")
   else
     PNG_INCLUDE := -I../contrib/install/$(ARCH)/include
     PNG_LIB := ../contrib/install/$(ARCH)/lib/libpng.a ../contrib/install/$(ARCH)/lib/libz.a

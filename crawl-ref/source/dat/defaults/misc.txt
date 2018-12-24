@@ -1,3 +1,5 @@
+autofight_stop = 60
+
 drop_filter += useless_item
 
 auto_exclude += oklob,statue,roxanne,hyperactive,lightning spire
@@ -14,3 +16,10 @@ note_messages += Your scales start
 note_messages += protects you from harm
 note_messages += You (fall through|are sucked into) a shaft
 note_monsters += orb of fire, ancient lich, Sigmund
+
+autoinscribe += dispersal:!f
+autoinscribe += throwing net:!f
+autoinscribe += curare:!f
+autoinscribe += needle of (frenzy|paralysis|sleeping|confusion):!f
+autoinscribe += ( ration):!d
+autoinscribe += figurine:!*

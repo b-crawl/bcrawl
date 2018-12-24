@@ -2,8 +2,10 @@ ae := autopickup_exceptions
 
 #### inclusions ###
 
-# Autopickup runes by default.
-ae = <rune of Zot
+ae = <rune of Zot                 # Autopickup runes by default.
+
+ae += <artefact
+ae += <throwing net
 
 ### exclusions ###
 

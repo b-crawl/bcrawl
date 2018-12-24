@@ -149,3 +149,4 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.3.1: Harold has Bolt of Fire, Blink, a branded trident, and a shield.
   - v1.3.2: Boris has Haunt instead of Iron Shot, and casts spells more.
   - v1.4.1: Psyche is reworked to be as dangerous as Erica, with a new spell set including Deflect Missiles, Sleep, and Poison Arrow. (Read the lore.)
+  - v1.5.3: Margery has +4 AC and +4 EV.

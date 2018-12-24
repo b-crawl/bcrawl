@@ -1,4 +1,4 @@
-    stop := runrest_stop_message
+stop := runrest_stop_message
 ignore := runrest_ignore_message
 
 ignore += Jiyva gurgles merrily
@@ -36,7 +36,8 @@ stop += A sentinel's mark forms upon you\.
 # Enchantments
 #
 ignore += Your skin is crawling a little less now.
-ignore += of your corpse armour falls away.
+ignore += Your icy armour evaporates
+ignore += Your battlesphere wavers and loses cohesion
 
 # Uskayaw -- ignore all Uskayaw power gain/loss messages since they happen constantly
 #
@@ -54,3 +55,9 @@ ignore += friend_action:
 ignore += sound:
 stop += god:
 stop += tutorial:
+
+ignore += You are feeling hungry.
+
+ignore += You feel a little less mighty now
+ignore += You feel a little less agile now
+ignore += You feel like a meek peon again

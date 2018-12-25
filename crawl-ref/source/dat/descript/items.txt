@@ -1231,12 +1231,14 @@ of its limbs.
 %%%%
 wand of polymorph
 
-A magical device which causes a creature to be transmogrified into another
-form. It is especially effective against shape-changing creatures.
+A magical device which causes the user or another target to be transmogrified
+into another form.
 %%%%
 wand of random effects
 
-A magical device which can produce a variety of effects.
+A magical device which can produce a variety of effects, including Inner Flame,
+Malmutate, Sleep, Slow, Shackle, Petrify, Teleport, Freezing Blast,
+Fireball, Bolt of Draining, and Venom Bolt.
 %%%%
 wand of scattershot
 

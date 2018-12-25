@@ -1591,13 +1591,13 @@ int wand_charge_value(int type)
     case WAND_ENSLAVEMENT:
     case WAND_PARALYSIS:
     case WAND_POLYMORPH:
+    case WAND_RANDOM_EFFECTS:
         return 15;
 
     default:
         return 24;
 
     case WAND_FLAME:
-    case WAND_RANDOM_EFFECTS:
         return 32;
     }
 }

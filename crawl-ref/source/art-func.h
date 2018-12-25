@@ -1101,15 +1101,25 @@ static void _CHILLY_DEATH_melee_effects(item_def* weapon, actor* attacker,
 {
     if (dam)
     {
-        if (defender->is_monster()
-            && !mondied
-            && !defender->as_monster()->has_ench(ENCH_FROZEN))
+        if (defender->is_monster() && !mondied)
         {
-            mprf("%s is flash-frozen.",
-                 defender->name(DESC_THE).c_str());
-            defender->as_monster()->add_ench(
-                mon_enchant(ENCH_FROZEN, 0, attacker,
-                            (5 + random2(dam)) * BASELINE_DELAY));
+            monster* mons = defender->as_monster();
+            
+            if(!mons->has_ench(ENCH_FROZEN))
+            {
+                mprf("%s is encased in ice.",
+                     defender->name(DESC_THE).c_str());
+                mons->add_ench(mon_enchant(
+                        ENCH_FROZEN, 0, attacker, (5 + random2(dam)) * BASELINE_DELAY));
+            }
+            
+            if (!(defender->res_cold() > 0 || defender->is_stationary()))
+            {
+                mons->add_ench(mon_enchant(ENCH_SLOW, 0, attacker, 10));
+                mprf("%s is slowed by the cold.",
+                     defender->name(DESC_THE).c_str());
+            }
+
         }
         else if (defender->is_player()
             && !you.duration[DUR_FROZEN])

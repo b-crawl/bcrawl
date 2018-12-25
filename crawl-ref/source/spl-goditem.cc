@@ -1347,16 +1347,14 @@ spret_type cast_random_effects(int pow, bolt& beam, bool fail)
 
     fail_check();
 
-    // Extremely arbitrary list of possible effects.
-    zap_type zap = random_choose(ZAP_THROW_FLAME,
-                                 ZAP_THROW_FROST,
+    // list of possible effects.
+    zap_type zap = random_choose(ZAP_INNER_FLAME,
+                                 ZAP_SLEEP,
                                  ZAP_SLOW,
-                                 ZAP_HASTE,
-                                 ZAP_PARALYSE,
-                                 ZAP_CONFUSE,
+                                 ZAP_SHACKLE,
+                                 ZAP_PETRIFY,
                                  ZAP_TELEPORT_OTHER,
-                                 ZAP_INVISIBILITY,
-                                 ZAP_ICEBLAST,
+                                 ZAP_FREEZING_BLAST,
                                  ZAP_FIREBALL,
                                  ZAP_BOLT_OF_DRAINING,
                                  ZAP_VENOM_BOLT,

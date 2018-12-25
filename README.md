@@ -52,6 +52,8 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.1: Players can use a Wand of Polymorph on themselves repeatedly.
   - v1.4: Some thrown weapon types are consolidated.
   - v1.5.2: The skin of Zhor gains +4 slaying.
+  - v1.5.3: The dagger of Chilly Death does more damage and can slow enemies.
+  - v1.5.3: Wands of random effects have fewer charges, and a new spell set: Inner Flame, Malmutate, Sleep, Slow, Shackle, Petrify, Teleport Other, Freezing Blast, Fireball, Bolt of Draining, Venom Bolt.
 
 #### Removed Items
   - Amulet of Harm
@@ -139,6 +141,7 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.5: Orc Priests cast 50% more often, but take 50% longer to cast.
   - v1.5: "Orc Wizard II" gets a Cantrip spell.
   - v1.5.2: Sphinxes have Sentinel's Mark instead of Confuse.
+  - v1.5.3: Skeletons now resist electricity.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -147,3 +150,4 @@ https://github.com/b-crawl/bcrawl/releases
   - v1.3.1: Harold has Bolt of Fire, Blink, a branded trident, and a shield.
   - v1.3.2: Boris has Haunt instead of Iron Shot, and casts spells more.
   - v1.4.1: Psyche is reworked to be as dangerous as Erica, with a new spell set including Deflect Missiles, Sleep, and Poison Arrow. (Read the lore.)
+  - v1.5.3: Margery has +4 AC and +4 EV.

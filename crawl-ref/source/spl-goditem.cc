@@ -1354,7 +1354,7 @@ spret_type cast_random_effects(int pow, bolt& beam, bool fail)
                                  ZAP_SHACKLE,
                                  ZAP_PETRIFY,
                                  ZAP_TELEPORT_OTHER,
-                                 ZAP_FREEZING_BLAST,
+                                 ZAP_ICEBLAST,
                                  ZAP_FIREBALL,
                                  ZAP_BOLT_OF_DRAINING,
                                  ZAP_VENOM_BOLT,

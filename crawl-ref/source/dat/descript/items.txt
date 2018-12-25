@@ -1237,7 +1237,7 @@ into another form.
 wand of random effects
 
 A magical device which can produce a variety of effects, including Inner Flame,
-Malmutate, Sleep, Slow, Shackle, Petrify, Teleport, Freezing Blast,
+Malmutate, Sleep, Slow, Shackle, Petrify, Teleport, Iceblast,
 Fireball, Bolt of Draining, and Venom Bolt.
 %%%%
 wand of scattershot

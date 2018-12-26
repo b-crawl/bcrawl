@@ -63,10 +63,11 @@ end
 NAME: serial_shops
 TAGS: allow_dup extra luniq
 DEPTH: D:4-, Depths, Orc, Elf, Shoals, Snake, Vaults
-CHANCE: 20% (D)
+CHANCE: 30% (D)
 CHANCE: 20% (Depths)
-CHANCE: 30% (Orc)
-CHANCE: 40% (Elf, Vaults)
+CHANCE: 60% (Orc)
+CHANCE: 80% (Vaults)
+CHANCE: 40% (Elf)
 CHANCE: 20% (Shoals, Snake)
 {{
 hook("post_place", function()

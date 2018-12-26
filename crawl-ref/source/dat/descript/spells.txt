@@ -639,9 +639,9 @@ portion of its damage bypasses cold resistance.
 %%%%
 Grasping Roots spell
 
-Calls giant grasping roots from deep underground that hold and constrict their
-victim. The roots will retreat if the victim breaks free or if the caller moves
-out of view.
+Calls giant grasping roots from underground that constrict their target, damaging
+it over time. The victim can attempt to break free by moving. 
+The roots are too short to reach through deep water.
 %%%%
 Greater Servant of Makhleb spell
 

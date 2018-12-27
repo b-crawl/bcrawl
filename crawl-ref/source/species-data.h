@@ -306,7 +306,7 @@ static const map<species_type, species_def> species_data =
     -1, -1, 0, 6,
     MONS_SHADOW,
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
-    12, 8, 8, // 28
+    8, 8, 8, // 24
     { STAT_STR, STAT_INT, STAT_DEX }, 4,
     {{ MUT_NIGHTSTALKER, 1, 4}, { MUT_FANGS, 2, 1 },
     { MUT_FANGS, 1, 8 }, { MUT_NIGHTSTALKER, 1, 12}, { MUT_NIGHTSTALKER, 1, 20}},

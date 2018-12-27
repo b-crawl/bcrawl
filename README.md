@@ -1,11 +1,31 @@
 # bcrawl
 
-bcrawl is a fork of X-Crawl, which is a fork of Dungeon Crawl Stone Soup.
+X-Crawl was a notable fork of Dungeon Crawl Stone Soup; bcrawl is a continuation of it.
 
-Like X-Crawl, discussion is done on the CXC Discord. (https://discord.gg/SzXGZNS)
+Like X-Crawl, discussion is done on the [CXC Discord](https://discord.gg/SzXGZNS).
 
-## Releases
-https://github.com/b-crawl/bcrawl/releases
+bcrawl has 2 goals: To be generally better than DCSS, and to try new things.
+
+David Ploog, a former DCSS developer [wrote](https://www.rockpapershotgun.com/2017/03/23/making-dungeon-crawl-stone-soup-with-253-cooks-and-no-head-chef/): 
+> In NetHack they have this model where if somebody [on the team] objects to something, it will not happen. So every person can veto every change. And in the end you could see that NetHack was dead, much less from having no releases – even when they had a few releases the changes that would appear were miniscule. Minor and minor. And they did improve, but they wouldn’t do anything radical. I was very much afraid that in Crawl, something like this could happen.
+> 
+> I try very hard to always shift in the direction of more changes. Because if you try something and it doesn’t work – and this happens from time to time – you can revert. But if you don’t even try, you are stuck. We have to try radical things.
+
+I believe that what David was afraid of happening to DCSS is now its current situation. Prospective contributors usually [just give up](https://www.reddit.com/r/dcss/comments/9aseh1/has_dcss_development_stagnated/e4yty2n/).
+
+But that's not the only problem.
+
+Certain maintainers of DCSS have expressed sentiments along the lines of, "People only complain about shafts and paralysis because they're bad players." (This is despite the people saying that being worse players than some of the people complaining.) In contrast, bcrawl is meant to be for all players, not just people who adopted certain canonized strategies or adapted to unintuitive and pointless systems. Neither will bcrawl be changed (such as by removing wall destruction) to prevent strategies that violate preconceptions how to play. Instead, the guiding principle of bcrawl is that fun and fair things are good, and unfun and unfair things are bad.
+
+This is why bcrawl exists. I hope that it can meet those goals; for now, I (bhauth) think it is.
+
+## How to Play
+#### offline
+- [Windows builds](https://github.com/b-crawl/bcrawl/releases)
+
+#### online
+  - [x-crawl.de](https://x-crawl.de/)
+  - [CKO](https://crawl.kelbi.org/)
 
 ## Changes from Vanilla Crawl
 #### Branches

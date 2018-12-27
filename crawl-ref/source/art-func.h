@@ -1115,7 +1115,7 @@ static void _CHILLY_DEATH_melee_effects(item_def* weapon, actor* attacker,
             
             if (!(defender->res_cold() > 0 || defender->is_stationary()))
             {
-                mons->add_ench(mon_enchant(ENCH_SLOW, 0, attacker, 10));
+                mons->add_ench(mon_enchant(ENCH_SLOW, 0, attacker, 11));
                 mprf("%s is slowed by the cold.",
                      defender->name(DESC_THE).c_str());
             }

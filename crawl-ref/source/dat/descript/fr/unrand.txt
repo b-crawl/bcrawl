@@ -105,7 +105,7 @@ demon blade "Leech"
 Cette arme vampirique pousse l'esprit de son porteur à assouvir un but unique :
 se gaver de force vitale drainée.
 %%%%
-dagger of Chilly Death
+sapphire dagger
 
 Une dague taillée dans un énorme morceau de saphir.
 %%%%

@@ -59,7 +59,7 @@ Questa mazza ti permetterà di far splendere della luce nel Dungeon, e di certo
 farà ai tuoi nemici della tua presenza. La sua luce è odiata dai nonmorti, e
 può rivelare ogni macchina che prova ad essere invisibile.
 %%%%
-dagger of Chilly Death
+sapphire dagger
 
 Un pugnale fatto di un enorme pezzo di zaffiro.
 %%%%

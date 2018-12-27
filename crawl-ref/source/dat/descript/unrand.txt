@@ -119,7 +119,7 @@ demon blade "Leech"
 An unerringly vampiric blade which gorges itself on drained life force every
 time it strikes.
 %%%%
-dagger of Chilly Death
+sapphire dagger
 
 A dagger made of one huge shard of sapphire. It covers opponents in ice,
 slowing down their movement somewhat.

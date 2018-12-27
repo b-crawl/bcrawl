@@ -365,7 +365,7 @@ AC:      -3
 EV:      -3
 LIFE:     1
 
-NAME:    dagger of Chilly Death
+NAME:    sapphire dagger
 OBJ:     OBJ_WEAPONS/WPN_DAGGER
 INSCRIP: flash freeze,
 PLUS:    +16

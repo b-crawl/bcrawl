@@ -338,7 +338,7 @@ TILE_EQ: flaming_death
 BRAND:   SPWPN_FLAMING
 FIRE:    2
 COLD:    -1
-BOOL:    poison, skip_ego
+BOOL:    skip_ego
 MAGIC:   1
 
 # TAG_MAJOR_VERSION == 34
@@ -365,7 +365,7 @@ AC:      -3
 EV:      -3
 LIFE:     1
 
-NAME:    dagger of Chilly Death
+NAME:    sapphire dagger
 OBJ:     OBJ_WEAPONS/WPN_DAGGER
 INSCRIP: flash freeze,
 PLUS:    +16
@@ -376,7 +376,7 @@ BRAND:   SPWPN_FREEZING
 FIRE:    -1
 COLD:    2
 MAGIC:   1
-BOOL:    poison, skip_ego
+BOOL:    skip_ego
 
 NAME:     dagger "Morg"
 OBJ:      OBJ_WEAPONS/WPN_DAGGER

@@ -313,8 +313,8 @@ static const map<species_type, species_def> species_data =
     {"Your attacks drain your enemies.",
     "You move stealthily even while encumbered by armour."},
     {"draining touch" , "unencumbered stealth"},
-    { JOB_FIGHTER, JOB_GLADIATOR, JOB_NECROMANCER, JOB_ICE_ELEMENTALIST,
-      JOB_ASSASSIN, JOB_EARTH_ELEMENTALIST, JOB_ARCHAEOLOGIST },
+    { JOB_FIGHTER, JOB_GLADIATOR, JOB_ASSASSIN, JOB_EARTH_ELEMENTALIST,
+    JOB_ARCHAEOLOGIST },
     { SK_STAVES, SK_SHORT_BLADES},
 } },
 

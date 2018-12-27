@@ -99,7 +99,7 @@ This is why bcrawl exists. I hope that it can meet those goals; for now, I (bhau
   - Vine Stalkers start with Regeneration 1.
   - Demigod's XP modifier is -1.
   - Felids and Octopodes can wear scarves.
-  - v1.4: Trolls have natural AC but can't wear body armour, and are slightly better at magic but worse with shields. They gain Regen 1 / Regen 2 / rC+ / rF+ at level 4/12/16/20.
+  - v1.4: [Trolls](https://github.com/b-crawl/bcrawl/wiki/Troll) have natural AC but can't wear body armour, and are slightly better at magic but worse with shields. They gain Regen 1 / Regen 2 / rC+ / rF+ at level 4/12/16/20.
   - v1.4: Deep Dwarves lose their Heal Wounds ability and start the game with Elyvilon if their background doesn't start with a god. They also don't gain HP from vampiric effects.
   - v1.5: Hill Orcs have a +1 Conjurations aptitude.
   - v1.5.2: Ghouls have adjusted magic aptitudes, including +4 Necromancy.
@@ -146,7 +146,7 @@ This is why bcrawl exists. I hope that it can meet those goals; for now, I (bhau
   - v1.3.2: Nemelex decks now exist in an ability menu instead of your inventory. (based on ebering's work)
   - v1.4: TSO's Cleansing Flame has 1/3 less damage scaling with invocations.
   - v1.4: Elyvilon's self-healing abilities are better.
-  - v1.5: Dithmenos is reworked: Actions aren't mimicked at high piety, but Shadow Step is much cheaper and makes a short-lived shadow clone of the player.
+  - v1.5: Dithmenos is [reworked](https://github.com/b-crawl/bcrawl/wiki/Dithmenos): Actions aren't mimicked at high piety, but Shadow Step is much cheaper and makes a short-lived shadow clone of the player.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

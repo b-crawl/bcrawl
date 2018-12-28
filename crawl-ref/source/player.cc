@@ -1597,7 +1597,7 @@ int player_res_poison(bool calc_unid, bool temp, bool items)
         case US_UNDEAD: // mummies & lichform
             return 3;
         case US_SEMI_UNDEAD: // vampire
-            if (you.hunger_state <= HS_STARVING) // XXX: && temp?
+            if (you.hunger_state < HS_SATIATED)
                 return 3;
             break;
     }

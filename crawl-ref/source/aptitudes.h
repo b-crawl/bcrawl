@@ -1248,23 +1248,23 @@ static const species_skill_aptitude species_skill_aptitudes[] =
 
     // SP_VAMPIRE
     APT(SP_VAMPIRE,         SK_FIGHTING,       -1),
-    APT(SP_VAMPIRE,         SK_SHORT_BLADES,    1),
-    APT(SP_VAMPIRE,         SK_LONG_BLADES,     0),
+    APT(SP_VAMPIRE,         SK_SHORT_BLADES,    2),
+    APT(SP_VAMPIRE,         SK_LONG_BLADES,     2),
     APT(SP_VAMPIRE,         SK_AXES,           -1),
     APT(SP_VAMPIRE,         SK_MACES_FLAILS,   -2),
-    APT(SP_VAMPIRE,         SK_POLEARMS,       -1),
-    APT(SP_VAMPIRE,         SK_STAVES,         -2),
-    APT(SP_VAMPIRE,         SK_SLINGS,         -2),
+    APT(SP_VAMPIRE,         SK_POLEARMS,       -2),
+    APT(SP_VAMPIRE,         SK_STAVES,          0),
+    APT(SP_VAMPIRE,         SK_SLINGS,         -3),
     APT(SP_VAMPIRE,         SK_BOWS,           -2),
     APT(SP_VAMPIRE,         SK_CROSSBOWS,      -2),
     APT(SP_VAMPIRE,         SK_THROWING,       -2),
-    APT(SP_VAMPIRE,         SK_ARMOUR,         -2),
+    APT(SP_VAMPIRE,         SK_ARMOUR,         -1),
     APT(SP_VAMPIRE,         SK_DODGING,         1),
     APT(SP_VAMPIRE,         SK_STEALTH,         5),
 #if TAG_MAJOR_VERSION == 34
     APT(SP_VAMPIRE,         SK_STABBING,      UNUSABLE_SKILL),
 #endif
-    APT(SP_VAMPIRE,         SK_SHIELDS,        -1),
+    APT(SP_VAMPIRE,         SK_SHIELDS,        -2),
 #if TAG_MAJOR_VERSION == 34
     APT(SP_VAMPIRE,         SK_TRAPS,         UNUSABLE_SKILL),
 #endif
@@ -1275,15 +1275,15 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_VAMPIRE,         SK_CHARMS,          1),
     APT(SP_VAMPIRE,         SK_SUMMONINGS,      0),
     APT(SP_VAMPIRE,         SK_NECROMANCY,      1),
-    APT(SP_VAMPIRE,         SK_TRANSLOCATIONS, -2),
+    APT(SP_VAMPIRE,         SK_TRANSLOCATIONS,  0),
     APT(SP_VAMPIRE,         SK_TRANSMUTATIONS,  1),
-    APT(SP_VAMPIRE,         SK_FIRE_MAGIC,     -2),
+    APT(SP_VAMPIRE,         SK_FIRE_MAGIC,     -3),
     APT(SP_VAMPIRE,         SK_ICE_MAGIC,       0),
     APT(SP_VAMPIRE,         SK_AIR_MAGIC,       0),
     APT(SP_VAMPIRE,         SK_EARTH_MAGIC,     0),
-    APT(SP_VAMPIRE,         SK_POISON_MAGIC,   -1),
+    APT(SP_VAMPIRE,         SK_POISON_MAGIC,    0),
     APT(SP_VAMPIRE,         SK_INVOCATIONS,    -1),
-    APT(SP_VAMPIRE,         SK_EVOCATIONS,     -1),
+    APT(SP_VAMPIRE,         SK_EVOCATIONS,      0),
 
     // SP_DEEP_DWARF
     APT(SP_DEEP_DWARF,      SK_FIGHTING,        0),

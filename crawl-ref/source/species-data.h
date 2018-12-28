@@ -306,15 +306,15 @@ static const map<species_type, species_def> species_data =
     -1, -1, 0, 6,
     MONS_SHADOW,
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
-    12, 8, 8, // 28
+    8, 8, 8, // 24
     { STAT_STR, STAT_INT, STAT_DEX }, 4,
     {{ MUT_NIGHTSTALKER, 1, 4}, { MUT_FANGS, 2, 1 },
     { MUT_FANGS, 1, 8 }, { MUT_NIGHTSTALKER, 1, 12}, { MUT_NIGHTSTALKER, 1, 20}},
     {"Your attacks drain your enemies.",
     "You move stealthily even while encumbered by armour."},
     {"draining touch" , "unencumbered stealth"},
-    { JOB_FIGHTER, JOB_GLADIATOR, JOB_NECROMANCER, JOB_ICE_ELEMENTALIST,
-      JOB_ASSASSIN, JOB_EARTH_ELEMENTALIST, JOB_ARCHAEOLOGIST },
+    { JOB_FIGHTER, JOB_GLADIATOR, JOB_ASSASSIN, JOB_EARTH_ELEMENTALIST,
+    JOB_ARCHAEOLOGIST },
     { SK_STAVES, SK_SHORT_BLADES},
 } },
 
@@ -693,16 +693,15 @@ static const map<species_type, species_def> species_data =
     -1, 0, 0, 4,
     MONS_VAMPIRE,
     HT_LAND, US_SEMI_UNDEAD, SIZE_MEDIUM,
-    7, 10, 9, // 26
+    11, 8, 8, // 27
     { STAT_INT, STAT_DEX }, 5,
-    { { MUT_FANGS, 3, 1 }, { MUT_ACUTE_VISION, 1, 1 },
+    { { MUT_FANGS, 3, 1 }, { MUT_CLAWS, 1, 1 }, { MUT_ACUTE_VISION, 1, 1 },
       { MUT_UNBREATHING, 1, 1 }, },
     {},
     {},
     { JOB_FIGHTER, JOB_GLADIATOR, JOB_ENCHANTER, JOB_NECROMANCER,
     JOB_ICE_ELEMENTALIST, JOB_SUMMONER },
-    { SK_SHORT_BLADES, SK_AXES, SK_LONG_BLADES, SK_BOWS, SK_CROSSBOWS,
-      SK_SLINGS },
+    { SK_SHORT_BLADES, SK_LONG_BLADES, SK_CROSSBOWS },
 } },
 
 { SP_VINE_STALKER, {

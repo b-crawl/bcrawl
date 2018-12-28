@@ -651,10 +651,8 @@ string describe_mutations(bool drop_title)
 
     if (you.species == SP_VAMPIRE)
     {
-        if (you.hunger_state <= HS_STARVING)
-            result += "<green>You do not heal naturally.</green>\n";
-        else if (you.hunger_state < HS_SATIATED)
-            result += "<green>You heal slowly.</green>\n";
+        if (you.hunger_state < HS_SATIATED)
+            result += "<lightred>You heal slowly.</lightred>\n";
         else if (you.hunger_state >= HS_FULL)
             result += "<green>Your natural rate of healing is unusually fast.</green>\n";
     }
@@ -807,25 +805,25 @@ static string _display_vampire_attributes()
                                  //Full       Satiated      Thirsty         Bloodless
         {"Metabolism           ", "fast       ", "normal     ", "slow       ", "none  "},
 
-        {"Regeneration         ", "fast       ", "normal     ", "slow       ", "none  "},
+        {"Regeneration         ", "fast       ", "normal     ", "slow       ", "slow  "},
 
-        {"Stealth boost        ", "none       ", "none       ", "minor      ", "major "},
+        {"Stealth boost        ", "none       ", "none       ", "large      ", "large "},
 
         {"Hunger costs         ", "full       ", "full       ", "halved     ", "none  "},
 
         {"\n<w>Resistances</w>\n"
-         "Poison resistance    ", "           ", "           ", "+          ", "immune"},
+         "Poison resistance    ", "           ", "           ", "immune     ", "immune"},
 
-        {"Cold resistance      ", "           ", "           ", "+          ", "++    "},
+        {"Cold resistance      ", "           ", "           ", "+          ", "+     "},
 
-        {"Negative resistance  ", "           ", " +         ", "++         ", "+++   "},
+        {"Negative resistance  ", "           ", "+          ", "++         ", "++    "},
 
         {"Rotting resistance   ", "           ", "           ", "+          ", "+     "},
 
-        {"Torment resistance   ", "           ", "           ", "           ", "+     "},
+        {"Torment resistance   ", "           ", "           ", "half       ", "half  "},
 
         {"\n<w>Transformations</w>\n"
-         "Bat form             ", "no         ", "yes        ", "yes        ", "yes   "},
+         "Bat form             ", "yes        ", "no         ", "no         ", "no    "},
 
         {"Other forms and \n"
          "berserk              ", "yes        ", "yes        ", "no         ", "no    "}

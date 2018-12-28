@@ -801,33 +801,32 @@ static string _display_vampire_attributes()
     const int lines = 12;
     string column[lines][5] =
     {
-        {"", "<green>Full</green>", "Satiated",
-            "<yellow>Thirsty</yellow>", "<lightred>Bloodless</lightred>"},
-                                 //Full, Satiated, Thirsty, Bloodless
-        {"Metabolism           ", "fast", "normal", "slow", "none"},
+        {"                     ", "<green>Full</green>       ", "Satiated   ", "<yellow>Thirsty</yellow>    ", "<lightred>Bloodless</lightred>"},
+                                 //Full       Satiated      Thirsty         Bloodless
+        {"Metabolism           ", "fast       ", "normal     ", "slow       ", "none  "},
 
-        {"Regeneration         ", "fast", "normal", "slow", "slow"},
+        {"Regeneration         ", "fast       ", "normal     ", "slow       ", "slow  "},
 
-        {"Stealth boost        ", "none", "small", "large", "large"},
+        {"Stealth boost        ", "none       ", "none       ", "large      ", "large "},
 
-        {"Hunger costs         ", "full", "full", "halved", "none"},
+        {"Hunger costs         ", "full       ", "full       ", "halved     ", "none  "},
 
         {"\n<w>Resistances</w>\n"
-         "Poison resistance    ", "", "", "immune", "immune"},
+         "Poison resistance    ", "           ", "           ", "immune     ", "immune"},
 
-        {"Cold resistance      ", "", "", "+", "+"},
+        {"Cold resistance      ", "           ", "           ", "+          ", "+     "},
 
-        {"Negative resistance  ", "", " +", "++", "++"},
+        {"Negative resistance  ", "           ", "+          ", "++         ", "++    "},
 
-        {"Rotting resistance   ", "", "", "+", "+"},
+        {"Rotting resistance   ", "           ", "           ", "+          ", "+     "},
 
-        {"Torment resistance   ", "", "", "half", "half"},
+        {"Torment resistance   ", "           ", "           ", "half       ", "half  "},
 
         {"\n<w>Transformations</w>\n"
-         "Bat form             ", "yes", "no", "no", "no"},
+         "Bat form             ", "yes        ", "no         ", "no         ", "no    "},
 
         {"Other forms and \n"
-         "berserk", "yes", "yes", "no", "no"}
+         "berserk              ", "yes        ", "yes        ", "no         ", "no    "}
     };
 
     int current = _vampire_bloodlessness();

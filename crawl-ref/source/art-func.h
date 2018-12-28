@@ -1086,17 +1086,17 @@ static void _FIRESTARTER_melee_effects(item_def* weapon, actor* attacker,
 
 ///////////////////////////////////////////////////
 
-static void _CHILLY_DEATH_equip(item_def *item, bool *show_msgs, bool unmeld)
+static void _SAPPHIRE_DAGGER_equip(item_def *item, bool *show_msgs, bool unmeld)
 {
     _equip_mpr(show_msgs, "The dagger glows with an icy blue light!");
 }
 
-static void _CHILLY_DEATH_unequip(item_def *item, bool *show_msgs)
+static void _SAPPHIRE_DAGGER_unequip(item_def *item, bool *show_msgs)
 {
     _equip_mpr(show_msgs, "The dagger stops glowing.");
 }
 
-static void _CHILLY_DEATH_melee_effects(item_def* weapon, actor* attacker,
+static void _SAPPHIRE_DAGGER_melee_effects(item_def* weapon, actor* attacker,
                                    actor* defender, bool mondied, int dam)
 {
     if (dam)

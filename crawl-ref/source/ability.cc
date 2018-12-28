@@ -1185,15 +1185,12 @@ void no_ability_msg()
     // Give messages if the character cannot use innate talents right now.
     // * Vampires can't turn into bats when full of blood.
     // * Tengu can't start to fly if already flying.
-    if (you.species == SP_VAMPIRE && you.experience_level >= 3)
+    if (you.species == SP_VAMPIRE)
     {
         if (you.transform_uncancellable)
             mpr("You can't untransform!");
         else
-        {
-            ASSERT(you.hunger_state > HS_SATIATED);
-            mpr("Sorry, you're too full to transform right now.");
-        }
+            mpr("You're too thirsty to transform right now.");
     }
     else if (you.get_mutation_level(MUT_TENGU_FLIGHT)
              || you.get_mutation_level(MUT_BIG_WINGS)

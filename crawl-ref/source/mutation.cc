@@ -798,7 +798,7 @@ static string _display_vampire_attributes()
 
     string result;
 
-    const int lines = 12;
+    const int lines = 11;
     string column[lines][5] =
     {
         {"                     ", "<green>Full</green>       ", "Satiated   ", "<yellow>Thirsty</yellow>    ", "<lightred>Bloodless</lightred>"},
@@ -807,9 +807,7 @@ static string _display_vampire_attributes()
 
         {"Regeneration         ", "fast       ", "normal     ", "slow       ", "slow  "},
 
-        {"Stealth boost        ", "none       ", "none       ", "large      ", "large "},
-
-        {"Hunger costs         ", "full       ", "full       ", "halved     ", "none  "},
+        {"Stealth boost        ", "none       ", "small      ", "large      ", "large "},
 
         {"\n<w>Resistances</w>\n"
          "Poison resistance    ", "           ", "           ", "immune     ", "immune"},

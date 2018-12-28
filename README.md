@@ -15,9 +15,13 @@ I believe that what David was afraid of happening to DCSS is now its current sit
 
 But that's not the only problem.
 
-Certain maintainers of DCSS have expressed sentiments along the lines of, "People only complain about shafts and paralysis because they're bad players." (This is despite the people saying that being worse players than some of the people complaining.) In contrast, bcrawl is meant to be for all players, not just people who adopted certain canonized strategies or adapted to unintuitive and pointless systems. Neither will bcrawl be changed (such as by removing wall destruction) to prevent strategies that violate preconceptions how to play. Instead, the guiding principle of bcrawl is that fun and fair things are good, and unfun and unfair things are bad.
+Certain maintainers of DCSS have expressed sentiments along the lines of, "People only complain about shafts and paralysis because they're bad players." (That's despite the people saying that being worse players than some of the people complaining.)
+
+bcrawl is meant to be for all players, not just long-time players who adopted certain canonized strategies. Neither will bcrawl be changed (such as by removing wall destruction) to prevent strategies *just* because they violate developer preconceptions about how to play. Instead, the guiding principle of bcrawl is that fun and fair things are good, and unfun and unfair things are bad.
 
 This is why bcrawl exists. I hope that it can meet those goals; for now, I (bhauth) think it is.
+
+Pull requests for new content are welcome.
 
 ## How to Play
 #### offline
@@ -36,6 +40,7 @@ This is why bcrawl exists. I hope that it can meet those goals; for now, I (bhau
   - Crypt is shortened to 2 floors.
   - Orc is shortened to 1 floor.
   - v1.5.3: Orc doesn't spawn Stone Giants except from vaults.
+  - v1.6: To compensate for fewer floors, shops are more likely.
   
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -103,6 +108,7 @@ This is why bcrawl exists. I hope that it can meet those goals; for now, I (bhau
   - v1.4: Deep Dwarves lose their Heal Wounds ability and start the game with Elyvilon if their background doesn't start with a god. They also don't gain HP from vampiric effects.
   - v1.5: Hill Orcs have a +1 Conjurations aptitude.
   - v1.5.2: Ghouls have adjusted magic aptitudes, including +4 Necromancy.
+  - v1.6: Vampires are reworked: above Satiated gives Bat Form and regeneration, and below Satiated gives resistances and stealth. Bloodless Vampires still regenerate at half normal speed.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

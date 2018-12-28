@@ -3400,7 +3400,6 @@ static void _display_vampire_status()
         case HS_ENGORGED:
             attrib.push_back("have a fast metabolism");
             attrib.push_back("heal quickly.");
-            attrib.push_back("can transform into a bat.");
             break;
     }
 

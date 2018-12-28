@@ -6222,8 +6222,7 @@ mon_holy_type player::holiness(bool temp) const
     // Lich form takes precedence over a species' base holiness
     if (undead_state(temp))
         holi = MH_UNDEAD;
-    else if (species == SP_GARGOYLE
-            || (species == SP_VAMPIRE && you.hunger_state < HS_SATIATED))
+    else if (species == SP_GARGOYLE)
         holi = MH_NONLIVING;
     else
         holi = MH_NATURAL;

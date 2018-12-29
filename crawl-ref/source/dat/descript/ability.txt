@@ -854,17 +854,17 @@ the landing spot and taking two turns to complete the motion.
 %%%%
 Serpent's Lash ability
 
-Allows you to move at supernatural speeds, making any movements up to a
-distance of two tiles instantly. Martial attacks performed under the effect of
-Serpent's Lash are more damaging and never miss.
+Allows you to move at supernatural speeds, making your next two tiles of movement
+instant. Martial attacks performed during that instant movement are more damaging,
+never miss, and can pin enemies. This ability drains you an amount that decreases
+with your current piety.
 %%%%
 Heavenly Storm ability
 
-Invokes a storm of heavenly clouds. While the storm rages, striking enemies
-with martial attacks provides an increasing bonus to melee damage and accuracy.
-The bonus fades over time, and the storm lasts until the bonus has faded
-completely. The heavenly clouds prevent invisibility, and obscure the vision of
-those outside the storm.
+Invokes a storm of heavenly clouds that prevent invisibility and obscure vision.
+Using martial attacks increases the storm's duration, and while the storm rages,
+you gain a bonus to melee damage and accuracy proportional to the storm's remaining
+duration.
 %%%%
 Hop ability
 

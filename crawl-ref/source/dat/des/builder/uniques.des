@@ -189,7 +189,7 @@ DEPTH:  D:4-7
 : place_unique(_G, "Menkaure")
 
 NAME:   uniq_natasha
-DEPTH:  D:2-4
+DEPTH:  D:3-4
 : place_unique(_G, "Natasha")
 
 NAME:   uniq_nergalle

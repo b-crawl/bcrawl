@@ -1437,7 +1437,7 @@ static bool _gift_sif_kiku_gift(bool forced)
         }
     }
     else if (forced || you.piety >= piety_breakpoint(0)
-                   && div_rand_round(you.piety, 600) == 1)
+                   && x_chance_in_y(you.piety, 600))
     {
         // Sif Muna special: Keep quiet if acquirement fails
         // because the player already has seen all spells.

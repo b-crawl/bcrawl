@@ -156,6 +156,7 @@ Pull requests for new content are welcome.
   - v1.4: Elyvilon's self-healing abilities are better.
   - v1.5: Dithmenos is [reworked](https://github.com/b-crawl/bcrawl/wiki/Dithmenos): Actions aren't mimicked at high piety, but Shadow Step is much cheaper and makes a short-lived shadow clone of the player.
   - v1.6.1: Sif Muna gives Divine Energy at 0* and book gifts starting at 1*.
+  - v1.6.1: Okawaru and Trog no longer give needles as gifts.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -180,3 +181,5 @@ Pull requests for new content are welcome.
   - v1.3.2: Boris has Haunt instead of Iron Shot, and casts spells more.
   - v1.4.1: Psyche is reworked to be as dangerous as Erica, with a new spell set including Deflect Missiles, Sleep, and Poison Arrow. (Read the lore.)
   - v1.5.3: Margery has +4 AC and +4 EV.
+  - v1.6.1: Natasha no longer appears on D:2.
+  - v1.6.1: Gastronok casts faster, and has summoning instead of Airstrike.

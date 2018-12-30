@@ -166,16 +166,16 @@ const vector<god_power> god_powers[NUM_GODS] =
     },
 
     // Sif Muna
-    { { 1, ABIL_SIF_MUNA_DIVINE_ENERGY, "request divine energy to cast spells "
+    { { 0, ABIL_SIF_MUNA_DIVINE_ENERGY, "request divine energy to cast spells "
                                         "with insufficient magic",
            "request divine energy" },
+      { 1, "Sif Muna will gift you books as you gain piety.",
+           "Sif Muna will no longer gift you books." },
       { 2, "Sif Muna is protecting you from the effects of miscast magic.",
            "Sif Muna no longer protects you from the effects of miscast magic." },
       { 3, ABIL_SIF_MUNA_CHANNEL_ENERGY, "call upon Sif Muna for magical energy"},
       { 4, ABIL_SIF_MUNA_FORGET_SPELL, "freely open your mind to new spells",
           "forget spells at will" },
-      { 5, "Sif Muna will gift you books as you gain piety.",
-           "Sif Muna will no longer gift you books." },
     },
 
     // Trog
@@ -1436,8 +1436,8 @@ static bool _gift_sif_kiku_gift(bool forced)
             gift = BOOK_DEATH;
         }
     }
-    else if (forced || you.piety >= piety_breakpoint(4)
-                       && random2(you.piety) > 100)
+    else if (forced || you.piety >= piety_breakpoint(0)
+                   && div_rand_round(you.piety, 600) == 1)
     {
         // Sif Muna special: Keep quiet if acquirement fails
         // because the player already has seen all spells.

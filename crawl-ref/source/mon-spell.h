@@ -587,7 +587,7 @@ static const mon_spellbook mspell_list[] =
     {  MST_VAULT_GUARD,
       {
        { SPELL_BATTLECRY, 50, MON_SPELL_NATURAL | MON_SPELL_NOISY
-                MON_SPELL_EMERGENCY | MON_SPELL_NO_SILENT },
+                | MON_SPELL_EMERGENCY | MON_SPELL_NO_SILENT },
       }
     },
 

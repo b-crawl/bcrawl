@@ -41,6 +41,7 @@ Pull requests for new content are welcome.
   - Orc is shortened to 1 floor.
   - v1.5.3: Orc doesn't spawn Stone Giants except from vaults.
   - v1.6: To compensate for fewer floors, shops are more likely.
+  - v1.6.1: Vaults has fewer orcs.
   
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -172,6 +173,7 @@ Pull requests for new content are welcome.
   - v1.5: "Orc Wizard II" gets a Cantrip spell.
   - v1.5.2: Sphinxes have Sentinel's Mark instead of Confuse.
   - v1.5.3: Skeletons now resist electricity.
+  - v1.6.1: Vault Guards can now use Battlecry when injured.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

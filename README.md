@@ -182,3 +182,4 @@ Pull requests for new content are welcome.
   - v1.4.1: Psyche is reworked to be as dangerous as Erica, with a new spell set including Deflect Missiles, Sleep, and Poison Arrow. (Read the lore.)
   - v1.5.3: Margery has +4 AC and +4 EV.
   - v1.6.1: Natasha no longer appears on D:2.
+  - v1.6.1: Gastronok casts faster, and has summoning instead of Airstrike.

@@ -52,7 +52,7 @@ spret_type cast_deaths_door(int pow, bool fail)
 
     if (you.duration[DUR_DEATHS_DOOR] > 25 * BASELINE_DELAY)
         you.duration[DUR_DEATHS_DOOR] = (23 + random2(5)) * BASELINE_DELAY;
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 void remove_ice_armour()
@@ -84,7 +84,7 @@ spret_type ice_armour(int pow, bool fail)
     you.props[ICY_ARMOUR_KEY] = pow;
     you.redraw_armour_class = true;
 
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 spret_type deflection(int pow, bool fail)
@@ -93,7 +93,7 @@ spret_type deflection(int pow, bool fail)
     you.attribute[ATTR_DEFLECT_MISSILES] = 1;
     mpr("You feel very safe from missiles.");
 
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 spret_type cast_regen(int pow, bool fail)
@@ -102,7 +102,7 @@ spret_type cast_regen(int pow, bool fail)
     you.increase_duration(DUR_REGENERATION, 5 + roll_dice(2, pow / 3 + 1), 100,
                           "Your skin crawls.");
 
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 spret_type cast_revivification(int pow, bool fail)
@@ -121,7 +121,7 @@ spret_type cast_revivification(int pow, bool fail)
         paralyse_player("Death's Door abortion");
         you.duration[DUR_DEATHS_DOOR] = 0;
     }
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 spret_type cast_swiftness(int power, bool fail)
@@ -139,7 +139,7 @@ spret_type cast_swiftness(int power, bool fail)
                      "You feel quick.");
     you.attribute[ATTR_SWIFTNESS] = you.duration[DUR_SWIFTNESS];
 
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 int cast_selective_amnesia(const string &pre_msg)
@@ -198,7 +198,7 @@ spret_type cast_infusion(int pow, bool fail)
     you.increase_duration(DUR_INFUSION,  8 + roll_dice(2, pow), 100);
     you.props["infusion_power"] = pow;
 
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 spret_type cast_song_of_slaying(int pow, bool fail)
@@ -213,7 +213,7 @@ spret_type cast_song_of_slaying(int pow, bool fail)
     you.set_duration(DUR_SONG_OF_SLAYING, 20 + random2avg(pow, 2));
 
     you.props[SONG_OF_SLAYING_KEY] = 0;
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 spret_type cast_silence(int pow, bool fail)
@@ -228,7 +228,7 @@ spret_type cast_silence(int pow, bool fail)
         you.update_beholders();
 
     learned_something_new(HINT_YOU_SILENCE);
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 spret_type cast_liquefaction(int pow, bool fail)
@@ -242,7 +242,7 @@ spret_type cast_liquefaction(int pow, bool fail)
 
     you.increase_duration(DUR_LIQUEFYING, 10 + random2avg(pow, 2), 100);
     invalidate_agrid(true);
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 spret_type cast_shroud_of_golubria(int pow, bool fail)
@@ -254,7 +254,7 @@ spret_type cast_shroud_of_golubria(int pow, bool fail)
         mpr("Space distorts slightly along a thin shroud covering your body.");
 
     you.increase_duration(DUR_SHROUD_OF_GOLUBRIA, 7 + roll_dice(2, pow), 50);
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 spret_type cast_transform(int pow, transformation which_trans, bool fail)
@@ -262,7 +262,7 @@ spret_type cast_transform(int pow, transformation which_trans, bool fail)
     if (!transform(pow, which_trans, false, true)
         || !check_form_stat_safety(which_trans))
     {
-        return SPRET_ABORT;
+        return spret_type::abort;
     }
     
     if(which_trans == transformation::tree)
@@ -275,16 +275,16 @@ spret_type cast_transform(int pow, transformation which_trans, bool fail)
                                    cloud_type_name(cloud).c_str()).c_str(), false, 'n'))
         {
             canned_msg(MSG_OK);
-            return SPRET_ABORT;
+            return spret_type::abort;
         }
     }
 
     fail_check();
     transform(pow, which_trans);
-    if(which_trans == transformation::tree)
+    if (which_trans == transformation::tree)
         you.transform_uncancellable = true;
     
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }
 
 spret_type cast_piercing_shot(int pow, bool fail)
@@ -299,5 +299,5 @@ spret_type cast_piercing_shot(int pow, bool fail)
     you.attribute[ATTR_PORTAL_PROJECTILE] = 0;
     you.duration[DUR_PORTAL_PROJECTILE] = 0;
     you.increase_duration(DUR_PIERCING_SHOT, 3 + random2(pow / 2) + random2(pow / 5), 50);
-    return SPRET_SUCCESS;
+    return spret_type::success;
 }

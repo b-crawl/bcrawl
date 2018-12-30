@@ -1436,7 +1436,7 @@ static bool _gift_sif_kiku_gift(bool forced)
             gift = BOOK_DEATH;
         }
     }
-    else if (forced || you.piety >= piety_breakpoint(1)
+    else if (forced || you.piety >= piety_breakpoint(0)
                    && div_rand_round(you.piety, 600) == 1)
     {
         // Sif Muna special: Keep quiet if acquirement fails

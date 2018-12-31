@@ -775,11 +775,11 @@ BOOL:    berserk
 
 NAME:    gauntlets of War
 OBJ:     OBJ_ARMOUR/ARM_GLOVES
-PLUS:    +3
+PLUS:    +0
 COLOUR:  BROWN
 TILE:    urand_war
 TILE_EQ: glove_black
-SLAY:    5
+SLAY:    6
 
 NAME:    shield of Resistance
 OBJ:     OBJ_ARMOUR/ARM_SHIELD

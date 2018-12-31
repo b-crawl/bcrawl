@@ -766,12 +766,14 @@ SLAY:    4
 ENUM:    SALAMANDER
 NAME:    salamander hide armour
 OBJ:     OBJ_ARMOUR/ARM_LEATHER_ARMOUR
-PLUS:    +3
+INSCRIP: +Fog
+PLUS:    +8
 COLOUR:  ETC_FIRE
 TILE:    urand_salamander
 TILE_EQ: leather_red
 FIRE:    2
-BOOL:    berserk
+COLD:    -1
+BOOL:    fog
 
 NAME:    gauntlets of War
 OBJ:     OBJ_ARMOUR/ARM_GLOVES

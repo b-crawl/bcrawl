@@ -556,7 +556,7 @@ static void _setup_normal_game()
 
 static void _setup_adventure_game()
 {
-    _setup_normal_game;
+    _setup_normal_game();
 }
 
 static void _setup_tutorial(const newgame_def& ng)

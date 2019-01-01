@@ -968,6 +968,7 @@ bool UIStartupMenu::on_event(const wm_event& ev)
                 input_string = "";
                 break;
             case GAME_TYPE_NORMAL:
+            case GAME_TYPE_ADVENTURE:
             case GAME_TYPE_TUTORIAL:
             case GAME_TYPE_SPRINT:
             case GAME_TYPE_HINTS:
@@ -1008,6 +1009,7 @@ bool UIStartupMenu::on_event(const wm_event& ev)
     switch (id)
     {
     case GAME_TYPE_NORMAL:
+    case GAME_TYPE_ADVENTURE:
     case GAME_TYPE_TUTORIAL:
     case GAME_TYPE_SPRINT:
     case GAME_TYPE_HINTS:

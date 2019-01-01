@@ -507,6 +507,7 @@ static void _give_basic_knowledge()
 }
 
 static void _setup_normal_game();
+static void _setup_adventure_game();
 static void _setup_tutorial(const newgame_def& ng);
 static void _setup_sprint(const newgame_def& ng);
 static void _setup_hints();

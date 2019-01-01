@@ -557,7 +557,6 @@ static void _setup_normal_game()
 static void _setup_adventure_game()
 {
     _setup_normal_game;
-    you.lives = 2;
 }
 
 static void _setup_tutorial(const newgame_def& ng)
@@ -594,6 +593,9 @@ static void _free_up_slot(char letter)
 static void _setup_generic(const newgame_def& ng)
 {
     _init_player();
+    
+    if(ng.type == GAME_TYPE_ADVENTURE)
+        you.lives = 2;
 
 #if TAG_MAJOR_VERSION == 34
     // Avoid the remove_dead_shops() Gozag fixup in new games: see

@@ -394,25 +394,6 @@ static void _construct_game_modes_menu(MenuScroller* menu)
 
 #ifdef USE_TILE_LOCAL
     tmp = new TextTileItem();
-    tmp->add_tile(tile_def(tileidx_gametype(GAME_TYPE_TUTORIAL), TEX_GUI));
-#else
-    tmp = new TextItem();
-#endif
-    text = "Tutorial for Dungeon Crawl";
-    tmp->set_text(text);
-    tmp->set_fg_colour(WHITE);
-    tmp->set_highlight_colour(LIGHTGREY);
-    tmp->set_id(GAME_TYPE_TUTORIAL);
-    // Scroller does not care about x-coordinates and only cares about
-    // item height obtained from max.y - min.y
-    tmp->set_bounds(coord_def(1, 1), coord_def(1, 2));
-    tmp->set_description_text("Tutorial that covers the basics of "
-                              "Dungeon Crawl survival.");
-    menu->attach_item(tmp);
-    tmp->set_visible(true);
-
-#ifdef USE_TILE_LOCAL
-    tmp = new TextTileItem();
     tmp->add_tile(tile_def(tileidx_gametype(GAME_TYPE_HINTS), TEX_GUI));
 #else
     tmp = new TextItem();
@@ -427,6 +408,25 @@ static void _construct_game_modes_menu(MenuScroller* menu)
     tmp->set_bounds(coord_def(1, 1), coord_def(1, 2));
     tmp->set_description_text("A mostly normal game that provides more "
                               "advanced hints than the tutorial.");
+    menu->attach_item(tmp);
+    tmp->set_visible(true);
+
+#ifdef USE_TILE_LOCAL
+    tmp = new TextTileItem();
+    tmp->add_tile(tile_def(tileidx_gametype(GAME_TYPE_TUTORIAL), TEX_GUI));
+#else
+    tmp = new TextItem();
+#endif
+    text = "Tutorial for Dungeon Crawl";
+    tmp->set_text(text);
+    tmp->set_fg_colour(WHITE);
+    tmp->set_highlight_colour(LIGHTGREY);
+    tmp->set_id(GAME_TYPE_TUTORIAL);
+    // Scroller does not care about x-coordinates and only cares about
+    // item height obtained from max.y - min.y
+    tmp->set_bounds(coord_def(1, 1), coord_def(1, 2));
+    tmp->set_description_text("Tutorial that covers the basics of "
+                              "Dungeon Crawl survival.");
     menu->attach_item(tmp);
     tmp->set_visible(true);
 

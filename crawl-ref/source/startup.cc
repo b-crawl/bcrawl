@@ -394,7 +394,7 @@ static void _construct_game_modes_menu(MenuScroller* menu)
 
 #ifdef USE_TILE_LOCAL
     tmp = new TextTileItem();
-    tmp->add_tile(tile_def(tileidx_gametype(GAME_TYPE_NORMAL), TEX_GUI));
+    tmp->add_tile(tile_def(tileidx_gametype(GAME_TYPE_ADVENTURE), TEX_GUI));
 #else
     tmp = new TextItem();
 #endif

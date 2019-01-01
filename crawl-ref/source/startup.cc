@@ -394,6 +394,25 @@ static void _construct_game_modes_menu(MenuScroller* menu)
 
 #ifdef USE_TILE_LOCAL
     tmp = new TextTileItem();
+    tmp->add_tile(tile_def(tileidx_gametype(GAME_TYPE_NORMAL), TEX_GUI));
+#else
+    tmp = new TextItem();
+#endif
+    text = "Adventure Mode";
+    tmp->set_text(text);
+    tmp->set_fg_colour(WHITE);
+    tmp->set_highlight_colour(LIGHTGREY);
+    tmp->set_id(GAME_TYPE_ADVENTURE);
+    // Scroller does not care about x-coordinates and only cares about
+    // item height obtained from max.y - min.y
+    tmp->set_bounds(coord_def(1, 1), coord_def(1, 2));
+    tmp->set_description_text("Play with three lives instead of one..."
+                              "but why would you need to?");
+    menu->attach_item(tmp);
+    tmp->set_visible(true);
+
+#ifdef USE_TILE_LOCAL
+    tmp = new TextTileItem();
     tmp->add_tile(tile_def(tileidx_gametype(GAME_TYPE_HINTS), TEX_GUI));
 #else
     tmp = new TextItem();

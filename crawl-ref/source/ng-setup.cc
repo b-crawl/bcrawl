@@ -523,6 +523,9 @@ void setup_game(const newgame_def& ng)
     case GAME_TYPE_NORMAL:
         _setup_normal_game();
         break;
+    case GAME_TYPE_ADVENTURE:
+        _setup_adventure_game();
+        break;
     case GAME_TYPE_TUTORIAL:
         _setup_tutorial(ng);
         break;
@@ -542,24 +545,25 @@ void setup_game(const newgame_def& ng)
 }
 
 /**
- * Special steps that normal game needs;
+ * Special steps that game modes need:
  */
+
 static void _setup_normal_game()
 {
     make_hungry(0, true);
 }
 
-/**
- * Special steps that tutorial game needs;
- */
+static void _setup_adventure_game()
+{
+    _setup_normal_game;
+    you.lives = 2;
+}
+
 static void _setup_tutorial(const newgame_def& ng)
 {
     make_hungry(0, true);
 }
 
-/**
- * Special steps that sprint needs;
- */
 static void _setup_sprint(const newgame_def& ng)
 {
     // nothing currently

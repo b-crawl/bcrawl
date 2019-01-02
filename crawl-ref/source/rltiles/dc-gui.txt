@@ -10,6 +10,7 @@ dngn/unseen
 
 %sdir gui/startup
 stonesoup STARTUP_STONESOUP
+adventure STARTUP_ADVENTURE
 tutorial STARTUP_TUTORIAL
 hints_mode STARTUP_HINTS
 dungeon_sprint STARTUP_SPRINT

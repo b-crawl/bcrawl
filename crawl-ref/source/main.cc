@@ -995,9 +995,13 @@ static void _input()
 
     if (you.pending_revival)
     {
-        revive();
+        if(you.species == SP_FELID)
+            mpr("You're not done yet!");
+        else
+            mpr("Xom reaches out...");
         bring_to_safety();
         redraw_screen();
+        revive();
     }
 
     // Unhandled things that should have caused death.

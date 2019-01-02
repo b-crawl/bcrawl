@@ -4,20 +4,14 @@ X-Crawl was a notable fork of Dungeon Crawl Stone Soup; bcrawl is a continuation
 
 Like X-Crawl, discussion is done on the [CXC Discord](https://discord.gg/SzXGZNS).
 
-bcrawl has 2 goals: To be generally better than DCSS, and to try new things.
-
 David Ploog (a former DCSS developer) [wrote](https://www.rockpapershotgun.com/2017/03/23/making-dungeon-crawl-stone-soup-with-253-cooks-and-no-head-chef/): 
 > In NetHack they have this model where if somebody [on the team] objects to something, it will not happen. So every person can veto every change. And in the end you could see that NetHack was dead, much less from having no releases – even when they had a few releases the changes that would appear were miniscule. Minor and minor. And they did improve, but they wouldn’t do anything radical. I was very much afraid that in Crawl, something like this could happen.
 > 
 > I try very hard to always shift in the direction of more changes. Because if you try something and it doesn’t work – and this happens from time to time – you can revert. But if you don’t even try, you are stuck. We have to try radical things.
 
-I believe that what David was afraid of happening to DCSS is now its current situation. Prospective contributors usually [just give up](https://www.reddit.com/r/dcss/comments/9aseh1/has_dcss_development_stagnated/e4yty2n/).
+bcrawl exists because I believe DCSS has become stagnant, generally [unwilling](https://www.reddit.com/r/dcss/comments/9aseh1/has_dcss_development_stagnated/e4yty2n/) to try new content.
 
-But that's not the only problem.
-
-Certain maintainers of DCSS have expressed sentiments along the lines of, "People only complain about shafts and paralysis because they're bad players." (That's despite the people saying that being worse players than some of the people complaining.)
-
-bcrawl is meant to be for all players, not just long-time players who adopted certain canonized strategies. Neither will bcrawl be changed (such as by removing wall destruction) to prevent strategies *just* because they violate developer preconceptions about how to play. Instead, the guiding principle of bcrawl is that fun and fair things are good, and unfun and unfair things are bad.
+bcrawl is meant to be for all players, not just long-time players who adopted certain canonized strategies. Neither will bcrawl be [changed](https://www.reddit.com/r/dcss/comments/8poib2/make_lees_rapid_deconstruction_never_break_walls/) to prevent strategies *just* because they violate developer preconceptions about how to play. Instead, the guiding principle of bcrawl is that fun and fair things are good, and unfun and unfair things are bad.
 
 This is why bcrawl exists. I hope that it can meet those goals; for now, I (bhauth) think it is.
 
@@ -28,8 +22,8 @@ Pull requests for new content are welcome.
 - [Windows builds](https://github.com/b-crawl/bcrawl/releases)
 
 #### online
-  - [x-crawl.de](https://x-crawl.de/)
-  - [CKO](https://crawl.kelbi.org/)
+  - [x-crawl.de](https://x-crawl.de/) (Germany)
+  - [CKO](https://crawl.kelbi.org/) (New York)
 
 ## Changes from Vanilla Crawl
 #### Branches
@@ -55,40 +49,13 @@ Pull requests for new content are welcome.
   - All items are automatically identified if the player has a rune.
   - v1.1.1: Like in mainline DCSS, all traps are revealed, but there are no trap effects from exploration.
   - v1.3: To replace traps, when taking stairs there's a 4% chance of being teleported onto the lower floor.
+  - v1.7: An "Adventure" mode is added, which is a normal game that starts the player with 2 extra lives.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
   - Plain unidentified weapons are always +0.
   - Long Blades now give +SH instead of a chance to riposte.
   - v1.4.1: Distortion weapons can't banish on hit.
-
-#### New Items
-  - The 'Ring of Insulation' gives rElec.
-  - Iron Dragons may drop 'Iron Dragon Scales' on death.
-  - Scarf of Stasis
-
-#### Changed Items
-  - Missiles are always lost when fired, and have a proportionately higher spawn rate.
-  - Morningstars and Eveningstars are 2-handed for small species.
-  - Potions of mutation are more common.
-  - Centaur and Naga bardings have been merged.
-  - Staves of Earth have a +3 AC bonus.
-  - v1.1: Players can use a Wand of Polymorph on themselves repeatedly.
-  - v1.4: Some thrown weapon types are consolidated.
-  - v1.5.3: Wands of random effects have fewer charges, and a new spell set: Inner Flame, Malmutate, Sleep, Slow, Shackle, Petrify, Teleport Other, Iceblast, Fireball, Bolt of Draining, Venom Bolt.
-
-#### Removed Items
-  - Amulet of Harm
-  - Needles of Sleeping
-  - Scrolls of Random Uselessness
-  - v1.3.2: Crystal Ball of Energy
-  - v1.4.2: Scrolls of Holy Word
-
-#### Artefacts
-  - The 'Fists of Thunder' unrandart gives electric-branded unarmed attacks.
-  - The scimitar of Flaming Death and the dagger of Chilly Death have returned.
-  - v1.5.2: The skin of Zhor gains +4 slaying.
-  - v1.6: The dagger of Chilly Death is stronger, can slow enemies, and is renamed to the sapphire dagger.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -152,12 +119,42 @@ Pull requests for new content are welcome.
   - v1.1: Wu Jian is reworked: abilities require less piety, Serpent's Lash only costs drain (scaling down with piety), Whirlwind does full dmg but only pins with Serpent's Lash, and Heavenly Storm starts out weaker but costs much less piety.
   - v1.2: Fedhas is reworked: piety is gained by killing natural and undead monsters, and abilities cost piety instead of rations.
   - v1.3: Sif Muna has faster piety gain.
-  - v1.3.2: Nemelex decks now exist in an ability menu instead of your inventory. (based on ebering's work)
+  - v1.3.2: Nemelex decks now exist in an ability menu instead of your inventory. (based on ebering's work) Decks have a max size of 20, Triple Draw doesn't cost piety, and Deal Four doesn't destroy decks.
   - v1.4: TSO's Cleansing Flame has 1/3 less damage scaling with invocations.
   - v1.4: Elyvilon's self-healing abilities are better.
   - v1.5: Dithmenos is [reworked](https://github.com/b-crawl/bcrawl/wiki/Dithmenos): Actions aren't mimicked at high piety, but Shadow Step is much cheaper and makes a short-lived shadow clone of the player.
   - v1.6.1: Sif Muna gives Divine Energy at 0* and book gifts starting at 1*.
   - v1.6.1: Okawaru and Trog no longer give needles as gifts.
+
+#### New Items
+  - The 'Ring of Insulation' gives rElec.
+  - Iron Dragons may drop 'Iron Dragon Scales' on death.
+  - Scarf of Stasis
+
+#### Changed Items
+  - Missiles are always lost when fired, and have a proportionately higher spawn rate.
+  - Morningstars and Eveningstars are 2-handed for small species.
+  - Potions of mutation are more common.
+  - Centaur and Naga bardings have been merged.
+  - Staves of Earth have a +3 AC bonus.
+  - v1.1: Players can use a Wand of Polymorph on themselves repeatedly.
+  - v1.4: Some thrown weapon types are consolidated.
+  - v1.5.3: Wands of random effects have fewer charges, and a new spell set: Inner Flame, Malmutate, Sleep, Slow, Shackle, Petrify, Teleport Other, Iceblast, Fireball, Bolt of Draining, Venom Bolt.
+
+#### Removed Items
+  - Amulet of Harm
+  - Needles of Sleeping
+  - Scrolls of Random Uselessness
+  - v1.3.2: Crystal Ball of Energy
+  - v1.4.2: Scrolls of Holy Word
+
+#### Artefacts
+  - The 'Fists of Thunder' unrandart gives electric-branded unarmed attacks.
+  - The scimitar of Flaming Death and the dagger of Chilly Death have returned.
+  - v1.5.2: The skin of Zhor gains +4 slaying.
+  - v1.6: The dagger of Chilly Death is stronger, can slow enemies, and is renamed to the sapphire dagger.
+  - v1.7: The gauntlets of War are +0 with +6 slaying.
+  - v1.7: The salamander hide armour is +8, rF++ rC-, and can be evoked to make fog.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

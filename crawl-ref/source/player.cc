@@ -2677,8 +2677,7 @@ bool will_gain_life(int lev)
 
 static void _felid_extra_life()
 {
-    if (will_gain_life(you.max_level)
-        && you.lives < 2)
+    if (will_gain_life(you.max_level) && you.lives < 3)
     {
         you.lives++;
         mprf(MSGCH_INTRINSIC_GAIN, "Extra life!");

@@ -507,6 +507,7 @@ static void _give_basic_knowledge()
 }
 
 static void _setup_normal_game();
+static void _setup_adventure_game();
 static void _setup_tutorial(const newgame_def& ng);
 static void _setup_sprint(const newgame_def& ng);
 static void _setup_hints();
@@ -522,6 +523,9 @@ void setup_game(const newgame_def& ng)
     {
     case GAME_TYPE_NORMAL:
         _setup_normal_game();
+        break;
+    case GAME_TYPE_ADVENTURE:
+        _setup_adventure_game();
         break;
     case GAME_TYPE_TUTORIAL:
         _setup_tutorial(ng);
@@ -542,24 +546,24 @@ void setup_game(const newgame_def& ng)
 }
 
 /**
- * Special steps that normal game needs;
+ * Special steps that game modes need:
  */
+
 static void _setup_normal_game()
 {
     make_hungry(0, true);
 }
 
-/**
- * Special steps that tutorial game needs;
- */
+static void _setup_adventure_game()
+{
+    _setup_normal_game();
+}
+
 static void _setup_tutorial(const newgame_def& ng)
 {
     make_hungry(0, true);
 }
 
-/**
- * Special steps that sprint needs;
- */
 static void _setup_sprint(const newgame_def& ng)
 {
     // nothing currently
@@ -589,6 +593,9 @@ static void _free_up_slot(char letter)
 static void _setup_generic(const newgame_def& ng)
 {
     _init_player();
+    
+    if(ng.type == GAME_TYPE_ADVENTURE)
+        you.lives = 2;
 
 #if TAG_MAJOR_VERSION == 34
     // Avoid the remove_dead_shops() Gozag fixup in new games: see

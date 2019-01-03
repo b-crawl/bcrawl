@@ -457,7 +457,7 @@ COLOUR:  ETC_FIRE
 TILE:    urand_damnation
 TILE_EQ: crossbow_fire
 VALUE:   800
-BOOL:    evil
+BOOL:    evil, curse
 
 # TAG_MAJOR_VERSION == 34
 NAME:    sword of the Doom Knight

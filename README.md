@@ -184,3 +184,5 @@ Pull requests for new content are welcome.
   - v1.5.3: Margery has +4 AC and +4 EV.
   - v1.6.1: Natasha no longer appears on D:2.
   - v1.6.1: Gastronok casts faster, and has summoning instead of Airstrike.
+  - v1.7.2: Fannar is more dangerous, getting Freezing Cloud.
+  - v1.7.2: Psyche, Fannar, and Sojobo sometimes drop a spellbook.

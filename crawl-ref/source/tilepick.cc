@@ -159,8 +159,12 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
         return TILE_WALL_SLIME;
     case DNGN_RUNED_DOOR:
         return TILE_DNGN_RUNED_DOOR;
+    case DNGN_RUNED_CLEAR_DOOR:
+        return TILE_DNGN_RUNED_CLEAR_DOOR;
     case DNGN_SEALED_DOOR:
         return TILE_DNGN_SEALED_DOOR;
+    case DNGN_SEALED_CLEAR_DOOR:
+        return TILE_DNGN_SEALED_CLEAR_DOOR;
     case DNGN_GRATE:
         return TILE_DNGN_GRATE;
     case DNGN_CLEAR_ROCK_WALL:
@@ -173,6 +177,8 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
         return TILE_DNGN_STONE_WALL;
     case DNGN_CLOSED_DOOR:
         return TILE_DNGN_CLOSED_DOOR;
+    case DNGN_CLOSED_CLEAR_DOOR:
+        return TILE_DNGN_CLOSED_CLEAR_DOOR;
     case DNGN_METAL_WALL:
         return TILE_DNGN_METAL_WALL;
     case DNGN_CRYSTAL_WALL:
@@ -203,6 +209,8 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
         return TILE_DNGN_ENTER_HELL;
     case DNGN_OPEN_DOOR:
         return TILE_DNGN_OPEN_DOOR;
+    case DNGN_OPEN_CLEAR_DOOR:
+        return TILE_DNGN_OPEN_CLEAR_DOOR;
     case DNGN_TRAP_MECHANICAL:
         return TILE_DNGN_TRAP_ARROW;
     case DNGN_TRAP_TELEPORT:

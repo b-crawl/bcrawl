@@ -155,6 +155,7 @@ Pull requests for new content are welcome.
   - v1.6: The dagger of Chilly Death is stronger, can slow enemies, and is renamed to the sapphire dagger.
   - v1.7: The gauntlets of War are +0 with +6 slaying.
   - v1.7: The salamander hide armour is +8, rF++ rC-, and can be evoked to make fog.
+  - v1.7.1: Morg has +12 int, but curses itself.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

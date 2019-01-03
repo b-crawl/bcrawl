@@ -140,6 +140,7 @@ Pull requests for new content are welcome.
   - v1.1: Players can use a Wand of Polymorph on themselves repeatedly.
   - v1.4: Some thrown weapon types are consolidated.
   - v1.5.3: Wands of random effects have fewer charges, and a new spell set: Inner Flame, Malmutate, Sleep, Slow, Shackle, Petrify, Teleport Other, Iceblast, Fireball, Bolt of Draining, Venom Bolt.
+  - v1.7.1: Wands of digging are partly un-nerfed, getting 8 average charges.
 
 #### Removed Items
   - Amulet of Harm

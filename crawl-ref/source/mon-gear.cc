@@ -102,15 +102,16 @@ static bool _should_give_unique_item(monster* mon)
     return mon->type != MONS_NATASHA || !mon->props.exists("felid_revives");
 }
 
-static void _give_book(monster* mon, int level)
+static void _give_special(monster* mon, int level)
 {
-    if (mon->type == MONS_ROXANNE)
+    switch(mon->type)
     {
+    case MONS_ROXANNE:
+	{
         const int which_book = (one_chance_in(3) ? BOOK_TRANSFIGURATIONS
                                                  : BOOK_EARTH);
 
         const int thing_created = items(false, OBJ_BOOKS, which_book, level);
-
         if (thing_created == NON_ITEM)
             return;
 
@@ -119,6 +120,59 @@ static void _give_book(monster* mon, int level)
             make_book_roxanne_special(&mitm[thing_created]);
 
         give_specific_item(mon, thing_created);
+        break;
+	}
+    
+    case MONS_PSYCHE:
+	{
+        if(one_chance_in(2))
+            {
+            const int which_book = BOOK_DREAMS;
+            const int thing_created = items(false, OBJ_BOOKS, which_book, level);
+            if (thing_created == NON_ITEM)
+                return;
+            
+            give_specific_item(mon, thing_created);
+            }
+        break;
+	}
+    
+    case MONS_FANNAR:
+	{
+        if(one_chance_in(2))
+            {
+            const int which_book = BOOK_ICE;
+            const int thing_created = items(false, OBJ_BOOKS, which_book, level);
+            if (thing_created == NON_ITEM)
+                return;
+            
+            give_specific_item(mon, thing_created);
+            }
+        break;
+	}
+    
+    case MONS_SOJOBO:
+	{
+        if(one_chance_in(2))
+            {
+            const int which_book = BOOK_SKY;
+            const int thing_created = items(false, OBJ_BOOKS, which_book, level);
+            if (thing_created == NON_ITEM)
+                return;
+            
+            give_specific_item(mon, thing_created);
+            }
+        break;
+	}
+    
+    case MONS_MAURICE:
+	{
+        const int it = items(false, OBJ_GOLD, 0, level);
+        give_specific_item(mon, it);
+        break;
+	}
+
+    default: break;
     }
 }
 
@@ -1451,11 +1505,6 @@ static void _give_ammo(monster* mon, int level, bool mons_summoned)
             qty = random_range(80, 140);
             break;
 
-        case MONS_CHUCK:
-            weap_type  = MI_LARGE_ROCK;
-            qty = 2;
-            break;
-
         case MONS_POLYPHEMUS:
             weap_type  = MI_LARGE_ROCK;
             qty        = random_range(16, 24);
@@ -1512,9 +1561,6 @@ static void _give_ammo(monster* mon, int level, bool mons_summoned)
         if (thing_created != NON_ITEM)
         {
             item_def& w(mitm[thing_created]);
-
-            if (mon->type == MONS_CHUCK)
-                set_item_ego_type(w, OBJ_MISSILES, SPMSL_RETURNING);
 
             w.quantity = qty;
             give_specific_item(mon, thing_created);
@@ -2180,12 +2226,6 @@ static void _give_armour(monster* mon, int level)
     give_specific_item(mon, make_mons_armour(mon->type, level));
 }
 
-static void _give_gold(monster* mon, int level)
-{
-    const int it = items(false, OBJ_GOLD, 0, level);
-    give_specific_item(mon, it);
-}
-
 void give_weapon(monster *mons, int level_number)
 {
     _give_weapon(mons, level_number);
@@ -2205,10 +2245,8 @@ void give_item(monster *mons, int level_number, bool mons_summoned)
 {
     ASSERT(level_number > -1); // debugging absdepth0 changes
 
-    if (mons->type == MONS_MAURICE)
-        _give_gold(mons, level_number);
-
-    _give_book(mons, level_number);
+    _give_special(mons, level_number);
+    
     _give_wand(mons, level_number);
     _give_potion(mons, level_number);
     _give_weapon(mons, level_number);

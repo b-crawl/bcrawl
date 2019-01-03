@@ -1510,8 +1510,6 @@ spret_type your_spells(spell_type spell, int powc, bool allow_fail,
     if (you.props.exists("battlesphere") && allow_fail)
         aim_battlesphere(&you, spell, powc, beam);
 
-    const bool old_target = actor_at(beam.target);
-
     spret_type cast_result = _do_cast(spell, powc, spd, beam, god, fail);
 
     switch (cast_result)
@@ -1520,7 +1518,6 @@ spret_type your_spells(spell_type spell, int powc, bool allow_fail,
     {
         if (you.props.exists("battlesphere") && allow_fail)
             trigger_battlesphere(&you, beam);
-        actor* victim = actor_at(beam.target);
         _spellcasting_side_effects(spell, god, !allow_fail);
         return SPRET_SUCCESS;
     }

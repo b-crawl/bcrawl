@@ -385,8 +385,9 @@ COLOUR:   LIGHTRED
 TILE:     urand_morg
 TILE_EQ:  morg
 BRAND:    SPWPN_PAIN
-INT:      5
+INT:      12
 MAGIC:    1
+BOOL:     curse
 
 NAME:    scythe "Finisher"
 OBJ:     OBJ_WEAPONS/WPN_SCYTHE
@@ -456,7 +457,7 @@ COLOUR:  ETC_FIRE
 TILE:    urand_damnation
 TILE_EQ: crossbow_fire
 VALUE:   800
-BOOL:    evil
+BOOL:    evil, curse
 
 # TAG_MAJOR_VERSION == 34
 NAME:    sword of the Doom Knight

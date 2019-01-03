@@ -140,6 +140,7 @@ Pull requests for new content are welcome.
   - v1.1: Players can use a Wand of Polymorph on themselves repeatedly.
   - v1.4: Some thrown weapon types are consolidated.
   - v1.5.3: Wands of random effects have fewer charges, and a new spell set: Inner Flame, Malmutate, Sleep, Slow, Shackle, Petrify, Teleport Other, Iceblast, Fireball, Bolt of Draining, Venom Bolt.
+  - v1.7.1: Wands of digging are partly un-nerfed, getting 8 average charges.
 
 #### Removed Items
   - Amulet of Harm
@@ -155,6 +156,7 @@ Pull requests for new content are welcome.
   - v1.6: The dagger of Chilly Death is stronger, can slow enemies, and is renamed to the sapphire dagger.
   - v1.7: The gauntlets of War are +0 with +6 slaying.
   - v1.7: The salamander hide armour is +8, rF++ rC-, and can be evoked to make fog.
+  - v1.7.1: Morg has +12 int, but curses itself.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -182,3 +184,5 @@ Pull requests for new content are welcome.
   - v1.5.3: Margery has +4 AC and +4 EV.
   - v1.6.1: Natasha no longer appears on D:2.
   - v1.6.1: Gastronok casts faster, and has summoning instead of Airstrike.
+  - v1.7.2: Fannar is more dangerous, getting Freezing Cloud.
+  - v1.7.2: Psyche, Fannar, and Sojobo sometimes drop a spellbook.

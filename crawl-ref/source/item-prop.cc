@@ -1583,7 +1583,6 @@ int wand_charge_value(int type)
     {
     case WAND_CLOUDS:
     case WAND_SCATTERSHOT:
-    case WAND_DIGGING:
         return 9;
 
     case WAND_ICEBLAST:
@@ -1592,13 +1591,14 @@ int wand_charge_value(int type)
     case WAND_PARALYSIS:
     case WAND_POLYMORPH:
     case WAND_RANDOM_EFFECTS:
+    case WAND_DIGGING:
         return 15;
-
-    default:
-        return 24;
 
     case WAND_FLAME:
         return 32;
+
+    default:
+        return 24;
     }
 }
 

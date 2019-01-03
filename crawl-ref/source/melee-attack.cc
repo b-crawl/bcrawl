@@ -270,7 +270,8 @@ bool melee_attack::handle_phase_attempted()
 
 bool melee_attack::handle_phase_blocked()
 {
-    do_passive_freeze();
+    if (defender->is_player())
+        do_passive_freeze();
 
     return attack::handle_phase_blocked();
 }

@@ -227,12 +227,11 @@ bool monster_can_submerge(const monster* mon, dungeon_feature_type feat)
 
 static void _apply_ood(level_id &place)
 {
-    // OODs do not apply to any portal vaults, any 1-level branches, Zot and
+    // OODs do not apply to any portal vaults, Zot and
     // hells. What with newnewabyss?
     if (!is_connected_branch(place)
         || place.branch == BRANCH_ZOT
-        || is_hell_subbranch(place.branch)
-        || brdepth[place.branch] <= 1)
+        || is_hell_subbranch(place.branch))
     {
         return;
     }
@@ -241,28 +240,14 @@ static void _apply_ood(level_id &place)
     level_id old_place = place;
 #endif
 
-    // The OOD fuzz roll is not applied on D:1, and is applied slightly less
-    // often (0.75*0.14) on D:2. All other levels have a straight 14% chance of
-    // moderate OOD fuzz for each monster at level generation.
-    if (place.branch == BRANCH_DUNGEON
-        && (place.depth == 1
-            || place.depth == 2 && one_chance_in(4)))
+    // 20% chance of OOD fuzz for each monster at level generation.
+    // fuzzed depth capped at 2x current depth
+    if (x_chance_in_y(20, 100))
     {
-        return;
-    }
-
-    if (x_chance_in_y(14, 100))
-    {
-        const int fuzzspan = 5;
-        const int fuzz = max(0, random_range(-fuzzspan, fuzzspan, 2));
-
-        // Quite bizarre logic: why should we fail in >50% cases here?
-        if (fuzz)
-        {
+        int depth = place.depth;
+        int fuzz = abs(random2(5) + random2(5) + random2(5) - 6);
+        if(fuzz <= depth)
             place.depth += fuzz;
-            dprf(DIAG_MONPLACE, "Monster level fuzz: %d (old: %s, new: %s)",
-                 fuzz, old_place.describe().c_str(), place.describe().c_str());
-        }
     }
 }
 

@@ -244,10 +244,10 @@ static void _apply_ood(level_id &place)
     // fuzzed depth capped at 2x current depth
     if (x_chance_in_y(20, 100))
     {
-        int depth = place.depth;
         int fuzz = abs(random2(5) + random2(5) + random2(5) - 6);
-        if(fuzz <= depth)
-            place.depth += fuzz;
+        if(fuzz > place.depth)
+            fuzz = 1;
+        place.depth += fuzz;
     }
 }
 

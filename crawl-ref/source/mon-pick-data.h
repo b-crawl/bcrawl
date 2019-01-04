@@ -6,8 +6,8 @@
 //FALL, // linearly from 100% at the start to near-zero
 static const pop_entry pop_d[] =
 { // Dungeon (OOD cap: 27)
-  { -2,  8,  515, SEMI, MONS_GIANT_COCKROACH },
-  { -2,  8,  192, PEAK, MONS_BALL_PYTHON },
+  { -2,  5,  515, SEMI, MONS_GIANT_COCKROACH },
+  { -2,  6,  192, PEAK, MONS_BALL_PYTHON },
   { -1,  5,  640, SEMI, MONS_FRILLED_LIZARD},
   { -1,  7,  136, SEMI, MONS_OOZE },
   {  1,  3, 1000, FLAT, MONS_GOBLIN },
@@ -16,11 +16,11 @@ static const pop_entry pop_d[] =
   {  1,  3, 1000, FLAT, MONS_RAT },
   {  1,  3, 1000, FLAT, MONS_HOBGOBLIN },
   {  1,  5,  335, FALL, MONS_DART_SLUG },
-  {  1, 10,  515, SEMI, MONS_LEOPARD_GECKO },
+  {  1,  8,  515, SEMI, MONS_LEOPARD_GECKO },
   {  1, 10,  335, SEMI, MONS_JACKAL },
   {  1, 11,  192, PEAK, MONS_GNOLL },
   {  2, 11,  925, FLAT, MONS_ADDER },
-  {  2, 11,  515, SEMI, MONS_QUOKKA },
+  {  2,  8,  515, SEMI, MONS_QUOKKA },
   {  2,  6,  515, FALL, MONS_WORM },
   {  3, 11, 1000, FLAT, MONS_ORC },
   {  4,  7, 1000, FLAT, MONS_NO_MONSTER},

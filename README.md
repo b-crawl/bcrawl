@@ -36,6 +36,7 @@ Pull requests for new content are welcome.
   - v1.5.3: Orc doesn't spawn Stone Giants except from vaults.
   - v1.6: To compensate for fewer floors, shops are more likely.
   - v1.6.1: Vaults has fewer orcs.
+  - v1.7.3: Out-of-depth monster spawns are changed: centaurs and water moccasins can't appear until D:3, and killer bees can't appear until D:4. 
   
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)

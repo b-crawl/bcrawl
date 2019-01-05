@@ -968,11 +968,46 @@ static like_map divine_likes[] =
     },
     // GOD_DEMIGOD,
     {
-        { DID_KILL_LIVING, KILL_LIVING_RESPONSE },
-        { DID_KILL_UNDEAD, KILL_UNDEAD_RESPONSE },
-        { DID_KILL_DEMON, KILL_DEMON_RESPONSE },
-        { DID_KILL_HOLY, KILL_HOLY_RESPONSE },
-        { DID_KILL_NONLIVING, KILL_NONLIVING_RESPONSE },
+        { DID_KILL_LIVING, { "Your divinity strengthens when you kill living beings",
+            false, -6, 18, 2, nullptr, [] (int &piety, int &denom,
+                                            const monster* victim)
+            {
+                mprf(MSGCH_GOD, you.religion,
+                     "Your kill strengthens your divinity.");
+            },
+        } },
+        { DID_KILL_UNDEAD, { "destroy the undead",
+            false, -6, 18, 2, nullptr, [] (int &piety, int &denom,
+                                            const monster* victim)
+            {
+                mprf(MSGCH_GOD, you.religion,
+                     "Your kill strengthens your divinity.");
+            },
+        } },
+        { DID_KILL_DEMON, { "kill demons",
+            false, -6, 18, 2, nullptr, [] (int &piety, int &denom,
+                                            const monster* victim)
+            {
+                mprf(MSGCH_GOD, you.religion,
+                     "Your kill strengthens your divinity.");
+            },
+        } },
+        { DID_KILL_HOLY, { "kill holy beings",
+            false, -6, 18, 2, nullptr, [] (int &piety, int &denom,
+                                            const monster* victim)
+            {
+                mprf(MSGCH_GOD, you.religion,
+                     "Your kill strengthens your divinity.");
+            },
+        } },
+        { DID_KILL_NONLIVING, { "destroy nonliving beings",
+            false, -6, 18, 2, nullptr, [] (int &piety, int &denom,
+                                            const monster* victim)
+            {
+                mprf(MSGCH_GOD, you.religion,
+                     "Your kill strengthens your divinity.");
+            },
+        } },
     },
     // GOD_USKAYAW
     {

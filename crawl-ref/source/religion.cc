@@ -4376,7 +4376,8 @@ bool god_power_usable(const god_power& power, bool ignore_piety, bool ignore_pen
     return (power.rank <= 0
             || power.rank == 7 && can_do_capstone_ability(you.religion)
             || piety_rank() >= power.rank
-            || ignore_piety)
+            || ignore_piety
+            || you.religion == GOD_DEMIGOD)
            && (!player_under_penance()
                || power.rank == -1
                || ignore_penance);

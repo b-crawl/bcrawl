@@ -3679,9 +3679,25 @@ vector<ability_type> get_god_abilities(bool ignore_silence, bool ignore_piety,
     }
     if (you.transfer_skill_points > 0)
         abilities.push_back(ABIL_ASHENZARI_END_TRANSFER);
-    if (silenced(you.pos()) && you_worship(GOD_WU_JIAN) && piety_rank() >= 2)
-        abilities.push_back(ABIL_WU_JIAN_WALLJUMP);
-
+    
+    switch(you.religion)
+    {
+    case GOD_WU_JIAN:
+        if (silenced(you.pos()))
+        {
+            if(piety_rank() >= 1)
+                abilities.push_back(ABIL_WU_JIAN_WALLJUMP);
+            if(piety_rank() >= 2)
+                abilities.push_back(ABIL_WU_JIAN_SERPENTS_LASH);
+        }
+        break;
+    
+    case GOD_DEMIGOD:
+        ignore_silence = true;
+    default:
+        break;
+    }
+    
     if (!ignore_silence && silenced(you.pos()))
         return abilities;
     // Remaining abilities are unusable if silenced.

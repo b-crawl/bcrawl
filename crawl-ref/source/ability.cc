@@ -3368,7 +3368,7 @@ vector<talent> your_talents(bool check_confused, bool include_unusable)
     }
 
     // And finally, the ability to opt-out of your faith {dlb}:
-    if (!you_worship(GOD_NO_GOD))
+    if (you.religion != GOD_NO_GOD && you.religion != GOD_DEMIGOD)
         _add_talent(talents, ABIL_RENOUNCE_RELIGION, check_confused);
 
     if (env.level_state & LSTATE_BEOGH && can_convert_to_beogh())

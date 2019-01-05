@@ -306,6 +306,7 @@ const vector<god_power> god_powers[NUM_GODS] =
     // Demigod
     {
       { 1, ABIL_CHEIBRIADOS_DISTORTION, "warp the flow of time around you" },
+      { 2, "walk through plants" },
       { 2, ABIL_FEDHAS_PLANT_RING, "cause a ring of plants to grow" },
       { 3, ABIL_MAKHLEB_MAJOR_DESTRUCTION, "hurl elemental destruction" },
       { 4, ABIL_OKAWARU_HEROISM, "gain great but temporary skills" },

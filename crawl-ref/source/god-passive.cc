@@ -396,15 +396,12 @@ static const vector<god_passive> god_passives[] =
         },
     },
 
-    // Pakellas
+    // Demigod
     {
-        { -1, passive_t::no_mp_regen,
-              "GOD NOW prevents you from regenerating your magical power" },
-        { -1, passive_t::mp_on_kill, "have a chance to gain magical power from"
-                                     " killing" },
-        {  1, passive_t::bottle_mp,
-              "GOD NOW collects and distills excess magic from your kills"
-        },
+        { 2, passive_t::pass_through_plants,
+              "can NOW walk through plants" },
+        { 2, passive_t::shoot_through_plants,
+              "can NOW safely fire through allied plants" },
     },
 
     // Uskayaw

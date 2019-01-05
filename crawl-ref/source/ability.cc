@@ -188,17 +188,13 @@ skill_type invo_skill(god_type god)
         case GOD_KIKUBAAQUDGHA:
             return SK_NECROMANCY;
 
-#if TAG_MAJOR_VERSION == 34
-        case GOD_DEMIGOD:
-            return SK_EVOCATIONS;
-#endif
         case GOD_ASHENZARI:
         case GOD_JIYVA:
         case GOD_GOZAG:
         case GOD_RU:
         case GOD_TROG:
         case GOD_WU_JIAN:
-            return SK_NONE; // ugh
+            return SK_NONE;
         default:
             return SK_INVOCATIONS;
     }
@@ -612,13 +608,6 @@ static const ability_def Ability_List[] =
       6, 0, 0, 6, {fail_basis::invo, 60, 5, 20}, abflag::none },
     { ABIL_QAZLAL_DISASTER_AREA, "Disaster Area",
       7, 0, 0, 10, {fail_basis::invo, 70, 4, 25}, abflag::none },
-
-#if TAG_MAJOR_VERSION == 34
-    // Pakellas
-    { ABIL_PAKELLAS_DEVICE_SURGE, "Device Surge",
-      0, 0, 0, generic_cost::fixed(1),
-      {fail_basis::invo, 40, 5, 20}, abflag::variable_mp | abflag::instant },
-#endif
 
     // Uskayaw
     { ABIL_USKAYAW_STOMP, "Stomp",
@@ -1629,17 +1618,6 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
             return false;
         }
         return true;
-
-#if TAG_MAJOR_VERSION == 34
-    case ABIL_PAKELLAS_DEVICE_SURGE:
-        if (you.magic_points == 0)
-        {
-            if (!quiet)
-                mpr("You have no magic power.");
-            return false;
-        }
-        return true;
-#endif
 
         // only available while your ancestor is alive.
     case ABIL_HEPLIAKLQANA_IDEALISE:
@@ -2991,18 +2969,6 @@ static spret_type _do_ability(const ability_def& abil, bool fail)
             return SPRET_ABORT;
         you.increase_duration(DUR_EXHAUSTED, 30 + random2(20));
         break;
-
-#if TAG_MAJOR_VERSION == 34
-    case ABIL_PAKELLAS_DEVICE_SURGE:
-    {
-        fail_check();
-
-        mprf(MSGCH_DURATION, "You feel a buildup of energy.");
-        you.increase_duration(DUR_DEVICE_SURGE,
-                              random2avg(you.piety / 4, 2) + 3, 100);
-        break;
-    }
-#endif
 
     case ABIL_USKAYAW_STOMP:
         fail_check();

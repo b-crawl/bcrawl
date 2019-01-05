@@ -647,6 +647,12 @@ static void _setup_generic(const newgame_def& ng)
 
     if (you.species == SP_DEMONSPAWN)
         roll_demonspawn_mutations();
+    
+    if (you.species == SP_DEMIGOD)
+    {
+        you.religion = GOD_DEMIGOD;
+        you.piety = 15;
+    }
 
     _give_starting_food();
 

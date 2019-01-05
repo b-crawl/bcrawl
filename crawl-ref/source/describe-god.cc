@@ -220,9 +220,9 @@ static const char *divine_title[][8] =
     {"Sleeper",           "Questioner",             "Initiate",                 "Seeker of Truth",
         "@Walker@ of the Path","Lifter of the Veil",     "Transcendent",     "Drop of Water"},
 
-    // Pakellas -- inventor theme
-    {"Reactionary",       "Apprentice",             "Inquisitive",              "Experimenter",
-        "Inventor",           "Pioneer",               "Brilliant",                "Grand Gadgeteer"},
+    // Demigod
+    {"Dormant",          "Nescient",             "Spark",              "Confident",
+        "Awoken",           "Ascendant",            "Transcendent",       "Prime"},
 
     // Uskayaw -- reveler theme
     {"Prude",             "Wallflower",             "Party-goer",              "Dancer",

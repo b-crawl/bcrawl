@@ -85,7 +85,7 @@ static const char *_god_wrath_adjectives[] =
     "greed",            // Gozag (unused)
     "adversity",        // Qazlal
     "disappointment",   // Ru
-    "progress",         // Pakellas
+    "divergence",       // Demigod
     "fury",             // Uskayaw
     "memory",           // Hepliaklqana (unused)
     "rancor",           // Wu Jian

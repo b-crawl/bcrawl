@@ -450,12 +450,7 @@ static peeve_map divine_peeves[] =
     // GOD_RU,
     peeve_map(),
     // GOD_DEMIGOD
-    {
-        { DID_CHANNEL, {
-            "you channel magical energy", true,
-            1, 1,
-        } },
-    },
+    peeve_map(),
     // GOD_USKAYAW,
     peeve_map(),
     // GOD_HEPLIAKLQANA,
@@ -973,14 +968,7 @@ static like_map divine_likes[] =
     },
     // GOD_DEMIGOD,
     {
-        { DID_KILL_LIVING, _on_kill("you kill living beings", MH_NATURAL, false,
-                                  [](int &piety, int &denom,
-                                     const monster* victim)
-            {
-                piety *= 4;
-                denom *= 3;
-            }
-        ) },
+        { DID_KILL_LIVING, KILL_LIVING_RESPONSE },
         { DID_KILL_UNDEAD, KILL_UNDEAD_RESPONSE },
         { DID_KILL_DEMON, KILL_DEMON_RESPONSE },
         { DID_KILL_HOLY, KILL_HOLY_RESPONSE },

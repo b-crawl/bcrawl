@@ -2369,36 +2369,6 @@ item_def* monster_die(monster& mons, killer_type killer,
                     inc_mp(mp_heal);
                     mp_heal -= tmp;
                 }
-
-                // perhaps this should go to its own function
-                if (mp_heal
-                    && have_passive(passive_t::bottle_mp)
-                    && !you_foodless(false))
-                {
-                    simple_god_message(" collects the excess magic power.");
-                    you.attribute[ATTR_PAKELLAS_EXTRA_MP] -= mp_heal;
-
-                    if (you.attribute[ATTR_PAKELLAS_EXTRA_MP] <= 0
-                        && (feat_has_solid_floor(grd(you.pos()))
-                            || feat_is_watery(grd(you.pos()))
-                               && species_likes_water(you.species)))
-                    {
-                        int thing_created = items(true, OBJ_POTIONS,
-                                                  POT_MAGIC, 1, 0,
-                                                  GOD_DEMIGOD);
-                        if (thing_created != NON_ITEM)
-                        {
-                            move_item_to_grid(&thing_created, you.pos(), true);
-                            mitm[thing_created].quantity = 1;
-                            mitm[thing_created].flags |= ISFLAG_KNOW_TYPE;
-                            // not a conventional gift, but use the same
-                            // messaging
-                            simple_god_message(" grants you a gift!");
-                            you.attribute[ATTR_PAKELLAS_EXTRA_MP]
-                                += POT_MAGIC_MP;
-                        }
-                    }
-                }
             }
 
             if (gives_player_xp && you_worship(GOD_RU) && you.piety < 200

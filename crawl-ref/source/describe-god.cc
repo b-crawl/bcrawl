@@ -875,25 +875,7 @@ static formatted_string _describe_god_powers(god_type which_god)
         break;
 
     case GOD_DEMIGOD:
-    {
-        have_any = true;
-        desc.cprintf("%s prevents your magic from regenerating.\n",
-                uppercase_first(god_name(which_god)).c_str());
-        desc.cprintf("%s identifies device charges for you.\n",
-                uppercase_first(god_name(which_god)).c_str());
-        if (!you_foodless(false))
-        {
-            if (have_passive(passive_t::bottle_mp))
-                desc.textcolour(god_colour(which_god));
-            else
-                desc.textcolour(DARKGREY);
-
-            desc.cprintf("%s will collect and distill excess magic from your "
-                    "kills.\n",
-                    uppercase_first(god_name(which_god)).c_str());
-        }
         break;
-    }
 
     case GOD_LUGONU:
         have_any = true;
@@ -970,17 +952,22 @@ static formatted_string _god_overview_description(god_type which_god)
     // something better, do it.
 
     desc.textcolour(LIGHTGREY);
-    desc.cprintf("\nFavour - ");
-    desc.textcolour(god_colour(which_god));
-
-    if (!you_worship(which_god))
-        desc.cprintf("%s", _god_penance_message(which_god).c_str());
-    else
+    
+    if(which_god != GOD_DEMIGOD)
     {
-        desc.cprintf("%s", _describe_favour(which_god).c_str());
-        if (which_god == GOD_ASHENZARI)
-            desc.cprintf("\n%s", ash_describe_bondage(ETF_ALL, true).c_str());
+        desc.cprintf("\nFavour - ");
+        desc.textcolour(god_colour(which_god));
+
+        if (!you_worship(which_god))
+            desc.cprintf("%s", _god_penance_message(which_god).c_str());
+        else
+        {
+            desc.cprintf("%s", _describe_favour(which_god).c_str());
+            if (which_god == GOD_ASHENZARI)
+                desc.cprintf("\n%s", ash_describe_bondage(ETF_ALL, true).c_str());
+        }
     }
+    
     desc += _describe_god_powers(which_god);
     desc.cprintf("\n\n");
 

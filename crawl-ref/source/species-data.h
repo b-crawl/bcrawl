@@ -100,7 +100,7 @@ static const map<species_type, species_def> species_data =
     -1, 1, 2, 4,
     MONS_DEMIGOD,
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
-    11, 12, 11, // 34
+    12, 12, 12, // 36
     set<stat_type>(), 28, // No natural stat gain (double chosen instead)
     { {MUT_HIGH_MAGIC, 1, 1} },
     {},

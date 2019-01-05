@@ -1590,7 +1590,7 @@ bool needs_handle_warning(const item_def &item, operation_types oper,
         return true;
 
     if (oper == OPER_ATTACK && god_hates_item(item)
-        && !you_worship(GOD_PAKELLAS))
+        && !you_worship(GOD_DEMIGOD))
     {
         penance = true;
         return true;

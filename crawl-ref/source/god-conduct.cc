@@ -449,13 +449,8 @@ static peeve_map divine_peeves[] =
     peeve_map(),
     // GOD_RU,
     peeve_map(),
-    // GOD_PAKELLAS
-    {
-        { DID_CHANNEL, {
-            "you channel magical energy", true,
-            1, 1,
-        } },
-    },
+    // GOD_DEMIGOD
+    peeve_map(),
     // GOD_USKAYAW,
     peeve_map(),
     // GOD_HEPLIAKLQANA,
@@ -971,20 +966,48 @@ static like_map divine_likes[] =
             }
         } },
     },
-    // GOD_PAKELLAS,
+    // GOD_DEMIGOD,
     {
-        { DID_KILL_LIVING, _on_kill("you kill living beings", MH_NATURAL, false,
-                                  [](int &piety, int &denom,
-                                     const monster* victim)
+        { DID_KILL_LIVING, { "Your divinity strengthens when you kill living beings",
+            false, -6, 18, 2, nullptr, [] (int &piety, int &denom,
+                                            const monster* victim)
             {
-                piety *= 4;
-                denom *= 3;
-            }
-        ) },
-        { DID_KILL_UNDEAD, KILL_UNDEAD_RESPONSE },
-        { DID_KILL_DEMON, KILL_DEMON_RESPONSE },
-        { DID_KILL_HOLY, KILL_HOLY_RESPONSE },
-        { DID_KILL_NONLIVING, KILL_NONLIVING_RESPONSE },
+                mprf(MSGCH_GOD, you.religion,
+                     "Your kill strengthens your divinity.");
+            },
+        } },
+        { DID_KILL_UNDEAD, { "destroy the undead",
+            false, -6, 18, 2, nullptr, [] (int &piety, int &denom,
+                                            const monster* victim)
+            {
+                mprf(MSGCH_GOD, you.religion,
+                     "Your kill strengthens your divinity.");
+            },
+        } },
+        { DID_KILL_DEMON, { "kill demons",
+            false, -6, 18, 2, nullptr, [] (int &piety, int &denom,
+                                            const monster* victim)
+            {
+                mprf(MSGCH_GOD, you.religion,
+                     "Your kill strengthens your divinity.");
+            },
+        } },
+        { DID_KILL_HOLY, { "kill holy beings",
+            false, -6, 18, 2, nullptr, [] (int &piety, int &denom,
+                                            const monster* victim)
+            {
+                mprf(MSGCH_GOD, you.religion,
+                     "Your kill strengthens your divinity.");
+            },
+        } },
+        { DID_KILL_NONLIVING, { "destroy nonliving beings",
+            false, -6, 18, 2, nullptr, [] (int &piety, int &denom,
+                                            const monster* victim)
+            {
+                mprf(MSGCH_GOD, you.religion,
+                     "Your kill strengthens your divinity.");
+            },
+        } },
     },
     // GOD_USKAYAW
     {

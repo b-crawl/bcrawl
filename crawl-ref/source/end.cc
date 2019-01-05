@@ -359,10 +359,9 @@ NORETURN void end_game(scorefile_entry &se, int hiscore_index)
             }
             break;
 
-        case GOD_PAKELLAS:
+        case GOD_DEMIGOD:
         {
-            const string result = getSpeakString("Pakellas death");
-            god_speaks(GOD_PAKELLAS, result.c_str());
+            mprf(MSGCH_GOD, "Your divinity fades.");
             break;
         }
 

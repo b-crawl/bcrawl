@@ -1709,7 +1709,7 @@ string skill_title_by_rank(skill_type best_skill, uint8_t skill_rank,
             break;
 
         case SK_EVOCATIONS:
-            if (god == GOD_PAKELLAS)
+            if (god == GOD_DEMIGOD)
                 result = god_title(god, species, piety);
             break;
 

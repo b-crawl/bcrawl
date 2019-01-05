@@ -3578,7 +3578,7 @@ bool is_useless_item(const item_def &item, bool temp)
                        && you.hunger_state <= HS_STARVING);
 
         case AMU_MANA_REGENERATION:
-            return you_worship(GOD_PAKELLAS);
+            return you_worship(GOD_DEMIGOD);
 
         case RING_SEE_INVISIBLE:
             return you.innate_sinv();

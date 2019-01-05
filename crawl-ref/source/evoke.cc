@@ -406,13 +406,6 @@ void zap_wand(int slot)
         return;
     }
 
-    if (player_under_penance(GOD_PAKELLAS))
-    {
-        simple_god_message("'s wrath prevents you from evoking devices!",
-                           GOD_PAKELLAS);
-        return;
-    }
-
     const int mp_cost = wand_mp_cost();
 
     int item_slot;
@@ -1632,17 +1625,10 @@ bool evoke_item(int slot, bool check_range)
     case OBJ_MISCELLANY:
         did_work = true; // easier to do it this way for misc items
 
-        if ((you.get_mutation_level(MUT_NO_ARTIFICE)
-             || player_under_penance(GOD_PAKELLAS))
+        if ((you.get_mutation_level(MUT_NO_ARTIFICE))
             && item.sub_type != MISC_ZIGGURAT)
         {
-            if (you.get_mutation_level(MUT_NO_ARTIFICE))
-                mpr("You cannot evoke magical items.");
-            else
-            {
-                simple_god_message("'s wrath prevents you from evoking "
-                                   "devices!", GOD_PAKELLAS);
-            }
+			mpr("You cannot evoke magical items.");
             return false;
         }
 

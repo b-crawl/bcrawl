@@ -400,8 +400,6 @@ static const vector<god_passive> god_passives[] =
     {
         { 2, passive_t::pass_through_plants,
               "can NOW walk through plants" },
-        { 2, passive_t::shoot_through_plants,
-              "can NOW safely fire through allied plants" },
     },
 
     // Uskayaw

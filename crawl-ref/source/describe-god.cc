@@ -537,7 +537,7 @@ static formatted_string _god_wrath_description(god_type which_god)
     _add_par(desc, _describe_god_wrath_causes(which_god));
     _add_par(desc, getLongDescription(god_name(which_god) + " wrath"));
 
-    if (which_god != GOD_RU) // Permanent wrath.
+    if (which_god != GOD_RU && which_god != GOD_DEMIGOD)
     {
         const bool long_wrath = initial_wrath_penance_for(which_god) > 30;
         _add_par(desc, apostrophise(uppercase_first(god_name(which_god)))

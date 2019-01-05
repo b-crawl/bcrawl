@@ -449,7 +449,7 @@ static peeve_map divine_peeves[] =
     peeve_map(),
     // GOD_RU,
     peeve_map(),
-    // GOD_PAKELLAS
+    // GOD_DEMIGOD
     {
         { DID_CHANNEL, {
             "you channel magical energy", true,
@@ -971,7 +971,7 @@ static like_map divine_likes[] =
             }
         } },
     },
-    // GOD_PAKELLAS,
+    // GOD_DEMIGOD,
     {
         { DID_KILL_LIVING, _on_kill("you kill living beings", MH_NATURAL, false,
                                   [](int &piety, int &denom,

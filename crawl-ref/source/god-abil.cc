@@ -6318,7 +6318,7 @@ bool ru_apocalypse()
  */
 int pakellas_effective_hex_power(int pow)
 {
-    if (!you_worship(GOD_PAKELLAS) || !you.duration[DUR_DEVICE_SURGE])
+    if (!you_worship(GOD_DEMIGOD) || !you.duration[DUR_DEVICE_SURGE])
         return pow;
 
     if (you.magic_points == 0)
@@ -6375,7 +6375,7 @@ int pakellas_effective_hex_power(int pow)
  */
 int pakellas_surge_devices()
 {
-    if (!you_worship(GOD_PAKELLAS) || !you.duration[DUR_DEVICE_SURGE])
+    if (!you_worship(GOD_DEMIGOD) || !you.duration[DUR_DEVICE_SURGE])
         return 0;
 
     const int mp = min(you.magic_points, min(9, max(3,

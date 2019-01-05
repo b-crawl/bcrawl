@@ -376,7 +376,7 @@ mutation_activity_type mutation_activity_level(mutation_type mut)
         return mutation_activity_type::INACTIVE;
     }
 #if TAG_MAJOR_VERSION == 34
-    if ((you_worship(GOD_PAKELLAS) || player_under_penance(GOD_PAKELLAS))
+    if ((you_worship(GOD_DEMIGOD) || player_under_penance(GOD_DEMIGOD))
          && (mut == MUT_MANA_LINK || mut == MUT_MANA_REGENERATION))
     {
         return mutation_activity_type::INACTIVE;

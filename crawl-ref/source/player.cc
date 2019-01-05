@@ -4106,7 +4106,7 @@ bool player_regenerates_mp()
     if (you.spirit_shield() && you.species == SP_DEEP_DWARF)
         return false;
     // Pakellas blocks MP regeneration.
-    if (have_passive(passive_t::no_mp_regen) || player_under_penance(GOD_PAKELLAS))
+    if (have_passive(passive_t::no_mp_regen) || player_under_penance(GOD_DEMIGOD))
         return false;
     return true;
 }

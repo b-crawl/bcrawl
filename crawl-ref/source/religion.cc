@@ -422,7 +422,7 @@ static bool _is_disabled_god(god_type god)
     switch (god)
     {
     // Disabled, pending a rework.
-    case GOD_PAKELLAS:
+    case GOD_DEMIGOD:
         return true;
 
     default:
@@ -504,7 +504,7 @@ bool active_penance(god_type god)
            && god != GOD_GOZAG
            && god != GOD_RU
            && god != GOD_HEPLIAKLQANA
-           && god != GOD_PAKELLAS
+           && god != GOD_DEMIGOD
            && god != GOD_ELYVILON
            && (god == you.religion && !is_good_god(god)
                || god_hates_your_god(god, you.religion));
@@ -518,7 +518,7 @@ bool xp_penance(god_type god)
            && (god == GOD_ASHENZARI
                || god == GOD_GOZAG
                || god == GOD_HEPLIAKLQANA
-               || god == GOD_PAKELLAS
+               || god == GOD_DEMIGOD
                || god == GOD_ELYVILON)
            && god_hates_your_god(god, you.religion);
 }
@@ -603,7 +603,7 @@ void dec_penance(god_type god, int val)
         }
         else
         {
-            if (god == GOD_PAKELLAS)
+            if (god == GOD_DEMIGOD)
             {
                 // Penance just ended w/o worshipping Pakellas;
                 // notify the player that MP regeneration will start again.
@@ -780,7 +780,7 @@ static void _inc_penance(god_type god, int val)
                 you.redraw_armour_class = true;
             }
         }
-        else if (god == GOD_PAKELLAS)
+        else if (god == GOD_DEMIGOD)
         {
             if (you.duration[DUR_DEVICE_SURGE])
                 you.duration[DUR_DEVICE_SURGE] = 0;
@@ -1214,13 +1214,13 @@ static bool _give_pakellas_gift()
     int subtype = -1;
 
     if (you.piety >= piety_breakpoint(0)
-        && you.num_total_gifts[GOD_PAKELLAS] == 0)
+        && you.num_total_gifts[GOD_DEMIGOD] == 0)
     {
         basetype = OBJ_WANDS;
         subtype = _pakellas_low_wand();
     }
     else if (you.piety >= piety_breakpoint(1)
-             && you.num_total_gifts[GOD_PAKELLAS] == 1)
+             && you.num_total_gifts[GOD_DEMIGOD] == 1)
     {
         // All the evoker options here are summon-based, so give another
         // low-level wand instead under Sacrifice Love.
@@ -1236,19 +1236,19 @@ static bool _give_pakellas_gift()
         }
     }
     else if (you.piety >= piety_breakpoint(2)
-             && you.num_total_gifts[GOD_PAKELLAS] == 2)
+             && you.num_total_gifts[GOD_DEMIGOD] == 2)
     {
         basetype = OBJ_WANDS;
         subtype = _pakellas_high_wand();
     }
     else if (you.piety >= piety_breakpoint(3)
-             && you.num_total_gifts[GOD_PAKELLAS] == 3)
+             && you.num_total_gifts[GOD_DEMIGOD] == 3)
     {
         basetype = OBJ_MISCELLANY;
         subtype = _pakellas_high_misc();
     }
     else if (you.piety >= piety_breakpoint(4)
-             && you.num_total_gifts[GOD_PAKELLAS] == 4)
+             && you.num_total_gifts[GOD_DEMIGOD] == 4)
     {
         basetype = random_choose(OBJ_WANDS, OBJ_MISCELLANY);
         subtype = (basetype == OBJ_WANDS) ? _pakellas_high_wand()
@@ -1965,7 +1965,7 @@ bool do_god_gift(bool forced)
             success = _give_nemelex_gift(forced);
             break;
 
-        case GOD_PAKELLAS:
+        case GOD_DEMIGOD:
             success = _give_pakellas_gift();
             break;
 
@@ -2056,7 +2056,7 @@ string god_name(god_type which_god, bool long_name)
     case GOD_GOZAG:         return "Gozag";
     case GOD_QAZLAL:        return "Qazlal";
     case GOD_RU:            return "Ru";
-    case GOD_PAKELLAS:      return "Pakellas";
+    case GOD_DEMIGOD:      return "Pakellas";
     case GOD_USKAYAW:       return "Uskayaw";
     case GOD_HEPLIAKLQANA:  return "Hepliaklqana";
     case GOD_WU_JIAN:     return "Wu Jian";
@@ -2620,7 +2620,7 @@ int initial_wrath_penance_for(god_type god)
         case GOD_CHEIBRIADOS:
         case GOD_DITHMENOS:
         case GOD_MAKHLEB:
-        case GOD_PAKELLAS:
+        case GOD_DEMIGOD:
         case GOD_QAZLAL:
         case GOD_VEHUMET:
         case GOD_ZIN:
@@ -2883,7 +2883,7 @@ void excommunication(bool voluntary, god_type new_god)
         }
         break;
 
-    case GOD_PAKELLAS:
+    case GOD_DEMIGOD:
         simple_god_message(" continues to block your magic from regenerating.",
                            old_god);
         if (you.duration[DUR_DEVICE_SURGE])
@@ -3056,7 +3056,7 @@ bool player_can_join_god(god_type which_god)
         return false;
 
     if (you.get_mutation_level(MUT_NO_ARTIFICE)
-        && which_god == GOD_PAKELLAS)
+        && which_god == GOD_DEMIGOD)
     {
       return false;
     }
@@ -3518,7 +3518,7 @@ static const map<god_type, function<void ()>> on_join = {
         if (you.worshipped[GOD_LUGONU] == 0)
             gain_piety(20, 1, false);  // allow instant access to first power
     }},
-    { GOD_PAKELLAS, _join_pakellas },
+    { GOD_DEMIGOD, _join_pakellas },
     { GOD_RU, _join_ru },
     { GOD_TROG, _join_trog },
     { GOD_ZIN, _join_zin },
@@ -3662,7 +3662,7 @@ void god_pitch(god_type which_god)
                                which_god);
         }
         else if (you.get_mutation_level(MUT_NO_ARTIFICE)
-                 && which_god == GOD_PAKELLAS)
+                 && which_god == GOD_DEMIGOD)
         {
             simple_god_message(" does not accept worship from those who are "
                                "unable to use magical devices!", which_god);
@@ -3855,7 +3855,7 @@ bool god_hates_spell(spell_type spell, god_type god, bool fake_spell)
         if (is_hasty_spell(spell))
             return true;
         break;
-    case GOD_PAKELLAS:
+    case GOD_DEMIGOD:
         if (spell == SPELL_SUBLIMATION_OF_BLOOD)
             return true;
         break;
@@ -3991,7 +3991,7 @@ void handle_god_time(int /*time_delta*/)
         case GOD_KIKUBAAQUDGHA:
         case GOD_VEHUMET:
         case GOD_ZIN:
-        case GOD_PAKELLAS:
+        case GOD_DEMIGOD:
         case GOD_JIYVA:
         case GOD_WU_JIAN:
             if (one_chance_in(17))
@@ -4096,7 +4096,7 @@ int god_colour(god_type god) // mv - added
     case GOD_RU:
         return BROWN;
 
-    case GOD_PAKELLAS:
+    case GOD_DEMIGOD:
         return LIGHTGREEN;
 
     case GOD_NO_GOD:
@@ -4184,7 +4184,7 @@ colour_t god_message_altar_colour(god_type god)
     case GOD_RU:
         return BROWN;
 
-    case GOD_PAKELLAS:
+    case GOD_DEMIGOD:
         return random_choose(LIGHTMAGENTA, LIGHTGREEN, LIGHTCYAN);
 
     case GOD_USKAYAW:

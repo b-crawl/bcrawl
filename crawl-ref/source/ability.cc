@@ -189,7 +189,7 @@ skill_type invo_skill(god_type god)
             return SK_NECROMANCY;
 
 #if TAG_MAJOR_VERSION == 34
-        case GOD_PAKELLAS:
+        case GOD_DEMIGOD:
             return SK_EVOCATIONS;
 #endif
         case GOD_ASHENZARI:

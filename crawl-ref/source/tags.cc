@@ -2725,7 +2725,7 @@ static void tag_read_you(reader &th)
         you.attribute[j] = unmarshallInt(th);
     }
 #if TAG_MAJOR_VERSION == 34
-    if (count == ATTR_PAKELLAS_EXTRA_MP && you_worship(GOD_PAKELLAS))
+    if (count == ATTR_PAKELLAS_EXTRA_MP && you_worship(GOD_DEMIGOD))
         you.attribute[ATTR_PAKELLAS_EXTRA_MP] = POT_MAGIC_MP;
 #endif
     for (int j = count; j < NUM_ATTRIBUTES; ++j)
@@ -3359,11 +3359,11 @@ static void tag_read_you(reader &th)
 #if TAG_MAJOR_VERSION == 34
     }
     if (th.getMinorVersion() < TAG_MINOR_PAKELLAS_WRATH
-        && player_under_penance(GOD_PAKELLAS))
+        && player_under_penance(GOD_DEMIGOD))
     {
-        you.exp_docked[GOD_PAKELLAS] = exp_needed(min<int>(you.max_level, 27) + 1)
+        you.exp_docked[GOD_DEMIGOD] = exp_needed(min<int>(you.max_level, 27) + 1)
                                   - exp_needed(min<int>(you.max_level, 27));
-        you.exp_docked_total[GOD_PAKELLAS] = you.exp_docked[GOD_PAKELLAS];
+        you.exp_docked_total[GOD_DEMIGOD] = you.exp_docked[GOD_DEMIGOD];
     }
     if (th.getMinorVersion() < TAG_MINOR_ELYVILON_WRATH
         && player_under_penance(GOD_ELYVILON))

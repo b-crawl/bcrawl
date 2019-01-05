@@ -406,10 +406,10 @@ void zap_wand(int slot)
         return;
     }
 
-    if (player_under_penance(GOD_PAKELLAS))
+    if (player_under_penance(GOD_DEMIGOD))
     {
         simple_god_message("'s wrath prevents you from evoking devices!",
-                           GOD_PAKELLAS);
+                           GOD_DEMIGOD);
         return;
     }
 
@@ -1633,7 +1633,7 @@ bool evoke_item(int slot, bool check_range)
         did_work = true; // easier to do it this way for misc items
 
         if ((you.get_mutation_level(MUT_NO_ARTIFICE)
-             || player_under_penance(GOD_PAKELLAS))
+             || player_under_penance(GOD_DEMIGOD))
             && item.sub_type != MISC_ZIGGURAT)
         {
             if (you.get_mutation_level(MUT_NO_ARTIFICE))
@@ -1641,7 +1641,7 @@ bool evoke_item(int slot, bool check_range)
             else
             {
                 simple_god_message("'s wrath prevents you from evoking "
-                                   "devices!", GOD_PAKELLAS);
+                                   "devices!", GOD_DEMIGOD);
             }
             return false;
         }

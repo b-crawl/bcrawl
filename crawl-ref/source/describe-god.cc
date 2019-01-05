@@ -874,7 +874,7 @@ static formatted_string _describe_god_powers(god_type which_god)
         desc.cprintf("Your life essence is reduced. (-10%% HP)\n");
         break;
 
-    case GOD_PAKELLAS:
+    case GOD_DEMIGOD:
     {
         have_any = true;
         desc.cprintf("%s prevents your magic from regenerating.\n",

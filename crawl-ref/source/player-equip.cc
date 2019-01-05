@@ -397,7 +397,7 @@ static void _equip_use_warning(const item_def& item)
         mpr("You really shouldn't be using a chaotic item like this.");
     else if (is_hasty_item(item) && you_worship(GOD_CHEIBRIADOS))
         mpr("You really shouldn't be using a hasty item like this.");
-    else if (is_channeling_item(item) && you_worship(GOD_PAKELLAS))
+    else if (is_channeling_item(item) && you_worship(GOD_DEMIGOD))
         mpr("You really shouldn't be trying to channel magic like this.");
 }
 
@@ -803,7 +803,7 @@ static void _spirit_shield_message(bool unmeld)
         mpr("You feel your power drawn to a protective spirit.");
         if (you.species == SP_DEEP_DWARF
             && !(have_passive(passive_t::no_mp_regen)
-                 || player_under_penance(GOD_PAKELLAS)))
+                 || player_under_penance(GOD_DEMIGOD)))
         {
             mpr("Now linked to your health, your magic stops regenerating.");
         }

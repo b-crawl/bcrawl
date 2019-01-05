@@ -2324,7 +2324,7 @@ item_def* monster_die(monster& mons, killer_type killer,
                        && mons.evil())
                 && !mons_is_object(mons.type)
                 && !player_under_penance()
-                && (you_worship(GOD_PAKELLAS)
+                && (you_worship(GOD_DEMIGOD)
                     || random2(you.piety) >= piety_breakpoint(0)))
             {
                 int hp_heal = 0, mp_heal = 0;
@@ -2344,7 +2344,7 @@ item_def* monster_die(monster& mons, killer_type killer,
                 {
                     switch (you.religion)
                     {
-                    case GOD_PAKELLAS:
+                    case GOD_DEMIGOD:
                         mp_heal = random2(2 + mons.get_experience_level() / 6);
                         break;
                     case GOD_VEHUMET:
@@ -2385,7 +2385,7 @@ item_def* monster_die(monster& mons, killer_type killer,
                     {
                         int thing_created = items(true, OBJ_POTIONS,
                                                   POT_MAGIC, 1, 0,
-                                                  GOD_PAKELLAS);
+                                                  GOD_DEMIGOD);
                         if (thing_created != NON_ITEM)
                         {
                             move_item_to_grid(&thing_created, you.pos(), true);

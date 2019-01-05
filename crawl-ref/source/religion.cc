@@ -4374,13 +4374,40 @@ bool god_power_usable(const god_power& power, bool ignore_piety, bool ignore_pen
         return false;
     const ability_type abil = fixup_ability(power.abil);
     ASSERT(abil != ABIL_NON_ABILITY);
-    return (power.rank <= 0
-            || power.rank == 7 && can_do_capstone_ability(you.religion)
-            || piety_rank() >= power.rank
-            || ignore_piety
-            || you.religion == GOD_DEMIGOD)
+    int rank = power.rank;
+    
+    // there should be a better way to do this
+    if(you.religion == GOD_DEMIGOD)
+        switch(abil)
+        {
+        case ABIL_CHEIBRIADOS_DISTORTION:
+            rank = 1;
+            break;
+        case ABIL_FEDHAS_PLANT_RING:
+            rank = 2;
+            break;
+        case ABIL_MAKHLEB_MAJOR_DESTRUCTION:
+            rank = 3;
+            break;
+        case ABIL_OKAWARU_HEROISM:
+            rank = 4;
+            break;
+        case ABIL_TSO_DIVINE_SHIELD:
+            rank = 5;
+            break;
+        case ABIL_BEOGH_SMITING:
+            rank = 6;
+            break;
+        default:
+            break;
+        }
+    
+    return (rank <= 0
+            || rank == 7 && can_do_capstone_ability(you.religion)
+            || piety_rank() >= rank
+            || ignore_piety)
            && (!player_under_penance()
-               || power.rank == -1
+               || rank == -1
                || ignore_penance);
 }
 

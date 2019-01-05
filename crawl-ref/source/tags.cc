@@ -3346,12 +3346,13 @@ static void tag_read_you(reader &th)
         }
     }
     else
-    {
 #endif
+    {
     for (int i = 0; i < count; i++)
         you.exp_docked[i] = unmarshallInt(th);
     for (int i = 0; i < count; i++)
         you.exp_docked_total[i] = unmarshallInt(th);
+    }
 
     // elapsed time
     you.elapsed_time   = unmarshallInt(th);

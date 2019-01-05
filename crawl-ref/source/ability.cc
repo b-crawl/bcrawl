@@ -640,8 +640,7 @@ static const ability_def Ability_List[] =
 
     // Wu Jian
     { ABIL_WU_JIAN_SERPENTS_LASH, "Serpent's Lash",
-        0, 0, 0, 0, {fail_basis::invo}, abflag::exhaustion | abflag::instant
-        | abflag::skill_drain },
+        0, 0, 0, 0, {}, abflag::exhaustion | abflag::instant | abflag::skill_drain },
     { ABIL_WU_JIAN_HEAVENLY_STORM, "Heavenly Storm",
         0, 0, 0, 6, {fail_basis::invo, piety_breakpoint(4), 0, 1}, abflag::none },
     // Lunge and Whirlwind abilities aren't menu abilities but currently need

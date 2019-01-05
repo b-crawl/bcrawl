@@ -1351,8 +1351,11 @@ void tso_divine_shield()
     {
         if (you.shield())
         {
-            mprf("Your shield is strengthened by %s divine power.",
-                 apostrophise(god_name(GOD_SHINING_ONE)).c_str());
+            if(you.religion == GOD_SHINING_ONE)
+                mprf("Your shield is strengthened by %s divine power.",
+                        apostrophise(god_name(GOD_SHINING_ONE)).c_str());
+            else
+                mpr("Your shield is strengthened by divine power.");
         }
         else
             mpr("A divine shield forms around you!");
@@ -2549,8 +2552,11 @@ static bool _create_plant(coord_def& target, int hp_adjust = 0)
         {
             if (hp_adjust)
             {
-                mprf("A plant, strengthened by %s, grows up from the ground.",
-                     god_name(GOD_FEDHAS).c_str());
+                if(you.religion == GOD_FEDHAS)
+                    mprf("A plant, strengthened by %s, grows up from the ground.",
+                            god_name(GOD_FEDHAS).c_str());
+                else
+                    mpr("A plant, strengthened by divine power, grows up from the ground.");
             }
             else
                 mpr("A plant grows up from the ground.");
@@ -6313,7 +6319,7 @@ obsolete, remove
 */
 int pakellas_effective_hex_power(int pow)
 {
-	return pow;
+    return pow;
 }
 
 /**

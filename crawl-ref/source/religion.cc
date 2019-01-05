@@ -949,31 +949,6 @@ static bool _give_nemelex_gift(bool forced = false)
     return false;
 }
 
-/**
- * From the given list of items, return a random unseen item, if there are any.
- * Otherwise, just return any of them at random.
- *
- * If we cared, we could make this a template function to return more specific
- * types than 'int'. (That's probably not important, though.)
- *
- * @param item_types        A list of item types to choose from.
- * @param seen_func         How to tell whether the item was seen.
- * @return                  A random item type; e.g. WAND_ACID.
- */
-static int _preferably_unseen_item(const vector<int> &item_types,
-                                   function<bool(int)> seen_func)
-{
-    ASSERT(item_types.size());
-    vector<int> unseen;
-    for (auto item : item_types)
-        if (!seen_func(item))
-            unseen.emplace_back(item);
-
-    if (unseen.size())
-        return unseen[random2(unseen.size())];
-    return item_types[random2(item_types.size())];
-}
-
 static void _delayed_gift_callback(const mgen_data &mg, monster *&mon,
                                    int placed)
 {
@@ -1134,12 +1109,6 @@ static set<spell_type> _vehumet_get_spell_gifts()
         offers.insert(offer);
     }
     return offers;
-}
-
-/// Has the player ID'd the given type of wand?
-static bool _seen_wand(int wand)
-{
-    return get_ident_type(OBJ_WANDS, wand);
 }
 
 static bool _give_trog_oka_gift(bool forced)

@@ -1235,8 +1235,7 @@ static void _redraw_title()
     NOWRAP_EOL_CPRINTF("%s", species.c_str());
     if (you_worship(GOD_NO_GOD))
     {
-        if (you.char_class == JOB_MONK && you.species != SP_DEMIGOD
-            && !had_gods())
+        if (you.char_class == JOB_MONK && !had_gods())
         {
             string godpiety = "**....";
             textcolour(DARKGREY);
@@ -1255,6 +1254,8 @@ static void _redraw_title()
         string god = " of ";
         god += you_worship(GOD_JIYVA) ? god_name_jiyva(true)
                                       : god_name(you.religion);
+        if(you.religion == GOD_DEMIGOD)
+            god = "";
         NOWRAP_EOL_CPRINTF("%s", god.c_str());
 
         string piety = _god_asterisks();

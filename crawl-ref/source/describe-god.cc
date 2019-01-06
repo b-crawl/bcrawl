@@ -480,7 +480,7 @@ static inline void _add_par(formatted_string &desc, const string &str)
  */
 static string _describe_god_wrath_causes(god_type which_god)
 {
-    if (which_god == GOD_RU)
+    if (which_god == GOD_RU || which_god == GOD_DEMIGOD)
         return ""; // no wrath
     vector<god_type> evil_gods;
     vector<god_type> chaotic_gods;

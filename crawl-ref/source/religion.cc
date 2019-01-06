@@ -3884,14 +3884,12 @@ int god_colour(god_type god) // mv - added
 
     case GOD_DITHMENOS:
     case GOD_USKAYAW:
+    case GOD_DEMIGOD:
         return MAGENTA;
 
     case GOD_QAZLAL:
     case GOD_RU:
         return BROWN;
-
-    case GOD_DEMIGOD:
-        return LIGHTGREEN;
 
     case GOD_NO_GOD:
     case NUM_GODS:
@@ -3979,7 +3977,7 @@ colour_t god_message_altar_colour(god_type god)
         return BROWN;
 
     case GOD_DEMIGOD:
-        return random_choose(LIGHTMAGENTA, LIGHTGREEN, LIGHTCYAN);
+        return random_choose(MAGENTA, BLUE);
 
     case GOD_USKAYAW:
         return random_choose(RED, MAGENTA);

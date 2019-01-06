@@ -2867,9 +2867,6 @@ bool player_can_join_god(god_type which_god)
 
     if (you.get_mutation_level(MUT_NO_LOVE) && _god_rejects_loveless(which_god))
         return false;
-    {
-      return false;
-    }
 
     return _transformed_player_can_join_god(which_god);
 }

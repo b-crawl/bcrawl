@@ -11,6 +11,7 @@
 
 #include "areas.h"
 #include "art-enum.h"
+#include "cloud.h" // tree form
 #include "coordit.h" // radius_iterator
 #include "god-conduct.h"
 #include "god-passive.h"
@@ -263,9 +264,26 @@ spret_type cast_transform(int pow, transformation which_trans, bool fail)
     {
         return SPRET_ABORT;
     }
+    
+    if(which_trans == transformation::tree)
+    {
+        const cloud_type cloud = cloud_type_at(you.pos());
+        if (is_damaging_cloud(cloud, false)
+            // Tree form is immune to these two.
+            && cloud != CLOUD_MEPHITIC && cloud != CLOUD_POISON
+            && !yesno(make_stringf("Really become a tree while standing in a cloud of %s?",
+                                   cloud_type_name(cloud).c_str()).c_str(), false, 'n'))
+        {
+            canned_msg(MSG_OK);
+            return SPRET_ABORT;
+        }
+    }
 
     fail_check();
     transform(pow, which_trans);
+    if(which_trans == transformation::tree)
+        you.transform_uncancellable = true;
+    
     return SPRET_SUCCESS;
 }
 

@@ -499,8 +499,8 @@ static bool _transformation_check(const spell_type spell)
     case SPELL_ICE_FORM:
         tran = transformation::ice_beast;
         break;
-    case SPELL_HYDRA_FORM:
-        tran = transformation::hydra;
+    case SPELL_TREE_FORM:
+        tran = transformation::tree;
         break;
     case SPELL_DRAGON_FORM:
         tran = transformation::dragon;

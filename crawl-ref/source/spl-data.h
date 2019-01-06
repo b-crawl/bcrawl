@@ -1217,14 +1217,14 @@ static const struct spell_desc spelldata[] =
 },
 
 {
-    SPELL_HYDRA_FORM, "Hydra Form",
-    SPTYP_TRANSMUTATION,
+    SPELL_TREE_FORM, "Tree Form",
+    SPTYP_TRANSMUTATION | SPTYP_HEXES,
     SPFLAG_HELPFUL | SPFLAG_CHAOTIC | SPFLAG_UTILITY,
-    6,
-    200,
+    5,
+    0,
     -1, -1,
     6, 0,
-    TILEG_HYDRA_FORM,
+    TILEG_TREE_FORM,
 },
 
 {

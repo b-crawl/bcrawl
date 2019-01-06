@@ -694,18 +694,13 @@ Traps an enemy in a ring of blessed flame. These flames are especially
 dangerous to undead and demonic creatures, and have no effect on holy
 creatures.
 %%%%
-Hydra Form spell
+Tree Form spell
 
-Transforms the caster into an amphibious, many-headed hydra for a brief
-duration. Its multiple heads strike in all directions. Edible foes slain by the
-gnashing teeth are instantly devoured, reinvigorating the caster in their
-reptilian rampage. The caster gains innate armour and increased health, and
-becomes resistant to poison.
+Transforms the caster into a tree, gaining innate armour, increased health,
+extra unarmed combat damage, and immunity to negative energy. However, this
+form cannot move or teleport, and cannot be cancelled at will.
 
-While transformed, any equipped weapons and armour are melded. The form's
-number of heads is fixed upon casting the spell, and increases with power.
-
-With seven bars of power, the effects of this spell last until cancelled.
+While transformed, any equipped armour except shields and helmets is melded.
 %%%%
 Iceblast spell
 

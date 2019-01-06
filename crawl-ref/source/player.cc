@@ -5438,7 +5438,7 @@ string player_save_info::short_desc() const
 
     if (religion == GOD_JIYVA)
         desc << " of " << god_name << " " << jiyva_second_name;
-    else if (religion != GOD_NO_GOD)
+    else if (religion != GOD_NO_GOD && religion != GOD_DEMIGOD)
         desc << " of " << god_name;
 
 #ifdef WIZARD

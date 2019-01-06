@@ -143,6 +143,7 @@ Pull requests for new content are welcome.
   - v1.4: Some thrown weapon types are consolidated.
   - v1.5.3: Wands of random effects have fewer charges, and a new spell set: Inner Flame, Malmutate, Sleep, Slow, Shackle, Petrify, Teleport Other, Iceblast, Fireball, Bolt of Draining, Venom Bolt.
   - v1.7.1: Wands of digging are partly un-nerfed, getting 8 average charges.
+  - v1.8.3: Removing an amulet of faith drains 1/4 your piety instead of 1/3.
 
 #### Removed Items
   - Amulet of Harm

@@ -1145,7 +1145,7 @@ static void _remove_amulet_of_faith(item_def &item)
         {
             mprf(MSGCH_GOD, "You feel a sudden lack of confidence.");
 
-            const int piety_loss = div_rand_round(you.piety, 3);
+            const int piety_loss = div_rand_round(you.piety, 4);
             if (you.piety - piety_loss > 10)
                 lose_piety(piety_loss);
             break;
@@ -1154,7 +1154,7 @@ static void _remove_amulet_of_faith(item_def &item)
         {
             simple_god_message(" seems less interested in you.");
 
-            const int piety_loss = div_rand_round(you.piety, 3);
+            const int piety_loss = div_rand_round(you.piety, 4);
             if (you.piety - piety_loss > 10)
             {
                 mprf(MSGCH_GOD, "You feel less pious.");

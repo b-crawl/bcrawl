@@ -1825,8 +1825,8 @@ static spret_type _do_cast(spell_type spell, int powc, const dist& spd,
     case SPELL_ICE_FORM:
         return cast_transform(powc, transformation::ice_beast, fail);
 
-    case SPELL_HYDRA_FORM:
-        return cast_transform(powc, transformation::hydra, fail);
+    case SPELL_TREE_FORM:
+        return cast_transform(15, transformation::tree, fail);
 
     case SPELL_DRAGON_FORM:
         return cast_transform(powc, transformation::dragon, fail);

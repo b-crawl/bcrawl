@@ -157,7 +157,7 @@ gravitas GRAVITAS
 blade_hands BLADE_HANDS
 beastly_appendage BEASTLY_APPENDAGE
 irradiate IRRADIATE
-hydra_form HYDRA_FORM
+tree_form TREE_FORM
 dragon_form DRAGON_FORM
 
 # item-based spells

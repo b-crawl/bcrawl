@@ -88,6 +88,7 @@ Pull requests for new content are welcome.
   - False Image is a summon that blocks while you shoot through it.
   - Blink Other blinks enemies.
   - Piercing Shot adds the penetration brand to a ranged weapon.
+  - v1.8.3: Tree Form (L5 Hexes/Transmutation) acts like a Potion of Lignification with a shorter duration.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.

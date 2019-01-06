@@ -637,31 +637,30 @@ static void _decrement_durations()
             you.props.erase(EMERGENCY_FLIGHT_KEY);
         }
 
-        bool safe_recast = false;
-        if(you.form == transformation::spider)
-            safe_recast = calc_spell_power(SPELL_SPIDER_FORM,
-                true, false, false) >= 15;
-        if(you.form == transformation::statue)
-            safe_recast = calc_spell_power(SPELL_STATUE_FORM,
-                true, false, false) >= 50;
-        if(you.form == transformation::ice_beast)
-            safe_recast = calc_spell_power(SPELL_ICE_FORM,
-                true, false, false) >= 25;
-        if(you.form == transformation::lich)
-            safe_recast = calc_spell_power(SPELL_NECROMUTATION,
-                true, false, false) >= 100;
-        if(you.form == transformation::dragon)
-            safe_recast = calc_spell_power(SPELL_DRAGON_FORM,
-                true, false, false) >= 75;
-        if(you.form == transformation::hydra)
-            safe_recast = calc_spell_power(SPELL_HYDRA_FORM,
-                true, false, false) >= 50;
-        if(!safe_recast)
+        bool last_forever = false;
+        switch(you.form)
+        {
+        case transformation::spider:
+            last_forever = calc_spell_power(SPELL_SPIDER_FORM, true, false, false) >= 15;
+            break;
+        case transformation::ice_beast:
+            last_forever = calc_spell_power(SPELL_ICE_FORM, true, false, false) >= 25;
+            break;
+        case transformation::statue:
+            last_forever = calc_spell_power(SPELL_STATUE_FORM, true, false, false) >= 50;
+            break;
+        case transformation::dragon:
+            last_forever = calc_spell_power(SPELL_DRAGON_FORM, true, false, false) >= 75;
+            break;
+        case transformation::lich:
+            last_forever = calc_spell_power(SPELL_NECROMUTATION, true, false, false) >= 100;
+            break;
+        default: break;
+        }
+        if(!last_forever)
             if (_decrement_a_duration(DUR_TRANSFORMATION, delay, nullptr,
-                random2(3), "Your transformation is almost over."))
-            {
+                    random2(3), "Your transformation is almost over."))
                 untransform();
-            }
     }
 
     if (you.attribute[ATTR_SWIFTNESS] >= 0)

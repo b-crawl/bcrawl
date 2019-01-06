@@ -1118,35 +1118,49 @@ static void _unequip_armour_effect(item_def& item, bool meld,
         _unequip_artefact_effect(item, nullptr, meld, slot, false);
 }
 
+// Piety penalty for removing the Amulet of Faith.
 static void _remove_amulet_of_faith(item_def &item)
 {
-    if (you_worship(GOD_RU))
+    switch(you.religion)
     {
-        // next sacrifice is going to be delaaaayed.
-        if (you.piety < piety_breakpoint(5))
+        case GOD_NO_GOD:
+        case GOD_XOM:
+        case GOD_GOZAG:
+            break;
+        case GOD_RU:
         {
+            // next sacrifice is going to be delaaaayed.
+            if (you.piety < piety_breakpoint(5))
+            {
 #ifdef DEBUG_DIAGNOSTICS
-            const int cur_delay = you.props[RU_SACRIFICE_DELAY_KEY].get_int();
+                const int cur_delay = you.props[RU_SACRIFICE_DELAY_KEY].get_int();
 #endif
-            ru_reject_sacrifices(true);
-            dprf("prev delay %d, new delay %d", cur_delay,
-                 you.props[RU_SACRIFICE_DELAY_KEY].get_int());
+                ru_reject_sacrifices(true);
+                dprf("prev delay %d, new delay %d", cur_delay,
+                     you.props[RU_SACRIFICE_DELAY_KEY].get_int());
+            }
+            break;
         }
-    }
-    else if (!you_worship(GOD_NO_GOD)
-             && !you_worship(GOD_XOM)
-             && !you_worship(GOD_GOZAG))
-    {
-        simple_god_message(" seems less interested in you.");
-
-        const int piety_loss = div_rand_round(you.piety, 3);
-        // Piety penalty for removing the Amulet of Faith.
-        if (you.piety - piety_loss > 10)
+        case GOD_DEMIGOD:
         {
-            mprf(MSGCH_GOD, "You feel less pious.");
-            dprf("%s: piety drain: %d",
-                 item.name(DESC_PLAIN).c_str(), piety_loss);
-            lose_piety(piety_loss);
+            mprf(MSGCH_GOD, "You feel a sudden lack of confidence.");
+
+            const int piety_loss = div_rand_round(you.piety, 3);
+            if (you.piety - piety_loss > 10)
+                lose_piety(piety_loss);
+            break;
+        }
+        default:
+        {
+            simple_god_message(" seems less interested in you.");
+
+            const int piety_loss = div_rand_round(you.piety, 3);
+            if (you.piety - piety_loss > 10)
+            {
+                mprf(MSGCH_GOD, "You feel less pious.");
+                lose_piety(piety_loss);
+            }
+            break;
         }
     }
 }

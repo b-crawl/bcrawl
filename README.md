@@ -112,6 +112,7 @@ Pull requests for new content are welcome.
   - Gell's Gravitas
   - Excruciating Wounds
   - Death's Door
+  - v1.8.3: Hydra Form
 
 #### Gods
   - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.

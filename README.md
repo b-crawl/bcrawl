@@ -178,6 +178,7 @@ Pull requests for new content are welcome.
   - v1.5.2: Sphinxes have Sentinel's Mark instead of Confuse.
   - v1.5.3: Skeletons now resist electricity.
   - v1.6.1: Vault Guards can now use Battlecry when injured.
+  - v1.8.4: Killer Klowns carry branded weapons, and have a new spell set: Blink, Monstrous Menagerie, Corrupting Pulse, Dig, Silence.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

@@ -1249,7 +1249,7 @@ TILE:    urand_vines
 TILE_EQ: vines
 INSCRIP: NoPotionHeal
 REGEN:   7
-VALUE:   800
+VALUE:   700
 
 ENUM:    KRYIAS
 NAME:    Kryia's mail coat
@@ -1260,7 +1260,8 @@ TILE:    urand_kryias
 TILE_EQ: kryias
 INSCRIP: PotionHeal*2
 COLD:    1
-VALUE:   600
+VALUE:   800
+BOOL:    rmsl
 
 ENUM:    FROSTBITE
 NAME:    frozen axe "Frostbite"
@@ -1316,7 +1317,7 @@ BRAND:    SPWPN_FLAMING
 ENUM:     XTAHUA
 NAME:     fire dragon scales of Xtahua
 OBJ:      OBJ_ARMOUR/ARM_FIRE_DRAGON_ARMOUR
-PLUS:     +8
+PLUS:     +6
 COLOUR:   LIGHTRED
 TILE:     urand_xtahua_scales
 TILE_EQ:  xtahua_scales

@@ -146,6 +146,7 @@ Pull requests for new content are welcome.
   - v1.5.3: Wands of random effects have fewer charges, and a new spell set: Inner Flame, Malmutate, Sleep, Slow, Shackle, Petrify, Teleport Other, Iceblast, Fireball, Bolt of Draining, Venom Bolt.
   - v1.7.1: Wands of digging are partly un-nerfed, getting 8 average charges.
   - v1.8.3: Removing an amulet of faith drains 1/4 your piety instead of 1/3.
+  - v1.8.5: Changed base damage for weapons: bardiche (18->20), glaive (15->16), triple sword (17->18).
 
 #### Removed Items
   - Amulet of Harm

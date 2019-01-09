@@ -105,7 +105,7 @@ void lessen_hunger(int satiated_amount, bool suppress_msg, int max)
         _describe_food_change(satiated_amount);
 }
 
-void set_hunger(int new_hunger_level, bool suppress_msg)
+void set_hunger(int new_hunger_level,bool suppress_msg)
 {
     if (you_foodless())
         return;
@@ -248,7 +248,7 @@ bool food_change(bool initial)
                     mpr("You can't stomach any more blood right now.");
                 }
             }
-            else if (you.duration[DUR_TRANSFORMATION])
+            else if (you.duration[DUR_TRANSFORMATION] > 1)
             {
                 print_stats();
                 mprf(MSGCH_WARN,

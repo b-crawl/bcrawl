@@ -498,11 +498,10 @@ static level_id _travel_destination(const dungeon_feature_type how,
         //
         // If player falls down the stairs trying to leave the dungeon, we set
         // the destination depth to 1 (i.e. D:1)
-        {
-            if (how == DNGN_EXIT_DUNGEON)
-                dest.depth = 1;
-            return dest;
-        }
+        if (how == DNGN_EXIT_DUNGEON)
+            dest.depth = 1;
+        return dest;
+    }
     else if(going_up && feat_is_staircase(how) && one_chance_in(25))
     {
         mpr("As you climb the stairs, a rune flashes!");

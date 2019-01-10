@@ -1001,6 +1001,7 @@ static void _exile_card(int power)
         if (!mon_to_banish) // Banish yourself!
         {
             banished("drawing a card");
+            you.props[ABYSS_STAIR_XP_KEY] = 1;  // make escape easier
             break;              // Don't banish anything else.
         }
         else

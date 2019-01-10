@@ -700,7 +700,7 @@ Transforms the caster into a tree, gaining innate armour, increased health,
 extra unarmed combat damage, and immunity to negative energy. However, this
 form cannot move or teleport, and cannot be cancelled at will.
 
-While transformed, any equipped armour except shields and helmets is melded.
+While transformed, any equipped armour except shields is melded.
 %%%%
 Iceblast spell
 

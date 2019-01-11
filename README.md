@@ -22,8 +22,9 @@ Pull requests for new content are welcome.
 - [Windows builds](https://github.com/b-crawl/bcrawl/releases)
 
 #### online
-  - [x-crawl.de](https://x-crawl.de/) (Germany)
   - [CKO](https://crawl.kelbi.org/) (New York)
+  - [CPO](https://crawl.project357.org/) (Australia)
+  - [x-crawl.de](https://x-crawl.de/) (Germany)
 
 ## Changes from Vanilla Crawl
 #### Branches
@@ -184,8 +185,7 @@ Pull requests for new content are welcome.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
-  - Xtahua's breath now applies rF-.
-  - Xtahua now drops the +8 fire dragon scales of Xtahua {rF+++ rC- MR+} when he drops a corpse.
+  - Xtahua can drop unrand fire dragon scales, and Xtahua's breath applies rF-.
   - v1.3.1: Harold has Bolt of Fire, Blink, a branded trident, and a shield.
   - v1.3.2: Boris has Haunt instead of Iron Shot, and casts spells more.
   - v1.4.1: Psyche is reworked to be as dangerous as Erica, with a new spell set including Deflect Missiles, Sleep, and Poison Arrow. (Read the lore.)

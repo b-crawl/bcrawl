@@ -335,7 +335,7 @@ function ($, comm, enums, map_knowledge, messages, options) {
             $("#stats").attr("data-species", player.species);
 
         var species_god = player.species;
-        if (player.god != "")
+        if (player.god != "" && player.god != "Demigod")
             species_god += " of " + player.god;
         if (player.god == "Xom")
         {

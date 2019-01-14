@@ -112,8 +112,8 @@ bool skills_being_trained();
 int species_apt(skill_type skill, species_type species = you.species);
 float species_apt_factor(skill_type sk, species_type sp = you.species);
 float apt_to_factor(int apt);
-unsigned int skill_exp_needed(int lev, skill_type sk,
-                              species_type sp = you.species);
+unsigned int skill_exp_needed_with_apt(int lev, int apt);
+unsigned int skill_exp_needed(int lev, skill_type sk, species_type sp = you.species);
 skill_diff skill_level_to_diffs(skill_type skill, double amount,
     int scaled_training=100, bool base_only=true);
 

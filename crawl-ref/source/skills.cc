@@ -221,19 +221,20 @@ void reassess_starting_skills()
     for (skill_type next = NUM_SKILLS; next > SK_FIRST_SKILL; )
     {
         skill_type sk = --next;
+        
+        int apt = 0;
+        if(sk == SK_SPELLCASTING)
+            apt = -1;
 
-        // Grant the amount of skill points required for a human.
         you.skill_points[sk] = you.skills[sk] ?
-            skill_exp_needed(you.skills[sk], sk, SP_HUMAN) + 1 : 0;
+            skill_exp_needed_with_apt(you.skills[sk], apt) + 1 : 0;
 
         if (sk == SK_DODGING && you.skills[SK_ARMOUR]
-            && (is_useless_skill(SK_ARMOUR)
-                || you_can_wear(EQ_BODY_ARMOUR) != MB_TRUE))
+            && (is_useless_skill(SK_ARMOUR) || you_can_wear(EQ_BODY_ARMOUR) != MB_TRUE))
         {
             // No one who can't wear mundane heavy armour should start with
             // the Armour skill -- D:1 dragon armour is too unlikely.
-            you.skill_points[sk] += skill_exp_needed(you.skills[SK_ARMOUR],
-                SK_ARMOUR, SP_HUMAN) + 1;
+            you.skill_points[sk] += skill_exp_needed_with_apt(you.skills[SK_ARMOUR], apt) + 1;
             you.skills[SK_ARMOUR] = 0;
         }
 
@@ -1904,7 +1905,7 @@ float apt_to_factor(int apt)
     return 1 / exp(log(2) * apt / APT_DOUBLE);
 }
 
-unsigned int skill_exp_needed(int lev, skill_type sk, species_type sp)
+unsigned int skill_exp_needed_with_apt(int lev, int apt)
 {
     const int exp[28] =
           { 0, 50, 150, 300, 500, 750,          // 0-5
@@ -1915,7 +1916,12 @@ unsigned int skill_exp_needed(int lev, skill_type sk, species_type sp)
             27000, 29750 };
 
     ASSERT_RANGE(lev, 0, MAX_SKILL_LEVEL + 1);
-    return exp[lev] * species_apt_factor(sk, sp);
+    return exp[lev] * apt_to_factor(apt);
+}
+
+unsigned int skill_exp_needed(int lev, skill_type sk, species_type sp)
+{
+    return skill_exp_needed_with_apt(lev, species_apt(sk, sp));
 }
 
 int species_apt(skill_type skill, species_type species)

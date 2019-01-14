@@ -58,6 +58,7 @@ Pull requests for new content are welcome.
   - Plain unidentified weapons are always +0.
   - Long Blades now give +SH instead of a chance to riposte.
   - v1.4.1: Distortion weapons can't banish on hit.
+  - v1.8.6: Starting skills are based on +0 aptitude (-1 for Spellcasting) instead of Human aptitudes.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

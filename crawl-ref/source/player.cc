@@ -4049,6 +4049,9 @@ int get_real_hp(bool trans, bool rotted)
 
 int get_real_mp(bool include_items)
 {
+    if(you.species == SP_DJINNI)
+        return 3;
+    
     const int scale = 100;
     int spellcasting = you.skill(SK_SPELLCASTING, 1 * scale, true);
     int scaled_xl = you.experience_level * scale;

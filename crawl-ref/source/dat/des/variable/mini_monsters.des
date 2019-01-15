@@ -295,7 +295,7 @@ ENDMAP
 
 NAME:  worms_lemuel
 TAGS:  no_rotate no_monster_gen no_pool_fixup transparent
-DEPTH: D:8-13, Lair, Spider, Swamp
+DEPTH: D:12, Lair:2-, Spider, Swamp
 KITEM: | = |, *, %
 KMONS: 1 = swamp worm
 KMONS: 2 = tyrant leech

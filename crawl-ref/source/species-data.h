@@ -123,8 +123,9 @@ static const map<species_type, species_def> species_data =
     {},
     {},
     {},
-    {},
-    {},
+    { JOB_WIZARD, JOB_CONJURER, JOB_FIRE_ELEMENTALIST, JOB_AIR_ELEMENTALIST,
+      JOB_EARTH_ELEMENTALIST, JOB_VENOM_MAGE },
+    { SK_POLEARMS, SK_LONG_BLADES, SK_STAVES, SK_CROSSBOWS, SK_SLINGS },
 } },
 
 { SP_BASE_DRACONIAN, {

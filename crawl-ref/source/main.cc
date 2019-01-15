@@ -437,7 +437,8 @@ NORETURN static void _launch_game()
 
     _prep_input();
 
-    if (you.species == SP_FAIRY && you.num_turns == 0 && !you.airborne())
+    if ((you.species == SP_FAIRY || you.species == SP_DJINNI)
+            && you.num_turns == 0 && !you.airborne())
         float_once();
 
     if (game_start)

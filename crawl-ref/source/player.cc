@@ -4983,10 +4983,11 @@ void float_player()
 // Fairies start the game flying.
 void float_once()
 {
-    ASSERT(you.species == SP_FAIRY);
+    ASSERT(you.species == SP_FAIRY || you.species == SP_DJINNI);
 
     you.attribute[ATTR_PERM_FLIGHT] = 1;
-    float_player();
+    if(you.species == SP_FAIRY)
+        float_player();
 }
 
 void fly_player(int pow, bool already_flying)
@@ -6588,7 +6589,8 @@ bool player::racial_permanent_flight() const
 {
     return get_mutation_level(MUT_TENGU_FLIGHT)
         || get_mutation_level(MUT_BIG_WINGS)
-        || get_mutation_level(MUT_FAIRY_FLIGHT);
+        || get_mutation_level(MUT_FAIRY_FLIGHT)
+        || get_mutation_level(MUT_DJINN_FLIGHT);
 }
 
  // Only Tengu and Fairies get perks for flying.

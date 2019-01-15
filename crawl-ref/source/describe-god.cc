@@ -625,6 +625,10 @@ static formatted_string _god_extra_description(god_type which_god)
             _add_par(desc, "Ancestor upgrades:");
             _add_par(desc, _describe_ancestor_upgrades());
             break;
+        case GOD_WU_JIAN:
+            _add_par(desc, "Martial attacks:");
+            desc += formatted_string::parse_string(getLongDescription(god_name(which_god) + " extra"));
+            break;
         default:
             break;
     }

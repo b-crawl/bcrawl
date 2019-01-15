@@ -82,10 +82,8 @@ octopode2
 octopode3
 octopode4
 octopode5
-%rim 0
 djinni_f DJINNI
 djinni_m
-%rim 1
 formicid FORMICID
 vine_stalker_f VINE_STALKER
 vine_stalker_m

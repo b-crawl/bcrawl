@@ -647,6 +647,8 @@ tileidx_t tilep_species_to_base_tile(int sp, int level)
         return TILEP_BASE_HALFLING;
     case SP_ONI:
         return TILEP_BASE_ONI;
+    case SP_DJINNI:
+        return TILEP_BASE_DJINNI;
     case SP_GNOLL:
         return TILEP_BASE_GNOLL;
     default:

@@ -29,7 +29,7 @@ end
 
 NAME:   grunt_cocytus_stairs_refrigerator
 TAGS:   transparent
-DEPTH:  Coc:1-6
+DEPTH:  Coc, !Coc:$
 COLOUR: c = blue
 MONS:   Ice Fiend, blizzard demon, ice devil, white imp
 KMONS:  H = ice statue
@@ -83,7 +83,7 @@ MAP
 ENDMAP
 
 NAME:    nicolae_coc_ice_floe
-DEPTH:   Coc:2-, !Coc:$
+DEPTH:   Coc, !Coc:$
 SHUFFLE: {[(, }]}
 NSUBST:  D = 1:1 / 2:2 / *:34
 KMONS:   1 = Ice Fiend

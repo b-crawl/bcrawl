@@ -897,6 +897,29 @@ void take_stairs(dungeon_feature_type force_stair, bool going_up,
     // Latter case is falling down a shaft.
     const bool shaft = known_shaft || force_stair == DNGN_TRAP_SHAFT;
 
+    bool need_rune = false;
+    switch(you.where_are_you)
+    {
+    case BRANCH_DIS:
+        need_rune = !you.runes[RUNE_DIS];
+        break;
+    case BRANCH_GEHENNA:
+        need_rune = !you.runes[RUNE_GEHENNA];
+        break;
+    case BRANCH_COCYTUS:
+        need_rune = !you.runes[RUNE_COCYTUS];
+        break;
+    case BRANCH_TARTARUS:
+        need_rune = !you.runes[RUNE_TARTARUS];
+        break;
+    default: break;
+    }
+    if(need_rune)
+    {
+        mpr("The portal forces you away!");
+        return;
+    }
+
     level_id whither = _travel_destination(how, bool(force_stair), going_up,
                                            known_shaft);
 

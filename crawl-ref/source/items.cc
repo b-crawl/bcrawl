@@ -1922,21 +1922,8 @@ static void _get_rune(const item_def& it, bool quiet)
         mpr("Press } to see all the runes you have collected.");
     }
 
-    switch (it.sub_type)
-    {
-    case RUNE_DIS:
-    case RUNE_GEHENNA:
-    case RUNE_COCYTUS:
-    case RUNE_TARTARUS:
-        mpr("The rune's power creates a portal out.");
-        grd(you.pos()) = DNGN_ENTER_HELL;
-        break;
-    case RUNE_ABYSSAL:
+    if (it.sub_type == RUNE_ABYSSAL)
         mpr("You feel the abyssal rune guiding you out of this place.");
-        break;
-    default: break;
-    }
-        
 }
 
 /**

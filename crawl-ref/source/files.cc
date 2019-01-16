@@ -873,7 +873,7 @@ static int _get_dest_stair_type(branch_type old_branch,
     if (player_in_hell() && feat_is_stone_stair_down(stair_taken))
     {
         find_first = false;
-        return DNGN_FLOOR;
+        return DNGN_ENTER_HELL;
     }
 
     if (feat_is_stone_stair(stair_taken))

@@ -158,7 +158,7 @@ const Branch branches[NUM_BRANCHES] =
       DNGN_ENTER_DIS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Dis", "the Iron City of Dis", "Dis",
       "You enter the Iron City of Dis!\n"
-      "To return, you must find a gate leading back.",
+      "To return, you must find the iron rune of Zot.",
       CYAN, BROWN,
       'I', { RUNE_DIS }, BRANCH_NOISE_NORMAL },
 
@@ -167,7 +167,7 @@ const Branch branches[NUM_BRANCHES] =
       DNGN_ENTER_GEHENNA, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Gehenna", "Gehenna", "Geh",
       "You enter the fiery wasteland Gehenna!\n"
-      "To return, you must find a gate leading back.",
+      "To return, you must find the obsidian rune of Zot.",
       BROWN, RED,
       'G', { RUNE_GEHENNA }, BRANCH_NOISE_NORMAL },
 
@@ -176,7 +176,7 @@ const Branch branches[NUM_BRANCHES] =
       DNGN_ENTER_COCYTUS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Cocytus", "Cocytus", "Coc",
       "You enter the frozen wasteland Cocytus!\n"
-      "To return, you must find a gate leading back.",
+      "To return, you must find the icy rune of Zot.",
       LIGHTBLUE, LIGHTCYAN,
       'X', { RUNE_COCYTUS }, BRANCH_NOISE_NORMAL },
 
@@ -185,7 +185,7 @@ const Branch branches[NUM_BRANCHES] =
       DNGN_ENTER_TARTARUS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Tartarus", "Tartarus", "Tar",
       "You enter the decaying netherworld Tartarus!\n"
-      "To return, you must find a gate leading back.",
+      "To return, you must find the bone rune of Zot.",
       MAGENTA, MAGENTA,
       'Y', { RUNE_TARTARUS }, BRANCH_NOISE_NORMAL },
 

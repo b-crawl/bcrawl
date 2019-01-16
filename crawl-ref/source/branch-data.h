@@ -157,7 +157,8 @@ const Branch branches[NUM_BRANCHES] =
       BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
       DNGN_ENTER_DIS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Dis", "the Iron City of Dis", "Dis",
-      nullptr,
+      "You enter the Iron City of Dis!\n"
+      "To return, you must find a gate leading back.",
       CYAN, BROWN,
       'I', { RUNE_DIS }, BRANCH_NOISE_NORMAL },
 
@@ -165,7 +166,8 @@ const Branch branches[NUM_BRANCHES] =
       BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
       DNGN_ENTER_GEHENNA, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Gehenna", "Gehenna", "Geh",
-      nullptr,
+      "You enter the fiery wasteland Gehenna!\n"
+      "To return, you must find a gate leading back.",
       BROWN, RED,
       'G', { RUNE_GEHENNA }, BRANCH_NOISE_NORMAL },
 
@@ -173,7 +175,8 @@ const Branch branches[NUM_BRANCHES] =
       BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
       DNGN_ENTER_COCYTUS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Cocytus", "Cocytus", "Coc",
-      nullptr,
+      "You enter the frozen wasteland Cocytus!\n"
+      "To return, you must find a gate leading back.",
       LIGHTBLUE, LIGHTCYAN,
       'X', { RUNE_COCYTUS }, BRANCH_NOISE_NORMAL },
 
@@ -181,7 +184,8 @@ const Branch branches[NUM_BRANCHES] =
       BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
       DNGN_ENTER_TARTARUS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Tartarus", "Tartarus", "Tar",
-      nullptr,
+      "You enter the decaying netherworld Tartarus!\n"
+      "To return, you must find a gate leading back.",
       MAGENTA, MAGENTA,
       'Y', { RUNE_TARTARUS }, BRANCH_NOISE_NORMAL },
 

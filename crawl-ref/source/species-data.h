@@ -120,7 +120,7 @@ static const map<species_type, species_def> species_data =
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
     10, 10, 6, // 26
     { STAT_STR, STAT_INT }, 4,
-    {},
+    { {MUT_DJINN_FLIGHT, 1, 1} },
     {},
     {},
     { JOB_WIZARD, JOB_CONJURER, JOB_FIRE_ELEMENTALIST, JOB_AIR_ELEMENTALIST,

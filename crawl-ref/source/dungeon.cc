@@ -985,7 +985,7 @@ static void _fixup_hell_stairs()
         if (feat_is_stone_stair_up(grd(*ri))
             || grd(*ri) == DNGN_ESCAPE_HATCH_UP)
         {
-            _set_grd(*ri, DNGN_ENTER_HELL);
+            _set_grd(*ri, DNGN_FLOOR);
         }
     }
 }

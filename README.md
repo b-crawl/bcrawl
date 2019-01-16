@@ -37,8 +37,9 @@ Pull requests for new content are welcome.
   - v1.5.3: Orc doesn't spawn Stone Giants except from vaults.
   - v1.6: To compensate for fewer floors, shops are more likely.
   - v1.6.1: Vaults has fewer orcs.
-  - v1.7.3: Out-of-depth monster spawns are changed: centaurs and water moccasins can't appear until D:3, and killer bees can't appear until D:4. 
-  
+  - v1.7.3: Out-of-depth monster spawns are changed: centaurs and water moccasins can't appear until D:3, and killer bees can't appear until D:4.
+  - v1.9: Hell branches are 2 levels deep and can't be left without their rune.
+
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
   - Reaver is a melee background that starts the game worshipping Vehumet.
@@ -67,6 +68,7 @@ Pull requests for new content are welcome.
   - Duskwalker gains the Nightstalker mutation, has draining melee attacks, and has half the stealth penalty from armour.
   - Halflings have been merged into Kobolds.
   - Deep Elves and Tengu have been merged into Avariel, winged elves with good aptitudes for magic.
+  - Djinni can cast spells without mana, but doing so prevents spellcasting for 4*cost^2/experience_level turns.
 
 #### Species Changes
   - Hill Orcs use Fighting as their skill for all weapons.

@@ -3345,14 +3345,16 @@ vector<talent> your_talents(bool check_confused, bool include_unusable)
         _add_talent(talents, ABIL_TRAN_BAT, check_confused);
     }
 
-    if (you.racial_permanent_flight() && !you.attribute[ATTR_PERM_FLIGHT])
+    bool racial_flight = you.racial_permanent_flight();
+
+    if (racial_flight && !you.attribute[ATTR_PERM_FLIGHT])
     {
         // Avariel, black draconians and gargoyles get permaflight at XL 9/14/14.
         // Other dracs can mutate big wings whenever as well.
         _add_talent(talents, ABIL_FLY, check_confused);
     }
 
-    if (you.attribute[ATTR_PERM_FLIGHT] && you.racial_permanent_flight())
+    if (you.attribute[ATTR_PERM_FLIGHT] && racial_flight && you.species != SP_DJINNI)
         _add_talent(talents, ABIL_STOP_FLYING, check_confused);
 
     // Mutations

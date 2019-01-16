@@ -2487,26 +2487,6 @@ static bool _convert_obsolete_species()
         fly_player(100);
         return true;
     }
-    if (you.species == SP_DJINNI)
-    {
-        if (!yes_or_no("This <red>Djinni</red> save game cannot be loaded as-is. If you "
-                       "load it now, your character will be converted to a Vine Stalker. Continue?"))
-        {
-            you.save->abort(); // don't even rewrite the header
-            delete you.save;
-            you.save = 0;
-            game_ended(game_exit::abort,
-                "Please load the save in an earlier version "
-                "if you want to keep it as a Djinni.");
-        }
-        change_species_to(SP_VINE_STALKER);
-        you.magic_contamination = 0;
-        // Djinni were flying, so give the player some time to land
-        fly_player(100);
-        // Give them some time to find food. Creating food isn't safe as the grid doesn't exist yet, and may have water anyways.
-        you.hunger = HUNGER_MAXIMUM;
-        return true;
-    }
 #endif
     return false;
 }

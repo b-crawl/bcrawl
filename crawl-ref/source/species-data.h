@@ -111,6 +111,23 @@ static const map<species_type, species_def> species_data =
       SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
 } },
 
+{ SP_DJINNI, {
+    "Dj",
+    "Djinni", "Djinn", nullptr,
+    SPF_NONE,
+    -1, 0, 0, 4,
+    MONS_DJINNI,
+    HT_LAND, US_ALIVE, SIZE_MEDIUM,
+    10, 10, 6, // 26
+    { STAT_STR, STAT_INT }, 4,
+    {},
+    {},
+    {},
+    { JOB_WIZARD, JOB_CONJURER, JOB_FIRE_ELEMENTALIST, JOB_AIR_ELEMENTALIST,
+      JOB_EARTH_ELEMENTALIST, JOB_VENOM_MAGE },
+    { SK_POLEARMS, SK_LONG_BLADES, SK_STAVES, SK_CROSSBOWS, SK_SLINGS },
+} },
+
 { SP_BASE_DRACONIAN, {
     "Dr",
     "Draconian", nullptr, nullptr,
@@ -751,22 +768,6 @@ static const map<species_type, species_def> species_data =
     HT_AMPHIBIOUS_LAVA, US_ALIVE, SIZE_MEDIUM,
     10, 8, 6, // 24
     { STAT_INT, STAT_DEX }, 5,
-    {},
-    {},
-    {},
-    {}, // not a starting race
-    {}, // not a starting race
-} },
-
-{ SP_DJINNI, {
-    "Dj",
-    "Djinni", "Djinn", nullptr,
-    SPF_NONE,
-    -1, -1, 0, 3,
-    MONS_DJINNI,
-    HT_LAND, US_ALIVE, SIZE_MEDIUM,
-    8, 8, 8, // 24
-    { STAT_STR, STAT_INT, STAT_DEX }, 4,
     {},
     {},
     {},

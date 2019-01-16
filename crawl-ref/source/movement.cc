@@ -438,6 +438,13 @@ bool prompt_dangerous_portal(dungeon_feature_type ftype)
     case DNGN_ENTER_ABYSS:
         return yesno("If you enter this portal you might not be able to return "
                      "immediately. Continue?", false, 'n');
+    
+    case DNGN_ENTER_DIS:
+    case DNGN_ENTER_GEHENNA:
+    case DNGN_ENTER_COCYTUS:
+    case DNGN_ENTER_TARTARUS:
+        return yesno("If you enter this portal you will not be able to return "
+                     "without its rune. Continue?", false, 'n');
 
     case DNGN_MALIGN_GATEWAY:
         return yesno("Are you sure you wish to approach this portal? There's no "

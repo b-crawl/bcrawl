@@ -283,7 +283,7 @@ MAP
 ENDMAP
 
 NAME:    nicolae_geh_lava_in_the_way
-DEPTH:   Geh:2-, !Geh:$
+DEPTH:   Geh, !Geh:$
 SHUFFLE: {[(, }])
 KPROP:   '; = no_tele_into
 NSUBST:  ' = 1:1 / *:., ; = 1:1 / *:.
@@ -388,7 +388,7 @@ ENDMAP
 
 NAME: nicolae_geh_amphitheater
 TAGS: extra decor transparent
-DEPTH: Geh, !Geh:1
+DEPTH: Geh
 SUBST: { = {[(
 MAP
    lllll

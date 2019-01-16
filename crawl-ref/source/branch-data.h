@@ -153,35 +153,39 @@ const Branch branches[NUM_BRANCHES] =
       LIGHTGREY, LIGHTRED,
       'H', {}, BRANCH_NOISE_NORMAL },
 
-    { BRANCH_DIS, BRANCH_VESTIBULE, 1, 1, 7, 28,
+    { BRANCH_DIS, BRANCH_VESTIBULE, 1, 1, 2, 28,
       BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
       DNGN_ENTER_DIS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Dis", "the Iron City of Dis", "Dis",
-      nullptr,
+      "You enter the Iron City of Dis!\n"
+      "To return, you must find the iron rune of Zot.",
       CYAN, BROWN,
       'I', { RUNE_DIS }, BRANCH_NOISE_NORMAL },
 
-    { BRANCH_GEHENNA, BRANCH_VESTIBULE, 1, 1, 7, 28,
+    { BRANCH_GEHENNA, BRANCH_VESTIBULE, 1, 1, 2, 28,
       BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
       DNGN_ENTER_GEHENNA, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Gehenna", "Gehenna", "Geh",
-      nullptr,
+      "You enter the fiery wasteland Gehenna!\n"
+      "To return, you must find the obsidian rune of Zot.",
       BROWN, RED,
       'G', { RUNE_GEHENNA }, BRANCH_NOISE_NORMAL },
 
-    { BRANCH_COCYTUS, BRANCH_VESTIBULE, 1, 1, 7, 28,
+    { BRANCH_COCYTUS, BRANCH_VESTIBULE, 1, 1, 2, 28,
       BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
       DNGN_ENTER_COCYTUS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Cocytus", "Cocytus", "Coc",
-      nullptr,
+      "You enter the frozen wasteland Cocytus!\n"
+      "To return, you must find the icy rune of Zot.",
       LIGHTBLUE, LIGHTCYAN,
       'X', { RUNE_COCYTUS }, BRANCH_NOISE_NORMAL },
 
-    { BRANCH_TARTARUS, BRANCH_VESTIBULE, 1, 1, 7, 28,
+    { BRANCH_TARTARUS, BRANCH_VESTIBULE, 1, 1, 2, 28,
       BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
       DNGN_ENTER_TARTARUS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Tartarus", "Tartarus", "Tar",
-      nullptr,
+      "You enter the decaying netherworld Tartarus!\n"
+      "To return, you must find the bone rune of Zot.",
       MAGENTA, MAGENTA,
       'Y', { RUNE_TARTARUS }, BRANCH_NOISE_NORMAL },
 

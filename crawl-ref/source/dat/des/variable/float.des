@@ -4205,13 +4205,13 @@ NSUBST: ' = de / 2=|* / *% / 3=$ / .
 MONS: orc / orc wizard / orc priest
 MONS: ogre / w:30 orc warrior / two-headed ogre / cyclops / troll
 MONS: orc sorcerer / orc high priest / ogre mage
-MONS: w:20 orc knight / ettin / orc warlord / stone giant
+MONS: w:20 orc knight / ettin / orc warlord / cyclops
 NSUBST: - = 6=1 / 6=1. / 3=2 / 3=2. / 3 / 3. / 4... / .
 NSUBST: ' = de / 2=|* / * / %$.. / 3=$ / .
 :   else
 MONS: orc priest / orc warrior / cyclops, two-headed ogre / orc knight w:20
 MONS: orc sorcerer / orc high priest / ogre mage
-MONS: ettin / orc warlord / stone giant
+MONS: ettin / orc warlord / cyclops
 NSUBST: - = 5=1 / 5=1. / 3=2 / 4=2. / 3 / 3=3. / 4 / 2=4. / .
 NSUBST: ' = d / f / 2=|* / *% / %$.. / 3=$ / .
 :   end
@@ -4219,7 +4219,7 @@ NSUBST: ' = d / f / 2=|* / *% / %$.. / 3=$ / .
 : else
 MONS: orc / orc wizard / orc priest
 MONS: orc warrior / two-headed ogre / orc knight
-MONS: orc high priest / orc sorcerer, ettin / orc warlord / stone giant
+MONS: orc high priest / orc sorcerer, ettin / orc warlord / cyclops
 NSUBST: - = 5=1 / 5=1. / 3=2 / 4=2. / 3 / 2=3. / 4 / 4. / .
 NSUBST: ' = d / e / 2=|* / %$ / 3=$ / .
 : end

@@ -763,6 +763,7 @@ TILE:    urand_zhor
 TILE_EQ: zhor
 COLD:    3
 SLAY:    4
+BOOL:    berserk
 
 ENUM:    SALAMANDER
 NAME:    salamander hide armour

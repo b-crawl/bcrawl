@@ -29,6 +29,11 @@ Demonspawn
 Demonspawn are half human, half demon. They acquire strong demonic mutations as
 they grow.
 %%%%
+Djinni
+
+Djinni are floating primordial spirits. Unable to gain magical reserves, they
+instead pull magic from their surroundings.
+%%%%
 Draconian
 
 Draconians are versatile hybrids. They mature when reaching level 7 and develop

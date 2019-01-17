@@ -269,8 +269,8 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Cantrips
     SPELL_SUMMON_BUTTERFLIES,
-    SPELL_SUMMON_SMALL_MAMMAL,
-    SPELL_BEASTLY_APPENDAGE,
+    SPELL_SANDBLAST,
+    SPELL_INFUSION,
     SPELL_APPORTATION,
 },
 
@@ -335,7 +335,6 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Beasts
-    SPELL_SUMMON_BUTTERFLIES,
     SPELL_CALL_CANINE_FAMILIAR,
     SPELL_SUMMON_ICE_BEAST,
     SPELL_SUMMON_MANA_VIPER,

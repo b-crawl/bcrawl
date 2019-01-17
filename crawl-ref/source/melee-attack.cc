@@ -424,7 +424,7 @@ bool melee_attack::handle_phase_hit()
         {
             // infusion_power is set when the infusion spell is cast
             const int pow = you.props["infusion_power"].get_int();
-            const int dmg = 2 + div_rand_round(pow, 12);
+            const int dmg = div_rand_round(pow, 5);
             const int hurt = defender->apply_ac(dmg);
 
             dprf(DIAG_COMBAT, "Infusion: dmg = %d hurt = %d", dmg, hurt);

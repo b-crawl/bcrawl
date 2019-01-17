@@ -112,6 +112,7 @@ Pull requests for new content are welcome.
   - v1.4: Statue Form does slightly less damage when unarmed.
   - v1.9.1: Infusion scales much more with spell power.
   - v1.9.1: Song of Slaying starts at +1.
+  - v1.9.1: Force Lance is pure translocations, and removed from the Conjurer book.
 
 #### Removed Spells
   - Summon Guardian Golem

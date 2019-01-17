@@ -212,7 +212,7 @@ spret cast_song_of_slaying(int pow, bool fail)
 
     you.set_duration(DUR_SONG_OF_SLAYING, 20 + random2avg(pow, 2));
 
-    you.props[SONG_OF_SLAYING_KEY] = 0;
+    you.props[SONG_OF_SLAYING_KEY] = 1;
     return spret::success;
 }
 

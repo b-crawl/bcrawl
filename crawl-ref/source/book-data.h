@@ -106,7 +106,6 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Misfortune
-    SPELL_CONFUSING_TOUCH,
     SPELL_CONFUSE,
     SPELL_PETRIFY,
     SPELL_VIOLENT_UNRAVELLING,
@@ -269,7 +268,6 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Cantrips
-    SPELL_CONFUSING_TOUCH,
     SPELL_ANIMATE_SKELETON,
     SPELL_SUMMON_SMALL_MAMMAL,
     SPELL_APPORTATION,

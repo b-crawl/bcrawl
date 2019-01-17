@@ -120,6 +120,7 @@ Pull requests for new content are welcome.
   - Death's Door
   - v1.1: Shroud of Golubria
   - v1.8.3: Hydra Form
+  - v1.9.1: Confusing Touch
 
 #### Gods
   - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.

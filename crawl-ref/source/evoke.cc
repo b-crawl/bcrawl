@@ -275,36 +275,6 @@ static bool _evoke_horn_of_geryon()
     return true;
 }
 
-static bool _check_crystal_ball()
-{
-    if (you.confused())
-    {
-        canned_msg(MSG_TOO_CONFUSED);
-        return false;
-    }
-
-    if (!enough_mp(1, false))
-    {
-        mpr("Your reserves of magic are too empty for the crystal ball to "
-            "function.");
-        return false;
-    }
-
-    if (you.magic_points == you.max_magic_points)
-    {
-        canned_msg(MSG_FULL_MAGIC);
-        return false;
-    }
-
-    if (you.skill(SK_EVOCATIONS) < 2)
-    {
-        mpr("You lack the skill to use this item.");
-        return false;
-    }
-
-    return true;
-}
-
 /**
  * Spray lightning in all directions. (Randomly: shock, lightning bolt, OoE.)
  *
@@ -1718,13 +1688,6 @@ bool evoke_item(int slot, bool check_range)
 
         case MISC_SACK_OF_SPIDERS:
             if (_sack_of_spiders(item))
-                practise_evoking(1);
-            break;
-
-        case MISC_CRYSTAL_BALL_OF_ENERGY:
-            if (!_check_crystal_ball())
-                unevokable = true;
-            else if (_ball_of_energy())
                 practise_evoking(1);
             break;
 

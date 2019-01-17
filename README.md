@@ -68,7 +68,7 @@ Pull requests for new content are welcome.
   - Duskwalker gains the Nightstalker mutation, has draining melee attacks, and has half the stealth penalty from armour.
   - Halflings have been merged into Kobolds.
   - Deep Elves and Tengu have been merged into Avariel, winged elves with good aptitudes for magic.
-  - Djinni can cast spells without mana, but doing so prevents spellcasting for 4*cost^2/experience_level turns.
+  - v1.9: Djinni can cast spells without mana, but doing so prevents spellcasting for 4*cost^2/experience_level turns.
 
 #### Species Changes
   - Hill Orcs use Fighting as their skill for all weapons.
@@ -110,12 +110,15 @@ Pull requests for new content are welcome.
   - v1.3.3: Haunt, Chain Lightning, and Fire Storm are more common.
   - v1.3.3: Glaciate is a level 8 Ice/Air/Conjurations spell.
   - v1.4: Statue Form does slightly less damage when unarmed.
+  - v1.9.1: Infusion scales much more with spell power.
+  - v1.9.1: Song of Slaying starts at +1.
 
 #### Removed Spells
   - Summon Guardian Golem
   - Gell's Gravitas
   - Excruciating Wounds
   - Death's Door
+  - v1.1: Shroud of Golubria
   - v1.8.3: Hydra Form
 
 #### Gods

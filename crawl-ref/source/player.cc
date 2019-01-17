@@ -3839,6 +3839,19 @@ bool enough_mp(int minimum, bool suppress_msg, bool abort_macros)
     return true;
 }
 
+bool djinn_cast(int amount)
+{
+    if(you.duration[DUR_NO_CAST])
+        return false;
+    
+    mpr("You briefly lose access to your magic!");
+    int nocast_dur = div_rand_round(amount*amount*4, you.experience_level);
+    if(nocast_dur > 0)
+        nocast_dur++;
+    you.set_duration(DUR_NO_CAST, nocast_dur);
+    return true;
+}
+
 static int _rest_trigger_level(int max)
 {
     return (max * Options.rest_wait_percent) / 100;

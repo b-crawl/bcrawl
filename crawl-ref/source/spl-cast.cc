@@ -891,13 +891,7 @@ bool cast_a_spell(bool check_range, spell_type spell)
     if (sifcast_amount)
     {
         if(you.species == SP_DJINNI)
-        {
-            mpr("You briefly lose access to your magic!");
-            int nocast_dur = div_rand_round(sifcast_amount*sifcast_amount*4, you.experience_level);
-            if(nocast_dur > 0)
-                nocast_dur++;
-            you.set_duration(DUR_NO_CAST, nocast_dur);
-        }
+            djinn_cast(sifcast_amount);
         else
         {
             simple_god_message(" grants you divine energy.");

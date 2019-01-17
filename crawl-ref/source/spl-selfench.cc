@@ -195,7 +195,7 @@ spret cast_infusion(int pow, bool fail)
     else
         mpr("You extend your infusion's duration.");
 
-    you.increase_duration(DUR_INFUSION,  8 + roll_dice(2, pow), 100);
+    you.increase_duration(DUR_INFUSION,  8 + roll_dice(2, pow/2), 30);
     you.props["infusion_power"] = pow;
 
     return spret::success;
@@ -212,7 +212,7 @@ spret cast_song_of_slaying(int pow, bool fail)
 
     you.set_duration(DUR_SONG_OF_SLAYING, 20 + random2avg(pow, 2));
 
-    you.props[SONG_OF_SLAYING_KEY] = 0;
+    you.props[SONG_OF_SLAYING_KEY] = 1;
     return spret::success;
 }
 

@@ -1424,7 +1424,15 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
     // Note that mutation shenanigans might leave us with negative MP,
     // so don't fail in that case if there's no MP cost.
     if (abil.mp_cost > 0 && !enough_mp(abil.mp_cost, quiet, true))
-        return false;
+    {
+        if(you.species == SP_DJINNI)
+        {
+            if(you.duration[DUR_NO_CAST])
+                return false;
+        }
+        else
+            return false;
+    }
 
     const int hpcost = abil.hp_cost.cost(you.hp_max);
     if (hpcost > 0 && !enough_hp(hpcost, quiet))
@@ -3125,7 +3133,20 @@ static void _pay_ability_costs(const ability_def& abil)
          abil.mp_cost, hp_cost, food_cost, piety_cost);
 
     if (abil.mp_cost)
-        dec_mp(abil.mp_cost);
+    {
+        if(you.species == SP_DJINNI)
+        {
+            int extra_cost = 0;
+            if (!enough_mp(abil.mp_cost, true))
+            {
+                extra_cost = abil.mp_cost - you.magic_points;
+                djinn_cast(extra_cost);
+                dec_mp(you.magic_points);
+            }
+        }
+        else
+            dec_mp(abil.mp_cost);
+    }
 
     if (abil.hp_cost)
         dec_hp(hp_cost, false);

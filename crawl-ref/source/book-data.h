@@ -16,7 +16,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SEARING_RAY,
     SPELL_DAZZLING_SPRAY,
     SPELL_FULMINANT_PRISM,
-    SPELL_FORCE_LANCE,
     SPELL_ISKENDERUNS_MYSTIC_BLAST,
 },
 
@@ -106,7 +105,6 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Misfortune
-    SPELL_CONFUSING_TOUCH,
     SPELL_CONFUSE,
     SPELL_PETRIFY,
     SPELL_VIOLENT_UNRAVELLING,
@@ -198,6 +196,7 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of the Warp
     SPELL_PORTAL_PROJECTILE,
+    SPELL_BECKONING,
     SPELL_FORCE_LANCE,
     SPELL_DISPERSAL,
     SPELL_CONTROLLED_BLINK,
@@ -269,9 +268,9 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Cantrips
-    SPELL_CONFUSING_TOUCH,
-    SPELL_ANIMATE_SKELETON,
-    SPELL_SUMMON_SMALL_MAMMAL,
+    SPELL_SUMMON_BUTTERFLIES,
+    SPELL_SANDBLAST,
+    SPELL_INFUSION,
     SPELL_APPORTATION,
 },
 
@@ -336,7 +335,6 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Beasts
-    SPELL_SUMMON_BUTTERFLIES,
     SPELL_CALL_CANINE_FAMILIAR,
     SPELL_SUMMON_ICE_BEAST,
     SPELL_SUMMON_MANA_VIPER,

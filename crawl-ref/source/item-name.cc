@@ -3600,6 +3600,9 @@ bool is_useless_item(const item_def &item, bool temp)
         case RING_STEALTH:
             return you.get_mutation_level(MUT_NO_STEALTH);
 
+        case RING_MAGICAL_POWER:
+            return you.species == SP_DJINNI;
+
         default:
             return false;
         }
@@ -3627,6 +3630,9 @@ bool is_useless_item(const item_def &item, bool temp)
         case STAFF_CONJURATION:
         case STAFF_SUMMONING:
             return you_worship(GOD_TROG);
+        
+        case STAFF_POWER:
+            return you.species == SP_DJINNI;
         }
 
         return false;

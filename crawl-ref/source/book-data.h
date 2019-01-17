@@ -197,6 +197,7 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of the Warp
     SPELL_PORTAL_PROJECTILE,
+    SPELL_BECKONING,
     SPELL_FORCE_LANCE,
     SPELL_DISPERSAL,
     SPELL_CONTROLLED_BLINK,
@@ -268,8 +269,9 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Cantrips
-    SPELL_ANIMATE_SKELETON,
+    SPELL_SUMMON_BUTTERFLIES,
     SPELL_SUMMON_SMALL_MAMMAL,
+    SPELL_BEASTLY_APPENDAGE,
     SPELL_APPORTATION,
 },
 

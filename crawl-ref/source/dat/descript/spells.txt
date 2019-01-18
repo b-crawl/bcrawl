@@ -389,8 +389,13 @@ Deflect Missiles spell
 
 Protects the caster from all kinds of projectile attacks, making them
 significantly easier to dodge. It is highly effective against both
-single-target and penetrating attacks. Each time a missile is deflected the
-spell has a chance of expiring, with a lower chance of expiry at high power.
+single-target and penetrating attacks.
+
+The spell is linked to the caster's magical reserves, and may drain
+magic when a missile is deflected. The efficiency of the shield increases
+at higher spell power.
+
+To be cancelled, this spell must be carefully cast again in reverse.
 %%%%
 Dig spell
 

@@ -5788,7 +5788,8 @@ void player::shield_block_succeeded(actor *foe)
 
 int player::missile_deflection() const
 {
-    if (attribute[ATTR_DEFLECT_MISSILES])
+    if (attribute[ATTR_DEFLECT_MISSILES]
+            && (you.magic_points || you.species == SP_DJINNI))
         return 2;
 
     if (get_mutation_level(MUT_DISTORTION_FIELD) == 3
@@ -5807,11 +5808,7 @@ void player::ablate_deflection()
     if (attribute[ATTR_DEFLECT_MISSILES])
     {
         const int power = calc_spell_power(SPELL_DEFLECT_MISSILES, true);
-        if (one_chance_in(2 + power / 8))
-        {
-            attribute[ATTR_DEFLECT_MISSILES] = 0;
-            mprf(MSGCH_DURATION, "You feel less protected from missiles.");
-        }
+        dec_mp(div_rand_round(25, power));
     }
 }
 

@@ -3141,7 +3141,7 @@ spret cast_spectral_weapon(actor *agent, int pow, god_type god, bool fail)
 {
     ASSERT(agent);
 
-    const int dur = min(2 + random2(1 + div_rand_round(pow, 25)), 4);
+    const int dur = min(2 + div_rand_round(pow, 16), 6);
     item_def* wpn = agent->weapon();
 
     // If the wielded weapon should not be cloned, abort

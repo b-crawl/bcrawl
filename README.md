@@ -113,6 +113,8 @@ Pull requests for new content are welcome.
   - v1.9.1: Infusion scales much more with spell power.
   - v1.9.1: Song of Slaying starts at +1.
   - v1.9.1: Force Lance is pure translocations, and removed from the Conjurer book.
+  - v1.9.2: Spectral Weapon lasts longer at high spell power.
+  - v1.9.2: Deflect Missiles is never dispelled by attacks, but can drain mana when it deflects missiles. It drains less mana at higher power.
 
 #### Removed Spells
   - Summon Guardian Golem

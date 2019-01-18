@@ -9,19 +9,23 @@
 
 #include <iomanip>
 
+#include "act-iter.h"
 #include "ability.h"
 #include "branch.h"
 #include "cio.h"
 #include "database.h"
 #include "describe.h"
 #include "english.h"
+#include "env.h"
 #include "eq-type-flags.h"
 #include "food.h"
 #include "god-abil.h"
+#include "god-companions.h"
 #include "god-conduct.h"
 #include "god-passive.h"
 #include "god-prayer.h"
 #include "god-type.h"
+#include "item-name.h"
 #include "libutil.h"
 #include "macro.h"
 #include "menu.h"
@@ -386,7 +390,7 @@ static string _describe_ancestor_upgrades()
 
     if (upgrades)
     {
-        desc = "<white>XL              Upgrade\n</white>";
+        desc = "Ancestor Upgrades:\n\n<white>XL              Upgrade\n</white>";
         for (auto &entry : *upgrades)
         {
             desc += make_stringf("%s%2d              %s%s\n",
@@ -426,7 +430,7 @@ static void _list_bribable_branches(vector<branch_type> &targets)
 
         // If you don't know the branch exists, don't list it;
         // this mainly plugs info leaks about Lair branch structure.
-        if (!stair_level.count(br) && is_random_subbranch(br))
+        if (!stair_level.count(br))
             continue;
 
         targets.push_back(br);
@@ -548,6 +552,93 @@ static formatted_string _god_wrath_description(god_type which_god)
     return desc;
 }
 
+static formatted_string _beogh_extra_description()
+{
+    formatted_string desc;
+
+    _add_par(desc, "Named Followers:");
+
+    vector<monster*> followers;
+
+    for (monster_iterator mi; mi; ++mi)
+        if (is_orcish_follower(**mi))
+            followers.push_back(*mi);
+    for (auto &entry : companion_list)
+        // if not elsewhere, follower already seen by monster_iterator
+        if (companion_is_elsewhere(entry.second.mons.mons.mid, true))
+            followers.push_back(&entry.second.mons.mons);
+
+    sort(followers.begin(), followers.end(),
+        [] (monster* a, monster* b) { return a->experience > b->experience;});
+
+    bool has_named_followers = false;
+    for (auto mons : followers)
+    {
+        if (!mons->is_named()) continue;
+        has_named_followers = true;
+
+        desc += formatted_string(mons->full_name(DESC_PLAIN).c_str());
+        if (given_gift(mons))
+        {
+            mon_inv_type slot =
+                mons->props.exists(BEOGH_SH_GIFT_KEY) ? MSLOT_SHIELD :
+                mons->props.exists(BEOGH_ARM_GIFT_KEY) ? MSLOT_ARMOUR :
+                mons->props.exists(BEOGH_RANGE_WPN_GIFT_KEY) ? MSLOT_ALT_WEAPON :
+                MSLOT_WEAPON;
+
+            desc.cprintf(" (");
+
+            item_def &gift = mitm[mons->inv[slot]];
+            desc += formatted_string::parse_string(menu_colour_item_name(gift,DESC_PLAIN));
+            desc.cprintf(")");
+        }
+        desc.cprintf("\n");
+    }
+
+    if (!has_named_followers)
+        _add_par(desc, "None");
+
+    return desc;
+}
+
+
+static formatted_string _god_extra_description(god_type which_god)
+{
+    formatted_string desc;
+
+    switch (which_god)
+    {
+        case GOD_ASHENZARI:
+            if (have_passive(passive_t::bondage_skill_boost))
+            {
+                _add_par(desc, "Curse skill supports:");
+                _add_par(desc,  _describe_ash_skill_boost());
+            }
+            break;
+        case GOD_BEOGH:
+            if (you_worship(GOD_BEOGH))
+                desc = _beogh_extra_description();
+            break;
+        case GOD_GOZAG:
+            if (you_worship(GOD_GOZAG))
+                _add_par(desc, _describe_branch_bribability());
+            break;
+        case GOD_HEPLIAKLQANA:
+            if (you_worship(GOD_HEPLIAKLQANA))
+                desc = formatted_string::parse_string(_describe_ancestor_upgrades());
+            break;
+        case GOD_WU_JIAN:
+            _add_par(desc, "Martial attacks:");
+            desc += formatted_string::parse_string(
+                        getLongDescription(god_name(which_god) + " extra"));
+            break;
+        default:
+            break;
+    }
+
+    return desc;
+}
+
 /**
  * Describe miscellaneous information about the given god.
  *
@@ -583,39 +674,17 @@ static string _get_god_misc_info(god_type which_god)
     return info;
 }
 
-static string _get_god_specific_table(god_type which_god)
-{
-    switch (which_god)
-    {
-        case GOD_ASHENZARI:
-            if (have_passive(passive_t::bondage_skill_boost))
-                return _describe_ash_skill_boost();
-            return "";
-
-        case GOD_GOZAG:
-            return _describe_branch_bribability();
-
-        case GOD_HEPLIAKLQANA:
-            return _describe_ancestor_upgrades();
-
-        default:
-            return "";
-    }
-}
-
 /**
  * Print a detailed description of the given god's likes and powers.
  *
  * @param god       The god in question.
  */
-static formatted_string _detailed_god_description(god_type which_god, bool for_web = false)
+static formatted_string _detailed_god_description(god_type which_god)
 {
     formatted_string desc;
     _add_par(desc, getLongDescription(god_name(which_god) + " powers"));
     _add_par(desc, get_god_likes(which_god));
     _add_par(desc, _get_god_misc_info(which_god));
-    if (!for_web)
-        _add_par(desc, _get_god_specific_table(which_god));
     return desc;
 }
 
@@ -1004,10 +1073,11 @@ static void build_partial_god_ui(god_type which_god, shared_ptr<ui::Popup>& popu
     desc_sw->current() = 0;
     more_sw->current() = 0;
 
-    const formatted_string descs[3] = {
+    const formatted_string descs[4] = {
         _god_overview_description(which_god),
         _detailed_god_description(which_god),
         _god_wrath_description(which_god),
+        _god_extra_description(which_god)
     };
 
 #ifdef USE_TILE_LOCAL
@@ -1016,15 +1086,28 @@ static void build_partial_god_ui(god_type which_god, shared_ptr<ui::Popup>& popu
 # define MORE_PREFIX "[<w>!</w>/<w>^</w>" "]: "
 #endif
 
-    const char* mores[3] = {
-        MORE_PREFIX "<w>Overview</w>|Powers|Wrath",
-        MORE_PREFIX "Overview|<w>Powers</w>|Wrath",
-        MORE_PREFIX "Overview|Powers|<w>Wrath</w>",
+    int mores_index = descs[3].empty() ? 0 : 1;
+    const char* mores[2][4] =
+    {
+        {
+            MORE_PREFIX "<w>Overview</w>|Powers|Wrath",
+            MORE_PREFIX "Overview|<w>Powers</w>|Wrath",
+            MORE_PREFIX "Overview|Powers|<w>Wrath</w>",
+            MORE_PREFIX "Overview|Powers|Wrath"
+        },
+        {
+            MORE_PREFIX "<w>Overview</w>|Powers|Wrath|Extra",
+            MORE_PREFIX "Overview|<w>Powers</w>|Wrath|Extra",
+            MORE_PREFIX "Overview|Powers|<w>Wrath</w>|Extra",
+            MORE_PREFIX "Overview|Powers|Wrath|<w>Extra</w>"
+        }
     };
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
         const auto &desc = descs[i];
+        if (desc.empty()) continue;
+
         auto scroller = make_shared<Scroller>();
         auto text = make_shared<Text>(desc.trim());
         text->wrap_text = true;
@@ -1032,7 +1115,7 @@ static void build_partial_god_ui(god_type which_god, shared_ptr<ui::Popup>& popu
         desc_sw->add_child(move(scroller));
 
         more_sw->add_child(make_shared<Text>(
-                formatted_string::parse_string(mores[i])));
+                formatted_string::parse_string(mores[mores_index][i])));
     }
 
     desc_sw->set_margin_for_sdl({20, 0, 20, 0});
@@ -1070,16 +1153,21 @@ static void _send_god_ui(god_type god, bool is_altar)
         if (god == GOD_ASHENZARI)
             tiles.json_write_string("bondage", ash_describe_bondage(ETF_ALL, true));
     }
-    tiles.json_write_string("favour", you_worship(god) ?
-            _describe_favour(god) : _god_penance_message(god));
+    if(god != GOD_DEMIGOD)
+    {
+        tiles.json_write_string("favour", you_worship(god) ?
+                _describe_favour(god) : _god_penance_message(god));
+    }
     tiles.json_write_string("powers_list",
             _describe_god_powers(god).to_colour_string());
-    tiles.json_write_string("info_table", _get_god_specific_table(god));
+    tiles.json_write_string("info_table", "");
 
     tiles.json_write_string("powers",
-            _detailed_god_description(god, true).to_colour_string());
+            _detailed_god_description(god).to_colour_string());
     tiles.json_write_string("wrath",
             _god_wrath_description(god).to_colour_string());
+    tiles.json_write_string("extra",
+            _god_extra_description(god).to_colour_string());
     tiles.push_ui_layout("describe-god", 1);
 }
 #endif
@@ -1104,7 +1192,7 @@ void describe_god(god_type which_god)
         int key = ev.key.keysym.sym;
         if (key == '!' || key == CK_MOUSE_CMD || key == '^')
         {
-            int n = (desc_sw->current() + 1) % 3;
+            int n = (desc_sw->current() + 1) % desc_sw->num_children();
             desc_sw->current() = more_sw->current() = n;
 #ifdef USE_TILE_WEB
                 tiles.json_open_object();
@@ -1191,8 +1279,6 @@ bool describe_god_with_join(god_type which_god)
         more_sw->add_child(make_shared<Text>(prompt_fs));
     }
 
-    const int num_panes = 3; // overview, detailed, wrath
-
     join_step_type step = SHOW;
     bool yesno_only = false;
     bool done = false, join = false;
@@ -1208,7 +1294,7 @@ bool describe_god_with_join(god_type which_god)
             return done = true;
         if (keyin == '!' || keyin == CK_MOUSE_CMD || keyin == '^')
         {
-            int n = (desc_sw->current() + 1) % num_panes;
+            int n = (desc_sw->current() + 1) % desc_sw->num_children();
             desc_sw->current() = n;
 #ifdef USE_TILE_WEB
             tiles.json_open_object();
@@ -1261,7 +1347,7 @@ update_ui:
         tiles.json_write_int("pane", desc_sw->current());
         tiles.ui_state_change("describe-god", 0);
 #endif
-        more_sw->current() = num_panes + step*2 + yesno_only;
+        more_sw->current() = desc_sw->num_children() + step*2 + yesno_only;
         return true;
     });
 

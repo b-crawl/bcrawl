@@ -90,8 +90,17 @@ spret ice_armour(int pow, bool fail)
 spret deflection(int pow, bool fail)
 {
     fail_check();
-    you.attribute[ATTR_DEFLECT_MISSILES] = 1;
-    mpr("You feel very safe from missiles.");
+    
+    if(!you.attribute[ATTR_DEFLECT_MISSILES])
+    {
+        you.attribute[ATTR_DEFLECT_MISSILES] = 1;
+        mpr("You feel very safe from missiles.");
+    }
+    else
+    {
+        you.attribute[ATTR_DEFLECT_MISSILES] = 0;
+        mpr("You carefully dispel your deflective shield.");
+    }
 
     return spret::success;
 }

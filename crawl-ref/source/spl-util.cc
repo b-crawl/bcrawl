@@ -1146,11 +1146,6 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
             return "darkness is useless against divine light.";
         break;
 
-    case SPELL_DEFLECT_MISSILES:
-        if (temp && you.attribute[ATTR_DEFLECT_MISSILES])
-            return "you're already deflecting missiles.";
-        break;
-
     case SPELL_STATUE_FORM:
         if (SP_GARGOYLE == you.species)
             return "you're already a statue.";

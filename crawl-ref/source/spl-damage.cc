@@ -2403,7 +2403,7 @@ void forest_damage(const actor *mon)
                             "A tree reaches out and scrapes @foe@!",
                             "A root barely touches @foe@ from below.");
                     if (foe->is_monster())
-                        behaviour_event(foe->as_monster(), ME_WHACK);    
+                        behaviour_event(foe->as_monster(), ME_WHACK);
                 }
                 else
                 {
@@ -2412,7 +2412,7 @@ void forest_damage(const actor *mon)
                         "A tree reaches out and hits @foe@!",
                         "A root smacks @foe@ from below.");
                     if (foe->is_monster())
-                        behaviour_event(foe->as_monster(), ME_WHACK);    
+                        behaviour_event(foe->as_monster(), ME_WHACK);
                 }
 
                 msg = replace_all(replace_all(msg,

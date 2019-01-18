@@ -1044,19 +1044,20 @@ static void _describe_terrain(status_info& inf)
 
 static void _describe_missiles(status_info& inf)
 {
-    const int level = you.missile_deflection();
-    if (!level)
-        return;
+    int level = you.missile_deflection();
+    
+    if(you.attribute[ATTR_DEFLECT_MISSILES] && level == 0)
+        level = 2;
 
-    if (level > 1)
+    if (level == 2)
     {
-        bool perm = false;
-        inf.light_colour = perm ? WHITE : LIGHTMAGENTA;
+        bool enough_mana = you.magic_points || you.species == SP_DJINNI;
+        inf.light_colour = enough_mana ? LIGHTMAGENTA : DARKGREY;
         inf.light_text   = "DMsl";
         inf.short_text   = "deflect missiles";
         inf.long_text    = "You deflect missiles.";
     }
-    else
+    else if (level == 1)
     {
         bool perm = you.get_mutation_level(MUT_DISTORTION_FIELD) == 3
                     || you.wearing_ego(EQ_ALL_ARMOUR, SPARM_REPULSION)

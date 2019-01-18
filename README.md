@@ -113,6 +113,7 @@ Pull requests for new content are welcome.
   - v1.9.1: Infusion scales much more with spell power.
   - v1.9.1: Song of Slaying starts at +1.
   - v1.9.1: Force Lance is pure translocations, and removed from the Conjurer book.
+  - v1.9.2: Spectral Weapon lasts longer at high spell power.
 
 #### Removed Spells
   - Summon Guardian Golem

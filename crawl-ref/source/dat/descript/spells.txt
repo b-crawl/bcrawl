@@ -738,9 +738,10 @@ death.
 %%%%
 Infusion spell
 
-Infuses the caster's melee attacks with magic, drawing from their reserves of
-magical energy to deal additional damage whenever an enemy is hit. It has no
-effect when the caster's magic is depleted.
+Links the caster's magical reserves to their melee attacks, creating a burst of
+magical energy when an enemy is hit unless the caster's magic is depleted.
+This does additional damage that is reduced by armour, making this spell most
+effective against unarmoured foes.
 %%%%
 Injury Bond spell
 

@@ -390,7 +390,7 @@ static string _describe_ancestor_upgrades()
 
     if (upgrades)
     {
-        desc = "<white>XL              Upgrade\n</white>";
+        desc = "Ancestor Upgrades:\n\n<white>XL              Upgrade\n</white>";
         for (auto &entry : *upgrades)
         {
             desc += make_stringf("%s%2d              %s%s\n",
@@ -616,14 +616,16 @@ static formatted_string _god_extra_description(god_type which_god)
             }
             break;
         case GOD_BEOGH:
-            desc = _beogh_extra_description();
+            if (you_worship(GOD_BEOGH))
+                desc = _beogh_extra_description();
             break;
         case GOD_GOZAG:
-            _add_par(desc, _describe_branch_bribability());
+            if (you_worship(GOD_GOZAG))
+                _add_par(desc, _describe_branch_bribability());
             break;
         case GOD_HEPLIAKLQANA:
-            _add_par(desc, "Ancestor upgrades:");
-            _add_par(desc, _describe_ancestor_upgrades());
+            if (you_worship(GOD_HEPLIAKLQANA))
+                desc = formatted_string::parse_string(_describe_ancestor_upgrades());
             break;
         case GOD_WU_JIAN:
             _add_par(desc, "Martial attacks:");

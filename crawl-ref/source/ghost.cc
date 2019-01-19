@@ -312,9 +312,8 @@ void ghost_demon::init_player_ghost(bool actual_ghost)
         {
             damage = property(weapon, PWPN_DAMAGE);
 
-            // Bows skill doesn't make bow-bashing better.
-            skill_type sk = is_range_weapon(weapon) ? SK_FIGHTING
-                                                    : item_attack_skill(weapon);
+            skill_type sk = (you.species == SP_HILL_ORC && !is_range_weapon(weapon)) ?
+                    SK_FIGHTING : item_attack_skill(weapon);
             damage *= 25 + you.skills[sk];
             damage /= 25;
 

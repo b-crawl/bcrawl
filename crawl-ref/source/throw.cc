@@ -61,12 +61,15 @@ static bool _is_always_penetrating_attack(const actor& attacker,
     if (projectile.base_type != OBJ_MISSILES)
         return false;
 
-    // Ammo of penetration penetrates for free.
-    if (get_ammo_brand(projectile) == SPMSL_PENETRATION &&
-        is_launched(&attacker, weapon, projectile) == launch_retval::LAUNCHED)
-    {
+    // javelins of penetration
+    if (get_ammo_brand(projectile) == SPMSL_PENETRATION)
         return true;
-    }
+    
+    // penetration branded weapons
+    if(weapon
+            && is_launched(&attacker, weapon, projectile) == launch_retval::LAUNCHED
+            && get_weapon_brand(*weapon) == SPWPN_PENETRATION)
+        return true;
 
     return false;
 }

@@ -148,6 +148,21 @@ item_def* newgame_make_item(object_class_type base,
         else
             item.sub_type = ARM_ROBE;
     }
+    
+    if(item.sub_type == AMU_GUARDIAN_SPIRIT)
+    {
+        switch(you.species)
+        {
+        case SP_DEEP_DWARF:
+            item.sub_type = AMU_MANA_REGENERATION;
+            break;
+        case SP_VINE_STALKER:
+            item.sub_type = AMU_FAITH;
+            break;
+        default: break;
+        }
+        you.equip[get_item_slot(item)] = slot;
+    }
 
     // Make sure we didn't get a stack of shields or such nonsense.
     ASSERT(item.quantity == 1 || is_stackable_item(item));

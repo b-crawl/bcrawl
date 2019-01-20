@@ -53,6 +53,7 @@ Pull requests for new content are welcome.
   - v1.1.1: Like in mainline DCSS, all traps are revealed, but there are no trap effects from exploration.
   - v1.3: To replace traps, when taking stairs there's a 4% chance of being teleported onto the lower floor.
   - v1.7: An "Adventure" mode is added, which is a normal game that starts the player with 2 extra lives.
+  - v1.9.3: When in Zot or carrying the Orb, teleports from stairs and traps are replaced by blinks.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.

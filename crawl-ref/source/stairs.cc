@@ -32,6 +32,7 @@
 #include "mon-death.h"
 #include "movement.h"
 #include "notes.h"
+#include "orb.h"
 #include "orb-type.h"
 #include "output.h"
 #include "prompt.h"
@@ -507,6 +508,11 @@ static level_id _travel_destination(const dungeon_feature_type how,
         mpr("As you climb the stairs, a rune flashes!");
         if (you.no_tele(true, true))
             canned_msg(MSG_STRANGE_STASIS);
+        else if (orb_limits_translocation())
+        {
+            uncontrolled_blink();
+            return dest;
+        }
         else
         {
             you.teleport(true, false);
@@ -868,6 +874,10 @@ void floor_transition(dungeon_feature_type how,
         mpr("Near the exit of the stairs, a rune flashes!");
         if (you.no_tele(true, true))
             canned_msg(MSG_STRANGE_STASIS);
+        else if (orb_limits_translocation())
+        {
+            uncontrolled_blink();
+        }
         else
             you.teleport(true, false);
         }

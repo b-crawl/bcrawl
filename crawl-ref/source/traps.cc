@@ -37,6 +37,7 @@
 #include "mon-place.h"
 #include "mon-transit.h"
 #include "nearby-danger.h"
+#include "orb.h"
 #include "output.h"
 #include "prompt.h"
 #include "random.h"
@@ -579,7 +580,12 @@ void trap_def::trigger(actor& triggerer)
             destroy();
         }
         if (!triggerer.no_tele(true, you_trigger))
-            triggerer.teleport(true);
+        {
+            if (orb_limits_translocation())
+                triggerer.blink();
+            else
+                triggerer.teleport(true);
+        }
         break;
 
     case TRAP_ALARM:

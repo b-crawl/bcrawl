@@ -3563,7 +3563,7 @@ bool is_useless_item(const item_def &item, bool temp)
                     || (you_worship(GOD_RU) && you.piety == piety_breakpoint(5)));
 
         case AMU_GUARDIAN_SPIRIT:
-            return you.spirit_shield(false, false);
+            return (you.spirit_shield(false, false) || you.species == SP_DEEP_DWARF);
 
         case RING_LIFE_PROTECTION:
             return player_prot_life(false, temp, false) == 3;

@@ -2,7 +2,8 @@ ae := autopickup_exceptions
 
 #### inclusions ###
 
-ae = <rune of Zot                 # Autopickup runes by default.
+# Autopickup runes by default.
+ae = <rune of Zot
 
 ae += <artefact
 ae += <throwing net
@@ -13,8 +14,12 @@ ae += <throwing net
 # ae += dangerous_item
 
 ae += useless_item
-ae += forbidden                    # items your god disapproves of
-ae += [^n]identified.*spellbook    # Ignore books you have already seen
+
+# items your god disapproves of
+ae += forbidden
+
+# Ignore books you have already seen
+ae += [^n]identified.*spellbook
 
 # Don't pick up misc items when duplication doesn't help.
 :add_autopickup_func(function (it, name)

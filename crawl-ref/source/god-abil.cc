@@ -3194,12 +3194,12 @@ struct monster_conversion
 
 static const map<monster_type, monster_conversion> conversions =
 {
-    { MONS_PLANT,          { MONS_OKLOB_PLANT, 8, 0 } },
-    { MONS_BUSH,           { MONS_OKLOB_PLANT, 8, 0 } },
-    { MONS_BURNING_BUSH,   { MONS_OKLOB_PLANT, 8, 0 } },
-    { MONS_OKLOB_SAPLING,  { MONS_OKLOB_PLANT, 4, 0 } },
-    { MONS_FUNGUS,         { MONS_WANDERING_MUSHROOM, 6, 0 } },
-    { MONS_TOADSTOOL,      { MONS_WANDERING_MUSHROOM, 6, 0 } },
+    { MONS_PLANT,          { MONS_OKLOB_PLANT, 12, 0 } },
+    { MONS_BUSH,           { MONS_OKLOB_PLANT, 12, 0 } },
+    { MONS_BURNING_BUSH,   { MONS_OKLOB_PLANT, 12, 0 } },
+    { MONS_OKLOB_SAPLING,  { MONS_OKLOB_PLANT, 6, 0 } },
+    { MONS_FUNGUS,         { MONS_WANDERING_MUSHROOM, 9, 0 } },
+    { MONS_TOADSTOOL,      { MONS_WANDERING_MUSHROOM, 9, 0 } },
     { MONS_BALLISTOMYCETE, { MONS_HYPERACTIVE_BALLISTOMYCETE, 4, 0 } },
 };
 

@@ -47,6 +47,7 @@ Pull requests for new content are welcome.
   - Necromancers start with Bolt of Draining.
   - v1.1: Skalds have a reworked Ozocubu's Armour instead of Shroud of Golubria.
   - v1.5.2: Assassin and Artificer have been merged into Rogue.
+  - v1.9.3: Monks start with an amulet (usually guardian spirit) and a hat.
 
 #### Features
   - All items are automatically identified if the player has a rune.

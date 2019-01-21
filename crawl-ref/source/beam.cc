@@ -1533,13 +1533,9 @@ int mons_adjust_flavoured(monster* mons, bolt &pbolt, int hurted,
         hurted = resist_adjust_damage(mons, pbolt.flavour, hurted);
         if (doFlavouredEffects && (!hurted || hurted != original))
         {
-            simple_monster_message(*mons,
-                                       original == 0 ? " appears unharmed." :
-                                         hurted == 0 ? " completely resists." :
-                                   hurted < original ? " resists." :
-                                   hurted > original ? " writhes in agony!" :
-                                   " suffers an impossible damage scaling amount!");
-
+            simple_monster_message(*mons, hurted == 0 ? " completely resists." :
+                                    hurted < original ? " resists." :
+                                    " writhes in agony!");
         }
         break;
     }

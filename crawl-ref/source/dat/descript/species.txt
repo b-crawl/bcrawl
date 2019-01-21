@@ -56,8 +56,8 @@ strong and they live in a state of permanent stasis.
 %%%%
 Felid
 
-Felids are many-lived cats possessing sentience. They are incapable of advanced
-item manipulation or the use of armour or weapons.
+Felids are sentient cats that cannot use weapons or armour but gain extra lives.
+Highly curious, they gain experience for seeing enemies, not for defeating them.
 %%%%
 Ghoul
 

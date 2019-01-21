@@ -37,6 +37,7 @@
 #include "mon-behv.h"
 #include "mon-poly.h"
 #include "mon-tentacle.h"
+#include "prompt.h"
 #include "religion.h"
 #include "shout.h"
 #include "spl-damage.h"
@@ -135,6 +136,22 @@ bool melee_attack::handle_phase_attempted()
 
             if (stop_attack_prompt(hitfunc, "attack", nullptr, nullptr,
                                    defender->as_monster()))
+            {
+                cancel_attack = true;
+                return false;
+            }
+        }
+        else if (weapon && is_unrandom_artefact(*weapon, UNRAND_TORMENT)
+                 && you.can_see(*defender))
+        {
+            targeter_los hitfunc(&you, LOS_NO_TRANS);
+
+            if (stop_attack_prompt(hitfunc, "attack",
+                                   [] (const actor *m)
+                                   {
+                                       return !m->res_torment();
+                                   },
+                                   nullptr, defender->as_monster()))
             {
                 cancel_attack = true;
                 return false;

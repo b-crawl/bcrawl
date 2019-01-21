@@ -303,7 +303,7 @@ static void _beogh_spread_experience(int exp)
 static int _calc_player_experience(const monster* mons)
 {
     int experience = exper_value(*mons);
-    if (!experience)
+    if (!experience || you.species == SP_FELID)
         return 0;
 
     const bool already_got_half_xp = testbits(mons->flags, MF_PACIFIED);

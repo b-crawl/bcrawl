@@ -26,6 +26,7 @@
 #include "env.h"
 #include "evoke.h"
 #include "exercise.h"
+#include "fight.h"
 #include "food.h"
 #include "god-abil.h"
 #include "god-conduct.h"
@@ -2771,6 +2772,34 @@ string cannot_read_item_reason(const item_def &item)
 }
 
 /**
+ * Check if a particular scroll type would hurt a monster.
+ *
+ * @param scr           Scroll type in question
+ * @param m             Actor as a potential victim to the scroll
+ * @return  true if the provided scroll type is harmful to the actor.
+ */
+static bool _scroll_will_harm(const scroll_type scr, const actor &m)
+{
+    if (!m.alive())
+        return false;
+
+    switch (scr)
+    {
+        case SCR_HOLY_WORD:
+            if (m.undead_or_demonic())
+                return true;
+            break;
+        case SCR_TORMENT:
+            if (!m.res_torment())
+                return true;
+            break;
+        default: break;
+    }
+
+    return false;
+}
+
+/**
  * Check to see if the player can read the item in the given slot, and if so,
  * reads it. (Examining books, evoking the tome of destruction, & using
  * scrolls.)
@@ -2803,14 +2832,45 @@ void read(item_def* scroll)
         return;
     }
 
-    // need to handle this before we waste time (with e.g. blurryvis)
-    if (scroll->sub_type == SCR_BLINKING && item_type_known(*scroll)
-        && orb_limits_translocation()
-        && !yesno("Your blink will be uncontrolled - continue anyway?",
-                  false, 'n'))
-    {
-        canned_msg(MSG_OK);
-        return;
+    const scroll_type which_scroll = static_cast<scroll_type>(scroll->sub_type);
+    // Handle player cancels before we waste time (with e.g. blurryvis)
+    if (item_type_known(*scroll)) {
+        bool penance = god_hates_item(*scroll);
+        string verb_object = "read the " + scroll->name(DESC_DBNAME);
+
+        targeter_los hitfunc(&you, LOS_NO_TRANS);
+
+        if (stop_attack_prompt(hitfunc, verb_object.c_str(),
+                               [which_scroll] (const actor* m)
+                               {
+                                   return _scroll_will_harm(which_scroll, *m);
+                               },
+                               nullptr, nullptr))
+        {
+            return;
+        }
+
+        string penance_prompt = make_stringf("Really %s? This action would"
+                                             " place you under penance!",
+                                             verb_object.c_str());
+        // Having a separate prompt if the player is going to harm allies and
+        // get penance is a bit awkward; but for gods where this will happen
+        // the player is going to get punished both for hurting the allies and
+        // using a bad item so they'd better be sure.
+        if (penance && !yesno(penance_prompt.c_str(), false, 'n'))
+        {
+            canned_msg(MSG_OK);
+            return;
+        }
+
+        if (scroll->sub_type == SCR_BLINKING
+            && orb_limits_translocation()
+            && !yesno("Your blink will be uncontrolled - continue anyway?",
+                      false, 'n'))
+        {
+            canned_msg(MSG_OK);
+            return;
+        }
     }
 
     if (you.get_mutation_level(MUT_BLURRY_VISION)

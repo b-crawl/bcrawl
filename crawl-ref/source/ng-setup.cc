@@ -408,7 +408,7 @@ static void _give_items_skills(const newgame_def& ng)
 
     case JOB_ABYSSAL_KNIGHT:
         you.religion = GOD_LUGONU;
-        if (!crawl_state.game_is_sprint())
+        if (!crawl_state.game_is_sprint() && you.species != SP_FELID)
             you.chapter = CHAPTER_POCKET_ABYSS;
         you.piety = 38;
 

@@ -3558,7 +3558,9 @@ void mons_pacify(monster& mon, mon_attitude_type att, bool no_xp)
     if (!testbits(mon.flags, MF_PACIFIED) // Don't allow repeatedly pacifying.
         && !no_xp
         && !mon.is_summoned()
-        && !testbits(mon.flags, MF_NO_REWARD))
+        && !testbits(mon.flags, MF_NO_REWARD)
+        && you.species != SP_FELID
+        )
     {
         // Give the player half of the monster's XP.
         gain_exp((exper_value(mon) + 1) / 2);

@@ -339,7 +339,7 @@ static const map<species_type, species_def> species_data =
     "Fe",
     "Felid", "Feline", "Cat",
     SPF_NONE,
-    -1, -4, 1, 6,
+    0, -3, 1, 6,
     MONS_FELID,
     HT_LAND, US_ALIVE, SIZE_LITTLE,
     4, 9, 11, // 24

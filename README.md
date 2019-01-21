@@ -87,6 +87,7 @@ Pull requests for new content are welcome.
   - v1.5.2: Ghouls have adjusted magic aptitudes, including +4 Necromancy.
   - v1.6: Vampires are reworked: above Satiated gives Bat Form and regeneration, and below Satiated gives resistances and stealth. Bloodless Vampires still regenerate at half normal speed.
   - v1.8: Demigods have various divine abilities.
+  - v1.10: Felids gain half XP for seeing enemies, and no experience for killing them. They have -30% HP instead of -40%, and +0 XP instead of -1 XP.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

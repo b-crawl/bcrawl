@@ -1424,7 +1424,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
 #if TAG_MAJOR_VERSION == 34
     APT(SP_FELID,           SK_TRAPS,         UNUSABLE_SKILL),
 #endif
-    APT(SP_FELID,           SK_UNARMED_COMBAT,  0),
+    APT(SP_FELID,           SK_UNARMED_COMBAT,  2),
     APT(SP_FELID,           SK_SPELLCASTING,   -1),
     APT(SP_FELID,           SK_CONJURATIONS,   -1),
     APT(SP_FELID,           SK_HEXES,           4),

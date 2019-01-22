@@ -5393,7 +5393,8 @@ player::player()
     shield_blocks       = 0;
 
     abyss_speed         = 0;
-    game_seed = get_uint32();
+    game_seed           = crawl_state.seed;
+    game_is_seeded      = true;
 
     old_hunger          = hunger;
 

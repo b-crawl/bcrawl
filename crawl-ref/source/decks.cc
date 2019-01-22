@@ -1618,6 +1618,7 @@ static void _degeneration_card(int power)
                if (mons.can_polymorph())
                {
                    monster_polymorph(&mons, RANDOM_MONSTER, PPT_LESS);
+                   mons.hit_points -= mons.hit_points * power_level / 3;
                    mons.malmutate("");
                }
                else

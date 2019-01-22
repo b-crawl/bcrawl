@@ -143,6 +143,7 @@ Pull requests for new content are welcome.
   - v1.5: Dithmenos is [reworked](https://github.com/b-crawl/bcrawl/wiki/Dithmenos): Actions aren't mimicked at high piety, but Shadow Step is much cheaper and makes a short-lived shadow clone of the player.
   - v1.6.1: Sif Muna gives Divine Energy at 0* and book gifts starting at 1*.
   - v1.6.1: Okawaru and Trog no longer give needles as gifts.
+  - v1.10.1: Nemelex's Degeneration card reduces enemy HP at high power.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

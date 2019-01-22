@@ -353,8 +353,7 @@ static const map<species_type, species_def> species_data =
       "Your paws allow you to move quietly. (Stealth)" },
     { "no armour", "no weapons or thrown items", "stealth" },
     { JOB_MONK, JOB_BERSERKER, JOB_ENCHANTER, JOB_TRANSMUTER, JOB_ICE_ELEMENTALIST,
-      JOB_CONJURER, JOB_SUMMONER, JOB_AIR_ELEMENTALIST, JOB_VENOM_MAGE,
-      JOB_REAVER },
+      JOB_CONJURER, JOB_SUMMONER, JOB_EARTH_ELEMENTALIST, JOB_WIZARD, JOB_REAVER },
     { SK_UNARMED_COMBAT },
 } },
 

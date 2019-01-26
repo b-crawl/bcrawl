@@ -168,6 +168,13 @@ static player_save_info _read_character_info(package *save)
     return fromfile;
 }
 
+vector<string> get_dir_files_sorted(const string &dirname)
+{
+    auto result = get_dir_files(dirname);
+    sort(result.begin(), result.end());
+    return result;
+}
+
 // Returns a vector of files (including directories if requested) in
 // the given directory, recursively. All filenames returned are
 // relative to the start directory. If an extension is supplied, all
@@ -189,7 +196,7 @@ vector<string> get_dir_files_recursive(const string &dirname, const string &ext,
         recursion_depth == -1? -1 : recursion_depth - 1;
     const bool recur = recursion_depth == -1 || recursion_depth > 0;
 
-    for (const string &filename : get_dir_files(dirname))
+    for (const string &filename : get_dir_files_sorted(dirname))
     {
         if (dir_exists(catpath(dirname, filename)))
         {
@@ -732,7 +739,7 @@ static vector<player_save_info> _find_saved_characters()
     if (searchpath.empty())
         searchpath = ".";
 
-    for (const string &filename : get_dir_files(searchpath))
+    for (const string &filename : get_dir_files_sorted(searchpath))
     {
         if (is_save_file_name(filename))
         {
@@ -1856,7 +1863,7 @@ static vector<string> _list_bones()
     string base_filename = _make_ghost_filename();
     string underscored_filename = base_filename + "_";
 
-    vector<string> filenames = get_dir_files(bonefile_dir);
+    vector<string> filenames = get_dir_files_sorted(bonefile_dir);
     vector<string> bonefiles;
     for (const auto &filename : filenames)
         if (starts_with(filename, underscored_filename)
@@ -2952,7 +2959,7 @@ vector<string> get_title_files()
 {
     vector<string> titles;
     for (const string &dir : _get_base_dirs())
-        for (const string &file : get_dir_files(dir))
+        for (const string &file : get_dir_files_sorted(dir))
             if (file.substr(0, 6) == "title_")
                 titles.push_back(file);
     return titles;

@@ -705,8 +705,11 @@ void bolt::apply_beam_conducts()
         switch (flavour)
         {
         case BEAM_DAMNATION:
-            did_god_conduct(DID_EVIL, 2 + random2(3), god_cares());
+        {
+            const int level = 2 + random2(3);
+            did_god_conduct(DID_EVIL, level, god_cares());
             break;
+        }
         default:
             break;
         }
@@ -2884,7 +2887,9 @@ bool bolt::fuzz_invis_tracer()
         return false;
 
     // Apply fuzz now.
-    coord_def fuzz(random_range(-2, 2), random_range(-2, 2));
+    coord_def fuzz;
+    fuzz.x = random_range(-2, 2);
+    fuzz.y = random_range(-2, 2);
     coord_def newtarget = target + fuzz;
 
     if (in_bounds(newtarget))
@@ -5239,8 +5244,8 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
             obvious_effect = true;
         if (YOU_KILL(thrower))
         {
-            did_god_conduct(DID_DELIBERATE_MUTATING, 2 + random2(3),
-                            god_cares());
+            const int level = 2 + random2(3);
+            did_god_conduct(DID_DELIBERATE_MUTATING, level, god_cares());
         }
         return MON_AFFECTED;
 
@@ -5250,8 +5255,8 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
             obvious_effect = true;
         if (YOU_KILL(thrower))
         {
-            did_god_conduct(DID_DELIBERATE_MUTATING, 2 + random2(3),
-                            god_cares());
+            const int level = 2 + random2(3);
+            did_god_conduct(DID_DELIBERATE_MUTATING, level, god_cares());
         }
         return MON_AFFECTED;
 

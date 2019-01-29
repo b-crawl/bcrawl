@@ -630,13 +630,11 @@ void trap_def::trigger(actor& triggerer)
     case TRAP_BLADE:
         if (you_trigger)
         {
-            if (trig_knows && one_chance_in(3))
+            const int narrow_miss_rnd = random2(6) + 3;
+            if (one_chance_in(3))
                 mpr("You avoid triggering a blade trap.");
-            else if (random2limit(you.evasion(), 40)
-                     + random2(6) + (trig_knows ? 3 : 0) > 8)
-            {
+            else if (random2limit(you.evasion(), 40) + narrow_miss_rnd > 8)
                 mpr("A huge blade swings just past you!");
-            }
             else
             {
                 mpr("A huge blade swings out and slices into you!");
@@ -1269,7 +1267,9 @@ void trap_def::shoot_ammo(actor& act, bool was_known)
 
     item_def shot = generate_trap_item();
 
-    int trap_hit = (20 + (to_hit_bonus()*2)) * random2(200) / 100;
+    int trap_hit = 20 + (to_hit_bonus()*2);
+    trap_hit *= random2(200);
+    trap_hit /= 100;
     if (int defl = act.missile_deflection())
         trap_hit = random2(trap_hit / defl);
 

@@ -128,7 +128,7 @@ struct deck_type_data
     string name;
     string flavour;
     /// The list of cards this deck contains.
-    const deck_archetype cards;
+    deck_archetype cards;
 };
 
 static map<deck_type, deck_type_data> all_decks =

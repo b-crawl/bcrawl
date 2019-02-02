@@ -40,6 +40,7 @@
 #include "mutation.h"
 #include "ouch.h"
 #include "prompt.h"
+#include "religion.h"
 #include "shout.h"
 #include "spl-summoning.h"
 #include "spl-util.h"
@@ -360,6 +361,12 @@ static void _player_hurt_monster(monster &mon, int damage, beam_type flavour,
     if (is_sanctuary(you.pos()) || is_sanctuary(mon.pos()))
         remove_sanctuary(true);
 
+    if (god_conducts && you.deity() == GOD_FEDHAS && fedhas_neutralises(mon))
+    {
+        simple_god_message(" protects your plant from harm.", GOD_FEDHAS);
+        return;
+    }
+
     god_conduct_trigger conducts[3];
     if (god_conducts)
         set_attack_conducts(conducts, mon, you.can_see(mon));
@@ -547,7 +554,9 @@ static spret _cast_los_attack_spell(spell_type spell, int pow,
             verb = "frozen";
             prompt_verb = "refrigerate";
             vulnerable = [](const actor *caster, const actor *act) {
-                return act->is_player() || act->res_cold() < 3;
+                return act->is_player() || act->res_cold() < 3
+                       && !(caster->deity() == GOD_FEDHAS
+                            && fedhas_protects(*act->as_monster()));
             };
             break;
 
@@ -570,7 +579,9 @@ static spret _cast_los_attack_spell(spell_type spell, int pow,
             verb = "blasted";
             // prompt_verb = "sing" The singing sword prompts in melee-attack
             vulnerable = [](const actor *caster, const actor *act) {
-                return !act->is_player();
+                return act != caster
+                       && !(caster->deity() == GOD_FEDHAS
+                            && fedhas_protects(*act->as_monster()));
             };
             break;
 
@@ -985,14 +996,14 @@ static int _shatter_walls(coord_def where, int pow, actor *agent)
         break;
     }
 
+    if (agent->deity() == GOD_FEDHAS && feat_is_tree(grid))
+        return 0;
+
     if (x_chance_in_y(chance, 100))
     {
         noisy(spell_effect_noise(SPELL_SHATTER), where);
 
         destroy_wall(where);
-
-        if (agent->is_player() && feat_is_tree(grid))
-            did_god_conduct(DID_KILL_PLANT, 1);
 
         return 1;
     }
@@ -1216,6 +1227,9 @@ static bool _irradiate_is_safe()
         if (!mon)
             continue;
 
+        if (you.deity() == GOD_FEDHAS && fedhas_protects(*mon))
+            continue;
+
         if (stop_attack_prompt(mon, false, you.pos()))
             return false;
     }
@@ -1244,6 +1258,15 @@ static int _irradiate_cell(coord_def where, int pow, actor *agent)
          mons->name(DESC_THE).c_str(),
          attack_strength_punctuation(dam).c_str());
     dprf("irr for %d (%d pow, max %d)", dam, pow, max_dam);
+
+    if (agent->deity() == GOD_FEDHAS && fedhas_protects(*mons))
+    {
+        simple_god_message(
+                    make_stringf(" protects %s plant from harm.",
+                        agent->is_player() ? "your" : "a").c_str(),
+                    GOD_FEDHAS);
+        return 0;
+    }
 
     if (agent->is_player())
         _player_hurt_monster(*mons, dam, BEAM_MMISSILE);
@@ -1319,6 +1342,10 @@ static int _ignite_tracer_cloud_value(coord_def where, actor *agent)
         const int dam = actor_cloud_immune(*act, CLOUD_FIRE)
                         ? 0
                         : resist_adjust_damage(act, BEAM_FIRE, 40);
+
+        if (agent->deity() == GOD_FEDHAS && fedhas_protects(*act->as_monster()))
+            return 0;
+
         return mons_aligned(act, agent) ? -dam : dam;
     }
     // We've done something, but its value is indeterminate
@@ -1773,6 +1800,15 @@ static int _discharge_monsters(const coord_def &where, int pow,
     // rEelec monsters don't allow arcs to continue.
     else if (victim->res_elec() > 0)
         return 0;
+    else if (agent.deity() == GOD_FEDHAS
+             && fedhas_protects(*victim->as_monster()))
+    {
+        simple_god_message(
+                    make_stringf(" protects %s plant from harm.",
+                        agent.is_player() ? "your" : "a").c_str(),
+                    GOD_FEDHAS);
+        return 0;
+    }
     else
     {
         monster* mons = victim->as_monster();
@@ -1827,8 +1863,12 @@ bool safe_discharge(coord_def where, vector<const actor *> &exclude)
             if (act->is_monster())
             {
                 // Harmless to these monsters, so don't prompt about them.
-                if (act->res_elec() > 0)
+                if (act->res_elec() > 0
+                    || you.deity() == GOD_FEDHAS
+                       && fedhas_protects(*act->as_monster()))
+                {
                     continue;
+                }
 
                 if (stop_attack_prompt(act->as_monster(), false, where))
                     return false;
@@ -2249,7 +2289,8 @@ spret cast_sandblast(int pow, bolt &beam, bool fail)
 
 static bool _elec_not_immune(const actor *act)
 {
-    return act->res_elec() < 3;
+    return act->res_elec() < 3 && !(you_worship(GOD_FEDHAS)
+                                    && fedhas_protects(*act->as_monster()));
 }
 
 spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)

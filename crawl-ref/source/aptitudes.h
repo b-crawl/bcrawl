@@ -131,7 +131,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_AVARIEL,       SK_POLEARMS,       -1),
     APT(SP_AVARIEL,       SK_STAVES,          0),
     APT(SP_AVARIEL,       SK_SLINGS,         -1),
-    APT(SP_AVARIEL,       SK_BOWS,            1),
+    APT(SP_AVARIEL,       SK_BOWS,            2),
     APT(SP_AVARIEL,       SK_CROSSBOWS,       1),
     APT(SP_AVARIEL,       SK_THROWING,        0),
     APT(SP_AVARIEL,       SK_ARMOUR,          1),

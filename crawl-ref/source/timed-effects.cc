@@ -78,15 +78,15 @@ static void _hell_effect_noise()
 static void _random_hell_miscast()
 {
     const spschool which_miscast
-        = random_choose_weighted(8, spschool::necromancy,
-                                 4, spschool::summoning,
-                                 2, spschool::conjuration,
-                                 1, spschool::charms,
-                                 1, spschool::hexes);
+        = random_choose_weighted(8, SPTYP_NECROMANCY,
+                                 4, SPTYP_SUMMONING,
+                                 2, SPTYP_CONJURATION,
+                                 1, SPTYP_CHARMS,
+                                 1, SPTYP_HEXES);
 
     const int pow = 4 + random2(6);
     const int fail = random2avg(97, 3);
-    MiscastEffect(&you, nullptr, {miscast_source::hell_effect}, which_miscast,
+    MiscastEffect(&you, nullptr, HELL_EFFECT_MISCAST, which_miscast,
                   pow, fail,
                   "the effects of Hell");
 }
@@ -154,7 +154,7 @@ static void _themed_hell_summon_or_miscast()
     {
         const int pow = 4 + random2(6);
         const int fail = random2avg(97, 3);
-        MiscastEffect(&you, nullptr, {miscast_source::hell_effect},
+        MiscastEffect(&you, nullptr, HELL_EFFECT_MISCAST,
                       spec->miscast_type, pow, fail,
                       "the effects of Hell");
     }

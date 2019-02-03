@@ -153,9 +153,9 @@ static void _CURSES_equip(item_def *item, bool *show_msgs, bool unmeld)
     if (!unmeld)
     {
         const int pow = random2(9);
-        MiscastEffect(&you, nullptr, {miscast_source::wield},
-                      spschool::necromancy, pow, random2(70),
-                      "the scythe of Curses", nothing_happens::NEVER);
+        MiscastEffect(&you, nullptr, WIELD_MISCAST,
+                      SPTYP_NECROMANCY, pow, random2(70),
+                      "the scythe of Curses", NH_NEVER);
     }
 }
 
@@ -174,9 +174,9 @@ static void _CURSES_melee_effects(item_def* weapon, actor* attacker,
     if (!mondied && defender->holiness() == MH_NATURAL)
     {
         const int pow = random2(9);
-        MiscastEffect(defender, attacker, {miscast_source::melee},
-                      spschool::necromancy, pow, random2(70),
-                      "the scythe of Curses", nothing_happens::NEVER);
+        MiscastEffect(defender, attacker, MELEE_MISCAST,
+                      SPTYP_NECROMANCY, pow, random2(70),
+                      "the scythe of Curses", NH_NEVER);
     }
 }
 
@@ -847,9 +847,9 @@ static void _PLUTONIUM_SWORD_melee_effects(item_def* weapon, actor* attacker,
     {
         mpr("Mutagenic energy flows through the plutonium sword!");
         const int pow = random2(9);
-        MiscastEffect(defender, attacker, {miscast_source::melee},
-                      spschool::transmutation, pow, random2(70),
-                      "the plutonium sword", nothing_happens::NEVER);
+        MiscastEffect(defender, attacker, MELEE_MISCAST,
+                      SPTYP_TRANSMUTATION, pow, random2(70),
+                      "the plutonium sword", NH_NEVER);
 
         if (attacker->is_player())
             did_god_conduct(DID_CHAOS, 3);
@@ -1037,9 +1037,9 @@ static void _SPELLBINDER_melee_effects(item_def* weapon, actor* attacker,
         && !mondied)
     {
         const int pow = random2(9);
-        MiscastEffect(defender, attacker, {miscast_source::melee},
-                      spschool::random, pow, random2(70),
-                      "the demon whip \"Spellbinder\"", nothing_happens::NEVER);
+        MiscastEffect(defender, attacker, MELEE_MISCAST,
+                      SPTYP_RANDOM, pow, random2(70),
+                      "the demon whip \"Spellbinder\"", NH_NEVER);
     }
 }
 

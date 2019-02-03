@@ -77,7 +77,7 @@ static void _hell_effect_noise()
  */
 static void _random_hell_miscast()
 {
-    const spschool which_miscast
+    const spschool_flag_type which_miscast
         = random_choose_weighted(8, SPTYP_NECROMANCY,
                                  4, SPTYP_SUMMONING,
                                  2, SPTYP_CONJURATION,

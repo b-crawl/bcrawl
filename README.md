@@ -55,6 +55,7 @@ Pull requests for new content are welcome.
   - v1.3: To replace traps, when taking stairs there's a 4% chance of being teleported onto the lower floor.
   - v1.7: An "Adventure" mode is added, which is a normal game that starts the player with 2 extra lives.
   - v1.9.3: When in Zot or carrying the Orb, teleports from stairs and traps are replaced by blinks.
+  - v1.11: Seeded runs are merged from DCSS.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -179,6 +180,7 @@ Pull requests for new content are welcome.
   - v1.7: The salamander hide armour is +8, rF++ rC-, and can be evoked to make fog.
   - v1.7.1: Morg has +12 int, but curses itself.
   - v1.8.5: Kryia's mail coat has Repel Missiles.
+  - v1.11: The serpentine sling can petrify enemies it hits.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

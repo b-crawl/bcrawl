@@ -186,6 +186,7 @@ i-confusion BRAND_ORC_SLAYING
 i-confusion BRAND_DRAGON_SLAYING
 # End removals
 i-venom BRAND_VENOM
+i-petrification BRAND_PETRIFY
 i-protection BRAND_PROTECTION
 i-draining BRAND_DRAINING
 i-speed BRAND_SPEED

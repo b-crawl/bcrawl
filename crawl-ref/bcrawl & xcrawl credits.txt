@@ -1,0 +1,21 @@
+﻿
+bcrawl management:
+	bhauth
+
+other bcrawl contributors:
+	NormalPerson7
+	Wishbringer
+
+-----------------------------------------------------------
+
+X-Crawl management:
+	NormalPerson7
+	Vajrapani
+
+other X-Crawl contributors:
+	bhauth
+	Doesnty
+	MalcolmRose
+	Pablo Mansanet
+	pubby
+	RealzHS

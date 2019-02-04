@@ -865,7 +865,9 @@ skill_type spell_type2skill(spschool_flag_type spelltype)
     case SPTYP_AIR:            return SK_AIR_MAGIC;
 
     default:
-        dprf("spell_type2skill: called with spelltype %u", spelltype);
+        dprf("spell_type2skill: called with unmapped spell school %u"
+             " (name '%s')", static_cast<unsigned int>(spelltype),
+             spelltype_long_name(spelltype));
         return SK_NONE;
     }
 }
@@ -1291,6 +1293,11 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
     case SPELL_GOLUBRIAS_PASSAGE:
         if (orb_limits_translocation(temp))
             return "the Orb prevents this spell from working.";
+        else if (temp && player_in_branch(BRANCH_GAUNTLET))
+        {
+            return "a magic seal in the Gauntlet prevents this spell "
+                "from working.";
+        }
 
     default:
         break;

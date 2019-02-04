@@ -231,51 +231,6 @@ static unique_ptr<dungeon_colour_grid> dgn_colour_grid;
 
 static string branch_epilogues[NUM_BRANCHES];
 
-static void _count_gold()
-{
-    vector<item_def *> gold_piles;
-    vector<coord_def> gold_places;
-    int gold = 0;
-    for (rectangle_iterator ri(0); ri; ++ri)
-    {
-        for (stack_iterator j(*ri); j; ++j)
-        {
-            if (j->base_type == OBJ_GOLD)
-            {
-                gold += j->quantity;
-                gold_piles.push_back(&(*j));
-                gold_places.push_back(*ri);
-            }
-        }
-    }
-
-    if (!player_in_branch(BRANCH_ABYSS))
-        you.attribute[ATTR_GOLD_GENERATED] += gold;
-
-    if (have_passive(passive_t::detect_gold))
-    {
-        for (unsigned int i = 0; i < gold_places.size(); i++)
-        {
-            bool detected = false;
-            int dummy = gold_piles[i]->index();
-            coord_def &pos = gold_places[i];
-            unlink_item(dummy);
-            move_item_to_grid(&dummy, pos, true);
-            if (!env.map_knowledge(pos).item()
-                || env.map_knowledge(pos).item()->base_type != OBJ_GOLD)
-            {
-                detected = true;
-            }
-            update_item_at(pos, true);
-            if (detected)
-            {
-                ASSERT(env.map_knowledge(pos).item());
-                env.map_knowledge(pos).flags |= MAP_DETECTED_ITEM;
-            }
-        }
-    }
-}
-
 /**********************************************************************
  * builder() - kickoff for the dungeon generator.
  *********************************************************************/
@@ -289,12 +244,22 @@ bool builder(bool enable_random_maps, dungeon_feature_type dest_stairs_type)
     const set<string> uniq_tags  = you.uniq_map_tags;
     const set<string> uniq_names = you.uniq_map_names;
 
+    // For normal cases, this should already be taken care of by enter_level.
+    // However, we want to be really sure that the builder isn't ever run with
+    // the player at a real position on the level, e.g. during debug code or
+    // tests, because that can impact levelgen (somehow) and cause seed
+    // divergence. (I think it's because actor position can impact item gen,
+    // but it's a bit hard to track down.)
+    unwind_var<coord_def> saved_position(you.position);
+    you.position.reset();
+
     // Save a copy of unique creatures for vetoes.
     temp_unique_creatures = you.unique_creatures;
     // And unrands
     temp_unique_items = you.unique_items;
 
     unwind_bool levelgen(crawl_state.generating_level, true);
+    rng_generator levelgen_rng(you.where_are_you);
 
     // N tries to build the level, after which we bail with a capital B.
     int tries = 50;
@@ -425,7 +390,6 @@ static bool _build_level_vetoable(bool enable_random_maps,
     strip_all_maps();
 
     check_map_validity();
-    _count_gold();
 
     if (!_you_vault_list.empty())
     {
@@ -636,8 +600,32 @@ void level_clear_vault_memory()
 
 void dgn_flush_map_memory()
 {
+    // it's probably better in general to just reset `you`. But that's not so
+    // convenient for lua tests, who are the only user of this function.
+    // This leaves some state uninitialized, and probably should be immediately
+    // followed by a call to `initial_dungeon_setup` and something that moves
+    // the player to a level or regenerates a level.
+    you.runes.reset();
+    you.obtainable_runes = 15;
+    you.zigs_completed = 0;
+    you.zig_max = 0;
     you.uniq_map_tags.clear();
     you.uniq_map_names.clear();
+    you.unique_creatures.reset();
+    you.unique_items.init(UNIQ_NOT_EXISTS);
+    you.vault_list.clear();
+    you.branches_left.reset();
+    you.branch_stairs.init(0);
+    you.octopus_king_rings = 0x00;
+    you.item_description.init(255);
+    you.exploration = 0;
+    // would it be safe to just clear you.props?
+    you.props.erase(TEMPLE_SIZE_KEY);
+    you.props.erase(TEMPLE_MAP_KEY);
+    you.props.erase(OVERFLOW_TEMPLES_KEY);
+    you.props.erase(TEMPLE_GODS_KEY);
+    dlua.callfn("dgn_clear_data", "");
+    you.attribute[ATTR_GOLD_GENERATED] = 0;
 }
 
 static void _dgn_load_colour_grid()
@@ -693,15 +681,15 @@ static void _set_grd(const coord_def &c, dungeon_feature_type feat)
     grd(c) = feat;
 }
 
-static void _dgn_register_vault(const string &name, const string &spaced_tags)
+static void _dgn_register_vault(const string &name, const set<string> &tags)
 {
-    if (spaced_tags.find(" allow_dup ") == string::npos)
+    if (!tags.count("allow_dup"))
         you.uniq_map_names.insert(name);
 
-    if (spaced_tags.find(" luniq ") != string::npos)
+    if (tags.count("luniq"))
         env.level_uniq_maps.insert(name);
 
-    for (const string &tag : split_string(" ", spaced_tags))
+    for (const string &tag : tags)
     {
         if (starts_with(tag, "uniq_"))
             you.uniq_map_tags.insert(tag);
@@ -710,12 +698,22 @@ static void _dgn_register_vault(const string &name, const string &spaced_tags)
     }
 }
 
+static void _dgn_register_vault(const map_def &map)
+{
+    _dgn_register_vault(map.name, map.get_tags());
+}
+
+static void _dgn_register_vault(const string &name, string &spaced_tags)
+{
+    _dgn_register_vault(name, parse_tags(spaced_tags));
+}
+
 static void _dgn_unregister_vault(const map_def &map)
 {
     you.uniq_map_names.erase(map.name);
     env.level_uniq_maps.erase(map.name);
 
-    for (const string &tag : split_string(" ", map.tags))
+    for (const string &tag : map.get_tags())
     {
         if (starts_with(tag, "uniq_"))
             you.uniq_map_tags.erase(tag);
@@ -1023,7 +1021,7 @@ dgn_register_place(const vault_placement &place, bool register_vault)
 
     if (register_vault)
     {
-        _dgn_register_vault(place.map.name, place.map.tags);
+        _dgn_register_vault(place.map);
         for (int i = env.new_subvault_names.size() - 1; i >= 0; i--)
         {
             _dgn_register_vault(env.new_subvault_names[i],
@@ -1051,7 +1049,7 @@ dgn_register_place(const vault_placement &place, bool register_vault)
     }
 
     // Find tags matching properties.
-    vector<string> tags = place.map.get_tags();
+    set<string> tags = place.map.get_tags();
 
     for (const auto &tag : tags)
     {
@@ -1853,7 +1851,9 @@ static bool _add_feat_if_missing(bool (*iswanted)(const coord_def &),
             int i = 0;
             while (i++ < 2000)
             {
-                coord_def rnd(random2(GXM), random2(GYM));
+                coord_def rnd;
+                rnd.x = random2(GXM);
+                rnd.y = random2(GYM);
                 if (grd(rnd) != DNGN_FLOOR)
                     continue;
 
@@ -2552,13 +2552,13 @@ static bool _vault_can_use_layout(const map_def *vault, const map_def *layout)
 
     ASSERT(layout->has_tag_prefix("layout_type_"));
 
-    vector<string> tags = layout->get_tags();
+    const set<string> tags = layout->get_tags();
 
-    for (string &tag : tags)
+    for (auto &tag : tags)
     {
         if (starts_with(tag, "layout_type_"))
         {
-            string type = strip_tag_prefix(tag, "layout_type_");
+            string type = tag_without_prefix(tag, "layout_type_");
             if (vault->has_tag("layout_" + type))
                 return true;
             else if (vault->has_tag("nolayout_" + type))
@@ -3312,8 +3312,10 @@ bool dgn_has_adjacent_feat(coord_def c, dungeon_feature_type feat)
 
 coord_def dgn_random_point_in_margin(int margin)
 {
-    return coord_def(random_range(margin, GXM - margin - 1),
-                     random_range(margin, GYM - margin - 1));
+    coord_def res;
+    res.x = random_range(margin, GXM - margin - 1);
+    res.y = random_range(margin, GYM - margin - 1);
+    return res;
 }
 
 static inline bool _point_matches_feat(coord_def c,
@@ -3802,7 +3804,13 @@ static void _randomly_place_item(int item)
         destroy_item(item);
     }
     else
+    {
+        dprf(DIAG_DNGN, "builder placing %s (%s) at %d,%d",
+            mitm[item].name(DESC_PLAIN).c_str(),
+            mitm[item].name(DESC_PLAIN, false, true).c_str(),
+            itempos.x, itempos.y);
         move_item_to_grid(&item, itempos);
+    }
 }
 
 /**
@@ -4176,13 +4184,12 @@ static const vault_placement *_build_vault_impl(const map_def *vault,
 
     if (is_layout && place.map.has_tag_prefix("layout_type_"))
     {
-        vector<string> tag_list = place.map.get_tags();
-        for (string &tag : tag_list)
+        for (auto &tag : place.map.get_tags())
         {
             if (starts_with(tag, "layout_type_"))
             {
                 env.level_layout_types.insert(
-                    strip_tag_prefix(tag, "layout_type_"));
+                    tag_without_prefix(tag, "layout_type_"));
             }
         }
     }
@@ -4237,10 +4244,9 @@ static void _build_postvault_level(vault_placement &place)
             ngb_min = 1, ngb_max = random_range(5, 7);
         if (one_chance_in(20))
             ngb_min = 3, ngb_max = 4;
-        delve(0, ngb_min, ngb_max,
-              random_choose(0, 5, 20, 50, 100),
-              -1,
-              random_choose(1, 20, 125, 500, 999999));
+        const int connchance = random_choose(0, 5, 20, 50, 100);
+        const int top = random_choose(1, 20, 125, 500, 999999);
+        delve(0, ngb_min, ngb_max, connchance, -1, top);
     }
     else
     {
@@ -5417,8 +5423,12 @@ int greed_for_shop_type(shop_type shop, int level_number)
     if (shop == SHOP_FOOD)
         return 10 + random2(5);
     if (_shop_sells_antiques(shop))
-        return 15 + random2avg(19, 2) + random2(level_number);
-    return 10 + random2(5) + random2(level_number / 2);
+    {
+        const int rand = random2avg(19, 2);
+        return 15 + rand + random2(level_number);
+    }
+    const int rand = random2(5);
+    return 10 + rand + random2(level_number / 2);
 }
 
 /**
@@ -6288,16 +6298,26 @@ bool dgn_region::overlaps(const map_mask &mask) const
 
 coord_def dgn_region::random_edge_point() const
 {
-    return x_chance_in_y(size.x, size.x + size.y) ?
-                  coord_def(pos.x + random2(size.x),
-                             random_choose(pos.y, pos.y + size.y - 1))
-                : coord_def(random_choose(pos.x, pos.x + size.x - 1),
-                             pos.y + random2(size.y));
+    coord_def res;
+    if (x_chance_in_y(size.x, size.x + size.y))
+    {
+        res.x = pos.x + random2(size.x);
+        res.y = random_choose(pos.y, pos.y + size.y - 1);
+    }
+    else
+    {
+        res.x = random_choose(pos.x, pos.x + size.x - 1);
+        res.y = pos.y + random2(size.y);
+    }
+    return res;
 }
 
 coord_def dgn_region::random_point() const
 {
-    return coord_def(pos.x + random2(size.x), pos.y + random2(size.y));
+    coord_def res;
+    res.x = pos.x + random2(size.x);
+    res.y = pos.y + random2(size.y);
+    return res;
 }
 
 struct StairConnectivity

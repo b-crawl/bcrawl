@@ -51,6 +51,8 @@
 #define TEMP_WATERWALK_KEY "temp_waterwalk"
 #define EMERGENCY_FLIGHT_KEY "emergency_flight"
 #define LAST_ACTION_WAS_MOVE_OR_REST_KEY "last_action_was_move_or_rest"
+#define PARALYSED_BY_KEY "paralysed_by"
+#define PETRIFIED_BY_KEY "petrified_by"
 
 // display/messaging breakpoints for penalties from Ru's MUT_HORROR
 #define HORROR_LVL_EXTREME  3
@@ -359,7 +361,8 @@ public:
     vector<mid_t> recall_list;
 
     // Hash seed for deterministic stuff.
-    uint32_t game_seed;
+    uint64_t game_seed;
+    bool game_is_seeded;
 
     // -------------------
     // Non-saved UI state:

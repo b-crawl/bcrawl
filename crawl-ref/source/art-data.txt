@@ -1337,6 +1337,16 @@ TILE_EQ:  glove_white
 SLAY:     2
 BOOL:     elec
 
+NAME:     serpentine sling
+OBJ:      OBJ_WEAPONS/WPN_HUNTING_SLING
+COLOUR:   DARKGREY
+TILE:     urand_serpentine_sling
+TILE_EQ:  sling
+PLUS:     +4
+BASE_DAM: +5
+BASE_DELAY: +3
+BRAND:    SPWPN_PETRIFY
+
 # This entry must always be last.
 ENUM:   DUMMY2
 NAME:   DUMMY UNRANDART 2

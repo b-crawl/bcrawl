@@ -501,6 +501,7 @@ static void _show_commandline_options_help()
     puts("  -no-throttle          disable throttling of user Lua scripts");
 #else
     puts("  -throttle             enable throttling of user Lua scripts");
+    puts("  -seed <number>        specify a game seed to use when creating a new game");
 #endif
 
     puts("");
@@ -1352,6 +1353,17 @@ static bool _prompt_stairs(dungeon_feature_type ygrd, bool down, bool shaft)
     // Does the next level have a warning annotation?
     if (!check_annotation_exclusion_warning())
         return false;
+
+    // Prompt for entering excluded transporters.
+    if (ygrd == DNGN_TRANSPORTER && is_exclude_root(you.pos()))
+    {
+        mprf(MSGCH_WARN, "This transporter is marked as excluded!");
+        if (!yesno("Enter transporter anyway?", true, 'n', true, false))
+        {
+            canned_msg(MSG_OK);
+            return false;
+        }
+    }
 
     // Toll portals, eg. troves, ziggurats. (Using vetoes like this is hacky.)
     if (_marker_vetoes_stair())

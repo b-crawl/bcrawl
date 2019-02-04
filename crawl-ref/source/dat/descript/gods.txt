@@ -154,7 +154,7 @@ Sif Muna
 Sif Muna the Loreminder is a contemplative but powerful deity, served by those
 who seek magical knowledge. The Loreminder appreciates followers who triumph
 over their foes and especially the training of spellcasting skills in order to
-do so. The faithful can expect to recieve a supply of spellbooks taken directly
+do so. The faithful can expect to receive a supply of spellbooks taken directly
 from Sif Muna's legendary library.
 %%%%
 the Shining One
@@ -248,12 +248,11 @@ the ability to step out of the flow of time entirely.
 Dithmenos powers
 
 Followers of Dithmenos are constantly surrounded in an aura of shadow, the
-extent of which is reflective of their level of devotion. Dithmenos grants
-followers the ability to instantly step into the shadow of nearby creatures,
-and protects followers by occasionally shrouding those struck by attacks in
-dark smoke. Sufficiently pious followers of Dithmenos will find their own
-shadow will begin to attack on its own, and eventually gain the ability to
-assume the form of a shadow themself.
+extent of which reflects their level of devotion. Dithmenos grants
+followers the ability to step into the shadow of nearby creatures, leaving
+behind a short-lived clone of themself made of shadow.
+Sufficiently pious followers of Dithmenos will begin to bleed dark smoke
+when struck, and eventually gain the ability to temporarily become a shadow.
 %%%%
 Elyvilon powers
 

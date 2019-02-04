@@ -225,7 +225,9 @@ static bool _try_make_weapon_artefact(item_def& item, int force_type,
             return false;
 
         // Mean enchantment +6.
-        item.plus = 12 - biased_random2(7,2) - biased_random2(7,2) - biased_random2(7,2);
+        item.plus = 12 - biased_random2(7,2);
+        item.plus -= biased_random2(7,2);
+        item.plus -= biased_random2(7,2);
 
         bool cursed = false;
         if (one_chance_in(5))
@@ -314,6 +316,7 @@ bool is_weapon_brand_ok(int type, int brand, bool strict)
     case SPWPN_ELECTROCUTION:
     case SPWPN_FLAMING:
     case SPWPN_FREEZING:
+    case SPWPN_PETRIFY:
         break;
 
     // Melee-only brands.
@@ -2185,9 +2188,10 @@ void makeitem_tests()
             item.brand = SPWPN_FORBID_BRAND;
         }
 #endif
+        auto weap_type = coinflip() ? OBJ_RANDOM : random2(NUM_WEAPONS);
         _generate_weapon_item(item,
                               coinflip(),
-                              coinflip() ? OBJ_RANDOM : random2(NUM_WEAPONS),
+                              weap_type,
                               level);
     }
 

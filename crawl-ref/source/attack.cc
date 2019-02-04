@@ -1529,13 +1529,14 @@ bool attack::apply_damage_brand(const char *what)
         else if (one_chance_in(3))
         {
             special_damage = 8 + random2(13);
-            const char *punctuation =
-                attack_strength_punctuation(special_damage).c_str();
+            const string punctuation =
+                    attack_strength_punctuation(special_damage);
             special_damage_message =
                 defender->is_player()
-                ? make_stringf("You are electrocuted%s", punctuation)
+                ? make_stringf("You are electrocuted%s", punctuation.c_str())
                 : make_stringf("Lightning courses through %s%s",
-                               defender->name(DESC_THE).c_str(), punctuation);
+                               defender->name(DESC_THE).c_str(),
+                               punctuation.c_str());
             special_damage_flavour = BEAM_ELECTRICITY;
             defender->expose_to_element(BEAM_ELECTRICITY, 2);
         }
@@ -1564,7 +1565,7 @@ bool attack::apply_damage_brand(const char *what)
             || attacker->stat_hp() == attacker->stat_maxhp()
             || attacker->is_player() && you.duration[DUR_DEATHS_DOOR]
             || x_chance_in_y(2, 5) && !is_unrandom_artefact(*weapon, UNRAND_LEECH)
-			|| you.species == SP_DEEP_DWARF)
+            || you.species == SP_DEEP_DWARF)
         {
             break;
         }
@@ -1665,6 +1666,16 @@ bool attack::apply_damage_brand(const char *what)
         defender->splash_with_acid(attacker, 3);
         break;
 
+    case SPWPN_PETRIFY:
+        {
+        int res_margin = defender->check_res_magic(10 + random2(51));
+        if (res_margin <= 0 && !defender->res_petrify())
+            {
+            mpr("Stone forms around the hit!");
+            enchant_actor_with_flavour(defender, attacker, BEAM_PETRIFY);
+            }
+        break;
+        }
 
     default:
         if (using_weapon() && is_unrandom_artefact(*weapon, UNRAND_DAMNATION))

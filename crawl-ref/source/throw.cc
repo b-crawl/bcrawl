@@ -13,6 +13,7 @@
 #include "artefact.h"
 #include "chardump.h"
 #include "command.h"
+#include "coordit.h"
 #include "directn.h"
 #include "english.h"
 #include "env.h"
@@ -817,7 +818,9 @@ bool throw_it(bolt &pbolt, int throw_2, dist *target)
 
     if (you.confused())
     {
-        thr.target = you.pos() + coord_def(random2(13)-6, random2(13)-6);
+        thr.target = you.pos();
+        thr.target.x += random2(13) - 6;
+        thr.target.y += random2(13) - 6;
         thr.isValid = true;
     }
     else if (target)
@@ -885,6 +888,18 @@ bool throw_it(bolt &pbolt, int throw_2, dist *target)
             monster *m = monster_at(thr.target);
             if (m)
                 cancelled = stop_attack_prompt(m, false, thr.target);
+
+            if (!cancelled /*&& pbolt.is_explosion*/)
+            {
+                for (adjacent_iterator ai(thr.target); ai; ++ai)
+                {
+                    if (cancelled)
+                        break;
+                    monster *am = monster_at(*ai);
+                    if (am)
+                        cancelled = stop_attack_prompt(am, false, *ai);
+                }
+            }
         }
         else
         {

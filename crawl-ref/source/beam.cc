@@ -705,8 +705,11 @@ void bolt::apply_beam_conducts()
         switch (flavour)
         {
         case BEAM_DAMNATION:
-            did_god_conduct(DID_EVIL, 2 + random2(3), god_cares());
+        {
+            const int level = 2 + random2(3);
+            did_god_conduct(DID_EVIL, level, god_cares());
             break;
+        }
         default:
             break;
         }
@@ -2884,7 +2887,9 @@ bool bolt::fuzz_invis_tracer()
         return false;
 
     // Apply fuzz now.
-    coord_def fuzz(random_range(-2, 2), random_range(-2, 2));
+    coord_def fuzz;
+    fuzz.x = random_range(-2, 2);
+    fuzz.y = random_range(-2, 2);
     coord_def newtarget = target + fuzz;
 
     if (in_bounds(newtarget))
@@ -2962,9 +2967,6 @@ bool bolt::is_harmless(const monster* mon) const
 
     case BEAM_ACID:
         return mon->res_acid() >= 3;
-
-    case BEAM_PETRIFY:
-        return mon->res_petrify() || mon->petrified();
 
     case BEAM_MEPHITIC:
         return mon->res_poison() > 0 || mon->is_unbreathing();
@@ -5101,6 +5103,10 @@ bool ench_flavour_affects_monster(beam_type flavour, const monster* mon,
         rc = !(mon->is_summoned() || mon->has_ench(ENCH_INNER_FLAME));
         break;
 
+    case BEAM_PETRIFY:
+        rc = !mon->res_petrify();
+        break;
+
     case BEAM_INFESTATION:
         rc = mons_gives_xp(*mon, you) && !mon->has_ench(ENCH_INFESTATION);
         break;
@@ -5238,8 +5244,8 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
             obvious_effect = true;
         if (YOU_KILL(thrower))
         {
-            did_god_conduct(DID_DELIBERATE_MUTATING, 2 + random2(3),
-                            god_cares());
+            const int level = 2 + random2(3);
+            did_god_conduct(DID_DELIBERATE_MUTATING, level, god_cares());
         }
         return MON_AFFECTED;
 
@@ -5249,8 +5255,8 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
             obvious_effect = true;
         if (YOU_KILL(thrower))
         {
-            did_god_conduct(DID_DELIBERATE_MUTATING, 2 + random2(3),
-                            god_cares());
+            const int level = 2 + random2(3);
+            did_god_conduct(DID_DELIBERATE_MUTATING, level, god_cares());
         }
         return MON_AFFECTED;
 
@@ -5260,18 +5266,31 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         return MON_AFFECTED;
 
     case BEAM_DISPEL_UNDEAD:
-        if (simple_monster_message(*mon, " convulses!"))
+    {
+        const int dam = damage.roll();
+        if (you.see_cell(mon->pos()))
+        {
+            mprf("%s is dispelled%s",
+                 mon->name(DESC_THE).c_str(),
+                 attack_strength_punctuation(dam).c_str());
             obvious_effect = true;
-        mon->hurt(agent(), damage.roll());
+        }
+        mon->hurt(agent(), dam);
         return MON_AFFECTED;
+    }
 
     case BEAM_PAIN:
     {
         const int dam = resist_adjust_damage(mon, flavour, damage.roll());
         if (dam)
         {
-            if (simple_monster_message(*mon, " writhes in agony!"))
+            if (you.see_cell(mon->pos()))
+            {
+                mprf("%s writhes in agony%s",
+                     mon->name(DESC_THE).c_str(),
+                     attack_strength_punctuation(dam).c_str());
                 obvious_effect = true;
+            }
             mon->hurt(agent(), dam, flavour);
             return MON_AFFECTED;
         }
@@ -5280,14 +5299,22 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
 
     case BEAM_AGONY:
         torment_cell(mon->pos(), agent(), TORMENT_AGONY);
-        obvious_effect = you.can_see(*mon);
+        obvious_effect = true;
         return MON_AFFECTED;
 
     case BEAM_DISINTEGRATION:   // disrupt/disintegrate
-        if (simple_monster_message(*mon, " is blasted."))
+    {
+        const int dam = damage.roll();
+        if (you.see_cell(mon->pos()))
+        {
+            mprf("%s is blasted%s",
+                 mon->name(DESC_THE).c_str(),
+                 attack_strength_punctuation(dam).c_str());
             obvious_effect = true;
-        mon->hurt(agent(), damage.roll(), flavour);
+        }
+        mon->hurt(agent(), dam, flavour);
         return MON_AFFECTED;
+    }
 
     case BEAM_HIBERNATION:
         if (mon->can_hibernate())
@@ -6169,6 +6196,8 @@ bool bolt::nasty_to(const monster* mon) const
         case BEAM_VILE_CLUTCH:
         case BEAM_SLOW:
         case BEAM_PARALYSIS:
+        case BEAM_PETRIFY:
+        case BEAM_POLYMORPH:
         case BEAM_DISPEL_UNDEAD:
         case BEAM_PAIN:
         case BEAM_AGONY:

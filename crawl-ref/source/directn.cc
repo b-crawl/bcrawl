@@ -181,8 +181,10 @@ bool dist::isMe() const
 
 void dist::confusion_fuzz(int range)
 {
-    target   = you.pos() + coord_def(random_range(-range, range),
-                                     random_range(-range, range));
+    target   = you.pos();
+    target.x += random_range(-range, range);
+    target.y += random_range(-range, range);
+
     choseRay = false;
 }
 
@@ -2045,6 +2047,7 @@ bool direction_chooser::choose_direction()
 
     clear_messages();
     msgwin_set_temporary(true);
+    unwind_bool save_more(crawl_state.show_more_prompt, false);
     show_initial_prompt();
     need_text_redraw = false;
 

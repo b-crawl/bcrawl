@@ -169,6 +169,7 @@ enum brand_type // item_def.special
     NUM_REAL_SPECIAL_WEAPONS,
 
     SPWPN_ACID,    // acid bite and Punk
+    SPWPN_PETRIFY,    // serpentine sling
 #if TAG_MAJOR_VERSION > 34
     SPWPN_CONFUSE, // Confusing Touch only for the moment
 #endif

@@ -1666,6 +1666,9 @@ bool attack::apply_damage_brand(const char *what)
         defender->splash_with_acid(attacker, 3);
         break;
 
+    case SPWPN_PETRIFY:
+        enchant_actor_with_flavour(defender, attacker, BEAM_PETRIFY, 10 + random2(51));
+        break;
 
     default:
         if (using_weapon() && is_unrandom_artefact(*weapon, UNRAND_DAMNATION))

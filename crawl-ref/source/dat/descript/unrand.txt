@@ -683,3 +683,7 @@ hand wraps "Fists of Thunder"
 A simple set of hand wraps, cracking with electricity. Unlike most gloves they
 don't cover any claws the wearer has, and they can deliver a real shock to
 anyone on the receiving end of a punch.
+%%%%
+serpentine sling
+
+This hunting sling is made with what appears to be a snake in place of rope.

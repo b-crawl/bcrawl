@@ -1106,6 +1106,7 @@ static void _debug_acquirement_stats(FILE *ostat)
             "reaping",
             "INVALID",
             "acid",
+            "petrification",
 #if TAG_MAJOR_VERSION > 34
             "confuse",
 #endif

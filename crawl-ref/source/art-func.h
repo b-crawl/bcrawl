@@ -1411,3 +1411,10 @@ static void _THERMIC_ENGINE_world_reacts(item_def *item)
         you.wield_change = true;
     }
 }
+
+///////////////////////////////////////////////////
+
+static void _SERPENTINE_SLING_equip(item_def *item, bool *show_msgs, bool unmeld)
+{
+    _equip_mpr(show_msgs, "The sling writhes as if it's alive!");
+}

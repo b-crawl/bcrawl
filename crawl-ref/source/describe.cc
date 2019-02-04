@@ -1326,6 +1326,9 @@ static string _describe_weapon(const item_def &item, bool verbose)
                     "hit. Natural abilities and divine invocations are not "
                     "affected.";
             break;
+        case SPWPN_PETRIFY:
+            description += "It can petrify creatures with low resistance to magic that it strikes.";
+            break;
         case SPWPN_NORMAL:
             ASSERT(enchanted);
             description += "It has no special brand (it is not flaming, "

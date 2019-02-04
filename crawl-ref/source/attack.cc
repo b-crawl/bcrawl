@@ -1565,7 +1565,7 @@ bool attack::apply_damage_brand(const char *what)
             || attacker->stat_hp() == attacker->stat_maxhp()
             || attacker->is_player() && you.duration[DUR_DEATHS_DOOR]
             || x_chance_in_y(2, 5) && !is_unrandom_artefact(*weapon, UNRAND_LEECH)
-			|| you.species == SP_DEEP_DWARF)
+            || you.species == SP_DEEP_DWARF)
         {
             break;
         }
@@ -1667,8 +1667,15 @@ bool attack::apply_damage_brand(const char *what)
         break;
 
     case SPWPN_PETRIFY:
-        enchant_actor_with_flavour(defender, attacker, BEAM_PETRIFY, 10 + random2(51));
+        {
+        int res_margin = defender->check_res_magic(10 + random2(51));
+        if (res_margin <= 0 && !defender->res_petrify())
+            {
+            mpr("Stone forms around the hit!");
+            enchant_actor_with_flavour(defender, attacker, BEAM_PETRIFY);
+            }
         break;
+        }
 
     default:
         if (using_weapon() && is_unrandom_artefact(*weapon, UNRAND_DAMNATION))

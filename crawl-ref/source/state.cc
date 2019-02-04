@@ -556,6 +556,7 @@ bool game_state::game_is_normal() const
 {
     ASSERT(type < NUM_GAME_TYPE);
     return type == GAME_TYPE_NORMAL || type == GAME_TYPE_ADVENTURE
+            || type == GAME_TYPE_CUSTOM_SEED
             || type == GAME_TYPE_UNSPECIFIED;
 }
 
@@ -605,6 +606,8 @@ string game_state::game_type_name_for(game_type _type)
         return "";
     case GAME_TYPE_ADVENTURE:
         return "Adventure";
+    case GAME_TYPE_CUSTOM_SEED:
+        return "Seeded";
     case GAME_TYPE_TUTORIAL:
         return "Tutorial";
     case GAME_TYPE_ARENA:
@@ -621,6 +624,8 @@ string game_state::game_savedir_path() const
 
 string game_state::game_type_qualifier() const
 {
+    if (type == GAME_TYPE_CUSTOM_SEED)
+        return "-seeded";
     if (crawl_state.game_is_sprint())
         return "-sprint";
     if (crawl_state.game_is_tutorial())

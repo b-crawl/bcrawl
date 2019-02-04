@@ -3286,6 +3286,7 @@ tileidx_t tileidx_gametype(const game_type gtype)
     switch (gtype)
     {
     case GAME_TYPE_NORMAL:
+    case GAME_TYPE_CUSTOM_SEED:
         return TILEG_STARTUP_STONESOUP;
     case GAME_TYPE_ADVENTURE:
         return TILEG_STARTUP_ADVENTURE;

@@ -1,4 +1,30 @@
-﻿The Dungeon Crawl Stone Soup team would like to thank:
+﻿
+=============== bcrawl credits ===============
+
+management:
+	bhauth
+
+other contributors:
+	NormalPerson7
+	Wishbringer
+
+=============== X-Crawl credits ===============
+
+management:
+	NormalPerson7
+	Vajrapani
+
+other contributors:
+	bhauth
+	Doesnty
+	MalcolmRose
+	Pablo Mansanet
+	pubby
+	RealzHS
+
+=============== DCSS credits ===============
+
+The Dungeon Crawl Stone Soup team would like to thank:
 
 * Linley Henzell, the author of Dungeon Crawl, for writing this great game.
 

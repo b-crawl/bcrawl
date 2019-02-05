@@ -186,7 +186,6 @@ i-confusion BRAND_ORC_SLAYING
 i-confusion BRAND_DRAGON_SLAYING
 # End removals
 i-venom BRAND_VENOM
-i-petrification BRAND_PETRIFY
 i-protection BRAND_PROTECTION
 i-draining BRAND_DRAINING
 i-speed BRAND_SPEED
@@ -210,7 +209,8 @@ i-evasion BRAND_EVASION
 # Move i-confusion down to missile-only brands when TAG_MAJOR_VERSION > 34
 i-confusion BRAND_CONFUSION
 i-penetration BRAND_PENETRATION
-i-reaping BRAND_REAPING BRAND_WEP_LAST
+i-reaping BRAND_REAPING
+i-petrification BRAND_PETRIFY BRAND_WEP_LAST
 # missile-only brands, order doesn't matter
 i-dispersal BRAND_DISPERSAL
 i-explosion BRAND_EXPLOSION

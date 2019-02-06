@@ -1427,3 +1427,14 @@ static setup_missile_type _SCORPIO_launch(item_def* item, bolt* beam,
     beam->origin_spell = SPELL_BECKONING;
     return SM_CONTINUE;
 }
+
+///////////////////////////////////////////////////
+
+static void _BUTTERFLY_SWORD_melee_effects(item_def* weapon, actor* attacker,
+                                    actor* defender, bool mondied, int dam)
+{
+    create_monster(
+        mgen_data(MONS_BUTTERFLY, BEH_NEUTRAL, attacker->pos(), MG_AUTOFOE)
+        .set_summoned(&you, 2, SPELL_SUMMON_BUTTERFLIES)
+        );
+}

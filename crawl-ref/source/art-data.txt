@@ -1367,6 +1367,7 @@ PLUS:     -2
 BASE_DELAY: -6
 BRAND:    SPWPN_SPEED
 BOOL:     curse
+MAGIC:    1
 
 # This entry must always be last.
 ENUM:   DUMMY2

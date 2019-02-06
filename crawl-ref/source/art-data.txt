@@ -1347,6 +1347,17 @@ BASE_DAM: +5
 BASE_DELAY: +3
 BRAND:    SPWPN_PETRIFY
 
+NAME:     Scorpio
+OBJ:      OBJ_WEAPONS/WPN_HAND_CROSSBOW
+INSCRIP:  beckon,
+COLOUR:   LIGHTGREEN
+TILE:     urand_scorpio
+TILE_EQ:  hand_crossbow
+PLUS:     +6
+BASE_DAM: +8
+BASE_DELAY: +5
+BRAND:    SPWPN_VENOM
+
 # This entry must always be last.
 ENUM:   DUMMY2
 NAME:   DUMMY UNRANDART 2

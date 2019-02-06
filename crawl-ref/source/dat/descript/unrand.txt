@@ -687,3 +687,7 @@ anyone on the receiving end of a punch.
 serpentine sling
 
 This hunting sling is made with what appears to be a snake in place of rope.
+%%%%
+Scorpio
+
+This hand crossbow uses a complex and unusual mechanism, and is enchanted to magically pull enemies towards the user.

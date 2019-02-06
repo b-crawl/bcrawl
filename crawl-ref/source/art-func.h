@@ -1418,3 +1418,12 @@ static void _SERPENTINE_SLING_equip(item_def *item, bool *show_msgs, bool unmeld
 {
     _equip_mpr(show_msgs, "The sling writhes as if it's alive!");
 }
+
+///////////////////////////////////////////////////
+
+static setup_missile_type _SCORPIO_launch(item_def* item, bolt* beam,
+                                           string* ammo_name, bool* returning)
+{
+    beam->origin_spell = SPELL_BECKONING;
+    return SM_CONTINUE;
+}

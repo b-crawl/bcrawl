@@ -35,6 +35,7 @@
 #include "errors.h"
 #include "evoke.h"
 #include "exercise.h"
+#include "files.h"
 #include "food.h"
 #include "god-abil.h"
 #include "god-conduct.h"
@@ -5354,6 +5355,8 @@ player::player()
     travel_x         = 0;
     travel_y         = 0;
     travel_z         = level_id();
+
+    init_level_visited();
 
     running.clear();
     travel_ally_pace = false;

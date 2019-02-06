@@ -33,6 +33,7 @@
 #include "cloud.h"
 #include "coordit.h"
 #include "dactions.h"
+#include "dbg-util.h"
 #include "dgn-overview.h"
 #include "directn.h"
 #include "dungeon.h"
@@ -1459,6 +1460,14 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
     if (just_created_level)
         env.markers.init_all(); // init first, activation happens when entering
 
+    // Clear map knowledge stair emphasis.
+    show_update_emphasis();
+
+    // Shouldn't happen, but this is too unimportant to assert.
+    deleteAll(env.final_effects);
+
+    los_changed();
+
     if (load_mode == LOAD_GENERATE)
     {
         if (just_created_level)
@@ -1467,15 +1476,10 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
     }
 
     if (env.turns_on_level == 0)
+    {
         just_created_level = true; // in case level was pre-generated
-
-    // Clear map knowledge stair emphasis.
-    show_update_emphasis();
-
-    // Shouldn't happen, but this is too unimportant to assert.
-    deleteAll(env.final_effects);
-
-    los_changed();
+        you.vault_list[level_id::current()] = level_vault_names();
+    }
 
     // Markers must be activated early, since they may rely on
     // events issued later, e.g. DET_ENTERING_LEVEL or

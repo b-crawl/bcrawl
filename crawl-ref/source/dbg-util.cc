@@ -37,11 +37,17 @@ monster_type debug_prompt_for_monster()
     return MONS_NO_MONSTER;
 }
 
-vector<string> level_vault_names()
+vector<string> level_vault_names(bool force_all)
 {
     vector<string> result;
     for (auto &vault : env.level_vaults)
     {
+        // TODO: should this suppress layouts? The code it is replacing did.
+        if (!force_all && (vault->map.has_tag_suffix("dummy")
+                            || vault->map.has_tag("no_dump")))
+        {
+            continue;
+        }
         string vault_name = vault->map.name;
         if (vault->map.subvault_places.size())
         {
@@ -104,7 +110,7 @@ void debug_dump_levgen()
     if (!env.level_vaults.empty())
     {
         mpr("Level vaults:");
-        auto vaults = level_vault_names();
+        auto vaults = level_vault_names(true);
         for (auto &vname : vaults)
             mprf("    %s", vname.c_str());
     }

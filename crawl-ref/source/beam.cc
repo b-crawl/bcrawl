@@ -4400,18 +4400,23 @@ void bolt::monster_post_hit(monster* mon, int dmg)
         curare_actor(agent(), mon, 2, name, source_name);
     }
 
-    // purple draconian breath
-    if (origin_spell == SPELL_QUICKSILVER_BOLT)
+    switch(origin_spell)
+    {
+    case SPELL_QUICKSILVER_BOLT:  // purple draconian breath
         debuff_monster(*mon);
+        break;
+    case SPELL_DAZZLING_SPRAY:
+        _dazzle_monster(mon, agent());
+        break;
+    default: break;
+    }
 
     if (dmg)
         beogh_follower_convert(mon, true);
 
     knockback_actor(mon, dmg);
-
-    if (origin_spell == SPELL_DAZZLING_SPRAY)
-        _dazzle_monster(mon, agent());
-    else if (origin_spell == SPELL_FLASH_FREEZE
+    
+    if (origin_spell == SPELL_FLASH_FREEZE
              || name == "blast of ice"
              || origin_spell == SPELL_GLACIATE && !is_explosion)
     {
@@ -4698,6 +4703,17 @@ void bolt::affect_monster(monster* mon)
     {
         ranged_attack attk(agent(true), mon, item, use_target_as_pos, agent());
         attk.attack();
+        
+        if (mon->alive())
+            switch(origin_spell)
+            {
+            case SPELL_BECKONING:   // Scorpio unrand
+                if(attk.damage_done > 0)
+                    beckon(*mon, *this);
+                break;
+            default: break;
+            }
+        
         // fsim purposes - throw_it detects if an attack connected through
         // hit_verb
         if (attk.ev_margin >= 0 && hit_verb.empty())
@@ -4705,6 +4721,7 @@ void bolt::affect_monster(monster* mon)
         if (attk.reflected)
             reflect();
         extra_range_used += attk.range_used;
+                
         return;
     }
 

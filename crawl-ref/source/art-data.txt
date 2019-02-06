@@ -1347,6 +1347,28 @@ BASE_DAM: +5
 BASE_DELAY: +3
 BRAND:    SPWPN_PETRIFY
 
+NAME:     Scorpio
+OBJ:      OBJ_WEAPONS/WPN_HAND_CROSSBOW
+INSCRIP:  beckon,
+COLOUR:   LIGHTGREEN
+TILE:     urand_scorpio
+TILE_EQ:  hand_crossbow
+PLUS:     +6
+BASE_DAM: +8
+BASE_DELAY: +5
+BRAND:    SPWPN_VENOM
+
+NAME:     butterfly sword
+OBJ:      OBJ_WEAPONS/WPN_GREAT_SWORD
+COLOUR:   LIGHTRED
+TILE:     urand_butterfly_sword
+TILE_EQ:  great_sword
+PLUS:     -2
+BASE_DELAY: -6
+BRAND:    SPWPN_SPEED
+BOOL:     curse
+MAGIC:    1
+
 # This entry must always be last.
 ENUM:   DUMMY2
 NAME:   DUMMY UNRANDART 2

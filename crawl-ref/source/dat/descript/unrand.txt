@@ -687,3 +687,11 @@ anyone on the receiving end of a punch.
 serpentine sling
 
 This hunting sling is made with what appears to be a snake in place of rope.
+%%%%
+Scorpio
+
+This hand crossbow uses a complex and unusual mechanism, and is enchanted to magically pull enemies towards the user.
+%%%%
+butterfly sword
+
+This sword seems to have a mind of its own, and it wants to move quickly. When used in combat, it can also summon butterflies.

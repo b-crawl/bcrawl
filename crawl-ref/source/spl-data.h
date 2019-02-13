@@ -180,7 +180,7 @@ static const struct spell_desc spelldata[] =
     SPELL_SLOW, "Slow",
     SPTYP_HEXES,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK,
-    2,
+    1,
     200,
     LOS_RADIUS, LOS_RADIUS,
     2, 0,

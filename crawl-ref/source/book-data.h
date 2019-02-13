@@ -4,9 +4,9 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Minor Magic
     SPELL_MAGIC_DART,
+    SPELL_SLOW,
     SPELL_BLINK,
     SPELL_CALL_IMP,
-    SPELL_SLOW,
     SPELL_CONJURE_FLAME,
     SPELL_MEPHITIC_CLOUD,
 },

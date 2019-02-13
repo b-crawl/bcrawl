@@ -582,7 +582,10 @@ void trap_def::trigger(actor& triggerer)
         if (!triggerer.no_tele(true, you_trigger))
         {
             if (orb_limits_translocation())
+            {
+                mprf(MSGCH_ORB, "The power of the Orb disrupts the teleport trap!");
                 triggerer.blink();
+            }
             else
                 triggerer.teleport(true);
         }

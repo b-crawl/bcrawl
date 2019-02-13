@@ -48,6 +48,9 @@ Pull requests for new content are welcome.
   - v1.1: Skalds have a reworked Ozocubu's Armour instead of Shroud of Golubria.
   - v1.5.2: Assassin and Artificer have been merged into Rogue.
   - v1.9.3: Monks start with an amulet (usually guardian spirit) and a hat.
+  - v1.11.3: Sloth Apostles worship Cheibriados and start with a shield.
+  - v1.11.3: Transmuters start with a potion of lignification.
+  - v1.11.3: Skalds start with a scroll of fear.
 
 #### Features
   - All items are automatically identified if the player has a rune.

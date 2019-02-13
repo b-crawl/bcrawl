@@ -42,6 +42,17 @@ static const map<job_type, job_def> job_data =
       { SK_DODGING, 2 }, { SK_STEALTH, 2 }, },
 } },
 
+{ JOB_SLOTH_APOSTLE, {
+    "SA", "Sloth Apostle",
+    4, 4, 4,
+    { SP_NAGA, SP_BARACHI, SP_GNOLL, SP_MINOTAUR },
+    { "robe", "shield", "wand of paralysis charges:10" },
+    WCHOICE_PLAIN,
+    { { SK_FIGHTING, 2 }, { SK_SHIELDS, 2 }, { SK_WEAPON, 2 },
+    { SK_STEALTH, 3 }, 
+    { SK_SPELLCASTING, 1 }, { SK_HEXES, 1 }, { SK_EVOCATIONS, 1 } },
+} },
+
 { JOB_ARCANE_MARKSMAN, {
     "AM", "Arcane Marksman",
     2, 5, 5,
@@ -228,7 +239,7 @@ static const map<job_type, job_def> job_data =
     "Sk", "Skald",
     3, 5, 4,
     { SP_KOBOLD, SP_CENTAUR, SP_MERFOLK, SP_BASE_DRACONIAN, SP_VAMPIRE, },
-    { "leather armour", "book of Battle" },
+    { "leather armour", "book of Battle", "scroll of fear" },
     WCHOICE_PLAIN,
     { { SK_FIGHTING, 2 }, { SK_ARMOUR, 1 }, { SK_DODGING, 2 },
       { SK_SPELLCASTING, 2 }, { SK_CHARMS, 3 }, { SK_WEAPON, 2 }, },
@@ -249,7 +260,7 @@ static const map<job_type, job_def> job_data =
     2, 5, 5,
     { SP_NAGA, SP_MERFOLK, SP_BASE_DRACONIAN, SP_DEMIGOD, SP_DEMONSPAWN,
       SP_TROLL, },
-    { "arrow q:120", "robe", "book of Changes" },
+    { "arrow q:120", "robe", "book of Changes", "potion of lignification" },
     WCHOICE_NONE,
     { { SK_FIGHTING, 1 }, { SK_UNARMED_COMBAT, 3 }, { SK_DODGING, 2 },
       { SK_SPELLCASTING, 2 }, { SK_TRANSMUTATIONS, 2 }, },

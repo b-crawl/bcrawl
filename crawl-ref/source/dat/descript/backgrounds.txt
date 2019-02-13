@@ -99,6 +99,11 @@ Skald
 Skalds are melee fighters who can boost themselves in battle with spells from
 the Charms school.
 %%%%
+Sloth Apostle
+
+Apostles of Sloth worship Cheibriados, and believe the world needs more "Slack".
+They start with a simple weapon, a shield, and some ways to slow down enemies.
+%%%%
 Summoner
 
 Summoners are able to cast Summon Small Mammal from the start, and begin with

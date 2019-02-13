@@ -41,6 +41,7 @@ enum job_type
     JOB_JESTER,
 #endif
     JOB_REAVER,
+    JOB_SLOTH_APOSTLE,
     NUM_JOBS,                          // always after the last job
 
     JOB_UNKNOWN = 100,

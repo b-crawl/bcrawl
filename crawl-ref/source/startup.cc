@@ -237,7 +237,6 @@ static void _zap_los_monsters(bool items_also)
     }
 }
 
-#ifndef DGAMELAUNCH
 /**
  * Ensure that the level given by `pos` is generated. This does not do much in
  * the way of cleanup, and the caller must ensure the player ends up somewhere
@@ -279,6 +278,9 @@ static void _pregen_levels(const branch_type branch, progress_popup &progress)
 
 static void _pregen_dungeon()
 {
+    // be sure that AK start doesn't interfere with the builder
+    unwind_var<game_chapter> chapter(you.chapter, CHAPTER_ORB_HUNTING);
+
     // bel's original proposal generated D to lair depth, then lair, then D
     // to orc depth, then orc, then the rest of D. I have simplified this to
     // just generate whole branches at a time -- I am not sure how much real
@@ -313,9 +315,11 @@ static void _pregen_dungeon()
     progress_popup progress("Generating dungeon...\n\n", 35);
     progress.advance_progress();
     // TODO: why is dungeon invalid? it's not set up properly in
-    // `initialise_branch_depths` for some reason.
+    // `initialise_branch_depths` for some reason. The vestibule is invalid
+    // because its depth isn't set until the player actually enters a portal.
     for (auto br : generation_order)
-        if (brentry[br].is_valid() || br == BRANCH_DUNGEON)
+        if (brentry[br].is_valid()
+            || br == BRANCH_DUNGEON || br == BRANCH_VESTIBULE)
         {
             string status = "\nbuilding ";
 
@@ -338,7 +342,6 @@ static void _pregen_dungeon()
             progress.advance_progress();
         }
 }
-#endif
 
 static void _post_init(bool newc)
 {
@@ -365,10 +368,8 @@ static void _post_init(bool newc)
 
     if (newc)
     {
-#ifndef DGAMELAUNCH
         if (Options.pregen_dungeon && crawl_state.game_standard_levelgen())
             _pregen_dungeon();
-#endif
 
         you.entering_level = false;
         you.transit_stair = DNGN_UNSEEN;

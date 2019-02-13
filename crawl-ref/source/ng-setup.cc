@@ -429,6 +429,13 @@ static void _give_items_skills(const newgame_def& ng)
         you.spell_library.set(SPELL_BATTLESPHERE, true);
         break;
 
+    case JOB_SLOTH_APOSTLE:
+        you.religion = GOD_CHEIBRIADOS;
+        you.piety = 10;
+        
+        add_spell_to_memory(SPELL_SLOW);
+        break;
+
     case JOB_WANDERER:
         create_wanderer();
         break;

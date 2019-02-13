@@ -598,27 +598,43 @@ void dgn_flush_map_memory()
     // This leaves some state uninitialized, and probably should be immediately
     // followed by a call to `initial_dungeon_setup` and something that moves
     // the player to a level or regenerates a level.
-    you.runes.reset();
-    you.obtainable_runes = 15;
-    you.zigs_completed = 0;
-    you.zig_max = 0;
+
+    // vaults and map stuff
     you.uniq_map_tags.clear();
     you.uniq_map_names.clear();
-    you.unique_creatures.reset();
-    you.unique_items.init(UNIQ_NOT_EXISTS);
     you.vault_list.clear();
     you.branches_left.reset();
     you.branch_stairs.init(0);
-    you.octopus_king_rings = 0x00;
-    you.item_description.init(255);
+    you.zigs_completed = 0;
+    you.zig_max = 0;
     you.exploration = 0;
+    you.seen_portals = 0; // should be just cosmetic
     // would it be safe to just clear you.props?
     you.props.erase(TEMPLE_SIZE_KEY);
     you.props.erase(TEMPLE_MAP_KEY);
     you.props.erase(OVERFLOW_TEMPLES_KEY);
     you.props.erase(TEMPLE_GODS_KEY);
+    you.clear_place_info();
+    // the following is supposed to clear any persistent lua state related to
+    // the builder. However, it's susceptible to custom dlua doing its own
+    // thing...
     dlua.callfn("dgn_clear_data", "");
+
+    // monsters
+    you.unique_creatures.reset();
+
+    // item stuff that can interact with the builder
+    you.runes.reset();
+    you.obtainable_runes = 15;
+    you.unique_items.init(UNIQ_NOT_EXISTS);
+    you.octopus_king_rings = 0x00;
+    you.item_description.init(255); // random names need reset after this, e.g.
+                                    // via debug.dungeon_setup()
     you.attribute[ATTR_GOLD_GENERATED] = 0;
+    // potentially relevant for item placement in e.g. troves:
+    you.seen_weapon.init(0);
+    you.seen_armour.init(0);
+    you.seen_misc.reset();
 }
 
 static void _dgn_load_colour_grid()
@@ -2597,7 +2613,7 @@ static bool _pan_level()
     const char *pandemon_level_names[] =
         { "mnoleg", "lom_lobon", "cerebov", "gloorx_vloq", };
     int which_demon = -1;
-    PlaceInfo &place_info = you.get_place_info();
+    const PlaceInfo &place_info = you.get_place_info();
     bool all_demons_generated = true;
 
     if (you.props.exists("force_map"))
@@ -4534,7 +4550,13 @@ int dgn_place_item(const item_spec &spec,
             item.pos = where;
 
             if (_apply_item_props(item, spec, (useless_tries >= 10), false))
+            {
+                dprf(DIAG_DNGN, "vault spec: placing %s (%s) at %d,%d",
+                    mitm[item_made].name(DESC_PLAIN).c_str(),
+                    mitm[item_made].name(DESC_PLAIN, false, true).c_str(),
+                    where.x, where.y);
                 return item_made;
+            }
             else
             {
                 // _apply_item_props will not generate a rune you already have,
@@ -5044,7 +5066,13 @@ static void _vault_grid_glyph(vault_placement &place, const coord_def& where,
 
         item_made = items(true, which_class, which_type, which_depth);
         if (item_made != NON_ITEM)
+        {
             mitm[item_made].pos = where;
+            dprf(DIAG_DNGN, "vault grid: placing %s (%s) at %d,%d",
+                mitm[item_made].name(DESC_PLAIN).c_str(),
+                mitm[item_made].name(DESC_PLAIN, false, true).c_str(),
+                mitm[item_made].pos.x, mitm[item_made].pos.y);
+        }
     }
 
     // defghijk - items
@@ -6897,17 +6925,46 @@ string dump_vault_maps()
 
     for (const level_id &lid : levels)
     {
-        if (!you.vault_list.count(lid))
+        // n.b. portal vaults get cleared from here, so won't show up.
+        // kind of spammy in wizmode. To test non-wizmode, use &ctrl-y
+        if (!you.wizard && (!you.level_visited(lid)
+                            || !you.vault_list.count(lid))
+            || branch_is_unfinished(lid.branch))
+        {
             continue;
+        }
 
-        out += lid.describe() + ": " + string(max(8 - int(lid.describe().length()), 0), ' ');
-
+        if (you.wizard)
+        {
+            // because the save is already gone at the point where we are
+            // printing a morgue, this check isn't reliable. Ignore it.
+            if (!is_existing_level(lid) && you.save)
+            {
+                out += " (not gen.) " + lid.describe() + "\n";
+                continue;
+            }
+            out += you.level_visited(lid) ? "  (visited) " : "(unvisited) ";
+        }
+        out += lid.describe();
         vector<string> &maps(you.vault_list[lid]);
+        if (maps.size() == 0)
+        {
+            out += "\n";
+            continue;
+        }
+
+        out += ": " + string(max(8 - int(lid.describe().length()), 0), ' ');
+
+        // TODO: some way of showing no_dump maps in wizmode?
 
         string vaults = comma_separated_line(maps.begin(), maps.end(), ", ");
         out += wordwrap_line(vaults, 70) + "\n";
         while (!vaults.empty())
-            out += "          " + wordwrap_line(vaults, 70, false) + "\n";
+        {
+            out += string(you.wizard ? 22 : 10, ' ')
+                    + wordwrap_line(vaults, 70, false) + "\n";
+        }
+
     }
     return out;
 }

@@ -345,6 +345,7 @@ static void _reset_game()
     clear_message_store();
     macro_clear_buffers();
     the_lost_ones.clear();
+    shopping_list = ShoppingList();
     you = player();
     reset_hud();
     StashTrack = StashTracker();
@@ -1297,7 +1298,7 @@ static bool _can_take_stairs(dungeon_feature_type ftype, bool down,
         if (ftype != it->entry_stairs)
             continue;
 
-        if (!is_existing_level(level_id(it->id, 1)))
+        if (!you.level_visited(level_id(it->id, 1)))
         {
             min_runes = runes_for_branch(it->id);
             if (runes_in_pack() < min_runes)

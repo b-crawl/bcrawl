@@ -239,7 +239,7 @@ static const map<job_type, job_def> job_data =
     "Sk", "Skald",
     3, 5, 4,
     { SP_KOBOLD, SP_CENTAUR, SP_MERFOLK, SP_BASE_DRACONIAN, SP_VAMPIRE, },
-    { "leather armour", "book of Battle" },
+    { "leather armour", "book of Battle", "scroll of fear" },
     WCHOICE_PLAIN,
     { { SK_FIGHTING, 2 }, { SK_ARMOUR, 1 }, { SK_DODGING, 2 },
       { SK_SPELLCASTING, 2 }, { SK_CHARMS, 3 }, { SK_WEAPON, 2 }, },

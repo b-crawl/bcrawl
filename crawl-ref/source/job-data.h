@@ -42,6 +42,17 @@ static const map<job_type, job_def> job_data =
       { SK_DODGING, 2 }, { SK_STEALTH, 2 }, },
 } },
 
+{ JOB_SLOTH_APOSTLE, {
+    "SA", "Sloth Apostle",
+    4, 4, 4,
+    { SP_NAGA, SP_BARACHI, SP_GNOLL, SP_MINOTAUR },
+    { "robe", "shield", "wand of paralysis charges:10" },
+    WCHOICE_PLAIN,
+    { { SK_FIGHTING, 2 }, { SK_SHIELDS, 2 }, { SK_WEAPON, 2 },
+    { SK_STEALTH, 3 }, 
+    { SK_SPELLCASTING, 1 }, { SK_HEXES, 1 }, { SK_EVOCATIONS, 1 } },
+} },
+
 { JOB_ARCANE_MARKSMAN, {
     "AM", "Arcane Marksman",
     2, 5, 5,

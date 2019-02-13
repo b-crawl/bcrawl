@@ -272,6 +272,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SANDBLAST,
     SPELL_INFUSION,
     SPELL_APPORTATION,
+    SPELL_SLOW,
 },
 
 {   // Book of Party Tricks

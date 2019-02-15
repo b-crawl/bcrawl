@@ -122,6 +122,8 @@ Pull requests for new content are welcome.
   - v1.9.1: Force Lance is pure translocations, and removed from the Conjurer book.
   - v1.9.2: Spectral Weapon lasts longer at high spell power.
   - v1.9.2: Deflect Missiles is never dispelled by attacks, but can drain mana when it deflects missiles. It drains less mana at higher power.
+  - v1.11.3: Slow is level 1.
+  - v1.11.4: Ozocubu's Refrigeration now has the same damage formula as Fireball. (Its damage scaling was wrong for a long time.)
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -197,7 +199,7 @@ Pull requests for new content are welcome.
   - v1.3.2: Neqoxecs and Shining Eyes have Corrupting Pulse instead of Malmutate.
   - v1.4.1: Gnolls no longer sometimes spawn with nets.
   - v1.5: Nagaraja get a new spell set that includes Fireball.
-  - v1.5: Orc Priests cast 50% more often, but take 50% longer to cast.
+  - v1.5: Orc Priests cast more often, but take longer to cast.
   - v1.5: "Orc Wizard II" gets a Cantrip spell.
   - v1.5.2: Sphinxes have Sentinel's Mark instead of Confuse.
   - v1.5.3: Skeletons now resist electricity.

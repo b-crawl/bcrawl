@@ -1131,6 +1131,10 @@ static bool _spellcasting_aborted(spell_type spell, bool fake_spell)
                     "(100%% risk of failure)!");
             return true;
         }
+        
+        if(spell_typematch(spell, SPTYP_NECROMANCY)
+                && you_worship(GOD_KIKUBAAQUDGHA) && you.piety >= piety_breakpoint(2))
+            return false;
 
         string prompt = make_stringf("The spell is %s to cast "
                                      "(%s risk of failure)%s",

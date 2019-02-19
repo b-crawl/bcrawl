@@ -1421,7 +1421,7 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_ORB_GUARDIAN,
       {
-       { SPELL_LESSER_BECKONING, 10, MON_SPELL_MAGICAL },
+       { SPELL_BECKONING, 10, MON_SPELL_MAGICAL },
        { SPELL_SLEEP, 10, MON_SPELL_MAGICAL },
        { SPELL_LIGHTNING_BOLT, 10, MON_SPELL_MAGICAL },
       }

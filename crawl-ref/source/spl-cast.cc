@@ -1131,10 +1131,6 @@ static bool _spellcasting_aborted(spell_type spell, bool fake_spell)
                     "(100%% risk of failure)!");
             return true;
         }
-        
-        if(spell_typematch(spell, SPTYP_NECROMANCY)
-                && you_worship(GOD_KIKUBAAQUDGHA) && you.piety >= piety_breakpoint(2))
-            return false;
 
         string prompt = make_stringf("The spell is %s to cast "
                                      "(%s risk of failure)%s",
@@ -2067,8 +2063,12 @@ const char *fail_severity_adjs[] =
 COMPILE_CHECK(ARRAYSZ(fail_severity_adjs) > 3);
 
 int fail_severity(spell_type spell)
-{
-    const double chance = _get_miscast_chance_with_miscast_prot(spell);
+{   
+    if(spell_typematch(spell, SPTYP_NECROMANCY)
+            && you_worship(GOD_KIKUBAAQUDGHA) && you.piety >= piety_breakpoint(2))
+        return 0;
+
+    double chance = _get_miscast_chance_with_miscast_prot(spell);
 
     return (chance < 0.001) ? 0 :
            (chance < 0.005) ? 1 :
@@ -2080,7 +2080,7 @@ int fail_severity(spell_type spell)
 // based on the chance of getting a severity >= 2 miscast.
 int failure_rate_colour(spell_type spell)
 {
-    const int severity = fail_severity(spell);
+    int severity = fail_severity(spell);
     return severity == 0 ? LIGHTGREY :
            severity == 1 ? YELLOW :
            severity == 2 ? LIGHTRED

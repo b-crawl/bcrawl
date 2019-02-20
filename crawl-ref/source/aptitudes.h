@@ -997,7 +997,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
 #endif
     APT(SP_SPRIGGAN,        SK_UNARMED_COMBAT, -2),
     APT(SP_SPRIGGAN,        SK_SPELLCASTING,    2),
-    APT(SP_SPRIGGAN,        SK_CONJURATIONS,   -3),
+    APT(SP_SPRIGGAN,        SK_CONJURATIONS,  UNUSABLE_SKILL),
     APT(SP_SPRIGGAN,        SK_HEXES,           2),
     APT(SP_SPRIGGAN,        SK_CHARMS,          4),
     APT(SP_SPRIGGAN,        SK_SUMMONINGS,     -2),

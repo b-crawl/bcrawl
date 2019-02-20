@@ -39,6 +39,7 @@ Pull requests for new content are welcome.
   - v1.6.1: Vaults has fewer orcs.
   - v1.7.3: Out-of-depth monster spawns are changed: centaurs and water moccasins can't appear until D:3, and killer bees can't appear until D:4.
   - v1.9: Hell branches are 2 levels deep and can't be left without their rune.
+  - v1.11.5: Orb Guardians can spawn on any level of Zot.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -92,6 +93,7 @@ Pull requests for new content are welcome.
   - v1.6: Vampires are reworked: above Satiated gives Bat Form and regeneration, and below Satiated gives resistances and stealth. Bloodless Vampires still regenerate at half normal speed.
   - v1.8: Demigods have various divine abilities.
   - v1.10: Felids gain half XP for seeing enemies, and no experience for killing them. They have -30% HP instead of -40%, and +0 XP instead of -1 XP.
+  - v1.11.5: Spriggans can't train Conjurations, but have some better aptitudes.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -150,6 +152,7 @@ Pull requests for new content are welcome.
   - v1.6.1: Sif Muna gives Divine Energy at 0* and book gifts starting at 1*.
   - v1.6.1: Okawaru and Trog no longer give needles as gifts.
   - v1.10.1: Nemelex's Degeneration card reduces enemy HP at high power.
+  - v1.11.5: Kikubaaqudgha prevents miscasts from any spell including Necromancy, not just from pure Necromancy spells, and gives full protection at 3* piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -168,6 +171,7 @@ Pull requests for new content are welcome.
   - v1.7.1: Wands of digging are partly un-nerfed, getting 8 average charges.
   - v1.8.3: Removing an amulet of faith drains 1/4 your piety instead of 1/3.
   - v1.8.5: Changed base damage for weapons: bardiche (18->20), glaive (15->16), triple sword (17->18).
+  - v1.11.5: Shadow dragon armour has (10->11) base AC, and storm dragon armour has (15->13) encumbrance.
 
 #### Removed Items
   - Amulet of Harm
@@ -205,6 +209,7 @@ Pull requests for new content are welcome.
   - v1.5.3: Skeletons now resist electricity.
   - v1.6.1: Vault Guards can now use Battlecry when injured.
   - v1.8.4: Killer Klowns carry branded weapons, and have a new spell set: Blink, Monstrous Menagerie, Corrupting Pulse, Dig, Silence.
+  - v1.11.5: Orb Guardians get a magical gaze, with Lesser Beckoning, Sleep, and Lightning Bolt.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

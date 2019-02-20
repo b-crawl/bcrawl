@@ -484,6 +484,10 @@ eidolon cast targeted
 
 @The_monster@ stares piercingly @at@ @target@.
 %%%%
+orb guardian cast targeted
+
+@floating eye cast targeted@
+%%%%
 basilisk cast targeted
 
 @floating eye cast targeted@

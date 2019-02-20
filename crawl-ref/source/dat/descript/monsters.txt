@@ -1793,7 +1793,8 @@ to swiftly bring an end to anything trespassing upon the Realm of Zot.
 Orb Guardian
 
 A huge, glowing, four-limbed purple creature with heightened senses, created by
-the Orb itself. It guards the Orb with enormous punctiliousness and violence.
+the Orb itself. Each of its three eyes can produce a different magical effect,
+and it guards the Orb with enormous punctiliousness and violence.
 %%%%
 orb of destruction
 

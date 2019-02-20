@@ -1234,12 +1234,15 @@ static unique_ptr<targeter> _spell_targeter(spell_type spell, int pow,
     return nullptr;
 }
 
-static double _chance_miscast_prot()
+static double _chance_miscast_prot(spell_type spell)
 {
     double miscast_prot = 0;
 
     if (have_passive(passive_t::miscast_protection))
-        miscast_prot = (double) you.piety/piety_breakpoint(5);
+        miscast_prot += ((double) you.piety)/piety_breakpoint(5);
+
+    if (have_passive(passive_t::miscast_protection_necromancy) && spell_typematch(spell, SPTYP_NECROMANCY))
+        miscast_prot += ((double) (you.piety - piety_breakpoint(0))) / (piety_breakpoint(2) - piety_breakpoint(0));
 
     return min(1.0, miscast_prot);
 }
@@ -1548,7 +1551,7 @@ spret your_spells(spell_type spell, int powc, bool allow_fail,
         flush_input_buffer(FLUSH_ON_FAILURE);
         learned_something_new(HINT_SPELL_MISCAST);
 
-        if (decimal_chance(_chance_miscast_prot()))
+        if (decimal_chance(_chance_miscast_prot(spell)))
         {
             simple_god_message(" protects you from the effects of your miscast!");
             return spret::fail;
@@ -2047,7 +2050,7 @@ double get_miscast_chance(spell_type spell, int severity)
 static double _get_miscast_chance_with_miscast_prot(spell_type spell)
 {
     double raw_chance = get_miscast_chance(spell);
-    double miscast_prot = _chance_miscast_prot();
+    double miscast_prot = _chance_miscast_prot(spell);
     double chance = raw_chance * (1 - miscast_prot);
 
     return chance;
@@ -2064,7 +2067,7 @@ COMPILE_CHECK(ARRAYSZ(fail_severity_adjs) > 3);
 
 int fail_severity(spell_type spell)
 {
-    const double chance = _get_miscast_chance_with_miscast_prot(spell);
+    double chance = _get_miscast_chance_with_miscast_prot(spell);
 
     return (chance < 0.001) ? 0 :
            (chance < 0.005) ? 1 :
@@ -2076,7 +2079,7 @@ int fail_severity(spell_type spell)
 // based on the chance of getting a severity >= 2 miscast.
 int failure_rate_colour(spell_type spell)
 {
-    const int severity = fail_severity(spell);
+    int severity = fail_severity(spell);
     return severity == 0 ? LIGHTGREY :
            severity == 1 ? YELLOW :
            severity == 2 ? LIGHTRED

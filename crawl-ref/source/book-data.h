@@ -14,9 +14,9 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Book of Conjurations
     SPELL_MAGIC_DART,
     SPELL_SEARING_RAY,
-    SPELL_DAZZLING_SPRAY,
-    SPELL_FULMINANT_PRISM,
     SPELL_ISKENDERUNS_MYSTIC_BLAST,
+    SPELL_FULMINANT_PRISM,
+    SPELL_IRRADIATE,
 },
 
 {   // Book of Flames
@@ -105,6 +105,7 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Misfortune
     SPELL_CONFUSE,
+    SPELL_DAZZLING_SPRAY,
     SPELL_PETRIFY,
     SPELL_VIOLENT_UNRAVELLING,
     SPELL_ENGLACIATION,
@@ -331,7 +332,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_IGNITE_POISON,
     SPELL_PETRIFY,
     SPELL_INTOXICATE,
-    SPELL_IRRADIATE,
+    SPELL_OZOCUBUS_REFRIGERATION,
 },
 
 {   // Book of Beasts

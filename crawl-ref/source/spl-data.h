@@ -564,7 +564,7 @@ static const struct spell_desc spelldata[] =
     SPELL_ISKENDERUNS_MYSTIC_BLAST, "Iskenderun's Mystic Blast",
     SPTYP_CONJURATION,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER,
-    4,
+    3,
     100,
     6, 6,
     4, 10,

@@ -52,6 +52,7 @@ Pull requests for new content are welcome.
   - v1.11.3: Sloth Apostles worship Cheibriados and start with a shield.
   - v1.11.3: Transmuters start with a potion of lignification.
   - v1.11.3: Skalds start with a scroll of fear.
+  - v1.11.6: Conjurers have Irradiate instead of Dazzling Spray.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -125,7 +126,8 @@ Pull requests for new content are welcome.
   - v1.9.2: Spectral Weapon lasts longer at high spell power.
   - v1.9.2: Deflect Missiles is never dispelled by attacks, but can drain mana when it deflects missiles. It drains less mana at higher power.
   - v1.11.3: Slow is level 1.
-  - v1.11.4: Ozocubu's Refrigeration now has the same damage formula as Fireball. (Its damage scaling was wrong for a long time.)
+  - v1.11.4: Ozocubu's Refrigeration now has the same damage formula as Fireball. (Its damage calculation was wrong for several months.)
+  - v1.11.6: Iskenderun's Mystic Blast is level 3, and has lower base damage but higher damage scaling.
 
 #### Removed Spells
   - Summon Guardian Golem

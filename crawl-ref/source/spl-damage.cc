@@ -1253,7 +1253,7 @@ static int _irradiate_cell(coord_def where, int pow, actor *agent)
         return 0; // XXX: handle damaging the player for mons casts...?
 
     const int dice = 6;
-    const int max_dam = 30 + div_rand_round(pow, 2);
+    const int max_dam = 18 + div_rand_round(pow*2, 3);
     const dice_def dam_dice = calc_dice(dice, max_dam);
     const int dam = dam_dice.roll();
     mprf("%s is blasted with magical radiation%s",

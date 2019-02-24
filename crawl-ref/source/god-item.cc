@@ -297,10 +297,6 @@ static bool _is_potentially_hasty_item(const item_def& item)
             return true;
         }
         break;
-    case OBJ_WANDS:
-        if (item.sub_type == WAND_RANDOM_EFFECTS)
-            return true;
-        break;
     default:
         break;
     }

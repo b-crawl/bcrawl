@@ -124,6 +124,7 @@ TILE:  t = dngn_tree_dead
 : set_feature_name("granite_statue", "a gravestone")
 FTILE:  -|*%$OGt = floor_pebble_brown / floor_pebble_darkgray
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
  cccc
 .ndtc
@@ -163,6 +164,7 @@ NSUBST: D = 0 / 2=0. / 2=9 / 2=9. / 8 / 2=8. / .
 : end
 SUBST:  p : x., q : x., x : xc
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ...........
 .cccnnnccc.
@@ -225,6 +227,7 @@ MARKER: Q = lua:transp_dest_loc("ghost_arena_entry")
 MARKER: R = lua:transp_loc("ghost_arena_exit")
 MARKER: S = lua:transp_dest_loc("ghost_arena_exit")
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
   ...........
  ..nnnnnnnnn..
@@ -274,6 +277,7 @@ TILE:    t = dngn_tree_dead
 FTILE:   -de|*%$DFHpGt = floor_pebble_brown / floor_pebble_darkgray
 : set_feature_name("granite_statue", "a gravestone")
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
   ccccccc
  ccdfrfecc
@@ -297,6 +301,7 @@ MARKER: F = lua:fog_machine { cloud_type = "black smoke", \
             size = 1, walk_dist = 0, start_clouds = 1 }
 : dgn.delayed_decay(_G, "d", "chunk")
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
  ccccc
 .n'''c
@@ -356,6 +361,7 @@ COLOUR: G = yellow
 : set_feature_name("granite_statue", "golden statue")
 : set_feature_name("stone_wall", "golden wall")
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
  ccccccc
 ccMGOGMcc
@@ -378,6 +384,7 @@ NSUBST: r = O / d / e / tG / t'' / '
 COLOUR: '-O|*%$tG = yellow, c = white
 FTILE:  '-O|*%$tG = floor_dirt
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ccccccccc
 c---r-r-c
@@ -397,6 +404,7 @@ KFEAT:  O = shallow_water
 : lone_ghost_extra_loot(_G, "-")
 FTILE:  -|*%$O : floor_pebble_brown / floor_pebble_darkgray
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ccccc
 cdOec
@@ -428,6 +436,7 @@ SUBST:  eg = f
 COLOUR: -1deOf = green
 FTILE:  -1defOTt = floor_grass
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
    .....
   ..nnn..
@@ -455,6 +464,7 @@ SUBST:  r = wWl
 : end
 SUBST: P = GTV
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 cccccccccc
 cccc'c'ccc
@@ -538,6 +548,7 @@ NSUBST: - = 2=1 / 4=1- / -
 : end
 FTILE:  -de|*%$O12G = floor_pebble_brown / floor_pebble_darkgray
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
  ccccccc
 .n1c1c1c
@@ -580,6 +591,7 @@ NSUBST: D = 2 / 3 / 2=3- / 4-, - = 2=1 / 2=1- / 2=2 / 2=2- / -
 : end
 FTILE:  -de|*%$O1234G = floor_pebble_brown / floor_pebble_darkgray
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
  ccccccc
 .nDcDcDc
@@ -626,6 +638,7 @@ KFEAT:  _ = altar_jiyva
 COLOUR: c = green
 COLOUR: n = lightgreen
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
   ccccc
  cc---cn.
@@ -714,6 +727,7 @@ MARKER: R = lua:transp_loc("ghost_mausoleum_exit")
 MARKER: S = lua:transp_dest_loc("ghost_mausoleum_exit")
 FTILE:  -de|*%$O012389G = floor_pebble_brown / floor_pebble_darkgray
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
  ...............
  .nnnnnnnnnnnnn.
@@ -773,6 +787,7 @@ SUBST:  fg = |*
 NSUBST: - = 1 / 3=1- / -
 : end
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
   ccccc
  cctttcn.
@@ -854,6 +869,7 @@ SUBST:  fgh = |*, i = *%, j = %$..
 NSUBST: - = 3=1 / 4=1- / 12-- / 2=2 / 2=2- / 3 / 3- / -
 : end
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ccccccccccc
 cGvvvvvvvGc
@@ -889,6 +905,7 @@ TILE:   t = dngn_tree_dead
 FTILE:  GtO123498$*|- = floor_pebble_brown / floor_pebble_darkgray
 : set_feature_name("granite_statue", "a gravestone")
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
      .@.
   cccc.ccc
@@ -917,6 +934,7 @@ MONS:   iron troll / iron dragon, iron giant
 : ghost_good_loot(_G)
 NSUBST:  2 = 2=2 / 2=2., 3 = 2=3 / 2=3.
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 vvvvvvv
 v$d|e$v
@@ -956,6 +974,7 @@ MONS:   juggernaut zombie / juggernaut simulacrum / spectral juggernaut
 NSUBST: 1 = 3=1 / 4=1., 2 = 2=2 / 4=2., 3 = 2=3 / 4=3.
 : dgn.delayed_decay(_G, "'", "felid corpse")
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
  ccccccc
  c--+*Tc
@@ -988,6 +1007,7 @@ NSUBST: - = 4=1 / 6=1. / 2=2. / .
 TILE:   G = dngn_statue_imp / dngn_statue_cerebov / \
             dngn_statue_demonic_bust / dngn_statue_ancient_evil
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 vvvvvvvvv
 vGffdefGv
@@ -1055,6 +1075,7 @@ COLOUR: .pO012345689de|*$ = green
 FTILE:  tGVA.pO012345689de|*$ = floor_moss
 : end
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
   ttttttt
  tt'''--tt
@@ -1108,6 +1129,7 @@ NSUBST: - = 3=1 / 4=1. / 3 / 3. / 4. / 2=5 / 2=5. / EEEF / 2=6 / 2=6. / .7 / .
 : end
 KFEAT:  _ = altar_beogh
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ccccccccccccccc
 cI---hd_fj---Ic
@@ -1166,6 +1188,7 @@ COLOUR: O1234567DEde|*%$' = blue
 RTILE:  x = wall_ice_block
 FTILE:  =cnO1234567DEde|*%$' = floor_ice
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
      ...........
     ..cnn===nnc..
@@ -1212,6 +1235,7 @@ SUBST:  a = c.
 KFEAT:  O = expired_portal
 FTILE:  O = dngn_portal_gauntlet_gone
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ...........
 .nnccnccnn.
@@ -1236,6 +1260,7 @@ KMONS:  O = player_ghost
 KFEAT:  O = altar_xom
 FTILE:  -|*%$O1 : floor_pebble_brown / floor_pebble_darkgray
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
  ccc
 cc1cc
@@ -1264,6 +1289,7 @@ NSUBST: 1 = 1 / 2 / 12WW / W
 COLOUR: 12*%$W = lightgreen / cyan w:5
 FTILE:  O = dngn_portal_sewer_rusted
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
        ..
 ccccccnn.
@@ -1293,6 +1319,7 @@ NSUBST: W = 1 / 2=1223WW / 2 / 3 / 3W / W
 COLOUR: 123*%$W = lightgreen / cyan w:5
 FTILE:  O = dngn_portal_sewer_rusted
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
  ccccccccccc
 .nWWWWeWWWWn.
@@ -1344,6 +1371,7 @@ MARKER: U = lua:fog_machine { cloud_type = "mutagenic fog", pow_min = 3, \
                 pow_max = 5, delay = 5, start_clouds = 3, size = 2, \
                 spread_rate = 0, excl_rad = 0 }
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 bbbbbbbbb
 bbU"P"Ubb
@@ -1383,6 +1411,7 @@ dgn.delayed_decay(_G,"'","minotaur skeleton / halfling skeleton" ..
   " / felid skeleton / orc skeleton / centaur skeleton")
 }}
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
  WWWWWWWWWWWWW
 WWcccccccccccWW
@@ -1450,6 +1479,7 @@ MARKER: Q = lua:transp_dest_loc("stat_death_entry")
 MARKER: R = lua:transp_loc("stat_death_exit")
 MARKER: S = lua:transp_dest_loc("stat_death_exit")
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
     ....@.....
    ..cncScccc.....
@@ -1512,6 +1542,7 @@ MARKER: Q = lua:transp_dest_loc("smash_entry")
 MARKER: R = lua:transp_loc("smash_exit")
 MARKER: S = lua:transp_dest_loc("smash_exit")
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
      .@.
 .....P.S.....
@@ -1576,6 +1607,7 @@ SUBST:  f = *, g = %$
 NSUBST: - = E / H / 2=EH.. / 2=P / 2=K / 3=KM.. / 2=3 / 4=3. / .
 : end
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
   ccccc
  ccedfcc
@@ -1630,6 +1662,7 @@ MARKER: P = lua:transp_loc("ghost_hive_entry")
 MARKER: Q = lua:transp_dest_loc("ghost_hive_entry")
 MARKER: R = lua:transp_loc("ghost_hive_exit")
 MARKER: S = lua:transp_dest_loc("ghost_hive_exit")
+KFEAT:   = = runed_clear_door
 MAP
          @
   .......P.......
@@ -1719,6 +1752,7 @@ FTILE:   `defghij|*%$O = floor_cobble_blood
 COLOUR:  " = brown
 FTILE:   " = floor_mud
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ...........................
 .wwwwwwwwwwwwWwwwwwwwwwwww.
@@ -1774,6 +1808,7 @@ SUBST:  d = dd|*----, V = VY
 KFEAT:  _ = altar_kikubaaqudgha
 FTILE:  -d|*%$ODEFHJKL12VY_ = floor_pebble_brown / floor_pebble_darkgray
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
     ccc
   cccDccc
@@ -1880,6 +1915,7 @@ MARKER: Q = lua:transp_dest_loc("berserking_beasts_entry")
 MARKER: R = lua:transp_loc("berserking_beasts_exit")
 MARKER: S = lua:transp_dest_loc("berserking_beasts_exit")
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
     ....@.....
    ..cncScccc.....
@@ -2049,6 +2085,7 @@ MARKER: S = lua:transp_dest_loc("wrathful_warriors_exit")
 COLOUR: x = lightred
 TILE:   x = wall_pebble_red
 : ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
       .@.
     ...P...

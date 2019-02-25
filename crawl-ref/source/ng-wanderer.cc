@@ -329,60 +329,6 @@ static void _give_wanderer_book(skill_type skill)
 
 
 /**
- * Can we include the given spell in our themed spellbook?
- *
- * Guarantees exactly two spells of total spell level 4.
- * (I.e., 2+2 or 1+3)
- *
- * XXX: strongly consider caching this - currently we're n^2 over all spells,
- * which seems excessive.
- *
- * @param discipline_1      The first spellschool of the book.
- * @param discipline_2      The second spellschool of the book.
- * @param agent             The entity creating the book; possibly a god.
- * @param prev              A list of spells already chosen for the book.
- * @param spell             The spell to be filtered.
- * @return                  Whether the spell can be included.
- */
-static bool exact_level_spell_filter(spschool_flag_type discipline_1,
-                                     spschool_flag_type discipline_2,
-                                     int agent,
-                                     const vector<spell_type> &prev,
-                                     spell_type spell)
-{
-    if (!basic_themed_spell_filter(discipline_1, discipline_2, agent, prev,
-                                   spell))
-    {
-        return false;
-    }
-
-    if (!you_can_memorise(spell))
-        return false;
-
-    static const int TOTAL_LEVELS = 4;
-
-    const int spell_level = spell_difficulty(spell);
-    if (prev.size())
-        return TOTAL_LEVELS == spell_level + spell_difficulty(prev[0]);
-
-    // we need to check to see there is some possible second spell; otherwise
-    // we could be walking into a trap, if we select e.g. a level 2 spell when
-    // there's only one player-castable level 2 spell in the school.
-    const vector<spell_type> incl_spell = {spell};
-    for (int s = 0; s < NUM_SPELLS; ++s)
-    {
-        const spell_type second_spell = static_cast<spell_type>(s);
-        if (exact_level_spell_filter(discipline_1, discipline_2,
-                                     agent, incl_spell, second_spell))
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-/**
  * Create a consumable as a "good item".
  *
  * Shouldn't ever create an useless consumable for the player's species.

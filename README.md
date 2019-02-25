@@ -53,6 +53,8 @@ Pull requests for new content are welcome.
   - v1.11.3: Transmuters start with a potion of lignification.
   - v1.11.3: Skalds start with a scroll of fear.
   - v1.11.6: Conjurers have Irradiate instead of Dazzling Spray.
+  - v1.11.7: Enchanters start with a scroll of fog.
+  - v1.11.7: Wanderers start with significantly more spells on average.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -128,6 +130,7 @@ Pull requests for new content are welcome.
   - v1.11.3: Slow is level 1.
   - v1.11.4: Ozocubu's Refrigeration now has the same damage formula as Fireball. (Its damage calculation was wrong for several months.)
   - v1.11.6: Iskenderun's Mystic Blast is level 3, and has lower base damage but higher damage scaling.
+  - v1.11.7: Irradiate has the same damage formula as Bolt of Fire, which has lower base damage but higher damage scaling.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -224,3 +227,4 @@ Pull requests for new content are welcome.
   - v1.6.1: Gastronok casts faster, and has summoning instead of Airstrike.
   - v1.7.2: Fannar is more dangerous, getting Freezing Cloud.
   - v1.7.2: Psyche, Fannar, and Sojobo sometimes drop a spellbook.
+  - v1.11.7: Bai Suzhen now summons drakes and then goes berserk, making her significantly more dangerous.

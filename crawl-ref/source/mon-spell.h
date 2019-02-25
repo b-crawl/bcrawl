@@ -1726,7 +1726,7 @@ static const mon_spellbook mspell_list[] =
     // ('d') Draconians.
     { MST_BAI_SUZHEN,
       {
-        { SPELL_SUMMON_HYDRA, 40, MON_SPELL_WIZARD },
+        { SPELL_SUMMON_DRAKES, 40, MON_SPELL_WIZARD },
       }
     },
 
@@ -1867,8 +1867,8 @@ static const mon_spellbook mspell_list[] =
 
     { MST_BAI_SUZHEN_DRAGON,
       {
-        { SPELL_PRIMAL_WAVE, 60, MON_SPELL_NATURAL | MON_SPELL_BREATH },
         { SPELL_RING_OF_THUNDER, 100, MON_SPELL_NATURAL | MON_SPELL_INSTANT },
+        { SPELL_BERSERKER_RAGE, 50, MON_SPELL_NATURAL },
       }
     },
 

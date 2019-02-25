@@ -5,7 +5,6 @@
 #include "item-prop.h"
 #include "ng-setup.h"
 #include "potion-type.h"
-#include "randbook.h"
 #include "random.h"
 #include "skills.h"
 #include "spl-book.h" // you_can_memorise
@@ -166,12 +165,22 @@ static skill_type _wanderer_role_skill_select(stat_type selected_role,
 
     if (selected_skill == NUM_SKILLS)
     {
-        ASSERT(you.species == SP_FELID || you.species == SP_ONI);
-
-        if (you.species == SP_FELID)
+        switch(you.species)
+        {
+        case SP_FELID:
             selected_skill = SK_UNARMED_COMBAT;
-        else if (you.species == SP_ONI)
+            break;
+        case SP_ONI:
+        case SP_SPRIGGAN:
             selected_skill = SK_SPELLCASTING;
+            break;
+        case SP_HILL_ORC:
+            selected_skill = SK_FIGHTING;
+            break;
+        default:
+            ASSERT(false);
+            break;
+        }
     }
 
     return selected_skill;
@@ -262,17 +271,16 @@ static void _give_wanderer_book(skill_type skill)
     {
     default:
     case SK_SPELLCASTING:
-        book = BOOK_MINOR_MAGIC;
+        book = random_choose(BOOK_MINOR_MAGIC, BOOK_MINOR_MAGIC, BOOK_CANTRIPS);
         break;
 
     case SK_CONJURATIONS:
-        // minor magic should have only half the likelihood of conj
-        book = random_choose(BOOK_MINOR_MAGIC,
+        book = random_choose(BOOK_FLAMES, BOOK_AIR, BOOK_MINOR_MAGIC,
                              BOOK_CONJURATIONS, BOOK_CONJURATIONS);
         break;
 
     case SK_SUMMONINGS:
-        book = random_choose(BOOK_MINOR_MAGIC, BOOK_CALLINGS);
+        book = BOOK_CALLINGS;
         break;
 
     case SK_NECROMANCY:
@@ -284,7 +292,7 @@ static void _give_wanderer_book(skill_type skill)
         break;
 
     case SK_TRANSMUTATIONS:
-        book = random_choose(BOOK_GEOMANCY, BOOK_CHANGES);
+        book = BOOK_CHANGES;
         break;
 
     case SK_FIRE_MAGIC:
@@ -300,7 +308,7 @@ static void _give_wanderer_book(skill_type skill)
         break;
 
     case SK_EARTH_MAGIC:
-        book = BOOK_GEOMANCY;
+        book = random_choose(BOOK_GEOMANCY, BOOK_GEOMANCY, BOOK_CANTRIPS);
         break;
 
     case SK_POISON_MAGIC:
@@ -308,92 +316,17 @@ static void _give_wanderer_book(skill_type skill)
         break;
 
     case SK_HEXES:
-        book = BOOK_MALEDICT;
+        book = random_choose(BOOK_MALEDICT, BOOK_DEBILITATION);
         break;
 
     case SK_CHARMS:
-        book = BOOK_BATTLE;
+        book = random_choose(BOOK_BATTLE, BOOK_BATTLE, BOOK_CANTRIPS);
         break;
     }
 
     newgame_make_item(OBJ_BOOKS, book);
 }
 
-
-/**
- * Can we include the given spell in our themed spellbook?
- *
- * Guarantees exactly two spells of total spell level 4.
- * (I.e., 2+2 or 1+3)
- *
- * XXX: strongly consider caching this - currently we're n^2 over all spells,
- * which seems excessive.
- *
- * @param discipline_1      The first spellschool of the book.
- * @param discipline_2      The second spellschool of the book.
- * @param agent             The entity creating the book; possibly a god.
- * @param prev              A list of spells already chosen for the book.
- * @param spell             The spell to be filtered.
- * @return                  Whether the spell can be included.
- */
-static bool exact_level_spell_filter(spschool_flag_type discipline_1,
-                                     spschool_flag_type discipline_2,
-                                     int agent,
-                                     const vector<spell_type> &prev,
-                                     spell_type spell)
-{
-    if (!basic_themed_spell_filter(discipline_1, discipline_2, agent, prev,
-                                   spell))
-    {
-        return false;
-    }
-
-    if (!you_can_memorise(spell))
-        return false;
-
-    static const int TOTAL_LEVELS = 4;
-
-    const int spell_level = spell_difficulty(spell);
-    if (prev.size())
-        return TOTAL_LEVELS == spell_level + spell_difficulty(prev[0]);
-
-    // we need to check to see there is some possible second spell; otherwise
-    // we could be walking into a trap, if we select e.g. a level 2 spell when
-    // there's only one player-castable level 2 spell in the school.
-    const vector<spell_type> incl_spell = {spell};
-    for (int s = 0; s < NUM_SPELLS; ++s)
-    {
-        const spell_type second_spell = static_cast<spell_type>(s);
-        if (exact_level_spell_filter(discipline_1, discipline_2,
-                                     agent, incl_spell, second_spell))
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-// Give the wanderer a randart book containing two spells of total level 4.
-// The theme of the book is the spell school of the chosen skill.
-static void _give_wanderer_minor_book(skill_type skill)
-{
-    // Doing a rejection loop for this because I am lazy.
-    while (skill == SK_SPELLCASTING)
-    {
-        int value = SK_LAST_MAGIC - SK_FIRST_MAGIC_SCHOOL + 1;
-        skill = skill_type(SK_FIRST_MAGIC_SCHOOL + random2(value));
-    }
-
-    spschool_flag_type school = skill2spell_type(skill);
-
-    item_def* item = newgame_make_item(OBJ_BOOKS, BOOK_RANDART_THEME);
-    if (!item)
-        return;
-
-    build_themed_book(*item, exact_level_spell_filter,
-                      forced_book_theme(school), 2);
-}
 
 /**
  * Create a consumable as a "good item".
@@ -635,7 +568,7 @@ static void _wanderer_decent_equipment(skill_type & skill,
     case SK_AIR_MAGIC:
     case SK_EARTH_MAGIC:
     case SK_POISON_MAGIC:
-        _give_wanderer_minor_book(skill);
+        _give_wanderer_book(skill);
         break;
 
     case SK_EVOCATIONS:

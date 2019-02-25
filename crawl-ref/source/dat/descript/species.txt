@@ -129,8 +129,8 @@ while wearing heavy armour. However, having short legs, they move slowly.
 %%%%
 Spriggan
 
-Very small, very frail and very fast, Spriggans make highly competent stabbers
-and spellcasters.
+Very small, very frail, and very fast, Spriggans are skilled at spellcasting and
+stealthy stabbing, but terrible at melee combat, summoning, and especially conjuration.
 %%%%
 Troll
 

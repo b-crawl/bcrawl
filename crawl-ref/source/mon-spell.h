@@ -1868,7 +1868,7 @@ static const mon_spellbook mspell_list[] =
     { MST_BAI_SUZHEN_DRAGON,
       {
         { SPELL_RING_OF_THUNDER, 100, MON_SPELL_NATURAL | MON_SPELL_INSTANT },
-        { SPELL_BERSERKER_RAGE, 50, MON_SPELL_NATURAL | MON_SPELL_BREATH },
+        { SPELL_BERSERKER_RAGE, 50, MON_SPELL_NATURAL },
       }
     },
 

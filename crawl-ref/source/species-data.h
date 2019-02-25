@@ -121,8 +121,8 @@ static const map<species_type, species_def> species_data =
     10, 10, 6, // 26
     { STAT_INT }, 4,
     { {MUT_DJINN_FLIGHT, 1, 1} },
-    {},
-    {},
+    { "You cannot gain maximum magic capacity.", "You can pull magic from your surroundings." },
+    { "fixed mp, +cast" },
     { JOB_WIZARD, JOB_CONJURER, JOB_FIRE_ELEMENTALIST, JOB_AIR_ELEMENTALIST,
       JOB_EARTH_ELEMENTALIST, JOB_VENOM_MAGE },
     { SK_POLEARMS, SK_LONG_BLADES, SK_STAVES, SK_CROSSBOWS, SK_SLINGS },

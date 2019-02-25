@@ -5,7 +5,6 @@
 #include "item-prop.h"
 #include "ng-setup.h"
 #include "potion-type.h"
-#include "randbook.h"
 #include "random.h"
 #include "skills.h"
 #include "spl-book.h" // you_can_memorise
@@ -272,17 +271,16 @@ static void _give_wanderer_book(skill_type skill)
     {
     default:
     case SK_SPELLCASTING:
-        book = BOOK_MINOR_MAGIC;
+        book = random_choose(BOOK_MINOR_MAGIC, BOOK_MINOR_MAGIC, BOOK_CANTRIPS);
         break;
 
     case SK_CONJURATIONS:
-        // minor magic should have only half the likelihood of conj
-        book = random_choose(BOOK_MINOR_MAGIC,
+        book = random_choose(BOOK_FLAMES, BOOK_AIR, BOOK_MINOR_MAGIC,
                              BOOK_CONJURATIONS, BOOK_CONJURATIONS);
         break;
 
     case SK_SUMMONINGS:
-        book = random_choose(BOOK_MINOR_MAGIC, BOOK_CALLINGS);
+        book = BOOK_CALLINGS;
         break;
 
     case SK_NECROMANCY:
@@ -294,7 +292,7 @@ static void _give_wanderer_book(skill_type skill)
         break;
 
     case SK_TRANSMUTATIONS:
-        book = random_choose(BOOK_GEOMANCY, BOOK_CHANGES);
+        book = BOOK_CHANGES;
         break;
 
     case SK_FIRE_MAGIC:
@@ -310,7 +308,7 @@ static void _give_wanderer_book(skill_type skill)
         break;
 
     case SK_EARTH_MAGIC:
-        book = BOOK_GEOMANCY;
+        book = random_choose(BOOK_GEOMANCY, BOOK_GEOMANCY, BOOK_CANTRIPS);
         break;
 
     case SK_POISON_MAGIC:
@@ -318,11 +316,11 @@ static void _give_wanderer_book(skill_type skill)
         break;
 
     case SK_HEXES:
-        book = BOOK_MALEDICT;
+        book = random_choose(BOOK_MALEDICT, BOOK_DEBILITATION);
         break;
 
     case SK_CHARMS:
-        book = BOOK_BATTLE;
+        book = random_choose(BOOK_BATTLE, BOOK_BATTLE, BOOK_CANTRIPS);
         break;
     }
 
@@ -382,27 +380,6 @@ static bool exact_level_spell_filter(spschool_flag_type discipline_1,
     }
 
     return false;
-}
-
-// Give the wanderer a randart book containing two spells of total level 4.
-// The theme of the book is the spell school of the chosen skill.
-static void _give_wanderer_minor_book(skill_type skill)
-{
-    // Doing a rejection loop for this because I am lazy.
-    while (skill == SK_SPELLCASTING)
-    {
-        int value = SK_LAST_MAGIC - SK_FIRST_MAGIC_SCHOOL + 1;
-        skill = skill_type(SK_FIRST_MAGIC_SCHOOL + random2(value));
-    }
-
-    spschool_flag_type school = skill2spell_type(skill);
-
-    item_def* item = newgame_make_item(OBJ_BOOKS, BOOK_RANDART_THEME);
-    if (!item)
-        return;
-
-    build_themed_book(*item, exact_level_spell_filter,
-                      forced_book_theme(school), 2);
 }
 
 /**
@@ -645,7 +622,7 @@ static void _wanderer_decent_equipment(skill_type & skill,
     case SK_AIR_MAGIC:
     case SK_EARTH_MAGIC:
     case SK_POISON_MAGIC:
-        _give_wanderer_minor_book(skill);
+        _give_wanderer_book(skill);
         break;
 
     case SK_EVOCATIONS:

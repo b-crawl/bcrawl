@@ -2372,7 +2372,7 @@ spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)
         beam.source.x -= sgn(beam.source.x - hitfunc.origin.x);
         beam.source.y -= sgn(beam.source.y - hitfunc.origin.y);
         beam.damage = dice_def(div_rand_round(juice, LIGHTNING_CHARGE_MULT),
-                               div_rand_round(30 + pow / 6, arc + 2));
+                               div_rand_round(pow, arc + 4));
         beam.fire();
     }
 

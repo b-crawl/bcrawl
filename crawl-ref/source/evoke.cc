@@ -313,10 +313,7 @@ static bool _lightning_rod()
         return false;
     }
 
-    const int surge = pakellas_surge_devices();
-    surge_power(you.spec_evoke() + surge);
-    const int power =
-        player_adjust_evoc_power(5 + you.skill(SK_EVOCATIONS, 3), surge);
+    int power = player_adjust_evoc_power(5 + you.skill(SK_EVOCATIONS, 3), 0);
 
     const spret ret = your_spells(SPELL_THUNDERBOLT, power, false);
 
@@ -1559,7 +1556,7 @@ bool evoke_item(int slot, bool check_range)
         if ((you.get_mutation_level(MUT_NO_ARTIFICE))
             && item.sub_type != MISC_ZIGGURAT)
         {
-			mpr("You cannot evoke magical items.");
+            mpr("You cannot evoke magical items.");
             return false;
         }
 

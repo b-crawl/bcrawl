@@ -638,6 +638,7 @@ static void _setup_generic(const newgame_def& ng)
 {
     reset_rng(); // initialize rng from Options.seed
     _init_player();
+    you.game_seed = crawl_state.seed;
     
     if(ng.type == GAME_TYPE_ADVENTURE)
         you.lives = 2;

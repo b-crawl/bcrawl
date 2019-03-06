@@ -293,7 +293,7 @@ void wizard_blink()
     move_player_to_grid(beam.target, false);
 }
 
-static const int HOP_FUZZ_RADIUS = 2;
+static const int HOP_FUZZ_RADIUS = 1;
 
 /**
  * Randomly choose one of the spaces near the given target for the player's hop

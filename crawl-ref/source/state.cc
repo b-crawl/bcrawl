@@ -552,9 +552,14 @@ bool game_state::game_standard_levelgen() const
     return game_is_normal() || game_is_hints();
 }
 
+bool game_state::game_is_valid_type() const
+{
+    return type < NUM_GAME_TYPE;
+}
+
 bool game_state::game_is_normal() const
 {
-    ASSERT(type < NUM_GAME_TYPE);
+    ASSERT(game_is_valid_type());
     return type == GAME_TYPE_NORMAL || type == GAME_TYPE_ADVENTURE
             || type == GAME_TYPE_CUSTOM_SEED
             || type == GAME_TYPE_UNSPECIFIED;
@@ -562,25 +567,25 @@ bool game_state::game_is_normal() const
 
 bool game_state::game_is_tutorial() const
 {
-    ASSERT(type < NUM_GAME_TYPE);
+    ASSERT(game_is_valid_type());
     return type == GAME_TYPE_TUTORIAL;
 }
 
 bool game_state::game_is_arena() const
 {
-    ASSERT(type < NUM_GAME_TYPE);
+    ASSERT(game_is_valid_type());
     return type == GAME_TYPE_ARENA;
 }
 
 bool game_state::game_is_sprint() const
 {
-    ASSERT(type < NUM_GAME_TYPE);
+    ASSERT(game_is_valid_type());
     return type == GAME_TYPE_SPRINT;
 }
 
 bool game_state::game_is_hints() const
 {
-    ASSERT(type < NUM_GAME_TYPE);
+    ASSERT(game_is_valid_type());
     return type == GAME_TYPE_HINTS;
 }
 
@@ -614,11 +619,15 @@ string game_state::game_type_name_for(game_type _type)
         return "Arena";
     case GAME_TYPE_SPRINT:
         return "Dungeon Sprint";
+    case NUM_GAME_TYPE:
+        return "Unknown";
     }
 }
 
 string game_state::game_savedir_path() const
 {
+    if (!game_is_valid_type())
+        return ""; // a game from the future -- avoid the ASSERT below
     return game_is_sprint()? "sprint/" : "";
 }
 

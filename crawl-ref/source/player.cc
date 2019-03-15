@@ -5199,6 +5199,7 @@ player::player()
     equip.init(-1);
     melded.reset();
     unrand_reacts.reset();
+    last_unequip = -1;
 
     symbol          = MONS_PLAYER;
     form            = transformation::none;

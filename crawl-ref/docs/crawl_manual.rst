@@ -2557,7 +2557,7 @@ will deselect it (except for ',' and '-', obviously).
 &amp;
   Select all carrion and inedible food.
 
-\+ or :
+:
   Select all books.
 
 /

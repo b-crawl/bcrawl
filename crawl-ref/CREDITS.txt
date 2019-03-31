@@ -310,7 +310,6 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Robert Shimmin
     Sigurd
     Edgar Simo
-    Skrybe
     Alex Smith
     Keanan Smith
     Richard Soderberg

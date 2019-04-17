@@ -5076,7 +5076,6 @@ bool land_player(bool quiet)
 static void _end_water_hold()
 {
     you.duration[DUR_WATER_HOLD] = 0;
-    you.duration[DUR_WATER_HOLD_IMMUNITY] = 1;
     you.props.erase("water_holder");
 }
 
@@ -5086,7 +5085,7 @@ bool player::clear_far_engulf()
         return false;
 
     monster * const mons = monster_by_mid(you.props["water_holder"].get_int());
-    if (!mons || !adjacent(mons->pos(), you.pos()))
+    if (!mons || !mons->alive() || !adjacent(mons->pos(), you.pos()))
     {
         if (you.res_water_drowning())
             mpr("The water engulfing you falls away.");
@@ -5101,40 +5100,22 @@ bool player::clear_far_engulf()
 
 void handle_player_drowning(int delay)
 {
-    if (you.duration[DUR_WATER_HOLD] == 1)
+    if (you.clear_far_engulf())
+        return;
+    if (you.res_water_drowning())
     {
-        if (!you.res_water_drowning())
-            mpr("You gasp with relief as air once again reaches your lungs.");
-        _end_water_hold();
+        // Reset so damage doesn't ramp up while able to breathe
+        you.duration[DUR_WATER_HOLD] = 10;
     }
     else
     {
-        monster* mons = monster_by_mid(you.props["water_holder"].get_int());
-        if (!mons || !adjacent(mons->pos(), you.pos()))
-        {
-            if (you.res_water_drowning())
-                mpr("The water engulfing you falls away.");
-            else
-                mpr("You gasp with relief as air once again reaches your lungs.");
-
-            _end_water_hold();
-
-        }
-        else if (you.res_water_drowning())
-        {
-            // Reset so damage doesn't ramp up while able to breathe
-            you.duration[DUR_WATER_HOLD] = 10;
-        }
-        else if (!you.res_water_drowning())
-        {
-            you.duration[DUR_WATER_HOLD] += delay;
-            int dam =
-                div_rand_round((28 + stepdown((float)you.duration[DUR_WATER_HOLD], 28.0))
-                                * delay,
-                                BASELINE_DELAY * 10);
-            ouch(dam, KILLED_BY_WATER, mons->mid);
-            mprf(MSGCH_WARN, "Your lungs strain for air!");
-        }
+        you.duration[DUR_WATER_HOLD] += delay;
+        int dam =
+            div_rand_round((28 + stepdown((float)you.duration[DUR_WATER_HOLD], 28.0))
+                            * delay,
+                            BASELINE_DELAY * 10);
+        ouch(dam, KILLED_BY_WATER, you.props["water_holder"].get_int());
+        mprf(MSGCH_WARN, "Your lungs strain for air!");
     }
 }
 

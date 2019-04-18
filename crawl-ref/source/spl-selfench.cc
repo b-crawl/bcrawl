@@ -73,12 +73,6 @@ spret ice_armour(int pow, bool fail)
     else
         mpr("A cloud of ice covers your body!");
 
-    if (you.attribute[ATTR_BONE_ARMOUR] > 0)
-    {
-        you.attribute[ATTR_BONE_ARMOUR] = 0;
-        mpr("Your corpse armour falls away.");
-    }
-
     int dur = 2 + div_rand_round(pow, 20);
     you.increase_duration(DUR_ICY_ARMOUR, dur, dur);
     you.props[ICY_ARMOUR_KEY] = pow;

@@ -132,6 +132,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Matthew Boeh
     Mike Boutin
     John Boyle
+    Josh Braden
     Daniel Mark Brownrigg
     Andre Bubel
     Trent W. Buck

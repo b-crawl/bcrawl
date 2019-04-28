@@ -1364,7 +1364,7 @@ OBJ:      OBJ_WEAPONS/WPN_GREAT_SWORD
 COLOUR:   LIGHTRED
 TILE:     urand_butterfly_sword
 TILE_EQ:  great_sword
-PLUS:     -2
+PLUS:     -1
 BASE_DELAY: -6
 BRAND:    SPWPN_SPEED
 BOOL:     curse

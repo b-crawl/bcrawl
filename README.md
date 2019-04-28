@@ -97,6 +97,7 @@ Pull requests for new content are welcome.
   - v1.8: Demigods have various divine abilities.
   - v1.10: Felids gain half XP for seeing enemies, and no experience for killing them. They have -30% HP instead of -40%, and +0 XP instead of -1 XP.
   - v1.11.5: Spriggans can't train Conjurations, but have some better aptitudes.
+  - v1.11.8: Barachim hop target radius is reduced to 1.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -177,6 +178,7 @@ Pull requests for new content are welcome.
   - v1.8.3: Removing an amulet of faith drains 1/4 your piety instead of 1/3.
   - v1.8.5: Changed base damage for weapons: bardiche (18->20), glaive (15->16), triple sword (17->18).
   - v1.11.5: Shadow dragon armour has (10->11) base AC, and storm dragon armour has (15->13) encumbrance.
+  - v1.11.8: Lightning rod damage scales more with Evocations.
 
 #### Removed Items
   - Amulet of Harm

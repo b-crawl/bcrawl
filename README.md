@@ -133,6 +133,7 @@ Pull requests for new content are welcome.
   - v1.11.4: Ozocubu's Refrigeration now has the same damage formula as Fireball. (Its damage calculation was wrong for several months.)
   - v1.11.6: Iskenderun's Mystic Blast is level 3, and has lower base damage but higher damage scaling.
   - v1.11.7: Irradiate has the same damage formula as Bolt of Fire, which has lower base damage but higher damage scaling.
+  - v1.11.8: Lesser Beckoning has +1 range.
 
 #### Removed Spells
   - Summon Guardian Golem

@@ -3890,7 +3890,7 @@ static const struct spell_desc spelldata[] =
     SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEEDS_TRACER,
     3,
     200,
-    2, LOS_DEFAULT_RANGE,
+    3, LOS_DEFAULT_RANGE,
     2, 0,
     TILEG_BECKONING,
 },

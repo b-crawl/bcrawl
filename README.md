@@ -55,6 +55,7 @@ Pull requests for new content are welcome.
   - v1.11.6: Conjurers have Irradiate instead of Dazzling Spray.
   - v1.11.7: Enchanters start with a scroll of fog.
   - v1.11.7: Wanderers start with significantly more spells on average.
+  - v1.11.8: Monks start with 2 Invocations skill.
 
 #### Features
   - All items are automatically identified if the player has a rune.

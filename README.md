@@ -180,6 +180,7 @@ Pull requests for new content are welcome.
   - v1.8.5: Changed base damage for weapons: bardiche (18->20), glaive (15->16), triple sword (17->18).
   - v1.11.5: Shadow dragon armour has (10->11) base AC, and storm dragon armour has (15->13) encumbrance.
   - v1.11.8: Lightning rod damage scales more with Evocations.
+  - v1.11.8: Randart crossbows of penetration are 2x as likely.
 
 #### Removed Items
   - Amulet of Harm

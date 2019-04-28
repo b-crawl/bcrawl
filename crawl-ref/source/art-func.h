@@ -21,7 +21,6 @@
 #define ART_FUNC_H
 
 #include "beam.h"          // For Lajatang of Order's silver damage
-#include "cloud.h"         // For storm bow's and robe of clouds' rain
 #include "english.h"       // For apostrophise
 #include "exercise.h"      // For practise_evoking
 #include "fight.h"
@@ -39,7 +38,6 @@
 #include "spl-goditem.h"   // For Sceptre of Torment tormenting
 #include "spl-miscast.h"   // For Staff of Wucad Mu and Scythe of Curses miscasts
 #include "spl-summoning.h" // For Zonguldrok animating dead
-#include "terrain.h"       // For storm bow
 #include "view.h"          // For arc blade's discharge effect
 
 // prop recording whether the singing sword has said hello yet

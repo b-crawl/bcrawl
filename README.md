@@ -222,6 +222,7 @@ Pull requests for new content are welcome.
   - v1.6.1: Vault Guards can now use Battlecry when injured.
   - v1.8.4: Killer Klowns carry branded weapons, and have a new spell set: Blink, Monstrous Menagerie, Corrupting Pulse, Dig, Silence.
   - v1.11.5: Orb Guardians get a magical gaze, with Lesser Beckoning, Sleep, and Lightning Bolt.
+  - v1.11.8: Reapers can seal doors like Vault Wardens do.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

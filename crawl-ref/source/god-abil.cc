@@ -1273,8 +1273,7 @@ bool zin_vitalisation()
     simple_god_message(" grants you divine stamina.");
 
     // Add divine stamina.
-    const int stamina_amt =
-        max(1, you.skill_rdiv(SK_INVOCATIONS, 1, 3));
+    const int stamina_amt = 6 + you.skill_rdiv(SK_INVOCATIONS, 1, 3);
     you.attribute[ATTR_DIVINE_STAMINA] = stamina_amt;
     you.set_duration(DUR_DIVINE_STAMINA, 60 + roll_dice(2, 10));
 

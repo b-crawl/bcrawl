@@ -366,7 +366,7 @@ static const ability_def Ability_List[] =
     { ABIL_ZIN_RECITE, "Recite",
       0, 0, 0, 0, {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_ZIN_VITALISATION, "Vitalisation",
-      2, 0, 0, 1, {fail_basis::invo, 40, 5, 20}, abflag::none },
+      2, 0, 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_ZIN_IMPRISON, "Imprison",
       5, 0, 0, 4, {fail_basis::invo, 60, 5, 20}, abflag::none },
     { ABIL_ZIN_SANCTUARY, "Sanctuary",

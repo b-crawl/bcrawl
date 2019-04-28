@@ -236,3 +236,4 @@ Pull requests for new content are welcome.
   - v1.7.2: Fannar is more dangerous, getting Freezing Cloud.
   - v1.7.2: Psyche, Fannar, and Sojobo sometimes drop a spellbook.
   - v1.11.7: Bai Suzhen now summons drakes and then goes berserk, making her significantly more dangerous.
+  - v1.11.8: Agnes is much harder to hit.

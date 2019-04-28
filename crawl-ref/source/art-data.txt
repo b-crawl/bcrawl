@@ -324,9 +324,10 @@ COLOUR:  ETC_DARK
 TILE:    urand_bloodbane
 TILE_EQ: bloodbane
 BRAND:   SPWPN_VORPAL
-ANGRY:   5
-BOOL:    berserk
+BOOL:    berserk, drain, rnd_tele
 STEALTH: -1
+STR:     5
+BASE_DAM: +5
 
 NAME:    scimitar of Flaming Death
 OBJ:     OBJ_WEAPONS/WPN_SCIMITAR

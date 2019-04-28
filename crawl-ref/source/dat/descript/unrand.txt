@@ -99,8 +99,8 @@ the vividly coloured faerie dragons ever existed.
 %%%%
 demon blade "Bloodbane"
 
-A blade forged in Hell by the sacrifice of countless tortured souls. It
-inflicts the rage and suffering of those souls upon its wielder.
+A blade forged in Hell by the sacrifice of countless tortured souls. It can
+bring its wielder towards foes to slake its thirst for more death.
 %%%%
 scimitar of Flaming Death
 

@@ -200,7 +200,8 @@ Pull requests for new content are welcome.
   - v1.8.5: Kryia's mail coat has Repel Missiles.
   - v1.11: The serpentine sling can petrify enemies it hits.
   - v1.11.2: Scorpio is a hand crossbow that does high damage and pulls enemies towards you.
-  - v1.11.2: The butterfly sword attacks quickly and summons neutral butterflies.  
+  - v1.11.2: The butterfly sword attacks quickly and summons neutral butterflies.
+  - v1.11.8: Bloodbane is reworked, doing high damage but causing teleports.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

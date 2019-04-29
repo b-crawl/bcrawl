@@ -468,7 +468,7 @@ static const ability_def Ability_List[] =
       {fail_basis::invo, 85, 7, 20}, abflag::none },
     { ABIL_LUGONU_CORRUPT, "Corrupt", 7, scaling_cost::fixed(5), 500, 10,
       {fail_basis::invo, 70, 4, 25}, abflag::none },
-    { ABIL_LUGONU_ABYSS_ENTER, "Enter the Abyss", 10, 0, 500, 28,
+    { ABIL_LUGONU_ABYSS_ENTER, "Enter the Abyss", 10, 0, 500, 16,
       {fail_basis::invo, 80, 4, 25}, abflag::pain },
     { ABIL_LUGONU_BLESS_WEAPON, "Brand Weapon With Distortion", 0, 0, 0, 0,
       {fail_basis::invo}, abflag::none },

@@ -163,6 +163,7 @@ Pull requests for new content are welcome.
   - v1.11.5: Kikubaaqudgha prevents miscasts from any spell including Necromancy, not just from pure Necromancy spells, and gives full protection at 3* piety.
   - v1.11.8: Uskayaw's Line Pass ability no longer costs piety.
   - v1.11.8: Zin's Vitalisation gives a much bigger attribute bonus, but costs more piety.
+  - v1.11.8: Lugonu's self-banishment costs much less piety. (About half as much.)
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

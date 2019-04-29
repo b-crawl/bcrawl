@@ -4704,15 +4704,29 @@ void bolt::affect_monster(monster* mon)
         ranged_attack attk(agent(true), mon, item, use_target_as_pos, agent());
         attk.attack();
         
-        if (mon->alive())
-            switch(origin_spell)
+        switch(origin_spell)
+        {
+        case SPELL_BECKONING:   // Scorpio unrand
+            if(mon->alive() && attk.damage_done > 0)
+                beckon(*mon, *this);
+            break;
+        case SPELL_CONJURE_BALL_LIGHTNING:   // Storm Bow unrand
+        {
+            mgen_data cbl(MONS_BALL_LIGHTNING, BEH_FRIENDLY, mon->pos());
+            cbl.set_summoned(&you, 0, SPELL_CONJURE_BALL_LIGHTNING, GOD_NO_GOD);
+            cbl.hd = 8;
+
+            if (monster *ball = create_monster(cbl))
             {
-            case SPELL_BECKONING:   // Scorpio unrand
-                if(attk.damage_done > 0)
-                    beckon(*mon, *this);
-                break;
-            default: break;
+                ball->add_ench(ENCH_SHORT_LIVED);
+
+                // Avoid ball lightnings without targets always moving towards (0,0)
+                set_random_target(ball);
             }
+            break;
+        }
+        default: break;
+        }
         
         // fsim purposes - throw_it detects if an attack connected through
         // hit_verb

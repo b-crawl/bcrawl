@@ -650,12 +650,14 @@ TILE_EQ:  capt_cutlass
 BRAND:    SPWPN_SPEED
 
 NAME:     storm bow
-OBJ:      OBJ_WEAPONS/WPN_LONGBOW
+OBJ:      OBJ_WEAPONS/WPN_SHORTBOW
+INSCRIP:  +Lightning
 PLUS:     +8
 COLOUR:   BLUE
 TILE:     urand_storm_bow
 TILE_EQ:  storm_bow
-BRAND:    SPWPN_ELECTROCUTION
+BOOL:     elec
+STEALTH:  -1
 
 NAME:    large shield of Ignorance
 OBJ:     OBJ_ARMOUR/ARM_LARGE_SHIELD

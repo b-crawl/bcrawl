@@ -1430,6 +1430,26 @@ static setup_missile_type _SCORPIO_launch(item_def* item, bolt* beam,
 
 ///////////////////////////////////////////////////
 
+static void _STORM_BOW_equip(item_def *item, bool *show_msgs, bool unmeld)
+{
+    _equip_mpr(show_msgs, "Electricity crackles across the bow's limbs.");
+}
+
+static void _STORM_BOW_unequip(item_def *item, bool *show_msgs)
+{
+    _equip_mpr(show_msgs, "The bow stops crackling with electricity.");
+}
+
+static setup_missile_type _STORM_BOW_launch(item_def* item, bolt* beam,
+                                           string* ammo_name, bool* returning)
+{
+    if (one_chance_in(2))
+        beam->origin_spell = SPELL_CONJURE_BALL_LIGHTNING;
+    return SM_CONTINUE;
+}
+
+///////////////////////////////////////////////////
+
 static void _BUTTERFLY_SWORD_melee_effects(item_def* weapon, actor* attacker,
                                     actor* defender, bool mondied, int dam)
 {

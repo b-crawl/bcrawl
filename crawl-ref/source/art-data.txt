@@ -319,15 +319,14 @@ BOOL:    nogen, unided, no_upgrade, notac
 
 NAME:    demon blade "Bloodbane"
 OBJ:     OBJ_WEAPONS/WPN_DEMON_BLADE
-PLUS:    +8
+PLUS:    +6
 COLOUR:  ETC_DARK
 TILE:    urand_bloodbane
 TILE_EQ: bloodbane
 BRAND:   SPWPN_VORPAL
 BOOL:    berserk, drain, rnd_tele
-STEALTH: -1
-STR:     5
-BASE_DAM: +5
+STR:     6
+BASE_DAM: +6
 
 NAME:    scimitar of Flaming Death
 OBJ:     OBJ_WEAPONS/WPN_SCIMITAR

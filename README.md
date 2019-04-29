@@ -55,7 +55,7 @@ Pull requests for new content are welcome.
   - v1.11.6: Conjurers have Irradiate instead of Dazzling Spray.
   - v1.11.7: Enchanters start with a scroll of fog.
   - v1.11.7: Wanderers start with significantly more spells on average.
-  - v1.11.8: Monks start with 2 Invocations skill.
+  - v1.12: Monks start with 2 Invocations skill.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -98,7 +98,7 @@ Pull requests for new content are welcome.
   - v1.8: Demigods have various divine abilities.
   - v1.10: Felids gain half XP for seeing enemies, and no experience for killing them. They have -30% HP instead of -40%, and +0 XP instead of -1 XP.
   - v1.11.5: Spriggans can't train Conjurations, but have some better aptitudes.
-  - v1.11.8: Barachim hop target radius is reduced to 1.
+  - v1.12: Barachim hop target radius is reduced to 1.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -133,7 +133,7 @@ Pull requests for new content are welcome.
   - v1.11.4: Ozocubu's Refrigeration now has the same damage formula as Fireball. (Its damage calculation was wrong for several months.)
   - v1.11.6: Iskenderun's Mystic Blast is level 3, and has lower base damage but higher damage scaling.
   - v1.11.7: Irradiate has the same damage formula as Bolt of Fire, which has lower base damage but higher damage scaling.
-  - v1.11.8: Lesser Beckoning has +1 range.
+  - v1.12: Lesser Beckoning has +1 range.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -161,9 +161,9 @@ Pull requests for new content are welcome.
   - v1.6.1: Okawaru and Trog no longer give needles as gifts.
   - v1.10.1: Nemelex's Degeneration card reduces enemy HP at high power.
   - v1.11.5: Kikubaaqudgha prevents miscasts from any spell including Necromancy, not just from pure Necromancy spells, and gives full protection at 3* piety.
-  - v1.11.8: Uskayaw's Line Pass ability no longer costs piety.
-  - v1.11.8: Zin's Vitalisation gives a much bigger attribute bonus, but costs more piety.
-  - v1.11.8: Lugonu's self-banishment costs much less piety. (About half as much.)
+  - v1.12: Uskayaw's Line Pass ability no longer costs piety.
+  - v1.12: Zin's Vitalisation gives a much bigger attribute bonus, but costs more piety.
+  - v1.12: Lugonu's self-banishment costs much less piety. (About half as much.)
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -183,9 +183,9 @@ Pull requests for new content are welcome.
   - v1.8.3: Removing an amulet of faith drains 1/4 your piety instead of 1/3.
   - v1.8.5: Changed base damage for weapons: bardiche (18->20), glaive (15->16), triple sword (17->18).
   - v1.11.5: Shadow dragon armour has (10->11) base AC, and storm dragon armour has (15->13) encumbrance.
-  - v1.11.8: Lightning rod damage scales more with Evocations.
-  - v1.11.8: Randart crossbows of penetration are 2x as likely.
-  - v1.11.8: Changed base delay for weapons: falchion (13->12), long sword (14->13).
+  - v1.12: Lightning rod damage scales more with Evocations.
+  - v1.12: Randart crossbows of penetration are 2x as likely.
+  - v1.12: Changed base delay for weapons: falchion (13->12), long sword (14->13).
 
 #### Removed Items
   - Amulet of Harm
@@ -206,7 +206,7 @@ Pull requests for new content are welcome.
   - v1.11: The serpentine sling can petrify enemies it hits.
   - v1.11.2: Scorpio is a hand crossbow that does high damage and pulls enemies towards you.
   - v1.11.2: The butterfly sword attacks quickly and summons neutral butterflies.
-  - v1.11.8: Bloodbane is reworked, doing high damage but causing teleports.
+  - v1.12: Bloodbane is reworked, doing high damage but causing teleports.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -225,8 +225,8 @@ Pull requests for new content are welcome.
   - v1.6.1: Vault Guards can now use Battlecry when injured.
   - v1.8.4: Killer Klowns carry branded weapons, and have a new spell set: Blink, Monstrous Menagerie, Corrupting Pulse, Dig, Silence.
   - v1.11.5: Orb Guardians get a magical gaze, with Lesser Beckoning, Sleep, and Lightning Bolt.
-  - v1.11.8: Reapers can seal doors like Vault Wardens do.
-  - v1.11.8: Juggernauts are tougher, hit faster, and knock their foes back.
+  - v1.12: Reapers can seal doors like Vault Wardens do.
+  - v1.12: Juggernauts are tougher, hit faster, and knock their foes back.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -240,4 +240,4 @@ Pull requests for new content are welcome.
   - v1.7.2: Fannar is more dangerous, getting Freezing Cloud.
   - v1.7.2: Psyche, Fannar, and Sojobo sometimes drop a spellbook.
   - v1.11.7: Bai Suzhen now summons drakes and then goes berserk, making her significantly more dangerous.
-  - v1.11.8: Agnes is much harder to hit.
+  - v1.12: Agnes is much harder to hit.

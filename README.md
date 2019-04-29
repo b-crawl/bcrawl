@@ -207,6 +207,7 @@ Pull requests for new content are welcome.
   - v1.11.2: Scorpio is a hand crossbow that does high damage and pulls enemies towards you.
   - v1.11.2: The butterfly sword attacks quickly and summons neutral butterflies.
   - v1.12: Bloodbane is reworked, doing high damage but causing teleports.
+  - v1.12: The storm bow is reworked, and can conjure ball lightning.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

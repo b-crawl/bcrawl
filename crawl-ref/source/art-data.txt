@@ -1217,7 +1217,6 @@ TILE:    urand_gyre
 TILE_EQ: gyre
 PLUS:    5
 BRAND:   SPWPN_VORPAL
-DEX:     -3
 
 ENUM:    ETHERIC_CAGE
 NAME:    Maxwell's etheric cage

@@ -670,7 +670,7 @@ static void _choose_name(newgame_def& ng, newgame_def& choice)
         if (!good_name)
             prompt.cprintf("That's a silly name!");
         else if (overwrite_prompt)
-            prompt.cprintf("Really overwrite? [Y/n]");
+            prompt.cprintf("You have an existing game under this name; really overwrite? [Y/n]");
         prompt_ui->set_text(prompt);
 
         ui::pump_events();
@@ -683,10 +683,24 @@ static void _choose_name(newgame_def& ng, newgame_def& choice)
 
 #endif
 
+static keyfun_action _keyfun_seed_input(int &ch)
+{
+    if (ch == CONTROL('K') || ch == CONTROL('D') || ch == CONTROL('W') ||
+            ch == CONTROL('U') || ch == CONTROL('A') || ch == CONTROL('E') ||
+            ch == CK_ENTER || ch == CK_BKSP || ch == CK_ESCAPE ||
+            ch < 0 || // this should get all other special keys
+            isadigit(ch))
+    {
+        return KEYFUN_PROCESS;
+    }
+    return KEYFUN_IGNORE;
+}
+
 static void _choose_seed(newgame_def& ng, newgame_def& choice,
     const newgame_def& defaults)
 {
-    char buf[20]; // max unsigned 64 bit integer is 19 chars
+    char buf[21]; // max unsigned 64 bit integer is 20 chars in decimal,
+                  // specifically 18446744073709551615
     buf[0] = '\0';
     resumable_line_reader reader(buf, sizeof(buf));
     if (Options.seed)
@@ -694,6 +708,7 @@ static void _choose_seed(newgame_def& ng, newgame_def& choice,
     else if (Options.seed_from_rc)
         choice.seed = Options.seed_from_rc;
     reader.set_text(make_stringf("%" PRIu64, choice.seed));
+    reader.set_keyproc(_keyfun_seed_input);
 
     bool done = false;
     bool cancel = false;
@@ -710,7 +725,7 @@ static void _choose_seed(newgame_def& ng, newgame_def& choice,
             choice.pregenerate = !choice.pregenerate;
             return done = false;
         }
-        if (key == 'd' || key == 'D')
+        else if (key == 'd' || key == 'D')
         {
             time_t now;
             struct tm * timeinfo;
@@ -722,6 +737,24 @@ static void _choose_seed(newgame_def& ng, newgame_def& choice,
             reader.set_text(timebuf);
             return done = false;
         }
+        else if (key == '-')
+        {
+            reader.set_text("");
+            return done = false;
+        }
+#ifdef USE_TILE_LOCAL
+        else if ((key == 'p' || key == 'P') && wm->has_clipboard())
+        {
+            string clip = wm->get_clipboard();
+            // try to avoid pasting in crazy garbage, by parsing as uint64
+            // this could be done better
+            uint64_t clip_seed;
+            int clip_found = sscanf(clip.c_str(), "%" SCNu64, &clip_seed);
+            if (clip_found)
+                reader.set_text(make_stringf("%" PRIu64, clip_seed));
+            return done = false;
+        }
+#endif
         // TODO: digits only
         key = reader.putkey(key);
 
@@ -729,7 +762,8 @@ static void _choose_seed(newgame_def& ng, newgame_def& choice,
         {
             if (key_is_escape(key))
                 return done = cancel = true;
-            return done = true;
+            if (reader.get_text().size() > 0)
+                return done = true;
         }
         return true;
     });
@@ -746,13 +780,27 @@ static void _choose_seed(newgame_def& ng, newgame_def& choice,
     {
         formatted_string prompt;
         prompt.textcolour(CYAN);
-        prompt.cprintf("Play a game with a custom seed.\n\n");
+        prompt.cprintf("Play a game with a custom seed for version %s.\n\n",
+            Version::Long);
         prompt.textcolour(LIGHTGREY);
         prompt.cprintf(
             "Choose 0 for a random seed. Press [d] for today's daily seed.\n"
-            "The seed will determine the dungeon layout, monsters,\n"
-            "and items that you discover.\n\n");
-        prompt.cprintf("Seed:");
+#ifdef USE_TILE_LOCAL
+            "Press [p] to paste a seed from the clipboard (overwriting the\n"
+            "current value).\n"
+#endif
+            "\n"
+            "The seed will determine the dungeon layout, monsters, and items\n"
+            "that you discover, relative to this version of the game.\n"
+            "Pregeneration will ensure that these remain the same no matter\n"
+            "what order you explore the dungeon in. (See the manual for more\n"
+            "details.)\n\n");
+#ifdef SEEDING_UNRELIABLE
+            prompt.cprintf(
+                "Warning: your build of crawl does not support stable seeding!\n"
+                "Levels may differ from 'official' seeded games.\n\n");
+#endif
+        prompt.cprintf("Seed ([-] to clear):");
         string seed_text = make_stringf("%-20s", buf);
         prompt.cprintf("\n%s\n\n", seed_text.c_str());
         prompt_ui->set_text(prompt);
@@ -771,6 +819,8 @@ static void _choose_seed(newgame_def& ng, newgame_def& choice,
 
     string result = reader.get_text();
     uint64_t tmp_seed = 0;
+    // TODO: if the user types in a number that exceeds the max value, sscanf
+    // will give back the max value. Probably better to print an error?
     int found = sscanf(result.c_str(), "%" SCNu64, &tmp_seed);
 
     if (cancel || crawl_state.seen_hups || !found || result.size() == 0)

@@ -227,8 +227,11 @@ private:
     void toggle_beam();
 
     void finalize_moves();
-    void draw_beam_if_needed();
     void do_redraws();
+
+    void draw_beam();
+    void highlight_summoner();
+    coord_def find_summoner();
 
     // Whether the current target is you.
     bool looking_at_you() const;
@@ -265,7 +268,7 @@ private:
                                 // position?
 
     // What we need to redraw.
-    bool need_beam_redraw;
+    bool need_viewport_redraw;
     bool need_cursor_redraw;
     bool need_text_redraw;
     bool need_all_redraw;       // All of the above.
@@ -276,7 +279,6 @@ private:
     static targeting_behaviour stock_behaviour;
 
     bool unrestricted;
-
 public:
     // TODO: fix the weird behavior that led to this hack
     bool needs_path;            // Determine a ray while we're at it?

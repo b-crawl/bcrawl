@@ -1485,6 +1485,7 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
     bool just_created_level = false;
 
     if (load_mode != LOAD_GENERATE
+        && load_mode != LOAD_VISITOR
         && you.chapter == CHAPTER_POCKET_ABYSS
         && player_in_branch(BRANCH_DUNGEON))
     {
@@ -1545,15 +1546,18 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
     if (make_changes && env.elapsed_time && !just_created_level)
         update_level(you.elapsed_time - env.elapsed_time);
 
-    // Apply all delayed actions, if any.
+    // Apply all delayed actions, if any. TODO: logic for marshalling this is
+    // kind of odd.
     if (just_created_level)
-        env.dactions_done = you.dactions.size();
-    else
-        catchup_dactions();
+        env.dactions_done = 0;
 
     // Here's the second cloud clearing, on load (see above).
     if (make_changes)
     {
+        // this includes various things that are irrelevant for new levels, but
+        // also some things that aren't, such as bribe branch.
+        catchup_dactions();
+
         delete_all_clouds();
 
         _place_player(stair_taken, old_level.branch, return_pos, dest_pos,
@@ -2389,6 +2393,12 @@ bool load_ghosts(int max_ghosts, bool creating_level)
     return true;
 }
 
+static string _type_name_processed(game_type t)
+{
+    string name = game_state::game_type_name_for(t);
+    return name.size() ? name : "regular";
+}
+
 // returns false if a new game should start instead
 static bool _restore_game(const string& filename)
 {
@@ -2399,6 +2409,7 @@ static bool _restore_game(const string& filename)
     // to send enough information to the webtiles client to render the display.
     // This is just cosmetic for other build targets.
     unwind_bool save_more(crawl_state.show_more_prompt, false);
+    game_type menu_game_type = crawl_state.type;
 
     clear_message_store();
 
@@ -2408,7 +2419,8 @@ static bool _restore_game(const string& filename)
     {
         // Note: if we are here, the save info was properly read, it would
         // raise an exception otherwise.
-        if (yesno(("This game comes from an incompatible version of Crawl ("
+        if (yesno(("There is an existing game for name '" + you.your_name +
+                   "' from an incompatible version of Crawl ("
                    + you.prev_save_version + ").\n"
                    "Unless you reinstall that version, you can't load it.\n"
                    "Do you want to DELETE that game and start a new one?"
@@ -2425,6 +2437,24 @@ static bool _restore_game(const string& filename)
         you.save = 0;
         game_ended(game_exit::abort,
             you.your_name + " is from an incompatible version and can't be loaded.");
+    }
+
+    if (!crawl_state.bypassed_startup_menu
+        && menu_game_type != crawl_state.type)
+    {
+        if (!yesno(("You already have a "
+                        + _type_name_processed(crawl_state.type) +
+                    " game saved under the name '" + you.your_name + "';\n"
+                    "do you want to load that instead?").c_str(),
+                   true, 'n'))
+        {
+            you.save->abort(); // don't even rewrite the header
+            delete you.save;
+            you.save = 0;
+            game_ended(game_exit::abort,
+                "Please use a different name to start a new " +
+                _type_name_processed(menu_game_type) + " game, then.");
+        }
     }
 
     crawl_state.default_startup_name = you.your_name; // for main menu

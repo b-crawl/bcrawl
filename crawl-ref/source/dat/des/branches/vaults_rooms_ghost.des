@@ -23,6 +23,7 @@ KMONS:  2 = vault warden
 KMONS:  3 = player ghost
 SHUFFLE: 13
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ........
 ........
@@ -44,6 +45,7 @@ KMONS:  3 = player ghost
 SHUFFLE: 1239
 SUBST: 9 = 98
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ........
 nnn==nnn
@@ -64,6 +66,7 @@ TILE:  G = dngn_gravestone
 TILE:  t = dngn_tree_dead
 : set_feature_name("granite_statue", "a gravestone")
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ..x.....
 ..x.....
@@ -80,6 +83,7 @@ KMONS:  O = player ghost
 SUBST:  fg = |*, p : b., q : b., b : xbcv
 NSUBST: D = 0 / 2=0. / 2=9 / 2=9. / 8 / 2=8. / .
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 .............
 .............
@@ -112,6 +116,7 @@ TILE:    G = dngn_gravestone
 TILE:    t = dngn_tree_dead
 : set_feature_name("granite_statue", "a gravestone")
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 qd-frf-eq
 dD--F--De
@@ -132,6 +137,7 @@ MONS:   simulacrum place:Vaults:3 / spectre place:Vaults:3, lich
 SUBST:  fg = |*, h = *, i = %$, j = -
 NSUBST: 1 = 12 / 1, - = 3=1 / 6=1. / .
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ..xxxxxxx
 ..n1x1x1x
@@ -154,6 +160,7 @@ MONS:   eidolon, revenant / curse skull
 SUBST:  fg = |*, h = *, i = %$--
 NSUBST: D = 2 / 3 / 2=3- / 4-, - = 2=1 / 2=1. / 2 / 3=2. / .
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ..xxxxxxx
 ..nDxDxDx
@@ -200,6 +207,7 @@ MONS:   fire giant / frost giant / deep elf blademaster / \
 SUBST:  O = O:49 P:1, fgh = |*, i = *%, j = %$..
 NSUBST: - = 3=1 / 4=1. / 2=2 / 2=2. / 2=3. / 3... / .
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 GvvvvvvvG
 -igvOvhj-
@@ -224,6 +232,7 @@ MARKER: F = lua:fog_machine { cloud_type = "black smoke", \
             size = 1, walk_dist = 0, start_clouds = 1 }
 : dgn.delayed_decay(_G, "d", "chunk")
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ..x....
 ..x''..
@@ -241,6 +250,7 @@ TAGS:   vaults_orient_s no_pool_fixup
 KMONS:  O = player_ghost
 KFEAT:  O = shallow_water
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 .....
 .dOe.
@@ -256,16 +266,12 @@ ENDMAP
 NAME:   ebering_vaults_ghost_disaster_area
 TAGS:   vaults_orient_s
 KMONS:  O = player ghost
-NSUBST: ' = d / e / 8=wWlr / .
+NSUBST: ' = d / e / 8=wWl / .
 : lone_ghost_guarded_loot(_G, "O")
 : lone_ghost_extra_loot(_G, ".")
-: if you.depth() < dgn.br_depth(you.branch()) then
-KFEAT:  r = known shaft trap
-: else
-SUBST:  r = wWl
-: end
 SUBST:  P = GTV
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 'xx'x'x'
 x''O''x'
@@ -298,6 +304,7 @@ COLOUR: G = yellow
 : set_feature_name("granite_statue", "golden statue")
 : set_feature_name("stone_wall", "golden wall")
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 .............
 .............
@@ -320,6 +327,7 @@ TAGS:   vaults_orient_s
 KMONS:  O = player_ghost
 KFEAT:  _ = altar_xom
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 ...1...
 ..d_e..
@@ -342,6 +350,7 @@ NSUBST: - = 2=1 / 2=1. / 2=2 / 2=2. / 3=3 / 3=3. / 4 / 2=4. / F / 5 / 2=5. \
             / 2=6F..
 KFEAT:  _ = altar_beogh
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 I---fd_eg---I
 ------h------
@@ -375,6 +384,7 @@ MARKER: U = lua:fog_machine { cloud_type = "mutagenic fog", pow_min = 3, \
                 pow_max = 5, delay = 5, start_clouds = 3, size = 2, \
                 spread_rate = 0, excl_rad = 0 }
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
 bU"P"Ub
 """O"""
@@ -419,6 +429,7 @@ SUBST:   d = dd|*----, V = VY
 KFEAT:   _ = altar_kikubaaqudgha
 FTILE:   -d|*%$ODEFHJKL12VY_ = floor_pebble_brown / floor_pebble_darkgray
 : vaults_ghost_setup(_G)
+KFEAT:   = = runed_clear_door
 MAP
  xxxDxxx
 xxExdxFxx

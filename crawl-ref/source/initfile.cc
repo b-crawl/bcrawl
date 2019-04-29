@@ -1692,6 +1692,8 @@ newgame_def read_startup_prefs()
         temp.game.job = temp.game.allowed_jobs[0];
     if (!temp.game.allowed_weapons.empty())
         temp.game.weapon = temp.game.allowed_weapons[0];
+    if (!Options.seed_from_rc)
+        Options.seed = temp.seed_from_rc;
     return temp.game;
 #endif // !DISABLE_STICKY_STARTUP_OPTIONS
 }
@@ -1712,6 +1714,8 @@ static void write_newgame_options(const newgame_def& prefs, FILE *f)
         fprintf(f, "background = %s\n", _job_to_str(prefs.job).c_str());
     if (prefs.weapon != WPN_UNKNOWN)
         fprintf(f, "weapon = %s\n", _weapon_to_str(prefs.weapon).c_str());
+    if (prefs.seed != 0)
+        fprintf(f, "game_seed = %" PRIu64 "\n", prefs.seed);
     fprintf(f, "fully_random = %s\n", prefs.fully_random ? "yes" : "no");
 }
 #endif // !DISABLE_STICKY_STARTUP_OPTIONS
@@ -1761,6 +1765,24 @@ void save_player_name()
     write_newgame_options_file(prefs);
 #endif // !DISABLE_STICKY_STARTUP_OPTIONS
 }
+
+#ifndef DISABLE_STICKY_STARTUP_OPTIONS
+// TODO: can these functions be generalized? This is called on game end, maybe
+// the entire pref should be updated then?
+void save_seed_pref()
+{
+#ifndef DGAMELAUNCH
+    if (!crawl_state.game_standard_levelgen())
+        return;
+    // Read other preferences
+    newgame_def prefs = read_startup_prefs();
+    prefs.seed = crawl_state.seed;
+
+    // And save
+    write_newgame_options_file(prefs);
+#endif
+}
+#endif // !DISABLE_STICKY_STARTUP_OPTIONS
 
 void read_options(const string &s, bool runscript, bool clear_aliases)
 {
@@ -3412,25 +3434,26 @@ void game_options::read_option_line(const string &str, bool runscript)
         else
             constants.insert(field);
     }
-#ifndef DGAMELAUNCH
     else if (key == "game_seed")
     {
+#ifdef DGAMELAUNCH
+        // try to avoid confusing online players who put this in their rc
+        // file. N.b. it is still possible to use the -seed CLO.
+        report_error("Your rc file specifies a game seed, but this build of "
+                     "crawl does not support seed selection. I will "
+                     "choose a seed randomly.");
+#else
         // special handling because of the large type.
         uint64_t tmp_seed = 0;
         if (sscanf(field.c_str(), "%" SCNu64, &tmp_seed))
         {
             // seed_from_rc is only ever set here, or by the CLO. The CLO gets
             // first crack, so don't overwrite it here.
-            // Options.seed can be updated in-game from the custom seed menu,
-            // so also don't overwrite it when the CLO has set it, or the
-            // player has set it in-game.
-            if (!Options.seed_from_rc)
-                Options.seed_from_rc = tmp_seed;
-            if (!Options.seed)
-                Options.seed = tmp_seed;
+            if (!seed_from_rc)
+                seed_from_rc = tmp_seed;
         }
-    }
 #endif
+    }
 
     // Catch-all else, copies option into map
     else if (runscript)

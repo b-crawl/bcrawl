@@ -319,14 +319,14 @@ BOOL:    nogen, unided, no_upgrade, notac
 
 NAME:    demon blade "Bloodbane"
 OBJ:     OBJ_WEAPONS/WPN_DEMON_BLADE
-PLUS:    +8
+PLUS:    +6
 COLOUR:  ETC_DARK
 TILE:    urand_bloodbane
 TILE_EQ: bloodbane
 BRAND:   SPWPN_VORPAL
-ANGRY:   5
-BOOL:    berserk
-STEALTH: -1
+BOOL:    berserk, drain, rnd_tele
+STR:     6
+BASE_DAM: +6
 
 NAME:    scimitar of Flaming Death
 OBJ:     OBJ_WEAPONS/WPN_SCIMITAR
@@ -649,12 +649,14 @@ TILE_EQ:  capt_cutlass
 BRAND:    SPWPN_SPEED
 
 NAME:     storm bow
-OBJ:      OBJ_WEAPONS/WPN_LONGBOW
+OBJ:      OBJ_WEAPONS/WPN_SHORTBOW
+INSCRIP:  +Lightning
 PLUS:     +8
 COLOUR:   BLUE
 TILE:     urand_storm_bow
 TILE_EQ:  storm_bow
-BRAND:    SPWPN_ELECTROCUTION
+BOOL:     elec
+STEALTH:  -1
 
 NAME:    large shield of Ignorance
 OBJ:     OBJ_ARMOUR/ARM_LARGE_SHIELD
@@ -1215,7 +1217,6 @@ TILE:    urand_gyre
 TILE_EQ: gyre
 PLUS:    5
 BRAND:   SPWPN_VORPAL
-DEX:     -3
 
 ENUM:    ETHERIC_CAGE
 NAME:    Maxwell's etheric cage
@@ -1363,7 +1364,7 @@ OBJ:      OBJ_WEAPONS/WPN_GREAT_SWORD
 COLOUR:   LIGHTRED
 TILE:     urand_butterfly_sword
 TILE_EQ:  great_sword
-PLUS:     -2
+PLUS:     -1
 BASE_DELAY: -6
 BRAND:    SPWPN_SPEED
 BOOL:     curse

@@ -366,7 +366,7 @@ static const ability_def Ability_List[] =
     { ABIL_ZIN_RECITE, "Recite",
       0, 0, 0, 0, {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_ZIN_VITALISATION, "Vitalisation",
-      2, 0, 0, 1, {fail_basis::invo, 40, 5, 20}, abflag::none },
+      2, 0, 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_ZIN_IMPRISON, "Imprison",
       5, 0, 0, 4, {fail_basis::invo, 60, 5, 20}, abflag::none },
     { ABIL_ZIN_SANCTUARY, "Sanctuary",
@@ -468,7 +468,7 @@ static const ability_def Ability_List[] =
       {fail_basis::invo, 85, 7, 20}, abflag::none },
     { ABIL_LUGONU_CORRUPT, "Corrupt", 7, scaling_cost::fixed(5), 500, 10,
       {fail_basis::invo, 70, 4, 25}, abflag::none },
-    { ABIL_LUGONU_ABYSS_ENTER, "Enter the Abyss", 10, 0, 500, 28,
+    { ABIL_LUGONU_ABYSS_ENTER, "Enter the Abyss", 10, 0, 500, 16,
       {fail_basis::invo, 80, 4, 25}, abflag::pain },
     { ABIL_LUGONU_BLESS_WEAPON, "Brand Weapon With Distortion", 0, 0, 0, 0,
       {fail_basis::invo}, abflag::none },
@@ -613,7 +613,7 @@ static const ability_def Ability_List[] =
     { ABIL_USKAYAW_STOMP, "Stomp",
         3, 0, 100, generic_cost::fixed(20), {fail_basis::invo}, abflag::none },
     { ABIL_USKAYAW_LINE_PASS, "Line Pass",
-        4, 0, 200, generic_cost::fixed(20), {fail_basis::invo}, abflag::none},
+        4, 0, 200, 0, {fail_basis::invo}, abflag::none},
     { ABIL_USKAYAW_GRAND_FINALE, "Grand Finale",
         8, 0, 500, generic_cost::fixed(0),
         {fail_basis::invo, 120 + piety_breakpoint(4), 5, 1}, abflag::none},
@@ -3172,9 +3172,9 @@ int choose_ability_menu(const vector<talent>& talents)
         // Hack like the one in spl-cast.cc:list_spells() to align the title.
         ToggleableMenuEntry* me =
             new ToggleableMenuEntry("Ability - do what?                  "
-                                    "Cost                          Failure",
+                                    "Cost                            Failure",
                                     "Ability - describe what?            "
-                                    "Cost                          Failure",
+                                    "Cost                            Failure",
                                     MEL_ITEM);
         me->colour = BLUE;
         abil_menu.set_title(me, true, true);
@@ -3182,9 +3182,9 @@ int choose_ability_menu(const vector<talent>& talents)
 #else
     abil_menu.set_title(
         new ToggleableMenuEntry("Ability - do what?                  "
-                                "Cost                          Failure",
+                                "Cost                            Failure",
                                 "Ability - describe what?            "
-                                "Cost                          Failure",
+                                "Cost                            Failure",
                                 MEL_TITLE), true, true);
 #endif
     abil_menu.set_tag("ability");
@@ -3307,7 +3307,7 @@ string describe_talent(const talent& tal)
     ostringstream desc;
     desc << left
          << chop_string(ability_name(tal.which), 32)
-         << chop_string(make_cost_description(tal.which), 30)
+         << chop_string(make_cost_description(tal.which), 32)
          << chop_string(failure, 12);
     return trimmed_string(desc.str());
 }

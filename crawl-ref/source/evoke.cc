@@ -1378,14 +1378,8 @@ static spret _phantom_mirror()
         return spret::abort;
     }
 
-    if (player_will_anger_monster(*victim))
-    {
-        if (you.get_mutation_level(MUT_NO_LOVE))
-            mpr("The reflection would only feel hate for you!");
-        else
-            simple_god_message(" forbids your reflecting this monster.");
+    if (player_angers_monster(victim, false))
         return spret::abort;
-    }
 
     const int surge = pakellas_surge_devices();
     surge_power(you.spec_evoke() + surge);

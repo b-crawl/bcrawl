@@ -546,6 +546,8 @@ void setup_game(const newgame_def& ng)
         Options.seed = Options.seed_from_rc;
         crawl_state.type = GAME_TYPE_CUSTOM_SEED;
     }
+    else if (Options.seed && ng.type == GAME_TYPE_NORMAL)
+        Options.seed = 0;
     else if (!Options.seed && ng.type == GAME_TYPE_CUSTOM_SEED)
         crawl_state.type = GAME_TYPE_NORMAL;
     else
@@ -638,6 +640,7 @@ static void _setup_generic(const newgame_def& ng)
 {
     reset_rng(); // initialize rng from Options.seed
     _init_player();
+    you.game_seed = crawl_state.seed;
     
     if(ng.type == GAME_TYPE_ADVENTURE)
         you.lives = 2;
@@ -732,6 +735,9 @@ static void _setup_generic(const newgame_def& ng)
         item.slot = index_to_letter(item.link);
         item_colour(item);  // set correct special and colour
     }
+
+    if (you.equip[EQ_WEAPON] > 0)
+        swap_inv_slots(0, you.equip[EQ_WEAPON], false);
 
     // A second pass to apply the item_slot option.
     for (auto &item : you.inv)

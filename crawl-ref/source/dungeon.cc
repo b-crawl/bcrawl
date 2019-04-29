@@ -272,12 +272,7 @@ bool builder(bool enable_random_maps, dungeon_feature_type dest_stairs_type)
         try
         {
             if (_build_level_vetoable(enable_random_maps, dest_stairs_type))
-            {
-                for (monster_iterator mi; mi; ++mi)
-                    gozag_set_bribe(*mi);
-
                 return true;
-            }
         }
         catch (map_load_exception &mload)
         {
@@ -6940,10 +6935,10 @@ string dump_vault_maps()
             // printing a morgue, this check isn't reliable. Ignore it.
             if (!is_existing_level(lid) && you.save)
             {
-                out += " (not gen.) " + lid.describe() + "\n";
+                out += "[-gen,-vis] " + lid.describe() + "\n";
                 continue;
             }
-            out += you.level_visited(lid) ? "  (visited) " : "(unvisited) ";
+            out += you.level_visited(lid) ? "[+gen,+vis] " : "[+gen,-vis] ";
         }
         out += lid.describe();
         vector<string> &maps(you.vault_list[lid]);
@@ -6958,11 +6953,11 @@ string dump_vault_maps()
         // TODO: some way of showing no_dump maps in wizmode?
 
         string vaults = comma_separated_line(maps.begin(), maps.end(), ", ");
-        out += wordwrap_line(vaults, 70) + "\n";
+        out += wordwrap_line(vaults, you.wizard ? 58 : 70) + "\n";
         while (!vaults.empty())
         {
             out += string(you.wizard ? 22 : 10, ' ')
-                    + wordwrap_line(vaults, 70, false) + "\n";
+                    + wordwrap_line(vaults, you.wizard ? 58 : 70, false) + "\n";
         }
 
     }

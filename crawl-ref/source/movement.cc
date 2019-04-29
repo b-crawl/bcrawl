@@ -538,8 +538,13 @@ void move_player_action(coord_def move)
 
     const coord_def targ = you.pos() + move;
     string wall_jump_err;
-    bool can_wall_jump = Options.wall_jump_move &&
-                            wu_jian_can_wall_jump(targ, wall_jump_err);
+    // Don't allow wall jump against close doors via movement -- need to use
+    // the ability. Also, if moving into a closed door, don't call
+    // wu_jian_can_wall_jump, to avoid printing a spurious message (see 11940).
+    bool can_wall_jump = Options.wall_jump_move
+                         && (!in_bounds(targ)
+                             || !feat_is_closed_door(grd(targ)))
+                         && wu_jian_can_wall_jump(targ, wall_jump_err);
     bool did_wall_jump = false;
     // You can't walk out of bounds!
     if (!in_bounds(targ) && !can_wall_jump)
@@ -549,13 +554,6 @@ void move_player_action(coord_def move)
             mpr("This wall is too hard to dig through.");
         return;
     }
-
-    const dungeon_feature_type targ_grid = grd(targ);
-
-    // don't allow wall jump against close doors via movement -- need to use
-    // the ability
-    if (can_wall_jump && feat_is_closed_door(targ_grid))
-        can_wall_jump = false;
 
     const string walkverb = you.airborne()                     ? "fly"
                           : you.swimming()                     ? "swim"
@@ -593,12 +591,8 @@ void move_player_action(coord_def move)
             you.digging = false;
             canned_msg(MSG_TOO_HUNGRY);
         }
-        else if (grd(targ) == DNGN_ROCK_WALL
-                 || grd(targ) == DNGN_CLEAR_ROCK_WALL
-                 || grd(targ) == DNGN_GRATE)
-        {
+        else if (feat_is_diggable(grd(targ)))
             targ_pass = true;
-        }
         else // moving or attacking ends dig
         {
             you.digging = false;
@@ -822,7 +816,7 @@ void move_player_action(coord_def move)
     // BCR - Easy doors single move
     if ((Options.travel_open_doors || !you.running)
         && !attacking
-        && feat_is_closed_door(targ_grid))
+        && feat_is_closed_door(grd(targ)))
     {
         open_door_action(move);
         move.reset();

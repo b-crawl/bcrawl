@@ -99,8 +99,8 @@ the vividly coloured faerie dragons ever existed.
 %%%%
 demon blade "Bloodbane"
 
-A blade forged in Hell by the sacrifice of countless tortured souls. It
-inflicts the rage and suffering of those souls upon its wielder.
+A blade forged in Hell by the sacrifice of countless tortured souls. It can
+bring its wielder towards foes to slake its thirst for more death.
 %%%%
 scimitar of Flaming Death
 
@@ -281,7 +281,7 @@ relieve opponents of their weapons, dealing extra damage in the process.
 %%%%
 storm bow
 
-A longbow with the colour of dark rain clouds.
+A shortbow the colour of dark rain clouds.
 {{
     if you.can_smell() then
         return "It smells like a storm just past, or one about to begin."

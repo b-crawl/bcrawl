@@ -25,6 +25,7 @@
 #include "describe.h"
 #include "dungeon.h"
 #include "english.h"
+#include "externs.h" // INVALID_COORD
 #include "fight.h" // melee_confuse_chance
 #include "food.h"
 #include "god-abil.h"
@@ -531,7 +532,7 @@ direction_chooser::direction_chooser(dist& moves_,
         needs_path = true;
 
     show_beam = !just_looking && needs_path;
-    need_beam_redraw = show_beam;
+    need_viewport_redraw = show_beam;
     have_beam = false;
 
     need_text_redraw = true;
@@ -1122,17 +1123,12 @@ static void _draw_ray_cell(coord_def p, coord_def target, aff_type aff)
 #endif
 }
 
-void direction_chooser::draw_beam_if_needed()
+void direction_chooser::draw_beam()
 {
-    if (!need_beam_redraw)
-        return;
-
-    need_beam_redraw = false;
-
     if (!show_beam)
     {
         viewwindow(
-#ifndef USE_TILE_LOCAL
+#ifndef USE_TILE
             false
 #endif
             );
@@ -1593,7 +1589,7 @@ void direction_chooser::toggle_beam()
     }
 
     show_beam = !show_beam;
-    need_beam_redraw = true;
+    need_viewport_redraw = true;
 
     if (show_beam)
     {
@@ -1673,7 +1669,7 @@ void direction_chooser::handle_wizard_command(command_type key_command,
         show_beam = true;
         have_beam = find_ray(you.pos(), target(), beam,
                              opc_solid_see, you.current_vision, show_beam);
-        need_beam_redraw = true;
+        need_viewport_redraw = true;
         return;
 
     case CMD_TARGET_WIZARD_DEBUG_PORTAL:
@@ -1700,7 +1696,7 @@ void direction_chooser::handle_wizard_command(command_type key_command,
         if (target() != you.pos())
         {
             wizard_create_feature(target());
-            need_beam_redraw = true;
+            need_viewport_redraw = true;
         }
         return;
 
@@ -1782,13 +1778,21 @@ void direction_chooser::do_redraws()
 
     if (need_all_redraw)
     {
-        need_beam_redraw = true;
+        need_viewport_redraw = true;
         need_text_redraw = true;
         need_cursor_redraw = true;
         need_all_redraw = false;
     }
 
-    draw_beam_if_needed();
+    if (need_viewport_redraw)
+    {
+        draw_beam();
+        // draw_beam calls viewwindow(true) at least one in tiles mode, and
+        // viewwindow(false) at least once in console, so the old highlight and
+        // the old beam are both gone here.
+        highlight_summoner();
+        need_viewport_redraw = false;
+    }
 
     if (need_text_redraw)
     {
@@ -1809,6 +1813,48 @@ void direction_chooser::do_redraws()
 #endif
         need_cursor_redraw = false;
     }
+}
+
+coord_def direction_chooser::find_summoner()
+{
+    const monster* mon = monster_at(target());
+
+    // Don't leak information about rakshasa mirrored illusions.
+    if (mon && mon->is_summoned() && !mon->has_ench(ENCH_PHANTOM_MIRROR))
+        if (const monster *summ = monster_by_mid(mon->summoner))
+            return summ->pos();
+    return INVALID_COORD;
+}
+
+void direction_chooser::highlight_summoner()
+{
+    const coord_def summ_loc = find_summoner();
+
+    if (summ_loc == INVALID_COORD || !you.see_cell(summ_loc))
+        return;
+
+#ifdef USE_TILE
+    monster_info* summ_info = env.map_knowledge(summ_loc).monsterinfo();
+
+    if (!summ_info)  // Can happen, e. g. if the summoner is invisible
+        return;
+
+    summ_info->mb.set(MB_HIGHLIGHTED_SUMMONER);
+
+    // The first argument must be false, because otherwise viewwindow would
+    // wipe any beams we might have drawn, and also reset the monster_info we
+    // just altered, before it draws anything.
+    viewwindow(false, true);
+#else
+    char32_t glych  = get_cell_glyph(summ_loc).ch;
+    int col = CYAN;
+    col |= COLFLAG_REVERSE;
+
+    const coord_def vp = grid2view(summ_loc);
+    cgotoxy(vp.x, vp.y, GOTO_DNGN);
+    textcolour(real_colour(col));
+    putwch(glych);
+#endif
 }
 
 bool direction_chooser::tiles_update_target()
@@ -1888,8 +1934,7 @@ bool direction_chooser::do_main_loop()
         {
             const bool was_excluded = is_exclude_root(target());
             cycle_exclude_radius(target());
-            // XXX: abusing need_beam_redraw to force viewwindow call.
-            need_beam_redraw   = true;
+            need_viewport_redraw   = true;
             const bool is_excluded = is_exclude_root(target());
             if (!was_excluded && is_excluded)
                 mpr("Placed new exclusion.");
@@ -1987,7 +2032,7 @@ bool direction_chooser::do_main_loop()
         have_beam = show_beam && find_ray(you.pos(), target(), beam,
                                           opc_solid_see, you.current_vision);
         need_text_redraw   = true;
-        need_beam_redraw   = true;
+        need_viewport_redraw   = true;
         need_cursor_redraw = true;
     }
     do_redraws();
@@ -2040,10 +2085,10 @@ bool direction_chooser::choose_direction()
     {
         have_beam = find_ray(you.pos(), target(), beam,
                              opc_solid_see, you.current_vision);
-        need_beam_redraw = have_beam;
+        need_viewport_redraw = have_beam;
     }
     if (hitfunc)
-        need_beam_redraw = true;
+        need_viewport_redraw = true;
 
     clear_messages();
     msgwin_set_temporary(true);
@@ -3307,10 +3352,7 @@ string get_monster_equipment_desc(const monster_info& mi,
         }
     }
 
-    string weap = "";
-
-    if (mi.type != MONS_SPECTRAL_WEAPON)
-        weap = _describe_monster_weapon(mi, level == DESC_IDENTIFIED);
+    string weap = _describe_monster_weapon(mi, level == DESC_IDENTIFIED);
 
     // Print the rest of the equipment only for full descriptions.
     if (level == DESC_WEAPON || level == DESC_WEAPON_WARNING)
@@ -3352,8 +3394,13 @@ string get_monster_equipment_desc(const monster_info& mi,
 
     vector<string> item_descriptions;
 
-    if (!weap.empty())
+    // Dancing weapons have all their weapon information in their full_name, so
+    // we don't need to add another weapon description here (see Mantis 11887).
+    if (!weap.empty()
+        && mi.type != MONS_DANCING_WEAPON && mi.type != MONS_SPECTRAL_WEAPON)
+    {
         item_descriptions.push_back(weap.substr(1)); // strip leading space
+    }
 
     if (mon_arm)
     {

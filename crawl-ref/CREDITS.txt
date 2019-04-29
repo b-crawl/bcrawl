@@ -114,6 +114,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Roy Axenov
     Steve 'nfogravity' Balady
     Max Bane
+    G. Bailey
     Beargit
     Bill Beher
     Alexander Beisig
@@ -174,6 +175,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Chris Galardi
     GenericPseudonym
     Ge0ff
+    Joshua Gelbard
     Benoît Giannangeli
     Ben Goetter
     Aaron Golden
@@ -265,6 +267,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Chris Oelmueller
     John Olender
     Aaron Olowin
+    Andrew O'Neill
     Yuuma Oohara
     Julian Ospald
     Malwyn P
@@ -307,7 +310,6 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Robert Shimmin
     Sigurd
     Edgar Simo
-    Skrybe
     Alex Smith
     Keanan Smith
     Richard Soderberg

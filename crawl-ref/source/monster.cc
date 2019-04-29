@@ -4352,9 +4352,10 @@ bool monster::corrode_equipment(const char* corrosion_source, int degree)
 
     if (you.see_cell(pos()))
     {
-        mprf("%s corrodes %s!",
-             corrosion_source,
-             name(DESC_THE).c_str());
+        if (!has_ench(ENCH_CORROSION))
+            mprf("%s corrodes %s!", corrosion_source, name(DESC_THE).c_str());
+        else
+            mprf("%s seems to be corroded for longer.", name(DESC_THE).c_str());
     }
 
     add_ench(mon_enchant(ENCH_CORROSION, 0));
@@ -5610,12 +5611,9 @@ bool monster::do_shaft()
     if (!is_valid_shaft_level())
         return false;
 
-    // Tentacles & player ghosts are immune to shafting
-    if (mons_is_tentacle_or_tentacle_segment(type)
-        || type == MONS_PLAYER_GHOST)
-    {
+    // Tentacles are immune to shafting
+    if (mons_is_tentacle_or_tentacle_segment(type))
         return false;
-    }
 
     // Handle instances of do_shaft() being invoked magically when
     // the monster isn't standing over a shaft.

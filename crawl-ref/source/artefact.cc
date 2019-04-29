@@ -472,6 +472,7 @@ static void _add_randart_weapon_brand(const item_def &item,
     {
         item_props[ARTP_BRAND] = random_choose_weighted(
             2, SPWPN_SPEED,
+            2, SPWPN_ELECTROCUTION,
             4, SPWPN_VENOM,
             4, SPWPN_VORPAL,
             4, SPWPN_FLAMING,
@@ -479,11 +480,7 @@ static void _add_randart_weapon_brand(const item_def &item,
 
         if (item_attack_skill(item) == SK_CROSSBOWS)
         {
-            // Penetration and electrocution are only allowed on
-            // crossbows. This may change in future.
-            if (one_chance_in(5))
-                item_props[ARTP_BRAND] = SPWPN_ELECTROCUTION;
-            else if (one_chance_in(5))
+            if (one_chance_in(3))
                 item_props[ARTP_BRAND] = SPWPN_PENETRATION;
         }
     }

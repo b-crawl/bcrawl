@@ -550,14 +550,14 @@ void update_turn_count()
     // Show the turn count starting from 1. You can still quit on turn 0.
     textcolour(HUD_VALUE_COLOUR);
     if (Options.show_game_time)
-    {
-        CPRINTF("%.1f (%.1f)%s", you.elapsed_time / 10.0,
-                (you.elapsed_time - you.elapsed_time_at_last_input) / 10.0,
-                // extra spaces to erase excess if previous output was longer
-                "    ");
-    }
+        CPRINTF("%.1f", you.elapsed_time / 10.0);
     else
         CPRINTF("%d", you.num_turns);
+
+    CPRINTF(" (%.1f)%s",
+            (you.elapsed_time - you.elapsed_time_at_last_input) / 10.0,
+            // extra spaces to erase excess if previous output was longer
+            "    ");
     textcolour(LIGHTGREY);
 }
 
@@ -1904,7 +1904,7 @@ static const char* _determine_colour_string(int level, int max_level)
     }
 }
 
-static int _stealth_breakpoint(int stealth)
+int stealth_breakpoint(int stealth)
 {
     if (stealth == 0)
         return 0;
@@ -1922,7 +1922,7 @@ static string _stealth_bar(int sw)
     //no colouring
     bar += _determine_colour_string(0, 5);
     bar += "Stlth    ";
-    const int stealth_num = _stealth_breakpoint(player_stealth());
+    const int stealth_num = stealth_breakpoint(player_stealth());
     for (int i = 0; i < stealth_num; i++)
         bar += "+";
     for (int i = 0; i < 10 - stealth_num; i++)
@@ -2490,7 +2490,8 @@ private:
         if (find(equip_chars.begin(), equip_chars.end(), ch) != equip_chars.end())
         {
             item_def& item = you.inv[letter_to_index(ch)];
-            describe_item(item);
+            if (!describe_item(item))
+                return false;
             return true;
         }
         return formatted_scroller::process_key(ch);

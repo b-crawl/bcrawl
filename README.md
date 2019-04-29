@@ -184,6 +184,7 @@ Pull requests for new content are welcome.
   - v1.11.5: Shadow dragon armour has (10->11) base AC, and storm dragon armour has (15->13) encumbrance.
   - v1.11.8: Lightning rod damage scales more with Evocations.
   - v1.11.8: Randart crossbows of penetration are 2x as likely.
+  - v1.11.8: Changed base delay for weapons: falchion (13->12), long sword (14->13).
 
 #### Removed Items
   - Amulet of Harm

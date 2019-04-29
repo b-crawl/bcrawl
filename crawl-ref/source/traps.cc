@@ -583,7 +583,8 @@ void trap_def::trigger(actor& triggerer)
         {
             if (orb_limits_translocation())
             {
-                mprf(MSGCH_ORB, "The power of the Orb disrupts the teleport trap!");
+                if(you.see_cell(pos))
+                    mprf(MSGCH_ORB, "The power of the Orb disrupts the teleport trap!");
                 triggerer.blink();
             }
             else

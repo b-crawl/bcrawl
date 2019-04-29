@@ -224,6 +224,7 @@ Pull requests for new content are welcome.
   - v1.8.4: Killer Klowns carry branded weapons, and have a new spell set: Blink, Monstrous Menagerie, Corrupting Pulse, Dig, Silence.
   - v1.11.5: Orb Guardians get a magical gaze, with Lesser Beckoning, Sleep, and Lightning Bolt.
   - v1.11.8: Reapers can seal doors like Vault Wardens do.
+  - v1.11.8: Juggernauts are tougher, hit faster, and knock their foes back.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

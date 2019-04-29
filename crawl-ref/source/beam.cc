@@ -4713,7 +4713,7 @@ void bolt::affect_monster(monster* mon)
             break;
         case SPELL_CONJURE_BALL_LIGHTNING:   // Storm Bow unrand
         {
-            mgen_data cbl(MONS_BALL_LIGHTNING, BEH_FRIENDLY, mon->pos());
+            mgen_data cbl(MONS_BALL_LIGHTNING, BEH_FRIENDLY, pos());
             cbl.set_summoned(&you, 0, SPELL_CONJURE_BALL_LIGHTNING, GOD_NO_GOD);
             cbl.hd = 8;
 

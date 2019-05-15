@@ -1782,6 +1782,7 @@ void TilesFramework::_send_everything()
     json_open_array("items");
     for (UIStackFrame &frame : m_menu_stack)
     {
+        json_write_comma(); // noop immediately following open
         if (frame.type == UIStackFrame::MENU)
             frame.menu->webtiles_write_menu();
         else if (frame.type == UIStackFrame::CRT)
@@ -1803,7 +1804,6 @@ void TilesFramework::_send_everything()
                 }
             continue;
         }
-        json_write_comma();
     }
     json_close_array();
     json_close_object();

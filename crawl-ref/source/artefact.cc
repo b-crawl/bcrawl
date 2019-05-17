@@ -383,6 +383,7 @@ static map<jewellery_type, vector<jewellery_fake_artp>> jewellery_artps = {
     { RING_ELEC_RESISTANCE, { { ARTP_ELECTRICITY, 1 } } },
     { RING_LIFE_PROTECTION, { { ARTP_NEGATIVE_ENERGY, 1 } } },
     { RING_PROTECTION_FROM_MAGIC, { { ARTP_MAGIC_RESISTANCE, 1 } } },
+    { RING_RESIST_CORROSION, { { ARTP_RCORR, 1 } } },
 
     { RING_FIRE, { { ARTP_FIRE, 1 }, { ARTP_COLD, -1 } } },
     { RING_ICE, { { ARTP_COLD, 1 }, { ARTP_FIRE, -1 } } },
@@ -412,7 +413,7 @@ static void _populate_jewel_intrinsic_artps(const item_def &item,
         return;
 
     const bool id_props = item_ident(item, ISFLAG_KNOW_PROPERTIES)
-                            || item_ident(item, ISFLAG_KNOW_TYPE);
+                          || item_ident(item, ISFLAG_KNOW_TYPE);
 
     for (const auto &fake_artp : *props)
     {
@@ -1441,7 +1442,7 @@ static bool _randart_is_redundant(const item_def &item,
         break;
 
     case RING_SLAYING:
-        provides  = ARTP_SLAYING;
+        provides = ARTP_SLAYING;
         break;
 
     case RING_SEE_INVISIBLE:
@@ -1482,6 +1483,10 @@ static bool _randart_is_redundant(const item_def &item,
 
     case RING_PROTECTION_FROM_MAGIC:
         provides = ARTP_MAGIC_RESISTANCE;
+        break;
+
+    case RING_RESIST_CORROSION:
+        provides = ARTP_RCORR;
         break;
 
     case AMU_RAGE:
@@ -1546,6 +1551,10 @@ static bool _randart_is_conflicting(const item_def &item,
     case RING_WIZARDRY:
     case RING_MAGICAL_POWER:
         conflicts = ARTP_PREVENT_SPELLCASTING;
+        break;
+
+    case RING_RESIST_CORROSION:
+        conflicts = ARTP_CORRODE;
         break;
 
     case RING_TELEPORTATION:

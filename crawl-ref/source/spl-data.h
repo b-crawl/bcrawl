@@ -2542,7 +2542,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_HEXES | SPTYP_FIRE,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEUTRAL,
     3,
-    200,
+    0,
     LOS_RADIUS, LOS_RADIUS,
     3, 0,
     TILEG_INNER_FLAME,

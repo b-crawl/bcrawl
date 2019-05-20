@@ -2,7 +2,7 @@
 
 X-Crawl was a notable fork of Dungeon Crawl Stone Soup; bcrawl is a continuation of it.
 
-Like X-Crawl, discussion is done on the [CXC Discord](https://discord.gg/SzXGZNS).
+For discussion, check out [Demise's Discord](https://discord.gg/0u5ddSgPMZkySDJ5).
 
 David Ploog (a former DCSS developer) [wrote](https://www.rockpapershotgun.com/2017/03/23/making-dungeon-crawl-stone-soup-with-253-cooks-and-no-head-chef/): 
 > In NetHack they have this model where if somebody [on the team] objects to something, it will not happen. So every person can veto every change. And in the end you could see that NetHack was dead, much less from having no releases – even when they had a few releases the changes that would appear were miniscule. Minor and minor. And they did improve, but they wouldn’t do anything radical. I was very much afraid that in Crawl, something like this could happen.

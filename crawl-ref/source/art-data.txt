@@ -650,7 +650,7 @@ BRAND:    SPWPN_SPEED
 
 NAME:     storm bow
 OBJ:      OBJ_WEAPONS/WPN_SHORTBOW
-INSCRIP:  +Lightning
+INSCRIP:  lightning
 PLUS:     +8
 COLOUR:   BLUE
 TILE:     urand_storm_bow

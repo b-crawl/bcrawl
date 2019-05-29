@@ -854,7 +854,7 @@ bool cast_a_spell(bool check_range, spell_type spell)
         }
     }
 
-    const bool staff_energy = player_energy();
+    const bool staff_energy = player_energy(spell);
     you.last_cast_spell = spell;
     // Silently take MP before the spell.
     dec_mp(cost, true);

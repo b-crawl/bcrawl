@@ -1813,13 +1813,52 @@ int player_spec_poison()
     return sp;
 }
 
-int player_energy()
+int player_energy(spell_type spell)
 {
     int pe = 0;
+    spschools_type typeflags = get_spell_disciplines(spell);
 
-    // Staves
-    pe += you.wearing(EQ_STAFF, STAFF_ENERGY);
+    item_def& weapon = *you.weapon();
 
+    if(weapon.base_type == OBJ_STAVES)
+        switch(weapon.sub_type)
+        {
+        case STAFF_CONJURATION:
+            if (typeflags & spschool::conjuration)
+                pe++;
+            break;
+        case STAFF_SUMMONING:
+            if (typeflags & spschool::summoning)
+                pe++;
+            break;
+        case STAFF_POISON:
+            if (typeflags & spschool::poison)
+                pe++;
+            break;
+        case STAFF_DEATH:
+            if (typeflags & spschool::necromancy)
+                pe++;
+            break;
+        case STAFF_FIRE:
+            if (typeflags & spschool::fire)
+                pe++;
+            break;
+        case STAFF_COLD:
+            if (typeflags & spschool::ice)
+                pe++;
+            break;
+        case STAFF_EARTH:
+            if (typeflags & spschool::earth)
+                pe++;
+            break;
+        case STAFF_AIR:
+            if (typeflags & spschool::air)
+                pe++;
+            break;
+        default:
+            break;
+        }
+    
     return pe;
 }
 

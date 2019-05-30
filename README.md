@@ -25,6 +25,7 @@ Pull requests for new content are welcome.
   - [CKO](https://crawl.kelbi.org/) (New York)
   - [CPO](https://crawl.project357.org/) (Australia)
   - [x-crawl.de](https://x-crawl.de/) (Germany)
+  - [CUE](https://underhound.eu:8080/) (Netherlands)
 
 ## Changes from Vanilla Crawl
 #### Branches

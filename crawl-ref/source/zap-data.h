@@ -940,7 +940,7 @@ _mon_hex_zap(ZAP_SLEEP, BEAM_SLEEP),
 {
     ZAP_INNER_FLAME,
     "",
-    100,
+    0,
     nullptr,
     new tohit_calculator<0, 3, 1>,
     nullptr,

@@ -286,6 +286,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Iago Porto
     psywombats
     pubby
+    Ashley Elizabeth Raine
     Edward Randtke
     Derek Ray
     RealzHS

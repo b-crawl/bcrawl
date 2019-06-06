@@ -1073,62 +1073,61 @@ fastened on one end.
 %%%%
 staff of air
 
-A staff that increases the power of air spells cast by its wielder, and
+A staff that lets its wielder cast air magic with increased power and without hunger, and
 insulates them from electricity. If the wielder is skilled in Evocations and
 Air Magic, they can shock those struck by it.
 %%%%
 staff of cold
 
-A staff that increases the power of ice spells cast by its wielder, and
+A staff that lets its wielder cast ice magic with increased power and without hunger, and
 protects them from the effects of cold. If the wielder is skilled in Evocations
 and Ice Magic, they can freeze those struck by it.
 %%%%
 staff of conjuration
 
-A staff that increases the power of conjurations cast by its wielder.
+A staff that lets its wielder cast conjurations with increased power and without hunger.
 %%%%
 staff of death
 
-A staff that increases the power of necromantic spells cast by its wielder, and
+A staff that lets its wielder use necromancy with increased power and without hunger, and
 protects them from negative energy. If the wielder is skilled in Evocations and
-Necromancy, they can inflict great pain on those living souls they strike.
+Necromancy, they can inflict great pain on living souls they strike.
 %%%%
 staff of earth
 
-A staff that increases the power of earth spells cast by its wielder, and
+A staff that lets its wielder cast earth magic with increased power and without hunger, and
 protects them from physical attacks slightly. If the wielder is skilled in
 Evocations and Earth magic, they can crush those struck by it.
 %%%%
 staff of energy
 
-A staff that allows its wielder to control magical energy. It allows the
-wielder to cast spells without gaining hunger, and to channel ambient magical
-energy to restore their reserves of magic.
+REMOVED
 %%%%
 staff of fire
 
-A staff that increases the power of fire spells cast by its wielder, and
+A staff that lets its wielder cast fire magic with increased power and without hunger, and
 protects them from the effects of fire. If the wielder is skilled in Evocations
 and Fire Magic, they can burn those struck by it.
 %%%%
 staff of poison
 
-A staff that increases the power of poisoning spells cast by its wielder, and
+A staff that lets its wielder cast poison magic with increased power and without hunger, and
 protects them from the effects of poison. If the wielder is skilled in
 Evocations and Poison Magic, they can poison creatures struck by it — even if
 the victims are normally resistant.
 %%%%
 staff of power
 
-A staff that provides an increased reservoir of magical power to its wielder.
+A staff that provides a reservoir of magical power to its wielder, and
+lets them channel ambient magical energy to restore their reserves of magic.
 %%%%
 staff of summoning
 
-A staff that increases the power of summonings cast by its wielder.
+A staff that lets its wielder cast summonings with increased power and without hunger.
 %%%%
 staff of wizardry
 
-A staff that increases the ability of its wielder to use magical spells.
+A staff that helps its wielder control magical spells.
 %%%%
 steam dragon scales
 

@@ -187,6 +187,7 @@ Pull requests for new content are welcome.
   - v1.12: Lightning rod damage scales more with Evocations.
   - v1.12: Randart crossbows of penetration are 2x as likely.
   - v1.12: Changed base delay for weapons: falchion (13->12), long sword (14->13).
+  - v1.12.1: Staves of energy are removed. A staff of power can be used to channel mana, and enhancer staves remove spell hunger for their spell school.
 
 #### Removed Items
   - Amulet of Harm

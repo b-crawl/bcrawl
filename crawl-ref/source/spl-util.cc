@@ -405,6 +405,9 @@ int staff_energy(spell_type spell)
     int pe = 0;
     spschools_type typeflags = get_spell_disciplines(spell);
 
+    if (!you.weapon())
+        return pe;
+
     item_def& weapon = *you.weapon();
 
     if(weapon.base_type == OBJ_STAVES)

@@ -1506,7 +1506,7 @@ bool evoke_item(int slot, bool check_range)
 
     case OBJ_STAVES:
         ASSERT(wielded);
-        if (item.sub_type != STAFF_ENERGY)
+        if (item.sub_type != STAFF_POWER)
         {
             unevokable = true;
             break;
@@ -1538,7 +1538,7 @@ bool evoke_item(int slot, bool check_range)
             make_hungry(50, false, true);
             did_work = true;
             practise_evoking(1);
-            count_action(CACT_EVOKE, STAFF_ENERGY, OBJ_STAVES);
+            count_action(CACT_EVOKE, STAFF_POWER, OBJ_STAVES);
 
             did_god_conduct(DID_CHANNEL, 1, true);
         }

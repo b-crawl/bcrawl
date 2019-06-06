@@ -623,11 +623,10 @@ static int _acquirement_staff_subtype(bool /*divine*/, int & /*quantity*/)
         return result;
 
     // Otherwise pick a non-enhancer staff.
-    switch (random2(5))
+    switch (random2(2))
     {
-    case 0: case 1: result = STAFF_WIZARDRY;   break;
-    case 2: case 3: result = STAFF_ENERGY;     break;
-    case 4: result = STAFF_POWER;              break;
+    case 0: result = STAFF_WIZARDRY; break;
+    case 1: result = STAFF_POWER; break;
     }
     return result;
 }

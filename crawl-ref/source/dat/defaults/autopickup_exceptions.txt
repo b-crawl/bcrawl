@@ -5,8 +5,16 @@ ae := autopickup_exceptions
 # Autopickup runes by default.
 ae = <rune of Zot
 
-ae += <artefact
-ae += <throwing net
+## autopickup artifacts and throwing nets, unless you can't use them
+:add_autopickup_func(function (it, name)
+: if it.artefact
+: or it.subtype() == "throwing net" then
+:  if not it.is_useless then
+:   return true
+:  end
+: end
+: return
+:end)
 
 ### exclusions ###
 
@@ -72,7 +80,7 @@ ae += [^n]identified.*spellbook
 # Excluding amulets as you only need one of each. (If you know the subtype
 # that means you already have one of it.). Some items may already be excluded
 # as bad_item, e.g. inaccuracy.
-ae += amulet of (nothing|inaccuracy|the gourmand|regeneration|harm)
+ae += amulet of (nothing|inaccuracy|the gourmand|regeneration)
 ae += amulet of (rage|guardian spirit|faith|magic regeneration|the acrobat)
 
 # Likewise for some rings.

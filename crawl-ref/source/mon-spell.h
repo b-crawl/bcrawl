@@ -963,7 +963,8 @@ static const mon_spellbook mspell_list[] =
     {  MST_GOLDEN_EYE,
       {
        { SPELL_CONFUSION_GAZE, 100, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
-       { SPELL_BLINK, 29, MON_SPELL_MAGICAL },
+       { SPELL_BLINK, 20, MON_SPELL_MAGICAL },
+       { SPELL_TELEPORT_SELF, 11, MON_SPELL_MAGICAL },
       }
     },
 

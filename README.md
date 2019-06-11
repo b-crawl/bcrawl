@@ -230,6 +230,7 @@ Pull requests for new content are welcome.
   - v1.11.5: Orb Guardians get a magical gaze, with Lesser Beckoning, Sleep, and Lightning Bolt.
   - v1.12: Reapers can seal doors like Vault Wardens do.
   - v1.12: Juggernauts are tougher, hit faster, and knock their foes back.
+  - v1.12.1: Golden eyes sometimes teleport away.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

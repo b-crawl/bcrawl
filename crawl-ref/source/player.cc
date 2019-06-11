@@ -3874,7 +3874,7 @@ void inc_mp(int mp_gain, bool silent)
 {
     ASSERT(!crawl_state.game_is_arena());
 
-    if (mp_gain < 1 || you.magic_points >= you.max_magic_points)
+    if (mp_gain < 1 || you.magic_points >= you.max_magic_points || you.duration[DUR_TIME_STOP])
         return;
 
     you.magic_points += mp_gain;

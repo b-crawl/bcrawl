@@ -324,7 +324,8 @@ unsigned int item_value(item_def item, bool ident)
                 break;
             }
 
-            valued /= 10;
+            valued /= 100;
+            valued = max(1, valued);
         }
         break;
 

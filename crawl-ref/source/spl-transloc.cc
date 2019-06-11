@@ -67,7 +67,7 @@ static void _place_tloc_cloud(const coord_def &origin)
 spret cast_time_stop(bool fail)
 {
     fail_check();
-    you.duration[DUR_TIME_STOP] = 2;
+    you.duration[DUR_TIME_STOP] = 20;
     return spret::success;
 }
 

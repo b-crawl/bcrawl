@@ -41,9 +41,6 @@ bool orb_haloed(const coord_def& p);
 // ...or by a quad damage?
 bool quad_haloed(const coord_def& p);
 
-// ...or by disjunction?
-bool disjunction_haloed(const coord_def& p);
-
 // ...or endarkened by an umbra?
 bool umbraed(const coord_def& p);
 

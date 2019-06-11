@@ -370,8 +370,7 @@ static const duration_def duration_data[] =
       BLUE, "TStop",
       "accelerated", "time stop",
       "Your mind and magic are accelerated.", D_DISPELLABLE | D_EXPIRES,
-      { "Your magical acceleration ends." }
-      },
+      {{ "Your magical acceleration ends." }}},
     { DUR_SENTINEL_MARK,
       LIGHTRED, "Mark",
       "marked", "sentinel's mark",

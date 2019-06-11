@@ -108,6 +108,7 @@ Pull requests for new content are welcome.
   - Blink Other blinks enemies.
   - Piercing Shot adds the penetration brand to a ranged weapon.
   - v1.8.3: Tree Form (L5 Hexes/Transmutation) acts like a Potion of Lignification with a shorter duration.
+  - v1.12.1: Time Stop (L8 Charms/Translocations) lets you instantly cast spells below L5.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.
@@ -144,6 +145,7 @@ Pull requests for new content are welcome.
   - v1.1: Shroud of Golubria
   - v1.8.3: Hydra Form
   - v1.9.1: Confusing Touch
+  - v1.12.1: Disjunction
 
 #### Gods
   - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.

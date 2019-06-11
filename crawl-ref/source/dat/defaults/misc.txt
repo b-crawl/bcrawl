@@ -19,7 +19,6 @@ note_monsters += orb of fire, ancient lich, Sigmund
 
 autoinscribe += dispersal:!f
 autoinscribe += throwing net:!f
-autoinscribe += curare:!f
 autoinscribe += needle of (frenzy|paralysis|sleeping|confusion):!f
 autoinscribe += ( ration):!d
 autoinscribe += figurine:!*

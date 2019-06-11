@@ -267,11 +267,11 @@ static const struct spell_desc spelldata[] =
 },
 
 {
-    SPELL_DISJUNCTION, "Disjunction",
-    SPTYP_TRANSLOCATION,
-    SPFLAG_ESCAPE | SPFLAG_UTILITY,
+    SPELL_TIME_STOP, "Time Stop",
+    SPTYP_TRANSLOCATION | SPTYP_CHARMS,
+    SPFLAG_UTILITY | SPFLAG_SELFENCH,
     8,
-    200,
+    0,
     -1, -1,
     6, 0,
     TILEG_DISJUNCTION,

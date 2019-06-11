@@ -366,13 +366,12 @@ static const duration_def duration_data[] =
       {{ "The winds around you calm down.", []() {
           remove_tornado_clouds(MID_PLAYER);
       }}}},
-    { DUR_DISJUNCTION,
-      BLUE, "Disjoin",
-      "disjoining", "disjunction",
-      "You are disjoining your surroundings.", D_DISPELLABLE | D_EXPIRES,
-      {{ "The translocation energy dissipates.", []() {
-            invalidate_agrid(true);
-      }}}},
+    { DUR_TIME_STOP,
+      BLUE, "TStop",
+      "accelerated", "time stop",
+      "Your mind and magic are accelerated.", D_DISPELLABLE | D_EXPIRES,
+      { "Your magical acceleration ends." }
+      },
     { DUR_SENTINEL_MARK,
       LIGHTRED, "Mark",
       "marked", "sentinel's mark",

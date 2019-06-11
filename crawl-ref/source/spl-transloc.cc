@@ -64,51 +64,11 @@ static void _place_tloc_cloud(const coord_def &origin)
         place_cloud(CLOUD_TLOC_ENERGY, origin, 1 + random2(3), &you);
 }
 
-spret cast_disjunction(int pow, bool fail)
+spret cast_time_stop(bool fail)
 {
     fail_check();
-    int rand = random_range(35, 45) + random2(pow / 12);
-    you.duration[DUR_DISJUNCTION] = min(90 + pow / 12,
-        max(you.duration[DUR_DISJUNCTION] + rand,
-        30 + rand));
-    contaminate_player(750 + random2(500), true);
-    disjunction_spell();
+    you.duration[DUR_TIME_STOP] = 2;
     return spret::success;
-}
-
-void disjunction_spell()
-{
-    int steps = you.time_taken;
-    invalidate_agrid(true);
-    for (int step = 0; step < steps; ++step)
-    {
-        vector<monster*> mvec;
-        for (radius_iterator ri(you.pos(), LOS_RADIUS, C_SQUARE); ri; ++ri)
-        {
-            monster* mons = monster_at(*ri);
-            if (!mons || !you.see_cell(*ri))
-                continue;
-            mvec.push_back(mons);
-        }
-        if (mvec.empty())
-            return;
-        // blink should be isotropic
-        shuffle_array(mvec);
-        for (auto mons : mvec)
-        {
-            if (!mons->alive() || mons->no_tele())
-                continue;
-            coord_def p = mons->pos();
-            if (!disjunction_haloed(p))
-                continue;
-
-            int dist = grid_distance(you.pos(), p);
-            int decay = max(1, (dist - 1) * (dist + 1));
-            int chance = pow(0.8, 1.0 / decay) * 1000;
-            if (!x_chance_in_y(chance, 1000))
-                blink_away(mons, &you, false);
-        }
-    }
 }
 
 /**

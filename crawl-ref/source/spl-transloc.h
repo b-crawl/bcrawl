@@ -2,8 +2,7 @@
 
 #include "spl-cast.h"
 
-spret cast_disjunction(int pow, bool fail);
-void disjunction_spell();
+spret cast_time_stop(bool fail);
 
 spret cast_blink(bool fail = false);
 spret cast_controlled_blink(bool fail = false, bool safe = true);

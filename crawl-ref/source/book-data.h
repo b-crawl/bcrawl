@@ -139,13 +139,9 @@ static const vector<spell_type> spellbook_templates[] =
 
 #if TAG_MAJOR_VERSION > 34
 {   // Book of Battle
-    SPELL_INFUSION,
-    SPELL_SONG_OF_SLAYING,
-    SPELL_SPECTRAL_WEAPON,
-    SPELL_REGENERATION,
-    SPELL_OZOCUBUS_ARMOUR,
 },
 #endif
+
 {   // Book of Clouds
     SPELL_POISONOUS_VAPOURS,
     SPELL_MEPHITIC_CLOUD,
@@ -201,14 +197,10 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_FORCE_LANCE,
     SPELL_DISPERSAL,
     SPELL_CONTROLLED_BLINK,
-    SPELL_DISJUNCTION,
 },
 
 #if TAG_MAJOR_VERSION == 34
 {   // Book of Envenomations
-    SPELL_SPIDER_FORM,
-    SPELL_OLGREBS_TOXIC_RADIANCE,
-    SPELL_INTOXICATE,
 },
 #endif
 
@@ -222,7 +214,6 @@ static const vector<spell_type> spellbook_templates[] =
 
 #if TAG_MAJOR_VERSION == 34
 {   // Book of Control
-    SPELL_ENGLACIATION,
 },
 
 {   // Book of Battle
@@ -252,10 +243,6 @@ static const vector<spell_type> spellbook_templates[] =
 
 #if TAG_MAJOR_VERSION == 34
 {   // Book of Wizardry
-    SPELL_FORCE_LANCE,
-    SPELL_AGONY,
-    SPELL_INVISIBILITY,
-    SPELL_SPELLFORGED_SERVITOR,
 },
 #endif
 
@@ -286,10 +273,6 @@ static const vector<spell_type> spellbook_templates[] =
 
 #if TAG_MAJOR_VERSION == 34
 {   // Akashic Record
-    SPELL_DISPERSAL,
-    SPELL_MALIGN_GATEWAY,
-    SPELL_DISJUNCTION,
-    SPELL_CONTROLLED_BLINK,
 },
 #endif
 
@@ -321,10 +304,10 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Dreams
     SPELL_HIBERNATION,
-    SPELL_SILENCE,
     SPELL_DARKNESS,
     SPELL_SHADOW_CREATURES,
     SPELL_BORGNJORS_VILE_CLUTCH,
+    SPELL_TIME_STOP,
 },
 
 {   // Book of Alchemy

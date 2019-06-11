@@ -899,7 +899,8 @@ bool cast_a_spell(bool check_range, spell_type spell)
         }
     }
 
-    you.turn_is_over = true;
+    if(!you.duration[DUR_TIME_STOP] || spell_difficulty(spell) > 4)
+        you.turn_is_over = true;
     alert_nearby_monsters();
 
     return true;
@@ -1912,8 +1913,8 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
     case SPELL_RECALL:
         return cast_recall(fail);
 
-    case SPELL_DISJUNCTION:
-        return cast_disjunction(powc, fail);
+    case SPELL_TIME_STOP:
+        return cast_time_stop(fail);
 
     case SPELL_CORPSE_ROT:
         return cast_corpse_rot(fail);

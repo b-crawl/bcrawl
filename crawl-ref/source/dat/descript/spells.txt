@@ -417,13 +417,6 @@ Disintegrate spell
 Violently rends apart anything in a small volume of space. It can be used to
 cause severe damage, or remove a chunk of rock.
 %%%%
-Disjunction spell
-
-Destabilizes the space in a sphere around the caster for a while, causing
-anyone nearby to blink away from the caster. The chance of blinking depends on
-the distance from the caster, being nearly certain when directly adjacent. It
-causes magical contamination when cast.
-%%%%
 Dispel Undead spell
 
 Harms an undead creature greatly by interfering with the forces binding it
@@ -1550,6 +1543,10 @@ significant portion of its damage bypasses cold resistance.
 Thunderbolt spell
 
 Creates an arc of electricity.
+%%%%
+Time Stop spell
+
+Contrary to the name, this spell merely speeds up the caster's mind and flow of magical power by several hundred times. This acceleration can only handle a limited amount of power, so it only works for spells of level 4 or lower. Also, the caster cannot gain mana or reduce spell costs while this effect is active.
 %%%%
 Tomb of Doroklohe spell
 

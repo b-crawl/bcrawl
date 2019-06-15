@@ -2462,7 +2462,7 @@ static const struct spell_desc spelldata[] =
     SPELL_SUMMON_HYDRA, "Summon Hydra",
     SPTYP_SUMMONING,
     SPFLAG_MONS_ABJURE,
-    7,
+    6,
     200,
     -1, -1,
     6, 0,

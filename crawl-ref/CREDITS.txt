@@ -216,6 +216,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Vesa Kivimäki
     Daniel Klein
     Jon Knapp
+    Quinten Konyn
     Ilkka Koskela
     infiniplex
     Vambola Kotkas

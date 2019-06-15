@@ -3228,7 +3228,7 @@ int player_stealth()
 
     stealth += STEALTH_PIP * you.scan_artefacts(ARTP_STEALTH);
 
-    stealth += STEALTH_PIP * you.wearing(EQ_RINGS, RING_STEALTH);
+    stealth += STEALTH_PIP * you.wearing(EQ_RINGS, RING_STEALTH) * 2;
     stealth -= STEALTH_PIP * you.wearing(EQ_RINGS, RING_ATTENTION);
 
     if (you.duration[DUR_STEALTH])
@@ -3289,7 +3289,7 @@ int player_stealth()
                 stealth /= 2;       // splashy-splashy
         }
         else if (boots && get_armour_ego_type(*boots) == SPARM_STEALTH)
-            stealth += STEALTH_PIP;
+            stealth += STEALTH_PIP * 2;
         else if (you.has_usable_hooves())
             stealth -= 5 + 5 * you.get_mutation_level(MUT_HOOVES);
         else if (you.species == SP_FELID

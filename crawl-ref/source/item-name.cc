@@ -628,7 +628,7 @@ const char* armour_ego_name(const item_def& item, bool terse)
         case SPARM_FLYING:            return "Fly";
         case SPARM_MAGIC_RESISTANCE:  return "MR+";
         case SPARM_PROTECTION:        return "AC+3";
-        case SPARM_STEALTH:           return "Stlth+";
+        case SPARM_STEALTH:           return "Stlth++";
         case SPARM_RESISTANCE:        return "rC+ rF+";
         case SPARM_POSITIVE_ENERGY:   return "rN+";
         case SPARM_ARCHMAGI:          return "Archmagi";
@@ -855,7 +855,7 @@ const char* jewellery_effect_name(int jeweltype, bool terse)
         case RING_RESIST_CORROSION:      return "rCorr";
         case RING_ATTENTION:             return "Stlth-";
         case RING_EVASION:               return "EV";
-        case RING_STEALTH:               return "Stlth+";
+        case RING_STEALTH:               return "Stlth++";
         case RING_DEXTERITY:             return "Dex";
         case RING_INTELLIGENCE:          return "Int";
         case RING_MAGICAL_POWER:         return "MP+9";

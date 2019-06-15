@@ -136,6 +136,7 @@ Pull requests for new content are welcome.
   - v1.11.6: Iskenderun's Mystic Blast is level 3, and has lower base damage but higher damage scaling.
   - v1.11.7: Irradiate has the same damage formula as Bolt of Fire, which has lower base damage but higher damage scaling.
   - v1.12: Lesser Beckoning has +1 range.
+  - v1.12.1: Summon Hydra is level 6.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -190,6 +191,7 @@ Pull requests for new content are welcome.
   - v1.12: Randart crossbows of penetration are 2x as likely.
   - v1.12: Changed base delay for weapons: falchion (13->12), long sword (14->13).
   - v1.12.1: Staves of energy are removed. A staff of power can be used to channel mana, and enhancer staves remove spell hunger for their spell school.
+  - v1.12.1: Boots of stealth and rings of stealth give 2x the stealth bonus.
 
 #### Removed Items
   - Amulet of Harm

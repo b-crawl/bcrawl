@@ -187,8 +187,7 @@ of which contains treasure guarded by dangerous and sometimes exotic creatures.
 At the end awaits a fearsome minotaur guarding a large hoard of loot taken from
 the bodies of foolish adventurers.
 
-Beware that powerful magic prevents long-range teleports in Gauntlets. What's
-worse, some of these complexes offer only one exit...in the minotaur's lair.
+Beware — powerful magic prevents long-range teleports in Gauntlets.
 %%%%
 Bazaar
 

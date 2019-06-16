@@ -65,6 +65,7 @@ Pull requests for new content are welcome.
   - v1.7: An "Adventure" mode is added, which is a normal game that starts the player with 2 extra lives.
   - v1.9.3: When in Zot or carrying the Orb, teleports from stairs and traps are replaced by blinks.
   - v1.11: Seeded runs are merged from DCSS.
+  - v1.12.1: Taking stairs while on D:1 or D:2 can't teleport players.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.

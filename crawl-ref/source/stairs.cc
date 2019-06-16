@@ -520,7 +520,8 @@ static level_id _travel_destination(const dungeon_feature_type how,
             dest.depth = 1;
         return dest;
     }
-    else if(going_up && feat_is_staircase(how) && one_chance_in(25))
+    else if(going_up && feat_is_staircase(how) && one_chance_in(25)
+        && !(player_in_branch(BRANCH_DUNGEON) && you.depth < 3))
     {
         mpr("As you climb the stairs, a rune flashes!");
         if (you.no_tele(true, true))
@@ -889,8 +890,9 @@ void floor_transition(dungeon_feature_type how,
     autotoggle_autopickup(false);
     request_autopickup();
     
-    if(!going_up && feat_is_staircase(how) && one_chance_in(25))
-        {
+    if(!going_up && feat_is_staircase(how) && one_chance_in(25)
+        && !(player_in_branch(BRANCH_DUNGEON) && you.depth < 4))
+    {
         mpr("Near the exit of the stairs, a rune flashes!");
         if (you.no_tele(true, true))
             canned_msg(MSG_STRANGE_STASIS);
@@ -900,7 +902,7 @@ void floor_transition(dungeon_feature_type how,
         }
         else
             you.teleport(true, false);
-        }
+    }
 }
 
 /**

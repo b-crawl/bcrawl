@@ -3557,12 +3557,7 @@ bool is_useless_item(const item_def &item, bool temp)
             return player_prot_life(false, temp, false) == 3;
 
         case AMU_REGENERATION:
-            return you.get_mutation_level(MUT_NO_REGENERATION) > 0
-                   || (temp
-                       && you.get_mutation_level(MUT_INHIBITED_REGENERATION) > 0
-                       && regeneration_is_inhibited())
-                   || (temp && you.species == SP_VAMPIRE
-                       && you.hunger_state <= HS_STARVING);
+            return you.get_mutation_level(MUT_NO_REGENERATION) > 0;
 
         case RING_SEE_INVISIBLE:
             return you.innate_sinv();

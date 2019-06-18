@@ -101,6 +101,7 @@ Pull requests for new content are welcome.
   - v1.10: Felids gain half XP for seeing enemies, and no experience for killing them. They have -30% HP instead of -40%, and +0 XP instead of -1 XP.
   - v1.11.5: Spriggans can't train Conjurations, but have some better aptitudes.
   - v1.12: Barachim hop target radius is reduced to 1.
+  - v1.12.1: Felids have adjusted aptitudes, including (-1 -> +1) Spellcasting.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

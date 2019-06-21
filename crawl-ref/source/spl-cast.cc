@@ -1197,8 +1197,7 @@ static unique_ptr<targeter> _spell_targeter(spell_type spell, int pow,
         return make_unique<targeter_shotgun>(&you, shotgun_beam_count(pow),
                                              range);
     case SPELL_RUPTURE:
-        return make_unique<targeter_beam>(&you, range, ZAP_ICEBLAST, pow,
-                                          1, 1);
+        return make_unique<targeter_rupture>(&you, range, pow);
     case SPELL_VIOLENT_UNRAVELLING:
         return make_unique<targeter_unravelling>(&you, range, pow);
     case SPELL_RANDOM_BOLT:

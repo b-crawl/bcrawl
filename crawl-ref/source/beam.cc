@@ -3100,6 +3100,9 @@ void bolt::tracer_affect_player()
     if (flavour == BEAM_UNRAVELLING && player_is_debuffable())
         is_explosion = true;
 
+    if (flavour == BEAM_RUPTURE)
+        is_explosion = true;
+
     // Check whether thrower can see player, unless thrower == player.
     if (YOU_KILL(thrower))
     {
@@ -3617,6 +3620,10 @@ void bolt::affect_player_enchantment(bool resistible)
         debuff_player();
         _unravelling_explode(*this);
         obvious_effect = true;
+        break;
+    
+    case BEAM_RUPTURE:
+        mpr("error: rupture shouldn't target players");
         break;
 
     default:
@@ -4174,6 +4181,9 @@ void bolt::tracer_affect_monster(monster* mon)
         return;
 
     if (flavour == BEAM_UNRAVELLING && monster_is_debuffable(*mon))
+        is_explosion = true;
+
+    if (flavour == BEAM_RUPTURE)
         is_explosion = true;
 
     // Trigger explosion on exploding beams.
@@ -5056,6 +5066,8 @@ bool bolt::has_saving_throw() const
     case BEAM_SAP_MAGIC:
     case BEAM_UNRAVELLING:
     case BEAM_UNRAVELLED_MAGIC:
+    case BEAM_RUPTURE:
+    case BEAM_RUPTURED_MAGIC:
     case BEAM_INFESTATION:
     case BEAM_IRRESISTIBLE_CONFUSION:
     case BEAM_VILE_CLUTCH:
@@ -5698,6 +5710,29 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         debuff_monster(*mon);
         _unravelling_explode(*this);
         return MON_AFFECTED;
+
+    case BEAM_RUPTURE:
+    {
+        int mons_mr = get_monster_data(mon->type)->resist_magic;
+        if (mons_mr > 200)
+            mons_mr = 200;
+
+        mon_enchant lowered_mr(ENCH_LOWERED_MR, 1, &you, 70 + random2(75));
+        if (!mons_immune_magic(*mon))
+            mon->add_ench(lowered_mr);
+        
+        const int dice = 6;
+        int die_size = div_rand_round(mons_mr*(18*3 + (this->ench_power)*2), 3*100*dice);
+
+        this->damage       = dice_def(dice, die_size);
+        this->colour       = ETC_MUTAGENIC;
+        this->flavour      = BEAM_RUPTURED_MAGIC;
+        this->ex_size      = 1;
+        this->is_explosion = true;
+
+        obvious_effect = true;
+        return MON_AFFECTED;
+    }
 
     case BEAM_INFESTATION:
     {
@@ -6507,6 +6542,8 @@ static string _beam_type_name(beam_type type)
     case BEAM_RESISTANCE:            return "resistance";
     case BEAM_UNRAVELLING:           return "unravelling";
     case BEAM_UNRAVELLED_MAGIC:      return "unravelled magic";
+    case BEAM_RUPTURE:               return "magical disruption";
+    case BEAM_RUPTURED_MAGIC:        return "unstable magic";
     case BEAM_SHARED_PAIN:           return "shared pain";
     case BEAM_IRRESISTIBLE_CONFUSION:return "confusion";
     case BEAM_INFESTATION:           return "infestation";

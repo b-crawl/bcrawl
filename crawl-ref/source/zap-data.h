@@ -857,7 +857,7 @@ _mon_hex_zap(ZAP_HIBERNATION, BEAM_HIBERNATION),
     true,
     false,
     false,
-    2 // XXX: Sound 2 for level one spell?
+    2
 },
 
 {
@@ -893,7 +893,7 @@ _mon_hex_zap(ZAP_HIBERNATION, BEAM_HIBERNATION),
     true,
     false,
     false,
-    6 // XXX: Less noise because it's poison?
+    6
 },
 
 _mon_hex_zap(ZAP_PETRIFY, BEAM_PETRIFY),
@@ -1146,6 +1146,24 @@ _mon_hex_zap(ZAP_SLEEP, BEAM_SLEEP),
     ETC_MUTAGENIC,
     true,
     BEAM_UNRAVELLING,
+    NUM_DCHAR_TYPES,
+    false,
+    false,
+    false,
+    0 // dubious
+},
+
+{
+    ZAP_RUPTURE,
+    "magical disruption",
+    200,
+    nullptr,
+    new tohit_calculator<0, 1, 1>,
+    nullptr,
+    nullptr,
+    ETC_MUTAGENIC,
+    true,
+    BEAM_RUPTURE,
     NUM_DCHAR_TYPES,
     false,
     false,

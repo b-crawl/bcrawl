@@ -1651,9 +1651,6 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
     case SPELL_LRD:
         return cast_fragmentation(powc, &you, spd.target, fail);
 
-    case SPELL_GRAVITAS:
-        return cast_gravitas(powc, beam.target, fail);
-
     // other effects
     case SPELL_DISCHARGE:
         return cast_discharge(powc, you, fail);

@@ -1914,7 +1914,6 @@ bool setup_mons_cast(const monster* mons, bolt &pbolt, spell_type spell_cast,
 #if TAG_MAJOR_VERSION == 34
     case SPELL_CHANT_FIRE_STORM:
 #endif
-    case SPELL_GRAVITAS:
     case SPELL_ENTROPIC_WEAVE:
     case SPELL_SUMMON_EXECUTIONERS:
     case SPELL_DOOM_HOWL:
@@ -6828,10 +6827,6 @@ void mons_cast(monster* mons, bolt pbolt, spell_type spell_cast,
                         CLEANSING_FLAME_SPELL, mons->pos(), mons);
         return;
 
-    case SPELL_GRAVITAS:
-        fatal_attraction(foe->pos(), mons, splpow);
-        return;
-
     case SPELL_ENTROPIC_WEAVE:
         foe->corrode_equipment("the entropic weave");
         return;
@@ -8108,7 +8103,7 @@ static bool _ms_waste_of_time(monster* mon, mon_spell_slot slot)
     }
 
     case SPELL_RUPTURE:
-        mpr("error: Mana Rupture should not be a monster spell.")
+        mpr("error: Mana Rupture should not be a monster spell.");
         return true;
 
     case SPELL_DOOM_HOWL:

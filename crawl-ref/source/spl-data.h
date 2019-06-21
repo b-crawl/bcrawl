@@ -269,7 +269,7 @@ static const struct spell_desc spelldata[] =
 {
     SPELL_TIME_STOP, "Time Stop",
     SPTYP_TRANSLOCATION | SPTYP_CHARMS,
-    SPFLAG_UTILITY | SPFLAG_SELFENCH,
+    SPFLAG_UTILITY | SPFLAG_SELFENCH | SPFLAG_NO_GHOST,
     8,
     0,
     -1, -1,

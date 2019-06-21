@@ -3685,13 +3685,13 @@ static const struct spell_desc spelldata[] =
 #endif
 
 {
-    SPELL_GRAVITAS, "Gell's Gravitas",
-    SPTYP_TRANSLOCATION,
-    SPFLAG_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEEDS_TRACER,
-    3,
+    SPELL_RUPTURE, "Mana Rupture",
+    SPTYP_CONJURATION | SPTYP_HEXES,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_NOT_SELF | SPFLAG_NO_GHOST | SPFLAG_CHAOTIC,
+    7,
     200,
-    LOS_RADIUS, LOS_RADIUS,
-    3, 0,
+    3, 3,
+    7, 0,
     TILEG_GRAVITAS,
 },
 

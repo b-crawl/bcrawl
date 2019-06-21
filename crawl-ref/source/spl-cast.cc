@@ -1196,13 +1196,9 @@ static unique_ptr<targeter> _spell_targeter(spell_type spell, int pow,
     case SPELL_SCATTERSHOT:
         return make_unique<targeter_shotgun>(&you, shotgun_beam_count(pow),
                                              range);
-    case SPELL_GRAVITAS:
-        return make_unique<targeter_smite>(&you, range,
-                                           gravitas_range(pow),
-                                           gravitas_range(pow),
-                                           false,
-                                           [](const coord_def& p) -> bool {
-                                              return you.pos() != p; });
+    case SPELL_RUPTURE:
+        return make_unique<targeter_beam>(&you, range, ZAP_ICEBLAST, pow,
+                                          1, 1);
     case SPELL_VIOLENT_UNRAVELLING:
         return make_unique<targeter_unravelling>(&you, range, pow);
     case SPELL_RANDOM_BOLT:

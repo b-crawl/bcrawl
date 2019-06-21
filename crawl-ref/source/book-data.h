@@ -110,6 +110,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_PETRIFY,
     SPELL_VIOLENT_UNRAVELLING,
     SPELL_ENGLACIATION,
+    SPELL_RUPTURE,
 },
 
 {   // Book of Changes

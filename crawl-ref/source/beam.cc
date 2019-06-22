@@ -5716,6 +5716,9 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         int mons_mr = get_monster_data(mon->type)->resist_magic;
         if (mons_mr > 200)
             mons_mr = 200;
+        
+        if(mon->has_ench(ENCH_LOWERED_MR))
+            mons_mr /= 2;
 
         mon_enchant lowered_mr(ENCH_LOWERED_MR, 1, &you, 70 + random2(75));
         if (!mons_immune_magic(*mon))

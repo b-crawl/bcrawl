@@ -1480,10 +1480,6 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_OCTOPODE,        SK_INVOCATIONS,     1),
     APT(SP_OCTOPODE,        SK_EVOCATIONS,      1),
 
-#if TAG_MAJOR_VERSION == 34
-    // It seems that we need to keep this as long as SP_DJINNI/SP_LAVAORC
-    // (which  are needed for loading old Djinni saves) is still around.
-
     // SP_DJINNI
     APT(SP_DJINNI,          SK_FIGHTING,        0),
     APT(SP_DJINNI,          SK_SHORT_BLADES,    0),
@@ -1499,9 +1495,13 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_DJINNI,          SK_ARMOUR,          0),
     APT(SP_DJINNI,          SK_DODGING,         0),
     APT(SP_DJINNI,          SK_STEALTH,        -1),
+#if TAG_MAJOR_VERSION == 34
     APT(SP_DJINNI,          SK_STABBING,      UNUSABLE_SKILL),
+#endif
     APT(SP_DJINNI,          SK_SHIELDS,         0),
+#if TAG_MAJOR_VERSION == 34
     APT(SP_DJINNI,          SK_TRAPS,         UNUSABLE_SKILL),
+#endif
     APT(SP_DJINNI,          SK_UNARMED_COMBAT,  0),
     APT(SP_DJINNI,          SK_SPELLCASTING,    4),
     APT(SP_DJINNI,          SK_CONJURATIONS,    2),
@@ -1518,6 +1518,10 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_DJINNI,          SK_POISON_MAGIC,    2),
     APT(SP_DJINNI,          SK_INVOCATIONS,     1),
     APT(SP_DJINNI,          SK_EVOCATIONS,      1),
+
+#if TAG_MAJOR_VERSION == 34
+    // It seems that we need to keep this as long as SP_LAVAORC
+    // (which  are needed for loading old saves) is still around.
 
     // SP_LAVA_ORC
     APT(SP_LAVA_ORC,        SK_FIGHTING,        2),

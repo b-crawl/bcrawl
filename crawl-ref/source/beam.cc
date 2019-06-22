@@ -5847,6 +5847,10 @@ const map<spell_type, explosion_sfx> spell_explosions = {
         "The enchantments explode!",
         "a sharp crackling", // radiation = geiger counter
     } },
+    { SPELL_RUPTURE, {
+        "The unstable magic explodes!",
+        "the sound of breaking glass",
+    } },
     { SPELL_ICEBLAST, {
         "The mass of ice explodes!",
         "an explosion",

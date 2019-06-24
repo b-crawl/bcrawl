@@ -73,6 +73,9 @@ size_t shotgun_beam_count(int pow);
 spret cast_scattershot(const actor *caster, int pow, const coord_def &pos,
                             bool fail = false);
 
+size_t icicle_burst_count(int pow);
+spret cast_icicle_burst(const actor *caster, int pow, const coord_def &pos, bool fail = false);
+
 spret cast_ignition(const actor *caster, int pow, bool fail);
 
 spret cast_borgnjors_vile_clutch(int pow, bolt &beam, bool fail);

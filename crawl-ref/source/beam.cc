@@ -4341,7 +4341,7 @@ void bolt::monster_post_hit(monster* mon, int dmg)
 {
     // Suppress the message for scattershot.
     if (YOU_KILL(thrower) && you.see_cell(mon->pos())
-        && name != "burst of metal fragments")
+        && !(name.compare(0, 9, "burst of ", 0, 9)))
     {
         print_wounds(*mon);
     }
@@ -4858,7 +4858,7 @@ void bolt::affect_monster(monster* mon)
     {
         const bool deflected = _test_beam_hit(beam_hit, rand_ev, pierce, 0, r);
         // If the PLAYER cannot see the monster, don't tell them anything!
-        if (mon->observable() && name != "burst of metal fragments")
+        if (mon->observable() && !(name.compare(0, 9, "burst of ", 0, 9)))
         {
             // if it would have hit otherwise...
             if (_test_beam_hit(beam_hit, rand_ev, pierce, 0, r))

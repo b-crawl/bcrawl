@@ -804,6 +804,24 @@ _mon_hex_zap(ZAP_BANISHMENT, BEAM_BANISH, 150),
 },
 
 {
+    ZAP_ICICLE_BURST,
+    "burst of ice shards",
+    100,
+    new calcdice_calculator<3, 10, 1, 2>,
+    new tohit_calculator<9, 1, 12>,
+    new dicedef_calculator<3, 8, 1, 11>,
+    new tohit_calculator<17, 1, 25>,
+    WHITE,
+    false,
+    BEAM_ICE,
+    DCHAR_FIRED_MISSILE,
+    false,
+    false,
+    false,
+    4
+},
+
+{
     ZAP_CORONA,
     "",
     100,

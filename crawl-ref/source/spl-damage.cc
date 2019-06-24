@@ -3061,7 +3061,7 @@ spret cast_icicle_burst(const actor *caster, int pow, const coord_def &pos,
     beam.source      = caster->pos();
     beam.source_id   = caster->mid;
     beam.source_name = caster->name(DESC_PLAIN, true);
-    zappy(ZAP_THROW_ICICLE, pow, false, beam);
+    zappy(ZAP_ICICLE_BURST, pow, false, beam);
     beam.aux_source  = beam.name;
 
     beam.damage = dice_def(2, 7);

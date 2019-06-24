@@ -3030,6 +3030,88 @@ spret cast_scattershot(const actor *caster, int pow, const coord_def &pos,
     return spret::success;
 }
 
+size_t icicle_burst_count(int pow)
+{
+    return (7 + div_rand_round(pow, 7));
+}
+
+spret cast_icicle_burst(const actor *caster, int pow, const coord_def &pos,
+                            bool fail)
+{
+    const size_t range = spell_range(SPELL_ICICLE_BURST, pow);
+    const size_t beam_count = icicle_burst_count(pow);
+
+    targeter_shotgun hitfunc(caster, beam_count, range);
+
+    hitfunc.set_aim(pos);
+
+    if (caster->is_player())
+    {
+        if (stop_attack_prompt(hitfunc, "icicle burst"))
+            return spret::abort;
+    }
+
+    fail_check();
+
+    bolt beam;
+    beam.thrower = (caster && caster->is_player()) ? KILL_YOU :
+                   (caster)                        ? KILL_MON
+                                                   : KILL_MISC;
+    beam.range       = range;
+    beam.source      = caster->pos();
+    beam.source_id   = caster->mid;
+    beam.source_name = caster->name(DESC_PLAIN, true);
+    zappy(ZAP_THROW_ICICLE, pow, false, beam);
+    beam.aux_source  = beam.name;
+
+    beam.damage = dice_def(2, 7);
+    beam.hit = 10;
+
+    // Choose a random number of 'pellets' to fire for each beam in the spread.
+    // total pellets has O(beam_count^2)
+    vector<size_t> pellets;
+    pellets.resize(beam_count);
+    for (size_t i = 0; i < beam_count; i++)
+        pellets[random2avg(beam_count, 3)]++;
+
+    map<mid_t, int> hit_count;
+
+    // for each beam of pellets...
+    for (size_t i = 0; i < beam_count; i++)
+    {
+        // find the beam's path.
+        ray_def ray = hitfunc.rays[i];
+        for (size_t j = 0; j < range; j++)
+            ray.advance();
+
+        // fire the beam once per pellet.
+        for (size_t j = 0; j < pellets[i]; j++)
+        {
+            bolt tempbeam = beam;
+            tempbeam.draw_delay = 0;
+            tempbeam.target = ray.pos();
+            tempbeam.fire();
+            scaled_delay(5);
+            for (auto it : tempbeam.hit_count)
+               hit_count[it.first] += it.second;
+        }
+    }
+
+    for (auto it : hit_count)
+    {
+        if (it.first == MID_PLAYER)
+            continue;
+
+        monster* mons = monster_by_mid(it.first);
+        if (!mons || !mons->alive() || !you.can_see(*mons))
+            continue;
+
+        print_wounds(*mons);
+    }
+
+    return spret::success;
+}
+
 static void _setup_borgnjors_vile_clutch(bolt &beam, int pow)
 {
     beam.name         = "vile clutch";

@@ -1191,11 +1191,11 @@ static unique_ptr<targeter> _spell_targeter(spell_type spell, int pow,
     case SPELL_GLACIATE:
         return make_unique<targeter_cone>(&you, range);
     case SPELL_CLOUD_CONE:
-        return make_unique<targeter_shotgun>(&you, CLOUD_CONE_BEAM_COUNT,
-                                             range);
+        return make_unique<targeter_shotgun>(&you, CLOUD_CONE_BEAM_COUNT, range);
     case SPELL_SCATTERSHOT:
-        return make_unique<targeter_shotgun>(&you, shotgun_beam_count(pow),
-                                             range);
+        return make_unique<targeter_shotgun>(&you, shotgun_beam_count(pow), range);
+    case SPELL_ICICLE_BURST:
+        return make_unique<targeter_shotgun>(&you, icicle_burst_count(pow), range);
     case SPELL_RUPTURE:
         return make_unique<targeter_rupture>(&you, range, pow);
     case SPELL_VIOLENT_UNRAVELLING:
@@ -1934,6 +1934,9 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
 
     case SPELL_SCATTERSHOT:
         return cast_scattershot(&you, powc, target, fail);
+
+    case SPELL_ICICLE_BURST:
+        return cast_icicle_burst(&you, powc, target, fail);
 
     case SPELL_RANDOM_EFFECTS:
         return cast_random_effects(powc, beam, fail);

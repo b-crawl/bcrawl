@@ -4042,6 +4042,17 @@ static const struct spell_desc spelldata[] =
 },
 
 {
+    SPELL_ICICLE_BURST, "Icicle Burst",
+    SPTYP_CONJURATION | SPTYP_ICE,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF,
+    7,
+    200,
+    5, 5,
+    9, 0,
+    TILEG_ICICLE_BURST,
+},
+
+{
     SPELL_NO_SPELL, "nonexistent spell",
     SPTYP_NONE,
     SPFLAG_TESTING,

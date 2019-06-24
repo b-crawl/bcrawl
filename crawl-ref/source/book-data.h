@@ -88,8 +88,8 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of the Tempests
-    SPELL_DISCHARGE,
     SPELL_LIGHTNING_BOLT,
+    SPELL_ICICLE_BURST,
     SPELL_CHAIN_LIGHTNING,
     SPELL_IGNITION,
     SPELL_TORNADO,
@@ -327,6 +327,7 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Annihilations
+    SPELL_ICICLE_BURST,
     SPELL_CHAIN_LIGHTNING,
     SPELL_LEHUDIBS_CRYSTAL_SPEAR,
     SPELL_GLACIATE,

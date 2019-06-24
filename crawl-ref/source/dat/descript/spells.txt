@@ -709,6 +709,10 @@ While transformed, any equipped weapons and armour are melded.
 
 With four bars of power, the effects of this spell last until cancelled.
 %%%%
+Icicle Burst spell
+
+A modified version of Throw Icicle, this spell launches several shards of ice, sacrificing accuracy and armour penetration to maximize destructive power.
+%%%%
 Ignite Poison spell
 
 Converts all nearby poison into liquid flame, burning poisoned creatures from

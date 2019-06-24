@@ -806,7 +806,7 @@ _mon_hex_zap(ZAP_BANISHMENT, BEAM_BANISH, 150),
 {
     ZAP_ICICLE_BURST,
     "burst of ice shards",
-    100,
+    200,
     new calcdice_calculator<3, 10, 1, 2>,
     new tohit_calculator<9, 1, 12>,
     new dicedef_calculator<3, 8, 1, 11>,

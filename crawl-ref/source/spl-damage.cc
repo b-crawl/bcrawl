@@ -3032,7 +3032,7 @@ spret cast_scattershot(const actor *caster, int pow, const coord_def &pos,
 
 size_t icicle_burst_count(int pow)
 {
-    return (7 + div_rand_round(pow, 7));
+    return (7 + div_rand_round(pow, 6));
 }
 
 spret cast_icicle_burst(const actor *caster, int pow, const coord_def &pos,
@@ -3064,8 +3064,8 @@ spret cast_icicle_burst(const actor *caster, int pow, const coord_def &pos,
     zappy(ZAP_ICICLE_BURST, pow, false, beam);
     beam.aux_source  = beam.name;
 
-    beam.damage = dice_def(2, 7);
-    beam.hit = 10;
+    beam.damage = dice_def(2, 9);
+    beam.hit = 8;
 
     // Choose a random number of 'pellets' to fire for each beam in the spread.
     // total pellets has O(beam_count^2)

@@ -4850,6 +4850,8 @@ void bolt::affect_monster(monster* mon)
     defer_rand r;
     int rand_ev = random2(mon->evasion());
     int defl = mon->missile_deflection();
+	
+	int not_burst_fire = name.compare(0, 9, "burst of ", 0, 9);
 
     // FIXME: We're randomising mon->evasion, which is further
     // randomised inside test_beam_hit. This is so we stay close to the
@@ -4858,7 +4860,7 @@ void bolt::affect_monster(monster* mon)
     {
         const bool deflected = _test_beam_hit(beam_hit, rand_ev, pierce, 0, r);
         // If the PLAYER cannot see the monster, don't tell them anything!
-        if (mon->observable() && (name.compare(0, 9, "burst of ", 0, 9)))
+        if (mon->observable() && not_burst_fire)
         {
             // if it would have hit otherwise...
             if (_test_beam_hit(beam_hit, rand_ev, pierce, 0, r))
@@ -4935,7 +4937,7 @@ void bolt::affect_monster(monster* mon)
     }
 
     // Apply flavoured specials.
-    mons_adjust_flavoured(mon, *this, postac, true);
+    mons_adjust_flavoured(mon, *this, postac, not_burst_fire);
 
     // mons_adjust_flavoured may kill the monster directly.
     if (mon->alive())

@@ -4850,8 +4850,8 @@ void bolt::affect_monster(monster* mon)
     defer_rand r;
     int rand_ev = random2(mon->evasion());
     int defl = mon->missile_deflection();
-	
-	int not_burst_fire = name.compare(0, 9, "burst of ", 0, 9);
+    
+    int not_burst_fire = name.compare(0, 9, "burst of ", 0, 9);
 
     // FIXME: We're randomising mon->evasion, which is further
     // randomised inside test_beam_hit. This is so we stay close to the

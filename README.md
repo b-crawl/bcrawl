@@ -112,7 +112,7 @@ Pull requests for new content are welcome.
   - v1.8.3: Tree Form (L5 Hexes/Transmutation) acts like a Potion of Lignification with a shorter duration.
   - v1.12.1: Time Stop (L8 Charms/Translocations) lets you instantly cast spells below L5.
   - v1.12.1: Mana Rupture (L7 Conjurations/Hexes) creates an explosion that does damage proportional to the target's magic resistance.
-  - v1.12.1: Icicle Burst (L7 Conjurations/Ice) shoots several weak icicles.
+  - v1.12.1: Icicle Burst (L7 Conjurations/Ice) shoots several weak icicles. It's similar to the Scattershot wand, but it shoots icicles (40% cold), it has lower accuracy, and it's less affected by monster AC.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.

@@ -57,6 +57,7 @@ Pull requests for new content are welcome.
   - v1.11.7: Enchanters start with a scroll of fog.
   - v1.11.7: Wanderers start with significantly more spells on average.
   - v1.12: Monks start with 2 Invocations skill.
+  - v1.12.1: Wizards start with a plain staff.
 
 #### Features
   - All items are automatically identified if the player has a rune.

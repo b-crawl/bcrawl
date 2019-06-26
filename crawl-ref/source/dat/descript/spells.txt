@@ -1018,9 +1018,9 @@ otherwise almost indistinguishable from the original.
 %%%%
 Piercing Shot spell
 
-Allows the caster to throw of fire missiles through any targets they hit,
+Allows the caster to fire or throw missiles through any targets they hit,
 potentially hitting everything in their path until they reach their maximum
-distance. These missiles also bypass shields. Each missile thrown or fired
+range. These missiles also bypass shields. Each missile thrown or fired
 in this way consumes a further 2 MP.
 %%%%
 Plane Rend spell

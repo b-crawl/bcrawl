@@ -58,6 +58,7 @@ Pull requests for new content are welcome.
   - v1.11.7: Wanderers start with significantly more spells on average.
   - v1.12: Monks start with 2 Invocations skill.
   - v1.12.1: Wizards start with a plain staff.
+  - v1.12.1: Venom mages start with a potion of berserk rage and a potion of degeneration. (This lets slow species kill oozes on D1.)
 
 #### Features
   - All items are automatically identified if the player has a rune.

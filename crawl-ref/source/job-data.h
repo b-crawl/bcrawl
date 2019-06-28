@@ -271,7 +271,7 @@ static const map<job_type, job_def> job_data =
     0, 7, 5,
     { SP_AVARIEL, SP_SPRIGGAN, SP_NAGA, SP_MERFOLK, SP_FELID,
       SP_DEMONSPAWN, SP_FAIRY },
-    { "robe", "Young Poisoner's Handbook" },
+    { "robe", "Young Poisoner's Handbook", "potion of berserk rage", "potion of degeneration" },
     WCHOICE_NONE,
     { { SK_CONJURATIONS, 1 }, { SK_POISON_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
       { SK_DODGING, 2 }, { SK_STEALTH, 2 }, },

@@ -4187,7 +4187,7 @@ void bolt::tracer_affect_monster(monster* mon)
             is_explosion = true;
         break;
     case BEAM_RUPTURE:
-        if(!(mons->has_ench(ENCH_FAKE_ABJURATION) || mons->has_ench(ENCH_SHORT_LIVED) || mons->is_summoned()))
+        if(!(mon->has_ench(ENCH_FAKE_ABJURATION) || mon->has_ench(ENCH_SHORT_LIVED) || mon->is_summoned()))
             is_explosion = true;
         break;
     default: break;
@@ -5722,9 +5722,9 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
 
     case BEAM_RUPTURE:
     {
-        if (mons->has_ench(ENCH_FAKE_ABJURATION) || mons->has_ench(ENCH_SHORT_LIVED) || mons->is_summoned())
+        if (mon->has_ench(ENCH_FAKE_ABJURATION) || mon->has_ench(ENCH_SHORT_LIVED) || mon->is_summoned())
         {
-            simple_monster_message(mon, " dissipates.");
+            simple_monster_message(*mon, " dissipates.");
             monster_die(*mon, KILL_DISMISSED, NON_MONSTER);
             return MON_AFFECTED;
         }

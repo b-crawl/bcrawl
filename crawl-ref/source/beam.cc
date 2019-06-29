@@ -4180,11 +4180,18 @@ void bolt::tracer_affect_monster(monster* mon)
     if (!agent() || !agent()->can_see(*mon))
         return;
 
-    if (flavour == BEAM_UNRAVELLING && monster_is_debuffable(*mon))
-        is_explosion = true;
-
-    if (flavour == BEAM_RUPTURE)
-        is_explosion = true;
+    switch(flavour)
+    {
+    case BEAM_UNRAVELLING:
+        if (monster_is_debuffable(*mon))
+            is_explosion = true;
+        break;
+    case BEAM_RUPTURE:
+        if(!(mons->has_ench(ENCH_FAKE_ABJURATION) || mons->has_ench(ENCH_SHORT_LIVED) || mons->is_summoned()))
+            is_explosion = true;
+        break;
+    default: break;
+    }
 
     // Trigger explosion on exploding beams.
     if (is_explosion && !in_explosion_phase)
@@ -5715,6 +5722,13 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
 
     case BEAM_RUPTURE:
     {
+        if (mons->has_ench(ENCH_FAKE_ABJURATION) || mons->has_ench(ENCH_SHORT_LIVED) || mons->is_summoned())
+        {
+            simple_monster_message(mon, " dissipates.");
+            monster_die(*mon, KILL_DISMISSED, NON_MONSTER);
+            return MON_AFFECTED;
+        }
+        
         int mons_mr = get_monster_data(mon->type)->resist_magic;
         if (mons_mr > 200)
             mons_mr = 200;

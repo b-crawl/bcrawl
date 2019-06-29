@@ -869,6 +869,8 @@ cannot affect artificial beings, and the undead will decompose if affected.
 Mana Rupture spell
 
 Destabilizes the target's natural flow of magic, creating an explosion of unstable magic proportional in strength to the target's resistance to enchantments. Targets not completely immune to enchantments will become more vulnerable to them, if they survive.
+
+When cast on summoned creatures, this spell instantly destroys them instead of creating an explosion.
 %%%%
 Mara Summon spell
 

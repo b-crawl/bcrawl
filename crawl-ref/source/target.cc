@@ -334,7 +334,8 @@ static bool rupture_explodes_at(const coord_def c)
         return true;
 
     const monster_info* mi = env.map_knowledge(c).monsterinfo();
-    return mi;
+	const monster *mon = monster_at(c);
+    return mi && !(mon->has_ench(ENCH_SHORT_LIVED) || mon->summoner);
 }
 
 bool targeter_rupture::set_aim(coord_def a)

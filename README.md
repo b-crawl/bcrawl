@@ -143,6 +143,7 @@ Pull requests for new content are welcome.
   - v1.11.7: Irradiate has the same damage formula as Bolt of Fire, which has lower base damage but higher damage scaling.
   - v1.12: Lesser Beckoning has +1 range.
   - v1.12.1: Summon Hydra is level 6, and has a summon cap of 1.
+  - v1.12.1: Lesser Beckoning is renamed to Beckoning.
 
 #### Removed Spells
   - Summon Guardian Golem

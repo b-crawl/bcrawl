@@ -3885,7 +3885,7 @@ static const struct spell_desc spelldata[] =
 },
 
 {
-    SPELL_BECKONING, "Lesser Beckoning",
+    SPELL_BECKONING, "Beckoning",
     SPTYP_TRANSLOCATION,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEEDS_TRACER,
     3,

@@ -145,6 +145,7 @@ Pull requests for new content are welcome.
   - v1.12: Lesser Beckoning has +1 range.
   - v1.12.1: Summon Hydra is level 6, and has a summon cap of 1.
   - v1.12.1: Lesser Beckoning is renamed to Beckoning.
+  - v1.12.1: Throw Icicle has longer range at high spell power.
 
 #### Removed Spells
   - Summon Guardian Golem

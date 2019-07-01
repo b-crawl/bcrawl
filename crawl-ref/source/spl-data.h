@@ -1277,7 +1277,7 @@ static const struct spell_desc spelldata[] =
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER,
     4,
     100,
-    5, 5,
+    4, 8,  // capped at LOS above 75 power
     4, 0,
     TILEG_THROW_ICICLE,
 },

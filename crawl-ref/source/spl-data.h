@@ -702,7 +702,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_ICE,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF,
     1,
-    25,
+    50,
     1, 1,
     1, 0,
     TILEG_FREEZE,

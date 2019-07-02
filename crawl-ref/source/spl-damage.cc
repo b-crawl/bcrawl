@@ -786,8 +786,6 @@ spret vampiric_drain(int pow, monster* mons, bool fail)
 
 spret cast_freeze(int pow, monster* mons, bool fail)
 {
-    pow = min(25, pow);
-
     if (!mons || mons->submerged())
     {
         fail_check();

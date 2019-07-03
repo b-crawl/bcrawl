@@ -1498,7 +1498,7 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_DISCHARGE, "Static Discharge",
-    SPTYP_CONJURATION | SPTYP_AIR,
+    SPTYP_AIR,
     SPFLAG_AREA,
     3,
     100,

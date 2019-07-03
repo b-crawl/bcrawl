@@ -1302,10 +1302,9 @@ Causes the caster to move across terrain more rapidly for a short duration.
 %%%%
 Static Discharge spell
 
-Releases electrical charges against those next to the caster. These may arc to
-other adjacent creatures, or back to the caster, before eventually grounding
-out. It deals reduced damage when arcing to the caster, and bypasses any armour
-the target may have.
+Causes chaotic movement of electrical charges between creatures adjacent to the caster.
+These charges may arc to other adjacent creatures, or back to the caster, before eventually grounding
+out. Damage from these discharges bypasses armour, and is reduced when arcing to the caster.
 %%%%
 Statue Form spell
 

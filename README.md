@@ -204,6 +204,7 @@ Pull requests for new content are welcome.
   - v1.12: Changed base delay for weapons: falchion (13->12), long sword (14->13).
   - v1.12.1: Staves of energy are removed. A staff of power can be used to channel mana, and enhancer staves remove spell hunger for their spell school.
   - v1.12.1: Boots of stealth and rings of stealth give 2x the stealth bonus.
+  - v1.12.1: Great maces have a different brand set, including the speed brand.
 
 #### Removed Items
   - Amulet of Harm

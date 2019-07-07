@@ -956,7 +956,8 @@ static bool _id_floor_item(item_def &item)
         if (item.base_type != OBJ_BOOKS)
         {
             if(is_useless_item(item))
-                item.props["needs_autopickup"] = false;
+                if (item.props.exists("needs_autopickup"))
+                    item.props.erase("needs_autopickup");
             mpr("You use a rune to identify the item.");
         }
         return true;

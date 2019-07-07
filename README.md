@@ -147,6 +147,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Lesser Beckoning is renamed to Beckoning.
   - v1.12.1: Throw Icicle has longer range at high spell power.
   - v1.12.1: Freeze has a higher power cap. (25 -> 50)
+  - v1.12.1: Shock has a higher power cap. (25 -> 35)
   - v1.12.1: Summon Ice Beast has a lower summon cap. (3 -> 2)
   - v1.12.1: Static Discharge is just Air, instead of Air/Conjurations.
 

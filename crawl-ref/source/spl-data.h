@@ -1038,7 +1038,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_CONJURATION | SPTYP_AIR,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER,
     1,
-    25,
+    35,
     LOS_RADIUS, LOS_RADIUS,
     1, 0,
     TILEG_SHOCK,

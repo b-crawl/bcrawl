@@ -571,7 +571,7 @@ _mon_hex_zap(ZAP_BANISHMENT, BEAM_BANISH, 150),
 {
     ZAP_SHOCK,
     "zap",
-    25,
+    35,
     new dicedef_calculator<1, 3, 1, 4>,
     new tohit_calculator<8, 1, 7>,
     new dicedef_calculator<1, 8, 1, 20>,

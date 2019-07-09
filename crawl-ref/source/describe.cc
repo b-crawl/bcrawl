@@ -2188,11 +2188,6 @@ static vector<pair<string,string>> _get_feature_extra_descs(const coord_def &pos
             ret.emplace_back(pair<string,string>(
                     "Liquefied ground.", getLongDescription("liquefied")));
         }
-        if (disjunction_haloed(pos))
-        {
-            ret.emplace_back(pair<string,string>(
-                    "Translocational energy.", getLongDescription("disjunction haloed")));
-        }
     }
     if (const cloud_type cloud = env.map_knowledge(pos).cloud())
     {

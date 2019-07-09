@@ -729,9 +729,6 @@ static void _decrement_durations()
 #endif
     }
 
-    if (you.duration[DUR_DISJUNCTION])
-        disjunction_spell();
-
     // Should expire before flight.
     if (you.duration[DUR_TORNADO])
     {

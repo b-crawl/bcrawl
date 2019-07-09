@@ -3100,6 +3100,9 @@ void bolt::tracer_affect_player()
     if (flavour == BEAM_UNRAVELLING && player_is_debuffable())
         is_explosion = true;
 
+    if (flavour == BEAM_RUPTURE)
+        is_explosion = true;
+
     // Check whether thrower can see player, unless thrower == player.
     if (YOU_KILL(thrower))
     {
@@ -3617,6 +3620,10 @@ void bolt::affect_player_enchantment(bool resistible)
         debuff_player();
         _unravelling_explode(*this);
         obvious_effect = true;
+        break;
+    
+    case BEAM_RUPTURE:
+        mpr("error: rupture shouldn't target players");
         break;
 
     default:
@@ -4173,8 +4180,18 @@ void bolt::tracer_affect_monster(monster* mon)
     if (!agent() || !agent()->can_see(*mon))
         return;
 
-    if (flavour == BEAM_UNRAVELLING && monster_is_debuffable(*mon))
-        is_explosion = true;
+    switch(flavour)
+    {
+    case BEAM_UNRAVELLING:
+        if (monster_is_debuffable(*mon))
+            is_explosion = true;
+        break;
+    case BEAM_RUPTURE:
+        if(!(mon->has_ench(ENCH_SHORT_LIVED) || mon->summoner))
+            is_explosion = true;
+        break;
+    default: break;
+    }
 
     // Trigger explosion on exploding beams.
     if (is_explosion && !in_explosion_phase)
@@ -4331,7 +4348,7 @@ void bolt::monster_post_hit(monster* mon, int dmg)
 {
     // Suppress the message for scattershot.
     if (YOU_KILL(thrower) && you.see_cell(mon->pos())
-        && name != "burst of metal fragments")
+        && (name.compare(0, 9, "burst of ", 0, 9)))
     {
         print_wounds(*mon);
     }
@@ -4840,6 +4857,8 @@ void bolt::affect_monster(monster* mon)
     defer_rand r;
     int rand_ev = random2(mon->evasion());
     int defl = mon->missile_deflection();
+    
+    int not_burst_fire = name.compare(0, 9, "burst of ", 0, 9);
 
     // FIXME: We're randomising mon->evasion, which is further
     // randomised inside test_beam_hit. This is so we stay close to the
@@ -4848,7 +4867,7 @@ void bolt::affect_monster(monster* mon)
     {
         const bool deflected = _test_beam_hit(beam_hit, rand_ev, pierce, 0, r);
         // If the PLAYER cannot see the monster, don't tell them anything!
-        if (mon->observable() && name != "burst of metal fragments")
+        if (mon->observable() && not_burst_fire)
         {
             // if it would have hit otherwise...
             if (_test_beam_hit(beam_hit, rand_ev, pierce, 0, r))
@@ -4925,7 +4944,7 @@ void bolt::affect_monster(monster* mon)
     }
 
     // Apply flavoured specials.
-    mons_adjust_flavoured(mon, *this, postac, true);
+    mons_adjust_flavoured(mon, *this, postac, not_burst_fire);
 
     // mons_adjust_flavoured may kill the monster directly.
     if (mon->alive())
@@ -5056,6 +5075,8 @@ bool bolt::has_saving_throw() const
     case BEAM_SAP_MAGIC:
     case BEAM_UNRAVELLING:
     case BEAM_UNRAVELLED_MAGIC:
+    case BEAM_RUPTURE:
+    case BEAM_RUPTURED_MAGIC:
     case BEAM_INFESTATION:
     case BEAM_IRRESISTIBLE_CONFUSION:
     case BEAM_VILE_CLUTCH:
@@ -5699,6 +5720,39 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         _unravelling_explode(*this);
         return MON_AFFECTED;
 
+    case BEAM_RUPTURE:
+    {
+        if (mon->has_ench(ENCH_SHORT_LIVED) || mon->summoner)
+        {
+            simple_monster_message(*mon, " loses its magical cohesion.");
+            monster_die(*mon, KILL_DISMISSED, NON_MONSTER);
+            return MON_AFFECTED;
+        }
+        
+        int mons_mr = get_monster_data(mon->type)->resist_magic;
+        if (mons_mr > 200)
+            mons_mr = 200;
+        
+        if(mon->has_ench(ENCH_LOWERED_MR))
+            mons_mr /= 2;
+
+        mon_enchant lowered_mr(ENCH_LOWERED_MR, 1, &you, 70 + random2(75));
+        if (!mons_immune_magic(*mon))
+            mon->add_ench(lowered_mr);
+        
+        const int dice = 6;
+        int die_size = div_rand_round(mons_mr*(18*3 + (this->ench_power)*2), 3*100*dice);
+
+        this->damage       = dice_def(dice, die_size);
+        this->colour       = ETC_MUTAGENIC;
+        this->flavour      = BEAM_RUPTURED_MAGIC;
+        this->ex_size      = 1;
+        this->is_explosion = true;
+
+        obvious_effect = true;
+        return MON_AFFECTED;
+    }
+
     case BEAM_INFESTATION:
     {
         const int dur = (5 + random2avg(ench_power / 2, 2)) * BASELINE_DELAY;
@@ -5811,6 +5865,10 @@ const map<spell_type, explosion_sfx> spell_explosions = {
     { SPELL_VIOLENT_UNRAVELLING, {
         "The enchantments explode!",
         "a sharp crackling", // radiation = geiger counter
+    } },
+    { SPELL_RUPTURE, {
+        "The unstable magic explodes!",
+        "the sound of breaking glass",
     } },
     { SPELL_ICEBLAST, {
         "The mass of ice explodes!",
@@ -6507,6 +6565,8 @@ static string _beam_type_name(beam_type type)
     case BEAM_RESISTANCE:            return "resistance";
     case BEAM_UNRAVELLING:           return "unravelling";
     case BEAM_UNRAVELLED_MAGIC:      return "unravelled magic";
+    case BEAM_RUPTURE:               return "magical disruption";
+    case BEAM_RUPTURED_MAGIC:        return "unstable magic";
     case BEAM_SHARED_PAIN:           return "shared pain";
     case BEAM_IRRESISTIBLE_CONFUSION:return "confusion";
     case BEAM_INFESTATION:           return "infestation";

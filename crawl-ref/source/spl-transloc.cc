@@ -64,51 +64,12 @@ static void _place_tloc_cloud(const coord_def &origin)
         place_cloud(CLOUD_TLOC_ENERGY, origin, 1 + random2(3), &you);
 }
 
-spret cast_disjunction(int pow, bool fail)
+spret cast_time_stop(bool fail)
 {
     fail_check();
-    int rand = random_range(35, 45) + random2(pow / 12);
-    you.duration[DUR_DISJUNCTION] = min(90 + pow / 12,
-        max(you.duration[DUR_DISJUNCTION] + rand,
-        30 + rand));
-    contaminate_player(750 + random2(500), true);
-    disjunction_spell();
+    mpr("The world seems to slow to a stop.");
+    you.duration[DUR_TIME_STOP] = 20;
     return spret::success;
-}
-
-void disjunction_spell()
-{
-    int steps = you.time_taken;
-    invalidate_agrid(true);
-    for (int step = 0; step < steps; ++step)
-    {
-        vector<monster*> mvec;
-        for (radius_iterator ri(you.pos(), LOS_RADIUS, C_SQUARE); ri; ++ri)
-        {
-            monster* mons = monster_at(*ri);
-            if (!mons || !you.see_cell(*ri))
-                continue;
-            mvec.push_back(mons);
-        }
-        if (mvec.empty())
-            return;
-        // blink should be isotropic
-        shuffle_array(mvec);
-        for (auto mons : mvec)
-        {
-            if (!mons->alive() || mons->no_tele())
-                continue;
-            coord_def p = mons->pos();
-            if (!disjunction_haloed(p))
-                continue;
-
-            int dist = grid_distance(you.pos(), p);
-            int decay = max(1, (dist - 1) * (dist + 1));
-            int chance = pow(0.8, 1.0 / decay) * 1000;
-            if (!x_chance_in_y(chance, 1000))
-                blink_away(mons, &you, false);
-        }
-    }
 }
 
 /**
@@ -1012,117 +973,6 @@ spret cast_dispersal(int pow, bool fail)
     {
         mpr("The air shimmers briefly around you.");
     }
-    return spret::success;
-}
-
-int gravitas_range(int pow)
-{
-    return pow >= 80 ? 3 : 2;
-}
-
-
-#define GRAVITY "by gravitational forces"
-
-static void _attract_actor(const actor* agent, actor* victim,
-                           const coord_def pos, int pow, int strength)
-{
-    ASSERT(victim); // XXX: change to actor &victim
-
-    ray_def ray;
-    if (!find_ray(victim->pos(), pos, ray, opc_solid))
-    {
-        // This probably shouldn't ever happen, but just in case:
-        if (you.can_see(*victim))
-        {
-            mprf("%s violently %s moving!",
-                 victim->name(DESC_THE).c_str(),
-                 victim->conj_verb("stop").c_str());
-        }
-        victim->hurt(agent, roll_dice(strength / 2, pow / 20),
-                     BEAM_MMISSILE, KILLED_BY_BEAM, "", GRAVITY);
-        return;
-    }
-
-    const coord_def starting_pos = victim->pos();
-    for (int i = 0; i < strength; i++)
-    {
-        ray.advance();
-        const coord_def newpos = ray.pos();
-
-        if (!victim->can_pass_through_feat(grd(newpos)))
-        {
-            victim->collide(newpos, agent, pow);
-            break;
-        }
-        else if (actor* act_at_space = actor_at(newpos))
-        {
-            if (victim != act_at_space)
-                victim->collide(newpos, agent, pow);
-            break;
-        }
-        else if (!victim->is_habitable(newpos))
-            break;
-        else
-            victim->move_to_pos(newpos);
-
-        if (auto mons = victim->as_monster())
-        {
-            behaviour_event(mons, ME_ANNOY, agent, agent ? agent->pos()
-                                                         : coord_def(0, 0));
-        }
-
-        if (victim->pos() == pos)
-            break;
-    }
-    if (starting_pos != victim->pos())
-    {
-        victim->apply_location_effects(starting_pos);
-        if (victim->is_monster())
-            mons_relocated(victim->as_monster());
-    }
-}
-
-bool fatal_attraction(const coord_def& pos, const actor *agent, int pow)
-{
-    bool affected = false;
-    for (actor_near_iterator ai(pos, LOS_SOLID); ai; ++ai)
-    {
-        if (*ai == agent || ai->is_stationary() || ai->pos() == pos)
-            continue;
-
-        const int range = (pos - ai->pos()).rdist();
-        if (range > gravitas_range(pow))
-            continue;
-
-        const int strength = ((pow + 100) / 20) / (range*range);
-
-        affected = true;
-        _attract_actor(agent, *ai, pos, pow, strength);
-    }
-
-    return affected;
-}
-
-spret cast_gravitas(int pow, const coord_def& where, bool fail)
-{
-    if (cell_is_solid(where))
-    {
-        canned_msg(MSG_UNTHINKING_ACT);
-        return spret::abort;
-    }
-
-    fail_check();
-
-    monster* mons = monster_at(where);
-
-    mprf("Gravity reorients around %s.",
-         mons                      ? mons->name(DESC_THE).c_str() :
-         feat_is_solid(grd(where)) ? feature_description(grd(where),
-                                                         NUM_TRAPS, "",
-                                                         DESC_THE, false)
-                                                         .c_str()
-                                   : "empty space");
-    fatal_attraction(where, &you, pow);
     return spret::success;
 }
 

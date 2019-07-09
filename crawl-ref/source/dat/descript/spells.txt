@@ -417,13 +417,6 @@ Disintegrate spell
 Violently rends apart anything in a small volume of space. It can be used to
 cause severe damage, or remove a chunk of rock.
 %%%%
-Disjunction spell
-
-Destabilizes the space in a sphere around the caster for a while, causing
-anyone nearby to blink away from the caster. The chance of blinking depends on
-the distance from the caster, being nearly certain when directly adjacent. It
-causes magical contamination when cast.
-%%%%
 Dispel Undead spell
 
 Harms an undead creature greatly by interfering with the forces binding it
@@ -612,12 +605,6 @@ Conjures a prism which unleashes a violent explosion of arcane force after a
 short duration. The prism is extremely fragile and any damage caused to it may
 result in premature detonation.
 %%%%
-Gell's Gravitas spell
-
-Briefly redirects gravity around a target point, causing 'down' to be towards
-that point. All nearby creatures, save the caster, fall helplessly toward that
-point – typically colliding with each other, or with a victim standing there.
-%%%%
 Ghostly Fireball spell
 
 Hurls an exploding ball of negative energy which drains any living creature
@@ -721,6 +708,10 @@ resistant to cold and resistant to poison, but vulnerable to fire.
 While transformed, any equipped weapons and armour are melded.
 
 With four bars of power, the effects of this spell last until cancelled.
+%%%%
+Icicle Burst spell
+
+A modified version of Throw Icicle, this spell launches several shards of ice, sacrificing accuracy and armour penetration to maximize destructive power.
 %%%%
 Ignite Poison spell
 
@@ -836,7 +827,7 @@ Lehudib's Crystal Spear spell
 
 Hurls a lethally sharp shard of crystal.
 %%%%
-Lesser Beckoning spell
+Beckoning spell
 
 Beckons the target forward, attempting to place them adjacent to the caster.
 %%%%
@@ -874,6 +865,12 @@ Malmutate spell
 
 Bestows a mutation on a target. The mutation is almost always harmful. It
 cannot affect artificial beings, and the undead will decompose if affected.
+%%%%
+Mana Rupture spell
+
+Destabilizes the target's natural flow of magic, creating an explosion of unstable magic proportional in strength to the target's resistance to enchantments. Targets not completely immune to enchantments will become more vulnerable to them, if they survive.
+
+When cast on summoned creatures, this spell instantly destroys them instead of creating an explosion.
 %%%%
 Mara Summon spell
 
@@ -1023,9 +1020,9 @@ otherwise almost indistinguishable from the original.
 %%%%
 Piercing Shot spell
 
-Allows the caster to throw of fire missiles through any targets they hit,
+Allows the caster to fire or throw missiles through any targets they hit,
 potentially hitting everything in their path until they reach their maximum
-distance. These missiles also bypass shields. Each missile thrown or fired
+range. These missiles also bypass shields. Each missile thrown or fired
 in this way consumes a further 2 MP.
 %%%%
 Plane Rend spell
@@ -1305,10 +1302,9 @@ Causes the caster to move across terrain more rapidly for a short duration.
 %%%%
 Static Discharge spell
 
-Releases electrical charges against those next to the caster. These may arc to
-other adjacent creatures, or back to the caster, before eventually grounding
-out. It deals reduced damage when arcing to the caster, and bypasses any armour
-the target may have.
+Causes chaotic movement of electrical charges between creatures adjacent to the caster.
+These charges may arc to other adjacent creatures, or back to the caster, before eventually grounding
+out. Damage from these discharges bypasses armour, and is reduced when arcing to the caster.
 %%%%
 Statue Form spell
 
@@ -1550,6 +1546,10 @@ significant portion of its damage bypasses cold resistance.
 Thunderbolt spell
 
 Creates an arc of electricity.
+%%%%
+Time Stop spell
+
+Contrary to the name, this spell merely speeds up the caster's mind and flow of magical power by several hundred times. This acceleration can only handle a limited amount of power, so it only works for spells of level 4 or lower. Also, the caster cannot gain mana or reduce spell costs while this effect is active.
 %%%%
 Tomb of Doroklohe spell
 

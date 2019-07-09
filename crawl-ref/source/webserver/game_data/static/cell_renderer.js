@@ -833,6 +833,11 @@ function ($, view_data, main, tileinfo_player, icons, dngn, enums,
                 this.draw_icon(icons.INNER_FLAME, x, y, -status_shift, 0);
                 status_shift += 7;
             }
+            if (fg.SHACKLE)
+            {
+                this.draw_icon(icons.SHACKLE, x, y, -status_shift, 0);
+                status_shift += 7;
+            }
             if (fg.CONSTRICTED)
             {
                 this.draw_icon(icons.CONSTRICTED, x, y, -status_shift, 0);

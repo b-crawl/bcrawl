@@ -672,8 +672,7 @@ KFEAT:   S = general shop type:Lightly-Used suffix:Armoury ; \
              damaged ego:none triple crossbow | \
              damaged ego:none longbow | \
              damaged ego:none crystal plate armour | \
-             damaged ego:none centaur barding | \
-             damaged ego:none naga barding | \
+             damaged ego:none barding | \
              damaged ego:none pearl dragon scales | \
              damaged ego:none gold dragon scales
 MAP

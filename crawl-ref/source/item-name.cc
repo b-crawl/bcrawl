@@ -628,7 +628,7 @@ const char* armour_ego_name(const item_def& item, bool terse)
         case SPARM_FLYING:            return "Fly";
         case SPARM_MAGIC_RESISTANCE:  return "MR+";
         case SPARM_PROTECTION:        return "AC+3";
-        case SPARM_STEALTH:           return "Stlth+";
+        case SPARM_STEALTH:           return "Stlth++";
         case SPARM_RESISTANCE:        return "rC+ rF+";
         case SPARM_POSITIVE_ENERGY:   return "rN+";
         case SPARM_ARCHMAGI:          return "Archmagi";
@@ -855,7 +855,7 @@ const char* jewellery_effect_name(int jeweltype, bool terse)
         case RING_RESIST_CORROSION:      return "rCorr";
         case RING_ATTENTION:             return "Stlth-";
         case RING_EVASION:               return "EV";
-        case RING_STEALTH:               return "Stlth+";
+        case RING_STEALTH:               return "Stlth++";
         case RING_DEXTERITY:             return "Dex";
         case RING_INTELLIGENCE:          return "Int";
         case RING_MAGICAL_POWER:         return "MP+9";
@@ -3196,21 +3196,8 @@ bool is_bad_item(const item_def &item, bool temp)
 
         switch (item.sub_type)
         {
-#if TAG_MAJOR_VERSION == 34
-        case POT_SLOWING:
-            return !you.stasis();
-#endif
         case POT_DEGENERATION:
             return true;
-#if TAG_MAJOR_VERSION == 34
-        case POT_DECAY:
-            return you.res_rotting(temp) <= 0;
-        case POT_STRONG_POISON:
-        case POT_POISON:
-            // Poison is not that bad if you're poison resistant.
-            return player_res_poison(false) <= 0
-                   || !temp && you.species == SP_VAMPIRE;
-#endif
         default:
             return false;
         }
@@ -3392,15 +3379,22 @@ bool is_useless_item(const item_def &item, bool temp)
         if (is_artefact(item))
             return false;
 
-        if (item.sub_type == ARM_SCARF
-            && item_type_known(item)
-            && (get_armour_ego_type(item) == SPARM_SPIRIT_SHIELD
-                && you.spirit_shield(false, false)
-                || get_armour_ego_type(item) == SPARM_CLOUD_IMMUNE
-                   && have_passive(passive_t::cloud_immunity)))
-        {
-            return true;
-        }
+        if (item.sub_type == ARM_SCARF && item_type_known(item))
+            switch(get_armour_ego_type(item))
+            {
+            case SPARM_SPIRIT_SHIELD:
+                if(you.spirit_shield(false, false))
+                    return true;
+                break;
+            case SPARM_CLOUD_IMMUNE:
+                if(have_passive(passive_t::cloud_immunity))
+                    return true;
+                break;
+            case SPARM_STASIS:
+                if(you.species == SP_FORMICID)
+                    return true;
+                break;
+            }
         return false;
 
     case OBJ_SCROLLS:
@@ -3570,12 +3564,7 @@ bool is_useless_item(const item_def &item, bool temp)
             return player_prot_life(false, temp, false) == 3;
 
         case AMU_REGENERATION:
-            return you.get_mutation_level(MUT_NO_REGENERATION) > 0
-                   || (temp
-                       && you.get_mutation_level(MUT_INHIBITED_REGENERATION) > 0
-                       && regeneration_is_inhibited())
-                   || (temp && you.species == SP_VAMPIRE
-                       && you.hunger_state <= HS_STARVING);
+            return you.get_mutation_level(MUT_NO_REGENERATION) > 0;
 
         case RING_SEE_INVISIBLE:
             return you.innate_sinv();

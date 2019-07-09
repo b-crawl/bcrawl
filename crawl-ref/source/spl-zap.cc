@@ -36,6 +36,7 @@ static pair<spell_type, zap_type> _spl_zaps[] =
     { SPELL_AGONY, ZAP_AGONY },
     { SPELL_DISINTEGRATE, ZAP_DISINTEGRATE },
     { SPELL_THROW_ICICLE, ZAP_THROW_ICICLE },
+    { SPELL_RUPTURE, ZAP_RUPTURE },
     // Wizard mode only.
     { SPELL_PORKALATOR, ZAP_PORKALATOR },
     // Should only be available from Staff of Dispater and Sceptre

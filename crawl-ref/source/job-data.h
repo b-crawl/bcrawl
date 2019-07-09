@@ -67,11 +67,11 @@ static const map<job_type, job_def> job_data =
 { JOB_ARCHAEOLOGIST, {
     "Ac", "Archaeologist",
     3, 6, 3,
-    { SP_CENTAUR, SP_DUSK_WALKER, SP_FORMICID, SP_MINOTAUR, SP_NAGA, SP_VINE_STALKER, },
-    { "robe plus:1", "hat plus:1", "pair of boots plus:1",
-      "pair of gloves plus:1", "dusty tome", "ancient crate" },
+    { SP_CENTAUR, SP_DUSK_WALKER, SP_FORMICID, SP_MINOTAUR, SP_NAGA, SP_VINE_STALKER, SP_GARGOYLE, SP_HILL_ORC, SP_HUMAN },
+    { "whip", "robe plus:1", "hat plus:1", "pair of boots plus:1",
+      "dusty tome", "ancient crate" },
     WCHOICE_NONE,
-    { { SK_STEALTH, 3}, { SK_DODGING, 3}, { SK_FIGHTING, 1} },
+    { { SK_STEALTH, 3}, { SK_DODGING, 3}, { SK_FIGHTING, 1}, { SK_MACES_FLAILS, 1} },
 } },
 
 { JOB_ARTIFICER, {
@@ -271,7 +271,7 @@ static const map<job_type, job_def> job_data =
     0, 7, 5,
     { SP_AVARIEL, SP_SPRIGGAN, SP_NAGA, SP_MERFOLK, SP_FELID,
       SP_DEMONSPAWN, SP_FAIRY },
-    { "robe", "Young Poisoner's Handbook" },
+    { "robe", "Young Poisoner's Handbook", "potion of berserk rage", "potion of degeneration" },
     WCHOICE_NONE,
     { { SK_CONJURATIONS, 1 }, { SK_POISON_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
       { SK_DODGING, 2 }, { SK_STEALTH, 2 }, },
@@ -303,7 +303,7 @@ static const map<job_type, job_def> job_data =
     -1, 10, 3,
     { SP_AVARIEL, SP_NAGA, SP_BASE_DRACONIAN, SP_OCTOPODE, SP_HUMAN,
       SP_MUMMY, SP_FAIRY },
-    { "robe", "hat", "book of Minor Magic" },
+    { "staff", "robe", "hat", "book of Minor Magic" },
     WCHOICE_NONE,
     { { SK_DODGING, 2 }, { SK_STEALTH, 2 }, { SK_SPELLCASTING, 3 },
       { SK_TRANSLOCATIONS, 1 }, { SK_CONJURATIONS, 1 }, { SK_SUMMONINGS, 1 }, },

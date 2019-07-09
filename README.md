@@ -57,6 +57,9 @@ Pull requests for new content are welcome.
   - v1.11.7: Enchanters start with a scroll of fog.
   - v1.11.7: Wanderers start with significantly more spells on average.
   - v1.12: Monks start with 2 Invocations skill.
+  - v1.12.1: Wizards start with a plain staff.
+  - v1.12.1: Venom mages start with a potion of berserk rage and a potion of degeneration. (This lets slow species kill oozes on D1.)
+  - v1.12.1: Archaeologists start with a whip instead of +1 gloves.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -65,6 +68,7 @@ Pull requests for new content are welcome.
   - v1.7: An "Adventure" mode is added, which is a normal game that starts the player with 2 extra lives.
   - v1.9.3: When in Zot or carrying the Orb, teleports from stairs and traps are replaced by blinks.
   - v1.11: Seeded runs are merged from DCSS.
+  - v1.12.1: Taking stairs while on D:1 or D:2 can't teleport players.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -100,6 +104,7 @@ Pull requests for new content are welcome.
   - v1.10: Felids gain half XP for seeing enemies, and no experience for killing them. They have -30% HP instead of -40%, and +0 XP instead of -1 XP.
   - v1.11.5: Spriggans can't train Conjurations, but have some better aptitudes.
   - v1.12: Barachim hop target radius is reduced to 1.
+  - v1.12.1: Felids have adjusted aptitudes, including (-1 -> +1) Spellcasting.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -108,6 +113,9 @@ Pull requests for new content are welcome.
   - Blink Other blinks enemies.
   - Piercing Shot adds the penetration brand to a ranged weapon.
   - v1.8.3: Tree Form (L5 Hexes/Transmutation) acts like a Potion of Lignification with a shorter duration.
+  - v1.12.1: Time Stop (L8 Charms/Translocations) lets you instantly cast spells below L5.
+  - v1.12.1: Mana Rupture (L7 Conjurations/Hexes) creates an explosion that does damage proportional to the target's magic resistance.
+  - v1.12.1: Icicle Burst (L7 Conjurations/Ice) shoots several weak icicles. It's similar to the Scattershot wand, but it shoots icicles (40% cold), it has lower accuracy, and it's less affected by monster AC.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.
@@ -135,6 +143,13 @@ Pull requests for new content are welcome.
   - v1.11.6: Iskenderun's Mystic Blast is level 3, and has lower base damage but higher damage scaling.
   - v1.11.7: Irradiate has the same damage formula as Bolt of Fire, which has lower base damage but higher damage scaling.
   - v1.12: Lesser Beckoning has +1 range.
+  - v1.12.1: Summon Hydra is level 6, and has a summon cap of 1.
+  - v1.12.1: Lesser Beckoning is renamed to Beckoning.
+  - v1.12.1: Throw Icicle has longer range at high spell power.
+  - v1.12.1: Freeze has a higher power cap. (25 -> 50)
+  - v1.12.1: Shock has a higher power cap. (25 -> 35)
+  - v1.12.1: Summon Ice Beast has a lower summon cap. (3 -> 2)
+  - v1.12.1: Static Discharge is just Air, instead of Air/Conjurations.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -144,6 +159,7 @@ Pull requests for new content are welcome.
   - v1.1: Shroud of Golubria
   - v1.8.3: Hydra Form
   - v1.9.1: Confusing Touch
+  - v1.12.1: Disjunction
 
 #### Gods
   - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.
@@ -187,6 +203,9 @@ Pull requests for new content are welcome.
   - v1.12: Lightning rod damage scales more with Evocations.
   - v1.12: Randart crossbows of penetration are 2x as likely.
   - v1.12: Changed base delay for weapons: falchion (13->12), long sword (14->13).
+  - v1.12.1: Staves of energy are removed. A staff of power can be used to channel mana, and enhancer staves remove spell hunger for their spell school.
+  - v1.12.1: Boots of stealth and rings of stealth give 2x the stealth bonus.
+  - v1.12.1: Great maces have a different brand set, including the speed brand.
 
 #### Removed Items
   - Amulet of Harm
@@ -229,6 +248,7 @@ Pull requests for new content are welcome.
   - v1.11.5: Orb Guardians get a magical gaze, with Lesser Beckoning, Sleep, and Lightning Bolt.
   - v1.12: Reapers can seal doors like Vault Wardens do.
   - v1.12: Juggernauts are tougher, hit faster, and knock their foes back.
+  - v1.12.1: Golden eyes sometimes teleport away.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -243,3 +263,4 @@ Pull requests for new content are welcome.
   - v1.7.2: Psyche, Fannar, and Sojobo sometimes drop a spellbook.
   - v1.11.7: Bai Suzhen now summons drakes and then goes berserk, making her significantly more dangerous.
   - v1.12: Agnes is much harder to hit.
+  - v1.12.1: The royal jelly is giant. (Giant creatures can't be netted.)

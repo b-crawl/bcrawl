@@ -623,11 +623,10 @@ static int _acquirement_staff_subtype(bool /*divine*/, int & /*quantity*/)
         return result;
 
     // Otherwise pick a non-enhancer staff.
-    switch (random2(5))
+    switch (random2(2))
     {
-    case 0: case 1: result = STAFF_WIZARDRY;   break;
-    case 2: case 3: result = STAFF_ENERGY;     break;
-    case 4: result = STAFF_POWER;              break;
+    case 0: result = STAFF_WIZARDRY; break;
+    case 1: result = STAFF_POWER; break;
     }
     return result;
 }
@@ -737,9 +736,6 @@ static int _find_acquirement_subtype(object_class_type &class_wanted,
 {
     COMPILE_CHECK(ARRAYSZ(_subtype_finders) == NUM_OBJECT_CLASSES);
     ASSERT(class_wanted != OBJ_RANDOM);
-
-    if (class_wanted == OBJ_ARMOUR && you.species == SP_FELID)
-        return OBJ_RANDOM;
 
     int type_wanted = OBJ_RANDOM;
 
@@ -1463,7 +1459,6 @@ bool acquirement(object_class_type class_wanted, int agent,
     {
         bad_class.set(OBJ_WEAPONS);
         bad_class.set(OBJ_MISSILES);
-        bad_class.set(OBJ_ARMOUR);
         bad_class.set(OBJ_STAVES);
     }
     if (you.get_mutation_level(MUT_NO_ARTIFICE))

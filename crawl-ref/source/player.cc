@@ -1813,16 +1813,6 @@ int player_spec_poison()
     return sp;
 }
 
-int player_energy()
-{
-    int pe = 0;
-
-    // Staves
-    pe += you.wearing(EQ_STAFF, STAFF_ENERGY);
-
-    return pe;
-}
-
 // If temp is set to false, temporary sources of resistance won't be
 // counted.
 int player_prot_life(bool calc_unid, bool temp, bool items)
@@ -3238,7 +3228,7 @@ int player_stealth()
 
     stealth += STEALTH_PIP * you.scan_artefacts(ARTP_STEALTH);
 
-    stealth += STEALTH_PIP * you.wearing(EQ_RINGS, RING_STEALTH);
+    stealth += STEALTH_PIP * you.wearing(EQ_RINGS, RING_STEALTH) * 2;
     stealth -= STEALTH_PIP * you.wearing(EQ_RINGS, RING_ATTENTION);
 
     if (you.duration[DUR_STEALTH])
@@ -3299,7 +3289,7 @@ int player_stealth()
                 stealth /= 2;       // splashy-splashy
         }
         else if (boots && get_armour_ego_type(*boots) == SPARM_STEALTH)
-            stealth += STEALTH_PIP;
+            stealth += STEALTH_PIP * 2;
         else if (you.has_usable_hooves())
             stealth -= 5 + 5 * you.get_mutation_level(MUT_HOOVES);
         else if (you.species == SP_FELID
@@ -3884,7 +3874,7 @@ void inc_mp(int mp_gain, bool silent)
 {
     ASSERT(!crawl_state.game_is_arena());
 
-    if (mp_gain < 1 || you.magic_points >= you.max_magic_points)
+    if (mp_gain < 1 || you.magic_points >= you.max_magic_points || you.duration[DUR_TIME_STOP])
         return;
 
     you.magic_points += mp_gain;

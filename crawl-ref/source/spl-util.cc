@@ -400,9 +400,61 @@ bool del_spell_from_memory(spell_type spell)
         return del_spell_from_memory_by_slot(i);
 }
 
+int staff_energy(spell_type spell)
+{
+    int pe = 0;
+    spschools_type typeflags = get_spell_disciplines(spell);
+
+    if (!you.weapon())
+        return pe;
+
+    item_def& weapon = *you.weapon();
+
+    if(weapon.base_type == OBJ_STAVES)
+        switch(weapon.sub_type)
+        {
+        case STAFF_CONJURATION:
+            if (typeflags & SPTYP_CONJURATION)
+                pe++;
+            break;
+        case STAFF_SUMMONING:
+            if (typeflags & SPTYP_SUMMONING)
+                pe++;
+            break;
+        case STAFF_POISON:
+            if (typeflags & SPTYP_POISON)
+                pe++;
+            break;
+        case STAFF_DEATH:
+            if (typeflags & SPTYP_NECROMANCY)
+                pe++;
+            break;
+        case STAFF_FIRE:
+            if (typeflags & SPTYP_FIRE)
+                pe++;
+            break;
+        case STAFF_COLD:
+            if (typeflags & SPTYP_ICE)
+                pe++;
+            break;
+        case STAFF_EARTH:
+            if (typeflags & SPTYP_EARTH)
+                pe++;
+            break;
+        case STAFF_AIR:
+            if (typeflags & SPTYP_AIR)
+                pe++;
+            break;
+        default:
+            break;
+        }
+    
+    return pe;
+}
+
 int spell_hunger(spell_type which_spell)
 {
-    if (player_energy() || you.species == SP_FAIRY)
+    if (staff_energy(which_spell) || you.species == SP_FAIRY)
         return 0;
 
     const int level = spell_difficulty(which_spell);
@@ -462,10 +514,11 @@ bool spell_harms_area(spell_type spell)
 // for Xom acting (more power = more likely to grab his attention) {dlb}
 int spell_mana(spell_type which_spell)
 {
-    if (you.species == SP_FAIRY)
-        return _seekspell(which_spell)->level - 1;
-    else
-        return _seekspell(which_spell)->level;
+    int spell_cost = _seekspell(which_spell)->level;
+    if(!you.duration[DUR_TIME_STOP])
+        if (you.species == SP_FAIRY)
+            spell_cost--;
+    return spell_cost;
 }
 
 // applied in naughties (more difficult = higher level knowledge = worse)

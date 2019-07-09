@@ -854,7 +854,6 @@ bool cast_a_spell(bool check_range, spell_type spell)
         }
     }
 
-    const bool staff_energy = player_energy();
     you.last_cast_spell = spell;
     // Silently take MP before the spell.
     dec_mp(cost, true);
@@ -878,7 +877,7 @@ bool cast_a_spell(bool check_range, spell_type spell)
 
     flush_mp();
 
-    if (!staff_energy && you.undead_state() != US_UNDEAD)
+    if (!staff_energy(spell) && you.undead_state() != US_UNDEAD)
     {
         const int spellh = spell_hunger(spell);
         if (calc_hunger(spellh) > 0)
@@ -900,7 +899,8 @@ bool cast_a_spell(bool check_range, spell_type spell)
         }
     }
 
-    you.turn_is_over = true;
+    if(!you.duration[DUR_TIME_STOP] || spell_difficulty(spell) > 4)
+        you.turn_is_over = true;
     alert_nearby_monsters();
 
     return true;
@@ -1191,18 +1191,13 @@ static unique_ptr<targeter> _spell_targeter(spell_type spell, int pow,
     case SPELL_GLACIATE:
         return make_unique<targeter_cone>(&you, range);
     case SPELL_CLOUD_CONE:
-        return make_unique<targeter_shotgun>(&you, CLOUD_CONE_BEAM_COUNT,
-                                             range);
+        return make_unique<targeter_shotgun>(&you, CLOUD_CONE_BEAM_COUNT, range);
     case SPELL_SCATTERSHOT:
-        return make_unique<targeter_shotgun>(&you, shotgun_beam_count(pow),
-                                             range);
-    case SPELL_GRAVITAS:
-        return make_unique<targeter_smite>(&you, range,
-                                           gravitas_range(pow),
-                                           gravitas_range(pow),
-                                           false,
-                                           [](const coord_def& p) -> bool {
-                                              return you.pos() != p; });
+        return make_unique<targeter_shotgun>(&you, shotgun_beam_count(pow), range);
+    case SPELL_ICICLE_BURST:
+        return make_unique<targeter_shotgun>(&you, icicle_burst_count(pow), range);
+    case SPELL_RUPTURE:
+        return make_unique<targeter_rupture>(&you, range, pow);
     case SPELL_VIOLENT_UNRAVELLING:
         return make_unique<targeter_unravelling>(&you, range, pow);
     case SPELL_RANDOM_BOLT:
@@ -1655,9 +1650,6 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
     case SPELL_LRD:
         return cast_fragmentation(powc, &you, spd.target, fail);
 
-    case SPELL_GRAVITAS:
-        return cast_gravitas(powc, beam.target, fail);
-
     // other effects
     case SPELL_DISCHARGE:
         return cast_discharge(powc, you, fail);
@@ -1913,8 +1905,8 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
     case SPELL_RECALL:
         return cast_recall(fail);
 
-    case SPELL_DISJUNCTION:
-        return cast_disjunction(powc, fail);
+    case SPELL_TIME_STOP:
+        return cast_time_stop(fail);
 
     case SPELL_CORPSE_ROT:
         return cast_corpse_rot(fail);
@@ -1942,6 +1934,9 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
 
     case SPELL_SCATTERSHOT:
         return cast_scattershot(&you, powc, target, fail);
+
+    case SPELL_ICICLE_BURST:
+        return cast_icicle_burst(&you, powc, target, fail);
 
     case SPELL_RANDOM_EFFECTS:
         return cast_random_effects(powc, beam, fail);

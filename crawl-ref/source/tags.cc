@@ -4591,7 +4591,7 @@ void unmarshallItem(reader &th, item_def &item)
     }
 
     if (item.is_type(OBJ_STAVES, STAFF_CHANNELING))
-        item.sub_type = STAFF_ENERGY;
+        item.sub_type = STAFF_POWER;
 
     if (th.getMinorVersion() < TAG_MINOR_GOD_GIFT)
     {

@@ -571,7 +571,7 @@ _mon_hex_zap(ZAP_BANISHMENT, BEAM_BANISH, 150),
 {
     ZAP_SHOCK,
     "zap",
-    25,
+    35,
     new dicedef_calculator<1, 3, 1, 4>,
     new tohit_calculator<8, 1, 7>,
     new dicedef_calculator<1, 8, 1, 20>,
@@ -804,6 +804,24 @@ _mon_hex_zap(ZAP_BANISHMENT, BEAM_BANISH, 150),
 },
 
 {
+    ZAP_ICICLE_BURST,
+    "burst of ice shards",
+    200,
+    new calcdice_calculator<3, 10, 1, 2>,
+    new tohit_calculator<9, 1, 12>,
+    new dicedef_calculator<3, 8, 1, 11>,
+    new tohit_calculator<17, 1, 25>,
+    WHITE,
+    false,
+    BEAM_ICE,
+    DCHAR_FIRED_MISSILE,
+    false,
+    false,
+    false,
+    4
+},
+
+{
     ZAP_CORONA,
     "",
     100,
@@ -857,7 +875,7 @@ _mon_hex_zap(ZAP_HIBERNATION, BEAM_HIBERNATION),
     true,
     false,
     false,
-    2 // XXX: Sound 2 for level one spell?
+    2
 },
 
 {
@@ -893,7 +911,7 @@ _mon_hex_zap(ZAP_HIBERNATION, BEAM_HIBERNATION),
     true,
     false,
     false,
-    6 // XXX: Less noise because it's poison?
+    6
 },
 
 _mon_hex_zap(ZAP_PETRIFY, BEAM_PETRIFY),
@@ -1146,6 +1164,24 @@ _mon_hex_zap(ZAP_SLEEP, BEAM_SLEEP),
     ETC_MUTAGENIC,
     true,
     BEAM_UNRAVELLING,
+    NUM_DCHAR_TYPES,
+    false,
+    false,
+    false,
+    0 // dubious
+},
+
+{
+    ZAP_RUPTURE,
+    "magical disruption",
+    200,
+    nullptr,
+    new tohit_calculator<0, 1, 1>,
+    nullptr,
+    nullptr,
+    ETC_MUTAGENIC,
+    true,
+    BEAM_RUPTURE,
     NUM_DCHAR_TYPES,
     false,
     false,

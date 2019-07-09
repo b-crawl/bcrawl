@@ -112,9 +112,6 @@ int artefact_value(const item_def &item)
 
     // Discount Stlth-, charge for Stlth+
     ret += 2 * prop[ARTP_STEALTH];
-    // Stlth+ costs more than Stlth- cheapens
-    if (prop[ARTP_STEALTH] > 0)
-        ret += 2 * prop[ARTP_STEALTH];
 
     // only one meaningful level:
     if (prop[ ARTP_POISON ])
@@ -324,7 +321,8 @@ unsigned int item_value(item_def item, bool ident)
                 break;
             }
 
-            valued /= 10;
+            valued /= 100;
+            valued = max(1, valued);
         }
         break;
 

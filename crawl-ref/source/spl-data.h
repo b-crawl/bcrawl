@@ -267,11 +267,11 @@ static const struct spell_desc spelldata[] =
 },
 
 {
-    SPELL_DISJUNCTION, "Disjunction",
-    SPTYP_TRANSLOCATION,
-    SPFLAG_ESCAPE | SPFLAG_UTILITY,
+    SPELL_TIME_STOP, "Time Stop",
+    SPTYP_TRANSLOCATION | SPTYP_CHARMS,
+    SPFLAG_UTILITY | SPFLAG_SELFENCH | SPFLAG_NO_GHOST,
     8,
-    200,
+    0,
     -1, -1,
     6, 0,
     TILEG_DISJUNCTION,
@@ -702,7 +702,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_ICE,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF,
     1,
-    25,
+    50,
     1, 1,
     1, 0,
     TILEG_FREEZE,
@@ -1038,7 +1038,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_CONJURATION | SPTYP_AIR,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER,
     1,
-    25,
+    35,
     LOS_RADIUS, LOS_RADIUS,
     1, 0,
     TILEG_SHOCK,
@@ -1154,7 +1154,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_TRANSMUTATION | SPTYP_POISON,
     SPFLAG_HELPFUL | SPFLAG_CHAOTIC | SPFLAG_UTILITY,
     3,
-    200,
+    15,
     -1, -1,
     2, 0,
     TILEG_SPIDER_FORM,
@@ -1209,7 +1209,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_TRANSMUTATION,
     SPFLAG_HELPFUL | SPFLAG_CHAOTIC | SPFLAG_UTILITY,
     7,
-    200,
+    75,
     -1, -1,
     6, 0,
     TILEG_DRAGON_FORM,
@@ -1231,7 +1231,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_TRANSMUTATION | SPTYP_NECROMANCY,
     SPFLAG_HELPFUL | SPFLAG_CORPSE_VIOLATING | SPFLAG_CHAOTIC,
     8,
-    200,
+    100,
     -1, -1,
     6, 0,
     TILEG_NECROMUTATION,
@@ -1277,7 +1277,7 @@ static const struct spell_desc spelldata[] =
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER,
     4,
     100,
-    5, 5,
+    4, 8,  // capped at LOS above 75 power
     4, 0,
     TILEG_THROW_ICICLE,
 },
@@ -1498,7 +1498,7 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_DISCHARGE, "Static Discharge",
-    SPTYP_CONJURATION | SPTYP_AIR,
+    SPTYP_AIR,
     SPFLAG_AREA,
     3,
     100,
@@ -2462,7 +2462,7 @@ static const struct spell_desc spelldata[] =
     SPELL_SUMMON_HYDRA, "Summon Hydra",
     SPTYP_SUMMONING,
     SPFLAG_MONS_ABJURE,
-    7,
+    6,
     200,
     -1, -1,
     6, 0,
@@ -3685,13 +3685,13 @@ static const struct spell_desc spelldata[] =
 #endif
 
 {
-    SPELL_GRAVITAS, "Gell's Gravitas",
-    SPTYP_TRANSLOCATION,
-    SPFLAG_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEEDS_TRACER,
-    3,
+    SPELL_RUPTURE, "Mana Rupture",
+    SPTYP_CONJURATION | SPTYP_HEXES,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_NOT_SELF | SPFLAG_NO_GHOST | SPFLAG_CHAOTIC,
+    7,
     200,
-    LOS_RADIUS, LOS_RADIUS,
-    3, 0,
+    3, 3,
+    7, 0,
     TILEG_GRAVITAS,
 },
 
@@ -3885,7 +3885,7 @@ static const struct spell_desc spelldata[] =
 },
 
 {
-    SPELL_BECKONING, "Lesser Beckoning",
+    SPELL_BECKONING, "Beckoning",
     SPTYP_TRANSLOCATION,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEEDS_TRACER,
     3,
@@ -4039,6 +4039,17 @@ static const struct spell_desc spelldata[] =
     LOS_RADIUS, LOS_RADIUS,
     5, 0,
     TILEG_GRASPING_ROOTS,
+},
+
+{
+    SPELL_ICICLE_BURST, "Icicle Burst",
+    SPTYP_CONJURATION | SPTYP_ICE,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF,
+    7,
+    200,
+    5, 5,
+    9, 0,
+    TILEG_ICICLE_BURST,
 },
 
 {

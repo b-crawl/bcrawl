@@ -265,6 +265,8 @@ bool targeter_beam::affects_monster(const monster_info& mon)
            || beam.flavour == BEAM_INNER_FLAME && !m->is_summoned();
 }
 
+// Yara's Violent Unravelling
+
 targeter_unravelling::targeter_unravelling(const actor *act, int r, int pow)
     : targeter_beam(act, r, ZAP_UNRAVELLING, pow, 1, 1)
 {
@@ -309,6 +311,58 @@ bool targeter_unravelling::set_aim(coord_def a)
 
     return true;
 }
+
+// ---
+
+// Mana Rupture
+
+targeter_rupture::targeter_rupture(const actor *act, int r, int pow)
+    : targeter_beam(act, r, ZAP_RUPTURE, pow, 1, 1)
+{
+}
+
+/**
+ * Will a casting of Mana Rupture explode a target at the given loc?
+ *
+ * @param c     The location in question.
+ * @return      Whether, to the player's knowledge, there's a valid target for
+ *              Mana Rupture at the given coordinate.
+ */
+static bool rupture_explodes_at(const coord_def c)
+{
+    if (you.pos() == c)
+        return true;
+
+    const monster_info* mi = env.map_knowledge(c).monsterinfo();
+    const monster *mon = monster_at(c);
+    return mi && !(mon->has_ench(ENCH_SHORT_LIVED) || mon->summoner);
+}
+
+bool targeter_rupture::set_aim(coord_def a)
+{
+    if (!targeter::set_aim(a))
+        return false;
+
+    bolt tempbeam = beam;
+
+    tempbeam.target = aim;
+    tempbeam.path_taken.clear();
+    tempbeam.fire();
+    path_taken = tempbeam.path_taken;
+
+    bolt explosion_beam = beam;
+    set_explosion_target(beam);
+    if (rupture_explodes_at(beam.target))
+        min_expl_rad = 1;
+    else
+        min_expl_rad = 0;
+
+    set_explosion_aim(beam);
+
+    return true;
+}
+
+// ---
 
 targeter_imb::targeter_imb(const actor *act, int pow, int r) :
                targeter_beam(act, r, ZAP_ISKENDERUNS_MYSTIC_BLAST, pow, 0, 0)

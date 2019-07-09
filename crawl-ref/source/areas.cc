@@ -182,19 +182,6 @@ static void _update_agrid()
         no_areas = false;
     }
 
-    if (you.duration[DUR_DISJUNCTION])
-    {
-        const int r = 4;
-        _agrid_centres.emplace_back(AREA_DISJUNCTION, you.pos(), r);
-        for (radius_iterator ri(you.pos(), r, C_SQUARE);
-             ri; ++ri)
-        {
-            if (cell_see_cell(you.pos(), *ri, LOS_DEFAULT))
-                _set_agrid_flag(*ri, areaprop::disjunction);
-        }
-        no_areas = false;
-    }
-
     if (!env.sunlight.empty())
     {
         for (const auto &entry : env.sunlight)
@@ -644,20 +631,6 @@ bool quad_haloed(const coord_def& p)
         _update_agrid();
 
     return _check_agrid_flag(p, areaprop::quad);
-}
-
-/////////////
-// Disjunction Glow
-//
-
-bool disjunction_haloed(const coord_def& p)
-{
-    if (!map_bounds(p))
-        return false;
-    if (!_agrid_valid)
-        _update_agrid();
-
-    return _check_agrid_flag(p, areaprop::disjunction);
 }
 
 /////////////

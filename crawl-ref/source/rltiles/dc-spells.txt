@@ -80,6 +80,7 @@ metabolic_englaciation METABOLIC_ENGLACIATION
 ozocubus_armour OZOCUBUS_ARMOUR
 ozocubus_refrigeration OZOCUBUS_REFRIGERATION
 throw_frost THROW_FROST
+icicle_burst ICICLE_BURST
 
 %sdir gui/spells/necromancy
 agony AGONY

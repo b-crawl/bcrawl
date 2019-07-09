@@ -2,8 +2,7 @@
 
 #include "spl-cast.h"
 
-spret cast_disjunction(int pow, bool fail);
-void disjunction_spell();
+spret cast_time_stop(bool fail);
 
 spret cast_blink(bool fail = false);
 spret cast_controlled_blink(bool fail = false, bool safe = true);
@@ -24,9 +23,5 @@ spret cast_apportation(int pow, bolt& beam, bool fail);
 spret cast_golubrias_passage(const coord_def& where, bool fail);
 
 spret cast_dispersal(int pow, bool fail);
-
-int gravitas_range(int pow);
-bool fatal_attraction(const coord_def& pos, const actor *agent, int pow);
-spret cast_gravitas(int pow, const coord_def& where, bool fail);
 
 bool beckon(actor &beckoned, const bolt &path);

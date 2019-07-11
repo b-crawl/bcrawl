@@ -1134,7 +1134,7 @@ void game_options::reset_options()
     tile_shield_offsets.first  = INT_MAX;
     tile_shield_offsets.second = INT_MAX;
     tile_viewport_scale = 100;
-    tile_map_scale      = 60;
+    tile_map_scale      = 80;
 #endif
 
 #ifdef USE_TILE_WEB

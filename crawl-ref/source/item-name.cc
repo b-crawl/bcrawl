@@ -3417,6 +3417,7 @@ bool is_useless_item(const item_def &item, bool temp)
                 if(you.species == SP_FORMICID)
                     return true;
                 break;
+            default: break;
             }
         return false;
 

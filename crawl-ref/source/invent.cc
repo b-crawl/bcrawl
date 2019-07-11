@@ -364,14 +364,14 @@ void InvMenu::set_title(const string &s)
 
 int InvMenu::pre_process(int key)
 {
-    if (type == menu_type::drop && key == '\\')
+    if (type == MT_DROP && key == '\\')
     {
         _mode_special_drop = !_mode_special_drop;
         key = CK_NO_KEY;
     }
     else if (key == ';'
              && you.last_unequip != -1
-             && (type == menu_type::drop || type == menu_type::invlist))
+             && (type == MT_DROP || type == MT_INVLIST))
     {
         key = index_to_letter(you.last_unequip);
     }
@@ -393,7 +393,7 @@ static bool _item_is_permadrop_candidate(const item_def &item)
 
 void InvMenu::select_item_index(int idx, int qty, bool draw_cursor)
 {
-    if (type != menu_type::drop)
+    if (type != MT_DROP)
         return Menu::select_item_index(idx, qty, draw_cursor);
 
     InvEntry *ie = static_cast<InvEntry*>(items[idx]);
@@ -1378,13 +1378,8 @@ vector<SelItem> prompt_drop_items(const vector<SelItem> &preselected_items)
         else if (keyin == '?' || keyin == '*' || keyin == ',')
         {
             // The "view inventory listing" mode.
-<<<<<<< HEAD
-            const int ch = _invent_select(prompt.c_str(),
-                                          MT_DROP,
-=======
             const int ch = _invent_select("",
-                                          menu_type::drop,
->>>>>>> faf41a374d... Let players disable autopickup from the drop menu
+                                          MT_DROP,
                                           OSEL_ANY,
                                           -1,
                                           MF_MULTISELECT | MF_ALLOW_FILTER,

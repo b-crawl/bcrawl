@@ -2534,21 +2534,24 @@ void check_item_knowledge(bool unknown_items)
 
         for (int i = 0; i < NUM_MISCELLANY; i++)
         {
-            if (i == MISC_HORN_OF_GERYON
-#if TAG_MAJOR_VERSION == 34
-                || is_deck_type(i)
-                || i == MISC_BUGGY_EBONY_CASKET
-                || i == MISC_BUGGY_LANTERN_OF_SHADOWS
-                || i == MISC_BOTTLED_EFREET
-                || i == MISC_RUNE_OF_ZOT
-                || i == MISC_STONE_OF_TREMORS
-                || i == MISC_XOMS_CHESSBOARD
-#endif
-                || (i == MISC_QUAD_DAMAGE && !crawl_state.game_is_sprint()))
+            switch(i)
             {
-                continue;
-            }
-            _add_fake_item(OBJ_MISCELLANY, i, selected_items, items_misc);
+            case MISC_BOX_OF_BEASTS:
+            case MISC_FAN_OF_GALES:
+            case MISC_ZIGGURAT:
+            case MISC_LAMP_OF_FIRE:
+            case MISC_LIGHTNING_ROD:
+            case MISC_PHANTOM_MIRROR:
+            case MISC_PHIAL_OF_FLOODS:
+            case MISC_SACK_OF_SPIDERS:
+                _add_fake_item(OBJ_MISCELLANY, i, selected_items, items_misc);
+                break;
+            case MISC_QUAD_DAMAGE:
+                if crawl_state.game_is_sprint():
+                    _add_fake_item(OBJ_MISCELLANY, i, selected_items, items_misc);
+                break;
+            default: break;
+            }           
         }
 
         // Misc.

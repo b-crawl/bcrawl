@@ -5,6 +5,11 @@ ae := autopickup_exceptions
 # Autopickup runes by default.
 ae = <rune of Zot
 
+ae += <figurine of a ziggurat
+ae += <lightning rod
+ae += <lamp of fire
+ae += <phial of floods
+
 ## autopickup artifacts and throwing nets, unless you can't use them
 :add_autopickup_func(function (it, name)
 : if it.artefact

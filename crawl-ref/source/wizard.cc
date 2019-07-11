@@ -20,6 +20,7 @@
 #include "god-passive.h" // jiyva_eat_offlevel_items
 #include "hiscores.h"
 #include "items.h"
+#include "libutil.h" // toupper_safe (?)
 #include "luaterp.h" // debug_terp_lua
 #include "macro.h"
 #include "menu.h" // column_composer

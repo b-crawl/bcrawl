@@ -2547,7 +2547,7 @@ void check_item_knowledge(bool unknown_items)
                 _add_fake_item(OBJ_MISCELLANY, i, selected_items, items_misc);
                 break;
             case MISC_QUAD_DAMAGE:
-                if crawl_state.game_is_sprint():
+                if(crawl_state.game_is_sprint())
                     _add_fake_item(OBJ_MISCELLANY, i, selected_items, items_misc);
                 break;
             default: break;

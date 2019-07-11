@@ -206,7 +206,7 @@ define(function () {
     fg_flags.flags.SWIFT        = [0, 0x1000000];
     fg_flags.flags.PINNED       = [0, 0x2000000];
     fg_flags.flags.VILE_CLUTCH  = [0, 0x4000000];
-    fg_flags.flags.SHACKLE      = [0, 0x8000000];
+    fg_flags.flags.SHACKLE      = [0, 0x10000000];
 
     // MDAM has 5 possibilities, so uses 3 bits.
     fg_flags.exclusive_flags.push({

@@ -30,6 +30,7 @@
 #include "invent.h"
 #include "item-name.h"
 #include "items.h"
+#include "los.h"
 #include "losglobal.h"
 #include "macro.h"
 #include "message.h"
@@ -225,6 +226,18 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
             {
                 continue;
             }
+
+            // check for actors along the arc path
+            ray_def ray;
+            if (!find_ray(source, mi->pos(), ray, opc_solid))
+                continue;
+
+            while (ray.advance())
+                if (actor_at(ray.pos()))
+                    break;
+
+            if (ray.pos() != mi->pos())
+                continue;
 
             count++;
 
@@ -2645,7 +2658,8 @@ spret cast_toxic_radiance(actor *agent, int pow, bool fail, bool mon_tracer)
         else
             mpr("Your toxic radiance grows in intensity.");
 
-        you.increase_duration(DUR_TOXIC_RADIANCE, 3 + random2(pow/20), 15);
+        you.increase_duration(DUR_TOXIC_RADIANCE, 2 + random2(pow/20), 15);
+        toxic_radiance_effect(&you, 1, true);
 
         flash_view_delay(UA_PLAYER, GREEN, 300, &hitfunc);
 
@@ -2671,7 +2685,8 @@ spret cast_toxic_radiance(actor *agent, int pow, bool fail, bool mon_tracer)
                                " begins to radiate toxic energy.");
 
         mon_agent->add_ench(mon_enchant(ENCH_TOXIC_RADIANCE, 1, mon_agent,
-                                        (5 + random2avg(pow/15, 2)) * BASELINE_DELAY));
+                                        (4 + random2avg(pow/15, 2)) * BASELINE_DELAY));
+        toxic_radiance_effect(agent, 1);
 
         targeter_los hitfunc(mon_agent, LOS_NO_TRANS);
         flash_view_delay(UA_MONSTER, GREEN, 300, &hitfunc);
@@ -2680,7 +2695,20 @@ spret cast_toxic_radiance(actor *agent, int pow, bool fail, bool mon_tracer)
     }
 }
 
-void toxic_radiance_effect(actor* agent, int mult)
+/*
+ * Attempt to poison all monsters in line of sight of the caster.
+ *
+ * @param agent   The caster.
+ * @param mult    A number to multiply the damage by.
+ *                This is the time taken for the player's action in turns,
+ *                or 1 if the spell was cast this turn.
+ * @param on_cast Whether the spell was cast this turn. This only matters
+ *                if the player cast the spell. If true, we trigger conducts
+ *                if the player hurts allies; if false, we don't, to avoid
+ *                the player being accidentally put under penance.
+ *                Defaults to false.
+ */
+void toxic_radiance_effect(actor* agent, int mult, bool on_cast)
 {
     int pow;
     if (agent->is_player())
@@ -2717,7 +2745,20 @@ void toxic_radiance_effect(actor* agent, int mult)
         }
         else
         {
+            // We need to deal with conducts before damaging the monster,
+            // because otherwise friendly monsters that are one-shot won't
+            // trigger conducts. Only trigger conducts on the turn the player
+            // casts the spell (see PR #999).
+            if (on_cast && agent->is_player())
+            {
+                god_conduct_trigger conducts[3];
+                set_attack_conducts(conducts, *ai->as_monster());
+                if (is_sanctuary(ai->pos()))
+                    break_sanctuary = true;
+            }
+
             ai->hurt(agent, dam, BEAM_POISON);
+
             if (ai->alive())
             {
                 behaviour_event(ai->as_monster(), ME_ANNOY, agent,
@@ -2725,9 +2766,6 @@ void toxic_radiance_effect(actor* agent, int mult)
                 if (coinflip() || !ai->as_monster()->has_ench(ENCH_POISON))
                     poison_monster(ai->as_monster(), agent, 1);
             }
-
-            if (agent->is_player() && is_sanctuary(ai->pos()))
-                break_sanctuary = true;
         }
     }
 

@@ -17,6 +17,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <unordered_set>
 
 #include "dlua.h"
 #include "enum.h"
@@ -40,6 +41,10 @@
 #define RANDBK_SPELLS_KEY "randbook_spells"
 #define RANDBK_SLVLS_KEY "randbook_slevels"
 #define RANDBK_NSPELLS_KEY "randbook_num_spells"
+
+#ifdef DEBUG_TAG_PROFILING
+void tag_profile_out();
+#endif
 
 class mon_enchant;
 extern const char *traversable_glyphs;
@@ -1151,7 +1156,7 @@ public:
     vector<subvault_place> subvault_places;
 
 private:
-    set<string>     tags;
+    unordered_set<string>     tags;
     // This map has been loaded from an index, and not fully realised.
     bool            index_only;
     mutable long    cache_offset;
@@ -1163,6 +1168,14 @@ private:
 
     // True if this map is in the process of being validated.
     bool validating_map_flag;
+
+    // values cached from tags -- adding to this is only recommended if you've
+    // actually done the profiling...
+    // These are the top three worst tags, which jointly amount to about 3-4%
+    // of levelgen time if not cached.
+    bool cache_minivault;
+    bool cache_overwritable;
+    bool cache_extra;
 
 public:
     map_def();
@@ -1247,10 +1260,22 @@ public:
 
     bool is_minivault() const;
     bool is_overwritable_layout() const;
-    bool has_tag(const string &tagswanted) const;
-    bool has_tag(const set<string> &tagswanted) const;
+    bool is_extra_vault() const;
+    bool has_tag(const string &tagwanted) const;
     bool has_tag_prefix(const string &tag) const;
     bool has_tag_suffix(const string &suffix) const;
+
+    template <typename TagIterator>
+    bool has_all_tags(TagIterator begin, TagIterator end) const
+    {
+        if (tags.empty() || begin == end) // legacy behavior for empty case
+            return false;
+        for ( ; begin != end; ++begin)
+            if (!has_tag(*begin))
+                return false;
+        return true;
+    }
+    bool has_all_tags(const string &tagswanted) const;
 
     template <typename TagIterator>
     bool has_any_tag(TagIterator begin, TagIterator end) const
@@ -1261,7 +1286,8 @@ public:
         return false;
     }
 
-    const set<string> get_tags() const;
+    const vector<string> get_tags() const;
+    const unordered_set<string> get_tags_unsorted() const;
     void add_tags(const string &tag);
     void set_tags(const string &tag);
     bool remove_tags(const string &tag);
@@ -1314,6 +1340,7 @@ private:
     string apply_subvault(string_spec &);
     string validate_map_placeable();
     bool has_exit() const;
+    void update_cached_tags();
 };
 
 const int CHANCE_ROLL = 10000;

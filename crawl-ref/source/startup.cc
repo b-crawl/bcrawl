@@ -237,42 +237,15 @@ static void _zap_los_monsters(bool items_also)
     }
 }
 
-/**
- * Ensure that the level given by `pos` is generated. This does not do much in
- * the way of cleanup, and the caller must ensure the player ends up somewhere
- * sensible (this will not place the player).
- */
-static bool _ensure_level_generated(const level_pos &pos)
-{
-    // TODO: how important is it to get stair_taken right? bel just used stone 1
-    dungeon_feature_type stair_taken =
-        absdungeon_depth(pos.id.branch, pos.id.depth) > env.absdepth0 ?
-        DNGN_STONE_STAIRS_DOWN_I : DNGN_STONE_STAIRS_UP_I;
-
-    if (pos.id.depth == brdepth[pos.id.branch])
-        stair_taken = DNGN_STONE_STAIRS_DOWN_I;
-
-    if (pos.id.depth == 1 && pos.id.branch != BRANCH_DUNGEON)
-        stair_taken = branches[pos.id.branch].entry_stairs;
-
-    const level_id old_level = level_id::current();
-
-    you.where_are_you = static_cast<branch_type>(pos.id.branch);
-    you.depth         = pos.id.depth;
-
-    return load_level(stair_taken, LOAD_GENERATE, old_level);
-}
-
 static void _pregen_levels(const branch_type branch, progress_popup &progress)
 {
     for (int i = 1; i <= branches[branch].numlevels; i++)
     {
         level_id new_level = level_id(branch, i);
-        level_pos pos = level_pos(new_level);
-        dprf("Pregenerating %s:%d", branches[pos.id.branch].abbrevname,
-                                    pos.id.depth);
+        dprf("Pregenerating %s:%d", branches[new_level.branch].abbrevname,
+                                    new_level.depth);
         progress.advance_progress();
-        _ensure_level_generated(pos);
+        generate_level(new_level);
     }
 }
 
@@ -448,7 +421,6 @@ static void _post_init(bool newc)
     ash_check_bondage(false);
 
     trackers_init_new_level(false);
-    tile_new_level(newc);
 
     if (newc) // start a new game
     {
@@ -1237,66 +1209,6 @@ static void _show_startup_menu(newgame_def& ng_choice,
 }
 #endif
 
-static void _choose_arena_teams(newgame_def& choice,
-                                const newgame_def& defaults)
-{
-#ifdef USE_TILE_WEB
-    tiles_crt_popup show_as_popup;
-#endif
-
-    if (!choice.arena_teams.empty())
-        return;
-    clear_message_store();
-
-    char buf[80];
-    resumable_line_reader reader(buf, sizeof(buf));
-    bool done = false, cancel;
-    auto prompt_ui = make_shared<Text>();
-
-    prompt_ui->on(Widget::slots.event, [&](wm_event ev)  {
-        if (ev.type != WME_KEYDOWN)
-            return false;
-        int key = ev.key.keysym.sym;
-        key = reader.putkey(key);
-        if (key == -1)
-            return true;
-        cancel = !!key;
-        return done = true;
-    });
-
-    auto popup = make_shared<ui::Popup>(prompt_ui);
-    ui::push_layout(move(popup));
-    while (!done && !crawl_state.seen_hups)
-    {
-        string hlbuf = formatted_string(buf).to_colour_string();
-        if (hlbuf.find(" v ") != string::npos)
-            hlbuf = "<w>" + replace_all(hlbuf, " v ", "</w> v <w>") + "</w>";
-
-        formatted_string prompt;
-        prompt.cprintf("Enter your choice of teams:\n\n  ");
-        prompt += formatted_string::parse_string(hlbuf);
-
-        prompt.cprintf("\n\n");
-        if (!defaults.arena_teams.empty())
-            prompt.cprintf("Enter - %s\n", defaults.arena_teams.c_str());
-        prompt.cprintf("\n");
-        prompt.cprintf("Examples:\n");
-        prompt.cprintf("  Sigmund v Jessica\n");
-        prompt.cprintf("  99 orc v the Royal Jelly\n");
-        prompt.cprintf("  20-headed hydra v 10 kobold ; scimitar ego:flaming");
-        prompt_ui->set_text(prompt);
-
-        ui::pump_events();
-    }
-    ui::pop_layout();
-
-    if (cancel || crawl_state.seen_hups)
-        game_ended(game_exit::abort);
-    choice.arena_teams = buf;
-    if (choice.arena_teams.empty())
-        choice.arena_teams = defaults.arena_teams;
-}
-
 #ifndef DGAMELAUNCH
 static bool _exit_type_allows_menu_bypass(game_exit exit)
 {
@@ -1383,10 +1295,8 @@ bool startup_step()
     //       choose_game and setup_game
     if (choice.type == GAME_TYPE_ARENA)
     {
-        _choose_arena_teams(choice, defaults);
-        write_newgame_options_file(choice);
         crawl_state.last_type = GAME_TYPE_ARENA;
-        run_arena(choice.arena_teams); // this is NORETURN
+        run_arena(choice, defaults.arena_teams); // this is NORETURN
     }
 
     bool newchar = false;

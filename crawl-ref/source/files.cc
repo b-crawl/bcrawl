@@ -49,6 +49,7 @@
 #include "hints.h"
 #include "initfile.h"
 #include "item-name.h"
+#include "item-status-flag-type.h"
 #include "items.h"
 #include "jobs.h"
 #include "kills.h"
@@ -1189,42 +1190,6 @@ static bool _leave_level(dungeon_feature_type stair_taken,
     return popped;
 }
 
-
-/**
- * Generate a new level.
- *
- * Cleanup the environment, build the level, and possibly place a ghost or
- * handle initial AK entrance.
- *
- * @param stair_taken   The means used to leave the last level.
- * @param old_level     The ID of the previous level.
- */
-static void _make_level(dungeon_feature_type stair_taken,
-                        const level_id& old_level)
-{
-
-    env.turns_on_level = -1;
-
-    tile_init_default_flavour();
-    tile_clear_flavour();
-    env.tile_names.clear();
-
-    // XXX: This is ugly.
-    bool dummy;
-    dungeon_feature_type stair_type = static_cast<dungeon_feature_type>(
-        _get_dest_stair_type(old_level.branch,
-                             static_cast<dungeon_feature_type>(stair_taken),
-                             dummy));
-
-    _clear_env_map();
-    builder(true, stair_type);
-
-    env.turns_on_level = 0;
-    // sanctuary
-    env.sanctuary_pos  = coord_def(-1, -1);
-    env.sanctuary_time = 0;
-}
-
 /**
  * Move the player to the appropriate entrance location in a level.
  *
@@ -1297,53 +1262,6 @@ static string _get_hatch_name()
     return "";
 }
 
-
-static void _count_gold()
-{
-    vector<item_def *> gold_piles;
-    vector<coord_def> gold_places;
-    int gold = 0;
-    for (rectangle_iterator ri(0); ri; ++ri)
-    {
-        for (stack_iterator j(*ri); j; ++j)
-        {
-            if (j->base_type == OBJ_GOLD)
-            {
-                gold += j->quantity;
-                gold_piles.push_back(&(*j));
-                gold_places.push_back(*ri);
-            }
-        }
-    }
-
-    if (!player_in_branch(BRANCH_ABYSS))
-        you.attribute[ATTR_GOLD_GENERATED] += gold;
-
-    // TODO: this probably should fire when you join gozag, too?
-    if (have_passive(passive_t::detect_gold))
-    {
-        for (unsigned int i = 0; i < gold_places.size(); i++)
-        {
-            bool detected = false;
-            int dummy = gold_piles[i]->index();
-            coord_def &pos = gold_places[i];
-            unlink_item(dummy);
-            move_item_to_grid(&dummy, pos, true);
-            if (!env.map_knowledge(pos).item()
-                || env.map_knowledge(pos).item()->base_type != OBJ_GOLD)
-            {
-                detected = true;
-            }
-            update_item_at(pos, true);
-            if (detected)
-            {
-                ASSERT(env.map_knowledge(pos).item());
-                env.map_knowledge(pos).flags |= MAP_DETECTED_ITEM;
-            }
-        }
-    }
-}
-
 static const string VISITED_LEVELS_KEY = "visited_levels";
 
 #if TAG_MAJOR_VERSION == 34
@@ -1378,17 +1296,97 @@ void player::set_level_visited(const level_id &level)
     visited[level.describe()] = true;
 }
 
+/**
+ * Has the player visited the level currently stored in the save under the id
+ * `level`, if there is one? Returns false if there isn't one. This stores
+ * *token level* visited state, not type-level -- it does not answer questions
+ * like, e.g. has the player ever visited a trove? For that, see place_info.
+ * This distinction matters mainly for portal branches, especially ones that can
+ * be revisited, e.g. Pan levels and zigs.
+ */
 bool player::level_visited(const level_id &level)
 {
-    // this will mean that portal maps that the player is not currently on
-    // return false, since the map gets deleted. A continuation of legacy
-    // behavior...
     // `is_existing_level` is not reliable after the game end, because the
     // save no longer exists, so we ignore it for printing morgues
     if (!is_existing_level(level) && you.save)
         return false;
     const auto &visited = props[VISITED_LEVELS_KEY].get_table();
     return visited.exists(level.describe());
+}
+
+static void _generic_level_reset()
+{
+    // TODO: can more be pulled into here?
+
+    you.prev_targ = MHITNOT;
+    you.prev_grd_targ.reset();
+
+    // Lose all listeners.
+    dungeon_events.clear();
+    clear_travel_trail();
+}
+
+/**
+ * Ensure that the level given by `l` is generated. This does not do much in
+ * the way of cleanup, and the caller must ensure the player ends up somewhere
+ * sensible afterwards (this will not place the player, and will wipe out their
+ * current location state if a level is built). Does not do anything if the
+ * save already contains the relevant level.
+ *
+ * @param l the level to try to build.
+ * @return whether a level was built.
+ */
+bool generate_level(const level_id &l)
+{
+    const string level_name = l.describe();
+    if (you.save->has_chunk(level_name))
+        return false;
+
+    unwind_var<int> depth(you.depth, l.depth);
+    unwind_var<branch_type> branch(you.where_are_you, l.branch);
+    unwind_var<coord_def> saved_position(you.position);
+    you.position.reset();
+
+    // simulate a reasonable stair to enter the level with
+    const dungeon_feature_type stair_taken =
+          you.depth == 1
+        ? (you.where_are_you == BRANCH_DUNGEON
+           ? DNGN_UNSEEN
+           : branches[you.where_are_you].entry_stairs)
+        : DNGN_STONE_STAIRS_DOWN_I;
+
+    unwind_var<dungeon_feature_type> stair(you.transit_stair, stair_taken);
+    // TODO how necessary is this?
+    unwind_bool ylev(you.entering_level, true);
+    // n.b. crawl_state.generating_level is handled in builder
+
+    _generic_level_reset();
+    delete_all_clouds();
+    los_changed(); // invalidate the los cache, which impacts monster placement
+
+    // initialize env for builder
+    env.turns_on_level = -1;
+    tile_init_default_flavour();
+    tile_clear_flavour();
+    env.tile_names.clear();
+    _clear_env_map();
+
+    // finally -- everything is set up, call the builder.
+    dprf("Generating new level for '%s'.", level_name.c_str());
+    builder(true);
+
+    you.vault_list[level_id::current()] = level_vault_names();
+
+    // initialize env for a new level
+    env.turns_on_level = 0;
+    env.sanctuary_pos  = coord_def(-1, -1);
+    env.sanctuary_time = 0;
+    env.markers.init_all(); // init first, activation happens when entering
+    show_update_emphasis(); // Clear map knowledge stair emphasis in env.
+
+    // save the level and associated env state
+    _save_level(level_id::current());
+    return true;
 }
 
 /**
@@ -1402,6 +1400,9 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
                 const level_id& old_level)
 {
     const string level_name = level_id::current().describe();
+    if (!you.save->has_chunk(level_name) && load_mode == LOAD_VISITOR)
+        return false;
+
     const bool make_changes =
         (load_mode == LOAD_START_GAME || load_mode == LOAD_ENTER_LEVEL);
 
@@ -1420,7 +1421,7 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
     if (feat_is_escape_hatch(stair_taken))
         hatch_name = _get_hatch_name();
 
-    if (load_mode != LOAD_VISITOR && load_mode != LOAD_GENERATE)
+    if (load_mode != LOAD_VISITOR)
         popped = _leave_level(stair_taken, old_level, &return_pos);
 
     unwind_var<dungeon_feature_type> stair(
@@ -1435,16 +1436,12 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
     // Save position for hatches to place a marker on the destination level.
     coord_def dest_pos = you.pos();
 
-    you.prev_targ     = MHITNOT;
-    you.prev_grd_targ.reset();
+    _generic_level_reset();
 
     // We clear twice - on save and on load.
     // Once would be enough...
     if (make_changes)
         delete_all_clouds();
-
-    // Lose all listeners.
-    dungeon_events.clear();
 
     // This block is to grab followers and save the old level to disk.
     if (load_mode == LOAD_ENTER_LEVEL)
@@ -1462,19 +1459,14 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
                 _save_level(old_level);
         }
 
-        // TODO: for staged pregeneration this also needs to happen on
-        // LOAD_GENERATE. However, it's a bit tricky, because player position
-        // does need to be saved for the later LOAD_ENTER_LEVEL call. postpone.
         // The player is now between levels.
         you.position.reset();
 
         update_companions();
     }
 
-    clear_travel_trail();
-
 #ifdef USE_TILE
-    if (load_mode != LOAD_VISITOR && load_mode != LOAD_GENERATE)
+    if (load_mode != LOAD_VISITOR)
     {
         tiles.clear_minimap();
         crawl_view_buffer empty_vbuf;
@@ -1482,10 +1474,7 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
     }
 #endif
 
-    bool just_created_level = false;
-
-    if (load_mode != LOAD_GENERATE
-        && load_mode != LOAD_VISITOR
+    if (load_mode != LOAD_VISITOR
         && you.chapter == CHAPTER_POCKET_ABYSS
         && player_in_branch(BRANCH_DUNGEON))
     {
@@ -1499,22 +1488,16 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
     if (!you.save->has_chunk(level_name))
     {
         ASSERT(load_mode != LOAD_VISITOR);
-        dprf("Generating new level for '%s'.", level_name.c_str());
-        _make_level(stair_taken, old_level);
-        you.vault_list[level_id::current()] = level_vault_names();
-        just_created_level = true;
+        generate_level(level_id::current());
     }
     else
     {
         dprf("Loading old level '%s'.", level_name.c_str());
         _restore_tagged_chunk(you.save, level_name, TAG_LEVEL, "Level file is invalid.");
-
-        if (load_mode != LOAD_GENERATE)
-            _redraw_all(); // TODO why is there a redraw call here?
+        _redraw_all(); // TODO why is there a redraw call here?
     }
 
-    if (just_created_level)
-        env.markers.init_all(); // init first, activation happens when entering
+    const bool just_created_level = !you.level_visited(level_id::current());
 
     // Clear map knowledge stair emphasis.
     show_update_emphasis();
@@ -1523,16 +1506,6 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
     deleteAll(env.final_effects);
 
     los_changed();
-
-    if (load_mode == LOAD_GENERATE)
-    {
-        if (just_created_level)
-            _save_level(level_id::current());
-        return just_created_level;
-    }
-
-    if (!you.level_visited(level_id::current()))
-        just_created_level = true; // in case level was pre-generated
 
     if (load_mode != LOAD_VISITOR)
         you.set_level_visited(level_id::current());
@@ -1685,7 +1658,7 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
     if (just_created_level)
     {
         you.attribute[ATTR_ABYSS_ENTOURAGE] = 0;
-        _count_gold();
+        gozag_detect_level_gold(true);
     }
 
 
@@ -2587,6 +2560,10 @@ void delete_level(const level_id &level)
 
     if (you.save)
         you.save->delete_chunk(level.describe());
+
+    auto &visited = you.props[VISITED_LEVELS_KEY].get_table();
+    visited.erase(level.describe());
+
     if (level.branch == BRANCH_ABYSS)
     {
         save_abyss_uniques();

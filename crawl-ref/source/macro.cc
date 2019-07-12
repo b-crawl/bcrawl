@@ -31,6 +31,10 @@
 #include <string>
 #include <vector>
 
+#ifdef USE_TILE_LOCAL
+#include <SDL_keycode.h>
+#endif
+
 #include "cio.h"
 #include "command.h"
 #include "files.h"
@@ -261,7 +265,7 @@ static int read_key_code(string s)
     else if (s[0] == '^')
     {
         // ^A = 1, etc.
-        return 1 + toupper(s[1]) - 'A';
+        return 1 + toupper_safe(s[1]) - 'A';
     }
 
     char *tail;
@@ -1504,6 +1508,11 @@ string command_to_string(command_type cmd, bool tutorial)
         const int numpad = (key - 1000);
         result = make_stringf("Numpad %d", numpad);
     }
+#ifdef USE_TILE_LOCAL
+    // SDL allows control modifiers for some extra punctuation
+    else if (key < 0 && key > SDLK_EXCLAIM - SDLK_a + 1)
+        result = make_stringf("Ctrl-%c", (char) (key + SDLK_a - 1));
+#endif
     else
     {
         const int ch = key + 'A' - 1;

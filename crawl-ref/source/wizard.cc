@@ -20,6 +20,7 @@
 #include "god-passive.h" // jiyva_eat_offlevel_items
 #include "hiscores.h"
 #include "items.h"
+#include "libutil.h" // toupper_safe (?)
 #include "luaterp.h" // debug_terp_lua
 #include "macro.h"
 #include "menu.h" // column_composer
@@ -115,7 +116,7 @@ static void _do_wizard_command(int wiz_command)
 
     case 'l': wizard_set_xl(); break;
     case 'L': debug_place_map(false); break;
-    // case CONTROL('L'): break;
+    case CONTROL('L'): debug_show_builder_logs(); break;
 
     case 'M':
     case 'm': wizard_create_spec_monster_name(); break;
@@ -316,7 +317,7 @@ void handle_wizard_command()
         cursor_control con(true);
         wiz_command = getchm();
         if (wiz_command == '*')
-            wiz_command = CONTROL(toupper(getchm()));
+            wiz_command = CONTROL(toupper_safe(getchm()));
     }
 
     if (crawl_state.cmd_repeat_start)
@@ -442,6 +443,12 @@ int list_wizard_commands(bool do_redraw_screen)
                        "<w>{</w>      magic mapping\n"
                        "<w>Ctrl-W</w> change Shoals' tide speed\n"
                        "<w>Ctrl-E</w> dump level builder information\n"
+#ifdef DEBUG
+                       // might be present in any save, but only generated
+                       // in debug builds; hide this for regular wizmode so as
+                       // to not confuse non-devs. The command will still work.
+                       "<w>Ctrl-L</w> show builder logs for level\n"
+#endif
                        "<w>Ctrl-R</w> regenerate current level\n"
                        "<w>P</w>      create a level based on a vault\n",
                        true);

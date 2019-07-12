@@ -558,13 +558,10 @@ static level_id _travel_destination(const dungeon_feature_type how,
                                     + shaft_dest.describe() + ".");
         }
 
-        string howfar;
-        if (shaft_depth > 1)
-            howfar = make_stringf(" for %d floors", shaft_depth);
-
-        mprf("You %s a shaft%s!", you.airborne() ? "are sucked into"
-                                                 : "fall through",
-                                  howfar.c_str());
+        mprf("You %s into a shaft and drop %d floor%s!",
+             you.airborne() ? "are sucked" : "fall",
+             shaft_depth,
+             shaft_depth > 1 ? "s" : "");
 
         // Shafts are one-time-use.
         mpr("The shaft crumbles and collapses.");
@@ -814,7 +811,7 @@ void floor_transition(dungeon_feature_type how,
         {
             string old_branch_string = branches[old_level.branch].longname;
             if (starts_with(old_branch_string, "The "))
-                old_branch_string[0] = tolower(old_branch_string[0]);
+                old_branch_string[0] = tolower_safe(old_branch_string[0]);
             mark_milestone("br.exit", "left " + old_branch_string + ".",
                            old_level.describe());
             you.branches_left.set(old_level.branch);

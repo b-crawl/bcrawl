@@ -55,9 +55,7 @@ This reduces their remaining time before being sent back where they came from.
 Aura of Brilliance spell
 
 Empowers the magic of nearby wizard allies of the caster, allowing them to
-cast their magic more powerfully and more often, but at the price of fixing
-the caster in place until they no longer have any nearby allies they can
-empower.
+cast their magic more powerfully and more often.
 %%%%
 Avatar Song spell
 
@@ -176,21 +174,25 @@ the bolt's destination.
 %%%%
 Bolt of Cold spell
 
-Fires a penetrating bolt of frost.
+Fires a penetrating bolt of frost. The range of the bolt is decreased by one for
+every creature it strikes.
 %%%%
 Bolt of Draining spell
 
 Fires a penetrating bolt of negative energy, which drains any living creature
-it strikes.
+it strikes. The range of the bolt is decreased by one for every creature it
+hits.
 %%%%
 Bolt of Fire spell
 
-Fires a penetrating bolt of flames.
+Fires a penetrating bolt of flames. The range of the bolt is decreased by one
+for every creature it strikes.
 %%%%
 Bolt of Magma spell
 
 Fires a penetrating bolt of molten rock. A portion of its damage bypasses
-fire resistance.
+fire resistance. The range of the bolt is decreased by one for every creature
+it strikes.
 %%%%
 Borgnjor's Revivification spell
 
@@ -270,7 +272,8 @@ Exhales a large cloud of fumes filled with the very essence of chaos.
 %%%%
 Chilling Breath spell
 
-Exhales a blast of frost that may knock back airborne targets.
+Exhales a blast of frost that may knock back airborne targets. The range of the
+blast is decreased by one for every creature it strikes.
 %%%%
 Cleansing Flame spell
 
@@ -287,6 +290,7 @@ become available.
 Cold Breath spell
 
 Exhales a focused blast of icy-cold air. It may knock back airborne targets.
+The range of the blast is decreased by one for every creature it strikes.
 %%%%
 Confuse spell
 
@@ -338,7 +342,8 @@ force of any creature it envelops.
 %%%%
 Corrosive Bolt spell
 
-Fires a penetrating bolt of acid.
+Fires a penetrating bolt of acid. The range of the bolt is decreased by one for
+every creature it strikes.
 %%%%
 Corrupting Pulse spell
 
@@ -350,7 +355,8 @@ Crystal Bolt spell
 
 Projects a penetrating projectile with peculiar magical properties. It is
 randomly imbued with either fire or ice, and additionally will reflect from
-walls of any material due to the crystal embedded in the shot.
+walls of any material due to the crystal embedded in the shot. The range of the
+bolt is decreased by one for every creature it strikes.
 %%%%
 Darkness spell
 
@@ -492,7 +498,8 @@ antimagic weapon.
 Draining Gaze spell
 
 Causes the target's magic to leak into the air, as though they were hit by an
-antimagic weapon, with no direct line of fire required.
+antimagic weapon, and heals the caster for the amount of magic drained,
+with no direct line of fire required.
 %%%%
 Dream Dust spell
 
@@ -509,7 +516,8 @@ Throws a bolt of electricity at the target, with high accuracy.
 %%%%
 Energy Bolt spell
 
-Fires a bolt of highly destructive energy.
+Fires a bolt of highly destructive energy. The range of the bolt is decreased
+by one for every creature it strikes.
 %%%%
 Enslavement spell
 
@@ -546,7 +554,8 @@ ineffective against unnatural targets.
 %%%%
 Fire Breath spell
 
-Breathes a blast of fire at a targeted creature.
+Breathes a blast of fire at a targeted creature. The range of the blast is
+decreased by one for every creature it strikes.
 %%%%
 Fire Storm spell
 
@@ -900,7 +909,8 @@ shorter time.
 Metal Splinters spell
 
 Fires a directed stream of sharp metal splinters. Its damage is strongly
-reduced by armour.
+reduced by armour. The range of the stream is decreased by one for every
+creature it strikes.
 %%%%
 Miasma Breath spell
 
@@ -1319,7 +1329,8 @@ With six bars of power, the effects of this spell last until cancelled.
 %%%%
 Steam Ball spell
 
-Throws a ball of hot steam towards a targeted creature.
+Throws a ball of hot steam towards a targeted creature. The range of the ball
+is decreased by one for every creature it strikes.
 %%%%
 Sticks to Snakes spell
 
@@ -1590,7 +1601,8 @@ Life will not be drained in excess of what the caster can capably absorb.
 %%%%
 Venom Bolt spell
 
-Fires a penetrating bolt of poison.
+Fires a penetrating bolt of poison. The range of the bolt is decreased by one
+for every creature it strikes.
 %%%%
 Virulence spell
 

@@ -132,6 +132,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Matthew Boeh
     Mike Boutin
     John Boyle
+    Josh Braden
     Daniel Mark Brownrigg
     Andre Bubel
     Trent W. Buck
@@ -215,6 +216,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Vesa Kivimäki
     Daniel Klein
     Jon Knapp
+    Quinten Konyn
     Ilkka Koskela
     infiniplex
     Vambola Kotkas
@@ -242,6 +244,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Paul Maloney
     Pablo Mansanet
     Wille Mäntylä
+    Gabriel Marks
     Jean Martel
     James 'Eronarn' Meickle
     Jacob Meigs
@@ -261,6 +264,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Nikolai Lavsky
     Jonathon Nooner
     NormalPerson7
+    Michael Nowack
     Erkki Nurmi
     Mattias Nyberg
     nyra
@@ -284,6 +288,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Iago Porto
     psywombats
     pubby
+    Ashley Elizabeth Raine
     Edward Randtke
     Derek Ray
     RealzHS
@@ -301,6 +306,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Sebastian Salman
     Sandman25
     Brett Scarborough
+    sdynet
     Roman Sêk
     Brennan Shacklett
     ShadyAmish

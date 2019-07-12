@@ -5076,7 +5076,6 @@ bool land_player(bool quiet)
 static void _end_water_hold()
 {
     you.duration[DUR_WATER_HOLD] = 0;
-    you.duration[DUR_WATER_HOLD_IMMUNITY] = 1;
     you.props.erase("water_holder");
 }
 
@@ -5086,7 +5085,7 @@ bool player::clear_far_engulf()
         return false;
 
     monster * const mons = monster_by_mid(you.props["water_holder"].get_int());
-    if (!mons || !adjacent(mons->pos(), you.pos()))
+    if (!mons || !mons->alive() || !adjacent(mons->pos(), you.pos()))
     {
         if (you.res_water_drowning())
             mpr("The water engulfing you falls away.");
@@ -5101,40 +5100,22 @@ bool player::clear_far_engulf()
 
 void handle_player_drowning(int delay)
 {
-    if (you.duration[DUR_WATER_HOLD] == 1)
+    if (you.clear_far_engulf())
+        return;
+    if (you.res_water_drowning())
     {
-        if (!you.res_water_drowning())
-            mpr("You gasp with relief as air once again reaches your lungs.");
-        _end_water_hold();
+        // Reset so damage doesn't ramp up while able to breathe
+        you.duration[DUR_WATER_HOLD] = 10;
     }
     else
     {
-        monster* mons = monster_by_mid(you.props["water_holder"].get_int());
-        if (!mons || !adjacent(mons->pos(), you.pos()))
-        {
-            if (you.res_water_drowning())
-                mpr("The water engulfing you falls away.");
-            else
-                mpr("You gasp with relief as air once again reaches your lungs.");
-
-            _end_water_hold();
-
-        }
-        else if (you.res_water_drowning())
-        {
-            // Reset so damage doesn't ramp up while able to breathe
-            you.duration[DUR_WATER_HOLD] = 10;
-        }
-        else if (!you.res_water_drowning())
-        {
-            you.duration[DUR_WATER_HOLD] += delay;
-            int dam =
-                div_rand_round((28 + stepdown((float)you.duration[DUR_WATER_HOLD], 28.0))
-                                * delay,
-                                BASELINE_DELAY * 10);
-            ouch(dam, KILLED_BY_WATER, mons->mid);
-            mprf(MSGCH_WARN, "Your lungs strain for air!");
-        }
+        you.duration[DUR_WATER_HOLD] += delay;
+        int dam =
+            div_rand_round((28 + stepdown((float)you.duration[DUR_WATER_HOLD], 28.0))
+                            * delay,
+                            BASELINE_DELAY * 10);
+        ouch(dam, KILLED_BY_WATER, you.props["water_holder"].get_int());
+        mprf(MSGCH_WARN, "Your lungs strain for air!");
     }
 }
 
@@ -5218,6 +5199,7 @@ player::player()
     equip.init(-1);
     melded.reset();
     unrand_reacts.reset();
+    last_unequip = -1;
 
     symbol          = MONS_PLAYER;
     form            = transformation::none;
@@ -5693,7 +5675,7 @@ int player::get_noise_perception(bool adjusted) const
     const int level = los_noise_last_turn;
     static const int BAR_MAX = 1000; // TODO: export to output.cc & webtiles
     if (!adjusted)
-         return div_rand_round(level, BAR_MAX);
+         return (level + 500) / BAR_MAX;
 
     static const vector<int> NOISE_BREAKPOINTS = { 0, 6000, 13000, 29000 };
     const int BAR_FRAC = BAR_MAX / (NOISE_BREAKPOINTS.size() - 1);
@@ -5768,7 +5750,6 @@ bool player::shielded() const
            || duration[DUR_DIVINE_SHIELD]
            || get_mutation_level(MUT_LARGE_BONE_PLATES) > 0
            || qazlal_sh_boost() > 0
-           || attribute[ATTR_BONE_ARMOUR] > 0
            || you.wearing(EQ_AMULET_PLUS, AMU_REFLECTION) > 0
            || you.scan_artefacts(ARTP_SHIELDING);
 }

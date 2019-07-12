@@ -274,6 +274,7 @@ enum MenuFlag
 
     MF_USE_TWO_COLUMNS  = 0x08000,   ///< Only valid for tiles menus
     MF_UNCANCEL         = 0x10000,   ///< Menu is uncancellable
+    MF_SPECIAL_MINUS    = 0x20000,   ///< '-' isn't PGUP or clear multiselect
 };
 
 class UIMenu;
@@ -308,6 +309,7 @@ public:
     virtual bool is_set(int flag) const;
     void set_tag(const string& t) { tag = t; }
 
+    bool minus_is_pageup() const;
     // Sets a replacement for the default -more- string.
     void set_more(const formatted_string &more);
     // Shows a stock message about scrolling the menu instead of -more-
@@ -438,7 +440,7 @@ protected:
 
     void deselect_all(bool update_view = true);
     virtual void select_items(int key, int qty = -1);
-    void select_item_index(int idx, int qty, bool draw_cursor = true);
+    virtual void select_item_index(int idx, int qty, bool draw_cursor = true);
     void select_index(int index, int qty = -1);
 
     bool is_hotkey(int index, int key);

@@ -38,6 +38,7 @@
 #include "view.h"
 #include "viewchar.h"
 #include "viewgeom.h"
+#include "delay.h"
 
 #ifdef USE_TILE
 #endif
@@ -618,6 +619,7 @@ static void _forget_map(bool wizard_forget = false)
 bool show_map(level_pos &lpos,
               bool travel_mode, bool allow_esc, bool allow_offlevel)
 {
+    unwind_bool _in_map_mode(crawl_state.in_map_mode, true);
     bool chose      = false;
 #ifdef USE_TILE_LOCAL
     bool first_run  = true;
@@ -636,12 +638,12 @@ bool show_map(level_pos &lpos,
     {
         levelview_excursion le(travel_mode);
         level_id original(level_id::current());
+        unwind_var<level_id> _original_lid(crawl_state.map_mode_info.original_lid, original);
 
         if (!lpos.id.is_valid() || !allow_offlevel)
             lpos.id = level_id::current();
 
         cursor_control ccon(!Options.use_fake_cursor);
-        int i, j;
 
         int move_x = 0, move_y = 0, scroll_y = 0;
 
@@ -702,29 +704,11 @@ bool show_map(level_pos &lpos,
 
                 feats.init();
 
-                min_x = GXM, max_x = 0, min_y = 0, max_y = 0;
-                bool found_y = false;
-
-                for (j = 0; j < GYM; j++)
-                    for (i = 0; i < GXM; i++)
-                    {
-                        if (env.map_knowledge[i][j].known())
-                        {
-                            if (!found_y)
-                            {
-                                found_y = true;
-                                min_y = j;
-                            }
-
-                            max_y = j;
-
-                            if (i < min_x)
-                                min_x = i;
-
-                            if (i > max_x)
-                                max_x = i;
-                        }
-                    }
+                std::pair<coord_def, coord_def> bounds = known_map_bounds();
+                min_x = bounds.first.x;
+                min_y = bounds.first.y;
+                max_x = bounds.second.x;
+                max_y = bounds.second.y;
 
                 map_lines = max_y - min_y + 1;
 
@@ -807,17 +791,24 @@ bool show_map(level_pos &lpos,
 #ifndef USE_TILE_LOCAL
             cursorxy(curs_x, curs_y + top - 1);
 #endif
+            crawl_state.map_mode_info.cursor_lpos = lpos;
             redraw_map = true;
 
             c_input_reset(true);
 #ifdef USE_TILE_LOCAL
             const int key = getchm(KMC_LEVELMAP);
-            command_type cmd = key_to_command(key, KMC_LEVELMAP);
 #else
             const int key = unmangle_direction_keys(getchm(KMC_LEVELMAP),
                                                     KMC_LEVELMAP);
-            command_type cmd = key_to_command(key, KMC_LEVELMAP);
 #endif
+            if (is_userfunction(key))
+            {
+                run_macro(get_userfunction(key).c_str());
+                continue;
+            }
+
+            command_type cmd = key_to_command(key, KMC_LEVELMAP);
+
             if (cmd < CMD_MIN_OVERMAP || cmd > CMD_MAX_OVERMAP)
                 cmd = CMD_NO_CMD;
 
@@ -1028,26 +1019,29 @@ bool show_map(level_pos &lpos,
             }
 
             case CMD_MAP_GOTO_LEVEL:
-            {
                 if (!allow_offlevel)
                     break;
 
-                string name;
-                const level_pos pos
-                    = prompt_translevel_target(TPF_DEFAULT_OPTIONS, name);
-
-                if (pos.id.depth < 1
-                    || pos.id.depth > brdepth[pos.id.branch]
-                    || !you.level_visited(pos.id))
                 {
-                    canned_msg(MSG_OK);
-                    redraw_map = true;
-                    break;
-                }
+                    string name;
+#ifdef USE_TILE_WEB
+                    tiles_ui_control msgwin(UI_NORMAL);
+#endif
+                    const level_pos pos
+                        = prompt_translevel_target(TPF_DEFAULT_OPTIONS, name);
 
-                lpos = pos;
+                    if (pos.id.depth < 1
+                        || pos.id.depth > brdepth[pos.id.branch]
+                        || !you.level_visited(pos.id))
+                    {
+                        canned_msg(MSG_OK);
+                        redraw_map = true;
+                        break;
+                    }
+
+                    lpos = pos;
+                }
                 continue;
-            }
 
             case CMD_MAP_JUMP_DOWN_LEFT:
                 move_x = -block_step;
@@ -1108,6 +1102,13 @@ bool show_map(level_pos &lpos,
                     move_y = you.pos().y - lpos.pos.y;
                 }
                 break;
+
+#ifdef USE_TILE
+            case CMD_MAP_ZOOM_IN:
+            case CMD_MAP_ZOOM_OUT:
+                tiles.zoom_dungeon(cmd == CMD_MAP_ZOOM_IN);
+                break;
+#endif
 
             case CMD_MAP_FIND_UPSTAIR:
             case CMD_MAP_FIND_DOWNSTAIR:
@@ -1188,6 +1189,7 @@ bool show_map(level_pos &lpos,
                             move_y = you.travel_y - lpos.pos.y;
                         }
                         else if (allow_offlevel && you.travel_z.is_valid()
+                                        && can_travel_to(you.travel_z)
                                         && you.level_visited(you.travel_z))
                         {
                             // previous travel target is offlevel
@@ -1213,7 +1215,12 @@ bool show_map(level_pos &lpos,
                 if (!is_map_persistent())
                     mpr("You can't annotate this level.");
                 else
+                {
+#ifdef USE_TILE_WEB
+                    tiles_ui_control msgwin(UI_NORMAL);
+#endif
                     do_annotate(lpos.id);
+                }
 
                 redraw_map = true;
                 break;

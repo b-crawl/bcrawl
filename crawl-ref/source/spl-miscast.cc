@@ -490,7 +490,7 @@ bool MiscastEffect::_explosion()
 
     // wild magic card
     if (special_source == DECK_MISCAST)
-        beam.thrower = KILL_MISCAST;
+        beam.thrower = KILL_YOU;
 
     int max_dam = beam.damage.num * beam.damage.size;
     max_dam = check_your_resists(max_dam, beam.flavour, cause);

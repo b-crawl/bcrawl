@@ -400,7 +400,6 @@ public:
 
     int         dump_item_origins;  // Show where items came from?
     int         dump_item_origin_price;
-    bool        dump_book_spells;
 
     // Order of sections in the character dump.
     vector<string> dump_order;
@@ -552,6 +551,8 @@ public:
     maybe_bool  tile_use_small_layout;
 #endif
     int         tile_cell_pixels;
+    int         tile_viewport_scale;
+    int         tile_map_scale;
     bool        tile_filter_scaling;
     int         tile_map_pixels;
 

@@ -2836,20 +2836,6 @@ c.....c.....c.....c
 cccbcccc.@.ccccbccc
 ENDMAP
 
-NAME:   evilmike_surprise_oklob
-DEPTH:  D:9-, Elf
-WEIGHT: 5
-KMASK:  x = no_wall_fixup
-KMONS:  1 = oklob plant
-KITEM:  1 = star_item / nothing
-KITEM:  | = gold, superb_item
-MAP
-ccccccccccc
-c1x|mmm...c
-ccccccccc.c
-ccccccccc@c
-ENDMAP
-
 NAME:   hangedman_tree_tricks
 DEPTH:  D:8-, !D:$
 TAGS:   extra no_monster_gen
@@ -4563,9 +4549,9 @@ MAP
 ....n|n....
 .cccc+cccc.
 .c8^n_n^8c.
-.cccc.cccc.
+.cc^c.c^cc.
 .c8^n.n^8c.
-.cccc.cccc.
+.cc^c.c^cc.
 .c8^n.n^8c.
 .cccc+cccc.
 ...........
@@ -4862,6 +4848,7 @@ ENDMAP
 NAME:   minmay_hidden_floor
 DEPTH:  D:12-, Depths
 SUBST:  9 = 9999., 8 = 8888.
+KPROP:  8*$ = no_tele_into
 MAP
      @
 cccccnccccc
@@ -4869,7 +4856,7 @@ c.........c
 c.ccc9ccc.c
 c.c8ncn8c.c
 c.cn***nc.c
-@.9c*.*c9.n@
+@.9c*$*c9.n@
 cncn***nc.c
 c.=8ncn8c.c
 c.ccc9ccc.c

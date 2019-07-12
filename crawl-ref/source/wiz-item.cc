@@ -392,7 +392,7 @@ void wizard_tweak_object()
     char specs[50];
     int keyin;
 
-    int item = prompt_invent_item("Tweak which item? ", MT_INVLIST, -1);
+    int item = prompt_invent_item("Tweak which item? ", MT_INVLIST, OSEL_ANY);
 
     if (prompt_failed(item))
         return;
@@ -521,7 +521,8 @@ static bool _make_book_randart(item_def &book)
 /// Prompt for an item in inventory & print its base shop value.
 void wizard_value_item()
 {
-    const int i = prompt_invent_item("Value of which item?", MT_INVLIST, -1);
+    const int i = prompt_invent_item("Value of which item?",
+                                     MT_INVLIST, OSEL_ANY);
 
     if (prompt_failed(i))
         return;
@@ -591,7 +592,7 @@ void wizard_create_all_artefacts()
 void wizard_make_object_randart()
 {
     int i = prompt_invent_item("Make an artefact out of which item?",
-                                MT_INVLIST, -1);
+                                MT_INVLIST, OSEL_ANY);
 
     if (prompt_failed(i))
         return;
@@ -681,7 +682,8 @@ static bool _item_type_can_be_cursed(int type)
 
 void wizard_uncurse_item()
 {
-    const int i = prompt_invent_item("(Un)curse which item?", MT_INVLIST, -1);
+    const int i = prompt_invent_item("(Un)curse which item?",
+                                     MT_INVLIST, OSEL_ANY);
 
     if (!prompt_failed(i))
     {
@@ -1301,7 +1303,7 @@ static void _debug_rap_stats(FILE *ostat)
 {
     const int inv_index
         = prompt_invent_item("Generate randart stats on which item?",
-                             MT_INVLIST, -1);
+                             MT_INVLIST, OSEL_ANY);
 
     if (prompt_failed(inv_index))
         return;
@@ -1601,6 +1603,9 @@ void wizard_identify_all_items()
     for (auto &item : mitm)
         if (item.defined())
             set_ident_flags(item, ISFLAG_IDENT_MASK);
+    for (auto& entry : env.shop)
+        for (auto &item : entry.second.stock)
+            set_ident_flags(item, ISFLAG_IDENT_MASK);
     for (int ii = 0; ii < NUM_OBJECT_CLASSES; ii++)
     {
         object_class_type i = (object_class_type)ii;
@@ -1616,6 +1621,9 @@ void wizard_unidentify_all_items()
     wizard_unidentify_pack();
     for (auto &item : mitm)
         if (item.defined())
+            _forget_item(item);
+    for (auto& entry : env.shop)
+        for (auto &item : entry.second.stock)
             _forget_item(item);
     for (int ii = 0; ii < NUM_OBJECT_CLASSES; ii++)
     {

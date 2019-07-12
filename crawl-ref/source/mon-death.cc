@@ -576,14 +576,9 @@ item_def* place_monster_corpse(const monster& mons, bool silent, bool force)
                    && mons_gives_xp(mons, you)
                    && !force;
 
-    const bool no_coinflip =
-        mons.props.exists("always_corpse")
-        || force
-        || goldify
-        || mons_class_flag(mons.type, M_ALWAYS_CORPSE)
-        || mons_is_demonspawn(mons.type)
-           && mons_class_flag(draco_or_demonspawn_subspecies(mons),
-                              M_ALWAYS_CORPSE);
+    const bool no_coinflip = mons.props.exists("always_corpse")
+                             || force
+                             || goldify;
 
     // 50/50 chance of getting a corpse, usually.
     if (!no_coinflip && coinflip())
@@ -2928,6 +2923,8 @@ void monster_cleanup(monster* mons)
     // on the order in which things are cleaned up: If the constrictee is
     // cleaned up first, we wouldn't get a message anyway.
     mons->stop_constricting_all(false, true);
+
+    mons->clear_far_engulf();
 
     if (mons_is_tentacle_head(mons_base_type(*mons)))
         destroy_tentacles(mons);

@@ -1655,10 +1655,12 @@ void monster::apply_enchantment(const mon_enchant &me)
             maybe_bloodify_square(base_position);
             add_ench(ENCH_SEVERED);
 
-            // Severed tentacles immediately become "hostile" to everyone (or insane)
+            // Severed tentacles immediately become "hostile" to everyone
+            // (or insane)
             attitude = ATT_NEUTRAL;
             mons_att_changed(this);
-            behaviour_event(this, ME_ALERT);
+            if (!crawl_state.game_is_arena())
+                behaviour_event(this, ME_ALERT);
         }
     }
     break;
@@ -1683,7 +1685,8 @@ void monster::apply_enchantment(const mon_enchant &me)
 
             attitude = ATT_HOSTILE;
             mons_att_changed(this);
-            behaviour_event(this, ME_ALERT, &you);
+            if (!crawl_state.game_is_arena())
+                behaviour_event(this, ME_ALERT, &you);
         }
     }
     break;
@@ -1815,8 +1818,9 @@ void monster::apply_enchantment(const mon_enchant &me)
             if (res_water_drowning() <= 0)
             {
                 lose_ench_duration(me, -speed_to_duration(speed));
+                int dur = speed_to_duration(speed); // sequence point for randomness
                 int dam = div_rand_round((50 + stepdown((float)me.duration, 30.0))
-                                          * speed_to_duration(speed),
+                                          * dur,
                             BASELINE_DELAY * 10);
                 if (res_water_drowning() < 0)
                     dam = dam * 3 / 2;
@@ -2299,10 +2303,13 @@ int mon_enchant::calc_duration(const monster* mons,
         cturn = 1200 / _mod_speed(200, mons->speed);
         break;
     case ENCH_SLOWLY_DYING:
+    {
         // This may be a little too direct but the randomization at the end
         // of this function is excessive for toadstools. -cao
+        int dur = speed_to_duration(mons->speed); // uses div_rand_round, so we need a sequence point
         return (2 * FRESHEST_CORPSE + random2(10))
-                  * speed_to_duration(mons->speed);
+                  * dur;
+    }
     case ENCH_SPORE_PRODUCTION:
         // This is used as a simple timer, when the enchantment runs out
         // the monster will create a ballistomycete spore.

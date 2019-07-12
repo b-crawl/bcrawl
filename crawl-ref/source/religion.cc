@@ -2726,7 +2726,6 @@ void excommunication(bool voluntary, god_type new_god)
     case GOD_WU_JIAN:
         you.attribute[ATTR_SERPENTS_LASH] = 0;
         you.attribute[ATTR_HEAVENLY_STORM] = 0;
-        _set_penance(old_god, 25);
         break;
 
     default:
@@ -3122,12 +3121,12 @@ static void _set_initial_god_piety()
         // monk bonus...
         you.props[RU_SACRIFICE_PROGRESS_KEY] = 0;
         // offer the first sacrifice faster than normal
-    {
-        int delay = 50;
-        if (crawl_state.game_is_sprint())
-            delay /= SPRINT_MULTIPLIER;
-        you.props[RU_SACRIFICE_DELAY_KEY] = delay;
-    }
+        {
+            int delay = 50;
+            if (crawl_state.game_is_sprint())
+                delay /= SPRINT_MULTIPLIER;
+            you.props[RU_SACRIFICE_DELAY_KEY] = delay;
+        }
         you.props[RU_SACRIFICE_PENALTY_KEY] = 0;
         break;
 
@@ -3191,7 +3190,7 @@ static void _join_gozag()
 #endif
     }
 
-    // Move gold to top of piles.
+    // Move gold to top of piles & detect it.
     add_daction(DACT_GOLD_ON_TOP);
 }
 
@@ -3362,12 +3361,10 @@ void join_religion(god_type which_god)
     mark_milestone("god.worship", "became a worshipper of "
                    + god_name(you.religion) + ".");
     take_note(Note(NOTE_GET_GOD, you.religion));
-    const bool returning = you.worshipped[which_god]
-                           || is_good_god(which_god)
-                              && you.species == SP_BARACHI;
-    simple_god_message(
-        make_stringf(" welcomes you%s!",
-                     returning ? " back" : "").c_str());
+
+    simple_god_message(make_stringf(" welcomes you%s!",
+                                    you.worshipped[which_god] ? " back"
+                                                              : "").c_str());
     // included in default force_more_message
 #ifdef DGL_WHEREIS
     whereis_record();
@@ -3385,10 +3382,6 @@ void join_religion(god_type which_god)
         add_daction(DACT_ALLY_UNHOLY_EVIL);
         mprf(MSGCH_MONSTER_ENCHANT, "Your unholy and evil allies forsake you.");
     }
-
-    // Move gold to top of piles with Gozag.
-    if (have_passive(passive_t::detect_gold))
-        add_daction(DACT_GOLD_ON_TOP);
 
     const function<void ()> *join_effect = map_find(on_join, you.religion);
     if (join_effect != nullptr)

@@ -22,8 +22,14 @@ You can quickly select items by type by pressing:
 <w>/</w>   wands        <w>|</w>   magical staves <w>?</w>   scrolls         <w>:</w>   books
 <w>"</w>   amulets      <w>=</w>   rings          <w>}</w>   miscellaneous   <w>%</w>   food
 Global selects:  <w>,</w>   select all     <w>*</w>   invert all      <w>-</w>   deselect all
+                 <w>;</w>   select last unequipped
 Note that for dropping, the <w>,</w> command uses the <w>drop_filter</w> option, which
 narrows the range of items to be (de)selected. The default are useless items.
+
+<h>Disabling autopickup via the drop menu</h>
+On the drop menu, items you select after pressing <w>\</w> will be marked with a <w>*</w>
+instead of the usual <w>+</w>. Autopickup for these items will be disabled when you
+leave the menu. To return to the normal selection mode, press <w>\</w> a second time.
 %%%%
 known-menu
 
@@ -110,12 +116,13 @@ that contain the spell.
 You can search for artefact item properties (such as <w>/prevents.*teleport</w>)
 to find artefacts that have the property.
 
-You can search by some additional item properties: <w>artefact</w> or <w>artifact</w> will
-find identified artefacts, <w>ego</w> or <w>branded</w> will find non-artefacts with a
-brand and unidentified items which may be branded, <w>throwable</w> will find things
-you can throw, <w>dropped</w> will find items you have dropped, <w>in_shop</w> will find
-items in shops, and (if the autopickup_search option is enabled) <w>autopickup</w> will find
-items that would be automatically picked up.
+You can search by some additional item properties: <w>artefact</w> or
+<w>artifact</w> will find identified artefacts, <w>ego</w> or <w>branded</w>
+will find non-artefacts with a brand and unidentified items which may be
+branded, <w>throwable</w> will find things you can throw, <w>dropped</w> will
+find items you have dropped, <w>in_shop</w> will find items in shops, and (if
+the autopickup_search option is enabled) <w>autopickup</w> will find items that
+would be automatically picked up.
 
 Skill names (such as <w>Polearms</w> or <w>Long Blades</w>) will find all weapons that
 train that skill. You can also look for <w>melee weapon</w> and <w>ranged weapon</w>.
@@ -126,10 +133,10 @@ Use <w>armour && !!body</w> to list all armour pieces except for body armour.
 
 <h>Finding Dungeon Features:</h>
 
-You can search for dungeon features by name: all shops will be found by a
-search for <w>shop</w> (including shops that do not have "shop" in their name);
-other dungeon features can also be found by name: <w>fountain</w>, <w>spear trap</w>,
-<w>altar</w>, etc. You can also search for altars by deity name: <w>Zin</w>.
+You can search for dungeon features by name: all shops will be found by a search
+for <w>shop</w> (including shops that do not have "shop" in their name); other
+dungeon features can also be found by name: <w>dispersal trap</w>, <w>altar</w>,
+etc. You can also search for altars by deity name: <w>Zin</w>.
 
 <h>Non-regex operators:</h>
 
@@ -155,6 +162,7 @@ level-map
 <w>[</w> or <w>]</w>     : Examine the next higher or lower level
 <w>G</w>          : Go to another level by branch and depth
 <w>o</w>          : Move the cursor to the next autoexplore target.
+<w>{</w> or <w>}</w>     : Zoom out or in (tiles only).
 
 <h>Travel exclusions</h>
 <w>e</w>          : Create a travel exclusion, change its radius, or remove it.

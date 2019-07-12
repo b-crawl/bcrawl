@@ -49,6 +49,7 @@
 #include "libutil.h"
 #include "mapmark.h"
 #include "maps.h"
+#include "message.h"
 #include "mon-death.h"
 #include "mon-pick.h"
 #include "mon-place.h"
@@ -80,9 +81,8 @@
 #endif
 
 // DUNGEON BUILDERS
-static bool _build_level_vetoable(bool enable_random_maps,
-                                  dungeon_feature_type dest_stairs_type);
-static void _build_dungeon_level(dungeon_feature_type dest_stairs_type);
+static bool _build_level_vetoable(bool enable_random_maps);
+static void _build_dungeon_level();
 static bool _valid_dungeon_level();
 
 static bool _builder_by_type();
@@ -233,7 +233,7 @@ static string branch_epilogues[NUM_BRANCHES];
 /**********************************************************************
  * builder() - kickoff for the dungeon generator.
  *********************************************************************/
-bool builder(bool enable_random_maps, dungeon_feature_type dest_stairs_type)
+bool builder(bool enable_random_maps)
 {
     // Re-check whether we're in a valid place, it leads to obscure errors
     // otherwise.
@@ -260,6 +260,14 @@ bool builder(bool enable_random_maps, dungeon_feature_type dest_stairs_type)
     unwind_bool levelgen(crawl_state.generating_level, true);
     rng_generator levelgen_rng(you.where_are_you);
 
+#ifdef DEBUG_DIAGNOSTICS // no point in enabling unless dprf works
+    CrawlHashTable &debug_logs = you.props["debug_builder_logs"].get_table();
+    string &cur_level_log = debug_logs[level_id::current().describe()].get_string();
+    message_tee debug_messages(cur_level_log);
+    debug_messages.append_line(make_stringf("Builder log for %s:",
+        level_id::current().describe().c_str()));
+#endif
+
     // N tries to build the level, after which we bail with a capital B.
     int tries = 50;
     while (tries-- > 0)
@@ -271,7 +279,7 @@ bool builder(bool enable_random_maps, dungeon_feature_type dest_stairs_type)
 
         try
         {
-            if (_build_level_vetoable(enable_random_maps, dest_stairs_type))
+            if (_build_level_vetoable(enable_random_maps))
                 return true;
         }
         catch (map_load_exception &mload)
@@ -305,8 +313,7 @@ bool builder(bool enable_random_maps, dungeon_feature_type dest_stairs_type)
     return false;
 }
 
-static bool _build_level_vetoable(bool enable_random_maps,
-                                  dungeon_feature_type dest_stairs_type)
+static bool _build_level_vetoable(bool enable_random_maps)
 {
 #ifdef DEBUG_STATISTICS
     mapstat_report_map_build_start();
@@ -319,7 +326,7 @@ static bool _build_level_vetoable(bool enable_random_maps,
 
     try
     {
-        _build_dungeon_level(dest_stairs_type);
+        _build_dungeon_level();
     }
     catch (dgn_veto_exception& e)
     {
@@ -685,7 +692,7 @@ static void _set_grd(const coord_def &c, dungeon_feature_type feat)
     grd(c) = feat;
 }
 
-static void _dgn_register_vault(const string &name, const set<string> &tags)
+static void _dgn_register_vault(const string &name, const unordered_set<string> &tags)
 {
     if (!tags.count("allow_dup"))
         you.uniq_map_names.insert(name);
@@ -693,7 +700,10 @@ static void _dgn_register_vault(const string &name, const set<string> &tags)
     if (tags.count("luniq"))
         env.level_uniq_maps.insert(name);
 
-    for (const string &tag : tags)
+    vector<string> sorted_tags(tags.begin(), tags.end());
+    sort(sorted_tags.begin(), sorted_tags.end());
+
+    for (const string &tag : sorted_tags)
     {
         if (starts_with(tag, "uniq_"))
             you.uniq_map_tags.insert(tag);
@@ -704,7 +714,7 @@ static void _dgn_register_vault(const string &name, const set<string> &tags)
 
 static void _dgn_register_vault(const map_def &map)
 {
-    _dgn_register_vault(map.name, map.get_tags());
+    _dgn_register_vault(map.name, map.get_tags_unsorted());
 }
 
 static void _dgn_register_vault(const string &name, string &spaced_tags)
@@ -717,7 +727,7 @@ static void _dgn_unregister_vault(const map_def &map)
     you.uniq_map_names.erase(map.name);
     env.level_uniq_maps.erase(map.name);
 
-    for (const string &tag : map.get_tags())
+    for (const string &tag : map.get_tags_unsorted())
     {
         if (starts_with(tag, "uniq_"))
             you.uniq_map_tags.erase(tag);
@@ -750,6 +760,17 @@ static bool _dgn_square_is_passable(const coord_def &c)
     // or otherwise cause connectivity issues even if the map terrain
     // is travel-passable.
     return !(env.level_map_mask(c) & MMT_OPAQUE) && dgn_square_travel_ok(c);
+}
+
+static bool _dgn_square_is_ever_passable(const coord_def &c)
+{
+    if (!(env.level_map_mask(c) & MMT_OPAQUE))
+    {
+        const dungeon_feature_type feat = grd(c);
+        if (feat == DNGN_DEEP_WATER || feat == DNGN_LAVA)
+            return true;
+    }
+    return _dgn_square_is_passable(c);
 }
 
 static inline void _dgn_point_record_stub(const coord_def &) { }
@@ -906,8 +927,9 @@ static bool _is_exit_stair(const coord_def &c)
 // If fill is non-zero, it fills any disconnected regions with fill.
 //
 static int _process_disconnected_zones(int x1, int y1, int x2, int y2,
-                                       bool choose_stairless,
-                                       dungeon_feature_type fill)
+                bool choose_stairless,
+                dungeon_feature_type fill,
+                bool (*passable)(const coord_def &) = _dgn_square_is_passable)
 {
     memset(travel_point_distance, 0, sizeof(travel_distance_grid_t));
     int nzones = 0;
@@ -918,7 +940,7 @@ static int _process_disconnected_zones(int x1, int y1, int x2, int y2,
         {
             if (!map_bounds(x, y)
                 || travel_point_distance[x][y]
-                || !_dgn_square_is_passable(coord_def(x, y)))
+                || !passable(coord_def(x, y)))
             {
                 continue;
             }
@@ -926,7 +948,7 @@ static int _process_disconnected_zones(int x1, int y1, int x2, int y2,
             const bool found_exit_stair =
                 _dgn_fill_zone(coord_def(x, y), ++nzones,
                                _dgn_point_record_stub,
-                               _dgn_square_is_passable,
+                               passable,
                                choose_stairless ? (at_branch_bottom() ?
                                                    _is_upwards_exit_stair :
                                                    _is_exit_stair) : nullptr);
@@ -1053,9 +1075,7 @@ dgn_register_place(const vault_placement &place, bool register_vault)
     }
 
     // Find tags matching properties.
-    set<string> tags = place.map.get_tags();
-
-    for (const auto &tag : tags)
+    for (const auto &tag : place.map.get_tags_unsorted())
     {
         const feature_property_type prop = str_to_fprop(tag);
         if (prop == FPROP_NONE)
@@ -1126,7 +1146,7 @@ dgn_register_place(const vault_placement &place, bool register_vault)
     vault_placement *new_vault_place = new vault_placement(place);
     env.level_vaults.emplace_back(new_vault_place);
     if (register_vault)
-        _remember_vault_placement(place, place.map.has_tag("extra"));
+        _remember_vault_placement(place, place.map.is_extra_vault());
     return new_vault_place;
 }
 
@@ -1143,7 +1163,7 @@ static bool _dgn_ensure_vault_placed(bool vault_success,
 static bool _ensure_vault_placed_ex(bool vault_success, const map_def *vault)
 {
     return _dgn_ensure_vault_placed(vault_success,
-                                    (!vault->has_tag("extra")
+                                    (!vault->is_extra_vault()
                                      && vault->orient == MAP_ENCOMPASS));
 }
 
@@ -2317,7 +2337,7 @@ static bool _mimic_at_level()
            && !crawl_state.game_is_tutorial();
 }
 
-static void _place_feature_mimics(dungeon_feature_type dest_stairs_type)
+static void _place_feature_mimics()
 {
     for (rectangle_iterator ri(1); ri; ++ri)
     {
@@ -2365,7 +2385,7 @@ static void _post_vault_build()
     }
 }
 
-static void _build_dungeon_level(dungeon_feature_type dest_stairs_type)
+static void _build_dungeon_level()
 {
     bool place_vaults = _builder_by_type();
 
@@ -2419,7 +2439,7 @@ static void _build_dungeon_level(dungeon_feature_type dest_stairs_type)
         _place_uniques();
 
         if (_mimic_at_level())
-            _place_feature_mimics(dest_stairs_type);
+            _place_feature_mimics();
 
         _place_traps();
 
@@ -2555,9 +2575,9 @@ static bool _vault_can_use_layout(const map_def *vault, const map_def *layout)
 
     ASSERT(layout->has_tag_prefix("layout_type_"));
 
-    const set<string> tags = layout->get_tags();
-
-    for (auto &tag : tags)
+    // in principle, tag order can matter here, even though that is probably
+    // a vault designer error
+    for (const auto &tag : layout->get_tags())
     {
         if (starts_with(tag, "layout_type_"))
         {
@@ -3148,7 +3168,7 @@ static void _place_minivaults()
             if (vault)
                 _build_secondary_vault(vault);
         } // if ALL maps eligible are "extra" but fail to place, we'd be screwed
-        while (vault && vault->has_tag("extra") && tries++ < 10000);
+        while (vault && vault->is_extra_vault() && tries++ < 10000);
     }
 }
 
@@ -3208,9 +3228,12 @@ static void _place_traps()
         {
             ts.pos.x = random2(GXM);
             ts.pos.y = random2(GYM);
+            // Don't place random traps under vault monsters; if a vault
+            // wants this they have to request it specifically.
             if (in_bounds(ts.pos)
                 && grd(ts.pos) == DNGN_FLOOR
-                && !map_masked(ts.pos, MMT_NO_TRAP))
+                && !map_masked(ts.pos, MMT_NO_TRAP)
+                && mgrd(ts.pos) == NON_MONSTER)
             {
                 break;
             }
@@ -3525,7 +3548,7 @@ static void _place_extra_vaults()
             if (_build_secondary_vault(vault))
             {
                 const map_def &map(*vault);
-                if (map.has_tag("extra"))
+                if (map.is_extra_vault())
                     continue;
                 use_random_maps = false;
             }
@@ -4211,6 +4234,13 @@ static const vault_placement *_build_vault_impl(const map_def *vault,
         && player_in_branch(BRANCH_SWAMP))
     {
         _process_disconnected_zones(0, 0, GXM-1, GYM-1, true, DNGN_TREE);
+        // do a second pass to remove tele closets consisting of deep water
+        // created by the first pass -- which will not fill in deep water
+        // because it is treated as impassable.
+        // TODO: get zonify to prevent these?
+        // TODO: does this come up anywhere outside of swamp?
+        _process_disconnected_zones(0, 0, GXM-1, GYM-1, true, DNGN_TREE,
+                                    _dgn_square_is_ever_passable);
     }
 
     if (!make_no_exits)
@@ -4550,6 +4580,7 @@ int dgn_place_item(const item_spec &spec,
                     mitm[item_made].name(DESC_PLAIN).c_str(),
                     mitm[item_made].name(DESC_PLAIN, false, true).c_str(),
                     where.x, where.y);
+                env.level_map_mask(where) |= MMT_NO_TRAP;
                 return item_made;
             }
             else
@@ -4706,6 +4737,8 @@ monster* dgn_place_monster(mons_spec &mspec, coord_def where,
 
     if (!mspec.place.is_valid())
         mspec.place = level_id::current();
+    bool chose_ood = false;
+    const int starting_depth = mspec.place.depth;
 
     if (type == RANDOM_SUPER_OOD || type == RANDOM_MODERATE_OOD)
     {
@@ -4743,7 +4776,12 @@ monster* dgn_place_monster(mons_spec &mspec, coord_def where,
         if (mons_class_is_zombified(mspec.monbase))
             type = pick_local_zombifiable_monster(mspec.place, mspec.monbase, coord_def());
         else
-            type = pick_random_monster(mspec.place, mspec.monbase);
+        {
+            level_id place = mspec.place;
+            type = pick_random_monster(mspec.place, mspec.monbase, &place);
+            if (place.depth > starting_depth + 5)
+                chose_ood = true;
+        }
         if (!type)
             type = RANDOM_MONSTER;
     }
@@ -4830,6 +4868,12 @@ monster* dgn_place_monster(mons_spec &mspec, coord_def where,
         mons->spells = mspec.spells[random2(mspec.spells.size())];
         mons->props[CUSTOM_SPELLS_KEY] = true;
     }
+
+    // this prop is mainly for the seed explorer.
+    // not a great or complete measure of monster danger: the builder can roll
+    // on the low side of the ood range, and vaults don't get this set.
+    if (chose_ood)
+        mons->props[MON_OOD_KEY].get_bool() = true;
 
     if (!mspec.items.empty())
         _dgn_give_mon_spec_items(mspec, mons, type);
@@ -5063,6 +5107,7 @@ static void _vault_grid_glyph(vault_placement &place, const coord_def& where,
         if (item_made != NON_ITEM)
         {
             mitm[item_made].pos = where;
+            env.level_map_mask(where) |= MMT_NO_TRAP;
             dprf(DIAG_DNGN, "vault grid: placing %s (%s) at %d,%d",
                 mitm[item_made].name(DESC_PLAIN).c_str(),
                 mitm[item_made].name(DESC_PLAIN, false, true).c_str(),

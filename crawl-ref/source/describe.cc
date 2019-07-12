@@ -235,7 +235,6 @@ const char* jewellery_base_ability_string(int subtype)
     case RING_FIRE:               return "Fire";
     case RING_ICE:                return "Ice";
     case RING_TELEPORTATION:      return "*Tele";
-    case RING_RESIST_CORROSION:   return "rCorr";
     case AMU_HARM:                return "Harm";
     case AMU_MANA_REGENERATION:   return "RegenMP";
     case AMU_THE_GOURMAND:        return "Gourm";
@@ -1991,8 +1990,7 @@ string get_item_description(const item_def &item, bool verbose,
         break;
 
     case OBJ_BOOKS:
-        if (!verbose
-            && (Options.dump_book_spells || is_random_artefact(item)))
+        if (!verbose && is_random_artefact(item))
         {
             desc += describe_item_spells(item);
             if (desc.empty())
@@ -2537,7 +2535,7 @@ static command_type _get_action(int key, vector<command_type> actions)
         { CMD_SET_SKILL_TARGET, 's' },
     };
 
-    key = tolower(key);
+    key = tolower_safe(key);
 
     for (auto cmd : actions)
         if (key == act_key.at(cmd))
@@ -3203,7 +3201,7 @@ void describe_spell(spell_type spell, const monster_info *mon_owner,
         if (ev.type != WME_KEYDOWN)
             return false;
         lastch = ev.key.keysym.sym;
-        done = (toupper(lastch) == 'M' && can_mem || lastch == CK_ESCAPE
+        done = (toupper_safe(lastch) == 'M' && can_mem || lastch == CK_ESCAPE
             || lastch == CK_ENTER || lastch == ' ');
         return done;
     });
@@ -3229,7 +3227,7 @@ void describe_spell(spell_type spell, const monster_info *mon_owner,
     tiles.pop_ui_layout();
 #endif
 
-    if (toupper(lastch) == 'M' && can_mem)
+    if (toupper_safe(lastch) == 'M' && can_mem)
     {
         redraw_screen(); // necessary to ensure stats is redrawn (!?)
         if (!learn_spell(spell) || !you.turn_is_over)
@@ -3846,6 +3844,7 @@ COMPILE_CHECK(ARRAYSZ(size_adj) == NUM_SIZE_LEVELS);
 // This is used in monster description and on '%' screen for player size
 const char* get_size_adj(const size_type size, bool ignore_medium)
 {
+    ASSERT_RANGE(static_cast<int>(size), 0, ARRAYSZ(size_adj));
     if (ignore_medium && size == SIZE_MEDIUM)
         return nullptr; // don't mention medium size
     return size_adj[size];

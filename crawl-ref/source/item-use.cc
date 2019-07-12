@@ -2118,9 +2118,12 @@ void drink(item_def* potion)
         return;
     }
 
-    string prompt = make_stringf("Really quaff the %s?",
-                                 potion->name(DESC_DBNAME).c_str());
-    if (alreadyknown && is_dangerous_item(*potion, true)
+    bool penance = god_hates_item(*potion);
+    string prompt = make_stringf("Really quaff the %s?%s",
+                                 potion->name(DESC_DBNAME).c_str(),
+                                 penance ? " This action would place"
+                                           " you under penance!" : "");
+    if (alreadyknown && (is_dangerous_item(*potion, true) || penance)
         && Options.bad_item_prompt
         && !yesno(prompt.c_str(), false, 'n'))
     {
@@ -2811,8 +2814,7 @@ static bool _scroll_will_harm(const scroll_type scr, const actor &m)
 
 /**
  * Check to see if the player can read the item in the given slot, and if so,
- * reads it. (Examining books, evoking the tome of destruction, & using
- * scrolls.)
+ * reads it. (Examining books and using scrolls.)
  *
  * @param slot      The slot of the item in the player's inventory. If -1, the
  *                  player is prompted to choose a slot.
@@ -3188,10 +3190,23 @@ void read_scroll(item_def& scroll)
         }
         if (you.spell_no == 0)
             mpr("You feel forgetful for a moment.");
-        else if (!alreadyknown)
-            cast_selective_amnesia();
         else
-            cancel_scroll = (cast_selective_amnesia(pre_succ_msg) == -1);
+        {
+            bool done;
+            bool aborted;
+            do
+            {
+                aborted = cast_selective_amnesia() == -1;
+                done = !aborted
+                       || alreadyknown
+                       || crawl_state.seen_hups
+                       || yesno("Really abort (and waste the scroll)?",
+                                false, 0);
+                cancel_scroll = aborted && alreadyknown;
+            } while (!done);
+            if (aborted)
+                canned_msg(MSG_OK);
+        }
         break;
 
     default:

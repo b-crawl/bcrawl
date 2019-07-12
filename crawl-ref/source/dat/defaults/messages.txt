@@ -64,9 +64,9 @@ msc += $warning:settles down
 msc += lightcyan:LOW MAGIC WARNING
 msc += $warning:fails to return
 msc += $warning:no longer ripe
-msc += $warning:This .* contains the .* runes? of Zot.
-msc += $warning:They guard the .* runes? of Zot.
-msc += $warning:Beware, you cannot shaft yourself on this level.
+msc += $warning:This .* contains the .* runes? of Zot
+msc += $warning:They guard the .* runes? of Zot
+msc += $warning:Beware\, you cannot shaft yourself on this level
 
 # Unimportant messages and combat clutter
 #
@@ -93,7 +93,7 @@ msc += mute:Uskayaw will no longer force your foes to share their pain\.
 
 force_more_message += You have reached level
 force_more_message += Your scales start
-force_more_message += You fall through a shaft
+force_more_message += You (fall|are sucked) into a shaft
 force_more_message += You fall into the water!
 force_more_message += You fall into the lava!
 force_more_message += You focus on prolonging your flight
@@ -130,7 +130,7 @@ force_more_message += You have lost your religion
 force_more_message += is wielding.*distortion
 # dancing weapons require special handling...
 force_more_message += there is a.*distortion
-force_more_message += of distortion comes into view.
+force_more_message += of distortion comes into view
 
 # Banishment
 force_more_message += You are cast into the Abyss

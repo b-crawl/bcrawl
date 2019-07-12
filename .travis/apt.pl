@@ -3,14 +3,13 @@ use strict;
 use warnings;
 
 run(qw(sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y));
-run(qw(sudo add-apt-repository ppa:zoogie/sdl2-snapshots -y));
 
 retry(qw(sudo apt-get update -qq));
 
 my @common_libs = qw(xorg-dev);
 
 if ($ENV{CROSSCOMPILE}) {
-    retry(qw(sudo apt-get install -qq mingw32 mingw32-binutils mingw32-runtime g++-mingw-w64-i686 gcc-mingw-w64-i686 nsis));
+    retry(qw(sudo apt-get install -qq mingw-w64 binutils-mingw-w64 g++-mingw-w64-i686 gcc-mingw-w64-i686 nsis));
 }
 
 if ($ENV{CXX} eq "clang++") {

@@ -84,7 +84,7 @@ function zonify.fill_smallest_zones(zonemap, num_to_keep, fgroup, ffill, min_zon
 
   local sorted_zones = {}
   for name,group in pairs(zonemap) do table.insert(sorted_zones, name) end
-  table.sort(sorted_zones)
+  util.sort(sorted_zones)
   for i, name in ipairs(sorted_zones) do
     group = zonemap[name]
     if type(fgroup) == "function" and fgroup(group) or name==fgroup then
@@ -232,6 +232,11 @@ end
 -- is needed to fill in deep water zones and stop flyers/swimmers getting trapped.
 -- TODO: Need to simplify into a single pass that understands connectivity issues
 -- between different zone groups and can handle everything more elegantly.
+-- TODO: This does not address zones separated by deep water, that in swamp
+-- may be further filled by c++ code in _build_vault_impl, creating tele
+-- closets of exactly the kind that this code prevents. Because of that, there's
+-- yet *another* pass to fill these in there. This is all extremely redundant
+-- and should be cleaned up one day.
 function zonify.grid_fill_water_zones(num_to_keep, feature, min_zone_size)
   if num_to_keep == nil then num_to_keep = 1 end
   if feature == nil then feature = 'rock_wall' end

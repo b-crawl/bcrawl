@@ -372,6 +372,7 @@ uint8_t unmarshallUByte(reader &th)
 // Marshall 2 byte short in network order.
 void marshallShort(writer &th, short data)
 {
+    // TODO: why does this use `short` and `char` when unmarshall uses int16_t??
     CHECK_INITIALIZED(data);
     const char b2 = (char)(data & 0x00FF);
     const char b1 = (char)((data & 0xFF00) >> 8);
@@ -826,7 +827,7 @@ float unmarshallFloat(reader &th)
 void marshallString(writer &th, const string &data)
 {
     size_t len = data.length();
-    // A limit of 32K.
+    // A limit of 32K. TODO: why doesn't this use int16_t?
     if (len > SHRT_MAX)
         die("trying to marshall too long a string (len=%ld)", (long int)len);
     marshallShort(th, len);
@@ -836,7 +837,7 @@ void marshallString(writer &th, const string &data)
 
 string unmarshallString(reader &th)
 {
-    char buffer[SHRT_MAX];
+    char buffer[SHRT_MAX]; // TODO: why doesn't this use int16_t?
 
     short len = unmarshallShort(th);
     ASSERT(len >= 0);
@@ -862,14 +863,20 @@ static string unmarshallString2(reader &th)
 // string -- 4 byte length, non-terminated string data.
 void marshallString4(writer &th, const string &data)
 {
-    marshallInt(th, data.length());
-    th.write(data.c_str(), data.length());
+    const size_t len = data.length();
+    if (len > numeric_limits<int32_t>::max())
+        die("trying to marshall too long a string (len=%ld)", (long int) len);
+    marshallInt(th, len);
+    th.write(data.c_str(), len);
 }
+
 void unmarshallString4(reader &th, string& s)
 {
     const int len = unmarshallInt(th);
+    ASSERT(len >= 0);
     s.resize(len);
-    if (len) th.read(&s.at(0), len);
+    if (len)
+        th.read(&s.at(0), len);
 }
 
 // boolean (to avoid system-dependent bool implementations)
@@ -3917,7 +3924,7 @@ static void tag_read_you_items(reader &th)
 
         // If fruit pickup was not set explicitly during the time between
         // FOOD_PURGE and FOOD_PURGE_AP_FIX, copy the old exemplar FOOD_PEAR.
-        if (food_pickups[FOOD_FRUIT] == 0)
+        if (food_pickups[FOOD_FRUIT] == AP_FORCE_NONE)
             food_pickups[FOOD_FRUIT] = food_pickups[FOOD_PEAR];
     }
     if (you.species == SP_FORMICID)

@@ -153,6 +153,15 @@ use_gzip = True
 # This needs a patch currently not in mainline tornado.
 http_connection_timeout = None
 
+# Set this to true if you are behind a reverse proxy
+# Your proxy must set header X-Real-IP
+#
+# Enabling this option when webtiles is NOT protected behind a reverse proxy
+# introduces a security risk. An attacker could inject a false address into the
+# X-Real-IP header. Do not enable this option if the webtiles server is
+# directly exposed to users.
+http_xheaders = None
+
 kill_timeout = 10 # Seconds until crawl is killed after HUP is sent
 
 nick_regex = r"^[a-zA-Z0-9]{3,20}$"

@@ -28,6 +28,7 @@
 #include "god-passive.h" // passive_t::slow_abyss
 #include "hiscores.h"
 #include "item-prop.h"
+#include "item-status-flag-type.h"
 #include "items.h"
 #include "libutil.h"
 #include "mapmark.h"
@@ -589,6 +590,8 @@ static void _abyss_lose_monster(monster& mons)
     // make sure we don't end up with an invalid hep ancestor
     else if (hepliaklqana_ancestor() == mons.mid)
     {
+        simple_monster_message(mons, " is pulled into the Abyss.",
+                MSGCH_BANISHMENT);
         remove_companion(&mons);
         you.duration[DUR_ANCESTOR_DELAY] = random_range(50, 150); //~5-15 turns
     }
@@ -627,7 +630,8 @@ static void _place_displaced_monsters()
         if (mon->alive() && !mon->find_home_near_place(mon->pos()))
         {
             maybe_bloodify_square(mon->pos());
-            if (you.can_see(*mon))
+            // hep messaging is done in _abyss_lose_monster
+            if (you.can_see(*mon) && hepliaklqana_ancestor() != mon->mid)
             {
                 simple_monster_message(*mon, " is pulled into the Abyss.",
                         MSGCH_BANISHMENT);
@@ -667,6 +671,7 @@ static void _push_items()
             if (!_pushy_feature(grd(*di)))
             {
                 int j = i;
+                ASSERT(!testbits(item.flags, ISFLAG_SUMMONED));
                 move_item_to_grid(&j, *di, true);
                 break;
             }
@@ -1373,7 +1378,7 @@ static int _abyss_place_vaults(const map_bitmask &abyss_genlevel_mask)
         const map_def *map = random_map_in_depth(level_id::current(), extra);
         if (map)
         {
-            if (_abyss_place_map(map) && !map->has_tag("extra"))
+            if (_abyss_place_map(map) && !map->is_extra_vault())
             {
                 extra = true;
 
@@ -1489,6 +1494,9 @@ static void abyss_area_shift()
     place_transiting_monsters();
 
     check_map_validity();
+    // TODO: should dactions be rerun at this point instead? That would cover
+    // this particular case...
+    gozag_detect_level_gold(false);
 }
 
 void destroy_abyss()
@@ -1667,6 +1675,7 @@ void abyss_morph()
     _abyss_apply_terrain(abyss_genlevel_mask, true);
     _place_displaced_monsters();
     _push_items();
+    // TODO: does gozag gold detection need to be here too?
     los_changed();
 }
 
@@ -1711,6 +1720,7 @@ void abyss_teleport()
     stop_delay(true);
     forget_map(false);
     clear_excludes();
+    gozag_detect_level_gold(false);
     more();
 }
 

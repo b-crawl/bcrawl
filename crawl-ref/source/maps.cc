@@ -730,10 +730,11 @@ mapref_vector find_maps_for_tag(const string &tag,
 {
     mapref_vector maps;
     level_id place = level_id::current();
+    unordered_set<string> tag_set = parse_tags(tag);
 
     for (const map_def &mapdef : vdefs)
     {
-        if (mapdef.has_tag(tag)
+        if (mapdef.has_all_tags(tag_set.begin(), tag_set.end())
             && !mapdef.has_tag("dummy")
             && (!check_depth || !mapdef.has_depth()
                 || mapdef.is_usable_in(place))
@@ -860,7 +861,7 @@ bool map_selector::accept(const map_def &mapdef) const
             return false;
         }
         return mapdef.is_minivault() == mini
-               && _is_extra_compatible(extra, mapdef.has_tag("extra"))
+               && _is_extra_compatible(extra, mapdef.is_extra_vault())
                && mapdef.place.is_usable_in(place)
                && _map_matches_layout_type(mapdef)
                && !mapdef.map_already_used();
@@ -869,7 +870,7 @@ bool map_selector::accept(const map_def &mapdef) const
     {
         const map_chance chance(mapdef.chance(place));
         return mapdef.is_minivault() == mini
-               && _is_extra_compatible(extra, mapdef.has_tag("extra"))
+               && _is_extra_compatible(extra, mapdef.is_extra_vault())
                && (!chance.valid() || mapdef.has_tag("dummy"))
                && depth_selectable(mapdef)
                && !mapdef.map_already_used();
@@ -882,12 +883,12 @@ bool map_selector::accept(const map_def &mapdef) const
         return chance.valid()
                && !mapdef.has_tag("dummy")
                && depth_selectable(mapdef)
-               && _is_extra_compatible(extra, mapdef.has_tag("extra"))
+               && _is_extra_compatible(extra, mapdef.is_extra_vault())
                && !mapdef.map_already_used();
     }
 
     case TAG:
-        return mapdef.has_tag(tag)
+        return mapdef.has_all_tags(tag) // allow multiple tags, for temple overflow vaults
                && (!check_depth
                    || !mapdef.has_depth()
                    || mapdef.is_usable_in(place))

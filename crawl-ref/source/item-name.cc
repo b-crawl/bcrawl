@@ -61,9 +61,9 @@
 #include "viewgeom.h"
 
 static bool _is_consonant(char let);
-static char _random_vowel(int seed);
-static char _random_cons(int seed);
-static string _random_consonant_set(int seed);
+static char _random_vowel(uint32_t seed);
+static char _random_cons(uint32_t seed);
+static string _random_consonant_set(size_t seed);
 
 static void _maybe_identify_pack_item()
 {
@@ -2325,12 +2325,7 @@ public:
             }
         }
         else if (item->base_type == OBJ_MISCELLANY)
-        {
-            if (item->sub_type == MISC_PHANTOM_MIRROR)
-                name = pluralise(item->name(DESC_PLAIN));
-            else
-                name = "miscellaneous";
-        }
+            name = pluralise(item->name(DESC_DBNAME));
         else if (item->is_type(OBJ_BOOKS, BOOK_MANUAL))
             name = "manuals";
         else if (item->base_type == OBJ_GOLD)
@@ -2390,9 +2385,12 @@ public:
         else
             selected_qty = 0;
 
-        // Set the force_autopickup values
-        const int forceval = (selected_qty == 2 ? -1 : selected_qty);
-        you.force_autopickup[item->base_type][item->sub_type] = forceval;
+        if (selected_qty == 2)
+            set_item_autopickup(*item, AP_FORCE_OFF);
+        else if (selected_qty == 1)
+            set_item_autopickup(*item, AP_FORCE_ON);
+        else
+            set_item_autopickup(*item, AP_FORCE_NONE);
     }
 };
 
@@ -2464,9 +2462,9 @@ static void _add_fake_item(object_class_type base, int sub,
 
     items.push_back(ptmp);
 
-    if (you.force_autopickup[base][sub] == 1)
+    if (you.force_autopickup[base][sub] == AP_FORCE_ON)
         selected.emplace_back(0, 1, ptmp);
-    else if (you.force_autopickup[base][sub] == -1)
+    else if (you.force_autopickup[base][sub] == AP_FORCE_OFF)
         selected.emplace_back(0, 2, ptmp);
 }
 
@@ -2475,6 +2473,7 @@ void check_item_knowledge(bool unknown_items)
     vector<const item_def*> items;
     vector<const item_def*> items_missile; //List of missiles should go after normal items
     vector<const item_def*> items_food;    //List of foods should come next
+    vector<const item_def*> items_misc;
     vector<const item_def*> items_other;   //List of other items should go after everything
     vector<SelItem> selected_items;
 
@@ -2489,7 +2488,7 @@ void check_item_knowledge(bool unknown_items)
             if (i == OBJ_JEWELLERY && j >= NUM_RINGS && j < AMU_FIRST_AMULET)
                 continue;
 
-            if (i == OBJ_BOOKS && j > MAX_FIXED_BOOK)
+            if (i == OBJ_BOOKS && (j > MAX_FIXED_BOOK || !unknown_items))
                 continue;
 
             if (item_type_removed(i, j))
@@ -2510,7 +2509,7 @@ void check_item_knowledge(bool unknown_items)
         for (int ii = 0; ii < NUM_OBJECT_CLASSES; ii++)
         {
             object_class_type i = (object_class_type)ii;
-            if (!item_type_has_ids(i))
+            if (i == OBJ_BOOKS || !item_type_has_ids(i))
                 continue;
             _add_fake_item(i, get_max_subtype(i), selected_items, items);
         }
@@ -2533,12 +2532,34 @@ void check_item_knowledge(bool unknown_items)
             _add_fake_item(OBJ_FOOD, i, selected_items, items_food);
         }
 
+        for (int i = 0; i < NUM_MISCELLANY; i++)
+        {
+            switch(i)
+            {
+            case MISC_BOX_OF_BEASTS:
+            case MISC_FAN_OF_GALES:
+            case MISC_ZIGGURAT:
+            case MISC_LAMP_OF_FIRE:
+            case MISC_LIGHTNING_ROD:
+            case MISC_PHANTOM_MIRROR:
+            case MISC_PHIAL_OF_FLOODS:
+            case MISC_SACK_OF_SPIDERS:
+                _add_fake_item(OBJ_MISCELLANY, i, selected_items, items_misc);
+                break;
+            case MISC_QUAD_DAMAGE:
+                if(crawl_state.game_is_sprint())
+                    _add_fake_item(OBJ_MISCELLANY, i, selected_items, items_misc);
+                break;
+            default: break;
+            }           
+        }
+
         // Misc.
         static const pair<object_class_type, int> misc_list[] =
         {
             { OBJ_BOOKS, BOOK_MANUAL },
             { OBJ_GOLD, 1 },
-            { OBJ_MISCELLANY, NUM_MISCELLANY },
+            { OBJ_BOOKS, NUM_BOOKS },
             { OBJ_RUNES, NUM_RUNE_TYPES },
         };
         for (auto e : misc_list)
@@ -2548,6 +2569,7 @@ void check_item_knowledge(bool unknown_items)
     sort(items.begin(), items.end(), _identified_item_names);
     sort(items_missile.begin(), items_missile.end(), _identified_item_names);
     sort(items_food.begin(), items_food.end(), _identified_item_names);
+    sort(items_misc.begin(), items_misc.end(), _identified_item_names);
 
     KnownMenu menu;
     string stitle;
@@ -2575,6 +2597,7 @@ void check_item_knowledge(bool unknown_items)
 
     ml = menu.load_items(items_missile, known_item_mangle, ml, false);
     ml = menu.load_items(items_food, known_item_mangle, ml, false);
+    ml = menu.load_items(items_misc, known_item_mangle, ml, false);
     if (!items_other.empty())
     {
         menu.add_entry(new MenuEntry("Other Items", MEL_SUBTITLE));
@@ -2589,6 +2612,7 @@ void check_item_knowledge(bool unknown_items)
     deleteAll(items);
     deleteAll(items_missile);
     deleteAll(items_food);
+    deleteAll(items_misc);
     deleteAll(items_other);
 
     if (!all_items_known && (last_char == '\\' || last_char == '-'))
@@ -2766,7 +2790,6 @@ string make_name(uint32_t seed, makename_type name_type)
                                               : '\0';
         const char penult_char = name.length() > 1 ? name[name.length() - 2]
                                                     : '\0';
-
         if (name.empty() && name_type == MNAME_JIYVA)
         {
             // Start the name with a predefined letter.
@@ -2898,7 +2921,7 @@ string make_name(uint32_t seed, makename_type name_type)
             ASSERT(name[i] != ' ');
 
         if (name_type == MNAME_SCROLL || i == 0 || name[i - 1] == ' ')
-            uppercased_name += toupper(name[i]);
+            uppercased_name += toupper_safe(name[i]);
         else
             uppercased_name += name[i];
     }
@@ -2923,7 +2946,7 @@ static bool _is_consonant(char let)
 
 // Returns a random vowel (a, e, i, o, u with equal probability) or space
 // or 'y' with lower chances.
-static char _random_vowel(int seed)
+static char _random_vowel(uint32_t seed)
 {
     static const char vowels[] = "aeiouaeiouaeiouy  ";
     return vowels[ seed % (sizeof(vowels) - 1) ];
@@ -2931,7 +2954,7 @@ static char _random_vowel(int seed)
 
 // Returns a random consonant with not quite equal probability.
 // Does not include 'y'.
-static char _random_cons(int seed)
+static char _random_cons(uint32_t seed)
 {
     static const char consonants[] = "bcdfghjklmnpqrstvwxzcdfghlmnrstlmnrst";
     return consonants[ seed % (sizeof(consonants) - 1) ];
@@ -2946,7 +2969,7 @@ static char _random_cons(int seed)
  * @return      A random length 2 or 3 consonant set; e.g. "kl", "str", etc.
  *              If the seed is out of bounds, return "";
  */
-static string _random_consonant_set(int seed)
+static string _random_consonant_set(size_t seed)
 {
     // Pick a random combination of consonants from the set below.
     //   begin  -> [RCS_BB, RCS_EB) = [ 0, 27)
@@ -2976,7 +2999,7 @@ static string _random_consonant_set(int seed)
     };
     COMPILE_CHECK(ARRAYSZ(consonant_sets) == RCS_END);
 
-    ASSERT_RANGE(seed, 0, (int) ARRAYSZ(consonant_sets));
+    ASSERT_RANGE(seed, 0, ARRAYSZ(consonant_sets));
 
     return consonant_sets[seed];
 }
@@ -3394,6 +3417,7 @@ bool is_useless_item(const item_def &item, bool temp)
                 if(you.species == SP_FORMICID)
                     return true;
                 break;
+            default: break;
             }
         return false;
 

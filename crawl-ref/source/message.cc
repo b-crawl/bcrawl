@@ -680,6 +680,8 @@ public:
      */
     void more(bool full, bool user=false)
     {
+        rng_generator rng(RNG_UI);
+
         if (_pre_more())
             return;
 
@@ -942,6 +944,49 @@ static bool suppress_messages = false;
 static msg_colour_type prepare_message(const string& imsg,
                                        msg_channel_type channel,
                                        int param);
+
+static unordered_set<message_tee *> current_message_tees;
+
+message_tee::message_tee()
+    : target(nullptr)
+{
+    current_message_tees.insert(this);
+}
+
+message_tee::message_tee(string &_target)
+    : target(&_target)
+{
+    current_message_tees.insert(this);
+}
+
+message_tee::~message_tee()
+{
+    if (target)
+        *target += get_store();
+    current_message_tees.erase(this);
+}
+
+void message_tee::append(const string &s, msg_channel_type ch)
+{
+    // could use a more c++y external interface -- but that just complicates things
+    store << s;
+}
+
+void message_tee::append_line(const string &s, msg_channel_type ch)
+{
+    append(s + "\n", ch);
+}
+
+string message_tee::get_store() const
+{
+    return store.str();
+}
+
+static void _append_to_tees(const string &s, msg_channel_type ch)
+{
+    for (auto tee : current_message_tees)
+        tee->append(s, ch);
+}
 
 no_messages::no_messages() : msuppressed(suppress_messages)
 {
@@ -1229,6 +1274,8 @@ static bool _updating_view = false;
 static bool _check_option(const string& line, msg_channel_type channel,
                           const vector<message_filter>& option)
 {
+    if (crawl_state.generating_level)
+        return false;
     return any_of(begin(option),
                   end(option),
                   bind(mem_fn(&message_filter::is_filtered),
@@ -1355,6 +1402,8 @@ static int _last_msg_turn = -1; // Turn of last message.
 static void _mpr(string text, msg_channel_type channel, int param, bool nojoin,
                  bool cap)
 {
+    rng_generator rng(RNG_UI);
+
     if (_msg_dump_file != nullptr)
         fprintf(_msg_dump_file, "%s\n", text.c_str());
 
@@ -1409,6 +1458,9 @@ static void _mpr(string text, msg_channel_type channel, int param, bool nojoin,
     // that doesn't preserve close tags!
     string col = colour_to_str(colour_msg(colour));
     text = "<" + col + ">" + text + "</" + col + ">"; // XXX
+
+    if (current_message_tees.size())
+        _append_to_tees(text + "\n", channel);
 
     formatted_string fs = formatted_string::parse_string(text);
 
@@ -1594,6 +1646,8 @@ static void mpr_check_patterns(const string& message,
                                msg_channel_type channel,
                                int param)
 {
+    if (crawl_state.generating_level)
+        return;
     for (const text_pattern &pat : Options.note_messages)
     {
         if (channel == MSGCH_EQUIPMENT || channel == MSGCH_FLOOR_ITEMS
@@ -1648,12 +1702,15 @@ static msg_colour_type prepare_message(const string& imsg,
     if (colour != MSGCOL_MUTED)
         mpr_check_patterns(imsg, channel, param);
 
-    for (const message_colour_mapping &mcm : Options.message_colour_mappings)
+    if (!crawl_state.generating_level)
     {
-        if (mcm.message.is_filtered(channel, imsg))
+        for (const message_colour_mapping &mcm : Options.message_colour_mappings)
         {
-            colour = mcm.colour;
-            break;
+            if (mcm.message.is_filtered(channel, imsg))
+            {
+                colour = mcm.colour;
+                break;
+            }
         }
     }
 
@@ -1759,6 +1816,8 @@ static bool _pre_more()
 
 void more(bool user_forced)
 {
+    rng_generator rng(RNG_UI);
+
     if (!crawl_state.io_inited)
         return;
     flush_prev_message();

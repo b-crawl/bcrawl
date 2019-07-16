@@ -229,6 +229,7 @@ Pull requests for new content are welcome.
   - v1.12: Bloodbane is reworked, doing high damage but causing teleports.
   - v1.12: The storm bow is reworked, and can conjure ball lightning.
   - v1.12.3: The Majin-Bo is reworked, providing a huge stat bonus instead of a spell enhancement level.
+  - v1.12.3: Spellbinder miscasts are no longer blamed on the player, so they won't anger allies.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

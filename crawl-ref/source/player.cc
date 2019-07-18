@@ -2987,18 +2987,12 @@ void level_change(bool skip_attribute_increase)
                     switch(you.species)
                     {
                     case SP_MANA_STALKER:
-                        mprf(MSGCH_MUTATION, "You feel a sudden thirst for magic.");
-                        mprf(MSGCH_MUTATION, "You feel more resistant to hostile enchantments.");
                         mprf(MSGCH_INTRINSIC_GAIN, "You feel attuned to conjurations and hexes.");
                         break;
                     case SP_TWILIGHT_STALKER:
-                        mprf(MSGCH_MUTATION, "Your body grows into and around your armour.");
-                        mprf(MSGCH_MUTATION, "You slip into the darkness of the dungeon.");
                         mprf(MSGCH_INTRINSIC_GAIN, "You feel attuned to necromancy and ice.");
                         break;
                     case SP_JUNGLE_STALKER:
-                        mprf(MSGCH_MUTATION, "Acid begins to drip from your mouth.");
-                        mprf(MSGCH_MUTATION, "You feel resistant to poisons.");
                         mprf(MSGCH_INTRINSIC_GAIN, "You feel attuned to earth and poison.");
                         break;
                     default: break;

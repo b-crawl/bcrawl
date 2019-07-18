@@ -2979,10 +2979,10 @@ void level_change(bool skip_attribute_increase)
             case SP_VINE_STALKER:
                 if (you.experience_level >= 8)
                 {
-                        change_species_to(random_choose(
-                            SP_MANA_STALKER,
-                            SP_TWILIGHT_STALKER,
-                            SP_JUNGLE_STALKER));
+                    change_species_to(random_choose(
+                        SP_MANA_STALKER,
+                        SP_TWILIGHT_STALKER,
+                        SP_JUNGLE_STALKER));
                     
                     switch(you.species)
                     {

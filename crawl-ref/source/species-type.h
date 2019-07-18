@@ -5,10 +5,10 @@ enum species_type
     SP_HUMAN,
 #if TAG_MAJOR_VERSION == 34
     SP_HIGH_ELF,
-    SP_DEEP_ELF,
-    SP_SLUDGE_ELF,
-    SP_HALFLING,
 #endif
+    SP_MANA_STALKER,
+    SP_TWILIGHT_STALKER,
+    SP_JUNGLE_STALKER,
     SP_HILL_ORC,
     SP_KOBOLD,
     SP_MUMMY,

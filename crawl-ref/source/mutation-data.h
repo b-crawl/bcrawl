@@ -1937,6 +1937,30 @@ static const mutation_def mut_data[] =
   {"Your armour suddenly feels uncomfortable.", "", ""},
 },
 
+{ MUT_STRONG_JAWS, 0, 1, mutflag::good, true,
+  "strong jaws",
+
+  {"Your bites deal extra damage.", "", ""},
+  {"Your jaws grow and strengthen.", "", ""},
+  {"Your jaws shrink and weaken.", "", ""},
+},
+
+{ MUT_STEALTHY_ARMOUR, 0, 1, mutflag::good, true,
+  "assimilated armour",
+
+  {"Your stealth is less affected by armour.", "", ""},
+  {"Your body grows into and around your armour.", "", ""},
+  {"Your armour suddenly feels uncomfortable.", "", ""},
+},
+
+{ MUT_POISON_BITE, 0, 1, mutflag::good, true,
+  "poisonous bite",
+
+  {"Your fangs are venomous.", "", ""},
+  {"Your fangs briefly drip venom.", "", ""},
+  {"You stop producing venom.", "", ""},
+},
+
 };
 
 static const mutation_category_def category_mut_data[] =

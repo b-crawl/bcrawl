@@ -325,11 +325,10 @@ static const map<species_type, species_def> species_data =
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
     8, 8, 8, // 24
     { STAT_STR, STAT_INT, STAT_DEX }, 4,
-    {{ MUT_NIGHTSTALKER, 1, 4}, { MUT_FANGS, 2, 1 },
+    {{ MUT_NIGHTSTALKER, 1, 4}, { MUT_FANGS, 2, 1 }, { MUT_STEALTHY_ARMOUR, 1, 1 },
     { MUT_FANGS, 1, 8 }, { MUT_NIGHTSTALKER, 1, 12}, { MUT_NIGHTSTALKER, 1, 20}},
-    {"Your attacks drain your enemies.",
-    "You move stealthily even while encumbered by armour."},
-    {"draining touch" , "unencumbered stealth"},
+    {"Your attacks drain your enemies."},
+    {"draining touch"},
     { JOB_FIGHTER, JOB_GLADIATOR, JOB_ASSASSIN, JOB_EARTH_ELEMENTALIST,
     JOB_ARCHAEOLOGIST },
     { SK_STAVES, SK_SHORT_BLADES},
@@ -722,17 +721,16 @@ static const map<species_type, species_def> species_data =
 
 { SP_VINE_STALKER, {
     "VS",
-    "Vine Stalker", "Vine", "Vine",
+    "Vine Stalker", "Vine", "Stalker",
     SPF_NONE,
-    0, -3, 1, 5,
+    0, -2, 1, 4,
     MONS_VINE_STALKER,
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
     10, 8, 9, // 27
     { STAT_STR, STAT_DEX }, 4,
-    { { MUT_FANGS, 2, 1 }, { MUT_FANGS, 1, 8 },
-      { MUT_MANA_SHIELD, 1, 1 }, { MUT_ANTIMAGIC_BITE, 1, 1 },
+    { { MUT_FANGS, 2, 1 }, { MUT_FANGS, 1, 6 }, { MUT_STRONG_JAWS, 1, 1 },
       { MUT_NO_POTION_HEAL, 3, 1 }, { MUT_ROT_IMMUNITY, 1, 1 },
-      { MUT_REGENERATION, 1, 1 }, { MUT_REGENERATION, 1, 12 }, },
+      { MUT_REGENERATION, 1, 1 }, },
     {},
     {},
     { JOB_FIGHTER, JOB_GLADIATOR, JOB_MONK, JOB_ASSASSIN, JOB_BERSERKER,
@@ -741,23 +739,67 @@ static const map<species_type, species_def> species_data =
       SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
 } },
 
-#if TAG_MAJOR_VERSION == 34
-{ SP_SLUDGE_ELF, {
-    "SE",
-    "Sludge Elf", "Elven", "Elf",
-    SPF_ELVEN,
-    0, -1, 1, 3,
-    MONS_ELF,
+{ SP_MANA_STALKER, {
+    "VS",
+    "Mana Stalker", "Vine", "Stalker",
+    SPF_NONE,
+    0, -2, 1, 4,
+    MONS_VINE_STALKER,
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
-    8, 8, 8, // 24
-    { STAT_INT, STAT_DEX }, 4,
-    {},
+    10, 8, 9, // 27
+    { STAT_STR, STAT_DEX }, 4,
+    { { MUT_FANGS, 2, 1 }, { MUT_FANGS, 1, 6 }, { MUT_STRONG_JAWS, 1, 1 },
+      { MUT_NO_POTION_HEAL, 3, 1 }, { MUT_ROT_IMMUNITY, 1, 1 },
+      { MUT_REGENERATION, 1, 1 },
+      { MUT_ANTIMAGIC_BITE, 1, 1 }, { MUT_MAGIC_RESISTANCE, 1, 1 },
+      { MUT_MAGIC_RESISTANCE, 1, 12 }, { MUT_MAGIC_RESISTANCE, 1, 16 }, },
     {},
     {},
     {}, // not a starting race
     {}, // not a starting race
 } },
 
+{ SP_TWILIGHT_STALKER, {
+    "VS",
+    "Twilight Stalker", "Vine", "Stalker",
+    SPF_NONE,
+    0, -2, 1, 4,
+    MONS_VINE_STALKER,
+    HT_LAND, US_ALIVE, SIZE_MEDIUM,
+    10, 8, 9, // 27
+    { STAT_STR, STAT_DEX }, 4,
+    { { MUT_FANGS, 2, 1 }, { MUT_FANGS, 1, 6 }, { MUT_STRONG_JAWS, 1, 1 },
+      { MUT_NO_POTION_HEAL, 3, 1 }, { MUT_ROT_IMMUNITY, 1, 1 },
+      { MUT_REGENERATION, 1, 1 },
+      { MUT_STEALTHY_ARMOUR, 1, 1 }, { MUT_NIGHTSTALKER, 1, 1 },
+      { MUT_NIGHTSTALKER, 1, 12 }, { MUT_NIGHTSTALKER, 1, 16 }, },
+    {},
+    {},
+    {}, // not a starting race
+    {}, // not a starting race
+} },
+
+{ SP_JUNGLE_STALKER, {
+    "VS",
+    "Jungle Stalker", "Vine", "Stalker",
+    SPF_NONE,
+    0, -2, 1, 4,
+    MONS_VINE_STALKER,
+    HT_LAND, US_ALIVE, SIZE_MEDIUM,
+    10, 8, 9, // 27
+    { STAT_STR, STAT_DEX }, 4,
+    { { MUT_FANGS, 2, 1 }, { MUT_FANGS, 1, 6 }, { MUT_STRONG_JAWS, 1, 1 },
+      { MUT_NO_POTION_HEAL, 3, 1 }, { MUT_ROT_IMMUNITY, 1, 1 },
+      { MUT_REGENERATION, 1, 1 },
+      { MUT_POISON_BITE, 1, 1 }, { MUT_POISON_RESISTANCE, 1, 1 },
+      { MUT_REGENERATION, 1, 12 }, { MUT_REGENERATION, 1, 16 }, },
+    {},
+    {},
+    {}, // not a starting race
+    {}, // not a starting race
+} },
+
+#if TAG_MAJOR_VERSION == 34
 { SP_LAVA_ORC, {
     "LO",
     "Lava Orc", "Orcish", "Orc",
@@ -783,37 +825,6 @@ static const map<species_type, species_def> species_data =
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
     7, 11, 10, // 28
     { STAT_INT, STAT_DEX }, 3,
-    {},
-    {},
-    {},
-    {},
-    {},
-} },
-
-{ SP_HALFLING, {
-    "Ha",
-    "Halfling", nullptr, nullptr,
-    SPF_NONE,
-    1, -1, 0, 3,
-    MONS_HALFLING,
-    HT_LAND, US_ALIVE, SIZE_SMALL,
-    9, 6, 9, // 24
-    { STAT_DEX }, 5,
-    { { MUT_MUTATION_RESISTANCE, 1, 1 }, },
-    {},
-    {},
-    {},
-} },
-
-{ SP_DEEP_ELF, {
-    "DE",
-    "Deep Elf", "Elven", "Elf",
-    SPF_ELVEN,
-    -1, -2, 2, 4,
-    MONS_ELF,
-    HT_LAND, US_ALIVE, SIZE_MEDIUM,
-    5, 12, 10, // 27
-    { STAT_INT }, 4,
     {},
     {},
     {},

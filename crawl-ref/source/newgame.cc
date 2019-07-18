@@ -190,7 +190,6 @@ static const species_type species_order[] =
     // comparatively human-like looks
     SP_HUMAN,          SP_AVARIEL,
     SP_DEEP_DWARF,     SP_HILL_ORC,
-    SP_DUSK_WALKER,
     // small species
     SP_KOBOLD,         SP_SAND_DWARF,
     SP_SPRIGGAN,       SP_FAIRY,
@@ -1199,7 +1198,6 @@ static species_group species_groups[] =
             SP_GARGOYLE,
             SP_TROLL,
             SP_GHOUL,
-            SP_DUSK_WALKER,
             SP_KOBOLD,
             SP_GNOLL,
             SP_FAIRY,

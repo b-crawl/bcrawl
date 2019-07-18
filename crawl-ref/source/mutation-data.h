@@ -1953,14 +1953,6 @@ static const mutation_def mut_data[] =
   {"Your armour suddenly feels uncomfortable.", "", ""},
 },
 
-{ MUT_POISON_BITE, 0, 1, mutflag::good, true,
-  "poisonous bite",
-
-  {"Your fangs are venomous.", "", ""},
-  {"Your fangs briefly drip venom.", "", ""},
-  {"You stop producing venom.", "", ""},
-},
-
 };
 
 static const mutation_category_def category_mut_data[] =

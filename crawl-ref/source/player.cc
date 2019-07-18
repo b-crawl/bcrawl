@@ -2997,7 +2997,7 @@ void level_change(bool skip_attribute_increase)
                         mprf(MSGCH_INTRINSIC_GAIN, "You feel attuned to necromancy and ice.");
                         break;
                     case SP_JUNGLE_STALKER:
-                        mprf(MSGCH_MUTATION, "Your fangs briefly drip venom.");
+                        mprf(MSGCH_MUTATION, "Acid begins to drip from your mouth.");
                         mprf(MSGCH_MUTATION, "You feel resistant to poisons.");
                         mprf(MSGCH_INTRINSIC_GAIN, "You feel attuned to earth and poison.");
                         break;

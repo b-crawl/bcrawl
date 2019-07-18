@@ -1168,8 +1168,6 @@ public:
             return SPWPN_ACID;
         if (you.get_mutation_level(MUT_ANTIMAGIC_BITE))
             return SPWPN_ANTIMAGIC;
-        if (you.get_mutation_level(MUT_POISON_BITE))
-            return SPWPN_VENOM;
         if (you.get_mutation_level(MUT_DRAIN_BITE))
             return SPWPN_DRAINING;
 

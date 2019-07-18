@@ -791,7 +791,7 @@ static const map<species_type, species_def> species_data =
     { { MUT_FANGS, 2, 1 }, { MUT_FANGS, 1, 6 }, { MUT_STRONG_JAWS, 1, 1 },
       { MUT_NO_POTION_HEAL, 3, 1 }, { MUT_ROT_IMMUNITY, 1, 1 },
       { MUT_REGENERATION, 1, 1 },
-      { MUT_POISON_BITE, 1, 1 }, { MUT_POISON_RESISTANCE, 1, 1 },
+      { MUT_ACIDIC_BITE, 1, 1 }, { MUT_POISON_RESISTANCE, 1, 1 },
       { MUT_REGENERATION, 1, 12 }, { MUT_REGENERATION, 1, 16 }, },
     {},
     {},

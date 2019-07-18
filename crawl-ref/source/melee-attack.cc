@@ -433,12 +433,6 @@ bool melee_attack::handle_phase_hit()
         return false;
     }
 
-    if (attacker->is_player()
-        && you.species == SP_DUSK_WALKER)
-    {
-        drain_defender();
-    }
-
     if (attacker->is_player() && you.duration[DUR_INFUSION])
     {
         if (enough_mp(1, true, false))
@@ -1160,15 +1154,11 @@ public:
 
     int get_damage() const override
     {
-        const int fang_damage = you.has_usable_fangs() * 2;
-        if (you.get_mutation_level(MUT_ANTIMAGIC_BITE))
-            return fang_damage + div_rand_round(you.get_hit_dice(), 3);
+        int fang_damage = you.has_usable_fangs() * 2;
+        if (you.get_mutation_level(MUT_STRONG_JAWS))
+            fang_damage += div_rand_round(you.get_hit_dice(), 3);
 
-        const int str_damage = div_rand_round(max(you.strength()-10, 0), 5);
-
-        if (you.get_mutation_level(MUT_ACIDIC_BITE))
-            return fang_damage + str_damage;
-
+        int str_damage = div_rand_round(max(you.strength()-10, 0), 5);
         return fang_damage + str_damage;
     }
 

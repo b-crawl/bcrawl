@@ -2975,7 +2975,16 @@ void level_change(bool skip_attribute_increase)
                     redraw_screen();
                 }
                 break;
-
+            
+            case SP_VINE_STALKER:
+                if (you.experience_level >= 8)
+                    {
+                        change_species_to(random_choose(
+                            SP_MANA_STALKER,
+                            SP_TWILIGHT_STALKER,
+                            SP_JUNGLE_STALKER));
+                    }
+            
             case SP_DEMONSPAWN:
             {
                 bool gave_message = false;

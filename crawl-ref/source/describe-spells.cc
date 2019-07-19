@@ -40,7 +40,7 @@
  */
 spellset item_spellset(const item_def &item)
 {
-    if (!item.has_spells())
+    if (!item.has_spells() || you.species == SP_ONI)
         return {};
 
     return { { "\n", spells_in_book(item) } };

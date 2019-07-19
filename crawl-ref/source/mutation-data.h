@@ -1925,7 +1925,7 @@ static const mutation_def mut_data[] =
   "draining bite",
 
   {"Your bite drains your enemy's life force.", "", ""},
-  {"You feel a sudden thirst for living beings", "", ""},
+  {"You feel a sudden thirst for living beings.", "", ""},
   {"Your thirst for living beings wanes.", "", ""},
 },
 

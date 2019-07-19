@@ -156,9 +156,6 @@ item_def* newgame_make_item(object_class_type base,
         case SP_DEEP_DWARF:
             item.sub_type = AMU_MANA_REGENERATION;
             break;
-        case SP_VINE_STALKER:
-            item.sub_type = AMU_FAITH;
-            break;
         default: break;
         }
         you.equip[get_item_slot(item)] = slot;

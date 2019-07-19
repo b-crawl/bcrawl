@@ -144,6 +144,7 @@ stabbers and casters.
 %%%%
 Vine Stalker
 
-Frail symbionts, Vine Stalkers cannot regain health from potions.
-Their magical reserves absorb damage, and they pack a magic-restoring bite.
+Humanoids infested with a symbiotic vine, Vine Stalkers have a powerful bite and
+regenerate quickly, but are frail and cannot heal with potions.
+They evolve into a specialized variant when reaching level 8.
 %%%%

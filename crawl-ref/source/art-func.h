@@ -1037,7 +1037,7 @@ static void _SPELLBINDER_melee_effects(item_def* weapon, actor* attacker,
         && !mondied)
     {
         const int pow = random2(9);
-        MiscastEffect(defender, attacker, MELEE_MISCAST,
+        MiscastEffect(defender, defender, MELEE_MISCAST,
                       SPTYP_RANDOM, pow, random2(70),
                       "the demon whip \"Spellbinder\"", NH_NEVER);
     }

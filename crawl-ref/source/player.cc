@@ -2958,6 +2958,11 @@ void level_change(bool skip_attribute_increase)
                         check_skill_level_change(sk);
                     }
 
+                    // It's possible we passed a training target due to
+                    // skills being rescaled to new aptitudes. Thus, we must
+                    // check the training targets.
+                    check_training_targets();
+
                     // Tell the player about their new species
                     for (auto &mut : fake_mutations(you.species, false))
                         mprf(MSGCH_INTRINSIC_GAIN, "%s", mut.c_str());
@@ -2970,7 +2975,30 @@ void level_change(bool skip_attribute_increase)
                     redraw_screen();
                 }
                 break;
-
+            
+            case SP_VINE_STALKER:
+                if (you.experience_level >= 8)
+                {
+                    change_species_to(random_choose(
+                        SP_MANA_STALKER,
+                        SP_TWILIGHT_STALKER,
+                        SP_JUNGLE_STALKER));
+                    
+                    switch(you.species)
+                    {
+                    case SP_MANA_STALKER:
+                        mprf(MSGCH_INTRINSIC_GAIN, "You feel attuned to conjurations and hexes.");
+                        break;
+                    case SP_TWILIGHT_STALKER:
+                        mprf(MSGCH_INTRINSIC_GAIN, "You feel attuned to necromancy and ice.");
+                        break;
+                    case SP_JUNGLE_STALKER:
+                        mprf(MSGCH_INTRINSIC_GAIN, "You feel attuned to earth and poison.");
+                        break;
+                    default: break;
+                    }
+                }
+            
             case SP_DEMONSPAWN:
             {
                 bool gave_message = false;
@@ -3219,7 +3247,7 @@ int player_stealth()
         // Now 2 * EP^2 / 3 after EP rescaling.
         const int evp = you.unadjusted_body_armour_penalty();
         const int penalty = evp * evp * 2 / 3;
-        if (you.species == SP_DUSK_WALKER)
+        if (you.get_mutation_level(MUT_STEALTHY_ARMOUR))
             stealth -= (penalty / 2);
         else stealth -= penalty;
         const int pips = armour_type_prop(arm->sub_type, ARMF_STEALTH);

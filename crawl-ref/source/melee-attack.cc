@@ -128,8 +128,7 @@ bool melee_attack::handle_phase_attempted()
         }
         else if (weapon &&
                 (is_unrandom_artefact(*weapon, UNRAND_SINGING_SWORD)
-                 || is_unrandom_artefact(*weapon, UNRAND_VARIABILITY)
-                 || is_unrandom_artefact(*weapon, UNRAND_SPELLBINDER))
+                 || is_unrandom_artefact(*weapon, UNRAND_VARIABILITY))
                  && you.can_see(*defender))
         {
             targeter_los hitfunc(&you, LOS_NO_TRANS);
@@ -431,12 +430,6 @@ bool melee_attack::handle_phase_hit()
         you.duration[DUR_SLIMIFY] = 0;
 
         return false;
-    }
-
-    if (attacker->is_player()
-        && you.species == SP_DUSK_WALKER)
-    {
-        drain_defender();
     }
 
     if (attacker->is_player() && you.duration[DUR_INFUSION])
@@ -1160,26 +1153,22 @@ public:
 
     int get_damage() const override
     {
-        const int fang_damage = you.has_usable_fangs() * 2;
-        if (you.get_mutation_level(MUT_ANTIMAGIC_BITE))
-            return fang_damage + div_rand_round(you.get_hit_dice(), 3);
+        int fang_damage = you.has_usable_fangs() * 2;
+        if (you.get_mutation_level(MUT_STRONG_JAWS))
+            fang_damage += div_rand_round(you.get_hit_dice(), 3);
 
-        const int str_damage = div_rand_round(max(you.strength()-10, 0), 5);
-
-        if (you.get_mutation_level(MUT_ACIDIC_BITE))
-            return fang_damage + str_damage;
-
+        int str_damage = div_rand_round(max(you.strength()-10, 0), 5);
         return fang_damage + str_damage;
     }
 
     int get_brand() const override
     {
+        if (you.get_mutation_level(MUT_ACIDIC_BITE))
+            return SPWPN_ACID;
         if (you.get_mutation_level(MUT_ANTIMAGIC_BITE))
             return SPWPN_ANTIMAGIC;
         if (you.get_mutation_level(MUT_DRAIN_BITE))
             return SPWPN_DRAINING;
-        if (you.get_mutation_level(MUT_ACIDIC_BITE))
-            return SPWPN_ACID;
 
         return SPWPN_NORMAL;
     }

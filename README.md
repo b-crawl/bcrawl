@@ -81,7 +81,6 @@ Pull requests for new content are welcome.
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
   - Sand Dwarf is small, slow, and has no spellcasting penalty in armour.
   - Oni can't learn spells from books, instead gaining random spells every 2 XL. All Oni spells only use the Spellcasting skill.
-  - Duskwalker gains the Nightstalker mutation, has draining melee attacks, and has half the stealth penalty from armour.
   - Halflings have been merged into Kobolds.
   - Deep Elves and Tengu have been merged into Avariel, winged elves with good aptitudes for magic.
   - v1.9: Djinni can cast spells without mana, but doing so prevents spellcasting for 4*cost^2/experience_level turns.
@@ -105,6 +104,7 @@ Pull requests for new content are welcome.
   - v1.11.5: Spriggans can't train Conjurations, but have some better aptitudes.
   - v1.12: Barachim hop target radius is reduced to 1.
   - v1.12.1: Felids have adjusted aptitudes, including (-1 -> +1) Spellcasting.
+  - v1.12.3: Vine Stalker is reworked, evolving into a Mana Stalker, Twilight Stalker, or Jungle Stalker at level 8. Dusk Walker is merged into Twilight Stalker.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -228,6 +228,8 @@ Pull requests for new content are welcome.
   - v1.11.2: The butterfly sword attacks quickly and summons neutral butterflies.
   - v1.12: Bloodbane is reworked, doing high damage but causing teleports.
   - v1.12: The storm bow is reworked, and can conjure ball lightning.
+  - v1.12.3: The Majin-Bo is reworked, providing a huge stat bonus instead of a spell enhancement level.
+  - v1.12.3: Spellbinder miscasts are no longer blamed on the player, so they won't anger allies.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

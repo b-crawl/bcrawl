@@ -2708,7 +2708,9 @@ string cannot_read_item_reason(const item_def &item)
     if (item.base_type == OBJ_BOOKS)
     {
         if (item.sub_type == BOOK_MANUAL)
-            return "You can't read that!";
+            return "Just reading that without practice is pointless!";
+        if (you.species == SP_ONI)
+            return "You can't understand that!";
         return "";
     }
 

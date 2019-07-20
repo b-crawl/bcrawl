@@ -4994,7 +4994,8 @@ void debug_mondata()
         if (md->speed < 0)
             fails += make_stringf("%s has 0 speed\n", name);
         else if (md->speed == 0 && !mons_class_is_firewood(mc)
-            && mc != MONS_HYPERACTIVE_BALLISTOMYCETE)
+            && mc != MONS_HYPERACTIVE_BALLISTOMYCETE
+            && mc != MONS_FALSE_IMAGE)
         {
             fails += make_stringf("%s has 0 speed\n", name);
         }

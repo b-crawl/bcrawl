@@ -41,6 +41,7 @@ Pull requests for new content are welcome.
   - v1.7.3: Out-of-depth monster spawns are changed: centaurs and water moccasins can't appear until D:3, and killer bees can't appear until D:4.
   - v1.9: Hell branches are 2 levels deep and can't be left without their rune.
   - v1.11.5: Orb Guardians can spawn on any level of Zot.
+  - v1.12.4: Entering the Abyss brings you to the deepest Abyss level you've seen.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)

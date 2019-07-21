@@ -411,7 +411,7 @@ void banished(const string &who, const int power)
         return;
     }
 
-    const int depth = _banished_depth(power);
+    const int depth = max(_banished_depth(power), min_abyss_depth());
     const string what = make_stringf("Cast into level %d of the Abyss", depth)
                       + _who_banished(who);
     take_note(Note(NOTE_MESSAGE, 0, 0, what), true);

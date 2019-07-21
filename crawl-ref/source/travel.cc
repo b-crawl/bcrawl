@@ -3080,7 +3080,7 @@ level_id level_id::get_next_level_id(const coord_def &pos)
         return stair_destination(pos);
 #endif
     if (gridc == DNGN_EXIT_THROUGH_ABYSS)
-        return level_id(BRANCH_ABYSS, 1);
+        return level_id(BRANCH_ABYSS, min_abyss_depth());
 
     for (branch_iterator it; it; ++it)
     {
@@ -4893,3 +4893,14 @@ bool stairs_destination_is_excluded(const stair_info &si)
 
     return false;
 }
+
+int min_abyss_depth()
+{
+    for (int depth = 5; depth > 1; depth--)
+    {
+        if(you.level_visited(level_id(BRANCH_ABYSS, depth)))
+            return depth;
+    }
+    return 1;
+}
+

@@ -1106,7 +1106,7 @@ level_id stair_destination(dungeon_feature_type feat, const string &dst,
         return you.level_stack.back().id;
     case DNGN_ENTER_ABYSS:
         push_features_to_abyss();
-        break;
+        return level_id(BRANCH_ABYSS, min_abyss_depth());
     default:
         break;
     }

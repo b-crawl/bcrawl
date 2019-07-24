@@ -92,7 +92,7 @@ string species_walking_verb(species_type sp)
     {
     case SP_NAGA:
         return "Slid";
-    case SP_TENGU:
+    case SP_AVARIEL:
         return "Glid";
     case SP_OCTOPODE:
         return "Wriggl";

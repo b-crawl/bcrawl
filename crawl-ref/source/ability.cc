@@ -2034,8 +2034,8 @@ static spret _do_ability(const ability_def& abil, bool fail)
             you.attribute[ATTR_PERM_FLIGHT] = 1;
             float_player();
         }
-        // low level Te
-        if (you.species == SP_TENGU)
+        // low level tengu flight
+        if (you.species == SP_AVARIEL)
             mpr("You feel very comfortable in the air.");
         break;
 

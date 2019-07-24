@@ -22,7 +22,7 @@ static const map<species_type, species_def> species_data =
 { SP_AVARIEL, {
     "Av",
     "Avariel", "Elven", "Elf",
-    SPF_NONE,
+    SPF_ELVEN,
     0, -2, 2, 4,
     MONS_ELF,
     HT_LAND, US_ALIVE, SIZE_MEDIUM,

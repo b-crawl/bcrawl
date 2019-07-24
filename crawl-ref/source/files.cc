@@ -2561,10 +2561,12 @@ void delete_level(const level_id &level)
     if (you.save)
         you.save->delete_chunk(level.describe());
 
-    auto &visited = you.props[VISITED_LEVELS_KEY].get_table();
-    visited.erase(level.describe());
-
-    if (level.branch == BRANCH_ABYSS)
+    if (level.branch != BRANCH_ABYSS)
+    {
+        auto &visited = you.props[VISITED_LEVELS_KEY].get_table();
+        visited.erase(level.describe());
+    }
+    else
     {
         save_abyss_uniques();
         destroy_abyss();

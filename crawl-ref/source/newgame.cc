@@ -208,7 +208,7 @@ static const species_type species_order[] =
     SP_ONI,            SP_DJINNI,
     // undead species
     SP_MUMMY,          SP_GHOUL,
-    SP_VAMPIRE,
+    SP_VAMPIRE,        SP_SKELETON,
     // not humanoid at all
     SP_FELID,          SP_OCTOPODE,
 };
@@ -1198,6 +1198,7 @@ static species_group species_groups[] =
             SP_GARGOYLE,
             SP_TROLL,
             SP_GHOUL,
+            SP_SKELETON,
             SP_KOBOLD,
             SP_GNOLL,
             SP_FAIRY,

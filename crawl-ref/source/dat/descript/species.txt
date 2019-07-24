@@ -127,6 +127,12 @@ Sand Dwarf
 Sand Dwarves are hardy, skilled with axes and maces, and can use magic
 while wearing heavy armour. However, having short legs, they move slowly.
 %%%%
+Skeleton
+
+Collections of bones animated by a sentient spirit, skeletons are skilled with
+both weapons and destructive magic. With no flesh, their bodies are frail, but
+casting spells restores their body's integrity.
+%%%%
 Spriggan
 
 Very small, very frail, and very fast, Spriggans are skilled at spellcasting and

@@ -664,6 +664,28 @@ static const map<species_type, species_def> species_data =
     { SK_MACES_FLAILS, SK_AXES, SK_CROSSBOWS, SK_SLINGS },
 } },
 
+{ SP_SKELETON, {
+    "Sk",
+    "Skeleton", "Skeletal", nullptr,
+    SPF_NONE,
+    -1, -2, 0, 6,
+    MONS_MUMMY,
+    HT_LAND, US_UNDEAD, SIZE_MEDIUM,
+    14, 6,  4, // 24
+    { STAT_STR, STAT_INT }, 4,
+    { { MUT_NEGATIVE_ENERGY_RESISTANCE, 3, 1 }, { MUT_COLD_RESISTANCE, 1, 1 },
+      { MUT_TORMENT_RESISTANCE, 1, 1 }, { MUT_UNBREATHING, 1, 1 },
+      { MUT_MANA_SHIELD, 1, 1 }, { MUT_MAGIC_HEAL, 1, 1 },
+      { MUT_DETERIORATION, 1, 1 },
+      { MUT_POWERED_BY_DEATH, 1, 6 }, { MUT_POWERED_BY_DEATH, 1, 16 },
+      { MUT_STURDY_FRAME, 1, 1 }, { MUT_STURDY_FRAME, 1, 10 }, { MUT_STURDY_FRAME, 1, 20 }, },
+    { "You do not eat or drink." },
+    { "no food or potions" },
+    { JOB_FIGHTER, JOB_GLADIATOR, JOB_MONK, JOB_HUNTER, JOB_SKALD, JOB_WIZARD, JOB_CONJURER, JOB_NECROMANCER, JOB_ICE_ELEMENTALIST, JOB_FIRE_ELEMENTALIST, JOB_SUMMONER },
+    { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS, SK_LONG_BLADES,
+      SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
+} },
+
 { SP_SPRIGGAN, {
     "Sp",
     "Spriggan", nullptr, nullptr,
@@ -826,23 +848,6 @@ static const map<species_type, species_def> species_data =
     7, 11, 10, // 28
     { STAT_INT, STAT_DEX }, 3,
     {},
-    {},
-    {},
-    {},
-    {},
-} },
-
-{ SP_TENGU, {
-    "Te",
-    "Tengu", nullptr, nullptr,
-    SPF_NO_HAIR,
-    0, -2, 1, 3,
-    MONS_TENGU,
-    HT_LAND, US_ALIVE, SIZE_MEDIUM,
-    8, 8, 9, // 25
-    { STAT_STR, STAT_INT, STAT_DEX }, 4,
-    { { MUT_BEAK, 1, 1 }, { MUT_TALONS, 3, 1 },
-      { MUT_TENGU_FLIGHT, 1, 5 }, /* { MUT_TENGU_FLIGHT, 1, 14 }, */ },
     {},
     {},
     {},

@@ -37,6 +37,7 @@ gnoll4_m
 gnoll4_f
 gnome_f
 gnome_m
+skeleton SKELETON
 halfling_m HALFLING
 halfling_f
 orc_f ORC

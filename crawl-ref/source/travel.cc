@@ -4896,11 +4896,11 @@ bool stairs_destination_is_excluded(const stair_info &si)
 
 int min_abyss_depth()
 {
-    for (int depth = 5; depth > 1; depth--)
-    {
-        if(you.level_visited(level_id(BRANCH_ABYSS, depth)))
-            return depth;
-    }
-    return 1;
+    PlaceInfo place_info = you.get_place_info(BRANCH_ABYSS);
+    int visits = place_info.num_visits;
+    if(you.religion == GOD_LUGONU)
+        visits = visits/2;
+
+    return min(5, visits + 1);
 }
 

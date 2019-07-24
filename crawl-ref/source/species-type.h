@@ -36,9 +36,7 @@ enum species_type
     SP_MINOTAUR,
     SP_DEMONSPAWN,
     SP_GHOUL,
-#if TAG_MAJOR_VERSION == 34
-    SP_TENGU,
-#endif
+    SP_SKELETON,
     SP_MERFOLK,
     SP_VAMPIRE,
     SP_DEEP_DWARF,

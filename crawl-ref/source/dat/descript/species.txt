@@ -1,7 +1,7 @@
 %%%%
 Avariel
 
-Avariel are winged elves that learn to fly swiftly as they age. They are frail
+Avariel are winged elves that learn to fly swiftly as they gain experience. They are frail
 but love to fight, mostly with spells, but also with weapons.
 %%%%
 Barachi
@@ -126,6 +126,12 @@ Sand Dwarf
 
 Sand Dwarves are hardy, skilled with axes and maces, and can use magic
 while wearing heavy armour. However, having short legs, they move slowly.
+%%%%
+Skeleton
+
+Collections of bones animated by sentient spirits, skeletons are skilled with
+both weapons and destructive magic. With no flesh, their bodies are frail, but
+casting spells restores their body's integrity.
 %%%%
 Spriggan
 

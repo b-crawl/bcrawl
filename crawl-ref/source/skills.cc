@@ -1598,7 +1598,7 @@ static string _stk_weight(species_type species)
         return "Heavy";
     else if (species_size(species, PSIZE_BODY) == SIZE_LARGE)
         return "Cruiser";
-    else if (species_size(species) == SIZE_SMALL || species == SP_TENGU)
+    else if (species_size(species) == SIZE_SMALL)
         return "Feather";
     else if (species_size(species) == SIZE_LITTLE)
         return "Fly";

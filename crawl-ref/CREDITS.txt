@@ -8,6 +8,7 @@ other contributors:
 	NormalPerson7
 	Wishbringer
 	Doesnty
+	Pablo Mansanet
 
 =============== X-Crawl credits ===============
 

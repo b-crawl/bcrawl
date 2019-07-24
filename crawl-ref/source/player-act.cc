@@ -594,8 +594,6 @@ string player::arm_name(bool plural, bool *can_plural) const
 
     if (species_is_draconian(you.species) || species == SP_NAGA)
         adj = "scaled";
-    else if (species == SP_TENGU)
-        adj = "feathered";
     else if (species == SP_MUMMY)
         adj = "bandage-wrapped";
     else if (species == SP_OCTOPODE)

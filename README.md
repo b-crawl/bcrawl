@@ -41,6 +41,7 @@ Pull requests for new content are welcome.
   - v1.7.3: Out-of-depth monster spawns are changed: centaurs and water moccasins can't appear until D:3, and killer bees can't appear until D:4.
   - v1.9: Hell branches are 2 levels deep and can't be left without their rune.
   - v1.11.5: Orb Guardians can spawn on any level of Zot.
+  - v1.13: Entering the Abyss brings you to the deepest Abyss level you've seen.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -84,6 +85,7 @@ Pull requests for new content are welcome.
   - Halflings have been merged into Kobolds.
   - Deep Elves and Tengu have been merged into Avariel, winged elves with good aptitudes for magic.
   - v1.9: Djinni can cast spells without mana, but doing so prevents spellcasting for 4*cost^2/experience_level turns.
+  - v1.13: Skeletons have -20% HP, but have good aptitudes, guardian spirit, and heal when casting spells. They also gain reduced encumbrance from armour and health regeneration from kills.
 
 #### Species Changes
   - Hill Orcs use Fighting as their skill for all weapons.

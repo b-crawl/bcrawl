@@ -154,6 +154,7 @@ item_def* newgame_make_item(object_class_type base,
         switch(you.species)
         {
         case SP_DEEP_DWARF:
+        case SP_SKELETON:
             item.sub_type = AMU_MANA_REGENERATION;
             break;
         default: break;

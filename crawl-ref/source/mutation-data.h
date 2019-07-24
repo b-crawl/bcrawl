@@ -1953,6 +1953,14 @@ static const mutation_def mut_data[] =
   {"Your armour suddenly feels uncomfortable.", "", ""},
 },
 
+{ MUT_MAGIC_HEAL, 0, 1, mutflag::good, true,
+  "spell healing",
+
+  {"Casting spells heals you.", "", ""},
+  {"You feel more aware of the flow of magic in your body.", "", ""},
+  {"You feel less aware of the flow of magic in your body.", "", ""},
+},
+
 };
 
 static const mutation_category_def category_mut_data[] =

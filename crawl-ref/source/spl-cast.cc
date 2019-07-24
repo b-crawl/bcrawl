@@ -996,13 +996,20 @@ static void _spellcasting_side_effects(spell_type spell, god_type god,
         // Make some noise if it's actually the player casting.
         noisy(spell_noise(spell), you.pos());
 
-        if (!fake_spell && player_equip_unrand(UNRAND_MAJIN))
+        if (!fake_spell)
         {
-            // never kill the player (directly)
-            int hp_cost = min(spell_mana(spell), you.hp - 1);
-            ouch(hp_cost, KILLED_BY_SOMETHING, MID_NOBODY, "the Majin-Bo");
-            if (one_chance_in(500))
-                _majin_speak(spell);
+            if(player_equip_unrand(UNRAND_MAJIN))
+            {
+                // never kill the player (directly)
+                int hp_cost = min(spell_mana(spell), you.hp - 1);
+                ouch(hp_cost, KILLED_BY_SOMETHING, MID_NOBODY, "the Majin-Bo");
+                if (one_chance_in(500))
+                    _majin_speak(spell);
+            }
+            if(you.get_mutation_level(MUT_MAGIC_HEAL))
+            {
+                inc_hp(spell_mana(spell));
+            }
         }
     }
 

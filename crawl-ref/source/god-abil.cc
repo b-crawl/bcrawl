@@ -4339,19 +4339,30 @@ bool gozag_call_merchant()
         shop_type type = static_cast<shop_type>(i);
         // if they are useful to the player, food shops are handled through the
         // first index.
-        if (type == SHOP_FOOD)
-            continue;
-        if (type == SHOP_DISTILLERY && you.species == SP_MUMMY)
-            continue;
-        if (type == SHOP_EVOKABLES && you.get_mutation_level(MUT_NO_ARTIFICE))
-            continue;
-        if (you.species == SP_FELID &&
-            (type == SHOP_ARMOUR
-             || type == SHOP_ARMOUR_ANTIQUE
-             || type == SHOP_WEAPON
-             || type == SHOP_WEAPON_ANTIQUE))
+        switch(type)
         {
+        case SHOP_FOOD:
             continue;
+        case SHOP_DISTILLERY:
+            if (species_undead_type(you.species) == US_UNDEAD)
+                continue;
+            break;
+        case SHOP_EVOKABLES:
+            if(you.get_mutation_level(MUT_NO_ARTIFICE))
+                continue;
+            break;
+        case SHOP_ARMOUR:
+        case SHOP_ARMOUR_ANTIQUE:
+            if (you.species == SP_FELID
+                    || you.species == SP_OCTOPODE)
+                continue;
+            break;
+        case SHOP_WEAPON:
+        case SHOP_WEAPON_ANTIQUE:
+            if (you.species == SP_FELID)
+                continue;
+            break;
+        default: break;
         }
         valid_shops.push_back(type);
     }

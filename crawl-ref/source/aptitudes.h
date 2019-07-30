@@ -1373,7 +1373,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_OCTOPODE,        SK_EVOCATIONS,      1),
 
     // SP_DJINNI
-    APT(SP_DJINNI,          SK_FIGHTING,        0),
+    APT(SP_DJINNI,          SK_FIGHTING,        1),
     APT(SP_DJINNI,          SK_SHORT_BLADES,    0),
     APT(SP_DJINNI,          SK_LONG_BLADES,     1),
     APT(SP_DJINNI,          SK_AXES,            0),
@@ -1382,11 +1382,11 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_DJINNI,          SK_STAVES,          0),
     APT(SP_DJINNI,          SK_SLINGS,         -1),
     APT(SP_DJINNI,          SK_BOWS,           -1),
-    APT(SP_DJINNI,          SK_CROSSBOWS,      -1),
+    APT(SP_DJINNI,          SK_CROSSBOWS,      -2),
     APT(SP_DJINNI,          SK_THROWING,       -1),
-    APT(SP_DJINNI,          SK_ARMOUR,          0),
+    APT(SP_DJINNI,          SK_ARMOUR,         -1),
     APT(SP_DJINNI,          SK_DODGING,         0),
-    APT(SP_DJINNI,          SK_STEALTH,        -1),
+    APT(SP_DJINNI,          SK_STEALTH,        -2),
 #if TAG_MAJOR_VERSION == 34
     APT(SP_DJINNI,          SK_STABBING,      UNUSABLE_SKILL),
 #endif
@@ -1395,21 +1395,21 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_DJINNI,          SK_TRAPS,         UNUSABLE_SKILL),
 #endif
     APT(SP_DJINNI,          SK_UNARMED_COMBAT,  0),
-    APT(SP_DJINNI,          SK_SPELLCASTING,    4),
-    APT(SP_DJINNI,          SK_CONJURATIONS,    2),
-    APT(SP_DJINNI,          SK_HEXES,           2),
-    APT(SP_DJINNI,          SK_CHARMS,          2),
+    APT(SP_DJINNI,          SK_SPELLCASTING,    3),
+    APT(SP_DJINNI,          SK_CONJURATIONS,    1),
+    APT(SP_DJINNI,          SK_HEXES,           0),
+    APT(SP_DJINNI,          SK_CHARMS,          0),
     APT(SP_DJINNI,          SK_SUMMONINGS,      0),
     APT(SP_DJINNI,          SK_NECROMANCY,      0),
     APT(SP_DJINNI,          SK_TRANSLOCATIONS,  2),
-    APT(SP_DJINNI,          SK_TRANSMUTATIONS,  2),
+    APT(SP_DJINNI,          SK_TRANSMUTATIONS,  1),
     APT(SP_DJINNI,          SK_FIRE_MAGIC,      2),
     APT(SP_DJINNI,          SK_ICE_MAGIC,       0),
     APT(SP_DJINNI,          SK_AIR_MAGIC,       2),
-    APT(SP_DJINNI,          SK_EARTH_MAGIC,     0),
-    APT(SP_DJINNI,          SK_POISON_MAGIC,    2),
+    APT(SP_DJINNI,          SK_EARTH_MAGIC,    -1),
+    APT(SP_DJINNI,          SK_POISON_MAGIC,    0),
     APT(SP_DJINNI,          SK_INVOCATIONS,     1),
-    APT(SP_DJINNI,          SK_EVOCATIONS,      1),
+    APT(SP_DJINNI,          SK_EVOCATIONS,      2),
 
 #if TAG_MAJOR_VERSION == 34
     // It seems that we need to keep this as long as SP_LAVAORC

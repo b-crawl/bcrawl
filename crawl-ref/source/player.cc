@@ -8313,7 +8313,7 @@ void player_end_berserk()
         {
             mpr("Trog's vigour flows through your veins.");
         }
-        else
+        else if (you.species != SP_DJINNI)
         {
             mprf(MSGCH_WARN, "You pass out from exhaustion.");
             you.increase_duration(DUR_PARALYSIS, roll_dice(1, 4));
@@ -8338,6 +8338,16 @@ void player_end_berserk()
     Hints.hints_events[HINT_YOU_ENCHANTED] = false;
 
     slow_player(dur);
+    
+    if (you.species == SP_DJINNI)
+    {
+        bool were_brilliant = you.duration[DUR_BRILLIANCE] > 0;
+
+        mprf(MSGCH_DURATION, "As your rage ends, you feel a sudden clarity.");
+        you.increase_duration(DUR_BRILLIANCE, 4 + random2(3), 80);
+        if (!were_brilliant)
+            notify_stat_change(STAT_INT, 5, true);
+    }
 
     //Un-apply Berserk's +50% Current/Max HP
     calc_hp(true, false);

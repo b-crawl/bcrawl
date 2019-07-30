@@ -115,7 +115,7 @@ static const map<species_type, species_def> species_data =
     "Dj",
     "Djinni", "Djinn", nullptr,
     SPF_NONE,
-    -1, 0, 0, 4,
+    -1, 1, 0, 4,
     MONS_DJINNI,
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
     10, 10, 6, // 26

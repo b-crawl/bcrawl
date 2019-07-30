@@ -119,7 +119,7 @@ static const map<species_type, species_def> species_data =
     MONS_DJINNI,
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
     10, 10, 6, // 26
-    { STAT_INT }, 4,
+    { STAT_STR, STAT_INT }, 4,
     { {MUT_DJINN_FLIGHT, 1, 1}, {MUT_MP_WANDS, 1, 1}, 
       {MUT_BERSERK, 2, 1}, {MUT_BLURRY_VISION, 2, 1}, 
       {MUT_WILD_MAGIC, 1, 1}, {MUT_WILD_MAGIC, 1, 4}, {MUT_WILD_MAGIC, 1, 10}, 

@@ -3875,19 +3875,6 @@ bool enough_mp(int minimum, bool suppress_msg, bool abort_macros)
     return true;
 }
 
-bool djinn_cast(int amount)
-{
-    if(you.duration[DUR_NO_CAST])
-        return false;
-    
-    mpr("You briefly lose access to your magic!");
-    int nocast_dur = div_rand_round(amount*amount*4, you.experience_level);
-    if(nocast_dur > 0)
-        nocast_dur++;
-    you.set_duration(DUR_NO_CAST, nocast_dur);
-    return true;
-}
-
 static int _rest_trigger_level(int max)
 {
     return (max * Options.rest_wait_percent) / 100;
@@ -4099,9 +4086,6 @@ int get_real_hp(bool trans, bool rotted)
 
 int get_real_mp(bool include_items)
 {
-    if(you.species == SP_DJINNI)
-        return 3;
-    
     const int scale = 100;
     int spellcasting = you.skill(SK_SPELLCASTING, 1 * scale, true);
     int scaled_xl = you.experience_level * scale;

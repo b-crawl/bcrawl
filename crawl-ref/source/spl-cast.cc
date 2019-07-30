@@ -794,7 +794,7 @@ bool cast_a_spell(bool check_range, spell_type spell)
     int sifcast_amount = 0;
     if (!enough_mp(cost, true))
     {
-        if (you.attribute[ATTR_DIVINE_ENERGY] || you.species == SP_DJINNI)
+        if (you.attribute[ATTR_DIVINE_ENERGY])
         {
             sifcast_amount = cost - you.magic_points;
             cost = you.magic_points;
@@ -888,14 +888,9 @@ bool cast_a_spell(bool check_range, spell_type spell)
 
     if (sifcast_amount)
     {
-        if(you.species == SP_DJINNI)
-            djinn_cast(sifcast_amount);
-        else
-        {
-            simple_god_message(" grants you divine energy.");
-            mpr("You briefly lose access to your magic!");
-            you.set_duration(DUR_NO_CAST, 3 + random2avg(sifcast_amount * 2, 2));
-        }
+        simple_god_message(" grants you divine energy.");
+        mpr("You briefly lose access to your magic!");
+        you.set_duration(DUR_NO_CAST, 3 + random2avg(sifcast_amount * 2, 2));
     }
 
     if(!you.duration[DUR_TIME_STOP] || spell_difficulty(spell) > 4)

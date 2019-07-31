@@ -3854,15 +3854,10 @@ bool enough_mp(int minimum, bool suppress_msg, bool abort_macros)
     {
         if (!suppress_msg)
         {
-            if(you.species == SP_DJINNI)
-                mpr("The flow of your magic is too unstable!");
+            if (get_real_mp(true) < minimum)
+                mpr("You don't have enough magic capacity.");
             else
-            {
-                if (get_real_mp(true) < minimum)
-                    mpr("You don't have enough magic capacity.");
-                else
-                    mpr("You don't have enough magic at the moment.");
-            }
+                mpr("You don't have enough magic at the moment.");
         }
         if (abort_macros)
         {
@@ -3872,19 +3867,6 @@ bool enough_mp(int minimum, bool suppress_msg, bool abort_macros)
         return false;
     }
 
-    return true;
-}
-
-bool djinn_cast(int amount)
-{
-    if(you.duration[DUR_NO_CAST])
-        return false;
-    
-    mpr("You briefly lose access to your magic!");
-    int nocast_dur = div_rand_round(amount*amount*4, you.experience_level);
-    if(nocast_dur > 0)
-        nocast_dur++;
-    you.set_duration(DUR_NO_CAST, nocast_dur);
     return true;
 }
 
@@ -4099,9 +4081,6 @@ int get_real_hp(bool trans, bool rotted)
 
 int get_real_mp(bool include_items)
 {
-    if(you.species == SP_DJINNI)
-        return 3;
-    
     const int scale = 100;
     int spellcasting = you.skill(SK_SPELLCASTING, 1 * scale, true);
     int scaled_xl = you.experience_level * scale;
@@ -8313,7 +8292,7 @@ void player_end_berserk()
         {
             mpr("Trog's vigour flows through your veins.");
         }
-        else
+        else if (you.species != SP_DJINNI)
         {
             mprf(MSGCH_WARN, "You pass out from exhaustion.");
             you.increase_duration(DUR_PARALYSIS, roll_dice(1, 4));
@@ -8338,6 +8317,16 @@ void player_end_berserk()
     Hints.hints_events[HINT_YOU_ENCHANTED] = false;
 
     slow_player(dur);
+    
+    if (you.species == SP_DJINNI)
+    {
+        bool were_brilliant = you.duration[DUR_BRILLIANCE] > 0;
+
+        mprf(MSGCH_DURATION, "As your rage ends, you feel a sudden clarity.");
+        you.increase_duration(DUR_BRILLIANCE, 4 + random2(3), 80);
+        if (!were_brilliant)
+            notify_stat_change(STAT_INT, 5, true);
+    }
 
     //Un-apply Berserk's +50% Current/Max HP
     calc_hp(true, false);

@@ -89,7 +89,6 @@ deck_archetype deck_of_escape =
     { CARD_TOMB,       5 },
     { CARD_EXILE,      1 },
     { CARD_ELIXIR,     5 },
-    { CARD_CLOUD,      5 },
     { CARD_VELOCITY,   5 },
     { CARD_SHAFT,      5 },
 };
@@ -102,6 +101,7 @@ deck_archetype deck_of_destruction =
     { CARD_DEGEN,      3 },
     { CARD_WILD_MAGIC, 5 },
     { CARD_STORM,      5 },
+    { CARD_CLOUD,      5 },
 };
 
 deck_archetype deck_of_summoning =
@@ -1099,7 +1099,8 @@ static void _damaging_card(card_type card, int power,
 
     dist target;
     zap_type ztype = ZAP_DEBUGGING_RAY;
-    const zap_type painzaps[2] = { ZAP_AGONY, ZAP_BOLT_OF_DRAINING };
+    const zap_type painzaps[3] = { ZAP_AGONY, ZAP_BOLT_OF_DRAINING,
+                                   ZAP_BOLT_OF_DRAINING };
     const zap_type acidzaps[3] = { ZAP_BREATHE_ACID, ZAP_CORROSIVE_BOLT,
                                    ZAP_CORROSIVE_BOLT };
     const zap_type orbzaps[3]  = { ZAP_ISKENDERUNS_MYSTIC_BLAST, ZAP_IOOD,
@@ -1131,30 +1132,9 @@ static void _damaging_card(card_type card, int power,
     case CARD_PAIN:
         if (power_level == 2)
         {
-            mpr(prompt);
-
-            if (monster *ghost = _friendly(MONS_FLAYED_GHOST, 3))
-            {
-                apply_visible_monsters([&, ghost](monster& mons)
-                {
-                    if (mons.wont_attack()
-                        || !(mons.holiness() & MH_NATURAL))
-                    {
-                        return false;
-                    }
-
-
-                    flay(*ghost, mons, mons.hit_points * 2 / 5);
-                    return true;
-                }, ghost->pos());
-
-                ghost->foe = MHITYOU; // follow you around (XXX: rethink)
-                return;
-            }
-            // else, fallback to level 1
+            torment(&you, TORMENT_CARDS_PAIN, you.pos());
         }
-
-        ztype = painzaps[min(power_level, (int)ARRAYSZ(painzaps)-1)];
+        ztype = painzaps[power_level];
         break;
 
     default:
@@ -1492,13 +1472,13 @@ static void _cloud_card(int power)
         for (adjacent_iterator ai(mons->pos()); ai; ++ai)
         {
             // don't place clouds on the player or monsters
-            if (*ai == you.pos() || monster_at(*ai))
+            if (*ai == you.pos())
                 continue;
 
-            if (grd(*ai) == DNGN_FLOOR && !cloud_at(*ai))
+            if (grd(*di) == DNGN_FLOOR && !cloud_at(*di))
             {
                 const int cloud_power = 5 + random2((power_level + 1) * 3);
-                place_cloud(cloudy, *ai, cloud_power, &you);
+                place_cloud(cloudy, *di, cloud_power, &you);
 
                 if (you.see_cell(*ai))
                     something_happened = true;

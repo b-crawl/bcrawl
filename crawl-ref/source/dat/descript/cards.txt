@@ -40,14 +40,14 @@ The card depicts a smug smile formed out of nine chalices.
 Drawing this card rapidly restores the user's health or magic, or both at high power
 levels. It will also heal their allies.
 %%%%
+# Destruction
 the Cloud card
 
 The card depicts an iron gate enshrouded in mist.
 
-Drawing this card imprisons the user's foes in rings of clouds. The type of clouds
+Drawing this card creates a cloud around each of the user's foes. The type of clouds
 produced will improve with card power.
 %%%%
-# Destruction
 Vitriol card
 
 The card depicts an oklob plant, dripping with its distinctive corrosive sap.
@@ -65,7 +65,7 @@ Pain card
 
 The card depicts an iron wheel, menacing with spikes and rusted with blood.
 
-Drawing this card unleashes a necromantic attack spell.
+Drawing this card unleashes a necromantic attack.
 %%%%
 the Orb card
 

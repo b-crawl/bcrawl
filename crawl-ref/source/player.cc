@@ -3854,15 +3854,10 @@ bool enough_mp(int minimum, bool suppress_msg, bool abort_macros)
     {
         if (!suppress_msg)
         {
-            if(you.species == SP_DJINNI)
-                mpr("The flow of your magic is too unstable!");
+            if (get_real_mp(true) < minimum)
+                mpr("You don't have enough magic capacity.");
             else
-            {
-                if (get_real_mp(true) < minimum)
-                    mpr("You don't have enough magic capacity.");
-                else
-                    mpr("You don't have enough magic at the moment.");
-            }
+                mpr("You don't have enough magic at the moment.");
         }
         if (abort_macros)
         {

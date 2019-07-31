@@ -2894,12 +2894,15 @@ void read(item_def* scroll)
     }
 
     if (you.get_mutation_level(MUT_BLURRY_VISION)
-        && !i_feel_safe(false, false, true)
-        && !yesno("Really read with blurry vision while enemies are nearby?",
-                  false, 'n'))
+            && !i_feel_safe(false, false, true))
     {
-        canned_msg(MSG_OK);
-        return;
+        if (you.species == SP_DJINNI && (you.get_mutation_level(MUT_BLURRY_VISION) < 3))
+            mprf(MSGCH_DANGER, "Your blurry vision makes reading the scroll take longer!");
+        else if(!yesno("Really read with blurry vision while enemies are nearby?", false, 'n'))
+        {
+            canned_msg(MSG_OK);
+            return;
+        }
     }
 
     // Ok - now we FINALLY get to read a scroll !!! {dlb}

@@ -31,8 +31,7 @@ they grow.
 %%%%
 Djinni
 
-Djinni are floating primordial spirits. Unable to gain magical reserves, they
-instead pull magic from their surroundings.
+Djinni are floating primordial spirits, with powerful but unstable magic. In melee combat, they often go berserk.
 %%%%
 Draconian
 

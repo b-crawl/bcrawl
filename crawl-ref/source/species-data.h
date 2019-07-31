@@ -123,6 +123,7 @@ static const map<species_type, species_def> species_data =
     { {MUT_DJINN_FLIGHT, 1, 1}, {MUT_MP_WANDS, 1, 1}, 
       {MUT_BERSERK, 2, 1}, {MUT_BLURRY_VISION, 2, 1}, 
       {MUT_WILD_MAGIC, 1, 1}, {MUT_WILD_MAGIC, 1, 4}, {MUT_WILD_MAGIC, 1, 8}, 
+      {MUT_BLINK, 1, 4}, 
       {MUT_ANTI_WIZARDRY, 1, 12}, {MUT_HEAT_RESISTANCE, 1, 12}, {MUT_HIGH_MAGIC, 2, 12}, 
       {MUT_HURL_DAMNATION, 1, 18} },
     { "You never pass out after going berserk." },

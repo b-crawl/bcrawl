@@ -84,8 +84,8 @@ Pull requests for new content are welcome.
   - Oni can't learn spells from books, instead gaining random spells every 2 XL. All Oni spells only use the Spellcasting skill.
   - Halflings have been merged into Kobolds.
   - Deep Elves and Tengu have been merged into Avariel, winged elves with good aptitudes for magic.
-  - v1.9: Djinni can cast spells without mana, but doing so prevents spellcasting for 4*cost^2/experience_level turns.
   - v1.13: Skeletons have -20% HP, but have good aptitudes, guardian spirit, and heal when casting spells. They also gain reduced encumbrance from armour and health regeneration from kills.
+  - v1.13.1: Djinni get Wild Magic, Berserkitis, Blurry Vision, and Blink mutations. After their berserk rages end, they never pass out and get a few turns of Brilliance.
 
 #### Species Changes
   - Hill Orcs use Fighting as their skill for all weapons.
@@ -183,6 +183,7 @@ Pull requests for new content are welcome.
   - v1.12: Uskayaw's Line Pass ability no longer costs piety.
   - v1.12: Zin's Vitalisation gives a much bigger attribute bonus, but costs more piety.
   - v1.12: Lugonu's self-banishment costs much less piety. (About half as much.)
+  - v1.13.1: Nemelex card changes: Pain casts Torment instead of summoning a Flayed Ghost, and Clouds creates a cloud under each enemy instead of clouds around enemies. (by sdynet)
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

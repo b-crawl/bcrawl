@@ -10,6 +10,7 @@ other contributors:
 	Doesnty
 	josbraden
 	Pablo Mansanet
+	sdynet
 
 =============== X-Crawl credits ===============
 

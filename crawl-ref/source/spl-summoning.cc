@@ -263,6 +263,9 @@ spret cast_call_canine_familiar(int pow, god_type god, bool fail)
 
 spret cast_summon_scorpions(actor* caster, int pow, god_type god, bool fail)
 {
+    if (otr_stop_summoning_prompt())
+        return spret::abort;
+    
     fail_check();
     monster_type mon = MONS_SCORPION;
     

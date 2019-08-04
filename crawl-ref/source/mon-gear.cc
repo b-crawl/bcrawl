@@ -2275,10 +2275,11 @@ void view_monster_equipment(monster* mon)
             continue;
 
         item_def &item = mitm[mon->inv[i]];
+        item.flags |= ISFLAG_SEEN;
+        
         if(item.base_type == OBJ_BOOKS)
             continue;
         
-        item.flags |= ISFLAG_SEEN;
         set_ident_flags(item, ISFLAG_IDENT_MASK);
         if (item.base_type == OBJ_WANDS)
             set_ident_type(item, true);

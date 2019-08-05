@@ -875,7 +875,7 @@ ENDMAP
 
 NAME:   introduction_to_nature_1
 TAGS:   no_monster_gen no_pool_fixup uniq_introduction_to_nature transparent
-DEPTH:  D:8-13
+DEPTH:  D:8-, !D:$
 WEIGHT: 3
 ITEM:   any potion
 ITEM:   Young Poisoner's Handbook / book of Changes / \
@@ -932,7 +932,7 @@ ENDMAP
 
 NAME:   introduction_to_nature_2
 TAGS:   no_monster_gen no_pool_fixup uniq_introduction_to_nature
-DEPTH:  D:8-13
+DEPTH:  D:8-, !D:$
 ITEM:   any potion
 ITEM:   Young Poisoner's Handbook / book of Changes / \
         randbook disc:Poison disc2:Transmutation slevels:8 w:5 / \

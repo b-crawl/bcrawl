@@ -269,3 +269,4 @@ Pull requests for new content are welcome.
   - v1.11.7: Bai Suzhen now summons drakes and then goes berserk, making her significantly more dangerous.
   - v1.12: Agnes is much harder to hit.
   - v1.12.1: The royal jelly is giant. (Giant creatures can't be netted.)
+  - v1.13.2: Jory has Summon Undead instead of Crystal Spear.

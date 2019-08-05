@@ -2044,7 +2044,7 @@ static const mon_spellbook mspell_list[] =
     {  MST_JORY,
       {
        { SPELL_VAMPIRIC_DRAINING, 50, MON_SPELL_WIZARD },
-       { SPELL_LEHUDIBS_CRYSTAL_SPEAR, 17, MON_SPELL_WIZARD },
+       { SPELL_SUMMON_UNDEAD, 17, MON_SPELL_WIZARD },
        { SPELL_MESMERISE, 17, MON_SPELL_WIZARD },
        { SPELL_BLINK_CLOSE, 17, MON_SPELL_WIZARD },
       }

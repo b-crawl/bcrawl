@@ -107,7 +107,7 @@ static void _give_special(monster* mon, int level)
     switch(mon->type)
     {
     case MONS_ROXANNE:
-	{
+    {
         const int which_book = (one_chance_in(3) ? BOOK_TRANSFIGURATIONS
                                                  : BOOK_EARTH);
 
@@ -121,10 +121,10 @@ static void _give_special(monster* mon, int level)
 
         give_specific_item(mon, thing_created);
         break;
-	}
+    }
     
     case MONS_PSYCHE:
-	{
+    {
         if(one_chance_in(2))
             {
             const int which_book = BOOK_DREAMS;
@@ -135,10 +135,10 @@ static void _give_special(monster* mon, int level)
             give_specific_item(mon, thing_created);
             }
         break;
-	}
+    }
     
     case MONS_FANNAR:
-	{
+    {
         if(one_chance_in(2))
             {
             const int which_book = BOOK_ICE;
@@ -149,10 +149,10 @@ static void _give_special(monster* mon, int level)
             give_specific_item(mon, thing_created);
             }
         break;
-	}
+    }
     
     case MONS_SOJOBO:
-	{
+    {
         if(one_chance_in(2))
             {
             const int which_book = BOOK_SKY;
@@ -163,14 +163,14 @@ static void _give_special(monster* mon, int level)
             give_specific_item(mon, thing_created);
             }
         break;
-	}
+    }
     
     case MONS_MAURICE:
-	{
+    {
         const int it = items(false, OBJ_GOLD, 0, level);
         give_specific_item(mon, it);
         break;
-	}
+    }
 
     default: break;
     }
@@ -2276,6 +2276,10 @@ void view_monster_equipment(monster* mon)
 
         item_def &item = mitm[mon->inv[i]];
         item.flags |= ISFLAG_SEEN;
+        
+        if(item.base_type == OBJ_BOOKS)
+            continue;
+        
         set_ident_flags(item, ISFLAG_IDENT_MASK);
         if (item.base_type == OBJ_WANDS)
             set_ident_type(item, true);

@@ -653,7 +653,7 @@ static void _decrement_durations()
             break;
         default: break;
         }
-        if(!last_forever)
+        if(!last_forever || you.transform_uncancellable)
             if (_decrement_a_duration(DUR_TRANSFORMATION, delay, nullptr,
                     random2(3), "Your transformation is almost over."))
                 untransform();

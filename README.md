@@ -209,6 +209,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Staves of energy are removed. A staff of power can be used to channel mana, and enhancer staves remove spell hunger for their spell school.
   - v1.12.1: Boots of stealth and rings of stealth give 2x the stealth bonus.
   - v1.12.1: Great maces have a different brand set, including the speed brand.
+  - v1.13.2: Great swords have higher (15 -> 16) base damage.
 
 #### Removed Items
   - Amulet of Harm
@@ -269,3 +270,4 @@ Pull requests for new content are welcome.
   - v1.11.7: Bai Suzhen now summons drakes and then goes berserk, making her significantly more dangerous.
   - v1.12: Agnes is much harder to hit.
   - v1.12.1: The royal jelly is giant. (Giant creatures can't be netted.)
+  - v1.13.2: Jory has Summon Undead instead of Crystal Spear.

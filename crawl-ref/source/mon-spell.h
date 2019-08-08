@@ -2043,10 +2043,11 @@ static const mon_spellbook mspell_list[] =
     // ('V') Vampires.
     {  MST_JORY,
       {
-       { SPELL_VAMPIRIC_DRAINING, 50, MON_SPELL_WIZARD },
-       { SPELL_SUMMON_UNDEAD, 17, MON_SPELL_WIZARD },
-       { SPELL_MESMERISE, 17, MON_SPELL_WIZARD },
-       { SPELL_BLINK_CLOSE, 17, MON_SPELL_WIZARD },
+       { SPELL_HASTE, 50, MON_SPELL_WIZARD },
+       { SPELL_SUMMON_UNDEAD, 20, MON_SPELL_WIZARD },
+       { SPELL_MESMERISE, 12, MON_SPELL_WIZARD },
+       { SPELL_VAMPIRIC_DRAINING, 40, MON_SPELL_WIZARD },
+       { SPELL_BLINK_CLOSE, 10, MON_SPELL_WIZARD },
       }
     },
 

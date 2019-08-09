@@ -1131,45 +1131,49 @@ static bool _give_trog_oka_gift(bool forced)
         return false;
 
     const bool need_missiles = _need_missile_gift(forced);
-    object_class_type gift_type;
+    object_class_type gift_type = NUM_OBJECT_CLASSES;
 
-    if (forced && coinflip()
-        || (!forced && you.piety >= piety_breakpoint(4)
-            && random2(you.piety) > 120
-            && one_chance_in(4)))
+    switch(you.religion)
     {
-        if (you_worship(GOD_TROG)
-            || (you_worship(GOD_OKAWARU) && coinflip()))
-        {
+    case GOD_TROG:
+        if (forced && coinflip()
+            || (!forced && you.piety >= piety_breakpoint(4)
+                && random2(you.piety) > 120
+                && one_chance_in(4)))
             gift_type = OBJ_WEAPONS;
-        }
-        else
-            gift_type = OBJ_ARMOUR;
+        break;
+    case GOD_OKAWARU:
+        if (forced && coinflip()
+            || (!forced && you.piety >= piety_breakpoint(4)
+                && random2(you.piety) > 120
+                && one_chance_in(4)))
+            gift_type = random_choose(OBJ_WEAPONS, OBJ_ARMOUR);
+        else if (need_missiles)
+            gift_type = OBJ_MISSILES;
+        break;
+    default: break;
     }
-    else if (need_missiles)
-        gift_type = OBJ_MISSILES;
-    else
+    if (gift_type == NUM_OBJECT_CLASSES)
         return false;
 
     success = acquirement(gift_type, you.religion);
     if (success)
     {
-        if (gift_type == OBJ_MISSILES)
+        switch (gift_type)
         {
+        case OBJ_MISSILES:
             simple_god_message(" grants you ammunition!");
             _inc_gift_timeout(4 + roll_dice(2, 4));
-        }
-        else
-        {
-            if (gift_type == OBJ_WEAPONS)
-                simple_god_message(" grants you a weapon!");
-            else
-                simple_god_message(" grants you armour!");
-            // Okawaru charges extra for armour acquirements.
-            if (you_worship(GOD_OKAWARU) && gift_type == OBJ_ARMOUR)
-                _inc_gift_timeout(30 + random2avg(15, 2));
-
+            break;
+        case OBJ_WEAPONS:
+            simple_god_message(" grants you a weapon!");
             _inc_gift_timeout(30 + random2avg(19, 2));
+            break;
+        case OBJ_ARMOUR:
+            simple_god_message(" grants you armour!");
+            _inc_gift_timeout(60 + random2avg(15, 2) + random2avg(19, 2));
+            break;
+        default: break;
         }
         you.num_current_gifts[you.religion]++;
         you.num_total_gifts[you.religion]++;

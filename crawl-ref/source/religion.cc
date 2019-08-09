@@ -919,17 +919,12 @@ int yred_random_servants(unsigned int threshold, bool force_hostile)
     return created;
 }
 
-static bool _need_missile_gift(bool forced)
+static bool _need_missile_gift()
 {
     skill_type sk = best_skill(SK_SLINGS, SK_THROWING);
-    // Default to throwing if all missile skills are at zero.
     if (you.skills[sk] == 0)
         sk = SK_THROWING;
-    return forced
-           || (you.piety >= piety_breakpoint(2)
-               && random2(you.piety) > 70
-               && one_chance_in(8)
-               && x_chance_in_y(1 + you.skills[sk], 12));
+    return x_chance_in_y(you.skills[sk], 12));
 }
 
 static bool _give_nemelex_gift(bool forced = false)
@@ -1130,9 +1125,7 @@ static bool _give_trog_oka_gift(bool forced)
     if (you.species == SP_FELID)
         return false;
 
-    const bool need_missiles = _need_missile_gift(forced);
     object_class_type gift_type = NUM_OBJECT_CLASSES;
-
     switch(you.religion)
     {
     case GOD_TROG:
@@ -1148,8 +1141,10 @@ static bool _give_trog_oka_gift(bool forced)
                 && random2(you.piety) > 120
                 && one_chance_in(4)))
             gift_type = random_choose(OBJ_WEAPONS, OBJ_ARMOUR);
-        else if (need_missiles)
-            gift_type = OBJ_MISSILES;
+        else if (_need_missile_gift())
+            if((you.piety >= piety_breakpoint(2) && random2(you.piety) > 70 && one_chance_in(8)
+                    || forced)
+                gift_type = OBJ_MISSILES;
         break;
     default: break;
     }

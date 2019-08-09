@@ -1051,15 +1051,17 @@ static monster* _place_monster_aux(const mgen_data &mg, const monster *leader,
     case MONS_FREDERICK:
         mon->god = GOD_DEMIGOD;
         break;
-    default: switch (mons_genus(mg.cls))
-        {
+    default:
+    {
         bool is_priest = mon->is_priest();
+        switch (mons_genus(mg.cls))
+        {
         case MONS_ORC:
-            if (priest || !one_chance_in(7))
+            if (is_priest || !one_chance_in(7))
                 mon->god = GOD_BEOGH;
             break;
         case MONS_JELLY:
-            if (priest)
+            if (is_priest)
                 mon->god = GOD_JIYVA;
             break;
         default:
@@ -1070,11 +1072,12 @@ static monster* _place_monster_aux(const mgen_data &mg, const monster *leader,
                 else
                     mon->god = GOD_XOM;
             }
-            else if (priest)
+            else if (is_priest)
                 mon->god = GOD_NAMELESS;
             break;
         }
-    break;
+        break;
+    }
 
     // Holy monsters need their halo!
     if (mon->holiness() & MH_HOLY)

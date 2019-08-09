@@ -1078,6 +1078,7 @@ static monster* _place_monster_aux(const mgen_data &mg, const monster *leader,
         }
         break;
     }
+    }
 
     // Holy monsters need their halo!
     if (mon->holiness() & MH_HOLY)

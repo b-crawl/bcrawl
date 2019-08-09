@@ -184,6 +184,8 @@ Pull requests for new content are welcome.
   - v1.12: Zin's Vitalisation gives a much bigger attribute bonus, but costs more piety.
   - v1.12: Lugonu's self-banishment costs much less piety. (About half as much.)
   - v1.13.1: Nemelex card changes: Pain casts Torment instead of summoning a Flayed Ghost, and Clouds creates a cloud under each enemy instead of clouds around enemies. (by sdynet)
+  - v1.13.3: Trog no longer gifts ammo.
+  - v1.13.3: Lugonu gives armour and ammo gifts.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -271,4 +273,4 @@ Pull requests for new content are welcome.
   - v1.11.7: Bai Suzhen now summons drakes and then goes berserk, making her significantly more dangerous.
   - v1.12: Agnes is much harder to hit.
   - v1.12.1: The royal jelly is giant. (Giant creatures can't be netted.)
-  - v1.13.2: Jory has Summon Undead instead of Crystal Spear.
+  - v1.13.3: Jory and Frederick have reworked spell sets.

@@ -4624,13 +4624,14 @@ string do_mon_str_replacements(const string &in_msg, const monster& mons,
     }
     else if (mons.god == GOD_DEMIGOD)
     {
-        msg = replace_all(msg, "@a_God@", mons.name);
-        msg = replace_all(msg, "@A_God@", uppercase_first(mons.name));
-        msg = replace_all(msg, "@possessive_God@", mons.name);
-        msg = replace_all(msg, "@Possessive_God@", uppercase_first(mons.name));
+        string mons_name = mons.name(DESC_PLAIN);
+        msg = replace_all(msg, "@a_God@", mons_name);
+        msg = replace_all(msg, "@A_God@", uppercase_first(mons_name));
+        msg = replace_all(msg, "@possessive_God@", mons_name);
+        msg = replace_all(msg, "@Possessive_God@", uppercase_first(mons_name));
 
-        msg = replace_all(msg, "@my_God@", mons.name);
-        msg = replace_all(msg, "@My_God@", uppercase_first(mons.name));
+        msg = replace_all(msg, "@my_God@", mons_name);
+        msg = replace_all(msg, "@My_God@", uppercase_first(mons_name));
     }
     else
     {

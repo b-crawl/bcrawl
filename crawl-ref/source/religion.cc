@@ -926,7 +926,7 @@ static bool _need_missile_gift()
     skill_type sk = best_skill(SK_SLINGS, SK_THROWING);
     if (you.skills[sk] == 0)
         sk = SK_THROWING;
-    return x_chance_in_y(you.skills[sk], 12));
+    return x_chance_in_y(you.skills[sk], 12);
 }
 
 static bool _give_nemelex_gift(bool forced = false)
@@ -1144,7 +1144,7 @@ static bool _give_trog_oka_gift(bool forced)
                 && one_chance_in(4)))
             gift_type = random_choose(OBJ_WEAPONS, OBJ_ARMOUR);
         else if (_need_missile_gift())
-            if((you.piety >= piety_breakpoint(2) && random2(you.piety) > 70 && one_chance_in(8)
+            if((you.piety >= piety_breakpoint(2) && random2(you.piety) > 70 && one_chance_in(8))
                     || forced)
                 gift_type = OBJ_MISSILES;
         break;

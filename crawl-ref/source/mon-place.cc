@@ -1007,6 +1007,7 @@ static monster* _place_monster_aux(const mgen_data &mg, const monster *leader,
     {
     // Berserkers belong to Trog.
     case MONS_SPRIGGAN_BERSERKER:
+    case MONS_RUPERT:
         mon->god = GOD_TROG;
         break;
     case MONS_DEATH_KNIGHT:
@@ -1046,6 +1047,9 @@ static monster* _place_monster_aux(const mgen_data &mg, const monster *leader,
         break;
     case MONS_CRAZY_YIUF:
         mon->god = GOD_XOM;
+        break;
+    case MONS_FREDERICK:
+        mon->god = GOD_DEMIGOD;
         break;
     default: switch (mons_genus(mg.cls))
         {

@@ -527,7 +527,7 @@ static const map<species_type, species_def> species_data =
       "You are very nimble and swift while swimming.",
       "You are very stealthy in the water. (Stealth+)" },
     { "change form in water", "swift swim", "stealthy swim" },
-    { JOB_GLADIATOR, JOB_BERSERKER, JOB_SKALD, JOB_TRANSMUTER, JOB_SUMMONER,
+    { JOB_FIGHTER, JOB_GLADIATOR, JOB_MONK, JOB_HUNTER, JOB_BERSERKER, JOB_ABYSSAL_KNIGHT, JOB_SKALD, JOB_TRANSMUTER, JOB_SUMMONER,
       JOB_ICE_ELEMENTALIST },
     { SK_POLEARMS, SK_LONG_BLADES },
 } },

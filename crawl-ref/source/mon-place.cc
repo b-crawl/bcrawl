@@ -1003,83 +1003,81 @@ static monster* _place_monster_aux(const mgen_data &mg, const monster *leader,
     if (mg.god != GOD_NO_GOD)
         mons_make_god_gift(*mon, mg.god);
     // Not a god gift, give priestly monsters a god.
-    else if (mon->is_priest())
+    else switch(mg.cls)
     {
-        // Berserkers belong to Trog.
-        if (mg.cls == MONS_SPRIGGAN_BERSERKER)
-            mon->god = GOD_TROG;
-        // Death knights belong to Yredelemnul.
-        else if (mg.cls == MONS_DEATH_KNIGHT)
-            mon->god = GOD_YREDELEMNUL;
-        // Asterion belongs to Mahkleb.
-        else if (mg.cls == MONS_ASTERION)
-            mon->god = GOD_MAKHLEB;
-        // Seraphim follow the Shining One.
-        else if (mg.cls == MONS_SERAPH)
-            mon->god = GOD_SHINING_ONE;
-        // Draconian stormcallers worship Qazlal.
-        else if (mg.cls == MONS_DRACONIAN_STORMCALLER)
-            mon->god = GOD_QAZLAL;
-        // Classed demonspawn.
-        else if (mg.cls == MONS_BLOOD_SAINT)
-            mon->god = GOD_MAKHLEB;
-        else if (mg.cls == MONS_BLACK_SUN)
-            mon->god = GOD_KIKUBAAQUDGHA;
-        else if (mg.cls == MONS_CORRUPTER)
-            mon->god = GOD_LUGONU;
-        else
-        {
-            switch (mons_genus(mg.cls))
-            {
-            case MONS_ORC:
-                mon->god = GOD_BEOGH;
-                break;
-            case MONS_JELLY:
-                mon->god = GOD_JIYVA;
-                break;
-            case MONS_MUMMY:
-            case MONS_DRACONIAN:
-            case MONS_ELF:
-                // [ds] Vault defs can request priest monsters of unusual types.
-            default:
-                mon->god = GOD_NAMELESS;
-                break;
-            }
-        }
-    }
-    // The Royal Jelly belongs to Jiyva.
-    else if (mg.cls == MONS_ROYAL_JELLY)
-        mon->god = GOD_JIYVA;
-    // Mennas belongs to Zin.
-    else if (mg.cls == MONS_MENNAS)
-        mon->god = GOD_ZIN;
-    // Yiuf is a faithful Xommite.
-    else if (mg.cls == MONS_CRAZY_YIUF)
-        mon->god = GOD_XOM;
-    // Grinder and Ignacio belong to Makhleb.
-    else if (mg.cls == MONS_GRINDER
-             || mg.cls == MONS_IGNACIO)
-    {
-        mon->god = GOD_MAKHLEB;
-    }
-    // 1 out of 7 non-priestly orcs are unbelievers.
-    else if (mons_genus(mg.cls) == MONS_ORC)
-    {
-        if (!one_chance_in(7))
-            mon->god = GOD_BEOGH;
-    }
-    else if (mg.cls == MONS_APIS)
-        mon->god = GOD_ELYVILON;
-    else if (mg.cls == MONS_PROFANE_SERVITOR)
+    // Berserkers belong to Trog.
+    case MONS_SPRIGGAN_BERSERKER:
+    case MONS_RUPERT:
+        mon->god = GOD_TROG;
+        break;
+    case MONS_DEATH_KNIGHT:
+    case MONS_PROFANE_SERVITOR:
         mon->god = GOD_YREDELEMNUL;
-    // Angels (other than Mennas) and daevas belong to TSO, but 1 out of
-    // 7 in the Abyss are adopted by Xom.
-    else if (mons_class_holiness(mg.cls) == MH_HOLY)
+        break;
+    case MONS_ASTERION:
+    case MONS_GRINDER:
+    case MONS_IGNACIO:
+        mon->god = GOD_MAKHLEB;
+        break;
+    case MONS_SERAPH:
+        mon->god = GOD_SHINING_ONE;
+        break;
+    case MONS_APIS:
+        mon->god = GOD_ELYVILON;
+        break;
+    case MONS_DRACONIAN_STORMCALLER:
+        mon->god = GOD_QAZLAL;
+        break;
+    // Classed demonspawn.
+    case MONS_BLOOD_SAINT:
+        mon->god = GOD_MAKHLEB;
+        break;
+    case MONS_BLACK_SUN:
+        mon->god = GOD_KIKUBAAQUDGHA;
+        break;
+    case MONS_CORRUPTER:
+        mon->god = GOD_LUGONU;
+        break;
+    // more uniques
+    case MONS_ROYAL_JELLY:
+        mon->god = GOD_JIYVA;
+        break;
+    case MONS_MENNAS:
+        mon->god = GOD_ZIN;
+        break;
+    case MONS_CRAZY_YIUF:
+        mon->god = GOD_XOM;
+        break;
+    case MONS_FREDERICK:
+        mon->god = GOD_DEMIGOD;
+        break;
+    default:
     {
-        if (mg.place != BRANCH_ABYSS || !one_chance_in(7))
-            mon->god = GOD_SHINING_ONE;
-        else
-            mon->god = GOD_XOM;
+        bool is_priest = mon->is_priest();
+        switch (mons_genus(mg.cls))
+        {
+        case MONS_ORC:
+            if (is_priest || !one_chance_in(7))
+                mon->god = GOD_BEOGH;
+            break;
+        case MONS_JELLY:
+            if (is_priest)
+                mon->god = GOD_JIYVA;
+            break;
+        default:
+            if (mons_class_holiness(mg.cls) == MH_HOLY)
+            {
+                if (mg.place != BRANCH_ABYSS || !one_chance_in(7))
+                    mon->god = GOD_SHINING_ONE;
+                else
+                    mon->god = GOD_XOM;
+            }
+            else if (is_priest)
+                mon->god = GOD_NAMELESS;
+            break;
+        }
+        break;
+    }
     }
 
     // Holy monsters need their halo!

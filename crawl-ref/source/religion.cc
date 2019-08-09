@@ -214,6 +214,8 @@ const vector<god_power> god_powers[NUM_GODS] =
       { 2, ABIL_LUGONU_BEND_SPACE, "bend space around yourself" },
       { 3, ABIL_LUGONU_BANISH, "banish your foes" },
       { 4, ABIL_LUGONU_CORRUPT, "corrupt the fabric of space" },
+      { 4, "Lugonu will gift you equipment and ammunition from the Abyss.",
+           "Lugonu will no longer gift you items." },
       { 5, ABIL_LUGONU_ABYSS_ENTER, "gate yourself to the Abyss" },
       { 7, ABIL_LUGONU_BLESS_WEAPON, "Lugonu will corrupt your weapon with distortion... once.",
                                      "Lugonu is no longer ready to corrupt your weapon." },
@@ -919,17 +921,12 @@ int yred_random_servants(unsigned int threshold, bool force_hostile)
     return created;
 }
 
-static bool _need_missile_gift(bool forced)
+static bool _need_missile_gift()
 {
     skill_type sk = best_skill(SK_SLINGS, SK_THROWING);
-    // Default to throwing if all missile skills are at zero.
     if (you.skills[sk] == 0)
         sk = SK_THROWING;
-    return forced
-           || (you.piety >= piety_breakpoint(2)
-               && random2(you.piety) > 70
-               && one_chance_in(8)
-               && x_chance_in_y(1 + you.skills[sk], 12));
+    return x_chance_in_y(you.skills[sk], 12);
 }
 
 static bool _give_nemelex_gift(bool forced = false)
@@ -1130,46 +1127,57 @@ static bool _give_trog_oka_gift(bool forced)
     if (you.species == SP_FELID)
         return false;
 
-    const bool need_missiles = _need_missile_gift(forced);
-    object_class_type gift_type;
-
-    if (forced && coinflip()
-        || (!forced && you.piety >= piety_breakpoint(4)
-            && random2(you.piety) > 120
-            && one_chance_in(4)))
+    object_class_type gift_type = NUM_OBJECT_CLASSES;
+    switch(you.religion)
     {
-        if (you_worship(GOD_TROG)
-            || (you_worship(GOD_OKAWARU) && coinflip()))
-        {
+    case GOD_TROG:
+        if (forced && coinflip()
+            || (!forced && you.piety >= piety_breakpoint(4)
+                && random2(you.piety) > 100
+                && one_chance_in(4)))
             gift_type = OBJ_WEAPONS;
-        }
-        else
-            gift_type = OBJ_ARMOUR;
+        break;
+    case GOD_OKAWARU:
+        if (forced && coinflip()
+            || (!forced && you.piety >= piety_breakpoint(4)
+                && random2(you.piety) > 120
+                && one_chance_in(4)))
+            gift_type = random_choose(OBJ_WEAPONS, OBJ_ARMOUR);
+        else if (_need_missile_gift())
+            if((you.piety >= piety_breakpoint(2) && random2(you.piety) > 70 && one_chance_in(8))
+                    || forced)
+                gift_type = OBJ_MISSILES;
+        break;
+    case GOD_LUGONU:
+        if (forced
+            || (you.piety >= piety_breakpoint(3)
+                && random2(you.piety) > 90
+                && one_chance_in(2)))
+            gift_type = random_choose(OBJ_ARMOUR, OBJ_MISSILES);
+        break;
+    default: break;
     }
-    else if (need_missiles)
-        gift_type = OBJ_MISSILES;
-    else
+    if (gift_type == NUM_OBJECT_CLASSES)
         return false;
 
     success = acquirement(gift_type, you.religion);
     if (success)
     {
-        if (gift_type == OBJ_MISSILES)
+        switch (gift_type)
         {
+        case OBJ_MISSILES:
             simple_god_message(" grants you ammunition!");
             _inc_gift_timeout(4 + roll_dice(2, 4));
-        }
-        else
-        {
-            if (gift_type == OBJ_WEAPONS)
-                simple_god_message(" grants you a weapon!");
-            else
-                simple_god_message(" grants you armour!");
-            // Okawaru charges extra for armour acquirements.
-            if (you_worship(GOD_OKAWARU) && gift_type == OBJ_ARMOUR)
-                _inc_gift_timeout(30 + random2avg(15, 2));
-
+            break;
+        case OBJ_WEAPONS:
+            simple_god_message(" grants you a weapon!");
             _inc_gift_timeout(30 + random2avg(19, 2));
+            break;
+        case OBJ_ARMOUR:
+            simple_god_message(" grants you armour!");
+            _inc_gift_timeout(60 + random2avg(15, 2) + random2avg(19, 2));
+            break;
+        default: break;
         }
         you.num_current_gifts[you.religion]++;
         you.num_total_gifts[you.religion]++;
@@ -1796,6 +1804,7 @@ bool do_god_gift(bool forced)
 
         case GOD_OKAWARU:
         case GOD_TROG:
+        case GOD_LUGONU:
             success = _give_trog_oka_gift(forced);
             break;
 

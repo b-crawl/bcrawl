@@ -214,6 +214,8 @@ const vector<god_power> god_powers[NUM_GODS] =
       { 2, ABIL_LUGONU_BEND_SPACE, "bend space around yourself" },
       { 3, ABIL_LUGONU_BANISH, "banish your foes" },
       { 4, ABIL_LUGONU_CORRUPT, "corrupt the fabric of space" },
+      { 4, "Lugonu will gift you equipment and ammunition from the Abyss.",
+           "Lugonu will no longer gift you items." },
       { 5, ABIL_LUGONU_ABYSS_ENTER, "gate yourself to the Abyss" },
       { 7, ABIL_LUGONU_BLESS_WEAPON, "Lugonu will corrupt your weapon with distortion... once.",
                                      "Lugonu is no longer ready to corrupt your weapon." },
@@ -1131,7 +1133,7 @@ static bool _give_trog_oka_gift(bool forced)
     case GOD_TROG:
         if (forced && coinflip()
             || (!forced && you.piety >= piety_breakpoint(4)
-                && random2(you.piety) > 120
+                && random2(you.piety) > 100
                 && one_chance_in(4)))
             gift_type = OBJ_WEAPONS;
         break;
@@ -1145,6 +1147,13 @@ static bool _give_trog_oka_gift(bool forced)
             if((you.piety >= piety_breakpoint(2) && random2(you.piety) > 70 && one_chance_in(8)
                     || forced)
                 gift_type = OBJ_MISSILES;
+        break;
+    case GOD_LUGONU:
+        if (forced
+            || (you.piety >= piety_breakpoint(3)
+                && random2(you.piety) > 90
+                && one_chance_in(2)))
+            gift_type = random_choose(OBJ_ARMOUR, OBJ_MISSILES);
         break;
     default: break;
     }
@@ -1795,6 +1804,7 @@ bool do_god_gift(bool forced)
 
         case GOD_OKAWARU:
         case GOD_TROG:
+        case GOD_LUGONU:
             success = _give_trog_oka_gift(forced);
             break;
 

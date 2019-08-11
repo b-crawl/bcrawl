@@ -70,7 +70,7 @@ static const map<species_type, species_def> species_data =
     {},
     { JOB_FIGHTER, JOB_HUNTER, JOB_WARPER, JOB_ARCANE_MARKSMAN,
     JOB_ARCHAEOLOGIST },
-    { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS, SK_LONG_BLADES, SK_STAVES,
+    { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS,
       SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
 } },
 
@@ -510,7 +510,7 @@ static const map<species_type, species_def> species_data =
     {},
     {},
     { JOB_HUNTER, JOB_REAVER, JOB_WARPER, JOB_ARCANE_MARKSMAN, JOB_ASSASSIN },
-    { SK_SHORT_BLADES, SK_LONG_BLADES, SK_SLINGS, SK_CROSSBOWS },
+    { SK_SHORT_BLADES, SK_SLINGS, SK_CROSSBOWS },
 } },
 
 { SP_MERFOLK, {

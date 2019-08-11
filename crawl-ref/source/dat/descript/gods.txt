@@ -326,14 +326,14 @@ the Necronomicon, or to have their weapon imbued with pain.
 Lugonu powers
 
 Followers of Lugonu gain powers to depart the Abyss at will, to bend space
-around themselves, and to banish monsters to the Abyss. Later they will be able
-to corrupt the ordered world, opening a gate for creatures of the Abyss to pass
-through, and to gate themselves directly into this realm of chaos. Lugonu will
-protect followers from the normally harmful effects of weapons imbued with the
-distorting energies of the Abyss, and eventually will offer to corrupt a
-follower's weapon in that way. Lugonu expects followers to spread unceasing
-chaos in the overworld, and as such does not grant piety to worshippers while
-they remain in the Abyss itself.
+around themselves, and to banish monsters to the Abyss. Eventually they will be able
+to corrupt the ordered world with ground and creatures from the Abyss,
+receive equipment and ammunition from the Abyss,
+and to gate themselves directly into that realm of chaos.
+Lugonu will protect followers from the effects of handling weapons of distortion,
+and will eventually offer to corrupt a follower's weapon with distortion.
+Lugonu expects followers to spread unceasing chaos in the overworld,
+and as such does not grant piety to worshippers while they remain in the Abyss itself.
 %%%%
 Makhleb powers
 

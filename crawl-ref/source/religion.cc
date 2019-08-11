@@ -2867,7 +2867,7 @@ bool player_can_join_god(god_type which_god)
     if (is_good_god(which_god) && you.undead_or_demonic())
         return false;
     
-    if (which_god == GOD_BEOGH))
+    if (which_god == GOD_BEOGH)
         switch(you.species)
         {
         case SP_HILL_ORC:

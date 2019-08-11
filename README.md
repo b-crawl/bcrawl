@@ -107,6 +107,7 @@ Pull requests for new content are welcome.
   - v1.12: Barachim hop target radius is reduced to 1.
   - v1.12.1: Felids have adjusted aptitudes, including (-1 -> +1) Spellcasting.
   - v1.12.3: Vine Stalker is reworked, evolving into a Mana Stalker, Twilight Stalker, or Jungle Stalker at level 8. Dusk Walker is merged into Twilight Stalker.
+  - v1.13.4: Kobolds have some better aptitudes, better stat gain, and the Talons 1 mutation.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -186,6 +187,8 @@ Pull requests for new content are welcome.
   - v1.13.1: Nemelex card changes: Pain casts Torment instead of summoning a Flayed Ghost, and Clouds creates a cloud under each enemy instead of clouds around enemies. (by sdynet)
   - v1.13.3: Trog no longer gifts ammo.
   - v1.13.3: Lugonu gives armour and ammo gifts.
+  - v1.13.4: Lugonu's Banish ability costs less (3-4 -> 2-3) piety.
+  - v1.13.4: Ogres and Trolls can worship Beogh, but can only convert at an altar.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

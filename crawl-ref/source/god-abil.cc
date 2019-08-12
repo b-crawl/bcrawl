@@ -3919,7 +3919,7 @@ int gozag_potion_price()
     if (!you.attribute[ATTR_GOZAG_FIRST_POTION])
         return 0;
 
-    int price = 300 + (300 * you.elapsed_time) / 400000
+    int price = 200 + (300 * you.elapsed_time) / 400000
     return price;
 }
 
@@ -4076,7 +4076,7 @@ static int _gozag_max_shops()
 int gozag_price_for_shop(bool max)
 {
     // This value probably needs tweaking.
-    const int max_base = 800 + (800 * you.elapsed_time) / 400000;
+    const int max_base = 600 + (800 * you.elapsed_time) / 400000;
     const int price = max ? max_base : random_range(max_base/2, max_base);
     return price;
 }

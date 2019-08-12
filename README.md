@@ -42,6 +42,7 @@ Pull requests for new content are welcome.
   - v1.9: Hell branches are 2 levels deep and can't be left without their rune.
   - v1.11.5: Orb Guardians can spawn on any level of Zot.
   - v1.13: Each time you enter the Abyss increases the depth of your next entry.
+  - v1.13.4: The Lair entrance is on D:7-9 instead of D:7-10.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -107,6 +108,8 @@ Pull requests for new content are welcome.
   - v1.12: Barachim hop target radius is reduced to 1.
   - v1.12.1: Felids have adjusted aptitudes, including (-1 -> +1) Spellcasting.
   - v1.12.3: Vine Stalker is reworked, evolving into a Mana Stalker, Twilight Stalker, or Jungle Stalker at level 8. Dusk Walker is merged into Twilight Stalker.
+  - v1.13.4: Kobolds have some better aptitudes, better stat gain, and the Talons 1 mutation.
+  - v1.13.4: Formicids have a +0 bows aptitude.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -186,6 +189,10 @@ Pull requests for new content are welcome.
   - v1.13.1: Nemelex card changes: Pain casts Torment instead of summoning a Flayed Ghost, and Clouds creates a cloud under each enemy instead of clouds around enemies. (by sdynet)
   - v1.13.3: Trog no longer gifts ammo.
   - v1.13.3: Lugonu gives armour and ammo gifts.
+  - v1.13.4: Lugonu's Banish ability costs less (3-4 -> 2-3) piety.
+  - v1.13.4: Ogres and Trolls can worship Beogh, but can only convert at an altar.
+  - v1.13.4: TSO gives ammo gifts.
+  - v1.13.4: Gozag shop costs don't increase with number. Instead, shop and potion costs increase with time taken.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -237,6 +244,7 @@ Pull requests for new content are welcome.
   - v1.12.3: The Majin-Bo is reworked, providing a huge stat bonus instead of a spell enhancement level.
   - v1.12.3: Spellbinder miscasts are no longer blamed on the player, so they won't anger allies.
   - v1.13.2: The Sword of Power has an enchantment level of (your strength - 10).
+  - v1.13.4: The Fencer's Gloves give more (+3 -> +6) dexterity.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

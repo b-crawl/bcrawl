@@ -104,6 +104,8 @@ const vector<god_power> god_powers[NUM_GODS] =
     { { 1, "You and your allies can gain power from killing the unholy and evil.",
            "You and your allies can no longer gain power from killing the unholy and evil." },
       { 2, ABIL_TSO_DIVINE_SHIELD, "call upon the Shining One for a divine shield" },
+      { 3, "The Shining One will gift you ammunition as your piety grows.",
+           "The Shining One will no longer gift you ammunition." },
       { 4, ABIL_TSO_CLEANSING_FLAME, "channel blasts of cleansing flame", },
       { 5, ABIL_TSO_SUMMON_DIVINE_WARRIOR, "summon a divine warrior" },
       { 7, ABIL_TSO_BLESS_WEAPON,
@@ -921,11 +923,11 @@ int yred_random_servants(unsigned int threshold, bool force_hostile)
     return created;
 }
 
-static bool _need_missile_gift()
+static bool _need_missile_gift(int min_skill)
 {
     skill_type sk = best_skill(SK_SLINGS, SK_THROWING);
-    if (you.skills[sk] == 0)
-        sk = SK_THROWING;
+    if (you.skills[sk] < min_skill)
+        return false;
     return x_chance_in_y(you.skills[sk], 12);
 }
 
@@ -1143,7 +1145,7 @@ static bool _give_trog_oka_gift(bool forced)
                 && random2(you.piety) > 120
                 && one_chance_in(4)))
             gift_type = random_choose(OBJ_WEAPONS, OBJ_ARMOUR);
-        else if (_need_missile_gift())
+        else if (_need_missile_gift(3))
             if((you.piety >= piety_breakpoint(2) && random2(you.piety) > 70 && one_chance_in(8))
                     || forced)
                 gift_type = OBJ_MISSILES;
@@ -1154,6 +1156,12 @@ static bool _give_trog_oka_gift(bool forced)
                 && random2(you.piety) > 90
                 && one_chance_in(2)))
             gift_type = random_choose(OBJ_ARMOUR, OBJ_MISSILES);
+        break;
+    case GOD_SHINING_ONE:
+        if (_need_missile_gift(3))
+            if((you.piety >= piety_breakpoint(2) && random2(you.piety) > 70 && one_chance_in(8))
+                    || forced)
+                gift_type = OBJ_MISSILES;
         break;
     default: break;
     }
@@ -1805,6 +1813,7 @@ bool do_god_gift(bool forced)
         case GOD_OKAWARU:
         case GOD_TROG:
         case GOD_LUGONU:
+        case GOD_SHINING_ONE:
             success = _give_trog_oka_gift(forced);
             break;
 
@@ -2867,8 +2876,15 @@ bool player_can_join_god(god_type which_god)
     if (is_good_god(which_god) && you.undead_or_demonic())
         return false;
     
-    if (which_god == GOD_BEOGH && !species_is_orcish(you.species))
-        return false;
+    if (which_god == GOD_BEOGH)
+        switch(you.species)
+        {
+        case SP_HILL_ORC:
+        case SP_OGRE:
+        case SP_TROLL:
+            break;
+        default: return false;
+        }
     
     // Fedhas hates undead, but will accept demonspawn.
     if (which_god == GOD_FEDHAS && you.holiness() & MH_UNDEAD)

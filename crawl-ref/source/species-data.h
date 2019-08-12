@@ -70,7 +70,7 @@ static const map<species_type, species_def> species_data =
     {},
     { JOB_FIGHTER, JOB_HUNTER, JOB_WARPER, JOB_ARCANE_MARKSMAN,
     JOB_ARCHAEOLOGIST },
-    { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS, SK_LONG_BLADES, SK_STAVES,
+    { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS,
       SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
 } },
 
@@ -505,12 +505,13 @@ static const map<species_type, species_def> species_data =
     MONS_KOBOLD,
     HT_LAND, US_ALIVE, SIZE_SMALL,
     5, 9, 10, // 24
-    { STAT_STR, STAT_INT, STAT_DEX }, 5,
-    { { MUT_CARNIVOROUS, 1, 1 }, { MUT_MUTATION_RESISTANCE, 1, 1 } },
+    { STAT_STR, STAT_INT, STAT_DEX }, 4,
+    { { MUT_CARNIVOROUS, 1, 1 }, { MUT_MUTATION_RESISTANCE, 1, 1 },
+      { MUT_TALONS, 1, 1 }, },
     {},
     {},
-    { JOB_HUNTER, JOB_REAVER, JOB_WARPER, JOB_ARCANE_MARKSMAN, JOB_ASSASSIN },
-    { SK_SHORT_BLADES, SK_LONG_BLADES, SK_SLINGS, SK_CROSSBOWS },
+    { JOB_FIGHTER, JOB_HUNTER, JOB_BERSERKER, JOB_REAVER, JOB_WARPER, JOB_ARCANE_MARKSMAN, JOB_ASSASSIN, JOB_EARTH_ELEMENTALIST },
+    { SK_SHORT_BLADES, SK_THROWING, SK_SLINGS, SK_CROSSBOWS },
 } },
 
 { SP_MERFOLK, {
@@ -527,8 +528,7 @@ static const map<species_type, species_def> species_data =
       "You are very nimble and swift while swimming.",
       "You are very stealthy in the water. (Stealth+)" },
     { "change form in water", "swift swim", "stealthy swim" },
-    { JOB_FIGHTER, JOB_GLADIATOR, JOB_MONK, JOB_HUNTER, JOB_BERSERKER, JOB_ABYSSAL_KNIGHT, JOB_SKALD, JOB_TRANSMUTER, JOB_SUMMONER,
-      JOB_ICE_ELEMENTALIST },
+    { JOB_FIGHTER, JOB_GLADIATOR, JOB_MONK, JOB_HUNTER, JOB_BERSERKER, JOB_ABYSSAL_KNIGHT, JOB_SKALD, JOB_TRANSMUTER, JOB_SUMMONER, JOB_ICE_ELEMENTALIST },
     { SK_POLEARMS, SK_LONG_BLADES },
 } },
 

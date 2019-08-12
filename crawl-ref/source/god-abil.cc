@@ -3919,7 +3919,8 @@ int gozag_potion_price()
     if (!you.attribute[ATTR_GOZAG_FIRST_POTION])
         return 0;
 
-    return GOZAG_POTION_PETITION_AMOUNT;
+    int price = 200 + (300 * you.elapsed_time) / 400000;
+    return price;
 }
 
 bool gozag_setup_potion_petition(bool quiet)
@@ -3942,6 +3943,7 @@ bool gozag_potion_petition()
 {
     CrawlVector *pots[GOZAG_MAX_POTIONS];
     int prices[GOZAG_MAX_POTIONS];
+    int max_price = gozag_potion_price();
 
     item_def dummy;
     dummy.base_type = OBJ_POTIONS;
@@ -3955,7 +3957,7 @@ bool gozag_potion_petition()
             for (int i = 0; i < GOZAG_MAX_POTIONS; i++)
             {
                 prices[i] = 0;
-                int multiplier = random_range(20, 30); // arbitrary
+                int multiplier = random_range(20, 30) * max_price / 300; // arbitrary
 
                 if (!you.attribute[ATTR_GOZAG_FIRST_POTION])
                     multiplier = 0;
@@ -3983,7 +3985,7 @@ bool gozag_potion_petition()
                 key = make_stringf(GOZAG_PRICE_KEY, i);
                 you.props[key].get_int() = prices[i];
 
-                if (prices[i] <= gozag_potion_price())
+                if (prices[i] <= max_price)
                     affordable_potions = true;
             }
         }
@@ -4074,13 +4076,8 @@ static int _gozag_max_shops()
 int gozag_price_for_shop(bool max)
 {
     // This value probably needs tweaking.
-    const int max_base = 800;
-    const int base = max ? max_base : random_range(max_base/2, max_base);
-    const int price = base
-                      * (GOZAG_SHOP_BASE_MULTIPLIER
-                         + GOZAG_SHOP_MOD_MULTIPLIER
-                           * you.attribute[ATTR_GOZAG_SHOPS])
-                      / GOZAG_SHOP_BASE_MULTIPLIER;
+    const int max_base = 600 + (800 * you.elapsed_time) / 400000;
+    const int price = max ? max_base : random_range(max_base/2, max_base);
     return price;
 }
 

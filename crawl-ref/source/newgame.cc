@@ -1199,7 +1199,7 @@ static species_group species_groups[] =
             SP_TROLL,
             SP_GHOUL,
             SP_SKELETON,
-            SP_KOBOLD,
+            SP_CENTAUR,
             SP_GNOLL,
             SP_FAIRY,
         }
@@ -1213,7 +1213,7 @@ static species_group species_groups[] =
             SP_BASE_DRACONIAN,
             SP_DEMONSPAWN,
             SP_VINE_STALKER,
-            SP_CENTAUR,
+            SP_KOBOLD,
             SP_SPRIGGAN,
             SP_AVARIEL,
             SP_OGRE,

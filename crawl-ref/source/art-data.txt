@@ -781,7 +781,7 @@ BOOL:    fog
 
 NAME:    gauntlets of War
 OBJ:     OBJ_ARMOUR/ARM_GLOVES
-PLUS:    +0
+PLUS:    +1
 COLOUR:  BROWN
 TILE:    urand_war
 TILE_EQ: glove_black
@@ -866,8 +866,8 @@ PLUS:    +0
 COLOUR:  WHITE
 TILE:    urand_fencer
 TILE_EQ: glove_white
-DEX:     3
-VALUE:   400
+DEX:     6
+VALUE:   450
 
 NAME:     cloak of Starlight
 OBJ:      OBJ_ARMOUR/ARM_CLOAK
@@ -1337,6 +1337,7 @@ TILE:     urand_fists_of_thunder
 TILE_EQ:  glove_white
 SLAY:     2
 BOOL:     elec
+VALUE:    350
 
 NAME:     serpentine sling
 OBJ:      OBJ_WEAPONS/WPN_HUNTING_SLING
@@ -1347,6 +1348,7 @@ PLUS:     +4
 BASE_DAM: +5
 BASE_DELAY: +3
 BRAND:    SPWPN_PETRIFY
+VALUE:    600
 
 NAME:     Scorpio
 OBJ:      OBJ_WEAPONS/WPN_HAND_CROSSBOW
@@ -1369,6 +1371,7 @@ BASE_DELAY: -6
 BRAND:    SPWPN_SPEED
 BOOL:     curse
 MAGIC:    1
+VALUE:    300
 
 # This entry must always be last.
 ENUM:   DUMMY2

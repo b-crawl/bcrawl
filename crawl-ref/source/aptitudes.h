@@ -166,17 +166,17 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_HILL_ORC,        SK_EVOCATIONS,      0),
 
     // SP_KOBOLD
-    APT(SP_KOBOLD,          SK_FIGHTING,       -1),
+    APT(SP_KOBOLD,          SK_FIGHTING,        1),
     APT(SP_KOBOLD,          SK_SHORT_BLADES,    3),
     APT(SP_KOBOLD,          SK_LONG_BLADES,     0),
     APT(SP_KOBOLD,          SK_AXES,           -1),
     APT(SP_KOBOLD,          SK_MACES_FLAILS,   -1),
-    APT(SP_KOBOLD,          SK_POLEARMS,       -2),
+    APT(SP_KOBOLD,          SK_POLEARMS,        0),
     APT(SP_KOBOLD,          SK_STAVES,         -2),
     APT(SP_KOBOLD,          SK_SLINGS,          2),
     APT(SP_KOBOLD,          SK_BOWS,            0),
     APT(SP_KOBOLD,          SK_CROSSBOWS,       2),
-    APT(SP_KOBOLD,          SK_THROWING,        2),
+    APT(SP_KOBOLD,          SK_THROWING,        3),
     APT(SP_KOBOLD,          SK_ARMOUR,          0),
     APT(SP_KOBOLD,          SK_DODGING,         2),
     APT(SP_KOBOLD,          SK_STEALTH,         4),
@@ -187,7 +187,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
 #if TAG_MAJOR_VERSION == 34
     APT(SP_KOBOLD,          SK_TRAPS,         UNUSABLE_SKILL),
 #endif
-    APT(SP_KOBOLD,          SK_UNARMED_COMBAT,  0),
+    APT(SP_KOBOLD,          SK_UNARMED_COMBAT, -1),
     APT(SP_KOBOLD,          SK_SPELLCASTING,    0),
     APT(SP_KOBOLD,          SK_CONJURATIONS,   -1),
     APT(SP_KOBOLD,          SK_HEXES,          -1),
@@ -1460,7 +1460,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_FORMICID,        SK_POLEARMS,        0),
     APT(SP_FORMICID,        SK_STAVES,          0),
     APT(SP_FORMICID,        SK_SLINGS,          1),
-    APT(SP_FORMICID,        SK_BOWS,           -2),
+    APT(SP_FORMICID,        SK_BOWS,            0),
     APT(SP_FORMICID,        SK_CROSSBOWS,       0),
     APT(SP_FORMICID,        SK_THROWING,        0),
     APT(SP_FORMICID,        SK_ARMOUR,          1),

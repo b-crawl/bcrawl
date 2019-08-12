@@ -123,14 +123,6 @@ constantly prove themselves in combat, and may channel Okawaru's might to
 enhance their prowess. Okawaru pays little heed to easy victories, but will
 reward worshippers for heroic feats against mighty foes.
 %%%%
-Pakellas
-
-Pakellas the Inventive believes in the supremacy of devices, magical or
-otherwise, over spells and other forms of magic. Followers, although cut off
-from ambient magical power, are provided with magical energy to empower their
-devices so long as they use them to assert Pakellas' supremacy. Pakellas will
-grant devout worshippers access to increasingly powerful devices.
-%%%%
 Qazlal
 
 Qazlal Stormbringer is a violent god of tempests, who delights in unleashing
@@ -282,7 +274,8 @@ distracted by imaginings of great wealth. Stalwarts can purchase immediate help
 in the form of potions, and may also pay to attract shopkeepers into the
 dungeon. Particularly well-off adherents may bribe the inhabitants of a branch
 of the dungeon to turn a blind eye to their presence, or even to change their
-allegiance.
+allegiance. But remember that time is money; Gozag's prices may increase over time
+due to inflation.
 %%%%
 Hepliaklqana powers
 
@@ -326,14 +319,14 @@ the Necronomicon, or to have their weapon imbued with pain.
 Lugonu powers
 
 Followers of Lugonu gain powers to depart the Abyss at will, to bend space
-around themselves, and to banish monsters to the Abyss. Later they will be able
-to corrupt the ordered world, opening a gate for creatures of the Abyss to pass
-through, and to gate themselves directly into this realm of chaos. Lugonu will
-protect followers from the normally harmful effects of weapons imbued with the
-distorting energies of the Abyss, and eventually will offer to corrupt a
-follower's weapon in that way. Lugonu expects followers to spread unceasing
-chaos in the overworld, and as such does not grant piety to worshippers while
-they remain in the Abyss itself.
+around themselves, and to banish monsters to the Abyss. Eventually they will be able
+to corrupt the ordered world with ground and creatures from the Abyss,
+receive equipment and ammunition from the Abyss,
+and gate themselves directly into that realm of chaos.
+Lugonu will protect followers from the effects of handling weapons of distortion,
+and will eventually offer to corrupt a follower's weapon with distortion.
+Lugonu expects followers to spread unceasing chaos in the overworld,
+and as such does not grant piety to worshippers while they remain in the Abyss itself.
 %%%%
 Makhleb powers
 
@@ -356,17 +349,6 @@ Okawaru powers
 Followers of Okawaru will gain the ability to temporarily increase their skills
 in combat, and, much later, to deal much faster blows. Okawaru will eventually
 gift followers with ammunition, weapons and armour.
-%%%%
-Pakellas powers
-
-Followers of Pakellas do not regenerate their magic power naturally, and are
-forbidden from using external means to do so; instead, they are granted
-magical energy on killing beings. They may use increasing amounts of magical
-energy to strengthen their devices, temporarily granting them additional
-power, and can also use their magical energy to recharge their devices.
-Sufficiently devout followers will receive new devices from Pakellas, and may
-eventually petition Pakellas to personally charge one of their devices beyond
-its normal limits.
 %%%%
 Qazlal powers
 
@@ -417,9 +399,7 @@ Trog powers
 Trog offers various powers to help followers in battle. Followers will gain the
 ability to go berserk at will, and to rapidly heal their wounds while
 increasing resistance to hostile enchantments. Later, followers may call in
-powerful raging allies. Eventually, Trog will gift followers with weapons
-focused on damage.
-%%%%
+powerful raging allies. Eventually, Trog will gift followers with weapons.
 %%%%
 Uskayaw powers
 
@@ -580,13 +560,6 @@ Okawaru wrath
 Okawaru's most vicious warriors are sent against rebellious servants. Novices
 find themselves swarmed by packs of ogres and gnolls, while champions are
 surrounded by titans and elvish blademasters.
-%%%%
-Pakellas wrath
-
-Those that offend Pakellas will find themselves completely unable to make use
-of their devices for the duration of Pakellas's displeasure. Those who abandon
-Pakellas altogether will also continue to be unable to regenerate their magical
-power so long as Pakellas' attention remains on them.
 %%%%
 Qazlal wrath
 

@@ -138,15 +138,15 @@ char_choice_restriction weapon_restriction(weapon_type wpn,
         return CC_BANNED;
     }
 
+    if (species_recommends_weapon(ng.species, wpn))
+        return CC_UNRESTRICTED;
+
     // Javelins are always good, tomahawks not so much.
     if (wpn == WPN_THROWN)
     {
         return species_size(ng.species) >= SIZE_MEDIUM ? CC_UNRESTRICTED
                                                        : CC_RESTRICTED;
     }
-
-    if (species_recommends_weapon(ng.species, wpn))
-        return CC_UNRESTRICTED;
 
     return CC_RESTRICTED;
 }

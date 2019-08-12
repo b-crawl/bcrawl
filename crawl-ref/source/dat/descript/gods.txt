@@ -274,7 +274,8 @@ distracted by imaginings of great wealth. Stalwarts can purchase immediate help
 in the form of potions, and may also pay to attract shopkeepers into the
 dungeon. Particularly well-off adherents may bribe the inhabitants of a branch
 of the dungeon to turn a blind eye to their presence, or even to change their
-allegiance.
+allegiance. But remember that time is money; Gozag's prices may increase over time
+due to inflation.
 %%%%
 Hepliaklqana powers
 

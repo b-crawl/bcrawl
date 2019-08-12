@@ -191,6 +191,7 @@ Pull requests for new content are welcome.
   - v1.13.4: Lugonu's Banish ability costs less (3-4 -> 2-3) piety.
   - v1.13.4: Ogres and Trolls can worship Beogh, but can only convert at an altar.
   - v1.13.4: TSO gives ammo gifts.
+  - v1.13.4: Gozag shop costs don't increase with number. Instead, shop and potion costs increase with time taken.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

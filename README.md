@@ -108,6 +108,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Felids have adjusted aptitudes, including (-1 -> +1) Spellcasting.
   - v1.12.3: Vine Stalker is reworked, evolving into a Mana Stalker, Twilight Stalker, or Jungle Stalker at level 8. Dusk Walker is merged into Twilight Stalker.
   - v1.13.4: Kobolds have some better aptitudes, better stat gain, and the Talons 1 mutation.
+  - v1.13.4: Formicids have a +0 bows aptitude.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

@@ -3919,7 +3919,7 @@ int gozag_potion_price()
     if (!you.attribute[ATTR_GOZAG_FIRST_POTION])
         return 0;
 
-    int price = 200 + (300 * you.elapsed_time) / 400000
+    int price = 200 + (300 * you.elapsed_time) / 400000;
     return price;
 }
 

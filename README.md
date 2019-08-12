@@ -42,6 +42,7 @@ Pull requests for new content are welcome.
   - v1.9: Hell branches are 2 levels deep and can't be left without their rune.
   - v1.11.5: Orb Guardians can spawn on any level of Zot.
   - v1.13: Each time you enter the Abyss increases the depth of your next entry.
+  - v1.13.4: The Lair entrance is on D:7-9 instead of D:7-10.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)

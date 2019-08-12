@@ -54,7 +54,7 @@ const Branch branches[NUM_BRANCHES] =
       'K', {}, BRANCH_NOISE_NORMAL },
 #endif
 
-    { BRANCH_LAIR, BRANCH_DUNGEON, 7, 10, 6, 8,
+    { BRANCH_LAIR, BRANCH_DUNGEON, 7, 9, 6, 8,
       BFLAG_NONE,
       DNGN_ENTER_LAIR, DNGN_EXIT_LAIR, NUM_FEATURES,
       "Lair", "the Lair of Beasts", "Lair",

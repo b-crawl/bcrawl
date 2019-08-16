@@ -220,6 +220,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Boots of stealth and rings of stealth give 2x the stealth bonus.
   - v1.12.1: Great maces have a different brand set, including the speed brand.
   - v1.13.2: Great swords have higher (15 -> 16) base damage.
+  - v1.13.5: Changed wand max charges for acid (15 -> 12) and polymorph (15 -> 20).
 
 #### Removed Items
   - Amulet of Harm
@@ -268,6 +269,7 @@ Pull requests for new content are welcome.
   - v1.12: Juggernauts are tougher, hit faster, and knock their foes back.
   - v1.12.1: Golden eyes sometimes teleport away.
   - v1.13.5: Player ghosts have higher (50 -> 100) max damage.
+  - v1.13.5: Monsters can use iceblast wands, but will only use wands if 1000 < HD*charges^2 < 5000.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

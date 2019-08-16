@@ -1763,11 +1763,11 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_JORGRUN,
       {
-       { SPELL_LRD, 16, MON_SPELL_WIZARD },
-       { SPELL_GRASPING_ROOTS, 16, MON_SPELL_WIZARD },
+       { SPELL_LRD, 20, MON_SPELL_WIZARD },
+       { SPELL_GRASPING_ROOTS, 20, MON_SPELL_WIZARD },
        { SPELL_IRON_SHOT, 16, MON_SPELL_WIZARD },
-       { SPELL_PETRIFY, 16, MON_SPELL_WIZARD },
-       { SPELL_DIG, 16, MON_SPELL_WIZARD },
+       { SPELL_PETRIFY, 14, MON_SPELL_WIZARD },
+       { SPELL_AWAKEN_EARTH, 25, MON_SPELL_WIZARD },
       }
     },
 
@@ -2000,11 +2000,9 @@ static const mon_spellbook mspell_list[] =
     // ('R') Spiritual beings.
     {  MST_AZRAEL,
       {
-       { SPELL_BOLT_OF_FIRE, 13, MON_SPELL_MAGICAL },
-       { SPELL_STICKY_FLAME_RANGE, 13, MON_SPELL_MAGICAL },
-       { SPELL_FIREBALL, 13, MON_SPELL_MAGICAL },
-       { SPELL_HURL_DAMNATION, 13, MON_SPELL_MAGICAL },
-       { SPELL_CALL_DOWN_DAMNATION, 13, MON_SPELL_MAGICAL | MON_SPELL_EMERGENCY },
+       { SPELL_BOLT_OF_FIRE, 20, MON_SPELL_MAGICAL },
+       { SPELL_FIREBALL, 20, MON_SPELL_MAGICAL },
+       { SPELL_HURL_DAMNATION, 20, MON_SPELL_MAGICAL },
       }
     },
 

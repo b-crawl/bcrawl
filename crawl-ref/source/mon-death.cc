@@ -706,7 +706,17 @@ static bool _is_pet_kill(killer_type killer, int i)
 
     const monster* m = &menv[i];
     if (m->friendly()) // This includes enslaved monsters.
+    {
+        if (you.religion == GOD_FEDHAS)
+            switch(m->type)
+            {
+            case MONS_OKLOB_PLANT:
+            case MONS_WANDERING_MUSHROOM:
+                return false;
+            default: break;
+            }
         return true;
+    }
 
     // Check if the monster was confused by you or a friendly, which
     // makes casualties to this monster collateral kills.

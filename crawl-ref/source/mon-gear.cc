@@ -1696,6 +1696,11 @@ static void _give_shield(monster* mon, int level)
                       level);
         if (shield && !is_artefact(*shield)) // ineligible...
         {
+            if (coinflip())
+            {
+                set_item_ego_type(*shield, OBJ_ARMOUR, SPARM_REFLECTION);
+                set_equip_desc(*shield, ISFLAG_GLOWING);
+            }
             shield->props["item_tile_name"] = "buckler_spriggan";
             shield->props["worn_tile_name"] = "buckler_spriggan";
             bind_item_tile(*shield);

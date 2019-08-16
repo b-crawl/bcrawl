@@ -677,7 +677,10 @@ static like_response fedhas_kill(const char* desc)
         desc, false,
         0, 0, 0, nullptr, [] (int &piety, int &denom, const monster* victim)
         {
-            piety = get_fuzzied_monster_difficulty(*victim);
+            if(victim->is_insubstantial())
+                piety = 0;
+            else
+                piety = get_fuzzied_monster_difficulty(*victim);
             dprf("fuzzied monster difficulty: %4.2f", piety * 0.01);
             denom = 550;
 

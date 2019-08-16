@@ -86,11 +86,6 @@ An iron altar of Okawaru
 An altar of iron and steel dedicated to the Warmaster Okawaru. Its edges are
 surprisingly sharp.
 %%%%
-An oddly glowing altar of Pakellas
-
-An altar to Pakellas the Inventive, adorned with strange half-completed devices
-and tools, and glowing with an odd, persistent light.
-%%%%
 A stormy altar of Qazlal
 
 An altar dedicated to Qazlal Stormbringer, surrounded by fierce winds,
@@ -101,10 +96,11 @@ A sacrificial altar of Ru
 An altar to Ru the Awakened in the shape of a pair of scales, with a heart in
 one scale and a pictogram representing power and enlightenment in the other.
 %%%%
-A deep blue altar of Sif Muna
+A shimmering blue altar of Sif Muna
 
-An altar of the deepest blue, covered in intricate patterns and writings in
-long forgotten scripts, devoted to Sif Muna the Loreminder.
+An altar to Sif Muna the Loreminder, covered in intricate patterns and writings
+in long forgotten scripts. Atop a deep blue pedestal hovers a shimmering
+condensation of pure magic.
 %%%%
 A bloodstained altar of Trog
 

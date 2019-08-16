@@ -283,3 +283,4 @@ Pull requests for new content are welcome.
   - v1.12: Agnes is much harder to hit.
   - v1.12.1: The royal jelly is giant. (Giant creatures can't be netted.)
   - v1.13.3: Jory and Frederick have reworked spell sets.
+  - v1.13.5: Jorgrun has Awaken Earth instead of Dig.

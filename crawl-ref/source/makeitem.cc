@@ -539,9 +539,8 @@ static special_missile_type _determine_missile_brand(const item_def& item,
             break;
         }
 
-        rc = random_choose_weighted(30, SPMSL_CONFUSION,
-                                    15, SPMSL_PARALYSIS,
-                                    20, SPMSL_FRENZY,
+        rc = random_choose_weighted(50, SPMSL_CONFUSION,
+                                    25, SPMSL_FRENZY,
                                     nw, SPMSL_POISONED);
         break;
     case MI_JAVELIN:
@@ -552,7 +551,7 @@ static special_missile_type _determine_missile_brand(const item_def& item,
         break;
     case MI_TOMAHAWK:
         rc = random_choose_weighted(45, SPMSL_POISONED,
-                                    15, SPMSL_DISPERSAL,
+                                    10, SPMSL_DISPERSAL,
                                     15, SPMSL_EXPLODING,
                                     nw, SPMSL_NORMAL);
         break;

@@ -221,6 +221,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Great maces have a different brand set, including the speed brand.
   - v1.13.2: Great swords have higher (15 -> 16) base damage.
   - v1.13.5: Changed wand max charges for acid (15 -> 12) and polymorph (15 -> 20).
+  - v1.13.5: Needles of paralysis are replaced by more needles of confusion and frenzy.
 
 #### Removed Items
   - Amulet of Harm

@@ -786,23 +786,17 @@ bool monster::can_use_missile(const item_def &item) const
  * Does this monster have any interest in using the given wand? (Will they
  * pick it up?)
  *
- * Based purely on monster HD & wand type for now. Higher-HD monsters are less
- * inclined to bother with wands, especially the weaker ones.
- *
  * @param item      The wand in question.
  * @return          Whether the monster will bother picking up the wand.
  */
 bool monster::likes_wand(const item_def &item) const
 {
     ASSERT(item.base_type == OBJ_WANDS);
-    // kind of a hack
-    // assumptions:
-    // bad wands are value 48, so won't be used past hd 4
-    // mediocre wands are value 24; won't be used past hd 8
-    // good wands are value 15; won't be used past hd 9
-    // best wands are value 9; won't be used past hd 10
-    // better implementations welcome
-    return wand_charge_value(item.sub_type) + get_hit_dice() * 6 <= 72;
+    
+    int charges = wand_charge_value(item.sub_type);
+    int wand_factor = get_hit_dice() * charges*charges;
+    
+    return ((wand_factor > 1000) && (wand_factor < 5000));
 }
 
 void monster::equip_weapon_message(item_def &item)

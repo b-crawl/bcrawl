@@ -267,6 +267,7 @@ Pull requests for new content are welcome.
   - v1.12: Reapers can seal doors like Vault Wardens do.
   - v1.12: Juggernauts are tougher, hit faster, and knock their foes back.
   - v1.12.1: Golden eyes sometimes teleport away.
+  - v1.13.5: Player ghosts have higher (50 -> 100) max damage.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

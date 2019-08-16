@@ -160,8 +160,7 @@ DEPTH:  D:2-3
 : place_unique(_G, "Jessica")
 
 NAME:   uniq_jorgrun
-DEPTH:  D:12-, Orc, Elf, !Elf:$, Snake, !Snake:$, Shoals, !Shoals:$
-DEPTH:  Spider, !Spider:$, Swamp, !Swamp:$
+DEPTH:  D:11-, Orc, Elf, !Elf:$, Snake, Shoals, Spider
 : place_unique(_G, "Jorgrun")
 
 NAME:   uniq_joseph

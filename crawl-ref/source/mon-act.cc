@@ -1063,9 +1063,7 @@ static bool _setup_wand_beam(bolt& beem, monster& mons, const item_def& wand)
     if (item_type_removed(wand.base_type, wand.sub_type))
         return false;
 
-    //XXX: implement these for monsters... (:
-    if (wand.sub_type == WAND_ICEBLAST
-        || wand.sub_type == WAND_RANDOM_EFFECTS
+    if (wand.sub_type == WAND_RANDOM_EFFECTS
         || wand.sub_type == WAND_CLOUDS
         || wand.sub_type == WAND_SCATTERSHOT)
     {

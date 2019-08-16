@@ -17,7 +17,6 @@ note_messages += protects you from harm
 note_messages += You (fall|are sucked) into a shaft
 note_monsters += orb of fire, ancient lich, Sigmund
 
-autoinscribe += dispersal:!f
 autoinscribe += throwing net:!f
 autoinscribe += needle of (frenzy|paralysis|sleeping|confusion):!f
 autoinscribe += ( ration):!d

@@ -1592,14 +1592,18 @@ int wand_charge_value(int type)
     case WAND_SCATTERSHOT:
         return 9;
 
-    case WAND_ICEBLAST:
     case WAND_ACID:
+        return 12;
+
+    case WAND_ICEBLAST:
     case WAND_ENSLAVEMENT:
     case WAND_PARALYSIS:
-    case WAND_POLYMORPH:
     case WAND_RANDOM_EFFECTS:
     case WAND_DIGGING:
         return 15;
+
+    case WAND_POLYMORPH:
+        return 20;
 
     case WAND_FLAME:
         return 32;

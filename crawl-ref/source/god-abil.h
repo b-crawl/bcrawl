@@ -78,6 +78,8 @@ void elyvilon_purification();
 bool elyvilon_divine_vigour();
 void elyvilon_remove_divine_vigour();
 
+void hep_remove_incarnate();
+
 bool vehumet_supports_spell(spell_type spell);
 
 void sif_do_channel_energy(int pow);

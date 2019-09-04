@@ -16,9 +16,7 @@ enum duration_type
     DUR_POISONING,
 
     DUR_CONFUSING_TOUCH,
-#if TAG_MAJOR_VERSION == 34
-    DUR_SURE_BLADE,
-#endif
+    DUR_INCARNATE,
     DUR_CORONA,
     DUR_DEATHS_DOOR,
     DUR_FIRE_SHIELD,

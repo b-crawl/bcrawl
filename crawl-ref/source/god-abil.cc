@@ -1439,6 +1439,13 @@ void elyvilon_remove_divine_vigour()
     calc_mp();
 }
 
+void hep_remove_incarnate()
+{
+    mprf(MSGCH_DURATION, "Your connection to your ancestor fades.");
+    you.duration[DUR_INCARNATE] = 0;
+    calc_hp();
+}
+
 bool vehumet_supports_spell(spell_type spell)
 {
     if (spell_typematch(spell, SPTYP_CONJURATION))

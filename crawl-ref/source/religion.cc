@@ -1679,7 +1679,7 @@ static weapon_type _hepliaklqana_weapon_type(monster_type mc, int HD)
     case MONS_ANCESTOR_HEXER:
         return HD < 16 ? WPN_DAGGER : WPN_QUICK_BLADE;
     case MONS_ANCESTOR_KNIGHT:
-        return HD < 10 ? WPN_FLAIL : WPN_BROAD_AXE;
+        return HD < 10 ? WPN_WAR_AXE : WPN_BROAD_AXE;
     case MONS_ANCESTOR_BATTLEMAGE:
         return HD < 13 ? WPN_QUARTERSTAFF : WPN_LAJATANG;
     default:
@@ -1702,8 +1702,7 @@ static brand_type _hepliaklqana_weapon_brand(monster_type mc, int HD)
             return HD < 16 ?   SPWPN_DRAINING :
                                SPWPN_ANTIMAGIC;
         case MONS_ANCESTOR_KNIGHT:
-            return HD < 10 ?   SPWPN_NORMAL :
-                   HD < 16 ?   SPWPN_FLAMING :
+            return HD < 16 ?   SPWPN_FLAMING :
                                SPWPN_SPEED;
         case MONS_ANCESTOR_BATTLEMAGE:
             return HD < 13 ?   SPWPN_NORMAL :

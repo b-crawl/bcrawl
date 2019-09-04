@@ -275,6 +275,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Golden eyes sometimes teleport away.
   - v1.13.5: Player ghosts have higher (50 -> 100) max damage.
   - v1.13.5: Monsters can use iceblast wands, but will only use wands if 1000 < HD*charges^2 < 5000.
+  - v1.14: Bullfrogs and black bears are slightly stronger.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

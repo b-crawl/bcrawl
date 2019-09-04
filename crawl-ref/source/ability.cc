@@ -1622,7 +1622,7 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
         return true;
 
         // only available while your ancestor is alive.
-    case ABIL_HEPLIAKLQANA_IDEALISE:
+    case ABIL_HEPLIAKLQANA_INCARNATE:
     case ABIL_HEPLIAKLQANA_RECALL:
     case ABIL_HEPLIAKLQANA_TRANSFERENCE:
         if (hepliaklqana_ancestor() == MID_NOBODY)

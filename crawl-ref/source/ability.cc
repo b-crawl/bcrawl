@@ -624,8 +624,8 @@ static const ability_def Ability_List[] =
     { ABIL_HEPLIAKLQANA_TRANSFERENCE, "Transference",
         2, 0, 0, 3, {fail_basis::invo, 40, 5, 20},
         abflag::none },
-    { ABIL_HEPLIAKLQANA_IDEALISE, "Idealise",
-        4, 0, 0, 4, {fail_basis::invo, 60, 4, 25},
+    { ABIL_HEPLIAKLQANA_INCARNATE, "Incarnate",
+        4, 0, 0, 8, {fail_basis::invo, 60, 4, 25},
         abflag::none },
 
     { ABIL_HEPLIAKLQANA_TYPE_KNIGHT,       "Ancestor Life: Knight",
@@ -2997,8 +2997,8 @@ static spret _do_ability(const ability_def& abil, bool fail)
     case ABIL_USKAYAW_GRAND_FINALE:
         return uskayaw_grand_finale(fail);
 
-    case ABIL_HEPLIAKLQANA_IDEALISE:
-        return hepliaklqana_idealise(fail);
+    case ABIL_HEPLIAKLQANA_INCARNATE:
+        return hepliaklqana_incarnate();
 
     case ABIL_HEPLIAKLQANA_RECALL:
         fail_check();

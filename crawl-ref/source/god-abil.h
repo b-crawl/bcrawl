@@ -187,7 +187,7 @@ bool uskayaw_line_pass();
 spret uskayaw_grand_finale(bool fail);
 
 bool hepliaklqana_choose_ancestor_type(int ancestor_type);
-spret hepliaklqana_idealise(bool fail);
+spret hepliaklqana_incarnate();
 spret hepliaklqana_transference(bool fail);
 void hepliaklqana_choose_identity();
 

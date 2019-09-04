@@ -2998,7 +2998,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         return uskayaw_grand_finale(fail);
 
     case ABIL_HEPLIAKLQANA_INCARNATE:
-        return hepliaklqana_incarnate();
+        return hepliaklqana_incarnate(fail);
 
     case ABIL_HEPLIAKLQANA_RECALL:
         fail_check();

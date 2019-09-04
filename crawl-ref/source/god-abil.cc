@@ -6690,7 +6690,7 @@ bool hepliaklqana_choose_ancestor_type(int ancestor_choice)
 }
 
 
-spret hepliaklqana_incarnate()
+spret hepliaklqana_incarnate(bool fail)
 {
     const mid_t ancestor_mid = hepliaklqana_ancestor();
     if (ancestor_mid == MID_NOBODY)

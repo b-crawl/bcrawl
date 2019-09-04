@@ -78,8 +78,6 @@ void elyvilon_purification();
 bool elyvilon_divine_vigour();
 void elyvilon_remove_divine_vigour();
 
-void hep_remove_incarnate();
-
 bool vehumet_supports_spell(spell_type spell);
 
 void sif_do_channel_energy(int pow);
@@ -187,7 +185,8 @@ bool uskayaw_line_pass();
 spret uskayaw_grand_finale(bool fail);
 
 bool hepliaklqana_choose_ancestor_type(int ancestor_type);
-spret hepliaklqana_incarnate();
+spret hepliaklqana_incarnate(bool fail);
+void hep_remove_incarnate();
 spret hepliaklqana_transference(bool fail);
 void hepliaklqana_choose_identity();
 

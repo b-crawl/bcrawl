@@ -6711,7 +6711,7 @@ spret hepliaklqana_incarnate()
     simple_god_message("You draw your ancestor's spirit into your body!");
     monster_die(*ancestor, KILL_DISMISSED, NON_MONSTER);
     
-    int dur = 10 + random2avg(you.skill(SK_INVOCATIONS, 6), 2);
+    int dur = 16 + random2avg(you.skill(SK_INVOCATIONS, 5), 2);
     int heal_power = 0;
     int mana_power = 0;
     switch( (monster_type)you.props[HEPLIAKLQANA_ALLY_TYPE_KEY].get_int() )

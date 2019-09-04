@@ -5941,28 +5941,70 @@ int player::skill(skill_type sk_input, int scale, bool real, bool drained, bool 
     else if (ash_has_skill_boost(sk))
             level = ash_skill_boost(sk, scale);
 
-    if (temp && duration[DUR_HEROISM] && sk <= SK_LAST_MUNDANE)
-        level = min(level + 5 * scale, MAX_SKILL_LEVEL * scale);
-        
-    if (temp && duration[DUR_INCARNATE])
-        {
-        int skill_floor = 0;
-        int invo = you.skill(SK_INVOCATIONS, scale);
-        switch( (monster_type)you.props[HEPLIAKLQANA_ALLY_TYPE_KEY].get_int() )
-        {
-        case MONS_ANCESTOR_KNIGHT:
-            switch(sk)
+    if(temp)
+    {
+        if (duration[DUR_HEROISM] && sk <= SK_LAST_MUNDANE)
+            level = min(level + 5 * scale, MAX_SKILL_LEVEL * scale);
+            
+        if (duration[DUR_INCARNATE])
             {
-            case SK_FIGHTING:
-                skill_floor = invo;
+            int skill_floor = 0;
+            int invo = you.skill(SK_INVOCATIONS, scale, false, true, false);
+            switch( (monster_type)you.props[HEPLIAKLQANA_ALLY_TYPE_KEY].get_int() )
+            {
+            case MONS_ANCESTOR:
+                switch(sk)
+                {
+                case SK_FIGHTING:
+                case SK_STEALTH:
+                case SK_DODGING:
+                    skill_floor = invo;
+                    break;
+                default: break;
+                }
                 break;
+            case MONS_ANCESTOR_KNIGHT:
+                switch(sk)
+                {
+                case SK_FIGHTING:
+                case SK_ARMOUR:
+                case SK_SHIELDS:
+                case SK_AXES:
+                    skill_floor = invo;
+                    break;
+                default: break;
+                }
+                break;
+            case MONS_ANCESTOR_BATTLEMAGE:
+                switch(sk)
+                {
+                case SK_CONJURATIONS:
+                case SK_EARTH_MAGIC:
+                case SK_FIRE_MAGIC:
+                case SK_STAVES:
+                    skill_floor = invo;
+                    break;
+                default: break;
+                }
+                break;
+            case MONS_ANCESTOR_HEXER:
+                switch(sk)
+                {
+                case SK_SPELLCASTING:
+                case SK_HEXES:
+                case SK_CHARMS:
+                case SK_EVOCATIONS:
+                    skill_floor = invo;
+                    break;
+                default: break;
+                }
+                break;
+            default: break;
             }
-            break;
-        default: break;
-        }
-        skill_floor = min(skill_floor, MAX_SKILL_LEVEL * scale);
-        level = max(level, skill_floor);
-        }
+            skill_floor = min(skill_floor, MAX_SKILL_LEVEL * scale);
+            level = max(level, skill_floor);
+            }
+    }
     
     return level;
 }

@@ -6692,6 +6692,12 @@ bool hepliaklqana_choose_ancestor_type(int ancestor_choice)
 
 spret hepliaklqana_incarnate(bool fail)
 {
+    if (you.duration[DUR_INCARNATE])
+    {
+        mpr("You're already channeling your ancestor's spirit!");
+        return spret::abort;
+    }
+
     const mid_t ancestor_mid = hepliaklqana_ancestor();
     if (ancestor_mid == MID_NOBODY)
     {
@@ -6708,7 +6714,7 @@ spret hepliaklqana_incarnate(bool fail)
     
     fail_check();
     
-    simple_god_message("You draw your ancestor's spirit into your body!");
+    mprf(MSGCH_GOD, "You draw your ancestor's spirit into your body!");
     monster_die(*ancestor, KILL_DISMISSED, NON_MONSTER);
     
     int dur = 16 + random2avg(you.skill(SK_INVOCATIONS, 5), 2);

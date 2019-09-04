@@ -1625,13 +1625,16 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
     case ABIL_HEPLIAKLQANA_INCARNATE:
     case ABIL_HEPLIAKLQANA_RECALL:
     case ABIL_HEPLIAKLQANA_TRANSFERENCE:
+        if (you.duration[DUR_INCARNATE])
+        {
+            if (!quiet)
+                mpr("You're currently channeling your ancestor's spirit!");
+            return false;
+        }
         if (hepliaklqana_ancestor() == MID_NOBODY)
         {
             if (!quiet)
-            {
-                mprf("%s is still trapped in memory!",
-                     hepliaklqana_ally_name().c_str());
-            }
+                mprf("%s is still trapped in memory!", hepliaklqana_ally_name().c_str());
             return false;
         }
         return true;

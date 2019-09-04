@@ -6774,25 +6774,6 @@ static coord_def _get_transference_target()
     return spd.target;
 }
 
-/// Drain any monsters near the destination of Tranference.
-static void _transfer_drain_nearby(coord_def destination)
-{
-    for (adjacent_iterator it(destination); it; ++it)
-    {
-        monster* mon = monster_at(*it);
-        if (!mon || mons_is_hepliaklqana_ancestor(mon->type))
-            continue;
-
-        const int dur = random_range(60, 150);
-        // 1-2 at 0 skill, 2-6 at 27 skill.
-        const int degree
-            = random_range(1 + you.skill_rdiv(SK_INVOCATIONS, 1, 27),
-                           2 + you.skill_rdiv(SK_INVOCATIONS, 4, 27));
-        if (mon->add_ench(mon_enchant(ENCH_DRAINED, degree, &you, dur)))
-            simple_monster_message(*mon, " is drained by nostalgia.");
-    }
-}
-
 /**
  * Activate Hepliaklqana's Transference ability, swapping the player's
  * ancestor with a targeted creature & potentially slowing monsters adjacent
@@ -6887,9 +6868,6 @@ spret hepliaklqana_transference(bool fail)
     victim->apply_location_effects(target);
     if (victim->is_monster())
         behaviour_event(victim->as_monster(), ME_DISTURB, &you, target);
-
-    if (have_passive(passive_t::transfer_drain))
-        _transfer_drain_nearby(target);
 
     return spret::success;
 }

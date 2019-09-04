@@ -563,7 +563,7 @@ bool ranged_attack::blowgun_check(special_missile_type type)
         return x_chance_in_y(chance, 100);
     }
 
-    const int skill = you.skill_rdiv(SK_THROWING);
+    const int skill = you.skill_rdiv(SK_FIGHTING);
 
     // You have a really minor chance of hitting with no skills or good
     // enchants.
@@ -602,7 +602,7 @@ int ranged_attack::blowgun_duration_roll(special_missile_type type)
 
     const int base_power = (attacker->is_monster())
                            ? attacker->get_hit_dice()
-                           : attacker->skill_rdiv(SK_THROWING);
+                           : attacker->skill_rdiv(SK_FIGHTING);
 
     const int plus = using_weapon() ? weapon->plus : 0;
 

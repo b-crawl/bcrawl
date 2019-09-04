@@ -353,7 +353,7 @@ static int _get_blowgun_chance(const int hd)
 {
     ASSERT(you.weapon()->is_type(OBJ_WEAPONS, WPN_BLOWGUN));
     const int plus = you.weapon()->plus;
-    const int skill = you.skill_rdiv(SK_THROWING);
+    const int skill = you.skill_rdiv(SK_FIGHTING);
 
     int chance = 10000 - 10000 * (hd - 2) / (4 + skill + plus);
     chance = min(max(chance, 0), 10000);

@@ -2105,7 +2105,7 @@ Ranged combat skills
 
 There are a number of individual weapon skills for missile weapons:
 
-  * Throwing (includes blowguns)
+  * Throwing
   * Bows
   * Crossbows
   * Slings
@@ -2113,7 +2113,7 @@ There are a number of individual weapon skills for missile weapons:
 Throwing is the skill for all things hurled without a launcher: tomahawks,
 javelins, nets, etc. The other skills refer to various types of missiles shot
 with a launcher. An exception to this are needles: these are launched using
-blowguns, an action which uses the Throwing skill. Since stones can be thrown
+blowguns, an action which uses the Fighting skill. Since stones can be thrown
 without launchers to some effect, these skills crosstrain:
 
   * Throwing and Slings

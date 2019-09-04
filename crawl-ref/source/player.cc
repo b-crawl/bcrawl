@@ -4050,7 +4050,8 @@ int get_real_hp(bool trans, bool rotted)
                 + (you.get_mutation_level(MUT_RUGGED_BROWN_SCALES) ?
                    you.get_mutation_level(MUT_RUGGED_BROWN_SCALES) * 2 + 1 : 0)
                 - (you.get_mutation_level(MUT_FRAIL) * 10)
-                - (hep_frail ? 10 : 0);
+                - (hep_frail ? 10 : 0)
+                + (you.duration[DUR_INCARNATE] ? 20 : 0);
 
     hitp /= 100;
 
@@ -5942,6 +5943,27 @@ int player::skill(skill_type sk_input, int scale, bool real, bool drained, bool 
 
     if (temp && duration[DUR_HEROISM] && sk <= SK_LAST_MUNDANE)
         level = min(level + 5 * scale, MAX_SKILL_LEVEL * scale);
+        
+    if (temp && duration[DUR_INCARNATE])
+        {
+        int skill_floor = 0;
+        int invo = you.skill(SK_INVOCATIONS, scale);
+        switch( (monster_type)you.props[HEPLIAKLQANA_ALLY_TYPE_KEY].get_int() )
+        {
+        case MONS_ANCESTOR_KNIGHT:
+            switch(sk)
+            {
+            case SK_FIGHTING:
+                skill_floor = invo;
+                break;
+            }
+            break;
+        default: break;
+        }
+        skill_floor = min(skill_floor, MAX_SKILL_LEVEL * scale);
+        level = max(level, skill_floor);
+        }
+    
     return level;
 }
 

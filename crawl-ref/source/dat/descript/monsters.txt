@@ -528,8 +528,6 @@ ancestor
 A humanoid construct of insubstantial memory, floating through the air. Though
 perhaps somewhat changed in shape and bearing few discernable features, still
 they seem somehow to resemble a warrior from the distantly remembered past.
-
-When incarnated, this ancestor can increase skill with Fighting, Stealth, and Dodging.
 %%%%
 ancient champion
 

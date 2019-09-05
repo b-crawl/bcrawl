@@ -6698,6 +6698,12 @@ spret hepliaklqana_incarnate(bool fail)
         return spret::abort;
     }
 
+    if (!you.props.exists(HEPLIAKLQANA_ALLY_TYPE_KEY))
+    {
+        mpr("Your ancestor's existence is still too hazy to incarnate it.");
+        return spret::abort;
+    }
+
     const mid_t ancestor_mid = hepliaklqana_ancestor();
     if (ancestor_mid == MID_NOBODY)
     {

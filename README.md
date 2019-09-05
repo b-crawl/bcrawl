@@ -194,6 +194,9 @@ Pull requests for new content are welcome.
   - v1.13.4: TSO gives ammo gifts.
   - v1.13.4: Gozag shop costs don't increase with number. Instead, shop and potion costs increase with time taken.
   - v1.13.5: Fedhas no longer gives piety for kills by oklobs or mushrooms.
+  - v1.14: Hepliaklqana's Transference ability costs much less piety, but doesn't gain the effect of draining enemies.
+  - v1.14: Hepliaklqana's Knight ancestor's first level gets a war axe of flaming instead of a flail.
+  - v1.14: Hepliaklqana's Idealise ability is replaced by Incarnate, which gives +20% max HP, healing and/or mana, and increases some skills to at least your Invocations skill. Knights give HP, Fighting, Armour, Shields, and Axes; Battlemages give HP, MP, Conjurations, Earth Magic, Fire Magic, and Staves; Hexers give MP, Spellcasting, Hexes, Charms, and Evocations.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -222,6 +225,7 @@ Pull requests for new content are welcome.
   - v1.13.2: Great swords have higher (15 -> 16) base damage.
   - v1.13.5: Changed wand max charges for acid (15 -> 12) and polymorph (15 -> 20).
   - v1.13.5: Needles of paralysis are replaced by more needles of confusion and frenzy.
+  - v1.14: Blowguns use Fighting skill instead of Throwing skill.
 
 #### Removed Items
   - Amulet of Harm
@@ -271,6 +275,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Golden eyes sometimes teleport away.
   - v1.13.5: Player ghosts have higher (50 -> 100) max damage.
   - v1.13.5: Monsters can use iceblast wands, but will only use wands if 1000 < HD*charges^2 < 5000.
+  - v1.14: Bullfrogs and black bears are slightly stronger.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

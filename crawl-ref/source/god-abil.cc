@@ -1439,6 +1439,13 @@ void elyvilon_remove_divine_vigour()
     calc_mp();
 }
 
+void hep_remove_incarnate()
+{
+    mprf(MSGCH_DURATION, "Your connection to your ancestor fades.");
+    you.duration[DUR_INCARNATE] = 0;
+    calc_hp();
+}
+
 bool vehumet_supports_spell(spell_type spell)
 {
     if (spell_typematch(spell, SPTYP_CONJURATION))
@@ -6683,48 +6690,65 @@ bool hepliaklqana_choose_ancestor_type(int ancestor_choice)
 }
 
 
-/**
- * Heal the player's ancestor, and apply the Idealised buff for a few turns.
- *
- * @param fail      Whether the effect should fail after checking validity.
- * @return          Whether the healing succeeded, failed, or was aborted.
- */
-spret hepliaklqana_idealise(bool fail)
+spret hepliaklqana_incarnate(bool fail)
 {
-    const mid_t ancestor_mid = hepliaklqana_ancestor();
-    if (ancestor_mid == MID_NOBODY)
+    if (you.duration[DUR_INCARNATE])
     {
-        mpr("You have no ancestor to preserve!");
+        mpr("You're already channeling your ancestor's spirit!");
         return spret::abort;
     }
 
+    if (!you.props.exists(HEPLIAKLQANA_ALLY_TYPE_KEY))
+    {
+        mpr("Your ancestor's existence is still too hazy to incarnate it.");
+        return spret::abort;
+    }
+
+    const mid_t ancestor_mid = hepliaklqana_ancestor();
+    if (ancestor_mid == MID_NOBODY)
+    {
+        mpr("Your ancestor's spirit is not available!");
+        return spret::abort;
+    }
+    
     monster *ancestor = monster_by_mid(ancestor_mid);
     if (!ancestor || !you.can_see(*ancestor))
     {
         mprf("%s is not nearby!", hepliaklqana_ally_name().c_str());
         return spret::abort;
     }
-
+    
     fail_check();
-
-    simple_god_message(make_stringf(" grants %s healing and protection!",
-                                    ancestor->name(DESC_YOUR).c_str()).c_str());
-
-    // 1/3 mhp healed at 0 skill, full at 27 invo
-    const int healing = ancestor->max_hit_points
-                         * (9 + you.skill(SK_INVOCATIONS)) / 36;
-
-    if (ancestor->heal(healing))
+    
+    mprf(MSGCH_GOD, "You draw your ancestor's spirit into your body!");
+    monster_die(*ancestor, KILL_DISMISSED, NON_MONSTER);
+    
+    int dur = 16 + random2avg(you.skill(SK_INVOCATIONS, 5), 2);
+    int heal_power = 0;
+    int mana_power = 0;
+    switch( (monster_type)you.props[HEPLIAKLQANA_ALLY_TYPE_KEY].get_int() )
     {
-        if (ancestor->hit_points == ancestor->max_hit_points)
-            simple_monster_message(*ancestor, " is fully restored!");
-        else
-            simple_monster_message(*ancestor, " is healed somewhat.");
+    case MONS_ANCESTOR_KNIGHT:
+        heal_power = 10 + you.skill_rdiv(SK_INVOCATIONS, 2, 3);
+        dur = dur*2;
+        break;
+    case MONS_ANCESTOR_BATTLEMAGE:
+        heal_power = 5 + you.skill_rdiv(SK_INVOCATIONS, 1, 3);
+        mana_power = 2 + you.skill_rdiv(SK_INVOCATIONS, 1, 7);
+        break;
+    case MONS_ANCESTOR_HEXER:
+        mana_power = 4 + you.skill_rdiv(SK_INVOCATIONS, 2, 7);
+        break;
+    default: break;
     }
-
-    const int dur = random_range(50, 80)
-                    + random2avg(you.skill(SK_INVOCATIONS, 20), 2);
-    ancestor->add_ench({ ENCH_IDEALISED, 1, &you, dur});
+    inc_hp(heal_power + roll_dice(2, heal_power));
+    inc_mp(mana_power + roll_dice(2, mana_power));
+        
+    you.increase_duration(DUR_INCARNATE, dur, 200);
+    you.increase_duration(DUR_ANCESTOR_DELAY, dur, 200);
+    calc_hp(true, false);
+    you.redraw_armour_class = true;
+    
     return spret::success;
 }
 
@@ -6754,25 +6778,6 @@ static coord_def _get_transference_target()
     if (!spd.isValid)
         return coord_def();
     return spd.target;
-}
-
-/// Drain any monsters near the destination of Tranference.
-static void _transfer_drain_nearby(coord_def destination)
-{
-    for (adjacent_iterator it(destination); it; ++it)
-    {
-        monster* mon = monster_at(*it);
-        if (!mon || mons_is_hepliaklqana_ancestor(mon->type))
-            continue;
-
-        const int dur = random_range(60, 150);
-        // 1-2 at 0 skill, 2-6 at 27 skill.
-        const int degree
-            = random_range(1 + you.skill_rdiv(SK_INVOCATIONS, 1, 27),
-                           2 + you.skill_rdiv(SK_INVOCATIONS, 4, 27));
-        if (mon->add_ench(mon_enchant(ENCH_DRAINED, degree, &you, dur)))
-            simple_monster_message(*mon, " is drained by nostalgia.");
-    }
 }
 
 /**
@@ -6869,9 +6874,6 @@ spret hepliaklqana_transference(bool fail)
     victim->apply_location_effects(target);
     if (victim->is_monster())
         behaviour_event(victim->as_monster(), ME_DISTURB, &you, target);
-
-    if (have_passive(passive_t::transfer_drain))
-        _transfer_drain_nearby(target);
 
     return spret::success;
 }

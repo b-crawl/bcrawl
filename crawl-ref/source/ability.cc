@@ -622,10 +622,10 @@ static const ability_def Ability_List[] =
     { ABIL_HEPLIAKLQANA_RECALL, "Recall Ancestor",
         2, 0, 0, 0, {fail_basis::invo}, abflag::none },
     { ABIL_HEPLIAKLQANA_TRANSFERENCE, "Transference",
-        2, 0, 0, 3, {fail_basis::invo, 40, 5, 20},
+        2, 0, 0, 1, {fail_basis::invo, 40, 5, 20},
         abflag::none },
-    { ABIL_HEPLIAKLQANA_IDEALISE, "Idealise",
-        4, 0, 0, 4, {fail_basis::invo, 60, 4, 25},
+    { ABIL_HEPLIAKLQANA_INCARNATE, "Incarnate",
+        4, 0, 0, 8, {fail_basis::invo, 60, 4, 25},
         abflag::none },
 
     { ABIL_HEPLIAKLQANA_TYPE_KNIGHT,       "Ancestor Life: Knight",
@@ -1622,16 +1622,19 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
         return true;
 
         // only available while your ancestor is alive.
-    case ABIL_HEPLIAKLQANA_IDEALISE:
+    case ABIL_HEPLIAKLQANA_INCARNATE:
     case ABIL_HEPLIAKLQANA_RECALL:
     case ABIL_HEPLIAKLQANA_TRANSFERENCE:
+        if (you.duration[DUR_INCARNATE])
+        {
+            if (!quiet)
+                mpr("You're currently channeling your ancestor's spirit!");
+            return false;
+        }
         if (hepliaklqana_ancestor() == MID_NOBODY)
         {
             if (!quiet)
-            {
-                mprf("%s is still trapped in memory!",
-                     hepliaklqana_ally_name().c_str());
-            }
+                mprf("%s is still trapped in memory!", hepliaklqana_ally_name().c_str());
             return false;
         }
         return true;
@@ -2997,8 +3000,8 @@ static spret _do_ability(const ability_def& abil, bool fail)
     case ABIL_USKAYAW_GRAND_FINALE:
         return uskayaw_grand_finale(fail);
 
-    case ABIL_HEPLIAKLQANA_IDEALISE:
-        return hepliaklqana_idealise(fail);
+    case ABIL_HEPLIAKLQANA_INCARNATE:
+        return hepliaklqana_incarnate(fail);
 
     case ABIL_HEPLIAKLQANA_RECALL:
         fail_check();

@@ -3533,6 +3533,7 @@ colour_t item_def::weapon_colour() const
         case SK_CROSSBOWS:
             return LIGHTBLUE;
         case SK_THROWING:
+        case SK_FIGHTING:
             return WHITE;
         case SK_SLINGS:
             return BROWN;

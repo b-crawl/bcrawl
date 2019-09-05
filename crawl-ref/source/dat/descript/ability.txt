@@ -813,37 +813,36 @@ Recall Ancestor ability
 Recalls your ancestor from anywhere in the dungeon to your immediate
 surroundings.
 %%%%
-Idealise ability
+Incarnate ability
 
-Restores your ancestor to an idyllic vision of their best self. Their wounds
-are forgotten and a glow of perfection infuses them, giving them a short-lived
-but dramatic increase in strength, spellcasting, and armour. The quality of the
-healing and duration of the idealisation granted are both improved by the
-Invocations skill.
+Draws your ancestor's spirit into your body and channels their memory. This increases your maximum health, restores some health and/or magical power depending on your type of ancestor, and grants you some of your ancestor's skills if they are greater than your own and your Invocations skill is sufficient.
 %%%%
 Transference ability
 
 Forces a targeted creature to pass through the realms of memory and exchange
 places with your ancestor.
-
-With great piety, those near the target will be drained to a degree depending
-on Invocations skill.
 %%%%
 Ancestor Life: Knight ability
 
 Remembers your ancestor as a knight, a strong melee combatant with superior
 defenses. This choice is permanent and cannot be undone.
+
+When incarnated, this ancestor restores some health, and can increase skill with Fighting, Armour, Shields, and Axes.
 %%%%
 Ancestor Life: Battlemage ability
 
 Remembers your ancestor as a battlemage, a warrior capable of relentless offense
 with both melee and conjurations. This choice is permanent and cannot be undone.
+
+When incarnated, this ancestor restores a small amount of health and magical power, and can increase skill with Conjurations, Earth Magic, Fire Magic, and Staves.
 %%%%
 Ancestor Life: Hexer ability
 
 Remembers your ancestor as a hexer, a cunning rogue capable of skilled
 knifework and debilitating spellcasting. This choice is permanent and cannot be
 undone.
+
+When incarnated, this ancestor restores some magical power, and can increase skill with Spellcasting, Hexes, Charms, and Evocations.
 %%%%
 Ancestor Identity ability
 

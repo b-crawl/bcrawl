@@ -606,6 +606,8 @@ A humanoid construct of insubstantial memory, floating through the air. Though
 perhaps somewhat changed in shape and bearing few discernable features, still
 it seems somehow to resemble a warrior from the distantly remembered past,
 skilled with both conjurations and melee combat.
+
+When incarnated, this ancestor restores a small amount of health and magical power, and can increase skill with Conjurations, Earth Magic, Fire Magic, and Staves.
 %%%%
 battlesphere
 
@@ -1343,6 +1345,8 @@ A humanoid construct of insubstantial memory, floating through the air. Though
 perhaps somewhat changed in shape and bearing few discernable features, still
 it seems somehow to resemble a warrior from the distantly remembered past,
 ready with debilitating spells and deadly knifework.
+
+When incarnated, this ancestor restores some magical power, and can increase skill with Spellcasting, Hexes, Charms, and Evocations.
 %%%%
 hippogriff
 
@@ -1524,6 +1528,8 @@ A humanoid construct of insubstantial memory, floating through the air. Though
 perhaps somewhat changed in shape and bearing few discernable features, still
 it seems somehow to resemble a warrior from the distantly remembered past,
 well equipped with arms and armour both.
+
+When incarnated, this ancestor restores some health, and can increase skill with Fighting, Armour, Shields, and Axes.
 %%%%
 kobold
 

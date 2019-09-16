@@ -70,11 +70,10 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Enchantments
-    SPELL_CAUSE_FEAR,
-    SPELL_VIOLENT_UNRAVELLING,
     SPELL_SILENCE,
     SPELL_PIERCING_SHOT,
     SPELL_DEFLECT_MISSILES,
+    SPELL_INFESTATION,
     SPELL_DISCORD,
 },
 
@@ -122,7 +121,6 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Transfigurations
-    SPELL_IRRADIATE,
     SPELL_TREE_FORM,
     SPELL_STATUE_FORM,
     SPELL_DRAGON_FORM,
@@ -308,6 +306,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_DARKNESS,
     SPELL_SHADOW_CREATURES,
     SPELL_BORGNJORS_VILE_CLUTCH,
+    SPELL_INFESTATION,
     SPELL_TIME_STOP,
 },
 
@@ -343,9 +342,9 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Necronomicon
+    SPELL_DEATH_CHANNEL,
     SPELL_HAUNT,
     SPELL_BORGNJORS_REVIVIFICATION,
-    SPELL_INFESTATION,
     SPELL_NECROMUTATION,
 },
 

@@ -713,7 +713,7 @@ A truly wonderful and very rare drink, which grants experience when consumed.
 %%%%
 potion of flight
 
-A potion which confers great buoyancy on one who consumes it.
+A potion which confers great buoyancy and temporary swiftness on one who consumes it.
 %%%%
 potion of heal wounds
 

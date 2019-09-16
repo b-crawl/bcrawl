@@ -279,7 +279,7 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_FREEZING_CLOUD, "Freezing Cloud",
-    SPTYP_CONJURATION | SPTYP_ICE | SPTYP_AIR,
+    SPTYP_ICE | SPTYP_AIR,
     SPFLAG_TARGET | SPFLAG_AREA | SPFLAG_NEEDS_TRACER
         | SPFLAG_CLOUD,
     6,

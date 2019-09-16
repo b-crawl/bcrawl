@@ -533,18 +533,16 @@ void bennu_revive_fineff::fire()
 
 void infestation_death_fineff::fire()
 {
-    if (monster *scarab = create_monster(mgen_data(MONS_DEATH_SCARAB,
+    if (monster *spawn = create_monster(mgen_data(spawn_type,
                                                    BEH_FRIENDLY, posn,
-                                                   MHITYOU, MG_AUTOFOE)
-                                         .set_summoned(&you, 0,
-                                                       SPELL_INFESTATION),
+                                                   MHITYOU, MG_AUTOFOE),
                                          false))
     {
-        scarab->add_ench(mon_enchant(ENCH_FAKE_ABJURATION, 6));
+        spawn->add_ench(mon_enchant(ENCH_FAKE_ABJURATION, 6));
 
-        if (you.see_cell(posn) || you.can_see(*scarab))
+        if (you.see_cell(posn) || you.can_see(*spawn))
         {
-            mprf("%s bursts from %s!", scarab->name(DESC_A, true).c_str(),
+            mprf("%s bursts from %s!", spawn->name(DESC_A, true).c_str(),
                                        name.c_str());
         }
     }

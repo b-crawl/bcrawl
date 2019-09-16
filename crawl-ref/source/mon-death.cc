@@ -1512,10 +1512,13 @@ static bool _explode_monster(monster* mons, killer_type killer,
     return true;
 }
 
-static void _infestation_create_scarab(monster* mons)
+static void _infestation_create_wasp(monster* mons)
 {
     mons->flags |= MF_EXPLODE_KILL;
-    infestation_death_fineff::schedule(mons->pos(), mons->name(DESC_THE));
+    mon_enchant infestation = mons->get_ench(ENCH_INFESTATION);
+    int degree = infestation.degree;
+    monster_type spawn_type = degree ? MONS_SPARK_WASP : MONS_HORNET;
+    infestation_death_fineff::schedule(mons->pos(), mons->name(DESC_THE), spawn_type);
 }
 
 static void _monster_die_cloud(const monster* mons, bool corpse, bool silent,
@@ -2685,7 +2688,7 @@ item_def* monster_die(monster& mons, killer_type killer,
     if (!was_banished && !mons_reset)
     {
         if (mons.has_ench(ENCH_INFESTATION))
-            _infestation_create_scarab(&mons);
+            _infestation_create_wasp(&mons);
         if (you.duration[DUR_DEATH_CHANNEL] && was_visible && gives_player_xp)
             _make_derived_undead(&mons, !death_message, false);
     }

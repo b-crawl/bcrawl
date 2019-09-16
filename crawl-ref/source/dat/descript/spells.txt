@@ -737,9 +737,9 @@ spell.
 %%%%
 Infestation spell
 
-Calls forth a plague of scarabs, infesting affected creatures for a duration
-depending on power and causing death scarabs to grow and burst from them upon
-death.
+Transforms tiny parasites within affected targets into deadly wasps, which
+will burst forth upon their host's death. At high spell power, more powerful
+wasps may be created.
 %%%%
 Infusion spell
 

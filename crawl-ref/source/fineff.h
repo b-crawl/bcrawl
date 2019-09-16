@@ -326,16 +326,17 @@ public:
     bool mergeable(const final_effect &a) const override { return false; }
     void fire() override;
 
-    static void schedule(coord_def pos, const string &name)
+    static void schedule(coord_def pos, const string &name, monster_type spawn_type)
     {
-        final_effect::schedule(new infestation_death_fineff(pos, name));
+        final_effect::schedule(new infestation_death_fineff(pos, name, spawn_type));
     }
 protected:
-    infestation_death_fineff(coord_def pos, const string &_name)
-        : final_effect(0, 0, pos), name(_name)
+    infestation_death_fineff(coord_def pos, const string &_name, monster_type _spawn_type)
+        : final_effect(0, 0, pos), name(_name), spawn_type(_spawn_type)
     {
     }
     string name;
+    monster_type spawn_type;
 };
 
 class make_derived_undead_fineff : public final_effect

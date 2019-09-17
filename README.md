@@ -155,6 +155,8 @@ Pull requests for new content are welcome.
   - v1.12.1: Shock has a higher power cap. (25 -> 35)
   - v1.12.1: Summon Ice Beast has a lower summon cap. (3 -> 2)
   - v1.12.1: Static Discharge is just Air, instead of Air/Conjurations.
+  - v1.14.1: Infestation is now a level 6 Hexes/Poison/Transmutation spell that creates Hornets or Spark Wasps depending on spell power.
+  - v1.14.1: Freezing Cloud is now Ice/Air.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -226,6 +228,7 @@ Pull requests for new content are welcome.
   - v1.13.5: Changed wand max charges for acid (15 -> 12) and polymorph (15 -> 20).
   - v1.13.5: Needles of paralysis are replaced by more needles of confusion and frenzy.
   - v1.14: Blowguns use Fighting skill instead of Throwing skill.
+  - v1.14.1: Potions of flight give a Swiftness effect in addition to flight.
 
 #### Removed Items
   - Amulet of Harm

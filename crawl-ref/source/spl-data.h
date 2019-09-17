@@ -3834,7 +3834,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_HEXES | SPTYP_POISON | SPTYP_TRANSMUTATION,
     SPFLAG_TARGET | SPFLAG_UNCLEAN,
     6,
-    200,
+    150,
     LOS_RADIUS, LOS_RADIUS,
     8, 4,
     TILEG_INFESTATION,

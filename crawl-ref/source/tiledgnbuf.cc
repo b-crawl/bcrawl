@@ -2,8 +2,6 @@
 #ifdef USE_TILE_LOCAL
 #include "tiledgnbuf.h"
 
-#include "env.h"
-#include "player.h"
 #include "tile-flags.h"
 #include "tiledef-dngn.h"
 #include "tiledef-icons.h"
@@ -40,7 +38,11 @@ void DungeonCellBuffer::add(const packed_cell &cell, int x, int y)
     const tileidx_t fg_idx = cell.fg & TILE_FLAG_MASK;
     const bool in_water = _in_water(cell);
 
-    const tileidx_t cloud_idx = cell.cloud & TILE_FLAG_MASK;
+    tileidx_t cloud_idx = cell.cloud & TILE_FLAG_MASK;
+
+    // in the shoals, ink is handled in pack_cell_overlays(): don't overdraw
+    if (cloud_idx == TILE_CLOUD_INK && player_in_branch(BRANCH_SHOALS))
+        cloud_idx = 0;
 
     if (fg_idx >= TILEP_MCACHE_START)
     {

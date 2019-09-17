@@ -75,6 +75,8 @@ TilesFramework::TilesFramework() :
       _send_lock(false),
       m_last_ui_state(UI_INIT),
       m_view_loaded(false),
+      m_current_view(coord_def(GXM, GYM)),
+      m_next_view(coord_def(GXM, GYM)),
       m_next_view_tl(0, 0),
       m_next_view_br(-1, -1),
       m_current_flash_colour(BLACK),
@@ -85,8 +87,8 @@ TilesFramework::TilesFramework() :
 {
     screen_cell_t default_cell;
     default_cell.tile.bg = TILE_FLAG_UNSEEN;
-    m_next_view.init(default_cell);
-    m_current_view.init(default_cell);
+    m_current_view.fill(default_cell);
+    m_next_view.fill(default_cell);
 }
 
 TilesFramework::~TilesFramework()
@@ -1129,6 +1131,17 @@ static void _send_doll(const dolls_data &doll, bool submerged, bool ghost)
         p_order[6] = TILEP_PART_LEG;
     }
 
+    // Draw scarves above other clothing.
+    if (doll.parts[TILEP_PART_CLOAK] >= TILEP_CLOAK_SCARF_FIRST_NORM)
+    {
+        p_order[4] = p_order[5];
+        p_order[5] = p_order[6];
+        p_order[6] = p_order[7];
+        p_order[7] = p_order[8];
+        p_order[8] = p_order[9];
+        p_order[9] = TILEP_PART_CLOAK;
+    }
+
     // Special case bardings from being cut off.
     const bool is_naga = is_player_tile(doll.parts[TILEP_PART_BASE],
                                         TILEP_BASE_NAGA);
@@ -1580,7 +1593,7 @@ void TilesFramework::_send_map(bool force_full)
 
                 draw_cell(cell, gc, false, m_current_flash_colour);
                 cell->tile.flv = env.tile_flv(gc);
-                pack_cell_overlays(gc, &(cell->tile));
+                pack_cell_overlays(gc, m_next_view);
             }
 
             mark_clean(gc);
@@ -1728,6 +1741,16 @@ void TilesFramework::load_dungeon(const crawl_view_buffer &vbuf,
                 mark_for_redraw(coord_def(x, y));
         }
 
+    // re-cache the map knowledge for the whole map, not just the updated portion
+    // fixes render bugs for out-of-LOS when transitioning levels in shoals/slime
+    for (int y = 0; y < GYM; y++)
+        for (int x = 0; x < GXM; x++)
+        {
+            const coord_def gc(x, y);
+            screen_cell_t *cell = &m_next_view(gc);
+            cell->tile.map_knowledge = map_bounds(gc) ? env.map_knowledge(gc) : map_cell();
+        }
+
     m_next_view_tl = view2grid(coord_def(1, 1));
     m_next_view_br = view2grid(crawl_view.viewsz);
 
@@ -1745,7 +1768,7 @@ void TilesFramework::load_dungeon(const crawl_view_buffer &vbuf,
 
             *cell = ((const screen_cell_t *) vbuf)[x + vbuf.size().x * y];
             cell->tile.flv = env.tile_flv(grid);
-            pack_cell_overlays(grid, &(cell->tile));
+            pack_cell_overlays(grid, m_next_view);
 
             mark_clean(grid); // Remove redraw flag
             mark_dirty(grid);

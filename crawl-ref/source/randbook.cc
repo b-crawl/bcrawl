@@ -976,61 +976,37 @@ void make_book_kiku_gift(item_def &book, bool first)
     // spell, to complement Receive Corpses.
     if (first)
     {
-        bool can_bleed = you.species != SP_GARGOYLE
-            && you.species != SP_GHOUL
-            && you.species != SP_MUMMY;
         bool can_regen = you.species != SP_DEEP_DWARF
-            && you.species != SP_MUMMY;
+            && you.species != SP_MUMMY && you.species != SP_SKELETON;
 
         chosen_spells[0] = SPELL_PAIN;
         chosen_spells[1] = SPELL_CORPSE_ROT;
         chosen_spells[2] = SPELL_ANIMATE_SKELETON;
-        if (can_bleed) // Replace one of the corpse-using spells
-            chosen_spells[random_range(1, 2)] = SPELL_SUBLIMATION_OF_BLOOD;
 
         chosen_spells[3] = (!can_regen || coinflip())
             ? SPELL_VAMPIRIC_DRAINING : SPELL_REGENERATION;
     }
     else
     {
-        chosen_spells[0] = coinflip() ? SPELL_ANIMATE_DEAD : SPELL_SIMULACRUM;
+        int count = 8;
+        spell_type spell_options[] = 
+        {
+            SPELL_SUBLIMATION_OF_BLOOD,
+            SPELL_ANIMATE_DEAD,
+            SPELL_AGONY,
+            SPELL_BORGNJORS_VILE_CLUTCH,
+            SPELL_BOLT_OF_DRAINING,
+            SPELL_SIMULACRUM,
+            SPELL_DEATH_CHANNEL,
+            SPELL_DISPEL_UNDEAD
+        };
+        
+        for (int i = 0; i < count; i++)
+            std::swap(spell_options[i], spell_options[random2(count)]);
 
-        do
-        {  // Pick two spells from this list, but don't duplicate spells
-            for (int i = 1; i < 3; i++)
-            {
-                chosen_spells[i] = random_choose(SPELL_BOLT_OF_DRAINING,
-                                                 SPELL_AGONY,
-                                                 SPELL_DEATH_CHANNEL,
-                                                 SPELL_BORGNJORS_VILE_CLUTCH);
-            }
-        }
-        while (chosen_spells[1] == chosen_spells[2]);
-
-        spell_type extra_spell;
-        do
-        {  // Pick another random spell from the above lists
-            extra_spell = random_choose(SPELL_ANIMATE_DEAD,
-                                        SPELL_AGONY,
-                                        SPELL_BORGNJORS_VILE_CLUTCH,
-                                        SPELL_BOLT_OF_DRAINING,
-                                        SPELL_SIMULACRUM,
-                                        SPELL_DEATH_CHANNEL);
-#if TAG_MAJOR_VERSION == 34
-            if (you.species == SP_FELID
-                && extra_spell == SPELL_EXCRUCIATING_WOUNDS)
-            {
-                extra_spell = SPELL_NO_SPELL;
-            }
-#endif
-            for (int i = 0; i < 3; i++)
-                if (extra_spell == chosen_spells[i])
-                    extra_spell = SPELL_NO_SPELL;
-        }
-        while (extra_spell == SPELL_NO_SPELL);
-
-        chosen_spells[3] = extra_spell;
-        chosen_spells[4] = SPELL_DISPEL_UNDEAD;
+        int gifts = 4 + random2(2);
+        for (int i = 0; i < gifts; i++)
+            chosen_spells[i] = spell_options[i];
     }
 
     sort(chosen_spells, chosen_spells + RANDBOOK_SIZE, _compare_spells);

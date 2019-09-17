@@ -1030,8 +1030,8 @@ void TilesFramework::do_layout()
     // Expand dungeon region to cover partial tiles, then offset to keep player centred
     int tile_iw = m_stat_x_divider;
     int tile_ih = message_y_divider;
-    int tile_ow = round_up_to_multiple(tile_iw, m_region_tile->dx*2);
-    int tile_oh = round_up_to_multiple(tile_ih, m_region_tile->dy*2);
+    int tile_ow = round_up_to_multiple(tile_iw, m_region_tile->dx*2) + m_region_tile->dx;
+    int tile_oh = round_up_to_multiple(tile_ih, m_region_tile->dy*2) + m_region_tile->dx;
     m_region_tile->resize_to_fit(tile_ow, tile_oh);
     m_region_tile->place(-(tile_ow - tile_iw)/2, -(tile_oh - tile_ih)/2, 0);
     m_region_tile->tile_iw = tile_iw;
@@ -1472,12 +1472,12 @@ void TilesFramework::redraw()
     // Draw tooltip
     if (Options.tile_tooltip_ms > 0 && !m_tooltip.empty())
     {
-        const coord_def min_pos(0, 0);
+        const int buffer = 5;
+        const coord_def min_pos = coord_def() + buffer;
+        const coord_def max_pos = m_windowsz - buffer;
         FontWrapper *font = m_fonts[m_tip_font].font;
-
-        font->render_string(m_mouse.x, m_mouse.y - 2, m_tooltip.c_str(),
-                            min_pos, m_windowsz, WHITE, false, 220, BLUE, 5,
-                            true);
+        font->render_tooltip(m_mouse.x, m_mouse.y, formatted_string(m_tooltip),
+                min_pos, max_pos);
     }
     wm->swap_buffers();
 

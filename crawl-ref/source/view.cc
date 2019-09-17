@@ -199,7 +199,7 @@ static string _desc_mons_type_map(map<monster_type, int> types)
             message += ", ";
         ++count;
     }
-    return make_stringf("%s come into view.", message.c_str());
+    return message;
 }
 
 static monster_type _mons_genus_keep_uniques(monster_type mc)
@@ -267,7 +267,7 @@ static bool _is_weapon_worth_listing(const item_def *wpn)
 
 /// Return a warning for the player about newly-seen monsters, as appropriate.
 static string _monster_headsup(const vector<monster*> &monsters,
-                               map<monster_type, int> &types,
+                               const map<monster_type, int> &types,
                                bool divine)
 {
     string warning_msg = "";
@@ -296,7 +296,7 @@ static string _monster_headsup(const vector<monster*> &monsters,
             monname = mon->pronoun(PRONOUN_SUBJECTIVE);
         else if (mon->type == MONS_DANCING_WEAPON)
             monname = "There";
-        else if (types[mon->type] == 1)
+        else if (types.at(mon->type) == 1)
             monname = mon->full_name(DESC_THE);
         else
             monname = mon->full_name(DESC_A);
@@ -333,7 +333,7 @@ static string _monster_headsup(const vector<monster*> &monsters,
 
 /// Let Ash/Zin warn the player about newly-seen monsters, as appropriate.
 static void _divine_headsup(const vector<monster*> &monsters,
-                            map<monster_type, int> &types)
+                            const map<monster_type, int> &types)
 {
     const string warnings = _monster_headsup(monsters, types, true);
     if (!warnings.size())
@@ -349,12 +349,41 @@ static void _divine_headsup(const vector<monster*> &monsters,
 }
 
 static void _secular_headsup(const vector<monster*> &monsters,
-                             map<monster_type, int> &types)
+                             const map<monster_type, int> &types)
 {
     const string warnings = _monster_headsup(monsters, types, false);
     if (!warnings.size())
         return;
     mprf(MSGCH_MONSTER_WARNING, "%s", warnings.c_str());
+}
+
+static map<monster_type, int> _count_monster_types(const vector<monster*>& monsters,
+                                                   const unsigned int max_types = UINT_MAX)
+{
+    map<monster_type, int> types;
+    map<monster_type, int> genera; // This is the plural for genus!
+    for (const monster *mon : monsters)
+    {
+        const monster_type type = mon->type;
+        types[type]++;
+        genera[_mons_genus_keep_uniques(type)]++;
+    }
+
+    while (types.size() > max_types && !genera.empty())
+        _genus_factoring(types, genera);
+
+    return types;
+}
+
+/**
+ * Return a string listing monsters in a human readable form.
+ * E.g. "a hydra and 2 liches".
+ *
+ * @param monsters      A list of monsters that just became visible.
+ */
+string describe_monsters_condensed(const vector<monster*>& monsters)
+{
+    return _desc_mons_type_map(_count_monster_types(monsters, 4));
 }
 
 /**
@@ -368,28 +397,13 @@ static void _secular_headsup(const vector<monster*> &monsters,
 static void _handle_comes_into_view(const vector<string> &msgs,
                                     const vector<monster*> monsters)
 {
-    const unsigned int max_msgs = 4;
-
-    map<monster_type, int> types;
-    map<monster_type, int> genera; // This is the plural for genus!
-    for (const monster *mon : monsters)
-    {
-        const monster_type type = mon->type;
-        types[type]++;
-        genera[_mons_genus_keep_uniques(type)]++;
-    }
-
-    unsigned int size = monsters.size();
-    if (size == 1)
+    if (monsters.size() == 1)
         mprf(MSGCH_MONSTER_WARNING, "%s", msgs[0].c_str());
     else
-    {
-        while (types.size() > max_msgs && !genera.empty())
-            _genus_factoring(types, genera);
-        mprf(MSGCH_MONSTER_WARNING, "%s",
-             _desc_mons_type_map(types).c_str());
-    }
+        mprf(MSGCH_MONSTER_WARNING, "%s come into view.",
+             describe_monsters_condensed(monsters).c_str());
 
+    const auto& types = _count_monster_types(monsters);
     _divine_headsup(monsters, types);
     _secular_headsup(monsters, types);
 }
@@ -571,6 +585,13 @@ static const FixedArray<uint8_t, GXM, GYM>& _tile_difficulties(bool random)
     return cache;
 }
 
+static colour_t _feat_default_map_colour(dungeon_feature_type feat)
+{
+    if (player_in_branch(BRANCH_SEWER) && feat_is_water(feat))
+        return feat == DNGN_DEEP_WATER ? GREEN : LIGHTGREEN;
+    return BLACK;
+}
+
 // Returns true if it succeeded.
 bool magic_mapping(int map_radius, int proportion, bool suppress_msg,
                    bool force, bool deterministic,
@@ -669,12 +690,16 @@ bool magic_mapping(int map_radius, int proportion, bool suppress_msg,
         {
             if (wizard_map)
             {
-                knowledge.set_feature(grd(pos), 0,
+                knowledge.set_feature(feat, _feat_default_map_colour(feat),
                     feat_is_trap(grd(pos)) ? get_trap_type(pos)
                                            : TRAP_UNASSIGNED);
             }
             else if (!knowledge.feat())
-                knowledge.set_feature(magic_map_base_feat(grd(pos)));
+            {
+                auto base_feat = magic_map_base_feat(feat);
+                auto colour = _feat_default_map_colour(base_feat);
+                knowledge.set_feature(base_feat, colour);
+            }
             if (emphasise(pos))
                 knowledge.flags |= MAP_EMPHASIZE;
 
@@ -1409,6 +1434,8 @@ void viewwindow(bool show_updates, bool tiles_only, animation *a)
 
         bool run_dont_draw = you.running && Options.travel_delay < 0
                     && (!you.running.is_explore() || Options.explore_delay < 0);
+        if (you.running && you.running.is_rest())
+            run_dont_draw = Options.rest_delay == -1;
 
         if (run_dont_draw || you.asleep())
         {
@@ -1491,6 +1518,10 @@ void draw_cell(screen_cell_t *cell, const coord_def &gc,
         _draw_los(cell, gc, ep, anim_updates);
     else
         _draw_outside_los(cell, gc, ep); // in los bounds but not visible
+
+#ifdef USE_TILE
+    cell->tile.map_knowledge = map_bounds(gc) ? env.map_knowledge(gc) : map_cell();
+#endif
 
     cell->flash_colour = BLACK;
 

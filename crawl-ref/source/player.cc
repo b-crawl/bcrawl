@@ -7523,6 +7523,10 @@ bool player::do_shaft()
         return false;
     }
 
+    // Ensure altars, items, and shops discovered at the moment
+    // the player gets shafted are correctly registered.
+    maybe_update_stashes();
+
     down_stairs(DNGN_TRAP_SHAFT);
 
     return true;

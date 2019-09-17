@@ -419,6 +419,8 @@ void fill_doll_equipment(dolls_data &result)
                     result.parts[TILEP_PART_HELM] = TILEP_HELM_HORNS_CAT;
                 }
             }
+            else if (species_is_draconian(you.species))
+                result.parts[TILEP_PART_HELM] = TILEP_HELM_HORNS_DRAC;
             else
                 switch (you.get_mutation_level(MUT_HORNS))
                 {
@@ -547,6 +549,17 @@ void pack_doll_buf(SubmergedTileBuffer& buf, const dolls_data &doll,
     {
         p_order[7] = TILEP_PART_BOOTS;
         p_order[6] = TILEP_PART_LEG;
+    }
+
+    // Draw scarves above other clothing.
+    if (doll.parts[TILEP_PART_CLOAK] >= TILEP_CLOAK_SCARF_FIRST_NORM)
+    {
+        p_order[4] = p_order[5];
+        p_order[5] = p_order[6];
+        p_order[6] = p_order[7];
+        p_order[7] = p_order[8];
+        p_order[8] = p_order[9];
+        p_order[9] = TILEP_PART_CLOAK;
     }
 
     // Special case bardings from being cut off.

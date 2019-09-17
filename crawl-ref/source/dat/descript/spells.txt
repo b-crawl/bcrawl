@@ -320,7 +320,7 @@ exploding.
 %%%%
 Conjure Flame spell
 
-Creates a blazing column of flame in a targeted empty location.
+Creates a blazing column of magical flame in a targeted empty location.
 %%%%
 Controlled Blink spell
 
@@ -606,7 +606,7 @@ Hurls an explosive blast of cold.
 %%%%
 Freezing Cloud spell
 
-Conjures up a large cloud of lethally cold vapour.
+Magically chills the air in a large area to lethally cold temperatures.
 %%%%
 Fulminant Prism spell
 
@@ -737,9 +737,9 @@ spell.
 %%%%
 Infestation spell
 
-Calls forth a plague of scarabs, infesting affected creatures for a duration
-depending on power and causing death scarabs to grow and burst from them upon
-death.
+Transforms tiny parasites within affected targets into deadly wasps, which
+will burst forth upon their host's death. At high spell power, more powerful
+wasps may be created.
 %%%%
 Infusion spell
 

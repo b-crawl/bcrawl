@@ -408,7 +408,13 @@ public:
     {
         you.attribute[ATTR_FLIGHT_UNCANCELLABLE] = 1;
         fly_player(pow);
-        return you.airborne();
+        bool flying = you.airborne();
+        if (flying)
+        {
+            you.duration[DUR_SWIFTNESS] = you.duration[DUR_FLIGHT];
+            you.attribute[ATTR_SWIFTNESS] = you.duration[DUR_SWIFTNESS];
+        }
+        return flying;
     }
 };
 

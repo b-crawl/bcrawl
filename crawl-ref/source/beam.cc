@@ -5769,7 +5769,10 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
     case BEAM_INFESTATION:
     {
         const int dur = (5 + random2avg(ench_power / 2, 2)) * BASELINE_DELAY;
-        mon->add_ench(mon_enchant(ENCH_INFESTATION, 0, &you, dur));
+        int degree = 0;   // 0 for Hornet, 1 for Spark Wasp
+        if (x_chance_in_y(ench_power - 65, 135))
+            degree = 1;
+        mon->add_ench(mon_enchant(ENCH_INFESTATION, degree, &you, dur));
         if (simple_monster_message(*mon, " is infested!"))
             obvious_effect = true;
         return MON_AFFECTED;

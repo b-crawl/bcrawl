@@ -499,7 +499,7 @@ static char _deck_hotkey(deck_type deck)
 
 static deck_type _choose_deck(const string title = "Draw")
 {
-    ToggleableMenu deck_menu(MF_SINGLESELECT | MF_ANYPRINTABLE
+    ToggleableMenu deck_menu(MF_SINGLESELECT
             | MF_NO_WRAP_ROWS | MF_TOGGLE_ACTION | MF_ALWAYS_SHOW_MORE);
     {
         ToggleableMenuEntry* me =
@@ -508,9 +508,6 @@ static deck_type _choose_deck(const string title = "Draw")
                                     "Describe which deck?    "
                                     "Cards available",
                                     MEL_TITLE);
-#ifdef USE_TILE_LOCAL
-        me->colour = BLUE;
-#endif
         deck_menu.set_title(me, true, true);
     }
     deck_menu.set_tag("deck");
@@ -694,9 +691,6 @@ static void _draw_stack(int to_stack)
                                     "Describe which deck?    "
                                     "Cards available",
                                     MEL_TITLE);
-#ifdef USE_TILE_LOCAL
-        me->colour = BLUE;
-#endif
         deck_menu.set_title(me, true, true);
     }
     deck_menu.set_tag("deck");

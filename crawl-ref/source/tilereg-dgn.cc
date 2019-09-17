@@ -119,21 +119,9 @@ void DungeonRegion::pack_buffers()
         {
             coord_def gc(x + m_cx_to_gx, y + m_cy_to_gy);
 
-            packed_cell tile_cell = packed_cell(vbuf_cell->tile);
             if (map_bounds(gc))
-            {
-                tile_cell.flv = env.tile_flv(gc);
-                pack_cell_overlays(gc, &tile_cell);
-            }
-            else
-            {
-                tile_cell.flv.floor   = 0;
-                tile_cell.flv.wall    = 0;
-                tile_cell.flv.special = 0;
-                tile_cell.flv.feat    = 0;
-            }
-
-            m_buf_dngn.add(tile_cell, x, y);
+                pack_cell_overlays(coord_def(x, y), m_vbuf);
+            m_buf_dngn.add(vbuf_cell->tile, x, y);
 
             const int fcol = vbuf_cell->flash_colour;
             if (fcol)
@@ -254,10 +242,8 @@ void DungeonRegion::render()
             // center this coord, which is at the top left of gc's cell
             pc.x += dx / 2;
 
-            const coord_def min_pos(sx, sy);
-            const coord_def max_pos(ex, ey);
-            m_tag_font->render_string(pc.x, pc.y, def.text,
-                                      min_pos, max_pos, WHITE, false);
+            const auto text = formatted_string(def.text, WHITE);
+            m_tag_font->render_hover_string(pc.x, pc.y, text);
         }
 }
 
@@ -1004,7 +990,7 @@ bool DungeonRegion::update_tip_text(string &tip)
 #ifdef WIZARD
     if (you.wizard)
     {
-        if (ret)
+        if (!tip.empty())
             tip += "\n\n";
 
         if (you.see_cell(gc))
@@ -1041,7 +1027,7 @@ bool DungeonRegion::update_tip_text(string &tip)
         tip += make_stringf("\nFLV: floor: %d (%s) (%d)"
                             "\n     wall:  %d (%s) (%d)"
                             "\n     feat:  %d (%s) (%d)"
-                            "\n  special:  %d\n",
+                            "\n  special:  %d",
                             env.tile_flv(gc).floor,
                             tile_dngn_name(env.tile_flv(gc).floor),
                             env.tile_flv(gc).floor_idx,

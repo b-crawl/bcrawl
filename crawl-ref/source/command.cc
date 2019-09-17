@@ -465,33 +465,14 @@ static void _handle_FAQ()
     title->colour = YELLOW;
     FAQmenu.set_title(title);
 
-    const int width = get_number_of_cols();
-
     for (unsigned int i = 0, size = question_keys.size(); i < size; i++)
     {
         const char letter = index_to_letter(i);
-
         string question = getFAQ_Question(question_keys[i]);
-        // Wraparound if the question is longer than fits into a line.
-        linebreak_string(question, width - 4);
-        vector<formatted_string> fss;
-        formatted_string::parse_string_to_multiple(question, fss);
-
-        MenuEntry *me;
-        for (unsigned int j = 0; j < fss.size(); j++)
-        {
-            if (j == 0)
-            {
-                me = new MenuEntry(question, MEL_ITEM, 1, letter);
-                me->data = &question_keys[i];
-            }
-            else
-            {
-                question = "    " + fss[j].tostring();
-                me = new MenuEntry(question, MEL_ITEM, 1);
-            }
-            FAQmenu.add_entry(me);
-        }
+        trim_string_right(question);
+        MenuEntry *me = new MenuEntry(question, MEL_ITEM, 1, letter);
+        me->data = &question_keys[i];
+        FAQmenu.add_entry(me);
     }
 
     while (true)
@@ -564,7 +545,7 @@ int show_keyhelp_menu(const vector<formatted_string> &lines,
     cmd_help.set_more();
 
     for (unsigned i = 0; i < lines.size(); ++i)
-        cmd_help.add_formatted_string(lines[i], true);
+        cmd_help.add_formatted_string(lines[i], i < lines.size()-1);
 
     cmd_help.show();
 
@@ -573,7 +554,8 @@ int show_keyhelp_menu(const vector<formatted_string> &lines,
 
 void show_specific_help(const string &key)
 {
-    const string help = getHelpString(key);
+    string help = getHelpString(key);
+    trim_string_right(help);
     vector<formatted_string> formatted_lines;
     for (const string &line : split_string("\n", help, false, true))
         formatted_lines.push_back(formatted_string::parse_string(line));

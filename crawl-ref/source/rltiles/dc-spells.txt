@@ -45,6 +45,7 @@ discord DISCORD
 enslavement ENSLAVEMENT
 haste HASTE
 infusion INFUSION
+flaming_arrows FLAMING_ARROWS
 invisibility INVISIBILITY
 shackle SHACKLE
 slow SLOW

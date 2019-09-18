@@ -203,6 +203,23 @@ spret cast_infusion(int pow, bool fail)
     return spret::success;
 }
 
+spret cast_flaming_arrows(int pow, bool fail)
+{
+    fail_check();
+    if (!you.duration[DUR_FIRE_ARROW])
+        mpr("You begin infusing your projectiles with flame.");
+    else
+        mpr("You extend your fiery infusion's duration.");
+
+    you.increase_duration(DUR_FIRE_ARROW,  8 + roll_dice(2, pow/2), 30);
+    you.props["fire_arrow_power"] = pow;
+    
+    if(you.duration[DUR_PIERCING_SHOT])
+        you.duration[DUR_PIERCING_SHOT] = 1;
+
+    return spret::success;
+}
+
 spret cast_song_of_slaying(int pow, bool fail)
 {
     fail_check();
@@ -301,5 +318,9 @@ spret cast_piercing_shot(int pow, bool fail)
     you.attribute[ATTR_PORTAL_PROJECTILE] = 0;
     you.duration[DUR_PORTAL_PROJECTILE] = 0;
     you.increase_duration(DUR_PIERCING_SHOT, 3 + random2(pow / 2) + random2(pow / 5), 50);
+    
+    if(you.duration[DUR_FIRE_ARROW])
+        you.duration[DUR_FIRE_ARROW] = 1;
+    
     return spret::success;
 }

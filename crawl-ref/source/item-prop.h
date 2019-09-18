@@ -170,6 +170,8 @@ launch_retval is_launched(const actor *actor, const item_def *launcher,
 bool ammo_never_destroyed(const item_def &missile) PURE;
 int  ammo_type_damage(int missile_type) PURE;
 
+int thrown_missile_base_delay (int base_dmg);
+int thrown_missile_min_delay (int base_dmg);
 
 reach_type weapon_reach(const item_def &item) PURE;
 

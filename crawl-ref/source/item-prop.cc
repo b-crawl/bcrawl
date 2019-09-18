@@ -678,6 +678,28 @@ static const missile_def Missile_prop[] =
     { MI_TOMAHAWK,      "tomahawk",      6, 20, 5,  true  },
 };
 
+int thrown_missile_base_delay (int base_dmg)
+{
+    switch(base_dmg)
+    {
+    case 2:
+        return 10;
+    default:
+        return (10 + base_dmg / 2);
+    }
+}
+
+int thrown_missile_min_delay (int base_dmg)
+{
+    switch(base_dmg)
+    {
+    case 2:
+        return 5;
+    default:
+        return 7;
+    }
+}
+
 struct food_def
 {
     int         id;

@@ -73,9 +73,6 @@ static const int STEALTH_PIP = 50;
 static const int FASTEST_PLAYER_MOVE_SPEED = 6;
 // relevant for swiftness, etc
 
-// Min delay for thrown projectiles.
-static const int FASTEST_PLAYER_THROWING_SPEED = 7;
-
 class targeter;
 class Delay;
 

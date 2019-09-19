@@ -1381,7 +1381,7 @@ static string _describe_weapon(const item_def &item, bool verbose)
 
         description +=
             make_stringf(" '%s' category. ",
-                    item.sub_type == WPN_BLOWGUN ? "blowgun" : skill_name(skill));
+                    item.sub_type == WPN_BLOWGUN ? "Blowguns" : skill_name(skill));
 
         description += _handedness_string(item);
 

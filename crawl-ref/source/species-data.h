@@ -704,7 +704,7 @@ static const map<species_type, species_def> species_data =
       { MUT_ACUTE_VISION, 1, 1 }, { MUT_SLOW_METABOLISM, 2, 1 }, },
     {},
     {},
-    { JOB_ASSASSIN, JOB_ENCHANTER, JOB_WIZARD, JOB_EARTH_ELEMENTALIST, JOB_VENOM_MAGE },
+    { JOB_ASSASSIN, JOB_ENCHANTER, JOB_EARTH_ELEMENTALIST, JOB_VENOM_MAGE },
     { SK_SHORT_BLADES, SK_SLINGS, SK_BOWS, SK_CROSSBOWS },
 } },
 

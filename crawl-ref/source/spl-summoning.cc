@@ -2456,7 +2456,6 @@ spret cast_haunt(int pow, const coord_def& where, god_type god, bool fail)
 
 static spell_type servitor_spells[] =
 {
-    SPELL_IOOD,
     SPELL_IRON_SHOT,
     SPELL_FIREBALL,
     SPELL_BOLT_OF_FIRE,
@@ -2495,8 +2494,9 @@ static void _init_servitor_monster(monster &mon, const actor& caster)
     }
     else
     {
-        int max_power = 30;
-        spell_type chosen_spell = SPELL_ISKENDERUNS_MYSTIC_BLAST;
+        spell_type default_spell = SPELL_IOOD;
+        spell_type chosen_spell = default_spell;
+        int max_power = calc_spell_power(default_spell, true);
         
         for (const spell_type spell : servitor_spells)
             if(caster.has_spell(spell) && raw_spell_fail(spell) < 50)

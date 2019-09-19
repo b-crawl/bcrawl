@@ -247,14 +247,16 @@ random_var player::attack_delay(const item_def *projectile, bool rescale) const
     {
         // Thrown weapons use 10 + projectile damage to determine base delay.
         const skill_type wpn_skill = SK_THROWING;
-        const int projectile_delay = 10 + property(*projectile, PWPN_DAMAGE) / 2;
-        attk_delay = random_var(projectile_delay);
-        attk_delay -= div_rand_round(random_var(you.skill(wpn_skill, 10)),
-                                     DELAY_SCALE);
+        
+        int base_dmg = property(*projectile, PWPN_DAMAGE);
+        int base_proj_delay = thrown_missile_base_delay(base_dmg);
+        int min_proj_delay = thrown_missile_min_delay(base_dmg);
+                
+        attk_delay = random_var(base_proj_delay);
+        attk_delay -= div_rand_round(random_var(you.skill(wpn_skill, 10)), DELAY_SCALE);
 
         // apply minimum to weapon skill modification
-        attk_delay = rv::max(attk_delay,
-                random_var(FASTEST_PLAYER_THROWING_SPEED));
+        attk_delay = rv::max(attk_delay, random_var(min_proj_delay));
     }
     else if (!projectile && !weap)
     {

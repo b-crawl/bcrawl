@@ -2456,39 +2456,16 @@ spret cast_haunt(int pow, const coord_def& where, god_type god, bool fail)
 
 static spell_type servitor_spells[] =
 {
-    // primary spells
-    SPELL_LEHUDIBS_CRYSTAL_SPEAR,
     SPELL_IOOD,
     SPELL_IRON_SHOT,
     SPELL_BOLT_OF_FIRE,
     SPELL_BOLT_OF_COLD,
     SPELL_POISON_ARROW,
-    SPELL_LIGHTNING_BOLT,
     SPELL_BOLT_OF_MAGMA,
+    SPELL_LIGHTNING_BOLT,
     SPELL_BOLT_OF_DRAINING,
-    SPELL_VENOM_BOLT,
-    SPELL_THROW_ICICLE,
-    SPELL_STONE_ARROW,
-    SPELL_ISKENDERUNS_MYSTIC_BLAST,
-    // secondary spells
-    SPELL_CONJURE_BALL_LIGHTNING,
-    SPELL_FIREBALL,
     SPELL_AIRSTRIKE,
-    SPELL_LRD,
     SPELL_FREEZING_CLOUD,
-    SPELL_POISONOUS_CLOUD,
-    SPELL_FORCE_LANCE,
-    SPELL_DAZZLING_SPRAY,
-    SPELL_MEPHITIC_CLOUD,
-    // fallback spells
-    SPELL_STICKY_FLAME,
-    SPELL_THROW_FLAME,
-    SPELL_THROW_FROST,
-    SPELL_FREEZE,
-    SPELL_FLAME_TONGUE,
-    SPELL_STING,
-    SPELL_SANDBLAST,
-    SPELL_MAGIC_DART,
 };
 
 /**
@@ -2501,33 +2478,55 @@ static spell_type servitor_spells[] =
 static void _init_servitor_monster(monster &mon, const actor& caster)
 {
     const monster* caster_mon = caster.as_monster();
-    const int pow = caster_mon ?
-                        6 * caster_mon->spell_hd(SPELL_SPELLFORGED_SERVITOR) :
-                        calc_spell_power(SPELL_SPELLFORGED_SERVITOR, true);
-
-    mon.set_hit_dice(9 + div_rand_round(pow, 14));
-    mon.max_hit_points = mon.hit_points = 60 + roll_dice(7, 5); // 67-95
-                                            // mhp doesn't vary with HD
+    int pow = 0;
     int spell_levels = 0;
 
-    for (const spell_type spell : servitor_spells)
+    if (caster_mon)
     {
-        if (caster.has_spell(spell)
-            && (caster_mon || raw_spell_fail(spell) < 50))
-        {
-            mon.spells.emplace_back(spell, 0, MON_SPELL_WIZARD);
-            spell_levels += spell_difficulty(spell);
-        }
+        pow = 6 * caster_mon->spell_hd(SPELL_SPELLFORGED_SERVITOR);
+    
+        for (const spell_type spell : servitor_spells)
+            if (caster.has_spell(spell)
+                && (caster_mon || raw_spell_fail(spell) < 50))
+            {
+                mon.spells.emplace_back(spell, 0, MON_SPELL_WIZARD);
+                spell_levels += spell_difficulty(spell);
+            }
     }
+    else
+    {
+        int max_power = 30;
+        spell_type chosen_spell = SPELL_ISKENDERUNS_MYSTIC_BLAST;
+        
+        for (const spell_type spell : servitor_spells)
+            {
+            int conj_power = calc_spell_power(spell, true);
+            if (conj_power > max_power)
+                {
+                chosen_spell = spell;
+                max_power = conj_power;
+                }
+            }
+        
+        mon.spells.emplace_back(chosen_spell, 0, MON_SPELL_WIZARD);
+        spell_levels = spell_difficulty(chosen_spell);
+        
+        int summon_power = calc_spell_power(SPELL_SPELLFORGED_SERVITOR, true);
+        pow = (summon_power + max_power)/2;
+    }
+    
+    mon.set_hit_dice(4 + div_rand_round(pow, 7));
+    mon.max_hit_points = mon.hit_points = 60 + roll_dice(7, 5); // 67-95
+                                            // mhp doesn't vary with HD
 
     // Fix up frequencies now that we know the total number of spell levels.
     const int base_freq = caster_mon ? 67 : 200;
     for (auto& slot : mon.spells)
     {
-        slot.freq = max(1, div_rand_round(spell_difficulty(slot.spell)
-                                          * base_freq,
+        slot.freq = max(1, div_rand_round(spell_difficulty(slot.spell) * base_freq,
                                           spell_levels));
     }
+
     mon.props[CUSTOM_SPELLS_KEY].get_bool() = true;
 }
 

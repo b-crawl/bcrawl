@@ -1862,6 +1862,9 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
     case SPELL_INFUSION:
         return cast_infusion(powc, fail);
 
+    case SPELL_FLAMING_ARROWS:
+        return cast_flaming_arrows(powc, fail);
+
     case SPELL_SONG_OF_SLAYING:
         return cast_song_of_slaying(powc, fail);
 
@@ -2300,7 +2303,6 @@ const set<spell_type> removed_spells =
     SPELL_CONTROL_TELEPORT,
     SPELL_DEMONIC_HORDE,
     SPELL_EVAPORATE,
-    SPELL_FIRE_BRAND,
     SPELL_FORCEFUL_DISMISSAL,
     SPELL_FREEZING_AURA,
     SPELL_FULSOME_DISTILLATION,

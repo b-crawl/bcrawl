@@ -976,18 +976,18 @@ static const struct spell_desc spelldata[] =
     TILEG_CORPSE_ROT,
 },
 
-#if TAG_MAJOR_VERSION == 34
 {
-    SPELL_FIRE_BRAND, "Fire Brand",
+    SPELL_FLAMING_ARROWS, "Flaming Arrows",
     SPTYP_CHARMS | SPTYP_FIRE,
-    SPFLAG_HELPFUL,
+    SPFLAG_UTILITY,
     2,
-    200,
+    100,
     -1, -1,
     2, 0,
-    TILEG_ERROR,
+    TILEG_FLAMING_ARROWS,
 },
 
+#if TAG_MAJOR_VERSION == 34
 {
     SPELL_FREEZING_AURA, "Freezing Aura",
     SPTYP_CHARMS | SPTYP_ICE,

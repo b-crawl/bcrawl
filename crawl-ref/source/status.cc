@@ -698,6 +698,13 @@ bool fill_status_info(int status, status_info& inf)
         break;
     }
 
+    case DUR_FIRE_ARROW:
+    {
+        if (!enough_mp(2, true, false))
+            inf.light_colour = DARKGREY;
+        break;
+    }
+
     case STATUS_ORB:
     {
         if (player_has_orb())

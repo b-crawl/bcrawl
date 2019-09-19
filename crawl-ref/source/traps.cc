@@ -627,7 +627,7 @@ void trap_def::trigger(actor& triggerer)
             noisy(40, pos, msg.c_str(), source);
         }
 
-        if (you_trigger)
+        if (you_trigger || in_sight)
             you.sentinel_mark(true);
         break;
 

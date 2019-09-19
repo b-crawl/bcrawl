@@ -290,7 +290,28 @@ bool ranged_attack::handle_phase_hit()
     }
     else
     {
-        damage_done = calc_damage();
+        damage_done = 0;
+
+        if (attacker->is_player() && you.duration[DUR_FIRE_ARROW])
+            if (enough_mp(2, true, false))
+                {
+                    int pow = you.props["fire_arrow_power"].get_int();
+                    int base_dmg = div_rand_round(pow + 12, 5);
+                    
+                    bolt beam;
+                    beam.flavour = BEAM_FIRE;
+                    beam.thrower = KILL_YOU;
+                    
+                    int real_dmg = mons_adjust_flavoured(defender->as_monster(), beam, base_dmg);
+                    real_dmg = defender->apply_ac(real_dmg);
+                    
+                    dec_mp(2);
+                    if (real_dmg > 0)
+                        damage_done += real_dmg;
+                }
+
+        damage_done += calc_damage();       
+        
         if (damage_done > 0 || projectile->is_type(OBJ_MISSILES, MI_NEEDLE))
         {
             if (!handle_phase_damaged())

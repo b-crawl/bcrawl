@@ -929,7 +929,7 @@ static int _item_training_target(const item_def &item)
     else if (is_shield(item))
         return round(you.get_shield_skill_to_offset_penalty(item) * 10);
     else if (item.base_type == OBJ_MISSILES && throw_dam)
-        return (((10 + throw_dam / 2) - FASTEST_PLAYER_THROWING_SPEED) * 2) * 10;
+        return ((thrown_missile_base_delay(throw_dam) - thrown_missile_min_delay(throw_dam)) * 2) * 10;
     else
         return 0;
 }
@@ -1381,7 +1381,7 @@ static string _describe_weapon(const item_def &item, bool verbose)
 
         description +=
             make_stringf(" '%s' category. ",
-                    item.sub_type == WPN_BLOWGUN ? "blowgun" : skill_name(skill));
+                    item.sub_type == WPN_BLOWGUN ? "Blowguns" : skill_name(skill));
 
         description += _handedness_string(item);
 
@@ -1519,7 +1519,7 @@ static string _describe_ammo(const item_def &item)
     const int dam = property(item, PWPN_DAMAGE);
     if (dam)
     {
-        const int throw_delay = (10 + dam / 2);
+        const int throw_delay = thrown_missile_base_delay(dam);
         const int target_skill = _item_training_target(item);
         const bool could_set_target = _could_set_training_target(item, true);
 
@@ -1529,7 +1529,7 @@ static string _describe_ammo(const item_def &item)
                 "is reached at skill level %d.",
             dam,
             (float) throw_delay / 10,
-            (float) FASTEST_PLAYER_THROWING_SPEED / 10,
+            (float) thrown_missile_min_delay(dam) / 10,
             target_skill / 10
         );
 

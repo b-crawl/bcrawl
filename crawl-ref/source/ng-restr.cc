@@ -41,8 +41,7 @@ static bool _banned_combination(job_type job, species_type species)
             return true;
         }
     case SP_SPRIGGAN:
-        if (job == JOB_CONJURER
-            || job == JOB_FIRE_ELEMENTALIST)
+        if (job == JOB_CONJURER)
         {
             return true;
         }

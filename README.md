@@ -71,6 +71,7 @@ Pull requests for new content are welcome.
   - v1.9.3: When in Zot or carrying the Orb, teleports from stairs and traps are replaced by blinks.
   - v1.11: Seeded runs are merged from DCSS.
   - v1.12.1: Taking stairs while on D:1 or D:2 can't teleport players.
+  - v1.14.2: Monsters stepping on visible alarm traps will mark the player.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -110,6 +111,7 @@ Pull requests for new content are welcome.
   - v1.12.3: Vine Stalker is reworked, evolving into a Mana Stalker, Twilight Stalker, or Jungle Stalker at level 8. Dusk Walker is merged into Twilight Stalker.
   - v1.13.4: Kobolds have some better aptitudes, better stat gain, and the Talons 1 mutation.
   - v1.13.4: Formicids have a +0 bows aptitude.
+  - v1.14.2: Spriggans are worse with ranged weapons.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -121,6 +123,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Time Stop (L8 Charms/Translocations) lets you instantly cast spells below L5.
   - v1.12.1: Mana Rupture (L7 Conjurations/Hexes) creates an explosion that does damage proportional to the target's magic resistance.
   - v1.12.1: Icicle Burst (L7 Conjurations/Ice) shoots several weak icicles. It's similar to the Scattershot wand, but it shoots icicles (40% cold), it has lower accuracy, and it's less affected by monster AC.
+  - v1.14.2: Flaming Arrows (L2 Charms/Fire) adds bonus damage to ranged attacks, at the cost of 2 MP per projectile.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.
@@ -157,6 +160,8 @@ Pull requests for new content are welcome.
   - v1.12.1: Static Discharge is just Air, instead of Air/Conjurations.
   - v1.14.1: Infestation is now a level 6 Hexes/Poison/Transmutation spell that creates Hornets or Spark Wasps depending on spell power.
   - v1.14.1: Freezing Cloud is now Ice/Air.
+  - v1.14.2: Regeneration ends when at max HP.
+  - v1.14.2: Spellforged Servitors created by players have one spell, which is the spell from its list of possible spells that the player has the highest spell power for. That spell's power affects the Servitor's strength.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -229,6 +234,7 @@ Pull requests for new content are welcome.
   - v1.13.5: Needles of paralysis are replaced by more needles of confusion and frenzy.
   - v1.14: Blowguns use Fighting skill instead of Throwing skill.
   - v1.14.1: Potions of flight give a Swiftness effect in addition to flight.
+  - v1.14.2: Thrown stones have a lower base delay (1.1 -> 1) and min delay (0.7 -> 0.5).
 
 #### Removed Items
   - Amulet of Harm

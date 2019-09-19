@@ -1063,10 +1063,12 @@ static int _player_bonus_regen()
 
     // Trog's Hand is handled separately so that it will bypass slow
     // regeneration, and it overrides the spell.
-    if (you.duration[DUR_REGENERATION]
-        && !you.duration[DUR_TROGS_HAND])
+    if (you.duration[DUR_REGENERATION])
     {
-        rr += 100;
+        if (you.hp = you.hp_max)
+            you.duration[DUR_REGENERATION] = 1;
+        if (!you.duration[DUR_TROGS_HAND])
+            rr += 100;
     }
 
     // Jewellery.

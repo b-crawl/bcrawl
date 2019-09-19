@@ -164,12 +164,7 @@ TilesFramework::TilesFramework() :
     m_fullscreen(false),
     m_need_redraw(false),
     m_active_layer(LAYER_CRT),
-    m_crt_font(-1),
-    m_msg_font(-1),
-    m_tip_font(-1),
-    m_lbl_font(-1),
     m_mouse(-1, -1),
-    m_last_tick_moved(0),
     m_last_tick_redraw(0)
 {
 }
@@ -181,8 +176,7 @@ TilesFramework::~TilesFramework()
 bool TilesFramework::fonts_initialized()
 {
     // TODO should in principle check the m_fonts vector as well
-    return !(m_crt_font == -1 || m_msg_font == -1
-                                    || m_tip_font == -1 || m_lbl_font == -1);
+    return m_crt_font && m_msg_font && m_stat_font && m_tip_font && m_lbl_font;
 }
 
 static void _init_consoles()
@@ -288,7 +282,7 @@ void TilesFramework::shutdown()
 
 void TilesFramework::draw_doll_edit()
 {
-    DollEditRegion reg(m_image, m_fonts[m_msg_font].font);
+    DollEditRegion reg(m_image, m_msg_font);
     reg.run();
 }
 
@@ -398,20 +392,18 @@ bool TilesFramework::initialise()
                               Options.tile_font_crt_size, true);
     m_msg_font    = load_font(Options.tile_font_msg_file.c_str(),
                               Options.tile_font_msg_size, true);
-    int stat_font = load_font(Options.tile_font_stat_file.c_str(),
+    m_stat_font   = load_font(Options.tile_font_stat_file.c_str(),
                               Options.tile_font_stat_size, true);
     m_tip_font    = load_font(Options.tile_font_tip_file.c_str(),
                               Options.tile_font_tip_size, true);
     m_lbl_font    = load_font(Options.tile_font_lbl_file.c_str(),
                               Options.tile_font_lbl_size, true);
 
-    if (!fonts_initialized() || stat_font == -1)
+    if (!fonts_initialized())
         return false;
 
-    if (tiles.is_using_small_layout())
-        m_init = TileRegionInit(m_image, m_fonts[m_crt_font].font, TILE_X, TILE_Y);
-    else
-        m_init = TileRegionInit(m_image, m_fonts[m_lbl_font].font, TILE_X, TILE_Y);
+    const auto font = tiles.is_using_small_layout() ? m_crt_font : m_lbl_font;
+    m_init = TileRegionInit(m_image, font, TILE_X, TILE_Y);
     m_region_tile = new DungeonRegion(m_init);
     m_region_tab  = new TabbedRegion(m_init);
     m_region_inv  = new InventoryRegion(m_init);
@@ -458,10 +450,9 @@ bool TilesFramework::initialise()
     m_region_tab->activate_tab(TAB_ITEM);
 #endif
 
-    m_region_msg  = new MessageRegion(m_fonts[m_msg_font].font);
-    m_region_stat = new StatRegion(m_fonts[stat_font].font);
-    m_fonts[stat_font].font->char_width();
-    m_region_crt  = new CRTRegion(m_fonts[m_crt_font].font);
+    m_region_msg  = new MessageRegion(m_msg_font);
+    m_region_stat = new StatRegion(m_stat_font);
+    m_region_crt  = new CRTRegion(m_crt_font);
 
     m_layers[LAYER_NORMAL].m_regions.push_back(m_region_tile);
     m_layers[LAYER_NORMAL].m_regions.push_back(m_region_msg);
@@ -484,14 +475,14 @@ void TilesFramework::reconfigure_fonts()
         finfo.font->configure_font();
 }
 
-int TilesFramework::load_font(const char *font_file, int font_size,
+FontWrapper* TilesFramework::load_font(const char *font_file, int font_size,
                               bool default_on_fail)
 {
     for (unsigned int i = 0; i < m_fonts.size(); i++)
     {
         font_info &finfo = m_fonts[i];
         if (finfo.name == font_file && finfo.size == font_size)
-            return i;
+            return finfo.font;
     }
 
     FontWrapper *font = FontWrapper::create();
@@ -509,7 +500,7 @@ int TilesFramework::load_font(const char *font_file, int font_size,
             return load_font(MONOSPACED_FONT, 12, false);
         }
         else
-            return -1;
+            return nullptr;
     }
 
     font_info finfo;
@@ -518,7 +509,7 @@ int TilesFramework::load_font(const char *font_file, int font_size,
     finfo.size = font_size;
     m_fonts.push_back(finfo);
 
-    return m_fonts.size() - 1;
+    return font;
 }
 void TilesFramework::load_dungeon(const crawl_view_buffer &vbuf,
                                   const coord_def &gc)
@@ -625,8 +616,7 @@ static unsigned int _timer_callback(unsigned int ticks, void *param)
     // force the event loop to break
     wm->raise_custom_event();
 
-    unsigned int res = Options.tile_tooltip_ms;
-    return res;
+    return 0;
 }
 
 int TilesFramework::getch_ck()
@@ -643,8 +633,6 @@ int TilesFramework::getch_ck()
 
     const unsigned int ticks_per_screen_redraw = Options.tile_update_rate;
 
-    unsigned int res = Options.tile_tooltip_ms;
-    unsigned int timer_id = wm->set_timer(res, &_timer_callback);
 
     m_tooltip.clear();
     m_region_msg->alt_text().clear();
@@ -715,11 +703,13 @@ int TilesFramework::getch_ck()
 
                 // If you hit a key, disable tooltips until the mouse
                 // is moved again.
-                m_last_tick_moved = UINT_MAX;
+                m_show_tooltip = false;
+                wm->remove_timer(m_tooltip_timer_id);
                 break;
 
             case WME_KEYUP:
-                m_last_tick_moved = UINT_MAX;
+                m_show_tooltip = false;
+                wm->remove_timer(m_tooltip_timer_id);
                 break;
 
             case WME_MOUSEMOTION:
@@ -735,11 +725,6 @@ int TilesFramework::getch_ck()
                         continue;
 
                     // Record mouse pos for tooltip timer
-                    if (m_mouse.x != (int)event.mouse_event.px
-                        || m_mouse.y != (int)event.mouse_event.py)
-                    {
-                        m_last_tick_moved = ticks;
-                    }
                     m_mouse.x = event.mouse_event.px;
                     m_mouse.y = event.mouse_event.py;
 
@@ -776,21 +761,16 @@ int TilesFramework::getch_ck()
                         prev_msg_alt_text = m_region_msg->alt_text();
                         set_need_redraw();
                     }
+
+                    wm->remove_timer(m_tooltip_timer_id);
+                    m_tooltip_timer_id = wm->set_timer(Options.tile_tooltip_ms, &_timer_callback);
+                    m_show_tooltip = false;
                 }
                break;
 
             case WME_MOUSEBUTTONUP:
-                {
-                    key = handle_mouse(event.mouse_event);
-                    m_last_tick_moved = UINT_MAX;
-                }
-                break;
-
             case WME_MOUSEBUTTONDOWN:
-                {
-                    key = handle_mouse(event.mouse_event);
-                    m_last_tick_moved = UINT_MAX;
-                }
+                key = handle_mouse(event.mouse_event);
                 break;
 
             case WME_QUIT:
@@ -820,17 +800,14 @@ int TilesFramework::getch_ck()
             case WME_CUSTOMEVENT:
             default:
                 // This is only used to refresh the tooltip.
+                m_show_tooltip = true;
                 break;
             }
         }
 
         if (!mouse_target_mode)
         {
-            const bool timeout = (ticks > m_last_tick_moved
-                                  && (ticks - m_last_tick_moved
-                                      > (unsigned int)Options.tile_tooltip_ms));
-
-            if (timeout)
+            if (m_show_tooltip)
             {
                 tiles.clear_text_tags(TAG_CELL_DESC);
                 if (Options.tile_tooltip_ms > 0 && m_tooltip.empty())
@@ -867,8 +844,6 @@ int TilesFramework::getch_ck()
 
     // We got some input, so we'll probably have to redraw something.
     set_need_redraw();
-
-    wm->remove_timer(timer_id);
 
     return key;
 }
@@ -1475,8 +1450,7 @@ void TilesFramework::redraw()
         const int buffer = 5;
         const coord_def min_pos = coord_def() + buffer;
         const coord_def max_pos = m_windowsz - buffer;
-        FontWrapper *font = m_fonts[m_tip_font].font;
-        font->render_tooltip(m_mouse.x, m_mouse.y, formatted_string(m_tooltip),
+        m_tip_font->render_tooltip(m_mouse.x, m_mouse.y, formatted_string(m_tooltip),
                 min_pos, max_pos);
     }
     wm->swap_buffers();

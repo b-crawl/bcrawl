@@ -21,6 +21,7 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Flames
     SPELL_FLAME_TONGUE,
+    SPELL_FLAMING_ARROWS,
     SPELL_CONJURE_FLAME,
     SPELL_INNER_FLAME,
     SPELL_STICKY_FLAME,

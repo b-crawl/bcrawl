@@ -2515,7 +2515,7 @@ static void _init_servitor_monster(monster &mon, const actor& caster)
         pow = (summon_power + max_power)/2;
     }
     
-    mon.set_hit_dice(9 + div_rand_round(pow, 14));
+    mon.set_hit_dice(4 + div_rand_round(pow, 7));
     mon.max_hit_points = mon.hit_points = 60 + roll_dice(7, 5); // 67-95
                                             // mhp doesn't vary with HD
 

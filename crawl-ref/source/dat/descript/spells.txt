@@ -1287,9 +1287,8 @@ require evocation skill to trigger will not be active.
 Spellforged Servitor spell
 
 Summons an extraplanar elemental and binds it to a durable shell forged from
-the caster's own magic. The servitor is capable of unleashing some of the
-destructive spells known to its creator, though the strongest and most volatile
-of magics cannot be imbued in this fashion.
+the caster's own magic. The servitor is capable of unleashing whichever type of
+destructive magic its creator is most skilled with, though the strongest of magics cannot be imbued into it.
 %%%%
 Spider Form spell
 

@@ -2458,6 +2458,7 @@ static spell_type servitor_spells[] =
 {
     SPELL_IOOD,
     SPELL_IRON_SHOT,
+    SPELL_FIREBALL,
     SPELL_BOLT_OF_FIRE,
     SPELL_BOLT_OF_COLD,
     SPELL_POISON_ARROW,
@@ -2486,8 +2487,7 @@ static void _init_servitor_monster(monster &mon, const actor& caster)
         pow = 6 * caster_mon->spell_hd(SPELL_SPELLFORGED_SERVITOR);
     
         for (const spell_type spell : servitor_spells)
-            if (caster.has_spell(spell)
-                && (caster_mon || raw_spell_fail(spell) < 50))
+            if (caster.has_spell(spell))
             {
                 mon.spells.emplace_back(spell, 0, MON_SPELL_WIZARD);
                 spell_levels += spell_difficulty(spell);
@@ -2499,14 +2499,15 @@ static void _init_servitor_monster(monster &mon, const actor& caster)
         spell_type chosen_spell = SPELL_ISKENDERUNS_MYSTIC_BLAST;
         
         for (const spell_type spell : servitor_spells)
-            {
-            int conj_power = calc_spell_power(spell, true);
-            if (conj_power > max_power)
+            if(caster.has_spell(spell) && raw_spell_fail(spell) < 50)
                 {
-                chosen_spell = spell;
-                max_power = conj_power;
+                int conj_power = calc_spell_power(spell, true);
+                if (conj_power > max_power)
+                    {
+                    chosen_spell = spell;
+                    max_power = conj_power;
+                    }
                 }
-            }
         
         mon.spells.emplace_back(chosen_spell, 0, MON_SPELL_WIZARD);
         spell_levels = spell_difficulty(chosen_spell);

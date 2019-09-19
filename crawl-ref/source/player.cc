@@ -1065,7 +1065,7 @@ static int _player_bonus_regen()
     // regeneration, and it overrides the spell.
     if (you.duration[DUR_REGENERATION])
     {
-        if (you.hp = you.hp_max)
+        if (you.hp == you.hp_max)
             you.duration[DUR_REGENERATION] = 1;
         if (!you.duration[DUR_TROGS_HAND])
             rr += 100;

@@ -369,15 +369,24 @@ static void _SINGING_SWORD_melee_effects(item_def* weapon, actor* attacker,
                                          actor* defender, bool mondied,
                                          int dam)
 {
-    int tension = get_tension(GOD_NO_GOD);
-    int tier = (tension <= 0) ? 1 : (tension < 40) ? 2 : 3;
-    dprf(DIAG_COMBAT, "Singing sword tension: %d; tier: %d", tension, tier);
+    int tier;
 
-    if (silenced(you.pos()))
+    if (attacker->is_player())
+        tier = max(1, min(4, 1 + get_tension(GOD_NO_GOD) / 20));
+    // Don't base the sword on player state when the player isn't wielding it.
+    else
+        tier = 1;
+
+    if (silenced(attacker->pos()))
         tier = 0;
 
-    // not as spammy at low tension
-    if (!x_chance_in_y(5, (tier == 1) ? 1000 : (tier == 2) ? 100 : 10))
+    dprf(DIAG_COMBAT, "Singing sword tension: %d, tier: %d",
+                attacker->is_player() ? get_tension(GOD_NO_GOD) : -1, tier);
+
+    // Not as spammy at low tension. Max chance reached at tier 3, allowing
+    // tier 0 to have a high chance so that the sword is likely to express its
+    // unhappiness with being silenced.
+    if (!x_chance_in_y(6, (tier == 1) ? 24: (tier == 2) ? 16: 12))
         return;
 
     if (tier == 3 && one_chance_in(10))
@@ -390,7 +399,7 @@ static void _SINGING_SWORD_melee_effects(item_def* weapon, actor* attacker,
 
     const int loudness[] = {0, 0, 20, 30, 40};
 
-    item_noise(*weapon, msg, loudness[tier]);
+    item_noise(*weapon, *attacker, msg, loudness[tier]);
 
     if (tier < 3)
         return; // no damage on low tiers

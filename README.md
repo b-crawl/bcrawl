@@ -62,6 +62,11 @@ Pull requests for new content are welcome.
   - v1.12.1: Wizards start with a plain staff.
   - v1.12.1: Venom mages start with a potion of berserk rage and a potion of degeneration. (This lets slow species kill oozes on D1.)
   - v1.12.1: Archaeologists start with a whip instead of +1 gloves.
+  - v1.14.2: Fire Elementalists start with Flaming Arrows.
+  - v1.14.3: Fire Elementalists start with 40 stones.
+  - v1.14.3: Ice Elementalists start with 1 charge of Iceblast.
+  - v1.14.3: Conjurers start with a potion of magic.
+  - v1.14.3: Air Elementalists start with a potion of flight.
 
 #### Features
   - All items are automatically identified if the player has a rune.

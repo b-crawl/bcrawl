@@ -209,6 +209,7 @@ Pull requests for new content are welcome.
   - v1.14: Hepliaklqana's Transference ability costs much less piety, but doesn't gain the effect of draining enemies.
   - v1.14: Hepliaklqana's Knight ancestor's first level gets a war axe of flaming instead of a flail.
   - v1.14: Hepliaklqana's Idealise ability is replaced by Incarnate, which gives +20% max HP, healing and/or mana, and increases some skills to at least your Invocations skill. Knights give HP, Fighting, Armour, Shields, and Axes; Battlemages give HP, MP, Conjurations, Earth Magic, Fire Magic, and Staves; Hexers give MP, Spellcasting, Hexes, Charms, and Evocations.
+  - v1.14.3: Demigods can walk through plants at lower (** -> *) piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

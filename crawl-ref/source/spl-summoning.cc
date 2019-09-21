@@ -2458,7 +2458,6 @@ static spell_type servitor_spells[] =
 {
     SPELL_IRON_SHOT,
     SPELL_FIREBALL,
-    SPELL_BOLT_OF_FIRE,
     SPELL_BOLT_OF_COLD,
     SPELL_POISON_ARROW,
     SPELL_BOLT_OF_MAGMA,
@@ -2499,15 +2498,14 @@ static void _init_servitor_monster(monster &mon, const actor& caster)
         int max_power = calc_spell_power(default_spell, true);
         
         for (const spell_type spell : servitor_spells)
-            if(caster.has_spell(spell) && raw_spell_fail(spell) < 50)
+            {
+            int conj_power = calc_spell_power(spell, true);
+            if (conj_power > max_power)
                 {
-                int conj_power = calc_spell_power(spell, true);
-                if (conj_power > max_power)
-                    {
-                    chosen_spell = spell;
-                    max_power = conj_power;
-                    }
+                chosen_spell = spell;
+                max_power = conj_power;
                 }
+            }
         
         mon.spells.emplace_back(chosen_spell, 0, MON_SPELL_WIZARD);
         spell_levels = spell_difficulty(chosen_spell);

@@ -166,7 +166,8 @@ Pull requests for new content are welcome.
   - v1.14.1: Infestation is now a level 6 Hexes/Poison/Transmutation spell that creates Hornets or Spark Wasps depending on spell power.
   - v1.14.1: Freezing Cloud is now Ice/Air.
   - v1.14.2: Regeneration ends when at max HP.
-  - v1.14.2: Spellforged Servitors created by players have one spell, which is the spell from its list of possible spells that the player has the highest spell power for. That spell's power affects the Servitor's strength. The default spell is Orb of Destruction; others must be in the player's spell list.
+  - v1.14.2: Spellforged Servitors created by players have one spell, which is the spell from its list of possible spells that the player has the highest spell power for. That spell's power affects the Servitor's strength.
+  - v1.14.3: Spellforged Servitors can have spells that are not in the player's spell list.
 
 #### Removed Spells
   - Summon Guardian Golem

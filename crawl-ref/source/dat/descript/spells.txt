@@ -1333,7 +1333,7 @@ is decreased by one for every creature it strikes.
 %%%%
 Steam Barrier spell
 
-Causes the caster's body to emit steam, providing some resistance to attacks and fire,
+Causes the caster's body to emit strangely viscous steam, providing some resistance to attacks and fire,
 but inhibits their spell power and makes them more susceptible to cold.
 %%%%
 Sticks to Snakes spell

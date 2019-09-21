@@ -63,10 +63,10 @@ Pull requests for new content are welcome.
   - v1.12.1: Venom mages start with a potion of berserk rage and a potion of degeneration. (This lets slow species kill oozes on D1.)
   - v1.12.1: Archaeologists start with a whip instead of +1 gloves.
   - v1.14.2: Fire Elementalists start with Flaming Arrows.
-  - v1.14.3: Fire Elementalists start with 40 stones.
-  - v1.14.3: Ice Elementalists start with 1 charge of Iceblast.
-  - v1.14.3: Conjurers start with a potion of magic.
-  - v1.14.3: Air Elementalists start with a potion of flight.
+  - v1.15: Fire Elementalists start with 40 stones.
+  - v1.15: Ice Elementalists start with 1 charge of Iceblast.
+  - v1.15: Conjurers start with a potion of magic.
+  - v1.15: Air Elementalists start with a potion of flight.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -167,7 +167,7 @@ Pull requests for new content are welcome.
   - v1.14.1: Freezing Cloud is now Ice/Air.
   - v1.14.2: Regeneration ends when at max HP.
   - v1.14.2: Spellforged Servitors created by players have one spell, which is the spell from its list of possible spells that the player has the highest spell power for. That spell's power affects the Servitor's strength.
-  - v1.14.3: Spellforged Servitors can have spells that are not in the player's spell list.
+  - v1.15: Spellforged Servitors can have spells that are not in the player's spell list.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -210,7 +210,7 @@ Pull requests for new content are welcome.
   - v1.14: Hepliaklqana's Transference ability costs much less piety, but doesn't gain the effect of draining enemies.
   - v1.14: Hepliaklqana's Knight ancestor's first level gets a war axe of flaming instead of a flail.
   - v1.14: Hepliaklqana's Idealise ability is replaced by Incarnate, which gives +20% max HP, healing and/or mana, and increases some skills to at least your Invocations skill. Knights give HP, Fighting, Armour, Shields, and Axes; Battlemages give HP, MP, Conjurations, Earth Magic, Fire Magic, and Staves; Hexers give MP, Spellcasting, Hexes, Charms, and Evocations.
-  - v1.14.3: Demigods can walk through plants at lower (\*\* -> \*) piety.
+  - v1.15: Demigods can walk through plants at lower (\*\* -> \*) piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

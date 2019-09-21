@@ -129,6 +129,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Mana Rupture (L7 Conjurations/Hexes) creates an explosion that does damage proportional to the target's magic resistance.
   - v1.12.1: Icicle Burst (L7 Conjurations/Ice) shoots several weak icicles. It's similar to the Scattershot wand, but it shoots icicles (40% cold), it has lower accuracy, and it's less affected by monster AC.
   - v1.14.2: Flaming Arrows (L2 Charms/Fire) adds bonus damage to ranged attacks, at the cost of 2 MP per projectile.
+  - v1.15: Steam Barrier (L6 Charms/Fire) creates steam clouds around the player, gives rF+ and rC-, reduces player spell power (-1 enhancer level), and gives an AC bonus proportional to its remaining duration.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.
@@ -178,6 +179,7 @@ Pull requests for new content are welcome.
   - v1.8.3: Hydra Form
   - v1.9.1: Confusing Touch
   - v1.12.1: Disjunction
+  - v1.15: Ring of Flames
 
 #### Gods
   - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.

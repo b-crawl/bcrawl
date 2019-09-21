@@ -254,6 +254,7 @@ void manage_fire_shield(int delay)
     maybe_melt_player_enchantments(BEAM_FIRE, 100);
     
     you.redraw_armour_class = true;
+    noisy(6, you.pos());
 
     // Remove steam clouds on top of you
     if (cloud_at(you.pos()) && cloud_at(you.pos())->type == CLOUD_STEAM)

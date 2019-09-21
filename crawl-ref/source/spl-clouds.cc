@@ -252,6 +252,8 @@ void manage_fire_shield(int delay)
 
     // Melt ice armour entirely.
     maybe_melt_player_enchantments(BEAM_FIRE, 100);
+    
+    you.redraw_armour_class = true;
 
     // Remove steam clouds on top of you
     if (cloud_at(you.pos()) && cloud_at(you.pos())->type == CLOUD_STEAM)

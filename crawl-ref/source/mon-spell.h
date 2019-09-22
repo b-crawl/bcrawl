@@ -1069,6 +1069,7 @@ static const mon_spellbook mspell_list[] =
        { SPELL_SUMMON_GREATER_DEMON, 20, MON_SPELL_WIZARD },
        { SPELL_BOLT_OF_DRAINING, 20, MON_SPELL_WIZARD },
        { SPELL_SLOW, 20, MON_SPELL_WIZARD },
+       { SPELL_DIG, 10, MON_SPELL_WIZARD },
       }
     },
 

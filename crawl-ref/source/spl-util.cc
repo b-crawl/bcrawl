@@ -1282,7 +1282,7 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
         if (temp && you.form == transformation::statue)
             return "the film of ice won't work on stone.";
         if (temp && you.duration[DUR_FIRE_SHIELD])
-            return "your ring of flames would instantly melt the ice.";
+            return "your ring of steam would instantly melt the ice.";
         break;
 
     case SPELL_SUBLIMATION_OF_BLOOD:

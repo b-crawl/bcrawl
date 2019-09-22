@@ -1530,7 +1530,6 @@ bool UINewGameMenu::on_event(const wm_event& ev)
         {
         case 'X':
         case CONTROL('Q'):
-            cprintf("\nGoodbye!");
 #ifdef USE_TILE_WEB
             tiles.send_exit_reason("cancel");
 #endif
@@ -2027,7 +2026,6 @@ static bool _prompt_weapon(const newgame_def& ng, newgame_def& ng_choice,
             {
             case 'X':
             case CONTROL('Q'):
-                cprintf("\nGoodbye!");
 #ifdef USE_TILE_WEB
                 tiles.send_exit_reason("cancel");
 #endif
@@ -2464,7 +2462,6 @@ static void _prompt_gamemode_map(newgame_def& ng, newgame_def& ng_choice,
             {
             case 'X':
             case CONTROL('Q'):
-                cprintf("\nGoodbye!");
 #ifdef USE_TILE_WEB
                 tiles.send_exit_reason("cancel");
 #endif

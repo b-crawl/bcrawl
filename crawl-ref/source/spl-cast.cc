@@ -529,6 +529,9 @@ static int _spell_enhancement(spell_type spell)
     if (you.form == transformation::shadow)
         enhanced -= 2;
 
+    if (you.duration[DUR_FIRE_SHIELD])
+        enhanced -= 1;
+
     enhanced += you.archmagi();
 
     // These are used in an exponential way, so we'll limit them a bit. -- bwr

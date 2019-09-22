@@ -1385,7 +1385,7 @@ int player_res_fire(bool calc_unid, bool temp, bool items)
             rf++;
 
         if (you.duration[DUR_FIRE_SHIELD])
-            rf += 2;
+            rf += 1;
 
         if (you.duration[DUR_QAZLAL_FIRE_RES])
             rf++;
@@ -1436,7 +1436,7 @@ int player_res_cold(bool calc_unid, bool temp, bool items)
             rc++;
 
         if (you.duration[DUR_FIRE_SHIELD])
-            rc -= 2;
+            rc -= 1;
 
         if (you.duration[DUR_QAZLAL_COLD_RES])
             rc++;
@@ -1731,9 +1731,6 @@ int player_spec_fire()
 
     // rings of fire:
     sf += you.wearing(EQ_RINGS, RING_FIRE);
-
-    if (you.duration[DUR_FIRE_SHIELD])
-        sf++;
 
     return sf;
 }
@@ -5806,7 +5803,7 @@ void player::ablate_deflection()
     if (attribute[ATTR_DEFLECT_MISSILES])
     {
         const int power = calc_spell_power(SPELL_DEFLECT_MISSILES, true);
-        dec_mp(div_rand_round(25, power));
+        dec_mp(div_rand_round(30, power));
     }
 }
 
@@ -6136,6 +6133,9 @@ int player::base_ac(int scale) const
 
     if (wearing(EQ_STAFF, STAFF_EARTH))
         AC += 300;
+    
+    if (you.duration[DUR_FIRE_SHIELD])
+        AC += (you.duration[DUR_FIRE_SHIELD] * 20) / 3;
 
     AC += scan_artefacts(ARTP_AC) * 100;
 

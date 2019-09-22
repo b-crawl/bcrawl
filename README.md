@@ -62,6 +62,11 @@ Pull requests for new content are welcome.
   - v1.12.1: Wizards start with a plain staff.
   - v1.12.1: Venom mages start with a potion of berserk rage and a potion of degeneration. (This lets slow species kill oozes on D1.)
   - v1.12.1: Archaeologists start with a whip instead of +1 gloves.
+  - v1.14.2: Fire Elementalists start with Flaming Arrows.
+  - v1.15: Fire Elementalists start with 40 stones.
+  - v1.15: Ice Elementalists start with 1 charge of Iceblast.
+  - v1.15: Conjurers start with a potion of magic.
+  - v1.15: Air Elementalists start with a potion of flight.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -124,6 +129,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Mana Rupture (L7 Conjurations/Hexes) creates an explosion that does damage proportional to the target's magic resistance.
   - v1.12.1: Icicle Burst (L7 Conjurations/Ice) shoots several weak icicles. It's similar to the Scattershot wand, but it shoots icicles (40% cold), it has lower accuracy, and it's less affected by monster AC.
   - v1.14.2: Flaming Arrows (L2 Charms/Fire) adds bonus damage to ranged attacks, at the cost of 2 MP per projectile.
+  - v1.15: Steam Barrier (L6 Charms/Fire) creates steam clouds around the player, gives rF+ and rC-, reduces player spell power (-1 enhancer level), and gives an AC bonus proportional to its remaining duration.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.
@@ -161,7 +167,8 @@ Pull requests for new content are welcome.
   - v1.14.1: Infestation is now a level 6 Hexes/Poison/Transmutation spell that creates Hornets or Spark Wasps depending on spell power.
   - v1.14.1: Freezing Cloud is now Ice/Air.
   - v1.14.2: Regeneration ends when at max HP.
-  - v1.14.2: Spellforged Servitors created by players have one spell, which is the spell from its list of possible spells that the player has the highest spell power for. That spell's power affects the Servitor's strength. The default spell is Orb of Destruction; others must be in the player's spell list.
+  - v1.14.2: Spellforged Servitors created by players have one spell, which is the spell from its list of possible spells that the player has the highest spell power for. That spell's power affects the Servitor's strength.
+  - v1.15: Spellforged Servitors can have spells that are not in the player's spell list.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -172,6 +179,7 @@ Pull requests for new content are welcome.
   - v1.8.3: Hydra Form
   - v1.9.1: Confusing Touch
   - v1.12.1: Disjunction
+  - v1.15: Ring of Flames
 
 #### Gods
   - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.
@@ -204,6 +212,7 @@ Pull requests for new content are welcome.
   - v1.14: Hepliaklqana's Transference ability costs much less piety, but doesn't gain the effect of draining enemies.
   - v1.14: Hepliaklqana's Knight ancestor's first level gets a war axe of flaming instead of a flail.
   - v1.14: Hepliaklqana's Idealise ability is replaced by Incarnate, which gives +20% max HP, healing and/or mana, and increases some skills to at least your Invocations skill. Knights give HP, Fighting, Armour, Shields, and Axes; Battlemages give HP, MP, Conjurations, Earth Magic, Fire Magic, and Staves; Hexers give MP, Spellcasting, Hexes, Charms, and Evocations.
+  - v1.15: Demigods can walk through plants at lower (\*\* -> \*) piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -285,6 +294,8 @@ Pull requests for new content are welcome.
   - v1.13.5: Player ghosts have higher (50 -> 100) max damage.
   - v1.13.5: Monsters can use iceblast wands, but will only use wands if 1000 < HD*charges^2 < 5000.
   - v1.14: Bullfrogs and black bears are slightly stronger.
+  - v1.15: Liches and ancient liches have reworked spell sets.
+  - v1.15: Ancient liches get wands.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

@@ -859,8 +859,7 @@ bool actor_cloud_immune(const actor &act, cloud_type type)
         case CLOUD_FOREST_FIRE:
             if (!act.is_player())
                 return act.res_fire() >= 3;
-            return you.duration[DUR_FIRE_SHIELD]
-                || you.has_mutation(MUT_FLAME_CLOUD_IMMUNITY)
+            return you.has_mutation(MUT_FLAME_CLOUD_IMMUNITY)
                 || player_equip_unrand(UNRAND_FIRESTARTER);
         case CLOUD_HOLY:
             return act.res_holy_energy() >= 3;
@@ -874,7 +873,10 @@ bool actor_cloud_immune(const actor &act, cloud_type type)
         case CLOUD_POISON:
             return act.res_poison() > 0;
         case CLOUD_STEAM:
-            return act.res_steam() > 0;
+            if (!act.is_player())
+                return act.res_steam() > 0;
+            else
+                return (act.res_steam() > 0) || you.duration[DUR_FIRE_SHIELD];
         case CLOUD_MIASMA:
             return act.res_rotting() > 0;
         case CLOUD_PETRIFY:

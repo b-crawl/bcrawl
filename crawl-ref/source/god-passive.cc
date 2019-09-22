@@ -398,7 +398,7 @@ static const vector<god_passive> god_passives[] =
 
     // Demigod
     {
-        { 2, passive_t::pass_through_plants,
+        { 1, passive_t::pass_through_plants,
               "can NOW walk through plants" },
     },
 

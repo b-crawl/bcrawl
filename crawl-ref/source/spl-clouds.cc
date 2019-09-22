@@ -239,9 +239,8 @@ void big_cloud(cloud_type cl_type, const actor *agent,
 spret cast_ring_of_flames(int power, bool fail)
 {
     fail_check();
-    you.increase_duration(DUR_FIRE_SHIELD,
-                          6 + (power / 10) + (random2(power) / 5), 50,
-                          "The air around you leaps into flame!");
+    you.duration[DUR_FIRE_SHIELD] = 60 + power + random2(power);
+    mpr("You begin emitting steam!");
     manage_fire_shield(1);
     return spret::success;
 }
@@ -252,15 +251,18 @@ void manage_fire_shield(int delay)
 
     // Melt ice armour entirely.
     maybe_melt_player_enchantments(BEAM_FIRE, 100);
+    
+    you.redraw_armour_class = true;
+    noisy(6, you.pos());
 
-    // Remove fire clouds on top of you
-    if (cloud_at(you.pos()) && cloud_at(you.pos())->type == CLOUD_FIRE)
+    // Remove steam clouds on top of you
+    if (cloud_at(you.pos()) && cloud_at(you.pos())->type == CLOUD_STEAM)
         delete_cloud(you.pos());
 
-    // Place fire clouds all around you
+    // Place steam clouds all around you
     for (adjacent_iterator ai(you.pos()); ai; ++ai)
         if (!cell_is_solid(*ai) && !cloud_at(*ai))
-            place_cloud(CLOUD_FIRE, *ai, 1 + random2(6), &you);
+            place_cloud(CLOUD_STEAM, *ai, 1 + random2(6), &you);
 }
 
 spret cast_corpse_rot(bool fail)

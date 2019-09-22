@@ -178,32 +178,29 @@ static void _give_special(monster* mon, int level)
 
 static void _give_wand(monster* mon, int level)
 {
-    bool wand_allowed = mons_is_unique(mon->type)
-                        && !mons_class_flag(mon->type, M_NO_WAND)
-                        && _should_give_unique_item(mon);
+    bool always_wand = mons_class_flag(mon->type, M_ALWAYS_WAND);
+    bool wand_allowed = always_wand ||
+        (
+            mons_is_unique(mon->type)
+            && !mons_class_flag(mon->type, M_NO_WAND)
+            && _should_give_unique_item(mon)
+        );
 
     if (!wand_allowed)
         return;
 
-    bool give_wand = mons_class_flag(mon->type, M_ALWAYS_WAND)
-                     || one_chance_in(5);
+    bool give_wand = always_wand || one_chance_in(5);
 
     if (!give_wand)
         return;
 
-    // Don't give top-tier wands before 5 HD or in sprint.
-    bool no_high_tier = false;
+    bool no_high_tier = mons_class_flag(mon->type, M_NO_HT_WAND);
     int idx;
     
     if(mon->type == MONS_IJYB)
-    {
         idx = items(false, OBJ_WANDS, WAND_POLYMORPH, level);
-    }
     else
     {
-        no_high_tier = (mon->get_experience_level() < 5
-            || mons_class_flag(mon->type, M_NO_HT_WAND))
-            && crawl_state.game_is_sprint();
         idx = items(false, OBJ_WANDS, OBJ_RANDOM, level);
     }
 
@@ -212,18 +209,12 @@ static void _give_wand(monster* mon, int level)
 
     item_def& wand = mitm[idx];
 
-    const char* rejection_reason =
-        (no_high_tier && is_high_tier_wand(wand.sub_type)) ? "high tier" :
-                                    !mon->likes_wand(wand) ?      "weak" :
-                                                                  nullptr;
-
-    if (rejection_reason)
+    if (!mon->likes_wand(wand) || (no_high_tier && is_high_tier_wand(wand.sub_type)))
     {
         dprf(DIAG_MONPLACE,
-             "Destroying %s because %s doesn't want a %s wand.",
+             "Destroying %s because %s doesn't want it.",
              wand.name(DESC_A).c_str(),
-             mon->name(DESC_THE).c_str(),
-             rejection_reason);
+             mon->name(DESC_THE).c_str());
         destroy_item(idx, true);
         return;
     }

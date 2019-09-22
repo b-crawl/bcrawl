@@ -308,7 +308,7 @@ static const struct spell_desc spelldata[] =
     6,
     200,
     -1, -1,
-    6, 0,
+    7, 0,
     TILEG_RING_OF_FLAMES,
 },
 

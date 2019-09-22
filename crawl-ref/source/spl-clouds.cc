@@ -239,9 +239,8 @@ void big_cloud(cloud_type cl_type, const actor *agent,
 spret cast_ring_of_flames(int power, bool fail)
 {
     fail_check();
-    you.increase_duration(DUR_FIRE_SHIELD,
-                          6 + (power / 10) + (random2(power) / 5), 50,
-                          "You begin emitting steam!");
+    you.duration[DUR_FIRE_SHIELD] = 60 + power + random2(power);
+    mpr("You begin emitting steam!");
     manage_fire_shield(1);
     return spret::success;
 }

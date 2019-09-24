@@ -3938,19 +3938,26 @@ void bolt::affect_player()
 
 int bolt::apply_AC(const actor *victim, int hurted)
 {
+    int max_dmg_for_GDR_calc = 0;
     switch (flavour)
     {
+    case BEAM_MMISSILE:
+        ac_rule = AC_NORMAL;
+        max_dmg_for_GDR_calc = hurted;
+        break;
     case BEAM_DAMNATION:
         ac_rule = AC_NONE; break;
     case BEAM_ELECTRICITY:
         ac_rule = AC_HALF; break;
     case BEAM_FRAG:
         ac_rule = AC_TRIPLE; break;
-    default: ;
+    default:
+        ac_rule = AC_NORMAL;
+        break;
     }
 
     // beams don't obey GDR -> max_damage is 0
-    return victim->apply_ac(hurted, 0, ac_rule, 0, !is_tracer);
+    return victim->apply_ac(hurted, max_dmg_for_GDR_calc, ac_rule, 0, !is_tracer);
 }
 
 void bolt::update_hurt_or_helped(monster* mon)

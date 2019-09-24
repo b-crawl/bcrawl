@@ -197,11 +197,17 @@ static void _give_wand(monster* mon, int level)
     bool no_high_tier = mons_class_flag(mon->type, M_NO_HT_WAND);
     int idx;
     
-    if(mon->type == MONS_IJYB)
-        idx = items(false, OBJ_WANDS, WAND_POLYMORPH, level);
-    else
+    switch(mon->type)
     {
+    case MONS_IJYB:
+        idx = items(false, OBJ_WANDS, WAND_POLYMORPH, level);
+        break;
+    case MONS_VASHNIA:
+        idx = items(false, OBJ_WANDS, WAND_DIGGING, level);
+        break;
+    default:
         idx = items(false, OBJ_WANDS, OBJ_RANDOM, level);
+        break;
     }
 
     if (idx == NON_ITEM)

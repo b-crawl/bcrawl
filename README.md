@@ -313,4 +313,4 @@ Pull requests for new content are welcome.
   - v1.12.1: The royal jelly is giant. (Giant creatures can't be netted.)
   - v1.13.3: Jory and Frederick have reworked spell sets.
   - v1.13.5: Jorgrun has Awaken Earth instead of Dig.
-  - v1.15.1: Vashnia has a reworked spell set, and casts extremely quickly.
+  - v1.15.1: Vashnia has a reworked spell set, casts extremely quickly, and always carries a wand of digging.

@@ -1518,6 +1518,14 @@ static void _give_ammo(monster* mon, int level, bool mons_summoned)
             weap_type  = MI_LARGE_ROCK;
             qty        = random_range(16, 24);
             break;
+        
+        case MONS_NAGA_WARRIOR:
+            if (one_chance_in(2))
+            {
+                weap_type = MI_JAVELIN;
+                qty = random_range(20, 40);
+            }
+            break;
 
         case MONS_MERFOLK_JAVELINEER:
         case MONS_MINOTAUR:

@@ -459,11 +459,11 @@ rather than stones found on the floor.
 %%%%
 giant club
 
-A giant lump of wood.
+A giant lump of wood. Its inertia is great enough to hit multiple enemies around its wielder with a single swing.
 %%%%
 giant spiked club
 
-A giant lump of wood with sharp spikes at one end.
+A giant lump of wood with sharp spikes at one end. Its inertia is great enough to hit multiple enemies around its wielder with a single swing.
 %%%%
 glaive
 

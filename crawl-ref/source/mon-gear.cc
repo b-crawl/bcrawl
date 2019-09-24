@@ -197,11 +197,17 @@ static void _give_wand(monster* mon, int level)
     bool no_high_tier = mons_class_flag(mon->type, M_NO_HT_WAND);
     int idx;
     
-    if(mon->type == MONS_IJYB)
-        idx = items(false, OBJ_WANDS, WAND_POLYMORPH, level);
-    else
+    switch(mon->type)
     {
+    case MONS_IJYB:
+        idx = items(false, OBJ_WANDS, WAND_POLYMORPH, level);
+        break;
+    case MONS_VASHNIA:
+        idx = items(false, OBJ_WANDS, WAND_DIGGING, level);
+        break;
+    default:
         idx = items(false, OBJ_WANDS, OBJ_RANDOM, level);
+        break;
     }
 
     if (idx == NON_ITEM)
@@ -1511,6 +1517,14 @@ static void _give_ammo(monster* mon, int level, bool mons_summoned)
         case MONS_POLYPHEMUS:
             weap_type  = MI_LARGE_ROCK;
             qty        = random_range(16, 24);
+            break;
+        
+        case MONS_NAGA_WARRIOR:
+            if (one_chance_in(2))
+            {
+                weap_type = MI_JAVELIN;
+                qty = random_range(20, 40);
+            }
             break;
 
         case MONS_MERFOLK_JAVELINEER:

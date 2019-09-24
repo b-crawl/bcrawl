@@ -84,6 +84,7 @@ Pull requests for new content are welcome.
   - Long Blades now give +SH instead of a chance to riposte.
   - v1.4.1: Distortion weapons can't banish on hit.
   - v1.8.6: Starting skills are based on +0 aptitude (-1 for Spellcasting) instead of Human aptitudes.
+  - v1.15.1: Guaranteed damage reduction now affects player damage from spells with non-elemental damage.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -244,6 +245,7 @@ Pull requests for new content are welcome.
   - v1.14: Blowguns use Fighting skill instead of Throwing skill.
   - v1.14.1: Potions of flight give a Swiftness effect in addition to flight.
   - v1.14.2: Thrown stones have a lower base delay (1.1 -> 1) and min delay (0.7 -> 0.5).
+  - v1.15.1: Giant clubs and giant spiked clubs now cleave.
 
 #### Removed Items
   - Amulet of Harm
@@ -295,6 +297,7 @@ Pull requests for new content are welcome.
   - v1.13.5: Monsters can use iceblast wands, but will only use wands if 1000 < HD*charges^2 < 5000.
   - v1.14: Bullfrogs and black bears are slightly stronger.
   - v1.15: Liches and ancient liches have reworked spell sets.
+  - v1.15.1: Some naga warriors carry javelins.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -312,3 +315,4 @@ Pull requests for new content are welcome.
   - v1.12.1: The royal jelly is giant. (Giant creatures can't be netted.)
   - v1.13.3: Jory and Frederick have reworked spell sets.
   - v1.13.5: Jorgrun has Awaken Earth instead of Dig.
+  - v1.15.1: Vashnia has a reworked spell set, casts extremely quickly, and always carries a wand of digging.

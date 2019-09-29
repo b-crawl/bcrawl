@@ -635,6 +635,8 @@ string game_state::game_type_qualifier() const
 {
     if (type == GAME_TYPE_CUSTOM_SEED)
         return "-seeded";
+    if (type == GAME_TYPE_ADVENTURE)
+        return "-adventure";
     if (crawl_state.game_is_sprint())
         return "-sprint";
     if (crawl_state.game_is_tutorial())

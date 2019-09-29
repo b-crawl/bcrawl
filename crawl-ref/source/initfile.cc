@@ -3892,6 +3892,7 @@ enum commandline_option_type
     CLO_NO_THROTTLE,
     CLO_PLAYABLE_JSON, // JSON metadata for species, jobs, combos.
     CLO_EDIT_BONES,
+    CLO_ADVENTURE,
 #ifdef USE_TILE_WEB
     CLO_WEBTILES_SOCKET,
     CLO_AWAIT_CONNECTION,
@@ -3910,7 +3911,7 @@ static const char *cmd_ops[] =
     "extra-opt-first", "extra-opt-last", "sprint-map", "edit-save",
     "print-charset", "tutorial", "wizard", "explore", "no-save", "gdb",
     "no-gdb", "nogdb", "throttle", "no-throttle", "playable-json",
-    "bones",
+    "bones", "adventure",
 #ifdef USE_TILE_WEB
     "webtiles-socket", "await-connection", "print-webtiles-options",
 #endif
@@ -5004,6 +5005,11 @@ bool parse_args(int argc, char **argv, bool rc_only)
         case CLO_TUTORIAL:
             if (!rc_only)
                 Options.game.type = GAME_TYPE_TUTORIAL;
+            break;
+
+        case CLO_ADVENTURE:
+            if (!rc_only)
+                Options.game.type = GAME_TYPE_ADVENTURE;
             break;
 
         case CLO_WIZARD:

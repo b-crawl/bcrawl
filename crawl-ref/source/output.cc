@@ -2323,7 +2323,7 @@ static vector<formatted_string> _get_overview_stats()
     cols.add_formatted(3, entry.to_colour_string(), false);
     entry.clear();
 
-    if (you.species == SP_FELID)
+    if (you.species == SP_FELID || crawl_state.type == GAME_TYPE_ADVENTURE)
     {
         entry.textcolour(HUD_CAPTION_COLOUR);
         entry.cprintf("Lives:  ");

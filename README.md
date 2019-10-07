@@ -118,6 +118,8 @@ Pull requests for new content are welcome.
   - v1.13.4: Kobolds have some better aptitudes, better stat gain, and the Talons 1 mutation.
   - v1.13.4: Formicids have a +0 bows aptitude.
   - v1.14.2: Spriggans are worse with ranged weapons.
+  - v1.15.2: Fairies have adjusted aptitudes.
+  - v1.15.2: Ghouls start with a chunk instead of a ration.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

@@ -4917,7 +4917,6 @@ void unmarshallItem(reader &th, item_def &item)
 
     // turn old hides into the corresponding armour
     static const map<int, armour_type> hide_to_armour = {
-        { ARM_TROLL_HIDE,               ARM_TROLL_LEATHER_ARMOUR },
         { ARM_FIRE_DRAGON_HIDE,         ARM_FIRE_DRAGON_ARMOUR },
         { ARM_ICE_DRAGON_HIDE,          ARM_ICE_DRAGON_ARMOUR },
         { ARM_STEAM_DRAGON_HIDE,        ARM_STEAM_DRAGON_ARMOUR },

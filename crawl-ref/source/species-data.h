@@ -397,8 +397,8 @@ static const map<species_type, species_def> species_data =
     { "magic attunement", "unstealthy", "unfitting armour" },
     { JOB_AIR_ELEMENTALIST, JOB_FIRE_ELEMENTALIST, JOB_ICE_ELEMENTALIST,
       JOB_CONJURER, JOB_EARTH_ELEMENTALIST, JOB_VENOM_MAGE, JOB_WIZARD,
-      JOB_NECROMANCER, JOB_FIGHTER },
-    { SK_LONG_BLADES, SK_MACES_FLAILS, SK_STAVES, SK_SLINGS },
+      JOB_FIGHTER },
+    { SK_SHORT_BLADES, SK_LONG_BLADES, SK_STAVES, SK_SLINGS },
 } },
 
 { SP_GHOUL, {

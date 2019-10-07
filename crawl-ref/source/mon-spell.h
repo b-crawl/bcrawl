@@ -1501,9 +1501,8 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_GREEN_DEATH,
       {
-       { SPELL_POISON_ARROW, 21, MON_SPELL_MAGICAL },
+       { SPELL_POISON_ARROW, 42, MON_SPELL_MAGICAL },
        { SPELL_POISONOUS_CLOUD, 21, MON_SPELL_MAGICAL },
-       { SPELL_VENOM_BOLT, 21, MON_SPELL_MAGICAL },
       }
     },
 

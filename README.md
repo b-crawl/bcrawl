@@ -301,6 +301,7 @@ Pull requests for new content are welcome.
   - v1.15.1: Some naga warriors carry javelins.
   - v1.15.2: Balrugs deal much more melee damage, and have a simplified spell set.
   - v1.15.2: Brimstone Fiends deal more melee damage.
+  - v1.15.2: Green deaths have a simplified spell set.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

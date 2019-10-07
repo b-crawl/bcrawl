@@ -800,7 +800,7 @@ static string _describe_demon(const string& name, bool flying)
         " It is difficult to look away.",
         " It is constantly speaking in tongues.",
         " It babbles unendingly.",
-        " Its body is scourged by damnation.",
+        " Its body is scourged by hellfire.",
         " Its body is extensively scarred.",
         " You find it difficult to look away.",
     };
@@ -3403,7 +3403,7 @@ static const char* _get_resist_name(mon_resist_flags res_type)
     case MR_RES_NEG:
         return "negative energy";
     case MR_RES_DAMNATION:
-        return "damnation";
+        return "hellfire";
     case MR_RES_TORNADO:
         return "tornadoes";
     default:

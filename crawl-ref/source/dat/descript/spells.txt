@@ -565,7 +565,7 @@ of its damage bypasses fire resistance.
 %%%%
 Fire Summon spell
 
-Summons demons of flame and damnation.
+Summons demons of flame and hellfire.
 %%%%
 Fireball spell
 
@@ -680,11 +680,11 @@ Heals a nearby ally.
 %%%%
 Call Down Damnation spell
 
-Blasts a targeted enemy with damnation, with no direct line of fire required.
+Blasts a targeted enemy with hellfire, with no direct line of fire required.
 These unholy forces harm the victim and anyone adjacent, and are not affected
 by any means of protection, such as armour or resistances. However, certain
-creatures, usually those able to invoke damnation themselves, are entirely
-unscathed by damnation.
+creatures, usually those able to invoke hellfire themselves, are entirely
+unscathed by hellfire.
 %%%%
 Hurl Damnation spell
 

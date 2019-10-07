@@ -918,8 +918,8 @@ static setup_missile_type _DAMNATION_launch(item_def* item, bolt* beam,
     beam->item->special = SPMSL_EXPLODING; // so that it mulches
     beam->item->props[DAMNATION_BOLT_KEY].get_bool() = true;
 
-    beam->name    = "damnation bolt";
-    *ammo_name    = "a damnation bolt";
+    beam->name    = "hellfire bolt";
+    *ammo_name    = "a hellfire bolt";
     beam->colour  = LIGHTRED;
     beam->glyph   = DCHAR_FIRED_ZAP;
 
@@ -927,7 +927,7 @@ static setup_missile_type _DAMNATION_launch(item_def* item, bolt* beam,
     expl->flavour = BEAM_DAMNATION;
     expl->is_explosion = true;
     expl->damage = dice_def(3, 14);
-    expl->name   = "damnation";
+    expl->name   = "hellfire";
 
     beam->special_explosion = expl;
     return SM_FINISHED;

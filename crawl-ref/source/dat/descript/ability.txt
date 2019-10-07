@@ -76,10 +76,10 @@ inopportune moments.
 %%%%
 Hurl Damnation ability
 
-Blasts a targeted enemy with damnation. These unholy forces harm the victim and
+Blasts a targeted enemy with hellfire. These unholy forces harm the victim and
 anyone adjacent, and are not affected by any means of protection, such as armour
 or resistances. However, certain creatures, usually those able to invoke
-damnation themselves, are entirely unscathed by damnation.
+hellfire themselves, are entirely unscathed by hellfire.
 %%%%
 Cancel Portal Projectile ability
 

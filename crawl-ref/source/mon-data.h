@@ -38,7 +38,7 @@
                         to poison; extra damage from holy wrath;
                         affected by holy word
        MH_DEMONIC    - similar to undead, but no poison resistance
-                        *no* automatic damnation resistance
+                        *no* automatic hellfire resistance
        MH_NONLIVING  - golems and other constructs
        MH_PLANT      - plants
 

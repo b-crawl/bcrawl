@@ -1306,7 +1306,7 @@ string ego_type_string(const item_def &item, bool terse, brand_type override_bra
     case OBJ_MISSILES:
         // HACKHACKHACK
         if (item.props.exists(DAMNATION_BOLT_KEY))
-            return "damnation";
+            return "hellfire";
         return missile_brand_name(item, terse ? MBN_TERSE : MBN_BRAND);
     case OBJ_JEWELLERY:
         return jewellery_effect_name(item.sub_type, terse);
@@ -1621,7 +1621,7 @@ string item_def::name_aux(description_level_type desc, bool terse, bool ident,
         if (!terse && !dbname && !basename)
         {
             if (props.exists(DAMNATION_BOLT_KEY)) // hack alert
-                buff << "damnation ";
+                buff << "hellfire ";
             else if (_missile_brand_is_prefix(msl_brand)) // see below for postfix brands
                 buff << missile_brand_name(*this, MBN_NAME) << ' ';
         }
@@ -1637,7 +1637,7 @@ string item_def::name_aux(description_level_type desc, bool terse, bool ident,
             if (terse)
             {
                 if (props.exists(DAMNATION_BOLT_KEY)) // still a hack
-                    buff << " (damnation)";
+                    buff << " (hellfire)";
                 else
                     buff << " (" <<  missile_brand_name(*this, MBN_TERSE) << ")";
             }

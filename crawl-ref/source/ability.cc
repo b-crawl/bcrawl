@@ -315,7 +315,7 @@ static const ability_def Ability_List[] =
 
     { ABIL_FLY, "Fly", 3, 0, 100, 0, {fail_basis::xl, 42, 3}, abflag::none },
     { ABIL_STOP_FLYING, "Stop Flying", 0, 0, 0, 0, {}, abflag::starve_ok },
-    { ABIL_DAMNATION, "Hurl Damnation",
+    { ABIL_DAMNATION, "Hurl Hellfire",
         0, 150, 200, 0, {fail_basis::xl, 50, 1}, abflag::none },
 
     { ABIL_CANCEL_PPROJ, "Cancel Portal Projectile",

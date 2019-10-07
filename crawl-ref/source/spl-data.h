@@ -504,7 +504,7 @@ static const struct spell_desc spelldata[] =
 },
 
 {
-    SPELL_CALL_DOWN_DAMNATION, "Call Down Damnation",
+    SPELL_CALL_DOWN_DAMNATION, "Call Down Hellfire",
     SPTYP_CONJURATION,
     SPFLAG_TARGET | SPFLAG_AREA | SPFLAG_UNHOLY | SPFLAG_NEEDS_TRACER,
     9,
@@ -1727,7 +1727,7 @@ static const struct spell_desc spelldata[] =
 },
 
 {
-    SPELL_HURL_DAMNATION, "Hurl Damnation",
+    SPELL_HURL_DAMNATION, "Hurl Hellfire",
     SPTYP_CONJURATION,
     SPFLAG_DIR_OR_TARGET | SPFLAG_UNHOLY | SPFLAG_MONSTER | SPFLAG_NEEDS_TRACER,
     // plus DS ability, staff of Dispater & Sceptre of Asmodeus

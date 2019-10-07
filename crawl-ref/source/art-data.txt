@@ -450,7 +450,7 @@ ANGRY:    5
 LIFE:     1
 
 NAME:    arbalest "Damnation"
-INSCRIP: damnation,
+INSCRIP: hellfire,
 OBJ:     OBJ_WEAPONS/WPN_ARBALEST
 PLUS:    +6
 COLOUR:  ETC_FIRE

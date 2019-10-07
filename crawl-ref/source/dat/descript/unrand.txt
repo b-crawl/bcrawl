@@ -82,7 +82,7 @@ the fire resistance of those it strikes.
 %%%%
 staff of Dispater
 
-A legendary staff, granting the power to unleash damnation — although not
+A legendary staff, granting the power to unleash hellfire — although not
 without draining the wielder's vitality in the process.
 %%%%
 sceptre of Asmodeus
@@ -175,7 +175,7 @@ both the wielder and all of his or her mortal followers.
 arbalest "Damnation"
 
 An unholy crossbow, forged in the fires of Gehenna. It imbues the bolts it
-fires with the raw power of its namesake, causing a burst of damnation on
+fires with the raw power of its namesake, causing a burst of hellfire on
 impact irresistible by any mortal armour.
 %%%%
 # TAG_MINOR_VERSION == 34

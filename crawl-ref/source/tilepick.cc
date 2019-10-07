@@ -2966,7 +2966,7 @@ tileidx_t tileidx_bolt(const bolt &bolt)
         break;
 
     case LIGHTRED:
-        if (bolt.name.find("damnation") != string::npos)
+        if (bolt.name.find("hellfire") != string::npos)
             return TILE_BOLT_DAMNATION;
         break;
 

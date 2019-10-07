@@ -1636,7 +1636,7 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
 
     // Demonspawn ability, no failure.
     case SPELL_CALL_DOWN_DAMNATION:
-        return cast_smitey_damnation(powc, beam) ? spret::success : spret::abort;
+        return cast_smitey_hellfire(powc, beam) ? spret::success : spret::abort;
 
     // LOS spells
 

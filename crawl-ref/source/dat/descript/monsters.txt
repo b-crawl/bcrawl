@@ -470,7 +470,7 @@ An ancient and mighty dragon.
 %%%%
 the Serpent of Hell gehenna
 
-A huge, red-glowing, three-headed dragon, shrouded in damnation. It is
+A huge, red-glowing, three-headed dragon, shrouded in hellfire. It is
 possessed by the very essence of Gehenna and its eternal fire.
 %%%%
 the Serpent of Hell cocytus
@@ -684,7 +684,7 @@ through, walking through it looks like a painful prospect.
 %%%%
 Brimstone Fiend
 
-A huge and powerful demon wreathed in damnation, with great scaly wings. It is
+A huge and powerful demon wreathed in hellfire, with great scaly wings. It is
 one of the most fearsome denizens of any of the Hells.
 %%%%
 burning bush
@@ -1331,7 +1331,7 @@ fires of Hell.
 %%%%
 hellion
 
-A hateful demon, desirous to see all life destroyed by its damnation.
+A hateful demon, desiring only to see all life destroyed by its hellfire.
 %%%%
 hellwing
 

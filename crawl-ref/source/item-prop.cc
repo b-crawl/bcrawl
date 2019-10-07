@@ -666,7 +666,7 @@ static const missile_def Missile_prop[] =
 #if TAG_MAJOR_VERSION == 34
     { MI_DART,          "dart",          2, 1,  1,  true  },
 #endif
-    { MI_NEEDLE,        "needle",        0, 12, 2,  false },
+    { MI_NEEDLE,        "needle",        0, 12, 12, false },
     { MI_STONE,         "stone",         2, 8,  1,  true  },
     { MI_ARROW,         "arrow",         0, 8,  2,  false },
     { MI_BOLT,          "bolt",          0, 8,  2,  false },

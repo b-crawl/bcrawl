@@ -277,6 +277,7 @@ Pull requests for new content are welcome.
   - v1.13.4: The Fencer's Gloves give more (+3 -> +6) dexterity.
   - v1.15.2: The Robe of Folly is reworked.
   - v1.15.2: The Robe of Misfortune no longer has \*Drain and \*Contam.
+  - v1.15.2: The Sceptre of Torment has a higher base delay. (15 -> 18)
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

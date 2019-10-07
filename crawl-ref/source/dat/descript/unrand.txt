@@ -175,7 +175,7 @@ both the wielder and all of his or her mortal followers.
 arbalest "Damnation"
 
 An unholy crossbow, forged in the fires of Gehenna. It imbues the bolts it
-fires with the raw power of its namesake, causing a burst of hellfire on
+fires with the raw power of its origin, causing a burst of hellfire on
 impact irresistible by any mortal armour.
 %%%%
 # TAG_MINOR_VERSION == 34

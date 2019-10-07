@@ -74,7 +74,7 @@ Starts flight. During flight you can safely cross water and similar obstacles.
 Be warned, though, that some forms of flight are temporary and may expire at
 inopportune moments.
 %%%%
-Hurl Damnation ability
+Hurl Hellfire ability
 
 Blasts a targeted enemy with hellfire. These unholy forces harm the victim and
 anyone adjacent, and are not affected by any means of protection, such as armour

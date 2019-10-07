@@ -678,17 +678,17 @@ Heal Other spell
 
 Heals a nearby ally.
 %%%%
-Call Down Damnation spell
+Call Down Hellfire spell
 
 Blasts a targeted enemy with hellfire, with no direct line of fire required.
 These unholy forces harm the victim and anyone adjacent, and are not affected
 by any means of protection, such as armour or resistances. However, certain
 creatures, usually those able to invoke hellfire themselves, are entirely
-unscathed by hellfire.
+unscathed by it.
 %%%%
-Hurl Damnation spell
+Hurl Hellfire spell
 
-<Hurl Damnation ability>
+<Hurl Hellfire ability>
 %%%%
 Holy Breath spell
 

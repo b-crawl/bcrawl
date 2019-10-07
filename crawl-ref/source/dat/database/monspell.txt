@@ -400,15 +400,9 @@ Rupert cast targeted
 
 @The_monster@ yells loudly @at@ @target@.
 %%%%
-Ensnare Arachne cast
+Shadow Creatures Arachne cast
 
-@The_monster@ points her staff @at@ @target@, shooting a stream of webbing.
-
-@The_monster@'s staff shoots out a stream of webbing.
-%%%%
-unseen Ensnare Arachne cast
-
-A stream of webbing shoots out from thin air.
+@The_monster@ sings a single haunting note.
 %%%%
 Lehudib's Crystal Spear the Serpent of Hell cast
 

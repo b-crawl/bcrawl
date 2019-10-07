@@ -219,6 +219,7 @@ Pull requests for new content are welcome.
   - The 'Ring of Insulation' gives rElec.
   - Iron Dragons may drop 'Iron Dragon Scales' on death.
   - Scarf of Stasis
+  - v1.15.2: Iron trolls drop iron troll leather armour. (8 AC, 16 encumbrance, rF+ rC+ Regen)
 
 #### Changed Items
   - Missiles are always lost when fired, and have a proportionately higher spawn rate.

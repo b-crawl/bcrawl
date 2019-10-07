@@ -1070,9 +1070,7 @@ static int _mons_power_hd_factor(spell_type spell, bool random)
     switch (spell)
     {
         case SPELL_CONFUSION_GAZE:
-            if (random)
-                return 5 * (2 + random2(3)) * ENCH_POW_FACTOR;
-            return 5 * (2 + 1) * ENCH_POW_FACTOR;
+            return 15 * ENCH_POW_FACTOR;
 
         case SPELL_CAUSE_FEAR:
             return 18 * ENCH_POW_FACTOR;

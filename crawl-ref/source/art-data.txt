@@ -799,13 +799,16 @@ MAGIC:   1
 
 NAME:    robe of Folly
 OBJ:     OBJ_ARMOUR/ARM_ROBE
-PLUS:    3
+PLUS:    8
 COLOUR:  LIGHTGREY
 TILE:    urand_folly
 TILE_EQ: robe_red2
 BRAND:   SPARM_ARCHMAGI
-INT:     5
-MAGIC:   -2
+INT:     8
+SLAY:    8
+EV:      -8
+MAGIC:   -1
+STEALTH: -2
 
 ENUM:    MAXWELL
 NAME:    Maxwell's patent armour

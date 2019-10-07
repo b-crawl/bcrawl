@@ -1509,9 +1509,8 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_BALRUG,
       {
-       { SPELL_STICKY_FLAME_RANGE, 16, MON_SPELL_MAGICAL },
-       { SPELL_BOLT_OF_FIRE, 16, MON_SPELL_MAGICAL },
-       { SPELL_FIREBALL, 16, MON_SPELL_MAGICAL },
+       { SPELL_STICKY_FLAME_RANGE, 18, MON_SPELL_MAGICAL },
+       { SPELL_FIREBALL, 30, MON_SPELL_MAGICAL },
        { SPELL_SMITING, 16, MON_SPELL_MAGICAL },
       }
     },

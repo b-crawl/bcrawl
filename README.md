@@ -325,3 +325,4 @@ Pull requests for new content are welcome.
   - v1.13.3: Jory and Frederick have reworked spell sets.
   - v1.13.5: Jorgrun has Awaken Earth instead of Dig.
   - v1.15.1: Vashnia has a reworked spell set, casts extremely quickly, and always carries a wand of digging.
+  - v1.15.2: Arachne has a reworked spell set, and has melee attacks that ensnare.

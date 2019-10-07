@@ -1914,10 +1914,9 @@ static const mon_spellbook mspell_list[] =
     // ('H') Hybrids.
     {  MST_ARACHNE,
       {
-       { SPELL_VENOM_BOLT, 11, MON_SPELL_WIZARD },
-       { SPELL_POISON_ARROW, 11, MON_SPELL_WIZARD },
-       { SPELL_ENSNARE, 34, MON_SPELL_WIZARD },
-       { SPELL_BLINK, 11, MON_SPELL_WIZARD },
+       { SPELL_SHADOW_CREATURES, 35, MON_SPELL_BREATH | MON_SPELL_MAGICAL | MON_SPELL_NO_SILENT },
+       { SPELL_VENOM_BOLT, 25, MON_SPELL_WIZARD },
+       { SPELL_BLINK, 10, MON_SPELL_WIZARD },
       }
     },
 

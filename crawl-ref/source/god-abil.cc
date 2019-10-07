@@ -428,7 +428,7 @@ static const char * const book_of_zin[][3] =
     {
         "To those who would swear an oath of @virtue@ on my altar...",
         "...I bring ye salvation. To the rest, ye @sinners@...",
-        "...and the @sin_adj@, the name of Zin shall be thy hellfire.",
+        "...and the @sin_adj@, the name of Zin shall be thy damnation.",
     },
 
     {

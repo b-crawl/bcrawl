@@ -706,6 +706,8 @@ static bool _is_pet_kill(killer_type killer, int i)
             {
             case MONS_OKLOB_PLANT:
             case MONS_WANDERING_MUSHROOM:
+            case MONS_HYPERACTIVE_BALLISTOMYCETE:
+            case MONS_BALLISTOMYCETE_SPORE:
                 return false;
             default: break;
             }

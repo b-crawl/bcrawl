@@ -540,6 +540,10 @@ iron dragon scales
 
 The scales of a mighty iron dragon. It provides unparalleled protection against physical attacks.
 %%%%
+iron troll leather armour
+
+The dense skin of an iron troll, covered with thick grey scales. It grants its wearer resistance to fire and cold, and magically regenerates their flesh.
+%%%%
 javelin
 
 A lightweight spear, designed for throwing.

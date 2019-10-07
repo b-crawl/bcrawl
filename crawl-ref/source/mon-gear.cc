@@ -1226,7 +1226,7 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         item.base_type = OBJ_STAVES;
         item.sub_type = STAFF_POISON;
         item.flags    |= ISFLAG_KNOW_TYPE;
-        if (one_chance_in(100) && !get_unique_item_status(UNRAND_OLGREB))
+        if (one_chance_in(15) && !get_unique_item_status(UNRAND_OLGREB))
             make_item_unrandart(item, UNRAND_OLGREB);
         break;
 

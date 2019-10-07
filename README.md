@@ -276,6 +276,7 @@ Pull requests for new content are welcome.
   - v1.13.2: The Sword of Power has an enchantment level of (your strength - 10).
   - v1.13.4: The Fencer's Gloves give more (+3 -> +6) dexterity.
   - v1.15.2: The Robe of Folly is reworked.
+  - v1.15.2: The Robe of Misfortune no longer has *Drain and *Contam.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

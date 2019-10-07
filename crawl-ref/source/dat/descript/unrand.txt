@@ -326,7 +326,8 @@ an especially mighty bear.
 %%%%
 robe of Misfortune
 
-A splendid flowing robe of fur and silk whose lucky colour has faded.
+A once-splendid flowing robe of fur and silk, now faded and worn. It was originally
+used by a powerful but notoriously unlucky wizard.
 %%%%
 # TAG_MAJOR_VERSION == 34
 cloak of Flash

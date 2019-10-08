@@ -264,7 +264,7 @@ Pull requests for new content are welcome.
   - The scimitar of Flaming Death and the dagger of Chilly Death have returned.
   - v1.5.2: The skin of Zhor gains +4 slaying.
   - v1.6: The dagger of Chilly Death is stronger, can slow enemies, and is renamed to the sapphire dagger.
-  - v1.7: The gauntlets of War are +0 with +6 slaying.
+  - v1.7: The gauntlets of War are +1 with +6 slaying.
   - v1.7: The salamander hide armour is +8, rF++ rC-, and can be evoked to make fog.
   - v1.7.1: Morg has +12 int, but curses itself.
   - v1.8.5: Kryia's mail coat has Repel Missiles.
@@ -280,6 +280,7 @@ Pull requests for new content are welcome.
   - v1.16: The Robe of Folly is reworked.
   - v1.16: The Robe of Misfortune no longer has \*Drain and \*Contam.
   - v1.16: The Sceptre of Torment has a higher base delay. (15 -> 18)
+  - v1.16: The Vampire's Tooth has a lower enchantment. (+12 -> +10)
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

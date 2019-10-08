@@ -730,12 +730,6 @@ spret fire_los_attack_spell(spell_type spell, int pow, const actor* agent,
 
 spret vampiric_drain(int pow, monster* mons, bool fail)
 {
-    if (you.hp == you.hp_max)
-    {
-        canned_msg(MSG_FULL_HEALTH);
-        return spret::abort;
-    }
-
     const bool observable = mons && mons->observable();
     if (!mons
         || mons->submerged()
@@ -771,11 +765,8 @@ spret vampiric_drain(int pow, monster* mons, bool fail)
     }
 
     int hp_gain = 2 + (random2avg(pow, 2) * 2)/3;
-
-    hp_gain = min(mons->hit_points, hp_gain);
-    hp_gain = min(you.hp_max - you.hp, hp_gain);
-
     hp_gain = resist_adjust_damage(mons, BEAM_NEG, hp_gain);
+    hp_gain = min(mons->hit_points, hp_gain);
 
     if (!hp_gain)
     {

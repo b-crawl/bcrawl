@@ -309,6 +309,7 @@ Pull requests for new content are welcome.
   - v1.15.2: Green deaths have a simplified spell set.
   - v1.15.2: Hell knights have reworked (more dangerous) spell sets.
   - v1.15.2: Some wizards can cast Ensnare.
+  - v1.15.2: Ancient champions deal more melee damage.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

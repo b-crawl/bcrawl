@@ -1452,8 +1452,9 @@ Calls forth divine warriors to aid the caster.
 Summon Horrible Things spell
 
 Opens a gate to the Abyss and calls through one or more hideous abominations
-from that dreadful place. The opening of the gate may drain a portion of the
-caster's intellect.
+from that dreadful place.
+
+Opening such a gate may cause the caster's mind to degenerate.
 %%%%
 Summon Hydra spell
 
@@ -1601,6 +1602,8 @@ or rubble.
 Vampiric Draining spell
 
 Steals the life of an adjacent living creature and grants some of it to the caster.
+
+Heavy use of this spell may cause the caster's body to degenerate.
 %%%%
 Venom Bolt spell
 

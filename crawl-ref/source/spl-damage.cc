@@ -782,6 +782,12 @@ spret vampiric_drain(int pow, monster* mons, bool fail)
     {
         mpr("You feel life coursing into your body.");
         inc_hp(hp_gain);
+        
+        if (one_chance_in(10))
+        {
+            mprf(MSGCH_WARN, "The foreign life energy weakens you!");
+            lose_stat(STAT_STR, 1);
+        }
     }
 
     return spret::success;

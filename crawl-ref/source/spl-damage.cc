@@ -40,6 +40,7 @@
 #include "mon-tentacle.h"
 #include "mutation.h"
 #include "ouch.h"
+#include "player-stats.h"
 #include "prompt.h"
 #include "religion.h"
 #include "shout.h"

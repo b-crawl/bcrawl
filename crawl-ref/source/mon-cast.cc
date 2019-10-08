@@ -1070,9 +1070,7 @@ static int _mons_power_hd_factor(spell_type spell, bool random)
     switch (spell)
     {
         case SPELL_CONFUSION_GAZE:
-            if (random)
-                return 5 * (2 + random2(3)) * ENCH_POW_FACTOR;
-            return 5 * (2 + 1) * ENCH_POW_FACTOR;
+            return 15 * ENCH_POW_FACTOR;
 
         case SPELL_CAUSE_FEAR:
             return 18 * ENCH_POW_FACTOR;
@@ -1361,8 +1359,8 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         break;
 
     case SPELL_CALL_DOWN_DAMNATION:
-        beam.aux_source   = "damnation";
-        beam.name         = "damnation";
+        beam.aux_source   = "hellfire";
+        beam.name         = "hellfire";
         beam.ex_size      = 1;
         beam.flavour      = BEAM_DAMNATION;
         beam.is_explosion = true;
@@ -1447,9 +1445,9 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         beam.pierce   = true;
         break;
 
-    case SPELL_HURL_DAMNATION:           // fiend's damnation
-        beam.name         = "damnation";
-        beam.aux_source   = "damnation";
+    case SPELL_HURL_DAMNATION:           // fiend's hellfire
+        beam.name         = "hellfire";
+        beam.aux_source   = "hellfire";
         beam.colour       = LIGHTRED;
         beam.damage       = dice_def(3, 20);
         beam.hit          = 24;

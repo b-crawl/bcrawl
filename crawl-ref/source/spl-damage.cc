@@ -40,6 +40,7 @@
 #include "mon-tentacle.h"
 #include "mutation.h"
 #include "ouch.h"
+#include "player-stats.h"
 #include "prompt.h"
 #include "religion.h"
 #include "shout.h"
@@ -103,12 +104,12 @@ spret cast_fire_storm(int pow, bolt &beam, bool fail)
     return spret::success;
 }
 
-// No setup/cast split here as monster damnation is completely different.
+// No setup/cast split here as monster hellfire is completely different.
 // XXX make this not true
-bool cast_smitey_damnation(int pow, bolt &beam)
+bool cast_smitey_hellfire(int pow, bolt &beam)
 {
-    beam.name              = "damnation";
-    beam.aux_source        = "damnation";
+    beam.name              = "hellfire";
+    beam.aux_source        = "hellfire";
     beam.ex_size           = 1;
     beam.flavour           = BEAM_DAMNATION;
     beam.real_flavour      = beam.flavour;
@@ -134,7 +135,7 @@ bool cast_smitey_damnation(int pow, bolt &beam)
         return false;
     }
 
-    mpr("You call forth a pillar of damnation!");
+    mpr("You call forth a pillar of hellfire!");
 
     beam.is_tracer = false;
     beam.in_explosion_phase = false;
@@ -730,12 +731,6 @@ spret fire_los_attack_spell(spell_type spell, int pow, const actor* agent,
 
 spret vampiric_drain(int pow, monster* mons, bool fail)
 {
-    if (you.hp == you.hp_max)
-    {
-        canned_msg(MSG_FULL_HEALTH);
-        return spret::abort;
-    }
-
     const bool observable = mons && mons->observable();
     if (!mons
         || mons->submerged()
@@ -770,13 +765,9 @@ spret vampiric_drain(int pow, monster* mons, bool fail)
         return spret::success;
     }
 
-    // The practical maximum of this is about 25 (pow @ 100). - bwr
-    int hp_gain = 3 + random2avg(9, 2) + random2(pow) / 7;
-
-    hp_gain = min(mons->hit_points, hp_gain);
-    hp_gain = min(you.hp_max - you.hp, hp_gain);
-
+    int hp_gain = 2 + (random2avg(pow, 2) * 2)/3;
     hp_gain = resist_adjust_damage(mons, BEAM_NEG, hp_gain);
+    hp_gain = min(mons->hit_points, hp_gain);
 
     if (!hp_gain)
     {
@@ -792,6 +783,12 @@ spret vampiric_drain(int pow, monster* mons, bool fail)
     {
         mpr("You feel life coursing into your body.");
         inc_hp(hp_gain);
+        
+        if (one_chance_in(10))
+        {
+            mprf(MSGCH_WARN, "The foreign life energy weakens you!");
+            lose_stat(STAT_STR, 1);
+        }
     }
 
     return spret::success;

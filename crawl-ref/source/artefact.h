@@ -15,7 +15,7 @@
 #define ARTEFACT_NAME_KEY   "artefact_name"
 #define ARTEFACT_APPEAR_KEY "artefact_appearance"
 
-#define DAMNATION_BOLT_KEY "damnation_bolt"
+#define DAMNATION_BOLT_KEY "hellfire_bolt"
 
 struct bolt;
 

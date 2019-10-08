@@ -2830,6 +2830,7 @@ KITEM:   A = superb_item no_pickup, any good_item no_pickup \
 KFEAT:   A = enter_hell
 KFEAT:   _ = altar_makhleb
 KFEAT:   L = endless_lava
+KFEAT:   = = runed_door
 NSUBST:  1 = 3 = 11122 / * = 1h, 4 = 5:4 / 1:4H / *:H
 SUBST:   T = ttt.
 KPROP:   ` = bloody
@@ -2849,8 +2850,8 @@ MAP
 ..ttttttt..0tttt.t..ttttttttt.0.tttttttt..ttttttttxx
 .Tttttttttttttt..ttt...ttt....ttttttttttT.1Tttttttxx
 ...Ttttttttttt..ttttt.......tttttttttttT....Ttttttxx
-...tttttttttt.1ttttttt0ttFtttttttttcccccc++cccccccxx
-..Tttttttttt..tttttttttttt+ccccccccc'''''''''''''clL
+...tttttttttt.1ttttttt0ttttttttttttcccccc==cccccccxx
+..Tttttttttt..ttttttttttttcccccccccc'''''''''''''clL
 ..Ttttttttt.0t..ttttttttttc''''''''c'''G````G''''clL
 .Tttttttttt..tt..tttttttttc''G'G'''+'''''''''''''clL
 ..Tttttttt..tttt.tttttttttc'''c'G''ccccccccccccccclL

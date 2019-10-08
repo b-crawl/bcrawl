@@ -397,8 +397,8 @@ shirt_vest SHIRT_VEST
 karate KARATE
 karate2 KARATE2
 leather_heavy LEATHER_HEAVY
-troll_hide TROLL_HIDE
 troll_leather TROLL_LEATHER
+iron_troll_leather IRON_TROLL_ARMOUR
 green_chain GREEN_CHAIN
 metal_blue METAL_BLUE
 green_susp GREEN_SUSP
@@ -465,6 +465,7 @@ sam SAM
 vanhel1 VANHEL
 
 deep_troll_leather DEEP_TROLL_LEATHER
+# remove IRON_TROLL_LEATHER when TAG_MAJOR_VERSION > 34
 iron_troll_leather IRON_TROLL_LEATHER
 
 maxwell MAXWELL

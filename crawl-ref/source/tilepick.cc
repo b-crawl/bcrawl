@@ -2285,6 +2285,9 @@ static tileidx_t _tileidx_armour_base(const item_def &item)
     case ARM_TROLL_LEATHER_ARMOUR:
         return TILE_ARM_TROLL_LEATHER_ARMOUR;
 
+    case ARM_IRON_TROLL_ARMOUR:
+        return TILE_ARM_IRON_TROLL_ARMOUR;
+
     case ARM_FIRE_DRAGON_ARMOUR:
         return TILE_ARM_FIRE_DRAGON_ARMOUR;
 
@@ -2963,7 +2966,7 @@ tileidx_t tileidx_bolt(const bolt &bolt)
         break;
 
     case LIGHTRED:
-        if (bolt.name.find("damnation") != string::npos)
+        if (bolt.name.find("hellfire") != string::npos)
             return TILE_BOLT_DAMNATION;
         break;
 

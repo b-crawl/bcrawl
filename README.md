@@ -43,6 +43,7 @@ Pull requests for new content are welcome.
   - v1.11.5: Orb Guardians can spawn on any level of Zot.
   - v1.13: Each time you enter the Abyss increases the depth of your next entry.
   - v1.13.4: The Lair entrance is on D:7-9 instead of D:7-10.
+  - v1.16: Volcano levels will not contain wizards.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -118,6 +119,8 @@ Pull requests for new content are welcome.
   - v1.13.4: Kobolds have some better aptitudes, better stat gain, and the Talons 1 mutation.
   - v1.13.4: Formicids have a +0 bows aptitude.
   - v1.14.2: Spriggans are worse with ranged weapons.
+  - v1.16: Fairies have adjusted aptitudes.
+  - v1.16: Ghouls start with a chunk instead of a ration.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -170,6 +173,7 @@ Pull requests for new content are welcome.
   - v1.14.2: Regeneration ends when at max HP.
   - v1.14.2: Spellforged Servitors created by players have one spell, which is the spell from its list of possible spells that the player has the highest spell power for. That spell's power affects the Servitor's strength.
   - v1.15: Spellforged Servitors can have spells that are not in the player's spell list.
+  - v1.16: Vampiric Draining has lower base damage but scales more with spell power; above 19 power it will now be better. Also, it can now do more damage than the missing HP of the player, and has a 10% chance of draining 1 strength.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -219,6 +223,7 @@ Pull requests for new content are welcome.
   - The 'Ring of Insulation' gives rElec.
   - Iron Dragons may drop 'Iron Dragon Scales' on death.
   - Scarf of Stasis
+  - v1.16: Iron trolls drop iron troll leather armour. (8 AC, 16 encumbrance, rF+ rC+ Regen)
 
 #### Changed Items
   - Missiles are always lost when fired, and have a proportionately higher spawn rate.
@@ -259,7 +264,7 @@ Pull requests for new content are welcome.
   - The scimitar of Flaming Death and the dagger of Chilly Death have returned.
   - v1.5.2: The skin of Zhor gains +4 slaying.
   - v1.6: The dagger of Chilly Death is stronger, can slow enemies, and is renamed to the sapphire dagger.
-  - v1.7: The gauntlets of War are +0 with +6 slaying.
+  - v1.7: The gauntlets of War are +1 with +6 slaying.
   - v1.7: The salamander hide armour is +8, rF++ rC-, and can be evoked to make fog.
   - v1.7.1: Morg has +12 int, but curses itself.
   - v1.8.5: Kryia's mail coat has Repel Missiles.
@@ -272,6 +277,10 @@ Pull requests for new content are welcome.
   - v1.12.3: Spellbinder miscasts are no longer blamed on the player, so they won't anger allies.
   - v1.13.2: The Sword of Power has an enchantment level of (your strength - 10).
   - v1.13.4: The Fencer's Gloves give more (+3 -> +6) dexterity.
+  - v1.16: The Robe of Folly is reworked.
+  - v1.16: The Robe of Misfortune no longer has \*Drain and \*Contam.
+  - v1.16: The Sceptre of Torment has a higher base delay. (15 -> 18)
+  - v1.16: The Vampire's Tooth has a lower enchantment. (+12 -> +10)
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -298,6 +307,13 @@ Pull requests for new content are welcome.
   - v1.14: Bullfrogs and black bears are slightly stronger.
   - v1.15: Liches and ancient liches have reworked spell sets.
   - v1.15.1: Some naga warriors carry javelins.
+  - v1.16: Balrugs deal much more melee damage, and have a simplified spell set.
+  - v1.16: Brimstone Fiends deal more melee damage.
+  - v1.16: Green deaths have a simplified spell set.
+  - v1.16: Hell knights have reworked (more dangerous) spell sets.
+  - v1.16: Some wizards can cast Ensnare.
+  - v1.16: Ancient champions deal more melee damage.
+  - v1.16: Toenail golems are somewhat stronger.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -316,3 +332,4 @@ Pull requests for new content are welcome.
   - v1.13.3: Jory and Frederick have reworked spell sets.
   - v1.13.5: Jorgrun has Awaken Earth instead of Dig.
   - v1.15.1: Vashnia has a reworked spell set, casts extremely quickly, and always carries a wand of digging.
+  - v1.16: Arachne is reworked.

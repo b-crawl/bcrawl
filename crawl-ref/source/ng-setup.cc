@@ -484,10 +484,16 @@ static void _give_starting_food()
     object_class_type base_type = OBJ_FOOD;
     int sub_type = FOOD_RATION;
     int quantity = 1;
-    if (you.species == SP_VAMPIRE)
+    switch(you.species)
     {
+    case SP_VAMPIRE:
         base_type = OBJ_POTIONS;
         sub_type  = POT_BLOOD;
+        break;
+    case SP_GHOUL:
+        sub_type = FOOD_CHUNK;
+        break;
+    default: break;
     }
 
     // Give another one for hungry species.

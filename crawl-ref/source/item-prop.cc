@@ -105,10 +105,9 @@ static const armour_def Armour_prop[] =
     { ARM_CRYSTAL_PLATE_ARMOUR, "crystal plate armour",  14, -230,   800,
         EQ_BODY_ARMOUR, SIZE_SMALL, SIZE_MEDIUM, false, ARMF_NO_FLAGS, 500 },
 
-#if TAG_MAJOR_VERSION == 34
-    { ARM_TROLL_HIDE, "removed troll hide",              0,    0,      0,
-       EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT, false, ARMF_REGENERATION, 0 },
-#endif
+    { ARM_IRON_TROLL_ARMOUR, "iron troll leather armour",  8,  -160,    450,
+       EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT, false,
+       (ARMF_RES_FIRE | ARMF_RES_COLD | ARMF_REGENERATION), 0 },
     { ARM_TROLL_LEATHER_ARMOUR, "troll leather armour",  4,  -40,    150,
        EQ_BODY_ARMOUR, SIZE_LITTLE, SIZE_GIANT, false, ARMF_REGENERATION, 50 },
 
@@ -667,7 +666,7 @@ static const missile_def Missile_prop[] =
 #if TAG_MAJOR_VERSION == 34
     { MI_DART,          "dart",          2, 1,  1,  true  },
 #endif
-    { MI_NEEDLE,        "needle",        0, 12, 2,  false },
+    { MI_NEEDLE,        "needle",        0, 12, 12, false },
     { MI_STONE,         "stone",         2, 8,  1,  true  },
     { MI_ARROW,         "arrow",         0, 8,  2,  false },
     { MI_BOLT,          "bolt",          0, 8,  2,  false },
@@ -1330,7 +1329,7 @@ special_armour_type get_armour_ego_type(const item_def &item)
 static map<monster_type, armour_type> _monster_hides = {
     { MONS_TROLL,               ARM_TROLL_LEATHER_ARMOUR },
     { MONS_DEEP_TROLL,          ARM_TROLL_LEATHER_ARMOUR },
-    { MONS_IRON_TROLL,          ARM_TROLL_LEATHER_ARMOUR },
+    { MONS_IRON_TROLL,          ARM_IRON_TROLL_ARMOUR },
 
     { MONS_FIRE_DRAGON,         ARM_FIRE_DRAGON_ARMOUR },
     { MONS_ICE_DRAGON,          ARM_ICE_DRAGON_ARMOUR },

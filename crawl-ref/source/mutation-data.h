@@ -682,9 +682,9 @@ static const mutation_def mut_data[] =
 },
 
 { MUT_HURL_DAMNATION, 0, 1, mutflag::good, false,
-  "hurl damnation",
+  "hurl hellfire",
 
-  {"You can hurl damnation.", "", ""},
+  {"You can hurl hellfire.", "", ""},
   {"You smell a hint of brimstone.", "", ""},
   {"", "", ""},
 },

@@ -9,7 +9,7 @@ class dist;
 
 void setup_fire_storm(const actor *source, int pow, bolt &beam);
 spret cast_fire_storm(int pow, bolt &beam, bool fail);
-bool cast_smitey_damnation(int pow, bolt &beam);
+bool cast_smitey_hellfire(int pow, bolt &beam);
 spret cast_chain_spell(spell_type spell_cast, int pow,
                             const actor *caster, bool fail = false);
 

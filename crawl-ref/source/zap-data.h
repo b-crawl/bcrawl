@@ -516,7 +516,7 @@ _mon_hex_zap(ZAP_BANISHMENT, BEAM_BANISH, 150),
 
 {
     ZAP_DAMNATION,
-    "damnation",
+    "hellfire",
     200,
     new calcdice_calculator<3, 8, 3, 5>,
     new tohit_calculator<20, 1, 10>,

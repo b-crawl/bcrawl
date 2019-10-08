@@ -1226,7 +1226,7 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         item.base_type = OBJ_STAVES;
         item.sub_type = STAFF_POISON;
         item.flags    |= ISFLAG_KNOW_TYPE;
-        if (one_chance_in(100) && !get_unique_item_status(UNRAND_OLGREB))
+        if (one_chance_in(15) && !get_unique_item_status(UNRAND_OLGREB))
             make_item_unrandart(item, UNRAND_OLGREB);
         break;
 
@@ -1414,36 +1414,33 @@ static void _give_ammo(monster* mon, int level, bool mons_summoned)
 
         if (xitt == MI_NEEDLE)
         {
-            if (mon->type == MONS_SONJA)
+            int needle_brand = SPMSL_POISONED;
+            int quantity = 0;
+            
+            switch(mon->type)
             {
-                set_item_ego_type(mitm[thing_created], OBJ_MISSILES,
-                                  SPMSL_CURARE);
-
-                // This is one third of the expected value, so that
-                // Sonja can still sometimes run out of ammo. This is
-                // a very significant buff to Sonja otherwise. -- NP7
-                mitm[thing_created].quantity = random_range(8, 20);
-            }
-            else if (mon->type == MONS_SPRIGGAN_RIDER)
-            {
-                set_item_ego_type(mitm[thing_created], OBJ_MISSILES,
-                                  SPMSL_CURARE);
-
+            case MONS_SONJA:
+                needle_brand = SPMSL_CURARE;
+                quantity = random_range(8, 20);
+                break;
+            case MONS_SPRIGGAN_RIDER:
+                needle_brand = SPMSL_CURARE;
                 // Don't have spriggan riders placed in Lair vaults have
                 // really high amounts of ammo, so as to not make them OP.
-                mitm[thing_created].quantity = player_in_branch(BRANCH_LAIR)
-                                               ? random_range(3, 6)
-                                               : random_range(12, 24);
+                quantity = player_in_branch(BRANCH_LAIR) ?
+                        random_range(3, 6) : random_range(12, 24);
+                break;
+            default:
+                needle_brand = got_curare_roll(level) ? SPMSL_CURARE : SPMSL_POISONED;
+                if (needle_brand == SPMSL_CURARE)
+                    quantity = random_range(4, 12);
+                else
+                    quantity = random_range(12, 48);
+                break;
             }
-            else
-            {
-                set_item_ego_type(mitm[thing_created], OBJ_MISSILES,
-                                  got_curare_roll(level) ? SPMSL_CURARE
-                                                         : SPMSL_POISONED);
-
-                if (get_ammo_brand(mitm[thing_created]) == SPMSL_CURARE)
-                    mitm[thing_created].quantity = random_range(12, 48);
-            }
+            
+            set_item_ego_type(mitm[thing_created], OBJ_MISSILES, needle_brand);
+            mitm[thing_created].quantity = quantity;
         }
         else
         {

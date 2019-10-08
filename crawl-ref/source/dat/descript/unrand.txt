@@ -82,7 +82,7 @@ the fire resistance of those it strikes.
 %%%%
 staff of Dispater
 
-A legendary staff, granting the power to unleash damnation — although not
+A legendary staff, granting the power to unleash hellfire — although not
 without draining the wielder's vitality in the process.
 %%%%
 sceptre of Asmodeus
@@ -175,7 +175,7 @@ both the wielder and all of his or her mortal followers.
 arbalest "Damnation"
 
 An unholy crossbow, forged in the fires of Gehenna. It imbues the bolts it
-fires with the raw power of its namesake, causing a burst of damnation on
+fires with the raw power of its origin, causing a burst of hellfire on
 impact irresistible by any mortal armour.
 %%%%
 # TAG_MINOR_VERSION == 34
@@ -326,7 +326,8 @@ an especially mighty bear.
 %%%%
 robe of Misfortune
 
-A splendid flowing robe of fur and silk whose lucky colour has faded.
+A once-splendid flowing robe of fur and silk, now faded and worn. It was originally
+used by a powerful but notoriously unlucky wizard.
 %%%%
 # TAG_MAJOR_VERSION == 34
 cloak of Flash
@@ -373,7 +374,7 @@ frost and flame.
 %%%%
 robe of Folly
 
-A dull grey robe. It is enchanted to provide its wearer with immeasurable power
+A worn red robe, covered with stains. It is enchanted to provide its wearer with immeasurable power
 and wisdom, but...
 %%%%
 Maxwell's patent armour
@@ -421,8 +422,7 @@ A phosphorescent cloak, woven of pure light beams.
 ratskin cloak
 
 A cloak stitched from the hides of hundreds of hell rats, by an enchantress
-with a magic loom and too much time on her hands. It provides excellent
-protection from rats of all kinds.
+with a magic loom and too much time on her hands.
 
 It can be evoked to summon rats from the Dungeon to accompany the wearer,
 for a time.

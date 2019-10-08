@@ -565,7 +565,7 @@ of its damage bypasses fire resistance.
 %%%%
 Fire Summon spell
 
-Summons demons of flame and damnation.
+Summons demons of flame and hellfire.
 %%%%
 Fireball spell
 
@@ -678,17 +678,17 @@ Heal Other spell
 
 Heals a nearby ally.
 %%%%
-Call Down Damnation spell
+Call Down Hellfire spell
 
-Blasts a targeted enemy with damnation, with no direct line of fire required.
+Blasts a targeted enemy with hellfire, with no direct line of fire required.
 These unholy forces harm the victim and anyone adjacent, and are not affected
 by any means of protection, such as armour or resistances. However, certain
-creatures, usually those able to invoke damnation themselves, are entirely
-unscathed by damnation.
+creatures, usually those able to invoke hellfire themselves, are entirely
+unscathed by it.
 %%%%
-Hurl Damnation spell
+Hurl Hellfire spell
 
-<Hurl Damnation ability>
+<Hurl Hellfire ability>
 %%%%
 Holy Breath spell
 
@@ -1452,8 +1452,9 @@ Calls forth divine warriors to aid the caster.
 Summon Horrible Things spell
 
 Opens a gate to the Abyss and calls through one or more hideous abominations
-from that dreadful place. The opening of the gate may drain a portion of the
-caster's intellect.
+from that dreadful place.
+
+Opening such a gate may cause the caster's mind to degenerate.
 %%%%
 Summon Hydra spell
 
@@ -1600,8 +1601,9 @@ or rubble.
 %%%%
 Vampiric Draining spell
 
-Steals the life of an adjacent living creature and grants it to the caster.
-Life will not be drained in excess of what the caster can capably absorb.
+Steals the life of an adjacent living creature and grants some of it to the caster.
+
+Heavy use of this spell may cause the caster's body to degenerate.
 %%%%
 Venom Bolt spell
 

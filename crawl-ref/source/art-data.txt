@@ -237,7 +237,7 @@ VALUE:   1000
 NAME:    Vampire's Tooth
 OBJ:     OBJ_WEAPONS/WPN_QUICK_BLADE
 # it's a quick blade made from a tooth -> no TYPE
-PLUS:    +12
+PLUS:    +10
 COLOUR:  ETC_BONE
 TILE:    spwpn_vampires_tooth
 TILE_EQ: vampires_tooth
@@ -261,6 +261,7 @@ PLUS:    +7
 COLOUR:  ETC_GOLD
 TILE:    spwpn_sceptre_of_torment
 TILE_EQ: sceptre_of_torment
+BASE_DELAY: +3
 BRAND:   SPWPN_PAIN
 VALUE:   1200
 BOOL:    special, evil
@@ -450,7 +451,7 @@ ANGRY:    5
 LIFE:     1
 
 NAME:    arbalest "Damnation"
-INSCRIP: damnation,
+INSCRIP: hellfire,
 OBJ:     OBJ_WEAPONS/WPN_ARBALEST
 PLUS:    +6
 COLOUR:  ETC_FIRE
@@ -725,7 +726,7 @@ COLOUR:   LIGHTMAGENTA
 TILE:     urand_misfortune
 TILE_EQ:  robe_misfortune
 EV:       5
-BOOL:     harm, mutate, drain, slow, corrode
+BOOL:     harm, slow, corrode
 
 # TAG_MAJOR_VERSION == 34
 NAME:     cloak of Flash
@@ -799,13 +800,16 @@ MAGIC:   1
 
 NAME:    robe of Folly
 OBJ:     OBJ_ARMOUR/ARM_ROBE
-PLUS:    3
+PLUS:    8
 COLOUR:  LIGHTGREY
 TILE:    urand_folly
 TILE_EQ: robe_red2
 BRAND:   SPARM_ARCHMAGI
-INT:     5
-MAGIC:   -2
+INT:     8
+SLAY:    8
+EV:      -8
+MAGIC:   -1
+STEALTH: -2
 
 ENUM:    MAXWELL
 NAME:    Maxwell's patent armour
@@ -887,11 +891,7 @@ COLOUR:   ETC_BEOGH
 TILE:     urand_ratskin_cloak
 TILE_EQ:  ratskin
 INSCRIP:  +Rats
-STR:      -1
-INT:      -1
-DEX:      1
 LIFE:     1
-BOOL:     poison
 
 NAME:     shield of the Gong
 OBJ:      OBJ_ARMOUR/ARM_SHIELD

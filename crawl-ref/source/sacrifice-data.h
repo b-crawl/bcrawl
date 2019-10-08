@@ -52,7 +52,7 @@ static const sacrifice_def sac_data[] =
   30,
   SK_NONE,
   nullptr,
-  []() { return you.species != SP_MUMMY; },
+  []() { return species_undead_type(you.species) != US_UNDEAD; },
 },
 
 { ABIL_RU_SACRIFICE_ESSENCE, MUT_NON_MUTATION,

@@ -324,6 +324,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SUMMON_ICE_BEAST,
     SPELL_SUMMON_MANA_VIPER,
     SPELL_SUMMON_HYDRA,
+    SPELL_MONSTROUS_MENAGERIE,
 },
 
 {   // Book of Annihilations

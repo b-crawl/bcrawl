@@ -379,6 +379,11 @@ animal_skin2
 animal_skin3
 
 troll_leather_armour ARM_TROLL_LEATHER_ARMOUR
+deep_troll_leather DEEP_TROLL_LEATHER
+iron_troll_leather ARM_IRON_TROLL_ARMOUR
+# remove IRON_TROLL_LEATHER when TAG_MAJOR_VERSION > 34
+iron_troll_leather IRON_TROLL_LEATHER
+
 red_dragon_scale_mail ARM_FIRE_DRAGON_ARMOUR
 ice_dragon_armour ARM_ICE_DRAGON_ARMOUR
 silver_dragon_scale_mail ARM_STEAM_DRAGON_ARMOUR
@@ -390,9 +395,6 @@ gold_dragon_armour ARM_GOLD_DRAGON_ARMOUR
 swamp_dragon_armour ARM_SWAMP_DRAGON_ARMOUR
 pearl_dragon_armour ARM_PEARL_DRAGON_ARMOUR
 iron_dragon_armour   ARM_IRON_DRAGON_ARMOUR
-
-deep_troll_leather DEEP_TROLL_LEATHER
-iron_troll_leather IRON_TROLL_LEATHER
 
 %rim 1
 cloak1_leather ARM_CLOAK

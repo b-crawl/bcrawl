@@ -3699,8 +3699,8 @@ bool monster::is_insubstantial() const
     return mons_class_flag(type, M_INSUBSTANTIAL);
 }
 
-/// Is this monster completely immune to Damnation-flavoured damage?
-bool monster::res_damnation() const
+/// Is this monster completely immune to Hellfire-flavoured damage?
+bool monster::res_hellfire() const
 {
     return get_mons_resist(*this, MR_RES_DAMNATION);
 }

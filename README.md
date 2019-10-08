@@ -307,6 +307,8 @@ Pull requests for new content are welcome.
   - v1.15.2: Balrugs deal much more melee damage, and have a simplified spell set.
   - v1.15.2: Brimstone Fiends deal more melee damage.
   - v1.15.2: Green deaths have a simplified spell set.
+  - v1.15.2: Hell knights have reworked (more dangerous) spell sets.
+  - v1.15.2: Some wizards can cast Ensnare.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

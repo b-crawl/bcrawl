@@ -528,8 +528,8 @@ static const mon_spellbook mspell_list[] =
       {
        { SPELL_FREEZING_BLAST, 12, MON_SPELL_WIZARD },
        { SPELL_LEHUDIBS_CRYSTAL_SPEAR, 12, MON_SPELL_WIZARD },
-       { SPELL_SLOW, 12, MON_SPELL_WIZARD },
-       { SPELL_HASTE, 12, MON_SPELL_WIZARD },
+       { SPELL_SLOW, 14, MON_SPELL_WIZARD },
+       { SPELL_ENSNARE, 12, MON_SPELL_WIZARD },
       }
     },
 
@@ -542,17 +542,14 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_HELL_KNIGHT_I,
       {
-       { SPELL_PAIN, 13, MON_SPELL_WIZARD },
-       { SPELL_THROW_FLAME, 13, MON_SPELL_WIZARD },
-       { SPELL_HASTE, 26, MON_SPELL_WIZARD },
+       { SPELL_BERSERKER_RAGE, 25, MON_SPELL_NATURAL },
       }
     },
 
     {  MST_HELL_KNIGHT_II,
       {
-       { SPELL_PAIN, 17, MON_SPELL_WIZARD },
-       { SPELL_BOLT_OF_FIRE, 17, MON_SPELL_WIZARD },
-       { SPELL_BLINK, 17, MON_SPELL_WIZARD | MON_SPELL_EMERGENCY },
+       { SPELL_BOLT_OF_FIRE, 25, MON_SPELL_WIZARD },
+       { SPELL_SUMMON_HELL_BEAST, 10, MON_SPELL_WIZARD },
       }
     },
 
@@ -770,7 +767,6 @@ static const mon_spellbook mspell_list[] =
     {  MST_ANCIENT_CHAMPION_I,
       {
        { SPELL_IRON_SHOT, 21, MON_SPELL_WIZARD },
-       { SPELL_PAIN, 21, MON_SPELL_WIZARD },
        { SPELL_HASTE, 21, MON_SPELL_WIZARD },
       }
     },
@@ -1967,7 +1963,7 @@ static const mon_spellbook mspell_list[] =
        { SPELL_SMITING, 23, MON_SPELL_WIZARD },
        { SPELL_SYMBOL_OF_TORMENT, 11, MON_SPELL_WIZARD },
        { SPELL_SUMMON_EMPEROR_SCORPIONS, 11, MON_SPELL_WIZARD },
-       { SPELL_SUMMON_UNDEAD, 11, MON_SPELL_WIZARD },
+       { SPELL_ENSNARE, 11, MON_SPELL_WIZARD },
        { SPELL_TOMB_OF_DOROKLOHE, 11, MON_SPELL_WIZARD | MON_SPELL_EMERGENCY },
       }
     },

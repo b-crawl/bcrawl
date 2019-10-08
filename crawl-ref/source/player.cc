@@ -1079,8 +1079,11 @@ static int _player_bonus_regen()
     rr += REGEN_PIP * you.scan_artefacts(ARTP_REGENERATION);
 
     // Troll leather
-    if (you.wearing(EQ_BODY_ARMOUR, ARM_TROLL_LEATHER_ARMOUR))
-        rr += REGEN_PIP;
+    item_def *body_armour = you.slot_item(EQ_BODY_ARMOUR);
+    if (body_armour)
+        if (armour_type_prop(body_armour->sub_type, ARMF_REGENERATION)
+                && !is_artefact(body_armour))
+            rr += REGEN_PIP;
 
     // Fast heal mutation.
     rr += you.get_mutation_level(MUT_REGENERATION) * REGEN_PIP;

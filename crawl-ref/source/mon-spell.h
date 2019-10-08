@@ -542,7 +542,7 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_HELL_KNIGHT_I,
       {
-       { SPELL_BERSERKER_RAGE, 25, MON_SPELL_NATURAL },
+       { SPELL_BERSERKER_RAGE, 25, MON_SPELL_WIZARD },
       }
     },
 

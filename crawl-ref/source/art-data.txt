@@ -891,7 +891,7 @@ COLOUR:   ETC_BEOGH
 TILE:     urand_ratskin_cloak
 TILE_EQ:  ratskin
 INSCRIP:  +Rats
-BOOL:     poison
+LIFE:     1
 
 NAME:     shield of the Gong
 OBJ:      OBJ_ARMOUR/ARM_SHIELD

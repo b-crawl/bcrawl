@@ -1082,7 +1082,7 @@ static int _player_bonus_regen()
     item_def *body_armour = you.slot_item(EQ_BODY_ARMOUR);
     if (body_armour)
         if (armour_type_prop(body_armour->sub_type, ARMF_REGENERATION)
-                && !is_artefact(body_armour))
+                && !is_artefact(*body_armour))
             rr += REGEN_PIP;
 
     // Fast heal mutation.

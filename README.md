@@ -173,6 +173,7 @@ Pull requests for new content are welcome.
   - v1.14.2: Regeneration ends when at max HP.
   - v1.14.2: Spellforged Servitors created by players have one spell, which is the spell from its list of possible spells that the player has the highest spell power for. That spell's power affects the Servitor's strength.
   - v1.15: Spellforged Servitors can have spells that are not in the player's spell list.
+  - v1.16: Vampiric draining has lower base damage but scales more with spell power; above 19 power it will now be better.
 
 #### Removed Spells
   - Summon Guardian Golem

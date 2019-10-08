@@ -770,8 +770,7 @@ spret vampiric_drain(int pow, monster* mons, bool fail)
         return spret::success;
     }
 
-    // The practical maximum of this is about 25 (pow @ 100). - bwr
-    int hp_gain = 3 + random2avg(9, 2) + random2(pow) / 7;
+    int hp_gain = 2 + (random2avg(pow, 2) * 2)/3;
 
     hp_gain = min(mons->hit_points, hp_gain);
     hp_gain = min(you.hp_max - you.hp, hp_gain);

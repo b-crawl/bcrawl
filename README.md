@@ -118,8 +118,8 @@ Pull requests for new content are welcome.
   - v1.13.4: Kobolds have some better aptitudes, better stat gain, and the Talons 1 mutation.
   - v1.13.4: Formicids have a +0 bows aptitude.
   - v1.14.2: Spriggans are worse with ranged weapons.
-  - v1.15.2: Fairies have adjusted aptitudes.
-  - v1.15.2: Ghouls start with a chunk instead of a ration.
+  - v1.16: Fairies have adjusted aptitudes.
+  - v1.16: Ghouls start with a chunk instead of a ration.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -221,7 +221,7 @@ Pull requests for new content are welcome.
   - The 'Ring of Insulation' gives rElec.
   - Iron Dragons may drop 'Iron Dragon Scales' on death.
   - Scarf of Stasis
-  - v1.15.2: Iron trolls drop iron troll leather armour. (8 AC, 16 encumbrance, rF+ rC+ Regen)
+  - v1.16: Iron trolls drop iron troll leather armour. (8 AC, 16 encumbrance, rF+ rC+ Regen)
 
 #### Changed Items
   - Missiles are always lost when fired, and have a proportionately higher spawn rate.
@@ -275,9 +275,9 @@ Pull requests for new content are welcome.
   - v1.12.3: Spellbinder miscasts are no longer blamed on the player, so they won't anger allies.
   - v1.13.2: The Sword of Power has an enchantment level of (your strength - 10).
   - v1.13.4: The Fencer's Gloves give more (+3 -> +6) dexterity.
-  - v1.15.2: The Robe of Folly is reworked.
-  - v1.15.2: The Robe of Misfortune no longer has \*Drain and \*Contam.
-  - v1.15.2: The Sceptre of Torment has a higher base delay. (15 -> 18)
+  - v1.16: The Robe of Folly is reworked.
+  - v1.16: The Robe of Misfortune no longer has \*Drain and \*Contam.
+  - v1.16: The Sceptre of Torment has a higher base delay. (15 -> 18)
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -304,12 +304,12 @@ Pull requests for new content are welcome.
   - v1.14: Bullfrogs and black bears are slightly stronger.
   - v1.15: Liches and ancient liches have reworked spell sets.
   - v1.15.1: Some naga warriors carry javelins.
-  - v1.15.2: Balrugs deal much more melee damage, and have a simplified spell set.
-  - v1.15.2: Brimstone Fiends deal more melee damage.
-  - v1.15.2: Green deaths have a simplified spell set.
-  - v1.15.2: Hell knights have reworked (more dangerous) spell sets.
-  - v1.15.2: Some wizards can cast Ensnare.
-  - v1.15.2: Ancient champions deal more melee damage.
+  - v1.16: Balrugs deal much more melee damage, and have a simplified spell set.
+  - v1.16: Brimstone Fiends deal more melee damage.
+  - v1.16: Green deaths have a simplified spell set.
+  - v1.16: Hell knights have reworked (more dangerous) spell sets.
+  - v1.16: Some wizards can cast Ensnare.
+  - v1.16: Ancient champions deal more melee damage.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -328,4 +328,4 @@ Pull requests for new content are welcome.
   - v1.13.3: Jory and Frederick have reworked spell sets.
   - v1.13.5: Jorgrun has Awaken Earth instead of Dig.
   - v1.15.1: Vashnia has a reworked spell set, casts extremely quickly, and always carries a wand of digging.
-  - v1.15.2: Arachne is reworked.
+  - v1.16: Arachne is reworked.

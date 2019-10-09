@@ -362,8 +362,7 @@ COLOUR:  ETC_DARK
 TILE:    urand_leech
 TILE_EQ: leech
 BRAND:   SPWPN_VAMPIRISM
-AC:      -3
-EV:      -3
+AC:      -5
 LIFE:     1
 
 NAME:    sapphire dagger

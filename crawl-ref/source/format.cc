@@ -236,7 +236,7 @@ formatted_string::operator string() const
 {
     string s;
     for (const fs_op &op : ops)
-        if (op == FSOP_TEXT)
+        if (op.type == FSOP_TEXT)
             s += op.text;
 
     return s;
@@ -273,7 +273,7 @@ string formatted_string::html_dump() const
             break;
         case FSOP_COLOUR:
             s += "<font color=";
-            s += colour_to_str(op.x);
+            s += colour_to_str(op.colour);
             s += ">";
             break;
         }
@@ -284,6 +284,12 @@ string formatted_string::html_dump() const
 bool formatted_string::operator < (const formatted_string &other) const
 {
     return string(*this) < string(other);
+}
+
+bool formatted_string::operator == (const formatted_string &other) const
+{
+    // May produce false negative in some cases, e.g. duplicated colour ops
+    return ops == other.ops;
 }
 
 const formatted_string &
@@ -298,7 +304,7 @@ int formatted_string::width() const
     // Just add up the individual string lengths.
     int len = 0;
     for (const fs_op &op : ops)
-        if (op == FSOP_TEXT)
+        if (op.type == FSOP_TEXT)
             len += strwidth(op.text);
     return len;
 }
@@ -319,7 +325,7 @@ char &formatted_string::operator [] (size_t idx)
     int size = ops.size();
     for (int i = 0; i < size; ++i)
     {
-        if (ops[i] != FSOP_TEXT)
+        if (ops[i].type != FSOP_TEXT)
             continue;
 
         size_t len = ops[i].text.length();
@@ -341,7 +347,7 @@ string formatted_string::tostring(int s, int e) const
 
     for (int i = s; i <= e && i < size; ++i)
     {
-        if (ops[i] == FSOP_TEXT)
+        if (ops[i].type == FSOP_TEXT)
             st += ops[i].text;
     }
     return st;
@@ -353,7 +359,7 @@ string formatted_string::to_colour_string() const
     const int size = ops.size();
     for (int i = 0; i < size; ++i)
     {
-        if (ops[i] == FSOP_TEXT)
+        if (ops[i].type == FSOP_TEXT)
         {
             // gotta double up those '<' chars ...
             size_t start = st.size();
@@ -369,10 +375,10 @@ string formatted_string::to_colour_string() const
                 start = left_angle + 2;
             }
         }
-        else if (ops[i] == FSOP_COLOUR)
+        else if (ops[i].type == FSOP_COLOUR)
         {
             st += "<";
-            st += colour_to_str(ops[i].x);
+            st += colour_to_str(ops[i].colour);
             st += ">";
         }
     }
@@ -399,7 +405,7 @@ int formatted_string::find_last_colour() const
     {
         for (int i = ops.size() - 1; i >= 0; --i)
             if (ops[i].type == FSOP_COLOUR)
-                return ops[i].x;
+                return ops[i].colour;
     }
     return LIGHTGREY;
 }
@@ -497,7 +503,7 @@ void formatted_string::add_glyph(cglyph_t g)
 
 void formatted_string::textcolour(int colour)
 {
-    if (!ops.empty() && ops[ ops.size() - 1 ].type == FSOP_COLOUR)
+    if (!ops.empty() && ops.back().type == FSOP_COLOUR)
         ops.pop_back();
 
     ops.emplace_back(colour);
@@ -532,9 +538,9 @@ void formatted_string::fs_op::display() const
     {
     case FSOP_COLOUR:
 #ifndef USE_TILE_LOCAL
-        if (x < NUM_TERM_COLOURS)
+        if (colour < NUM_TERM_COLOURS)
 #endif
-            ::textcolour(x);
+            ::textcolour(colour);
         break;
     case FSOP_TEXT:
         ::cprintf("%s", text.c_str());
@@ -588,55 +594,4 @@ int count_linebreaks(const formatted_string& fs)
         }
     }
     return count;
-}
-
-/**
- * How long are the <colour> tags in the string?
- *
- * This function assumes that every character making up the tag is one char
- * long. This shouldn't break as long as nobody uses non-ASCII characters
- * in the tag. It also can't handle nested tags, but that shouldn't be an issue.
- *
- * @param s the string with the tags.
- * @return the length of the tags, including the angle brackets.
- */
-int tagged_string_tag_length(const string& s)
-{
-    int len = 0;
-    bool in_tag = false;
-    char prev_char = '\0';
-    for (char ch : s)
-    {
-        if (in_tag)
-        {
-            if (ch == '<' && prev_char == '<') // "<<" sequence
-            {
-                in_tag = false;
-                len--; // Correct for len being incremented last time
-            }
-            else if (ch == '>')
-                in_tag = false;
-        }
-        else if (ch == '<')
-            in_tag = true;
-
-        if (in_tag)
-            len++;
-        prev_char = ch;
-    }
-
-    ASSERT(len >= 0);
-    return len;
-}
-
-/**
- * How long will this string be when printed?
- *
- * @param string str
- * @return how much the user will see -- counting combining characters together,
- *         not including <colour> tags, etc.
- */
-int printed_width(const string& str)
-{
-    return strwidth(str) - tagged_string_tag_length(str);
 }

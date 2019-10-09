@@ -634,7 +634,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_NECROMANCY,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK,
     1,
-    25,
+    50,
     5, 5,
     1, 0,
     TILEG_PAIN,
@@ -1239,7 +1239,7 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_DEATH_CHANNEL, "Death Channel",
-    SPTYP_NECROMANCY,
+    SPTYP_NECROMANCY | SPTYP_CHARMS,
     SPFLAG_HELPFUL | SPFLAG_UTILITY,
     6,
     200,
@@ -3804,7 +3804,7 @@ static const struct spell_desc spelldata[] =
     100,
     -1, -1,
     2, 0,
-    TILEG_GENERIC_MONSTER_SPELL,
+    TILEG_SPRINT,
 },
 
 {

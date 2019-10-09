@@ -464,6 +464,8 @@ Text::Text()
 
 void Text::set_text(const formatted_string &fs)
 {
+    if (fs == m_text)
+        return;
     m_text.clear();
     m_text += fs;
     _invalidate_sizereq();
@@ -1745,9 +1747,10 @@ void resize(int w, int h)
 
 static void remap_key(wm_event &event)
 {
-    keyseq keys = {event.key.keysym.sym};
-    KeymapContext km = ui_root.keymap_stack.size() > 0 ? ui_root.keymap_stack[0] : KMC_NONE;
-    macro_buf_add_with_keymap(keys, km);
+    const auto keymap = ui_root.keymap_stack.size() > 0 ?
+            ui_root.keymap_stack[0] : KMC_NONE;
+    ASSERT(get_macro_buf_size() == 0);
+    macro_buf_add_with_keymap(event.key.keysym.sym, keymap);
     event.key.keysym.sym = macro_buf_get();
     ASSERT(event.key.keysym.sym != -1);
 }

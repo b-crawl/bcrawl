@@ -765,7 +765,7 @@ spret vampiric_drain(int pow, monster* mons, bool fail)
         return spret::success;
     }
 
-    int hp_gain = 2 + (random2avg(pow, 2) * 2)/3;
+    int hp_gain = 2 + random2avg(pow, 2)/2;
     hp_gain = resist_adjust_damage(mons, BEAM_NEG, hp_gain);
     hp_gain = min(mons->hit_points, hp_gain);
 
@@ -777,7 +777,7 @@ spret vampiric_drain(int pow, monster* mons, bool fail)
 
     _player_hurt_monster(*mons, hp_gain, BEAM_NEG);
 
-    hp_gain = div_rand_round(hp_gain, 2);
+    hp_gain = div_rand_round(hp_gain*2, 3);
 
     if (hp_gain && !you.duration[DUR_DEATHS_DOOR] && you.species != SP_DEEP_DWARF)
     {

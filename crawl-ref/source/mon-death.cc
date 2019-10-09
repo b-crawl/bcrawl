@@ -430,7 +430,7 @@ static void _gold_pile(item_def &corpse, monster_type corpse_class)
     // In sprint, increase the amount of gold from corpses (but not
     // the gold aura duration!)
     if (crawl_state.game_is_sprint())
-        corpse.quantity *= SPRINT_MULTIPLIER;
+        corpse.quantity = (corpse.quantity * SPRINT_MULTIPLIER)/2;
 
     const int chance = you.props[GOZAG_GOLD_AURA_KEY].get_int();
     if (!x_chance_in_y(chance, chance + 9))

@@ -176,6 +176,7 @@ Pull requests for new content are welcome.
   - v1.16: Vampiric Draining has lower base damage but scales more with spell power; above 19 power it will now be better. Also, it can now do more damage than the missing HP of the player, and has a 10% chance of draining 1 strength.
   - v1.16.1: Vampiric Draining deals somewhat less damage, but heals players for the same amount.
   - v1.16.1: Pain has a higher power cap. (25 -> 50)
+  - v1.16.1: Death Channel is now Charms/Necromancy.
 
 #### Removed Spells
   - Summon Guardian Golem

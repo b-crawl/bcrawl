@@ -1239,7 +1239,7 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_DEATH_CHANNEL, "Death Channel",
-    SPTYP_NECROMANCY,
+    SPTYP_NECROMANCY | SPTYP_CHARMS,
     SPFLAG_HELPFUL | SPFLAG_UTILITY,
     6,
     200,

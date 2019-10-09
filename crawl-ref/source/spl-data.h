@@ -634,7 +634,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_NECROMANCY,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK,
     1,
-    25,
+    50,
     5, 5,
     1, 0,
     TILEG_PAIN,

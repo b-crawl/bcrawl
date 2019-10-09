@@ -744,8 +744,8 @@ spret vampiric_drain(int pow, monster* mons, bool fail)
         return spret::success;
     }
 
-    // TODO: check known rN instead of holiness
-    if (observable && !actor_is_susceptible_to_vampirism(*mons))
+    if (observable &&
+			(!actor_is_susceptible_to_vampirism(*mons) || mons->res_negative_energy() >= 3))
     {
         mpr("You can't drain life from that!");
         return spret::abort;

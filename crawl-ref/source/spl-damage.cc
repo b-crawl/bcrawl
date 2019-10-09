@@ -745,7 +745,7 @@ spret vampiric_drain(int pow, monster* mons, bool fail)
     }
 
     if (observable &&
-			(!actor_is_susceptible_to_vampirism(*mons) || mons->res_negative_energy() >= 3))
+            (!actor_is_susceptible_to_vampirism(*mons) || mons->res_negative_energy() >= 3))
     {
         mpr("You can't drain life from that!");
         return spret::abort;
@@ -803,6 +803,12 @@ spret cast_freeze(int pow, monster* mons, bool fail)
         // If there's no monster there, you still pay the costs in
         // order to prevent locating invisible/submerged monsters.
         return spret::success;
+    }
+
+    if (mons->res_cold() >= 3)
+    {
+        mpr("That target is immune!");
+        return spret::abort;
     }
 
     if (stop_attack_prompt(mons, false, you.pos()))

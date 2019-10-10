@@ -575,20 +575,17 @@ void slimify_monster(monster* mon)
 
     if (x < 3)
         target = MONS_OOZE;
-    else if (x >= 3 && x < 5)
+    else if (x >= 3 && x < 7)
         target = MONS_JELLY;
-    else if (x >= 5 && x <= 11)
+    else if (x >= 7 && x <= 13)
         target = MONS_SLIME_CREATURE;
     else
     {
         target = coinflip() ? MONS_ACID_BLOB : MONS_AZURE_JELLY;
     }
 
-    if ((mon->holiness() & MH_UNDEAD) && x >= 5)
+    if ((mon->holiness() & MH_UNDEAD) && x >= 10)
         target = MONS_DEATH_OOZE;
-
-    if (feat_is_water(grd(mon->pos()))) // Pick something amphibious.
-        target = (x < 7) ? MONS_JELLY : MONS_SLIME_CREATURE;
 
     // Bail out if jellies can't live here.
     if (!monster_habitable_grid(target, grd(mon->pos())))
@@ -601,10 +598,10 @@ void slimify_monster(monster* mon)
     remove_unique_annotation(mon);
 
     monster_polymorph(mon, target);
-
     mon->attitude = ATT_FRIENDLY;
-
     mons_make_god_gift(*mon, GOD_JIYVA);
+    
+    you.duration[DUR_SLIMIFY] = max(0, you.duration[DUR_SLIMIFY] - 40);
 
     // Don't want shape-shifters to shift into non-slimes.
     mon->del_ench(ENCH_GLOWING_SHAPESHIFTER);

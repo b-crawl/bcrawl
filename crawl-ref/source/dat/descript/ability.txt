@@ -550,6 +550,8 @@ Coats a wielded weapon or your fists with slime, giving you a chance to turn
 corporeal foes you hit into friendly slimes when hitting them in melee.
 This chance increases with heavier blows and your Invocations skill, and decreases
 with the remaining durability of the foe hit.
+
+The remaining duration of this ability is reduced each time a foe is transformed by it.
 %%%%
 Cure Bad Mutation ability
 

@@ -536,10 +536,9 @@ bool melee_attack::handle_phase_damaged()
         int slimify_dmg = min(damage_done, current_hp);
         if(mon_can_be_slimified(defender->as_monster())
                 && x_chance_in_y((slimify_dmg * (you.skill(SK_INVOCATIONS, 10) + 90)),
-                    (current_hp * 350)))
+                    (current_hp * 385)))
         {
             slimify_monster(defender->as_monster());
-            you.duration[DUR_SLIMIFY] = max(0, you.duration[DUR_SLIMIFY] - 40);
 
             // Bail out after sliming so we don't get aux unarmed and attack a fellow slime.
             // did_hit = false;

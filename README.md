@@ -222,7 +222,7 @@ Pull requests for new content are welcome.
   - v1.14: Hepliaklqana's Knight ancestor's first level gets a war axe of flaming instead of a flail.
   - v1.14: Hepliaklqana's Idealise ability is replaced by Incarnate, which gives +20% max HP, healing and/or mana, and increases some skills to at least your Invocations skill. Knights give HP, Fighting, Armour, Shields, and Axes; Battlemages give HP, MP, Conjurations, Earth Magic, Fire Magic, and Staves; Hexers give MP, Spellcasting, Hexes, Charms, and Evocations.
   - v1.15: Demigods can walk through plants at lower (\*\* -> \*) piety.
-  - v1.17: Jiyva is reworked: a Jiyva altar always appears near the entrance to Slime; Slimify creates friendly slimes and can act on multiple enemies, but only has a chance (based on damage done vs enemy HP) to work, and loses duration when it works; jellies do not randomly spawn; off-level items are not eaten; jellies eating items does not restore player HP or MP or satiation; Jiyva grants bonus AC for having mutations, equal to max(mutation_count - natural_AC, mutation_count/2).
+  - v1.17: Jiyva is reworked: a Jiyva altar always appears near the entrance to Slime; Jiyva gives piety for killing monsters; Slimify creates friendly slimes and can act on multiple enemies, but only has a chance (based on damage done vs enemy HP) to work, and loses duration when it works; jellies do not randomly spawn; off-level items are not eaten; jellies eating items does not give piety or restore player HP or MP or satiation; Jiyva grants bonus AC for having mutations, equal to max(mutation_count - natural_AC, mutation_count/2).
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

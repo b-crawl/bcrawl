@@ -6106,13 +6106,6 @@ int player::racial_ac(bool temp) const
             break;
         default: break;
         }
-    
-        if(have_passive(passive_t::jiyva_AC))
-        {
-            int mut_count = you.how_mutated(false, false, false);
-            int jiyva_mut_ac = max(mut_count*2 - AC, mut_count);
-            AC += jiyva_mut_ac;
-        }
     }
 
     return AC;
@@ -6159,7 +6152,15 @@ int player::base_ac(int scale) const
 
     AC += get_form()->get_ac_bonus();
 
-    AC += racial_ac(true);
+    int natural_AC = racial_ac(true);
+    AC += natural_AC;
+    
+    if(have_passive(passive_t::jiyva_AC))
+    {
+        int mut_count = you.how_mutated(false, false, false);
+        int jiyva_mut_ac = max(mut_count*100 - natural_AC, mut_count*50);
+        AC += jiyva_mut_ac;
+    }
 
     // Scale mutations, etc. Statues don't get an AC benefit from scales,
     // since the scales are made of the same stone as everything else.

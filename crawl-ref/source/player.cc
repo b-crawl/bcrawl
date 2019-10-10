@@ -6086,17 +6086,21 @@ int player::racial_ac(bool temp) const
 
     if (!(player_is_shapechanged() && temp))
     {
-        if (species == SP_NAGA)
+        switch(species)
+        {
+        case SP_NAGA:
             return 100 * experience_level / 3;              // max 9
-        else if (species == SP_GARGOYLE)
+        case SP_GARGOYLE:
         {
             return 200 + 100 * experience_level * 2 / 5     // max 20
                        + 100 * max(0, experience_level - 7) * 2 / 5;
         }
-        else if (species == SP_FAIRY)
+        case SP_FAIRY:
             return 300 + 100 * experience_level / 3;
-        else if (species == SP_TROLL)
+        case SP_TROLL:
             return (300 + 100*((experience_level + 1) / 2));
+        default: break;
+        }
     }
 
     return 0;

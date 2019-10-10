@@ -30,6 +30,7 @@
 #include "exclude.h"
 #include "fight.h"
 #include "fprop.h"
+#include "god-passive.h"
 #include "item-prop.h"
 #include "items.h"
 #include "libutil.h"

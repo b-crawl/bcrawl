@@ -541,53 +541,8 @@ bool melee_attack::handle_phase_hit()
 
 bool melee_attack::handle_phase_damaged()
 {
-    bool shroud_broken = false;
-
-    // TODO: Move this somewhere else, this is a terrible place for a
-    // block-like (prevents all damage) effect.
-    if (attacker != defender
-        && (defender->is_player() && you.duration[DUR_SHROUD_OF_GOLUBRIA]
-            || defender->is_monster()
-               && defender->as_monster()->has_ench(ENCH_SHROUD))
-        && !one_chance_in(3))
-    {
-        // Chance of the shroud falling apart increases based on the
-        // strain of it, i.e. the damage it is redirecting.
-        if (x_chance_in_y(damage_done, 10+damage_done))
-        {
-            // Delay the message for the shroud breaking until after
-            // the attack message.
-            shroud_broken = true;
-            if (defender->is_player())
-                you.duration[DUR_SHROUD_OF_GOLUBRIA] = 0;
-            else
-                defender->as_monster()->del_ench(ENCH_SHROUD);
-        }
-        else
-        {
-            if (needs_message)
-            {
-                mprf("%s shroud bends %s attack away%s",
-                     def_name(DESC_ITS).c_str(),
-                     atk_name(DESC_ITS).c_str(),
-                     attack_strength_punctuation(damage_done).c_str());
-            }
-            did_hit = false;
-            damage_done = 0;
-
-            return false;
-        }
-    }
-
     if (!attack::handle_phase_damaged())
         return false;
-
-    if (shroud_broken && needs_message)
-    {
-        mprf(defender->is_player() ? MSGCH_WARN : MSGCH_PLAIN,
-             "%s shroud falls apart!",
-             def_name(DESC_ITS).c_str());
-    }
 
     return true;
 }

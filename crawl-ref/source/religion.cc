@@ -1225,7 +1225,7 @@ static bool _give_yred_gift(bool forced)
 static bool _gift_jiyva_gift(bool forced)
 {
     if (forced || you.piety >= piety_breakpoint(1)
-                  && random2(min(you.piety, 100)) > 40
+                  && random2(min((int)you.piety, 100)) > 40
                   && one_chance_in(4) && !you.gift_timeout
                   && you.can_safely_mutate())
     {

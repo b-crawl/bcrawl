@@ -187,9 +187,7 @@ skill_type invo_skill(god_type god)
     {
         case GOD_KIKUBAAQUDGHA:
             return SK_NECROMANCY;
-
         case GOD_ASHENZARI:
-        case GOD_JIYVA:
         case GOD_GOZAG:
         case GOD_RU:
         case GOD_TROG:

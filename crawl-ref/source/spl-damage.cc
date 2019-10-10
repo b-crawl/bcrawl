@@ -805,7 +805,8 @@ spret cast_freeze(int pow, monster* mons, bool fail)
         return spret::success;
     }
 
-    if (mons->res_cold() >= 3)
+    const bool observable = mons && mons->observable();
+    if (mons->res_cold() >= 3 && observable)
     {
         mpr("That target is immune!");
         return spret::abort;

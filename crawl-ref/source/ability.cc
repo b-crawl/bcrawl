@@ -187,9 +187,7 @@ skill_type invo_skill(god_type god)
     {
         case GOD_KIKUBAAQUDGHA:
             return SK_NECROMANCY;
-
         case GOD_ASHENZARI:
-        case GOD_JIYVA:
         case GOD_GOZAG:
         case GOD_RU:
         case GOD_TROG:
@@ -503,7 +501,7 @@ static const ability_def Ability_List[] =
     { ABIL_JIYVA_CALL_JELLY, "Request Jelly",
       2, 0, 0, 1, {fail_basis::invo}, abflag::none },
     { ABIL_JIYVA_SLIMIFY, "Slimify",
-      4, 0, 0, 8, {fail_basis::invo, 90, 0, 2}, abflag::none },
+      4, 0, 0, 6, {fail_basis::invo, 90, 0, 2}, abflag::none },
     { ABIL_JIYVA_CURE_BAD_MUTATION, "Cure Bad Mutation",
       0, 0, 0, 15, {fail_basis::invo}, abflag::none },
 
@@ -2778,7 +2776,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
                                   : ("your " + you.hand_name(true));
         mprf(MSGCH_DURATION, "A thick mucus forms on %s.", msg.c_str());
         you.increase_duration(DUR_SLIMIFY,
-                              random2avg(you.piety / 4, 2) + 3, 100);
+                10 + random2avg(you.skill(SK_INVOCATIONS, 6), 2), 100);
         break;
     }
 

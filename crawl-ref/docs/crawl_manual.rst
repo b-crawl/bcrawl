@@ -1856,7 +1856,7 @@ Red Draconians
 
 White Draconians
   stem from frost-bitten lands, and are naturally resistant to frost. Their
-  breath is piercing cold. They are versed in ice magic, but bad at fire.
+  breath is piercing cold. They are versed in ice magic, but bad with fire.
 
 Green Draconians
   are used to venomous surroundings and breathe clouds of mephitic vapours. They
@@ -1874,7 +1874,7 @@ Grey Draconians
 
 Black Draconians
   can unleash huge electrical discharges, and are naturally insulated. They are
-  good at air magic but feel cumbersome with earth magic. Their wings will
+  good at fighting and air magic but bad with earth magic. Their wings will
   eventually grow larger, which allows them to fly continuously when combined
   with their natural skill with air magic.
 

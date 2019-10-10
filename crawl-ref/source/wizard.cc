@@ -17,7 +17,6 @@
 #include "dgn-shoals.h" // wizard_mod_tide
 #include "files.h" // save_game
 #include "god-companions.h" // wizard_list_companions
-#include "god-passive.h" // jiyva_eat_offlevel_items
 #include "hiscores.h"
 #include "items.h"
 #include "libutil.h" // toupper_safe (?)
@@ -106,8 +105,7 @@ static void _do_wizard_command(int wiz_command)
 
     // case 'j': break;
     case 'J':
-        mpr("Running Jiyva off-level sacrifice.");
-        jiyva_eat_offlevel_items();
+        mpr("Jiyva off-level sacrifice is removed!");
         break;
     // case CONTROL('J'): break;
 

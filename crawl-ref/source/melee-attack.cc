@@ -419,18 +419,6 @@ bool melee_attack::handle_phase_hit()
     }
 
     damage_done = 0;
-    // Slimify does no damage and serves as an on-hit effect, handle it
-    if (attacker->is_player() && you.duration[DUR_SLIMIFY]
-        && mon_can_be_slimified(defender->as_monster())
-        && !cleaving)
-    {
-        // Bail out after sliming so we don't get aux unarmed and
-        // attack a fellow slime.
-        slimify_monster(defender->as_monster());
-        you.duration[DUR_SLIMIFY] = 0;
-
-        return false;
-    }
 
     if (attacker->is_player() && you.duration[DUR_INFUSION])
     {
@@ -541,53 +529,26 @@ bool melee_attack::handle_phase_hit()
 
 bool melee_attack::handle_phase_damaged()
 {
-    bool shroud_broken = false;
-
-    // TODO: Move this somewhere else, this is a terrible place for a
-    // block-like (prevents all damage) effect.
-    if (attacker != defender
-        && (defender->is_player() && you.duration[DUR_SHROUD_OF_GOLUBRIA]
-            || defender->is_monster()
-               && defender->as_monster()->has_ench(ENCH_SHROUD))
-        && !one_chance_in(3))
+    // chance to slimify monster, based on damage
+    if (attacker->is_player() && you.duration[DUR_SLIMIFY])
     {
-        // Chance of the shroud falling apart increases based on the
-        // strain of it, i.e. the damage it is redirecting.
-        if (x_chance_in_y(damage_done, 10+damage_done))
+        int current_hp = defender->as_monster()->hit_points;
+        int slimify_dmg = min(damage_done, current_hp);
+        if(mon_can_be_slimified(defender->as_monster())
+                && x_chance_in_y((slimify_dmg * (you.skill(SK_INVOCATIONS, 10) + 90)),
+                    (current_hp * 385)))
         {
-            // Delay the message for the shroud breaking until after
-            // the attack message.
-            shroud_broken = true;
-            if (defender->is_player())
-                you.duration[DUR_SHROUD_OF_GOLUBRIA] = 0;
-            else
-                defender->as_monster()->del_ench(ENCH_SHROUD);
-        }
-        else
-        {
-            if (needs_message)
-            {
-                mprf("%s shroud bends %s attack away%s",
-                     def_name(DESC_ITS).c_str(),
-                     atk_name(DESC_ITS).c_str(),
-                     attack_strength_punctuation(damage_done).c_str());
-            }
-            did_hit = false;
-            damage_done = 0;
+            slimify_monster(defender->as_monster());
 
+            // Bail out after sliming so we don't get aux unarmed and attack a fellow slime.
+            // did_hit = false;
+            damage_done = 0;
             return false;
         }
     }
 
     if (!attack::handle_phase_damaged())
         return false;
-
-    if (shroud_broken && needs_message)
-    {
-        mprf(defender->is_player() ? MSGCH_WARN : MSGCH_PLAIN,
-             "%s shroud falls apart!",
-             def_name(DESC_ITS).c_str());
-    }
 
     return true;
 }

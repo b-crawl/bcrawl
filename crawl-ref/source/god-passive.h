@@ -186,8 +186,8 @@ enum class passive_t
     /// Items consumed by your fellow slimes restores your health
     slime_hp,
 
-    /// Jiyva summons jellies to protect you
-    jellies_army,
+    /// Jiyva gives bonus natural AC when mutated
+    jiyva_AC,
 
     /// Jiyva allows jellies to eats off-level and seen items.
     jelly_eating,
@@ -263,7 +263,6 @@ bool have_passive(passive_t passive);
 bool will_have_passive(passive_t passive);
 int rank_for_passive(passive_t passive);
 int chei_stat_boost(int piety = you.piety);
-void jiyva_eat_offlevel_items();
 void ash_init_bondage(player *y);
 void ash_check_bondage(bool msg = true);
 string ash_describe_bondage(int flags, bool level);

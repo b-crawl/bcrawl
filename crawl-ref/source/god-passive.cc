@@ -281,27 +281,17 @@ static const vector<god_passive> god_passives[] =
     {
         { -1, passive_t::neutral_slimes,
               "Slimes and eye monsters are NOW neutral towards you" },
-        { -1, passive_t::jellies_army,
-              "GOD NOW summons jellies to protect you" },
         { -1, passive_t::jelly_eating,
               "GOD NOW allows jellies to devour items" },
-        { -1, passive_t::fluid_stats,
-              "GOD NOW adjusts your attributes periodically" },
         {  0, passive_t::slime_wall_immune,
               "are NOW immune to slime covered walls" },
-        {  2, passive_t::slime_feed,
-              "Items consumed by your fellow slimes NOW feed you" },
-        {  3, passive_t::resist_corrosion,
-              "GOD NOW protects you from corrosion" },
-        {  4, passive_t::slime_mp,
-              "Items consumed by your fellow slimes NOW restore"
-              " your magical power"
-        },
-        {  5, passive_t::slime_hp,
-              "Items consumed by your fellow slimes NOW restore"
-              " your health"
-        },
-        {  6, passive_t::spawn_slimes_on_hit,
+        {  2, passive_t::resist_corrosion,
+              "GOD NOW protects you from acid" },
+        {  3, passive_t::fluid_stats,
+              "GOD NOW adjusts your attributes periodically" },
+        {  3, passive_t::jiyva_AC,
+              "GOD NOW toughens your body as you become more mutated" },
+        {  5, passive_t::spawn_slimes_on_hit,
               "spawn slimes when struck by massive blows" },
         {  6, passive_t::unlock_slime_vaults,
               "GOD NOW grants you access to the hidden treasures"
@@ -463,70 +453,6 @@ int chei_stat_boost(int piety)
     if (piety >= piety_breakpoint(5))
         return 15;
     return (piety - 10) / 10;
-}
-
-// Eat from one random off-level item stack.
-void jiyva_eat_offlevel_items()
-{
-    // For wizard mode 'J' command
-    if (!have_passive(passive_t::jelly_eating))
-        return;
-
-    if (crawl_state.game_is_sprint())
-        return;
-
-    while (true)
-    {
-        if (one_chance_in(200))
-            break;
-
-        const int branch = random2(NUM_BRANCHES);
-
-        // Choose level based on main dungeon depth so that levels of
-        // short branches aren't picked more often.
-        ASSERT(brdepth[branch] <= MAX_BRANCH_DEPTH);
-        const int level = random2(MAX_BRANCH_DEPTH) + 1;
-
-        const level_id lid(static_cast<branch_type>(branch), level);
-
-        if (lid == level_id::current() || !you.level_visited(lid))
-            continue;
-
-        dprf("Checking %s", lid.describe().c_str());
-
-        level_excursion le;
-        le.go_to(lid);
-        while (true)
-        {
-            if (one_chance_in(200))
-                break;
-
-            const coord_def p = random_in_bounds();
-
-            if (igrd(p) == NON_ITEM || testbits(env.pgrid(p), FPROP_NO_JIYVA))
-                continue;
-
-            for (stack_iterator si(p); si; ++si)
-            {
-                if (!item_is_jelly_edible(*si) || one_chance_in(4))
-                    continue;
-
-                if (one_chance_in(4))
-                    break;
-
-                dprf("Eating %s on %s",
-                     si->name(DESC_PLAIN).c_str(), lid.describe().c_str());
-
-                // Needs a message now to explain possible hp or mp
-                // gain from jiyva_slurp_bonus()
-                mpr("You hear a distant slurping noise.");
-                jiyva_slurp_item_stack(*si);
-                item_was_destroyed(*si);
-                destroy_item(si.index());
-            }
-            return;
-        }
-    }
 }
 
 void ash_init_bondage(player *y)

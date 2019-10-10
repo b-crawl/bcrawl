@@ -103,13 +103,6 @@ void monster_drop_things(monster* mons,
 
 static bool _valid_morph(monster* mons, monster_type new_mclass)
 {
-    const dungeon_feature_type current_tile = grd(mons->pos());
-
-    monster_type old_mclass = mons->type;
-    if (mons_class_is_zombified(old_mclass))
-        old_mclass = mons->base_monster;
-    // don't force spectral shapeshifters to become natural|undead mons only
-
     // Shapeshifters cannot polymorph into glowing shapeshifters or
     // vice versa.
     if ((new_mclass == MONS_GLOWING_SHAPESHIFTER
@@ -130,7 +123,7 @@ static bool _valid_morph(monster* mons, monster_type new_mclass)
     }
 
     // Various inappropriate polymorph targets.
-    if ( !(mons_class_holiness(new_mclass) & mons_class_holiness(old_mclass))
+    if ( !(mons_class_holiness(new_mclass) & mons_class_holiness(mons->type))
         // normally holiness just needs to overlap, but we don't want
         // shapeshifters to become demons
         || mons->is_shapeshifter() && !(mons_class_holiness(new_mclass) & MH_NATURAL)
@@ -145,7 +138,7 @@ static bool _valid_morph(monster* mons, monster_type new_mclass)
 
         // 'morph targets are _always_ "base" classes, not derived ones.
         || new_mclass != mons_species(new_mclass)
-        || new_mclass == mons_species(old_mclass)
+        || new_mclass == mons_species(mons->type)
         // They act as separate polymorph classes on their own.
         || mons_class_is_zombified(new_mclass)
 
@@ -167,7 +160,7 @@ static bool _valid_morph(monster* mons, monster_type new_mclass)
     }
 
     // Determine if the monster is happy on current tile.
-    return monster_habitable_grid(new_mclass, current_tile);
+    return monster_habitable_grid(new_mclass, grd(mons->pos()));
 }
 
 static bool _is_poly_power_unsuitable(poly_power_type power,
@@ -570,7 +563,8 @@ bool mon_can_be_slimified(const monster* mons)
 
     return !mons->is_insubstantial()
            && !mons_is_tentacle_or_tentacle_segment(mons->type)
-           && (holi & (MH_UNDEAD | MH_NATURAL) && !mons_is_slime(*mons));
+           && (holi & (MH_UNDEAD | MH_NATURAL | MH_DEMONIC | MH_HOLY | MH_PLANT)
+           && !mons_is_slime(*mons));
 }
 
 void slimify_monster(monster* mon)
@@ -581,22 +575,16 @@ void slimify_monster(monster* mon)
 
     if (x < 3)
         target = MONS_OOZE;
-    else if (x >= 3 && x < 5)
+    else if (x >= 3 && x < 7)
         target = MONS_JELLY;
-    else if (x >= 5 && x <= 11)
+    else if (x >= 7 && x <= 13)
         target = MONS_SLIME_CREATURE;
     else
     {
-        if (coinflip())
-            target = MONS_ACID_BLOB;
-        else
-            target = MONS_AZURE_JELLY;
+        target = coinflip() ? MONS_ACID_BLOB : MONS_AZURE_JELLY;
     }
 
-    if (feat_is_water(grd(mon->pos()))) // Pick something amphibious.
-        target = (x < 7) ? MONS_JELLY : MONS_SLIME_CREATURE;
-
-    if (mon->holiness() & MH_UNDEAD)
+    if ((mon->holiness() & MH_UNDEAD) && x >= 10)
         target = MONS_DEATH_OOZE;
 
     // Bail out if jellies can't live here.
@@ -610,10 +598,10 @@ void slimify_monster(monster* mon)
     remove_unique_annotation(mon);
 
     monster_polymorph(mon, target);
-
-    mon->attitude = ATT_STRICT_NEUTRAL;
-
+    mon->attitude = ATT_FRIENDLY;
     mons_make_god_gift(*mon, GOD_JIYVA);
+    
+    you.duration[DUR_SLIMIFY] = max(0, you.duration[DUR_SLIMIFY] - 40);
 
     // Don't want shape-shifters to shift into non-slimes.
     mon->del_ench(ENCH_GLOWING_SHAPESHIFTER);

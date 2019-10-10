@@ -6073,33 +6073,42 @@ int player::base_ac_from(const item_def &armour, int scale) const
  */
 int player::racial_ac(bool temp) const
 {
+    int AC = 0;
+
     // drac scales suppressed in all serious forms, except dragon
     if (species_is_draconian(species)
         && (!player_is_shapechanged() || form == transformation::dragon
             || !temp))
     {
-        int AC = 400 + 100 * (experience_level / 3);  // max 13
+        AC = 400 + 100 * (experience_level / 3);  // max 13
         if (species == SP_GREY_DRACONIAN) // no breath
             AC += 500;
-        return AC;
     }
 
     if (!(player_is_shapechanged() && temp))
     {
-        if (species == SP_NAGA)
-            return 100 * experience_level / 3;              // max 9
-        else if (species == SP_GARGOYLE)
+        switch(species)
         {
-            return 200 + 100 * experience_level * 2 / 5     // max 20
+        case SP_NAGA:
+            AC = 100 * experience_level / 3;              // max 9
+            break;
+        case SP_GARGOYLE:
+        {
+            AC = 200 + 100 * experience_level * 2 / 5     // max 20
                        + 100 * max(0, experience_level - 7) * 2 / 5;
+            break;
         }
-        else if (species == SP_FAIRY)
-            return 300 + 100 * experience_level / 3;
-        else if (species == SP_TROLL)
-            return (300 + 100*((experience_level + 1) / 2));
+        case SP_FAIRY:
+            AC = 300 + 100 * experience_level / 3;
+            break;
+        case SP_TROLL:
+            AC = (300 + 100*((experience_level + 1) / 2));
+            break;
+        default: break;
+        }
     }
 
-    return 0;
+    return AC;
 }
 
 /**
@@ -6143,7 +6152,15 @@ int player::base_ac(int scale) const
 
     AC += get_form()->get_ac_bonus();
 
-    AC += racial_ac(true);
+    int natural_AC = racial_ac(true);
+    AC += natural_AC;
+    
+    if(have_passive(passive_t::jiyva_AC))
+    {
+        int mut_count = you.how_mutated(false, false, false);
+        int jiyva_mut_ac = max(mut_count*100 - natural_AC, mut_count*50);
+        AC += jiyva_mut_ac;
+    }
 
     // Scale mutations, etc. Statues don't get an AC benefit from scales,
     // since the scales are made of the same stone as everything else.

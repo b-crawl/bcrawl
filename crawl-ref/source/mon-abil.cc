@@ -30,6 +30,7 @@
 #include "exclude.h"
 #include "fight.h"
 #include "fprop.h"
+#include "god-passive.h"
 #include "item-prop.h"
 #include "items.h"
 #include "libutil.h"
@@ -455,7 +456,8 @@ static void _do_merge_slimes(monster* initial_slime, monster* merge_to)
                  merge_to->name(DESC_A).c_str());
         }
 
-        flash_view_delay(UA_MONSTER, LIGHTGREEN, 150);
+        if(!have_passive(passive_t::neutral_slimes))
+            flash_view_delay(UA_MONSTER, LIGHTGREEN, 150);
     }
     else if (you.can_see(*initial_slime))
         mpr("A slime creature suddenly disappears!");

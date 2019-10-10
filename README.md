@@ -121,6 +121,7 @@ Pull requests for new content are welcome.
   - v1.14.2: Spriggans are worse with ranged weapons.
   - v1.16: Fairies have adjusted aptitudes.
   - v1.16: Ghouls start with a chunk instead of a ration.
+  - v1.17: Black Draconians have a better Fighting aptitude. (+1 -> +3)
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

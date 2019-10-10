@@ -865,25 +865,6 @@ static formatted_string _describe_god_powers(god_type which_god)
         break;
     }
 
-    case GOD_JIYVA:
-        have_any = true;
-        if (have_passive(passive_t::resist_corrosion))
-            desc.textcolour(god_colour(which_god));
-        else
-            desc.textcolour(DARKGREY);
-        desc.cprintf("%s shields you from corrosive effects.\n",
-                uppercase_first(god_name(which_god)).c_str());
-
-        if (have_passive(passive_t::slime_feed))
-            desc.textcolour(god_colour(which_god));
-        else
-            desc.textcolour(DARKGREY);
-        desc.cprintf("You gain nutrition%s when your fellow slimes consume items.\n",
-                have_passive(passive_t::slime_hp) ? ", magic and health" :
-                have_passive(passive_t::slime_mp) ? " and magic" :
-                                                    "");
-        break;
-
     case GOD_FEDHAS:
         have_any = true;
         desc.cprintf("You can walk through plants and fire through allied plants.\n");
@@ -953,9 +934,6 @@ static formatted_string _describe_god_powers(god_type which_god)
     case GOD_HEPLIAKLQANA:
         have_any = true;
         desc.cprintf("Your life essence is reduced. (-10%% HP)\n");
-        break;
-
-    case GOD_DEMIGOD:
         break;
 
     case GOD_LUGONU:

@@ -563,7 +563,8 @@ bool mon_can_be_slimified(const monster* mons)
 
     return !mons->is_insubstantial()
            && !mons_is_tentacle_or_tentacle_segment(mons->type)
-           && (holi & (MH_UNDEAD | MH_NATURAL) && !mons_is_slime(*mons));
+           && (holi & (MH_UNDEAD | MH_NATURAL | MH_DEMONIC | MH_HOLY | MH_PLANT)
+           && !mons_is_slime(*mons));
 }
 
 void slimify_monster(monster* mon)

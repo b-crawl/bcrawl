@@ -1163,10 +1163,6 @@ string get_god_likes(god_type which_god)
     // Unique/unusual piety gain methods first.
     switch (which_god)
     {
-    case GOD_JIYVA:
-        likes.emplace_back("you sacrifice items by allowing slimes to consume "
-                           "them");
-        break;
     case GOD_GOZAG:
         likes.emplace_back("you collect gold");
         break;
@@ -1179,7 +1175,6 @@ string get_god_likes(god_type which_god)
     default:
         break;
     }
-
 
     for (const auto& entry : divine_likes[which_god])
     {

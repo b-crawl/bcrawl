@@ -234,8 +234,14 @@ const vector<god_power> god_powers[NUM_GODS] =
 
     // Jiyva
     { { 1, ABIL_JIYVA_CALL_JELLY, "request a jelly" },
-      { 3, "Jiyva will mutate your body as you gain piety.",
+      { 2, "Jiyva will protect you from acid.",
+           "Jiyva will no longer protect you from acid." },
+      { 2, "Jiyva will mutate your body as you gain piety.",
            "Jiyva will no longer mutate your body." },
+      { 3, "Jiyva will optimize your attributes.",
+           "Jiyva will no longer optimize your attributes." },
+      { 3, "Jiyva toughens your body as you become more mutated.",
+           "Jiyva no longer toughens your body." },
       { 4, ABIL_JIYVA_SLIMIFY, "turn your foes to slime" },
       { 5, "You may now expel jellies when seriously injured.",
            "You will no longer expel jellies when injured." },
@@ -1218,8 +1224,8 @@ static bool _give_yred_gift(bool forced)
 
 static bool _gift_jiyva_gift(bool forced)
 {
-    if (forced || you.piety >= piety_breakpoint(2)
-                  && random2(you.piety) > 50
+    if (forced || you.piety >= piety_breakpoint(1)
+                  && random2(min(you.piety, 100)) > 40
                   && one_chance_in(4) && !you.gift_timeout
                   && you.can_safely_mutate())
     {

@@ -186,8 +186,8 @@ enum class passive_t
     /// Items consumed by your fellow slimes restores your health
     slime_hp,
 
-    /// Jiyva summons jellies to protect you
-    jellies_army,
+    /// Jiyva gives bonus natural AC when mutated
+    jiyva_AC,
 
     /// Jiyva allows jellies to eats off-level and seen items.
     jelly_eating,

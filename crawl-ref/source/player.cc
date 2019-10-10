@@ -6107,7 +6107,7 @@ int player::racial_ac(bool temp) const
         default: break;
         }
     
-        if(you.religion = GOD_JIYVA)
+        if(have_passive(passive_t::jiyva_AC))
         {
             int mut_count = you.how_mutated(false, false, false);
             int jiyva_mut_ac = max(mut_count*2 - AC, mut_count);

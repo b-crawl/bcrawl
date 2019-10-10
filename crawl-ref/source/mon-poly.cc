@@ -583,11 +583,11 @@ void slimify_monster(monster* mon)
         target = coinflip() ? MONS_ACID_BLOB : MONS_AZURE_JELLY;
     }
 
+    if ((mon->holiness() & MH_UNDEAD) && x >= 5)
+        target = MONS_DEATH_OOZE;
+
     if (feat_is_water(grd(mon->pos()))) // Pick something amphibious.
         target = (x < 7) ? MONS_JELLY : MONS_SLIME_CREATURE;
-
-    if (mon->holiness() & MH_UNDEAD)
-        target = MONS_DEATH_OOZE;
 
     // Bail out if jellies can't live here.
     if (!monster_habitable_grid(target, grd(mon->pos())))

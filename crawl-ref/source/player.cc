@@ -6073,15 +6073,16 @@ int player::base_ac_from(const item_def &armour, int scale) const
  */
 int player::racial_ac(bool temp) const
 {
+    int AC = 0;
+
     // drac scales suppressed in all serious forms, except dragon
     if (species_is_draconian(species)
         && (!player_is_shapechanged() || form == transformation::dragon
             || !temp))
     {
-        int AC = 400 + 100 * (experience_level / 3);  // max 13
+        AC = 400 + 100 * (experience_level / 3);  // max 13
         if (species == SP_GREY_DRACONIAN) // no breath
             AC += 500;
-        return AC;
     }
 
     if (!(player_is_shapechanged() && temp))
@@ -6089,21 +6090,32 @@ int player::racial_ac(bool temp) const
         switch(species)
         {
         case SP_NAGA:
-            return 100 * experience_level / 3;              // max 9
+            AC = 100 * experience_level / 3;              // max 9
+            break;
         case SP_GARGOYLE:
         {
-            return 200 + 100 * experience_level * 2 / 5     // max 20
+            AC = 200 + 100 * experience_level * 2 / 5     // max 20
                        + 100 * max(0, experience_level - 7) * 2 / 5;
+            break;
         }
         case SP_FAIRY:
-            return 300 + 100 * experience_level / 3;
+            AC = 300 + 100 * experience_level / 3;
+            break;
         case SP_TROLL:
-            return (300 + 100*((experience_level + 1) / 2));
+            AC = (300 + 100*((experience_level + 1) / 2));
+            break;
         default: break;
+        }
+    
+        if(you.religion = GOD_JIYVA)
+        {
+            int mut_count = you.how_mutated(false, false, false);
+            int jiyva_mut_ac = max(mut_count*2 - AC, mut_count);
+            AC += jiyva_mut_ac;
         }
     }
 
-    return 0;
+    return AC;
 }
 
 /**

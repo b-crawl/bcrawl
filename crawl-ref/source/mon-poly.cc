@@ -587,10 +587,7 @@ void slimify_monster(monster* mon)
         target = MONS_SLIME_CREATURE;
     else
     {
-        if (coinflip())
-            target = MONS_ACID_BLOB;
-        else
-            target = MONS_AZURE_JELLY;
+        target = coinflip() ? MONS_ACID_BLOB : MONS_AZURE_JELLY;
     }
 
     if (feat_is_water(grd(mon->pos()))) // Pick something amphibious.
@@ -611,7 +608,7 @@ void slimify_monster(monster* mon)
 
     monster_polymorph(mon, target);
 
-    mon->attitude = ATT_STRICT_NEUTRAL;
+    mon->attitude = ATT_FRIENDLY;
 
     mons_make_god_gift(*mon, GOD_JIYVA);
 

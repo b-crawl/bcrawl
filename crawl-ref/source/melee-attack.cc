@@ -419,18 +419,6 @@ bool melee_attack::handle_phase_hit()
     }
 
     damage_done = 0;
-    // Slimify does no damage and serves as an on-hit effect, handle it
-    if (attacker->is_player() && you.duration[DUR_SLIMIFY]
-        && mon_can_be_slimified(defender->as_monster())
-        && !cleaving)
-    {
-        // Bail out after sliming so we don't get aux unarmed and
-        // attack a fellow slime.
-        slimify_monster(defender->as_monster());
-        you.duration[DUR_SLIMIFY] = 0;
-
-        return false;
-    }
 
     if (attacker->is_player() && you.duration[DUR_INFUSION])
     {
@@ -541,6 +529,25 @@ bool melee_attack::handle_phase_hit()
 
 bool melee_attack::handle_phase_damaged()
 {
+    // chance to slimify monster, based on damage
+    if (attacker->is_player() && you.duration[DUR_SLIMIFY])
+    {
+        int current_hp = defender->as_monster()->hit_points;
+        int slimify_dmg = min(damage_done, current_hp);
+        if(mon_can_be_slimified(defender->as_monster())
+                && x_chance_in_y((slimify_dmg * (you.skill(SK_INVOCATIONS, 10) + 90)),
+                    (current_hp * 350)))
+        {
+            slimify_monster(defender->as_monster());
+            you.duration[DUR_SLIMIFY] -= 10;
+
+            // Bail out after sliming so we don't get aux unarmed and attack a fellow slime.
+            // did_hit = false;
+            damage_done = 0;
+            return false;
+        }
+    }
+
     if (!attack::handle_phase_damaged())
         return false;
 

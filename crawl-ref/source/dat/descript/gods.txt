@@ -77,9 +77,7 @@ help in the form of a storm of heavenly clouds.
 %%%%
 Jiyva
 
-Jiyva is the ancient deity of the slimes. Followers are expected to
-support the spread and satiation of their fellow slimes by allowing them to
-consume items, and are forbidden from harming any slimes. Especially favoured
+Jiyva is the ancient deity of the slimes. Favoured
 followers will become as shapeless as their god, as their attributes and
 mutations shift around under Jiyva's influence.
 %%%%
@@ -291,13 +289,12 @@ their life's talents.
 %%%%
 Jiyva powers
 
-Jiyva's followers can request jellies, which will consume nearby items and
-provide sustenance to the follower in doing so. Jiyva will also consume items
-left elsewhere in the dungeon. Followers will later become able to turn
-monsters to slime, and eventually to reshape themselves to remove harmful
-mutations. As their piety grows, Jiyva will, with increasing frequency, drop
-jellies into the dungeon; rearrange followers' attributes based on their skills
-and armour; and mutate followers to better reflect Jiyva's image.
+Jiyva's followers can request jellies, which will consume nearby items to reproduce.
+Followers will eventually become able to turn their foes to slime,
+and reshape themselves to remove harmful mutations.
+As their piety grows, Jiyva will, with increasing frequency,
+rearrange followers' attributes based on their skills and armour,
+and mutate followers to better reflect Jiyva's image.
 %%%%
 Wu Jian powers
 

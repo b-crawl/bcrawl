@@ -293,10 +293,8 @@ Jiyva powers
 
 Jiyva's followers can request jellies, which will consume nearby items to reproduce.
 Followers will eventually become able to turn their foes to slime,
-and reshape themselves to remove harmful mutations.
-As their piety grows, Jiyva will, with increasing frequency,
-rearrange followers' attributes based on their skills and armour,
-and mutate followers to better reflect Jiyva's image.
+and reshape themselves to adjust their attributes or remove harmful mutations.
+As their piety grows, Jiyva will mutate followers to better reflect its image.
 %%%%
 Wu Jian powers
 

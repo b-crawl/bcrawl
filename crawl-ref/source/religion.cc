@@ -238,8 +238,6 @@ const vector<god_power> god_powers[NUM_GODS] =
            "Jiyva will no longer protect you from acid." },
       { 2, "Jiyva will mutate your body as you gain piety.",
            "Jiyva will no longer mutate your body." },
-      { 3, "Jiyva will optimize your attributes.",
-           "Jiyva will no longer optimize your attributes." },
       { 3, "Jiyva toughens your body as you become more mutated.",
            "Jiyva no longer toughens your body." },
       { 4, ABIL_JIYVA_SLIMIFY, "turn your foes to slime" },

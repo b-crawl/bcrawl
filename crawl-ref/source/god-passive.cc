@@ -287,8 +287,6 @@ static const vector<god_passive> god_passives[] =
               "are NOW immune to slime covered walls" },
         {  2, passive_t::resist_corrosion,
               "GOD NOW protects you from acid" },
-        {  3, passive_t::fluid_stats,
-              "GOD NOW adjusts your attributes periodically" },
         {  3, passive_t::jiyva_AC,
               "GOD NOW toughens your body as you become more mutated" },
         {  5, passive_t::spawn_slimes_on_hit,

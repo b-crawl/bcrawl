@@ -32,6 +32,7 @@
 #include "mgen-data.h"     // For Sceptre of Asmodeus evoke
 #include "mon-death.h"     // For demon axe's SAME_ATTITUDE
 #include "mon-place.h"     // For Sceptre of Asmodeus evoke
+#include "nearby-danger.h" // For Staff of Battle
 #include "player.h"
 #include "player-stats.h"
 #include "spl-cast.h"      // For evokes
@@ -1470,11 +1471,6 @@ static void _BUTTERFLY_SWORD_melee_effects(item_def* weapon, actor* attacker,
 
 ////////////////////////////////////////////////////
 // Staff of Battle
-
-static void _BATTLE_unequip(item_def *item, bool *show_msgs)
-{
-    end_spectral_weapon(find_spectral_weapon(&you), false);
-}
 
 static void _BATTLE_world_reacts(item_def *item)
 {

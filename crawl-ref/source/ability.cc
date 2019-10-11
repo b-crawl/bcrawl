@@ -2801,8 +2801,8 @@ static spret _do_ability(const ability_def& abil, bool fail)
         you.base_stats[stat1] = stat2_start;
         you.base_stats[stat2] = stat1_start;
 
-        notify_stat_change(stat1, stat2 - stat1, false);
-        notify_stat_change(stat2, stat1 - stat2, false);
+        notify_stat_change(stat1, stat2_start - stat1_start, false);
+        notify_stat_change(stat2, stat1_start - stat2_start, false);
         
         break;
     }

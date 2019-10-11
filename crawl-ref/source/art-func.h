@@ -1467,3 +1467,18 @@ static void _BUTTERFLY_SWORD_melee_effects(item_def* weapon, actor* attacker,
         .set_summoned(&you, 2, SPELL_SUMMON_BUTTERFLIES)
         );
 }
+
+////////////////////////////////////////////////////
+// Staff of Battle
+
+static void _BATTLE_unequip(item_def *item, bool *show_msgs)
+{
+    end_spectral_weapon(find_spectral_weapon(&you), false);
+}
+
+static void _BATTLE_world_reacts(item_def *item)
+{
+    if (!find_spectral_weapon(&you) && there_are_monsters_nearby(true, true, false))
+        your_spells(SPELL_SPECTRAL_WEAPON, 0, false);
+}
+

@@ -287,6 +287,7 @@ Pull requests for new content are welcome.
   - v1.16: The Robe of Misfortune no longer has \*Drain and \*Contam.
   - v1.16: The Sceptre of Torment has a higher base delay. (15 -> 18)
   - v1.16: The Vampire's Tooth has a lower enchantment. (+12 -> +10)
+  - v1.17.1: The Staff of Battle is a +6 vorpal lajatang with 6 min delay, and it makes a spectral weapon when enemies are nearby. It also gives +12 max mana.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

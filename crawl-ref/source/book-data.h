@@ -72,6 +72,7 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Enchantments
     SPELL_SILENCE,
+    SPELL_BATTLESPHERE,
     SPELL_PIERCING_SHOT,
     SPELL_DEFLECT_MISSILES,
     SPELL_INFESTATION,

@@ -189,6 +189,7 @@ Pull requests for new content are welcome.
   - v1.9.1: Confusing Touch
   - v1.12.1: Disjunction
   - v1.15: Ring of Flames
+  - v1.17.1: Alistair's Intoxication
 
 #### Gods
   - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.
@@ -223,6 +224,7 @@ Pull requests for new content are welcome.
   - v1.14: Hepliaklqana's Idealise ability is replaced by Incarnate, which gives +20% max HP, healing and/or mana, and increases some skills to at least your Invocations skill. Knights give HP, Fighting, Armour, Shields, and Axes; Battlemages give HP, MP, Conjurations, Earth Magic, Fire Magic, and Staves; Hexers give MP, Spellcasting, Hexes, Charms, and Evocations.
   - v1.15: Demigods can walk through plants at lower (\*\* -> \*) piety.
   - v1.17: Jiyva is reworked: a Jiyva altar always appears near the entrance to Slime; Jiyva gives piety for killing monsters; Slimify creates friendly slimes and can act on multiple enemies, but only has a chance (based on damage done vs enemy HP) to work, and loses duration when it works; jellies do not randomly spawn; off-level items are not eaten; jellies eating items does not give piety or restore player HP or MP or satiation; Jiyva grants bonus AC for having mutations, equal to max(mutation_count - natural_AC, mutation_count/2).
+  - v1.17.1: Instead of adjusting player attributes automatically, Jiyva gives players an ability that swaps 2 attribute values.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -286,6 +288,7 @@ Pull requests for new content are welcome.
   - v1.16: The Robe of Misfortune no longer has \*Drain and \*Contam.
   - v1.16: The Sceptre of Torment has a higher base delay. (15 -> 18)
   - v1.16: The Vampire's Tooth has a lower enchantment. (+12 -> +10)
+  - v1.17.1: The Staff of Battle is a +6 vorpal lajatang with 6 min delay, and it makes a spectral weapon when enemies are nearby. It also gives +12 max mana.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

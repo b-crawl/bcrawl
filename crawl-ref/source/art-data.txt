@@ -1372,6 +1372,18 @@ BOOL:     curse
 MAGIC:    1
 VALUE:    300
 
+ENUM:     BATTLE
+NAME:     staff of Battle
+OBJ:      OBJ_WEAPONS/WPN_LAJATANG
+PLUS:     +6
+COLOUR:   ETC_MAGIC
+TILE:     urand_staff_of_battle
+TILE_EQ:  battle_staff
+MP:       +12
+BASE_DELAY: -1
+BRAND:    SPWPN_VORPAL
+VALUE:    800
+
 # This entry must always be last.
 ENUM:   DUMMY2
 NAME:   DUMMY UNRANDART 2

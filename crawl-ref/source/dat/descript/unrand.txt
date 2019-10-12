@@ -39,6 +39,12 @@ sword of Power
 A mighty sword which rewards the strong with power and the weak with
 feebleness.
 %%%%
+staff of Battle
+
+A tubular staff encased in vividly coloured scales, the handiwork of a
+long-forgotten warrior-mage. When wielded, it creates magical blades around its ends,
+and when it detects enemies, it summons a spectral clone of itself to fight alongside the wielder.
+%%%%
 staff of Olgreb
 
 A staff which was once wielded by the mighty wizard Olgreb. It increases the

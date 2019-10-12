@@ -32,6 +32,7 @@
 #include "mgen-data.h"     // For Sceptre of Asmodeus evoke
 #include "mon-death.h"     // For demon axe's SAME_ATTITUDE
 #include "mon-place.h"     // For Sceptre of Asmodeus evoke
+#include "nearby-danger.h" // For Staff of Battle
 #include "player.h"
 #include "player-stats.h"
 #include "spl-cast.h"      // For evokes
@@ -1467,3 +1468,13 @@ static void _BUTTERFLY_SWORD_melee_effects(item_def* weapon, actor* attacker,
         .set_summoned(&you, 2, SPELL_SUMMON_BUTTERFLIES)
         );
 }
+
+////////////////////////////////////////////////////
+// Staff of Battle
+
+static void _BATTLE_world_reacts(item_def *item)
+{
+    if (!find_spectral_weapon(&you) && there_are_monsters_nearby(true, true, false))
+        your_spells(SPELL_SPECTRAL_WEAPON, 0, false);
+}
+

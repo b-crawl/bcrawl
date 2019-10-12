@@ -808,11 +808,7 @@ static void _decrement_durations()
     }
 
     if (you.duration[DUR_TOXIC_RADIANCE])
-    {
-        const int ticks = (you.duration[DUR_TOXIC_RADIANCE] / 10)
-                          - ((you.duration[DUR_TOXIC_RADIANCE] - delay) / 10);
-        toxic_radiance_effect(&you, ticks);
-    }
+        toxic_radiance_effect(&you, min(delay, you.duration[DUR_TOXIC_RADIANCE]));
 
     if (you.duration[DUR_RECITE] && _check_recite())
     {

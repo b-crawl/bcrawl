@@ -72,6 +72,7 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Enchantments
     SPELL_SILENCE,
+    SPELL_BATTLESPHERE,
     SPELL_PIERCING_SHOT,
     SPELL_DEFLECT_MISSILES,
     SPELL_INFESTATION,
@@ -267,7 +268,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_APPORTATION,
     SPELL_BECKONING,
     SPELL_TUKIMAS_DANCE,
-    SPELL_INTOXICATE,
     SPELL_INVISIBILITY
 },
 
@@ -315,7 +315,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SUBLIMATION_OF_BLOOD,
     SPELL_IGNITE_POISON,
     SPELL_PETRIFY,
-    SPELL_INTOXICATE,
     SPELL_OZOCUBUS_REFRIGERATION,
 },
 

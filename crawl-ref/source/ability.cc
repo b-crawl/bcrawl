@@ -500,8 +500,10 @@ static const ability_def Ability_List[] =
     // Jiyva
     { ABIL_JIYVA_CALL_JELLY, "Request Jelly",
       2, 0, 150, 1, {fail_basis::invo}, abflag::none },
+    { ABIL_JIYVA_STAT_SHUFFLE, "Evolve",
+      0, 0, 100, 2, {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_JIYVA_SLIMIFY, "Slimify",
-      4, 0, 0, 6, {fail_basis::invo, 90, 0, 2}, abflag::none },
+      4, 0, 0, 6, {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_JIYVA_CURE_BAD_MUTATION, "Cure Bad Mutation",
       0, 0, 0, 15, {fail_basis::invo}, abflag::none },
 
@@ -2765,6 +2767,43 @@ static spret _do_ability(const ability_def& abil, bool fail)
 
         if (!create_monster(mg))
             return spret::abort;
+        break;
+    }
+
+    case ABIL_JIYVA_STAT_SHUFFLE:
+    {
+        fail_check();
+        
+        mpr("You feel very strange.");
+        
+        // swap a random pair of base stats
+        stat_type stat1 = STAT_STR;
+        stat_type stat2 = STAT_STR;
+
+        switch(random2(3))
+        {
+        case 0:
+            stat2 = STAT_INT;
+            break;
+        case 1:
+            stat2 = STAT_DEX;
+            break;
+        case 2:
+            stat1 = STAT_INT;
+            stat2 = STAT_DEX;
+            break;
+        default: break;
+        }
+
+        int stat1_start = you.base_stats[stat1];
+        int stat2_start = you.base_stats[stat2];
+
+        you.base_stats[stat1] = stat2_start;
+        you.base_stats[stat2] = stat1_start;
+
+        notify_stat_change(stat1, stat2_start - stat1_start, false);
+        notify_stat_change(stat2, stat1_start - stat2_start, false);
+        
         break;
     }
 

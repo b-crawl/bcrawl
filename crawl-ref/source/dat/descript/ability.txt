@@ -544,6 +544,10 @@ Request Jelly ability
 
 Creates a neutral jelly that will wander the floor and digest items.
 %%%%
+Evolve ability
+
+Alters your body, randomly swapping your attributes.
+%%%%
 Slimify ability
 
 Coats a wielded weapon or your fists with slime, giving you a chance to turn

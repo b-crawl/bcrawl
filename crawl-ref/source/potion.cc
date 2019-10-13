@@ -411,6 +411,9 @@ public:
         bool flying = you.airborne();
         if (flying)
         {
+            if(you.religion == GOD_CHEIBRIADOS)
+                god_speaks(you.religion, "\"This would be unforgivable if you put any effort into moving so quickly!\"");
+
             you.duration[DUR_SWIFTNESS] = you.duration[DUR_FLIGHT];
             you.attribute[ATTR_SWIFTNESS] = you.duration[DUR_SWIFTNESS];
         }

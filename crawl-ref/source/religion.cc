@@ -3154,6 +3154,14 @@ static void _set_initial_god_piety()
         }
         you.props[RU_SACRIFICE_PENALTY_KEY] = 0;
         break;
+    
+    case GOD_JIYVA:
+        you.piety = 35; // higher because Jiyva altars are later
+        if (you.piety_max[you.religion] < 35)
+            you.piety_max[you.religion] = 35;
+        you.piety_hysteresis = 0;
+        you.gift_timeout = 0;
+        break;
 
     default:
         you.piety = 15; // to prevent near instant excommunication

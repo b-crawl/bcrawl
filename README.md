@@ -225,6 +225,7 @@ Pull requests for new content are welcome.
   - v1.15: Demigods can walk through plants at lower (\*\* -> \*) piety.
   - v1.17: Jiyva is reworked: a Jiyva altar always appears near the entrance to Slime; Jiyva gives piety for killing monsters; Slimify creates friendly slimes and can act on multiple enemies, but only has a chance (based on damage done vs enemy HP) to work, and loses duration when it works; jellies do not randomly spawn; off-level items are not eaten; jellies eating items does not give piety or restore player HP or MP or satiation; Jiyva grants bonus AC for having mutations, equal to max(mutation_count - natural_AC, mutation_count/2).
   - v1.17.1: Instead of adjusting player attributes automatically, Jiyva gives players an ability that swaps 2 attribute values.
+  - v1.17.2: Jiyva gives \* piety on conversion.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

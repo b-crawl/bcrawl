@@ -3574,23 +3574,64 @@ bool god_likes_your_god(god_type god, god_type your_god)
 
 bool god_hates_your_god(god_type god, god_type your_god)
 {
-    // Ru doesn't care.
-    if (god == GOD_RU)
-        return false;
-
     // Gods do not hate themselves.
     if (god == your_god)
         return false;
 
-    // Non-good gods always hate your current god.
-    if (!is_good_god(god))
+    switch(god)
+    {
+    case GOD_RU:
+        return false;
+    
+    case GOD_ZIN:
+    case GOD_SHINING_ONE:
+    case GOD_ELYVILON:
+        if(is_evil_god(your_god))
+            return true;
+        if (god == GOD_ZIN && is_chaotic_god(your_god))
+            return true;
+        return false;
+    
+    case GOD_USKAYAW:
+        if(your_god == GOD_WU_JIAN)
+            return false;
         return true;
-
-    // Zin hates chaotic gods.
-    if (god == GOD_ZIN && is_chaotic_god(your_god))
+    
+    case GOD_WU_JIAN:
+        if(your_god == GOD_OKAWARU)
+            return false;
         return true;
-
-    return is_evil_god(your_god);
+    
+    case GOD_OKAWARU:
+        if(your_god == GOD_SHINING_ONE)
+            return false;
+        return true;
+    
+    case GOD_NEMELEX_XOBEH:
+        if(your_god == GOD_XOM)
+            return false;
+        return true;
+    
+    case GOD_MAKHLEB:
+        if(your_god == GOD_LUGONU)
+            return false;
+        return true;
+    
+    case GOD_YREDELEMNUL:
+        if(your_god == GOD_KIKUBAAQUDGHA)
+            return false;
+        return true;
+    
+    case GOD_SIF_MUNA:
+        if(your_god == GOD_ASHENZARI)
+            return false;
+        return true;
+    
+    default:
+        return true;
+    }
+    
+    return true;
 }
 
 bool god_hates_killing(god_type god, const monster& mon)

@@ -3076,48 +3076,42 @@ static void _transfer_good_god_piety()
 
 
 /**
- * Give an appropriate message for the given good god to give in response to
+ * Give an appropriate message for the given god to give in response to
  * the player joining a god that brings down their wrath.
- *
- * @param good_god    The good god in question.
  */
-static string _good_god_wrath_message(god_type good_god)
+static string _delayed_god_wrath_message(god_type old_god)
 {
-    switch (good_god)
+    switch (old_god)
     {
         case GOD_ELYVILON:
-            return "Your evil deeds will not go unpunished";
+            return " says: Your evil deeds will not go unpunished";
         case GOD_SHINING_ONE:
-            return "You will pay for your evil ways, mortal";
+            return " says: You will pay for your evil ways, mortal";
         case GOD_ZIN:
-            return make_stringf("You will suffer for embracing such %s",
+            return make_stringf(" says: You will suffer for embracing such %s",
                                 is_chaotic_god(you.religion) ? "chaos"
                                                              : "evil");
         default:
-            return "You will be buggily punished for this";
+            return " is not pleased by your conversion!";
     }
 }
 
 /**
  * Check if joining the current god will cause wrath for any previously-
- * worshipped good gods. If so, message & set penance timeouts.
+ * worshipped gods. If so, message & set penance timeouts.
  *
  * @param old_god    The previous god worshipped; may be GOD_NO_GOD.
  */
-static void _check_good_god_wrath(god_type old_god)
+static void _check_delayed_god_wrath(god_type old_god)
 {
-    for (god_type good_god : { GOD_ELYVILON, GOD_SHINING_ONE, GOD_ZIN })
+    for (god_iterator it; it; ++it)
     {
-        if (old_god == good_god || !you.penance[good_god]
-            || !god_hates_your_god(good_god, you.religion))
-        {
+        if (old_god == it || !you.penance[it]
+                || !god_hates_your_god(it, you.religion))
             continue;
-        }
 
-        const string wrath_message
-            = make_stringf(" says: %s!",
-                           _good_god_wrath_message(good_god).c_str());
-        simple_god_message(wrath_message.c_str(), good_god);
+        const string wrath_message = _delayed_god_wrath_message(it);
+        simple_god_message(wrath_message.c_str(), it);
         set_penance_xp_timeout();
     }
 }
@@ -3428,8 +3422,8 @@ void join_religion(god_type which_god)
     // when flash_view_delay redraws the screen in local tiles
     _god_welcome_handle_gear();
 
-    // Warn if a good god is starting wrath now.
-    _check_good_god_wrath(old_god);
+    // Warn if a god is starting wrath now.
+    _check_delayed_god_wrath(old_god);
 
     if (!you_worship(GOD_GOZAG))
         for (const auto& power : get_god_powers(you.religion))

@@ -178,6 +178,7 @@ Pull requests for new content are welcome.
   - v1.16.1: Vampiric Draining deals somewhat less damage, but heals players for the same amount.
   - v1.16.1: Pain has a higher power cap. (25 -> 50)
   - v1.16.1: Death Channel is now Charms/Necromancy.
+  - v1.17.2: Blink Other has a higher chance to affect monsters.
 
 #### Removed Spells
   - Summon Guardian Golem

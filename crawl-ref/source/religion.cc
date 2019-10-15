@@ -3106,12 +3106,13 @@ static void _check_delayed_god_wrath(god_type old_god)
 {
     for (god_iterator it; it; ++it)
     {
-        if (old_god == it || !you.penance[it]
-                || !god_hates_your_god(it, you.religion))
+        god_type this_god = *it;
+        if (old_god == this_god || !you.penance[this_god]
+                || !god_hates_your_god(this_god, you.religion))
             continue;
 
-        const string wrath_message = _delayed_god_wrath_message(it);
-        simple_god_message(wrath_message.c_str(), it);
+        const string wrath_message = _delayed_god_wrath_message(this_god);
+        simple_god_message(wrath_message.c_str(), this_god);
         set_penance_xp_timeout();
     }
 }

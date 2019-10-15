@@ -784,18 +784,6 @@ static bool _make_zig(item_def &zig)
     return true;
 }
 
-static int _num_evoker_elementals(int surge)
-{
-    int n = 1;
-    const int adjusted_power =
-        player_adjust_evoc_power(you.skill(SK_EVOCATIONS, 10), surge);
-    if (adjusted_power + random2(70) > 110)
-        ++n;
-    if (adjusted_power + random2(70) > 170)
-        ++n;
-    return n;
-}
-
 static vector<coord_def> _get_jitter_path(coord_def source, coord_def target,
                                           bool jitter_start,
                                           bolt &beam1, bolt &beam2)
@@ -988,7 +976,8 @@ static bool _lamp_of_fire()
         mpr("The flames dance!");
 
         vector<bolt> beams;
-        int num_trails = _num_evoker_elementals(surge);
+        int randomized_power = you.skill(SK_EVOCATIONS, 10) + random2(70) - 50;
+        int num_trails = 1 + max(0, randomized_power/30);
 
         _fill_flame_trails(you.pos(), target.target, beams, num_trails);
 
@@ -1316,8 +1305,9 @@ static bool _phial_of_floods()
                 elementals.push_back(*di);
             }
         }
-
-        int num_elementals = _num_evoker_elementals(surge);
+        
+        int randomized_power = you.skill(SK_EVOCATIONS, 10) + random2(70) - 50;
+        int num_elementals = 1 + max(0, randomized_power/60);
 
         bool created = false;
         num = min(num_elementals,

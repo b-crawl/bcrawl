@@ -261,6 +261,7 @@ Pull requests for new content are welcome.
   - v1.14.1: Potions of flight give a Swiftness effect in addition to flight.
   - v1.14.2: Thrown stones have a lower base delay (1.1 -> 1) and min delay (0.7 -> 0.5).
   - v1.15.1: Giant clubs and giant spiked clubs now cleave.
+  - v1.17.2: Lamps of fire scale somewhat better with Evocations skill.
 
 #### Removed Items
   - Amulet of Harm

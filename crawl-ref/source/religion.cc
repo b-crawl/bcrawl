@@ -3425,9 +3425,10 @@ void join_religion(god_type which_god)
     // Warn if a god is starting wrath now.
     _check_delayed_god_wrath(old_god);
 
+    int rank = piety_rank(you.piety);
     if (!you_worship(GOD_GOZAG))
         for (const auto& power : get_god_powers(you.religion))
-            if (power.rank <= 0)
+            if (power.rank <= rank)
                 power.display(true, "You can now %s.");
 
     // Allow training all divine ability skills immediately.

@@ -326,6 +326,7 @@ Pull requests for new content are welcome.
   - v1.16: Ancient champions deal more melee damage.
   - v1.16: Toenail golems are somewhat stronger.
   - v1.17.2: Iron dragons deal more melee damage.
+  - v1.17.2: Golden dragons have a strong poison bite instead of poison breath, and have significantly more HP.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

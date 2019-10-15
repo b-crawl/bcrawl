@@ -343,3 +343,4 @@ Pull requests for new content are welcome.
   - v1.13.5: Jorgrun has Awaken Earth instead of Dig.
   - v1.15.1: Vashnia has a reworked spell set, casts extremely quickly, and always carries a wand of digging.
   - v1.16: Arachne is reworked.
+  - v1.17.2: Gastronok acts faster and casts much faster.

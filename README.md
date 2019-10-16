@@ -262,6 +262,7 @@ Pull requests for new content are welcome.
   - v1.14.2: Thrown stones have a lower base delay (1.1 -> 1) and min delay (0.7 -> 0.5).
   - v1.15.1: Giant clubs and giant spiked clubs now cleave.
   - v1.17.2: Lamps of fire scale somewhat better with Evocations skill.
+  - v1.17.2: Blowguns have higher base delay. (10 -> 12)
 
 #### Removed Items
   - Amulet of Harm

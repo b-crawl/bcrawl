@@ -3118,6 +3118,15 @@ static void _check_delayed_god_wrath(god_type old_god)
 }
 
 /// Handle basic god piety & related setup for a new-joined god.
+static void _set_initial_piety_value(int value)
+{
+    you.piety = value;
+    if (you.piety_max[you.religion] < value)
+        you.piety_max[you.religion] = value;
+    you.piety_hysteresis = 0;
+    you.gift_timeout = 0;
+}
+
 static void _set_initial_god_piety()
 {
     // Currently, penance is just zeroed. This could be much more
@@ -3151,19 +3160,18 @@ static void _set_initial_god_piety()
         break;
     
     case GOD_JIYVA:
-        you.piety = 35; // higher because Jiyva altars are later
-        if (you.piety_max[you.religion] < 35)
-            you.piety_max[you.religion] = 35;
-        you.piety_hysteresis = 0;
-        you.gift_timeout = 0;
+        _set_initial_piety_value(35); // higher because Jiyva altars are later
+        break;
+
+    case GOD_LUGONU:
+        // give ability to leave Abyss at start
+        if (!you.worshipped[GOD_LUGONU])
+            _set_initial_piety_value(35);
+        else _set_initial_piety_value(15);
         break;
 
     default:
-        you.piety = 15; // to prevent near instant excommunication
-        if (you.piety_max[you.religion] < 15)
-            you.piety_max[you.religion] = 15;
-        you.piety_hysteresis = 0;
-        you.gift_timeout = 0;
+        _set_initial_piety_value(15); // to prevent near instant excommunication
         break;
     }
 
@@ -3353,10 +3361,6 @@ static const map<god_type, function<void ()>> on_join = {
     { GOD_GOZAG, _join_gozag },
     { GOD_JIYVA, _join_jiyva },
     { GOD_HEPLIAKLQANA, _join_hepliaklqana },
-    { GOD_LUGONU, []() {
-        if (you.worshipped[GOD_LUGONU] == 0)
-            gain_piety(20, 1, false);  // allow instant access to first power
-    }},
     { GOD_DEMIGOD, _join_demigod },
     { GOD_RU, _join_ru },
     { GOD_TROG, _join_trog },

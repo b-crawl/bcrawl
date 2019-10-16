@@ -3084,11 +3084,11 @@ static string _delayed_god_wrath_message(god_type old_god)
     switch (old_god)
     {
         case GOD_ELYVILON:
-            return " says: Your evil deeds will not go unpunished";
+            return " says: Your evil deeds will not go unpunished!";
         case GOD_SHINING_ONE:
-            return " says: You will pay for your evil ways, mortal";
+            return " says: You will pay for your evil ways, mortal!";
         case GOD_ZIN:
-            return make_stringf(" says: You will suffer for embracing such %s",
+            return make_stringf(" says: You will suffer for embracing such %s!",
                                 is_chaotic_god(you.religion) ? "chaos"
                                                              : "evil");
         default:

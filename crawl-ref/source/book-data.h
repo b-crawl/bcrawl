@@ -315,6 +315,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SUBLIMATION_OF_BLOOD,
     SPELL_IGNITE_POISON,
     SPELL_PETRIFY,
+    SPELL_STICKY_FLAME,
     SPELL_OZOCUBUS_REFRIGERATION,
 },
 

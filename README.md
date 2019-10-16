@@ -178,6 +178,7 @@ Pull requests for new content are welcome.
   - v1.16.1: Vampiric Draining deals somewhat less damage, but heals players for the same amount.
   - v1.16.1: Pain has a higher power cap. (25 -> 50)
   - v1.16.1: Death Channel is now Charms/Necromancy.
+  - v1.17.2: Blink Other has a higher chance to affect monsters.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -225,6 +226,8 @@ Pull requests for new content are welcome.
   - v1.15: Demigods can walk through plants at lower (\*\* -> \*) piety.
   - v1.17: Jiyva is reworked: a Jiyva altar always appears near the entrance to Slime; Jiyva gives piety for killing monsters; Slimify creates friendly slimes and can act on multiple enemies, but only has a chance (based on damage done vs enemy HP) to work, and loses duration when it works; jellies do not randomly spawn; off-level items are not eaten; jellies eating items does not give piety or restore player HP or MP or satiation; Jiyva grants bonus AC for having mutations, equal to max(mutation_count - natural_AC, mutation_count/2).
   - v1.17.1: Instead of adjusting player attributes automatically, Jiyva gives players an ability that swaps 2 attribute values.
+  - v1.17.2: Jiyva gives \* piety on conversion.
+  - v1.17.2: Some gods respect certain other gods, and will not punish followers for converting to them. Check the wrath info in god descriptions to see if this is the case.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -258,6 +261,8 @@ Pull requests for new content are welcome.
   - v1.14.1: Potions of flight give a Swiftness effect in addition to flight.
   - v1.14.2: Thrown stones have a lower base delay (1.1 -> 1) and min delay (0.7 -> 0.5).
   - v1.15.1: Giant clubs and giant spiked clubs now cleave.
+  - v1.17.2: Lamps of fire scale somewhat better with Evocations skill.
+  - v1.17.2: Blowguns have higher base delay. (10 -> 12)
 
 #### Removed Items
   - Amulet of Harm
@@ -322,6 +327,8 @@ Pull requests for new content are welcome.
   - v1.16: Some wizards can cast Ensnare.
   - v1.16: Ancient champions deal more melee damage.
   - v1.16: Toenail golems are somewhat stronger.
+  - v1.17.2: Iron dragons deal more melee damage.
+  - v1.17.2: Golden dragons have a strong poison bite instead of poison breath, and have significantly more HP.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -341,3 +348,4 @@ Pull requests for new content are welcome.
   - v1.13.5: Jorgrun has Awaken Earth instead of Dig.
   - v1.15.1: Vashnia has a reworked spell set, casts extremely quickly, and always carries a wand of digging.
   - v1.16: Arachne is reworked.
+  - v1.17.2: Gastronok acts faster and casts much faster.

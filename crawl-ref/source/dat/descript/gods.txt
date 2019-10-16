@@ -113,6 +113,8 @@ through magical packs of cards painted in the ichor of demons. Followers will
 be granted decks of cards as they traverse the dungeon, and are encouraged to
 trust in the cards to provide them with divine assistance. However, the
 Trickster can also ensure that fortune favours the bold.
+
+Nemelex will not punish followers for converting to Xom.
 %%%%
 Okawaru
 
@@ -519,6 +521,8 @@ Those who turn against the Council must be prepared to endure death by a
 thousand cuts. No hiding place is secure, no disguise perfect enough to avoid
 the sudden spring of traps, the flying daggers and the armies of animated
 weapons that will ambush the betrayer.
+
+The Council will not punish followers for converting to Okawaru.
 %%%%
 Kikubaaqudgha wrath
 
@@ -543,6 +547,8 @@ Those who invite the fury of Makhleb are buried in demons and destruction.
 The greatest punishments are reserved for the strongest sinners; crystal spears
 and Executioners are hurled with abandon only at those Makhleb finds truly
 deserving!
+
+Makhleb will not punish followers for converting to Lugonu.
 %%%%
 Nemelex Xobeh wrath
 
@@ -557,6 +563,8 @@ Okawaru wrath
 Okawaru's most vicious warriors are sent against rebellious servants. Novices
 find themselves swarmed by packs of ogres and gnolls, while champions are
 surrounded by titans and elvish blademasters.
+
+Okawaru will not punish followers for converting to the Shining One.
 %%%%
 Qazlal wrath
 
@@ -576,6 +584,8 @@ Those in Sif Muna's ill graces find the very forces of magic rebelling against
 them. They are confused and stupefied, their magical reserves drained, their
 enchantments unravelled. Casting spells, too, becomes unreliable – and even
 dangerous.
+
+Sif Muna will not punish followers for converting to Ashenzari.
 %%%%
 the Shining One wrath
 
@@ -596,6 +606,8 @@ Uskayaw's wrath turns the powers of the dance against the offender. The prude
 will find their foes going berserk and will be forced to helplessly watch as
 foes execute their own solos. When the dance is getting too slow, Uskayaw will
 cause noise to attract more revelers.
+
+Uskayaw will not punish followers for converting to the Wu Jian Council.
 %%%%
 Vehumet wrath
 
@@ -616,6 +628,8 @@ Novice adventurers will be assaulted by zombies and skeletons; veterans by
 the strongest of Yredelemnul's undead servants. The victims' own undead
 servants desert them and crumble into dust. A variety of necromantic maladies
 also afflict those stricken by Yredremnul's wrath.
+
+Yredelemnul will not punish followers for converting to Kikubaaqudgha.
 %%%%
 Zin wrath
 

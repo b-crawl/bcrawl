@@ -621,7 +621,7 @@ static const weapon_def Weapon_prop[] =
         }},
 
     // Range weapons
-    { WPN_BLOWGUN,           "blowgun",             0,  2, 10,
+    { WPN_BLOWGUN,           "blowgun",             0,  2, 12,
         SK_FIGHTING,     SIZE_LITTLE, SIZE_LITTLE, MI_NEEDLE,
         DAMV_NON_MELEE, 5, 0, 25, {}, },
 

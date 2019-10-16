@@ -150,11 +150,13 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Thom Chiovoloni
     Anthony Chuah
     Henry Cipolla
+    CollinJ
     Nicholas Connelly
     Tom Conrad
     Vitor 'Baconkid' Costa
     Aaron Curtis
     Simon Curtis
+    cut1less
     Paul Dejean
     Denzi
     Lothar Dierkes
@@ -171,6 +173,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Micha Elsner
     Carl-Oscar Erneholm
     Erich Erstu
+    Higor Eurípedes
     Christopher Evenstar
     Floodkiller
     floraline
@@ -298,6 +301,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Terence Reeves
     Tobias Rehbein
     Remsleep
+    Chris Rendle-Short
     Ryan Riegel
     RjY
     rmcneive
@@ -333,6 +337,7 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Jan 'heftig' Steffens
     Stenella
     Timothy Stiles
+    John Stilley
     Johan Strandell
     Ben Striegel
     Derrick Sund
@@ -345,8 +350,10 @@ The Dungeon Crawl Stone Soup team would like to thank:
     Jared 'Twinge' Tinney
     Matt Titus
     Tommy
+    Sean VanMeter
     Mikko Vepsäläinen
     WanderingBlade
+    Richard Wardin
     waylon531
     Steven Wheeler
     Thomas Willem

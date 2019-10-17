@@ -2178,7 +2178,7 @@ Shields
   Affects the amount of protection you gain by using a shield, and the degree to
   which it hinders you. For most races, 5/15/25 skill is enough to mitigate the
   encumbrance of bucklers/shields/large shields respectively, though larger
-  races need less skill and and smaller races more.
+  races need less skill and smaller races more.
 
 Invocations
   Affects your ability to call on your god for aid. Those skilled at Invocations

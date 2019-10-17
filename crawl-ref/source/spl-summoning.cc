@@ -12,6 +12,7 @@
 
 #include "act-iter.h"
 #include "areas.h"
+#include "art-enum.h"
 #include "artefact.h"
 #include "butcher.h"
 #include "cloud.h"
@@ -3222,7 +3223,12 @@ spret cast_spectral_weapon(actor *agent, int pow, god_type god, bool fail)
     }
 
     if (agent->is_player())
-        mpr("You draw out your weapon's spirit!");
+        {
+        if(player_equip_unrand(UNRAND_BATTLE))
+            mpr("Your staff activates!");
+        else
+            mpr("You draw out your weapon's spirit!");
+        }
     else
     {
         if (you.can_see(*agent) && you.can_see(*mons))

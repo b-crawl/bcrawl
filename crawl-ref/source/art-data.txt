@@ -200,6 +200,7 @@ BRAND:   SPWPN_CHAOS
 
 NAME:    glaive of Prune
 OBJ:     OBJ_WEAPONS/WPN_GLAIVE
+INSCRIP: lignify
 PLUS:    +12
 COLOUR:  LIGHTMAGENTA
 TILE:    spwpn_glaive_of_prune

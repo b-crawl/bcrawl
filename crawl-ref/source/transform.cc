@@ -1582,7 +1582,7 @@ undead_form_reason lifeless_prevents_form(transformation which_trans,
  *                          to intervene. (That may be the only case.)
  */
 bool transform(int pow, transformation which_trans, bool involuntary,
-               bool just_check, string *fail_reason)
+               bool just_check, string *fail_reason, bool ignore_undead)
 {
     const transformation previous_trans = you.form;
     const bool was_flying = you.airborne();
@@ -1655,16 +1655,13 @@ bool transform(int pow, transformation which_trans, bool involuntary,
     }
 
     // the undead cannot enter most forms.
-    if (lifeless_prevents_form(which_trans, involuntary) == UFR_TOO_DEAD)
+    if (!ignore_undead)
     {
-        msg = "Your unliving flesh cannot be transformed in this way.";
-        success = false;
-    }
-    else if (which_trans == transformation::lich
-             && you.duration[DUR_DEATHS_DOOR])
-    {
-        msg = "You cannot become a lich while in Death's Door.";
-        success = false;
+        if (lifeless_prevents_form(which_trans, involuntary) == UFR_TOO_DEAD)
+        {
+            msg = "Your unliving flesh cannot be transformed in this way.";
+            success = false;
+        }
     }
 
     if (!just_check && previous_trans != transformation::none)

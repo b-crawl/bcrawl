@@ -571,7 +571,9 @@ void slimify_monster(monster* mon)
 {
     monster_type target = MONS_JELLY;
 
-    const int x = mon->get_hit_dice() + random_choose(1, -1) * random2(5);
+    int x = mon->get_hit_dice() + random_choose(1, -1) * random2(5);
+    if (mons_is_firewood(mons))
+        x = 0;
 
     if (x < 3)
         target = MONS_OOZE;

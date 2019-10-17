@@ -438,7 +438,7 @@ bool monster_polymorph(monster* mons, monster_type targetc,
 
     // There's not a single valid target on the '&' demon tier, so unless we
     // make one, let's ban this outright.
-    if (source_tier == -1)
+    if (!ignore_restrictions && source_tier == -1)
     {
         return simple_monster_message(*mons,
             "'s appearance momentarily alters.");

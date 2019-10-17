@@ -410,6 +410,7 @@ static void _SINGING_SWORD_melee_effects(item_def* weapon, actor* attacker,
             defender);
 }
 ////////////////////////////////////////////////////
+// Glaive of Prune
 
 static void _PRUNE_equip(item_def *item, bool *show_msgs, bool unmeld)
 {
@@ -420,6 +421,16 @@ static void _PRUNE_world_reacts(item_def *item)
 {
     if (one_chance_in(10))
         did_god_conduct(DID_CHAOS, 1);
+}
+
+static void _PRUNE_melee_effects(item_def* weapon, actor* attacker,
+                                    actor* defender, bool mondied, int dam)
+{
+    if(attacker->is_player() && you.form != transformation::tree)
+    {
+        transform(0, transformation::tree, true, false, nullptr, true);
+        you.transform_uncancellable = true;
+    }
 }
 
 ////////////////////////////////////////////////////
@@ -1478,17 +1489,3 @@ static void _BATTLE_world_reacts(item_def *item)
     if (!find_spectral_weapon(&you) && there_are_monsters_nearby(true, true, false))
         your_spells(SPELL_SPECTRAL_WEAPON, 0, false);
 }
-
-////////////////////////////////////////////////////
-// Glaive of Prune
-
-static void _GLAIVE_OF_PRUNE_melee_effects(item_def* weapon, actor* attacker,
-                                    actor* defender, bool mondied, int dam)
-{
-    if(attacker->is_player() && you.form != transformation::tree)
-    {
-        transform(0, transformation::tree, true, false, nullptr, true);
-        you.transform_uncancellable = true;
-    }
-}
-

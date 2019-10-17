@@ -3160,18 +3160,19 @@ static void _set_initial_god_piety()
         break;
     
     case GOD_JIYVA:
-        _set_initial_piety_value(35); // higher because Jiyva altars are later
+        if (!you.worshipped[GOD_JIYVA])
+            _set_initial_piety_value(35); // higher because Jiyva altars are later
+        else _set_initial_piety_value(15);
         break;
 
     case GOD_LUGONU:
-        // give ability to leave Abyss at start
         if (!you.worshipped[GOD_LUGONU])
-            _set_initial_piety_value(35);
+            _set_initial_piety_value(35); // give AKs ability to leave Abyss at start
         else _set_initial_piety_value(15);
         break;
 
     default:
-        _set_initial_piety_value(15); // to prevent near instant excommunication
+        _set_initial_piety_value(15); // to prevent near-instant excommunication
         break;
     }
 

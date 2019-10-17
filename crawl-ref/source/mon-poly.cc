@@ -572,7 +572,7 @@ void slimify_monster(monster* mon)
     monster_type target = MONS_JELLY;
 
     int x = mon->get_hit_dice() + random_choose(1, -1) * random2(5);
-    if (mons_is_firewood(mons))
+    if (mons_is_firewood(*mon))
         x = 0;
 
     if (x < 3)

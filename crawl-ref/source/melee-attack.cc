@@ -541,7 +541,7 @@ bool melee_attack::handle_phase_damaged()
             slimify_monster(defender->as_monster());
 
             // Bail out after sliming so we don't get aux unarmed and attack a fellow slime.
-            // did_hit = false;
+            did_hit = false;
             damage_done = 0;
             return false;
         }

@@ -418,7 +418,7 @@ void change_monster_type(monster* mons, monster_type targetc)
 // says.
 bool monster_polymorph(monster* mons, monster_type targetc,
                        poly_power_type power,
-                       bool force_beh)
+                       bool force_beh, bool ignore_restrictions)
 {
     // Don't attempt to polymorph a monster that is busy using the stairs.
     if (mons->flags & MF_TAKING_STAIRS)
@@ -494,7 +494,7 @@ bool monster_polymorph(monster* mons, monster_type targetc,
         targetc = target_types[random2(target_types.size())];
     }
 
-    if (!_valid_morph(mons, targetc))
+    if (!ignore_restrictions && !_valid_morph(mons, targetc))
         return simple_monster_message(*mons, " looks momentarily different.");
 
     change_monster_type(mons, targetc);
@@ -597,7 +597,7 @@ void slimify_monster(monster* mon)
     record_monster_defeat(mon, KILL_SLIMIFIED);
     remove_unique_annotation(mon);
 
-    monster_polymorph(mon, target);
+    monster_polymorph(mon, target, PPT_SAME, false, true);
     mon->attitude = ATT_FRIENDLY;
     mons_make_god_gift(*mon, GOD_JIYVA);
     

@@ -1307,6 +1307,19 @@ vector<string> desc_success_chance(const monster_info& mi, int pow, bool evoked,
     return descs;
 }
 
+// for Mana Rupture
+vector<string> _desc_target_mr(const monster_info& mi)
+{
+    int mons_mr = mi.res_magic();
+    string mr_text = (mons_mr == MAG_IMMUNE) ?
+        "∞" : std::string((mons_mr / MR_PIP), '*');
+    mr_text = "target MR:" + mr_text + "\n";
+
+    vector<string> descs;
+    descs.push_back(mr_text);
+    return descs;
+}
+
 /**
  * Targets and fires player-cast spells & spell-like effects.
  *
@@ -1393,6 +1406,10 @@ spret your_spells(spell_type spell, int powc, bool allow_fail,
                                                                  false);
             additional_desc = bind(desc_success_chance, placeholders::_1,
                                    eff_pow, evoked_item, hitfunc.get());
+        }
+        else if (spell == SPELL_RUPTURE)
+        {
+            additional_desc = bind(_desc_target_mr, placeholders::_1);
         }
 
         string title = make_stringf("Aiming: <w>%s</w>", spell_title(spell));

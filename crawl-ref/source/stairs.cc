@@ -925,7 +925,7 @@ void take_stairs(dungeon_feature_type force_stair, bool going_up,
         case DNGN_ENTER_PANDEMONIUM:
             how = DNGN_ENTER_ABYSS;
             mprf(MSGCH_WARN, "The portal is diverted to the Abyss!");
-            grd(*you.pos()) = DNGN_ENTER_ABYSS;
+            grd(you.pos()) = DNGN_ENTER_ABYSS;
             break;
         case DNGN_TRANSIT_PANDEMONIUM:
             how = DNGN_EXIT_THROUGH_ABYSS;

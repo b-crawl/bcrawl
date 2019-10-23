@@ -2855,6 +2855,8 @@ void level_change(bool skip_attribute_increase)
             if (hit_max_level)
             {
                 mprf(MSGCH_WARN, "The lords of Pandemonium have recognized you as a threat, and redirect portals to contain you!");
+                if (player_in_branch(BRANCH_PANDEMONIUM))
+                    env.spawn_random_rate = 0;
             }
 
             const bool manual_stat_level = new_exp % 3 == 0;  // 3,6,9,12...

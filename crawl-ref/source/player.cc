@@ -2834,16 +2834,27 @@ void level_change(bool skip_attribute_increase)
         {
             // Don't want to see the dead creature at the prompt.
             redraw_screen();
-
+            
+            bool hit_max_level = false;
             if (new_exp == 27)
+            {
                 mprf(MSGCH_INTRINSIC_GAIN, "You have reached level 27, the final one!");
+                hit_max_level = true;
+            }
             else if (new_exp == you.get_max_xl())
-                mprf(MSGCH_INTRINSIC_GAIN, "You have reached level %d, the highest you will ever reach!",
-                        you.get_max_xl());
+            {
+                mprf(MSGCH_INTRINSIC_GAIN, "You have reached level %d, the highest you will ever reach!", you.get_max_xl());
+                hit_max_level = true;
+            }
             else
             {
                 mprf(MSGCH_INTRINSIC_GAIN, "You have reached level %d!",
                      new_exp);
+            }
+            
+            if (hit_max_level)
+            {
+                mprf(MSGCH_WARN, "The lords of Pandemonium have recognized you as a threat, and redirect portals to contain you!");
             }
 
             const bool manual_stat_level = new_exp % 3 == 0;  // 3,6,9,12...

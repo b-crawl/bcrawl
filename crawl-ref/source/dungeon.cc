@@ -48,6 +48,7 @@
 #include "lev-pand.h"
 #include "libutil.h"
 #include "mapmark.h"
+#include "map-knowledge.h"
 #include "maps.h"
 #include "message.h"
 #include "mon-death.h"
@@ -1016,13 +1017,39 @@ static void _fixup_hell_stairs()
 
 static void _fixup_pandemonium_stairs()
 {
+    bool enough_runes_to_detect = runes_in_pack() >= 2;
+    bool rune_detected = false;
+    
     for (rectangle_iterator ri(1); ri; ++ri)
     {
-        if (feat_is_stone_stair_up(grd(*ri))
-            || grd(*ri) == DNGN_ESCAPE_HATCH_UP)
+        coord_def c(*ri);
+        if (feat_is_stone_stair_up(grd(c)) || grd(c) == DNGN_ESCAPE_HATCH_UP)
         {
-            _set_grd(*ri, DNGN_TRANSIT_PANDEMONIUM);
+            _set_grd(c, DNGN_TRANSIT_PANDEMONIUM);
+            if (enough_runes_to_detect)
+                set_terrain_seen(c);
         }
+        
+        if (enough_runes_to_detect)
+        {
+            int item = igrd(c);
+            if (item != NON_ITEM)
+            {
+                item_def it = mitm[item];
+                if (it.base_type == OBJ_RUNES && !env.map_knowledge(c).item())
+                {
+                    rune_detected = true;
+                    env.map_knowledge(c).set_detected_item();
+                }
+            }
+        }
+    }
+    
+    if (enough_runes_to_detect)
+    {
+        mpr("You locate some portals by their resonance with your runes.");
+        if (rune_detected)
+            mpr("You detect a rune of Zot on this floor by its effects on those portals, and triangulate its position!");
     }
 }
 

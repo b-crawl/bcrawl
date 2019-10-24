@@ -853,11 +853,12 @@ int yred_random_servants(bool force_hostile)
     }
     else
     {
-        ally_factor = div_rand_round(you.piety, 10) + absdungeon_depth(you.where_are_you, you.depth);
+        int absdepth = branches[you.where_are_you].absdepth + you.depth - 1;
+        ally_factor = div_rand_round(you.piety, 10) + absdepth;
     }
     
     int min_ally_index = min(ally_types - 6, ((ally_factor - 13) * ally_types) / 64);
-    int min_ally_index = max(0, min_ally_index);
+    min_ally_index = max(0, min_ally_index);
     int max_ally_index = min(ally_types - 1, (ally_factor * ally_types) / 38);
 
     monster_type mon_type = _yred_servants[random_range(min_ally_index, max_ally_index)];

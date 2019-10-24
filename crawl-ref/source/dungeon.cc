@@ -1043,7 +1043,7 @@ static void _fixup_pandemonium_stairs()
                 {
                     env.map_knowledge(c).set_feature(grd(c));
                     set_terrain_mapped(c);
-                    env.map_knowledge(c).set_item(get_item_info(it), false);
+                    env.map_knowledge(c).set_detected_item();
                     rune_detected = true;
                 }
             }

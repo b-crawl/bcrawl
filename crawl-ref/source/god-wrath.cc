@@ -1069,7 +1069,7 @@ static bool _lugonu_retribution()
  */
 static spell_type _vehumet_wrath_type()
 {
-    const int severity = min(6, (you.experience_level / 9) + random2(4));
+    int severity = min(5, div_rand_round(you.experience_level + random2(14), 8));
     // Mostly player-castable conjurations with a couple of additions.
     switch (severity)
     {
@@ -1079,12 +1079,11 @@ static spell_type _vehumet_wrath_type()
         case 1:
             return random_choose(SPELL_ISKENDERUNS_MYSTIC_BLAST,
                                  SPELL_STICKY_FLAME,
-                                 SPELL_THROW_ICICLE,
-                                 SPELL_ENERGY_BOLT);
+                                 SPELL_THROW_ICICLE);
         case 2:
             return random_choose(SPELL_FIREBALL,
                                  SPELL_LIGHTNING_BOLT,
-                                 SPELL_BOLT_OF_MAGMA,
+                                 SPELL_ENERGY_BOLT,
                                  SPELL_VENOM_BOLT,
                                  SPELL_BOLT_OF_DRAINING,
                                  SPELL_QUICKSILVER_BOLT,
@@ -1093,8 +1092,7 @@ static spell_type _vehumet_wrath_type()
             return random_choose(SPELL_BOLT_OF_FIRE,
                                  SPELL_BOLT_OF_COLD,
                                  SPELL_CORROSIVE_BOLT,
-                                 SPELL_FREEZING_CLOUD,
-                                 SPELL_POISONOUS_CLOUD,
+                                 SPELL_BOLT_OF_MAGMA,
                                  SPELL_POISON_ARROW,
                                  SPELL_IRON_SHOT,
                                  SPELL_CONJURE_BALL_LIGHTNING);
@@ -1102,16 +1100,15 @@ static spell_type _vehumet_wrath_type()
             return random_choose(SPELL_ORB_OF_ELECTRICITY,
                                  SPELL_FLASH_FREEZE);
         case 5:
-            return SPELL_LEHUDIBS_CRYSTAL_SPEAR;
-        case 6:
-            return SPELL_FIRE_STORM;
+            return random_choose(SPELL_LEHUDIBS_CRYSTAL_SPEAR,
+                                 SPELL_FIRE_STORM);
         default:
             return SPELL_NO_SPELL;
     }
 }
 
 /**
- * Call down the wrath of Vehumpet upon the player!
+ * Call down the wrath of Vehumet upon the player!
  *
  * Conjuration theme.
  *

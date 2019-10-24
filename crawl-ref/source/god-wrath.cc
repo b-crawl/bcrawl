@@ -1069,29 +1069,19 @@ static bool _lugonu_retribution()
  */
 static spell_type _vehumet_wrath_type()
 {
-    const int severity = min(random_range(1 + you.experience_level / 5,
-                                          1 + you.experience_level / 3),
-                             9);
+    const int severity = min(6, (you.experience_level / 9) + random2(4));
     // Mostly player-castable conjurations with a couple of additions.
     switch (severity)
     {
-        case 1:
-            return random_choose(SPELL_MAGIC_DART,
-                                 SPELL_STING,
-                                 SPELL_SHOCK,
-                                 SPELL_FLAME_TONGUE);
-        case 2:
-            return random_choose(SPELL_THROW_FLAME,
-                                 SPELL_THROW_FROST);
-        case 3:
+        case 0:
             return random_choose(SPELL_MEPHITIC_CLOUD,
                                  SPELL_STONE_ARROW);
-        case 4:
+        case 1:
             return random_choose(SPELL_ISKENDERUNS_MYSTIC_BLAST,
                                  SPELL_STICKY_FLAME,
                                  SPELL_THROW_ICICLE,
                                  SPELL_ENERGY_BOLT);
-        case 5:
+        case 2:
             return random_choose(SPELL_FIREBALL,
                                  SPELL_LIGHTNING_BOLT,
                                  SPELL_BOLT_OF_MAGMA,
@@ -1099,7 +1089,7 @@ static spell_type _vehumet_wrath_type()
                                  SPELL_BOLT_OF_DRAINING,
                                  SPELL_QUICKSILVER_BOLT,
                                  SPELL_METAL_SPLINTERS);
-        case 6:
+        case 3:
             return random_choose(SPELL_BOLT_OF_FIRE,
                                  SPELL_BOLT_OF_COLD,
                                  SPELL_CORROSIVE_BOLT,
@@ -1108,12 +1098,12 @@ static spell_type _vehumet_wrath_type()
                                  SPELL_POISON_ARROW,
                                  SPELL_IRON_SHOT,
                                  SPELL_CONJURE_BALL_LIGHTNING);
-        case 7:
+        case 4:
             return random_choose(SPELL_ORB_OF_ELECTRICITY,
                                  SPELL_FLASH_FREEZE);
-        case 8:
+        case 5:
             return SPELL_LEHUDIBS_CRYSTAL_SPEAR;
-        case 9:
+        case 6:
             return SPELL_FIRE_STORM;
         default:
             return SPELL_NO_SPELL;

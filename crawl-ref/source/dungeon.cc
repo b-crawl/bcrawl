@@ -1027,7 +1027,7 @@ static void _fixup_pandemonium_stairs()
         {
             _set_grd(c, DNGN_TRANSIT_PANDEMONIUM);
             if (enough_runes_to_detect)
-                set_terrain_seen(c);
+                set_terrain_mapped(c);
         }
         
         if (enough_runes_to_detect)
@@ -2487,10 +2487,6 @@ static void _build_dungeon_level()
         _post_vault_build();
     }
 
-    // Translate stairs for pandemonium levels.
-    if (player_in_branch(BRANCH_PANDEMONIUM))
-        _fixup_pandemonium_stairs();
-
     _fixup_branch_stairs();
 
     if (!dgn_make_transporters_from_markers())
@@ -2505,6 +2501,10 @@ static void _build_dungeon_level()
     {
         _prepare_water();
     }
+
+    // Translate stairs for pandemonium levels.
+    if (player_in_branch(BRANCH_PANDEMONIUM))
+        _fixup_pandemonium_stairs();
 
     if (player_in_hell())
         _fixup_hell_stairs();

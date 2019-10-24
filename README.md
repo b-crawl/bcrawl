@@ -44,6 +44,7 @@ Pull requests for new content are welcome.
   - v1.13: Each time you enter the Abyss increases the depth of your next entry.
   - v1.13.4: The Lair entrance is on D:7-9 instead of D:7-10.
   - v1.16: Volcano levels will not contain wizards.
+  - v1.18: Portals to Pandemonium levels are redirected to the Abyss by the lords of Pandemonium if the player has reached their max experience level. On entering a Pandemonium level, if the player has at least 2 runes, the locations of portals and runes are revealed.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -228,6 +229,8 @@ Pull requests for new content are welcome.
   - v1.17.1: Instead of adjusting player attributes automatically, Jiyva gives players an ability that swaps 2 attribute values.
   - v1.17.2: Jiyva gives \* piety on conversion.
   - v1.17.2: Some gods respect certain other gods, and will not punish followers for converting to them. Check the wrath info in god descriptions to see if this is the case.
+  - v1.18: Vehumet's wrath at low experience levels is stronger.
+  - v1.18: Yredelemnul is adjusted: gifted ally strength is based on your location and current piety, not on number of gifts received so far; no piety is given for killing undead; there is no cap on the number of strong gifted allies.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -256,7 +259,6 @@ Pull requests for new content are welcome.
   - v1.12.1: Great maces have a different brand set, including the speed brand.
   - v1.13.2: Great swords have higher (15 -> 16) base damage.
   - v1.13.5: Changed wand max charges for acid (15 -> 12) and polymorph (15 -> 20).
-  - v1.13.5: Needles of paralysis are replaced by more needles of confusion and frenzy.
   - v1.14: Blowguns use Fighting skill instead of Throwing skill.
   - v1.14.1: Potions of flight give a Swiftness effect in addition to flight.
   - v1.14.2: Thrown stones have a lower base delay (1.1 -> 1) and min delay (0.7 -> 0.5).
@@ -270,6 +272,7 @@ Pull requests for new content are welcome.
   - Scrolls of Random Uselessness
   - v1.3.2: Crystal Ball of Energy
   - v1.4.2: Scrolls of Holy Word
+  - v1.13.5: Needles of Paralysis
 
 #### Artefacts
   - The 'Fists of Thunder' unrandart gives electric-branded unarmed attacks.

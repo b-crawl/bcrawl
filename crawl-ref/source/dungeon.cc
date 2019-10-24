@@ -1027,7 +1027,10 @@ static void _fixup_pandemonium_stairs()
         {
             _set_grd(c, DNGN_TRANSIT_PANDEMONIUM);
             if (enough_runes_to_detect)
+            {
+                env.map_knowledge(c).set_feature(DNGN_TRANSIT_PANDEMONIUM);
                 set_terrain_mapped(c);
+            }
         }
         
         if (enough_runes_to_detect)
@@ -1036,10 +1039,10 @@ static void _fixup_pandemonium_stairs()
             if (item != NON_ITEM)
             {
                 item_def it = mitm[item];
-                if (it.base_type == OBJ_RUNES && !env.map_knowledge(c).item())
+                if (it.base_type == OBJ_RUNES)
                 {
+                    update_item_at(c, false, true);
                     rune_detected = true;
-                    env.map_knowledge(c).set_detected_item();
                 }
             }
         }

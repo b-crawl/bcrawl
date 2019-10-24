@@ -3576,6 +3576,11 @@ bool god_hates_your_god(god_type god, god_type your_god)
             return false;
         return true;
     
+    case GOD_LUGONU:
+        if(your_god == GOD_RU)
+            return false;
+        return true;
+    
     case GOD_YREDELEMNUL:
         if(your_god == GOD_KIKUBAAQUDGHA)
             return false;

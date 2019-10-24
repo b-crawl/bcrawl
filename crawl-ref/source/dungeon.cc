@@ -1041,7 +1041,9 @@ static void _fixup_pandemonium_stairs()
                 item_def it = mitm[item];
                 if (it.base_type == OBJ_RUNES)
                 {
-                    update_item_at(c, false, true);
+                    env.map_knowledge(c).set_feature(grd(c));
+                    set_terrain_mapped(c);
+                    env.map_knowledge(c).set_item(get_item_info(it), false);
                     rune_detected = true;
                 }
             }

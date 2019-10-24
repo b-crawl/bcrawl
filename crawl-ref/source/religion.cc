@@ -3624,7 +3624,7 @@ bool god_hates_your_god(god_type god, god_type your_god)
         return true;
     
     case GOD_SIF_MUNA:
-        if(your_god == GOD_ASHENZARI)
+        if(your_god == GOD_ASHENZARI || your_god == GOD_CHEIBRIADOS)
             return false;
         return true;
     

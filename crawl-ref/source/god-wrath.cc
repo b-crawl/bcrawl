@@ -683,7 +683,7 @@ static bool _yredelemnul_retribution()
                 }
                 else
                 {
-                    const int num = yred_random_servants(0, true);
+                    const int num = yred_random_servants(true);
                     if (num >= 0)
                         count += num;
                     else

@@ -1059,7 +1059,7 @@ static void _pandemonium_rune_detection()
         }
     
     if (rune_detected)
-        mpr("You detect a rune of Zot on this floor by its effect on the portals!");
+        mprf(MSGCH_ORB, "You detect a rune of Zot on this floor by its effect on the portals!");
 }
 
 static void _mask_vault(const vault_placement &place, unsigned mask)

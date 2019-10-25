@@ -44,7 +44,7 @@ Pull requests for new content are welcome.
   - v1.13: Each time you enter the Abyss increases the depth of your next entry.
   - v1.13.4: The Lair entrance is on D:7-9 instead of D:7-10.
   - v1.16: Volcano levels will not contain wizards.
-  - v1.18: Portals to Pandemonium levels are redirected to the Abyss by the lords of Pandemonium if the player has reached their max experience level. On entering a Pandemonium level, if the player has at least 2 runes, the locations of portals and runes are revealed.
+  - v1.18: Portals to Pandemonium levels are redirected to the Abyss by the lords of Pandemonium if the player has reached their max experience level. On entering a Pandemonium level, if the player has at least 2 runes, the locations of portals are revealed and the player is notified if the demonic rune is present.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)

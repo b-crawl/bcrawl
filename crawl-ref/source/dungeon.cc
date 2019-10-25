@@ -1032,30 +1032,34 @@ static void _fixup_pandemonium_stairs()
                 set_terrain_mapped(c);
             }
         }
-        
-        if (enough_runes_to_detect)
-        {
-            int item = igrd(c);
-            if (item != NON_ITEM)
-            {
-                item_def it = mitm[item];
-                if (it.base_type == OBJ_RUNES)
-                {
-                    env.map_knowledge(c).set_feature(grd(c));
-                    set_terrain_mapped(c);
-                    env.map_knowledge(c).set_detected_item();
-                    rune_detected = true;
-                }
-            }
-        }
     }
     
     if (enough_runes_to_detect)
-    {
         mpr("You locate some portals by their resonance with your runes.");
-        if (rune_detected)
-            mpr("You detect a rune of Zot on this floor by its effects on those portals, and triangulate its position!");
-    }
+}
+
+static void _pandemonium_rune_detection()
+{
+    bool enough_runes_to_detect = runes_in_pack() >= 2;
+    bool rune_detected = false;
+    
+    if (enough_runes_to_detect)
+        for (rectangle_iterator ri(1); ri; ++ri)
+        {
+            coord_def c(*ri);
+            int item = igrd(c);
+            if (item != NON_ITEM)
+            {
+                if (mitm[item].base_type == OBJ_RUNES)
+                {
+                    rune_detected = true;
+                    break;
+                }
+            }
+        }
+    
+    if (rune_detected)
+        mpr("You detect a rune of Zot on this floor by its effect on the portals!");
 }
 
 static void _mask_vault(const vault_placement &place, unsigned mask)
@@ -2491,6 +2495,10 @@ static void _build_dungeon_level()
         // they happen to have the relevant branch.
         _post_vault_build();
     }
+    
+    // translate stairs for pandemonium levels
+    if (player_in_branch(BRANCH_PANDEMONIUM))
+        _fixup_pandemonium_stairs();
 
     _fixup_branch_stairs();
 
@@ -2507,9 +2515,9 @@ static void _build_dungeon_level()
         _prepare_water();
     }
 
-    // Translate stairs for pandemonium levels.
+    // find and announce the demonic rune
     if (player_in_branch(BRANCH_PANDEMONIUM))
-        _fixup_pandemonium_stairs();
+        _pandemonium_rune_detection();
 
     if (player_in_hell())
         _fixup_hell_stairs();

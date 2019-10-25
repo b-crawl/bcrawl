@@ -3519,10 +3519,6 @@ bool is_useless_item(const item_def &item, bool temp)
                    && (you.species != SP_VAMPIRE
                        || temp && you.hunger_state < HS_SATIATED);
 
-        case POT_FLIGHT:
-            return you.permanent_flight()
-                   || you.racial_permanent_flight();
-
 #if TAG_MAJOR_VERSION == 34
         case POT_PORRIDGE:
             return you.species == SP_VAMPIRE

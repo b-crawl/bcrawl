@@ -520,17 +520,6 @@ static special_missile_type _determine_missile_brand(const item_def& item,
 
     switch (item.sub_type)
     {
-#if TAG_MAJOR_VERSION == 34
-    case MI_DART:
-#endif
-    case MI_THROWING_NET:
-    case MI_STONE:
-    case MI_LARGE_ROCK:
-    case MI_SLING_BULLET:
-    case MI_ARROW:
-    case MI_BOLT:
-        rc = SPMSL_NORMAL;
-        break;
     case MI_NEEDLE:
         // Curare is special cased, all the others aren't.
         if (got_curare_roll(item_level))
@@ -554,6 +543,10 @@ static special_missile_type _determine_missile_brand(const item_def& item,
                                     10, SPMSL_DISPERSAL,
                                     15, SPMSL_EXPLODING,
                                     nw, SPMSL_NORMAL);
+        break;
+    
+    default:
+        rc = SPMSL_NORMAL;
         break;
     }
 
@@ -673,64 +666,41 @@ static void _generate_missile_item(item_def& item, int force_type,
                                    1,  MI_LARGE_ROCK);
     }
 
-    // No fancy rocks -- break out before we get to special stuff.
-    if (item.sub_type == MI_LARGE_ROCK)
+    switch(item.sub_type)
     {
-        // Vanilla gives 2...6 with 1/25 mulch rate.
-        // This is the vanilla value multiplied by 12,
-        // so large rocks are approx 2x scarcer than in vanilla.
+    case MI_LARGE_ROCK:
         item.quantity = 24 + random2avg(60, 2);
-        return;
-    }
-    else if (item.sub_type == MI_STONE)
-    {
-        // Vanilla: 1 + 0...6 + 0...9 + 0...11 + 0...9
-        // On average is 1 + 3 + 4.5 + 5.5 + 4.5 = 18.5 with 1/8 mulch rate.
+        break;
+    case MI_STONE:
         item.quantity = 1 + random2avg(280, 4);
-        return;
-    }
-    else if (item.sub_type == MI_THROWING_NET) // no fancy nets, either
-    {
-        item.quantity = 1 + one_chance_in(4); // and only one, rarely two
-        return;
-    }
-
-    if (!no_brand)
-    {
-        set_item_ego_type(item, OBJ_MISSILES,
-                           _determine_missile_brand(item, item_level));
-    }
-
-    if (item.sub_type == MI_NEEDLE && get_ammo_brand(item) == SPMSL_CURARE)
-    {
-        // Vanilla curare is 2...8 with 1/6 mulch rate.
-        item.quantity = random_range(12, 48);
-    }
-    else if (item.sub_type == MI_NEEDLE && get_ammo_brand(item) != SPMSL_POISONED)
-    {
-        // Vanilla special needles are 2...8 with 1/12 mulch rate.
-        item.quantity = random_range(24, 96);
-    }
-    else if (item.sub_type == MI_JAVELIN || item.sub_type == MI_TOMAHAWK)
-    {
-        // All tomahawks and javelins.
-        // Vanilla gives 2...8 with 1/20 mulch rate.
+        break;
+    case MI_SLING_BULLET:
+        item.quantity = 1 + random2avg(460, 4);   // more because few monsters carry them
+        break;
+    case MI_THROWING_NET:
+        item.quantity = 1 + one_chance_in(4);
+        break;
+    case MI_NEEDLE:
+        set_item_ego_type(item, OBJ_MISSILES, _determine_missile_brand(item, item_level));
+        switch(get_ammo_brand(item))
+        {
+        case SPMSL_POISONED:
+            item.quantity = 1 + random2avg(160, 3);  // reduced for blowgun rework
+            break;
+        default:
+            item.quantity = random_range(12, 72);   // more curare, less others
+            break;
+        }
+        break;
+    case MI_JAVELIN:
+    case MI_TOMAHAWK:
+        if (!no_brand)
+            set_item_ego_type(item, OBJ_MISSILES, _determine_missile_brand(item, item_level));
         item.quantity = random_range(40, 160);
-    }
-    else if (get_ammo_brand(item) != SPMSL_NORMAL)
-    {
-        // This only catches basic (poisoned) needles now.
-        // In past versions, it also caught variant bolts, arrows, bullets.
-        // Vanilla gives 1 + 0...6 + 0...9 + 0...9.
-        // Average is 1 + 3 + 4.5 + 4.5 = 13 with 1/12 mulch rate.
-        item.quantity = 1 + random2avg(312, 3);
-    }
-    else
-    {
-        // Normal arrows, bolts, bullets.
-        // Vanilla gives 1 + 0...6 + 0...9 + 0...9 + 0...11.
-        // Average is 1 + 3 + 4.5 + 4.5 + 5.5 = 18.5 with 1/8 mulch rate.
+        break;
+    default:
         item.quantity = 1 + random2avg(280, 4);
+        break;
     }
 }
 

@@ -712,15 +712,13 @@ static string _raw_penance_message(god_type which_god)
 {
     const int penance = you.penance[which_god];
 
-    // Give more appropriate message for the good gods.
-    if (penance > 0 && is_good_god(which_god))
+    if (penance > 0)
     {
-        if (is_good_god(you.religion))
+        if (is_good_god(which_god) && is_good_god(you.religion))
             return "%s is ambivalent towards you.";
         if (!god_hates_your_god(which_god))
         {
-            return "%s is almost ready to forgive your sins.";
-                 // == "Come back to the one true church!"
+            return "%s is watching you.";
         }
     }
 

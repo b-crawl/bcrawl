@@ -26,6 +26,7 @@
 #include "ng-restr.h"
 #include "options.h"
 #include "prompt.h"
+#include "skills.h"
 #include "state.h"
 #include "stringutil.h"
 #ifdef USE_TILE_LOCAL
@@ -1771,6 +1772,14 @@ static void _construct_weapon_menu(const newgame_def& ng,
             }
             break;
         }
+
+        // note species aptitude
+        const skill_type wpn_skill =
+              wpn_type == WPN_THROWN  ? SK_THROWING :
+              wpn_type == WPN_UNARMED ? SK_UNARMED_COMBAT :
+                                   item_attack_skill(OBJ_WEAPONS, wpn_type);
+        text += make_stringf(" (%+d)", species_apt(wpn_skill, ng.species));
+        
         // Fill to column width to give extra padding for the highlight
         text.append(WEAPON_COLUMN_WIDTH - text.size() - 1 , ' ');
         tmp->set_text(text);

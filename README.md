@@ -265,6 +265,7 @@ Pull requests for new content are welcome.
   - v1.15.1: Giant clubs and giant spiked clubs now cleave.
   - v1.17.2: Lamps of fire scale somewhat better with Evocations skill.
   - v1.17.2: Blowguns have higher base delay. (10 -> 12)
+  - v1.18: The fustibalus has higher base damage (10 -> 11) and base delay (14 -> 15).
 
 #### Removed Items
   - Amulet of Harm
@@ -298,6 +299,7 @@ Pull requests for new content are welcome.
   - v1.16: The Vampire's Tooth has a lower enchantment. (+12 -> +10)
   - v1.17.1: The Staff of Battle is a +6 vorpal lajatang with 6 min delay, and it makes a spectral weapon when enemies are nearby. It also gives +12 max mana.
   - v1.17.3: The Glaive of Prune now transforms the user into a tree when it hits.
+  - v1.18: Punk is a hunting sling instead of a fustibalus.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

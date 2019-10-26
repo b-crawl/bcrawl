@@ -718,8 +718,9 @@ cold-resistant creatures somewhat, due to the strong impact and cutting edges.
 Ice Form spell
 
 Transforms the caster into a frozen ice-creature, light enough to float on
-water. The caster gains a freezing melee attack, and becomes incredibly
-resistant to cold and resistant to poison, but vulnerable to fire.
+water. The caster gains a powerful freezing melee attack,
+and becomes resistant to cold, poison, and hostile enchantments,
+but becomes more vulnerable to fire.
 
 While transformed, any equipped weapons and armour are melded.
 

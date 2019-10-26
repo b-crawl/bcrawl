@@ -2036,16 +2036,17 @@ bool player_effectively_in_light_armour()
 // it just makes the character undead (with the benefits that implies). - bwr
 bool player_is_shapechanged()
 {
-    if (you.form == transformation::none
-        || you.form == transformation::blade_hands
-        || you.form == transformation::lich
-        || you.form == transformation::shadow
-        || you.form == transformation::appendage)
+    switch(you.form)
     {
+    case transformation::none:
+    case transformation::blade_hands:
+    case transformation::lich:
+    case transformation::shadow:
+    case transformation::appendage:
         return false;
+    default:
+        return true;
     }
-
-    return true;
 }
 
 void update_acrobat_status()

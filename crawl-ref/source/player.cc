@@ -6557,6 +6557,8 @@ int player_res_magic(bool calc_unid, bool temp)
     // transformations
     if (you.form == transformation::lich && temp)
         rm += MR_PIP;
+    if (you.form == transformation::ice_beast && temp)
+        rm += (MR_PIP * 2);
 
     // Trog's Hand
     if (you.duration[DUR_TROGS_HAND] && temp)

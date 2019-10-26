@@ -27,6 +27,8 @@ Pull requests for new content are welcome.
   - [x-crawl.de](https://x-crawl.de/) (Germany)
   - [CUE](https://underhound.eu:8080/) (Netherlands)
 
+#### [scoring for online games](http://bcrawl.montres.org.uk/)
+
 ## Changes from Vanilla Crawl
 #### Branches
   - Dungeon is shortened to 12 floors.
@@ -180,7 +182,7 @@ Pull requests for new content are welcome.
   - v1.16.1: Pain has a higher power cap. (25 -> 50)
   - v1.16.1: Death Channel is now Charms/Necromancy.
   - v1.17.2: Blink Other has a higher chance to affect monsters.
-  - v1.18: Ice Form AC scales more with spell power.
+  - v1.18: Ice Form gives MR++ and its AC scales more with spell power.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -336,6 +338,7 @@ Pull requests for new content are welcome.
   - v1.16: Toenail golems are somewhat stronger.
   - v1.17.2: Iron dragons deal more melee damage.
   - v1.17.2: Golden dragons have a strong poison bite instead of poison breath, and have significantly more HP.
+  - v1.18: Ice beasts have higher magic resistance, to match the transformation.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

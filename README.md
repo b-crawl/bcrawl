@@ -182,7 +182,7 @@ Pull requests for new content are welcome.
   - v1.16.1: Pain has a higher power cap. (25 -> 50)
   - v1.16.1: Death Channel is now Charms/Necromancy.
   - v1.17.2: Blink Other has a higher chance to affect monsters.
-  - v1.18: Ice Form gives MR++ and its AC scales more with spell power.
+  - v1.18: Ice Form gives MR++, its AC scales more with spell power, and it has good guaranteed damage reduction.
 
 #### Removed Spells
   - Summon Guardian Golem

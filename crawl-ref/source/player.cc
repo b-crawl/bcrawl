@@ -6260,6 +6260,7 @@ int player::gdr_perc() const
     {
     case transformation::dragon:
         return 34; // base AC 8
+    case transformation::ice_beast:
     case transformation::statue:
         return 39; // like plate (AC 10)
     case transformation::tree:

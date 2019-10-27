@@ -766,7 +766,7 @@ TAGS:    no_item_gen no_monster_gen
 ITEM:    potion of curing / potion of heal wounds / potion of haste / \
          potion of ambrosia w:5 / potion of mutation w:5 / \
          scroll of identify / scroll of teleportation w:5 / \
-         scroll of blinking w:5 / scroll of holy word
+         scroll of blinking w:5 / scroll of immolation
 # There are three setups than can occur:
 # 10% - part of the loot in the closets, bit more loot
 # 45% - traps are nasty, monsters asleep

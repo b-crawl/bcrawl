@@ -26,17 +26,10 @@ function pan_lord_epilogue(name)
         Cerebov = "Searing heat pours from the floors and walls of this place.",
         ['Gloorx Vloq'] = "Shadowy figures dance across your vision."
     }
-    local runes = {
-        Mnoleg = "glowing",
-        ['Lom Lobon'] = "magical",
-        Cerebov = "fiery",
-        ['Gloorx Vloq'] = "dark"
-    }
 
     crawl.mpr(msgs[name], "warning")
     crawl.mpr("The mighty Pandemonium lord " .. name .. " resides here.", "warning")
     -- Counterpart to branch_rune_desc from lookup-help.cc
-    crawl.mpr("It guards the " .. runes[name] .. " rune of Zot.")
     crawl.take_note('Entered the realm of ' .. name .. '.')
     crawl.mark_milestone('br.enter', 'entered the realm of ' .. name .. '.', "")
 end
@@ -206,11 +199,6 @@ function pan_entry_vault_contents(e, glyph)
         e.subst("12 = .")
         e.kmons(glyph .. " = lesser demon")
     end
-end
-
-function pan_declare_demonic_rune(e)
-  crawl.mpr("The tension of great conflict fills the air!", "warning")
-  crawl.mpr("The demonic rune of Zot may be found here.")
 end
 
 function pan_highlights_setup(e)
@@ -2513,14 +2501,10 @@ ENDMAP
 #    these relatively large floating vaults (and die_on_error, aside
 #    from being insufficient, shows player-visible error messages) -
 #    some validator check is needed for the concept to work.
-#  * pan_declare_demonic_rune produces messages every time the level
-#    is rebuilt due to connectivity failures, and should also use
-#    the same validator check.
 NAME:   pan_demonic_rune_highlights
 ORIENT: float
 WEIGHT: 0
 : pan_highlights_setup(_G)
-: pan_declare_demonic_rune(_G)
 
 # Concept inherited from lemuel_draining_boxes.
 NAME:   regret_index_pan_draining_boxed
@@ -3928,7 +3912,6 @@ NSUBST: . = > / .
 : if you.have_rune("demonic") then
 KFEAT:  O = exit_pandemonium
 : else
-: pan_declare_demonic_rune(_G)
 KITEM:  O = demonic rune of Zot
 : end
 ITEM:   w:5 any / potion of curing

@@ -683,7 +683,7 @@ static bool _yredelemnul_retribution()
                 }
                 else
                 {
-                    const int num = yred_random_servants(0, true);
+                    const int num = yred_random_servants(true);
                     if (num >= 0)
                         count += num;
                     else
@@ -1069,59 +1069,46 @@ static bool _lugonu_retribution()
  */
 static spell_type _vehumet_wrath_type()
 {
-    const int severity = min(random_range(1 + you.experience_level / 5,
-                                          1 + you.experience_level / 3),
-                             9);
+    int severity = min(5, div_rand_round(you.experience_level + random2(14), 8));
     // Mostly player-castable conjurations with a couple of additions.
     switch (severity)
     {
-        case 1:
-            return random_choose(SPELL_MAGIC_DART,
-                                 SPELL_STING,
-                                 SPELL_SHOCK,
-                                 SPELL_FLAME_TONGUE);
-        case 2:
-            return random_choose(SPELL_THROW_FLAME,
-                                 SPELL_THROW_FROST);
-        case 3:
+        case 0:
             return random_choose(SPELL_MEPHITIC_CLOUD,
                                  SPELL_STONE_ARROW);
-        case 4:
+        case 1:
             return random_choose(SPELL_ISKENDERUNS_MYSTIC_BLAST,
                                  SPELL_STICKY_FLAME,
-                                 SPELL_THROW_ICICLE,
-                                 SPELL_ENERGY_BOLT);
-        case 5:
+                                 SPELL_THROW_ICICLE);
+        case 2:
             return random_choose(SPELL_FIREBALL,
                                  SPELL_LIGHTNING_BOLT,
-                                 SPELL_BOLT_OF_MAGMA,
+                                 SPELL_ENERGY_BOLT,
                                  SPELL_VENOM_BOLT,
                                  SPELL_BOLT_OF_DRAINING,
                                  SPELL_QUICKSILVER_BOLT,
                                  SPELL_METAL_SPLINTERS);
-        case 6:
+        case 3:
             return random_choose(SPELL_BOLT_OF_FIRE,
                                  SPELL_BOLT_OF_COLD,
                                  SPELL_CORROSIVE_BOLT,
-                                 SPELL_FREEZING_CLOUD,
-                                 SPELL_POISONOUS_CLOUD,
+                                 SPELL_BOLT_OF_MAGMA,
                                  SPELL_POISON_ARROW,
                                  SPELL_IRON_SHOT,
                                  SPELL_CONJURE_BALL_LIGHTNING);
-        case 7:
+        case 4:
             return random_choose(SPELL_ORB_OF_ELECTRICITY,
                                  SPELL_FLASH_FREEZE);
-        case 8:
-            return SPELL_LEHUDIBS_CRYSTAL_SPEAR;
-        case 9:
-            return SPELL_FIRE_STORM;
+        case 5:
+            return random_choose(SPELL_LEHUDIBS_CRYSTAL_SPEAR,
+                                 SPELL_FIRE_STORM);
         default:
             return SPELL_NO_SPELL;
     }
 }
 
 /**
- * Call down the wrath of Vehumpet upon the player!
+ * Call down the wrath of Vehumet upon the player!
  *
  * Conjuration theme.
  *

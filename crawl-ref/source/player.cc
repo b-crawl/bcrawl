@@ -2036,16 +2036,17 @@ bool player_effectively_in_light_armour()
 // it just makes the character undead (with the benefits that implies). - bwr
 bool player_is_shapechanged()
 {
-    if (you.form == transformation::none
-        || you.form == transformation::blade_hands
-        || you.form == transformation::lich
-        || you.form == transformation::shadow
-        || you.form == transformation::appendage)
+    switch(you.form)
     {
+    case transformation::none:
+    case transformation::blade_hands:
+    case transformation::lich:
+    case transformation::shadow:
+    case transformation::appendage:
         return false;
+    default:
+        return true;
     }
-
-    return true;
 }
 
 void update_acrobat_status()
@@ -2834,16 +2835,29 @@ void level_change(bool skip_attribute_increase)
         {
             // Don't want to see the dead creature at the prompt.
             redraw_screen();
-
+            
+            bool hit_max_level = false;
             if (new_exp == 27)
+            {
                 mprf(MSGCH_INTRINSIC_GAIN, "You have reached level 27, the final one!");
+                hit_max_level = true;
+            }
             else if (new_exp == you.get_max_xl())
-                mprf(MSGCH_INTRINSIC_GAIN, "You have reached level %d, the highest you will ever reach!",
-                        you.get_max_xl());
+            {
+                mprf(MSGCH_INTRINSIC_GAIN, "You have reached level %d, the highest you will ever reach!", you.get_max_xl());
+                hit_max_level = true;
+            }
             else
             {
                 mprf(MSGCH_INTRINSIC_GAIN, "You have reached level %d!",
                      new_exp);
+            }
+            
+            if (hit_max_level)
+            {
+                mprf(MSGCH_WARN, "The lords of Pandemonium have recognized you as a threat, and redirect portals to contain you!");
+                if (player_in_branch(BRANCH_PANDEMONIUM))
+                    env.spawn_random_rate = 0;
             }
 
             const bool manual_stat_level = new_exp % 3 == 0;  // 3,6,9,12...
@@ -6246,6 +6260,7 @@ int player::gdr_perc() const
     {
     case transformation::dragon:
         return 34; // base AC 8
+    case transformation::ice_beast:
     case transformation::statue:
         return 39; // like plate (AC 10)
     case transformation::tree:
@@ -6543,6 +6558,8 @@ int player_res_magic(bool calc_unid, bool temp)
     // transformations
     if (you.form == transformation::lich && temp)
         rm += MR_PIP;
+    if (you.form == transformation::ice_beast && temp)
+        rm += (MR_PIP * 2);
 
     // Trog's Hand
     if (you.duration[DUR_TROGS_HAND] && temp)

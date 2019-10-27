@@ -20,8 +20,8 @@ function callback.tgw_lugonu_bribe_lugonu_item (data, triggerable,
       return
     end
 
-    local weapon = util.random_from({"short sword", "rapier",
-                 "long sword", "scimitar", "glaive", "bardiche",
+    local weapon = util.random_from({"rapier",
+                 "scimitar", "trident", "glaive",
                  "broad axe", "battleaxe", "quarterstaff",
                  "lajatang", "morningstar", "great mace"})
     local item = {
@@ -51,8 +51,7 @@ function callback.tgw_lugonu_bribe_lugonu_item (data, triggerable,
               ring of wizardry ident:type",
          Vehumet="randbook owner:Lugonu spells:magic_dart numspells:1",
          Xom="manual of Invocations",
-         Yredelemnul= "scroll of holy word ident:type q:2-4 /\
-              good_item " .. weapon .. " ego:holy_wrath ident:type",
+         Yredelemnul= "good_item " .. weapon .. " ego:holy_wrath ident:type",
          Zin="good_item " .. weapon .. " ego:chaos ident:type /\
               wand of polymorph ident:type /\
               potion of lignification ident:type q:2-4",

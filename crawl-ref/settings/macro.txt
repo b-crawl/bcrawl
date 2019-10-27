@@ -1,0 +1,8 @@
+M:[
+A:===hit_closest_nomove
+
+M:]
+A:\{-233}\{-233}\{-233}
+
+M:p
+A:===hit_closest

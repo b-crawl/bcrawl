@@ -837,65 +837,31 @@ static void _inc_gift_timeout(int val)
 static monster_type _yred_servants[] =
 {
     MONS_MUMMY, MONS_WIGHT, MONS_FLYING_SKULL, MONS_WRAITH,
-    MONS_VAMPIRE, MONS_PHANTASMAL_WARRIOR, MONS_SKELETAL_WARRIOR,
-    MONS_FLAYED_GHOST, MONS_VAMPIRE_KNIGHT, MONS_GHOUL, MONS_BONE_DRAGON,
-    MONS_PROFANE_SERVITOR
+    MONS_VAMPIRE, MONS_SKELETAL_WARRIOR, MONS_PHANTASMAL_WARRIOR,
+    MONS_FREEZING_WRAITH, MONS_VAMPIRE_KNIGHT, MONS_GHOUL,
+    MONS_PROFANE_SERVITOR, MONS_BONE_DRAGON
 };
 
-#define MIN_YRED_SERVANT_THRESHOLD 3
-#define MAX_YRED_SERVANT_THRESHOLD ARRAYSZ(_yred_servants)
-
-static bool _yred_high_level_servant(monster_type type)
+int yred_random_servants(bool force_hostile)
 {
-    return type == MONS_BONE_DRAGON
-           || type == MONS_PROFANE_SERVITOR;
-}
-
-int yred_random_servants(unsigned int threshold, bool force_hostile)
-{
-    if (threshold == 0)
+    const int ally_types = ARRAYSZ(_yred_servants);
+    int ally_factor = 0;
+    if (force_hostile)
     {
-        if (force_hostile)
-        {
-            // This implies wrath - scale the threshold with XL.
-            threshold =
-                MIN_YRED_SERVANT_THRESHOLD
-                + (MAX_YRED_SERVANT_THRESHOLD - MIN_YRED_SERVANT_THRESHOLD)
-                  * you.experience_level / 27;
-        }
-        else
-            threshold = ARRAYSZ(_yred_servants);
+        // This implies wrath - scale with XL.
+        ally_factor = you.experience_level * 2;
     }
     else
     {
-        threshold = min(static_cast<unsigned int>(ARRAYSZ(_yred_servants)),
-                        threshold);
+        int absdepth = branches[you.where_are_you].absdepth + you.depth - 1;
+        ally_factor = div_rand_round(you.piety, 10) + absdepth;
     }
+    
+    int min_ally_index = min(ally_types - 6, ((ally_factor - 13) * ally_types) / 64);
+    min_ally_index = max(0, min_ally_index);
+    int max_ally_index = min(ally_types - 1, (ally_factor * ally_types) / 38);
 
-    const unsigned int servant = random2(threshold);
-
-    // Skip some of the weakest servants, once the threshold is high.
-    if ((servant + 2) * 2 < threshold)
-        return -1;
-
-    monster_type mon_type = _yred_servants[servant];
-
-    // Cap some of the strongest servants.
-    if (!force_hostile && _yred_high_level_servant(mon_type))
-    {
-        int current_high_level = 0;
-        for (auto &entry : companion_list)
-        {
-            monster* mons = monster_by_mid(entry.first);
-            if (!mons)
-                mons = &entry.second.mons.mons;
-            if (_yred_high_level_servant(mons->type))
-                current_high_level++;
-        }
-
-        if (current_high_level >= 3)
-            return -1;
-    }
+    monster_type mon_type = _yred_servants[random_range(min_ally_index, max_ally_index)];
 
     int how_many = (mon_type == MONS_FLYING_SKULL) ? 2 + random2(4)
                                                    : 1;
@@ -1201,17 +1167,9 @@ static bool _give_trog_oka_gift(bool forced)
 static bool _give_yred_gift(bool forced)
 {
     bool success = false;
-    if (forced || (random2(you.piety) >= piety_breakpoint(2)
-                   && one_chance_in(4)))
+    if (forced || one_chance_in(16))
     {
-        unsigned int threshold = MIN_YRED_SERVANT_THRESHOLD
-                                 + you.num_current_gifts[you.religion] / 2;
-        threshold = max(threshold,
-            static_cast<unsigned int>(MIN_YRED_SERVANT_THRESHOLD));
-        threshold = min(threshold,
-            static_cast<unsigned int>(MAX_YRED_SERVANT_THRESHOLD));
-
-        if (yred_random_servants(threshold) != -1)
+        if (yred_random_servants() > 0)
         {
             delayed_monster_done(" grants you @servant@!",
                                  _delayed_gift_callback);
@@ -3618,13 +3576,18 @@ bool god_hates_your_god(god_type god, god_type your_god)
             return false;
         return true;
     
+    case GOD_LUGONU:
+        if(your_god == GOD_RU)
+            return false;
+        return true;
+    
     case GOD_YREDELEMNUL:
         if(your_god == GOD_KIKUBAAQUDGHA)
             return false;
         return true;
     
     case GOD_SIF_MUNA:
-        if(your_god == GOD_ASHENZARI)
+        if(your_god == GOD_ASHENZARI || your_god == GOD_CHEIBRIADOS)
             return false;
         return true;
     

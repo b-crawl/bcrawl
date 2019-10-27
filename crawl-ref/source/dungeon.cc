@@ -48,6 +48,7 @@
 #include "lev-pand.h"
 #include "libutil.h"
 #include "mapmark.h"
+#include "map-knowledge.h"
 #include "maps.h"
 #include "message.h"
 #include "mon-death.h"
@@ -1016,14 +1017,49 @@ static void _fixup_hell_stairs()
 
 static void _fixup_pandemonium_stairs()
 {
+    bool enough_runes_to_detect = runes_in_pack() >= 2;
+    bool rune_detected = false;
+    
     for (rectangle_iterator ri(1); ri; ++ri)
     {
-        if (feat_is_stone_stair_up(grd(*ri))
-            || grd(*ri) == DNGN_ESCAPE_HATCH_UP)
+        coord_def c(*ri);
+        if (feat_is_stone_stair_up(grd(c)) || grd(c) == DNGN_ESCAPE_HATCH_UP)
         {
-            _set_grd(*ri, DNGN_TRANSIT_PANDEMONIUM);
+            _set_grd(c, DNGN_TRANSIT_PANDEMONIUM);
+            if (enough_runes_to_detect)
+            {
+                env.map_knowledge(c).set_feature(DNGN_TRANSIT_PANDEMONIUM);
+                set_terrain_mapped(c);
+            }
         }
     }
+    
+    if (enough_runes_to_detect)
+        mpr("You locate some portals by their resonance with your runes.");
+}
+
+static void _pandemonium_rune_detection()
+{
+    bool enough_runes_to_detect = runes_in_pack() >= 2;
+    bool rune_detected = false;
+    
+    if (enough_runes_to_detect)
+        for (rectangle_iterator ri(1); ri; ++ri)
+        {
+            coord_def c(*ri);
+            int item = igrd(c);
+            if (item != NON_ITEM)
+            {
+                if (mitm[item].base_type == OBJ_RUNES)
+                {
+                    rune_detected = true;
+                    break;
+                }
+            }
+        }
+    
+    if (rune_detected)
+        mprf(MSGCH_ORB, "You detect a rune of Zot on this floor by its effect on the portals!");
 }
 
 static void _mask_vault(const vault_placement &place, unsigned mask)
@@ -2459,8 +2495,8 @@ static void _build_dungeon_level()
         // they happen to have the relevant branch.
         _post_vault_build();
     }
-
-    // Translate stairs for pandemonium levels.
+    
+    // translate stairs for pandemonium levels
     if (player_in_branch(BRANCH_PANDEMONIUM))
         _fixup_pandemonium_stairs();
 
@@ -2478,6 +2514,10 @@ static void _build_dungeon_level()
     {
         _prepare_water();
     }
+
+    // find and announce the demonic rune
+    if (player_in_branch(BRANCH_PANDEMONIUM))
+        _pandemonium_rune_detection();
 
     if (player_in_hell())
         _fixup_hell_stairs();

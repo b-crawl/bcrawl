@@ -27,6 +27,8 @@ Pull requests for new content are welcome.
   - [x-crawl.de](https://x-crawl.de/) (Germany)
   - [CUE](https://underhound.eu:8080/) (Netherlands)
 
+#### [scoring for online games](http://bcrawl.montres.org.uk/)
+
 ## Changes from Vanilla Crawl
 #### Branches
   - Dungeon is shortened to 12 floors.
@@ -44,6 +46,7 @@ Pull requests for new content are welcome.
   - v1.13: Each time you enter the Abyss increases the depth of your next entry.
   - v1.13.4: The Lair entrance is on D:7-9 instead of D:7-10.
   - v1.16: Volcano levels will not contain wizards.
+  - v1.18: Portals to Pandemonium levels are redirected to the Abyss by the lords of Pandemonium if the player has reached their max experience level. On entering a Pandemonium level, if the player has at least 2 runes, the locations of portals are revealed and the player is notified if the demonic rune is present.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -78,6 +81,7 @@ Pull requests for new content are welcome.
   - v1.11: Seeded runs are merged from DCSS.
   - v1.12.1: Taking stairs while on D:1 or D:2 can't teleport players.
   - v1.14.2: Monsters stepping on visible alarm traps will mark the player.
+  - v1.18: New default macros: 'p' = melee attack; '[' = melee attack if in range, otherwise throw; ']' = 3x '['.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -179,6 +183,7 @@ Pull requests for new content are welcome.
   - v1.16.1: Pain has a higher power cap. (25 -> 50)
   - v1.16.1: Death Channel is now Charms/Necromancy.
   - v1.17.2: Blink Other has a higher chance to affect monsters.
+  - v1.18: Ice Form gives MR++, its AC scales more with spell power, and it has good guaranteed damage reduction.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -228,6 +233,8 @@ Pull requests for new content are welcome.
   - v1.17.1: Instead of adjusting player attributes automatically, Jiyva gives players an ability that swaps 2 attribute values.
   - v1.17.2: Jiyva gives \* piety on conversion.
   - v1.17.2: Some gods respect certain other gods, and will not punish followers for converting to them. Check the wrath info in god descriptions to see if this is the case.
+  - v1.18: Vehumet's wrath at low experience levels is stronger.
+  - v1.18: Yredelemnul is adjusted: gifted ally strength is based on your location and current piety, not on number of gifts received so far; no piety is given for killing undead; there is no cap on the number of strong gifted allies.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -256,13 +263,13 @@ Pull requests for new content are welcome.
   - v1.12.1: Great maces have a different brand set, including the speed brand.
   - v1.13.2: Great swords have higher (15 -> 16) base damage.
   - v1.13.5: Changed wand max charges for acid (15 -> 12) and polymorph (15 -> 20).
-  - v1.13.5: Needles of paralysis are replaced by more needles of confusion and frenzy.
   - v1.14: Blowguns use Fighting skill instead of Throwing skill.
   - v1.14.1: Potions of flight give a Swiftness effect in addition to flight.
   - v1.14.2: Thrown stones have a lower base delay (1.1 -> 1) and min delay (0.7 -> 0.5).
   - v1.15.1: Giant clubs and giant spiked clubs now cleave.
   - v1.17.2: Lamps of fire scale somewhat better with Evocations skill.
   - v1.17.2: Blowguns have higher base delay. (10 -> 12)
+  - v1.18: The fustibalus has higher base damage (10 -> 11) and base delay (14 -> 15).
 
 #### Removed Items
   - Amulet of Harm
@@ -270,6 +277,7 @@ Pull requests for new content are welcome.
   - Scrolls of Random Uselessness
   - v1.3.2: Crystal Ball of Energy
   - v1.4.2: Scrolls of Holy Word
+  - v1.13.5: Needles of Paralysis
 
 #### Artefacts
   - The 'Fists of Thunder' unrandart gives electric-branded unarmed attacks.
@@ -295,6 +303,7 @@ Pull requests for new content are welcome.
   - v1.16: The Vampire's Tooth has a lower enchantment. (+12 -> +10)
   - v1.17.1: The Staff of Battle is a +6 vorpal lajatang with 6 min delay, and it makes a spectral weapon when enemies are nearby. It also gives +12 max mana.
   - v1.17.3: The Glaive of Prune now transforms the user into a tree when it hits.
+  - v1.18: Punk is a hunting sling instead of a fustibalus.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -330,6 +339,7 @@ Pull requests for new content are welcome.
   - v1.16: Toenail golems are somewhat stronger.
   - v1.17.2: Iron dragons deal more melee damage.
   - v1.17.2: Golden dragons have a strong poison bite instead of poison breath, and have significantly more HP.
+  - v1.18: Ice beasts have higher magic resistance, to match the transformation.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

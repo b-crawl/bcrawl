@@ -97,7 +97,7 @@ function setup_room(e, id)
 e.kitem("1 = superb_item ident:all w:590 / ration w:2 /\
             potion of heal wounds ident:all q:4 w:3 /\
             potion of haste ident:all q:4 w:3 /\
-            scroll of fog w:1 ident:all / scroll of holy word w:1 ident:all /\
+            scroll of fog w:1 ident:all / scroll of silence w:1 ident:all /\
             potion of might ident:all w:2 / potion of agility w:2 ident:all /\
             scroll of acquirement q:1 w:1 ident:all /\
             scroll of enchant weapon ident:all q:4 w:2 /\
@@ -775,7 +775,6 @@ KITEM:    L = scroll of blinking q:3 ident:all, \
               scroll of fear q:2 ident:all, \
               scroll of remove curse q:5 ident:all, \
               scroll of identify q:5 ident:all, \
-              scroll of holy word q:1 ident:all, \
               scroll of fog q:7 ident:all, \
               scroll of amnesia q:4 ident:all
 KITEM:    M = ration q:6

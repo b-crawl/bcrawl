@@ -1,3 +1,5 @@
+additional_macro_file = default_macros.txt
+
 autofight_stop = 60
 
 drop_filter += useless_item

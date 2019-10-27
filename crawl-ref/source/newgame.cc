@@ -1675,7 +1675,7 @@ static weapon_type _fixup_weapon(weapon_type wp,
     return WPN_UNKNOWN;
 }
 
-static const int WEAPON_COLUMN_WIDTH = 40;
+static const int WEAPON_COLUMN_WIDTH = 44;
 static void _construct_weapon_menu(const newgame_def& ng,
                                    const weapon_type& defweapon,
                                    const vector<weapon_choice>& weapons,
@@ -1774,11 +1774,13 @@ static void _construct_weapon_menu(const newgame_def& ng,
         }
 
         // note species aptitude
-        const skill_type wpn_skill =
+        skill_type wpn_skill =
               wpn_type == WPN_THROWN  ? SK_THROWING :
               wpn_type == WPN_UNARMED ? SK_UNARMED_COMBAT :
                                    item_attack_skill(OBJ_WEAPONS, wpn_type);
-        text += make_stringf(" (%+d)", species_apt(wpn_skill, ng.species));
+        int wpn_apt = species_apt(wpn_skill, ng.species);
+        if (wpn_apt != UNUSABLE_SKILL && ng.species != SP_GNOLL)
+            text = make_stringf("(%+d)", wpn_apt) + text;
         
         // Fill to column width to give extra padding for the highlight
         text.append(WEAPON_COLUMN_WIDTH - text.size() - 1 , ' ');

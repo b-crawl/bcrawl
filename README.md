@@ -23,9 +23,10 @@ Pull requests for new content are welcome.
 
 #### online
   - [CKO](https://crawl.kelbi.org/) (New York)
+  - [CUE](https://underhound.eu:8080/) (Netherlands)
+  - [CXC](https://crawl.xtahua.com/) (France)
   - [CPO](https://crawl.project357.org/) (Australia)
   - [x-crawl.de](https://x-crawl.de/) (Germany)
-  - [CUE](https://underhound.eu:8080/) (Netherlands)
 
 #### [scoring for online games](http://bcrawl.montres.org.uk/)
 

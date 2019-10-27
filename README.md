@@ -235,6 +235,7 @@ Pull requests for new content are welcome.
   - v1.17.2: Jiyva gives \* piety on conversion.
   - v1.17.2: Some gods respect certain other gods, and will not punish followers for converting to them. Check the wrath info in god descriptions to see if this is the case.
   - v1.18: Vehumet's wrath at low experience levels is stronger.
+  - v1.18: Kikubaaqudgha can brand ranged weapons with pain, not just melee weapons.
   - v1.18: Yredelemnul is adjusted: gifted ally strength is based on your location and current piety, not on number of gifts received so far; no piety is given for killing undead; there is no cap on the number of strong gifted allies.
 
 #### New Items

@@ -237,6 +237,7 @@ Pull requests for new content are welcome.
   - v1.18: Vehumet's wrath at low experience levels is stronger.
   - v1.18: Kikubaaqudgha can brand ranged weapons with pain, not just melee weapons.
   - v1.18: Yredelemnul is adjusted: gifted ally strength is based on your location and current piety, not on number of gifts received so far; no piety is given for killing undead; there is no cap on the number of strong gifted allies.
+  - v1.18: Vehumet passives are rearranged: miscast reduction at \* and mana gain from kills at \*\*.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

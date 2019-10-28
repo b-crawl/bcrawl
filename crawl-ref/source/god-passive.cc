@@ -204,10 +204,10 @@ static const vector<god_passive> god_passives[] =
 
     // Vehumet
     {
-        { -1, passive_t::mp_on_kill,
-              "have a chance to gain magical power from killing" },
-        {  3, passive_t::spells_success,
+        {  1, passive_t::spells_success,
               "are NOW less likely to miscast destructive spells" },
+        {  2, passive_t::mp_on_kill,
+              "have a chance to gain magical power from killing" },
         {  4, passive_t::spells_range,
               "can NOW cast destructive spells farther" },
     },

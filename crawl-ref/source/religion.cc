@@ -145,9 +145,9 @@ const vector<god_power> god_powers[NUM_GODS] =
     { },
 
     // Vehumet
-    { { 1, "gain magical power from killing" },
-      { 3, "Vehumet is aiding your destructive magics.",
+    { { 1, "Vehumet is aiding your destructive magics.",
            "Vehumet will no longer aid your destructive magics." },
+      { 2, "gain magical power from killing" },
       { 4, "Vehumet is extending the range of your destructive magics.",
            "Vehumet will no longer extend the range of your destructive magics." },
     },

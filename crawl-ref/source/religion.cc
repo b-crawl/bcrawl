@@ -950,8 +950,6 @@ static void _delayed_gift_callback(const mgen_data &mg, monster *&mon,
 
 static bool _jiyva_mutate()
 {
-    simple_god_message(" alters your body.");
-
     const int rand = random2(100);
 
     if (rand < 5)
@@ -1186,15 +1184,19 @@ static bool _gift_jiyva_gift(bool forced)
                   && one_chance_in(4) && !you.gift_timeout
                   && you.can_safely_mutate())
     {
-        if (_jiyva_mutate())
+        simple_god_message(" alters your body.");
+        
+        for (int chances = 0; chances < 4; chances++)
         {
-            _inc_gift_timeout(15 + roll_dice(2, 4));
-            you.num_current_gifts[you.religion]++;
-            you.num_total_gifts[you.religion]++;
-            return true;
+            if (_jiyva_mutate())
+            {
+                _inc_gift_timeout(15 + roll_dice(2, 4));
+                you.num_current_gifts[you.religion]++;
+                you.num_total_gifts[you.religion]++;
+                return true;
+            }
         }
-        else
-            mpr("You feel as though nothing has changed.");
+        mpr("You feel as though nothing has changed.");
     }
     return false;
 }

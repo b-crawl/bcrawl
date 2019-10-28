@@ -308,6 +308,7 @@ Pull requests for new content are welcome.
   - v1.17.1: The Staff of Battle is a +6 vorpal lajatang with 6 min delay, and it makes a spectral weapon when enemies are nearby. It also gives +12 max mana.
   - v1.17.3: The Glaive of Prune now transforms the user into a tree when it hits.
   - v1.18: Punk is a hunting sling instead of a fustibalus.
+  - v1.18: The Scythe of Curses applies random debuffs to enemies hit, instead of miscast effects.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

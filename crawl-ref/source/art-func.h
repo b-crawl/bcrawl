@@ -163,8 +163,7 @@ static void _CURSES_equip(item_def *item, bool *show_msgs, bool unmeld)
 
 static void _CURSES_world_reacts(item_def *item)
 {
-    // don't spam messages for ash worshippers
-    if (one_chance_in(30) && !have_passive(passive_t::want_curses))
+    if (one_chance_in(30))
         curse_an_item(true);
 }
 
@@ -173,12 +172,30 @@ static void _CURSES_melee_effects(item_def* weapon, actor* attacker,
 {
     if (attacker->is_player())
         did_god_conduct(DID_EVIL, 3);
-    if (!mondied && defender->holiness() == MH_NATURAL)
+    if (!mondied && !defender->is_player())
     {
-        const int pow = random2(9);
-        MiscastEffect(defender, attacker, MELEE_MISCAST,
-                      SPTYP_NECROMANCY, pow, random2(70),
-                      "the scythe of Curses", NH_NEVER);
+        monster* mons = defender->as_monster();
+        switch (random2(8))
+        {
+        case 0:
+            mons->add_ench(mon_enchant(ENCH_CORONA, 1, attacker, random2(150)));
+            break;
+        case 1:
+            if(mons_can_be_blinded(mons->type))
+                mons->add_ench(mon_enchant(ENCH_BLIND, 1, attacker, random2(100)));
+            break;
+        case 2:
+            mons->add_ench(mon_enchant(ENCH_SLOW, 1, attacker, random2(100)));
+            break;
+        case 3:
+            mons->add_ench(mon_enchant(ENCH_CONFUSION, 1, attacker, random2(60)));
+            break;
+        case 4:
+            if (mons->antimagic_susceptible())
+                mons->add_ench(mon_enchant(ENCH_ANTIMAGIC, 1, attacker, random2(320)));
+            break;
+        default: break;
+        }
     }
 }
 

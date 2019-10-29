@@ -900,14 +900,6 @@ bool item_is_cursable(const item_def &item, bool ignore_holy_wrath)
 // Curses a random player inventory item.
 bool curse_an_item(bool ignore_holy_wrath)
 {
-    // allowing these would enable mummy scumming
-    if (have_passive(passive_t::want_curses))
-    {
-        mprf(MSGCH_GOD, "The curse is absorbed by %s.",
-             god_name(you.religion).c_str());
-        return false;
-    }
-
     int count = 0;
     item_def *found = nullptr;
 

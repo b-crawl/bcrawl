@@ -918,7 +918,7 @@ static int _shatter_mon_dice(const monster *mon)
 
     default:
         if (mon->is_insubstantial())
-            return 1;
+            return 0;
         if (mon->petrifying() || mon->petrified())
             return 6; // reduced later by petrification's damage reduction
         else if (mon->is_skeletal() || mon->is_icy())
@@ -933,19 +933,24 @@ static int _shatter_mon_dice(const monster *mon)
 
 static int _shatter_monsters(coord_def where, int pow, actor *agent)
 {
+    int damage = 0;
     dice_def dam_dice(0, 5 + pow / 3); // Number of dice set below.
     monster* mon = monster_at(where);
 
     if (!mon || !mon->alive() || mon == agent)
         return 0;
 
-    dam_dice.num = _shatter_mon_dice(mon);
-    int damage = max(0, dam_dice.roll() - random2(mon->armour_class()));
+    int shatter_dice = _shatter_mon_dice(mon);
+    if(shatter_dice)
+    {
+        dam_dice.num = shatter_dice;
+        damage = max(0, dam_dice.roll() - random2(mon->armour_class()));
 
-    if (agent->is_player())
-        _player_hurt_monster(*mon, damage, BEAM_MMISSILE);
-    else if (damage)
-        mon->hurt(agent, damage);
+        if (agent->is_player())
+            _player_hurt_monster(*mon, damage, BEAM_MMISSILE);
+        else if (damage)
+            mon->hurt(agent, damage);
+    }
 
     return damage;
 }

@@ -36,7 +36,7 @@
 #include "player.h"
 #include "player-stats.h"
 #include "spl-cast.h"      // For evokes
-#include "spl-damage.h"    // For the Singing Sword.
+#include "spl-damage.h"
 #include "spl-goditem.h"   // For Sceptre of Torment tormenting
 #include "spl-miscast.h"   // For Staff of Wucad Mu and Scythe of Curses miscasts
 #include "spl-summoning.h" // For Zonguldrok animating dead
@@ -360,71 +360,49 @@ static void _SINGING_SWORD_equip(item_def *item, bool *show_msgs, bool unmeld)
 static void _SINGING_SWORD_unequip(item_def *item, bool *show_msgs)
 {
     set_artefact_name(*item, "Singing Sword");
-    _equip_mpr(show_msgs, "The Singing Sword sighs.", MSGCH_TALK);
+    if (you.duration[DUR_SONG_OF_SLAYING] > 9000)
+    {
+        _equip_mpr(show_msgs, "The Singing Sword stops its song.", MSGCH_TALK);
+        you.props[SONG_OF_SLAYING_KEY] = 0;
+        you.duration[DUR_SONG_OF_SLAYING] = 0;
+    }
+    else
+        _equip_mpr(show_msgs, "The Singing Sword sighs.", MSGCH_TALK);
 }
 
 static void _SINGING_SWORD_world_reacts(item_def *item)
 {
-    int tension = get_tension(GOD_NO_GOD);
-    int tier = (tension <= 0) ? 1 : (tension < 40) ? 2 : 3;
     bool silent = silenced(you.pos());
-
     string old_name = get_artefact_name(*item);
     string new_name;
     if (silent)
         new_name = "Sulking Sword";
-    else if (tier < 2)
-        new_name = "Singing Sword";
     else
-        new_name = "Screaming Sword";
+        new_name = "Singing Sword";
     if (old_name != new_name)
     {
         set_artefact_name(*item, new_name);
         you.wield_change = true;
     }
-}
-
-static void _SINGING_SWORD_melee_effects(item_def* weapon, actor* attacker,
-                                         actor* defender, bool mondied,
-                                         int dam)
-{
-    int tier;
-
-    if (attacker->is_player())
-        tier = max(1, min(4, 1 + get_tension(GOD_NO_GOD) / 20));
-    // Don't base the sword on player state when the player isn't wielding it.
-    else
-        tier = 1;
-
-    if (silenced(attacker->pos()))
-        tier = 0;
-
-    dprf(DIAG_COMBAT, "Singing sword tension: %d, tier: %d",
-                attacker->is_player() ? get_tension(GOD_NO_GOD) : -1, tier);
-
-    // Not as spammy at low tension. Max chance reached at tier 3, allowing
-    // tier 0 to have a high chance so that the sword is likely to express its
-    // unhappiness with being silenced.
-    if (!x_chance_in_y(6, (tier == 1) ? 24: (tier == 2) ? 16: 12))
-        return;
-
-    if (tier == 3 && one_chance_in(10))
-        tier++; // Loudest scream -- 50% more spellpower and 40 noise.
-
-    const char *tenname[] =  {"silenced", "no_tension", "low_tension",
-                              "high_tension", "SCREAM"};
-    const string key = tenname[tier];
-    string msg = getSpeakString("singing sword " + key);
-
-    const int loudness[] = {0, 0, 20, 30, 40};
-
-    item_noise(*weapon, *attacker, msg, loudness[tier]);
-
-    if (tier < 3)
-        return; // no damage on low tiers
-
-    fire_los_attack_spell(SPELL_SONIC_WAVE, 120 + (tier == 4) * 60, &you,
-            defender);
+    
+    if (there_are_monsters_nearby(true, true, false) && !silent)
+    {
+        if (you.duration[DUR_SONG_OF_SLAYING] < 9000)
+        {
+            mprf(MSGCH_TALK, "The Singing Sword starts singing loudly!");
+            if (!you.duration[DUR_SONG_OF_SLAYING])
+                you.props[SONG_OF_SLAYING_KEY] = 0;
+        }
+        you.duration[DUR_SONG_OF_SLAYING] = 10000;
+        noisy(15, you.pos());
+        you.duration[DUR_INVIS] = max(20, you.duration[DUR_INVIS]);
+    }
+    else if (you.duration[DUR_SONG_OF_SLAYING] > 9000)
+    {
+        mprf(MSGCH_TALK, "The Singing Sword stops its song.");
+        you.props[SONG_OF_SLAYING_KEY] = 0;
+        you.duration[DUR_SONG_OF_SLAYING] = 0;
+    }
 }
 ////////////////////////////////////////////////////
 // Glaive of Prune

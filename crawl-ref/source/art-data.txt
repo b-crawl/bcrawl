@@ -168,7 +168,6 @@ COLOUR: BLACK
 
 NAME:    Singing Sword
 OBJ:     OBJ_WEAPONS/WPN_DOUBLE_SWORD
-INSCRIP: sonic wave
 PLUS:    +7
 COLOUR:  ETC_GOLD
 TILE:    spwpn_singing_sword

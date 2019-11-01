@@ -73,6 +73,7 @@ Pull requests for new content are welcome.
   - v1.15: Conjurers start with a potion of magic.
   - v1.15: Air Elementalists start with a potion of flight.
   - v1.18.1: Shortbows that characters start with get an extra +1 enchantment.
+  - v1.18.1: Summoners start with a sack of spiders.
 
 #### Features
   - All items are automatically identified if the player has a rune.

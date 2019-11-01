@@ -389,7 +389,7 @@ static void _SINGING_SWORD_world_reacts(item_def *item)
     {
         if (you.duration[DUR_SONG_OF_SLAYING] < 9000)
         {
-            mprf("The Singing Sword starts singing loudly!", MSGCH_TALK);
+            mprf(MSGCH_TALK, "The Singing Sword starts singing loudly!");
             if (!you.duration[DUR_SONG_OF_SLAYING])
                 you.props[SONG_OF_SLAYING_KEY] = 0;
         }
@@ -399,7 +399,7 @@ static void _SINGING_SWORD_world_reacts(item_def *item)
     }
     else if (you.duration[DUR_SONG_OF_SLAYING] > 9000)
     {
-        mprf("The Singing Sword stops its song.", MSGCH_TALK);
+        mprf(MSGCH_TALK, "The Singing Sword stops its song.");
         you.props[SONG_OF_SLAYING_KEY] = 0;
         you.duration[DUR_SONG_OF_SLAYING] = 0;
     }

@@ -1018,7 +1018,6 @@ static void _fixup_hell_stairs()
 static void _fixup_pandemonium_stairs()
 {
     bool enough_runes_to_detect = runes_in_pack() >= 2;
-    bool rune_detected = false;
     
     for (rectangle_iterator ri(1); ri; ++ri)
     {

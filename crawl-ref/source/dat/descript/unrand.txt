@@ -1,10 +1,10 @@
 %%%%
 Singing Sword
 
-An enchanted blade which loves nothing more than to sing to its owner, whether
-they want it to or not. In combat involving dangerous or numerous foes, the
-sword may sing so intensely that it radiates damaging sonic waves as you
-strike.
+An enchanted intelligent blade which loves to sing. Its song grants its wielder prowess in battle as well as
+invisibility, but is also very loud and annoying.
+
+It was once abandoned for hundreds of years, with the people who noticed its song being unable to find it because it was invisible while singing. Now, it fears being abandoned once more, so it only sings when enemies are nearby.
 %%%%
 Sulking Sword
 

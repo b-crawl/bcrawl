@@ -918,7 +918,7 @@ static int _shatter_mon_dice(const monster *mon)
 
     default:
         if (mon->is_insubstantial())
-            return 1;
+            return 0;
         if (mon->petrifying() || mon->petrified())
             return 6; // reduced later by petrification's damage reduction
         else if (mon->is_skeletal() || mon->is_icy())

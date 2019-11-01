@@ -36,6 +36,7 @@
 #include "player.h"
 #include "player-stats.h"
 #include "spl-cast.h"      // For evokes
+#include "spl-damage.h"
 #include "spl-goditem.h"   // For Sceptre of Torment tormenting
 #include "spl-miscast.h"   // For Staff of Wucad Mu and Scythe of Curses miscasts
 #include "spl-summoning.h" // For Zonguldrok animating dead
@@ -362,7 +363,8 @@ static void _SINGING_SWORD_unequip(item_def *item, bool *show_msgs)
     if (you.duration[DUR_SONG_OF_SLAYING] > 9000)
     {
         _equip_mpr(show_msgs, "The Singing Sword stops its song.", MSGCH_TALK);
-        you.duration[DUR_SONG_OF_SLAYING] = -1;
+        you.props[SONG_OF_SLAYING_KEY] = 0;
+        you.duration[DUR_SONG_OF_SLAYING] = 0;
     }
     else
         _equip_mpr(show_msgs, "The Singing Sword sighs.", MSGCH_TALK);
@@ -386,15 +388,20 @@ static void _SINGING_SWORD_world_reacts(item_def *item)
     if (there_are_monsters_nearby(true, true, false) && !silent)
     {
         if (you.duration[DUR_SONG_OF_SLAYING] < 9000)
-            _equip_mpr(show_msgs, "The Singing Sword starts singing loudly!", MSGCH_TALK);
+        {
+            mprf("The Singing Sword starts singing loudly!", MSGCH_TALK);
+            if (!you.duration[DUR_SONG_OF_SLAYING])
+                you.props[SONG_OF_SLAYING_KEY] = 0;
+        }
         you.duration[DUR_SONG_OF_SLAYING] = 10000;
-        noisy(15, wearer->pos());
+        noisy(15, you.pos());
         you.duration[DUR_INVIS] = max(20, you.duration[DUR_INVIS]);
     }
     else if (you.duration[DUR_SONG_OF_SLAYING] > 9000)
     {
-        _equip_mpr(show_msgs, "The Singing Sword stops its song.", MSGCH_TALK);
-        you.duration[DUR_SONG_OF_SLAYING] = -1;
+        mprf("The Singing Sword stops its song.", MSGCH_TALK);
+        you.props[SONG_OF_SLAYING_KEY] = 0;
+        you.duration[DUR_SONG_OF_SLAYING] = 0;
     }
 }
 ////////////////////////////////////////////////////

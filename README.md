@@ -72,6 +72,7 @@ Pull requests for new content are welcome.
   - v1.15: Ice Elementalists start with 1 charge of Iceblast.
   - v1.15: Conjurers start with a potion of magic.
   - v1.15: Air Elementalists start with a potion of flight.
+  - v1.18.1: Shortbows that characters start with get an extra +1 enchantment.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -83,6 +84,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Taking stairs while on D:1 or D:2 can't teleport players.
   - v1.14.2: Monsters stepping on visible alarm traps will mark the player.
   - v1.18: New default macros: 'p' = melee attack; '[' = melee attack if in range, otherwise throw; ']' = 3x '['.
+  - v1.18.1: New default macros: ';' = rest; '"' = ';'.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -185,6 +187,7 @@ Pull requests for new content are welcome.
   - v1.16.1: Death Channel is now Charms/Necromancy.
   - v1.17.2: Blink Other has a higher chance to affect monsters.
   - v1.18: Ice Form gives MR++, its AC scales more with spell power, and it has good guaranteed damage reduction.
+  - v1.18.1: Shatter no longer damages or angers insubstantial monsters. (This reverses a change made in Nov. 2017.)
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -309,6 +312,7 @@ Pull requests for new content are welcome.
   - v1.17.3: The Glaive of Prune now transforms the user into a tree when it hits.
   - v1.18: Punk is a hunting sling instead of a fustibalus.
   - v1.18: The Scythe of Curses applies random debuffs to enemies hit, instead of miscast effects.
+  - v1.18.1: The Singing Sword gives invisibility and a Song of Slaying instead of damaging visible creatures.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -345,6 +349,7 @@ Pull requests for new content are welcome.
   - v1.17.2: Iron dragons deal more melee damage.
   - v1.17.2: Golden dragons have a strong poison bite instead of poison breath, and have significantly more HP.
   - v1.18: Ice beasts have higher magic resistance, to match the transformation.
+  - v1.18.1: Shadow Fiends have Shadow Creatures.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

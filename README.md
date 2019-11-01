@@ -189,6 +189,7 @@ Pull requests for new content are welcome.
   - v1.17.2: Blink Other has a higher chance to affect monsters.
   - v1.18: Ice Form gives MR++, its AC scales more with spell power, and it has good guaranteed damage reduction.
   - v1.18.1: Shatter no longer damages or angers insubstantial monsters. (This reverses a change made in Nov. 2017.)
+  - v1.18.1: Call Imp always summons Crimson Imps at low power, instead of having a fixed chance to summon White Imps.
 
 #### Removed Spells
   - Summon Guardian Golem

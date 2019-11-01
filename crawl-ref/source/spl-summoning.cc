@@ -1119,27 +1119,6 @@ spret cast_summon_guardian_golem(int pow, god_type god, bool fail)
 }
 #endif
 
-/**
- * Choose a type of imp to summon with Call Imp.
- *
- * @param pow   The power with which the spell is being cast.
- * @return      An appropriate imp type.
- */
-static monster_type _get_imp_type(int pow)
-{
-    // Proportion of white imps is independent of spellpower.
-    if (x_chance_in_y(5, 18))
-        return MONS_WHITE_IMP;
-
-    // 3/13 * 13/18 = 1/6 chance of one of these two at 0-46 spellpower,
-    // increasing up to about 4/9 at max spellpower.
-    if (random2(pow) >= 46 || x_chance_in_y(3, 13))
-        return one_chance_in(3) ? MONS_IRON_IMP : MONS_SHADOW_IMP;
-
-    // 5/9 crimson at 0-46 spellpower, about half that at max power.
-    return MONS_CRIMSON_IMP;
-}
-
 static map<monster_type, const char*> _imp_summon_messages = {
     { MONS_WHITE_IMP,
         "A beastly little devil appears in a puff of frigid air." },
@@ -1160,7 +1139,10 @@ spret cast_call_imp(int pow, god_type god, bool fail)
 {
     fail_check();
 
-    const monster_type imp_type = _get_imp_type(pow);
+    monster_type imp_summons[] = { MONS_CRIMSON_IMP, MONS_SHADOW_IMP, MONS_IRON_IMP, MONS_WHITE_IMP };
+    int min_imp_index = div_rand_round(pow-25, 25);
+    int max_imp_index = (pow < 25) ? 0 : (pow < 35) ? 2 : 3;
+    monster_type imp_type = imp_summons[random_range(min_imp_index, max_imp_index)];
 
     const int dur = min(2 + (random2(pow) / 4), 6);
 

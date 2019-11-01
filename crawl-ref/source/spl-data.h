@@ -770,7 +770,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_SUMMONING,
     SPFLAG_UNHOLY | SPFLAG_SELFENCH,
     2,
-    100,
+    50,
     -1, -1,
     2, 0,
     TILEG_CALL_IMP,

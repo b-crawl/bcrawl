@@ -217,6 +217,8 @@ const vector<god_power> god_powers[NUM_GODS] =
       { 2, ABIL_LUGONU_BANISH, "banish your foes" },
       { 3, "Lugonu is aiding your Translocation magic.",
            "Lugonu will no longer aid your Translocation magic." },
+      { 3, "Lugonu imbues your non-magical melee attacks with distortion.",
+           "Lugonu will no longer imbue your attacks with distortion." },
       { 4, ABIL_LUGONU_CORRUPT, "corrupt the fabric of space" },
       { 4, "Lugonu will gift you equipment and ammunition from the Abyss.",
            "Lugonu will no longer gift you items." },

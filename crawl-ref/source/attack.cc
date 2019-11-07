@@ -1493,7 +1493,6 @@ bool attack::apply_damage_brand(const char *what)
             return false;
         default: break;
         }
-    }
 
     switch (brand)
     {

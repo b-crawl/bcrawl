@@ -436,20 +436,6 @@ bool ranged_attack::apply_damage_brand(const char *what)
 
     const brand_type brand = get_weapon_brand(*weapon);
 
-    // No stacking elemental brands.
-    if (projectile->base_type == OBJ_MISSILES
-        && get_ammo_brand(*projectile) != SPMSL_NORMAL
-        && get_ammo_brand(*projectile) != SPMSL_PENETRATION
-        && (brand == SPWPN_FLAMING
-            || brand == SPWPN_FREEZING
-            || brand == SPWPN_HOLY_WRATH
-            || brand == SPWPN_ELECTROCUTION
-            || brand == SPWPN_VENOM
-            || brand == SPWPN_CHAOS))
-    {
-        return false;
-    }
-
     damage_brand = brand;
     return attack::apply_damage_brand(what);
 }

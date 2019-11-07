@@ -339,14 +339,19 @@ static void _good_potion_or_scroll()
     // xxx: could we use is_useless_item here? (not without dummy items...?)
     const vector<pair<pair<object_class_type, int>, int>> options = {
         { { OBJ_SCROLLS, SCR_FEAR }, 1 },
+        { { OBJ_SCROLLS, SCR_SUMMONING }, 1 },
         { { OBJ_SCROLLS, SCR_BLINKING },
             stasis ? 0 : 1 },
         { { OBJ_POTIONS, POT_HEAL_WOUNDS },
             (no_potions || you.species == SP_VINE_STALKER) ? 0 : 1 },
         { { OBJ_POTIONS, POT_HASTE },
             (no_potions || stasis) ? 0 : 1 },
-        { { OBJ_POTIONS, POT_BERSERK_RAGE },
-            (stasis || you.is_lifeless_undead(false)) ? 0 : 1},
+        { { OBJ_POTIONS, POT_LIGNIFY },
+            you.is_lifeless_undead(false) ? 0 : 1 },
+        { { OBJ_POTIONS, POT_MIGHT },
+            no_potions ? 0 : 1 },
+        { { OBJ_POTIONS, POT_INVISIBILITY },
+            no_potions ? 0 : 1 },
     };
 
     const pair<object_class_type, int> *option
@@ -372,8 +377,12 @@ static void _decent_potion_or_scroll()
             stasis ? 0 : 1 },
         { { OBJ_POTIONS, POT_CURING },
             no_potions ? 0 : 1 },
-        { { OBJ_POTIONS, POT_LIGNIFY },
-            you.is_lifeless_undead(false) ? 0 : 1 },
+        { { OBJ_POTIONS, POT_BERSERK_RAGE },
+            (stasis || you.is_lifeless_undead(false)) ? 0 : 1},
+        { { OBJ_POTIONS, POT_AGILITY },
+            no_potions ? 0 : 1 },
+        { { OBJ_POTIONS, POT_FLIGHT },
+            no_potions ? 0 : 1 },
     };
 
     const pair<object_class_type, int> *option

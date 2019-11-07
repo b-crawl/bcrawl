@@ -231,8 +231,8 @@ enum class passive_t
     /// Pakellas prevents you from regenerating your mana reserve
     no_mp_regen,
 
-    /// Pakellas identifies wands and rods
-    identify_devices,
+    /// Lugonu reduces Tloc miscast chance
+    translocation_success,
 
     /// Pakellas collects and distills extra MP from your kills
     bottle_mp,

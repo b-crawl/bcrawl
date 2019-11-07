@@ -213,14 +213,14 @@ const vector<god_power> god_powers[NUM_GODS] =
 
     // Lugonu
     { { 1, ABIL_LUGONU_ABYSS_EXIT, "depart the Abyss", "depart the Abyss at will" },
-      { 2, ABIL_LUGONU_BEND_SPACE, "bend space around yourself" },
-      { 3, ABIL_LUGONU_BANISH, "banish your foes" },
+      { 1, ABIL_LUGONU_BEND_SPACE, "bend space around yourself" },
+      { 2, ABIL_LUGONU_BANISH, "banish your foes" },
+      { 3, "Lugonu is aiding your Translocation magic.",
+           "Lugonu will no longer aid your Translocation magic." },
       { 4, ABIL_LUGONU_CORRUPT, "corrupt the fabric of space" },
       { 4, "Lugonu will gift you equipment and ammunition from the Abyss.",
            "Lugonu will no longer gift you items." },
       { 5, ABIL_LUGONU_ABYSS_ENTER, "gate yourself to the Abyss" },
-      { 7, ABIL_LUGONU_BLESS_WEAPON, "Lugonu will corrupt your weapon with distortion... once.",
-                                     "Lugonu is no longer ready to corrupt your weapon." },
     },
 
     // Beogh

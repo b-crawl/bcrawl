@@ -262,6 +262,8 @@ static const vector<god_passive> god_passives[] =
               "are NOW protected from distortion unwield effects" },
         { -1, passive_t::map_rot_res_abyss,
               "remember the shape of the Abyss better" },
+        {  3, passive_t::translocation_success,
+              "are NOW less likely to miscast Translocation spells" },
         {  5, passive_t::attract_abyssal_rune,
               "GOD will NOW help you find the Abyssal rune" },
     },

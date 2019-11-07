@@ -1465,22 +1465,34 @@ bool attack::apply_damage_brand(const char *what)
     obvious_effect = false;
     brand = damage_brand == SPWPN_CHAOS ? random_chaos_brand() : damage_brand;
 
-    if (brand != SPWPN_FLAMING && brand != SPWPN_FREEZING
-        && brand != SPWPN_ELECTROCUTION && brand != SPWPN_VAMPIRISM
-        && brand != SPWPN_PROTECTION && !defender->alive())
-    {
-        // Most brands have no extra effects on just killed enemies, and the
-        // effect would be often inappropriate.
-        return false;
-    }
+    if (!defender->alive())
+        switch(brand)
+        {
+        case SPWPN_FLAMING:
+        case SPWPN_FREEZING:
+        case SPWPN_ELECTROCUTION:
+        case SPWPN_VAMPIRISM:
+        case SPWPN_PROTECTION:
+            break;
+        default:
+            // Most brands have no extra effects on just killed enemies, and the
+            // effect would be often inappropriate.
+            return false;
+        }
 
-    if (!damage_done
-        && (brand == SPWPN_FLAMING || brand == SPWPN_FREEZING
-            || brand == SPWPN_HOLY_WRATH || brand == SPWPN_ANTIMAGIC
-            || brand == SPWPN_VORPAL || brand == SPWPN_VAMPIRISM))
-    {
-        // These brands require some regular damage to function.
-        return false;
+    if (!damage_done)
+        switch(brand)
+        {
+        case SPWPN_FLAMING:
+        case SPWPN_FREEZING:
+        case SPWPN_HOLY_WRATH:
+        case SPWPN_ANTIMAGIC:
+        case SPWPN_VORPAL:
+        case SPWPN_VAMPIRISM:
+            // These brands require some regular damage to function.
+            return false;
+        default: break;
+        }
     }
 
     switch (brand)

@@ -2192,10 +2192,9 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_NIKOLA,
       {
-       { SPELL_SHOCK, 11, MON_SPELL_WIZARD },
-       { SPELL_LIGHTNING_BOLT, 11, MON_SPELL_WIZARD },
-       { SPELL_CHAIN_LIGHTNING, 23, MON_SPELL_WIZARD },
-       { SPELL_BLINK, 23, MON_SPELL_WIZARD },
+       { SPELL_LIGHTNING_BOLT, 39, MON_SPELL_WIZARD },
+       { SPELL_BLINK, 21, MON_SPELL_NATURAL },
+       { SPELL_DEFLECT_MISSILES, 10, MON_SPELL_WIZARD },
       }
     },
 

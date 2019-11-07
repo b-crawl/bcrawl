@@ -978,17 +978,7 @@ static int _shatter_walls(coord_def where, int pow, actor *agent)
     case DNGN_OPEN_CLEAR_DOOR:
     case DNGN_SEALED_DOOR:
     case DNGN_SEALED_CLEAR_DOOR:
-        if (you.see_cell(where))
-            mpr("A door shatters!");
-        chance = 100;
-        break;
-
     case DNGN_GRATE:
-        if (you.see_cell(where))
-            mpr("An iron grate is ripped into pieces!");
-        chance = 100;
-        break;
-
     case DNGN_ORCISH_IDOL:
     case DNGN_GRANITE_STATUE:
         chance = 100;
@@ -1007,16 +997,17 @@ static int _shatter_walls(coord_def where, int pow, actor *agent)
     case DNGN_ROCK_WALL:
     case DNGN_SLIMY_WALL:
     case DNGN_CRYSTAL_WALL:
+        chance = 33;
+        break;
     case DNGN_TREE:
+        if (agent->deity() == GOD_FEDHAS)
+            return 0;
         chance = 33;
         break;
 
     default:
         break;
-    }
-
-    if (agent->deity() == GOD_FEDHAS && feat_is_tree(grid))
-        return 0;
+    }        
 
     if (x_chance_in_y(chance * min(50, (pow-50)), 100*50))
     {

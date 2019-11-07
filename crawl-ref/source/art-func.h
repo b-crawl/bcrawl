@@ -920,6 +920,10 @@ static void _WOE_melee_effects(item_def* weapon, actor* attacker,
 static setup_missile_type _DAMNATION_launch(item_def* item, bolt* beam,
                                            string* ammo_name, bool* returning)
 {
+    item_def *player_weapon = you.weapon();
+    if (player_weapon && is_unrandom_artefact(*player_weapon, UNRAND_DAMNATION))
+        you.god_conduct(DID_EVIL, 3);
+
     ASSERT(beam->item
            && beam->item->base_type == OBJ_MISSILES
            && !is_artefact(*(beam->item)));

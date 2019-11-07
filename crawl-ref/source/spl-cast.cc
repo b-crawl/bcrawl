@@ -281,7 +281,7 @@ int list_spells(bool toggle_with_I, bool viewing, bool allow_preselect,
 
 static int _apply_spellcasting_success_boosts(spell_type spell, int chance)
 {
-    int fail_reduce = 100;
+    int fail_reduce = 1000;
 
     if ((have_passive(passive_t::spells_success) && vehumet_supports_spell(spell))
             || (have_passive(passive_t::translocation_success) && spell_typematch(spell, SPTYP_TRANSLOCATION)))
@@ -298,7 +298,7 @@ static int _apply_spellcasting_success_boosts(spell_type spell, int chance)
     if (you.duration[DUR_BRILLIANCE])
         fail_reduce = fail_reduce / 2;
 
-    return chance * fail_reduce / 100;
+    return chance * fail_reduce / 1000;
 }
 
 /**

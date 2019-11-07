@@ -1018,7 +1018,7 @@ static int _shatter_walls(coord_def where, int pow, actor *agent)
     if (agent->deity() == GOD_FEDHAS && feat_is_tree(grid))
         return 0;
 
-    if (x_chance_in_y(chance, 100))
+    if (x_chance_in_y(chance * min(50, (pow-50)), 100*50))
     {
         noisy(spell_effect_noise(SPELL_SHATTER), where);
 

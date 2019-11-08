@@ -357,6 +357,7 @@ Pull requests for new content are welcome.
   - v1.18: Ice beasts have higher magic resistance, to match the transformation.
   - v1.18.1: Shadow Fiends have Shadow Creatures.
   - v1.18.2: Dithmenos shadows, Nemelex player illusions, and friendly lightning spires are not angered by attacks from players.
+  - v1.18.2: Draconian knights have a reworked spell set.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

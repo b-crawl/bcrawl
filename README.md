@@ -95,6 +95,7 @@ Pull requests for new content are welcome.
   - v1.4.1: Distortion weapons can't banish on hit.
   - v1.8.6: Starting skills are based on +0 aptitude (-1 for Spellcasting) instead of Human aptitudes.
   - v1.15.1: Guaranteed damage reduction now affects player damage from spells with non-elemental damage.
+  - v1.18.2: The combined effect of wizardry items, Vehumet, and brilliance potions is no longer capped.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -244,6 +245,8 @@ Pull requests for new content are welcome.
   - v1.18: Kikubaaqudgha can brand ranged weapons with pain, not just melee weapons.
   - v1.18: Yredelemnul is adjusted: gifted ally strength is based on your location and current piety, not on number of gifts received so far; no piety is given for killing undead; there is no cap on the number of strong gifted allies.
   - v1.18: Vehumet passives are rearranged: miscast reduction at \* and mana gain from kills at \*\*.
+  - v1.18.2: Some Nemelex cards are changed: Velocity can slow any monster and can haste the player, and Elixir at power level 1 always gives a moderate amount of both health and mana.
+  - v1.18.2: Lugonu is changed: Bend Space at \*; Banish at \*\*; all unbranded melee attacks become distortion-branded at \*\*\*; Translocation spell miscast chance is reduced at \*\*\*.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

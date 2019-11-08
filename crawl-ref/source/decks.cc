@@ -924,7 +924,6 @@ static int _get_power_level(int power)
 
 static void _velocity_card(int power)
 {
-
     int power_level = _get_power_level(power);
     bool did_something = false;
 
@@ -964,10 +963,13 @@ static void _velocity_card(int power)
 
               bool did_haste = false;
 
-              if (hostile && slow_enemies)
+              if (hostile)
               {
-                  do_slow_monster(mon, &you);
-                  affected = true;
+                  if (slow_enemies)
+                  {
+                      do_slow_monster(mon, &you);
+                      affected = true;
+                  }
               }
               else if (!haste_immune && get_haste)   // allies
               {

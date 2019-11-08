@@ -925,47 +925,59 @@ static int _get_power_level(int power)
 static void _velocity_card(int power)
 {
 
-    const int power_level = _get_power_level(power);
+    int power_level = _get_power_level(power);
     bool did_something = false;
 
-    if (you.duration[DUR_SLOW] && x_chance_in_y(power_level, 2))
+    if (you.duration[DUR_SLOW])
     {
         you.duration[DUR_SLOW] = 1;
         did_something = true;
     }
+    
+    bool slow_enemies = false;
+    bool get_haste = false;
+    switch (power_level)
+    {
+    case 0:
+        slow_enemies = true;
+        break;
+    case 1:
+        if (!you.stasis() && !you.duration[DUR_HASTE])
+            get_haste = true;
+        else
+            slow_enemies = true;
+        break;
+    default:
+        slow_enemies = true;
+        get_haste = true;
+        break;
+    }
+    
+    if (get_haste)
+        haste_player(7 + random2(6));
 
     if (!apply_visible_monsters([=](monster& mon)
           {
               bool affected = false;
-              if (!mons_immune_magic(mon))
+              bool hostile = !mon.wont_attack();
+              bool haste_immune = (mon.stasis() || mons_is_immotile(mon));
+
+              bool did_haste = false;
+
+              if (hostile && slow_enemies)
               {
-                  const bool hostile = !mon.wont_attack();
-                  const bool haste_immune = (mon.stasis()
-                                             || mons_is_immotile(mon));
-
-                  bool did_haste = false;
-
-                  if (hostile)
-                  {
-                      if (x_chance_in_y(1 + power_level, 3))
-                      {
-                          do_slow_monster(mon, &you);
-                          affected = true;
-                      }
-                  }
-                  else //allies
-                  {
-                      if (!haste_immune && x_chance_in_y(power_level, 2))
-                      {
-                          mon.add_ench(ENCH_HASTE);
-                          affected = true;
-                          did_haste = true;
-                      }
-                  }
-
-                  if (did_haste)
-                      simple_monster_message(mon, " seems to speed up.");
+                  do_slow_monster(mon, &you);
+                  affected = true;
               }
+              else if (!haste_immune && get_haste)   // allies
+              {
+                  mon.add_ench(ENCH_HASTE);
+                  affected = true;
+                  did_haste = true;
+              }
+
+              if (did_haste)
+                  simple_monster_message(mon, " seems to speed up.");
               return affected;
           })
         && !did_something)

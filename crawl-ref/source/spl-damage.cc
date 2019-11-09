@@ -1009,7 +1009,7 @@ static int _shatter_walls(coord_def where, int pow, actor *agent)
         break;
     }        
 
-    if (x_chance_in_y(chance * min(50, (pow-50)), 100*50))
+    if (x_chance_in_y(min((chance*pow)/100, chance + pow - 100), 100))
     {
         noisy(spell_effect_noise(SPELL_SHATTER), where);
 
@@ -2113,9 +2113,9 @@ bool setup_fragmentation_beam(bolt &beam, int pow, const actor *caster,
                              || grid == DNGN_SLIMY_WALL
                              || grid == DNGN_CLEAR_ROCK_WALL)
                && one_chance_in(3)
-            || pow >= 50 && (grid == DNGN_STONE_WALL
+            || pow >= 75 && (grid == DNGN_STONE_WALL
                              || grid == DNGN_CLEAR_STONE_WALL)
-               && one_chance_in(6))
+               && one_chance_in(5))
         {
             should_destroy_wall = true;
         }

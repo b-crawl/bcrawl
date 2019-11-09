@@ -953,7 +953,10 @@ static void _velocity_card(int power)
     }
     
     if (get_haste)
+    {
         haste_player(7 + random2(6));
+        did_something = true;
+    }
 
     if (!apply_visible_monsters([=](monster& mon)
           {

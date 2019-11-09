@@ -4788,31 +4788,30 @@ spret qazlal_elemental_force(bool fail)
         const cloud_struct* cloud = cloud_at(*ri);
         if (!cloud || !elemental_clouds.count(cloud->type))
             continue;
-
-        const actor *agent = actor_by_mid(cloud->source);
-        if (agent && agent->is_player())
-            targets.push_back(*ri);
-    }
-
-    if (targets.empty())
-    {
-        mpr("You can't see any clouds you can empower.");
-        return spret::abort;
+        
+        targets.push_back(*ri);
     }
 
     fail_check();
 
-    shuffle_array(targets);
-    const int count = max(1, min((int)targets.size(),
-                                 random2avg(you.skill(SK_INVOCATIONS), 2)));
+    // shuffle_array(targets);
     mgen_data mg;
     mg.summon_type = MON_SUMM_AID;
     mg.abjuration_duration = 1;
     mg.flags |= MG_FORCE_PLACE | MG_AUTOFOE;
     mg.summoner = &you;
     int placed = 0;
-    for (unsigned int i = 0; placed < count && i < targets.size(); i++)
+
+    int elemental_chance = you.skill(SK_INVOCATIONS) + 14;   // out of 40
+    
+    for (unsigned int i = 0; i < targets.size(); i++)
     {
+        if (!x_chance_in_y(elemental_chance, 40))
+            continue;
+        
+        mg.abjuration_duration = max(1, div_rand_round(you.skill(SK_INVOCATIONS), 9));
+        mg.hd = 2 + you.skill_rdiv(SK_INVOCATIONS, 16, 27);
+        
         coord_def pos = targets[i];
         ASSERT(cloud_at(pos));
         const cloud_struct &cl = *cloud_at(pos);
@@ -4830,10 +4829,19 @@ spret qazlal_elemental_force(bool fail)
         placed++;
     }
 
+    for (monster_near_iterator mi(you.pos(), LOS_NO_TRANS); mi; ++mi)
+    {
+        if (!x_chance_in_y(elemental_chance, 40))
+            continue;
+        if (mi->is_summoned())
+            continue;
+
+        mi->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, *mi));
+    }
+
+    mprf(MSGCH_GOD, "Qazlal's elemental power surges around you!");
     if (placed)
-        mprf(MSGCH_GOD, "Clouds arounds you coalesce and take form!");
-    else
-        canned_msg(MSG_NOTHING_HAPPENS); // can this ever happen?
+        mprf(MSGCH_GOD, "Clouds around you coalesce and take form!");
 
     return spret::success;
 }

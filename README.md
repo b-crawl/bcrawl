@@ -247,6 +247,8 @@ Pull requests for new content are welcome.
   - v1.18: Vehumet passives are rearranged: miscast reduction at \* and mana gain from kills at \*\*.
   - v1.18.2: Some Nemelex cards are changed: Velocity can slow any monster and can haste the player, and Elixir at power level 1 always gives a moderate amount of both health and mana.
   - v1.18.2: Lugonu is changed: Bend Space at \*; Banish at \*\*; all unbranded melee attacks become distortion-branded at \*\*\*; Translocation spell miscast chance is reduced at \*\*\*.
+  - v1.18.2: Qazlal's Elemental Force ability is changed: instead of turning player-created clouds into elemental up to a cap based on Invocations, it affects every cloud with a chance based on Invocations. Also, the duration and strength of the elementals created scales with Invocations. Also, it has a chance (based on Invocations) to give creatures an Inner Flame status which will not anger allies.
+  - v1.18.2: Qazlal's Disaster Area ability causes exhaustion.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

@@ -4776,7 +4776,7 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
     
     if (break_tile)
     {
-        noisy(18, pos);
+        noisy(18, target_center);
         destroy_wall(target_center);
     }
 

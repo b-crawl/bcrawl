@@ -4612,7 +4612,7 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
     if (target.origin())
     {
         dist spd;
-        targeter_smite tgt(&you, LOS_RADIUS, 0, max_radius);
+        targeter_smite tgt(&you, LOS_RADIUS, 0, max_radius, true);
         direction_chooser_args args;
         args.restricts = DIR_TARGET;
         args.mode = TARG_HOSTILE;

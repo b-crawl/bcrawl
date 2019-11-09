@@ -4623,13 +4623,6 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
         if (!spell_direction(spd, beam, &args))
             return spret::abort;
 
-        if (cell_is_solid(beam.target))
-        {
-            mprf("There is %s there.",
-                 article_a(feat_type_name(grd(beam.target))).c_str());
-            return spret::abort;
-        }
-
         bolt tempbeam;
         tempbeam.source    = beam.target;
         tempbeam.target    = beam.target;
@@ -4681,9 +4674,11 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
             break;
     }
 
+    coord_def target_center = beam.target;
+
     vector<coord_def> affected;
-    affected.push_back(beam.target);
-    for (radius_iterator ri(beam.target, max_radius, C_SQUARE, LOS_SOLID, true);
+    affected.push_back(target_center);
+    for (radius_iterator ri(target_center, max_radius, C_SQUARE, LOS_SOLID, true);
          ri; ++ri)
     {
         if (!in_bounds(*ri) || cell_is_solid(*ri))
@@ -4691,7 +4686,7 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
 
         int chance = pow;
 
-        bool adj = adjacent(beam.target, *ri);
+        bool adj = adjacent(target_center, *ri);
         if (!adj && max_radius > 1)
             chance -= 100;
         if (adj && max_radius > 1 || x_chance_in_y(chance, 100))
@@ -4714,8 +4709,6 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
     }
     else
         scaled_delay(25);
-
-    int wall_count = 0;
 
     for (coord_def pos : affected)
     {
@@ -4742,26 +4735,50 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
                                 &you);
                 }
                 break;
-            case BEAM_FRAG:
-                if (((grd(pos) == DNGN_ROCK_WALL
-                     || grd(pos) == DNGN_CLEAR_ROCK_WALL
-                     || grd(pos) == DNGN_SLIMY_WALL)
-                     && x_chance_in_y(pow / 4, 100)
-                    || feat_is_door(grd(pos))
-                    || grd(pos) == DNGN_GRATE))
-                {
-                    noisy(30, pos);
-                    destroy_wall(pos);
-                    wall_count++;
-                }
-                break;
             default:
                 break;
         }
     }
 
-    if (wall_count && !quiet)
-        mpr("Ka-crash!");
+    dungeon_feature_type grid = grd(target_center);
+    bool break_tile = false;
+
+    switch (grid)
+    {
+    case DNGN_CLOSED_DOOR:
+    case DNGN_CLOSED_CLEAR_DOOR:
+    case DNGN_RUNED_DOOR:
+    case DNGN_RUNED_CLEAR_DOOR:
+    case DNGN_OPEN_DOOR:
+    case DNGN_OPEN_CLEAR_DOOR:
+    case DNGN_SEALED_DOOR:
+    case DNGN_SEALED_CLEAR_DOOR:
+    case DNGN_GRATE:
+    case DNGN_ORCISH_IDOL:
+    case DNGN_GRANITE_STATUE:
+    case DNGN_CLEAR_ROCK_WALL:
+    case DNGN_ROCK_WALL:
+    case DNGN_SLIMY_WALL:
+    case DNGN_CRYSTAL_WALL:
+    case DNGN_TREE:
+        break_tile = true;
+        break;
+
+    case DNGN_CLEAR_STONE_WALL:
+    case DNGN_STONE_WALL:
+        if(pow >= 100)
+            break_tile = true;
+        break;
+
+    default:
+        break;
+    }        
+    
+    if (break_tile)
+    {
+        noisy(18, pos);
+        destroy_wall(target_center);
+    }
 
     return spret::success;
 }

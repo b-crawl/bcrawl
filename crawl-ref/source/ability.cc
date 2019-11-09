@@ -605,7 +605,7 @@ static const ability_def Ability_List[] =
     { ABIL_QAZLAL_UPHEAVAL, "Upheaval",
       5, 0, 0, 1, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_QAZLAL_ELEMENTAL_FORCE, "Elemental Force",
-      6, 0, 0, 6, {fail_basis::invo, 60, 5, 20}, abflag::none },
+      6, 0, 0, 6, {fail_basis::invo, 60, 5, 20}, abflag::exhaustion },
     { ABIL_QAZLAL_DISASTER_AREA, "Disaster Area",
       7, 0, 0, 10, {fail_basis::invo, 70, 4, 25}, abflag::exhaustion },
 
@@ -2929,6 +2929,11 @@ static spret _do_ability(const ability_def& abil, bool fail)
         return qazlal_upheaval(coord_def(), false, fail);
 
     case ABIL_QAZLAL_ELEMENTAL_FORCE:
+        if (you.duration[DUR_EXHAUSTED])
+        {
+            mpr("You are too exhausted.");
+            return spret::abort;
+        }
         return qazlal_elemental_force(fail);
 
     case ABIL_QAZLAL_DISASTER_AREA:

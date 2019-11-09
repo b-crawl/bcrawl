@@ -4860,6 +4860,7 @@ spret qazlal_elemental_force(bool fail)
     if (placed)
         mprf(MSGCH_GOD, "Clouds around you coalesce and take form!");
 
+    you.increase_duration(DUR_EXHAUSTED, 10 + random2(5));
     return spret::success;
 }
 

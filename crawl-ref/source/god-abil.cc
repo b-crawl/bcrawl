@@ -4596,6 +4596,7 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
 
     bolt beam;
     beam.name        = "****";
+    beam.source      = you.pos();
     beam.source_id   = MID_PLAYER;
     beam.source_name = "you";
     beam.thrower     = KILL_YOU;
@@ -4624,7 +4625,7 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
             return spret::abort;
 
         bolt tempbeam;
-        tempbeam.source    = beam.target;
+        tempbeam.source    = you.pos();
         tempbeam.target    = beam.target;
         tempbeam.flavour   = BEAM_MISSILE;
         tempbeam.ex_size   = max_radius;
@@ -4772,7 +4773,7 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
 
     default:
         break;
-    }        
+    }
     
     if (break_tile)
     {

@@ -4783,7 +4783,7 @@ spret qazlal_elemental_force(bool fail)
     };
 
     vector<coord_def> targets;
-    for (radius_iterator ri(you.pos(), LOS_RADIUS, C_SQUARE, true); ri; ++ri)
+    for (radius_iterator ri(you.pos(), LOS_RADIUS, C_SQUARE, LOS_SOLID, true); ri; ++ri)
     {
         const cloud_struct* cloud = cloud_at(*ri);
         if (!cloud || !elemental_clouds.count(cloud->type))

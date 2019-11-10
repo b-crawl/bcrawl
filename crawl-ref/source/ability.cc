@@ -603,7 +603,7 @@ static const ability_def Ability_List[] =
 
     // Qazlal
     { ABIL_QAZLAL_UPHEAVAL, "Upheaval",
-      5, 0, 0, 1, {fail_basis::invo, 40, 5, 20}, abflag::none },
+      4, 0, 0, 1, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_QAZLAL_ELEMENTAL_FORCE, "Elemental Force",
       6, 0, 0, 6, {fail_basis::invo, 60, 5, 20}, abflag::exhaustion },
     { ABIL_QAZLAL_DISASTER_AREA, "Disaster Area",

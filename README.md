@@ -249,7 +249,6 @@ Pull requests for new content are welcome.
   - v1.18.2: Lugonu is changed: Bend Space at \*; Banish at \*\*; all unbranded melee attacks become distortion-branded at \*\*\*; Translocation spell miscast chance is reduced at \*\*\*.
   - v1.18.2: Qazlal's Elemental Force ability is changed: instead of turning player-created clouds into elemental up to a cap based on Invocations, it affects every cloud with a chance based on Invocations. Also, the duration and strength of the elementals created scales with Invocations. Also, it has a chance (based on Invocations) to give creatures an Inner Flame status which will not anger allies.
   - v1.18.2: Qazlal's Disaster Area ability causes exhaustion.
-  - v1.18.2: Qazlal's Upheaval ability costs 5 mana and can destroy walls.
   - v1.18.2: Xom has higher minimum levels for banishment. (6 -> 8 when bored, 9 -> 14 otherwise)
 
 #### New Items

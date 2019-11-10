@@ -644,6 +644,8 @@ Upheaval ability
 
 Calls on the forces of nature to blast a small area with magma, ice, wind,
 or rubble. Invocations skill increases both damage and area affected.
+
+With sufficient Invocations skill, this can destroy rock and even stone walls.
 %%%%
 Elemental Force ability
 

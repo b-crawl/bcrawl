@@ -885,7 +885,7 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         { MONS_NIKOLA, {
             { { WPN_RAPIER,             1 } },
             { 1, 0, 4 },
-            { { SPWPN_ELECTROCUTION, 1 } },
+            { { SPWPN_DISTORTION, 1 } },
         } },
         { MONS_SALAMANDER_MYSTIC,
             { { { WPN_QUARTERSTAFF,     10 },
@@ -1942,8 +1942,10 @@ int make_mons_armour(monster_type type, int level)
 
     case MONS_MARGERY:
         item.base_type = OBJ_ARMOUR;
-        item.sub_type = random_choose_weighted(3, ARM_ACID_DRAGON_ARMOUR,
-                                               1, ARM_SWAMP_DRAGON_ARMOUR,
+        item.sub_type = random_choose_weighted(2, ARM_SHADOW_DRAGON_ARMOUR,
+                                               2, ARM_QUICKSILVER_DRAGON_ARMOUR,
+                                               2, ARM_STORM_DRAGON_ARMOUR,
+                                               3, ARM_GOLD_DRAGON_ARMOUR,
                                                6, ARM_FIRE_DRAGON_ARMOUR);
         break;
 

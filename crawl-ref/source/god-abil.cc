@@ -4686,7 +4686,7 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
     for (radius_iterator ri(beam.target, max_radius, C_SQUARE, LOS_SOLID, true);
          ri; ++ri)
     {
-        if (!in_bounds(*ri) || cell_is_solid(*ri))
+        if (!in_bounds(*ri))
             continue;
 
         int chance = pow;
@@ -4696,8 +4696,7 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
             chance -= 100;
         if (adj && max_radius > 1 || x_chance_in_y(chance, 100))
         {
-            if (beam.flavour == BEAM_FRAG || !cell_is_solid(*ri))
-                affected.push_back(*ri);
+            affected.push_back(*ri);
         }
     }
 
@@ -4715,10 +4714,53 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
     else
         scaled_delay(25);
 
-    int wall_count = 0;
-
     for (coord_def pos : affected)
     {
+        if (cell_is_solid(pos))
+        {
+        int min_power = 200;
+        switch (grd(pos))
+        {
+        case DNGN_CLOSED_DOOR:
+        case DNGN_CLOSED_CLEAR_DOOR:
+        case DNGN_RUNED_DOOR:
+        case DNGN_RUNED_CLEAR_DOOR:
+        case DNGN_OPEN_DOOR:
+        case DNGN_OPEN_CLEAR_DOOR:
+        case DNGN_SEALED_DOOR:
+        case DNGN_SEALED_CLEAR_DOOR:
+        case DNGN_GRATE:
+        case DNGN_ORCISH_IDOL:
+        case DNGN_GRANITE_STATUE:
+            min_power = 50;
+            break;
+
+        case DNGN_CLEAR_ROCK_WALL:
+        case DNGN_ROCK_WALL:
+        case DNGN_SLIMY_WALL:
+        case DNGN_CRYSTAL_WALL:
+        case DNGN_TREE:
+            min_power = 75;
+            break;
+
+        case DNGN_CLEAR_STONE_WALL:
+        case DNGN_STONE_WALL:
+            min_power = 100;
+            break;
+
+        default:
+            break;
+        }
+        
+        if(pow >= min_power && div_rand_round(pow, min_power*2))
+        {
+            noisy(18, pos);
+            destroy_wall(pos);
+        }
+        
+        continue;
+        }
+    
         beam.source = pos;
         beam.target = pos;
         beam.fire();
@@ -4730,38 +4772,19 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
                 {
                     temp_change_terrain(
                         pos, DNGN_LAVA,
-                        random2(you.skill(SK_INVOCATIONS, BASELINE_DELAY)),
-                        TERRAIN_CHANGE_FLOOD);
+                        random2(you.skill(SK_INVOCATIONS, BASELINE_DELAY)), TERRAIN_CHANGE_FLOOD);
                 }
                 break;
             case BEAM_AIR:
                 if (!cell_is_solid(pos) && !cloud_at(pos) && coinflip())
                 {
-                    place_cloud(CLOUD_STORM, pos,
-                                random2(you.skill_rdiv(SK_INVOCATIONS, 1, 4)),
-                                &you);
-                }
-                break;
-            case BEAM_FRAG:
-                if (((grd(pos) == DNGN_ROCK_WALL
-                     || grd(pos) == DNGN_CLEAR_ROCK_WALL
-                     || grd(pos) == DNGN_SLIMY_WALL)
-                     && x_chance_in_y(pow / 4, 100)
-                    || feat_is_door(grd(pos))
-                    || grd(pos) == DNGN_GRATE))
-                {
-                    noisy(30, pos);
-                    destroy_wall(pos);
-                    wall_count++;
+                    place_cloud(CLOUD_STORM, pos, random2(you.skill_rdiv(SK_INVOCATIONS, 1, 4)), &you);
                 }
                 break;
             default:
                 break;
         }
     }
-
-    if (wall_count && !quiet)
-        mpr("Ka-crash!");
 
     return spret::success;
 }
@@ -4783,36 +4806,35 @@ spret qazlal_elemental_force(bool fail)
     };
 
     vector<coord_def> targets;
-    for (radius_iterator ri(you.pos(), LOS_RADIUS, C_SQUARE, true); ri; ++ri)
+    for (radius_iterator ri(you.pos(), LOS_RADIUS, C_SQUARE, LOS_SOLID, true); ri; ++ri)
     {
         const cloud_struct* cloud = cloud_at(*ri);
         if (!cloud || !elemental_clouds.count(cloud->type))
             continue;
-
-        const actor *agent = actor_by_mid(cloud->source);
-        if (agent && agent->is_player())
-            targets.push_back(*ri);
-    }
-
-    if (targets.empty())
-    {
-        mpr("You can't see any clouds you can empower.");
-        return spret::abort;
+        
+        targets.push_back(*ri);
     }
 
     fail_check();
 
-    shuffle_array(targets);
-    const int count = max(1, min((int)targets.size(),
-                                 random2avg(you.skill(SK_INVOCATIONS), 2)));
+    // shuffle_array(targets);
     mgen_data mg;
     mg.summon_type = MON_SUMM_AID;
     mg.abjuration_duration = 1;
     mg.flags |= MG_FORCE_PLACE | MG_AUTOFOE;
     mg.summoner = &you;
     int placed = 0;
-    for (unsigned int i = 0; placed < count && i < targets.size(); i++)
+
+    int elemental_chance = you.skill(SK_INVOCATIONS) + 14;   // out of 40
+    
+    for (unsigned int i = 0; i < targets.size(); i++)
     {
+        if (!x_chance_in_y(elemental_chance, 40))
+            continue;
+        
+        mg.abjuration_duration = max(1, div_rand_round(you.skill(SK_INVOCATIONS), 9));
+        mg.hd = 2 + you.skill_rdiv(SK_INVOCATIONS, 16, 27);
+        
         coord_def pos = targets[i];
         ASSERT(cloud_at(pos));
         const cloud_struct &cl = *cloud_at(pos);
@@ -4830,11 +4852,21 @@ spret qazlal_elemental_force(bool fail)
         placed++;
     }
 
-    if (placed)
-        mprf(MSGCH_GOD, "Clouds arounds you coalesce and take form!");
-    else
-        canned_msg(MSG_NOTHING_HAPPENS); // can this ever happen?
+    for (monster_near_iterator mi(you.pos(), LOS_NO_TRANS); mi; ++mi)
+    {
+        if (!x_chance_in_y(elemental_chance, 40))
+            continue;
+        if (mi->is_summoned())
+            continue;
 
+        mi->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, *mi));
+    }
+
+    mprf(MSGCH_GOD, "Qazlal's elemental power surges around you!");
+    if (placed)
+        mprf(MSGCH_GOD, "Clouds around you coalesce and take form!");
+
+    you.increase_duration(DUR_EXHAUSTED, 10 + random2(5));
     return spret::success;
 }
 

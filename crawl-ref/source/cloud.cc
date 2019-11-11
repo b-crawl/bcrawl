@@ -1262,17 +1262,28 @@ static int _actor_cloud_damage(const actor *act,
 // the damage dealt.
 int actor_apply_cloud(actor *act)
 {
-    const cloud_struct* cl = cloud_at(act->pos());
+    cloud_struct* cl = cloud_at(act->pos());
     if (!cl)
         return 0;
 
-    const cloud_struct &cloud(*cl);
+    cloud_struct &cloud(*cl);
     const bool player = act->is_player();
     monster *mons = !player? act->as_monster() : nullptr;
     const beam_type cloud_flavour = _cloud2beam(cloud.type);
 
     if (actor_cloud_immune(*act, cloud))
+    {
+        if(player)
+        {
+            if (you.religion == GOD_QAZLAL && you.piety >= piety_breakpoint(0))
+            {
+                inc_mp(2 + random2(2));
+                _dissipate_cloud(cloud);
+            }
+        }
+        
         return 0;
+    }
 
     const int resist = _actor_cloud_resist(act, cloud);
     const int cloud_max_base_damage =

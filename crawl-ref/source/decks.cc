@@ -924,48 +924,65 @@ static int _get_power_level(int power)
 
 static void _velocity_card(int power)
 {
-
-    const int power_level = _get_power_level(power);
+    int power_level = _get_power_level(power);
     bool did_something = false;
 
-    if (you.duration[DUR_SLOW] && x_chance_in_y(power_level, 2))
+    if (you.duration[DUR_SLOW])
     {
         you.duration[DUR_SLOW] = 1;
+        did_something = true;
+    }
+    
+    bool slow_enemies = false;
+    bool get_haste = false;
+    switch (power_level)
+    {
+    case 0:
+        slow_enemies = true;
+        break;
+    case 1:
+        if (!you.stasis() && !you.duration[DUR_HASTE])
+            get_haste = true;
+        else
+            slow_enemies = true;
+        break;
+    default:
+        slow_enemies = true;
+        get_haste = true;
+        break;
+    }
+    
+    if (get_haste)
+    {
+        haste_player(7 + random2(6));
         did_something = true;
     }
 
     if (!apply_visible_monsters([=](monster& mon)
           {
               bool affected = false;
-              if (!mons_immune_magic(mon))
+              bool hostile = !mon.wont_attack();
+              bool haste_immune = (mon.stasis() || mons_is_immotile(mon));
+
+              bool did_haste = false;
+
+              if (hostile)
               {
-                  const bool hostile = !mon.wont_attack();
-                  const bool haste_immune = (mon.stasis()
-                                             || mons_is_immotile(mon));
-
-                  bool did_haste = false;
-
-                  if (hostile)
+                  if (slow_enemies)
                   {
-                      if (x_chance_in_y(1 + power_level, 3))
-                      {
-                          do_slow_monster(mon, &you);
-                          affected = true;
-                      }
+                      do_slow_monster(mon, &you);
+                      affected = true;
                   }
-                  else //allies
-                  {
-                      if (!haste_immune && x_chance_in_y(power_level, 2))
-                      {
-                          mon.add_ench(ENCH_HASTE);
-                          affected = true;
-                          did_haste = true;
-                      }
-                  }
-
-                  if (did_haste)
-                      simple_monster_message(mon, " seems to speed up.");
               }
+              else if (!haste_immune && get_haste)   // allies
+              {
+                  mon.add_ench(ENCH_HASTE);
+                  affected = true;
+                  did_haste = true;
+              }
+
+              if (did_haste)
+                  simple_monster_message(mon, " seems to speed up.");
               return affected;
           })
         && !did_something)
@@ -985,11 +1002,12 @@ static void _exile_card(int power)
     // Calculate how many extra banishments you get.
     const int power_level = _get_power_level(power);
     int extra_targets = power_level + random2(1 + power_level);
+    int player_weight = you.experience_level >= 12 ? 1 : 0;
 
     for (int i = 0; i < 1 + extra_targets; ++i)
     {
         // Pick a random monster nearby to banish (or yourself).
-        monster* mon_to_banish = choose_random_nearby_monster(1);
+        monster* mon_to_banish = choose_random_nearby_monster(player_weight);
 
         // Bonus banishments only banish monsters.
         if (i != 0 && !mon_to_banish)
@@ -1182,15 +1200,13 @@ static void _elixir_card(int power)
     {
     case 0:
         if (coinflip())
-            you.set_duration(DUR_ELIXIR_HEALTH, 1 + random2(3));
+            you.set_duration(DUR_ELIXIR_HEALTH, 2 + random2(3));
         else
             you.set_duration(DUR_ELIXIR_MAGIC, 3 + random2(5));
         break;
     case 1:
-        if (you.hp * 2 < you.hp_max)
-            you.set_duration(DUR_ELIXIR_HEALTH, 3 + random2(3));
-        else
-            you.set_duration(DUR_ELIXIR_MAGIC, 10);
+        you.set_duration(DUR_ELIXIR_HEALTH, 2 + random2(3));
+        you.set_duration(DUR_ELIXIR_MAGIC, 3 + random2(5));
         break;
     default:
         you.set_duration(DUR_ELIXIR_HEALTH, 10);

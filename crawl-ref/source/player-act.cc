@@ -206,21 +206,25 @@ int player::damage_type(int)
  */
 brand_type player::damage_brand(int)
 {
-    // confusing touch always overrides
+    brand_type player_brand = SPWPN_NORMAL;
+    
+    // confusing touch always overrides [OBSOLETE]
     if (duration[DUR_CONFUSING_TOUCH])
         return SPWPN_CONFUSE;
 
     const int wpn = equip[EQ_WEAPON];
     if (wpn != -1 && !melded[EQ_WEAPON])
     {
-        if (is_range_weapon(inv[wpn]))
-            return SPWPN_NORMAL; // XXX: check !is_melee_weapon instead?
-        return get_weapon_brand(inv[wpn]);
+        if (!is_range_weapon(inv[wpn]))
+            player_brand = get_weapon_brand(inv[wpn]);
     }
-
-    // unarmed
-
-    return get_form()->get_uc_brand();
+    else
+        player_brand = get_form()->get_uc_brand();  // unarmed
+        
+    if (player_brand == SPWPN_NORMAL && you.religion == GOD_LUGONU && you.piety >= piety_breakpoint(2))
+        player_brand = SPWPN_DISTORTION;
+    
+    return player_brand;
 }
 
 

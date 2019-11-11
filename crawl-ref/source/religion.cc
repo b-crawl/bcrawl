@@ -196,7 +196,7 @@ const vector<god_power> god_powers[NUM_GODS] =
     // Nemelex
     {
       { 0, "draw from decks of power" },
-      { 3, ABIL_NEMELEX_TRIPLE_DRAW, "choose one out of three cards" },
+      { 2, ABIL_NEMELEX_TRIPLE_DRAW, "choose one out of three cards" },
       { 4, ABIL_NEMELEX_DEAL_FOUR, "deal four cards at a time" },
       { 5, ABIL_NEMELEX_STACK_FIVE, "stack five cards from your decks",
                                     "stack cards" },
@@ -213,14 +213,16 @@ const vector<god_power> god_powers[NUM_GODS] =
 
     // Lugonu
     { { 1, ABIL_LUGONU_ABYSS_EXIT, "depart the Abyss", "depart the Abyss at will" },
-      { 2, ABIL_LUGONU_BEND_SPACE, "bend space around yourself" },
-      { 3, ABIL_LUGONU_BANISH, "banish your foes" },
+      { 1, ABIL_LUGONU_BEND_SPACE, "bend space around yourself" },
+      { 2, ABIL_LUGONU_BANISH, "banish your foes" },
+      { 3, "Lugonu is aiding your Translocation magic.",
+           "Lugonu will no longer aid your Translocation magic." },
+      { 3, "Lugonu imbues your non-magical melee attacks with distortion.",
+           "Lugonu will no longer imbue your attacks with distortion." },
       { 4, ABIL_LUGONU_CORRUPT, "corrupt the fabric of space" },
       { 4, "Lugonu will gift you equipment and ammunition from the Abyss.",
            "Lugonu will no longer gift you items." },
       { 5, ABIL_LUGONU_ABYSS_ENTER, "gate yourself to the Abyss" },
-      { 7, ABIL_LUGONU_BLESS_WEAPON, "Lugonu will corrupt your weapon with distortion... once.",
-                                     "Lugonu is no longer ready to corrupt your weapon." },
     },
 
     // Beogh
@@ -297,13 +299,14 @@ const vector<god_power> god_powers[NUM_GODS] =
     {
       { 0, "Qazlal grants you and your divine allies immunity to clouds." },
       { 1, "You are surrounded by a storm.", "Your storm dissipates completely." },
+      { 1, "You can channel magical energy from clouds surrounding you.", "You can no longer channel energy from clouds." },
       { 2, ABIL_QAZLAL_UPHEAVAL, "call upon nature to destroy your foes" },
       { 3, ABIL_QAZLAL_ELEMENTAL_FORCE, "give life to nearby clouds" },
       { 4, "The storm surrounding you is powerful enough to repel missiles.",
            "The storm surrounding you is now too weak to repel missiles." },
       { 4, "You adapt resistances upon receiving elemental damage.",
            "You no longer adapt resistances upon receiving elemental damage." },
-      { 5, ABIL_QAZLAL_DISASTER_AREA, "call upon nature's wrath in a wide area around you" },
+      { 5, ABIL_QAZLAL_DISASTER_AREA, "release nature's wrath around you" },
     },
 
     // Ru

@@ -978,17 +978,7 @@ static int _shatter_walls(coord_def where, int pow, actor *agent)
     case DNGN_OPEN_CLEAR_DOOR:
     case DNGN_SEALED_DOOR:
     case DNGN_SEALED_CLEAR_DOOR:
-        if (you.see_cell(where))
-            mpr("A door shatters!");
-        chance = 100;
-        break;
-
     case DNGN_GRATE:
-        if (you.see_cell(where))
-            mpr("An iron grate is ripped into pieces!");
-        chance = 100;
-        break;
-
     case DNGN_ORCISH_IDOL:
     case DNGN_GRANITE_STATUE:
         chance = 100;
@@ -1007,18 +997,19 @@ static int _shatter_walls(coord_def where, int pow, actor *agent)
     case DNGN_ROCK_WALL:
     case DNGN_SLIMY_WALL:
     case DNGN_CRYSTAL_WALL:
+        chance = 33;
+        break;
     case DNGN_TREE:
+        if (agent->deity() == GOD_FEDHAS)
+            return 0;
         chance = 33;
         break;
 
     default:
         break;
-    }
+    }        
 
-    if (agent->deity() == GOD_FEDHAS && feat_is_tree(grid))
-        return 0;
-
-    if (x_chance_in_y(chance, 100))
+    if (x_chance_in_y(min((chance*pow)/110, chance + pow - 100), 100))
     {
         noisy(spell_effect_noise(SPELL_SHATTER), where);
 
@@ -2122,9 +2113,9 @@ bool setup_fragmentation_beam(bolt &beam, int pow, const actor *caster,
                              || grid == DNGN_SLIMY_WALL
                              || grid == DNGN_CLEAR_ROCK_WALL)
                && one_chance_in(3)
-            || pow >= 50 && (grid == DNGN_STONE_WALL
+            || pow >= 75 && (grid == DNGN_STONE_WALL
                              || grid == DNGN_CLEAR_STONE_WALL)
-               && one_chance_in(6))
+               && one_chance_in(5))
         {
             should_destroy_wall = true;
         }

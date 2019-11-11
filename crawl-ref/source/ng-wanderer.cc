@@ -74,9 +74,9 @@ static void _give_wanderer_weapon(skill_type wpn_skill, int plus)
     newgame_make_item(OBJ_WEAPONS, sub_type, 1, plus);
 
     if (sub_type == WPN_SHORTBOW)
-        newgame_make_item(OBJ_MISSILES, MI_ARROW, 15 + random2avg(21, 5));
+        newgame_make_item(OBJ_MISSILES, MI_ARROW, 100 + random2avg(130, 5));
     else if (sub_type == WPN_HAND_CROSSBOW)
-        newgame_make_item(OBJ_MISSILES, MI_BOLT, 15 + random2avg(21, 5));
+        newgame_make_item(OBJ_MISSILES, MI_BOLT, 75 + random2avg(101, 5));
 }
 
 // The overall role choice for wanderers is a weighted chance based on
@@ -332,20 +332,26 @@ static void _give_wanderer_book(skill_type skill)
  */
 static void _good_potion_or_scroll()
 {
+    bool no_potions = species_undead_type(you.species) == US_UNDEAD;
+    bool stasis = you.species == SP_FORMICID;
+    
     // vector of weighted {object_class_type, subtype} pairs
     // xxx: could we use is_useless_item here? (not without dummy items...?)
     const vector<pair<pair<object_class_type, int>, int>> options = {
         { { OBJ_SCROLLS, SCR_FEAR }, 1 },
+        { { OBJ_SCROLLS, SCR_SUMMONING }, 1 },
         { { OBJ_SCROLLS, SCR_BLINKING },
-            you.species == SP_FORMICID ? 0 : 1 },
+            stasis ? 0 : 1 },
         { { OBJ_POTIONS, POT_HEAL_WOUNDS },
-            (you.species == SP_MUMMY
-             || you.species == SP_VINE_STALKER) ? 0 : 1 },
+            (no_potions || you.species == SP_VINE_STALKER) ? 0 : 1 },
         { { OBJ_POTIONS, POT_HASTE },
-            you.species == SP_MUMMY ? 0 : 1 },
-        { { OBJ_POTIONS, POT_BERSERK_RAGE },
-            (you.species == SP_FORMICID
-             || you.is_lifeless_undead(false)) ? 0 : 1},
+            (no_potions || stasis) ? 0 : 1 },
+        { { OBJ_POTIONS, POT_LIGNIFY },
+            you.is_lifeless_undead(false) ? 0 : 1 },
+        { { OBJ_POTIONS, POT_MIGHT },
+            no_potions ? 0 : 1 },
+        { { OBJ_POTIONS, POT_INVISIBILITY },
+            no_potions ? 0 : 1 },
     };
 
     const pair<object_class_type, int> *option
@@ -361,15 +367,22 @@ static void _good_potion_or_scroll()
  */
 static void _decent_potion_or_scroll()
 {
+    bool no_potions = species_undead_type(you.species) == US_UNDEAD;
+    bool stasis = you.species == SP_FORMICID;
+    
     // vector of weighted {object_class_type, subtype} pairs
     // xxx: could we use is_useless_item here? (not without dummy items...?)
     const vector<pair<pair<object_class_type, int>, int>> options = {
         { { OBJ_SCROLLS, SCR_TELEPORTATION },
-            you.species == SP_FORMICID ? 0 : 1 },
+            stasis ? 0 : 1 },
         { { OBJ_POTIONS, POT_CURING },
-            you.species == SP_MUMMY ? 0 : 1 },
-        { { OBJ_POTIONS, POT_LIGNIFY },
-            you.is_lifeless_undead(false) ? 0 : 1 },
+            no_potions ? 0 : 1 },
+        { { OBJ_POTIONS, POT_BERSERK_RAGE },
+            (stasis || you.is_lifeless_undead(false)) ? 0 : 1},
+        { { OBJ_POTIONS, POT_AGILITY },
+            no_potions ? 0 : 1 },
+        { { OBJ_POTIONS, POT_FLIGHT },
+            no_potions ? 0 : 1 },
     };
 
     const pair<object_class_type, int> *option

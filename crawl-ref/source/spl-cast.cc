@@ -281,12 +281,12 @@ int list_spells(bool toggle_with_I, bool viewing, bool allow_preselect,
 
 static int _apply_spellcasting_success_boosts(spell_type spell, int chance)
 {
-    int fail_reduce = 100;
+    int fail_reduce = 1000;
 
-    if (have_passive(passive_t::spells_success) && vehumet_supports_spell(spell))
+    if ((have_passive(passive_t::spells_success) && vehumet_supports_spell(spell))
+            || (have_passive(passive_t::translocation_success) && spell_typematch(spell, SPTYP_TRANSLOCATION)))
     {
-        // [dshaligram] Fail rate multiplier used to be .5, scaled
-        // back to 67%.
+        // [dshaligram] Fail rate multiplier used to be .5, scaled back to 67%.
         fail_reduce = fail_reduce * 2 / 3;
     }
 
@@ -298,11 +298,7 @@ static int _apply_spellcasting_success_boosts(spell_type spell, int chance)
     if (you.duration[DUR_BRILLIANCE])
         fail_reduce = fail_reduce / 2;
 
-    // Hard cap on fail rate reduction.
-    if (fail_reduce < 50)
-        fail_reduce = 50;
-
-    return chance * fail_reduce / 100;
+    return chance * fail_reduce / 1000;
 }
 
 /**

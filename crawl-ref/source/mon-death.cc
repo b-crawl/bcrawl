@@ -655,11 +655,10 @@ void record_monster_defeat(const monster* mons, killer_type killer)
         return;
     if (killer == KILL_RESET || killer == KILL_DISMISSED)
         return;
-    if (mons->has_ench(ENCH_FAKE_ABJURATION) || mons->has_ench(ENCH_SHORT_LIVED)
-            || mons->is_summoned())
+    if (mons->has_ench(ENCH_FAKE_ABJURATION) || mons->is_summoned())
         return;
     if (mons->is_named() && mons->friendly()
-        && !mons_is_hepliaklqana_ancestor(mons->type))
+        && !mons_is_hepliaklqana_ancestor(mons->type) && mons->type != MONS_PLAYER_ILLUSION)
     {
         take_note(Note(NOTE_ALLY_DEATH, 0, 0, mons->mname));
     }

@@ -643,11 +643,10 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_DRACONIAN_KNIGHT,
       {
-       { SPELL_THROW_ICICLE, 13, MON_SPELL_WIZARD },
-       { SPELL_BOLT_OF_COLD, 13, MON_SPELL_WIZARD },
-       { SPELL_OZOCUBUS_ARMOUR, 13, MON_SPELL_WIZARD },
-       { SPELL_HASTE, 13, MON_SPELL_WIZARD },
-       { SPELL_INVISIBILITY, 13, MON_SPELL_WIZARD },
+       { SPELL_HASTE, 25, MON_SPELL_WIZARD },
+       { SPELL_MIGHT, 20, MON_SPELL_WIZARD },
+       { SPELL_GRASPING_ROOTS, 10, MON_SPELL_WIZARD },
+       { SPELL_DIG, 5, MON_SPELL_WIZARD },
       }
     },
 
@@ -2192,10 +2191,9 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_NIKOLA,
       {
-       { SPELL_SHOCK, 11, MON_SPELL_WIZARD },
-       { SPELL_LIGHTNING_BOLT, 11, MON_SPELL_WIZARD },
-       { SPELL_CHAIN_LIGHTNING, 23, MON_SPELL_WIZARD },
-       { SPELL_BLINK, 23, MON_SPELL_WIZARD },
+       { SPELL_LIGHTNING_BOLT, 39, MON_SPELL_WIZARD },
+       { SPELL_BLINK, 21, MON_SPELL_NATURAL },
+       { SPELL_DEFLECT_MISSILES, 10, MON_SPELL_WIZARD },
       }
     },
 

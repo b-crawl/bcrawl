@@ -644,12 +644,15 @@ Upheaval ability
 
 Calls on the forces of nature to blast a small area with magma, ice, wind,
 or rubble. Invocations skill increases both damage and area affected.
+
+With sufficient Invocations skill, this can destroy rock and even stone walls.
 %%%%
 Elemental Force ability
 
-Causes your elemental clouds to coalesce into friendly elementals. Your
-Invocations skill increases the maximum number of elementals that can be
-created with one use of the ability.
+Releases Qazlal's raw divine energy around you,
+which can cause elemental clouds to coalesce into friendly elementals
+and fill nearby creatures with an inner flame.
+The chance of both effects increases with your Invocations skill.
 %%%%
 Disaster Area ability
 

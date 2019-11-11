@@ -5818,8 +5818,9 @@ void player::ablate_deflection()
 {
     if (attribute[ATTR_DEFLECT_MISSILES])
     {
-        const int power = calc_spell_power(SPELL_DEFLECT_MISSILES, true);
-        dec_mp(div_rand_round(30, power));
+        int power = calc_spell_power(SPELL_DEFLECT_MISSILES, true);
+        power = max(1, power);
+        dec_mp(div_rand_round(1800, power*power));
     }
 }
 

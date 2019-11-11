@@ -2675,13 +2675,13 @@ static void _xom_summon_hostiles(int sever)
 
 static bool _has_min_banishment_level()
 {
-    return you.experience_level >= 9;
+    return (you.experience_level >= 14);
 }
 
 // Rolls whether banishment will be averted.
 static bool _will_not_banish()
 {
-    return x_chance_in_y(5, you.experience_level);
+    return (you.experience_level < 8);
 }
 
 // Disallow early banishment and make it much rarer later-on.

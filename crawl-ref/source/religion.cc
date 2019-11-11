@@ -306,7 +306,7 @@ const vector<god_power> god_powers[NUM_GODS] =
            "The storm surrounding you is now too weak to repel missiles." },
       { 4, "You adapt resistances upon receiving elemental damage.",
            "You no longer adapt resistances upon receiving elemental damage." },
-      { 5, ABIL_QAZLAL_DISASTER_AREA, "call upon nature's wrath in a wide area around you" },
+      { 5, ABIL_QAZLAL_DISASTER_AREA, "release nature's wrath around you" },
     },
 
     // Ru

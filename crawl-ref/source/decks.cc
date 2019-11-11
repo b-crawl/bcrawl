@@ -1002,11 +1002,12 @@ static void _exile_card(int power)
     // Calculate how many extra banishments you get.
     const int power_level = _get_power_level(power);
     int extra_targets = power_level + random2(1 + power_level);
+    int player_weight = you.experience_level >= 10 ? 1 : 0;
 
     for (int i = 0; i < 1 + extra_targets; ++i)
     {
         // Pick a random monster nearby to banish (or yourself).
-        monster* mon_to_banish = choose_random_nearby_monster(1);
+        monster* mon_to_banish = choose_random_nearby_monster(player_weight);
 
         // Bonus banishments only banish monsters.
         if (i != 0 && !mon_to_banish)

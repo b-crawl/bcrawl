@@ -1009,7 +1009,7 @@ static int _shatter_walls(coord_def where, int pow, actor *agent)
         break;
     }        
 
-    if (x_chance_in_y(min((chance*pow)/100, chance + pow - 100), 100))
+    if (x_chance_in_y(min((chance*pow)/110, chance + pow - 100), 100))
     {
         noisy(spell_effect_noise(SPELL_SHATTER), where);
 

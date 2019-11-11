@@ -95,7 +95,7 @@ Pull requests for new content are welcome.
   - v1.4.1: Distortion weapons can't banish on hit.
   - v1.8.6: Starting skills are based on +0 aptitude (-1 for Spellcasting) instead of Human aptitudes.
   - v1.15.1: Guaranteed damage reduction now affects player damage from spells with non-elemental damage.
-  - v1.18.2: The combined effect of wizardry items, Vehumet, and brilliance potions is no longer capped.
+  - v1.19: The combined effect of wizardry items, Vehumet, and brilliance potions is no longer capped.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -245,11 +245,13 @@ Pull requests for new content are welcome.
   - v1.18: Kikubaaqudgha can brand ranged weapons with pain, not just melee weapons.
   - v1.18: Yredelemnul is adjusted: gifted ally strength is based on your location and current piety, not on number of gifts received so far; no piety is given for killing undead; there is no cap on the number of strong gifted allies.
   - v1.18: Vehumet passives are rearranged: miscast reduction at \* and mana gain from kills at \*\*.
-  - v1.18.2: Some Nemelex cards are changed: Velocity can slow any monster and can haste the player, and Elixir at power level 1 always gives a moderate amount of both health and mana.
-  - v1.18.2: Lugonu is changed: Bend Space at \*; Banish at \*\*; all unbranded melee attacks become distortion-branded at \*\*\*; Translocation spell miscast chance is reduced at \*\*\*.
-  - v1.18.2: Qazlal's Elemental Force ability is changed: instead of turning player-created clouds into elemental up to a cap based on Invocations, it affects every cloud with a chance based on Invocations. Also, the duration and strength of the elementals created scales with Invocations. Also, it has a chance (based on Invocations) to give creatures an Inner Flame status which will not anger allies.
-  - v1.18.2: Qazlal's Disaster Area ability causes exhaustion.
-  - v1.18.2: Xom has higher minimum levels for banishment. (6 -> 8 when bored, 9 -> 14 otherwise)
+  - v1.19: Some Nemelex cards are changed: Velocity can slow any monster and can haste the player, and Elixir at power level 1 always gives a moderate amount of both health and mana.
+  - v1.19: Lugonu is changed: Bend Space at \*; Banish at \*\*; all unbranded melee attacks become distortion-branded at \*\*\*; Translocation spell miscast chance is reduced at \*\*\*.
+  - v1.19: Qazlal's Elemental Force ability is changed: instead of turning player-created clouds into elemental up to a cap based on Invocations, it affects every cloud with a chance based on Invocations. Also, the duration and strength of the elementals created scales with Invocations. Also, it has a chance (based on Invocations) to give creatures an Inner Flame status which will not anger allies if it triggers. Also, it causes exhaustion.
+  - v1.19: Qazlal's Disaster Area ability causes exhaustion. Also, it can destroy rock walls at 13 Invocations, and stone walls at 17 Invocations.
+  - v1.19: Qazlal's Upheaval ability costs more (4 -> 5) mana. Also, it can destroy rock walls at 13 Invocations, and stone walls at 17 Invocations.
+  - v1.19: Qazlal worshippers can regain mana by standing in a cloud.
+  - v1.19: Xom has higher minimum levels for banishment. (6 -> 8 when bored, 9 -> 14 otherwise)
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -359,8 +361,8 @@ Pull requests for new content are welcome.
   - v1.17.2: Golden dragons have a strong poison bite instead of poison breath, and have significantly more HP.
   - v1.18: Ice beasts have higher magic resistance, to match the transformation.
   - v1.18.1: Shadow Fiends have Shadow Creatures.
-  - v1.18.2: Dithmenos shadows, Nemelex player illusions, and friendly lightning spires are not angered by attacks from players.
-  - v1.18.2: Draconian knights have a reworked spell set.
+  - v1.19: Dithmenos shadows, Nemelex player illusions, and friendly lightning spires are not angered by attacks from players.
+  - v1.19: Draconian knights have a reworked spell set.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -381,4 +383,4 @@ Pull requests for new content are welcome.
   - v1.15.1: Vashnia has a reworked spell set, casts extremely quickly, and always carries a wand of digging.
   - v1.16: Arachne is reworked.
   - v1.17.2: Gastronok acts faster and casts much faster.
-  - v1.18.2: Nikola is reworked, losing Chain Lightning but gaining Deflect Missiles and a rapier of distortion.
+  - v1.19: Nikola is reworked, losing Chain Lightning but gaining Deflect Missiles and a rapier of distortion.

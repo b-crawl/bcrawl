@@ -5820,7 +5820,7 @@ void player::ablate_deflection()
     {
         int power = calc_spell_power(SPELL_DEFLECT_MISSILES, true);
         power = max(1, power);
-        dec_mp(div_rand_round(30, power));
+        dec_mp(div_rand_round(1800, power*power));
     }
 }
 

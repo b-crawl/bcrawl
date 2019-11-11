@@ -253,6 +253,7 @@ Pull requests for new content are welcome.
   - v1.19: Qazlal's Upheaval ability costs more (4 -> 5) mana. Also, it can destroy rock walls at 13 Invocations, and stone walls at 17 Invocations.
   - v1.19: Qazlal worshippers can regain mana by standing in a cloud.
   - v1.19: Xom has higher minimum levels for banishment. (6 -> 8 when bored, 9 -> 14 otherwise)
+  - v1.19: Nemelex's Triple Draw ability is now available at \*\*.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

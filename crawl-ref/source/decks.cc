@@ -1002,7 +1002,7 @@ static void _exile_card(int power)
     // Calculate how many extra banishments you get.
     const int power_level = _get_power_level(power);
     int extra_targets = power_level + random2(1 + power_level);
-    int player_weight = you.experience_level >= 10 ? 1 : 0;
+    int player_weight = you.experience_level >= 12 ? 1 : 0;
 
     for (int i = 0; i < 1 + extra_targets; ++i)
     {

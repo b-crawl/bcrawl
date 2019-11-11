@@ -75,6 +75,7 @@ Pull requests for new content are welcome.
   - v1.18.1: Shortbows that characters start with get an extra +1 enchantment.
   - v1.18.1: Summoners start with a scroll of summoning.
   - v1.18.1: Wizards start with Spider Form instead of Slow.
+  - v1.19: Wanderers start with more ammo, to compensate for it not being reusable.
 
 #### Features
   - All items are automatically identified if the player has a rune.

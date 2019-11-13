@@ -646,30 +646,28 @@ dgn.good_scrolls = [[
     w:85  scroll of teleportation no_pickup /
     w:38  scroll of teleportation no_pickup q:2 /
     w:10  scroll of teleportation no_pickup q:3 /
-    w:85  scroll of fog no_pickup /
+    w:90  scroll of fog no_pickup /
     w:33  scroll of fog no_pickup q:2 /
     w:85  scroll of remove curse no_pickup /
     w:38  scroll of remove curse no_pickup q:2 /
-    w:95  scroll of enchant weapon no_pickup /
+    w:100 scroll of enchant weapon no_pickup /
     w:38  scroll of enchant weapon no_pickup q:2 /
     w:54  scroll of blinking no_pickup /
     w:22  scroll of blinking no_pickup q:2 /
     w:54  scroll of enchant armour no_pickup /
     w:22  scroll of enchant armour no_pickup q:2 /
-    w:33  scroll of magic mapping no_pickup /
+    w:40  scroll of magic mapping no_pickup /
     w:11  scroll of magic mapping no_pickup q:2 /
-    w:33  scroll of amnesia no_pickup /
+    w:47  scroll of amnesia no_pickup /
     w:11  scroll of amnesia no_pickup q:2 /
-    w:33  scroll of holy word no_pickup q:1 /
-    w:11  scroll of holy word no_pickup q:2 /
     w:22  scroll of silence no_pickup q:1 /
     w:5   scroll of silence no_pickup q:2 /
     w:11  scroll of acquirement no_pickup q:1 /
     w:4   scroll of acquirement no_pickup q:2 /
     w:1   scroll of acquirement no_pickup q:3 /
-    w:11  scroll of brand weapon no_pickup q:1 /
-    w:11  scroll of torment no_pickup q:1 /
-    w:11  scroll of vulnerability no_pickup
+    w:16  scroll of brand weapon no_pickup q:1 /
+    w:16  scroll of torment no_pickup q:1 /
+    w:14  scroll of vulnerability no_pickup
     ]]
 
 -- Some scroll and potions with weights that are used as nice loot. These lists

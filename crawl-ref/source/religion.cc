@@ -1227,6 +1227,9 @@ static bool _handle_uskayaw_ability_unlocks()
 
 static bool _gift_sif_kiku_gift(bool forced)
 {
+    if (you.species == SP_ONI)
+        return false;
+
     bool success = false;
     book_type gift = NUM_BOOKS;
     // Break early if giving a gift now means it would be lost.

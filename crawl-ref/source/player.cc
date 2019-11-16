@@ -5923,6 +5923,7 @@ int player::skill(skill_type sk_input, int scale, bool real, bool drained, bool 
             break;
         default: break;
         }
+        break;
     case SP_ONI:
         switch (sk_input)
         {
@@ -5942,6 +5943,7 @@ int player::skill(skill_type sk_input, int scale, bool real, bool drained, bool 
             break;
         default: break;
         }
+        break;
     default: break;
     }
 

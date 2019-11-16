@@ -5907,7 +5907,9 @@ int player::skill(skill_type sk_input, int scale, bool real, bool drained, bool 
     // If you add another enhancement/reduction, be sure to change
     // SkillMenuSwitch::get_help() to reflect that
     skill_type sk = sk_input;
-    if(you.species == SP_HILL_ORC)
+    switch(you.species)
+    {
+    case SP_HILL_ORC:
         switch (sk_input)
         {
         case SK_SHORT_BLADES:
@@ -5919,9 +5921,29 @@ int player::skill(skill_type sk_input, int scale, bool real, bool drained, bool 
         case SK_UNARMED_COMBAT:
             sk = SK_FIGHTING;
             break;
-        default:
-            break;
+        default: break;
         }
+    case SP_ONI:
+        switch (sk_input)
+        {
+        case SK_CONJURATIONS:
+        case SK_HEXES:
+        case SK_CHARMS:
+        case SK_SUMMONINGS:
+        case SK_NECROMANCY:
+        case SK_TRANSLOCATIONS:
+        case SK_TRANSMUTATIONS:
+        case SK_FIRE_MAGIC:
+        case SK_ICE_MAGIC:
+        case SK_AIR_MAGIC:
+        case SK_EARTH_MAGIC:
+        case SK_POISON_MAGIC:
+            sk = SK_SPELLCASTING;
+            break;
+        default: break;
+        }
+    default: break;
+    }
 
     // wizard racechange, or upgraded old save
     if (is_useless_skill(sk))

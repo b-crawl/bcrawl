@@ -2000,7 +2000,7 @@ bool kiku_gift_necronomicon()
     
     if (you.species == SP_ONI)
     {
-        simple_god_message("says: Illiterate? No matter.");
+        simple_god_message(" says: Illiterate? No matter.");
         mprf(MSGCH_GOD, "Terrible necromantic knowledge echoes in your mind!");
         you.spell_library.set(SPELL_DEATH_CHANNEL, true);
         you.spell_library.set(SPELL_HAUNT, true);

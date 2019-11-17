@@ -133,6 +133,8 @@ Pull requests for new content are welcome.
   - v1.16: Fairies have adjusted aptitudes.
   - v1.16: Ghouls start with a chunk instead of a ration.
   - v1.17: Black Draconians have a better Fighting aptitude. (+1 -> +3)
+  - v1.19.1: Oni use Spellcasting as magic school skill level for all non-spell magic school skill checks.
+  - v1.19.1: Oni can receive Kikubaaqudgha's final spell gifts.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

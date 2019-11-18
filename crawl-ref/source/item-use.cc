@@ -668,6 +668,9 @@ bool armour_prompt(const string & mesg, int *index, operation_types oper)
  */
 static int armour_equip_delay(const item_def &item)
 {
+    if (item.sub_type == ARM_BUCKLER)
+        return 1;
+    
     return 5;
 }
 

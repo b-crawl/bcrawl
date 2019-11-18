@@ -292,6 +292,7 @@ Pull requests for new content are welcome.
   - v1.17.2: Blowguns have higher base delay. (10 -> 12)
   - v1.18: The fustibalus has higher base damage (10 -> 11) and base delay (14 -> 15).
   - v1.18: Executioner's axes have lower base delay (20 -> 19).
+  - v1.19.1: Bucklers can be equipped and unequipped in 1 turn.
 
 #### Removed Items
   - Amulet of Harm

@@ -3191,7 +3191,7 @@ bool bolt::misses_player()
 
         const int block = you.shield_bonus();
 
-        // 50% chance of blocking ench-type effects at 20 displayed sh
+        // 50% chance of blocking ench-type effects at 30 displayed sh
         const bool omnireflected
             = hit == AUTOMATIC_HIT
               && x_chance_in_y(SH, omnireflect_chance_denom(SH));
@@ -6725,7 +6725,7 @@ bool shoot_through_monster(const bolt& beam, const monster* victim)
  */
 int omnireflect_chance_denom(int SH)
 {
-    return SH + 40;
+    return SH + 30;
 }
 
 /// Set up a beam aiming from the given monster to their target.

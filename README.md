@@ -133,6 +133,8 @@ Pull requests for new content are welcome.
   - v1.16: Fairies have adjusted aptitudes.
   - v1.16: Ghouls start with a chunk instead of a ration.
   - v1.17: Black Draconians have a better Fighting aptitude. (+1 -> +3)
+  - v1.19.1: Oni use Spellcasting as magic school skill level for all non-spell magic school skill checks.
+  - v1.19.1: Oni can receive Kikubaaqudgha's final spell gifts.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -290,6 +292,8 @@ Pull requests for new content are welcome.
   - v1.17.2: Blowguns have higher base delay. (10 -> 12)
   - v1.18: The fustibalus has higher base damage (10 -> 11) and base delay (14 -> 15).
   - v1.18: Executioner's axes have lower base delay (20 -> 19).
+  - v1.19.1: Bucklers can be equipped and unequipped in 1 turn.
+  - v1.19.1: A staff of power gives less (15 -> 12) extra max mana.
 
 #### Removed Items
   - Amulet of Harm
@@ -365,6 +369,7 @@ Pull requests for new content are welcome.
   - v1.18.1: Shadow Fiends have Shadow Creatures.
   - v1.19: Dithmenos shadows, Nemelex player illusions, and friendly lightning spires are not angered by attacks from players.
   - v1.19: Draconian knights have a reworked spell set.
+  - v1.19.1: Crocodiles can sprint.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

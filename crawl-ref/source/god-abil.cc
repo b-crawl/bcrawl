@@ -1997,8 +1997,19 @@ bool kiku_gift_necronomicon()
         canned_msg(MSG_OK);
         return false;
     }
-    int thing_created = items(true, OBJ_BOOKS, BOOK_NECRONOMICON, 1, 0,
-                              you.religion);
+    
+    if (you.species == SP_ONI)
+    {
+        simple_god_message(" says: Illiterate? No matter.");
+        mprf(MSGCH_GOD, "Terrible necromantic knowledge echoes in your mind!");
+        you.spell_library.set(SPELL_DEATH_CHANNEL, true);
+        you.spell_library.set(SPELL_HAUNT, true);
+        you.spell_library.set(SPELL_BORGNJORS_REVIVIFICATION, true);
+        you.spell_library.set(SPELL_NECROMUTATION, true);
+    }
+    else
+    {
+    int thing_created = items(true, OBJ_BOOKS, BOOK_NECRONOMICON, 1, 0, you.religion);
     if (thing_created == NON_ITEM
         || !move_item_to_grid(&thing_created, you.pos()))
     {
@@ -2006,6 +2017,8 @@ bool kiku_gift_necronomicon()
     }
     set_ident_type(mitm[thing_created], true);
     simple_god_message(" grants you a gift!");
+    }
+    
     flash_view(UA_PLAYER, RED);
 #ifndef USE_TILE_LOCAL
     // Allow extra time for the flash to linger.

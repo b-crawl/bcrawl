@@ -84,6 +84,8 @@ static void _initialize()
 
     seed_rng(); // don't use any chosen seed yet
 
+    clua.init_libraries();
+
     init_char_table(Options.char_set);
     init_show_table();
     init_monster_symbols();

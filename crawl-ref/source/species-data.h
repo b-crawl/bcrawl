@@ -47,7 +47,7 @@ static const map<species_type, species_def> species_data =
     9, 8, 7, // 24
     { STAT_STR, STAT_INT, STAT_DEX }, 4,
     { { MUT_SLOW, 1, 1 }, { MUT_HOP, 1, 1}, {MUT_HOP, 1, 13}, },
-    { "Shadows flee at your approach. (+LOS)", "You can swim through water.", },
+    { "You can see and be seen from farther away.", "You can swim through water.", },
     { "+LOS", "swims", },
     { JOB_FIGHTER, JOB_BERSERKER, JOB_SKALD, JOB_WARPER, JOB_SUMMONER,
       JOB_ICE_ELEMENTALIST, JOB_SLOTH_APOSTLE },

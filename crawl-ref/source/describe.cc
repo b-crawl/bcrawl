@@ -3679,7 +3679,7 @@ static string _monster_missiles_description(const monster_info& mi)
 
     string desc;
     desc += uppercase_first(mi.pronoun(PRONOUN_SUBJECTIVE));
-    desc += mi.pronoun_plurality() ? " are quivering " : " is quivering ";
+    desc += " is quivering ";
     desc += missile->name(DESC_A, false, false, true, false, ISFLAG_KNOW_CURSE);
     desc += ".\n";
     return desc;

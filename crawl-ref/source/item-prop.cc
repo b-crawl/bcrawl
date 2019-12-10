@@ -1653,14 +1653,6 @@ bool is_offensive_wand(const item_def& item)
 {
     switch (item.sub_type)
     {
-    // Monsters don't use those, so no need to warn the player about them.
-    case WAND_CLOUDS:
-    case WAND_RANDOM_EFFECTS:
-    case WAND_SCATTERSHOT:
-    // Monsters use it, but it's not an offensive wand
-    case WAND_DIGGING:
-        return false;
-
     case WAND_ICEBLAST:
     case WAND_ENSLAVEMENT:
     case WAND_FLAME:
@@ -1669,8 +1661,9 @@ bool is_offensive_wand(const item_def& item)
     case WAND_ACID:
     case WAND_DISINTEGRATION:
         return true;
+    
+    default: return false;
     }
-    return false;
 }
 
 // Returns whether a piece of armour can be enchanted further.

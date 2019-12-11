@@ -24,6 +24,7 @@
 #include "spl-util.h"
 #include "state.h"
 #include "stringutil.h"
+#include "transform.h"
 #include "unwind.h"
 
 #define MAX_GHOST_DAMAGE    100

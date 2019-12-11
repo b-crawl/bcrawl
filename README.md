@@ -97,6 +97,7 @@ Pull requests for new content are welcome.
   - v1.8.6: Starting skills are based on +0 aptitude (-1 for Spellcasting) instead of Human aptitudes.
   - v1.15.1: Guaranteed damage reduction now affects player damage from spells with non-elemental damage.
   - v1.19: The combined effect of wizardry items, Vehumet, and brilliance potions is no longer capped.
+  - v1.19.2: Poison on monsters is no longer capped at 4 stacks.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -195,6 +196,7 @@ Pull requests for new content are welcome.
   - v1.18: Ice Form gives MR++, its AC scales more with spell power, and it has good guaranteed damage reduction.
   - v1.18.1: Shatter no longer damages or angers insubstantial monsters. (This reverses a change made in Nov. 2017.)
   - v1.18.1: Call Imp always summons Crimson Imps at low power, instead of having a fixed chance to summon White Imps.
+  - v1.19.2: Searing Ray has an unlimited duration and higher max spell power, but uses 2 mana/turn at full strength.
 
 #### Removed Spells
   - Summon Guardian Golem

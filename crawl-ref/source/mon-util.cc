@@ -861,16 +861,19 @@ bool mons_is_projectile(const monster& mon)
     return mons_is_projectile(mon.type);
 }
 
-static bool _mons_class_is_clingy(monster_type type)
-{
-    return mons_genus(type) == MONS_SPIDER || type == MONS_LEOPARD_GECKO
-        || type == MONS_GIANT_COCKROACH || type == MONS_DEMONIC_CRAWLER
-        || type == MONS_DART_SLUG;
-}
-
 bool mons_can_cling_to_walls(const monster& mon)
 {
-    return _mons_class_is_clingy(mon.type);
+    switch(mon.type)
+    {
+    case MONS_LEOPARD_GECKO:
+    case MONS_GIANT_COCKROACH:
+    case MONS_TARANTELLA:
+    case MONS_JUMPING_SPIDER:
+    case MONS_WOLF_SPIDER:
+    case MONS_REDBACK:
+        return true;
+    default: return false;
+    }
 }
 
 // Conjuration or Hexes. Summoning and Necromancy make the monster a creature
@@ -3504,9 +3507,9 @@ bool mons_is_influenced_by_sanctuary(const monster& m)
 
 bool mons_is_fleeing_sanctuary(const monster& m)
 {
-    return mons_is_influenced_by_sanctuary(m)
-           && in_bounds(env.sanctuary_pos)
-           && (m.flags & MF_FLEEING_FROM_SANCTUARY);
+    return sanctuary_exists()
+           && (m.flags & MF_FLEEING_FROM_SANCTUARY)
+           && mons_is_influenced_by_sanctuary(m);
 }
 
 bool mons_just_slept(const monster& m)
@@ -4078,17 +4081,20 @@ bool monster_senior(const monster& m1, const monster& m2, bool fleeing)
             return false;
     }
 
-    // If they're the same holiness, monsters smart enough to use stairs can
-    // push past monsters too stupid to use stairs (so that e.g. non-zombified
-    // or spectral zombified undead can push past non-spectral zombified
-    // undead).
-    if (m1.holiness() & m2.holiness() && mons_class_can_use_stairs(m1.type)
+    // Monsters smart enough to use stairs can push past monsters too stupid
+    // to use stairs (so that e.g. non-zombified or spectral zombified undead
+    // can push past non-spectral zombified undead).
+    if (mons_class_can_use_stairs(m1.type)
         && !mons_class_can_use_stairs(m2.type))
     {
         return true;
     }
+    // This check assumes that demonicness is always carried at the monster type
+    // level; this is because a full holiness check in such an often-called
+    // function is costly.
     const bool related = mons_genus(m1.type) == mons_genus(m2.type)
-                         || (m1.holiness() & m2.holiness() & MH_DEMONIC);
+                            || (   mons_class_holiness(m1.type) & MH_DEMONIC
+                                && mons_class_holiness(m2.type) & MH_DEMONIC);
 
     // Let all related monsters (all demons are 'related') push past ones that
     // are weaker at all. Unrelated ones have to be quite a bit stronger, to

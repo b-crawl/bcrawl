@@ -936,15 +936,15 @@ static bool _mons_check_foe(monster* mon, const coord_def& p,
 
     monster* foe = monster_at(p);
     return foe && foe != mon
-           && (mon->has_ench(ENCH_INSANE)
-               || foe->friendly() != friendly
-               || neutral && !foe->neutral())
            && (ignore_sight || mon->can_see(*foe))
+           && (foe->friendly() != friendly
+               || neutral && !foe->neutral()
+               || mon->has_ench(ENCH_INSANE))
            && !mons_is_projectile(*foe)
            && summon_can_attack(mon, p)
            && (friendly || !is_sanctuary(p))
            && !mons_is_firewood(*foe)
-           || mon->has_ench(ENCH_INSANE) && p == you.pos();
+           || p == you.pos() && mon->has_ench(ENCH_INSANE);
 }
 
 // Choose random nearest monster as a foe.
@@ -964,12 +964,13 @@ void set_nearest_monster_foe(monster* mon, bool near_player)
 
     coord_def center = mon->pos();
     bool second_pass = false;
+    vector<coord_def> monster_pos;
 
     while (true)
     {
         for (int k = 1; k <= LOS_RADIUS; ++k)
         {
-            vector<coord_def> monster_pos;
+            monster_pos.clear();
             for (int i = -k; i <= k; ++i)
                 for (int j = -k; j <= k; (abs(i) == k ? j++ : j += 2*k))
                 {

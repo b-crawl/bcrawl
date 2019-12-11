@@ -32,6 +32,7 @@
 #include "misc.h"
 #include "mon-death.h"
 #include "movement.h"
+#include "nearby-danger.h" // for upward stair teleport check
 #include "notes.h"
 #include "orb.h"
 #include "orb-type.h"
@@ -521,7 +522,8 @@ static level_id _travel_destination(const dungeon_feature_type how,
         return dest;
     }
     else if(going_up && feat_is_staircase(how) && one_chance_in(25)
-        && !(player_in_branch(BRANCH_DUNGEON) && you.depth < 3))
+        && !(player_in_branch(BRANCH_DUNGEON) && you.depth < 3)
+        && there_are_monsters_nearby(true, true, false))
     {
         mpr("As you climb the stairs, a rune flashes!");
         if (you.no_tele(true, true))

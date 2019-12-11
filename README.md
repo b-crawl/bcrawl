@@ -88,6 +88,7 @@ Pull requests for new content are welcome.
   - v1.14.2: Monsters stepping on visible alarm traps will mark the player.
   - v1.18: New default macros: 'p' = melee attack; '[' = melee attack if in range, otherwise throw; ']' = 3x '['.
   - v1.18.1: New default macros: ';' = rest; '"' = ';'.
+  - v1.19.2: Taking stairs upwards when no monsters are visible will never teleport players.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -97,6 +98,7 @@ Pull requests for new content are welcome.
   - v1.8.6: Starting skills are based on +0 aptitude (-1 for Spellcasting) instead of Human aptitudes.
   - v1.15.1: Guaranteed damage reduction now affects player damage from spells with non-elemental damage.
   - v1.19: The combined effect of wizardry items, Vehumet, and brilliance potions is no longer capped.
+  - v1.19.2: Poison on monsters is no longer capped at 4 stacks.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -195,6 +197,7 @@ Pull requests for new content are welcome.
   - v1.18: Ice Form gives MR++, its AC scales more with spell power, and it has good guaranteed damage reduction.
   - v1.18.1: Shatter no longer damages or angers insubstantial monsters. (This reverses a change made in Nov. 2017.)
   - v1.18.1: Call Imp always summons Crimson Imps at low power, instead of having a fixed chance to summon White Imps.
+  - v1.19.2: Searing Ray has an unlimited duration and higher max spell power, but uses 2 mana/turn at full strength.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -370,6 +373,7 @@ Pull requests for new content are welcome.
   - v1.19: Dithmenos shadows, Nemelex player illusions, and friendly lightning spires are not angered by attacks from players.
   - v1.19: Draconian knights have a reworked spell set.
   - v1.19.1: Crocodiles can sprint.
+  - v1.19.2: Player ghost damage is calculated differently, making weapon base damage less important.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -391,3 +395,4 @@ Pull requests for new content are welcome.
   - v1.16: Arachne is reworked.
   - v1.17.2: Gastronok acts faster and casts much faster.
   - v1.19: Nikola is reworked, losing Chain Lightning but gaining Deflect Missiles and a rapier of distortion.
+  - v1.19.2: Louise has higher-level conjurations.

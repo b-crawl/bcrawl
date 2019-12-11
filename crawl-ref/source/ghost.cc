@@ -24,6 +24,7 @@
 #include "spl-util.h"
 #include "state.h"
 #include "stringutil.h"
+#include "transform.h"
 #include "unwind.h"
 
 #define MAX_GHOST_DAMAGE    100
@@ -300,7 +301,7 @@ void ghost_demon::init_player_ghost(bool actual_ghost)
     move_energy = 10;
     speed       = 10;
 
-    damage = 4;
+    damage = 0;
     brand = SPWPN_NORMAL;
 
     if (you.weapon())
@@ -314,8 +315,7 @@ void ghost_demon::init_player_ghost(bool actual_ghost)
 
             skill_type sk = (you.species == SP_HILL_ORC && !is_range_weapon(weapon)) ?
                     SK_FIGHTING : item_attack_skill(weapon);
-            damage *= 25 + you.skills[sk];
-            damage /= 25;
+            damage += you.skills[sk];
 
             if (weapon.base_type == OBJ_WEAPONS)
             {
@@ -348,16 +348,19 @@ void ghost_demon::init_player_ghost(bool actual_ghost)
     else
     {
         // Unarmed combat.
-        if (you.has_innate_mutation(MUT_CLAWS))
-            damage += you.experience_level;
+        damage = get_form()->get_base_unarmed_damage();
+
+        // Claw damage only applies for bare hands.
+        if (you.has_usable_claws())
+            damage += you.has_claws() * 2;
 
         damage += you.skills[SK_UNARMED_COMBAT];
+        damage += you.experience_level / 3;
     }
 
-    damage *= 30 + you.skills[SK_FIGHTING];
-    damage /= 30;
-
-    damage += you.strength() / 4;
+    damage *= 25 + you.skills[SK_FIGHTING];
+    damage *= 20 + you.strength();  // 30 + strength-10
+    damage /= (25 * 30);
 
     if (damage > MAX_GHOST_DAMAGE)
         damage = MAX_GHOST_DAMAGE;

@@ -2173,16 +2173,26 @@ void mon_enchant::merge_killer(kill_category k, mid_t m)
 
 void mon_enchant::cap_degree()
 {
-    // Sickness & draining are not capped.
-    if (ench == ENCH_SICK || ench == ENCH_DRAINED)
+    int cap = MAX_ENCH_DEGREE_DEFAULT;
+    switch(ench)
+    {
+    case ENCH_SICK:
+    case ENCH_DRAINED:
+    case ENCH_POISON:
         return;
+    
+    case ENCH_ABJ:
+    case ENCH_FAKE_ABJURATION:
+        cap = MAX_ENCH_DEGREE_ABJURATION;
+        break;
+    
+    default: break;
+    }
 
     // Hard cap to simulate old enum behaviour, we should really throw this
     // out entirely.
-    const int max = (ench == ENCH_ABJ || ench == ENCH_FAKE_ABJURATION) ?
-            MAX_ENCH_DEGREE_ABJURATION : MAX_ENCH_DEGREE_DEFAULT;
-    if (degree > max)
-        degree = max;
+    if (degree > cap)
+        degree = cap;
 }
 
 mon_enchant &mon_enchant::operator += (const mon_enchant &other)

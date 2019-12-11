@@ -17,6 +17,7 @@
 
 #include "act-iter.h"
 #include "areas.h"
+#include "artefact.h"
 #include "attitude-change.h"
 #include "cloud.h"
 #include "colour.h"
@@ -88,6 +89,7 @@ enum LOSSelect
 #ifdef WIZARD
 static void _wizard_make_friendly(monster* m);
 #endif
+static dist _look_around_target(const coord_def &whence);
 static void _describe_oos_feature(const coord_def& where);
 static void _describe_cell(const coord_def& where, bool in_range = true);
 static bool _print_cloud_desc(const coord_def where);
@@ -825,14 +827,7 @@ void full_describe_view()
 
 void do_look_around(const coord_def &whence)
 {
-    dist lmove;   // Will be initialised by direction().
-    direction_chooser_args args;
-    args.restricts = DIR_TARGET;
-    args.just_looking = true;
-    args.needs_path = false;
-    args.target_prefix = "Here";
-    args.default_place = whence;
-    direction(lmove, args);
+    dist lmove = _look_around_target(you.pos() + whence);
     if (lmove.isValid && lmove.isTarget && !lmove.isCancel
         && !crawl_state.arena_suspended)
     {
@@ -840,6 +835,27 @@ void do_look_around(const coord_def &whence)
     }
 }
 
+bool get_look_position(coord_def *c)
+{
+    dist lmove = _look_around_target(you.pos());
+    if (lmove.isCancel)
+        return false;
+    *c = lmove.target;
+    return true;
+}
+
+static dist _look_around_target(const coord_def &whence)
+{
+    dist lmove;   // Will be initialised by direction().
+    direction_chooser_args args;
+    args.restricts = DIR_TARGET;
+    args.just_looking = true;
+    args.needs_path = false;
+    args.target_prefix = "Here";
+    args.default_place = whence - you.pos();
+    direction(lmove, args);
+    return lmove;
+}
 
 range_view_annotator::range_view_annotator(targeter *range)
 {
@@ -1845,7 +1861,8 @@ void direction_chooser::highlight_summoner()
     // wipe any beams we might have drawn, and also reset the monster_info we
     // just altered, before it draws anything.
     viewwindow(false, true);
-#else
+#endif
+#if defined(USE_TILE_WEB) || !defined(USE_TILE)
     char32_t glych  = get_cell_glyph(summ_loc).ch;
     int col = CYAN;
     col |= COLFLAG_REVERSE;
@@ -3365,25 +3382,22 @@ string get_monster_equipment_desc(const monster_info& mi,
     item_def* mon_wnd = mi.inv[MSLOT_WAND].get();
     item_def* mon_rng = mi.inv[MSLOT_JEWELLERY].get();
 
-#define no_warn(x) (!item_type_known(*x) || !item_is_branded(*x))
-    // For Ashenzari warnings, we only care about ided and branded stuff.
+#define uninteresting(x) (x && !item_is_branded(*x) && !is_artefact(*x))
+    // For "comes into view" msgs, only care about branded stuff and artefacts
     if (level == DESC_IDENTIFIED)
     {
-        if (mon_arm && no_warn(mon_arm))
-            mon_arm = 0;
-        if (mon_shd && no_warn(mon_shd))
-            mon_shd = 0;
-        if (mon_qvr && no_warn(mon_qvr))
-            mon_qvr = 0;
-        if (mon_rng && no_warn(mon_rng))
-            mon_rng = 0;
-        if (mon_alt && (!item_type_known(*mon_alt)
-                        || mon_alt->base_type == OBJ_WANDS
-                        && !is_offensive_wand(*mon_alt)))
-        {
-            mon_alt = 0;
-        }
+        if (uninteresting(mon_arm))
+            mon_arm = nullptr;
+        if (uninteresting(mon_shd))
+            mon_shd = nullptr;
+        if (uninteresting(mon_qvr))
+            mon_qvr = nullptr;
+        if (uninteresting(mon_rng))
+            mon_rng = nullptr;
+        if (uninteresting(mon_alt) && mon_alt->base_type != OBJ_WANDS)
+            mon_alt = nullptr;
     }
+#undef uninteresting
 
     // _describe_monster_weapon already took care of this
     if (mi.wields_two_weapons())

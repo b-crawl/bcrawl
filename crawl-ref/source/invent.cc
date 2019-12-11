@@ -275,9 +275,6 @@ void get_class_hotkeys(const int type, vector<char> &glyphs)
     case OBJ_MISCELLANY:
         glyphs.push_back('}');
         break;
-    case OBJ_CORPSES:
-        glyphs.push_back('&');
-        break;
     default:
         break;
     }
@@ -1623,8 +1620,7 @@ static bool _is_known_no_tele_item(const item_def &item)
     if (!is_artefact(item))
         return false;
 
-    bool known;
-    return artefact_property(item, ARTP_PREVENT_TELEPORTATION, known) && known;
+    return artefact_known_property(item, ARTP_PREVENT_TELEPORTATION);
 }
 
 bool needs_notele_warning(const item_def &item, operation_types oper)

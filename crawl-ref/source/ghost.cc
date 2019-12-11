@@ -272,36 +272,6 @@ static const set<brand_type> ghost_banned_brands =
 
 void ghost_demon::init_player_ghost(bool actual_ghost)
 {
-    // don't preserve transformations for ghosty purposes
-    unwind_var<transformation> form(you.form, transformation::none);
-    unwind_var<FixedBitVector<NUM_EQUIP>> melded(you.melded,
-                                                 FixedBitVector<NUM_EQUIP>());
-    unwind_var<bool> fishtail(you.fishtail, false);
-
-    name   = you.your_name;
-    max_hp = min(get_real_hp(false, false), MAX_GHOST_HP);
-    ev     = min(you.evasion(EV_IGNORE_HELPLESS), MAX_GHOST_EVASION);
-    ac     = you.armour_class();
-    dprf("ghost ac: %d, ev: %d", ac, ev);
-
-    see_invis      = you.can_see_invisible();
-    resists        = 0;
-    set_resist(resists, MR_RES_FIRE, player_res_fire());
-    set_resist(resists, MR_RES_COLD, player_res_cold());
-    set_resist(resists, MR_RES_ELEC, player_res_electricity());
-    // clones might lack innate rPois, copy it. pghosts don't care.
-    set_resist(resists, MR_RES_POISON, player_res_poison());
-    set_resist(resists, MR_RES_NEG, you.res_negative_energy());
-    set_resist(resists, MR_RES_ACID, player_res_acid());
-    // multi-level for players, boolean as an innate monster resistance
-    set_resist(resists, MR_RES_STEAM, player_res_steam() ? 1 : 0);
-    set_resist(resists, MR_RES_STICKY_FLAME, player_res_sticky_flame());
-    set_resist(resists, MR_RES_ROTTING, you.res_rotting());
-    set_resist(resists, MR_RES_PETRIFY, you.res_petrify());
-
-    move_energy = 10;
-    speed       = 10;
-
     damage = 0;
     brand = SPWPN_NORMAL;
 
@@ -316,7 +286,7 @@ void ghost_demon::init_player_ghost(bool actual_ghost)
 
             skill_type sk = (you.species == SP_HILL_ORC && !is_range_weapon(weapon)) ?
                     SK_FIGHTING : item_attack_skill(weapon);
-            damage += you.skill(sk, 1, false, false);
+            damage += you.skill(sk, 3, false, false) / 5;
 
             if (weapon.base_type == OBJ_WEAPONS)
             {
@@ -359,13 +329,46 @@ void ghost_demon::init_player_ghost(bool actual_ghost)
         damage += you.experience_level / 3;
     }
 
-    damage *= 25 + you.skill(SK_FIGHTING, 1, false, false);
-    damage /= 25;
+    damage *= 60 + you.skill(SK_FIGHTING, 1, false, false);
+    damage /= 60;
     damage *= 20 + you.strength();  // 30 + strength-10
     damage /= 30;
 
     if (damage > MAX_GHOST_DAMAGE)
         damage = MAX_GHOST_DAMAGE;
+
+
+    ac     = you.armour_class();
+    dprf("ghost ac: %d, ev: %d", ac, ev);
+
+    see_invis      = you.can_see_invisible();
+    resists        = 0;
+    set_resist(resists, MR_RES_FIRE, player_res_fire());
+    set_resist(resists, MR_RES_COLD, player_res_cold());
+    set_resist(resists, MR_RES_ELEC, player_res_electricity());
+    // clones might lack innate rPois, copy it. pghosts don't care.
+    set_resist(resists, MR_RES_POISON, player_res_poison());
+    set_resist(resists, MR_RES_NEG, you.res_negative_energy());
+    set_resist(resists, MR_RES_ACID, player_res_acid());
+    // multi-level for players, boolean as an innate monster resistance
+    set_resist(resists, MR_RES_STEAM, player_res_steam() ? 1 : 0);
+    set_resist(resists, MR_RES_STICKY_FLAME, player_res_sticky_flame());
+    set_resist(resists, MR_RES_ROTTING, you.res_rotting());
+    set_resist(resists, MR_RES_PETRIFY, you.res_petrify());
+
+
+    // don't preserve transformations for ghosty purposes
+    unwind_var<transformation> form(you.form, transformation::none);
+    unwind_var<FixedBitVector<NUM_EQUIP>> melded(you.melded,
+                                                 FixedBitVector<NUM_EQUIP>());
+    unwind_var<bool> fishtail(you.fishtail, false);
+
+    name   = you.your_name;
+    max_hp = min(get_real_hp(false, false), MAX_GHOST_HP);
+    ev     = min(you.evasion(EV_IGNORE_HELPLESS), MAX_GHOST_EVASION);
+
+    move_energy = 10;
+    speed       = 10;
 
     species = you.species;
     job = you.char_class;

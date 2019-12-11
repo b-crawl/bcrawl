@@ -393,3 +393,4 @@ Pull requests for new content are welcome.
   - v1.16: Arachne is reworked.
   - v1.17.2: Gastronok acts faster and casts much faster.
   - v1.19: Nikola is reworked, losing Chain Lightning but gaining Deflect Missiles and a rapier of distortion.
+  - v1.19.2: Louise has higher-level conjurations.

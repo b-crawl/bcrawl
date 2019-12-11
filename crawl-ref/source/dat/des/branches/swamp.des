@@ -2371,9 +2371,9 @@ PLACE:   Swamp:$
 ORIENT:  float
 MONS:    swamp dragon / swamp drake / hydra
 MONS:    freezing wraith / flayed ghost / phantasmal warrior / ghoul
-MONS:    hydra skeleton / bone dragon
-MONS:    hydra zombie / death scarab / quicksilver dragon zombie
-MONS:    spectral hydra / ghost crab
+MONS:    hydra skeleton / bone dragon / quicksilver dragon skeleton
+MONS:    hydra zombie / swamp dragon zombie / quicksilver dragon zombie
+MONS:    spectral hydra / spectral swamp dragon / ghost crab
 MONS:    patrolling thorn hunter / patrolling shambling mangrove
 MONS:    patrolling spriggan druid god:fedhas
 KITEM:   O = decaying rune of Zot

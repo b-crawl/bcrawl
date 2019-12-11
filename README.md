@@ -372,6 +372,7 @@ Pull requests for new content are welcome.
   - v1.19: Dithmenos shadows, Nemelex player illusions, and friendly lightning spires are not angered by attacks from players.
   - v1.19: Draconian knights have a reworked spell set.
   - v1.19.1: Crocodiles can sprint.
+  - v1.19.2: Player ghost damage is calculated differently, making weapon base damage less important.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

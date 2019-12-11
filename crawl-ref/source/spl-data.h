@@ -2929,7 +2929,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_CONJURATION,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER,
     2,
-    50,
+    100,
     4, 4,
     2, 0,
     TILEG_SEARING_RAY,

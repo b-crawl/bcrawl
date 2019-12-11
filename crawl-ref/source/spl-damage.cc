@@ -2816,14 +2816,17 @@ void handle_searing_ray()
         return;
     }
 
-    if (!enough_mp(1, true))
+    int ray_power_level = min(2, (you.attribute[ATTR_SEARING_RAY]-1));
+    int required_mp = ray_power_level >= 2 ? 2 : 1;
+
+    if (!enough_mp(required_mp, true))
     {
         mpr("Without enough magic to sustain it, your searing ray dissipates.");
         end_searing_ray();
         return;
     }
 
-    const zap_type zap = zap_type(ZAP_SEARING_RAY_I + (you.attribute[ATTR_SEARING_RAY]-1));
+    const zap_type zap = zap_type(ZAP_SEARING_RAY_I + ray_power_level);
     const int pow = calc_spell_power(SPELL_SEARING_RAY, true);
 
     bolt beam;
@@ -2847,13 +2850,10 @@ void handle_searing_ray()
     beam.fire();
     trigger_battlesphere(&you, beam);
 
-    dec_mp(1);
+    dec_mp(required_mp);
 
-    if (++you.attribute[ATTR_SEARING_RAY] > 3)
-    {
-        mpr("You finish channeling your searing ray.");
-        end_searing_ray();
-    }
+    if (you.attribute[ATTR_SEARING_RAY] < 3)
+        you.attribute[ATTR_SEARING_RAY]++;
 }
 
 void end_searing_ray()

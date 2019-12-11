@@ -20,6 +20,7 @@
 #include "mon-cast.h"
 #include "mon-transit.h"
 #include "ng-input.h"
+#include "player.h"
 #include "skills.h"
 #include "spl-util.h"
 #include "state.h"
@@ -315,7 +316,7 @@ void ghost_demon::init_player_ghost(bool actual_ghost)
 
             skill_type sk = (you.species == SP_HILL_ORC && !is_range_weapon(weapon)) ?
                     SK_FIGHTING : item_attack_skill(weapon);
-            damage += you.skills[sk];
+            damage += you.skill(sk, 1, false, false);
 
             if (weapon.base_type == OBJ_WEAPONS)
             {
@@ -354,13 +355,14 @@ void ghost_demon::init_player_ghost(bool actual_ghost)
         if (you.has_usable_claws())
             damage += you.has_claws() * 2;
 
-        damage += you.skills[SK_UNARMED_COMBAT];
+        damage += you.skill(SK_UNARMED_COMBAT, 1, false, false);
         damage += you.experience_level / 3;
     }
 
-    damage *= 25 + you.skills[SK_FIGHTING];
+    damage *= 25 + you.skill(SK_FIGHTING, 1, false, false);
+    damage /= 25;
     damage *= 20 + you.strength();  // 30 + strength-10
-    damage /= (25 * 30);
+    damage /= 30;
 
     if (damage > MAX_GHOST_DAMAGE)
         damage = MAX_GHOST_DAMAGE;

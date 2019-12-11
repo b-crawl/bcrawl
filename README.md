@@ -88,6 +88,7 @@ Pull requests for new content are welcome.
   - v1.14.2: Monsters stepping on visible alarm traps will mark the player.
   - v1.18: New default macros: 'p' = melee attack; '[' = melee attack if in range, otherwise throw; ']' = 3x '['.
   - v1.18.1: New default macros: ';' = rest; '"' = ';'.
+  - v1.19.2: Taking stairs upwards when no monsters are visible will never teleport players.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.

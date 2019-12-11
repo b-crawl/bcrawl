@@ -190,16 +190,16 @@ private:
     int range;
 };
 
-class targeter_radius : public targeter
+class targeter_los : public targeter
 {
 public:
-    targeter_radius(const actor *act, los_type los = LOS_DEFAULT,
-                  int ran = LOS_RADIUS, int ran_max = 0, int ran_min = 0);
+    targeter_los(const actor *act, los_type los = LOS_DEFAULT,
+                  int ran = LOS_RADIUS, int ran_max = 0);
     bool valid_aim(coord_def a) override;
     aff_type is_affected(coord_def loc) override;
 private:
     los_type los;
-    int range, range_max, range_min;
+    int range, range_max;
 };
 
 class targeter_thunderbolt : public targeter

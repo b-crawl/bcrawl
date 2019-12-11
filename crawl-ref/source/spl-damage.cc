@@ -612,7 +612,7 @@ static spret _cast_los_attack_spell(spell_type spell, int pow,
     {
         ASSERT(actual);
 
-        targeter_radius hitfunc(&you, LOS_NO_TRANS);
+        targeter_los hitfunc(&you, LOS_NO_TRANS);
         // Singing Sword's spell shouldn't give a prompt at this time.
         if (spell != SPELL_SONIC_WAVE)
         {
@@ -1052,7 +1052,7 @@ static bool _shatterable(const actor *act)
 
 spret cast_shatter(int pow, bool fail)
 {
-    targeter_radius hitfunc(&you, LOS_ARENA);
+    targeter_los hitfunc(&you, LOS_ARENA);
     if (stop_attack_prompt(hitfunc, "attack", _shatterable))
         return spret::abort;
 
@@ -1223,6 +1223,31 @@ void shillelagh(actor *wielder, coord_def where, int pow)
 }
 
 /**
+ * Is it OK for the player to cast Irradiate right now, or will they end up
+ * injuring a monster they didn't mean to?
+ *
+ * @return  true if it's ok to go ahead with the spell; false if the player
+ *          wants to abort.
+ */
+static bool _irradiate_is_safe()
+{
+    for (adjacent_iterator ai(you.pos()); ai; ++ai)
+    {
+        const monster *mon = monster_at(*ai);
+        if (!mon)
+            continue;
+
+        if (you.deity() == GOD_FEDHAS && fedhas_protects(*mon))
+            continue;
+
+        if (stop_attack_prompt(mon, false, you.pos()))
+            return false;
+    }
+
+    return true;
+}
+
+/**
  * Irradiate the given cell. (Per the spell.)
  *
  * @param where     The cell in question.
@@ -1277,15 +1302,7 @@ static int _irradiate_cell(coord_def where, int pow, actor *agent)
  */
 spret cast_irradiate(int powc, actor* who, bool fail)
 {
-    targeter_radius hitfunc(who, LOS_NO_TRANS, 1, 0, 1);
-    auto vulnerable = [who](const actor *act) -> bool
-    {
-        return act->is_player()
-               && !(who->deity() == GOD_FEDHAS
-                    && fedhas_protects(*act->as_monster()));
-    };
-
-    if (stop_attack_prompt(hitfunc, "irradiate", vulnerable))
+    if (!_irradiate_is_safe())
         return spret::abort;
 
     fail_check();
@@ -1629,7 +1646,7 @@ spret cast_ignite_poison(actor* agent, int pow, bool fail, bool tracer)
         fail_check();
     }
 
-    targeter_radius hitfunc(agent, LOS_NO_TRANS);
+    targeter_los hitfunc(agent, LOS_NO_TRANS);
     flash_view_delay(
         agent->is_player()
             ? UA_PLAYER
@@ -1670,7 +1687,7 @@ spret cast_ignition(const actor *agent, int pow, bool fail)
 
     fail_check();
 
-    //targeter_radius hitfunc(agent, LOS_NO_TRANS);
+    targeter_los hitfunc(agent, LOS_NO_TRANS);
 
     // Ignition affects squares that had hostile monsters on them at the time
     // of casting. This way nothing bad happens when monsters die halfway
@@ -2638,7 +2655,7 @@ spret cast_toxic_radiance(actor *agent, int pow, bool fail, bool mon_tracer)
 {
     if (agent->is_player())
     {
-        targeter_radius hitfunc(&you, LOS_NO_TRANS);
+        targeter_los hitfunc(&you, LOS_NO_TRANS);
         {
             if (stop_attack_prompt(hitfunc, "poison", _toxic_can_affect))
                 return spret::abort;
@@ -2680,7 +2697,7 @@ spret cast_toxic_radiance(actor *agent, int pow, bool fail, bool mon_tracer)
                                         (4 + random2avg(pow/15, 2)) * BASELINE_DELAY));
         toxic_radiance_effect(agent, 10);
 
-        targeter_radius hitfunc(mon_agent, LOS_NO_TRANS);
+        targeter_los hitfunc(mon_agent, LOS_NO_TRANS);
         flash_view_delay(UA_MONSTER, GREEN, 300, &hitfunc);
 
         return spret::success;

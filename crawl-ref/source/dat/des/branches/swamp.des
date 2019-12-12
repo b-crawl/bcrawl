@@ -2371,9 +2371,9 @@ PLACE:   Swamp:$
 ORIENT:  float
 MONS:    swamp dragon / swamp drake / hydra
 MONS:    freezing wraith / flayed ghost / phantasmal warrior / ghoul
-MONS:    hydra skeleton / bone dragon / quicksilver dragon skeleton
-MONS:    hydra zombie / swamp dragon zombie / quicksilver dragon zombie
-MONS:    spectral hydra / spectral swamp dragon / ghost crab
+MONS:    hydra skeleton / bone dragon / anaconda skeleton
+MONS:    hydra zombie / quicksilver dragon zombie / anaconda zombie
+MONS:    spectral hydra / ghost crab
 MONS:    patrolling thorn hunter / patrolling shambling mangrove
 MONS:    patrolling spriggan druid god:fedhas
 KITEM:   O = decaying rune of Zot
@@ -2389,7 +2389,7 @@ NSUBST:  P = 3=' / ppW
 KMONS:   p = plant
 KMONS:   ' = oklob plant
 KMONS:   q = vampire knight
-KMONS:   L = patrolling the lernaean hydra zombie / patrolling the lernaean hydra skeleton
+KMONS:   L = patrolling the lernaean hydra zombie
 KPROP:   q = bloody
 TILE:    E = WALL_UNDEAD, T = DNGN_TREE_DEAD, G = DNGN_GRAVESTONE, x = WALL_BRICK_VINES
 SUBST:   T = t

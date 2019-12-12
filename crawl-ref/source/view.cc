@@ -326,11 +326,15 @@ static string _monster_headsup(const vector<monster*> &monsters,
         warning_msg += uppercase_first(monname);
 
         warning_msg += " is";
+
+        mons_equip_desc_level_type level = mon->type != MONS_DANCING_WEAPON
+            ? DESC_IDENTIFIED : DESC_WEAPON_WARNING;
+
         if (!divine)
         {
-            warning_msg += " ";
-            warning_msg += get_monster_equipment_desc(mi, DESC_IDENTIFIED,
-                                                      DESC_NONE);
+            if (mon->type != MONS_DANCING_WEAPON)
+                warning_msg += " ";
+            warning_msg += get_monster_equipment_desc(mi, level, DESC_NONE);
             warning_msg += ".";
             continue;
         }
@@ -347,8 +351,7 @@ static string _monster_headsup(const vector<monster*> &monsters,
             // TODO: deduplicate
             if (mon->type != MONS_DANCING_WEAPON)
                 warning_msg += " ";
-            warning_msg += get_monster_equipment_desc(mi, DESC_IDENTIFIED,
-                                                      DESC_NONE);
+            warning_msg += get_monster_equipment_desc(mi, level, DESC_NONE);
         }
         warning_msg += ".";
     }

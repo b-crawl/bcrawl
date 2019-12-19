@@ -14,7 +14,6 @@
 #include <cstring>
 
 #include "art-enum.h"
-#include "cloud.h"
 #include "coord.h"
 #include "coordit.h"
 #include "delay.h"

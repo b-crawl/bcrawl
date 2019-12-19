@@ -20,7 +20,6 @@
 #include "areas.h"
 #include "attitude-change.h"
 #include "bloodspatter.h"
-#include "branch.h"
 #include "chardump.h"
 #include "cloud.h"
 #include "colour.h"

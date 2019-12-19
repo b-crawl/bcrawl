@@ -19,7 +19,6 @@
 #include "env.h"
 #include "exercise.h"
 #include "fight.h"
-#include "god-abil.h"
 #include "god-conduct.h"
 #include "hints.h"
 #include "invent.h"

@@ -54,14 +54,11 @@
 #include "prompt.h"
 #include "random.h"
 #include "religion.h"
-#include "rot.h"
 #include "shout.h"
 #include "sound.h"
-#include "spl-other.h"
 #include "spl-selfench.h"
 #include "spl-util.h"
 #include "stairs.h"
-#include "stash.h"
 #include "state.h"
 #include "stringutil.h"
 #include "teleport.h"
@@ -69,7 +66,6 @@
 #include "transform.h"
 #include "traps.h"
 #include "travel.h"
-#include "view.h"
 #include "xom.h"
 
 class interrupt_block

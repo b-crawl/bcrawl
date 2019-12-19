@@ -16,11 +16,8 @@
 #include "libutil.h"
 #include "macro.h"
 #include "message.h"
-#include "misc.h"
-#include "mon-util.h"
 #include "options.h"
 #include "output.h"
-#include "rot.h"
 #include "spl-book.h"
 #include "stringutil.h"
 #include "terrain.h"
@@ -31,7 +28,6 @@
 #include "tiledef-main.h"
 #include "tilepick.h"
 #include "unicode.h"
-#include "viewgeom.h"
 
 InventoryRegion::InventoryRegion(const TileRegionInit &init) : GridRegion(init)
 {

@@ -37,7 +37,6 @@
 #include "showsymb.h"
 #include "skills.h"
 #include "sound.h"
-#include "spl-summoning.h"
 #include "state.h"
 #include "stringutil.h"
 #include "terrain.h"

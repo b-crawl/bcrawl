@@ -28,7 +28,6 @@
 #include "mon-cast.h"
 #include "mon-death.h"
 #include "mon-tentacle.h"
-#include "mutation.h"
 #include "religion.h"
 #include "spl-util.h"
 #include "state.h"
@@ -37,7 +36,6 @@
 #include "terrain.h"
 #include "tiledef-dngn.h"
 #include "traps.h"
-#include "view.h"
 #include "viewchar.h"
 
 static void _print_holy_pacification_speech(const string &key,

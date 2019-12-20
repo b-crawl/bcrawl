@@ -26,7 +26,6 @@
 #include "level-state-type.h"
 #include "mapmark.h"
 #include "message.h"
-#include "misc.h"
 #include "mon-death.h"
 #include "movement.h"
 #include "nearby-danger.h" // for upward stair teleport check
@@ -39,7 +38,6 @@
 #include "spl-clouds.h"
 #include "spl-damage.h"
 #include "spl-other.h"
-#include "spl-transloc.h"
 #include "state.h"
 #include "stringutil.h"
 #include "terrain.h"

@@ -23,6 +23,7 @@
 #include "message.h"
 #include "mon-behv.h" // ME_WHACK
 #include "ouch.h"
+#include "prompt.h"
 #include "random-pick.h"
 #include "shout.h"
 #include "spl-util.h"

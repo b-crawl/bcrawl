@@ -40,6 +40,7 @@
 #include "item-status-flag-type.h"
 #include "items.h"
 #include "kills.h"
+#include "level-state-type.h"
 #include "libutil.h"
 #include "mapdef.h"
 #include "mapmark.h"

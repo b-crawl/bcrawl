@@ -50,6 +50,7 @@
 #include "potion.h"
 #include "prompt.h"
 #include "religion.h"
+#include "rot.h"
 #include "shout.h"
 #include "skills.h"
 #include "sound.h"

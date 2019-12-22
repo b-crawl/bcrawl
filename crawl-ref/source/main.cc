@@ -48,6 +48,7 @@
 #include "colour.h"
 #include "command.h"
 #include "coord.h"
+#include "coordit.h"
 #include "crash.h"
 #include "database.h"
 #include "dbg-scan.h"

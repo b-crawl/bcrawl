@@ -724,12 +724,6 @@ static void _decrement_durations()
         }
     }
 
-    if (you.duration[DUR_DEATHS_DOOR] && you.hp > allowed_deaths_door_hp())
-    {
-        set_hp(allowed_deaths_door_hp());
-        you.redraw_hit_points = true;
-    }
-
     if (_decrement_a_duration(DUR_CLOUD_TRAIL, delay,
             "Your trail of clouds dissipates."))
     {

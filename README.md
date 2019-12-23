@@ -76,7 +76,7 @@ Pull requests for new content are welcome.
   - v1.18.1: Summoners start with a scroll of summoning.
   - v1.18.1: Wizards start with Spider Form instead of Slow.
   - v1.19: Wanderers start with more ammo, to compensate for it not being reusable.
-  - v1.19: Abyssal Knights start with 40 stones.
+  - v1.20: Abyssal Knights start with 40 stones.
 
 #### Features
   - All items are automatically identified if the player has a rune.

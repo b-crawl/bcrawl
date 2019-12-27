@@ -12,7 +12,6 @@ ignore += standing in the rain
 ignore += A.*toadstool withers and dies
 ignore += toadstools? grows
 ignore += You walk carefully through the
-ignore += Fedhas appreciates ongoing decay
 ignore += Eating .*chunk
 ignore += This .*flesh tastes
 ignore += You .* eating
@@ -38,6 +37,8 @@ stop += A sentinel's mark forms upon you\.
 ignore += Your skin is crawling a little less now.
 ignore += Your icy armour evaporates
 ignore += Your battlesphere wavers and loses cohesion
+ignore += Your magical infusion is running out
+ignore += You are no longer magically infusing your attacks
 
 # Uskayaw -- ignore all Uskayaw power gain/loss messages since they happen constantly
 #

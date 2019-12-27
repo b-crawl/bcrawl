@@ -4091,9 +4091,8 @@ void TravelCache::add_waypoint(int x, int y)
 
 }
 
-void TravelCache::set_waypoint(int waynum, int x, int y)
+void TravelCache::set_waypoint(int waynum, int x, int y, bool quiet)
 {
-    bool is_pillar_waypoint = (waynum == 7) && (x == 0) && (y == 0);
     ASSERT_RANGE(waynum, 0, TRAVEL_WAYPOINT_COUNT);
     coord_def pos(x,y);
     if (x == -1 || y == -1)
@@ -4113,7 +4112,7 @@ void TravelCache::set_waypoint(int waynum, int x, int y)
     string new_dest = _get_trans_travel_dest(waypoints[waynum], false, true);
     clear_messages();
     
-    if (!is_pillar_waypoint)
+    if (!quiet)
     {
         if (overwrite)
         {

@@ -647,7 +647,7 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
     bool allow_band_ood = allow_ood;
     // If we drew an OOD monster on D:1-5 then
     // disable band generation. This applies only to randomly picked monsters.
-    if (ood_amount > 2)
+    if (ood_amount > 2 && env.absdepth0 < 12)
         create_band = false;
     else if (ood_amount > 0)
     {

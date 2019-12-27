@@ -629,14 +629,14 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
     if (!mg.place.is_valid())
         mg.place = level_id::current();
 
-    const bool allow_ood = !(mg.flags & MG_NO_OOD);
+    bool allow_ood = !(mg.flags & MG_NO_OOD);
     bool want_band = false;
     level_id place = mg.place;
     mg.cls = resolve_monster_type(mg.cls, mg.base_type, mg.proximity,
                                   &mg.pos, mg.map_mask,
                                   &place, &want_band, allow_ood);
-    // TODO: it doesn't seem that this check can ever come out to be true??
-    bool chose_ood_monster = place.absdepth() > mg.place.absdepth() + 5;
+
+    int ood_amount = mg.place.absdepth() - place.absdepth();
     if (want_band)
         mg.flags |= MG_PERMIT_BANDS;
 
@@ -644,16 +644,15 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
         return 0;
 
     bool create_band = mg.permit_bands();
-    // If we drew an OOD monster and the level has less absdepth than D:13
-    // disable band generation. This applies only to randomly picked monsters
-    // -- chose_ood_monster will never be set true for explicitly specified
-    // monsters in vaults and other places.
-    if (chose_ood_monster && env.absdepth0 < 12)
-    {
-        dprf(DIAG_MONPLACE,
-             "Chose monster with OOD roll: %s, disabling band generation",
-             get_monster_data(mg.cls)->name);
+    bool allow_band_ood = allow_ood;
+    // If we drew an OOD monster on D:1-5 then
+    // disable band generation. This applies only to randomly picked monsters.
+    if (ood_amount > 2)
         create_band = false;
+    else if (ood_amount > 0)
+    {
+        place.depth = min(place.depth + ood_amount, branch_ood_cap(place.branch));
+        allow_band_ood = false;
     }
 
     if (mg.cls == MONS_PROGRAM_BUG)
@@ -675,7 +674,7 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
         band_size++;
         for (int i = 1; i < band_size; ++i)
         {
-            band_monsters[i] = _band_member(band, i, place, allow_ood);
+            band_monsters[i] = _band_member(band, i, place, allow_band_ood);
             if (band_monsters[i] == NUM_MONSTERS)
                 die("Unhandled band type %d", band);
         }
@@ -727,7 +726,7 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
     if (mg.props.exists(MAP_KEY))
         mon->set_originating_map(mg.props[MAP_KEY].get_string());
 
-    if (chose_ood_monster)
+    if (ood_amount > 0)
         mon->props[MON_OOD_KEY].get_bool() = true;
 
     if (mg.needs_patrol_point()

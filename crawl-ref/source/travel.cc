@@ -4093,6 +4093,7 @@ void TravelCache::add_waypoint(int x, int y)
 
 void TravelCache::set_waypoint(int waynum, int x, int y)
 {
+    bool is_pillar_waypoint = (waynum == 7) && (x == 0) && (y == 0);
     ASSERT_RANGE(waynum, 0, TRAVEL_WAYPOINT_COUNT);
     coord_def pos(x,y);
     if (x == -1 || y == -1)
@@ -4111,18 +4112,22 @@ void TravelCache::set_waypoint(int waynum, int x, int y)
 
     string new_dest = _get_trans_travel_dest(waypoints[waynum], false, true);
     clear_messages();
-    if (overwrite)
+    
+    if (!is_pillar_waypoint)
     {
-        if (lid == old_lid) // same level
-            mprf("Waypoint %d re-assigned to %s.", waynum, new_dest.c_str());
-        else
+        if (overwrite)
         {
-            mprf("Waypoint %d re-assigned from %s to %s.",
-                 waynum, old_dest.c_str(), new_dest.c_str());
+            if (lid == old_lid) // same level
+                mprf("Waypoint %d re-assigned to %s.", waynum, new_dest.c_str());
+            else
+            {
+                mprf("Waypoint %d re-assigned from %s to %s.",
+                     waynum, old_dest.c_str(), new_dest.c_str());
+            }
         }
+        else
+            mprf("Waypoint %d assigned to %s.", waynum, new_dest.c_str());
     }
-    else
-        mprf("Waypoint %d assigned to %s.", waynum, new_dest.c_str());
 
     update_waypoints();
 }

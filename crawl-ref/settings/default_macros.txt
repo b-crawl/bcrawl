@@ -12,3 +12,6 @@ A:\{-236}
 
 M:"
 A:;
+
+macros += M _ ===inputTogglePillar
+macros += M \{32} ===startOrStep

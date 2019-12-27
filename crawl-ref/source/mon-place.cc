@@ -227,7 +227,7 @@ bool monster_can_submerge(const monster* mon, dungeon_feature_type feat)
         return false;
 }
 
-static void _apply_ood(level_id &place)
+static int _apply_ood(level_id &place)
 {
     // OODs do not apply to any portal vaults, Zot and
     // hells. What with newnewabyss?
@@ -235,12 +235,8 @@ static void _apply_ood(level_id &place)
         || place.branch == BRANCH_ZOT
         || is_hell_subbranch(place.branch))
     {
-        return;
+        return 0;
     }
-
-#ifdef DEBUG_DIAGNOSTICS
-    level_id old_place = place;
-#endif
 
     // 20% chance of OOD fuzz for each monster at level generation.
     // fuzzed depth capped at 2x current depth
@@ -250,7 +246,9 @@ static void _apply_ood(level_id &place)
         if(fuzz > place.depth)
             fuzz = 1;
         place.depth += fuzz;
+        return fuzz;
     }
+    return 0;
 }
 
 //#define DEBUG_MON_CREATION
@@ -632,11 +630,11 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
     bool allow_ood = !(mg.flags & MG_NO_OOD);
     bool want_band = false;
     level_id place = mg.place;
+    int ood_amount = _apply_ood(place);
     mg.cls = resolve_monster_type(mg.cls, mg.base_type, mg.proximity,
                                   &mg.pos, mg.map_mask,
                                   &place, &want_band, allow_ood);
 
-    int ood_amount = mg.place.absdepth() - place.absdepth();
     if (want_band)
         mg.flags |= MG_PERMIT_BANDS;
 
@@ -644,16 +642,9 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
         return 0;
 
     bool create_band = mg.permit_bands();
-    bool allow_band_ood = allow_ood;
-    // If we drew an OOD monster on D:1-5 then
-    // disable band generation. This applies only to randomly picked monsters.
-    if (ood_amount > 2 && env.absdepth0 < 10)
+
+    if (ood_amount > ((env.absdepth0 * 2) / 5))
         create_band = false;
-    else if (ood_amount > 0)
-    {
-        place.depth = min(place.depth + ood_amount, branch_ood_cap(place.branch));
-        allow_band_ood = false;
-    }
 
     if (mg.cls == MONS_PROGRAM_BUG)
         return 0;
@@ -674,7 +665,7 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
         band_size++;
         for (int i = 1; i < band_size; ++i)
         {
-            band_monsters[i] = _band_member(band, i, place, allow_band_ood);
+            band_monsters[i] = _band_member(band, i, place, false);
             if (band_monsters[i] == NUM_MONSTERS)
                 die("Unhandled band type %d", band);
         }

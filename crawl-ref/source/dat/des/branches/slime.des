@@ -44,14 +44,6 @@ end
 # Slime Pit entry vaults
 ##############################################################################
 
-# Weight balancer
-NAME:  slime_dummy
-TAGS:  slime_entry
-KFEAT: O = enter_slime_pits
-MAP
-O
-ENDMAP
-
 # Slime entries featuring an altar to Jiyva
 NAME:   slime_altar_1
 TAGS:   slime_entry

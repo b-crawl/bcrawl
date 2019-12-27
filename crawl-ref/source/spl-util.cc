@@ -1289,6 +1289,7 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
         if (you.species == SP_GARGOYLE
             || you.species == SP_GHOUL
             || you.species == SP_MUMMY
+            || you.species == SP_SKELETON
             || (temp && !form_can_bleed(you.form)))
         {
             return "you have no blood to sublime.";

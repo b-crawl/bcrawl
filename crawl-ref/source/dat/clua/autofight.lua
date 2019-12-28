@@ -477,14 +477,14 @@ function inputTogglePillar()
 
     killPillar()
     doSearch(px, py)
-    travel.set_waypoint(7, 0, 0, true)
+    travel.set_waypoint(7, 0, 0, 1)
 end
 
 function inputPillar()
     local x, y = crawl.get_target()
     killPillar()
     doSearch(x, y)
-    travel.set_waypoint(7, 0, 0, true)
+    travel.set_waypoint(7, 0, 0, 1)
 end
 
 function dancePillar()
@@ -1470,7 +1470,7 @@ function startOrStep()
             end
 
             killPillar()
-            travel.set_waypoint(7, 0, 0, true)
+            travel.set_waypoint(7, 0, 0, 1)
             crawl.mpr("Path cleared.")
 
             return

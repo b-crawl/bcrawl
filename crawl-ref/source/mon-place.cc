@@ -665,7 +665,7 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
         band_size++;
         for (int i = 1; i < band_size; ++i)
         {
-            band_monsters[i] = _band_member(band, i, place, false);
+            band_monsters[i] = _band_member(band, i, mg.place, allow_ood);
             if (band_monsters[i] == NUM_MONSTERS)
                 die("Unhandled band type %d", band);
         }

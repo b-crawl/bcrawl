@@ -630,7 +630,10 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
     bool allow_ood = !(mg.flags & MG_NO_OOD);
     bool want_band = false;
     level_id place = mg.place;
-    int ood_amount = _apply_ood(place);
+    int ood_amount = 0;
+    if (allow_ood)
+        ood_amount = _apply_ood(place);
+
     mg.cls = resolve_monster_type(mg.cls, mg.base_type, mg.proximity,
                                   &mg.pos, mg.map_mask,
                                   &place, &want_band, allow_ood);

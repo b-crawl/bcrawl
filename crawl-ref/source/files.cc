@@ -1703,31 +1703,87 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
     // Initialize halos, etc.
     invalidate_agrid(true);
 
-    // Maybe make a note if we reached a new level.
-    // Don't do so if we are just moving around inside Pan, though.
+    bool early_branch_entry_warning = false;
+
     if (just_created_level && stair_taken != DNGN_TRANSIT_PANDEMONIUM)
+    {
         take_note(Note(NOTE_DUNGEON_LEVEL_CHANGE));
+        
+        switch(you.where_are_you)
+        {
+        case BRANCH_TOMB:
+            #if TAG_MAJOR_VERSION == 34
+            if (make_changes && you.props.exists("zig-fixup")
+                && you.depth == brdepth[BRANCH_TOMB])
+            {
+                if (!just_created_level)
+                {
+                    int obj = items(false, OBJ_MISCELLANY, MISC_ZIGGURAT, 0);
+                    ASSERT(obj != NON_ITEM);
+                    bool success = move_item_to_grid(&obj, you.pos(), true);
+                    ASSERT(success);
+                }
+                you.props.erase("zig-fixup");
+            }
+            #endif
+            break;
+        case BRANCH_ELF:
+            if (you.experience_level < 18)
+                early_branch_entry_warning = true;
+            break;
+        case BRANCH_SLIME:
+            if (you.experience_level < 20)
+                early_branch_entry_warning = true;
+            break;
+        
+        default: break;
+        }
+    }
+
+    if (early_branch_entry_warning)
+        switch(you.religion)
+        {
+        case GOD_OKAWARU:
+            simple_god_message(" says: \"I see you desire a challenge, mortal. Show me your valor, then!\"");
+            break;
+        case GOD_USKAYAW:
+            simple_god_message(" says: \"For you, this place is a dance with death. Show me your moves!\"");
+            break;
+        case GOD_ZIN:
+        case GOD_SHINING_ONE:
+        case GOD_ELYVILON:
+            simple_god_message(" says: \"This area is dangerous for you, mortal. Take caution.\"");
+            break;
+        case GOD_DEMIGOD:
+            mprf(MSGCH_WARN, "Something about this place makes you nervous.");
+            break;
+        case GOD_WU_JIAN:
+            simple_god_message(" says: \"I suggest a tactical retreat from here, disciple.\"");
+            break;
+        case GOD_CHEIBRIADOS:
+            simple_god_message(" says: \"There is no need to be hasty about entering this place.\"");
+            break;
+        case GOD_ASHENZARI:
+            simple_god_message(" says: \"I see danger for you here.\"");
+            break;
+        case GOD_HEPLIAKLQANA:
+        {
+            monster *ancestor = hepliaklqana_ancestor_mon();
+            if (ancestor && you.can_see(*ancestor))
+                mprf(MSGCH_WARN, "Your ancestor seems reluctant to enter.");
+            break;
+        }
+        case GOD_SIF_MUNA:
+            simple_god_message(" says: \"Your knowledge may yet be insufficient to navigate this place.\"");
+            break;
+        
+        default: break;
+        }
 
     // If the player entered the level from a different location than they last
     // exited it, have monsters lose track of where they are
     if (you.position != env.old_player_pos)
        shake_off_monsters(you.as_player());
-
-#if TAG_MAJOR_VERSION == 34
-    if (make_changes && you.props.exists("zig-fixup")
-        && you.where_are_you == BRANCH_TOMB
-        && you.depth == brdepth[BRANCH_TOMB])
-    {
-        if (!just_created_level)
-        {
-            int obj = items(false, OBJ_MISCELLANY, MISC_ZIGGURAT, 0);
-            ASSERT(obj != NON_ITEM);
-            bool success = move_item_to_grid(&obj, you.pos(), true);
-            ASSERT(success);
-        }
-        you.props.erase("zig-fixup");
-    }
-#endif
 
     return just_created_level;
 }

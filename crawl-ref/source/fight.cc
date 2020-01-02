@@ -899,6 +899,9 @@ bool bad_attack(const monster *mon, string& adj, string& suffix,
         return true;
     }
 
+    if (mon->type == MONS_ORB_OF_DESTRUCTION)
+        return false;
+
     if (mon->friendly())
     {
         if (god_hates_attacking_friend(you.religion, *mon))

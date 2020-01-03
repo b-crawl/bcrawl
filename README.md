@@ -48,6 +48,7 @@ Pull requests for new content are welcome.
   - v1.13.4: The Lair entrance is on D:7-9 instead of D:7-10.
   - v1.16: Volcano levels will not contain wizards.
   - v1.18: Portals to Pandemonium levels are redirected to the Abyss by the lords of Pandemonium if the player has reached their max experience level. On entering a Pandemonium level, if the player has at least 2 runes, the locations of portals are revealed and the player is notified if the demonic rune is present.
+  - v1.20: Early out-of-depth monsters do not spawn with their band. This reduces the number of Orc Priests on D:2.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -90,6 +91,7 @@ Pull requests for new content are welcome.
   - v1.18: New default macros: 'p' = melee attack; '[' = melee attack if in range, otherwise throw; ']' = 3x '['.
   - v1.18.1: New default macros: ';' = rest; '"' = ';'.
   - v1.19.2: Taking stairs upwards when no monsters are visible will never teleport players.
+  - v1.20: New default macros: '_' = create path around a pillar; space = walk along path. (by marksg07)
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.

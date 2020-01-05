@@ -4225,11 +4225,7 @@ void contaminate_player(int change, bool controlled, bool msg)
     bool was_glowing = player_severe_contamination();
     int new_level  = 0;
 
-    if (change > 0 && player_equip_unrand(UNRAND_ETHERIC_CAGE))
-        change *= 2;
-
-    you.magic_contamination = max(0, min(250000,
-                                         you.magic_contamination + change));
+    you.magic_contamination = max(0, min(250000, you.magic_contamination + change));
 
     new_level = get_contamination_level();
 

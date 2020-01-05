@@ -1226,7 +1226,7 @@ TILE_EQ: etheric_cage
 INSCRIP: RegenMP+
 PLUS:    +0
 MP:      +4
-BOOL:    mutate, elec, chaotic
+BOOL:    mutate, elec, chaotic, nogen
 VALUE:   400
 
 # TAG_MAJOR_VERSION == 34

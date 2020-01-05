@@ -102,6 +102,7 @@ Pull requests for new content are welcome.
   - v1.15.1: Guaranteed damage reduction now affects player damage from spells with non-elemental damage.
   - v1.19: The combined effect of wizardry items, Vehumet, and brilliance potions is no longer capped.
   - v1.19.2: Poison on monsters is no longer capped at 4 stacks.
+  - v1.20: Magic contamination decreases twice as fast when at full mana.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

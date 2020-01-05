@@ -231,7 +231,11 @@ static void _handle_magic_contamination()
         added_contamination += INVIS_CONTAM_PER_TURN;
     //If not invisible, normal dissipation
     else
+    {
         added_contamination -= 25;
+        if(you.magic_points >= you.max_magic_points)
+            added_contamination -= 25;
+    }
 
     // Scaling to turn length
     added_contamination = div_rand_round(added_contamination * you.time_taken,

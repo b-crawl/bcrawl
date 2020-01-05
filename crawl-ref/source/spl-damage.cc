@@ -1447,7 +1447,7 @@ static int _ignite_poison_monsters(coord_def where, int pow, actor *agent)
     if (damage <= 0)
         return 0;
 
-    if (agent && agent->deity() == GOD_FEDHAS && fedhas_protects(mon))
+    if (agent && agent->deity() == GOD_FEDHAS && fedhas_protects(*mon))
     {
         if (!tracer)
         {

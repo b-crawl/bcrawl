@@ -646,7 +646,7 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
 
     bool create_band = mg.permit_bands();
 
-    if (ood_amount > ((env.absdepth0 * 2) / 5))
+    if (ood_amount > (((env.absdepth0 + 1) * 2) / 5))
         create_band = false;
 
     if (mg.cls == MONS_PROGRAM_BUG)

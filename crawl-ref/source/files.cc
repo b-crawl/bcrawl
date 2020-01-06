@@ -1758,7 +1758,7 @@ bool load_level(dungeon_feature_type stair_taken, load_mode_type load_mode,
             mprf(MSGCH_WARN, "Something about this place makes you nervous.");
             break;
         case GOD_WU_JIAN:
-            simple_god_message(" says: \"I suggest a tactical retreat from here, disciple.\"");
+            wu_jian_sifu_message(" says: \"I suggest a tactical retreat from here, disciple.\"");
             break;
         case GOD_CHEIBRIADOS:
             simple_god_message(" says: \"There is no need to be hasty about entering this place.\"");

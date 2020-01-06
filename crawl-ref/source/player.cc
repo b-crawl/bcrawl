@@ -3886,7 +3886,7 @@ bool enough_mp(int minimum, bool suppress_msg, bool abort_macros)
 
 static int _rest_trigger_level(int max)
 {
-    return (max * Options.rest_wait_percent) / 100;
+    return (max * Options.rest_wait_percent + 99) / 100;
 }
 
 static bool _should_stop_resting(int cur, int max)

@@ -27,3 +27,6 @@ autoinscribe += throwing net:!f
 autoinscribe += needle of (frenzy|paralysis|sleeping|confusion):!f
 autoinscribe += ( ration):!d
 autoinscribe += figurine:!*
+
+item_slot ^= ( ration):e
+item_slot ^= (potion of blood):q

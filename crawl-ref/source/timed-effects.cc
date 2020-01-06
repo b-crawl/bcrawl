@@ -233,7 +233,7 @@ static void _handle_magic_contamination()
     else
     {
         added_contamination -= 25;
-        if(you.magic_points >= you.max_magic_points)
+        if(you.magic_points >= you.max_magic_points && you.magic_contamination < 4000)
             added_contamination -= 25;
     }
 

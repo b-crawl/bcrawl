@@ -1847,6 +1847,11 @@ static void _save_game_base()
 
     _write_tagged_chunk("you", TAG_YOU);
     _write_tagged_chunk("chr", TAG_CHR);
+    
+    // Save the level as well; not doing this was causing problems
+    // with SIGHUP and acquirement scumming.
+    if(!you.entering_level)
+        _save_level(level_id::current());
 }
 
 // Stack allocated string's go in separate function, so Valgrind doesn't

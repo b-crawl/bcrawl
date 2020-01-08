@@ -1806,7 +1806,14 @@ bool acquirement(object_class_type class_wanted, int agent,
             {
                 mprf(MSGCH_WARN, "This will waste the scroll!");
                 if (_acquire_yesno("Really cancel your acquirement? (y/n)", 'n'))
+                {
+                    for (unsigned int i =0; i < selected.size(); i++)
+                    {
+                        item_def& item = mitm[stock[i]];
+                        destroy_item(item);
+                    }
                     break;
+                }
             }
             else if (key == '\r' || key == CK_MOUSE_CLICK)
             {

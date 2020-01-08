@@ -93,6 +93,7 @@ Pull requests for new content are welcome.
   - v1.18.1: New default macros: ';' = rest; '"' = ';'.
   - v1.19.2: Taking stairs upwards when no monsters are visible will never teleport players.
   - v1.20: New default macros: '_' = create path around a pillar; space = walk along path. (by marksg07)
+  - v1.20: Guaranteed damage reduction percent is shown always, not just in wizmode.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.

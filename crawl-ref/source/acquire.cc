@@ -1580,8 +1580,9 @@ bool acquirement(object_class_type class_wanted, int agent,
                 check_item_knowledge();
             else if (key == 'x' || key_is_escape(key) || key == CK_MOUSE_CMD)
             {
-                mprf(MSGCH_WARN, "This will waste the scroll!\nReally cancel your acquirement? (Y/N)");
-                if (yesno(NULL, false, 'n'))
+                mprf(MSGCH_WARN, "\nThis will waste the scroll!\nReally cancel your acquirement? (Y/N)");
+                flush_prev_message();
+                if (yesno(NULL, false, 'n', false, false, true))
                 {
                     for (unsigned int i =0; i < selected.size(); i++)
                     {
@@ -1645,7 +1646,8 @@ bool acquirement(object_class_type class_wanted, int agent,
                     selected[key] = true;
                     
                     mprf(MSGCH_PROMPT, "\nAcquire %s? (y/n)", item.name(DESC_THE, false, true).c_str());
-                    if (yesno(NULL, true, 'n'))
+                    flush_prev_message();
+                    if (yesno(NULL, true, 'n', false, false, true))
                     {
                         for (unsigned int i = 0; i < selected.size(); i++)
                         {

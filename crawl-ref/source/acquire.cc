@@ -1589,6 +1589,7 @@ bool acquirement(object_class_type class_wanted, int agent,
                         item_def& item = mitm[stock[i]];
                         destroy_item(item);
                     }
+                    mpr("Cancelling acquirement.");
                     break;
                 }
             }

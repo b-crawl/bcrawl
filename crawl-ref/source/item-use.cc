@@ -24,6 +24,7 @@
 #include "english.h"
 #include "env.h"
 #include "evoke.h"
+#include "files.h"
 #include "fight.h"
 #include "food.h"
 #include "god-conduct.h"
@@ -2656,8 +2657,7 @@ static bool _is_cancellable_scroll(scroll_type scroll)
 #endif
            || scroll == SCR_BRAND_WEAPON
            || scroll == SCR_ENCHANT_WEAPON
-           || scroll == SCR_MAGIC_MAPPING
-           || scroll == SCR_ACQUIREMENT;
+           || scroll == SCR_MAGIC_MAPPING;
 }
 
 /**
@@ -3035,12 +3035,14 @@ void read_scroll(item_def& scroll)
             // IDing scrolls. (Not an interesting ID game mechanic!)
         }
 
-        if (!alreadyknown)
-            run_uncancel(UNC_ACQUIREMENT, AQ_SCROLL);
+        if (in_inventory(scroll))
+            dec_inv_item_quantity(link, 1);
         else
-            cancel_scroll = !acquirement(OBJ_RANDOM, AQ_SCROLL, false, nullptr,
-                    false, true);
-        break;
+            dec_mitm_item_quantity(scroll.index(), 1);
+        count_action(CACT_USE, OBJ_SCROLLS);
+        save_game_state();
+        acquirement(OBJ_RANDOM, AQ_SCROLL, false, nullptr, false, true);
+        return;
 
     case SCR_FEAR:
         mpr("You assume a fearsome visage.");

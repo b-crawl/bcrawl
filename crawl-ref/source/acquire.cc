@@ -1320,14 +1320,7 @@ int acquirement_create_item_general(object_class_type class_wanted,
             acq_item.plus = max(static_cast<int>(acq_item.plus), 3 + random2(3));
         else if (class_wanted == OBJ_GOLD)
         {
-            // New gold acquirement formula from dpeg.
-            // Min=220, Max=5520, Mean=1218, Std=911
-            int quantity_rnd = roll_dice(1, 8); // ensure rnd sequence points
-            quantity_rnd *= roll_dice(1, 8);
-            quantity_rnd *= roll_dice(1, 8);
-            acq_item.quantity = 10 * (20
-                                    + roll_dice(1, 20)
-                                    + quantity_rnd);
+            acq_item.quantity = 200 + random2(1401);
         }
         else if (class_wanted == OBJ_MISSILES && !divine)
             acq_item.quantity *= 5;
@@ -1473,233 +1466,11 @@ return acquirement_create_item_general(class_wanted,
 }
 
 
-
-//dtsund: More shopping.cc copy-pasta.
-//This function generates each of the lines saying what the items are.
-static std::string _acquirement_print_stock(const std::vector<int>& stock,
-                                      const std::vector<bool>& selected)
-{
-    //ShopInfo &si  = StashTrack.get_shop(shop.pos);
-    //const bool id = true;
-    std::string purchasable;
-    for (unsigned int i = 0; i < stock.size(); ++i)
-    {
-        const item_def& item = mitm[stock[i]];
-
-        cgotoxy(1, i+1, GOTO_CRT);
-        const char c = i + 'a';
-        purchasable += c;
-
-        // Colour stock as follows:
-        //  * lightcyan, if on the shopping list.
-        //  * lightred, if you can't buy all you selected.
-        //  * lightgreen, if this item is purchasable along with your selections
-        //  * red, if this item is not purchasable even by itself.
-        //  * yellow, if this item would be purchasable if you deselected
-        //            something else.
-
-        // Is this too complicated? (jpeg)
-
-        if (selected[i])
-            textcolour(LIGHTCYAN);
-        else
-            textcolour(LIGHTGREEN);
-        
-        
-        if (selected[i])
-            cprintf("%c + ", c);
-        else
-            cprintf("%c - ", c);
-
-        mpr(item.name(DESC_PLAIN, false, true).c_str());
-    }
-    textcolour(LIGHTGREY);
-
-    return (purchasable);
-}
-
-
-//Copied from shopping.cc
-//This function assists _acquirement_keys, which in turn helps
-//_list_acquirement_keys.
-static std::string _hyphenated_suffix(char prev, char last)
-{
-    std::string s;
-    if (prev > last + 2)
-        s += "</w>-<w>";
-    else if (prev == last + 2)
-        s += (char) (last + 1);
-
-    if (prev != last)
-        s += prev;
-    return (s);
-}
-
-
-//Copied from shopping.cc
-//This function does utility work for _list_acquirement_keys.
-static std::string _acquirement_keys(const std::string &s)
-{
-    if (s.empty())
-        return "";
-
-    std::string list = "<w>" + s.substr(0, 1);
-    char last = s[0];
-    for (unsigned int i = 1; i < s.length(); ++i)
-    {
-        if (s[i] == s[i - 1] + 1)
-            continue;
-
-        char prev = s[i - 1];
-        list += _hyphenated_suffix(prev, last);
-        list += (last = s[i]);
-    }
-
-    list += _hyphenated_suffix(s[s.length() - 1], last);
-    list += "</w>";
-    return (list);
-}
-
-
-
-//Even more borrowing from shopping.cc
-//This function makes the part of the display that tells the player
-//what he/she can do.
-static void _list_acquirement_keys(const std::string &purchasable, bool viewing,
-                            int total_stock, int num_selected)
-{
-    ASSERT(total_stock > 0);
-
-    const int numlines = get_number_of_lines();
-    formatted_string fs;
-
-    cgotoxy(1, numlines - 1, GOTO_CRT);
-
-    std::string pkeys = "";
-    if (viewing)
-    {
-        pkeys = "<w>a</w>";
-        if (total_stock > 1)
-        {
-            pkeys += "-<w>";
-            pkeys += 'a' + total_stock - 1;
-            pkeys += "</w>";
-        }
-    }
-    else
-        pkeys = _acquirement_keys(purchasable);
-
-    if (!pkeys.empty())
-    {
-        pkeys = "[" + pkeys + "] Select Item to "
-                + (viewing ? "Examine" : "Acquire");
-    }
-    fs = formatted_string::parse_string(make_stringf(
-            "[<w>x</w>/<w>Esc</w>"
-#ifdef USE_TILE
-            "/<w>R-Click</w>"
-#endif
-            "] exit            [<w>!</w>] %s   %s",
-            (viewing ? "to acquire items" : "to examine items"),
-            pkeys.c_str()));
-
-    fs.cprintf("%*s", get_number_of_cols() - fs.width() - 1, "");
-    fs.display();
-    cgotoxy(1, numlines, GOTO_CRT);
-
-    fs = formatted_string::parse_string(
-            "[<w>Enter</w>"
-#ifdef USE_TILE
-            "/<w>L-Click</w>"
-#endif
-            "] acquire item    [<w>\\</w>] list known items   "
-            "[<w>?</w>/<w>*</w>] inventory");
-
-    fs.cprintf("%*s", get_number_of_cols() - fs.width() - 1, "");
-    fs.display();
-}
-
-
-
-static void _acquire_print(const char *shoppy, int line)
-{
-    cgotoxy(1, line + 19, GOTO_CRT);
-    cprintf("%s", shoppy);
-    clear_to_end_of_line();
-}
-
-
-static void _acquire_more()
-{
-    cgotoxy(65, 20, GOTO_CRT);
-    cprintf("-more-");
-    get_ch();
-}
-
-
-
-
-static bool _acquire_yesno(const char* prompt, int safeanswer)
-{
-    if (_acquiring_now)
-    {
-        mprf(MSGCH_PROMPT, "%s", prompt);
-        return yesno(NULL, true, safeanswer, false, false, true);
-    }
-    else
-        return yesno(prompt, true, safeanswer, false, false, false);
-}
-
-
-
 //dtsund: Acquirement was changed rather drastically.  Now lets you choose from
 //specific items, rather than classes of item.
 bool acquirement(object_class_type class_wanted, int agent,
                  bool quiet, int* item_index, bool debug, bool known_scroll)
 {
-    ASSERT(!crawl_state.game_is_arena());
-
-    FixedBitVector<NUM_OBJECT_CLASSES> bad_class;
-    if (you.species == SP_FELID)
-    {
-        bad_class.set(OBJ_WEAPONS);
-        bad_class.set(OBJ_MISSILES);
-        bad_class.set(OBJ_STAVES);
-    }
-    if (you.get_mutation_level(MUT_NO_ARTIFICE))
-        bad_class.set(OBJ_MISCELLANY);
-
-    bad_class.set(OBJ_FOOD, you_foodless(false));
-
-    static struct { object_class_type type; const char* name; } acq_classes[] =
-    {
-        { OBJ_WEAPONS,    "Weapon" },
-        { OBJ_ARMOUR,     "Armour" },
-        { OBJ_JEWELLERY,  "Jewellery" },
-        { OBJ_BOOKS,      "Book" },
-        { OBJ_STAVES,     "Staff " },
-        { OBJ_MISCELLANY, "Evocable" },
-        { OBJ_FOOD,       0 }, // amended below
-        { OBJ_GOLD,       0 },
-    };
-    ASSERT(acq_classes[6].type == OBJ_FOOD);
-    acq_classes[6].name = you.species == SP_VAMPIRE ? "Blood":
-                                                      "Food";
-    string gold_text = make_stringf("Gold (you have $%d)", you.gold);
-    ASSERT(acq_classes[7].type == OBJ_GOLD);
-    acq_classes[7].name = gold_text.c_str();
-
-    int thing_created = NON_ITEM;
-
-    if (item_index == nullptr)
-        item_index = &thing_created;
-
-    *item_index = NON_ITEM;
-
-#ifdef USE_TILE_WEB
-    ui::cutoff_point ui_cutoff_point;
-#endif
-
     //Experimental new scroll of acquirement code below.
     //Largely ripped shamelessly from shopping.cc.
     if(class_wanted == OBJ_RANDOM)
@@ -1707,8 +1478,6 @@ bool acquirement(object_class_type class_wanted, int agent,
         unwind_bool in_acquirement(_acquiring_now, true);
         cursor_control coff(false);
         bool tempQuiet = true;
-
-        clrscr();
 
         const std::string hello = "What would you like to acquire?";
         
@@ -1763,7 +1532,7 @@ bool acquirement(object_class_type class_wanted, int agent,
             {   
                 //Need to explicitly ID artifacts to prevent name mangling
                 //but don't want to hand out ID info like candy
-                set_ident_type(item, ID_KNOWN_TYPE);
+                set_ident_type(item, true);
                 set_ident_flags(item, ISFLAG_IDENT_MASK);
             }
         }
@@ -1776,27 +1545,34 @@ bool acquirement(object_class_type class_wanted, int agent,
     
         while (true)
         {
-            int num_selected = 0;
-            for (unsigned int i = 0; i < stock.size(); i++)
+            if (crawl_state.seen_hups)
             {
-                if (selected[i])
-                    num_selected++;
+                for (unsigned int i =0; i < selected.size(); i++)
+                {
+                    item_def& item = mitm[stock[i]];
+                    destroy_item(item);
+                }
+                mprf(MSGCH_WARN, "Cancelling acquirement.");
+                return false;
             }
-            clrscr();
+            
             if (stock.empty())
                 mprf(MSGCH_WARN, "ACQUIREMENT ERROR");
 
-            const std::string purchasable = _acquirement_print_stock(stock, selected);
-            _list_acquirement_keys(purchasable, viewing, stock.size(), num_selected);
-
-            //Money stuff, I'll show it just to help decide about gold acquirement.
-            mprf("You now have %d gold piece%s.", you.gold, you.gold != 1 ? "s" : "");
-            
-            if(viewing)
-                mprf(MSGCH_EXAMINE, "What would you like to examine? ");
+            if (viewing)
+                mprf(MSGCH_PROMPT, "\nView which item? (Press ! for selection.)");
             else
-                mprf(MSGCH_EXAMINE, "What would you like to acquire? ");
-
+                mprf(MSGCH_PROMPT, "\nAcquire which item? (Press ! for descriptions.)");
+            
+            char selection_key = 'A';
+            for (unsigned int i = 0; i < stock.size(); ++i)
+            {
+                const item_def& item = mitm[stock[i]];
+                mprf("%c: %s", selection_key, item.name(DESC_PLAIN, false, true).c_str());
+                selection_key++;
+            }
+            flush_prev_message();
+            
             mouse_control mc(MOUSE_MODE_MORE);
             int key = getchm();
 
@@ -1804,8 +1580,8 @@ bool acquirement(object_class_type class_wanted, int agent,
                 check_item_knowledge();
             else if (key == 'x' || key_is_escape(key) || key == CK_MOUSE_CMD)
             {
-                mprf(MSGCH_WARN, "This will waste the scroll!");
-                if (_acquire_yesno("Really cancel your acquirement? (y/n)", 'n'))
+                mprf(MSGCH_WARN, "This will waste the scroll!\nReally cancel your acquirement? (Y/N)");
+                if (yesno(NULL, false, 'n'))
                 {
                     for (unsigned int i =0; i < selected.size(); i++)
                     {
@@ -1815,57 +1591,27 @@ bool acquirement(object_class_type class_wanted, int agent,
                     break;
                 }
             }
+            
             else if (key == '\r' || key == CK_MOUSE_CLICK)
-            {
-                if (num_selected == 0) // Nothing selected.
-                {
-                    _acquire_print("You haven't selected anything!", 1);
-                    continue;
-                }
-                else
-                {
-                    if (_acquire_yesno("Acquire this item? (y/n)", 'n'))
-                    {
-                        //int num_items = 0, outside_items = 0, quant;
-                        for (unsigned int i =0; i < selected.size(); i++)
-                        {
-                            item_def& item = mitm[stock[i]];
-                            if (selected[i])
-                            {
-                                //May as well ID it before giving it to the player.
-                                set_ident_type(item, ID_KNOWN_TYPE);
-                                set_ident_flags(item, ISFLAG_IDENT_MASK);
-                                move_item_to_grid(&stock[i], you.pos());
-                            }
-                            else
-                            {
-                                destroy_item(item);
-                            }
-                        }
-                        canned_msg(MSG_SOMETHING_APPEARS);
-                        break;
-                    }
-                }
-                continue;
-            }
+                continue;               
+                
             else if (key == '!')
             {
                 // Toggle between browsing and shopping.
                 viewing = !viewing;
             }
-
-            else if (!isaalpha(key))
-            {
-                _acquire_print("Huh?", 1);
-                _acquire_more();
-            }
+            else if (key == '?')
+                viewing = true;
+            else if (key == '$')
+                shopping_list.display(true);
+            else if (key == 'i')
+                display_inventory();
             else
             {
                 key = tolower(key) - 'a';
-                if (key >= static_cast<int>(stock.size()))
+                if (key >= static_cast<int>(stock.size()) || key < 0)
                 {
-                    _acquire_print("No such item.", 1);
-                    _acquire_more();
+                    mpr("No such item.");
                     continue;
                 }
 
@@ -1890,22 +1636,47 @@ bool acquirement(object_class_type class_wanted, int agent,
                         item.flags = old_flags;
                 }
                 else
-                {                
-                    //This for loop serves the purpose of only allowing the player to
-                    //acquire one item.
+                {
                     for(unsigned int i = 0; i < selected.size(); i++)
                     {
                         selected[i] = false;
                     }
 
-                    selected[key] = !selected[key];
+                    selected[key] = true;
+                    
+                    mprf(MSGCH_PROMPT, "\nAcquire %s? (y/n)", item.name(DESC_THE, false, true).c_str());
+                    if (yesno(NULL, true, 'n'))
+                    {
+                        for (unsigned int i = 0; i < selected.size(); i++)
+                        {
+                            item_def& item = mitm[stock[i]];
+                            if (selected[i])
+                            {
+                                // ID it before giving it to the player.
+                                set_ident_type(item, true);
+                                set_ident_flags(item, ISFLAG_IDENT_MASK);
+                                move_item_to_grid(&stock[i], you.pos());
+                            }
+                            else
+                            {
+                                destroy_item(item);
+                            }
+                        }
+                        canned_msg(MSG_SOMETHING_APPEARS);
+                        break;
+                    }
+                    continue;
                 }
             }
         }
 
-    redraw_screen();
     return(true);
     }
+
+    int thing_created = NON_ITEM;
+    if (item_index == nullptr)
+        item_index = &thing_created;
+    *item_index = NON_ITEM;
 
     *item_index = acquirement_create_item(class_wanted, agent, quiet,
                                           you.pos(), debug);

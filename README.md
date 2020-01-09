@@ -303,6 +303,7 @@ Pull requests for new content are welcome.
   - v1.18: Executioner's axes have lower base delay (20 -> 19).
   - v1.19.1: Bucklers can be equipped and unequipped in 1 turn.
   - v1.19.1: A staff of power gives less (15 -> 12) extra max mana.
+  - v1.20: Scrolls of acquirement give a choice of specific items instead of categories.
 
 #### Removed Items
   - Amulet of Harm

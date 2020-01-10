@@ -3858,10 +3858,7 @@ void bolt::affect_player()
             you.increase_duration(DUR_BARBS, random_range(2, 4), 12);
 
         if (you.attribute[ATTR_BARBS_POW])
-        {
-            you.attribute[ATTR_BARBS_POW] =
-                min(6, you.attribute[ATTR_BARBS_POW]++);
-        }
+            you.attribute[ATTR_BARBS_POW] = you.attribute[ATTR_BARBS_POW] + 2;
         else
             you.attribute[ATTR_BARBS_POW] = 4;
     }

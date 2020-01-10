@@ -1097,6 +1097,7 @@ TILE:     urand_moon_troll_leather_armour
 TILE_EQ:  moon_troll_leather_armour
 MP:       +5
 REGEN:    1
+BOOL:     rCorr
 
 ENUM:     FINGER_AMULET
 NAME:     macabre finger necklace

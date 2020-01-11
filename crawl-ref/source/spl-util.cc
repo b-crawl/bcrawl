@@ -15,6 +15,7 @@
 #include <cstring>
 
 #include "areas.h"
+#include "art-enum.h"
 #include "coordit.h"
 #include "directn.h"
 #include "env.h"

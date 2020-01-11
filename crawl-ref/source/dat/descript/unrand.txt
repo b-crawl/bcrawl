@@ -628,10 +628,9 @@ the other, as if they have minds of their own.
 Maxwell's etheric cage
 
 A fine mesh cage designed to capture magical energy. Experimental notes suggest
-that research was abandoned when the cage began to capture magical
-contamination almost as effectively. Anyone reckless enough to place it on
-their head would find their magic regeneration dramatically increased, at the
-cost of multiplying any magical contamination received.
+that research was abandoned when the cage was found to also (inefficiently) capture
+some of the magical energy of spells cast by the user,
+significantly increasing their cost.
 %%%%
 # TAG_MAJOR_VERSION == 34
 crown of Eternal Torment

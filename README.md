@@ -340,7 +340,7 @@ Pull requests for new content are welcome.
   - v1.18: Punk is a hunting sling instead of a fustibalus.
   - v1.18: The Scythe of Curses applies random debuffs to enemies hit, instead of miscast effects.
   - v1.18.1: The Singing Sword gives invisibility and a Song of Slaying instead of damaging visible creatures.
-  - v1.20: Maxwell's Etheric Cage is removed. (It may be reworked and added back in the future.)
+  - v1.20: Maxwell's Etheric Cage is reworked: it gives 1 mana/turn and doesn't affect contamination, but increases spell costs by 2.
   - v1.20: The moon troll leather armour gives rCorr.
 
 #### Normal Monsters

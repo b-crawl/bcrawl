@@ -517,6 +517,10 @@ int spell_mana(spell_type which_spell)
     if(!you.duration[DUR_TIME_STOP])
         if (you.species == SP_FAIRY)
             spell_cost--;
+    
+    if (player_equip_unrand(UNRAND_ETHERIC_CAGE))
+        spell_cost += 2;
+    
     return spell_cost;
 }
 

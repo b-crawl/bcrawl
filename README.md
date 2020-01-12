@@ -407,3 +407,4 @@ Pull requests for new content are welcome.
   - v1.19: Nikola is reworked, losing Chain Lightning but gaining Deflect Missiles and a rapier of distortion.
   - v1.19.2: Louise has higher-level conjurations.
   - v1.20: The Moon Troll loses its acid spit, and is now a fast-moving corrosive melee enemy similar in strength to 2 caustic shrikes.
+  - v1.20: Xtahua has Fire Storm and Fear instead of Paralyse, and more HP.

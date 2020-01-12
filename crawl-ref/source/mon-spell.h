@@ -1851,9 +1851,9 @@ static const mon_spellbook mspell_list[] =
     // ('D') Dragons.
     {  MST_XTAHUA,
       {
-       { SPELL_SEARING_BREATH, 62, MON_SPELL_NATURAL | MON_SPELL_BREATH
-                                    | MON_SPELL_NOISY },
-       { SPELL_PARALYSE, 18, MON_SPELL_MAGICAL | MON_SPELL_NO_SILENT },
+       { SPELL_SEARING_BREATH, 60, MON_SPELL_NATURAL | MON_SPELL_BREATH | MON_SPELL_NOISY },
+       { SPELL_CAUSE_FEAR, 20, MON_SPELL_WIZARD },
+       { SPELL_FIRE_STORM, 20, MON_SPELL_MAGICAL },
       }
     },
 

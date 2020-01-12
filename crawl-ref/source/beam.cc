@@ -20,7 +20,6 @@
 #include "areas.h"
 #include "attitude-change.h"
 #include "bloodspatter.h"
-#include "branch.h"
 #include "chardump.h"
 #include "cloud.h"
 #include "colour.h"
@@ -42,7 +41,6 @@
 #include "losglobal.h"
 #include "los.h"
 #include "message.h"
-#include "misc.h"
 #include "mon-behv.h"
 #include "mon-death.h"
 #include "mon-movetarget.h"
@@ -60,7 +58,6 @@
 #include "spl-damage.h"
 #include "spl-goditem.h"
 #include "spl-monench.h"
-#include "spl-other.h"
 #include "spl-summoning.h"
 #include "spl-transloc.h"
 #include "spl-util.h"
@@ -3861,10 +3858,7 @@ void bolt::affect_player()
             you.increase_duration(DUR_BARBS, random_range(2, 4), 12);
 
         if (you.attribute[ATTR_BARBS_POW])
-        {
-            you.attribute[ATTR_BARBS_POW] =
-                min(6, you.attribute[ATTR_BARBS_POW]++);
-        }
+            you.attribute[ATTR_BARBS_POW] = you.attribute[ATTR_BARBS_POW] + 2;
         else
             you.attribute[ATTR_BARBS_POW] = 4;
     }

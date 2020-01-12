@@ -20,8 +20,11 @@
 
 #define ART_FUNC_H
 
+#include "areas.h"         // For silenced() and invalidate_agrid()
+#include "attack.h"        // For attack_strength_punctuation()
 #include "beam.h"          // For Lajatang of Order's silver damage
 #include "cloud.h"         // For storm bow's and robe of clouds' rain
+#include "coordit.h"       // For distance_iterator()
 #include "english.h"       // For apostrophise
 #include "exercise.h"      // For practise_evoking
 #include "fight.h"
@@ -724,11 +727,13 @@ static void _WYRMBANE_melee_effects(item_def* weapon, actor* attacker,
 
     if (!mondied)
     {
-        mprf("%s %s!",
+        int bonus_dam = 1 + random2(3 * dam / 2);
+        mprf("%s %s%s",
             defender->name(DESC_THE).c_str(),
-            defender->conj_verb("convulse").c_str());
+            defender->conj_verb("convulse").c_str(),
+            attack_strength_punctuation(bonus_dam).c_str());
 
-        defender->hurt(attacker, 1 + random2(3*dam/2));
+        defender->hurt(attacker, bonus_dam);
 
         // Allow the lance to charge when killing dragonform felid players.
         mondied = defender->is_player() ? defender->as_player()->pending_revival
@@ -779,10 +784,12 @@ static void _UNDEADHUNTER_melee_effects(item_def* item, actor* attacker,
     if (defender->holiness() & MH_UNDEAD && !one_chance_in(3)
         && !mondied && dam)
     {
-        mprf("%s %s blasted by disruptive energy!",
+        int bonus_dam = random2avg((1 + (dam * 3)), 3);
+        mprf("%s %s blasted by disruptive energy%s",
               defender->name(DESC_THE).c_str(),
-              defender->conj_verb("be").c_str());
-        defender->hurt(attacker, random2avg((1 + (dam * 3)), 3));
+              defender->conj_verb("be").c_str(),
+              attack_strength_punctuation(bonus_dam).c_str());
+        defender->hurt(attacker, bonus_dam);
     }
 }
 
@@ -1006,11 +1013,12 @@ static void _ELEMENTAL_STAFF_melee_effects(item_def*, actor* attacker,
     if (bonus_dam <= 0)
         return;
 
-    mprf("%s %s %s.",
+    mprf("%s %s %s%s",
          attacker->name(DESC_THE).c_str(),
          attacker->conj_verb(verb).c_str(),
          (attacker == defender ? defender->pronoun(PRONOUN_REFLEXIVE)
-                               : defender->name(DESC_THE)).c_str());
+                               : defender->name(DESC_THE)).c_str(),
+         attack_strength_punctuation(bonus_dam).c_str());
 
     defender->hurt(attacker, bonus_dam, flavour);
 
@@ -1289,17 +1297,6 @@ static void _FENCERS_equip(item_def *item, bool *show_msgs, bool unmeld)
 static void _ETHERIC_CAGE_equip(item_def *item, bool *show_msgs, bool unmeld)
 {
     _equip_mpr(show_msgs, "You sense a greater flux of ambient magical fields.");
-}
-
-static void _ETHERIC_CAGE_world_reacts(item_def *item)
-{
-    const int delay = you.time_taken;
-    ASSERT(delay > 0);
-
-    // coinflip() chance of 1 MP per turn. Be sure to change
-    // _get_overview_resistances to match!
-    if (player_regenerates_mp())
-        inc_mp(binomial(div_rand_round(delay, BASELINE_DELAY), 1, 2));
 }
 
 ///////////////////////////////////////////////////

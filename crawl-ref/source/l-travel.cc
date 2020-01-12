@@ -135,10 +135,11 @@ LUAFN(l_set_waypoint)
     coord_def s;
     s.x = luaL_safe_checkint(ls, 2);
     s.y = luaL_safe_checkint(ls, 3);
+    bool quiet = luaL_safe_checkint(ls, 4);
     const coord_def p = player2grid(s);
     if (!_in_map_bounds(p))
         return luaL_error(ls, "Coordinates out of bounds: (%d, %d)", s.x, s.y);
-    travel_cache.set_waypoint(waynum, p.x, p.y);
+    travel_cache.set_waypoint(waynum, p.x, p.y, quiet);
     return 0;
 }
 

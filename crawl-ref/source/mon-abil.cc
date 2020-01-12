@@ -18,7 +18,6 @@
 #include "areas.h"
 #include "arena.h"
 #include "beam.h"
-#include "bloodspatter.h"
 #include "cloud.h"
 #include "colour.h"
 #include "coordit.h"
@@ -27,33 +26,23 @@
 #include "directn.h"
 #include "english.h"
 #include "env.h"
-#include "exclude.h"
-#include "fight.h"
 #include "fprop.h"
 #include "god-passive.h"
 #include "item-prop.h"
-#include "items.h"
 #include "libutil.h"
-#include "losglobal.h"
 #include "message.h"
 #include "mgen-data.h"
-#include "misc.h"
 #include "mon-act.h"
 #include "mon-behv.h"
-#include "mon-book.h"
 #include "mon-cast.h"
 #include "mon-death.h"
 #include "mon-pathfind.h"
 #include "mon-place.h"
 #include "mon-poly.h"
-#include "mon-project.h"
-#include "mon-speak.h"
-#include "mon-tentacle.h"
 #include "mon-util.h"
 #include "ouch.h"
 #include "random.h"
 #include "religion.h"
-#include "shout.h"
 #include "spl-damage.h"
 #include "spl-miscast.h"
 #include "spl-util.h"
@@ -62,7 +51,6 @@
 #include "target.h"
 #include "teleport.h"
 #include "terrain.h"
-#include "viewchar.h"
 #include "view.h"
 
 static bool _slime_split_merge(monster* thing);
@@ -1024,7 +1012,7 @@ bool mon_special_ability(monster* mons)
 
         for (monster_near_iterator targ(mons, LOS_NO_TRANS); targ; ++targ)
         {
-            if (mons_aligned(mons, *targ) || grid_distance(mons->pos(), targ->pos()) > 2)
+            if (mons_aligned(mons, *targ) || grid_distance(mons->pos(), targ->pos()) > 2 || mons_is_firewood(**targ))
                 continue;
 
             if (!cell_is_solid(targ->pos()))

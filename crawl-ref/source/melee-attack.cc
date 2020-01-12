@@ -16,10 +16,8 @@
 #include "art-enum.h"
 #include "attitude-change.h"
 #include "bloodspatter.h"
-#include "butcher.h"
 #include "chardump.h"
 #include "cloud.h"
-#include "coordit.h"
 #include "delay.h"
 #include "english.h"
 #include "env.h"
@@ -33,15 +31,12 @@
 #include "item-prop.h"
 #include "mapdef.h"
 #include "message.h"
-#include "misc.h"
 #include "mon-behv.h"
 #include "mon-poly.h"
 #include "mon-tentacle.h"
-#include "prompt.h"
 #include "religion.h"
 #include "shout.h"
 #include "spl-damage.h"
-#include "spl-summoning.h"
 #include "state.h"
 #include "stepdown.h"
 #include "stringutil.h"
@@ -1841,24 +1836,6 @@ bool melee_attack::player_monattk_hit_effects()
     if (consider_decapitation(damage_done))
         return false;
 
-    // Mutually exclusive with (overrides) brand damage!
-    special_damage = 0;
-    apply_staff_damage();
-
-    if (!defender->alive())
-        return false;
-
-    if (special_damage || special_damage_flavour)
-    {
-        dprf(DIAG_COMBAT, "Special damage to %s: %d, flavour: %d",
-             defender->name(DESC_THE).c_str(),
-             special_damage, special_damage_flavour);
-
-        special_damage = inflict_damage(special_damage);
-        if (special_damage > 0)
-            defender->expose_to_element(special_damage_flavour, 2);
-    }
-
     return true;
 }
 
@@ -2123,16 +2100,16 @@ int melee_attack::staff_damage(skill_type skill)
     return 0;
 }
 
-void melee_attack::apply_staff_damage()
+bool melee_attack::apply_staff_damage()
 {
     if (!weapon)
-        return;
+        return false;
 
     if (attacker->is_player() && you.get_mutation_level(MUT_NO_ARTIFICE))
-        return;
+        return false;
 
     if (weapon->base_type != OBJ_STAVES)
-        return;
+        return false;
 
     switch (weapon->sub_type)
     {
@@ -2145,9 +2122,11 @@ void melee_attack::apply_staff_damage()
         if (special_damage)
         {
             special_damage_message =
-                make_stringf("%s %s electrocuted!",
-                             defender->name(DESC_THE).c_str(),
-                             defender->conj_verb("are").c_str());
+                make_stringf(
+                    "%s %s electrocuted%s",
+                    defender->name(DESC_THE).c_str(),
+                    defender->conj_verb("are").c_str(),
+                    attack_strength_punctuation(special_damage).c_str());
             special_damage_flavour = BEAM_ELECTRICITY;
         }
 
@@ -2163,10 +2142,11 @@ void melee_attack::apply_staff_damage()
         {
             special_damage_message =
                 make_stringf(
-                    "%s freeze%s %s!",
+                    "%s freeze%s %s%s",
                     attacker->name(DESC_THE).c_str(),
                     attacker->is_player() ? "" : "s",
-                    defender->name(DESC_THE).c_str());
+                    defender->name(DESC_THE).c_str(),
+                    attack_strength_punctuation(special_damage).c_str());
             special_damage_flavour = BEAM_COLD;
         }
         break;
@@ -2179,10 +2159,11 @@ void melee_attack::apply_staff_damage()
         {
             special_damage_message =
                 make_stringf(
-                    "%s crush%s %s!",
+                    "%s crush%s %s%s",
                     attacker->name(DESC_THE).c_str(),
                     attacker->is_player() ? "" : "es",
-                    defender->name(DESC_THE).c_str());
+                    defender->name(DESC_THE).c_str(),
+                    attack_strength_punctuation(special_damage).c_str());
         }
         break;
 
@@ -2196,10 +2177,11 @@ void melee_attack::apply_staff_damage()
         {
             special_damage_message =
                 make_stringf(
-                    "%s burn%s %s!",
+                    "%s burn%s %s%s",
                     attacker->name(DESC_THE).c_str(),
                     attacker->is_player() ? "" : "s",
-                    defender->name(DESC_THE).c_str());
+                    defender->name(DESC_THE).c_str(),
+                    attack_strength_punctuation(special_damage).c_str());
             special_damage_flavour = BEAM_FIRE;
 
             if (defender->is_player())
@@ -2210,7 +2192,7 @@ void melee_attack::apply_staff_damage()
     case STAFF_POISON:
     {
         if (random2(300) >= attacker->skill(SK_EVOCATIONS, 20) + attacker->skill(SK_POISON_MAGIC, 10))
-            return;
+            return true;
 
         // Base chance at 50% -- like mundane weapons.
         if (x_chance_in_y(80 + attacker->skill(SK_POISON_MAGIC, 10), 160))
@@ -2228,9 +2210,10 @@ void melee_attack::apply_staff_damage()
         {
             special_damage_message =
                 make_stringf(
-                    "%s %s in agony!",
+                    "%s %s in agony%s",
                     defender->name(DESC_THE).c_str(),
-                    defender->conj_verb("writhe").c_str());
+                    defender->conj_verb("writhe").c_str(),
+                    attack_strength_punctuation(special_damage).c_str());
 
             attacker->god_conduct(DID_EVIL, 4);
         }
@@ -2249,6 +2232,22 @@ void melee_attack::apply_staff_damage()
     default:
         die("Invalid staff type: %d", weapon->sub_type);
     }
+
+    if (special_damage || special_damage_flavour)
+    {
+        dprf(DIAG_COMBAT, "Staff damage to %s: %d, flavour: %d",
+             defender->name(DESC_THE).c_str(),
+             special_damage, special_damage_flavour);
+
+        if (needs_message && !special_damage_message.empty())
+            mpr(special_damage_message);
+
+        inflict_damage(special_damage, special_damage_flavour);
+        if (special_damage > 0)
+            defender->expose_to_element(special_damage_flavour, 2);
+    }
+
+    return true;
 }
 
 /**
@@ -2489,17 +2488,6 @@ bool melee_attack::mons_attack_effects()
             special_damage = 0;
             special_damage_message.clear();
             special_damage_flavour = BEAM_NONE;
-        }
-
-        apply_staff_damage();
-
-        if (needs_message && !special_damage_message.empty())
-            mpr(special_damage_message);
-
-        if (special_damage > 0
-            && inflict_damage(special_damage, special_damage_flavour))
-        {
-            defender->expose_to_element(special_damage_flavour, 2);
         }
     }
 
@@ -3610,6 +3598,12 @@ bool melee_attack::_player_vampire_draws_blood(const monster* mon, const int dam
         lessen_hunger(30 + random2avg(59, 2), false);
 
     return true;
+}
+
+bool melee_attack::apply_damage_brand(const char *what)
+{
+    // Staff damage overrides any brands
+    return apply_staff_damage() || attack::apply_damage_brand(what);
 }
 
 bool melee_attack::_vamp_wants_blood_from_monster(const monster* mon)

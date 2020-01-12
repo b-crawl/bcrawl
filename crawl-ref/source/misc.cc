@@ -15,22 +15,15 @@
 #include <unistd.h>
 #endif
 
-#include "coordit.h"
 #include "database.h"
 #include "english.h"
-#include "fprop.h"
 #include "items.h"
-#include "item-use.h"
 #include "libutil.h"
-#include "message.h"
 #include "monster.h"
-#include "prompt.h"
 #include "state.h"
 #include "terrain.h"
 #include "tileview.h"
 #include "traps.h"
-#include "view.h"
-#include "xom.h"
 
 string weird_glowing_colour()
 {

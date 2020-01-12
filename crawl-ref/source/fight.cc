@@ -14,7 +14,6 @@
 #include <cstring>
 
 #include "art-enum.h"
-#include "cloud.h"
 #include "coord.h"
 #include "coordit.h"
 #include "delay.h"
@@ -30,7 +29,6 @@
 #include "item-use.h"
 #include "melee-attack.h"
 #include "message.h"
-#include "mgen-data.h"
 #include "misc.h"
 #include "mon-behv.h"
 #include "mon-cast.h"
@@ -900,6 +898,9 @@ bool bad_attack(const monster *mon, string& adj, string& suffix,
         would_cause_penance = true;
         return true;
     }
+
+    if (mon->type == MONS_ORB_OF_DESTRUCTION)
+        return false;
 
     if (mon->friendly())
     {

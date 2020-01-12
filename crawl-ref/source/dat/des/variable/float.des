@@ -3886,7 +3886,7 @@ ENDMAP
 
 NAME: cheibrodos_pilgrimage
 TAGS: no_item_gen no_monster_gen
-DEPTH: D:2-4
+DEPTH: D:3-4
 ORIENT: float
 MONS: orc priest band, orc
 SUBST: ' : cG.w

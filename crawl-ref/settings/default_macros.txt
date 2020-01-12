@@ -12,3 +12,9 @@ A:\{-236}
 
 M:"
 A:;
+
+M:_
+A:===inputTogglePillar
+
+M:\{32}
+A:===startOrStep

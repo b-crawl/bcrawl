@@ -28,7 +28,6 @@
 #include "ghost.h"
 #include "god-abil.h"
 #include "god-passive.h" // passive_t::slow_abyss, slow_orb_run
-#include "lev-pand.h"
 #include "libutil.h"
 #include "losglobal.h"
 #include "message.h"
@@ -39,7 +38,6 @@
 #include "mon-pick.h"
 #include "mon-poly.h"
 #include "mon-tentacle.h"
-#include "options.h"
 #include "random.h"
 #include "religion.h"
 #include "shopping.h"
@@ -56,7 +54,6 @@
 #include "traps.h"
 #include "travel.h"
 #include "unwind.h"
-#include "viewchar.h"
 #include "view.h"
 
 band_type active_monster_band = BAND_NO_BAND;
@@ -230,7 +227,7 @@ bool monster_can_submerge(const monster* mon, dungeon_feature_type feat)
         return false;
 }
 
-static void _apply_ood(level_id &place)
+static int _apply_ood(level_id &place)
 {
     // OODs do not apply to any portal vaults, Zot and
     // hells. What with newnewabyss?
@@ -238,12 +235,8 @@ static void _apply_ood(level_id &place)
         || place.branch == BRANCH_ZOT
         || is_hell_subbranch(place.branch))
     {
-        return;
+        return 0;
     }
-
-#ifdef DEBUG_DIAGNOSTICS
-    level_id old_place = place;
-#endif
 
     // 20% chance of OOD fuzz for each monster at level generation.
     // fuzzed depth capped at 2x current depth
@@ -253,7 +246,9 @@ static void _apply_ood(level_id &place)
         if(fuzz > place.depth)
             fuzz = 1;
         place.depth += fuzz;
+        return fuzz;
     }
+    return 0;
 }
 
 //#define DEBUG_MON_CREATION
@@ -632,14 +627,17 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
     if (!mg.place.is_valid())
         mg.place = level_id::current();
 
-    const bool allow_ood = !(mg.flags & MG_NO_OOD);
+    bool allow_ood = !(mg.flags & MG_NO_OOD);
     bool want_band = false;
     level_id place = mg.place;
+    int ood_amount = 0;
+    if (allow_ood)
+        ood_amount = _apply_ood(place);
+
     mg.cls = resolve_monster_type(mg.cls, mg.base_type, mg.proximity,
                                   &mg.pos, mg.map_mask,
                                   &place, &want_band, allow_ood);
-    // TODO: it doesn't seem that this check can ever come out to be true??
-    bool chose_ood_monster = place.absdepth() > mg.place.absdepth() + 5;
+
     if (want_band)
         mg.flags |= MG_PERMIT_BANDS;
 
@@ -647,17 +645,9 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
         return 0;
 
     bool create_band = mg.permit_bands();
-    // If we drew an OOD monster and the level has less absdepth than D:13
-    // disable band generation. This applies only to randomly picked monsters
-    // -- chose_ood_monster will never be set true for explicitly specified
-    // monsters in vaults and other places.
-    if (chose_ood_monster && env.absdepth0 < 12)
-    {
-        dprf(DIAG_MONPLACE,
-             "Chose monster with OOD roll: %s, disabling band generation",
-             get_monster_data(mg.cls)->name);
+
+    if (ood_amount > ((env.absdepth0 * 2) / 5))
         create_band = false;
-    }
 
     if (mg.cls == MONS_PROGRAM_BUG)
         return 0;
@@ -678,7 +668,7 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
         band_size++;
         for (int i = 1; i < band_size; ++i)
         {
-            band_monsters[i] = _band_member(band, i, place, allow_ood);
+            band_monsters[i] = _band_member(band, i, mg.place, allow_ood);
             if (band_monsters[i] == NUM_MONSTERS)
                 die("Unhandled band type %d", band);
         }
@@ -730,7 +720,7 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
     if (mg.props.exists(MAP_KEY))
         mon->set_originating_map(mg.props[MAP_KEY].get_string());
 
-    if (chose_ood_monster)
+    if (ood_amount > 0)
         mon->props[MON_OOD_KEY].get_bool() = true;
 
     if (mg.needs_patrol_point()

@@ -22,7 +22,6 @@
 #include "art-enum.h"
 #include "artefact.h"
 #include "branch.h"
-#include "butcher.h"
 #include "cloud.h" // cloud_type_name
 #include "clua.h"
 #include "colour.h"
@@ -51,15 +50,11 @@
 #include "libutil.h"
 #include "macro.h"
 #include "message.h"
-#include "mon-book.h"
 #include "mon-cast.h" // mons_spell_range
 #include "mon-death.h"
 #include "mon-tentacle.h"
-#include "options.h"
 #include "output.h"
-#include "prompt.h"
 #include "religion.h"
-#include "scroller.h"
 #include "skills.h"
 #include "species.h"
 #include "spl-book.h"

@@ -15,9 +15,9 @@
 #include <cstring>
 
 #include "areas.h"
+#include "art-enum.h"
 #include "coordit.h"
 #include "directn.h"
-#include "english.h"
 #include "env.h"
 #include "god-passive.h"
 #include "god-abil.h"
@@ -518,6 +518,10 @@ int spell_mana(spell_type which_spell)
     if(!you.duration[DUR_TIME_STOP])
         if (you.species == SP_FAIRY)
             spell_cost--;
+    
+    if (player_equip_unrand(UNRAND_ETHERIC_CAGE))
+        spell_cost += 2;
+    
     return spell_cost;
 }
 
@@ -1290,6 +1294,7 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
         if (you.species == SP_GARGOYLE
             || you.species == SP_GHOUL
             || you.species == SP_MUMMY
+            || you.species == SP_SKELETON
             || (temp && !form_can_bleed(you.form)))
         {
             return "you have no blood to sublime.";

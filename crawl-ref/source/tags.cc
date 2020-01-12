@@ -33,9 +33,7 @@
 #include "artefact.h"
 #include "art-enum.h"
 #include "branch.h"
-#include "butcher.h"
 #if TAG_MAJOR_VERSION == 34
- #include "cloud.h"
  #include "decks.h"
 #endif
 #include "colour.h"

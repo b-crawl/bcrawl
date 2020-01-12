@@ -1097,6 +1097,7 @@ TILE:     urand_moon_troll_leather_armour
 TILE_EQ:  moon_troll_leather_armour
 MP:       +5
 REGEN:    1
+BOOL:     rCorr
 
 ENUM:     FINGER_AMULET
 NAME:     macabre finger necklace
@@ -1225,8 +1226,8 @@ TILE:    urand_etheric_cage
 TILE_EQ: etheric_cage
 INSCRIP: RegenMP+
 PLUS:    +0
-MP:      +4
 BOOL:    mutate, elec, chaotic
+STEALTH: -1
 VALUE:   400
 
 # TAG_MAJOR_VERSION == 34

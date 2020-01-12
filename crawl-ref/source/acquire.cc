@@ -17,19 +17,25 @@
 
 #include "artefact.h"
 #include "art-enum.h"
+#include "defines.h"
+#include "describe.h"
 #include "dungeon.h"
 #include "food.h"
 #include "god-item.h"
 #include "god-passive.h"
+#include "invent.h"
 #include "item-name.h"
 #include "item-prop.h"
 #include "item-status-flag-type.h"
+#include "item-type-id-state-type.h"
 #include "items.h"
 #include "item-use.h"
 #include "libutil.h"
 #include "macro.h"
 #include "message.h"
 #include "output.h"
+#include "player.h"
+#include "prompt.h"
 #include "randbook.h"
 #include "random.h"
 #include "religion.h"
@@ -42,6 +48,8 @@
 #include "terrain.h"
 #include "unwind.h"
 #include "ui.h"
+
+static bool _acquiring_now = false;
 
 static equipment_type _acquirement_armour_slot(bool);
 static armour_type _acquirement_armour_for_slot(equipment_type, bool);
@@ -1195,9 +1203,9 @@ static string _why_reject(const item_def &item, int agent)
     return ""; // all OK
 }
 
-int acquirement_create_item(object_class_type class_wanted,
-                            int agent, bool quiet,
-                            const coord_def &pos, bool debug)
+int acquirement_create_item_general(object_class_type class_wanted,
+                                    int agent, bool quiet,
+                                    const coord_def &pos, bool debug, bool move)
 {
     ASSERT(class_wanted != OBJ_RANDOM);
 
@@ -1312,14 +1320,7 @@ int acquirement_create_item(object_class_type class_wanted,
             acq_item.plus = max(static_cast<int>(acq_item.plus), 3 + random2(3));
         else if (class_wanted == OBJ_GOLD)
         {
-            // New gold acquirement formula from dpeg.
-            // Min=220, Max=5520, Mean=1218, Std=911
-            int quantity_rnd = roll_dice(1, 8); // ensure rnd sequence points
-            quantity_rnd *= roll_dice(1, 8);
-            quantity_rnd *= roll_dice(1, 8);
-            acq_item.quantity = 10 * (20
-                                    + roll_dice(1, 20)
-                                    + quantity_rnd);
+            acq_item.quantity = 200 + random2(1401);
         }
         else if (class_wanted == OBJ_MISSILES && !divine)
             acq_item.quantity *= 5;
@@ -1439,7 +1440,10 @@ int acquirement_create_item(object_class_type class_wanted,
             return _failed_acquirement(quiet);
     }
 
-    move_item_to_grid(&thing_created, pos);
+    if(move)
+    {
+        move_item_to_grid(&thing_created, pos);
+    }
 
     if (thing_created != NON_ITEM)
     {
@@ -1449,108 +1453,233 @@ int acquirement_create_item(object_class_type class_wanted,
     return thing_created;
 }
 
+
+//dtsund: Wrapper, since I needed to modify the original function to pass
+//an assert.
+int acquirement_create_item(object_class_type class_wanted,
+                            int agent, bool quiet,
+                            const coord_def &pos, bool debug)
+{
+return acquirement_create_item_general(class_wanted,
+                                       agent, quiet,
+                                       pos, debug, true);
+}
+
+
+//dtsund: Acquirement was changed rather drastically.  Now lets you choose from
+//specific items, rather than classes of item.
 bool acquirement(object_class_type class_wanted, int agent,
                  bool quiet, int* item_index, bool debug, bool known_scroll)
 {
-    ASSERT(!crawl_state.game_is_arena());
-
-    FixedBitVector<NUM_OBJECT_CLASSES> bad_class;
-    if (you.species == SP_FELID)
+    //Experimental new scroll of acquirement code below.
+    //Largely ripped shamelessly from shopping.cc.
+    if(class_wanted == OBJ_RANDOM)
     {
-        bad_class.set(OBJ_WEAPONS);
-        bad_class.set(OBJ_MISSILES);
-        bad_class.set(OBJ_STAVES);
-    }
-    if (you.get_mutation_level(MUT_NO_ARTIFICE))
-        bad_class.set(OBJ_MISCELLANY);
+        unwind_bool in_acquirement(_acquiring_now, true);
+        cursor_control coff(false);
+        bool tempQuiet = true;
 
-    bad_class.set(OBJ_FOOD, you_foodless(false));
-
-    static struct { object_class_type type; const char* name; } acq_classes[] =
-    {
-        { OBJ_WEAPONS,    "Weapon" },
-        { OBJ_ARMOUR,     "Armour" },
-        { OBJ_JEWELLERY,  "Jewellery" },
-        { OBJ_BOOKS,      "Book" },
-        { OBJ_STAVES,     "Staff " },
-        { OBJ_MISCELLANY, "Evocable" },
-        { OBJ_FOOD,       0 }, // amended below
-        { OBJ_GOLD,       0 },
-    };
-    ASSERT(acq_classes[6].type == OBJ_FOOD);
-    acq_classes[6].name = you.species == SP_VAMPIRE ? "Blood":
-                                                      "Food";
-    string gold_text = make_stringf("Gold (you have $%d)", you.gold);
-    ASSERT(acq_classes[7].type == OBJ_GOLD);
-    acq_classes[7].name = gold_text.c_str();
-
-    int thing_created = NON_ITEM;
-
-    if (item_index == nullptr)
-        item_index = &thing_created;
-
-    *item_index = NON_ITEM;
-
-#ifdef USE_TILE_WEB
-    ui::cutoff_point ui_cutoff_point;
-#endif
-
-    while (class_wanted == OBJ_RANDOM)
-    {
-        ASSERT(!quiet);
-        clear_messages();
-
-        string line;
-        for (unsigned int i = 0; i < ARRAYSZ(acq_classes); i++)
+        const std::string hello = "What would you like to acquire?";
+        
+        std::vector<int> stock(8);
+        
+        if(you.species == SP_FELID)
         {
-            int len = max(strlen(acq_classes[i].name),
-                          strlen(acq_classes[(i + ARRAYSZ(acq_classes) / 2)
-                                             % ARRAYSZ(acq_classes)].name));
-            if (bad_class[acq_classes[i].type])
-                line += make_stringf("     %-*s", len, "");
-            else
-                line += make_stringf(" [%c] %-*s", i + 'a', len, acq_classes[i].name);
+            stock.resize(6, false);
+        }
 
-            if (i == ARRAYSZ(acq_classes) / 2 - 1 || i == ARRAYSZ(acq_classes) - 1)
-            {
-                line.erase(0, 1);
-                mpr(line);
-                line.clear();
+        //dtsund: I don't really know what half of this does.
+        coord_def stock_loc = coord_def(0, 65);  // ??
+        
+        int index = 0;
+
+        if(you.species != SP_FELID)
+        {
+            stock[index] = acquirement_create_item_general(OBJ_WEAPONS, agent, tempQuiet,
+                                                   stock_loc, debug, false);
+            index++;
+        }
+        stock[index] = acquirement_create_item_general(OBJ_ARMOUR, agent, tempQuiet,
+                                               stock_loc, debug, false);
+        index++;
+        stock[index] = acquirement_create_item_general(OBJ_JEWELLERY, agent, tempQuiet,
+                                                   stock_loc, debug, false);
+        index++;
+        stock[index] = acquirement_create_item_general(OBJ_BOOKS, agent, tempQuiet,
+                                                   stock_loc, debug, false);
+        index++;
+        if(you.species != SP_FELID)
+        {
+            stock[index] = acquirement_create_item_general(OBJ_STAVES, agent, tempQuiet,
+                                                   stock_loc, debug, false);
+            index++;
+        }
+        stock[index] = acquirement_create_item_general(OBJ_MISCELLANY, agent, tempQuiet,
+                                                   stock_loc, debug, false);
+        index++;
+        stock[index] = acquirement_create_item_general(OBJ_FOOD, agent, tempQuiet,
+                                                   stock_loc, debug, false);
+        index++;
+        stock[index] = acquirement_create_item_general(OBJ_GOLD, agent, tempQuiet,
+                                                   stock_loc, debug, false);
+        index++;
+
+        // Autoinscribe randarts in the menu.
+        for (unsigned int i = 0; i < stock.size(); i++)
+        {
+            item_def& item = mitm[stock[i]];
+            if(is_artefact(item))
+            {   
+                //Need to explicitly ID artifacts to prevent name mangling
+                //but don't want to hand out ID info like candy
+                set_ident_type(item, true);
+                set_ident_flags(item, ISFLAG_IDENT_MASK);
             }
         }
-        mprf(MSGCH_PROMPT, "What kind of item would you like to acquire?"
-                "<lightgrey> [<w>\\</w>] known items %s</lightgrey>",
-                shopping_list.empty() ? "" : "[<w>$</w>] shopping list");
 
-        const int keyin = toalower(get_ch());
-        if (keyin >= 'a' && keyin < 'a' + (int)ARRAYSZ(acq_classes))
-            class_wanted = acq_classes[keyin - 'a'].type;
-        else if (keyin == '\\')
-            check_item_knowledge(), redraw_screen();
-        else if (keyin == '$' && !shopping_list.empty())
-            shopping_list.display(true), redraw_screen();
-        else
+        std::vector<bool> selected;
+        selected.resize(stock.size(), false);
+
+        const bool id_stock         = true;
+              bool viewing          = false;
+    
+        while (true)
         {
-            // Lets wizards escape out of accidentally choosing acquirement.
-            if (agent == AQ_WIZMODE || known_scroll)
-            {
-                canned_msg(MSG_OK);
-                return false;
-            }
-
-            // If we've gotten a HUP signal then the player will be unable
-            // to make a selection.
             if (crawl_state.seen_hups)
             {
-                dprf("Acquirement interrupted by HUP signal.");
-                you.turn_is_over = false;
+                for (unsigned int i =0; i < selected.size(); i++)
+                {
+                    item_def& item = mitm[stock[i]];
+                    destroy_item(item);
+                }
+                mprf(MSGCH_WARN, "Cancelling acquirement.");
                 return false;
+            }
+            
+            if (stock.empty())
+                mprf(MSGCH_WARN, "ACQUIREMENT ERROR");
+
+            if (viewing)
+                mprf(MSGCH_PROMPT, "\nView which item? (Press ! for selection.)");
+            else
+                mprf(MSGCH_PROMPT, "\nAcquire which item? (Press ! for descriptions.)");
+            
+            char selection_key = 'A';
+            for (unsigned int i = 0; i < stock.size(); ++i)
+            {
+                const item_def& item = mitm[stock[i]];
+                mprf("%c: %s", selection_key, item.name(DESC_PLAIN, false, true).c_str());
+                selection_key++;
+            }
+            flush_prev_message();
+            
+            mouse_control mc(MOUSE_MODE_MORE);
+            int key = getchm();
+
+            if (key == '\\')
+                check_item_knowledge();
+            else if (key == 'x' || key_is_escape(key) || key == CK_MOUSE_CMD)
+            {
+                mprf(MSGCH_WARN, "\nThis will waste the scroll!\nReally cancel your acquirement? (Y/N)");
+                flush_prev_message();
+                if (yesno(NULL, false, 'n', false, false, true))
+                {
+                    for (unsigned int i =0; i < selected.size(); i++)
+                    {
+                        item_def& item = mitm[stock[i]];
+                        destroy_item(item);
+                    }
+                    mpr("Cancelling acquirement.");
+                    break;
+                }
+            }
+            
+            else if (key == '\r' || key == CK_MOUSE_CLICK)
+                continue;               
+                
+            else if (key == '!')
+            {
+                // Toggle between browsing and shopping.
+                viewing = !viewing;
+            }
+            else if (key == '?')
+                viewing = true;
+            else if (key == '$')
+                shopping_list.display(true);
+            else if (key == 'i')
+                display_inventory();
+            else
+            {
+                key = tolower(key) - 'a';
+                if (key >= static_cast<int>(stock.size()) || key < 0)
+                {
+                    mpr("No such item.");
+                    continue;
+                }
+
+                item_def& item = mitm[stock[key]];
+                if (viewing)
+                {
+                    // A hack to make the description more useful.
+                    // In theory, the user could kill the process at this
+                    // point and end up with valid ID for the item.
+                    // That's not very useful, though, because it doesn't set
+                    // type-ID and once you can access the item (by buying it)
+                    // you have its full ID anyway. Worst case, it won't get
+                    // noted when you buy it.
+                    const uint64_t old_flags = item.flags;
+                    if (id_stock)
+                    {
+                        item.flags |= (ISFLAG_IDENT_MASK | ISFLAG_NOTED_ID
+                                       | ISFLAG_NOTED_GET);
+                    }
+                    describe_item(item);
+                    if (id_stock)
+                        item.flags = old_flags;
+                }
+                else
+                {
+                    for(unsigned int i = 0; i < selected.size(); i++)
+                    {
+                        selected[i] = false;
+                    }
+
+                    selected[key] = true;
+                    
+                    mprf(MSGCH_PROMPT, "\nAcquire %s? (y/n)", item.name(DESC_THE, false, true).c_str());
+                    flush_prev_message();
+                    if (yesno(NULL, true, 'n', false, false, true))
+                    {
+                        for (unsigned int i = 0; i < selected.size(); i++)
+                        {
+                            item_def& item = mitm[stock[i]];
+                            if (selected[i])
+                            {
+                                // ID it before giving it to the player.
+                                set_ident_type(item, true);
+                                set_ident_flags(item, ISFLAG_IDENT_MASK);
+                                move_item_to_grid(&stock[i], you.pos());
+                            }
+                            else
+                            {
+                                destroy_item(item);
+                            }
+                        }
+                        canned_msg(MSG_SOMETHING_APPEARS);
+                        break;
+                    }
+                    continue;
+                }
             }
         }
 
-        if (class_wanted >= NUM_OBJECT_CLASSES || bad_class[class_wanted])
-            class_wanted = OBJ_RANDOM;
+    return(true);
     }
+
+    int thing_created = NON_ITEM;
+    if (item_index == nullptr)
+        item_index = &thing_created;
+    *item_index = NON_ITEM;
 
     *item_index = acquirement_create_item(class_wanted, agent, quiet,
                                           you.pos(), debug);

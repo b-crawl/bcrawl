@@ -18,10 +18,7 @@
 #include "coordit.h"
 #include "english.h"
 #include "env.h"
-#include "fight.h"
-#include "god-abil.h"
 #include "ghost.h"
-#include "item-name.h"
 #include "item-prop.h"
 #include "item-status-flag-type.h"
 #include "libutil.h"
@@ -35,7 +32,6 @@
 #include "religion.h"
 #include "skills.h"
 #include "spl-goditem.h" // dispellable_enchantments
-#include "spl-summoning.h"
 #include "state.h"
 #include "stringutil.h"
 #ifdef USE_TILE

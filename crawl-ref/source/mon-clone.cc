@@ -11,7 +11,6 @@
 #include "arena.h"
 #include "artefact.h"
 #include "coordit.h"
-#include "directn.h"
 #include "env.h"
 #include "items.h"
 #include "message.h"
@@ -24,7 +23,6 @@
 #include "stringutil.h"
 #include "terrain.h"
 #include "transform.h"
-#include "unwind.h"
 #include "view.h"
 
 static string _monster_clone_id_for(monster* mons)

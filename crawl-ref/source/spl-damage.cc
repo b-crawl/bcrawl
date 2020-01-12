@@ -15,7 +15,6 @@
 #include "areas.h"
 #include "attack.h"
 #include "beam.h"
-#include "butcher.h"
 #include "cloud.h"
 #include "colour.h"
 #include "coordit.h"
@@ -25,10 +24,8 @@
 #include "fight.h"
 #include "food.h"
 #include "fprop.h"
-#include "god-abil.h"
 #include "god-conduct.h"
 #include "invent.h"
-#include "item-name.h"
 #include "items.h"
 #include "los.h"
 #include "losglobal.h"
@@ -1449,6 +1446,18 @@ static int _ignite_poison_monsters(coord_def where, int pow, actor *agent)
     const int damage = mons_adjust_flavoured(mon, beam, base_dam, false);
     if (damage <= 0)
         return 0;
+
+    if (agent && agent->deity() == GOD_FEDHAS && fedhas_protects(*mon))
+    {
+        if (!tracer)
+        {
+            simple_god_message(
+                        make_stringf(" protects %s plant from harm.",
+                            agent->is_player() ? "your" : "a").c_str(),
+                        GOD_FEDHAS);
+        }
+        return 0;
+    }
 
     mon->expose_to_element(BEAM_FIRE, damage);
 

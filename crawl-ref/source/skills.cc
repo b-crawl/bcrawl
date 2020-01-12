@@ -18,7 +18,6 @@
 #include "clua.h"
 #include "describe-god.h"
 #include "evoke.h"
-#include "exercise.h"
 #include "god-abil.h"
 #include "god-conduct.h"
 #include "god-passive.h"
@@ -26,7 +25,6 @@
 #include "item-prop.h"
 #include "libutil.h"
 #include "message.h"
-#include "misc.h"
 #include "notes.h"
 #include "output.h"
 #include "random.h"
@@ -35,7 +33,6 @@
 #include "sprint.h"
 #include "state.h"
 #include "stringutil.h"
-#include "unwind.h"
 
 // MAX_COST_LIMIT is the maximum XP amount it will cost to raise a skill
 //                by 10 skill points (ie one standard practice).

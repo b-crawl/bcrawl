@@ -15,7 +15,6 @@
 
 #include "act-iter.h"
 #include "artefact.h"
-#include "attitude-change.h"
 #include "cio.h"
 #include "cloud.h"
 #include "clua.h"
@@ -32,7 +31,6 @@
 #include "feature.h"
 #include "files.h"
 #include "fprop.h"
-#include "god-abil.h"
 #include "god-conduct.h"
 #include "god-passive.h"
 #include "god-wrath.h"
@@ -40,7 +38,6 @@
 #include "items.h"
 #include "item-name.h" // item_type_known
 #include "item-prop.h" // get_weapon_brand
-#include "item-status-flag-type.h"
 #include "libutil.h"
 #include "macro.h"
 #include "map-knowledge.h"
@@ -329,11 +326,15 @@ static string _monster_headsup(const vector<monster*> &monsters,
         warning_msg += uppercase_first(monname);
 
         warning_msg += " is";
+
+        mons_equip_desc_level_type level = mon->type != MONS_DANCING_WEAPON
+            ? DESC_IDENTIFIED : DESC_WEAPON_WARNING;
+
         if (!divine)
         {
-            warning_msg += " ";
-            warning_msg += get_monster_equipment_desc(mi, DESC_IDENTIFIED,
-                                                      DESC_NONE);
+            if (mon->type != MONS_DANCING_WEAPON)
+                warning_msg += " ";
+            warning_msg += get_monster_equipment_desc(mi, level, DESC_NONE);
             warning_msg += ".";
             continue;
         }
@@ -350,8 +351,7 @@ static string _monster_headsup(const vector<monster*> &monsters,
             // TODO: deduplicate
             if (mon->type != MONS_DANCING_WEAPON)
                 warning_msg += " ";
-            warning_msg += get_monster_equipment_desc(mi, DESC_IDENTIFIED,
-                                                      DESC_NONE);
+            warning_msg += get_monster_equipment_desc(mi, level, DESC_NONE);
         }
         warning_msg += ".";
     }

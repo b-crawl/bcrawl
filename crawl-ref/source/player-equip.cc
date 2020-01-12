@@ -10,7 +10,6 @@
 #include "art-enum.h"
 #include "delay.h"
 #include "english.h" // conjugate_verb
-#include "evoke.h"
 #include "food.h"
 #include "god-abil.h"
 #include "god-item.h"
@@ -24,10 +23,8 @@
 #include "libutil.h"
 #include "macro.h" // command_to_string
 #include "message.h"
-#include "mutation.h"
 #include "nearby-danger.h"
 #include "notes.h"
-#include "options.h"
 #include "player-stats.h"
 #include "religion.h"
 #include "shopping.h"

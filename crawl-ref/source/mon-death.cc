@@ -55,7 +55,6 @@
 #include "mutation.h"
 #include "nearby-danger.h"
 #include "notes.h"
-#include "output.h"
 #include "religion.h"
 #include "rot.h"
 #include "spl-damage.h"

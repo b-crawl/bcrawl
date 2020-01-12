@@ -14,15 +14,10 @@
 #include "artefact.h"
 #include "branch.h"
 #include "butcher.h"
-#include "chardump.h"
-#include "coord.h"
-#include "coordit.h"
 #include "dbg-maps.h"
 #include "dbg-util.h"
-#include "dungeon.h"
 #include "end.h"
 #include "env.h"
-#include "god-abil.h"
 #include "initfile.h"
 #include "invent.h"
 #include "item-name.h"
@@ -39,7 +34,6 @@
 #include "state.h"
 #include "stepdown.h"
 #include "stringutil.h"
-#include "terrain.h"
 #include "version.h"
 
 #ifdef DEBUG_STATISTICS

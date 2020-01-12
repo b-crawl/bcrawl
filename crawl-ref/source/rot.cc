@@ -9,12 +9,10 @@
 
 #include <algorithm>
 
-#include "areas.h"
 #include "butcher.h"
 #include "delay.h"
 #include "english.h"
 #include "env.h"
-#include "god-conduct.h"
 #include "item-prop.h"
 #include "items.h"
 #include "player-equip.h"
@@ -206,8 +204,6 @@ static void _rot_corpse(item_def &it, int mitm_index, int rot_time)
     else
     {
         turn_corpse_into_skeleton(it);
-        const int piety = x_chance_in_y(2, 5) ? 2 : 1; // match fungal_bloom()
-        did_god_conduct(DID_ROT_CARRION, piety);
     }
 }
 

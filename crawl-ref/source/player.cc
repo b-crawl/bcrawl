@@ -61,7 +61,6 @@
 #include "player-equip.h"
 #include "player-save-info.h"
 #include "player-stats.h"
-#include "potion.h"
 #include "prompt.h"
 #include "religion.h"
 #include "shout.h"
@@ -1171,6 +1170,9 @@ int player_mp_regen()
 
     if (you.props[MANA_REGEN_AMULET_ACTIVE].get_int() == 1)
         regen_amount += 25;
+
+    if (player_equip_unrand(UNRAND_ETHERIC_CAGE))
+        regen_amount += 100;
 
     return regen_amount;
 }
@@ -3887,7 +3889,7 @@ bool enough_mp(int minimum, bool suppress_msg, bool abort_macros)
 
 static int _rest_trigger_level(int max)
 {
-    return (max * Options.rest_wait_percent) / 100;
+    return (max * Options.rest_wait_percent + 99) / 100;
 }
 
 static bool _should_stop_resting(int cur, int max)
@@ -4226,11 +4228,7 @@ void contaminate_player(int change, bool controlled, bool msg)
     bool was_glowing = player_severe_contamination();
     int new_level  = 0;
 
-    if (change > 0 && player_equip_unrand(UNRAND_ETHERIC_CAGE))
-        change *= 2;
-
-    you.magic_contamination = max(0, min(250000,
-                                         you.magic_contamination + change));
+    you.magic_contamination = max(0, min(250000, you.magic_contamination + change));
 
     new_level = get_contamination_level();
 

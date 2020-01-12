@@ -11,13 +11,11 @@
 #include "act-iter.h"
 #include "areas.h"
 #include "beam.h"
-#include "bloodspatter.h"
 #include "cloud.h"
 #include "coordit.h"
 #include "database.h"
 #include "dgn-shoals.h"
 #include "dgn-event.h"
-#include "dungeon.h"
 #include "env.h"
 #include "exercise.h"
 #include "externs.h"
@@ -233,13 +231,11 @@ static void _handle_magic_contamination()
         added_contamination += INVIS_CONTAM_PER_TURN;
     //If not invisible, normal dissipation
     else
+    {
         added_contamination -= 25;
-
-    // The Orb halves dissipation (well a bit more, I had to round it),
-    // but won't cause glow on its own -- otherwise it'd spam the player
-    // with messages about contamination oscillating near zero.
-    if (you.magic_contamination && player_has_orb())
-        added_contamination += 13;
+        if(you.magic_points >= you.max_magic_points && you.magic_contamination < 4000)
+            added_contamination -= 25;
+    }
 
     // Scaling to turn length
     added_contamination = div_rand_round(added_contamination * you.time_taken,

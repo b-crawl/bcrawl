@@ -48,6 +48,8 @@ Pull requests for new content are welcome.
   - v1.13.4: The Lair entrance is on D:7-9 instead of D:7-10.
   - v1.16: Volcano levels will not contain wizards.
   - v1.18: Portals to Pandemonium levels are redirected to the Abyss by the lords of Pandemonium if the player has reached their max experience level. On entering a Pandemonium level, if the player has at least 2 runes, the locations of portals are revealed and the player is notified if the demonic rune is present.
+  - v1.20: Early out-of-depth monsters do not spawn with their band. This reduces the number of Orc Priests on D:2.
+  - v1.20: Some gods will warn the player about doing Elf or Slime at a low XL.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -76,6 +78,7 @@ Pull requests for new content are welcome.
   - v1.18.1: Summoners start with a scroll of summoning.
   - v1.18.1: Wizards start with Spider Form instead of Slow.
   - v1.19: Wanderers start with more ammo, to compensate for it not being reusable.
+  - v1.20: Abyssal Knights start with 40 stones.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -89,6 +92,8 @@ Pull requests for new content are welcome.
   - v1.18: New default macros: 'p' = melee attack; '[' = melee attack if in range, otherwise throw; ']' = 3x '['.
   - v1.18.1: New default macros: ';' = rest; '"' = ';'.
   - v1.19.2: Taking stairs upwards when no monsters are visible will never teleport players.
+  - v1.20: New default macros: '_' = create path around a pillar; space = walk along path. (by marksg07)
+  - v1.20: Guaranteed damage reduction percent is shown always, not just in wizmode.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -99,6 +104,7 @@ Pull requests for new content are welcome.
   - v1.15.1: Guaranteed damage reduction now affects player damage from spells with non-elemental damage.
   - v1.19: The combined effect of wizardry items, Vehumet, and brilliance potions is no longer capped.
   - v1.19.2: Poison on monsters is no longer capped at 4 stacks.
+  - v1.20: Magic contamination decreases twice as fast when at full mana and not glowing.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -297,6 +303,7 @@ Pull requests for new content are welcome.
   - v1.18: Executioner's axes have lower base delay (20 -> 19).
   - v1.19.1: Bucklers can be equipped and unequipped in 1 turn.
   - v1.19.1: A staff of power gives less (15 -> 12) extra max mana.
+  - v1.20: Scrolls of acquirement give a choice of specific items instead of categories.
 
 #### Removed Items
   - Amulet of Harm
@@ -333,6 +340,8 @@ Pull requests for new content are welcome.
   - v1.18: Punk is a hunting sling instead of a fustibalus.
   - v1.18: The Scythe of Curses applies random debuffs to enemies hit, instead of miscast effects.
   - v1.18.1: The Singing Sword gives invisibility and a Song of Slaying instead of damaging visible creatures.
+  - v1.20: Maxwell's Etheric Cage is reworked: it gives 1 mana/turn and doesn't affect contamination, but increases spell costs by 2.
+  - v1.20: The moon troll leather armour gives rCorr.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -374,6 +383,7 @@ Pull requests for new content are welcome.
   - v1.19: Draconian knights have a reworked spell set.
   - v1.19.1: Crocodiles can sprint.
   - v1.19.2: Player ghost damage is calculated differently, making weapon base damage less important.
+  - v1.20: Deep trolls and iron trolls are slightly stronger.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -396,3 +406,4 @@ Pull requests for new content are welcome.
   - v1.17.2: Gastronok acts faster and casts much faster.
   - v1.19: Nikola is reworked, losing Chain Lightning but gaining Deflect Missiles and a rapier of distortion.
   - v1.19.2: Louise has higher-level conjurations.
+  - v1.20: The Moon Troll loses its acid spit, and is now a fast-moving corrosive melee enemy similar in strength to 2 caustic shrikes.

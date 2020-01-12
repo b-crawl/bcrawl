@@ -17,10 +17,8 @@
 #include "eq-type-flags.h"
 #include "fight.h"
 #include "files.h"
-#include "food.h"
 #include "fprop.h"
 #include "god-abil.h"
-#include "god-item.h"
 #include "god-prayer.h"
 #include "invent.h" // in_inventory
 #include "item-name.h"
@@ -43,12 +41,10 @@
 #include "skills.h"
 #include "spl-clouds.h"
 #include "state.h"
-#include "status.h"
 #include "stringutil.h"
 #include "terrain.h"
 #include "throw.h"
 #include "unwind.h"
-#include "view.h"
 
 // TODO: template out the differences between this and god_power.
 // TODO: use the display method rather than dummy powers in god_powers.

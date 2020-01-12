@@ -18,10 +18,8 @@
 #include "env.h"
 #include "fprop.h"
 #include "fight.h"
-#include "god-conduct.h"
 #include "items.h"
 #include "level-state-type.h"
-#include "losglobal.h"
 #include "message.h"
 #include "mon-behv.h" // ME_WHACK
 #include "ouch.h"
@@ -31,7 +29,6 @@
 #include "spl-util.h"
 #include "target.h"
 #include "terrain.h"
-#include "viewchar.h"
 
 spret conjure_flame(const actor *agent, int pow, const coord_def& where,
                          bool fail)

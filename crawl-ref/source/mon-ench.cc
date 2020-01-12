@@ -20,17 +20,14 @@
 #include "english.h"
 #include "env.h"
 #include "fight.h"
-#include "fprop.h"
 #include "hints.h"
 #include "item-status-flag-type.h"
 #include "items.h"
 #include "libutil.h"
 #include "losglobal.h"
 #include "message.h"
-#include "misc.h"
 #include "mon-abil.h"
 #include "mon-behv.h"
-#include "mon-book.h"
 #include "mon-cast.h"
 #include "mon-death.h"
 #include "mon-place.h"
@@ -50,7 +47,6 @@
 #include "traps.h"
 #include "unwind.h"
 #include "view.h"
-#include "xom.h"
 
 static void _place_thunder_ring(const monster &mons)
 {

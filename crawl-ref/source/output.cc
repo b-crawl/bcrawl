@@ -18,12 +18,10 @@
 #include "colour.h"
 #include "describe.h"
 #ifndef USE_TILE_LOCAL
-#include "directn.h"
 #endif
 #include "english.h"
 #include "env.h"
 #include "files.h"
-#include "god-abil.h"
 #include "god-passive.h"
 #include "initfile.h"
 #include "item-name.h"
@@ -848,10 +846,7 @@ static void _print_stats_ac(int x, int y)
         text_col = RED;
 
     string ac = make_stringf("%2d ", you.armour_class());
-#ifdef WIZARD
-    if (you.wizard)
-        ac += make_stringf("(%d%%) ", you.gdr_perc());
-#endif
+    ac += make_stringf("(%d%%) ", you.gdr_perc());
     textcolour(text_col);
     CGOTOXY(x+4, y, GOTO_STAT);
     CPRINTF("%-12s", ac.c_str());

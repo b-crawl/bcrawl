@@ -934,10 +934,9 @@ A long sword with a wide, curved blade.
 %%%%
 scroll of acquirement
 
-A wonderful scroll which causes the creation of a valuable item, with the
-reader choosing the type of item to be created. The item produced will be
-heavily biased towards something fitting the reader's skills, and also towards
-gear that hasn't been seen yet, but, alas, nothing is guaranteed.
+A scroll which locates distant valuable items and allows the reader to teleport one
+of those to their location. It attempts to find items that are useful to the
+reader, but alas, nothing is guaranteed.
 %%%%
 scroll of amnesia
 

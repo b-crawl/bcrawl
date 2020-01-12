@@ -1485,7 +1485,7 @@ bool acquirement(object_class_type class_wanted, int agent,
         
         if(you.species == SP_FELID)
         {
-            stock.resize(5, false);
+            stock.resize(6, false);
         }
 
         //dtsund: I don't really know what half of this does.

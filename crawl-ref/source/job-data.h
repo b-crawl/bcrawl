@@ -26,10 +26,10 @@ static const map<job_type, job_def> job_data =
     "AK", "Abyssal Knight",
     4, 4, 4,
     { SP_DEMONSPAWN, SP_FORMICID, SP_GHOUL, SP_HILL_ORC, SP_HUMAN, SP_MINOTAUR, },
-    { "leather armour", "stone q:40" },
+    { "leather armour", "tomahawk ego:dispersal q:10", "stone q:40" },
     WCHOICE_PLAIN,
     { { SK_FIGHTING, 3 }, { SK_ARMOUR, 1 }, { SK_DODGING, 1 },
-      { SK_INVOCATIONS, 2 }, { SK_WEAPON, 2 }, },
+      { SK_INVOCATIONS, 2 }, { SK_WEAPON, 2 }, { SK_THROWING, 1 }, },
 } },
 
 { JOB_AIR_ELEMENTALIST, {

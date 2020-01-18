@@ -2692,107 +2692,73 @@ void bolt::affect_place_clouds()
         affect_place_explosion_clouds();
 
     const coord_def p = pos();
+
+    // Is there already a cloud here?
+    if (cloud_struct* cloud = cloud_at(p))
+    {
+        // fire cancelling cold & vice versa
+        if ((cloud->type == CLOUD_COLD
+             && (flavour == BEAM_FIRE || flavour == BEAM_LAVA))
+            || (cloud->type == CLOUD_FIRE && flavour == BEAM_COLD))
+        {
+            if (player_can_hear(p))
+                mprf(MSGCH_SOUND, "You hear a sizzling sound!");
+
+            delete_cloud(p);
+            extra_range_used += 5;
+        }
+        return;
+    }
+
+    // No clouds here, free to make new ones.
     const dungeon_feature_type feat = grd(p);
-    
-    cloud_type cl_type = CLOUD_NONE;
-    int lifetime = 0;
-    int spread_rate = -1;
-    
-    switch(origin_spell)
+
+    if (origin_spell == SPELL_POISONOUS_CLOUD)
+        place_cloud(CLOUD_POISON, p, random2(5) + 3, agent());
+
+    if (origin_spell == SPELL_HOLY_BREATH)
+        place_cloud(CLOUD_HOLY, p, random2(4) + 2, agent());
+
+    if (origin_spell == SPELL_FLAMING_CLOUD)
+        place_cloud(CLOUD_FIRE, p, random2(4) + 2, agent());
+
+    // Fire/cold over water/lava
+    if (feat == DNGN_LAVA && flavour == BEAM_COLD
+        || feat_is_watery(feat) && is_fiery())
     {
-    case SPELL_POISONOUS_CLOUD:
-        cl_type = CLOUD_POISON; lifetime = random2(5) + 3;
-        break;
-    case SPELL_HOLY_BREATH:
-        cl_type = CLOUD_HOLY; lifetime = random2(4) + 2;
-        break;
-    case SPELL_FLAMING_CLOUD:
-        cl_type = CLOUD_FIRE; lifetime = random2(4) + 2;
-        break;
-    case SPELL_PETRIFYING_CLOUD:
-        cl_type = CLOUD_PETRIFY; lifetime = random2(4) + 4;
-        break;
-    case SPELL_SPECTRAL_CLOUD:
-        cl_type = CLOUD_SPECTRAL; lifetime = random2(6) + 5;
-        break;
-    case SPELL_DEATH_RATTLE:
-        cl_type = CLOUD_MIASMA; lifetime = random2(4) + 4;
-        break;
-    default: break;
+        place_cloud(CLOUD_STEAM, p, 2 + random2(5), agent(), 11);
     }
 
-    switch(flavour)
+    if (feat_is_watery(feat) && flavour == BEAM_COLD
+        && damage.num * damage.size > 35)
     {
-    case BEAM_COLD:        
-        if (feat == DNGN_LAVA)
-        {
-            cl_type = CLOUD_STEAM;
-            lifetime = 2 + random2(5);
-            spread_rate = 11;
-        }
-        else if (feat_is_watery(feat) && damage.num * damage.size > 35)
-        {
-            cl_type = CLOUD_COLD;
-            lifetime = damage.num * damage.size / 30 + 1;
-        }
-        break;
-    
-    case BEAM_FIRE:
-    case BEAM_LAVA:    
-        if(feat_is_watery(feat))
-        {
-            cl_type = CLOUD_STEAM;
-            lifetime = 2 + random2(5);
-            spread_rate = 11;
-        }
-        break;
-    
-    case BEAM_MIASMA:
-        cl_type = CLOUD_MIASMA; lifetime = random2(5) + 2;
-        break;
-    
-    default: break;
-    }
-    
-    switch(name)
-    {
-    case "ball of steam":
-        cl_type = CLOUD_STEAM; lifetime = random2(5) + 2;
-        break;
-    case "poison gas":
-        cl_type = CLOUD_POISON; lifetime = random2(4) + 3;
-        break;
-    case "blast of choking fumes":
-        cl_type = CLOUD_MEPHITIC; lifetime = random2(4) + 3;
-        break;
-    case "trail of fire":
-        cl_type = CLOUD_FIRE; lifetime = random2(ench_power) + ench_power;
-        break;
-    case "ball of steam":
-        cl_type = CLOUD_STEAM; lifetime = random2(5) + 2;
-        break;
-    default: break;
+        place_cloud(CLOUD_COLD, p, damage.num * damage.size / 30 + 1, agent());
     }
 
-    if (cl_type != CLOUD_NONE)
-    {
-        if (cloud_struct* cloud = cloud_at(p))
-        {
-            // fire cancelling cold & vice versa
-            if ((cloud->type == CLOUD_COLD && (flavour == BEAM_FIRE || flavour == BEAM_LAVA))
-                || (cloud->type == CLOUD_FIRE && flavour == BEAM_COLD))
-            {
-                if (player_can_hear(p))
-                    mprf(MSGCH_SOUND, "You hear a sizzling sound!");
+    if (flavour == BEAM_MIASMA)
+        place_cloud(CLOUD_MIASMA, p, random2(5) + 2, agent());
 
-                delete_cloud(p);
-                extra_range_used += 5;
-            }
-            return;
-        }
+    //XXX: these use the name for a gameplay effect.
+    if (name == "ball of steam")
+        place_cloud(CLOUD_STEAM, p, random2(5) + 2, agent());
 
-        place_cloud(cl_type, p, lifetime, agent(), spread_rate);
-    }
+    if (name == "poison gas")
+        place_cloud(CLOUD_POISON, p, random2(4) + 3, agent());
+
+    if (name == "blast of choking fumes")
+        place_cloud(CLOUD_MEPHITIC, p, random2(4) + 3, agent());
+
+    if (name == "trail of fire")
+        place_cloud(CLOUD_FIRE, p, random2(ench_power) + ench_power, agent());
+
+    if (origin_spell == SPELL_PETRIFYING_CLOUD)
+        place_cloud(CLOUD_PETRIFY, p, random2(4) + 4, agent());
+
+    if (origin_spell == SPELL_SPECTRAL_CLOUD)
+        place_cloud(CLOUD_SPECTRAL, p, random2(6) + 5, agent());
+
+    if (origin_spell == SPELL_DEATH_RATTLE)
+        place_cloud(CLOUD_MIASMA, p, random2(4) + 4, agent());
 }
 
 void bolt::affect_place_explosion_clouds()

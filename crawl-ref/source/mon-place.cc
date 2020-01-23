@@ -636,7 +636,7 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
 
     mg.cls = resolve_monster_type(mg.cls, mg.base_type, mg.proximity,
                                   &mg.pos, mg.map_mask,
-                                  &place, &want_band, allow_ood);
+                                  &place, &want_band, false);
 
     if (want_band)
         mg.flags |= MG_PERMIT_BANDS;

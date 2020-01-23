@@ -79,6 +79,8 @@ Pull requests for new content are welcome.
   - v1.18.1: Wizards start with Spider Form instead of Slow.
   - v1.19: Wanderers start with more ammo, to compensate for it not being reusable.
   - v1.20: Abyssal Knights start with 40 stones.
+  - v1.20.1: Abyssal Knights start with 10 tomahawks of dispersal and 1 Throwing skill.
+  - v1.20.1: Wizards start with a potion of brilliance.
 
 #### Features
   - All items are automatically identified if the player has a rune.

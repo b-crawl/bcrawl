@@ -1154,8 +1154,9 @@ tear clean through the ranks of the caster's foes.
 %%%%
 Searing Breath spell
 
-Breathes a blast of fire at a targeted creature, leaving a cloud of flames at
-the endpoint.
+Breathes a blast of dragonfire that burns away some of
+the fire resistance of those it strikes.
+It leaves a cloud of flames at its endpoint.
 %%%%
 Sentinel's Mark spell
 

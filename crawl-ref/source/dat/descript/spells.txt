@@ -472,8 +472,8 @@ Dragon Form spell
     desc = desc .. "."
 
     return desc
-}} The caster becomes able to deal incredible damage in melee combat, and
-they become much more robust, although their evasiveness is reduced.
+}} The caster becomes much more robust and able to deal incredible damage in melee combat,
+and their magical spells become more powerful, but they become easier to hit because of a dragon's enormous size.
 
 While transformed, any equipped weapons and armour are melded.
 

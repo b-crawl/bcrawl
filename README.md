@@ -206,6 +206,7 @@ Pull requests for new content are welcome.
   - v1.18.1: Shatter no longer damages or angers insubstantial monsters. (This reverses a change made in Nov. 2017.)
   - v1.18.1: Call Imp always summons Crimson Imps at low power, instead of having a fixed chance to summon White Imps.
   - v1.19.2: Searing Ray has an unlimited duration and higher max spell power, but uses 2 mana/turn at full strength.
+  - v1.20.2: Dragon Form increases spell power (+1 enhancer level).
 
 #### Removed Spells
   - Summon Guardian Golem

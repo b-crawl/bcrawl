@@ -268,6 +268,7 @@ Pull requests for new content are welcome.
   - v1.19: Qazlal worshippers can regain mana by standing in a cloud.
   - v1.19: Xom has higher minimum levels for banishment. (6 -> 8 when bored, 9 -> 14 otherwise)
   - v1.19: Nemelex's Triple Draw ability is now available at \*\*.
+  - v1.20.2: Trog gives torment immunity while berserk at 3* piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

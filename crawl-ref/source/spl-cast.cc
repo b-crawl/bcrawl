@@ -520,6 +520,9 @@ static int _spell_enhancement(spell_type spell)
     if (you.form == transformation::shadow)
         enhanced -= 2;
 
+    if (you.form == transformation::dragon)
+        enhanced += 1;
+
     if (you.duration[DUR_FIRE_SHIELD])
         enhanced -= 1;
 

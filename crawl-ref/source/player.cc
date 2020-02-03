@@ -3350,7 +3350,7 @@ int player_stealth()
 
     // If you've been tagged with Corona or are Glowing, the glow
     // makes you extremely unstealthy.
-    if (you.backlit() || you.duration[DUR_CONFUSING_TOUCH])
+    if (you.backlit())
         stealth = stealth * 2 / 5;
 
     // On the other hand, shrouding has the reverse effect, if you know
@@ -7325,8 +7325,8 @@ bool player::backlit(bool self_halo) const
     return player_severe_contamination()
            || duration[DUR_CORONA]
            || duration[DUR_LIQUID_FLAMES]
-           || duration[DUR_QUAD_DAMAGE]
-           || !umbraed() && haloed() && (self_halo || halo_radius() == -1);
+           || (self_halo && duration[DUR_CONFUSING_TOUCH])
+           || (haloed() && !umbraed() && (self_halo || halo_radius() == -1));
 }
 
 bool player::umbra() const

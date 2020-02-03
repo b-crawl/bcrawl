@@ -1317,7 +1317,7 @@ int acquirement_create_item_general(object_class_type class_wanted,
         ASSERT(acq_item.is_valid());
 
         if (class_wanted == OBJ_WANDS)
-            acq_item.plus = max(static_cast<int>(acq_item.plus), 3 + random2(3));
+            acq_item.plus = (acq_item.plus * 5) / 2;
         else if (class_wanted == OBJ_GOLD)
         {
             acq_item.quantity = 200 + random2(1401);

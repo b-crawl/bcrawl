@@ -3143,7 +3143,7 @@ void level_change(bool skip_attribute_increase)
         learned_something_new(HINT_NEW_LEVEL);
     }
 
-    if (you.char_class == JOB_ARCHAEOLOGIST && you.experience_level >= 3)
+    if (you.char_class == JOB_ARCHAEOLOGIST && you.experience_level >= 5)
     {
         int tome_index = -1;
         for (int i = 0; i < ENDOFPACK; i++)

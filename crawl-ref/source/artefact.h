@@ -147,5 +147,3 @@ bool artp_potentially_bad(artefact_prop_type prop);
 int get_unrandart_num(const char *name);
 
 void unrand_reacts();
-
-const vector<int> archaeologist_unrands();

@@ -484,17 +484,45 @@ void archaeologist_open_crate(item_def& crate)
 
 void archaeologist_read_tome(item_def& tome)
 {
-    tome.base_type = OBJ_BOOKS;
-    tome.sub_type = BOOK_MANUAL;
-    tome.skill_points = 700;
-    tome.skill = (skill_type)tome.props[ARCHAEOLOGIST_TOME_SKILL].get_int();
+    tome.base_type = OBJ_SCROLLS;
+    tome.sub_type = SCR_ACQUIREMENT;
     item_colour(tome);
     item_set_appearance(tome);
-    mprf("You have an epiphany! "
-         "The dusty tome is %s! Reading it may be key to unlocking the crate...",
-         tome.name(DESC_A).c_str());
-    you.start_train.insert(tome.skill);
-    update_can_train();
+    mpr("You're now able to understand the dusty tome!");
+    mpr("Part of it contains a powerful arcane formula!");
+    mpr("Most of the book is about a legendary artefact.");
+    switch(random2(9))
+    {
+    case 0:
+        mpr("It claims this artefact was used as a power source by an ancient civilization, until it was buried after some disaster. The book seems to assume the reader is already familiar with that disaster, and doesn't describe it clearly.");
+        break;
+    case 1:
+        mpr("Supposedly this artefact could grant its holder eternal life, but with some unclear side effects.");
+        break;
+    case 2:
+        mpr("Supposedly this artefact emitted energy that could sustain life without food or drink, and would cause animals to gradually become larger and stronger.");
+        break;
+    case 3:
+        mpr("It claims this artefact was actually a hole in reality leading to a dimension of primordial energy, and that it could not safely be destroyed.");
+        break;
+    case 4:
+        mpr("It claims this artefact was created by a master of translocation magic, which supposedly proves the superiority of translocations to the other schools of magic.");
+        break;
+    case 5:
+        mpr("It claims this artefact was created by a master of summoning magic, which supposedly proves the superiority of summonings to the other schools of magic.");
+        break;
+    case 6:
+        mpr("It claims this artefact was created by the god Lugonu, and goes on to praise Lugonu in length.");
+        break;
+    case 7:
+        mpr("It claims this artefact was created by the god Ru, and goes on to praise Ru in length.");
+        break;
+    case 8:
+        mpr("It claims this artefact was created by the god Ashenzari, and goes on to praise Ashenzari in length.");
+        break;
+    default: break;
+    }
+    
     you.props[ARCHAEOLOGIST_TRIGGER_TOME_ON_PICKUP] = false;
 }
 
@@ -503,36 +531,7 @@ void finish_manual(int slot)
     item_def& manual(you.inv[slot]);
     const skill_type skill = static_cast<skill_type>(manual.plus);
 
-    if (you.char_class == JOB_ARCHAEOLOGIST && manual.props.exists(ARCHAEOLOGIST_TOME_SKILL))
-    {
-        int crate_index = -1;
-        for (int i = 0; i < ENDOFPACK; i++)
-            if (you.inv[i].defined()
-                && you.inv[i].is_type(OBJ_MISCELLANY, MISC_ANCIENT_CRATE))
-            {
-                crate_index = i;
-            }
-
-        if (crate_index != -1)
-        {
-            mprf("As you finish your manual of %s, "
-                 "the mysteries of the crate's mechanism unravel in your mind!",
-                 skill_name(skill));
-            archaeologist_open_crate(you.inv[crate_index]);
-        }
-        else
-        {
-            mprf("As you finish your manual of %s, you suddenly remember the "
-                 "ancient crate it was unearthed with."
-                 "\nYou are certain you could open it now, if only you could "
-                 "find it again...",
-                 skill_name(skill));
-            you.props[ARCHAEOLOGIST_TRIGGER_CRATE_ON_PICKUP] = true;
-        }
-    }
-    else
-        mprf("You have finished your manual of %s and toss it away.",
-             skill_name(skill));
+    mprf("You have finished your manual of %s and toss it away.", skill_name(skill));
 
     dec_inv_item_quantity(slot, 1);
 }

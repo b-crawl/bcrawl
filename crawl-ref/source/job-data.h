@@ -337,15 +337,6 @@ static const map<job_type, job_def> job_data =
     { },
 } },
 
-{ JOB_JESTER, {
-    "Jr", "Jester",
-    0, 0, 0,
-    { },
-    { },
-    WCHOICE_NONE,
-    { },
-} },
-
 { JOB_PRIEST, {
     "Pr", "Priest",
     0, 0, 0,

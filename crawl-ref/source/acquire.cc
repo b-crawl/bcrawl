@@ -687,13 +687,13 @@ static int _acquirement_wand_subtype(bool /*divine*/, int & /*quantity*/)
     vector<pair<wand_type, int>> weights = {
         { WAND_SCATTERSHOT,     25 },
         { WAND_CLOUDS,          25 },
-        { WAND_ACID,            18 },
-        { WAND_ICEBLAST,        18 },
-        { WAND_ENSLAVEMENT,     you.get_mutation_level(MUT_NO_LOVE) ? 0 : 8 },
-        { WAND_PARALYSIS,       8 },
+        { WAND_ACID,            25 },
+        { WAND_ICEBLAST,        20 },
+        { WAND_ENSLAVEMENT,     you.get_mutation_level(MUT_NO_LOVE) ? 0 : 10 },
+        { WAND_PARALYSIS,       10 },
+        { WAND_DIGGING,         10 },
         { WAND_DISINTEGRATION,  5 },
         { WAND_POLYMORPH,       5 },
-        { WAND_DIGGING,         5 },
         { WAND_RANDOM_EFFECTS,  2 },
         { WAND_FLAME,           1 },
     };
@@ -1317,7 +1317,7 @@ int acquirement_create_item_general(object_class_type class_wanted,
         ASSERT(acq_item.is_valid());
 
         if (class_wanted == OBJ_WANDS)
-            acq_item.plus = (acq_item.plus * 5) / 2;
+            acq_item.plus = acq_item.plus * 2;
         else if (class_wanted == OBJ_GOLD)
         {
             acq_item.quantity = 200 + random2(1401);

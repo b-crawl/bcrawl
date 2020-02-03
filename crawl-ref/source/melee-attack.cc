@@ -414,22 +414,36 @@ bool melee_attack::handle_phase_hit()
 
     damage_done = 0;
 
-    if (attacker->is_player() && you.duration[DUR_INFUSION])
+    if (attacker->is_player())
     {
-        if (enough_mp(1, true, false))
+        if (you.duration[DUR_INFUSION])
         {
-            // infusion_power is set when the infusion spell is cast
-            const int pow = you.props["infusion_power"].get_int();
-            const int dmg = div_rand_round(pow, 5);
-            const int hurt = defender->apply_ac(dmg);
-
-            dprf(DIAG_COMBAT, "Infusion: dmg = %d hurt = %d", dmg, hurt);
-
-            if (hurt > 0)
+            if (enough_mp(1, true, false))
             {
-                damage_done = hurt;
-                dec_mp(1);
+                // infusion_power is set when the infusion spell is cast
+                const int pow = you.props["infusion_power"].get_int();
+                const int dmg = div_rand_round(pow, 5);
+                const int hurt = defender->apply_ac(dmg);
+
+                dprf(DIAG_COMBAT, "Infusion: dmg = %d hurt = %d", dmg, hurt);
+
+                if (hurt > 0)
+                {
+                    damage_done = hurt;
+                    dec_mp(1);
+                }
             }
+        }
+        
+        if (you.duration[DUR_CONFUSING_TOUCH] && !you.weapon() && !slot_item(EQ_SHIELD, false))
+        {
+            if(x_chance_in_y(melee_confuse_chance(defender->get_hit_dice()), 100)
+                    && !defender->as_monster()->check_clarity(false))
+            {
+                defender->as_monster()->add_ench(mon_enchant(ENCH_CONFUSION, 1, attacker, 10 + random2(10)));
+            }
+            
+            you.duration[DUR_CONFUSING_TOUCH] = max(0, you.duration[DUR_CONFUSING_TOUCH] - 10);
         }
     }
 
@@ -1513,9 +1527,6 @@ int melee_attack::player_apply_final_multipliers(int damage)
     if (you.duration[DUR_WEAK])
         damage = div_rand_round(damage * 3, 4);
 
-    if (you.duration[DUR_CONFUSING_TOUCH])
-        return 0;
-
     return damage;
 }
 
@@ -2258,10 +2269,6 @@ bool melee_attack::apply_staff_damage()
 int melee_attack::calc_to_hit(bool random)
 {
     int mhit = attack::calc_to_hit(random);
-
-    // Just trying to touch is easier than trying to damage.
-    if (you.duration[DUR_CONFUSING_TOUCH])
-        mhit += maybe_random2(you.dex(), random);
 
     if (attacker->is_player() && !weapon)
     {

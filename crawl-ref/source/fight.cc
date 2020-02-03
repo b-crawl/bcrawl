@@ -60,7 +60,8 @@
  */
 int melee_confuse_chance(int HD)
 {
-    return max(80 * (24 - HD) / 24, 0);
+	int XL = you.experience_level;
+    return max(80 * (XL + 1 - HD) / XL, 0);
 }
 
 /**

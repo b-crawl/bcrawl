@@ -525,8 +525,8 @@ public:
                 afflictions.push_back("corona");
             if (you.duration[DUR_LIQUID_FLAMES])
                 afflictions.push_back("liquid flames");
-            if (you.duration[DUR_QUAD_DAMAGE])
-                afflictions.push_back("!!!QUAD DAMAGE!!!");
+            if (you.duration[DUR_CONFUSING_TOUCH])
+                afflictions.push_back("confusing touch enchantment");
             mprf(MSGCH_DURATION,
                  "You become %stransparent, but the glow from %s "
                  "%s prevents you from becoming completely invisible.",

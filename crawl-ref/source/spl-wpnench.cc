@@ -125,6 +125,17 @@ spret cast_excruciating_wounds(int power, bool fail)
 
 spret cast_confusing_touch(int power, bool fail)
 {
+    if(you.weapon())
+    {
+        mpr("You cannot use this spell with a weapon!");
+        return spret::abort;
+    }
+    if(slot_item(EQ_SHIELD, false))
+    {
+        mpr("You cannot use this spell with a shield!");
+        return spret::abort;
+    }
+    
     fail_check();
     msg::stream << you.hands_act("begin", "to glow ")
                 << (you.duration[DUR_CONFUSING_TOUCH] ? "brighter" : "red")

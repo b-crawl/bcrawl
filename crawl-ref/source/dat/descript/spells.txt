@@ -298,10 +298,8 @@ Induces a state of bewilderment and confusion in a creature's mind.
 %%%%
 Confusing Touch spell
 
-Enchants the caster's dominant hand with magical energy. This energy is
-released when the caster touches a monster, and may induce a state of confusion
-in the monster. The caster's attacks do no damage while attempting to touch a
-monster in this way.
+Enchants the caster's hands with magical energy that can confuse foes when striking them.
+This effect requires both hands, and cannot be used with a weapon or shield.
 %%%%
 Confusion Gaze spell
 

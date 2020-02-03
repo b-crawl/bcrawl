@@ -491,13 +491,13 @@ void archaeologist_read_tome(item_def& tome)
     mpr("You're now able to understand the dusty tome!");
     mpr("Part of it contains a powerful arcane formula!");
     mpr("Most of the book is about a legendary artefact.");
-    switch(random2(9))
+    switch(random2(11))
     {
     case 0:
         mpr("It claims this artefact was used as a power source by an ancient civilization, until it was buried after some disaster. The book seems to assume the reader is already familiar with that disaster, and doesn't describe it clearly.");
         break;
     case 1:
-        mpr("Supposedly this artefact could grant its holder eternal life, but with some unclear side effects.");
+        mpr("Supposedly this artefact could grant its holder eternal life, but with some unclear side effects. The book describes a war being fought over it until it was stolen by a powerful wizard.");
         break;
     case 2:
         mpr("Supposedly this artefact emitted energy that could sustain life without food or drink, and would cause animals to gradually become larger and stronger.");
@@ -512,13 +512,19 @@ void archaeologist_read_tome(item_def& tome)
         mpr("It claims this artefact was created by a master of summoning magic, which supposedly proves the superiority of summonings to the other schools of magic.");
         break;
     case 6:
-        mpr("It claims this artefact was created by the god Lugonu, and goes on to praise Lugonu in length.");
+        mpr("It claims this artefact was created by the god Lugonu, and goes on to praise Lugonu at length.");
         break;
     case 7:
-        mpr("It claims this artefact was created by the god Ru, and goes on to praise Ru in length.");
+        mpr("It claims this artefact was created by the god Ru, and goes on to praise Ru at length.");
         break;
     case 8:
-        mpr("It claims this artefact was created by the god Ashenzari, and goes on to praise Ashenzari in length.");
+        mpr("It claims this artefact was created by the god Ashenzari, and goes on to praise Ashenzari at length.");
+        break;
+    case 9:
+        mpr("It describes this artefact being used by an ancient king who exposed subjects to its energy, which strengthened them but warped their minds. That king then had them killed en masse, which released some of that energy to grant strength with fewer side effects. The book then describes this practice leading to a revolt and civil war.");
+        break;
+    case 10:
+        mpr("It claims this artefact weakened the barrier between dimensions, allowing demons to enter this world and also attracting them somehow.");
         break;
     default: break;
     }

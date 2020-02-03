@@ -437,10 +437,12 @@ bool melee_attack::handle_phase_hit()
         
         if (you.duration[DUR_CONFUSING_TOUCH] && !you.weapon() && !you.slot_item(EQ_SHIELD, false))
         {
+            monster* mon = defender->as_monster();
             if(x_chance_in_y(melee_confuse_chance(defender->get_hit_dice()), 100)
-                    && !defender->as_monster()->check_clarity(false))
+                    && !mon->check_clarity(false))
             {
-                defender->as_monster()->add_ench(mon_enchant(ENCH_CONFUSION, 1, attacker, 10 + random2(10)));
+                mon->add_ench(mon_enchant(ENCH_CONFUSION, 1, attacker, 10 + random2(10)));
+                simple_monster_message(*mon, " appears confused.");
             }
             
             you.duration[DUR_CONFUSING_TOUCH] = max(0, you.duration[DUR_CONFUSING_TOUCH] - 10);

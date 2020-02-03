@@ -209,7 +209,7 @@ static const map<job_type, job_def> job_data =
       SP_GARGOYLE, SP_DEMONSPAWN, SP_HUMAN, },
     { "robe", "potion of agility" },
     WCHOICE_PLAIN,
-    { { SK_FIGHTING, 3 }, { SK_UNARMED_COMBAT, 4 }, { SK_DODGING, 3 }, { SK_STEALTH, 1 }, },
+    { { SK_FIGHTING, 3 }, { SK_UNARMED_COMBAT, 4 }, { SK_DODGING, 3 }, { SK_STEALTH, 1 }, { SK_SPELLCASTING, 1 }, { SK_HEXES, 1 }, },
 } },
 
 { JOB_MONK, {

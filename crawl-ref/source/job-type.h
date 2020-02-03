@@ -37,9 +37,7 @@ enum job_type
 #endif
     JOB_ABYSSAL_KNIGHT,
     JOB_ARCHAEOLOGIST,
-#if TAG_MAJOR_VERSION == 34
-    JOB_JESTER,
-#endif
+    JOB_MARTIAL_ARTIST,
     JOB_REAVER,
     JOB_SLOTH_APOSTLE,
     NUM_JOBS,                          // always after the last job

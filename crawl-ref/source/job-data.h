@@ -202,6 +202,16 @@ static const map<job_type, job_def> job_data =
       { SK_DODGING, 2 }, { SK_STEALTH, 2 }, },
 } },
 
+{ JOB_MARTIAL_ARTIST, {
+    "MA", "Martial Artist",
+    4, 1, 7,
+    { SP_HILL_ORC, SP_TROLL, SP_CENTAUR, SP_MERFOLK,
+      SP_GARGOYLE, SP_DEMONSPAWN, SP_HUMAN, },
+    { "robe", "potion of agility" },
+    WCHOICE_PLAIN,
+    { { SK_FIGHTING, 3 }, { SK_UNARMED_COMBAT, 4 }, { SK_DODGING, 3 }, { SK_STEALTH, 1 }, },
+} },
+
 { JOB_MONK, {
     "Mo", "Monk",
     3, 2, 7,

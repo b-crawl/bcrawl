@@ -323,6 +323,13 @@ static void _give_items_skills(const newgame_def& ng)
         you.spell_library.set(SPELL_BATTLESPHERE, true);
         break;
 
+    case JOB_MARTIAL_ARTIST:
+        you.religion = GOD_WU_JIAN;
+        you.piety = 35;
+        
+        add_spell_to_memory(SPELL_CONFUSING_TOUCH);
+        break;
+    
     case JOB_SLOTH_APOSTLE:
         you.religion = GOD_CHEIBRIADOS;
         you.piety = 10;

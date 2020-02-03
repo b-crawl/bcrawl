@@ -130,7 +130,7 @@ spret cast_confusing_touch(int power, bool fail)
         mpr("You cannot use this spell with a weapon!");
         return spret::abort;
     }
-    if(slot_item(EQ_SHIELD, false))
+    if(you.slot_item(EQ_SHIELD, false))
     {
         mpr("You cannot use this spell with a shield!");
         return spret::abort;

@@ -435,7 +435,7 @@ bool melee_attack::handle_phase_hit()
             }
         }
         
-        if (you.duration[DUR_CONFUSING_TOUCH] && !you.weapon() && !slot_item(EQ_SHIELD, false))
+        if (you.duration[DUR_CONFUSING_TOUCH] && !you.weapon() && !you.slot_item(EQ_SHIELD, false))
         {
             if(x_chance_in_y(melee_confuse_chance(defender->get_hit_dice()), 100)
                     && !defender->as_monster()->check_clarity(false))

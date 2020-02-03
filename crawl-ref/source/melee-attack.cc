@@ -442,7 +442,7 @@ bool melee_attack::handle_phase_hit()
                     && !mon->check_clarity(false))
             {
                 mon->add_ench(mon_enchant(ENCH_CONFUSION, 1, attacker, 10 + random2(10)));
-                simple_monster_message(*mon, " appears confused.");
+                simple_monster_message(*mon, " seems disoriented.");
             }
             
             you.duration[DUR_CONFUSING_TOUCH] = max(0, you.duration[DUR_CONFUSING_TOUCH] - 10);

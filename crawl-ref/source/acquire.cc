@@ -651,11 +651,11 @@ static int _acquirement_misc_subtype(bool /*divine*/, int & /*quantity*/)
     {
         // These have charges, so give them a constant weight.
         {MISC_BOX_OF_BEASTS,
-                                       (NO_LOVE ?     0 :  7)},
+                                       (NO_LOVE ?     0 :  8)},
         {MISC_SACK_OF_SPIDERS,
                                        (NO_LOVE ?     0 :  7)},
         {MISC_PHANTOM_MIRROR,
-                                       (NO_LOVE ?     0 :  7)},
+                                       (NO_LOVE ?     0 :  6)},
         // The player never needs more than one.
         {MISC_LIGHTNING_ROD,
             (you.seen_misc[MISC_LIGHTNING_ROD] ?      0 : 17)},
@@ -664,7 +664,7 @@ static int _acquirement_misc_subtype(bool /*divine*/, int & /*quantity*/)
         {MISC_PHIAL_OF_FLOODS,
             (you.seen_misc[MISC_PHIAL_OF_FLOODS] ?    0 : 17)},
         {MISC_FAN_OF_GALES,
-            (you.seen_misc[MISC_FAN_OF_GALES] ?       0 : 17)},
+            (you.seen_misc[MISC_FAN_OF_GALES] ?       0 : 9)},
     };
 
     const int * const choice = random_choose_weighted(choices);
@@ -1317,7 +1317,7 @@ int acquirement_create_item_general(object_class_type class_wanted,
         ASSERT(acq_item.is_valid());
 
         if (class_wanted == OBJ_WANDS)
-            acq_item.plus = acq_item.plus * 2;
+            acq_item.plus = acq_item.plus * 2 + random2(2);
         else if (class_wanted == OBJ_GOLD)
         {
             acq_item.quantity = 200 + random2(1401);

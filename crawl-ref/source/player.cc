@@ -3350,7 +3350,7 @@ int player_stealth()
 
     // If you've been tagged with Corona or are Glowing, the glow
     // makes you extremely unstealthy.
-    if (you.backlit())
+    if (you.backlit() || you.duration[DUR_CONFUSING_TOUCH])
         stealth = stealth * 2 / 5;
 
     // On the other hand, shrouding has the reverse effect, if you know

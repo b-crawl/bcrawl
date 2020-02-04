@@ -182,6 +182,7 @@ PLUS:    +8
 COLOUR:  ETC_BLOOD
 TILE:    spwpn_wrath_of_trog
 TILE_EQ: axe_trog
+BASE_DAM: +3
 VALUE:   800
 ANGRY:   50
 BRAND:   SPWPN_ANTIMAGIC

@@ -1024,7 +1024,7 @@ BOOL:     poison, evil
 
 NAME:     amulet of Vitality
 OBJ:      OBJ_JEWELLERY/AMU_REGENERATION
-HP:       +15
+HP:       +25
 COLOUR:   ETC_MUTAGENIC
 TILE:     urand_vitality
 

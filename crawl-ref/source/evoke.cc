@@ -488,6 +488,10 @@ void archaeologist_read_tome(item_def& tome)
     tome.sub_type = SCR_ACQUIREMENT;
     item_colour(tome);
     item_set_appearance(tome);
+    
+    set_ident_flags(tome, ISFLAG_IDENT_MASK);
+    set_ident_type(tome, true);
+    
     mpr("You're now able to understand the dusty tome!");
     mpr("Part of it contains a powerful arcane formula!");
     mpr("Most of the book is about a legendary artefact.");

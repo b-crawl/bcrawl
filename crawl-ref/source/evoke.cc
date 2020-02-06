@@ -32,6 +32,7 @@
 #include "god-conduct.h"
 #include "invent.h"
 #include "item-prop.h"
+#include "item-status-flag-type.h"
 #include "items.h"
 #include "libutil.h"
 #include "losglobal.h"

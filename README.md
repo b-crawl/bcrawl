@@ -83,6 +83,7 @@ Pull requests for new content are welcome.
   - v1.20.1: Wizards start with a potion of brilliance.
   - v1.21: Archaeologist is reworked: they don't get a manual or unrand artefact; instead, they start with a scroll of magic mapping and get a scroll of acquirement at level 5.
   - v1.21: Martial Artists start with Wu Jian, unarmed skill, Confusing Touch, and a potion of agility.
+  - v1.21: Spelunkers start with a dagger, leather armor, boots, Corona, Passwall, a wand of digging, a lamp of fire, and a scroll of noise.
 
 #### Features
   - All items are automatically identified if the player has a rune.

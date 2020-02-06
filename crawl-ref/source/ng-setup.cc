@@ -337,6 +337,11 @@ static void _give_items_skills(const newgame_def& ng)
         add_spell_to_memory(SPELL_SLOW);
         break;
 
+    case JOB_SPELUNKER:
+        add_spell_to_memory(SPELL_CORONA);
+        add_spell_to_memory(SPELL_PASSWALL);
+        break;
+
     case JOB_WANDERER:
         create_wanderer();
         break;

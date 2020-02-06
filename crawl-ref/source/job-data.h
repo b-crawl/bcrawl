@@ -253,6 +253,15 @@ static const map<job_type, job_def> job_data =
       { SK_SPELLCASTING, 2 }, { SK_CHARMS, 3 }, { SK_WEAPON, 2 }, },
 } },
 
+{ JOB_SPELUNKER, {
+    "Sp", "Spelunker",
+    4, 4, 4,
+    { SP_HUMAN, SP_KOBOLD, SP_SPRIGGAN, SP_VAMPIRE, SP_DUSK_WALKER, SP_VINE_STALKER, SP_SAND_DWARF, },
+    { "dagger plus:1", "leather armour", "boots", "wand of digging charges:10", "lamp of fire", "scroll of noise" },
+    WCHOICE_NONE,
+    { { SK_STEALTH, 3 }, { SK_SHORT_BLADES, 2 }, { SK_FIGHTING, 2 }, { SK_SPELLCASTING, 2 },
+      { SK_HEXES, 2 }, { SK_TRANSMUTATIONS, 2 }, { SK_EARTH_MAGIC, 2 }, { SK_EVOCATIONS, 2 }, },} },
+
 { JOB_SUMMONER, {
     "Su", "Summoner",
     0, 7, 5,
@@ -338,15 +347,6 @@ static const map<job_type, job_def> job_data =
 
 { JOB_PRIEST, {
     "Pr", "Priest",
-    0, 0, 0,
-    { },
-    { },
-    WCHOICE_NONE,
-    { },
-} },
-
-{ JOB_STALKER, {
-    "St", "Stalker",
     0, 0, 0,
     { },
     { },

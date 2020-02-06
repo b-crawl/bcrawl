@@ -81,6 +81,8 @@ Pull requests for new content are welcome.
   - v1.20: Abyssal Knights start with 40 stones.
   - v1.20.1: Abyssal Knights start with 10 tomahawks of dispersal and 1 Throwing skill.
   - v1.20.1: Wizards start with a potion of brilliance.
+  - v1.21: Archaeologist is reworked: they don't get a manual or unrand artefact; instead, they start with a scroll of magic mapping and get a scroll of acquirement at level 5.
+  - v1.21: Martial Artists start with Wu Jian, unarmed skill, Confusing Touch, and a potion of agility.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -158,6 +160,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Icicle Burst (L7 Conjurations/Ice) shoots several weak icicles. It's similar to the Scattershot wand, but it shoots icicles (40% cold), it has lower accuracy, and it's less affected by monster AC.
   - v1.14.2: Flaming Arrows (L2 Charms/Fire) adds bonus damage to ranged attacks, at the cost of 2 MP per projectile.
   - v1.15: Steam Barrier (L6 Charms/Fire) creates steam clouds around the player, gives rF+ and rC-, reduces player spell power (-1 enhancer level), and gives an AC bonus proportional to its remaining duration.
+  - v1.21: Confusing Touch is re-added as a very different spell. It only works while unarmed without a shield, and has a chance based on your level and enemy HD to confuse hit enemies for 1 to 2 turns. It does not prevent players from dealing melee damage, and does not end when it affects an enemy. Currently, it's exclusive to Martial Artists.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.
@@ -206,7 +209,7 @@ Pull requests for new content are welcome.
   - v1.18.1: Shatter no longer damages or angers insubstantial monsters. (This reverses a change made in Nov. 2017.)
   - v1.18.1: Call Imp always summons Crimson Imps at low power, instead of having a fixed chance to summon White Imps.
   - v1.19.2: Searing Ray has an unlimited duration and higher max spell power, but uses 2 mana/turn at full strength.
-  - v1.20.2: Dragon Form increases spell power (+1 enhancer level).
+  - v1.21: Dragon Form increases spell power (+1 enhancer level).
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -268,7 +271,7 @@ Pull requests for new content are welcome.
   - v1.19: Qazlal worshippers can regain mana by standing in a cloud.
   - v1.19: Xom has higher minimum levels for banishment. (6 -> 8 when bored, 9 -> 14 otherwise)
   - v1.19: Nemelex's Triple Draw ability is now available at \*\*.
-  - v1.20.2: Trog gives torment immunity while berserk at 3* piety.
+  - v1.21: Trog gives torment immunity while berserk at 3* piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -346,6 +349,9 @@ Pull requests for new content are welcome.
   - v1.18.1: The Singing Sword gives invisibility and a Song of Slaying instead of damaging visible creatures.
   - v1.20: Maxwell's Etheric Cage is reworked: it gives 1 mana/turn and doesn't affect contamination, but increases spell costs by 2.
   - v1.20: The moon troll leather armour gives rCorr.
+  - v1.21: The Amulet of Vitality has a larger (+15 -> +25) health bonus.
+  - v1.21: The Wrath of Trog has +3 base damage.
+  - v1.21: Unrand artefact weapons and armor are somewhat more common.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

@@ -84,6 +84,8 @@ Pull requests for new content are welcome.
   - v1.21: Archaeologist is reworked: they don't get a manual or unrand artefact; instead, they start with a scroll of magic mapping and get a scroll of acquirement at level 5.
   - v1.21: Martial Artists start with Wu Jian, unarmed skill, Confusing Touch, and a potion of agility.
   - v1.21: Spelunkers start with a dagger, leather armor, boots, Corona, Passwall, a wand of digging, a lamp of fire, and a scroll of noise.
+  - v1.21: Necromancers start with Animate Skeleton memorized.
+  - v1.21: Enchanters start with a potion of invisibility.
 
 #### Features
   - All items are automatically identified if the player has a rune.

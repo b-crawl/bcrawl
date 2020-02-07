@@ -400,8 +400,7 @@ A magical weapon with two razor-sharp blades.
 %%%%
 dusty tome
 
-A manuscript written in an undecipherable language. It was found buried, together 
-with an equally mystifying crate.
+A manuscript uncovered during an archaeological dig. It contains maps which led to the dungeon, and is written in an undecipherable language similar to what is found on some items here.
 %%%%
 eggplant
 

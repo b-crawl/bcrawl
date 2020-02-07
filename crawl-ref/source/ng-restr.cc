@@ -31,24 +31,23 @@ static bool _banned_combination(job_type job, species_type species)
         }
         break;
     case SP_DEMIGOD:
-        if (job == JOB_BERSERKER
-            || job == JOB_CHAOS_KNIGHT
-            || job == JOB_ABYSSAL_KNIGHT
-            || job == JOB_REAVER
-            || job == JOB_SLOTH_APOSTLE
-            || job == JOB_MONK)
+        switch(job)
         {
-            return true;
+            case JOB_BERSERKER:
+            case JOB_CHAOS_KNIGHT:
+            case JOB_ABYSSAL_KNIGHT:
+            case JOB_REAVER:
+            case JOB_SLOTH_APOSTLE:
+            case JOB_MONK:
+            case JOB_MARTIAL_ARTIST:
+                return true;
+            default: break;
         }
     case SP_SPRIGGAN:
         if (job == JOB_CONJURER)
         {
             return true;
         }
-        break;
-    case SP_GNOLL:
-        if (job == JOB_ARCHAEOLOGIST)
-            return true;
         break;
     case SP_DEEP_DWARF:
         if (job == JOB_REAVER)

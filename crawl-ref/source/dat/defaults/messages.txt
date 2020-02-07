@@ -104,8 +104,9 @@ force_more_message += You rejoin the land of the living
 force_more_message += You cannot cast spells when silenced
 force_more_message += You don't have the energy to cast that spell
 force_more_message += This is a scroll of acquirement
-force_more_message += You have an epiphany
-force_more_message += The crate's locking mechanism finally gives in, revealing
+force_more_message += You're now able to understand the dusty tome
+force_more_message += Part of it contains a powerful arcane formula
+force_more_message += Most of the book is about a legendary artefact
 
 ## Reduce chance of draining because flight or form runs out:
 force_more_message += Careful!

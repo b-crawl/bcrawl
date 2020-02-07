@@ -1632,7 +1632,6 @@ bool attack::apply_damage_brand(const char *what)
         // Also used for players in fungus form.
         if (attacker->is_player()
             && you.form == transformation::fungus
-            && !you.duration[DUR_CONFUSING_TOUCH]
             && defender->is_unbreathing())
         {
             break;
@@ -1651,13 +1650,6 @@ bool attack::apply_damage_brand(const char *what)
         beam_temp.source_id = attacker->mid;
         beam_temp.apply_enchantment_to_monster(defender->as_monster());
         obvious_effect = beam_temp.obvious_effect;
-
-        if (attacker->is_player() && damage_brand == SPWPN_CONFUSE
-            && you.duration[DUR_CONFUSING_TOUCH])
-        {
-            you.duration[DUR_CONFUSING_TOUCH] = 0;
-            obvious_effect = false;
-        }
         break;
     }
 

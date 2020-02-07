@@ -1309,7 +1309,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_HEXES,
     SPFLAG_NONE,
     1,
-    50,
+    100,
     -1, -1,
     2, 0,
     TILEG_CONFUSING_TOUCH,

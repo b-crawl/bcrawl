@@ -3143,7 +3143,7 @@ void level_change(bool skip_attribute_increase)
         learned_something_new(HINT_NEW_LEVEL);
     }
 
-    if (you.char_class == JOB_ARCHAEOLOGIST && you.experience_level >= 3)
+    if (you.char_class == JOB_ARCHAEOLOGIST && you.experience_level >= 5)
     {
         int tome_index = -1;
         for (int i = 0; i < ENDOFPACK; i++)
@@ -7325,8 +7325,8 @@ bool player::backlit(bool self_halo) const
     return player_severe_contamination()
            || duration[DUR_CORONA]
            || duration[DUR_LIQUID_FLAMES]
-           || duration[DUR_QUAD_DAMAGE]
-           || !umbraed() && haloed() && (self_halo || halo_radius() == -1);
+           || (self_halo && duration[DUR_CONFUSING_TOUCH])
+           || (haloed() && !umbraed() && (self_halo || halo_radius() == -1));
 }
 
 bool player::umbra() const

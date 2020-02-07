@@ -68,8 +68,7 @@ static const map<job_type, job_def> job_data =
     "Ac", "Archaeologist",
     3, 6, 3,
     { SP_CENTAUR, SP_DUSK_WALKER, SP_FORMICID, SP_MINOTAUR, SP_NAGA, SP_VINE_STALKER, SP_GARGOYLE, SP_HILL_ORC, SP_HUMAN },
-    { "whip", "robe plus:1", "hat plus:1", "pair of boots plus:1",
-      "dusty tome", "ancient crate" },
+    { "whip", "robe plus:1", "hat plus:1", "pair of boots plus:1", "scroll of magic mapping", "dusty tome" },
     WCHOICE_NONE,
     { { SK_STEALTH, 3}, { SK_DODGING, 3}, { SK_FIGHTING, 1}, { SK_MACES_FLAILS, 1} },
 } },
@@ -142,7 +141,7 @@ static const map<job_type, job_def> job_data =
     "En", "Enchanter",
     0, 7, 5,
     { SP_AVARIEL, SP_FELID, SP_KOBOLD, SP_SPRIGGAN, SP_NAGA, SP_VAMPIRE, },
-    { "dagger plus:1", "robe", "book of Maledictions", "scroll of fog" },
+    { "dagger plus:1", "robe", "book of Maledictions", "scroll of fog", "potion of invisibility" },
     WCHOICE_NONE,
     { { SK_WEAPON, 1 }, { SK_HEXES, 3 }, { SK_SPELLCASTING, 2 },
       { SK_DODGING, 2 }, { SK_STEALTH, 3 }, },
@@ -203,6 +202,15 @@ static const map<job_type, job_def> job_data =
       { SK_DODGING, 2 }, { SK_STEALTH, 2 }, },
 } },
 
+{ JOB_MARTIAL_ARTIST, {
+    "MA", "Martial Artist",
+    4, 1, 7,
+    { SP_HILL_ORC, SP_TROLL, SP_CENTAUR, SP_MERFOLK, SP_GARGOYLE, SP_HUMAN, SP_VAMPIRE, SP_FELID, SP_FORMICID, SP_SAND_DWARF },
+    { "robe", "potion of agility" },
+    WCHOICE_NONE,
+    { { SK_FIGHTING, 3 }, { SK_UNARMED_COMBAT, 4 }, { SK_DODGING, 3 }, { SK_STEALTH, 1 }, { SK_SPELLCASTING, 1 }, { SK_HEXES, 1 }, },
+} },
+
 { JOB_MONK, {
     "Mo", "Monk",
     3, 2, 7,
@@ -244,6 +252,15 @@ static const map<job_type, job_def> job_data =
     { { SK_FIGHTING, 2 }, { SK_ARMOUR, 1 }, { SK_DODGING, 2 },
       { SK_SPELLCASTING, 2 }, { SK_CHARMS, 3 }, { SK_WEAPON, 2 }, },
 } },
+
+{ JOB_SPELUNKER, {
+    "Sp", "Spelunker",
+    4, 4, 4,
+    { SP_HUMAN, SP_KOBOLD, SP_SPRIGGAN, SP_VAMPIRE, SP_DUSK_WALKER, SP_VINE_STALKER, SP_SAND_DWARF, },
+    { "dagger plus:1", "leather armour", "boots", "wand of digging charges:10", "lamp of fire", "scroll of noise" },
+    WCHOICE_NONE,
+    { { SK_STEALTH, 3 }, { SK_SHORT_BLADES, 2 }, { SK_FIGHTING, 2 }, { SK_SPELLCASTING, 2 },
+      { SK_HEXES, 2 }, { SK_TRANSMUTATIONS, 2 }, { SK_EARTH_MAGIC, 2 }, { SK_EVOCATIONS, 2 }, },} },
 
 { JOB_SUMMONER, {
     "Su", "Summoner",
@@ -328,26 +345,8 @@ static const map<job_type, job_def> job_data =
     { },
 } },
 
-{ JOB_JESTER, {
-    "Jr", "Jester",
-    0, 0, 0,
-    { },
-    { },
-    WCHOICE_NONE,
-    { },
-} },
-
 { JOB_PRIEST, {
     "Pr", "Priest",
-    0, 0, 0,
-    { },
-    { },
-    WCHOICE_NONE,
-    { },
-} },
-
-{ JOB_STALKER, {
-    "St", "Stalker",
     0, 0, 0,
     { },
     { },

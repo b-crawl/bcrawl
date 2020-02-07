@@ -207,10 +207,6 @@ int player::damage_type(int)
 brand_type player::damage_brand(int)
 {
     brand_type player_brand = SPWPN_NORMAL;
-    
-    // confusing touch always overrides [OBSOLETE]
-    if (duration[DUR_CONFUSING_TOUCH])
-        return SPWPN_CONFUSE;
 
     const int wpn = equip[EQ_WEAPON];
     if (wpn != -1 && !melded[EQ_WEAPON])

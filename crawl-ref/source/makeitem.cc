@@ -213,8 +213,8 @@ static bool _try_make_weapon_artefact(item_def& item, int force_type,
     {
         // Make a randart or unrandart.
 
-        // 1 in 20 randarts are unrandarts.
-        if (one_chance_in(item_level == ISPEC_GOOD_ITEM ? 7 : 20)
+        // 1 in 12 randarts are unrandarts.
+        if (one_chance_in(item_level == ISPEC_GOOD_ITEM ? 6 : 12)
             && !force_randart)
         {
             if (_try_make_item_unrand(item, force_type, agent))
@@ -719,8 +719,8 @@ static bool _try_make_armour_artefact(item_def& item, int force_type,
     {
         // Make a randart or unrandart.
 
-        // 1 in 20 randarts are unrandarts.
-        if (one_chance_in(item_level == ISPEC_GOOD_ITEM ? 7 : 20)
+        // 1 in 16 randarts are unrandarts.
+        if (one_chance_in(item_level == ISPEC_GOOD_ITEM ? 7 : 16)
             && !force_randart)
         {
             if (_try_make_item_unrand(item, force_type, agent))
@@ -1583,7 +1583,7 @@ static bool _try_make_jewellery_unrandart(item_def& item, int force_type,
                (force_type == NUM_JEWELLERY) ? get_random_amulet_type()
                                              : force_type;
     if (item_level > 2
-        && one_chance_in(20)
+        && one_chance_in(29)
         && x_chance_in_y(101 + item_level * 3, 2000))
     {
         if (_try_make_item_unrand(item, type, agent))

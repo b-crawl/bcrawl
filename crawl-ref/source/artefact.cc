@@ -1869,34 +1869,3 @@ void artefact_fixup_props(item_def &item)
     if (props.exists(KNOWN_PROPS_KEY))
         artefact_pad_store_vector(props[KNOWN_PROPS_KEY], false);
 }
-
-// Initialise the eligible unrands for archaeologist
-const vector<int> archaeologist_unrands()
-{
-    vector<int> eligible_unrands;
-    bool wears_body_armour = you_can_wear(EQ_BODY_ARMOUR);
-
-    for (int i = 0; i < NUM_UNRANDARTS; ++i)
-    {
-        const int index = i + UNRAND_START;
-        const unrandart_entry *entry = &unranddata[i];
-
-        if (entry->base_type == OBJ_UNASSIGNED)
-            continue;
-
-        if (entry->flags & UNRAND_FLAG_NOGEN || entry->flags & UNRAND_FLAG_NOTAC)
-            continue;
-        
-        if(!wears_body_armour && entry->base_type == OBJ_ARMOUR)
-            continue;
-        
-        // As a non-felid: jewellery does not shape a character enough
-        // As a felid: we have no choice but to give jewellery
-        if (you.species == SP_FELID ^ entry->base_type == OBJ_JEWELLERY)
-            continue;
-
-        eligible_unrands.push_back(index);
-    }
-
-    return eligible_unrands;
-}

@@ -125,15 +125,25 @@ spret cast_excruciating_wounds(int power, bool fail)
 
 spret cast_confusing_touch(int power, bool fail)
 {
+    if(you.weapon())
+    {
+        mpr("You cannot use this spell with a weapon!");
+        return spret::abort;
+    }
+    if(you.slot_item(EQ_SHIELD, false))
+    {
+        mpr("You cannot use this spell with a shield!");
+        return spret::abort;
+    }
+    
     fail_check();
     msg::stream << you.hands_act("begin", "to glow ")
-                << (you.duration[DUR_CONFUSING_TOUCH] ? "brighter" : "red")
+                << (you.duration[DUR_CONFUSING_TOUCH] ? "brightly again" : "red")
                 << "." << endl;
 
     you.set_duration(DUR_CONFUSING_TOUCH,
-                     max(10 + random2(power) / 5,
-                         you.duration[DUR_CONFUSING_TOUCH]),
-                     20, nullptr);
+                     max(15 + (random2(power) + random2(power))/3, you.duration[DUR_CONFUSING_TOUCH]),
+                     80, nullptr);
 
     return spret::success;
 }

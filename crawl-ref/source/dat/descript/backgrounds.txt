@@ -16,8 +16,8 @@ vulnerable to attacks from afar.
 %%%%
 Archaeologist
 
-Thoroughly inept at fighting but well dressed, archaeologists enter the dungeon 
-looking to cast light over the origins of ancient relics.
+Archaeologists were led to the dungeon by an ancient tome, and hope to uncover
+the mysteries of both their tome and the dungeon itself.
 %%%%
 Artificer
 
@@ -73,6 +73,11 @@ Ice Elementalist
 Ice Elementalists begin with the Freeze spell. The spells in their starting
 library are quite versatile.
 %%%%
+Martial Artist
+
+Martial Artists follow the teachings of the Wu Jian Council.
+They are skilled at unarmed combat and have learned to confuse enemies with their strikes.
+%%%%
 Monk
 
 Monks are pilgrims on a journey of spiritual discovery, and gain additional piety
@@ -103,6 +108,10 @@ Sloth Apostle
 
 Apostles of Sloth worship Cheibriados, and believe the world needs more "Slack".
 They start with a simple weapon, a shield, and some ways to slow down enemies.
+%%%%
+Spelunker
+
+Spelunkers enter the dungeon fully equipped for cave exploration.
 %%%%
 Summoner
 

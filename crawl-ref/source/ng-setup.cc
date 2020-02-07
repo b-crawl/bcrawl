@@ -342,6 +342,10 @@ static void _give_items_skills(const newgame_def& ng)
         add_spell_to_memory(SPELL_PASSWALL);
         break;
 
+    case JOB_NECROMANCER:
+        add_spell_to_memory(SPELL_ANIMATE_SKELETON);
+        break;
+
     case JOB_WANDERER:
         create_wanderer();
         break;

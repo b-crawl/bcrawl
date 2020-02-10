@@ -70,7 +70,7 @@ static const map<job_type, job_def> job_data =
     { SP_CENTAUR, SP_DUSK_WALKER, SP_FORMICID, SP_MINOTAUR, SP_NAGA, SP_VINE_STALKER, SP_GARGOYLE, SP_HILL_ORC, SP_HUMAN },
     { "whip", "robe plus:1", "hat plus:1", "pair of boots plus:1", "scroll of magic mapping", "dusty tome" },
     WCHOICE_NONE,
-    { { SK_STEALTH, 3}, { SK_DODGING, 3}, { SK_FIGHTING, 1}, { SK_MACES_FLAILS, 1} },
+    { { SK_STEALTH, 3}, { SK_DODGING, 3}, { SK_FIGHTING, 1}, { SK_WEAPON, 1} },
 } },
 
 { JOB_ARTIFICER, {

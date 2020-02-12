@@ -2532,7 +2532,6 @@ static int _handle_enchant_armour(bool alreadyknown, const string &pre_msg)
     return result ? 1 : 0;
 }
 
-#if TAG_MAJOR_VERSION == 34
 void random_uselessness()
 {
     ASSERT(!crawl_state.game_is_arena());
@@ -2585,7 +2584,6 @@ void random_uselessness()
         break;
     }
 }
-#endif
 
 static void _handle_read_book(item_def& book)
 {
@@ -2904,6 +2902,13 @@ void read(item_def* scroll)
         }
     }
 
+    if (you.is_constricted()
+        && !yesno("Attempting to read a scroll while constricted might waste it - continue anyway?", false, 'n'))
+    {
+        canned_msg(MSG_OK);
+        return;
+    }
+
     // Ok - now we FINALLY get to read a scroll !!! {dlb}
     you.turn_is_over = true;
 
@@ -2911,6 +2916,18 @@ void read(item_def* scroll)
     {
         mpr("You almost manage to decipher the scroll,"
             " but fail in this attempt.");
+        return;
+    }
+
+    if (you.is_constricted() && coinflip())
+    {
+        mpr("You're unable to finish using the scroll due to being constricted!");
+        random_uselessness();
+        if (in_inventory(*scroll))
+            dec_inv_item_quantity(*scroll.link, 1);
+        else
+            dec_mitm_item_quantity(*scroll.index(), 1);
+        
         return;
     }
 

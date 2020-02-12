@@ -92,9 +92,6 @@ void uncontrolled_blink(bool override_stasis)
         return;
     }
 
-    if (!you.attempt_escape(2)) // prints its own messages
-        return;
-
     canned_msg(MSG_YOU_BLINK);
     const coord_def origin = you.pos();
     move_player_to_grid(target, false);
@@ -347,9 +344,6 @@ spret controlled_blink(bool fail, bool safe_cancel)
         canned_msg(MSG_STRANGE_STASIS);
         return spret::success; // of a sort
     }
-
-    if (!you.attempt_escape(2))
-        return spret::success; // of a sort
 
     // invisible monster that the targeter didn't know to avoid
     if (monster_at(target))

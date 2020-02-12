@@ -2924,9 +2924,9 @@ void read(item_def* scroll)
         mpr("You're unable to finish using the scroll due to being constricted!");
         random_uselessness();
         if (in_inventory(*scroll))
-            dec_inv_item_quantity(*scroll.link, 1);
+            dec_inv_item_quantity(scroll->link, 1);
         else
-            dec_mitm_item_quantity(*scroll.index(), 1);
+            dec_mitm_item_quantity(scroll->index(), 1);
         
         return;
     }

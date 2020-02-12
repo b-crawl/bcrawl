@@ -18,6 +18,7 @@
 
 #include "act-iter.h"
 #include "areas.h"
+#include "attack.h"
 #include "attitude-change.h"
 #include "bloodspatter.h"
 #include "chardump.h"
@@ -1343,12 +1344,8 @@ int mons_adjust_flavoured(monster* mons, bolt &pbolt, int hurted,
 
         if (!hurted)
         {
-            if (doFlavouredEffects)
-            {
-                simple_monster_message(*mons,
-                                       (original > 0) ? " completely resists."
-                                                      : " appears unharmed.");
-            }
+            if (original > 0 && doFlavouredEffects)
+                simple_monster_message(*mons, " completely resists.");
         }
         else if (original > hurted)
         {
@@ -1373,25 +1370,16 @@ int mons_adjust_flavoured(monster* mons, bolt &pbolt, int hurted,
 
     case BEAM_WATER:
         hurted = resist_adjust_damage(mons, pbolt.flavour, hurted);
-        if (doFlavouredEffects)
-        {
-            if (!hurted)
-                simple_monster_message(*mons, " shrugs off the wave.");
-            else if (hurted > original)
-                simple_monster_message(*mons, " is doused terribly!");
-        }
+        if (hurted > original && doFlavouredEffects)
+            simple_monster_message(*mons, " is doused terribly!");
         break;
 
     case BEAM_COLD:
         hurted = resist_adjust_damage(mons, pbolt.flavour, hurted);
         if (!hurted)
         {
-            if (doFlavouredEffects)
-            {
-                simple_monster_message(*mons,
-                                       (original > 0) ? " completely resists."
-                                                      : " appears unharmed.");
-            }
+            if (original > 0 && doFlavouredEffects)
+                simple_monster_message(*mons, " completely resists.");
         }
         else if (original > hurted)
         {
@@ -1409,12 +1397,8 @@ int mons_adjust_flavoured(monster* mons, bolt &pbolt, int hurted,
         hurted = resist_adjust_damage(mons, pbolt.flavour, hurted);
         if (!hurted)
         {
-            if (doFlavouredEffects)
-            {
-                simple_monster_message(*mons,
-                                       (original > 0) ? " completely resists."
-                                                      : " appears unharmed.");
-            }
+            if (original > 0 && doFlavouredEffects)
+                simple_monster_message(*mons, " completely resists.");
         }
         else if (original > hurted)
         {
@@ -1433,12 +1417,8 @@ int mons_adjust_flavoured(monster* mons, bolt &pbolt, int hurted,
         hurted = resist_adjust_damage(mons, pbolt.flavour, hurted);
         if (!hurted)
         {
-            if (doFlavouredEffects)
-            {
-                simple_monster_message(*mons,
-                                       (original > 0) ? " completely resists."
-                                                      : " appears unharmed.");
-            }
+            if (original > 0 && doFlavouredEffects)
+                simple_monster_message(*mons, " completely resists.");
         }
         else if (mons->res_acid() <= 0 && doFlavouredEffects)
             mons->splash_with_acid(pbolt.agent());
@@ -1449,14 +1429,13 @@ int mons_adjust_flavoured(monster* mons, bolt &pbolt, int hurted,
     {
         hurted = resist_adjust_damage(mons, pbolt.flavour, hurted);
 
-        if (!hurted && doFlavouredEffects)
+        if (doFlavouredEffects && original > 0)
         {
-            simple_monster_message(*mons,
-                                   (original > 0) ? " completely resists."
-                                                  : " appears unharmed.");
+            if (!hurted)
+                simple_monster_message(*mons, " completely resists.");
+            else 
+                poison_monster(mons, pbolt.agent());
         }
-        else if (doFlavouredEffects)
-            poison_monster(mons, pbolt.agent());
 
         break;
     }
@@ -1532,11 +1511,11 @@ int mons_adjust_flavoured(monster* mons, bolt &pbolt, int hurted,
     case BEAM_HOLY:
     {
         hurted = resist_adjust_damage(mons, pbolt.flavour, hurted);
-        if (doFlavouredEffects && (!hurted || hurted != original))
+        if (doFlavouredEffects && original > 0
+            && (!hurted || hurted != original))
         {
             simple_monster_message(*mons, hurted == 0 ? " completely resists." :
-                                    hurted < original ? " resists." :
-                                    " writhes in agony!");
+                                    hurted < original ? " resists." : " writhes in agony!");
         }
         break;
     }
@@ -1584,11 +1563,7 @@ int mons_adjust_flavoured(monster* mons, bolt &pbolt, int hurted,
         if (mons->res_hellfire())
         {
             if (doFlavouredEffects)
-            {
-                simple_monster_message(*mons,
-                                       hurted ? " completely resists."
-                                              : " appears unharmed.");
-            }
+                simple_monster_message(*mons, " completely resists.");
 
             hurted = 0;
         }
@@ -1597,12 +1572,8 @@ int mons_adjust_flavoured(monster* mons, bolt &pbolt, int hurted,
     case BEAM_MEPHITIC:
         if (mons->res_poison() > 0)
         {
-            if (doFlavouredEffects)
-            {
-                simple_monster_message(*mons,
-                                        hurted ? " completely resists."
-                                               : " appears unharmed.");
-            }
+            if (original > 0 && doFlavouredEffects)
+                simple_monster_message(*mons, " completely resists.");
 
             hurted = 0;
         }
@@ -3137,21 +3108,18 @@ void bolt::tracer_affect_player()
     extra_range_used += range_used_on_hit();
 }
 
+/* Determine whether the beam hit or missed the player, and tell them if it
+ * missed.
+ *
+ * @return  true if the beam missed, false if the beam hit the player.
+ */
 bool bolt::misses_player()
 {
     if (flavour == BEAM_VISUAL)
         return true;
 
-    const bool engulfs = is_explosion || is_big_cloud();
-
     if (is_explosion || aimed_at_feet || auto_hit)
-    {
-        if (hit_verb.empty())
-            hit_verb = engulfs ? "engulfs" : "hits";
-        if (flavour != BEAM_VISUAL && !is_enchantment())
-            mprf("The %s %s you!", name.c_str(), hit_verb.c_str());
         return false;
-    }
 
     const int dodge = you.evasion();
     int real_tohit  = hit;
@@ -3234,7 +3202,6 @@ bool bolt::misses_player()
         practise_being_shot_at();
 
     defer_rand r;
-    bool miss = true;
 
     int defl = you.missile_deflection();
 
@@ -3252,21 +3219,9 @@ bool bolt::misses_player()
         count_action(CACT_DODGE, DODGE_DEFLECT);
     }
     else
-    {
-        int dodge_more = you.evasion(EV_IGNORE_HELPLESS);
+        return false;
 
-        if (hit_verb.empty())
-            hit_verb = engulfs ? "engulfs" : "hits";
-
-        if (_test_beam_hit(real_tohit, dodge_more, pierce, defl, r))
-            mprf("The %s %s you!", name.c_str(), hit_verb.c_str());
-        else
-            mprf("Helpless, you fail to dodge the %s.", name.c_str());
-
-        miss = false;
-    }
-
-    return miss;
+    return true;
 }
 
 void bolt::affect_player_enchantment(bool resistible)
@@ -3775,6 +3730,17 @@ void bolt::affect_player()
     }
 
     hurted = check_your_resists(hurted, flavour, "", this);
+
+    // Tell the player the beam hit
+    if (hit_verb.empty())
+        hit_verb = engulfs ? "engulfs" : "hits";
+
+    if (flavour != BEAM_VISUAL && !is_enchantment())
+    {
+        mprf("The %s %s you%s%s", name.c_str(), hit_verb.c_str(),
+             hurted ? "" : " but does no damage",
+             attack_strength_punctuation(hurted).c_str());
+    }
 
     if (flavour == BEAM_MIASMA && hurted > 0)
         was_affected = miasma_player(agent(), name);
@@ -4932,10 +4898,15 @@ void bolt::affect_monster(monster* mon)
         if (hit_verb.empty())
             hit_verb = engulfs ? "engulfs" : "hits";
 
-        mprf("The %s %s %s.",
+        // If the beam did no damage because of resistances,
+        // mons_adjust_flavoured below will print "%s completely resists", so
+        // no need to also say "does no damage" here.
+        mprf("The %s %s %s%s%s",
              name.c_str(),
              hit_verb.c_str(),
-             mon->name(DESC_THE).c_str());
+             mon->name(DESC_THE).c_str(),
+             postac ? "" : " but does no damage",
+             attack_strength_punctuation(final).c_str());
 
     }
     else if (heard && !hit_noise_msg.empty())

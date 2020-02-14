@@ -864,6 +864,8 @@ Wall Jump ability
 
 Vaults off an adjacent wall towards enemies, striking all enemies adjacent to
 the landing spot and taking two turns to complete the motion.
+
+When there are no enemies to focus on attacking during a wall jump, this action briefly increases evasiveness.
 %%%%
 Serpent's Lash ability
 

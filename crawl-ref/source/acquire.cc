@@ -1471,8 +1471,6 @@ return acquirement_create_item_general(class_wanted,
 bool acquirement(object_class_type class_wanted, int agent,
                  bool quiet, int* item_index, bool debug, bool known_scroll)
 {
-    //Experimental new scroll of acquirement code below.
-    //Largely ripped shamelessly from shopping.cc.
     if(class_wanted == OBJ_RANDOM)
     {
         unwind_bool in_acquirement(_acquiring_now, true);
@@ -1481,12 +1479,34 @@ bool acquirement(object_class_type class_wanted, int agent,
 
         const std::string hello = "What would you like to acquire?";
         
-        std::vector<int> stock(8);
+        int item_type_count = 8;
         
         if(you.species == SP_FELID)
-        {
-            stock.resize(6, false);
-        }
+            item_type_count -= 2;
+        
+        bool no_food = you_foodless();
+        if(no_food)
+            item_type_count -= 1;
+        
+        bool usable_book = false;
+        if(you.religion == GOD_TROG)
+            for (skill_type sk = SK_FIRST_SKILL; sk < NUM_SKILLS; ++sk)
+            {
+                int skl = _skill_rdiv(sk);
+                if (skl < 27 && !is_useless_skill(sk) && !_skill_useless_with_god(sk))
+                {
+                    usable_book = true;
+                    break;
+                }
+            }
+        else
+            usable_book = true;
+        
+        if(!usable_book)
+            item_type_count -= 1;
+
+        std::vector<int> stock(item_type_count);
+        
 
         //dtsund: I don't really know what half of this does.
         coord_def stock_loc = coord_def(0, 65);  // ??
@@ -1495,33 +1515,37 @@ bool acquirement(object_class_type class_wanted, int agent,
 
         if(you.species != SP_FELID)
         {
-            stock[index] = acquirement_create_item_general(OBJ_WEAPONS, agent, tempQuiet,
-                                                   stock_loc, debug, false);
+            stock[index] = acquirement_create_item_general(OBJ_WEAPONS, agent, tempQuiet, stock_loc, debug, false);
             index++;
         }
-        stock[index] = acquirement_create_item_general(OBJ_ARMOUR, agent, tempQuiet,
-                                               stock_loc, debug, false);
+        
+        stock[index] = acquirement_create_item_general(OBJ_ARMOUR, agent, tempQuiet, stock_loc, debug, false);
         index++;
-        stock[index] = acquirement_create_item_general(OBJ_JEWELLERY, agent, tempQuiet,
-                                                   stock_loc, debug, false);
+        stock[index] = acquirement_create_item_general(OBJ_JEWELLERY, agent, tempQuiet, stock_loc, debug, false);
         index++;
-        stock[index] = acquirement_create_item_general(OBJ_BOOKS, agent, tempQuiet,
-                                                   stock_loc, debug, false);
-        index++;
+        
+        if(usable_book)
+        {
+            stock[index] = acquirement_create_item_general(OBJ_BOOKS, agent, tempQuiet, stock_loc, debug, false);
+            index++;
+        }
+        
         if(you.species != SP_FELID)
         {
-            stock[index] = acquirement_create_item_general(OBJ_STAVES, agent, tempQuiet,
-                                                   stock_loc, debug, false);
+            stock[index] = acquirement_create_item_general(OBJ_STAVES, agent, tempQuiet, stock_loc, debug, false);
             index++;
         }
-        stock[index] = acquirement_create_item_general(OBJ_MISCELLANY, agent, tempQuiet,
-                                                   stock_loc, debug, false);
+        
+        stock[index] = acquirement_create_item_general(OBJ_MISCELLANY, agent, tempQuiet, stock_loc, debug, false);
         index++;
-        stock[index] = acquirement_create_item_general(OBJ_FOOD, agent, tempQuiet,
-                                                   stock_loc, debug, false);
-        index++;
-        stock[index] = acquirement_create_item_general(OBJ_GOLD, agent, tempQuiet,
-                                                   stock_loc, debug, false);
+        
+        if(!no_food)
+        {
+            stock[index] = acquirement_create_item_general(OBJ_FOOD, agent, tempQuiet, stock_loc, debug, false);
+            index++;
+        }
+        
+        stock[index] = acquirement_create_item_general(OBJ_GOLD, agent, tempQuiet, stock_loc, debug, false);
         index++;
 
         // Autoinscribe randarts in the menu.

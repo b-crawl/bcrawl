@@ -1555,6 +1555,8 @@ Throws a small puff of flame.
 Throw Frost spell
 
 Throws a small puff of frost.
+
+This spell is particularly easy to cast for its level.
 %%%%
 Throw Icicle spell
 

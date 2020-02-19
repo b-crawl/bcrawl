@@ -214,6 +214,7 @@ Pull requests for new content are welcome.
   - v1.18.1: Call Imp always summons Crimson Imps at low power, instead of having a fixed chance to summon White Imps.
   - v1.19.2: Searing Ray has an unlimited duration and higher max spell power, but uses 2 mana/turn at full strength.
   - v1.21: Dragon Form increases spell power (+1 enhancer level).
+  - v1.21.3: Throw Frost is easy to cast (+1 wizardry level).
 
 #### Removed Spells
   - Summon Guardian Golem

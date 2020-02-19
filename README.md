@@ -315,6 +315,7 @@ Pull requests for new content are welcome.
   - v1.19.1: Bucklers can be equipped and unequipped in 1 turn.
   - v1.19.1: A staff of power gives less (15 -> 12) extra max mana.
   - v1.20: Scrolls of acquirement give a choice of specific items instead of categories.
+  - v1.21.3: The medium-size shield type is renamed to "medium shield".
 
 #### Removed Items
   - Amulet of Harm

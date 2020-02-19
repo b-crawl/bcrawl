@@ -534,7 +534,7 @@ dgn.delayed_decay_extra(_G, 'I', 'human skeleton', 'any armour, any weapon, '
    .. 'nothing / any scroll, nothing / any potion' )
 
  -- Orc fighter. 3 items.
-dgn.delayed_decay_extra(_G, 'J', 'orc skeleton', 'shield / large shield w:2, '
+dgn.delayed_decay_extra(_G, 'J', 'orc skeleton', 'medium shield / large shield w:2, '
    .. 'long sword / eveningstar / broad axe / demon blade, '
    .. 'plate armour / crystal plate armour w:2' )
 

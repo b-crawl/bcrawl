@@ -215,7 +215,12 @@ brand_type player::damage_brand(int)
             player_brand = get_weapon_brand(inv[wpn]);
     }
     else
-        player_brand = get_form()->get_uc_brand();  // unarmed
+    {
+        if (player_equip_unrand(UNRAND_FISTS_OF_THUNDER))
+            player_brand = SPWPN_ELECTROCUTION;
+        else
+            player_brand = get_form()->get_uc_brand();  // unarmed
+    }
         
     if (player_brand == SPWPN_NORMAL && you.religion == GOD_LUGONU && you.piety >= piety_breakpoint(2))
         player_brand = SPWPN_DISTORTION;

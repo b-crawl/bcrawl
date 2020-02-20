@@ -1577,7 +1577,7 @@ static string _describe_armour(const item_def &item, bool verbose)
 
                 if (crawl_state.need_save)
                 {
-                    description += "\n                            "
+                    description += "\n    "
                         + _your_skill_desc(SK_SHIELDS,
                           could_set_target && in_inventory(item), target_skill);
                 }

@@ -214,6 +214,7 @@ Pull requests for new content are welcome.
   - v1.18.1: Call Imp always summons Crimson Imps at low power, instead of having a fixed chance to summon White Imps.
   - v1.19.2: Searing Ray has an unlimited duration and higher max spell power, but uses 2 mana/turn at full strength.
   - v1.21: Dragon Form increases spell power (+1 enhancer level).
+  - v1.21.3: Throw Frost is easy to cast (+1 wizardry level).
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -315,6 +316,7 @@ Pull requests for new content are welcome.
   - v1.19.1: Bucklers can be equipped and unequipped in 1 turn.
   - v1.19.1: A staff of power gives less (15 -> 12) extra max mana.
   - v1.20: Scrolls of acquirement give a choice of specific items instead of categories.
+  - v1.21.3: The medium-size shield type is renamed to "medium shield".
 
 #### Removed Items
   - Amulet of Harm

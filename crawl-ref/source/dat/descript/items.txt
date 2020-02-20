@@ -1049,7 +1049,7 @@ scythe
 
 A farm implement, usually only used by untrained mobs in combat.
 %%%%
-shield
+medium shield
 
 A piece of wood and metal, to be strapped on one arm for defence. It is
 cumbersome to wear, and impedes the evasion, spellcasting ability, and attack

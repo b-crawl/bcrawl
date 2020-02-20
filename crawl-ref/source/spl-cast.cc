@@ -285,7 +285,10 @@ static int _apply_spellcasting_success_boosts(spell_type spell, int chance)
         fail_reduce = fail_reduce * 2 / 3;
     }
 
-    const int wizardry = player_wizardry(spell);
+    int wizardry = player_wizardry(spell);
+    
+    if (spell == SPELL_THROW_FROST)
+        wizardry++;
 
     if (wizardry > 0)
       fail_reduce = fail_reduce * 6 / (7 + wizardry);

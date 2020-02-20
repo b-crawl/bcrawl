@@ -171,11 +171,12 @@ static void _decrement_petrification(int delay)
     if (_decrement_a_duration(DUR_PETRIFIED, delay) && !you.paralysed())
     {
         you.redraw_evasion = true;
-        // implicit assumption: all races that can be petrified are made of
-        // flesh when not petrified
-        const string flesh_equiv = get_form()->flesh_equivalent.empty() ?
-                                            "flesh" :
-                                            get_form()->flesh_equivalent;
+
+        string flesh_equiv = "flesh";
+        if(!get_form()->flesh_equivalent.empty())
+            flesh_equiv = get_form()->flesh_equivalent;
+        else if (you.species == SP_SKELETON)
+            flesh_equiv = "bones";
 
         mprf(MSGCH_DURATION, "You turn to %s and can move again.",
              flesh_equiv.c_str());
@@ -391,7 +392,7 @@ static void _handle_uskayaw_time(int time_taken)
     // timer down to a minimum of 0, at which point it becomes eligible to
     // trigger again.
     if (audience_timer == -1 || (you.piety >= piety_breakpoint(2)
-            && x_chance_in_y(time_taken, time_taken * 10 + audience_timer)))
+            && x_chance_in_y(time_taken, 100 + audience_timer)))
     {
         uskayaw_prepares_audience();
     }
@@ -399,7 +400,7 @@ static void _handle_uskayaw_time(int time_taken)
         you.props[USKAYAW_AUDIENCE_TIMER] = max(0, audience_timer - time_taken);
 
     if (bond_timer == -1 || (you.piety >= piety_breakpoint(3)
-            && x_chance_in_y(time_taken, time_taken * 10 + bond_timer)))
+            && x_chance_in_y(time_taken, 100 + bond_timer)))
     {
         uskayaw_bonds_audience();
     }

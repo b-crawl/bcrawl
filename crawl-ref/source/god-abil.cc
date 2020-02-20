@@ -1454,23 +1454,24 @@ bool vehumet_supports_spell(spell_type spell)
     // propelling it towards the victim. This is the most popular way, but
     // by no means it has a monopoly for being destructive.
     // Vehumet loves all direct physical destruction.
-    if (spell == SPELL_SHATTER
-        || spell == SPELL_LRD
-        || spell == SPELL_SANDBLAST
-        || spell == SPELL_AIRSTRIKE
-        || spell == SPELL_TORNADO
-        || spell == SPELL_FREEZE
-        || spell == SPELL_IGNITE_POISON
-        || spell == SPELL_OZOCUBUS_REFRIGERATION
-        || spell == SPELL_OLGREBS_TOXIC_RADIANCE
-        || spell == SPELL_VIOLENT_UNRAVELLING
-        || spell == SPELL_INNER_FLAME
-        || spell == SPELL_IGNITION)
+    switch(spell)
     {
+    case SPELL_SHATTER:
+    case SPELL_LRD:
+    case SPELL_SANDBLAST:
+    case SPELL_AIRSTRIKE:
+    case SPELL_TORNADO:
+    case SPELL_FREEZE:
+    case SPELL_IGNITE_POISON:
+    case SPELL_OZOCUBUS_REFRIGERATION:
+    case SPELL_OLGREBS_TOXIC_RADIANCE:
+    case SPELL_VIOLENT_UNRAVELLING:
+    case SPELL_INNER_FLAME:
+    case SPELL_IGNITION:
         return true;
+    default:
+        return false;
     }
-
-    return false;
 }
 
 void trog_do_trogs_hand(int pow)

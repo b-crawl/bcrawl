@@ -489,7 +489,8 @@ reserves. After the call ends, it cannot be issued again for a short time.
 %%%%
 Drain Life spell
 
-<Drain Life ability>
+Drains the life force of any nearby creatures, healing the user depending on
+the damage dealt.
 %%%%
 Drain Magic spell
 
@@ -654,7 +655,7 @@ The roots are too short to reach through deep water.
 %%%%
 Greater Servant of Makhleb spell
 
-<Greater Servant of Makhleb ability>
+Summons a major demon.
 %%%%
 Haste Other spell
 
@@ -860,7 +861,7 @@ Fires a small bolt of magical energy which never misses.
 %%%%
 Major Destruction spell
 
-<Major Destruction ability>
+Shoots a random harmful beam or explosion at the targeted creature.
 %%%%
 Major Healing spell
 
@@ -1249,7 +1250,7 @@ Fires a sharp dart of hardened chitin.
 %%%%
 Smiting spell
 
-<Smiting ability>
+Smites any targeted enemy within sight, with no direct line of fire required.
 %%%%
 Song of Slaying spell
 
@@ -1401,8 +1402,7 @@ dragons at once.
 %%%%
 Summon Drakes spell
 
-Summons multiple drakes, and possibly one true dragon of some kind, barring the
-most powerful ones.
+Summons multiple drakes, komodo dragons, and lindwurms.
 %%%%
 Summon Earth Elementals spell
 
@@ -1555,6 +1555,8 @@ Throws a small puff of flame.
 Throw Frost spell
 
 Throws a small puff of frost.
+
+This spell is particularly easy to cast for its level.
 %%%%
 Throw Icicle spell
 

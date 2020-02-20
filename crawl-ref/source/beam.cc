@@ -5711,9 +5711,12 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
             return MON_AFFECTED;
         }
         
-        int mons_mr = get_monster_data(mon->type)->resist_magic;
+        monster_type mon_type = mon->type;
+        int mons_mr = get_monster_data(mon_type)->resist_magic;
         if (mons_mr > 200)
             mons_mr = 200;
+        else if (mons_mr < 0)
+            mons_mr = mons_class_hit_dice(mon_type) * -mons_mr * 4 / 3;
         
         if(mon->has_ench(ENCH_LOWERED_MR))
             mons_mr /= 2;

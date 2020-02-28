@@ -311,9 +311,9 @@ An axe with langets, spikes, a lengthed haft and a single-bladed crescent head.
 %%%%
 buckler
 
-A small piece of wood and metal, to be strapped on one arm for defence. It is
-cumbersome to wear, and impedes the evasion, spellcasting ability, and attack
-speed of an unskilled wearer.
+A small piece of wood and metal, meant to be held in one hand by a handle in the center. It is
+slightly cumbersome to wear, and impedes the evasion, spellcasting ability, and attack
+speed of an unskilled wearer. It can be equipped and unequipped faster than larger shields.
 %%%%
 centaur barding
 
@@ -582,7 +582,7 @@ A very large and very heavy stone. {{
 large shield
 
 A large piece of wood and metal, to be strapped on one arm for defence. It is
-cumbersome to wear, and impedes the evasion, spellcasting ability, and attack
+quite cumbersome to wear, and impedes the evasion, spellcasting ability, and attack
 speed of an unskilled wearer.
 %%%%
 leather armour

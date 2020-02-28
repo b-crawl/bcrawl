@@ -59,6 +59,7 @@ ENDMAP
 NAME:   slime_altar_2
 TAGS:   slime_entry
 KFEAT:  Z = altar_jiyva
+KPROP:  1OZ = no_tele_into
 SUBST:  1 : 111223
 NSUBST: 1 = 1 / 1. , 2 = 2 / 2... , 3 = 3 / 3....
 MONS:   jelly / ooze

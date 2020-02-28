@@ -2533,7 +2533,6 @@ void check_item_knowledge(bool unknown_items)
             {
             case MISC_BOX_OF_BEASTS:
             case MISC_FAN_OF_GALES:
-            case MISC_ZIGGURAT:
             case MISC_LAMP_OF_FIRE:
             case MISC_LIGHTNING_ROD:
             case MISC_PHANTOM_MIRROR:

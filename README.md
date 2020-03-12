@@ -228,6 +228,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Disjunction
   - v1.15: Ring of Flames
   - v1.17.1: Alistair's Intoxication
+  - v1.21.3: Leda's Liquefaction
 
 #### Gods
   - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.

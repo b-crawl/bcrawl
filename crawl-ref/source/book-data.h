@@ -235,7 +235,6 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Earth
-    SPELL_LEDAS_LIQUEFACTION,
     SPELL_BOLT_OF_MAGMA,
     SPELL_STATUE_FORM,
     SPELL_IRON_SHOT,

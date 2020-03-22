@@ -132,8 +132,8 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Fen Folio
     SPELL_CORPSE_ROT,
     SPELL_STONE_ARROW,
-    SPELL_SUMMON_FOREST,
     SPELL_TREE_FORM,
+    SPELL_SUMMON_FOREST,
     SPELL_POISON_ARROW,
     SPELL_SUMMON_HYDRA,
 },
@@ -235,7 +235,6 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Earth
-    SPELL_LEDAS_LIQUEFACTION,
     SPELL_BOLT_OF_MAGMA,
     SPELL_STATUE_FORM,
     SPELL_IRON_SHOT,

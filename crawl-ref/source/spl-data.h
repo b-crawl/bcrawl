@@ -1219,7 +1219,7 @@ static const struct spell_desc spelldata[] =
     SPELL_TREE_FORM, "Tree Form",
     SPTYP_TRANSMUTATION | SPTYP_HEXES,
     SPFLAG_HELPFUL | SPFLAG_CHAOTIC | SPFLAG_UTILITY,
-    5,
+    4,
     0,
     -1, -1,
     6, 0,

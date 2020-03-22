@@ -215,6 +215,7 @@ Pull requests for new content are welcome.
   - v1.19.2: Searing Ray has an unlimited duration and higher max spell power, but uses 2 mana/turn at full strength.
   - v1.21: Dragon Form increases spell power (+1 enhancer level).
   - v1.21.3: Throw Frost is easy to cast (+1 wizardry level).
+  - v1.21.3: Tree Form is level 4.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -227,6 +228,7 @@ Pull requests for new content are welcome.
   - v1.12.1: Disjunction
   - v1.15: Ring of Flames
   - v1.17.1: Alistair's Intoxication
+  - v1.21.3: Leda's Liquefaction
 
 #### Gods
   - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.

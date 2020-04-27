@@ -341,7 +341,7 @@ typedef pair<int, string> ancestor_upgrade;
 static const map<monster_type, vector<ancestor_upgrade> > ancestor_data =
 {
     { MONS_ANCESTOR_KNIGHT,
-      { { 1,  "Flail" },
+      { { 1,  "War axe (flame)" },
         { 1,  "Shield" },
         { 1,  "Chain mail (+AC)" },
         { 15, "Broad axe (flame)" },

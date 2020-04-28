@@ -51,8 +51,9 @@ reflect any blocked ranged attacks back towards the attacker.
 %%%%
 amulet of regeneration
 
-An amulet that increases the wearer's natural regeneration rate. In order to
-function, it must first attune itself to the wearer's body at full health.
+An amulet that increases the wearer's natural regeneration rate by an amount proportional
+to their current reserve of magical power.
+In order to function, it must first attune itself to the wearer's body at full health.
 %%%%
 amulet of the gourmand
 

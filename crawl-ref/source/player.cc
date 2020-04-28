@@ -1071,8 +1071,8 @@ static int _player_bonus_regen()
     }
 
     // Jewellery.
-    if (you.props[REGEN_AMULET_ACTIVE].get_int() == 1)
-        rr += REGEN_PIP * you.wearing(EQ_AMULET, AMU_REGENERATION);
+    if (you.props[REGEN_AMULET_ACTIVE].get_int() == 1 && you.wearing(EQ_AMULET, AMU_REGENERATION)
+        rr += you.magic_points * 3;
 
     // Artefacts
     rr += REGEN_PIP * you.scan_artefacts(ARTP_REGENERATION);

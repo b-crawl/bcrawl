@@ -1161,9 +1161,9 @@ The scales of a swamp dragon. It confers resistance to poison on its wearer.
 %%%%
 throwing net
 
-A mesh of ropes knotted together with weights around the edge, used to entangle
-and entrap targets. Struggling victims can eventually destroy the net and break
-free, if they live long enough.
+A mesh of ropes knotted together with weights around the edge, which can entangle
+and entrap any corporeal creature that moves and is smaller than a giant.
+Struggling victims can eventually destroy the net and break free, if they live long enough.
 %%%%
 tomahawk
 

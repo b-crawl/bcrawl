@@ -56,9 +56,9 @@ function, it must first attune itself to the wearer's body at full health.
 %%%%
 amulet of the gourmand
 
-An amulet that allows its wearer to eat fresh raw meat when not hungry, and
-drastically increases nutrition gained from them. These effects on the wearer's
-digestion are cumulative over time and are initially small.
+An amulet that makes fresh raw meat more palatable to its wearer, allowing them to
+gain more nutrition and some health from eating it.
+This effect on the wearer's digestion gradually takes effect over some time.
 %%%%
 amulet of the acrobat
 

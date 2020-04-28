@@ -1176,7 +1176,7 @@ static void _input()
 
     if (you.turn_is_over)
     {
-        if (you.apply_berserk_penalty)
+        if (you.apply_berserk_penalty && !you.wearing(EQ_AMULET, AMU_RAGE))
             _do_berserk_no_combat_penalty();
 
         _do_searing_ray();

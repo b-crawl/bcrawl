@@ -392,7 +392,6 @@ static const pop_entry pop_vaults[] =
   {  0,  8,   89, PEAK, MONS_ENTROPY_WEAVER },
   {  0, 12,   89, PEAK, MONS_SPHINX },
   {  0,  6,   89, FLAT, MONS_VERY_UGLY_THING },
-  {  1,  1,  255, FLAT, MONS_UNSEEN_HORROR },
   {  1,  1,  185, FLAT, MONS_WRAITH },
   {  1,  2,  415, FLAT, MONS_CYCLOPS },
   {  1,  3,  136, FLAT, MONS_RAKSHASA },

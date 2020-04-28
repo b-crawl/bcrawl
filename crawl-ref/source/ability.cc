@@ -342,13 +342,13 @@ static const ability_def Ability_List[] =
       0, 0, 0, 0, {}, abflag::starve_ok },
 #endif
     { ABIL_EVOKE_FLIGHT, "Evoke Flight",
-      1, 0, 100, 0, {fail_basis::evo, 40, 2}, abflag::none },
+      1, 0, 100, 0, {fail_basis::evo, 30, 2}, abflag::none },
     { ABIL_EVOKE_FOG, "Evoke Fog",
       2, 0, 250, 0, {fail_basis::evo, 50, 2}, abflag::none },
     { ABIL_EVOKE_RATSKIN, "Evoke Ratskin",
-      3, 0, 200, 0, {fail_basis::evo, 50, 2}, abflag::none },
+      3, 0, 200, 0, {fail_basis::evo, 60, 2}, abflag::none },
     { ABIL_EVOKE_THUNDER, "Evoke Thunderclouds",
-      5, 0, 200, 0, {fail_basis::evo, 60, 2}, abflag::none },
+      5, 0, 200, 0, {fail_basis::evo, 50, 2}, abflag::none },
 
 
     { ABIL_END_TRANSFORMATION, "End Transformation",

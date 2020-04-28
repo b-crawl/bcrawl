@@ -6093,9 +6093,7 @@ int player::base_ac_from(const item_def &armour, int scale) const
 
     // The deformed don't fit into body armour very well.
     // (This includes nagas and centaurs.)
-    if (get_armour_slot(armour) == EQ_BODY_ARMOUR
-            && (get_mutation_level(MUT_DEFORMED)
-                || get_mutation_level(MUT_PSEUDOPODS)))
+    if (get_armour_slot(armour) == EQ_BODY_ARMOUR && get_mutation_level(MUT_DEFORMED))
     {
         return AC - base / 2;
     }

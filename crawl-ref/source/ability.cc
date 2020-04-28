@@ -417,7 +417,7 @@ static const ability_def Ability_List[] =
       {fail_basis::invo, 60, 4, 25}, abflag::none },
     { ABIL_MAKHLEB_GREATER_SERVANT_OF_MAKHLEB, "Greater Servant of Makhleb",
       0, scaling_cost::fixed(10), 0, 4,
-      {fail_basis::invo, 100, 5, 20}, abflag::hostile },
+      {fail_basis::invo, 100, 4, 20}, abflag::hostile },
 
     // Sif Muna
     { ABIL_SIF_MUNA_DIVINE_ENERGY, "Divine Energy",

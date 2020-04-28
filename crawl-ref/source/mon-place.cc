@@ -1014,6 +1014,7 @@ static monster* _place_monster_aux(const mgen_data &mg, const monster *leader,
         mon->god = GOD_SHINING_ONE;
         break;
     case MONS_APIS:
+    case MONS_IRONHEART_PRESERVER:
         mon->god = GOD_ELYVILON;
         break;
     case MONS_DRACONIAN_STORMCALLER:

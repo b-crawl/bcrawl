@@ -563,8 +563,8 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_IRONHEART_PRESERVER,
       {
-       { SPELL_INJURY_BOND, 21, MON_SPELL_WIZARD },
-       { SPELL_MINOR_HEALING, 41, MON_SPELL_WIZARD },
+       { SPELL_INJURY_BOND, 25, MON_SPELL_WIZARD },
+       { SPELL_MAJOR_HEALING, 45, MON_SPELL_PRIEST | MON_SPELL_BREATH },
       }
     },
 

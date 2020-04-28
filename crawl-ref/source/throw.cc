@@ -507,7 +507,7 @@ bool fire_warn_if_impossible(bool silent)
         }
         // Else shooting is possible.
     }
-    if (you.berserk())
+    if (you.berserk() && !you.wearing(EQ_AMULET, AMU_RAGE))
     {
         if (!silent)
             canned_msg(MSG_TOO_BERSERK);

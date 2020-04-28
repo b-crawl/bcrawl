@@ -2081,7 +2081,7 @@ void drink(item_def* potion)
         return;
     }
 
-    if (you.berserk())
+    if (you.berserk() && !you.wearing(EQ_AMULET, AMU_RAGE))
     {
         canned_msg(MSG_TOO_BERSERK);
         return;

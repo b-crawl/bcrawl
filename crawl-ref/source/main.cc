@@ -1176,7 +1176,7 @@ static void _input()
 
     if (you.turn_is_over)
     {
-        if (you.apply_berserk_penalty && !you.wearing(EQ_AMULET, AMU_RAGE))
+        if (you.apply_berserk_penalty)
             _do_berserk_no_combat_penalty();
 
         _do_searing_ray();
@@ -2466,7 +2466,7 @@ static void _swing_at_target(coord_def move)
 //
 static void _do_berserk_no_combat_penalty()
 {
-    if (you.berserk())
+    if (you.berserk() && !you.wearing(EQ_AMULET, AMU_RAGE))
     {
         you.berserk_penalty++;
 

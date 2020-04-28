@@ -216,7 +216,7 @@ static const map<job_type, job_def> job_data =
     3, 2, 7,
     { SP_DEEP_DWARF, SP_HILL_ORC, SP_TROLL, SP_CENTAUR, SP_MERFOLK,
       SP_GARGOYLE, SP_DEMONSPAWN, },
-    { "robe", "hat", "amulet of guardian spirit" },
+    { "robe", "hat", "amulet of guardian spirit", "scroll of remove curse" },
     WCHOICE_PLAIN,
     { { SK_FIGHTING, 3 }, { SK_WEAPON, 3 }, { SK_DODGING, 3 },
       { SK_STEALTH, 2 }, { SK_INVOCATIONS, 2 }, },

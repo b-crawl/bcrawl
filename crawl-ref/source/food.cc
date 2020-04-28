@@ -473,8 +473,9 @@ int prompt_eat_chunks(bool only_auto)
             // Allow undead to use easy_eat, but not auto_eat, since the player
             // might not want to drink blood as a vampire and might want to save
             // chunks as a ghoul. Ghouls can auto_eat if they have rotted hp.
-            const bool no_auto = you.undead_state()
-                && !(you.species == SP_GHOUL && player_rotted());
+            const bool no_auto = (you.undead_state()
+                    && !(you.species == SP_GHOUL && player_rotted()))
+                || you.wearing(EQ_AMULET, AMU_THE_GOURMAND);
 
             // If this chunk is safe to eat, just do so without prompting.
             if (easy_eat && !bad && i_feel_safe() && !(only_auto && no_auto))

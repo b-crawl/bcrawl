@@ -1115,10 +1115,10 @@ static string _handedness_string(const item_def &item)
         if (you.species == SP_FORMICID)
             description += "It is a weapon for one hand-pair.";
         else
-            description += "It is a one handed weapon.";
+            description += "It is a one-handed weapon.";
         break;
     case HANDS_TWO:
-        description += "It is a two handed weapon.";
+        description += "It is a two-handed weapon.";
         break;
     }
 

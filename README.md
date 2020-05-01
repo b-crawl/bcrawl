@@ -86,7 +86,7 @@ Pull requests for new content are welcome.
   - v1.21: Spelunkers start with a dagger, leather armor, boots, Corona, Passwall, a wand of digging, a lamp of fire, and a scroll of noise.
   - v1.21: Necromancers start with Animate Skeleton memorized.
   - v1.21: Enchanters start with a potion of invisibility.
-  - v1.21.4: Monks start with a scroll of remove curse.
+  - v1.22: Monks start with a scroll of remove curse.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -217,7 +217,7 @@ Pull requests for new content are welcome.
   - v1.21: Dragon Form increases spell power (+1 enhancer level).
   - v1.21.3: Throw Frost is easy to cast (+1 wizardry level).
   - v1.21.3: Tree Form is level 4.
-  - v1.21.4: Olgreb's Toxic Radiance is reworked: each turn, it has a (power / (HD * 16)) chance of giving a poison level to everything visible. Its direct damage is removed. Poison-resistant monsters have half the chance of being poisoned.
+  - v1.22: Olgreb's Toxic Radiance is reworked: each turn, it has a (power / (HD * 16)) chance of giving a poison level to everything visible. Its direct damage is removed. Poison-resistant monsters have half the chance of being poisoned.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -281,8 +281,8 @@ Pull requests for new content are welcome.
   - v1.19: Xom has higher minimum levels for banishment. (6 -> 8 when bored, 9 -> 14 otherwise)
   - v1.19: Nemelex's Triple Draw ability is now available at \*\*.
   - v1.21: Trog gives torment immunity while berserk at 3* piety.
-  - v1.21.4: Jiyva's pseudopod mutation no longer reduces body armour AC.
-  - v1.21.4: Makhleb's Greater Servant ability failure chance scales less with piety and more with Invocations. It also costs slightly less piety.
+  - v1.22: Jiyva's pseudopod mutation no longer reduces body armour AC.
+  - v1.22: Makhleb's Greater Servant ability failure chance scales less with piety and more with Invocations. It also costs slightly less piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -323,9 +323,9 @@ Pull requests for new content are welcome.
   - v1.19.1: A staff of power gives less (15 -> 12) extra max mana.
   - v1.20: Scrolls of acquirement give a choice of specific items instead of categories.
   - v1.21.3: The medium-size shield type is renamed to "medium shield".
-  - v1.21.4: Wearing an amulet of the gourmand lets players heal from eating chunks like ghouls do.
-  - v1.21.4: Amulets of regeneration give health regeneration equal to 3% of current mana instead of a flat amount.
-  - v1.21.4: Amulets of rage let players drink potions, use wands, and throw items while berserk. They also remove the berserk duration penalty for actions other than melee attacks.
+  - v1.22: Wearing an amulet of the gourmand lets players heal from eating chunks like ghouls do.
+  - v1.22: Amulets of regeneration give health regeneration equal to 3% of current mana instead of a flat amount.
+  - v1.22: Amulets of rage let players drink potions, use wands, and throw items while berserk. They also remove the berserk duration penalty for actions other than melee attacks.
 
 #### Removed Items
   - Amulet of Harm
@@ -409,8 +409,8 @@ Pull requests for new content are welcome.
   - v1.19.1: Crocodiles can sprint.
   - v1.19.2: Player ghost damage is calculated differently, making weapon base damage less important.
   - v1.20: Deep trolls and iron trolls are slightly stronger.
-  - v1.21.4: Sea snakes are somewhat stronger.
-  - v1.21.4: Ironheart preservers have a stronger heal but can't use it as often.
+  - v1.22: Sea snakes are somewhat stronger.
+  - v1.22: Ironheart preservers have a stronger heal but can't use it as often.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -435,5 +435,5 @@ Pull requests for new content are welcome.
   - v1.19.2: Louise has higher-level conjurations.
   - v1.20: The Moon Troll loses its acid spit, and is now a fast-moving corrosive melee enemy similar in strength to 2 caustic shrikes.
   - v1.20: Xtahua has Fire Storm and Fear instead of Paralyse, and more HP.
-  - v1.21.4: Antaeus has rPois.
-  - v1.21.4: Dispater is giant.
+  - v1.22: Antaeus has rPois.
+  - v1.22: Dispater is giant.

@@ -2746,8 +2746,8 @@ void toxic_radiance_effect(actor* agent, int mult, bool on_cast)
             // We're affected only if we're not the agent.
             if (!agent->is_player())
             {
-                poison_player(roll_dice(2, 3), agent->name(DESC_A),
-                              "toxic radiance", false);
+                int dam = roll_dice(2, 1 + div_rand_round(pow, 20)) * div_rand_round(mult, BASELINE_DELAY);
+                poison_player(dam, agent->name(DESC_A), "toxic radiance", false);
             }
         }
         else

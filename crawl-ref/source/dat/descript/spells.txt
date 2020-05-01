@@ -964,7 +964,8 @@ Creates a large cloud of noxious fumes, which may cause confusion.
 Olgreb's Toxic Radiance spell
 
 Causes the caster to radiate toxic energy, continuously inflicting poison on
-everything nearby for as long as the spell lasts.
+everything nearby for as long as the spell lasts. It is less effective against
+strong foes.
 %%%%
 Orb of Destruction spell
 

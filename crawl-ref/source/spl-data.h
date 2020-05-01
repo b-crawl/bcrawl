@@ -339,7 +339,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_POISON,
     SPFLAG_AREA,
     4,
-    100,
+    150,
     -1, -1,
     2, 0,
     TILEG_OLGREBS_TOXIC_RADIANCE,

@@ -2653,11 +2653,7 @@ spret cast_dazzling_spray(int pow, coord_def aim, bool fail)
 
 static bool _toxic_can_affect(const actor *act)
 {
-    if (act->is_monster() && act->as_monster()->submerged())
-        return false;
-
-    // currently monsters are still immune at rPois 1
-    return act->res_poison() < (act->is_player() ? 3 : 1);
+    return act->res_poison() < 2;
 }
 
 spret cast_toxic_radiance(actor *agent, int pow, bool fail, bool mon_tracer)
@@ -2745,18 +2741,11 @@ void toxic_radiance_effect(actor* agent, int mult, bool on_cast)
         if (agent->is_monster() && mons_aligned(agent, *ai))
             continue;
 
-        int dam = roll_dice(1, 1 + pow / 20) * div_rand_round(mult, BASELINE_DELAY);
-        dam = resist_adjust_damage(*ai, BEAM_POISON, dam);
-
         if (ai->is_player())
         {
             // We're affected only if we're not the agent.
             if (!agent->is_player())
             {
-                ouch(dam, KILLED_BY_BEAM, agent->mid,
-                    "by Olgreb's Toxic Radiance", true,
-                    agent->as_monster()->name(DESC_A).c_str());
-
                 poison_player(roll_dice(2, 3), agent->name(DESC_A),
                               "toxic radiance", false);
             }
@@ -2775,17 +2764,16 @@ void toxic_radiance_effect(actor* agent, int mult, bool on_cast)
                     break_sanctuary = true;
             }
 
-            ai->hurt(agent, dam, BEAM_POISON);
-
             if (ai->alive())
             {
-                behaviour_event(ai->as_monster(), ME_ANNOY, agent,
-                                agent->pos());
-                int q = mult / BASELINE_DELAY;
-                int levels = roll_dice(q, 2) - q + (roll_dice(1, 20) <= (mult % BASELINE_DELAY));
-                if (!ai->as_monster()->has_ench(ENCH_POISON)) // Always apply poison to an unpoisoned enemy
-                    levels = max(levels, 1);
-                poison_monster(ai->as_monster(), agent, levels);
+                behaviour_event(ai->as_monster(), ME_ANNOY, agent, agent->pos());
+                
+                int HD = ai->get_hit_dice();
+                int rpois = max(0, ai->res_poison());
+                int power = (pow * mult) / (rpois + 1);
+                int pois_amount = div_rand_round(power, HD * 16 * BASELINE_DELAY);
+                if(pois_amount)
+                    poison_monster(ai->as_monster(), agent, pois_amount);
             }
         }
     }

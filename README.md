@@ -217,6 +217,7 @@ Pull requests for new content are welcome.
   - v1.21: Dragon Form increases spell power (+1 enhancer level).
   - v1.21.3: Throw Frost is easy to cast (+1 wizardry level).
   - v1.21.3: Tree Form is level 4.
+  - v1.21.4: Olgreb's Toxic Radiance is reworked: each turn, it has a (power / (HD * 16)) chance of giving a poison level to everything visible. Its direct damage is removed. Poison-resistant monsters have half the chance of being poisoned.
 
 #### Removed Spells
   - Summon Guardian Golem

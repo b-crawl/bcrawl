@@ -2179,25 +2179,36 @@ void drink(item_def* potion)
 // XXX: there's probably a nicer way of doing this.
 bool god_hates_brand(const int brand)
 {
-    if (is_good_god(you.religion)
-        && (brand == SPWPN_DRAINING
-            || brand == SPWPN_VAMPIRISM
-            || brand == SPWPN_CHAOS
-            || brand == SPWPN_PAIN))
+    switch(you.religion)
     {
-        return true;
+        case GOD_ZIN:
+        case GOD_SHINING_ONE:
+        case GOD_ELYVILON:
+        case GOD_WU_JIAN:
+            switch(brand)
+            {
+            case SPWPN_DRAINING:
+            case SPWPN_VAMPIRISM:
+            case SPWPN_CHAOS:
+            case SPWPN_PAIN:
+                return true;
+            default: return false;
+            }
+        case GOD_CHEIBRIADOS:
+            switch(brand)
+            {
+            case SPWPN_CHAOS:
+            case SPWPN_SPEED:
+                return true;
+            default: return false;
+            }
+        case GOD_YREDELEMNUL:
+            if (brand == SPWPN_HOLY_WRATH)
+                return true;
+            return false;
+        
+        default: return false;
     }
-
-    if (you_worship(GOD_CHEIBRIADOS) && (brand == SPWPN_CHAOS
-                                         || brand == SPWPN_SPEED))
-    {
-        return true;
-    }
-
-    if (you_worship(GOD_YREDELEMNUL) && brand == SPWPN_HOLY_WRATH)
-        return true;
-
-    return false;
 }
 
 static void _rebrand_weapon(item_def& wpn)

@@ -283,6 +283,7 @@ Pull requests for new content are welcome.
   - v1.21: Trog gives torment immunity while berserk at 3* piety.
   - v1.22: Jiyva's pseudopod mutation no longer reduces body armour AC.
   - v1.22: Makhleb's Greater Servant ability failure chance scales less with piety and more with Invocations. It also costs slightly less piety.
+  - v1.22: The Wu Jian Council hates evil actions, but still allows all species.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

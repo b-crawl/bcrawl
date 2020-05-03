@@ -2268,7 +2268,10 @@ item_def* monster_die(monster& mons, killer_type killer,
     {
         const int sos_bonus = you.props[SONG_OF_SLAYING_KEY].get_int();
         if (sos_bonus <= 8) // cap at +9 slay
+        {
             you.props[SONG_OF_SLAYING_KEY] = sos_bonus + 1;
+            you.redraw_armour_class = true;
+        }
     }
 
     switch (killer)

@@ -2319,6 +2319,12 @@ int player_shield_class()
 
         shield += stat;
     }
+    else
+    {
+        int song_dur = you.duration[DUR_SONG_OF_SLAYING];
+        if (song_dur && song_dur < 9000)
+            shield += 400 * you.props[SONG_OF_SLAYING_KEY].get_int();
+    }
 
     // mutations
     // +4, +6, +8 (displayed values)

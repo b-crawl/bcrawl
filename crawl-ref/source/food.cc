@@ -473,8 +473,9 @@ int prompt_eat_chunks(bool only_auto)
             // Allow undead to use easy_eat, but not auto_eat, since the player
             // might not want to drink blood as a vampire and might want to save
             // chunks as a ghoul. Ghouls can auto_eat if they have rotted hp.
-            const bool no_auto = you.undead_state()
-                && !(you.species == SP_GHOUL && player_rotted());
+            const bool no_auto = (you.undead_state()
+                    && !(you.species == SP_GHOUL && player_rotted()))
+                || you.wearing(EQ_AMULET, AMU_THE_GOURMAND);
 
             // If this chunk is safe to eat, just do so without prompting.
             if (easy_eat && !bad && i_feel_safe() && !(only_auto && no_auto))
@@ -526,17 +527,14 @@ int prompt_eat_chunks(bool only_auto)
     return 0;
 }
 
-static const char *_chunk_flavour_phrase(bool likes_chunks)
+static const char *_chunk_flavour_phrase(bool likes_chunks, int gourmand)
 {
     const char *phrase = "tastes terrible.";
 
-    if (you.species == SP_GHOUL)
-        phrase = "tastes great!";
-    else if (likes_chunks)
+    if (likes_chunks)
         phrase = "tastes great.";
     else
     {
-        const int gourmand = you.duration[DUR_GOURMAND];
         if (gourmand >= GOURMAND_MAX)
         {
             phrase = one_chance_in(1000) ? "tastes like chicken!"
@@ -630,19 +628,26 @@ static void _eat_chunk(item_def& food)
     int nutrition     = _chunk_nutrition(likes_chunks);
     bool suppress_msg = false; // do we display the chunk nutrition message?
     bool do_eat       = false;
+    
+    int gourmand = 0;
+    if (you.species == SP_GHOUL)
+        gourmand = GOURMAND_MAX;
+    else
+        gourmand = min(you.duration[DUR_GOURMAND], GOURMAND_MAX);
 
     switch (chunk_effect)
     {
     case CE_CLEAN:
     {
-        if (you.species == SP_GHOUL)
+        int hp_amt = 1 + random2avg(5 + you.experience_level, 3);
+        hp_amt = (hp_amt * gourmand) / GOURMAND_MAX;
+        if (hp_amt)
         {
             suppress_msg = true;
-            const int hp_amt = 1 + random2avg(5 + you.experience_level, 3);
             _heal_from_food(hp_amt);
         }
 
-        mprf("This raw flesh %s", _chunk_flavour_phrase(likes_chunks));
+        mprf("This raw flesh %s", _chunk_flavour_phrase(likes_chunks, gourmand));
         do_eat = true;
         break;
     }

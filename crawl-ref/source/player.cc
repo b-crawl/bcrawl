@@ -1071,8 +1071,8 @@ static int _player_bonus_regen()
     }
 
     // Jewellery.
-    if (you.props[REGEN_AMULET_ACTIVE].get_int() == 1)
-        rr += REGEN_PIP * you.wearing(EQ_AMULET, AMU_REGENERATION);
+    if (you.props[REGEN_AMULET_ACTIVE].get_int() == 1 && you.wearing(EQ_AMULET, AMU_REGENERATION))
+        rr += you.magic_points * 3;
 
     // Artefacts
     rr += REGEN_PIP * you.scan_artefacts(ARTP_REGENERATION);
@@ -2318,6 +2318,12 @@ int player_shield_class()
         stat = stat * (base_shield + 13) / 26;
 
         shield += stat;
+    }
+    else
+    {
+        int song_dur = you.duration[DUR_SONG_OF_SLAYING];
+        if (song_dur && song_dur < 9000)
+            shield += 400 * you.props[SONG_OF_SLAYING_KEY].get_int();
     }
 
     // mutations
@@ -6093,9 +6099,7 @@ int player::base_ac_from(const item_def &armour, int scale) const
 
     // The deformed don't fit into body armour very well.
     // (This includes nagas and centaurs.)
-    if (get_armour_slot(armour) == EQ_BODY_ARMOUR
-            && (get_mutation_level(MUT_DEFORMED)
-                || get_mutation_level(MUT_PSEUDOPODS)))
+    if (get_armour_slot(armour) == EQ_BODY_ARMOUR && get_mutation_level(MUT_DEFORMED))
     {
         return AC - base / 2;
     }

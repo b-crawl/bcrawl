@@ -189,7 +189,7 @@ BRAND:   SPWPN_ANTIMAGIC
 
 NAME:    mace of Variability
 OBJ:     OBJ_WEAPONS/WPN_GREAT_MACE
-INSCRIP: chain chaos
+INSCRIP: chain chaos,
 PLUS:    +7
 COLOUR:  ETC_RANDOM
 TILE:    spwpn_mace_of_variability
@@ -651,7 +651,7 @@ BRAND:    SPWPN_SPEED
 
 NAME:     storm bow
 OBJ:      OBJ_WEAPONS/WPN_SHORTBOW
-INSCRIP:  lightning
+INSCRIP:  lightning,
 PLUS:     +8
 COLOUR:   BLUE
 TILE:     urand_storm_bow
@@ -1043,7 +1043,7 @@ BOOL:     clarity
 BRAND:    SPWPN_VORPAL
 
 NAME:     shillelagh "Devastator"
-INSCRIP:  shatter
+INSCRIP:  shatter,
 OBJ:      OBJ_WEAPONS/WPN_CLUB
 TYPE:     shillelagh
 TILE:     urand_shillelagh
@@ -1329,7 +1329,7 @@ FIRE:     1
 BOOL:     nogen, notac
 
 NAME:     hand wraps "Fists of Thunder"
-INSCRIP:  +elec,
+INSCRIP:  elec,
 OBJ:      OBJ_ARMOUR/ARM_GLOVES
 PLUS:     +0
 TYPE:     hand wraps

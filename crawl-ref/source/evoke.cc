@@ -353,7 +353,7 @@ void zap_wand(int slot)
         return;
     }
 
-    if (you.berserk())
+    if (you.berserk() && !you.wearing(EQ_AMULET, AMU_RAGE))
     {
         canned_msg(MSG_TOO_BERSERK);
         return;

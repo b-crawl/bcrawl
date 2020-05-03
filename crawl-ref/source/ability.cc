@@ -342,13 +342,13 @@ static const ability_def Ability_List[] =
       0, 0, 0, 0, {}, abflag::starve_ok },
 #endif
     { ABIL_EVOKE_FLIGHT, "Evoke Flight",
-      1, 0, 100, 0, {fail_basis::evo, 40, 2}, abflag::none },
+      1, 0, 100, 0, {fail_basis::evo, 30, 2}, abflag::none },
     { ABIL_EVOKE_FOG, "Evoke Fog",
       2, 0, 250, 0, {fail_basis::evo, 50, 2}, abflag::none },
     { ABIL_EVOKE_RATSKIN, "Evoke Ratskin",
-      3, 0, 200, 0, {fail_basis::evo, 50, 2}, abflag::none },
+      3, 0, 200, 0, {fail_basis::evo, 60, 2}, abflag::none },
     { ABIL_EVOKE_THUNDER, "Evoke Thunderclouds",
-      5, 0, 200, 0, {fail_basis::evo, 60, 2}, abflag::none },
+      5, 0, 200, 0, {fail_basis::evo, 50, 2}, abflag::none },
 
 
     { ABIL_END_TRANSFORMATION, "End Transformation",
@@ -417,7 +417,7 @@ static const ability_def Ability_List[] =
       {fail_basis::invo, 60, 4, 25}, abflag::none },
     { ABIL_MAKHLEB_GREATER_SERVANT_OF_MAKHLEB, "Greater Servant of Makhleb",
       0, scaling_cost::fixed(10), 0, 5,
-      {fail_basis::invo, 90, 2, 5}, abflag::hostile },
+      {fail_basis::invo, 100, 4, 20}, abflag::hostile },
 
     // Sif Muna
     { ABIL_SIF_MUNA_DIVINE_ENERGY, "Divine Energy",

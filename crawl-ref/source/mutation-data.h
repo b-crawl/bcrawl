@@ -1201,9 +1201,9 @@ static const mutation_def mut_data[] =
 { MUT_PSEUDOPODS, 0, 3, mutflag::good | mutflag::jiyva, true,
   "pseudopods",
 
-  {"Armour fits poorly on your pseudopods.",
-   "Armour fits poorly on your large pseudopods.",
-   "Armour fits poorly on your massive pseudopods."},
+  {"You have pseudopods that can do melee attacks.",
+   "You have large pseudopods that can do melee attacks.",
+   "You have massive pseudopods that can do melee attacks."},
 
   {"Pseudopods emerge from your body.",
    "Your pseudopods grow in size.",

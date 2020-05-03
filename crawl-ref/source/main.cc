@@ -2466,7 +2466,7 @@ static void _swing_at_target(coord_def move)
 //
 static void _do_berserk_no_combat_penalty()
 {
-    if (you.berserk())
+    if (you.berserk() && !you.wearing(EQ_AMULET, AMU_RAGE))
     {
         you.berserk_penalty++;
 

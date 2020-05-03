@@ -964,7 +964,8 @@ Creates a large cloud of noxious fumes, which may cause confusion.
 Olgreb's Toxic Radiance spell
 
 Causes the caster to radiate toxic energy, continuously inflicting poison on
-everything nearby for as long as the spell lasts.
+everything nearby for as long as the spell lasts. It is less effective against
+strong foes.
 %%%%
 Orb of Destruction spell
 
@@ -1258,6 +1259,9 @@ Recites ancient verses of battle. Each non-summoned enemy the caster slays in
 combat during this recitation temporarily enhances their melee and ranged
 skills. The bonus only lasts for the duration of the song; casting this spell
 while already singing will start a new song, not extend an existing one.
+
+As the song grows in power, if the caster is not wielding a shield, they can use
+the sound itself as one.
 %%%%
 Spawn Tentacles spell
 

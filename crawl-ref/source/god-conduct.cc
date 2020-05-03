@@ -454,7 +454,9 @@ static peeve_map divine_peeves[] =
     // GOD_HEPLIAKLQANA,
     peeve_map(),
     // GOD_WU_JIAN,
-    peeve_map(),
+    {
+        { DID_EVIL, GOOD_EVIL_RESPONSE },
+    },
 };
 
 string get_god_dislikes(god_type which_god)

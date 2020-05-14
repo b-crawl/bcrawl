@@ -687,7 +687,7 @@ TILE:     urand_thief
 TILE_EQ:  black
 SLAY:     -2
 STEALTH:  1
-BOOL:     seeinv, fog
+BOOL:     seeinv, inv, fog
 
 # TAG_MAJOR_VERSION == 34
 NAME:    large shield "Bullseye"

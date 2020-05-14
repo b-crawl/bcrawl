@@ -371,6 +371,7 @@ Pull requests for new content are welcome.
   - v1.21: The Amulet of Vitality has a larger (+15 -> +25) health bonus.
   - v1.21: The Wrath of Trog has +3 base damage.
   - v1.21: Unrand artefact weapons and armor are somewhat more common.
+  - v1.22.1: The Cloak of the Thief has evokable invisibility.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

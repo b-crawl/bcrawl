@@ -329,6 +329,7 @@ Pull requests for new content are welcome.
   - v1.22: Amulets of regeneration give health regeneration equal to 3% of current mana instead of a flat amount.
   - v1.22: Amulets of rage let players drink potions, use wands, and throw items while berserk. They also remove the berserk duration penalty for actions other than melee attacks.
   - v1.22.1: Good stat rings are +2 to +8 instead of +2 to +6.
+  - v1.22.1: Scarves "of cloud immunity" are now scarves "of clouds", and can be evoked to create fog.
 
 #### Removed Items
   - Amulet of Harm

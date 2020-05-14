@@ -1730,7 +1730,7 @@ static string _describe_armour(const item_def &item, bool verbose)
 
         case SPARM_CLOUD_IMMUNE:
             description += "It completely protects its wearer from the effects"
-                           " of clouds.";
+                           " of clouds, and can be evoked to create fog.";
             break;
 
         case SPARM_STASIS:

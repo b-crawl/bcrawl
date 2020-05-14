@@ -2082,7 +2082,9 @@ static spret _do_ability(const ability_def& abil, bool fail)
 
     case ABIL_EVOKE_FOG:     // cloak of the Thief
         fail_check();
-        if(player_equip_unrand(UNRAND_THIEF))
+        if wearing_ego(EQ_CLOAK, SPARM_CLOUD_IMMUNE)
+            mpr("Your scarf creates fog around you.");
+        else if(player_equip_unrand(UNRAND_THIEF))
             mpr("With a swish of your cloak, you release a cloud of fog.");
         else if (player_equip_unrand(UNRAND_SALAMANDER))
             mpr("Your armour creates dense smoke.");
@@ -3454,7 +3456,9 @@ vector<talent> your_talents(bool check_confused, bool include_unusable)
         _add_talent(talents, ABIL_EVOKE_BLINK, check_confused);
     }
 
-    if ((player_equip_unrand(UNRAND_THIEF) || player_equip_unrand(UNRAND_SALAMANDER))
+    if (wearing_ego(EQ_CLOAK, SPARM_CLOUD_IMMUNE)
+            || (player_equip_unrand(UNRAND_THIEF)
+            || player_equip_unrand(UNRAND_SALAMANDER))
         && !you.get_mutation_level(MUT_NO_ARTIFICE))
     {
         _add_talent(talents, ABIL_EVOKE_FOG, check_confused);

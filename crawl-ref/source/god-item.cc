@@ -218,6 +218,9 @@ bool is_unclean_item(const item_def& item, bool calc_unid)
 
     if (item.has_spells() && (item_type_known(item) || calc_unid))
         return _is_book_type(item, is_unclean_spell);
+    
+    if (item.base_type == OBJ_POTIONS && is_blood_potion(item))
+        return true;
 
     return false;
 }

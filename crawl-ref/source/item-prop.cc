@@ -437,7 +437,7 @@ static const weapon_def Weapon_prop[] =
             { SPWPN_PAIN,            2 },
             { SPWPN_VAMPIRISM,       2 },
         }},
-    { WPN_GREAT_MACE,        "great mace",         26, -4, 23,
+    { WPN_GREAT_MACE,        "great mace",         26, -4, 20,
         SK_MACES_FLAILS, SIZE_MEDIUM, NUM_SIZE_LEVELS, MI_NONE,
         DAMV_CRUSHING, 3, 10, 65, {
             { SPWPN_PROTECTION,     28 },

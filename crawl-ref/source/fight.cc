@@ -60,7 +60,7 @@
  */
 int melee_confuse_chance(int HD)
 {
-	int XL = you.experience_level;
+    int XL = you.experience_level;
     return max(80 * (XL + 1 - HD) / XL, 0);
 }
 
@@ -793,20 +793,27 @@ int weapon_min_delay(const item_def &weapon, bool check_speed)
     const int base = property(weapon, PWPN_SPEED);
     int min_delay = base/2;
 
-    // Short blades can get up to at least unarmed speed.
-    if (item_attack_skill(weapon) == SK_SHORT_BLADES && min_delay > 5)
-        min_delay = 5;
-
-    // All weapons have min delay 7 or better
-    if (min_delay > 7)
-        min_delay = 7;
-
-    // ...except crossbows...
-    if (item_attack_skill(weapon) == SK_CROSSBOWS && min_delay < 10)
+    switch(item_attack_skill(weapon))
+    {
+    case SK_SHORT_BLADES:
+        min_delay = min(5, min_delay);  // for rapiers
+        break;
+    case SK_CROSSBOWS:
         min_delay = 10;
+        break;
+    case SK_MACES_FLAILS:
+        if (weapon.sub_type == WPN_GREAT_MACE)
+            min_delay = min(10, min_delay);
+        else
+            min_delay = min(7, min_delay);
+        break;
+    default:
+        min_delay = min(7, min_delay);
+        break;
+    }
 
-    // ... and unless it would take more than skill 27 to get there.
-    // Round up the reduction from skill, so that min delay is rounded down.
+    // handle weapons that would require more than skill 27 to reach min delay
+    // round up the reduction from skill, so that min delay is rounded down
     min_delay = max(min_delay, base - (MAX_SKILL_LEVEL + 1)/2);
 
     if (check_speed && get_weapon_brand(weapon) == SPWPN_SPEED)

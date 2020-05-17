@@ -2493,12 +2493,13 @@ feature -= <regex> , <regex>
         to override the above display_char options, or also to distinguish
         among subtypes of a character.
 
-        'magic' always refers to magic mapping. So the <magicmap symbol>
-        entry determines what symbol will be used for features only
-        detected via magic mapping.
+        'magic' refers to magic mapping. So the <magicmap symbol>
+        entry determines what symbol will be used for features
+        detected via magic mapping. The <magicmap symbol> will also be used
+        for stone stairs with unknown destination and unvisited transporters.
 
-        'emphasised_colour' refers to the colour used to highlight
-        stone stairs with unknown destination; for non-stair features,
+        'emphasised_colour' refers to the colour used to highlight stone stairs
+        and transporters with unknown destination; for non-stair features,
         setting emphasis colours does nothing useful.
 
         Leading parameters in the {...} list can be omitted by leaving
@@ -2873,3 +2874,46 @@ The above caveat applies to the "wiz_mode" option as well. Instead of
 conditionalized wiz_mode, you can add to the command line
 "-extra-opt-last wiz_mode=yes" to make any new game start in wizard
 mode.
+
+7-  Recommended Options for Blind Players.
+==========================================
+
+The following settings are recommended to facilitate using crawl in console
+with a screenreader.
+
+Disable animations and view delays so the screen updates immediately after each
+command:
+    view_delay = 0
+    travel_delay = -1
+    rest_delay = -1
+    use_animations = 0
+
+Place messages at the top of the screen and remove message condensing for
+easier screen reading:
+    messages_at_top = true
+    clear_messages = true
+    msg_condense_short = false
+
+Make the player cursor easier to track with screen reading, by setting a custom
+symbol for the player:
+    use_fake_player_cursor = false
+    show_player_species = false
+    mon_glyph += player:x263A
+
+Use mouse input clicks for automove (see the discussion of the mouse_input
+option for terminal configuration specifics):
+    mouse_input = true
+
+List player-relative coordinates in the ^x display:
+    monster_item_view_coordinates = true
+
+Mark the path taken by auto-travel and the exploration horizon with special
+characters:
+    show_travel_trail = true
+    feature += travel trail {x25AA}
+    feature += explore horizon {x25AB}
+
+Set a separate glyph for unvisited stairs and transporters:
+    feature += stone staircase leading up {<,x25C2}
+    feature += stone staircase leading down {>,x25B8}
+    feature += transporter {xA9, x25CE}

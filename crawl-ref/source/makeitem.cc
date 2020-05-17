@@ -1622,10 +1622,11 @@ static int _good_jewellery_plus(int subtype)
         case RING_STRENGTH:
         case RING_DEXTERITY:
         case RING_INTELLIGENCE:
+            return 2 + random2avg(7, 2);
         case AMU_REFLECTION:
-            return 2 + (one_chance_in(3) ? random2(2) : random2avg(5, 2));
+            return 2 + random2avg(5, 2);
         default:
-            return 1 + (one_chance_in(3) ? random2(3) : random2avg(6, 2));
+            return 1 + random2avg(6, 2);
     }
 }
 

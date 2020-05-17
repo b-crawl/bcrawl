@@ -599,7 +599,7 @@ const char* armour_ego_name(const item_def& item, bool terse)
         case SPARM_SPIRIT_SHIELD:     return "spirit shield";
         case SPARM_ARCHERY:           return "archery";
         case SPARM_REPULSION:         return "repulsion";
-        case SPARM_CLOUD_IMMUNE:      return "cloud immunity";
+        case SPARM_CLOUD_IMMUNE:      return "clouds";
         case SPARM_STASIS:            return "stasis";
         default:                      return "bugginess";
         }
@@ -634,7 +634,7 @@ const char* armour_ego_name(const item_def& item, bool terse)
         case SPARM_SPIRIT_SHIELD:     return "Spirit";
         case SPARM_ARCHERY:           return "archery";
         case SPARM_REPULSION:         return "repulsion";
-        case SPARM_CLOUD_IMMUNE:      return "cloud immunity";
+        case SPARM_CLOUD_IMMUNE:      return "clouds";
         case SPARM_STASIS:            return "stasis";
         default:                      return "buggy";
         }
@@ -3401,10 +3401,6 @@ bool is_useless_item(const item_def &item, bool temp)
             {
             case SPARM_SPIRIT_SHIELD:
                 if(you.spirit_shield(false, false))
-                    return true;
-                break;
-            case SPARM_CLOUD_IMMUNE:
-                if(have_passive(passive_t::cloud_immunity))
                     return true;
                 break;
             case SPARM_STASIS:

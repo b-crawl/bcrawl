@@ -738,16 +738,14 @@ TILE_EQ:  red
 EV:       4
 BOOL:     fly, nogen, notac
 
-ENUM:     HOOD_ASSASSIN
-NAME:     hood of the Assassin
-OBJ:      OBJ_ARMOUR/ARM_HAT
-FB_BRAND: SPARM_SEE_INVISIBLE
+ENUM:     BOOTS_ASSASSIN
+NAME:     boots of the Assassin
+OBJ:      OBJ_ARMOUR/ARM_BOOTS
 INSCRIP:  Detection Stab+
 PLUS:     +2
 COLOUR:   BROWN
-# XXX: needs tiles
-TILE:     urand_hood_assassin
-TILE_EQ:  hood_purple
+TILE:     urand_assassin
+TILE_EQ:  middle_gray
 STEALTH:  2
 VALUE:    600
 

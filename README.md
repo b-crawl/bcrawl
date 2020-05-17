@@ -328,8 +328,11 @@ Pull requests for new content are welcome.
   - v1.22: Wearing an amulet of the gourmand lets players heal from eating chunks like ghouls do.
   - v1.22: Amulets of regeneration give health regeneration equal to 3% of current mana instead of a flat amount.
   - v1.22: Amulets of rage let players drink potions, use wands, and throw items while berserk. They also remove the berserk duration penalty for actions other than melee attacks.
-  - v1.22.1: Good stat rings are +2 to +8 instead of +2 to +6.
-  - v1.22.1: Scarves "of cloud immunity" are now scarves "of clouds", and can be evoked to create fog.
+  - v1.23: Good stat rings are +2 to +8 instead of +2 to +6.
+  - v1.23: Scarves "of cloud immunity" are now scarves "of clouds", and can be evoked to create fog.
+  - v1.23: Potions of blood are no longer considered evil items.
+  - v1.23: Giant spiked clubs have lower base delay. (20 -> 19)
+  - v1.23: Great maces have higher base damage (17 -> 26) but higher base delay (17 -> 20) and higher min delay (0.7 -> 1.0).
 
 #### Removed Items
   - Amulet of Harm
@@ -371,7 +374,7 @@ Pull requests for new content are welcome.
   - v1.21: The Amulet of Vitality has a larger (+15 -> +25) health bonus.
   - v1.21: The Wrath of Trog has +3 base damage.
   - v1.21: Unrand artefact weapons and armor are somewhat more common.
-  - v1.22.1: The Cloak of the Thief has evokable invisibility.
+  - v1.23: The Cloak of the Thief has evokable invisibility.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -416,6 +419,8 @@ Pull requests for new content are welcome.
   - v1.20: Deep trolls and iron trolls are slightly stronger.
   - v1.22: Sea snakes are somewhat stronger.
   - v1.22: Ironheart preservers have a stronger heal but can't use it as often.
+  - v1.23: Leopard geckos move faster but no longer attack quickly.
+  - v1.23: Swamp drakes have a stronger bite that can slow and poison.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -442,3 +447,4 @@ Pull requests for new content are welcome.
   - v1.20: Xtahua has Fire Storm and Fear instead of Paralyse, and more HP.
   - v1.22: Antaeus has rPois.
   - v1.22: Dispater is giant.
+  - v1.23: Urug is slightly stronger.

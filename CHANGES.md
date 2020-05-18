@@ -18,6 +18,7 @@
   - v1.18: Portals to Pandemonium levels are redirected to the Abyss by the lords of Pandemonium if the player has reached their max experience level. On entering a Pandemonium level, if the player has at least 2 runes, the locations of portals are revealed and the player is notified if the demonic rune is present.
   - v1.20: Early out-of-depth monsters do not spawn with their band. This reduces the number of Orc Priests on D:2.
   - v1.20: Some gods will warn the player about doing Elf or Slime at a low XL.
+  - v1.23: Orange crystal statues can appear in Spider.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -391,6 +392,7 @@
   - v1.22: Ironheart preservers have a stronger heal but can't use it as often.
   - v1.23: Leopard geckos move faster but no longer attack quickly.
   - v1.23: Swamp drakes have a stronger bite that can slow and poison.
+  - v1.23: Demonic crawlers have somewhat higher melee damage.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

@@ -114,6 +114,7 @@ Pull requests for new content are welcome.
   - v1.19.2: Poison on monsters is no longer capped at 4 stacks.
   - v1.20: Magic contamination decreases twice as fast when at full mana and not glowing.
   - v1.21.1: Constriction no longer affects blinking. Instead, being constricted gives players a 50% chance to waste scrolls when trying to read them. (There is a warning for this.)
+  - v1.23: Monsters immune to drowning are still silenced by being engulfed by water. (This makes phials of floods better against liches.)
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

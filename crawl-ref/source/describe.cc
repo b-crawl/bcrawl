@@ -921,8 +921,6 @@ static int _item_training_target(const item_def &item)
     const int throw_dam = property(item, PWPN_DAMAGE);
     if (item.base_type == OBJ_WEAPONS || item.base_type == OBJ_STAVES)
         return weapon_min_delay_skill(item) * 10;
-    else if (is_shield(item))
-        return round(you.get_shield_skill_to_offset_penalty(item) * 10);
     else if (item.base_type == OBJ_MISSILES && throw_dam)
         return ((thrown_missile_base_delay(throw_dam) - thrown_missile_min_delay(throw_dam)) * 2) * 10;
     else
@@ -1567,27 +1565,12 @@ static string _describe_armour(const item_def &item, bool verbose)
             description += "\n";
             description += "\nBase shield rating: "
                         + to_string(property(item, PARM_AC));
-            const bool could_set_target = _could_set_training_target(item, true);
 
             if (!is_useless_item(item))
             {
-                description += "       Skill to remove penalty: "
-                            + make_stringf("%d.%d", target_skill / 10,
-                                                target_skill % 10);
-
-                if (crawl_state.need_save)
-                {
-                    description += "\n    "
-                        + _your_skill_desc(SK_SHIELDS,
-                          could_set_target && in_inventory(item), target_skill);
-                }
-                else
-                    description += "\n";
-                if (could_set_target)
-                {
-                    _append_skill_target_desc(description, SK_SHIELDS,
-                                                                target_skill);
-                }
+                int shield_penalty_percent = 100 * 8 * 10 / (8 * 10 + you.skill(SK_SHIELDS, 10));
+                description += "       Current penalty reduction: "
+                            + make_stringf("%d", (100 - shield_penalty_percent)) + "%\n";
             }
 
             if (is_unrandom_artefact(item, UNRAND_WARLOCK_MIRROR))

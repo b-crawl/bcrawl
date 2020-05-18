@@ -84,6 +84,7 @@
   - v1.20: Magic contamination decreases twice as fast when at full mana and not glowing.
   - v1.21.1: Constriction no longer affects blinking. Instead, being constricted gives players a 50% chance to waste scrolls when trying to read them. (There is a warning for this.)
   - v1.23: Monsters immune to drowning are still silenced by being engulfed by water. (This makes phials of floods better against liches.)
+  - v1.23: Shield penalty is multiplied by (8 / (8 + shield_skill)) instead of subtracting skill from shield penalty. This reduction is shown in shield descriptions.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

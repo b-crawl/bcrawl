@@ -5875,7 +5875,7 @@ int player::item_adjusted_shield_penalty (int base_shield_penalty, int scale) co
     
     return max(0, (((base_shield_penalty * scale) * 8 * 10)
                 / (8 * 10 + you.skill(SK_SHIELDS, 10)))
-                / player_shield_racial_factor());
+                * player_shield_racial_factor() / 25);
 }
 
 /**

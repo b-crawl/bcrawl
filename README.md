@@ -19,6 +19,8 @@ Pull requests for new content are welcome.
 
 #### [scoring for online games](http://bcrawl.montres.org.uk/)
 
-## [Changes from Vanilla Crawl](CHANGES.md)
+---
+
+## [changes from vanilla DCSS](CHANGES.md)
 
 ## [design philosophy](PHILOSOPHY.md)

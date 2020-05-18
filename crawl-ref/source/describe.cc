@@ -1568,8 +1568,11 @@ static string _describe_armour(const item_def &item, bool verbose)
 
             if (!is_useless_item(item))
             {
+                int adjusted_penalty = you.item_adjusted_shield_penalty(item, 10);
+                
+                description += "       Adjusted shield penalty: " + make_stringf("%d", adjusted_penalty);
                 int shield_penalty_percent = 100 * 8 * 10 / (8 * 10 + you.skill(SK_SHIELDS, 10));
-                description += "       Current penalty reduction: "
+                description += "\n    Current penalty reduction from skill: "
                             + make_stringf("%d", (100 - shield_penalty_percent)) + "%\n";
             }
 

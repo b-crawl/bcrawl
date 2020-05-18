@@ -5870,9 +5870,9 @@ int player::adjusted_body_armour_penalty(int scale) const
 
 
 
-int player::item_adjusted_shield_penalty (item_def shield, int scale)
+int player::item_adjusted_shield_penalty (int base_shield_penalty, int scale) const
 {
-    int base_shield_penalty = -property(*shield, PARM_EVASION);
+    
     return max(0, (((base_shield_penalty * scale) * 8 * 10)
                 / (8 * 10 + you.skill(SK_SHIELDS, 10)))
                 / player_shield_racial_factor());
@@ -5890,7 +5890,8 @@ int player::adjusted_shield_penalty(int scale) const
     if (!shield_l)
         return 0;
 
-    return item_adjusted_shield_penalty(shield_l, scale);
+    int base_shield_penalty = -property(*shield_l, PARM_EVASION);
+    return item_adjusted_shield_penalty(base_shield_penalty, scale);
 }
 
 int player::armour_tohit_penalty(bool random_factor, int scale) const

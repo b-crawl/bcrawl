@@ -829,7 +829,7 @@ public:
     // Combat-related adjusted penalty calculation methods
     int unadjusted_body_armour_penalty() const override;
     int adjusted_body_armour_penalty(int scale = 1) const override;
-    int item_adjusted_shield_penalty(item_def shield, int scale = 1);
+    int item_adjusted_shield_penalty(int base_shield_penalty, int scale = 1) const;
     int adjusted_shield_penalty(int scale = 1) const override;
     float get_shield_skill_to_offset_penalty(const item_def &item);
     int armour_tohit_penalty(bool random_factor, int scale = 1) const override;

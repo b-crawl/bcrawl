@@ -1489,7 +1489,7 @@ spret your_spells(spell_type spell, int powc, bool allow_fail,
         int spfl = random2avg(100, 3);
 
         if (!you_worship(GOD_SIF_MUNA)
-            && you.penance[GOD_SIF_MUNA] && one_chance_in(20))
+            && you.penance[GOD_SIF_MUNA] && god_hates_your_god(GOD_SIF_MUNA) && one_chance_in(20))
         {
             god_speaks(GOD_SIF_MUNA, "You feel a surge of divine spite.");
 

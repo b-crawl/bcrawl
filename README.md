@@ -285,6 +285,7 @@ Pull requests for new content are welcome.
   - v1.22: Jiyva's pseudopod mutation no longer reduces body armour AC.
   - v1.22: Makhleb's Greater Servant ability failure chance scales less with piety and more with Invocations.
   - v1.22: The Wu Jian Council hates evil actions, but still allows all species.
+  - v1.23: Ashenzari gives Evocations skill for staves with an active evoked ability, and some Staves and Spellcasting skill for all other staves.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

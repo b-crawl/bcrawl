@@ -1129,8 +1129,8 @@ TILE:     urand_dark_maul
 TILE_EQ:  dark_maul
 PLUS:     +10
 BASE_ACC: +2
-BASE_DAM: +35
-BASE_DELAY: +13
+BASE_DAM: +26
+BASE_DELAY: +10
 BRAND:    SPWPN_VORPAL
 
 # TAG_MAJOR_VERSION == 34

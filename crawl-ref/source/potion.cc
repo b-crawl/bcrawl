@@ -263,7 +263,9 @@ public:
         if (was_known && !check_known_quaff())
             return false;
 
-        effect(was_known, 1000);
+        if (effect(was_known, 1000))
+            did_god_conduct(DID_UNCLEAN, 10, was_known);
+
         return true;
     }
 };

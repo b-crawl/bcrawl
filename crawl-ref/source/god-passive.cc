@@ -853,27 +853,20 @@ map<skill_type, int8_t> ash_get_boosted_skills(eq_type type)
 
         // Boost weapon skill. Plain "staff" means an unrand magical staff,
         // boosted later.
-        if (wpn->base_type == OBJ_WEAPONS
-            && wpn->sub_type != WPN_STAFF)
+        if (wpn->base_type == OBJ_WEAPONS && wpn->sub_type != WPN_STAFF)
         {
             boost[item_attack_skill(*wpn)] = bondage;
         }
-        // Staves that have a melee effect, powered by evocations.
-        if (staff_uses_evocations(*wpn))
-        {
-            boost[SK_EVOCATIONS] = 1;
-            boost[SK_STAVES] = 1;
 
-        }
-        // Staves with an evokable ability but no melee effect.
-        else if (is_weapon(*wpn)
-                 && item_is_evokable(*wpn, false, false, false, false))
-        {
+        // staves with an active evokable ability
+        if (is_weapon(*wpn) && item_is_evokable(*wpn, false, false, false, false))
             boost[SK_EVOCATIONS] = 2;
-        }
-        // Other magical staves.
+        // other magical staves
         else if (wpn->base_type == OBJ_STAVES)
-            boost[SK_SPELLCASTING] = 2;
+        {
+            boost[SK_STAVES] = 1;
+            boost[SK_SPELLCASTING] = 1;
+        }
         break;
 
     case (ET_SHIELD):

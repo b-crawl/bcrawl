@@ -1574,7 +1574,7 @@ static string _describe_armour(const item_def &item, bool verbose)
                 description += "       Adjusted shield penalty: " + make_stringf("%d.%d", adjusted_penalty/10, adjusted_penalty % 10);
                 int shield_penalty_percent = 100 * 8 * 10 / (8 * 10 + you.skill(SK_SHIELDS, 10));
                 description += "\n    Current penalty reduction from skill: "
-                            + make_stringf("%d", (100 - shield_penalty_percent)) + "%\n";
+                            + make_stringf("%d", (100 - shield_penalty_percent)) + "%";
             }
 
             if (is_unrandom_artefact(item, UNRAND_WARLOCK_MIRROR))

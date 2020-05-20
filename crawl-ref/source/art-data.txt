@@ -518,7 +518,7 @@ BRAND:   SPWPN_SPEED
 MAGIC:   1
 
 NAME:     Elemental Staff
-OBJ:      OBJ_WEAPONS/WPN_STAFF
+OBJ:      OBJ_WEAPONS/WPN_QUARTERSTAFF
 PLUS:     +3
 COLOUR:   DARKGREY
 TILE:     urand_elemental

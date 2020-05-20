@@ -316,7 +316,10 @@ void give_basic_mutations(species_type species)
     // Don't perma_mutate since that gives messages.
     for (const auto& lum : get_species_def(species).level_up_mutations)
         if (lum.xp_level == 1)
-            you.mutation[lum.mut] = you.innate_mutation[lum.mut] = lum.mut_level;
+        {
+            you.mutation[lum.mut] = max((int)lum.mut_level, (int)you.mutation[lum.mut]);
+            you.innate_mutation[lum.mut] = lum.mut_level;
+        }
 }
 
 void give_level_mutations(species_type species, int xp_level)
@@ -439,29 +442,24 @@ void change_species_to(species_type sp)
     // Change permanent mutations, but preserve non-permanent ones.
     uint8_t prev_muts[NUM_MUTATIONS];
 
-    // remove all innate mutations
     for (int i = 0; i < NUM_MUTATIONS; ++i)
-    {
-        if (you.has_innate_mutation(static_cast<mutation_type>(i)))
-        {
-            you.mutation[i] -= you.innate_mutation[i];
-            you.innate_mutation[i] = 0;
-        }
         prev_muts[i] = you.mutation[i];
-    }
+    
+    // remove all innate mutations
+    for (const auto& lum : get_species_def(old_sp).level_up_mutations)
+        if (lum.xp_level <= you.experience_level)
+        {
+            if (you.has_innate_mutation(lum.mut))
+            {
+                you.mutation[lum.mut] -= you.innate_mutation[lum.mut];
+                you.innate_mutation[lum.mut] = 0;
+            }
+        }
+    
     // add the appropriate innate mutations for the new species and xl
     give_basic_mutations(sp);
     for (int i = 2; i <= you.experience_level; ++i)
         give_level_mutations(sp, i);
-
-    for (int i = 0; i < NUM_MUTATIONS; ++i)
-    {
-        // TODO: why do previous non-innate mutations override innate ones?  Shouldn't this be the other way around?
-        if (prev_muts[i] > you.innate_mutation[i])
-            you.innate_mutation[i] = 0;
-        else
-            you.innate_mutation[i] -= prev_muts[i];
-    }
 
     if (sp == SP_DEMONSPAWN)
     {

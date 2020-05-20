@@ -305,6 +305,7 @@
   - v1.23: Potions of blood are no longer considered evil items.
   - v1.23: Giant spiked clubs have lower base delay. (20 -> 19)
   - v1.23: Great maces have higher base damage (17 -> 26) but higher base delay (17 -> 20) and higher min delay (0.7 -> 1.0).
+  - v1.23.1: Lajatangs have lower min delay. (0.7 -> 0.6)
 
 #### Removed Items
   - Amulet of Harm

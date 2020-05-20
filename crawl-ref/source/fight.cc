@@ -807,6 +807,9 @@ int weapon_min_delay(const item_def &weapon, bool check_speed)
         else
             min_delay = min(7, min_delay);
         break;
+    case SK_STAVES:
+        min_delay = 6;
+        break;
     default:
         min_delay = min(7, min_delay);
         break;

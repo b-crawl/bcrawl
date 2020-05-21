@@ -846,6 +846,7 @@ void update_level(int elapsedTime)
     rot_floor_items(elapsedTime);
     shoals_apply_tides(turns, true, turns < 5);
     timeout_tombs(turns);
+    timeout_terrain_changes(elapsedTime);
 
     if (env.sanctuary_time)
     {

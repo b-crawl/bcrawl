@@ -3032,7 +3032,15 @@ int &evoker_debt(int evoker_type)
  */
 int evoker_max_charges(int evoker_type)
 {
-    return evoker_type == MISC_LIGHTNING_ROD ? LIGHTNING_MAX_CHARGE : 1;
+    switch (evoker_type)
+    {
+    case MISC_LIGHTNING_ROD:
+        return 4;
+    case MISC_FAN_OF_GALES:
+        return 2;
+    default:
+        return 1;
+    }
 }
 
 /**

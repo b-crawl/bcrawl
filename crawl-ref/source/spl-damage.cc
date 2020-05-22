@@ -2326,7 +2326,6 @@ spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)
     coord_def prev;
 
     int &charges = caster->props[THUNDERBOLT_CHARGES_KEY].get_int();
-    ASSERT(charges <= LIGHTNING_MAX_CHARGE);
 
     int &last_turn = caster->props[THUNDERBOLT_LAST_KEY].get_int();
     coord_def &last_aim = caster->props[THUNDERBOLT_AIM_KEY].get_coord();
@@ -2404,7 +2403,7 @@ spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)
 
     last_turn = you.num_turns;
     last_aim = aim;
-    if (charges < LIGHTNING_MAX_CHARGE)
+    if (charges < evoker_max_charges(MISC_LIGHTNING_ROD))
         charges++;
 
     return spret::success;

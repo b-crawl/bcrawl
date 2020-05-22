@@ -2403,8 +2403,7 @@ spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)
 
     last_turn = you.num_turns;
     last_aim = aim;
-    if (charges < evoker_max_charges(MISC_LIGHTNING_ROD))
-        charges++;
+    charges++;
 
     return spret::success;
 }

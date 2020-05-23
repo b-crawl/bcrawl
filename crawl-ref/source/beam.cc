@@ -2471,15 +2471,8 @@ void bolt::affect_endpoint()
     case SPELL_SEARING_BREATH:
     {
         // Xtahua's searing breath applies fire vulnerability for 5-11 turns
-        if (pos() == you.pos()
-            && you.res_fire() <= 3
-            && !you.duration[DUR_FIRE_VULN])
-        {
-            mpr("The searing breath burns away your fire resistance.");
-            you.increase_duration(DUR_FIRE_VULN, 5 + random2avg(7, 2), 11);
-        }
         monster *mon = monster_at(pos());
-        if (mon && !mon->has_ench(ENCH_FIRE_VULN))
+        if (mon)
         {
             if (you.can_see(*mon))
             {
@@ -3801,15 +3794,44 @@ void bolt::affect_player()
         }
     }
 
-    // Sticky flame.
-    if (origin_spell == SPELL_STICKY_FLAME
-        || origin_spell == SPELL_STICKY_FLAME_RANGE)
+    switch (origin_spell)
     {
+    case SPELL_THROW_BARBS:   // Manticore spikes
+        if (hurted > 0)
+        {
+            mpr("The barbed spikes become lodged in your body.");
+            if (!you.duration[DUR_BARBS])
+                you.set_duration(DUR_BARBS, random_range(4, 8));
+            else
+                you.increase_duration(DUR_BARBS, random_range(2, 4), 12);
+
+            if (you.attribute[ATTR_BARBS_POW])
+                you.attribute[ATTR_BARBS_POW] = you.attribute[ATTR_BARBS_POW] + 2;
+            else
+                you.attribute[ATTR_BARBS_POW] = 4;
+        }
+        break;
+    
+    case SPELL_QUICKSILVER_BOLT:
+        debuff_player();
+        break;
+    
+    case SPELL_STICKY_FLAME:
+    case SPELL_STICKY_FLAME_RANGE:
         if (!player_res_sticky_flame())
         {
             napalm_player(random2avg(7, 3) + 1, get_source_name(), aux_source);
             was_affected = true;
         }
+        break;
+    
+    case SPELL_SEARING_BREATH:
+        // Xtahua's searing breath applies fire vulnerability for 5-11 turns
+        mpr("The searing breath burns away your fire resistance.");
+        you.increase_duration(DUR_FIRE_VULN, 5 + random2avg(7, 2), 11);
+        break;
+    
+    default: break;
     }
 
     // need to trigger qaz resists after reducing damage from ac/resists.
@@ -3821,28 +3843,8 @@ void bolt::affect_player()
     // what about acid?
     you.expose_to_element(flavour, 2, false);
 
-
-    // Manticore spikes
-    if (origin_spell == SPELL_THROW_BARBS && hurted > 0)
-    {
-        mpr("The barbed spikes become lodged in your body.");
-        if (!you.duration[DUR_BARBS])
-            you.set_duration(DUR_BARBS, random_range(4, 8));
-        else
-            you.increase_duration(DUR_BARBS, random_range(2, 4), 12);
-
-        if (you.attribute[ATTR_BARBS_POW])
-            you.attribute[ATTR_BARBS_POW] = you.attribute[ATTR_BARBS_POW] + 2;
-        else
-            you.attribute[ATTR_BARBS_POW] = 4;
-    }
-
     if (flavour == BEAM_ENSNARE)
         was_affected = ensnare(&you) || was_affected;
-
-
-    if (origin_spell == SPELL_QUICKSILVER_BOLT)
-        debuff_player();
 
     dprf(DIAG_BEAM, "Damage: %d", hurted);
 

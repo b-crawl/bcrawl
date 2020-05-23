@@ -2587,7 +2587,7 @@ static const struct spell_desc spelldata[] =
     SPELL_THUNDERBOLT, "Thunderbolt",
     SPTYP_CONJURATION | SPTYP_AIR,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF,
-    2, // 2-5, sort of
+    2,
     200,
     5, 5,
     15, 0,

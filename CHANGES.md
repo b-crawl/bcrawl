@@ -305,6 +305,11 @@
   - v1.23: Potions of blood are no longer considered evil items.
   - v1.23: Giant spiked clubs have lower base delay. (20 -> 19)
   - v1.23: Great maces have higher base damage (17 -> 26) but higher base delay (17 -> 20) and higher min delay (0.7 -> 1.0).
+  - v1.23.1: Lajatangs have lower min delay. (0.7 -> 0.6)
+  - v1.23.1: Wands of disintegration cause an Inner Flame explosion when they kill a non-summoned monster.
+  - v1.23.1: Lightning rod damage is flat instead of increasing with continuous use.
+  - v1.23.1: The fan of gales holds 2 charges.
+  - v1.23.1: Higher base damage for quick blades (5 -> 6) and rapiers (8 -> 9) as compensation for the 1.23 shield changes.
 
 #### Removed Items
   - Amulet of Harm
@@ -347,6 +352,8 @@
   - v1.21: The Wrath of Trog has +3 base damage.
   - v1.21: Unrand artefact weapons and armor are somewhat more common.
   - v1.23: The Cloak of the Thief has evokable invisibility.
+  - v1.23.1: The Elemental Staff is a quarterstaff.
+  - v1.23.1: The Sword of Cerebov has higher base damage (17 -> 20) and delay (17 -> 19).
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

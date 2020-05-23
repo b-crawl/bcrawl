@@ -596,8 +596,8 @@ with almost no hindrance to spellcasting or stealthy movement.
 lightning rod
 
 A rod that allows its wielder to fire unavoidable blasts of lightning.
-Consecutive evocations cause the discharge to be sustained, which increases the
-discharge's power and allows it to be spread across an area at
+Consecutive evocations cause the discharge to be sustained,
+which allows it to be spread across an area at
 the cost of reduced damage to each target.
 %%%%
 long sword
@@ -1214,8 +1214,10 @@ A magical device which drills tunnels through unworked rock.
 %%%%
 wand of disintegration
 
-A magical device which disrupts the physical structure of a target creature,
-dealing heavy damage and bypassing armour.
+A magical device which attempts to inflict a target with a self-amplifying
+pattern of magic. If it succeeds, it deals heavy damage that bypasses armour.
+
+If this kills a creature which is not summoned, a powerful explosion results.
 %%%%
 wand of enslavement
 

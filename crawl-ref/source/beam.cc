@@ -2471,15 +2471,8 @@ void bolt::affect_endpoint()
     case SPELL_SEARING_BREATH:
     {
         // Xtahua's searing breath applies fire vulnerability for 5-11 turns
-        if (pos() == you.pos()
-            && you.res_fire() <= 3
-            && !you.duration[DUR_FIRE_VULN])
-        {
-            mpr("The searing breath burns away your fire resistance.");
-            you.increase_duration(DUR_FIRE_VULN, 5 + random2avg(7, 2), 11);
-        }
         monster *mon = monster_at(pos());
-        if (mon && !mon->has_ench(ENCH_FIRE_VULN))
+        if (mon)
         {
             if (you.can_see(*mon))
             {
@@ -2620,12 +2613,17 @@ bool bolt::is_fiery() const
 /// Can this bolt burn trees it hits?
 bool bolt::can_burn_trees() const
 {
-    // XXX: rethink this
-    return origin_spell == SPELL_LIGHTNING_BOLT
-           || origin_spell == SPELL_BOLT_OF_FIRE
-           || origin_spell == SPELL_BOLT_OF_MAGMA
-           || origin_spell == SPELL_FIREBALL
-           || origin_spell == SPELL_INNER_FLAME;
+    switch (origin_spell)
+    {
+    case SPELL_LIGHTNING_BOLT:
+    case SPELL_BOLT_OF_FIRE:
+    case SPELL_BOLT_OF_MAGMA:
+    case SPELL_FIREBALL:
+    case SPELL_INNER_FLAME:
+        return true;
+    default:
+        return false;
+    }
 }
 
 bool bolt::can_affect_wall(const coord_def& p, bool map_knowledge) const
@@ -3747,22 +3745,25 @@ void bolt::affect_player()
              attack_strength_punctuation(hurted).c_str());
     }
 
-    if (flavour == BEAM_MIASMA && hurted > 0)
-        was_affected = miasma_player(agent(), name);
-
-    if (flavour == BEAM_DEVASTATION) // DISINTEGRATION already handled
-        blood_spray(you.pos(), MONS_PLAYER, hurted / 5);
-
-    // Confusion effect for spore explosions
-    if (flavour == BEAM_SPORE && hurted
-        && !(you.holiness() & MH_UNDEAD)
-        && !you.is_unbreathing())
+    switch (flavour)
     {
-        confuse_player(2 + random2(3));
-    }
-
-    if (flavour == BEAM_UNRAVELLED_MAGIC)
+    case BEAM_MIASMA:
+        if (hurted > 0)
+            was_affected = miasma_player(agent(), name);
+        break;
+    case BEAM_DEVASTATION:  // DISINTEGRATION already handled
+        blood_spray(you.pos(), MONS_PLAYER, hurted / 5);
+        break;
+    case BEAM_SPORE:  // Confusion effect for spore explosions
+        if (hurted && !(you.holiness() & MH_UNDEAD) && !you.is_unbreathing())
+            confuse_player(2 + random2(3));
+        break;
+    case BEAM_UNRAVELLED_MAGIC:
         affect_player_enchantment();
+        break;
+    default:
+        break;
+    }
 
     // handling of missiles
     if (item && item->base_type == OBJ_MISSILES)
@@ -3798,15 +3799,44 @@ void bolt::affect_player()
         }
     }
 
-    // Sticky flame.
-    if (origin_spell == SPELL_STICKY_FLAME
-        || origin_spell == SPELL_STICKY_FLAME_RANGE)
+    switch (origin_spell)
     {
+    case SPELL_THROW_BARBS:   // Manticore spikes
+        if (hurted > 0)
+        {
+            mpr("The barbed spikes become lodged in your body.");
+            if (!you.duration[DUR_BARBS])
+                you.set_duration(DUR_BARBS, random_range(4, 8));
+            else
+                you.increase_duration(DUR_BARBS, random_range(2, 4), 12);
+
+            if (you.attribute[ATTR_BARBS_POW])
+                you.attribute[ATTR_BARBS_POW] = you.attribute[ATTR_BARBS_POW] + 2;
+            else
+                you.attribute[ATTR_BARBS_POW] = 4;
+        }
+        break;
+    
+    case SPELL_QUICKSILVER_BOLT:
+        debuff_player();
+        break;
+    
+    case SPELL_STICKY_FLAME:
+    case SPELL_STICKY_FLAME_RANGE:
         if (!player_res_sticky_flame())
         {
             napalm_player(random2avg(7, 3) + 1, get_source_name(), aux_source);
             was_affected = true;
         }
+        break;
+    
+    case SPELL_SEARING_BREATH:
+        // Xtahua's searing breath applies fire vulnerability for 5-11 turns
+        mpr("The searing breath burns away your fire resistance.");
+        you.increase_duration(DUR_FIRE_VULN, 5 + random2avg(7, 2), 11);
+        break;
+    
+    default: break;
     }
 
     // need to trigger qaz resists after reducing damage from ac/resists.
@@ -3818,28 +3848,8 @@ void bolt::affect_player()
     // what about acid?
     you.expose_to_element(flavour, 2, false);
 
-
-    // Manticore spikes
-    if (origin_spell == SPELL_THROW_BARBS && hurted > 0)
-    {
-        mpr("The barbed spikes become lodged in your body.");
-        if (!you.duration[DUR_BARBS])
-            you.set_duration(DUR_BARBS, random_range(4, 8));
-        else
-            you.increase_duration(DUR_BARBS, random_range(2, 4), 12);
-
-        if (you.attribute[ATTR_BARBS_POW])
-            you.attribute[ATTR_BARBS_POW] = you.attribute[ATTR_BARBS_POW] + 2;
-        else
-            you.attribute[ATTR_BARBS_POW] = 4;
-    }
-
     if (flavour == BEAM_ENSNARE)
         was_affected = ensnare(&you) || was_affected;
-
-
-    if (origin_spell == SPELL_QUICKSILVER_BOLT)
-        debuff_player();
 
     dprf(DIAG_BEAM, "Damage: %d", hurted);
 
@@ -4166,6 +4176,10 @@ void bolt::tracer_affect_monster(monster* mon)
     {
     case BEAM_UNRAVELLING:
         if (monster_is_debuffable(*mon))
+            is_explosion = true;
+        break;
+    case BEAM_DISINTEGRATION:
+        if (!mon->is_summoned())
             is_explosion = true;
         break;
     case BEAM_RUPTURE:
@@ -5345,6 +5359,7 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
     case BEAM_DISINTEGRATION:   // disrupt/disintegrate
     {
         const int dam = damage.roll();
+        
         if (you.see_cell(mon->pos()))
         {
             mprf("%s is blasted%s",
@@ -5352,6 +5367,10 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
                  attack_strength_punctuation(dam).c_str());
             obvious_effect = true;
         }
+        
+        if (dam >= mon->hit_points && !mon->is_summoned())
+            mon->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, agent()));
+        
         mon->hurt(agent(), dam, flavour);
         return MON_AFFECTED;
     }

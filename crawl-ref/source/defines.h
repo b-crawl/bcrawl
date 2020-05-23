@@ -138,7 +138,6 @@ const int EXERCISE_QUEUE_SIZE = 100;
 const int MIN_HIT_MISS_PERCENTAGE = 5;
 
 const int LIGHTNING_CHARGE_MULT = 100;
-const int LIGHTNING_MAX_CHARGE = 4;
 
 // Evoker debt for evoking one XP evoker.
 const int XP_EVOKE_DEBT = 10;

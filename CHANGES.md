@@ -349,6 +349,7 @@
   - v1.21: Unrand artefact weapons and armor are somewhat more common.
   - v1.23: The Cloak of the Thief has evokable invisibility.
   - v1.23.1: The Elemental Staff is a quarterstaff.
+  - v1.23.1: The Sword of Cerebov has higher base damage (17 -> 20) and delay (17 -> 19).
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

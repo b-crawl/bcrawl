@@ -5345,6 +5345,7 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
     case BEAM_DISINTEGRATION:   // disrupt/disintegrate
     {
         const int dam = damage.roll();
+        
         if (you.see_cell(mon->pos()))
         {
             mprf("%s is blasted%s",
@@ -5352,6 +5353,10 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
                  attack_strength_punctuation(dam).c_str());
             obvious_effect = true;
         }
+        
+        if (dam >= mon->hit_points && !mon->is_summoned())
+            mon->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, agent()));
+        
         mon->hurt(agent(), dam, flavour);
         return MON_AFFECTED;
     }

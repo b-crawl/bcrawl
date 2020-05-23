@@ -4173,6 +4173,10 @@ void bolt::tracer_affect_monster(monster* mon)
         if (monster_is_debuffable(*mon))
             is_explosion = true;
         break;
+    case BEAM_DISINTEGRATION:
+        if (!mon->is_summoned())
+            is_explosion = true;
+        break;
     case BEAM_RUPTURE:
         if(!(mon->has_ench(ENCH_SHORT_LIVED) || mon->summoner))
             is_explosion = true;

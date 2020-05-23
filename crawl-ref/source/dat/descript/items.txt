@@ -1214,8 +1214,10 @@ A magical device which drills tunnels through unworked rock.
 %%%%
 wand of disintegration
 
-A magical device which disrupts the physical structure of a target creature,
-dealing heavy damage and bypassing armour.
+A magical device which attempts to inflict a target with a self-amplifying
+pattern of magic. If it succeeds, it deals heavy damage that bypasses armour.
+
+If this kills a creature which is not summoned, a powerful explosion results.
 %%%%
 wand of enslavement
 

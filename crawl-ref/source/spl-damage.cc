@@ -2325,16 +2325,12 @@ spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)
 {
     coord_def prev;
 
-    int &charges = caster->props[THUNDERBOLT_CHARGES_KEY].get_int();
-
     int &last_turn = caster->props[THUNDERBOLT_LAST_KEY].get_int();
     coord_def &last_aim = caster->props[THUNDERBOLT_AIM_KEY].get_coord();
 
 
     if (last_turn && last_turn + 1 == you.num_turns)
         prev = last_aim;
-    else
-        charges = 0;
 
     targeter_thunderbolt hitfunc(caster, spell_range(SPELL_THUNDERBOLT, pow),
                                  prev);
@@ -2347,11 +2343,6 @@ spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)
     }
 
     fail_check();
-
-    const int juice
-        = (2 + charges) * LIGHTNING_CHARGE_MULT;
-
-    dprf("juice: %d", juice);
 
     bolt beam;
     beam.name              = "thunderbolt";
@@ -2396,14 +2387,12 @@ spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)
         beam.source = beam.target = entry.first;
         beam.source.x -= sgn(beam.source.x - hitfunc.origin.x);
         beam.source.y -= sgn(beam.source.y - hitfunc.origin.y);
-        beam.damage = dice_def(div_rand_round(juice, LIGHTNING_CHARGE_MULT),
-                               div_rand_round(pow, arc + 4));
+        beam.damage = dice_def(4, div_rand_round(pow * 7, 8*(arc + 4)));
         beam.fire();
     }
 
     last_turn = you.num_turns;
     last_aim = aim;
-    charges++;
 
     return spret::success;
 }

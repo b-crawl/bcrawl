@@ -596,8 +596,8 @@ with almost no hindrance to spellcasting or stealthy movement.
 lightning rod
 
 A rod that allows its wielder to fire unavoidable blasts of lightning.
-Consecutive evocations cause the discharge to be sustained, which increases the
-discharge's power and allows it to be spread across an area at
+Consecutive evocations cause the discharge to be sustained,
+which allows it to be spread across an area at
 the cost of reduced damage to each target.
 %%%%
 long sword

@@ -3747,22 +3747,25 @@ void bolt::affect_player()
              attack_strength_punctuation(hurted).c_str());
     }
 
-    if (flavour == BEAM_MIASMA && hurted > 0)
-        was_affected = miasma_player(agent(), name);
-
-    if (flavour == BEAM_DEVASTATION) // DISINTEGRATION already handled
-        blood_spray(you.pos(), MONS_PLAYER, hurted / 5);
-
-    // Confusion effect for spore explosions
-    if (flavour == BEAM_SPORE && hurted
-        && !(you.holiness() & MH_UNDEAD)
-        && !you.is_unbreathing())
+    switch (flavour)
     {
-        confuse_player(2 + random2(3));
-    }
-
-    if (flavour == BEAM_UNRAVELLED_MAGIC)
+    case BEAM_MIASMA:
+        if (hurted > 0)
+            was_affected = miasma_player(agent(), name);
+        break;
+    case BEAM_DEVASTATION:  // DISINTEGRATION already handled
+        blood_spray(you.pos(), MONS_PLAYER, hurted / 5);
+        break;
+    case BEAM_SPORE:  // Confusion effect for spore explosions
+        if (hurted && !(you.holiness() & MH_UNDEAD) && !you.is_unbreathing())
+            confuse_player(2 + random2(3));
+        break;
+    case BEAM_UNRAVELLED_MAGIC:
         affect_player_enchantment();
+        break;
+    default:
+        break;
+    }
 
     // handling of missiles
     if (item && item->base_type == OBJ_MISSILES)

@@ -2613,12 +2613,17 @@ bool bolt::is_fiery() const
 /// Can this bolt burn trees it hits?
 bool bolt::can_burn_trees() const
 {
-    // XXX: rethink this
-    return origin_spell == SPELL_LIGHTNING_BOLT
-           || origin_spell == SPELL_BOLT_OF_FIRE
-           || origin_spell == SPELL_BOLT_OF_MAGMA
-           || origin_spell == SPELL_FIREBALL
-           || origin_spell == SPELL_INNER_FLAME;
+    switch (origin_spell)
+    {
+    case SPELL_LIGHTNING_BOLT:
+    case SPELL_BOLT_OF_FIRE:
+    case SPELL_BOLT_OF_MAGMA:
+    case SPELL_FIREBALL:
+    case SPELL_INNER_FLAME:
+        return true;
+    default:
+        return false;
+    }
 }
 
 bool bolt::can_affect_wall(const coord_def& p, bool map_knowledge) const

@@ -1323,7 +1323,7 @@ static void _size_change_break_status()
     }
     
     // same for being engulfed by water
-    if (!you.duration[DUR_WATER_HOLD])
+    if (you.duration[DUR_WATER_HOLD])
     {
         monster * const engulfer = monster_by_mid(you.props["water_holder"].get_int());
         if (!engulfer || !engulfer->alive()

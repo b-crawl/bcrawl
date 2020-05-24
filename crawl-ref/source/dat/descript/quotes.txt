@@ -3158,14 +3158,13 @@ displaced the eyeballs.”
 %%%%
 wand
 
-“[The principle of selection] is the magician's wand, by means of which he may
-summon into life whatever form and mould he pleases.”
-    -William Youatt, _Sheep: their breeds, management, and diseases; to which
-     is added the Mountain Shepherd's Manual_, ch. III. 1837.
+“The major conflicts in the books are always solved through human intellect, through thinking out the problem and coming up with a solution. It's never 'I'll just wave my magic wand over the bad guys and have them all fall down dead!'”
+    -Terry Goodkind. 2003.
 %%%%
 wand of acid
 
-<wand>
+“And when Water and Oil of Vitriol poured successively into the same Vessel grow very hot in the mixing, does not this Heat argue a great Motion in the Parts of the Liquors?”
+    -Isaac Newton, _Opticks_, Book III, Quest. 31. 1704.
 %%%%
 wand of digging
 
@@ -3173,7 +3172,8 @@ wand of digging
 %%%%
 wand of disintegration
 
-<wand>
+“The same nuclear chain reaction that produces badly needed electrical energy when harnessed in a reactor, may kill thousands when abruptly released in an atomic bomb.”
+    -Wernher von Braun.
 %%%%
 wand of enslavement
 

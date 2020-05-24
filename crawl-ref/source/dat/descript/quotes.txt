@@ -1651,10 +1651,14 @@ which they destroy or wound.”
 %%%%
 javelin
 
-“Suppose you found your brother in bed with your wife, and put a javelin
-through both of them, you would be justified, and they would atone for their
-sins, and be received into the kingdom of God.”
-    -Brigham Young, _Journal of Discourses_, 3:247. 1856.
+“...a boar rushed at Alexander,
+and that Hermolaus anticipated him by casting a javelin at the beast,
+by which it was smitten and killed.
+But Alexander, having lost the opportunity of distinguishing himself by being too late in the assault,
+was indignant with Hermolaus,
+and in his wrath ordered him to receive a scourging in sight of the other pages;
+and also deprived him of his horse. ”
+    -Arrian of Nicomedia, _The Anabasis of Alexander_.
 %%%%
 jelly
 

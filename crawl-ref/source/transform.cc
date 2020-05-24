@@ -1310,6 +1310,30 @@ int form_hp_mod()
     return get_form()->hp_mod;
 }
 
+static void _size_change_break_status()
+{
+    // Stop being constricted if we are now too large.
+    if (you.is_directly_constricted())
+    {
+        actor* const constrictor = actor_by_mid(you.constricted_by);
+        ASSERT(constrictor);
+
+        if (you.body_size(PSIZE_BODY) > constrictor->body_size(PSIZE_BODY))
+            you.stop_being_constricted();
+    }
+    
+    // same for being engulfed by water
+    if (!you.duration[DUR_WATER_HOLD])
+    {
+        monster * const engulfer = monster_by_mid(you.props["water_holder"].get_int());
+        if (!engulfer || !engulfer->alive()
+                || you.body_size(PSIZE_BODY) > engulfer->body_size(PSIZE_BODY))
+        {
+            you.end_water_hold();
+        }
+    }
+}
+
 static bool _flying_in_new_form(transformation which_trans)
 {
     if (get_form(which_trans)->forbids_flight())
@@ -1837,16 +1861,8 @@ bool transform(int pow, transformation which_trans, bool involuntary,
     if (!form_keeps_mutations(which_trans))
         you.stop_directly_constricting_all(false);
 
-    // Stop being constricted if we are now too large.
-    if (you.is_directly_constricted())
-    {
-        actor* const constrictor = actor_by_mid(you.constricted_by);
-        ASSERT(constrictor);
-
-        if (you.body_size(PSIZE_BODY) > constrictor->body_size(PSIZE_BODY))
-            you.stop_being_constricted();
-    }
-
+    // Stop being constricted/engulfed if we are now too large.
+    _size_change_break_status();
 
     // If we are no longer living, end an effect that afflicts only the living
     if (you.duration[DUR_FLAYED] && !(you.holiness() & MH_NATURAL))
@@ -2017,13 +2033,8 @@ void untransform(bool skip_move)
                           transform_name(old_form)).c_str());
     }
 
-    // Stop being constricted if we are now too large.
-    if (you.is_directly_constricted())
-    {
-        actor* const constrictor = actor_by_mid(you.constricted_by);
-        if (you.body_size(PSIZE_BODY) > constrictor->body_size(PSIZE_BODY))
-            you.stop_being_constricted();
-    }
+    // Stop being constricted/engulfed if we are now too large.
+    _size_change_break_status();
 
     you.turn_is_over = true;
     if (you.transform_uncancellable)

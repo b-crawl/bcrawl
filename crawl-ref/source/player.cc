@@ -5097,7 +5097,7 @@ bool land_player(bool quiet)
     return true;
 }
 
-static void _end_water_hold()
+void player::end_water_hold()
 {
     you.duration[DUR_WATER_HOLD] = 0;
     you.props.erase("water_holder");
@@ -5116,7 +5116,7 @@ bool player::clear_far_engulf()
         else
             mpr("You gasp with relief as air once again reaches your lungs.");
 
-        _end_water_hold();
+        end_water_hold();
         return true;
     }
     return false;

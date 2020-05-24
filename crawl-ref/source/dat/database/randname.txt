@@ -622,6 +622,7 @@ general appearance
 
 brightly glowing
 
+w:2
 smoking
 
 scorched
@@ -630,30 +631,36 @@ twisted
 
 shimmering
 
+w:2
 warped
 
 transparent
 
+w:2
 translucent
 
 encrusted
 
+w:2
 pitted
 
 slimy
 
 polished
 
+w:2
 fine
 
 crude
 
 ancient
 
+w:2
 faintly glowing
 
 steaming
 
+w:2
 dazzling
 
 masterwork
@@ -661,13 +668,11 @@ masterwork
 w:2
 smouldering
 
-w:5
+w:3
 glimmering
 
-w:2
 buzzing
 
-w:5
 fading
 
 w:2

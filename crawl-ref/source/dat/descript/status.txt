@@ -337,7 +337,8 @@ Engulf status
                        .. " escape. This makes reading scrolls, casting"
                        .. " spells, and invoking divine abilities impossible"
     else
-        desc = desc .. " but suffer no negative effects"
+        desc = desc .. " and unable to speak. This makes reading scrolls, casting"
+                       .. " spells, and invoking divine abilities impossible"
     end
 
     return desc .. "."

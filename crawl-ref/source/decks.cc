@@ -566,7 +566,7 @@ static void _evoke_deck(deck_type deck, bool dealt = false)
         auto& stack = you.props[NEMELEX_STACK_KEY].get_vector();
         card_type card = (card_type) stack[stack.size() - 1].get_int();
         stack.pop_back();
-        card_effect(card, dealt);
+        card_effect(card, dealt, false, true, false);
     }
     else
     {
@@ -881,7 +881,7 @@ bool draw_three()
             canned_msg(MSG_HUH);
     }
 
-    card_effect((card_type) draws[selected].get_int());
+    card_effect((card_type) draws[selected].get_int(), false, false, true, false);
 
     return true;
 }
@@ -1686,8 +1686,7 @@ static int _card_power(bool punishment)
 }
 
 void card_effect(card_type which_card,
-                 bool dealt,
-                 bool punishment, bool tell_card)
+        bool dealt, bool punishment, bool tell_card, bool allow_cancel)
 {
     const char *participle = dealt ? "dealt" : "drawn";
     const int power = _card_power(punishment);
@@ -1703,6 +1702,12 @@ void card_effect(card_type which_card,
             && which_card != CARD_ORB)
         {
             mprf("You have %s %s.", participle, card_name(which_card));
+            if(!dealt && !punishment && allow_cancel)
+                if(!yesno("Will you play it?", true, 'Y'))
+                {
+                    canned_msg(MSG_OK);
+                    return;
+                }
         }
     }
 

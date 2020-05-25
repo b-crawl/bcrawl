@@ -71,8 +71,7 @@ bool draw_three();
 bool stack_five(int slot);
 
 void card_effect(card_type which_card, bool dealt = false,
-        bool punishment = false,
-        bool tell_card = true);
+        bool punishment = false, bool tell_card = true, bool allow_cancel = true);
 void draw_from_deck_of_punishment(bool deal = false);
 
 string deck_name(deck_type deck);

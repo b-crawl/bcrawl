@@ -163,7 +163,7 @@ static const form_entry formdata[] =
     transformation::tree, MONS_ANIMATED_TREE, "Tree", "tree-form", "tree",
     "a tree.",
     EQF_LEAR | SLOTF(EQ_CLOAK), MR_RES_POISON | mrd(MR_RES_NEG, 3),
-    BAD_DURATION, 0, 0, SIZE_CHARACTER, 15,
+    BAD_DURATION, 0, 0, SIZE_GIANT, 15,
     20, 0, 50, true, 0, 10, 12,
     SPWPN_NORMAL, BROWN, "Branches", { "hit", "smack", "pummel", "thrash" },
     FC_FORBID, FC_FORBID, FC_FORBID, false, false,

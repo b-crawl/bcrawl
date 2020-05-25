@@ -7125,11 +7125,17 @@ bool wu_jian_do_wall_jump(coord_def targ, bool ability)
     if (!ability)
         count_action(CACT_INVOKE, ABIL_WU_JIAN_WALLJUMP);
     wu_jian_wall_jump_effects(initial_position);
+    
+    if (you.duration[DUR_WATER_HOLD])
+    {
+        mpr("You slip free of the water engulfing you.");
+        you.props.erase("water_holder");
+        you.clear_far_engulf();
+    }
 
     if (ability)
     {
         // TODO: code duplication with movement...
-        // TODO: check engulfing
         int wall_jump_modifier = (you.attribute[ATTR_SERPENTS_LASH] != 1) ? 2
                                                                           : 1;
 

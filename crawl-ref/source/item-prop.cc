@@ -1375,24 +1375,24 @@ int armour_max_enchant(const item_def &item)
     // Unenchantables.
     if (!armour_is_enchantable(item))
         return 0;
-
-    const int eq_slot = get_armour_slot(item);
-
-    int max_plus = MAX_SEC_ENCHANT;
-    if (eq_slot == EQ_BODY_ARMOUR
-#if TAG_MAJOR_VERSION == 34
-        || item.sub_type == ARM_CENTAUR_BARDING
-        || item.sub_type == ARM_NAGA_BARDING
-#endif
-        || item.sub_type == ARM_BARDING)
+    
+    switch (item.sub_type)
     {
-        max_plus = property(item, PARM_AC);
+    case ARM_BUCKLER:
+        return 4;
+    case ARM_SHIELD:
+        return 6;
+    case ARM_LARGE_SHIELD:
+        return 8;
+    case ARM_BARDING:
+        return property(item, PARM_AC);
+    default: break;
     }
-    else if (eq_slot == EQ_SHIELD)
-        // 3 / 5 / 8 for bucklers/shields/lg. shields
-        max_plus = (property(item, PARM_AC) - 3)/2 + 3;
-
-    return max_plus;
+    
+    if (get_armour_slot(item) == EQ_BODY_ARMOUR)
+        return property(item, PARM_AC);
+    else   // boots, gloves, etc
+        return MAX_SEC_ENCHANT;
 }
 
 /**

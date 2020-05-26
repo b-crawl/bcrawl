@@ -2245,8 +2245,8 @@ xxxxxxxxxxxxxxxxxxx
 ENDMAP
 
 NAME:    doesnt_quadruple_sword_v2
-TAGS:    no_monster_gen no_item_gen
-DEPTH:   D:$, Depths
+TAGS:    no_monster_gen no_item_gen no_tele_into uniq_quadsword
+DEPTH:   Vaults, !Vaults:$, Depths
 KFEAT: r = runed_door
 KFEAT: ' = .
 KPROP: ' = bloody

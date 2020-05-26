@@ -2248,8 +2248,6 @@ NAME:    doesnt_quadruple_sword_v2
 TAGS:    no_monster_gen no_item_gen no_tele_into uniq_quadsword
 DEPTH:   Vaults, !Vaults:$, Depths
 KFEAT: r = runed_door
-KFEAT: ' = .
-KPROP: ' = bloody
 KMONS: L = dancing weapon ; long sword good_item
 KMONS: a = air elemental
 KMONS: s = smoke demon
@@ -2265,13 +2263,14 @@ KMONS: F = flayed ghost
 KMONS: P = phantasmal warrior
 NSUBST: C = 1:t / 1:E / 1:F / 1:EP / *:.
 KFEAT: p = enter_abyss
-KMONS: M = spatial maelstrom
 KMONS: S = starcursed mass
 KMONS: T = tentacled monstrosity
 KMONS: R = reaper
 KITEM: w = any wand / any randbook
 KITEM: i = ring of wizardry randart
-NSUBST: D = 1:M / 1:S / 1:T / 1:R / 2:MSTR / 3:' / 1:i / 1:w / 2:l / *:.
+KFEAT: ' = .
+NSUBST: D = 1:S / 1:T / 1:R / 3:STR / 3:' / 1:i / 1:w / 2:l / *:.
+KPROP: ' = bloody
 : dgn.delayed_decay(_G, 'f', 'wizard corpse')
 MAP
 vvvvvvvvvvv

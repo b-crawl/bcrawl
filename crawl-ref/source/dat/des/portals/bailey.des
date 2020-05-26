@@ -552,6 +552,7 @@ TAGS:    bailey_axe no_rotate no_item_gen no_monster_gen no_pool_fixup
 ITEM:    any good_item
 ITEM:    potion of flight ident:type
 ITEM:    ring of flight ident:type
+NSUBST:  f = 1:f / 2:e / *:.
 SHUFFLE: EB / XY / XY / XY
 SUBST:   X = c, Y = +
 NSUBST:  E = 1:+ / *:c
@@ -595,10 +596,10 @@ xxxxxxxxx....Wwwwwww(c.2.2.2.c(wwwwwxxxxxxxxxxxxxxx
 xxxxxxxxxx......Wwwwwccncncnccwwwwxxxxxxxxxxxxxxxxx
 xxxxxxxxxxx.......Wwwwwwwwwwwwwwxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxx........WwwwwwwwWxxxxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxx...e.........xxxxxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxxx...f..<..xxxxxxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxxxxx....e..xxxxxxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxxxxxxxx.....xxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxx...f..f..f.f.xxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxx.f.f..<.fxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxx..f.f.fxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxx.f.ffxxxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxxxxxx...xxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxxxxxxx...xxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxxxxxxx.....xxxxxxxxxxxxxxxxxx

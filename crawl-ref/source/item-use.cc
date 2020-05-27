@@ -2733,8 +2733,8 @@ string cannot_read_item_reason(const item_def &item)
         return "Magic scrolls do not work when you're silenced!";
 
     // water elementals
-    if (you.duration[DUR_WATER_HOLD] && !you.res_water_drowning())
-        return "You cannot read scrolls while unable to breathe!";
+    if (you.duration[DUR_WATER_HOLD])
+        return "You cannot read scrolls while unable to speak!";
 
     // ru
     if (you.duration[DUR_NO_SCROLLS])

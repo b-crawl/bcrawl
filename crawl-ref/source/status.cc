@@ -489,7 +489,7 @@ bool fill_status_info(int status, status_info& inf)
         {
             inf.short_text   = "engulfed";
             inf.long_text    = "You are engulfed in water.";
-            inf.light_colour = DARKGREY;
+            inf.light_colour = LIGHTRED;
         }
         else
         {

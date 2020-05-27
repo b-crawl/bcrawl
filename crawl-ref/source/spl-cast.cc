@@ -595,10 +595,10 @@ bool can_cast_spells(bool quiet)
         return false;
     }
 
-    if (you.duration[DUR_WATER_HOLD] && !you.res_water_drowning())
+    if (you.duration[DUR_WATER_HOLD])
     {
         if (!quiet)
-            mpr("You cannot cast spells while unable to breathe!");
+            mpr("You cannot cast spells while unable to speak!");
         return false;
     }
 

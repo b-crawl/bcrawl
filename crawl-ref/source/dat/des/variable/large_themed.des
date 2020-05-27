@@ -2244,23 +2244,46 @@ xxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxx
 ENDMAP
 
-NAME:    doesnt_quadruple_sword
-TAGS:    no_monster_gen no_item_gen
-DEPTH:   D:11-
-ORIENT:  north
-MONS:    dancing weapon ; long sword
-ITEM:    double sword, triple sword
-KPROP:   .* = bloody
-NSUBST:  . = 4:1 / 2=1.. / 1:d / 1:e / 1:f / 4=ff.
-SUBST:   c : cbxv
+NAME:    doesnt_quadruple_sword_v2
+TAGS:    no_monster_gen no_item_gen no_tele_into uniq_quadsword
+DEPTH:   Vaults, !Vaults:$, Depths
+KFEAT: r = runed_door
+KMONS: L = dancing weapon ; long sword good_item
+KMONS: a = air elemental
+KMONS: s = smoke demon
+NSUBST: A = 1:L / 1:a / 2:as / *:.
+KMONS: d = dancing weapon ; double sword good_item
+KMONS: W = war gargoyle
+KMONS: G = crystal guardian
+KMONS: k = peacekeeper
+NSUBST: B = 1:d / 1:W / 1:G / 1:k / 1:WGk / *:.
+KMONS: t = dancing weapon ; triple sword good_item
+KMONS: E = electric golem
+KMONS: F = flayed ghost
+KMONS: P = phantasmal warrior
+NSUBST: C = 1:t / 1:E / 1:F / 1:EP / *:.
+KFEAT: p = enter_abyss
+KMONS: S = starcursed mass
+KMONS: T = tentacled monstrosity
+KMONS: R = reaper
+KITEM: w = any wand / any randbook
+KITEM: i = ring of wizardry randart
+KFEAT: ' = .
+NSUBST: D = 1:S / 1:T / 1:R / 3:STR / 3:' / 1:i / 1:w / 2:l / *:.
+KPROP: ' = bloody
 : dgn.delayed_decay(_G, 'f', 'wizard corpse')
 MAP
-cccccccccc
-c.**..**.c
-c........c
-c........c
-c........c
-cccc==cccc
+vvvvvvvvvvv
+vDDDDvCCCCv
+vfDDDrCCCCv
+vpDDDrCCCCv
+vDDDDvCCCCv
+vvvvvvvrrvv
+vAAAAvBBBBv
+rAAAArBBBBv
+rAAAArBBBBv
+vAAAAvBBBBv
+vvrrvvvvvvv
 ENDMAP
 
 NAME: cheibrodos_cascadia

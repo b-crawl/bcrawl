@@ -27,3 +27,7 @@ Also, optional content such as species and usable items will generally only be r
 #### design ideology should be tested
 
 Changes should be evaluated based on their effect in practice, not based on what they "should" do according to some design ideology.
+
+#### games have many goals that must be balanced against each other
+
+According to the philosophy bcrawl follows, strategic depth, minimizing tedium, variety, replayability, flavor, narrative, intuitiveness, and visuals all have some value in games. (Some designers follow an ideology that ignores some of those, or values one infinitely more than the others, but I believe that leads to games that are incomplete and unbalanced.)

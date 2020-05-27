@@ -890,6 +890,7 @@ public:
 
     bool form_uses_xl() const;
 
+    void end_water_hold();
     bool clear_far_engulf() override;
 
 protected:

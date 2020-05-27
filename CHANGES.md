@@ -85,6 +85,9 @@
   - v1.21.1: Constriction no longer affects blinking. Instead, being constricted gives players a 50% chance to waste scrolls when trying to read them. (There is a warning for this.)
   - v1.23: Monsters immune to drowning are still silenced by being engulfed by water. (This makes phials of floods better against liches.)
   - v1.23: Shield penalty is multiplied by (8 / (8 + shield_skill)) instead of subtracting skill from shield penalty. This reduction is shown in shield descriptions.
+  - v1.23.2: Tree form is giant size, which means potions of lignification break constriction if the source is not giant.
+  - v1.23.2: Unbreathing players are not protected from being silenced by being engulfed by water.
+  - v1.23.2: Player size increasing can break engulf like how it can break constriction.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -257,6 +260,7 @@
   - v1.22: Makhleb's Greater Servant ability failure chance scales less with piety and more with Invocations.
   - v1.22: The Wu Jian Council hates evil actions, but still allows all species.
   - v1.23: Ashenzari gives Evocations skill for staves with an active evoked ability, and some Staves and Spellcasting skill for all other staves.
+  - v1.23.2: Nemelex cards that are individually drawn can be cancelled.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -310,6 +314,7 @@
   - v1.23.1: Lightning rod damage is flat instead of increasing with continuous use.
   - v1.23.1: The fan of gales holds 2 charges.
   - v1.23.1: Higher base damage for quick blades (5 -> 6) and rapiers (8 -> 9) as compensation for the 1.23 shield changes.
+  - v1.23.2: Higher maximum enchantments for bucklers (+3 -> +4) and medium shields (+5 -> +6).
 
 #### Removed Items
   - Amulet of Harm

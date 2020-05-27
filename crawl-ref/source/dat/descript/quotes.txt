@@ -1651,10 +1651,14 @@ which they destroy or wound.”
 %%%%
 javelin
 
-“Suppose you found your brother in bed with your wife, and put a javelin
-through both of them, you would be justified, and they would atone for their
-sins, and be received into the kingdom of God.”
-    -Brigham Young, _Journal of Discourses_, 3:247. 1856.
+“...a boar rushed at Alexander,
+and that Hermolaus anticipated him by casting a javelin at the beast,
+by which it was smitten and killed.
+But Alexander, having lost the opportunity of distinguishing himself by being too late in the assault,
+was indignant with Hermolaus,
+and in his wrath ordered him to receive a scourging in sight of the other pages;
+and also deprived him of his horse. ”
+    -Arrian of Nicomedia, _The Anabasis of Alexander_.
 %%%%
 jelly
 
@@ -3158,14 +3162,13 @@ displaced the eyeballs.”
 %%%%
 wand
 
-“[The principle of selection] is the magician's wand, by means of which he may
-summon into life whatever form and mould he pleases.”
-    -William Youatt, _Sheep: their breeds, management, and diseases; to which
-     is added the Mountain Shepherd's Manual_, ch. III. 1837.
+“The major conflicts in the books are always solved through human intellect, through thinking out the problem and coming up with a solution. It's never 'I'll just wave my magic wand over the bad guys and have them all fall down dead!'”
+    -Terry Goodkind. 2003.
 %%%%
 wand of acid
 
-<wand>
+“And when Water and Oil of Vitriol poured successively into the same Vessel grow very hot in the mixing, does not this Heat argue a great Motion in the Parts of the Liquors?”
+    -Isaac Newton, _Opticks_, Book III, Quest. 31. 1704.
 %%%%
 wand of digging
 
@@ -3173,7 +3176,8 @@ wand of digging
 %%%%
 wand of disintegration
 
-<wand>
+“The same nuclear chain reaction that produces badly needed electrical energy when harnessed in a reactor, may kill thousands when abruptly released in an atomic bomb.”
+    -Wernher von Braun.
 %%%%
 wand of enslavement
 
@@ -3181,7 +3185,9 @@ wand of enslavement
 %%%%
 wand of flame
 
-<wand>
+“I’ve hunted down and stolen, inside the hollow of a fennel’s stalk, the seed of fire, a gift that has proven itself to be the teacher of every craft and the greatest resource for humans.”
+    -Aeschylus, _Prometheus Bound_.
+     trans. Elizabeth Barrett Browning, 1833.
 %%%%
 wand of iceblast
 
@@ -3191,9 +3197,20 @@ wand of paralysis
 
 <wand>
 %%%%
-wand of polymorph
+wand of clouds
 
 <wand>
+%%%%
+wand of scattershot
+
+<wand>
+%%%%
+wand of polymorph
+
+“And the lion open his jaws and rushed upon her, but she was too quick for him, and, plucking a hair from her head, waved it in the air muttering over it the while.
+And the hair straightway became a trenchant sword blade, wherewith she smote the lion and cut him in twain.
+Then the two halves flew away in air and the head changed to a scorpion and the Princess became a huge serpent and set upon the accursed scorpion, and the two fought, coiling and uncoiling, a stiff fight for an hour at least.”
+    -_One Thousand and One Nights_, The Second Kalandar's Tale.
 %%%%
 wand of random effects
 

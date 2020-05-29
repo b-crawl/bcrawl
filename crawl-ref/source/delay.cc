@@ -1227,12 +1227,18 @@ static inline bool _monster_warning(activity_interrupt_type ai,
                 }
             }
         }
+        mons_set_just_seen(mon);
+        
+        mon_threat_level_type threat_level = mons_threat_level(*mon);
+        if (threat_level == MTHRT_NASTY)
+            mprf(MSGCH_WARN, "%s looks extremely dangerous!",
+                    uppercase_first(mon->pronoun(PRONOUN_SUBJECTIVE)).c_str());
+        
         if (you.has_mutation(MUT_SCREAM)
             && x_chance_in_y(3 + you.get_mutation_level(MUT_SCREAM) * 3, 100))
         {
             yell(mon);
         }
-        mons_set_just_seen(mon);
     }
 
     if (crawl_state.game_is_hints())

@@ -317,6 +317,7 @@
   - v1.23.1: The fan of gales holds 2 charges.
   - v1.23.1: Higher base damage for quick blades (5 -> 6) and rapiers (8 -> 9) as compensation for the 1.23 shield changes.
   - v1.23.2: Higher maximum enchantments for bucklers (+3 -> +4) and medium shields (+5 -> +6).
+  - v1.23.2: Health regeneration from potions of ambrosia scales with experience level, with an increased amount over level 8.
 
 #### Removed Items
   - Amulet of Harm

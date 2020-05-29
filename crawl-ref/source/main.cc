@@ -1813,6 +1813,10 @@ void process_command(command_type cmd)
         // else fall-through
     case CMD_WAIT:
         update_acrobat_status();
+        
+        if (!player_in_hell())
+            regenerate_hp_and_mp(10);
+        
         you.turn_is_over = true;
         break;
 

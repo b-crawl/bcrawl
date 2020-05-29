@@ -875,7 +875,7 @@ static void _handle_emergency_flight()
 // BASELINE_DELAY, and your regeneration rate. MP regeneration happens
 // similarly, but the countup depends on delay, BASELINE_DELAY, and
 // you.max_magic_points
-static void _regenerate_hp_and_mp(int delay)
+void regenerate_hp_and_mp(int delay)
 {
     if (crawl_state.disables[DIS_PLAYER_REGEN])
         return;
@@ -1013,7 +1013,7 @@ void player_reacts()
     if (food_use > 0 && you.hunger > 0)
         make_hungry(food_use, true);
 
-    _regenerate_hp_and_mp(you.time_taken);
+    regenerate_hp_and_mp(you.time_taken);
 
     dec_disease_player(you.time_taken);
     if (you.duration[DUR_POISONING])

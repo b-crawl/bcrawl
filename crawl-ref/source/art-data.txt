@@ -1252,6 +1252,7 @@ TILE:    urand_vines
 TILE_EQ: vines
 INSCRIP: NoPotionHeal
 REGEN:   7
+STR:     7
 VALUE:   700
 
 ENUM:    KRYIAS

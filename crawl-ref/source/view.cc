@@ -557,7 +557,7 @@ void update_monsters_in_view()
         for (monster* mon : monsters)
         {
             mon_threat_level_type threat_level = mons_threat_level(*mon);
-            if (threat_level == MTHRT_NASTY && !mons_is_unique(mons->type))
+            if (threat_level == MTHRT_NASTY && !mons_is_unique(mon->type))
                 dangerous_foe = true;
         }
         if (dangerous_foe)

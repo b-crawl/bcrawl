@@ -128,6 +128,7 @@ force_more_message += welcomes you( back)?!
 force_more_message += You have lost your religion
 
 # Dangerous weapons
+force_more_message += carrying a wand
 force_more_message += is wielding.*distortion
 # dancing weapons require special handling...
 force_more_message += there is a.*distortion

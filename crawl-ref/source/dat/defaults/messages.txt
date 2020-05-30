@@ -284,4 +284,4 @@ force_more_message += .*curse skull.*comes? into view.
 
 force_more_message += .*floating eye.*into view.
 
-force_more_message += looks extremely dangerous
+force_more_message += dangerous foe

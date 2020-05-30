@@ -105,8 +105,10 @@ static bool _mon_tries_regain_los(monster* mon)
 // to ideal_range (too far = easier to escape, too close = easier to ambush).
 static void _set_firing_pos(monster* mon, coord_def target)
 {
-    const int ideal_range = LOS_DEFAULT_RANGE / 2;
     const int current_distance = mon->pos().distance_from(target);
+    int ideal_range = LOS_DEFAULT_RANGE / 2;
+    if (mons_genus(mon->type) == MONS_ELF)
+        ideal_range = 1 + random2(3);
 
     // We don't consider getting farther away unless already very close.
     const int max_range = max(ideal_range, current_distance);

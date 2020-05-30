@@ -4215,7 +4215,7 @@ bool handle_mon_spell(monster* mons)
         if (spell_cast == SPELL_PRIMAL_WAVE
             && mons->type == MONS_ELEMENTAL_WELLSPRING)
         {
-            mons->hurt(mons, 5 + random2(15));
+            mons->hurt(mons, 4 + random2(5));
             if (mons->alive())
                 _summon(*mons, MONS_WATER_ELEMENTAL, 3, spell_slot);
         }

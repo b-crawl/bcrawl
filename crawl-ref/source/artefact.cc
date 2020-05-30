@@ -831,14 +831,14 @@ static void _add_good_randart_prop(artefact_prop_type prop,
  */
 static void _get_randart_properties(const item_def &item,
                                     artefact_properties_t &item_props,
-                                    int quality = 0,
+                                    int quality = -1,
                                     const int max_bad_props = 2)
 {
     const object_class_type item_class = item.base_type;
 
     // If we didn't receive a quality level, figure out how good we want the
     // artefact to be. The default calculation range is 1 to 7.
-    if (quality < 1)
+    if (quality < 0)
         quality = max(1, binomial(7, 30));
 
     // then consider adding bad properties. the better the artefact, the more
@@ -946,7 +946,7 @@ void setup_unrandart(item_def &item, bool creating)
     item.plus      = unrand->plus;
 }
 
-static bool _init_artefact_properties(item_def &item)
+static bool _init_artefact_properties(item_def &item, int quality = -1)
 {
     ASSERT(is_artefact(item));
 
@@ -964,7 +964,7 @@ static bool _init_artefact_properties(item_def &item)
 
     artefact_properties_t prop;
     prop.init(0);
-    _get_randart_properties(item, prop);
+    _get_randart_properties(item, prop, quality);
 
     for (int i = 0; i < ART_PROPERTIES; i++)
     {
@@ -1633,7 +1633,7 @@ static void _artefact_setup_prop_vectors(item_def &item)
 
 // If force_mundane is true, normally mundane items are forced to
 // nevertheless become artefacts.
-bool make_item_randart(item_def &item, bool force_mundane)
+bool make_item_randart(item_def &item, bool force_mundane, int quality = -1)
 {
     if (item.base_type != OBJ_WEAPONS
         && item.base_type != OBJ_ARMOUR
@@ -1663,7 +1663,7 @@ bool make_item_randart(item_def &item, bool force_mundane)
     do
     {
         // Now that we found something, initialise the props array.
-        if (--randart_tries <= 0 || !_init_artefact_properties(item))
+        if (--randart_tries <= 0 || !_init_artefact_properties(item, quality))
         {
             // Something went wrong that no amount of rerolling will fix.
             item.unrand_idx = 0;

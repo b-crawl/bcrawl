@@ -829,7 +829,7 @@ static monsterentry mondata[] =
 
 {
     MONS_DEEP_ELF_MAGE, 'e', MAGENTA, "deep elf mage",
-    M_WARM_BLOOD | M_SPEAKS,
+    M_WARM_BLOOD | M_SPEAKS | M_MAINTAIN_RANGE,
     MR_NO_FLAGS,
     12, MONS_ELF, MONS_ELF, MH_NATURAL, 40,
     { {AT_HIT, AF_PLAIN, 5}, AT_NO_ATK, AT_NO_ATK, AT_NO_ATK },
@@ -842,7 +842,7 @@ static monsterentry mondata[] =
 
 {
     MONS_DEEP_ELF_HIGH_PRIEST, 'e', LIGHTGREEN, "deep elf high priest",
-    M_SPEAKS | M_WARM_BLOOD | M_SEE_INVIS,
+    M_SPEAKS | M_WARM_BLOOD | M_SEE_INVIS | M_MAINTAIN_RANGE,
     MR_NO_FLAGS,
     15, MONS_ELF, MONS_ELF, MH_NATURAL | MH_EVIL, 80,
     { {AT_HIT, AF_PLAIN, 14}, AT_NO_ATK, AT_NO_ATK, AT_NO_ATK },
@@ -855,7 +855,7 @@ static monsterentry mondata[] =
 
 {
     MONS_DEEP_ELF_DEMONOLOGIST, 'e', YELLOW, "deep elf demonologist",
-    M_WARM_BLOOD | M_SEE_INVIS | M_SPEAKS,
+    M_WARM_BLOOD | M_SEE_INVIS | M_SPEAKS | M_MAINTAIN_RANGE,
     MR_NO_FLAGS,
     20, MONS_ELF, MONS_ELF, MH_NATURAL | MH_EVIL, 100,
     { {AT_HIT, AF_PLAIN, 12}, AT_NO_ATK, AT_NO_ATK, AT_NO_ATK },
@@ -868,7 +868,7 @@ static monsterentry mondata[] =
 
 {
     MONS_DEEP_ELF_ANNIHILATOR, 'e', LIGHTBLUE, "deep elf annihilator",
-    M_WARM_BLOOD | M_SEE_INVIS | M_SPEAKS,
+    M_WARM_BLOOD | M_SEE_INVIS | M_SPEAKS | M_MAINTAIN_RANGE,
     MR_NO_FLAGS,
     10, MONS_ELF, MONS_ELF, MH_NATURAL, 120,
     { {AT_HIT, AF_PLAIN, 12}, AT_NO_ATK, AT_NO_ATK, AT_NO_ATK },
@@ -881,7 +881,7 @@ static monsterentry mondata[] =
 
 {
     MONS_DEEP_ELF_SORCERER, 'e', LIGHTMAGENTA, "deep elf sorcerer",
-    M_WARM_BLOOD | M_SEE_INVIS | M_SPEAKS,
+    M_WARM_BLOOD | M_SEE_INVIS | M_SPEAKS | M_MAINTAIN_RANGE,
     MR_NO_FLAGS,
     17, MONS_ELF, MONS_ELF, MH_NATURAL | MH_EVIL, 120,
     { {AT_HIT, AF_PLAIN, 12}, AT_NO_ATK, AT_NO_ATK, AT_NO_ATK },
@@ -894,7 +894,7 @@ static monsterentry mondata[] =
 
 {
     MONS_DEEP_ELF_DEATH_MAGE, 'e', WHITE, "deep elf death mage",
-    M_WARM_BLOOD | M_SEE_INVIS | M_SPEAKS,
+    M_WARM_BLOOD | M_SEE_INVIS | M_SPEAKS | M_MAINTAIN_RANGE,
     MR_NO_FLAGS,
     10, MONS_ELF, MONS_ELF, MH_NATURAL | MH_EVIL, 120,
     { {AT_HIT, AF_PLAIN, 12}, AT_NO_ATK, AT_NO_ATK, AT_NO_ATK },
@@ -907,7 +907,7 @@ static monsterentry mondata[] =
 
 {
     MONS_DEEP_ELF_ELEMENTALIST, 'e', LIGHTRED, "deep elf elementalist",
-    M_WARM_BLOOD | M_SEE_INVIS | M_SPEAKS,
+    M_WARM_BLOOD | M_SEE_INVIS | M_SPEAKS | M_MAINTAIN_RANGE,
     MR_NO_FLAGS,
     17, MONS_ELF, MONS_ELF, MH_NATURAL, 120,
     { {AT_HIT, AF_PLAIN, 12}, AT_NO_ATK, AT_NO_ATK, AT_NO_ATK },

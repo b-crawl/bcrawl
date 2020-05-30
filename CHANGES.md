@@ -410,6 +410,7 @@
   - v1.23: Leopard geckos move faster but no longer attack quickly.
   - v1.23: Swamp drakes have a stronger bite that can slow and poison.
   - v1.23: Demonic crawlers have somewhat higher melee damage.
+  - v1.23.2: Deep elf casters will attempt to maintain range to the player.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

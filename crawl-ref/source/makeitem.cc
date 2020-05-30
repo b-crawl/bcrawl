@@ -1700,7 +1700,7 @@ static void _generate_jewellery_item(item_def& item, bool allow_uniques,
         do_curse_item(item);
 
     int randart_chance = 0;
-    int randart_quality = 0;    
+    int randart_quality = -1;
     int curse_chance = 5;
     switch(item.sub_type)
     {
@@ -1726,16 +1726,17 @@ static void _generate_jewellery_item(item_def& item, bool allow_uniques,
         default: break;
     }
     
-    if (allow_uniques && item_level > 2
-            && x_chance_in_y(101 + item_level * 3, 4000))
+    if (item_level == ISPEC_RANDART
+            || (allow_uniques && item_level > 2
+                && x_chance_in_y(101 + item_level * 3, 4000)))
         {
         randart_chance = 100;
         randart_quality = -1;  // indicates default quality
         }
     
-    if (item_level == ISPEC_RANDART || x_chance_in_y(randart_chance, 100))
+    if (x_chance_in_y(randart_chance, 100))
     {
-        make_item_randart(item);
+        make_item_randart(item, true, randart_quality);
         curse_chance /= 2;
     }
     

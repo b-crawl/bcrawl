@@ -263,7 +263,6 @@ force_more_message += Tiamat.*comes? into view.
 force_more_message += Urug.*comes? into view.
 force_more_message += Vashnia.*comes? into view.
 force_more_message += Xtahua.*comes? into view.
-force_more_message += .*'s ghost.* comes? into view
 force_more_message += .*Fiend.*comes? into view.
 force_more_message += .*Hellion.*comes? into view.
 force_more_message += .*Tormentor.*comes? into view.

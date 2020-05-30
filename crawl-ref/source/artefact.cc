@@ -1633,7 +1633,7 @@ static void _artefact_setup_prop_vectors(item_def &item)
 
 // If force_mundane is true, normally mundane items are forced to
 // nevertheless become artefacts.
-bool make_item_randart(item_def &item, bool force_mundane, int quality = -1)
+bool make_item_randart(item_def &item, bool force_mundane, int quality)
 {
     if (item.base_type != OBJ_WEAPONS
         && item.base_type != OBJ_ARMOUR

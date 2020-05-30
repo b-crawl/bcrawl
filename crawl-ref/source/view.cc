@@ -552,6 +552,16 @@ void update_monsters_in_view()
         // 'msgs' in ALL cases we want shoutitis/gozag wrath to trigger?
         _maybe_trigger_shoutitis(monsters);
         _maybe_gozag_incite(monsters);
+        
+        bool dangerous_foe = false;
+        for (monster* mon : monsters)
+        {
+            mon_threat_level_type threat_level = mons_threat_level(*mon);
+            if (threat_level == MTHRT_NASTY)
+                dangerous_foe = true;
+        }
+        if (dangerous_foe)
+            mprf(MSGCH_WARN, "You have encountered a dangerous foe!");
     }
 
     // Xom thinks it's hilarious the way the player picks up an ever

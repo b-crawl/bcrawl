@@ -9,12 +9,10 @@ David Ploog (a former DCSS developer) [wrote](https://www.rockpapershotgun.com/2
 
 When I started bcrawl, I felt that DCSS had become stagnant, generally [unwilling](https://www.reddit.com/r/dcss/comments/9aseh1/has_dcss_development_stagnated/e4yty2n/) to try adding new content.
 
-More recently, there have been a number of changes, almost entirely coming from a single new developer. But while I like to see new things being tried, I now feel that there's a lack of:
+I agree with David Ploog's position, but I also believe that it's important to have:
 - discussion of and collaboration on design of gameplay changes
 - adequate testing before gameplay changes are made
-- willingness to revert problematic gameplay changes
-
-While bcrawl does not use actual votes on changes like X-Crawl did, changes still involve community suggestions and feedback.
+- willingness to revert gameplay changes that don't improve the game
 
 #### supporting more gameplay styles is good
 
@@ -22,12 +20,14 @@ Having more ways to play a game is good, if they are fun for at least some playe
 
 So, bcrawl will not be [changed](https://www.reddit.com/r/dcss/comments/8poib2/make_lees_rapid_deconstruction_never_break_walls/) to prevent strategies *just* because they violate developer preconceptions about how to play. Instead, the strength and entertainment values of tactics and strategies will be evaluated as they exist in practice.
 
-Also, optional content such as species and usable items will generally only be removed if it is unfair, redundant, misleading, or useless. Content will not be removed just for being unnecessary to certain "canonical" strategies.
+Also, optional content such as species and usable items will generally only be removed if it is unfair, redundant, misleading, or useless. Content will not be removed just for being unnecessary to certain "canonical" strategies. Highly situational unusual tactics should be encouraged, and if novel and entertaining but suboptimal strategies are found, it's better to strengthen them than to remove them as options.
 
 #### design ideology should be tested
 
 Changes should be evaluated based on their effect in practice, not based on what they "should" do according to some design ideology.
 
-#### games have many goals that must be balanced against each other
+#### games have many goals
 
-According to the philosophy bcrawl follows, strategic depth, minimizing tedium, variety, replayability, flavor, narrative, intuitiveness, and visuals all have some value in games. (Some designers follow an ideology that ignores some of those, or values one infinitely more than the others, but I believe that leads to games that are incomplete and unbalanced.)
+According to the philosophy bcrawl follows, strategic depth, minimizing tedium, variety, replayability, flavor, narrative, intuitiveness, and visuals all have some value in games, and should all be balanced against each other.
+
+Some designers follow an ideology that ignores some of those, or values one infinitely more than the others, but I believe that leads to games that are incomplete and unbalanced.

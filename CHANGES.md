@@ -71,6 +71,7 @@
   - v1.19.2: Taking stairs upwards when no monsters are visible will never teleport players.
   - v1.20: New default macros: '_' = create path around a pillar; space = walk along path. (by marksg07)
   - v1.20: Guaranteed damage reduction percent is shown always, not just in wizmode.
+  - v1.23.2: "Melee or throw" (such as ']') now waits a turn if no ammo is quivered.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -88,6 +89,7 @@
   - v1.23.2: Tree form is giant size, which means potions of lignification break constriction if the source is not giant.
   - v1.23.2: Unbreathing players are not protected from being silenced by being engulfed by water.
   - v1.23.2: Player size increasing can break engulf like how it can break constriction.
+  - v1.23.2: Players have double the regeneration rate of health and mana while waiting, except in Hell branches. This represents first aid or meditation, and unlike normal regeneration is not adjusted by time per turn.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -315,6 +317,7 @@
   - v1.23.1: The fan of gales holds 2 charges.
   - v1.23.1: Higher base damage for quick blades (5 -> 6) and rapiers (8 -> 9) as compensation for the 1.23 shield changes.
   - v1.23.2: Higher maximum enchantments for bucklers (+3 -> +4) and medium shields (+5 -> +6).
+  - v1.23.2: Health regeneration from potions of ambrosia scales with experience level, with an increased amount over level 8.
 
 #### Removed Items
   - Amulet of Harm
@@ -359,6 +362,7 @@
   - v1.23: The Cloak of the Thief has evokable invisibility.
   - v1.23.1: The Elemental Staff is a quarterstaff.
   - v1.23.1: The Sword of Cerebov has higher base damage (17 -> 20) and delay (17 -> 19).
+  - v1.23.2: The Robe of Vines gains +7 strength.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -406,6 +410,7 @@
   - v1.23: Leopard geckos move faster but no longer attack quickly.
   - v1.23: Swamp drakes have a stronger bite that can slow and poison.
   - v1.23: Demonic crawlers have somewhat higher melee damage.
+  - v1.23.2: Deep elf casters will sometimes attempt to maintain range to the player.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

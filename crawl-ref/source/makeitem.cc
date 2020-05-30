@@ -1699,21 +1699,49 @@ static void _generate_jewellery_item(item_def& item, bool allow_uniques,
     if (item.plus < 0)
         do_curse_item(item);
 
-    // All jewellery base types should now work. - bwr
+    int randart_chance = 0;
+    int randart_quality = -1;
+    int curse_chance = 5;
+    switch(item.sub_type)
+    {
+        case RING_TELEPORTATION:
+            curse_chance = 100;
+            break;
+        case RING_ATTENTION:
+        case AMU_INACCURACY:
+            randart_chance = 50;
+            randart_quality = 1;
+            curse_chance = 100;
+            break;
+        case RING_FIRE:
+        case RING_ICE:
+            randart_chance = 50;
+            randart_quality = 1;
+            curse_chance = 50;
+            break;
+        case RING_FLIGHT:
+            randart_chance = 50;
+            randart_quality = 1;
+            break;
+        default: break;
+    }
+    
     if (item_level == ISPEC_RANDART
-        || allow_uniques && item_level > 2
-           && x_chance_in_y(101 + item_level * 3, 4000))
+            || (allow_uniques && item_level > 2
+                && x_chance_in_y(101 + item_level * 3, 4000)))
+        {
+        randart_chance = 100;
+        randart_quality = -1;  // indicates default quality
+        }
+    
+    if (x_chance_in_y(randart_chance, 100))
     {
-        make_item_randart(item);
+        make_item_randart(item, true, randart_quality);
+        curse_chance /= 2;
     }
-    else if (item.sub_type == RING_ATTENTION
-             || item.sub_type == RING_TELEPORTATION
-             || item.sub_type == AMU_INACCURACY
-             || one_chance_in(50))
-    {
-        // Bad jewellery is always cursed {dlb}:
+    
+    if (x_chance_in_y(curse_chance, 100))
         do_curse_item(item);
-    }
 }
 
 static void _generate_misc_item(item_def& item, int force_type, int force_ego)

@@ -128,6 +128,7 @@ force_more_message += welcomes you( back)?!
 force_more_message += You have lost your religion
 
 # Dangerous weapons
+force_more_message += carrying a wand
 force_more_message += is wielding.*distortion
 # dancing weapons require special handling...
 force_more_message += there is a.*distortion
@@ -262,16 +263,11 @@ force_more_message += Tiamat.*comes? into view.
 force_more_message += Urug.*comes? into view.
 force_more_message += Vashnia.*comes? into view.
 force_more_message += Xtahua.*comes? into view.
-force_more_message += .*'s ghost.* comes? into view
-force_more_message += .*Ancient Lich.*comes? into view.
-force_more_message += .*Orb of Fire.*comes? into view.
 force_more_message += .*Fiend.*comes? into view.
 force_more_message += .*Hellion.*comes? into view.
 force_more_message += .*Tormentor.*comes? into view.
 force_more_message += .*Hell Sentinel.*comes? into view.
-force_more_message += .*Executioner.*comes? into view.
 force_more_message += .*Cacodemon.*comes? into view.
-force_more_message += .*Greater Mummy.*comes? into view.
 force_more_message += .*Mummy Priest.*comes? into view.
 force_more_message += .*curse toe.*comes? into view.
 force_more_message += .*curse skull.*comes? into view.

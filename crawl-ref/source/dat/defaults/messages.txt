@@ -140,6 +140,7 @@ force_more_message += You are cast deeper into the Abyss
 force_more_message += The Abyss bends around you
 
 # Petrification
+force_more_message += The blast of calcifying dust hits you
 force_more_message += You are slowing down
 
 # Sleep

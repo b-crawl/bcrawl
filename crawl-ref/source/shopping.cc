@@ -603,45 +603,29 @@ unsigned int item_value(item_def item, bool ident)
         else
         {
             // Variable-strength rings.
-            if (item_ident(item, ISFLAG_KNOW_PLUSES)
-                && (item.sub_type == RING_PROTECTION
-                    || item.sub_type == RING_STRENGTH
-                    || item.sub_type == RING_EVASION
-                    || item.sub_type == RING_DEXTERITY
-                    || item.sub_type == RING_INTELLIGENCE
-                    || item.sub_type == RING_SLAYING
-                    || item.sub_type == AMU_REFLECTION))
+            if (item_ident(item, ISFLAG_KNOW_PLUSES))
             {
-                // Formula: price = kn(n+1) / 2, where k depends on the subtype,
-                // n is the power. (The base variable is equal to 2n.)
-                int base = 0;
-                int coefficient = 0;
-                if (item.sub_type == RING_SLAYING)
-                    base = 3 * item.plus;
-                else
-                    base = 2 * item.plus;
+                int power = 0;
 
                 switch (item.sub_type)
                 {
                 case RING_SLAYING:
                 case RING_PROTECTION:
                 case RING_EVASION:
-                    coefficient = 40;
+                    power = item.plus * 10;
+                    break;
+                case AMU_REFLECTION:
+                    power = item.plus * 9;
                     break;
                 case RING_STRENGTH:
                 case RING_DEXTERITY:
                 case RING_INTELLIGENCE:
-                case AMU_REFLECTION:
-                    coefficient = 30;
+                    power = item.plus * 6;
                     break;
                 default:
                     break;
                 }
-
-                if (base <= 0)
-                    valued += 25 * base;
-                else
-                    valued += (coefficient * base * (base + 1)) / 8;
+                valued += (power * abs(power) * 10)/46;
             }
             else
             {

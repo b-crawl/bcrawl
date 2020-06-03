@@ -625,7 +625,11 @@ unsigned int item_value(item_def item, bool ident)
                 default:
                     break;
                 }
-                valued += (power * abs(power) * 10)/46;
+                
+                if (power <= 0)
+                    valued += power * 10;
+                else
+                    valued += (power * (power + 6) * 10)/52;
             }
             else
             {

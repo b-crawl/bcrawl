@@ -90,6 +90,7 @@
   - v1.23.2: Unbreathing players are not protected from being silenced by being engulfed by water.
   - v1.23.2: Player size increasing can break engulf like how it can break constriction.
   - v1.23.2: Players have double the regeneration rate of health and mana while waiting, except in Hell branches. This represents first aid or meditation, and unlike normal regeneration is not adjusted by time per turn.
+  - v1.23.4: Monster smite damage (such as from orc priests) is changed from 7-17 to 10-12.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

@@ -4629,7 +4629,6 @@ void unmarshallItem(reader &th, item_def &item)
     if (item.base_type == OBJ_WEAPONS
         && (item.brand == SPWPN_RETURNING
             || item.brand == SPWPN_REACHING
-            || item.brand == SPWPN_ORC_SLAYING
             || item.brand == SPWPN_DRAGON_SLAYING
             || item.brand == SPWPN_EVASION))
     {

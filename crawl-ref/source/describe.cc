@@ -1305,7 +1305,11 @@ static string _describe_weapon(const item_def &item, bool verbose)
         case SPWPN_PENETRATION:
             description += "Ammo fired by it will pass through the "
                 "targets it hits, potentially hitting all targets in "
-                "its path until it reaches maximum range.";
+                "its path until it reaches its maximum range.";
+            break;
+        case SPWPN_SEEKING:
+            description += "Its attacks will magically seek out their targets, "
+                "allowing even novice users to hit as often as a master.";
             break;
         case SPWPN_REAPING:
             description += "If a monster killed with it leaves a "

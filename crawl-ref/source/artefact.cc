@@ -478,10 +478,17 @@ static void _add_randart_weapon_brand(const item_def &item,
             4, SPWPN_FLAMING,
             4, SPWPN_FREEZING);
 
-        if (item_attack_skill(item) == SK_CROSSBOWS)
+        switch (item_attack_skill(item))
         {
+        case SK_CROSSBOWS:
             if (one_chance_in(3))
                 item_props[ARTP_BRAND] = SPWPN_PENETRATION;
+            break;
+        case SK_BOWS:
+            if (one_chance_in(7))
+                item_props[ARTP_BRAND] = SPWPN_SEEKING;
+            break;
+        default: break;
         }
     }
     else if (is_demonic(item) && x_chance_in_y(7, 9))

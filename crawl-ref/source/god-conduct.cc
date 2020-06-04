@@ -394,7 +394,6 @@ static peeve_map divine_peeves[] =
     // GOD_BEOGH,
     {
         { DID_CANNIBALISM, RUDE_CANNIBALISM_RESPONSE },
-        { DID_DESECRATE_ORCISH_REMAINS, { "you desecrate orcish remains", true, 1 } },
         { DID_ATTACK_FRIEND, _on_attack_friend("you attack allied orcs") },
     },
     // GOD_JIYVA,

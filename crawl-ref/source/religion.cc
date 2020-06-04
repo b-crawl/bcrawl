@@ -2997,8 +2997,16 @@ static void _apply_monk_bonus()
     // monks get bonus piety for first god
     if (you_worship(GOD_RU))
         you.props[RU_SACRIFICE_PROGRESS_KEY] = 9999;
-    else if (you_worship(GOD_USKAYAW))  // Gaining piety past this point does nothing
-        gain_piety(15, 1, false); // of value with this god and looks weird.
+    else if (you_worship(GOD_USKAYAW))
+    {
+        gain_piety(15, 1, false);  // gaining piety past this point does nothing
+        
+        simple_god_message(" says: Let me lighten your step for a while.");
+        const bool were_agile = you.duration[DUR_AGILITY] > 0;
+        you.increase_duration(DUR_AGILITY, 800 + random2(400));
+        if (!were_agile)
+            notify_stat_change(STAT_DEX, 5, true);
+    }
     else
         gain_piety(35, 1, false);
 }

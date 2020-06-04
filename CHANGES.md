@@ -265,6 +265,7 @@
   - v1.23: Ashenzari gives Evocations skill for staves with an active evoked ability, and some Staves and Spellcasting skill for all other staves.
   - v1.23.2: Nemelex cards that are individually drawn can be cancelled.
   - v1.23.4: Deep Dwarves that convert to Ru start at \*\*\* piety.
+  - v1.23.4: Monks that convert to Uskayaw gain 800 to 1200 turns of agility status.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

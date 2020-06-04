@@ -2847,21 +2847,37 @@ void level_change(bool skip_attribute_increase)
             // Don't want to see the dead creature at the prompt.
             redraw_screen();
             
+            int max_xl = you.get_max_xl();
             bool hit_max_level = false;
             if (new_exp == 27)
             {
                 mprf(MSGCH_INTRINSIC_GAIN, "You have reached level 27, the final one!");
                 hit_max_level = true;
             }
-            else if (new_exp == you.get_max_xl())
+            else if (new_exp == max_xl)
             {
                 mprf(MSGCH_INTRINSIC_GAIN, "You have reached level %d, the highest you will ever reach!", you.get_max_xl());
                 hit_max_level = true;
             }
             else
             {
-                mprf(MSGCH_INTRINSIC_GAIN, "You have reached level %d!",
-                     new_exp);
+                mprf(MSGCH_INTRINSIC_GAIN, "You have reached level %d!", new_exp);
+                
+                if (new_exp == (max_xl - 3) && !player_in_branch(BRANCH_PANDEMONIUM))
+                {
+                    switch(you.religion)
+                    {
+                    case GOD_NO_GOD:
+                    case GOD_DEMIGOD:
+                        break;
+                    case GOD_XOM:
+                        simple_god_message(" says: Have you ever been to Pandemonium? I hear it's nice this time of year.");
+                        break;
+                    default:
+                        simple_god_message(" says: The lords of Pandemonium are watching you. If you wish to go there, you may need to do so soon.");
+                        break;
+                    }
+                }
             }
             
             if (hit_max_level)

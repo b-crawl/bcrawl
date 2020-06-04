@@ -615,7 +615,7 @@ unsigned int item_value(item_def item, bool ident)
                     power = item.plus * 10;
                     break;
                 case AMU_REFLECTION:
-                    power = item.plus * 9;
+                    power = 5 + item.plus * 8;  // small constant for reflection ego value
                     break;
                 case RING_STRENGTH:
                 case RING_DEXTERITY:
@@ -631,60 +631,59 @@ unsigned int item_value(item_def item, bool ident)
                 else
                     valued += (power * (power + 6) * 10)/52;
             }
-            else
+
+            switch (item.sub_type)
             {
-                switch (item.sub_type)
-                {
-                case AMU_FAITH:
-                case AMU_RAGE:
-                    valued += 400;
-                    break;
+            case AMU_FAITH:
+            case AMU_RAGE:
+                valued += 400;
+                break;
 
-                case RING_WIZARDRY:
-                case AMU_REGENERATION:
-                case AMU_GUARDIAN_SPIRIT:
-                case AMU_THE_GOURMAND:
-                case AMU_MANA_REGENERATION:
-                case AMU_ACROBAT:
-                    valued += 300;
-                    break;
+            case RING_WIZARDRY:
+            case AMU_REGENERATION:
+            case AMU_GUARDIAN_SPIRIT:
+            case AMU_THE_GOURMAND:
+            case AMU_MANA_REGENERATION:
+            case AMU_ACROBAT:
+                valued += 300;
+                break;
 
-                case RING_FIRE:
-                case RING_ICE:
-                case RING_PROTECTION_FROM_COLD:
-                case RING_PROTECTION_FROM_FIRE:
-                case RING_PROTECTION_FROM_MAGIC:
-                    valued += 250;
-                    break;
+            case RING_FIRE:
+            case RING_ICE:
+            case RING_PROTECTION_FROM_COLD:
+            case RING_PROTECTION_FROM_FIRE:
+            case RING_PROTECTION_FROM_MAGIC:
+                valued += 250;
+                break;
 
-                case RING_MAGICAL_POWER:
-                case RING_LIFE_PROTECTION:
-                case RING_POISON_RESISTANCE:
-                case RING_ELEC_RESISTANCE:
-                case RING_RESIST_CORROSION:
-                    valued += 200;
-                    break;
+            case RING_MAGICAL_POWER:
+            case RING_LIFE_PROTECTION:
+            case RING_POISON_RESISTANCE:
+            case RING_ELEC_RESISTANCE:
+            case RING_RESIST_CORROSION:
+                valued += 200;
+                break;
 
-                case RING_STEALTH:
-                case RING_FLIGHT:
-                    valued += 175;
-                    break;
+            case RING_STEALTH:
+            case RING_FLIGHT:
+                valued += 175;
+                break;
 
-                case RING_SEE_INVISIBLE:
-                    valued += 150;
-                    break;
+            case RING_SEE_INVISIBLE:
+                valued += 150;
+                break;
 
-                case RING_ATTENTION:
-                case RING_TELEPORTATION:
-                case AMU_NOTHING:
-                    valued += 75;
-                    break;
+            case RING_ATTENTION:
+            case RING_TELEPORTATION:
+            case AMU_NOTHING:
+                valued += 75;
+                break;
 
-                case AMU_INACCURACY:
-                    valued -= 300;
-                    break;
-                    // got to do delusion!
-                }
+            case AMU_INACCURACY:
+                valued -= 300;
+                break;
+            
+            default: break;
             }
 
             if (is_artefact(item))

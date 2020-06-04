@@ -166,7 +166,7 @@ int attack::calc_to_hit(bool random)
         if (using_weapon())
         {
             seeking = get_weapon_brand(*weapon) == SPWPN_SEEKING;
-            int skill = seeking ? 34 * 100 : you.skill(wpn_skill, 100);
+            int skill = seeking ? 50 * 100 : you.skill(wpn_skill, 100);
             if (wpn_skill != SK_FIGHTING)
             {
                 if (you.skill(wpn_skill) < 1 && player_in_a_dangerous_place())
@@ -187,7 +187,7 @@ int attack::calc_to_hit(bool random)
         }
 
         // fighting contribution
-        int fighting = seeking ? 34 * 100 : you.skill(SK_FIGHTING, 100);
+        int fighting = seeking ? 50 * 100 : you.skill(SK_FIGHTING, 100);
         mhit += maybe_random_div(fighting, 100, random);
 
         // weapon bonus contribution

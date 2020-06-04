@@ -3110,6 +3110,12 @@ static void _set_initial_god_piety()
         you.piety_hysteresis = 0;
         you.gift_timeout = 0;
 
+        if (you.species == SP_DEEP_DWARF && !you.worshipped[GOD_RU])
+        {
+            simple_god_message(" acknowledges the sacrifice of your ability to heal.");
+            _set_initial_piety_value(75);
+        }
+
         // I'd rather this be in on_join(), but then it overrides the
         // monk bonus...
         you.props[RU_SACRIFICE_PROGRESS_KEY] = 0;

@@ -258,12 +258,13 @@
   - v1.19: Qazlal worshippers can regain mana by standing in a cloud.
   - v1.19: Xom has higher minimum levels for banishment. (6 -> 8 when bored, 9 -> 14 otherwise)
   - v1.19: Nemelex's Triple Draw ability is now available at \*\*.
-  - v1.21: Trog gives torment immunity while berserk at 3* piety.
+  - v1.21: Trog gives torment immunity while berserk at 3\* piety.
   - v1.22: Jiyva's pseudopod mutation no longer reduces body armour AC.
   - v1.22: Makhleb's Greater Servant ability failure chance scales less with piety and more with Invocations.
   - v1.22: The Wu Jian Council hates evil actions, but still allows all species.
   - v1.23: Ashenzari gives Evocations skill for staves with an active evoked ability, and some Staves and Spellcasting skill for all other staves.
   - v1.23.2: Nemelex cards that are individually drawn can be cancelled.
+  - v1.23.4: Deep Dwarves that convert to Ru start at \*\*\* piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

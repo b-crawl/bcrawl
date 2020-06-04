@@ -319,7 +319,7 @@
   - v1.23.1: Higher base damage for quick blades (5 -> 6) and rapiers (8 -> 9) as compensation for the 1.23 shield changes.
   - v1.23.2: Higher maximum enchantments for bucklers (+3 -> +4) and medium shields (+5 -> +6).
   - v1.23.2: Health regeneration from potions of ambrosia scales with experience level, with an increased amount over level 8.
-  - v1.23.4: Some bows have the new Seeking brand, which makes weapons as accurate as if the user has 30 skill and 30 Fighting.
+  - v1.23.4: Some bows have the new Seeking brand, which makes weapons as accurate as if the user has 34 skill and 34 Fighting.
 
 #### Removed Items
   - Amulet of Harm

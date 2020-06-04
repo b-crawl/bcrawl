@@ -1085,8 +1085,8 @@ static void _debug_acquirement_stats(FILE *ostat)
             "freezing",
             "holy wrath",
             "electrocution",
+            "seeking",
 #if TAG_MAJOR_VERSION == 34
-            "orc slaying",
             "dragon slaying",
 #endif
             "venom",

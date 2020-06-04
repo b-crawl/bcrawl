@@ -636,41 +636,38 @@ unsigned int item_value(item_def item, bool ident)
             {
             case AMU_FAITH:
             case AMU_RAGE:
-                valued += 400;
+            case AMU_REGENERATION:
+            case AMU_GUARDIAN_SPIRIT:
+            case AMU_ACROBAT:
+                valued += 320;
+                break;
+
+            case AMU_THE_GOURMAND:
+            case AMU_MANA_REGENERATION:
+            case RING_PROTECTION_FROM_COLD:
+            case RING_PROTECTION_FROM_FIRE:
+            case RING_PROTECTION_FROM_MAGIC:
+            case RING_ELEC_RESISTANCE:
+            case RING_RESIST_CORROSION:
+                valued += 250;
                 break;
 
             case RING_WIZARDRY:
-            case AMU_REGENERATION:
-            case AMU_GUARDIAN_SPIRIT:
-            case AMU_THE_GOURMAND:
-            case AMU_MANA_REGENERATION:
-            case AMU_ACROBAT:
-                valued += 300;
+            case RING_MAGICAL_POWER:
+                valued += 230;
                 break;
 
             case RING_FIRE:
             case RING_ICE:
-            case RING_PROTECTION_FROM_COLD:
-            case RING_PROTECTION_FROM_FIRE:
-            case RING_PROTECTION_FROM_MAGIC:
-                valued += 250;
-                break;
-
-            case RING_MAGICAL_POWER:
             case RING_LIFE_PROTECTION:
             case RING_POISON_RESISTANCE:
-            case RING_ELEC_RESISTANCE:
-            case RING_RESIST_CORROSION:
                 valued += 200;
                 break;
 
             case RING_STEALTH:
-            case RING_FLIGHT:
-                valued += 175;
-                break;
-
             case RING_SEE_INVISIBLE:
-                valued += 150;
+            case RING_FLIGHT:
+                valued += 170;
                 break;
 
             case RING_ATTENTION:

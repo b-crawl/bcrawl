@@ -2,7 +2,7 @@
 
 X-Crawl was a notable fork of Dungeon Crawl Stone Soup; bcrawl is a continuation of it.
 
-For discussion, check out [Demise's Discord](https://discord.gg/0u5ddSgPMZkySDJ5).
+For discussion, check out [the bcrawl Discord server](https://discord.gg/cJ2wPpZ).
 
 Pull requests for new content are welcome.
 

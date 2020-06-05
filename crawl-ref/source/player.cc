@@ -3957,7 +3957,7 @@ void inc_hp(int hp_gain)
     if (you.hp > you.hp_max)
         you.hp = you.hp_max;
 
-    if (_should_stop_resting(you.hp, you.hp_max))
+    if (_should_stop_resting(you.hp, you.hp_max) && !you.duration[DUR_POISONING])
         interrupt_activity(AI_FULL_HP);
 
     you.redraw_hit_points = true;

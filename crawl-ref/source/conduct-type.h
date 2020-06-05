@@ -29,7 +29,7 @@ enum conduct_type
     DID_CAUSE_GLOWING,                    // Zin
     DID_UNCLEAN,                          // Zin (used unclean weapon/magic)
     DID_CHAOS,                            // Zin (used chaotic weapon/magic)
-    DID_DESECRATE_ORCISH_REMAINS,         // Beogh
+    DID_DESECRATE_ORCISH_REMAINS,         // Beogh (REMOVED)
     DID_KILL_SLIME,                       // Jiyva
     DID_KILL_PLANT,                       // Fedhas
     DID_HASTY,                            // Cheibriados

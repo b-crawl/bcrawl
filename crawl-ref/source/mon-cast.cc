@@ -781,7 +781,7 @@ static void _cast_smiting(monster &caster, mon_spell_slot slot, bolt&)
     else
         simple_monster_message(*foe->as_monster(), " is smitten.");
 
-    foe->hurt(&caster, 7 + random2avg(11, 2), BEAM_MISSILE, KILLED_BY_BEAM,
+    foe->hurt(&caster, 10 + random2(3), BEAM_MISSILE, KILLED_BY_BEAM,
               "", "by divine providence");
 }
 

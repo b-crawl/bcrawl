@@ -402,9 +402,9 @@ const char* missile_brand_name(const item_def &item, mbn_type t)
 
 static const char *weapon_brands_terse[] =
 {
-    "", "flame", "freeze", "holy", "elec",
+    "", "flame", "freeze", "holy", "elec", "seek",
 #if TAG_MAJOR_VERSION == 34
-    "obsolete", "obsolete",
+    "obsolete",
 #endif
     "venom", "protect", "drain", "speed", "buggy-vorpal",
 #if TAG_MAJOR_VERSION == 34
@@ -427,9 +427,9 @@ static const char *weapon_brands_terse[] =
 
 static const char *weapon_brands_verbose[] =
 {
-    "", "flaming", "freezing", "holy wrath", "electrocution",
+    "", "flaming", "freezing", "holy wrath", "electrocution", "seeking",
 #if TAG_MAJOR_VERSION == 34
-    "orc slaying", "dragon slaying",
+    "dragon slaying",
 #endif
     "venom", "protection", "draining", "speed", "buggy-vorpal",
 #if TAG_MAJOR_VERSION == 34

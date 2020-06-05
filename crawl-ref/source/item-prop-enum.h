@@ -128,8 +128,8 @@ enum brand_type // item_def.special
     SPWPN_FREEZING,
     SPWPN_HOLY_WRATH,
     SPWPN_ELECTROCUTION,
+    SPWPN_SEEKING,
 #if TAG_MAJOR_VERSION == 34
-    SPWPN_ORC_SLAYING,
     SPWPN_DRAGON_SLAYING,
 #endif
     SPWPN_VENOM,

@@ -352,6 +352,14 @@ static const vector<brand_weight_tuple> RANGED_BRANDS = {
     { SPWPN_VORPAL,   10 },
 };
 
+static const vector<brand_weight_tuple> BOW_BRANDS = {
+    { SPWPN_NORMAL,   57 },
+    { SPWPN_FLAMING,  15 },
+    { SPWPN_FREEZING, 15 },
+    { SPWPN_VORPAL,   9 },
+    { SPWPN_SEEKING,  4 },
+};
+
 /// brand weights for holy (TSO-blessed) weapons.
 static const vector<brand_weight_tuple> HOLY_BRANDS = {
     { SPWPN_HOLY_WRATH, 100 },
@@ -642,10 +650,10 @@ static const weapon_def Weapon_prop[] =
 
     { WPN_SHORTBOW,          "shortbow",            9,  2, 13,
         SK_BOWS,         SIZE_LITTLE, NUM_SIZE_LEVELS, MI_ARROW,
-        DAMV_NON_MELEE, 8, 10, 30, RANGED_BRANDS },
+        DAMV_NON_MELEE, 8, 10, 30, BOW_BRANDS },
     { WPN_LONGBOW,           "longbow",            15,  0, 17,
         SK_BOWS,         SIZE_MEDIUM, NUM_SIZE_LEVELS, MI_ARROW,
-        DAMV_NON_MELEE, 2, 10, 45, RANGED_BRANDS },
+        DAMV_NON_MELEE, 2, 10, 45, BOW_BRANDS },
 };
 
 struct missile_def

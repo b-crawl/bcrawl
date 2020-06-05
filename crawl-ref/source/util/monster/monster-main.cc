@@ -283,7 +283,7 @@ static dice_def mi_calc_iood_damage(monster* mons)
     return dice_def(9, power / 4);
 }
 
-static string mi_calc_smiting_damage(monster* mons) { return "7-17"; }
+static string mi_calc_smiting_damage(monster* mons) { return "10-12"; }
 
 static string mi_calc_airstrike_damage(monster* mons)
 {

@@ -332,6 +332,7 @@ bool is_weapon_brand_ok(int type, int brand, bool strict)
 
     // Ranged-only brands.
     case SPWPN_PENETRATION:
+    case SPWPN_SEEKING:
     case SPWPN_ACID: // Only exists on Punk
         if (!is_range_weapon(item))
             return false;
@@ -341,7 +342,6 @@ bool is_weapon_brand_ok(int type, int brand, bool strict)
     // Removed brands.
     case SPWPN_RETURNING:
     case SPWPN_REACHING:
-    case SPWPN_ORC_SLAYING:
     case SPWPN_FLAME:
     case SPWPN_FROST:
     case SPWPN_DRAGON_SLAYING:

@@ -90,6 +90,7 @@
   - v1.23.2: Unbreathing players are not protected from being silenced by being engulfed by water.
   - v1.23.2: Player size increasing can break engulf like how it can break constriction.
   - v1.23.2: Players have double the regeneration rate of health and mana while waiting, except in Hell branches. This represents first aid or meditation, and unlike normal regeneration is not adjusted by time per turn.
+  - v1.23.4: Monster smite damage (such as from orc priests) is changed from 7-17 to 10-12.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -257,12 +258,14 @@
   - v1.19: Qazlal worshippers can regain mana by standing in a cloud.
   - v1.19: Xom has higher minimum levels for banishment. (6 -> 8 when bored, 9 -> 14 otherwise)
   - v1.19: Nemelex's Triple Draw ability is now available at \*\*.
-  - v1.21: Trog gives torment immunity while berserk at 3* piety.
+  - v1.21: Trog gives torment immunity while berserk at 3\* piety.
   - v1.22: Jiyva's pseudopod mutation no longer reduces body armour AC.
   - v1.22: Makhleb's Greater Servant ability failure chance scales less with piety and more with Invocations.
   - v1.22: The Wu Jian Council hates evil actions, but still allows all species.
   - v1.23: Ashenzari gives Evocations skill for staves with an active evoked ability, and some Staves and Spellcasting skill for all other staves.
   - v1.23.2: Nemelex cards that are individually drawn can be cancelled.
+  - v1.23.4: Deep Dwarves that convert to Ru start at \*\*\* piety.
+  - v1.23.4: Monks that convert to Uskayaw gain 800 to 1200 turns of agility status.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -318,6 +321,7 @@
   - v1.23.1: Higher base damage for quick blades (5 -> 6) and rapiers (8 -> 9) as compensation for the 1.23 shield changes.
   - v1.23.2: Higher maximum enchantments for bucklers (+3 -> +4) and medium shields (+5 -> +6).
   - v1.23.2: Health regeneration from potions of ambrosia scales with experience level, with an increased amount over level 8.
+  - v1.23.4: Some bows have the new Seeking brand, which makes weapons as accurate as if the user has 50 skill and 50 Fighting.
 
 #### Removed Items
   - Amulet of Harm
@@ -411,6 +415,7 @@
   - v1.23: Swamp drakes have a stronger bite that can slow and poison.
   - v1.23: Demonic crawlers have somewhat higher melee damage.
   - v1.23.2: Deep elf casters will sometimes attempt to maintain range to the player.
+  - v1.23.4: Lurking horrors are less likely to move towards the player.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

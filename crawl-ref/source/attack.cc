@@ -160,19 +160,19 @@ int attack::calc_to_hit(bool random)
     // player_to_hit methods.
     if (attacker->is_player())
     {
-        // fighting contribution
-        mhit += maybe_random_div(you.skill(SK_FIGHTING, 100), 100, random);
-
+        bool seeking = false;
+        
         // weapon skill contribution
         if (using_weapon())
         {
+            seeking = get_weapon_brand(*weapon) == SPWPN_SEEKING;
+            int skill = seeking ? 50 * 100 : you.skill(wpn_skill, 100);
             if (wpn_skill != SK_FIGHTING)
             {
                 if (you.skill(wpn_skill) < 1 && player_in_a_dangerous_place())
                     xom_is_stimulated(10); // Xom thinks that is mildly amusing.
 
-                mhit += maybe_random_div(you.skill(wpn_skill, 100), 100,
-                                         random);
+                mhit += maybe_random_div(skill, 100, random);
             }
         }
         else if (you.form_uses_xl())
@@ -183,9 +183,12 @@ int attack::calc_to_hit(bool random)
             mhit += (you.get_mutation_level(MUT_CLAWS) > 0
                      && wpn_skill == SK_UNARMED_COMBAT) ? 4 : 2;
 
-            mhit += maybe_random_div(you.skill(wpn_skill, 100), 100,
-                                     random);
+            mhit += maybe_random_div(you.skill(wpn_skill, 100), 100, random);
         }
+
+        // fighting contribution
+        int fighting = seeking ? 50 * 100 : you.skill(SK_FIGHTING, 100);
+        mhit += maybe_random_div(fighting, 100, random);
 
         // weapon bonus contribution
         if (using_weapon())
@@ -225,7 +228,11 @@ int attack::calc_to_hit(bool random)
     else    // Monster to-hit.
     {
         if (using_weapon())
+        {
+            if (get_weapon_brand(*weapon) == SPWPN_SEEKING)
+                mhit += max(0, 50 - calc_mon_to_hit_base());
             mhit += weapon->plus + property(*weapon, PWPN_HIT);
+        }
 
         const int jewellery = attacker->as_monster()->inv[MSLOT_JEWELLERY];
         if (jewellery != NON_ITEM

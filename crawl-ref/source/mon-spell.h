@@ -192,7 +192,7 @@ static const mon_spellbook mspell_list[] =
        { SPELL_SLOW, 12, MON_SPELL_WIZARD },
        { SPELL_CONFUSE, 12, MON_SPELL_WIZARD },
        { SPELL_REPEL_MISSILES, 12, MON_SPELL_WIZARD },
-       { SPELL_BLINK_AWAY, 36, MON_SPELL_WIZARD | MON_SPELL_SHORT_RANGE },
+       { SPELL_BLINK_AWAY, 20, MON_SPELL_WIZARD | MON_SPELL_SHORT_RANGE },
       }
     },
 

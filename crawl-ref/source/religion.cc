@@ -3121,6 +3121,7 @@ static void _set_initial_god_piety()
         if (you.species == SP_DEEP_DWARF && !you.worshipped[GOD_RU])
         {
             simple_god_message(" acknowledges the sacrifice of your ability to heal.");
+            mprf(MSGCH_GOD, "Primal energy surges through what was lost!");
             _set_initial_piety_value(75);
         }
 

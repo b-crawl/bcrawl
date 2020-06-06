@@ -13,7 +13,7 @@ all the same thing.
 Beogh
 
 Beogh is an evil deity, worshipped by the cave orcs native to the dungeon. Only
-orcs may devote their service to Beogh, and they must prove their devotion with
+orcs and species allied with them may devote their service to Beogh, and they must prove their devotion with
 bloodshed. Especially fervent devotees of Beogh will find orcish followers
 flocking to their banner: it is an age of signs and portents, and the orcs have
 become increasingly certain that the coming of their Messiah is nigh.

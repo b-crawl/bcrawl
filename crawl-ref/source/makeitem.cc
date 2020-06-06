@@ -2172,8 +2172,7 @@ void makeitem_tests()
         item.brand = coinflip() ? SPWPN_NORMAL
                                 : random2(NUM_REAL_SPECIAL_WEAPONS);
 #if TAG_MAJOR_VERSION == 34
-        if (item.brand == SPWPN_ORC_SLAYING
-            || item.brand == SPWPN_REACHING
+        if (item.brand == SPWPN_REACHING
             || item.brand == SPWPN_RETURNING
             || item.brand == SPWPN_CONFUSE
             || item.brand == SPWPN_DRAGON_SLAYING)

@@ -1834,8 +1834,6 @@ coord_def direction_chooser::find_summoner()
 {
     const monster* mon = monster_at(target());
 
-    // Don't leak information about rakshasa mirrored illusions.
-    if (mon && mon->is_summoned() && !mon->has_ench(ENCH_PHANTOM_MIRROR))
     if (mon && mon->is_summoned()
         // Don't leak information about rakshasa mirrored illusions.
         && !mon->has_ench(ENCH_PHANTOM_MIRROR)

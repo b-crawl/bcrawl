@@ -641,7 +641,7 @@ static void _eat_chunk(item_def& food)
     {
         int hp_amt = 1 + random2avg(5 + you.experience_level, 3);
         hp_amt = (hp_amt * gourmand) / GOURMAND_MAX;
-        if (hp_amt)
+        if (hp_amt && you.species != SP_DEEP_DWARF)
         {
             suppress_msg = true;
             _heal_from_food(hp_amt);

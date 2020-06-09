@@ -911,6 +911,31 @@ static string _describe_mutant_beast(const monster_info &mi)
            + " " + _describe_mutant_beast_tier(tier);
 }
 
+int _estimate_adjusted_dmg(int base_dmg, skill_type wpn_skill, int scale)
+{
+    int adj_dmg = scale * base_dmg;
+    
+    if (wpn_skill == SK_THROWING)
+        adj_dmg += (you.skill(wpn_skill, scale) * min(4, base_dmg)) / 4;
+    else
+    {
+        adj_dmg *= 2500 + you.skill(wpn_skill, 50);
+        adj_dmg /= 2500;
+    }
+
+    int dammod = 39;
+    if (you.strength() > 10)
+        dammod += you.strength() - 9;
+    else if (you.strength() < 10)
+        dammod -= (11 - you.strength()) * 3 / 2;
+    adj_dmg *= dammod;
+    adj_dmg /= 39;
+
+    adj_dmg *= 3000 + you.skill(SK_FIGHTING, 50);
+    adj_dmg /= 3000;
+    return adj_dmg;
+}
+
 /**
  * Is the item associated with some specific training goal?  (E.g. mindelay)
  *
@@ -1070,22 +1095,27 @@ static void _append_weapon_stats(string &description, const item_def &item)
 {
     const int base_dam = property(item, PWPN_DAMAGE);
     const int ammo_type = fires_ammo_type(item);
-    const int ammo_dam = ammo_type == MI_NONE ? 0 :
-                                                ammo_type_damage(ammo_type);
+    const int ammo_dam = ammo_type == MI_NONE ? 0 : ammo_type_damage(ammo_type);
     const skill_type skill = _item_training_skill(item);
     const int mindelay_skill = _item_training_target(item);
 
     const bool could_set_target = _could_set_training_target(item, true);
+    
+    int standard_dmg = base_dam + ammo_dam;
+    int adj_dmg = _estimate_adjusted_dmg(standard_dmg, skill, 10);
+    description += make_stringf("\nBase damage: %d  (Adjusted base damage: %d.%d)",
+                                    standard_dmg, adj_dmg/10, adj_dmg%10);
 
     if (skill == SK_SLINGS)
     {
-        description += make_stringf("\nFiring bullets:    Base damage: %d",
-                                    base_dam +
-                                    ammo_type_damage(MI_SLING_BULLET));
+        int bullet_dmg = base_dam + ammo_type_damage(MI_SLING_BULLET);
+        int adj_bullet_dmg = _estimate_adjusted_dmg(bullet_dmg, skill, 10);
+        description += make_stringf("\nFiring bullets: %d  (Adjusted: %d.%d)",
+                                    bullet_dmg, adj_bullet_dmg/10, adj_bullet_dmg%10);
     }
 
     description += make_stringf(
-    "\nBase accuracy: %+d  Base damage: %d  Base attack delay: %.1f"
+    "\nBase accuracy: %+d  Base attack delay: %.1f"
     "\nThis weapon's minimum attack delay (%.1f) is reached at skill level %d.",
         property(item, PWPN_HIT),
         base_dam + ammo_dam,
@@ -1519,12 +1549,14 @@ static string _describe_ammo(const item_def &item)
         const int throw_delay = thrown_missile_base_delay(dam);
         const int target_skill = _item_training_target(item);
         const bool could_set_target = _could_set_training_target(item, true);
+        int adj_dmg = _estimate_adjusted_dmg(dam, SK_THROWING, 10);
 
         description += make_stringf(
-            "\nBase damage: %d  Base attack delay: %.1f"
+            "\nBase damage: %d  (Adjusted base damage: %d.%d)"
+            "\nBase accuracy: +0  Base attack delay: %.1f"
             "\nThis projectile's minimum attack delay (%.1f) "
                 "is reached at skill level %d.",
-            dam,
+            dam, adj_dmg/10, adj_dmg%10,
             (float) throw_delay / 10,
             (float) thrown_missile_min_delay(dam) / 10,
             target_skill / 10

@@ -387,8 +387,10 @@ function attack(allow_movement)
     if not AUTOFIGHT_PROMPT_RANGE or crawl.weapon_check() then
       move_towards(x,y)
     end
-  else
+  elseif AUTOFIGHT_WAIT or AUTOFIGHT_THROW_NOMOVE then
     crawl.do_commands({"CMD_WAIT"})
+  else
+    crawl.mpr("No target in range!")
   end
 end
 

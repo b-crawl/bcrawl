@@ -1438,7 +1438,7 @@ static string _describe_ammo(const item_def &item)
     const bool can_launch = has_launcher(item);
     const bool can_throw  = is_throwable(&you, item, true);
 
-    if (item.brand && item_type_known(item))
+    if (item.brand != SPMSL_NORMAL && item_type_known(item))
     {
         description += "\n\n";
 
@@ -1558,7 +1558,7 @@ static string _describe_ammo(const item_def &item)
         }
 
         description += make_stringf(
-            "\nBase damage: %d  (Adjusted base damage: %d.%d)"
+            "\n\nBase damage: %d  (Adjusted base damage: %d.%d)"
             "\nBase accuracy: +0  Base attack delay: %.1f"
             "\nThis projectile's minimum attack delay (%.1f) "
                 "is reached at skill level %d.",

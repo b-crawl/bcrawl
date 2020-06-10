@@ -1530,7 +1530,7 @@ static string _describe_ammo(const item_def &item)
                             "that is greatly affected by armour within the area around its endpoint."
             break;
         case SPMSL_STEEL:
-            description += "It deals increased damage compared to normal ammo.";
+            description += "It deals increased damage compared to normal ammo, but cannot be thrown as quickly.";
             break;
         case SPMSL_SILVER:
             description += "It deals substantially increased damage to chaotic "
@@ -1544,10 +1544,18 @@ static string _describe_ammo(const item_def &item)
     const int dam = property(item, PWPN_DAMAGE);
     if (dam)
     {
-        const int throw_delay = thrown_missile_base_delay(dam);
-        const int target_skill = _item_training_target(item);
-        const bool could_set_target = _could_set_training_target(item, true);
+        int throw_delay = thrown_missile_base_delay(dam);
+        int min_throw_delay = thrown_missile_min_delay(dam);
+        int target_skill = _item_training_target(item);
+        bool could_set_target = _could_set_training_target(item, true);
         int adj_dmg = _estimate_adjusted_dmg(dam, SK_THROWING, 10);
+        
+        if (item.brand == SPMSL_STEEL)
+        {
+            throw_delay += 3;
+            min_throw_delay += 3;
+            adj_dmg = (adj_dmg * 3) / 2;
+        }
 
         description += make_stringf(
             "\nBase damage: %d  (Adjusted base damage: %d.%d)"
@@ -1556,7 +1564,7 @@ static string _describe_ammo(const item_def &item)
                 "is reached at skill level %d.",
             dam, adj_dmg/10, adj_dmg%10,
             (float) throw_delay / 10,
-            (float) thrown_missile_min_delay(dam) / 10,
+            (float) min_throw_delay / 10,
             target_skill / 10
         );
 

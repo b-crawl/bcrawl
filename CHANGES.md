@@ -325,7 +325,7 @@
   - v1.23.4: Some bows have the new Seeking brand, which makes weapons as accurate as if the user has 50 skill and 50 Fighting.
   - v1.23.5: Silver javelins are no longer generated.
   - v1.23.5: Exploding ammunition has higher explosion damage (2d5 -> 3d8).
-  - v1.23.5: Steel ammunition deals +30% damage instead of having 30% higher base damage.
+  - v1.23.5: Steel ammunition is changed: instead of having 30% higher item base damage, it has 50% higher total base damage, but has a higher base delay (15 -> 18) and min delay (0.7 -> 1.0).
 
 #### Removed Items
   - Amulet of Harm

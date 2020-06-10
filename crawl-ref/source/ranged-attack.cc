@@ -371,7 +371,7 @@ int ranged_attack::weapon_damage()
     if (projectile->base_type == OBJ_MISSILES
         && get_ammo_brand(*projectile) == SPMSL_STEEL)
     {
-        dam = div_rand_round(dam * 13, 10);
+        dam = div_rand_round(dam * 3, 2);
     }
 
     return dam;

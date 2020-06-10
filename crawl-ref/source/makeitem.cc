@@ -512,13 +512,12 @@ static special_missile_type _determine_missile_brand(const item_def& item,
     if (item.brand != 0)
         return static_cast<special_missile_type>(item.brand);
 
-    const bool force_good = item_level >= ISPEC_GIFT;
+    // bool force_good = item_level >= ISPEC_GIFT;
     special_missile_type rc = SPMSL_NORMAL;
 
     // "Normal weight" of SPMSL_NORMAL.
     int nw = random2(2000 - 55 * item_level);
-    if (force_good)
-        nw = min(nw, 100);
+    nw = max(nw, 100);
 
     switch (item.sub_type)
     {

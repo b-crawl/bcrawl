@@ -258,8 +258,8 @@ random_var player::attack_delay(const item_def *projectile, bool rescale) const
         
         if (get_ammo_brand(*projectile) == SPMSL_STEEL)
         {
-            base_proj_delay += 3;
-            min_proj_delay += 3;
+            base_proj_delay += 5;
+            min_proj_delay += 5;
         }
         
         attk_delay = random_var(base_proj_delay);

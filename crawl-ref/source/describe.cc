@@ -1552,9 +1552,9 @@ static string _describe_ammo(const item_def &item)
         
         if (item.brand == SPMSL_STEEL)
         {
-            throw_delay += 3;
-            min_throw_delay += 3;
-            adj_dmg = (adj_dmg * 3) / 2;
+            throw_delay += 5;
+            min_throw_delay += 5;
+            adj_dmg = (adj_dmg * 9) / 5;
         }
 
         description += make_stringf(

@@ -250,13 +250,18 @@ random_var player::attack_delay(const item_def *projectile, bool rescale) const
 
     if (projectile && is_launched(this, weap, *projectile) == launch_retval::THROWN)
     {
-        // Thrown weapons use 10 + projectile damage to determine base delay.
         const skill_type wpn_skill = SK_THROWING;
         
         int base_dmg = property(*projectile, PWPN_DAMAGE);
         int base_proj_delay = thrown_missile_base_delay(base_dmg);
         int min_proj_delay = thrown_missile_min_delay(base_dmg);
-                
+        
+        if (get_ammo_brand(*projectile) == SPMSL_STEEL)
+        {
+            base_proj_delay += 5;
+            min_proj_delay += 5;
+        }
+        
         attk_delay = random_var(base_proj_delay);
         attk_delay -= div_rand_round(random_var(you.skill(wpn_skill, 10)), DELAY_SCALE);
 

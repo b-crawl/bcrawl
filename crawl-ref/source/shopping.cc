@@ -743,20 +743,15 @@ unsigned int item_value(item_def item, bool ident)
             {
                 const vector<spell_type>& spells = spells_in_book(item);
 
-                int rarest = 0;
+                double rarest = 0;
                 for (spell_type spell : spells)
                 {
-                    rarity += spell_rarity(spell);
-                    if (spell_rarity(spell) > rarest)
-                        rarest = spell_rarity(spell);
+                    double r = spell_rarity(spell);
+                    rarity += r;
+                    rarest = max(rarest, r);
                 }
-                rarity += rarest * 2;
-                rarity /= spells.size();
-
-                // Surcharge for large books.
-                if (spells.size() > 6)
-                    rarity *= spells.size() / 6;
-
+                rarity += rarest;
+                rarity /= 5;
             }
             else
                 rarity = book_rarity(book);

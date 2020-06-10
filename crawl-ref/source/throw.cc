@@ -711,7 +711,7 @@ static bool _setup_missile_beam(const actor *agent, bolt &beam, item_def &item,
         bolt *expl = new bolt(beam);
 
         expl->is_explosion = true;
-        expl->damage       = dice_def(2, 5);
+        expl->damage       = dice_def(3, 8);
         expl->ex_size      = 1;
 
         if (beam.flavour == BEAM_MISSILE)

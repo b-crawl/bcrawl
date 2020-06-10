@@ -516,7 +516,9 @@ static special_missile_type _determine_missile_brand(const item_def& item,
     special_missile_type rc = SPMSL_NORMAL;
 
     // "Normal weight" of SPMSL_NORMAL.
-    int nw = force_good ? 0 : random2(2000 - 55 * item_level);
+    int nw = random2(2000 - 55 * item_level);
+    if (force_good)
+        nw = min(nw, 100);
 
     switch (item.sub_type)
     {
@@ -535,7 +537,6 @@ static special_missile_type _determine_missile_brand(const item_def& item,
     case MI_JAVELIN:
         rc = random_choose_weighted(32, SPMSL_PENETRATION,
                                     30, SPMSL_STEEL,
-                                    30, SPMSL_SILVER,
                                     nw, SPMSL_NORMAL);
         break;
     case MI_TOMAHAWK:

@@ -911,6 +911,31 @@ static string _describe_mutant_beast(const monster_info &mi)
            + " " + _describe_mutant_beast_tier(tier);
 }
 
+int _estimate_adjusted_dmg(int base_dmg, skill_type wpn_skill, int scale)
+{
+    int adj_dmg = scale * base_dmg;
+    
+    if (wpn_skill == SK_THROWING)
+        adj_dmg += (you.skill(wpn_skill, scale) * min(4, base_dmg)) / 4;
+    else
+    {
+        adj_dmg *= 2500 + you.skill(wpn_skill, 50);
+        adj_dmg /= 2500;
+    }
+
+    int dammod = 39;
+    if (you.strength() > 10)
+        dammod += you.strength() - 9;
+    else if (you.strength() < 10)
+        dammod -= (11 - you.strength()) * 3 / 2;
+    adj_dmg *= dammod;
+    adj_dmg /= 39;
+
+    adj_dmg *= 3000 + you.skill(SK_FIGHTING, 50);
+    adj_dmg /= 3000;
+    return adj_dmg;
+}
+
 /**
  * Is the item associated with some specific training goal?  (E.g. mindelay)
  *
@@ -1070,25 +1095,29 @@ static void _append_weapon_stats(string &description, const item_def &item)
 {
     const int base_dam = property(item, PWPN_DAMAGE);
     const int ammo_type = fires_ammo_type(item);
-    const int ammo_dam = ammo_type == MI_NONE ? 0 :
-                                                ammo_type_damage(ammo_type);
+    const int ammo_dam = ammo_type == MI_NONE ? 0 : ammo_type_damage(ammo_type);
     const skill_type skill = _item_training_skill(item);
     const int mindelay_skill = _item_training_target(item);
 
     const bool could_set_target = _could_set_training_target(item, true);
+    
+    int standard_dmg = base_dam + ammo_dam;
+    int adj_dmg = _estimate_adjusted_dmg(standard_dmg, skill, 10);
+    description += make_stringf("\nBase damage: %d  (Adjusted base damage: %d.%d)",
+                                    standard_dmg, adj_dmg/10, adj_dmg%10);
 
     if (skill == SK_SLINGS)
     {
-        description += make_stringf("\nFiring bullets:    Base damage: %d",
-                                    base_dam +
-                                    ammo_type_damage(MI_SLING_BULLET));
+        int bullet_dmg = base_dam + ammo_type_damage(MI_SLING_BULLET);
+        int adj_bullet_dmg = _estimate_adjusted_dmg(bullet_dmg, skill, 10);
+        description += make_stringf("\nFiring bullets: %d  (Adjusted: %d.%d)",
+                                    bullet_dmg, adj_bullet_dmg/10, adj_bullet_dmg%10);
     }
 
     description += make_stringf(
-    "\nBase accuracy: %+d  Base damage: %d  Base attack delay: %.1f"
+    "\nBase accuracy: %+d  Base attack delay: %.1f"
     "\nThis weapon's minimum attack delay (%.1f) is reached at skill level %d.",
         property(item, PWPN_HIT),
-        base_dam + ammo_dam,
         (float) property(item, PWPN_SPEED) / 10,
         (float) weapon_min_delay(item, item_brand_known(item)) / 10,
         mindelay_skill / 10);
@@ -1409,7 +1438,7 @@ static string _describe_ammo(const item_def &item)
     const bool can_launch = has_launcher(item);
     const bool can_throw  = is_throwable(&you, item, true);
 
-    if (item.brand && item_type_known(item))
+    if (item.brand != SPMSL_NORMAL && item_type_known(item))
     {
         description += "\n\n";
 
@@ -1497,12 +1526,11 @@ static string _describe_ammo(const item_def &item)
                            "one who " + threw_or_fired + " it.";
             break;
         case SPMSL_EXPLODING:
-            description += "It will explode into fragments upon hitting a "
-                           "target, hitting an obstruction, or reaching its "
-                           "maximum range.";
+            description += "It will explode into fragments, dealing additional damage "
+                            "that is greatly affected by armour within the area around its endpoint.";
             break;
         case SPMSL_STEEL:
-            description += "It deals increased damage compared to normal ammo.";
+            description += "It deals increased damage compared to normal ammo, but cannot be thrown as quickly.";
             break;
         case SPMSL_SILVER:
             description += "It deals substantially increased damage to chaotic "
@@ -1516,17 +1544,27 @@ static string _describe_ammo(const item_def &item)
     const int dam = property(item, PWPN_DAMAGE);
     if (dam)
     {
-        const int throw_delay = thrown_missile_base_delay(dam);
-        const int target_skill = _item_training_target(item);
-        const bool could_set_target = _could_set_training_target(item, true);
+        int throw_delay = thrown_missile_base_delay(dam);
+        int min_throw_delay = thrown_missile_min_delay(dam);
+        int target_skill = _item_training_target(item);
+        bool could_set_target = _could_set_training_target(item, true);
+        int adj_dmg = _estimate_adjusted_dmg(dam, SK_THROWING, 10);
+        
+        if (item.brand == SPMSL_STEEL)
+        {
+            throw_delay += 5;
+            min_throw_delay += 5;
+            adj_dmg = (adj_dmg * 9) / 5;
+        }
 
         description += make_stringf(
-            "\nBase damage: %d  Base attack delay: %.1f"
+            "\n\nBase damage: %d  (Adjusted base damage: %d.%d)"
+            "\nBase accuracy: +0  Base attack delay: %.1f"
             "\nThis projectile's minimum attack delay (%.1f) "
                 "is reached at skill level %d.",
-            dam,
+            dam, adj_dmg/10, adj_dmg%10,
             (float) throw_delay / 10,
-            (float) thrown_missile_min_delay(dam) / 10,
+            (float) min_throw_delay / 10,
             target_skill / 10
         );
 
@@ -1565,7 +1603,6 @@ static string _describe_armour(const item_def &item, bool verbose)
     {
         if (is_shield(item))
         {
-            const int target_skill = _item_training_target(item);
             description += "\n";
             description += "\nBase shield rating: "
                         + to_string(property(item, PARM_AC));

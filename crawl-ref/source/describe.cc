@@ -1527,7 +1527,7 @@ static string _describe_ammo(const item_def &item)
             break;
         case SPMSL_EXPLODING:
             description += "It will explode into fragments, dealing additional damage "
-                            "that is greatly affected by armour within the area around its endpoint."
+                            "that is greatly affected by armour within the area around its endpoint.";
             break;
         case SPMSL_STEEL:
             description += "It deals increased damage compared to normal ammo, but cannot be thrown as quickly.";

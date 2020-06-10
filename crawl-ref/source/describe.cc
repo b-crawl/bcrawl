@@ -1526,9 +1526,8 @@ static string _describe_ammo(const item_def &item)
                            "one who " + threw_or_fired + " it.";
             break;
         case SPMSL_EXPLODING:
-            description += "It will explode into fragments upon hitting a "
-                           "target, hitting an obstruction, or reaching its "
-                           "maximum range.";
+            description += "It will explode into fragments, dealing additional damage "
+                            "that is greatly affected by armour within the area around its endpoint."
             break;
         case SPMSL_STEEL:
             description += "It deals increased damage compared to normal ammo.";

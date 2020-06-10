@@ -71,7 +71,7 @@
   - v1.19.2: Taking stairs upwards when no monsters are visible will never teleport players.
   - v1.20: New default macros: '_' = create path around a pillar; space = walk along path. (by marksg07)
   - v1.20: Guaranteed damage reduction percent is shown always, not just in wizmode.
-  - v1.23.2: "Melee or throw" (such as ']') now waits a turn if no ammo is quivered.
+  - v1.23.5: Weapons show their base damage adjusted by player strength and skills.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -266,6 +266,7 @@
   - v1.23.2: Nemelex cards that are individually drawn can be cancelled.
   - v1.23.4: Deep Dwarves that convert to Ru start at \*\*\* piety.
   - v1.23.4: Monks that convert to Uskayaw gain 800 to 1200 turns of agility status.
+  - v1.23.5: Throwable ammunition gifts are less likely to be branded.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -322,6 +323,8 @@
   - v1.23.2: Higher maximum enchantments for bucklers (+3 -> +4) and medium shields (+5 -> +6).
   - v1.23.2: Health regeneration from potions of ambrosia scales with experience level, with an increased amount over level 8.
   - v1.23.4: Some bows have the new Seeking brand, which makes weapons as accurate as if the user has 50 skill and 50 Fighting.
+  - v1.23.5: Silver javelins are no longer generated.
+  - v1.23.5: Exploding ammunition has higher explosion damage (2d5 -> 3d8).
 
 #### Removed Items
   - Amulet of Harm

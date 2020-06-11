@@ -634,7 +634,7 @@ string player::arm_name(bool plural, bool *can_plural) const
  */
 string player::unarmed_attack_name() const
 {
-    string default_name = "Nothing wielded";
+    string default_name = "";
 
     if (has_usable_claws(true))
     {
@@ -645,6 +645,11 @@ string player::unarmed_attack_name() const
     }
     else if (has_usable_tentacles(true))
         default_name = "Tentacles";
+    else
+    {
+        bool singular = you.get_mutation_level(MUT_MISSING_HAND);
+        default_name = "Fist" + (singular ? "" : "s");
+    }
 
     if (player_equip_unrand(UNRAND_FISTS_OF_THUNDER))
         default_name += " (elec)";

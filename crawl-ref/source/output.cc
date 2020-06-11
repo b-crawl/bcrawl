@@ -1980,16 +1980,10 @@ static void _print_overview_screen_equip(column_composer& cols,
                      colname.c_str());
             equip_chars.push_back(equip_char);
         }
-        else if (eqslot == EQ_WEAPON
-                 && you.skill(SK_UNARMED_COMBAT))
+        else if (eqslot == EQ_WEAPON)
         {
-            str = "  - Unarmed";
-        }
-        else if (eqslot == EQ_WEAPON
-                 && you.form == transformation::blade_hands)
-        {
-            const bool plural = !you.get_mutation_level(MUT_MISSING_HAND);
-            str = string("  - Blade Hand") + (plural ? "s" : "");
+            int dmg = estimate_adjusted_dmg(0, SK_UNARMED, 10);
+            str = make_stringf("  - %s (%d.%d)", you.unarmed_attack_name(), dmg/10, dmg%10);
         }
         else if (eqslot == EQ_BOOTS
                  && (you.species == SP_NAGA || you.species == SP_CENTAUR))

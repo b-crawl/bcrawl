@@ -911,16 +911,35 @@ static string _describe_mutant_beast(const monster_info &mi)
            + " " + _describe_mutant_beast_tier(tier);
 }
 
-int _estimate_adjusted_dmg(int base_dmg, skill_type wpn_skill, int scale)
+int estimate_adjusted_dmg(int base_dmg, skill_type wpn_skill, int scale)
 {
     int adj_dmg = scale * base_dmg;
     
-    if (wpn_skill == SK_THROWING)
-        adj_dmg += (you.skill(wpn_skill, scale) * min(4, base_dmg)) / 4;
-    else
+    switch (wpn_skill)
     {
+    case SK_UNARMED:
+        int unarmed_dmg = get_form()->get_base_unarmed_damage();
+        if (you.has_usable_claws())
+            unarmed_dmg += you.has_claws() * 2;
+
+        unarmed_dmg *= scale;
+
+        if (you.form_uses_xl())
+            unarmed_dmg += (you.experience_level * scale) / 3;
+        else
+            unarmed_dmg += you.skill(wpn_skill, scale);
+        
+        adj_dmg += unarmed_dmg;
+        break;
+    
+    case SK_THROWING:
+        adj_dmg += (you.skill(wpn_skill, scale) * min(4, base_dmg)) / 4;
+        break;
+    
+    default:
         adj_dmg *= 2500 + you.skill(wpn_skill, 50);
         adj_dmg /= 2500;
+        break;
     }
 
     int dammod = 39;
@@ -1102,14 +1121,14 @@ static void _append_weapon_stats(string &description, const item_def &item)
     const bool could_set_target = _could_set_training_target(item, true);
     
     int standard_dmg = base_dam + ammo_dam;
-    int adj_dmg = _estimate_adjusted_dmg(standard_dmg, skill, 10);
+    int adj_dmg = estimate_adjusted_dmg(standard_dmg, skill, 10);
     description += make_stringf("\nBase damage: %d  (Adjusted base damage: %d.%d)",
                                     standard_dmg, adj_dmg/10, adj_dmg%10);
 
     if (skill == SK_SLINGS)
     {
         int bullet_dmg = base_dam + ammo_type_damage(MI_SLING_BULLET);
-        int adj_bullet_dmg = _estimate_adjusted_dmg(bullet_dmg, skill, 10);
+        int adj_bullet_dmg = estimate_adjusted_dmg(bullet_dmg, skill, 10);
         description += make_stringf("\nFiring bullets: %d  (Adjusted: %d.%d)",
                                     bullet_dmg, adj_bullet_dmg/10, adj_bullet_dmg%10);
     }
@@ -1548,7 +1567,7 @@ static string _describe_ammo(const item_def &item)
         int min_throw_delay = thrown_missile_min_delay(dam);
         int target_skill = _item_training_target(item);
         bool could_set_target = _could_set_training_target(item, true);
-        int adj_dmg = _estimate_adjusted_dmg(dam, SK_THROWING, 10);
+        int adj_dmg = estimate_adjusted_dmg(dam, SK_THROWING, 10);
         
         if (item.brand == SPMSL_STEEL)
         {

@@ -619,7 +619,7 @@ public:
     string get_uc_attack_name(string default_name) const override
     {
         const bool singular = you.get_mutation_level(MUT_MISSING_HAND);
-        return make_stringf("Ice fist%s", singular ? "" : "s");
+        return make_stringf("Ice fist%s (freeze)", singular ? "" : "s");
     }
 };
 

@@ -75,6 +75,7 @@
  #include "tileview.h"
  #include "tile-flags.h"
 #endif
+#include "transform.h"
 #include "unicode.h"
 
 using namespace ui;
@@ -917,7 +918,8 @@ int estimate_adjusted_dmg(int base_dmg, skill_type wpn_skill, int scale)
     
     switch (wpn_skill)
     {
-    case SK_UNARMED:
+    case SK_UNARMED_COMBAT:
+    {
         int unarmed_dmg = get_form()->get_base_unarmed_damage();
         if (you.has_usable_claws())
             unarmed_dmg += you.has_claws() * 2;
@@ -931,7 +933,7 @@ int estimate_adjusted_dmg(int base_dmg, skill_type wpn_skill, int scale)
         
         adj_dmg += unarmed_dmg;
         break;
-    
+    }
     case SK_THROWING:
         adj_dmg += (you.skill(wpn_skill, scale) * min(4, base_dmg)) / 4;
         break;

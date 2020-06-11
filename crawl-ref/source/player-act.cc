@@ -647,8 +647,9 @@ string player::unarmed_attack_name() const
         default_name = "Tentacles";
     else
     {
-        bool singular = you.get_mutation_level(MUT_MISSING_HAND);
-        default_name = "Fist" + (singular ? "" : "s");
+        default_name = "Fist";
+        if (!you.get_mutation_level(MUT_MISSING_HAND))
+            default_name += "s";
     }
 
     if (player_equip_unrand(UNRAND_FISTS_OF_THUNDER))

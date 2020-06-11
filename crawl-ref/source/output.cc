@@ -1982,8 +1982,8 @@ static void _print_overview_screen_equip(column_composer& cols,
         }
         else if (eqslot == EQ_WEAPON)
         {
-            int dmg = estimate_adjusted_dmg(0, SK_UNARMED, 10);
-            str = make_stringf("  - %s (%d.%d)", you.unarmed_attack_name(), dmg/10, dmg%10);
+            int dmg = estimate_adjusted_dmg(0, SK_UNARMED_COMBAT, 10);
+            str = make_stringf("  - %s (%d.%d)", you.unarmed_attack_name().c_str(), dmg/10, dmg%10);
         }
         else if (eqslot == EQ_BOOTS
                  && (you.species == SP_NAGA || you.species == SP_CENTAUR))

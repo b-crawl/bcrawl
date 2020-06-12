@@ -1567,7 +1567,7 @@ bool attack::apply_damage_brand(const char *what)
         break;
 
     case SPWPN_VORPAL:
-        special_damage = 1 + random2(damage_done) / 3;
+        special_damage = div_rand_round(damage_done, 6);
         // Note: Leaving special_damage_message empty because there isn't one.
         break;
 
@@ -1745,7 +1745,7 @@ void attack::calc_elemental_brand_damage(beam_type flavour,
                                          const char *what)
 {
     special_damage = resist_adjust_damage(defender, flavour,
-                                          random2(damage_done) / 2 + 1);
+                                          div_rand_round(damage_done, 4));
 
     if (needs_message && special_damage > 0 && verb)
     {

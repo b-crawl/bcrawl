@@ -1525,7 +1525,7 @@ bool attack::apply_damage_brand(const char *what)
 
     case SPWPN_HOLY_WRATH:
         if (defender->holy_wrath_susceptible())
-            special_damage = 1 + (random2(damage_done * 15) / 10);
+            special_damage = div_rand_round(damage_done * 3, 4);
 
         if (special_damage && defender_visible)
         {

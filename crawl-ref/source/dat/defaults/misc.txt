@@ -25,6 +25,8 @@ note_monsters += orb of fire, ancient lich, Sigmund
 
 autoinscribe += throwing nets?:=f
 autoinscribe += needles? of (frenzy|paralysis):=f
+autoinscribe += tomahawks? of dispersal:=f
+autoinscribe += javelins? of penetration:=f
 autoinscribe += ( ration):!d
 autoinscribe += figurine:!*
 

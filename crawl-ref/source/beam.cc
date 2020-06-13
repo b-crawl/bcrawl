@@ -3836,6 +3836,11 @@ void bolt::affect_player()
         you.increase_duration(DUR_FIRE_VULN, 5 + random2avg(7, 2), 11);
         break;
     
+    case SPELL_DAZZLING_SPRAY:
+        you.confuse(agent(), 4 + random2(4));
+        you.backlight();
+        break;
+    
     default: break;
     }
 
@@ -3899,12 +3904,6 @@ void bolt::affect_player()
             mprf(MSGCH_WARN, "You are encased in ice.");
             you.duration[DUR_FROZEN] = (2 + random2(3)) * BASELINE_DELAY;
         }
-    }
-    else if (origin_spell == SPELL_DAZZLING_SPRAY
-             && !(you.holiness() & (MH_UNDEAD | MH_NONLIVING | MH_PLANT)))
-    {
-        if (x_chance_in_y(85 - you.experience_level * 3 , 100))
-            you.confuse(agent(), 5 + random2(3));
     }
 }
 
@@ -4290,23 +4289,20 @@ void bolt::enchantment_affect_monster(monster* mon)
     extra_range_used += range_used_on_hit();
 }
 
-static bool _dazzle_monster(monster* mons, actor* act)
+static bool _dazzle_monster(monster* mons, actor* act, int ench_power)
 {
+    int dur = (div_rand_round(ench_power, 10) + random2(3) + random2(3) + 1) * BASELINE_DELAY;
+    mons->add_ench(mon_enchant(ENCH_CORONA, 1, act, dur));
+    
     if (!mons_can_be_dazzled(mons->type))
-        return false;
-
-    // Fixed 2.5% chance for HD>18
-    if (x_chance_in_y(95 - mons->get_hit_dice() * 5 , 100)
-        || mons->get_hit_dice() > 18
-           && one_chance_in(40))
     {
-        simple_monster_message(*mons, " is dazzled.");
-        mons->add_ench(mon_enchant(ENCH_BLIND, 1, act,
-                       random_range(4, 8) * BASELINE_DELAY));
-        return true;
+        simple_monster_message(*mons, " is illuminated by the luminous glob.");
+        return false;
     }
-
-    return false;
+    
+    simple_monster_message(*mons, " is blinded by the luminous glob.");
+    mons->add_ench(mon_enchant(ENCH_BLIND, 1, act, dur));
+    return true;
 }
 
 static void _glaciate_freeze(monster* mon, killer_type englaciator,
@@ -4420,7 +4416,7 @@ void bolt::monster_post_hit(monster* mon, int dmg)
         debuff_monster(*mon);
         break;
     case SPELL_DAZZLING_SPRAY:
-        _dazzle_monster(mon, agent());
+        _dazzle_monster(mon, agent(), ench_power);
         break;
     default: break;
     }

@@ -4294,7 +4294,15 @@ static bool _dazzle_monster(monster* mons, actor* act, int ench_power)
     int dur = (div_rand_round(ench_power, 8) + random2(3) + random2(3) + 1) * BASELINE_DELAY;
     bool illuminate = !mons_class_flag(mons->type, M_INSUBSTANTIAL);
     if (illuminate)
-        mons->add_ench(mon_enchant(ENCH_CORONA, 1, act, dur));
+    {
+        int corona_dur = dur;
+        if (mons->has_ench(ENCH_CORONA))
+        {
+            corona_dur -= mons->get_ench(ENCH_CORONA).duration;
+            corona_dur = max(BASELINE_DELAY, corona_dur);
+        }
+        mons->add_ench(mon_enchant(ENCH_CORONA, 1, act, corona_dur));
+    }
     
     if (!mons_can_be_dazzled(mons->type))
     {
@@ -4304,7 +4312,13 @@ static bool _dazzle_monster(monster* mons, actor* act, int ench_power)
     }
     
     simple_monster_message(*mons, " is blinded by the radiant glob.");
-    mons->add_ench(mon_enchant(ENCH_BLIND, 1, act, dur));
+    int blind_dur = dur;
+    if (mons->has_ench(ENCH_BLIND))
+    {
+        blind_dur -= mons->get_ench(ENCH_BLIND).duration;
+        blind_dur = max(BASELINE_DELAY, blind_dur);
+    }
+    mons->add_ench(mon_enchant(ENCH_BLIND, 1, act, blind_dur));
     return true;
 }
 

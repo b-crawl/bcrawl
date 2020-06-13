@@ -363,7 +363,7 @@ Darkness spell
 
 Dims the light of the dungeon, reducing the range of vision.
 %%%%
-Dazzling Spray spell
+Dazzling Orbs spell
 
 Fires three globs of brightly glowing magical energy that are easily dodged and deal no damage but
 will stick to and illuminate any creature they hit, obstructing its vision if it relies on light to see.

@@ -143,9 +143,8 @@ void player_quiver::set_quiver(const item_def &item, ammo_t ammo_type)
 
 void player_quiver::empty_quiver(ammo_t ammo_type)
 {
-    m_last_used_of_type[ammo_type] = item_def();
+    m_last_used_of_type[ammo_type].base_type = OBJ_UNASSIGNED;
     m_last_used_of_type[ammo_type].quantity = 0;
-    m_last_used_type  = ammo_type;
     you.redraw_quiver = true;
 }
 
@@ -191,13 +190,6 @@ void choose_item_for_quiver()
     {
         ammo_t t = _get_weapon_ammo_type(you.weapon());
         you.m_quiver.empty_quiver(t);
-
-        mprf("Reset %s quiver to default.",
-             t == AMMO_THROW    ? "throwing" :
-             t == AMMO_BLOWGUN  ? "blowgun" :
-             t == AMMO_SLING    ? "sling" :
-             t == AMMO_BOW      ? "bow" :
-                                  "crossbow");
         return;
     }
     else

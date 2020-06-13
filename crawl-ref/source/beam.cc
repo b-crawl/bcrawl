@@ -4299,11 +4299,11 @@ static bool _dazzle_monster(monster* mons, actor* act, int ench_power)
     if (!mons_can_be_dazzled(mons->type))
     {
         if (illuminate)
-            simple_monster_message(*mons, " is illuminated by the luminous glob.");
+            simple_monster_message(*mons, " is illuminated by the radiant glob.");
         return false;
     }
     
-    simple_monster_message(*mons, " is blinded by the luminous glob.");
+    simple_monster_message(*mons, " is blinded by the radiant glob.");
     mons->add_ench(mon_enchant(ENCH_BLIND, 1, act, dur));
     return true;
 }

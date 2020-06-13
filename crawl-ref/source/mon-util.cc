@@ -1569,7 +1569,7 @@ bool mons_can_be_blinded(monster_type mc)
 bool mons_can_be_dazzled(monster_type mc)
 {
     const mon_holy_type holiness = mons_class_holiness(mc);
-    return !(holiness & (MH_NONLIVING | MH_PLANT) && mons_genus(mc) != MONS_GOLEM)
+    return !(holiness & MH_NONLIVING && mons_genus(mc) != MONS_GOLEM)
         && !mons_class_flag(mc, M_INSUBSTANTIAL)
         && mons_can_be_blinded(mc);
 }

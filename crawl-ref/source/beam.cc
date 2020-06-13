@@ -4291,7 +4291,7 @@ void bolt::enchantment_affect_monster(monster* mon)
 
 static bool _dazzle_monster(monster* mons, actor* act, int ench_power)
 {
-    int dur = (div_rand_round(ench_power, 10) + random2(3) + random2(3) + 1) * BASELINE_DELAY;
+    int dur = (div_rand_round(ench_power, 8) + random2(3) + random2(3) + 1) * BASELINE_DELAY;
     mons->add_ench(mon_enchant(ENCH_CORONA, 1, act, dur));
     
     if (!mons_can_be_dazzled(mons->type))

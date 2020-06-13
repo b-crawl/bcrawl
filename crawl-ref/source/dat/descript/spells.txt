@@ -365,8 +365,8 @@ Dims the light of the dungeon, reducing the range of vision.
 %%%%
 Dazzling Spray spell
 
-Fires three globs of brightly glowing magical energy that are easily dodged but
-will illuminate any creature they hit and obstruct its vision if it relies on light to see.
+Fires three globs of brightly glowing magical energy that are easily dodged and deal no damage but
+will stick to and illuminate any creature they hit, obstructing its vision if it relies on light to see.
 At high power, the effect duration increases but the accuracy of the globs does not.
 %%%%
 Death Channel spell

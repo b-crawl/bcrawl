@@ -424,6 +424,7 @@
   - v1.23: Demonic crawlers have somewhat higher melee damage.
   - v1.23.2: Deep elf casters will sometimes attempt to maintain range to the player.
   - v1.23.4: Lurking horrors are less likely to move towards the player.
+  - v1.24.1: Ogre mages have reworked spell sets. Changes include Paralyse being replaced by Ensnare.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

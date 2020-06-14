@@ -1881,7 +1881,7 @@ void canned_msg(canned_message_type which_message)
             crawl_state.cancel_cmd_repeat();
             break;
         case MSG_NO_ENERGY:
-            mpr("You don't have the energy to cast that spell.");
+            mpr("You don't have the energy to cast spells.");
             // included in default force_more_message
             crawl_state.cancel_cmd_repeat();
             break;

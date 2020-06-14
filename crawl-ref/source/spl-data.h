@@ -2641,11 +2641,11 @@ static const struct spell_desc spelldata[] =
 #endif
 
 {
-    SPELL_DAZZLING_SPRAY, "Dazzling Spray",
+    SPELL_DAZZLING_SPRAY, "Dazzling Orbs",
     SPTYP_CONJURATION | SPTYP_HEXES,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF,
     3,
-    50,
+    75,
     5, 5,
     3, 0,
     TILEG_DAZZLING_SPRAY,

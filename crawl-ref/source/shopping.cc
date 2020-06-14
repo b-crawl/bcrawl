@@ -148,7 +148,7 @@ int artefact_value(const item_def &item)
     if (prop[ ARTP_NOISE ])
         ret -= 5;
 
-    if (prop[ ARTP_PREVENT_TELEPORTATION ])
+    if (prop[ ARTP_PREVENT_TELEPORTATION ] && item.base_type == OBJ_ARMOUR)
         ret -= 8;
 
     if (prop[ ARTP_PREVENT_SPELLCASTING ])
@@ -391,51 +391,39 @@ unsigned int item_value(item_def item, bool ident)
             valued += 40;
         else
         {
-            // true if the wand is of a good type, a type with significant
-            // inherent value even when empty. Good wands are less expensive
-            // per charge.
-            bool good = false;
+            int wand_power = 0;
             switch (item.sub_type)
             {
             case WAND_CLOUDS:
             case WAND_SCATTERSHOT:
-                valued += 120;
-                good = true;
+                wand_power = 120;
                 break;
-
             case WAND_ACID:
             case WAND_DIGGING:
-                valued += 80;
-                good = true;
+                wand_power = 80;
                 break;
-
             case WAND_ICEBLAST:
-            case WAND_DISINTEGRATION:
-                valued += 40;
-                good = true;
+                wand_power = 60;
                 break;
-
             case WAND_ENSLAVEMENT:
             case WAND_PARALYSIS:
-            case WAND_RANDOM_EFFECTS:
-                valued += 20;
+                wand_power = 40;
                 break;
-
+            case WAND_RANDOM_EFFECTS:
+            case WAND_DISINTEGRATION:
+                wand_power = 25;
+                break;
             case WAND_FLAME:
             case WAND_POLYMORPH:
-                valued += 10;
-                break;
-
             default:
-                valued += 6;
+                wand_power = 16;
                 break;
             }
 
             if (item_ident(item, ISFLAG_KNOW_PLUSES))
-            {
-                if (good) valued += (valued * item.plus) / 4;
-                else      valued += (valued * item.plus) / 2;
-            }
+                valued += (wand_power * (item.plus + 1)) / 4;
+            else
+                valued += (wand_power * 5) / 4;
         }
         break;
 
@@ -468,16 +456,14 @@ unsigned int item_value(item_def item, bool ident)
                 valued += 100;
                 break;
 
-            case POT_MAGIC:
             case POT_INVISIBILITY:
-            case POT_CANCELLATION:
-            case POT_AMBROSIA:
             case POT_MUTATION:
                 valued += 80;
                 break;
 
-            case POT_BERSERK_RAGE:
+            case POT_CANCELLATION:
             case POT_HEAL_WOUNDS:
+            case POT_MAGIC:
 #if TAG_MAJOR_VERSION == 34
             case POT_RESTORE_ABILITIES:
 #endif
@@ -487,32 +473,25 @@ unsigned int item_value(item_def item, bool ident)
             case POT_MIGHT:
             case POT_AGILITY:
             case POT_BRILLIANCE:
+            case POT_LIGNIFY:
+            case POT_FLIGHT:
+            case POT_AMBROSIA:
                 valued += 40;
                 break;
 
-            case POT_CURING:
-            case POT_LIGNIFY:
-            case POT_FLIGHT:
+            case POT_BERSERK_RAGE:
                 valued += 30;
                 break;
 
-#if TAG_MAJOR_VERSION == 34
-            case POT_POISON:
-            case POT_STRONG_POISON:
-            case POT_PORRIDGE:
-            case POT_SLOWING:
-            case POT_DECAY:
-#endif
-            case POT_BLOOD:
-            case POT_DEGENERATION:
-                valued += 10;
+            case POT_CURING:
+                valued += 25;
                 break;
 
-#if TAG_MAJOR_VERSION == 34
-            case POT_BLOOD_COAGULATED:
-                valued += 5;
+            case POT_BLOOD:
+            case POT_DEGENERATION:
+            default:
+                valued += 10;
                 break;
-#endif
             }
         }
         break;
@@ -545,11 +524,11 @@ unsigned int item_value(item_def item, bool ident)
                 break;
 
             case SCR_BRAND_WEAPON:
-                valued += 200;
+                valued += 180;
                 break;
 
             case SCR_SUMMONING:
-                valued += 95;
+                valued += 100;
                 break;
 
             case SCR_BLINKING:
@@ -562,8 +541,11 @@ unsigned int item_value(item_def item, bool ident)
                 valued += 75;
                 break;
 
-            case SCR_AMNESIA:
             case SCR_FEAR:
+                valued += 50;
+                break;
+
+            case SCR_AMNESIA:
             case SCR_IMMOLATION:
             case SCR_MAGIC_MAPPING:
                 valued += 35;
@@ -576,18 +558,11 @@ unsigned int item_value(item_def item, bool ident)
 
             case SCR_FOG:
             case SCR_IDENTIFY:
-#if TAG_MAJOR_VERSION == 34
-            case SCR_CURSE_ARMOUR:
-            case SCR_CURSE_WEAPON:
-            case SCR_CURSE_JEWELLERY:
-#endif
                 valued += 20;
                 break;
 
             case SCR_NOISE:
-#if TAG_MAJOR_VERSION == 34
-            case SCR_RANDOM_USELESSNESS:
-#endif
+            default:
                 valued += 10;
                 break;
             }
@@ -706,17 +681,18 @@ unsigned int item_value(item_def item, bool ident)
             valued += 5000;
             break;
 
-        case MISC_FAN_OF_GALES:
+
         case MISC_PHIAL_OF_FLOODS:
         case MISC_LAMP_OF_FIRE:
         case MISC_LIGHTNING_ROD:
             valued += 400;
             break;
 
-        case MISC_PHANTOM_MIRROR:
+        case MISC_FAN_OF_GALES:
             valued += 300;
             break;
 
+        case MISC_PHANTOM_MIRROR:
         case MISC_BOX_OF_BEASTS:
         case MISC_SACK_OF_SPIDERS:
             valued += 200;

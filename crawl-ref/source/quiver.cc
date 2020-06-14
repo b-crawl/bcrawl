@@ -192,7 +192,7 @@ void choose_item_for_quiver()
         ammo_t t = _get_weapon_ammo_type(you.weapon());
         you.m_quiver.empty_quiver(t);
 
-        mprf("Reset %s quiver to default.",
+        mprf("Reset %s quiver to default.\nInscribe items with \"=f\" to prevent quivering.",
              t == AMMO_THROW    ? "throwing" :
              t == AMMO_BLOWGUN  ? "blowgun" :
              t == AMMO_SLING    ? "sling" :

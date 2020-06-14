@@ -72,6 +72,7 @@
   - v1.20: New default macros: '_' = create path around a pillar; space = walk along path. (by marksg07)
   - v1.20: Guaranteed damage reduction percent is shown always, not just in wizmode.
   - v1.24: Weapons show their base damage adjusted by player strength and skills.
+  - v1.24.1: Adjusted unarmed damage is shown on the % screen.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -91,6 +92,7 @@
   - v1.23.2: Player size increasing can break engulf like how it can break constriction.
   - v1.23.2: Players have double the regeneration rate of health and mana while waiting, except in Hell branches. This represents first aid or meditation, and unlike normal regeneration is not adjusted by time per turn.
   - v1.23.4: Monster smite damage (such as from orc priests) is changed from 7-17 to 10-12.
+  - v1.24.1: The bonus damage % from flaming, freezing, vorpal, and holy wrath brands is no longer randomized, to make branded weapon variance more consistent with unbranded attacks.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -129,6 +131,7 @@
   - v1.17: Black Draconians have a better Fighting aptitude. (+1 -> +3)
   - v1.19.1: Oni use Spellcasting as magic school skill level for all non-spell magic school skill checks.
   - v1.19.1: Oni can receive Kikubaaqudgha's final spell gifts.
+  - v1.24.1: Merfolk have higher aptitudes for long blades (+1 -> +2) and staves (-2 -> -1).
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -196,6 +199,7 @@
   - v1.21.3: Tree Form is level 4.
   - v1.22: Olgreb's Toxic Radiance is reworked: each turn, it has a (power / (HD * 16)) chance of giving a poison level to everything visible. Its direct damage is removed. Poison-resistant monsters have half the chance of being poisoned.
   - v1.22: Song of Slaying now gives +SH equal to twice its slaying bonus if not using a shield.
+  - v1.24.1: Dazzling Spray becomes Dazzling Orbs, which fires attacks with low accuracy that deal no damage. If they hit, they stick to the target, which always causes corona and blindness unless the target is immune.
 
 #### Removed Spells
   - Summon Guardian Golem

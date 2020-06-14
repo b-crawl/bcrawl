@@ -425,6 +425,7 @@
   - v1.23.2: Deep elf casters will sometimes attempt to maintain range to the player.
   - v1.23.4: Lurking horrors are less likely to move towards the player.
   - v1.24.1: Ogre mages have reworked spell sets. Changes include Paralyse being replaced by Ensnare.
+  - v1.24.1: Human wizards move less and cast their weakest spells more often.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

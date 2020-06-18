@@ -4865,6 +4865,18 @@ spret qazlal_elemental_force(bool fail)
         placed++;
     }
 
+    // give the player full XP and piety for inner flame kills
+    monster* avatar = get_free_monster();
+    if (avatar)
+    {
+        avatar->set_new_monster_id();
+        avatar->mname = "the divine energy of Qazlal";
+        avatar->flags = MF_NO_REWARD | MF_JUST_SUMMONED | MF_SEEN | MF_WAS_IN_VIEW
+                    | MF_HARD_RESET | MF_NAME_REPLACE;
+        avatar->attitude = ATT_FRIENDLY;
+        avatar->mid = MID_PLAYER;
+    }
+
     for (monster_near_iterator mi(you.pos(), LOS_NO_TRANS); mi; ++mi)
     {
         if (!x_chance_in_y(elemental_chance, 40))
@@ -4872,7 +4884,15 @@ spret qazlal_elemental_force(bool fail)
         if (mi->is_summoned())
             continue;
 
-        mi->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, *mi));
+        monster* flame_source = avatar ? avatar : *mi;
+        mi->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, flame_source));
+    }
+    
+    // cleanup avatar
+    if (avatar)
+    {
+        env.mid_cache.erase(avatar->mid);
+        avatar->reset();
     }
 
     mprf(MSGCH_GOD, "Qazlal's elemental power surges around you!");

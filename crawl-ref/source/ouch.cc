@@ -416,7 +416,7 @@ bool drain_player(int power, bool announce_full, bool ignore_protection)
 static void _xom_checks_damage(kill_method_type death_type,
                                int dam, mid_t death_source)
 {
-    if (you_worship(GOD_XOM))
+    if (you_worship(GOD_XOM) || you.char_class == JOB_CHAOS_KNIGHT)
     {
         if (death_type == KILLED_BY_TARGETING
             || death_type == KILLED_BY_BOUNCE
@@ -542,7 +542,7 @@ static void _maybe_spawn_monsters(int dam, kill_method_type death_type,
         if (dam >= 20)
             how_many = div_rand_round(dam, 80);
     }
-    else if (you_worship(GOD_XOM)
+    else if ((you_worship(GOD_XOM) || you.char_class == JOB_CHAOS_KNIGHT)
              && dam >= you.hp_max / 4
              && x_chance_in_y(dam, 3 * you.hp_max))
     {
@@ -635,7 +635,7 @@ static void _maybe_fog(int dam)
         mpr("You emit a cloud of dark smoke.");
         big_cloud(CLOUD_BLACK_SMOKE, &you, you.pos(), 50, 4 + random2(5));
     }
-    else if (you_worship(GOD_XOM) && x_chance_in_y(dam, 30 * upper_threshold))
+    else if ((you_worship(GOD_XOM) || you.char_class == JOB_CHAOS_KNIGHT) && x_chance_in_y(dam, 30 * upper_threshold))
     {
         mprf(MSGCH_GOD, "You emit a cloud of colourful smoke!");
         big_cloud(CLOUD_XOM_TRAIL, &you, you.pos(), 50, 4 + random2(5), -1);
@@ -962,17 +962,14 @@ void ouch(int dam, kill_method_type death_type, mid_t source, const char *aux,
         you.escaped_death_aux   = aux == nullptr ? "" : aux;
 
         // Xom should only kill his worshippers if they're under penance
-        // or Xom is bored.
-        if (you_worship(GOD_XOM) && !you.penance[GOD_XOM]
-            && you.gift_timeout > 0)
+        if ((you_worship(GOD_XOM) || you.char_class == JOB_CHAOS_KNIGHT))
         {
             return;
         }
 
         // Also don't kill wizards testing Xom acts.
-        if ((crawl_state.repeat_cmd == CMD_WIZARD
-                || crawl_state.prev_cmd == CMD_WIZARD)
-            && !you_worship(GOD_XOM))
+        if ((crawl_state.repeat_cmd == CMD_WIZARD || crawl_state.prev_cmd == CMD_WIZARD)
+            && !(you_worship(GOD_XOM) || you.char_class == JOB_CHAOS_KNIGHT))
         {
             return;
         }

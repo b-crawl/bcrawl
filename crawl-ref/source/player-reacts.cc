@@ -1027,9 +1027,9 @@ void player_reacts()
     seen_monsters_react(stealth);
 
     // XOM now ticks from here, to increase his reaction time to tension.
-    if (you_worship(GOD_XOM))
+    if (you_worship(GOD_XOM) || you.char_class == JOB_CHAOS_KNIGHT)
         xom_tick();
-    else if (you_worship(GOD_QAZLAL))
+    if (you_worship(GOD_QAZLAL))
         qazlal_storm_clouds();
 
     if (you.props[EMERGENCY_FLIGHT_KEY].get_bool())

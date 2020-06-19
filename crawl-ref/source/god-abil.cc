@@ -4874,7 +4874,6 @@ spret qazlal_elemental_force(bool fail)
         avatar->flags = MF_NO_REWARD | MF_JUST_SUMMONED | MF_SEEN | MF_WAS_IN_VIEW
                     | MF_HARD_RESET | MF_NAME_REPLACE;
         avatar->attitude = ATT_FRIENDLY;
-        avatar->mid = MID_PLAYER;
     }
 
     for (monster_near_iterator mi(you.pos(), LOS_NO_TRANS); mi; ++mi)

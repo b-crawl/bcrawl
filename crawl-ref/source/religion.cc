@@ -2714,8 +2714,8 @@ void excommunication(bool voluntary, god_type new_god)
         break;
 
     case GOD_XOM:
-        you.props[XOM_GIFT_KEY] = you.gift_timeout
-        you.props[XOM_PIETY_KEY] = old_piety
+        you.props[XOM_GIFT_KEY] = you.gift_timeout;
+        you.props[XOM_PIETY_KEY] = old_piety;
         break;
 
     default:

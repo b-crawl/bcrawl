@@ -2713,6 +2713,11 @@ void excommunication(bool voluntary, god_type new_god)
         you.attribute[ATTR_HEAVENLY_STORM] = 0;
         break;
 
+    case GOD_XOM:
+        you.props[XOM_GIFT_KEY] = you.gift_timeout;
+        you.props[XOM_PIETY_KEY] = old_piety;
+        break;
+
     default:
         break;
     }
@@ -3609,6 +3614,11 @@ bool god_hates_your_god(god_type god, god_type your_god)
     
     case GOD_SIF_MUNA:
         if(your_god == GOD_ASHENZARI || your_god == GOD_CHEIBRIADOS)
+            return false;
+        return true;
+    
+    case GOD_XOM:
+        if(your_god != GOD_ZIN && you.char_class == JOB_CHAOS_KNIGHT)
             return false;
         return true;
     

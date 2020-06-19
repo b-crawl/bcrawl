@@ -53,6 +53,8 @@
 #define LAST_ACTION_WAS_MOVE_OR_REST_KEY "last_action_was_move_or_rest"
 #define PARALYSED_BY_KEY "paralysed_by"
 #define PETRIFIED_BY_KEY "petrified_by"
+#define XOM_GIFT_KEY "xom_timeout"
+#define XOM_PIETY_KEY "xom_piety"
 
 // display/messaging breakpoints for penalties from Ru's MUT_HORROR
 #define HORROR_LVL_EXTREME  3

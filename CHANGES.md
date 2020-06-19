@@ -56,6 +56,7 @@
   - v1.21: Necromancers start with Animate Skeleton memorized.
   - v1.21: Enchanters start with a potion of invisibility.
   - v1.22: Monks start with a scroll of remove curse.
+  - v1.24.2: Chaos Knights are treated as still worshipping Xom if they convert to another deity.
 
 #### Features
   - All items are automatically identified if the player has a rune.

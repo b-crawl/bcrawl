@@ -376,7 +376,7 @@ void xom_tick()
         }
 
         if (_get_xom_gift_timeout() == 1)
-            simple_god_message(" is getting BORED.");
+            simple_god_message(" is getting BORED.", GOD_XOM);
     }
 
     if (x_chance_in_y(2 + you.faith(), 6))
@@ -406,9 +406,9 @@ void xom_tick()
             if (interest > 0)
             {
                 if (interest < 25)
-                    simple_god_message(" is interested.");
+                    simple_god_message(" is interested.", GOD_XOM);
                 else
-                    simple_god_message(" is intrigued.");
+                    simple_god_message(" is intrigued.", GOD_XOM);
 
                 _set_xom_gift_timeout(xom_gift_timeout + interest);
                 //updating piety status line

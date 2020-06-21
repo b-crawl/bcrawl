@@ -91,7 +91,7 @@
   - v1.23.2: Tree form is giant size, which means potions of lignification break constriction if the source is not giant.
   - v1.23.2: Unbreathing players are not protected from being silenced by being engulfed by water.
   - v1.23.2: Player size increasing can break engulf like how it can break constriction.
-  - v1.23.2: Players have double the regeneration rate of health and mana while waiting, except in Hell branches. This represents first aid or meditation, and unlike normal regeneration is not adjusted by time per turn.
+  - v1.23.2: Players have double the regeneration rate of health and mana while waiting, except in Hell branches. This represents first aid or meditation, and unlike normal regeneration is not adjusted by time per turn or temporary statuses.
   - v1.23.4: Monster smite damage (such as from orc priests) is changed from 7-17 to 10-12.
   - v1.24.1: The bonus damage % from flaming, freezing, vorpal, and holy wrath brands is no longer randomized, to make branded weapon variance more consistent with unbranded attacks.
 

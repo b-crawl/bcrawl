@@ -95,6 +95,8 @@
   - v1.23.4: Monster smite damage (such as from orc priests) is changed from 7-17 to 10-12.
   - v1.24.1: The bonus damage % from flaming, freezing, vorpal, and holy wrath brands is no longer randomized, to make branded weapon variance more consistent with unbranded attacks.
   - v1.24.3: Vorpal melee weapons have a minimum bonus damage of (1 + current_mana/25).
+  - v1.24.3: Flaming, freezing, and draining brands deal 1/3 more bonus damage. Vorpal brands on ranged weapons deal 1/3 more bonus damage.
+  - v1.24.3: Antimagic branded weapons reduce player max mana by 1/2 instead of 2/3.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

@@ -916,14 +916,13 @@ void attack::do_miscast()
 
 void attack::drain_defender()
 {
-    if (defender->is_monster() && coinflip())
-        return;
-
     if (!(defender->holiness() & MH_NATURAL))
         return;
 
-    special_damage = resist_adjust_damage(defender, BEAM_NEG,
-                                          (1 + random2(damage_done)) / 2);
+    if (defender->is_monster() && x_chance_in_y(1, 3))
+        return;
+
+    special_damage = resist_adjust_damage(defender, BEAM_NEG, (div_rand_round(damage_done)), 4);
 
     if (defender->drain_exp(attacker, true, 20 + min(35, damage_done)))
     {
@@ -1567,14 +1566,18 @@ bool attack::apply_damage_brand(const char *what)
 
     case SPWPN_VORPAL:
     {
-        special_damage = div_rand_round(damage_done, 6);
+        bool ranged = weapon && is_range_weapon(*weapon);
+        if (ranged)
+            special_damage = div_rand_round(damage_done * 2, 9);
+        else
+            special_damage = div_rand_round(damage_done, 6);
         
         int min_vorpal_dmg = 0;
         if (attacker->is_player())
             min_vorpal_dmg = 1 + div_rand_round(you.magic_points, 25);
         else if (attacker->is_monster())
             min_vorpal_dmg = 1 + div_rand_round(attacker->get_hit_dice(), 10);
-        if (min_vorpal_dmg > special_damage && weapon && !is_range_weapon(*weapon))
+        if (min_vorpal_dmg > special_damage && !ranged)
         {
             special_damage = 1 + random2(min_vorpal_dmg*2 - 1);
             
@@ -1758,7 +1761,7 @@ void attack::calc_elemental_brand_damage(beam_type flavour,
                                          const char *what)
 {
     special_damage = resist_adjust_damage(defender, flavour,
-                                          div_rand_round(damage_done, 4));
+                                          div_rand_round(damage_done, 3));
 
     if (needs_message && special_damage > 0 && verb)
     {

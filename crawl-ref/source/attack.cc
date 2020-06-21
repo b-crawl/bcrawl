@@ -1491,7 +1491,6 @@ bool attack::apply_damage_brand(const char *what)
         case SPWPN_FREEZING:
         case SPWPN_HOLY_WRATH:
         case SPWPN_ANTIMAGIC:
-        case SPWPN_VORPAL:
         case SPWPN_VAMPIRISM:
             // These brands require some regular damage to function.
             return false;
@@ -1567,10 +1566,24 @@ bool attack::apply_damage_brand(const char *what)
         break;
 
     case SPWPN_VORPAL:
+    {
         special_damage = div_rand_round(damage_done, 6);
-        // Note: Leaving special_damage_message empty because there isn't one.
+        
+        int min_vorpal_dmg = 0;
+        if (attacker->is_player())
+            min_vorpal_dmg = 1 + div_rand_round(you.magic_points, 16);
+        else if (attacker->is_monster())
+            min_vorpal_dmg = 1 + div_rand_round(attacker->get_hit_dice(), 10);
+        if (min_vorpal_dmg > special_damage && weapon && !is_range_weapon(*weapon))
+        {
+            special_damage = 1 + random2(min_vorpal_dmg*2 - 1);
+            
+            special_damage_message = make_stringf("%s%s",
+                    coinflip() ? "Snnnck" : "Ssssck",
+                    attack_strength_punctuation(special_damage).c_str());
+        }
         break;
-
+    }
     case SPWPN_VAMPIRISM:
     {
         if (!weapon

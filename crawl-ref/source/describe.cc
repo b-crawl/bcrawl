@@ -1324,8 +1324,8 @@ static string _describe_weapon(const item_def &item, bool verbose)
             }
             else
             {
-                description += "It inflicts extra damage upon your "
-                    "enemies.";
+                description += "It will always inflict at least some extra damage. "
+                            "This minimum extra damage increases with your current reserve of magical power.";
             }
             break;
         case SPWPN_CHAOS:

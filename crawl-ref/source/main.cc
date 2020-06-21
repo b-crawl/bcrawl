@@ -1815,7 +1815,7 @@ void process_command(command_type cmd)
         update_acrobat_status();
         
         if (!player_in_hell())
-            regenerate_hp_and_mp(10);
+            regenerate_hp_and_mp(10, false);
         
         you.turn_is_over = true;
         break;

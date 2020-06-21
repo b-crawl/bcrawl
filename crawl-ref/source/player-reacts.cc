@@ -875,7 +875,7 @@ static void _handle_emergency_flight()
 // BASELINE_DELAY, and your regeneration rate. MP regeneration happens
 // similarly, but the countup depends on delay, BASELINE_DELAY, and
 // you.max_magic_points
-void regenerate_hp_and_mp(int delay)
+void regenerate_hp_and_mp(int delay, bool apply_bonuses)
 {
     if (crawl_state.disables[DIS_PLAYER_REGEN])
         return;
@@ -883,7 +883,7 @@ void regenerate_hp_and_mp(int delay)
     // HP Regeneration
     if (!you.duration[DUR_DEATHS_DOOR])
     {
-        const int base_val = player_regen();
+        const int base_val = player_regen(apply_bonuses);
         you.hit_points_regeneration += div_rand_round(base_val * delay, BASELINE_DELAY);
     }
 

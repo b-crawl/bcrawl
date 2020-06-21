@@ -1121,7 +1121,7 @@ bool regeneration_is_inhibited()
     }
 }
 
-int player_regen()
+int player_regen(bool apply_bonuses)
 {
     // Note: if some condition can set rr = 0, can't be rested off, and
     // would allow travel, please update is_sufficiently_rested.
@@ -1132,7 +1132,8 @@ int player_regen()
         rr = 20 + ((rr - 20) / 2);
 
     // Add in miscellaneous bonuses
-    rr += _player_bonus_regen();
+    if (apply_bonuses)
+        rr += _player_bonus_regen();
 
     // Before applying other effects, make sure that there's something
     // to heal.
@@ -1155,7 +1156,7 @@ int player_regen()
         rr = 0;
 
     // Trog's Hand. This circumvents sickness or inhibited regeneration.
-    if (you.duration[DUR_TROGS_HAND])
+    if (apply_bonuses && you.duration[DUR_TROGS_HAND])
         rr += 100;
 
     return rr;

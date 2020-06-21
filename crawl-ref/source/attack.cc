@@ -922,7 +922,7 @@ void attack::drain_defender()
     if (defender->is_monster() && x_chance_in_y(1, 3))
         return;
 
-    special_damage = resist_adjust_damage(defender, BEAM_NEG, (div_rand_round(damage_done)), 4);
+    special_damage = resist_adjust_damage(defender, BEAM_NEG, div_rand_round(damage_done, 4));
 
     if (defender->drain_exp(attacker, true, 20 + min(35, damage_done)))
     {

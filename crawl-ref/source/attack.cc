@@ -1571,7 +1571,7 @@ bool attack::apply_damage_brand(const char *what)
         
         int min_vorpal_dmg = 0;
         if (attacker->is_player())
-            min_vorpal_dmg = 1 + div_rand_round(you.magic_points, 16);
+            min_vorpal_dmg = 1 + div_rand_round(you.magic_points, 25);
         else if (attacker->is_monster())
             min_vorpal_dmg = 1 + div_rand_round(attacker->get_hit_dice(), 10);
         if (min_vorpal_dmg > special_damage && weapon && !is_range_weapon(*weapon))

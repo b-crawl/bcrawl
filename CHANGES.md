@@ -94,7 +94,7 @@
   - v1.23.2: Players have double the regeneration rate of health and mana while waiting, except in Hell branches. This represents first aid or meditation, and unlike normal regeneration is not adjusted by time per turn or temporary statuses.
   - v1.23.4: Monster smite damage (such as from orc priests) is changed from 7-17 to 10-12.
   - v1.24.1: The bonus damage % from flaming, freezing, vorpal, and holy wrath brands is no longer randomized, to make branded weapon variance more consistent with unbranded attacks.
-  - v1.24.3: Vorpal melee weapons have a minimum bonus damage of (1 + current_mana/16).
+  - v1.24.3: Vorpal melee weapons have a minimum bonus damage of (1 + current_mana/25).
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

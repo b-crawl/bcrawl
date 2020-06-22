@@ -491,7 +491,7 @@ public:
      */
     string get_long_name() const override
     {
-        return "blade " + blade_parts(true) + " (speed)";
+        return "blade " + blade_parts(true);
     }
 
     /**
@@ -537,7 +537,7 @@ public:
      */
     string get_uc_attack_name(string default_name) const override
     {
-        return "Blade " + blade_parts(true) + " (speed)";
+        return "Blade " + blade_parts(true);
     }
 };
 

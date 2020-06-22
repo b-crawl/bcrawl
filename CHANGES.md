@@ -205,7 +205,7 @@
   - v1.22: Olgreb's Toxic Radiance is reworked: each turn, it has a (power / (HD * 16)) chance of giving a poison level to everything visible. Its direct damage is removed. Poison-resistant monsters have half the chance of being poisoned.
   - v1.22: Song of Slaying now gives +SH equal to twice its slaying bonus if not using a shield.
   - v1.24.1: Dazzling Spray becomes Dazzling Orbs, which fires attacks with low accuracy that deal no damage. If they hit, they stick to the target, which always causes corona and blindness unless the target is immune.
-  - v1.24.3: Blade Hands has a smaller base damage bonus, but is speed branded.
+  - v1.24.3: Blade Hands has a smaller base damage bonus, but has increased attack speed as if it has the speed brand. (Cheibriados still allows it.)
 
 #### Removed Spells
   - Summon Guardian Golem

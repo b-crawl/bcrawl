@@ -273,6 +273,8 @@ random_var player::attack_delay(const item_def *projectile, bool rescale) const
         int sk = form_uses_xl() ? experience_level * 10 :
                                   skill(SK_UNARMED_COMBAT, 10);
         attk_delay = random_var(10) - div_rand_round(random_var(sk), 27*2);
+        if (get_form()->get_uc_brand() == SPWPN_SPEED)
+            attk_delay = div_rand_round(attk_delay * 2, 3);
     }
     else if (weap &&
              (projectile ? projectile->launched_by(*weap)

@@ -126,7 +126,7 @@ deplete magical power.
 Blade Hands spell
 
 Causes long, scythe-shaped blades to grow from the caster's hands, increasing
-melee damage significantly.
+melee damage and attack speed significantly.
 
 While transformed, any equipped weapons are melded, and casting spells becomes
 somewhat more difficult.

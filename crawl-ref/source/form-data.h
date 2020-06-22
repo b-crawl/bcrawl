@@ -58,7 +58,7 @@ static const form_entry formdata[] =
     "",
     EQF_NONE, MR_NO_FLAGS,
     FormDuration(0, PS_NONE, 0), 0, 0, SIZE_CHARACTER, 10,
-    0, 0, 0, true, 0, 0, 3,
+    0, 0, 0, true, 0, 10, 3,
     SPWPN_NORMAL, LIGHTGREY, "", DEFAULT_VERBS,
     FC_DEFAULT, FC_DEFAULT, FC_DEFAULT, true, true,
     "", 0, "", "", "", ""

@@ -97,6 +97,7 @@
   - v1.24.3: Vorpal melee weapons have a minimum bonus damage of (1 + current_mana/25).
   - v1.24.3: Flaming, freezing, and draining brands deal 1/3 more bonus damage. Vorpal brands on ranged weapons deal 1/3 more bonus damage.
   - v1.24.3: Antimagic branded weapons reduce player max mana by 1/2 instead of 2/3.
+  - v1.24.3: Unarmed attacks in normal form have higher base accuracy (the same as spider form and ice form). Claws no longer increase unarmed accuracy.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

@@ -91,9 +91,12 @@
   - v1.23.2: Tree form is giant size, which means potions of lignification break constriction if the source is not giant.
   - v1.23.2: Unbreathing players are not protected from being silenced by being engulfed by water.
   - v1.23.2: Player size increasing can break engulf like how it can break constriction.
-  - v1.23.2: Players have double the regeneration rate of health and mana while waiting, except in Hell branches. This represents first aid or meditation, and unlike normal regeneration is not adjusted by time per turn.
+  - v1.23.2: Players have double the regeneration rate of health and mana while waiting, except in Hell branches. This represents first aid or meditation, and unlike normal regeneration is not adjusted by time per turn or temporary statuses.
   - v1.23.4: Monster smite damage (such as from orc priests) is changed from 7-17 to 10-12.
   - v1.24.1: The bonus damage % from flaming, freezing, vorpal, and holy wrath brands is no longer randomized, to make branded weapon variance more consistent with unbranded attacks.
+  - v1.24.3: Vorpal melee weapons have a minimum bonus damage of (1 + current_mana/25).
+  - v1.24.3: Flaming, freezing, and draining brands deal 1/3 more bonus damage. Vorpal brands on ranged weapons deal 1/3 more bonus damage.
+  - v1.24.3: Antimagic branded weapons reduce player max mana by 1/2 instead of 2/3.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

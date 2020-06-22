@@ -3565,6 +3565,7 @@ bool god_hates_your_god(god_type god, god_type your_god)
 
     switch(god)
     {
+    case GOD_NO_GOD:
     case GOD_RU:
         return false;
     

@@ -1320,7 +1320,7 @@ bool describe_god_with_join(god_type which_god)
             return done = true;
         }
 
-        if (step == ABANDON || (step == JOIN && you_worship(GOD_NO_GOD)))
+        if (step == ABANDON || (step == JOIN && !god_hates_your_god(you.religion, which_god)))
             return done = join = true;
         step = static_cast<join_step_type>(step + 1);
 

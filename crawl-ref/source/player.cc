@@ -1056,7 +1056,7 @@ int player_teleport(bool calc_unid)
 
 // Computes bonuses to regeneration from most sources. Does not handle
 // slow regeneration, vampireness, or Trog's Hand.
-static int _player_bonus_regen()
+static int _player_bonus_regen(bool apply_temp_bonuses = true)
 {
     int rr = 0;
 
@@ -1066,7 +1066,7 @@ static int _player_bonus_regen()
     {
         if (you.hp == you.hp_max)
             you.duration[DUR_REGENERATION] = 1;
-        if (!you.duration[DUR_TROGS_HAND])
+        if (!you.duration[DUR_TROGS_HAND] && apply_temp_bonuses)
             rr += 100;
     }
 
@@ -1088,7 +1088,7 @@ static int _player_bonus_regen()
 
     // Powered By Death mutation, boosts regen by variable strength
     // if the duration of the effect is still active.
-    if (you.duration[DUR_POWERED_BY_DEATH])
+    if (you.duration[DUR_POWERED_BY_DEATH] && apply_temp_bonuses)
         rr += you.props[POWERED_BY_DEATH_KEY].get_int() * 100;
 
     return rr;
@@ -1121,7 +1121,7 @@ bool regeneration_is_inhibited()
     }
 }
 
-int player_regen()
+int player_regen(bool apply_bonuses)
 {
     // Note: if some condition can set rr = 0, can't be rested off, and
     // would allow travel, please update is_sufficiently_rested.
@@ -1132,7 +1132,7 @@ int player_regen()
         rr = 20 + ((rr - 20) / 2);
 
     // Add in miscellaneous bonuses
-    rr += _player_bonus_regen();
+    rr += _player_bonus_regen(apply_bonuses);
 
     // Before applying other effects, make sure that there's something
     // to heal.
@@ -1155,7 +1155,7 @@ int player_regen()
         rr = 0;
 
     // Trog's Hand. This circumvents sickness or inhibited regeneration.
-    if (you.duration[DUR_TROGS_HAND])
+    if (apply_bonuses && you.duration[DUR_TROGS_HAND])
         rr += 100;
 
     return rr;
@@ -4160,7 +4160,7 @@ int get_real_mp(bool include_items)
     }
 
     if (include_items && you.wearing_ego(EQ_WEAPON, SPWPN_ANTIMAGIC))
-        enp /= 3;
+        enp /= 2;
 
     enp = max(enp, 0);
 

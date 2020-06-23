@@ -301,7 +301,6 @@ static const pop_entry pop_shoals[] =
   { -1,  5,  170, SEMI, MONS_MERFOLK_AVATAR },
   { -1,  5,  110, SEMI, MONS_CYCLOPS },
   { -1,  5,   73, SEMI, MONS_KRAKEN },
-  {  1,  3,   30, RISE, MONS_ELEMENTAL_WELLSPRING },
   { -1,  6,  265, SEMI, MONS_MERFOLK_IMPALER },
   { -1,  6,  125, SEMI, MONS_MERFOLK_AQUAMANCER },
   {  0,  3,  735, FLAT, MONS_MERFOLK },

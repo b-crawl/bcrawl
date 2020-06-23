@@ -79,7 +79,7 @@ static const form_entry formdata[] =
     EQF_HANDS, MR_NO_FLAGS,
     FormDuration(10, PS_SINGLE, 100), 0, 0, SIZE_CHARACTER, 10,
     0, 0, 0, true, 20, 12, 14,
-    SPWPN_SPEED, RED, "", { "hit", "slash", "slice", "shred" },
+    SPWPN_SPEED, YELLOW, "", { "hit", "slash", "slice", "shred" },
     FC_DEFAULT, FC_DEFAULT, FC_DEFAULT, true, true,
     "", 0, "scythe-like blade", "", "", ""
 },

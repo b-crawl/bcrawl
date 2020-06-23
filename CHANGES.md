@@ -98,6 +98,7 @@
   - v1.24.3: Flaming, freezing, and draining brands deal 1/3 more bonus damage. Vorpal brands on ranged weapons deal 1/3 more bonus damage.
   - v1.24.3: Antimagic branded weapons reduce player max mana by 1/2 instead of 2/3.
   - v1.24.3: Unarmed attacks in normal form have higher base accuracy. Claws no longer increase unarmed accuracy. Some transmutation forms have a smaller bonus to unarmed accuracy.
+  - v1.24.4: Unarmed attack speed is changed to (27 / (27 + skill)). This change has no effect at 0 skill or max skill, but increases attack speed by ~12% at 13 skill. This is compensation for the shield penalty rework, for weapon brand buffs, for reduced accuracy of some transmutation forms, and for shorter branches.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

@@ -2274,9 +2274,6 @@ int melee_attack::calc_to_hit(bool random)
 
     if (attacker->is_player() && !weapon)
     {
-
-        // TODO: Review this later (transformations getting extra hit
-        // almost across the board seems bad) - Cryp71c
         mhit += maybe_random2(get_form()->unarmed_hit_bonus, random);
     }
 

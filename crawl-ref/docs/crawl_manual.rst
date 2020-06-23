@@ -189,27 +189,29 @@ Armour Class
   damage you suffer.
 
 Evasion
-  Abbreviated to "EV". This helps you avoid being hit by unpleasant things (but
-  will not reduce the amount of damage you suffer if you do get hit).
+  Abbreviated to "EV". This is compared against the accuracy of attacks,
+  and helps you avoid being hit by unpleasant things
+  (but will not reduce the amount of damage you suffer if you do get hit).
 
 Shield
-  Abbreviated to "SH". This number is a measure of how good your shield (if any)
-  is at blocking attacks.
+  Abbreviated to "SH". This number is a measure of how good you are at blocking attacks.
+  SH is less effective the more attacks you have blocked since your last action, and
+  cannot protect against piercing attacks, but is otherwise more effective than EV.
 
 Your character's primary attributes are Strength, Intelligence and Dexterity:
 
 Strength
   Abbreviated to "Str". Increases your damage with melee and ranged weapons.
-  Affects your ability to use heavy armours and shields effectively.
+  Affects your ability to use heavy armours and large shields effectively.
 
 Intelligence
-  Abbreviated to "Int". Affects how well you can cast spells as well as how much
+  Abbreviated to "Int". Affects how well you can cast spells and how much
   nutrition spellcasting takes.
 
 Dexterity
-  Abbreviated to "Dex". Increases your accuracy with melee and ranged weapons.
-  Significantly affects your ability to dodge attacks aimed at you, your general
-  effectiveness with shields, your stealth, and your effectiveness when stabbing
+  Abbreviated to "Dex". Slightly increases your accuracy with melee and ranged weapons.
+  Significantly affects your ability to dodge attacks when you have trained dodging,
+  your general effectiveness with small shields, your stealth, and your effectiveness when stabbing
   unaware enemies.
 
 Attributes grow permanently from gaining levels, and may increase or decrease

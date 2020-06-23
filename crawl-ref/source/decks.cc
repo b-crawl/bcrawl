@@ -719,13 +719,22 @@ static void _draw_stack(int to_stack)
             describe_deck(selected);
         else
         {
-            you.props[deck_name(selected)]--;
-            me->text = _describe_deck(selected);
-            me->alt_text = _describe_deck(selected);
+            string status;
+            if (deck_cards(selected))
+            {
+                you.props[deck_name(selected)]--;
+                me->text = _describe_deck(selected);
+                me->alt_text = _describe_deck(selected);
 
-            card_type draw = _random_card(selected);
-            stack.push_back(draw);
-            string status = "Drawn so far: " + _stack_contents();
+                card_type draw = _random_card(selected);
+                stack.push_back(draw);
+            }
+            else
+                status = "<lightred>That deck is empty!</lightred> ";
+
+            if (stack.size() > 0)
+                string status += "Drawn so far: " + _stack_contents();
+            
             deck_menu.set_more(formatted_string::parse_string(
                        status + "\n" +
                        "Press '<w>!</w>' or '<w>?</w>' to toggle "

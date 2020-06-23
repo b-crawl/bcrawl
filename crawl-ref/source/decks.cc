@@ -733,7 +733,7 @@ static void _draw_stack(int to_stack)
                 status = "<lightred>That deck is empty!</lightred> ";
 
             if (stack.size() > 0)
-                string status += "Drawn so far: " + _stack_contents();
+                status += "Drawn so far: " + _stack_contents();
             
             deck_menu.set_more(formatted_string::parse_string(
                        status + "\n" +

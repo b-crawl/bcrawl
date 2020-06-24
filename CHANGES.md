@@ -278,6 +278,7 @@
   - v1.23.4: Deep Dwarves that convert to Ru start at \*\*\* piety.
   - v1.23.4: Monks that convert to Uskayaw gain 800 to 1200 turns of agility status.
   - v1.24: Throwable ammunition gifts are less likely to be branded.
+  - v1.24.4: Daggers have a bonus of (unarmed/3) to base damage.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

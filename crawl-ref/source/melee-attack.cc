@@ -3497,7 +3497,7 @@ int melee_attack::weapon_damage()
     int damage = property(*weapon, PWPN_DAMAGE);
     if (weapon->sub_type == WPN_DAGGER && attacker->is_player())
         damage += div_rand_round(you.skill(SK_UNARMED_COMBAT, 10), 30);
-    return property(*weapon, PWPN_DAMAGE);
+    return damage;
 }
 
 int melee_attack::calc_mon_to_hit_base()

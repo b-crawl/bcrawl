@@ -358,7 +358,9 @@ An incredibly heavy but extremely effective suit of crystalline armour.
 %%%%
 dagger
 
-A double-edged fighting knife with a sharp point.
+A double-edged fighting knife with a sharp point. Combatants skilled in
+unarmed combat as well as with short blades may find it to be more effective
+than larger or more complex weapons.
 %%%%
 decaying skeleton
 

@@ -1124,6 +1124,8 @@ static void _append_weapon_stats(string &description, const item_def &item)
     
     int standard_dmg = base_dam + ammo_dam;
     int adj_dmg = estimate_adjusted_dmg(standard_dmg, skill, 10);
+    if (item.sub_type == WPN_DAGGER)
+        adj_dmg = adj_dmg + (you.skill(SK_UNARMED_COMBAT, 10) * adj_dmg) / (30 * standard_dmg);
     description += make_stringf("\nBase damage: %d  (Adjusted base damage: %d.%d)",
                                     standard_dmg, adj_dmg/10, adj_dmg%10);
 

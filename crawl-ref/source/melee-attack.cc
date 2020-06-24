@@ -3494,6 +3494,9 @@ int melee_attack::weapon_damage()
     if (!using_weapon())
         return 0;
 
+    int damage = property(*weapon, PWPN_DAMAGE);
+    if (weapon->sub_type == WPN_DAGGER && attacker->is_player())
+        damage += div_rand_round(you.skill(SK_UNARMED_COMBAT, 10), 30);
     return property(*weapon, PWPN_DAMAGE);
 }
 

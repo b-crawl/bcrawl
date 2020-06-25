@@ -1261,11 +1261,6 @@ static string _describe_weapon(const item_def &item, bool verbose)
                     "those struck by it,";
             }
             description += " increasing damage dealt by approximately one third against foes not resistant or susceptible to cold, and potentially slowing cold-blooded foes.";
-            if (is_range_weapon(item))
-                description += " They";
-            else
-                description += " It";
-            description += " can also slow down cold-blooded creatures.";
             break;
         case SPWPN_HOLY_WRATH:
             description += "It has been blessed by the Shining One";

@@ -945,7 +945,7 @@ static setup_missile_type _DAMNATION_launch(item_def* item, bolt* beam,
     bolt *expl   = new bolt(*beam);
     expl->flavour = BEAM_DAMNATION;
     expl->is_explosion = true;
-    expl->damage = dice_def(3, 14);
+    expl->damage = dice_def(3, 10);
     expl->name   = "hellfire";
 
     beam->special_explosion = expl;

@@ -10,15 +10,23 @@ ae += <lightning rod
 ae += <lamp of fire
 ae += <phial of floods
 
-## autopickup artifacts and throwing nets, unless you can't use them
+## autopickup artifacts, throwing nets, and aux armour, unless you can't use them
 :add_autopickup_func(function (it, name)
-: if it.artefact
-: or it.subtype() == "throwing net" then
-:  if not it.is_useless then
-:   return true
+:  if it.is_useless then return false end
+:
+:  if it.artefact
+:  or it.subtype() == "throwing net" then
+:    return true
 :  end
-: end
-: return
+:
+:  local armour_slots = {cloak="Cloak", helmet="Helmet", gloves="Gloves", boots="Boots"}
+:  sub_type = armour_slots[it.subtype()]
+:  if sub_type then
+:    equipped_item = items.equipped_at(sub_type)
+:    return not equipped_item
+:  end
+:
+:  return
 :end)
 
 ### exclusions ###

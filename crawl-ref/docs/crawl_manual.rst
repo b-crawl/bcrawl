@@ -186,12 +186,12 @@ Next come your defences. For all of them, more is better.
 
 Armour Class
   Abbreviated to "AC". When something injures you, your AC reduces the amount of
-  damage you suffer.
+  damage taken.
 
 Evasion
   Abbreviated to "EV". This is compared against the accuracy of attacks,
-  and helps you avoid being hit by unpleasant things
-  (but will not reduce the amount of damage you suffer if you do get hit).
+  and helps you avoid being hit by unpleasant things (but will not reduce
+  the amount of damage taken if you do get hit).
 
 Shield
   Abbreviated to "SH". This number is a measure of how good you are at blocking attacks.
@@ -211,8 +211,8 @@ Intelligence
 Dexterity
   Abbreviated to "Dex". Slightly increases your accuracy with melee and ranged weapons.
   Significantly affects your ability to dodge attacks when you have trained dodging,
-  your general effectiveness with small shields, your stealth, and your effectiveness when stabbing
-  unaware enemies.
+  your general effectiveness with small shields, your stealth, and your effectiveness
+  when stabbing unaware enemies.
 
 Attributes grow permanently from gaining levels, and may increase or decrease
 temporarily from mutations or while using certain artefacts or abilities.

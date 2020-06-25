@@ -397,7 +397,7 @@ _mon_hex_zap(ZAP_POLYMORPH, BEAM_POLYMORPH),
     BEAM_MMISSILE,
     DCHAR_FIRED_MISSILE,
     true,
-    false,
+    true,
     false,
     8
 },

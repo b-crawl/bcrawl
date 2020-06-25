@@ -207,6 +207,7 @@
   - v1.22: Song of Slaying now gives +SH equal to twice its slaying bonus if not using a shield.
   - v1.24.1: Dazzling Spray becomes Dazzling Orbs, which fires attacks with low accuracy that deal no damage. If they hit, they stick to the target, which always causes corona and blindness unless the target is immune.
   - v1.24.3: Blade Hands has a smaller base damage bonus, but has increased attack speed as if it has the speed brand. (Cheibriados still allows it.)
+  - v1.24.4: Lehudib's Crystal Spear is penetrating.
 
 #### Removed Spells
   - Summon Guardian Golem

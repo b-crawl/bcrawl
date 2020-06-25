@@ -1236,22 +1236,17 @@ static string _describe_weapon(const item_def &item, bool verbose)
         case SPWPN_FLAMING:
             if (is_range_weapon(item))
             {
-                description += "It causes projectiles fired from it to burn "
-                    "those they strike,";
+                description += "It causes projectiles fired from it to surge with flame as they hit,";
             }
             else
             {
-                description += "It has been specially enchanted to burn "
-                    "those struck by it,";
+                description += "It has been specially enchanted to surge with flame as it hits,";
             }
-            description += " causing extra injury to most foes and up to half "
-                           "again as much damage against particularly "
-                           "susceptible opponents.";
+            description += " increasing damage dealt by approximately one third against foes not resistant or susceptible to fire.";
             if (!is_range_weapon(item) &&
                 (damtype == DVORP_SLICING || damtype == DVORP_CHOPPING))
             {
-                description += " Big, fiery blades are also staple "
-                    "armaments of hydra-hunters.";
+                description += " Its heat also prevents any hydra heads it cuts off from regrowing.";
             }
             break;
         case SPWPN_FREEZING:
@@ -1265,9 +1260,7 @@ static string _describe_weapon(const item_def &item, bool verbose)
                 description += "It has been specially enchanted to freeze "
                     "those struck by it,";
             }
-            description += " causing extra injury to most foes "
-                    "and up to half again as much damage against particularly "
-                    "susceptible opponents.";
+            description += " increasing damage dealt by approximately one third against foes not resistant or susceptible to cold, and potentially slowing cold-blooded foes.";
             if (is_range_weapon(item))
                 description += " They";
             else
@@ -1479,17 +1472,8 @@ static string _describe_ammo(const item_def &item)
         {
 #if TAG_MAJOR_VERSION == 34
         case SPMSL_FLAME:
-            description += "It burns those it strikes, causing extra injury "
-                    "to most foes and up to half again as much damage against "
-                    "particularly susceptible opponents. Compared to normal "
-                    "ammo, it is twice as likely to be destroyed on impact.";
-            break;
         case SPMSL_FROST:
-            description += "It freezes those it strikes, causing extra injury "
-                    "to most foes and up to half again as much damage against "
-                    "particularly susceptible opponents. It can also slow down "
-                    "cold-blooded creatures. Compared to normal ammo, it is "
-                    "twice as likely to be destroyed on impact.";
+            description += "ERROR: removed item";
             break;
 #endif
         case SPMSL_CHAOS:

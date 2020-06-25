@@ -679,8 +679,7 @@ and greaves. It provides excellent protection.
 %%%%
 potion of agility
 
-A potion which greatly increases the dexterity and evasiveness of one who
-drinks it.
+A potion which greatly increases the dexterity and evasiveness of the drinker.
 %%%%
 potion of ambrosia
 
@@ -698,13 +697,12 @@ A potion containing the essence of life.
 %%%%
 potion of brilliance
 
-A potion which greatly increases the intelligence and spell power of one who
-drinks it.
+A potion which greatly increases the intelligence and spell power of the drinker.
 %%%%
 potion of cancellation
 
-A potion which ends most magical effects, good or bad, affecting one who drinks
-it. It also reduces magical contamination.
+A potion which ends most magical effects, good or bad, affecting the drinker.
+It also reduces magical contamination.
 %%%%
 potion of curing
 
@@ -721,7 +719,7 @@ A truly wonderful and very rare drink, which grants experience when consumed.
 %%%%
 potion of flight
 
-A potion which confers great buoyancy and temporary swiftness on one who consumes it.
+A potion which confers great buoyancy and temporary swiftness on the drinker.
 %%%%
 potion of heal wounds
 
@@ -730,7 +728,7 @@ instantly. It can also repair rotting.
 %%%%
 potion of invisibility
 
-A potion which confers invisibility on one who consumes it.
+A potion which confers invisibility on the drinker.
 %%%%
 potion of lignification
 
@@ -746,8 +744,7 @@ A valuable potion which grants an infusion of magical energy.
 %%%%
 potion of might
 
-A potion which greatly increases the strength and melee damage of one who
-drinks it.
+A potion which greatly increases the strength and melee damage of the drinker.
 %%%%
 potion of mutation
 
@@ -761,7 +758,7 @@ fire, cold, electricity, poison, and acid.
 %%%%
 potion of haste
 
-An enchanted beverage which speeds the actions of anyone who drinks it.
+An enchanted beverage which speeds the actions of the drinker.
 %%%%
 quad damage
 

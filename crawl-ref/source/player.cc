@@ -3299,7 +3299,7 @@ int player_stealth()
     stealth += STEALTH_PIP * you.scan_artefacts(ARTP_STEALTH);
 
     stealth += STEALTH_PIP * you.wearing(EQ_RINGS, RING_STEALTH) * 2;
-    stealth -= STEALTH_PIP * you.wearing(EQ_RINGS, RING_ATTENTION);
+    stealth -= STEALTH_PIP * you.wearing(EQ_RINGS, RING_ATTENTION) * 2;
 
     if (you.duration[DUR_STEALTH])
         stealth += STEALTH_PIP * 2;

@@ -848,7 +848,7 @@ const char* jewellery_effect_name(int jeweltype, bool terse)
         case RING_SLAYING:               return "Slay";
         case RING_SEE_INVISIBLE:         return "sInv";
         case RING_RESIST_CORROSION:      return "rCorr";
-        case RING_ATTENTION:             return "Stlth-";
+        case RING_ATTENTION:             return "Stlth--";
         case RING_EVASION:               return "EV";
         case RING_STEALTH:               return "Stlth++";
         case RING_DEXTERITY:             return "Dex";

@@ -554,14 +554,62 @@ void update_monsters_in_view()
         _maybe_gozag_incite(monsters);
         
         bool dangerous_foe = false;
+        bool do_force_more = false;
         for (monster* mon : monsters)
         {
-            mon_threat_level_type threat_level = mons_threat_level(*mon);
-            if (threat_level == MTHRT_NASTY && !mons_is_unique(mon->type))
+            switch(mons_threat_level(*mon))
+            {
+            case MTHRT_TRIVIAL:
+            case MTHRT_EASY:
+                break;
+            
+            case MTHRT_TOUGH:
+                if (mons_is_unique(mon->type))
+                    do_force_more = true;
+                switch (mon->type)
+                {
+                case MONS_ORC_PRIEST:
+                    if (you.hp <= 36)
+                        dangerous_foe = true;
+                    break;
+                case MONS_HYDRA:
+                    switch(you.damage_type())
+                        {
+                        case DVORP_SLICING:
+                        case DVORP_CHOPPING:
+                            if (you.damage_brand() != SPWPN_FLAMING)
+                                do_force_more = true;
+                            break;
+                        case DVORP_CLAWING:
+                            if (you.has_claws() >= 3)
+                                do_force_more = true;
+                            break;
+                        default: break;
+                        }
+                    break;
+                default: break;
+                }
+                break;
+            
+            case MTHRT_NASTY:
                 dangerous_foe = true;
+                break;
+            
+            default: break;
+            }
         }
+        
+        if (mon->has_spell(SPELL_SYMBOL_OF_TORMENT) && !player_res_torment(false))
+            do_force_more = true;
+        if (mon->has_spell(SPELL_MALMUTATE) && you.can_safely_mutate(true))
+            do_force_more = true;
+        if (mon->has_spell(SPELL_CALL_DOWN_DAMNATION) || mon->has_spell(SPELL_HURL_DAMNATION))
+            do_force_more = true;
+        
         if (dangerous_foe)
             mprf(MSGCH_WARN, "You have encountered a dangerous foe!");
+        else if (do_force_more)
+            readkey_more();
     }
 
     // Xom thinks it's hilarious the way the player picks up an ever

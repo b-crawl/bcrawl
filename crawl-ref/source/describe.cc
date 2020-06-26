@@ -233,6 +233,7 @@ const char* jewellery_base_ability_string(int subtype)
     case RING_TELEPORTATION:      return "*Tele";
     case AMU_HARM:                return "Harm";
     case AMU_REGENERATION:        return "Regen";
+    case AMU_RAGE:                return "Rage";
     case AMU_MANA_REGENERATION:   return "RegenMP";
     case AMU_THE_GOURMAND:        return "Gourm";
     case AMU_ACROBAT:             return "Acrobat";

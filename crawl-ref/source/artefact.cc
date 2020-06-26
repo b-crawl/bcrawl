@@ -362,7 +362,6 @@ struct jewellery_fake_artp
 };
 
 static map<jewellery_type, vector<jewellery_fake_artp>> jewellery_artps = {
-    { AMU_RAGE, { { ARTP_BERSERK, 1 } } },
     { AMU_REFLECTION, { { ARTP_SHIELDING, 0 } } },
 #if TAG_MAJOR_VERSION == 34
     { AMU_HARM, { { ARTP_DRAIN, 1 } } },

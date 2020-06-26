@@ -555,6 +555,7 @@ void update_monsters_in_view()
         
         bool dangerous_foe = false;
         bool do_force_more = false;
+        int sheep_count = 0;
         for (monster* mon : monsters)
         {
             switch(mons_threat_level(*mon))
@@ -587,7 +588,11 @@ void update_monsters_in_view()
                         default: break;
                         }
                     break;
-                default: break;
+                default:
+                    if (mon->has_spell(SPELL_PARALYSE)
+                            || mon->has_spell(SPELL_BANISHMENT))
+                        do_force_more = true;
+                    break;
                 }
                 break;
             
@@ -603,8 +608,17 @@ void update_monsters_in_view()
             if (mon->has_spell(SPELL_MALMUTATE) && you.can_safely_mutate(true))
                 do_force_more = true;
             if (mon->has_spell(SPELL_CALL_DOWN_DAMNATION)
-                    || mon->has_spell(SPELL_HURL_DAMNATION))
+                    || mon->has_spell(SPELL_HURL_DAMNATION)
+                    || mon->has_spell(SPELL_BLINK_ALLIES_ENCIRCLE)
+                    || mon->has_spell(SPELL_GRASPING_ROOTS))
                 do_force_more = true;
+            
+            if (mon->has_spell(SPELL_DREAM_DUST))
+            {
+                sheep_count++;
+                if (sheep_count > 1)
+                    do_force_more = true;
+            }
         }
         
         if (dangerous_foe)

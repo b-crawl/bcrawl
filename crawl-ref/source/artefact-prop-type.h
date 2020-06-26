@@ -43,9 +43,7 @@ enum artefact_prop_type
     ARTP_BASE_ACC,
     ARTP_BASE_DAM,
     ARTP_RMSL,
-#if TAG_MAJOR_VERSION == 34
     ARTP_FOG,
-#endif
     ARTP_REGENERATION,
 #if TAG_MAJOR_VERSION == 34
     ARTP_SUSTAT,

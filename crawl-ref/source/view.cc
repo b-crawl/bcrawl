@@ -597,19 +597,20 @@ void update_monsters_in_view()
             
             default: break;
             }
+            
+            if (mon->has_spell(SPELL_SYMBOL_OF_TORMENT) && !player_res_torment(false))
+                do_force_more = true;
+            if (mon->has_spell(SPELL_MALMUTATE) && you.can_safely_mutate(true))
+                do_force_more = true;
+            if (mon->has_spell(SPELL_CALL_DOWN_DAMNATION)
+                    || mon->has_spell(SPELL_HURL_DAMNATION))
+                do_force_more = true;
         }
-        
-        if (mon->has_spell(SPELL_SYMBOL_OF_TORMENT) && !player_res_torment(false))
-            do_force_more = true;
-        if (mon->has_spell(SPELL_MALMUTATE) && you.can_safely_mutate(true))
-            do_force_more = true;
-        if (mon->has_spell(SPELL_CALL_DOWN_DAMNATION) || mon->has_spell(SPELL_HURL_DAMNATION))
-            do_force_more = true;
         
         if (dangerous_foe)
             mprf(MSGCH_WARN, "You have encountered a dangerous foe!");
         else if (do_force_more)
-            readkey_more();
+            more();
     }
 
     // Xom thinks it's hilarious the way the player picks up an ever

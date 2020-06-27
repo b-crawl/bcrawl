@@ -438,7 +438,7 @@
   - v1.24.1: Ogre mages have reworked spell sets. Changes include Paralyse being replaced by Ensnare.
   - v1.24.1: Human wizards move less and cast their weakest spells more often.
   - v1.25.1: High level player ghosts are less likely to have low level spells.
-  - v1.25.1: Water nymphs swim very quickly instead of teleporting to water near players.
+  - v1.25.1: Water nymphs swim very quickly instead of teleporting to water near players, and have Primal Wave.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

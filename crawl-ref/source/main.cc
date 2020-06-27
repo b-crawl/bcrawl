@@ -420,7 +420,8 @@ NORETURN static void _launch_game()
     _god_greeting_message(game_start);
 
     if (!crawl_state.game_is_tutorial())
-        mpr("Press <w>?</w> for a list of commands and other information.");
+        mprf("%sPress <w>?</w> for a list of commands and other information.",
+                (you.species != SP_GNOLL ? "Press <w>m</w> to set your skill training.\n" : ""));
 
     _prep_input();
 

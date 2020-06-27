@@ -279,7 +279,7 @@
   - v1.23.4: Deep Dwarves that convert to Ru start at \*\*\* piety.
   - v1.23.4: Monks that convert to Uskayaw gain 800 to 1200 turns of agility status.
   - v1.24: Throwable ammunition gifts are less likely to be branded.
-  - v1.25: Daggers have a bonus of (unarmed/3) to base damage.
+  - v1.25.1: Players can fire through their Hepliaklqana ancestor.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -339,6 +339,7 @@
   - v1.24: Silver javelins are no longer generated.
   - v1.24: Exploding ammunition has higher explosion damage (2d5 -> 3d8).
   - v1.24: Steel ammunition is changed: instead of having 30% higher item base damage, it has 80% higher total base damage, but has a higher base delay (15 -> 20) and min delay (0.7 -> 1.2).
+  - v1.25: Daggers have a bonus of (unarmed/3) to base damage.
 
 #### Removed Items
   - Amulet of Harm
@@ -436,6 +437,7 @@
   - v1.23.4: Lurking horrors are less likely to move towards the player.
   - v1.24.1: Ogre mages have reworked spell sets. Changes include Paralyse being replaced by Ensnare.
   - v1.24.1: Human wizards move less and cast their weakest spells more often.
+  - v1.25.1: High level player ghosts are less likely to have low level spells.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

@@ -4716,7 +4716,7 @@ void bolt::affect_monster(monster* mon)
                 coord_def chosen_cell = original_pos;
                 int empty_space = 0;
                 for (adjacent_iterator ai(original_pos); ai; ++ai)
-                    if (!monster_at(*ai) && !cell_is_solid(*ai))
+                    if (!monster_at(*ai) && !cell_is_solid(*ai) && *ai != you.pos())
                     {
                         empty_space++;
                         if (random2(empty_space) == 0)
@@ -6738,7 +6738,7 @@ bool shoot_through_monster(const bolt& beam, const monster* victim)
                 || mons_is_hepliaklqana_ancestor(victim->type))
         {
         for (adjacent_iterator ai(victim->pos()); ai; ++ai)
-            if (!monster_at(*ai) && !cell_is_solid(*ai))
+            if (!monster_at(*ai) && !cell_is_solid(*ai) && *ai != you.pos())
             {
                 player_shoots_thru = true;
                 break;

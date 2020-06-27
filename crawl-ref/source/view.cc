@@ -593,7 +593,7 @@ void update_monsters_in_view()
                         do_force_more = true;
                     break;
                 
-                case MST_DEEP_TROLL_EARTH_MAGE:
+                case MONS_DEEP_TROLL_EARTH_MAGE:
                     if (you.species == SP_GARGOYLE)
                         do_force_more = true;
                     break;

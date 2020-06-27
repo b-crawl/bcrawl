@@ -392,7 +392,7 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_WATER_NYMPH,
       {
-       { SPELL_WATERSTRIKE, 60, MON_SPELL_WIZARD },
+       { SPELL_WATERSTRIKE, 60, MON_SPELL_MAGICAL },
       }
     },
 

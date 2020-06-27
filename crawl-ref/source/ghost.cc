@@ -630,12 +630,16 @@ void ghost_demon::add_spells(bool actual_ghost)
 
     for (int i = 0; i < you.spell_no; i++)
     {
-        const int chance = max(0, 50 - failure_rate_to_int(raw_spell_fail(you.spells[i])));
-        const spell_type spell = translate_spell(you.spells[i]);
-        if (spell != SPELL_NO_SPELL
+        spell_type player_spell = you.spells[i];
+        int spell_level = min(spell_difficulty(player_spell), 7);
+        int chance = max(0, 50 - failure_rate_to_int(raw_spell_fail(player_spell)));
+        chance = chance * chance * spell_level * spell_level / you.experience_level;
+        bool take_spell = x_chance_in_y(chance, 3000);
+        
+        const spell_type spell = translate_spell(player_spell);
+        if (take_spell && spell != SPELL_NO_SPELL
             && !(get_spell_flags(spell) & SPFLAG_NO_GHOST)
-            && is_valid_mon_spell(spell)
-            && x_chance_in_y(chance*chance, 50*50))
+            && is_valid_mon_spell(spell))
         {
             spells.emplace_back(spell, 0, MON_SPELL_WIZARD);
         }

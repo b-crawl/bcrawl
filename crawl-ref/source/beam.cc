@@ -4693,6 +4693,8 @@ void bolt::affect_monster(monster* mon)
                 mpr("Your demonic guardian avoids your attack.");
             else if (mon->type == MONS_FALSE_IMAGE)
                 mpr("Your image avoids your attack.");
+            else if (mons_is_avatar(mon->type))
+                mpr("Your ancestor avoids your attack.");
             else if (!bush_immune(*mon))
             {
                 simple_god_message(
@@ -6707,7 +6709,9 @@ bool shoot_through_monster(const bolt& beam, const monster* victim)
         return true;
     
     bool player_shoots_thru = originator->is_player()
-            && (testbits(victim->flags, MF_DEMONIC_GUARDIAN) || victim->type == MONS_FALSE_IMAGE);
+            && (testbits(victim->flags, MF_DEMONIC_GUARDIAN)
+                || victim->type == MONS_FALSE_IMAGE
+                || mons_is_avatar(victim->type));
 
     if (player_shoots_thru
            && !beam.is_enchantment()

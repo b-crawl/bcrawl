@@ -4689,12 +4689,19 @@ void bolt::affect_monster(monster* mon)
         // nice.
         if (you.see_cell(mon->pos()))
         {
+            bool now_move = false;
             if (testbits(mon->flags, MF_DEMONIC_GUARDIAN))
-                mpr("Your demonic guardian avoids your attack.");
+            {
+                mpr("Your demonic guardian moves out of the way.");
+                now_move = true;
+            }
+            else if (mons_is_hepliaklqana_ancestor(mon->type))
+            {
+                mpr("Your ancestor moves out of the way.");
+                now_move = true;
+            }
             else if (mon->type == MONS_FALSE_IMAGE)
                 mpr("Your image avoids your attack.");
-            else if (mons_is_hepliaklqana_ancestor(mon->type))
-                mpr("Your ancestor avoids your attack.");
             else if (!bush_immune(*mon))
             {
                 simple_god_message(
@@ -4702,6 +4709,22 @@ void bolt::affect_monster(monster* mon)
                         attitude == ATT_FRIENDLY ? "your" : "a").c_str(),
                     GOD_FEDHAS);
             }
+            
+            if (now_move)
+            {
+                coord_def original_pos = mon->pos();
+                coord_def chosen_cell = original_pos;
+                int empty_space = 0;
+                for (adjacent_iterator ai(original_pos); ai; ++ai)
+                    if (!monster_at(*ai) && !cell_is_solid(*ai))
+                    {
+                        empty_space++;
+                        if (random2(empty_space) == 0)
+                            chosen_cell = *ai;
+                    }
+                mon->move_to_pos(chosen_cell);
+            }
+
         }
     }
 
@@ -6706,10 +6729,22 @@ bool shoot_through_monster(const bolt& beam, const monster* victim)
     if (origin_worships_fedhas && fedhas_protects(*victim))
         return true;
     
-    bool player_shoots_thru = originator->is_player()
-            && (testbits(victim->flags, MF_DEMONIC_GUARDIAN)
-                || victim->type == MONS_FALSE_IMAGE
-                || mons_is_hepliaklqana_ancestor(victim->type));
+    bool player_shoots_thru = false;
+    if (originator->is_player())
+    {
+        if (victim->type == MONS_FALSE_IMAGE)
+            player_shoots_thru = true;
+        else if (testbits(victim->flags, MF_DEMONIC_GUARDIAN)
+                || mons_is_hepliaklqana_ancestor(victim->type))
+        {
+        for (adjacent_iterator ai(victim->pos()); ai; ++ai)
+            if (!monster_at(*ai) && !cell_is_solid(*ai))
+            {
+                player_shoots_thru = true;
+                break;
+            }
+        }
+    }
 
     if (player_shoots_thru
            && !beam.is_enchantment()

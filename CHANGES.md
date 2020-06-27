@@ -384,6 +384,7 @@
   - v1.23.1: The Elemental Staff is a quarterstaff.
   - v1.23.1: The Sword of Cerebov has higher base damage (17 -> 20) and delay (17 -> 19).
   - v1.23.2: The Robe of Vines gains +7 strength.
+  - v1.25.1: Rings of attention give stealth-- instead of stealth-.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -462,3 +463,4 @@
   - v1.22: Antaeus has rPois.
   - v1.22: Dispater is giant.
   - v1.23: Urug is slightly stronger.
+  - v1.25.1: Dispater and Asmodeus have higher HD.

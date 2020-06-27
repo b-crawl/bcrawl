@@ -1106,29 +1106,6 @@ bool mon_special_ability(monster* mons)
     }
     break;
 
-    case MONS_WATER_NYMPH:
-    {
-        if (one_chance_in(5))
-        {
-            actor *foe = mons->get_foe();
-            if (foe && !feat_is_water(grd(foe->pos())))
-            {
-                coord_def spot;
-                if (find_habitable_spot_near(foe->pos(), MONS_ELECTRIC_EEL, 3, false, spot)
-                    && foe->pos().distance_from(spot)
-                     < foe->pos().distance_from(mons->pos()))
-                {
-                    if (mons->move_to_pos(spot))
-                    {
-                        simple_monster_message(*mons, " flows with the water.");
-                        used = true;
-                    }
-                }
-            }
-        }
-    }
-    break;
-
     case MONS_SHAMBLING_MANGROVE:
     {
         if (mons->hit_points * 2 < mons->max_hit_points

@@ -473,12 +473,12 @@ unsigned int item_value(item_def item, bool ident)
             case POT_MIGHT:
             case POT_AGILITY:
             case POT_BRILLIANCE:
-            case POT_LIGNIFY:
             case POT_FLIGHT:
             case POT_AMBROSIA:
                 valued += 40;
                 break;
 
+            case POT_LIGNIFY:
             case POT_BERSERK_RAGE:
                 valued += 30;
                 break;

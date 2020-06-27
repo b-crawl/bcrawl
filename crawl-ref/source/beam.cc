@@ -6703,16 +6703,19 @@ bool shoot_through_monster(const bolt& beam, const monster* victim)
         origin_attitude = temp->attitude;
     }
 
-    return (origin_worships_fedhas
-            && fedhas_protects(*victim))
-           || ((originator->is_player()
-               && testbits(victim->flags, MF_DEMONIC_GUARDIAN))
-           || (originator->is_player()
-               && victim->type == MONS_FALSE_IMAGE))
+    if (origin_worships_fedhas && fedhas_protects(*victim))
+        return true;
+    
+    bool player_shoots_thru = originator->is_player()
+            && (testbits(victim->flags, MF_DEMONIC_GUARDIAN) || victim->type == MONS_FALSE_IMAGE);
+
+    if (player_shoots_thru
            && !beam.is_enchantment()
            && beam.origin_spell != SPELL_CHAIN_LIGHTNING
-           && (mons_atts_aligned(victim->attitude, origin_attitude)
-               || victim->neutral());
+           && (mons_atts_aligned(victim->attitude, origin_attitude) || victim->neutral());
+        return true;
+
+    return false;
 }
 
 /**

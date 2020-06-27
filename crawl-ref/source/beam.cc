@@ -6714,7 +6714,7 @@ bool shoot_through_monster(const bolt& beam, const monster* victim)
     if (player_shoots_thru
            && !beam.is_enchantment()
            && beam.origin_spell != SPELL_CHAIN_LIGHTNING
-           && (mons_atts_aligned(victim->attitude, origin_attitude) || victim->neutral());
+           && (mons_atts_aligned(victim->attitude, origin_attitude) || victim->neutral()))
         return true;
 
     return false;

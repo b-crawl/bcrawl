@@ -567,12 +567,14 @@ void update_monsters_in_view()
             case MTHRT_TOUGH:
                 if (mons_is_unique(mon->type))
                     do_force_more = true;
+                
                 switch (mon->type)
                 {
                 case MONS_ORC_PRIEST:
                     if (you.hp <= 36)
                         dangerous_foe = true;
                     break;
+                
                 case MONS_HYDRA:
                     switch(you.damage_type())
                         {
@@ -587,12 +589,31 @@ void update_monsters_in_view()
                             break;
                         default: break;
                         }
-                    break;
-                default:
-                    if (mon->has_spell(SPELL_PARALYSE)
-                            || mon->has_spell(SPELL_BANISHMENT))
+                    if (you.armour_class() < 10)
                         do_force_more = true;
                     break;
+                
+                case MST_DEEP_TROLL_EARTH_MAGE:
+                    if (you.species == SP_GARGOYLE)
+                        do_force_more = true;
+                    break;
+                
+                // paralysis
+                case MONS_ORC_SORCERER:
+                case MONS_WIZARD:
+                case MONS_LICH:
+                case MONS_VAMPIRE_KNIGHT:
+                case MONS_GREAT_ORB_OF_EYES:
+                case MONS_SPHINX:
+                // banishment
+                case MONS_DEEP_ELF_SORCERER:
+                case MONS_DEEP_ELF_DEMONOLOGIST:
+                // misc foes dangerous for their level
+                case MONS_WATER_NYMPH:
+                    do_force_more = true;
+                    break;
+                
+                default: break;
                 }
                 break;
             
@@ -609,15 +630,21 @@ void update_monsters_in_view()
                 do_force_more = true;
             if (mon->has_spell(SPELL_CALL_DOWN_DAMNATION)
                     || mon->has_spell(SPELL_HURL_DAMNATION)
-                    || mon->has_spell(SPELL_BLINK_ALLIES_ENCIRCLE)
-                    || mon->has_spell(SPELL_GRASPING_ROOTS))
+                    || mon->has_spell(SPELL_BLINK_ALLIES_ENCIRCLE))
                 do_force_more = true;
             
-            if (mon->has_spell(SPELL_DREAM_DUST))
+            switch (mon->type)
             {
+            case MONS_DREAM_SHEEP:
                 sheep_count++;
                 if (sheep_count > 1)
                     do_force_more = true;
+                break;
+            case MONS_TORPOR_SNAIL:
+                if (!you.stasis())
+                    do_force_more = true;
+                break;
+            default: break;
             }
         }
         

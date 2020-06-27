@@ -721,7 +721,7 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         { MONS_IRONHEART_PRESERVER,     { IRON_WEAPONS } },
         { MONS_SIGMUND, { { { WPN_SCYTHE, 1 } } } },
         { MONS_REAPER, { { { WPN_SCYTHE, 1 } }, {}, {}, 1 } },
-        { MONS_BALRUG, { { { WPN_DEMON_WHIP, 1 } } } },
+        { MONS_BALRUG, { { { WPN_DEMON_BLADE, 1 } } } },
         { MONS_RED_DEVIL,
             { { { WPN_TRIDENT,          4 },
                 { WPN_DEMON_TRIDENT,    1 },

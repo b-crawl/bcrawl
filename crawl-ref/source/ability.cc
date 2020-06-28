@@ -389,7 +389,7 @@ static const ability_def Ability_List[] =
 
     // Yredelemnul
     { ABIL_YRED_INJURY_MIRROR, "Injury Mirror",
-      0, 0, 0, 0, {fail_basis::invo, 40, 4, 20}, abflag::piety },
+      0, 0, 0, 0, {fail_basis::invo, 40, 4, 20}, abflag::piety|abflag::variable_mp },
     { ABIL_YRED_ANIMATE_REMAINS, "Animate Remains",
       2, 0, 200, 0, {fail_basis::invo, 40, 4, 20}, abflag::none },
     { ABIL_YRED_RECALL_UNDEAD_SLAVES, "Recall Undead Slaves",

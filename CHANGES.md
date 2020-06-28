@@ -282,7 +282,7 @@
   - v1.23.4: Monks that convert to Uskayaw gain 800 to 1200 turns of agility status.
   - v1.24: Throwable ammunition gifts are less likely to be branded.
   - v1.25.1: If a Hepliaklqana ancestor has an adjacent empty space, the player can fire through their ancestor, which will cause it to move to an empty space.
-  - v1.25.1: Yredelemnul's Injury Mirror ability has lower piety costs that are linear with damage and decrease with Invocations, to make it less of a trap. (Previously, the piety cost was sqrt(dmg)).
+  - v1.25.1: Yredelemnul's Injury Mirror ability has lower piety costs that are linear with damage and decrease with Invocations, to make it less of a trap. (Previously, the piety cost was sqrt(dmg)). It also costs (damage/3) mana.
   - v1.25.1: Yredelemnul's Drain Life ability causes exhaustion.
 
 #### New Items

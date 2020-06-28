@@ -13,19 +13,52 @@ ae += <phial of floods
 ## autopickup artifacts, throwing nets, and aux armour, unless you can't use them
 :add_autopickup_func(function (it, name)
 :  if it.is_useless then return false end
-:
+:  
+:  local sub_type = it.subtype()
+:  
 :  if it.artefact
-:  or it.subtype() == "throwing net" then
+:  or sub_type == "throwing net" then
 :    return true
 :  end
 :
 :  local armour_slots = {cloak="Cloak", helmet="Helmet", gloves="Gloves", boots="Boots"}
-:  sub_type = armour_slots[it.subtype()]
-:  if sub_type then
-:    equipped_item = items.equipped_at(sub_type)
+:  aux_type = armour_slots[sub_type]
+:  if aux_type then
+:    equipped_item = items.equipped_at(aux_type)
 :    return not equipped_item
 :  end
+:  
+:  local no_dup_list =
+:    {
+:    ["lamp of fire"]=1,
+:    ["phial of floods"]=1,
+:    ["fan of gales"]=1,
+:    ["lightning rod"]=1,
+:    ["ring of flight"]=1,
+:    ["ring of poison resistance"]=1,
+:    ["ring of wizardry"]=1,
+:    ["ring of stealth"]=1,
+:    ["ring of resist corrosion"]=1,
+:    ["ring of see invisible"]=1,
+:    ["ring of magical power"]=1,
+:    ["ring of positive energy"]=1,
+:    ["ring of protection from magic"]=2,
+:    ["ring of protection from fire"]=2,
+:    ["ring of protection from cold"]=2,
+:    ["ring of ice"]=1,
+:    ["ring of fire"]=1,
+:    }
 :
+:  local dup_count = no_dup_list[sub_type]
+:  if dup_count then
+:    for inv in iter.invent_iterator:new(items.inventory()) do
+:      if inv.subtype() == sub_type then
+:        if dup_count == 1 then return false
+:        else dup_count = dup_count - 1 end
+:      end
+:    end
+:  end
+:  
 :  return
 :end)
 
@@ -41,50 +74,6 @@ ae += forbidden
 
 # Ignore books you have already seen
 ae += [^n]identified.*spellbook
-
-# Don't pick up misc items when duplication doesn't help.
-:add_autopickup_func(function (it, name)
-:  local itname = it.name(true) -- Not the name parameter, which includes prefixes.
-:  if string.find(itname, "lamp of fire")
-:  or string.find(itname, "phial of floods")
-:  or string.find(itname, "fan of gales")
-:  or string.find(itname, "lightning rod") then
-:    for inv in iter.invent_iterator:new(items.inventory()) do
-:      if itname == inv.name() then
-:        return false
-:      end
-:    end
-:  end
-:  return
-:end)
-
-# If you've sacrificed a hand, don't pick up pointless duplicate rings
-:add_autopickup_func(function (it, name)
-:  local itsubtype = it.subtype()
-:  if you.mutation("missing a hand") == 1 and you.race() ~= "octopode"
-:  and it.class(true) == "jewellery"
-:  and (itsubtype == "ring of positive energy"
-:   or itsubtype == "ring of flight"
-:   or itsubtype == "ring of poison resistance"
-:   or itsubtype == "ring of wizardry"
-:   or itsubtype == "ring of stealth"
-:   or itsubtype == "ring of teleportation"
-:   or itsubtype == "ring of protection from fire"
-:   or itsubtype == "ring of protection from cold"
-:   or itsubtype == "ring of resist corrosion"
-:   or itsubtype == "ring of see invisible"
-:   or itsubtype == "ring of magical power"
-:   or itsubtype == "ring of ice"
-:   or itsubtype == "ring of fire") then
-:    for inv in iter.invent_iterator:new(items.inventory()) do
-:      if it.class(true) == inv.class(true)
-:      and itsubtype == inv.subtype() then
-:        return false
-:      end
-:    end
-:  end
-:  return
-:end)
 
 : add_autopickup_func(function (it, name)
 :   return it.stacks() or nil

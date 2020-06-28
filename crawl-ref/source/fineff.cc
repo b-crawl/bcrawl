@@ -205,7 +205,13 @@ void mirror_damage_fineff::fire()
         if (attack->alive())
             print_wounds(*monster_by_mid(att));
 
-        lose_piety(isqrt_ceil(damage));
+        int piety_loss = div_rand_round(damage*10, 100 + you.skill(SK_INVOCATIONS, 10));
+        if (piety_loss > you.piety - 10)
+        {
+            piety_loss = you.piety - 10;
+            you.duration[DUR_MIRROR_DAMAGE] = 0;
+        }
+        lose_piety(piety_loss);
     }
     else
     {

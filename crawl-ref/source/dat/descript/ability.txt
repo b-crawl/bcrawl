@@ -247,6 +247,8 @@ Injury Mirror ability
 
 Reflects damage taken for a short duration, hurting attackers whenever any
 damage is taken and reducing piety depending on the amount of damage dealt.
+
+Invocations skill decreases the piety cost of reflected damage.
 %%%%
 Animate Dead ability
 

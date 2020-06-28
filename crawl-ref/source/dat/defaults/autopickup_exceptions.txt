@@ -11,23 +11,6 @@ ae += <lamp of fire
 ae += <phial of floods
 
 ## autopickup artifacts, throwing nets, and aux armour, unless you can't use them
-:add_autopickup_func(function (it, name)
-:  if it.is_useless then return false end
-:  
-:  local sub_type = it.subtype()
-:  
-:  if it.artefact
-:  or sub_type == "throwing net" then
-:    return true
-:  end
-:
-:  local armour_slots = {cloak="Cloak", helmet="Helmet", gloves="Gloves", boots="Boots"}
-:  aux_type = armour_slots[sub_type]
-:  if aux_type then
-:    equipped_item = items.equipped_at(aux_type)
-:    return not equipped_item
-:  end
-:  
 :  local no_dup_list =
 :    {
 :    ["lamp of fire"]=1,
@@ -49,6 +32,24 @@ ae += <phial of floods
 :    ["ring of fire"]=1,
 :    }
 :
+:  local armour_slots = {cloak="Cloak", helmet="Helmet", gloves="Gloves", boots="Boots"}
+:  
+:add_autopickup_func(function (it, name)
+:  if it.is_useless then return false end
+:  
+:  local sub_type = it.subtype()
+:  
+:  if it.artefact
+:  or sub_type == "throwing net" then
+:    return true
+:  end
+:
+:  aux_type = armour_slots[sub_type]
+:  if aux_type then
+:    equipped_item = items.equipped_at(aux_type)
+:    return not equipped_item
+:  end
+:  
 :  local dup_count = no_dup_list[sub_type]
 :  if dup_count then
 :    for inv in iter.invent_iterator:new(items.inventory()) do

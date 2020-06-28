@@ -14,13 +14,41 @@ I agree with David Ploog's position, but I also believe that it's important to h
 - adequate testing before gameplay changes are made
 - willingness to revert gameplay changes that don't improve the game
 
-#### supporting more gameplay styles is good
+#### more content is good
 
-Having more ways to play a game is good, if they are fun for at least some players and reasonably well-balanced. Variety provides both more replay value and wider appeal.
+Adding more items, spells, and abilities is good because it:
+- increases replayability
+- increases variety within individual games
+- increases the strategic depth (and "skill cap") by increasing the action space
+- lets players find a style they personally like
 
 So, bcrawl will not be [changed](https://www.reddit.com/r/dcss/comments/8poib2/make_lees_rapid_deconstruction_never_break_walls/) to prevent strategies *just* because they violate developer preconceptions about how to play. Instead, the strength and entertainment values of tactics and strategies will be evaluated as they exist in practice.
 
-Also, optional content such as species and usable items will generally only be removed if it is unfair, redundant, misleading, or useless. Content will not be removed just for being unnecessary to certain "canonical" strategies. Highly situational unusual tactics should be encouraged, and if novel and entertaining but suboptimal strategies are found, it's better to strengthen them than to remove them as options.
+Optional content such as species and usable items will generally only be removed if it is unfair, redundant, misleading, or useless. Content will not be removed just for being unnecessary to certain "canonical" strategies.
+
+#### content exists for gameplay
+
+The purpose of content is not to simply exist, but to enable gameplay. So, when feasible, balance should be adjusted to make interesting strategies viable. Highly situational unusual tactics should be encouraged, and if novel and entertaining but suboptimal strategies are found, it's better to strengthen them than to remove them as options.
+
+#### choices should be distinct or clear
+
+Things that are different should be distinct: differences should not be trivial. For example, a sword that does 1% extra damage against red enemies is not different enough from a regular sword to justify the mental overhead of its existence for players or programmers.
+
+When something is strictly better than another thing, that should be obvious. (For example, a +0 sword vs a +1 sword.)
+
+Advantages and weaknesses of things should not be both narrow and obvious. For example, a sword with bonus fire damage is better than a sword that does bonus damage only against skeletons because it's less narrow.
+
+#### tedious strategies are bad but inevitable
+
+Doing tedious actions to gain an advantage is boring. *Not* doing that and forgoing the advantage to save time feels bad to many players, because it's a failure to meet goals set forth in a game the player has decided to respect to some extent.
+
+Also, a game cannot be balanced both for doing tedious actions with large benefits and for *not* doing them without punishing newer and weaker players with worse gameplay.
+
+Still, it's impossible to completely eliminate repetitive or otherwise uninteresting parts of gameplay. So, the tedium-benefit product of player actions should be minimized.
+
+#### diversification and specialization should be balanced
+
+Optimal strategies should involve some specialization and some diversification.
 
 #### design ideology should be tested
 

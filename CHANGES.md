@@ -57,6 +57,7 @@
   - v1.21: Enchanters start with a potion of invisibility.
   - v1.22: Monks start with a scroll of remove curse.
   - v1.24.2: Chaos Knights are treated as still worshipping Xom if they convert to another deity.
+  - v1.25.1: Warpers start with Apportation.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -138,6 +139,7 @@
   - v1.19.1: Oni use Spellcasting as magic school skill level for all non-spell magic school skill checks.
   - v1.19.1: Oni can receive Kikubaaqudgha's final spell gifts.
   - v1.24.1: Merfolk have higher aptitudes for long blades (+1 -> +2) and staves (-2 -> -1).
+  - v1.25.1: If a Demonspawn demonic guardian has an adjacent empty space, the player can fire through it, which will cause it to move to an empty space. Otherwise, it cannot be fired through.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -279,7 +281,7 @@
   - v1.23.4: Deep Dwarves that convert to Ru start at \*\*\* piety.
   - v1.23.4: Monks that convert to Uskayaw gain 800 to 1200 turns of agility status.
   - v1.24: Throwable ammunition gifts are less likely to be branded.
-  - v1.25.1: Players can fire through their Hepliaklqana ancestor.
+  - v1.25.1: If a Hepliaklqana ancestor has an adjacent empty space, the player can fire through their ancestor, which will cause it to move to an empty space.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

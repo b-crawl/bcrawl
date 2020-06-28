@@ -397,7 +397,7 @@ static const ability_def Ability_List[] =
     { ABIL_YRED_ANIMATE_DEAD, "Animate Dead",
       2, 0, 200, 0, {fail_basis::invo, 40, 4, 20}, abflag::none },
     { ABIL_YRED_DRAIN_LIFE, "Drain Life",
-      6, 0, 200, 2, {fail_basis::invo, 60, 4, 25}, abflag::none },
+      6, 0, 200, 2, {fail_basis::invo, 60, 4, 25}, abflag::exhaustion },
     { ABIL_YRED_ENSLAVE_SOUL, "Enslave Soul",
       8, 0, 500, 4, {fail_basis::invo, 80, 4, 25}, abflag::none },
 
@@ -2321,6 +2321,11 @@ static spret _do_ability(const ability_def& abil, bool fail)
 
     case ABIL_YRED_DRAIN_LIFE:
     {
+        if (you.duration[DUR_EXHAUSTED])
+        {
+            mpr("You are too exhausted.");
+            return spret::abort;
+        }
         int damage = 0;
         const spret result =
             fire_los_attack_spell(SPELL_DRAIN_LIFE,
@@ -2334,6 +2339,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
             mpr("You feel life flooding into your body.");
             inc_hp(damage);
         }
+        you.increase_duration(DUR_EXHAUSTED, 10 + random2(5));
         break;
     }
 

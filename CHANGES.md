@@ -57,7 +57,7 @@
   - v1.21: Enchanters start with a potion of invisibility.
   - v1.22: Monks start with a scroll of remove curse.
   - v1.24.2: Chaos Knights are treated as still worshipping Xom if they convert to another deity.
-  - v1.25.1: Warpers start with Apportation.
+  - v1.26: Warpers start with Apportation.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -139,7 +139,7 @@
   - v1.19.1: Oni use Spellcasting as magic school skill level for all non-spell magic school skill checks.
   - v1.19.1: Oni can receive Kikubaaqudgha's final spell gifts.
   - v1.24.1: Merfolk have higher aptitudes for long blades (+1 -> +2) and staves (-2 -> -1).
-  - v1.25.1: If a Demonspawn demonic guardian has an adjacent empty space, the player can fire through it, which will cause it to move to an empty space. Otherwise, it cannot be fired through.
+  - v1.26: If a Demonspawn demonic guardian has an adjacent empty space, the player can fire through it, which will cause it to move to an empty space. Otherwise, it cannot be fired through.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -281,10 +281,10 @@
   - v1.23.4: Deep Dwarves that convert to Ru start at \*\*\* piety.
   - v1.23.4: Monks that convert to Uskayaw gain 800 to 1200 turns of agility status.
   - v1.24: Throwable ammunition gifts are less likely to be branded.
-  - v1.25.1: If a Hepliaklqana ancestor has an adjacent empty space, the player can fire through their ancestor, which will cause it to move to an empty space.
-  - v1.25.1: Yredelemnul's Injury Mirror ability has lower piety costs that are linear with damage and decrease with Invocations, to make it less of a trap. (Previously, the piety cost was sqrt(dmg)). It also costs (damage/3) mana.
-  - v1.25.1: Yredelemnul's Drain Life ability causes exhaustion.
-  - v1.25.1: The hunger costs of some god abilities are removed.
+  - v1.26: If a Hepliaklqana ancestor has an adjacent empty space, the player can fire through their ancestor, which will cause it to move to an empty space.
+  - v1.26: Yredelemnul's Injury Mirror ability has lower piety costs that are linear with damage and decrease with Invocations, to make it less of a trap. (Previously, the piety cost was sqrt(dmg)). It also costs (damage/3) mana.
+  - v1.26: Yredelemnul's Drain Life ability causes exhaustion.
+  - v1.26: The hunger costs of some god abilities are removed.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -390,7 +390,7 @@
   - v1.23.1: The Elemental Staff is a quarterstaff.
   - v1.23.1: The Sword of Cerebov has higher base damage (17 -> 20) and delay (17 -> 19).
   - v1.23.2: The Robe of Vines gains +7 strength.
-  - v1.25.1: Rings of attention give stealth-- instead of stealth-.
+  - v1.26: Rings of attention give stealth-- instead of stealth-.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -442,8 +442,8 @@
   - v1.23.4: Lurking horrors are less likely to move towards the player.
   - v1.24.1: Ogre mages have reworked spell sets. Changes include Paralyse being replaced by Ensnare.
   - v1.24.1: Human wizards move less and cast their weakest spells more often.
-  - v1.25.1: High level player ghosts are less likely to have low level spells.
-  - v1.25.1: Water nymphs swim very quickly instead of teleporting to water near players, and have Primal Wave.
+  - v1.26: High level player ghosts are less likely to have low level spells.
+  - v1.26: Water nymphs swim very quickly instead of teleporting to water near players, and have Primal Wave.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -471,4 +471,4 @@
   - v1.22: Antaeus has rPois.
   - v1.22: Dispater is giant.
   - v1.23: Urug is slightly stronger.
-  - v1.25.1: Dispater and Asmodeus have higher HD.
+  - v1.26: Dispater and Asmodeus have higher HD.

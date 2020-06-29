@@ -373,15 +373,15 @@ static const ability_def Ability_List[] =
     { ABIL_TSO_CLEANSING_FLAME, "Cleansing Flame",
       5, 0, 100, 2, {fail_basis::invo, 70, 4, 25}, abflag::none },
     { ABIL_TSO_SUMMON_DIVINE_WARRIOR, "Summon Divine Warrior",
-      8, 0, 150, 5, {fail_basis::invo, 80, 4, 25}, abflag::none },
+      8, 0, 0, 5, {fail_basis::invo, 80, 4, 25}, abflag::none },
     { ABIL_TSO_BLESS_WEAPON, "Brand Weapon With Holy Wrath", 0, 0, 0, 0,
       {fail_basis::invo}, abflag::none },
 
     // Kikubaaqudgha
     { ABIL_KIKU_RECEIVE_CORPSES, "Receive Corpses",
-      3, 0, 200, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
+      3, 0, 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_KIKU_TORMENT, "Torment",
-      4, 0, 0, 8, {fail_basis::invo, 60, 5, 20}, abflag::none },
+      4, 0, 400, 8, {fail_basis::invo, 60, 5, 20}, abflag::none },
     { ABIL_KIKU_GIFT_NECRONOMICON, "Receive Necronomicon", 0, 0, 0, 0,
       {fail_basis::invo}, abflag::none },
     { ABIL_KIKU_BLESS_WEAPON, "Brand Weapon With Pain", 0, 0, 0, 0,
@@ -397,9 +397,9 @@ static const ability_def Ability_List[] =
     { ABIL_YRED_ANIMATE_DEAD, "Animate Dead",
       2, 0, 200, 0, {fail_basis::invo, 40, 4, 20}, abflag::none },
     { ABIL_YRED_DRAIN_LIFE, "Drain Life",
-      6, 0, 200, 2, {fail_basis::invo, 60, 4, 25}, abflag::exhaustion },
+      6, 0, 0, 2, {fail_basis::invo, 60, 4, 25}, abflag::exhaustion },
     { ABIL_YRED_ENSLAVE_SOUL, "Enslave Soul",
-      8, 0, 500, 4, {fail_basis::invo, 80, 4, 25}, abflag::none },
+      8, 0, 0, 4, {fail_basis::invo, 80, 4, 25}, abflag::none },
 
     // Okawaru
     { ABIL_OKAWARU_HEROISM, "Heroism",
@@ -435,7 +435,7 @@ static const ability_def Ability_List[] =
     { ABIL_TROG_REGEN_MR, "Trog's Hand",
       0, 0, 200, 2, {fail_basis::invo, piety_breakpoint(2), 0, 1}, abflag::none },
     { ABIL_TROG_BROTHERS_IN_ARMS, "Brothers in Arms",
-      0, 0, 250, generic_cost::range(5, 6),
+      0, 0, 0, generic_cost::range(5, 6),
       {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::none },
 
     // Elyvilon
@@ -457,9 +457,9 @@ static const ability_def Ability_List[] =
       1, 0, 0, 10, {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_LUGONU_BEND_SPACE, "Bend Space",
       1, scaling_cost::fixed(2), 0, 0, {fail_basis::invo, 40, 5, 20}, abflag::none },
-    { ABIL_LUGONU_BANISH, "Banish", 4, 0, 200, generic_cost::range(2, 3),
+    { ABIL_LUGONU_BANISH, "Banish", 4, 0, 0, generic_cost::range(2, 3),
       {fail_basis::invo, 85, 7, 20}, abflag::none },
-    { ABIL_LUGONU_CORRUPT, "Corrupt", 7, scaling_cost::fixed(5), 500, 10,
+    { ABIL_LUGONU_CORRUPT, "Corrupt", 7, scaling_cost::fixed(5), 0, 10,
       {fail_basis::invo, 70, 4, 25}, abflag::none },
     { ABIL_LUGONU_ABYSS_ENTER, "Enter the Abyss", 10, 0, 500, 16,
       {fail_basis::invo, 80, 4, 25}, abflag::pain },
@@ -518,13 +518,13 @@ static const ability_def Ability_List[] =
 
     // Cheibriados
     { ABIL_CHEIBRIADOS_TIME_BEND, "Bend Time",
-      3, 0, 50, 1, {fail_basis::invo, 40, 4, 20}, abflag::none },
+      3, 0, 0, 1, {fail_basis::invo, 40, 4, 20}, abflag::none },
     { ABIL_CHEIBRIADOS_DISTORTION, "Temporal Distortion",
-      4, 0, 200, 3, {fail_basis::invo, 60, 5, 20}, abflag::instant },
+      4, 0, 0, 3, {fail_basis::invo, 60, 5, 20}, abflag::instant },
     { ABIL_CHEIBRIADOS_SLOUCH, "Slouch",
-      5, 0, 100, 8, {fail_basis::invo, 60, 4, 25}, abflag::none },
+      5, 0, 0, 8, {fail_basis::invo, 60, 4, 25}, abflag::none },
     { ABIL_CHEIBRIADOS_TIME_STEP, "Step From Time",
-      10, 0, 200, 10, {fail_basis::invo, 80, 4, 25}, abflag::none },
+      10, 0, 0, 10, {fail_basis::invo, 80, 4, 25}, abflag::none },
 
     // Ashenzari
     { ABIL_ASHENZARI_CURSE, "Curse Item",

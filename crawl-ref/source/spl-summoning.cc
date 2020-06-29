@@ -960,12 +960,13 @@ spret cast_conjure_ball_lightning(int pow, god_type god, bool fail)
 {
     fail_check();
     bool success = false;
-
-    int how_many = 2 + div_rand_round(pow, 50);
+    
+    int sqrt_pow = div_rand_round(isqrt(pow * 80 * 100), 10);
+    int how_many = 2 + div_rand_round(sqrt_pow, 50);
 
     mgen_data cbl(MONS_BALL_LIGHTNING, BEH_FRIENDLY, you.pos());
     cbl.set_summoned(&you, 0, SPELL_CONJURE_BALL_LIGHTNING, god);
-    cbl.hd = 5 + div_rand_round(pow, 20);
+    cbl.hd = 5 + div_rand_round(sqrt_pow, 20);
 
     for (int i = 0; i < how_many; ++i)
     {

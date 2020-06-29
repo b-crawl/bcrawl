@@ -1633,28 +1633,11 @@ void scorefile_entry::init(time_t dt)
     }
 
     /*
-     *  old scoring system (0.1-0.3):
-     *
-     *    Gold
-     *    + 0.7 * Experience
-     *    + (distinct Runes +2)^2 * 1000, winners with distinct runes >= 3 only
-     *    + value of Inventory, for winners only
-     *
-     *
-     *  0.4 scoring system, as suggested by Lemuel:
-     *
-     *    Gold
+     *  old scoring system:
      *    + 0.7 * Experience up to 250,000
      *    + 0.4 * Experience between 250,000 and 1,000,000
      *    + 0.2 * Experience between 1,000,000 and 3,000,000
      *    + 0.1 * Experience above 3,000,000
-     *    + (distinct Runes +2)^2 * 1000, winners with distinct runes >= 3 only
-     *    + value of Inventory, for winners only
-     *    + (250,000 * d. runes) * (25,000/(turns/d. runes)), for winners only
-     *
-     *  current scoring system (mostly the same as above):
-     *
-     *    Experience terms as above
      *    + runes * (runes + 12) * 1000        (for everyone)
      *    + (250000 + 2 * (runes + 2) * 1000)  (winners only)
      *    + 250000 * 25000 * runes^2 / turns   (winners only)
@@ -1673,25 +1656,23 @@ void scorefile_entry::init(time_t dt)
     // use the default formula.
     if (base_score)
     {
-        // sprint games could overflow a 32 bit value
-        uint64_t pt = points + _award_modified_experience();
-
         num_runes      = runes_in_pack();
         num_diff_runes = num_runes;
 
-        // There's no point in rewarding lugging artefacts. Thus, no points
-        // for the value of the inventory. -- 1KB
-        if (death_type == KILLED_BY_WINNING)
-        {
-            pt += 250000; // the Orb
-            pt += num_runes * 2000 + 4000;
-            pt += ((uint64_t)250000) * 25000 * num_runes * num_runes
-                / (1+you.num_turns);
-        }
-        pt += num_runes * 10000;
-        pt += num_runes * (num_runes + 2) * 1000;
+        double experience_score = 1 << 22;
+        uint64_t experience_score_int = sqrt(experience_score * you.experience);
+        experience_score_int *= (1 << 14);
 
-        points = pt;
+        double rune_score = 1 << 24;
+        uint64_t rune_score_int = sqrt(rune_score * num_runes);
+        rune_score_int *= (1 << 26);
+
+        int win_multiplier = 1;
+        if (death_type == KILLED_BY_WINNING)
+            win_multiplier = 2;
+
+// ~=((2.75*10^11 * sqrt(runes) * (1 + wins) + 3.36*10^7 * sqrt(experience)) / (turns + 1000))
+        points = (experience_score_int + (rune_score_int * win_multiplier)) / (you.num_turns + 1000);
     }
     else
         ASSERT(crawl_state.game_is_sprint());

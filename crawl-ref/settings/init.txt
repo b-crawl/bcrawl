@@ -3,4 +3,11 @@
 # That file is also available online at:
 # https://github.com/b-crawl/bcrawl/blob/master/crawl-ref/docs/options_guide.txt
 
+##### typical speedrun settings (remove # to enable):
+#view_delay = 0
+#explore_delay = -1
+#travel_delay = -1
+#rest_delay = -1
+#use_animations -= beam
+
 tile_full_screen = false

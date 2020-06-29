@@ -445,9 +445,16 @@ void noisy_equipment()
 // Berserking monsters cannot be ordered around.
 static bool _follows_orders(monster* mon)
 {
-    return mon->friendly()
-           && mon->type != MONS_BALLISTOMYCETE_SPORE
-           && !mon->berserk_or_insane()
+    if (!mon->friendly())
+        return false;
+    
+    switch(mon->type)
+    {
+    case MONS_BALLISTOMYCETE_SPORE: return false;
+    case MONS_BALL_LIGHTNING: return true;
+    default: break;
+    }
+    return !mon->berserk_or_insane()
            && !mons_is_conjured(mon->type)
            && !mon->has_ench(ENCH_HAUNTING);
 }

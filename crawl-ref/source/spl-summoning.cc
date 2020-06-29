@@ -961,7 +961,7 @@ spret cast_conjure_ball_lightning(int pow, god_type god, bool fail)
     fail_check();
     bool success = false;
 
-    const int how_many = min(5, 2 + pow / 100 + random2(pow / 50 + 1));
+    int how_many = 2 + div_rand_round(pow, 50);
 
     mgen_data cbl(MONS_BALL_LIGHTNING, BEH_FRIENDLY, you.pos());
     cbl.set_summoned(&you, 0, SPELL_CONJURE_BALL_LIGHTNING, god);

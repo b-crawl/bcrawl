@@ -5906,7 +5906,7 @@ DUMMY(MONS_GOLEM, '8', LIGHTGREY, "golem", TILEP_MONS_IRON_GOLEM)
 // statues and statue-like things (also '8')
 {
     MONS_ICE_STATUE, '8', LIGHTBLUE, "ice statue",
-    M_STATIONARY | M_SPEAKS | M_NO_REGEN,
+    M_STATIONARY | M_SPEAKS,
     MR_VUL_FIRE | mrd(MR_RES_COLD, 3) | MR_RES_ELEC | MR_RES_PETRIFY,
     10, MONS_STATUE, MONS_ICE_STATUE, MH_NONLIVING, MAG_IMMUNE,
     { AT_NO_ATK, AT_NO_ATK, AT_NO_ATK, AT_NO_ATK },
@@ -7001,7 +7001,7 @@ DUMMY(MONS_HELL_LORD, '&', COLOUR_UNDEF, "hell lord", TILEP_MONS_PROGRAM_BUG)
     // Roxanne obviously can't use items, but we want to equip her with
     // a spellbook, so MONUSE_STARTING_EQUIPMENT is necessary.
     MONS_ROXANNE, '8', BLUE, "Roxanne",
-    M_UNIQUE | M_STATIONARY | M_SPEAKS | M_NO_WAND | M_FEMALE | M_NO_REGEN,
+    M_UNIQUE | M_STATIONARY | M_SPEAKS | M_NO_WAND | M_FEMALE,
     mrd(MR_RES_FIRE | MR_RES_COLD, 2) | MR_RES_ELEC
         | MR_RES_PETRIFY,
     10, MONS_STATUE, MONS_STATUE, MH_NONLIVING, MAG_IMMUNE,

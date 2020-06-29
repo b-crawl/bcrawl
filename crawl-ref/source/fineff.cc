@@ -205,7 +205,7 @@ void mirror_damage_fineff::fire()
         if (attack->alive())
             print_wounds(*monster_by_mid(att));
 
-        int piety_loss = div_rand_round(damage*15, 100 + you.skill(SK_INVOCATIONS, 10));
+        int piety_loss = div_rand_round(damage*20, 100 + you.skill(SK_INVOCATIONS, 10));
         int mana_loss = div_rand_round(damage, 3);
         if (piety_loss > you.piety - 10)
         {

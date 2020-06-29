@@ -446,6 +446,7 @@
   - v1.24.1: Human wizards move less and cast their weakest spells more often.
   - v1.26: High level player ghosts are less likely to have low level spells.
   - v1.26: Water nymphs swim very quickly instead of teleporting to water near players, and have Primal Wave.
+  - v1.26: Ice statues can regenerate.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

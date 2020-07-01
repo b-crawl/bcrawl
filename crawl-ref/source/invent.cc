@@ -307,7 +307,7 @@ void InvEntry::set_show_glyph(bool doshow)
 
 InvMenu::InvMenu(int mflags)
     : Menu(mflags, "inventory"), type(MT_INVLIST), pre_select(nullptr),
-      title_annotate(nullptr), _mode_special_drop(false)
+      title_annotate(nullptr), _mode_special_drop(true)
 {
 #ifdef USE_TILE_LOCAL
     if (Options.tile_menu_icons)

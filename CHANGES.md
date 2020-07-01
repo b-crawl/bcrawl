@@ -76,6 +76,7 @@
   - v1.24: Weapons show their base damage adjusted by player strength and skills.
   - v1.24.1: Adjusted unarmed damage is shown on the % screen.
   - v1.26: Scoring is changed: scores are now ((2.75*10^11 * sqrt(runes) * (1 + wins) + 3.36*10^7 * sqrt(experience)) / (turns + 1000)); "wins" is 1 for winning games, and 0 otherwise.
+  - v1.26.1: Portals and shops no longer have a (small) chance to randomly be mimics.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -393,6 +394,7 @@
   - v1.23.1: The Sword of Cerebov has higher base damage (17 -> 20) and delay (17 -> 19).
   - v1.23.2: The Robe of Vines gains +7 strength.
   - v1.26: Rings of attention give stealth-- instead of stealth-.
+  - v1.26.1: Scrolls of identify are identified when touched.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

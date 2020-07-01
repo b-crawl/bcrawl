@@ -92,7 +92,7 @@ int _get_xom_gift_timeout()
     return you_worship(GOD_XOM) ? you.gift_timeout : you.props[XOM_GIFT_KEY].get_int();
 }
 
-int _set_xom_gift_timeout(int val)
+void _set_xom_gift_timeout(int val)
 {
     if (you_worship(GOD_XOM))
         you.gift_timeout = val;
@@ -105,7 +105,7 @@ int _get_xom_piety()
     return you_worship(GOD_XOM) ? you.piety : you.props[XOM_PIETY_KEY].get_int();
 }
 
-int _set_xom_piety(int val)
+void _set_xom_piety(int val)
 {
     if (you_worship(GOD_XOM))
         you.piety = val;

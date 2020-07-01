@@ -282,6 +282,8 @@ void ghost_demon::init_player_ghost(bool actual_ghost)
         if (is_weapon(weapon))
         {
             damage = property(weapon, PWPN_DAMAGE);
+            if (weapon.sub_type == WPN_DAGGER)
+                damage += you.skill(SK_UNARMED_COMBAT, 1, false, false) / 3;
 
             skill_type sk = (you.species == SP_HILL_ORC && !is_range_weapon(weapon)) ?
                     SK_FIGHTING : item_attack_skill(weapon);

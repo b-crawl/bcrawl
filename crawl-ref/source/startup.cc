@@ -1308,8 +1308,8 @@ bool startup_step()
     }
     else
     {
-        clear_message_store();
         setup_game(ng);
+        clear_message_store();
         newchar = true;
         choice.seed = Options.seed; // kind of ugly, but may be changed during
                                     // setup_game.

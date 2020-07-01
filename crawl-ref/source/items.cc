@@ -940,17 +940,33 @@ void item_check()
 // only wands and books are fully identified.
 static bool _id_floor_item(item_def &item)
 {
-    int runes = runes_in_pack();
-    if (runes || item.base_type == OBJ_BOOKS)
+    if (fully_identified(item))
+        return false;
+    
+    bool always_identify = false;
+    switch(item.base_type)
     {
-        if (fully_identified(item))
-            return false;
-
-        // fix autopickup for previously-unknown books (hack)
-        if (item_needs_autopickup(item))
-            item.props["needs_autopickup"] = true;
+    case OBJ_BOOKS:
+    case OBJ_WANDS:
+        always_identify = true;
+        break;
+    case OBJ_SCROLLS:
+        if (item.sub_type == SCR_IDENTIFY)
+            always_identify = true;
+        break;
+    default: break;
+    }
+    
+    if (always_identify || runes_in_pack())
+    {
+        bool should_pickup = item_needs_autopickup(item);
         set_ident_flags(item, ISFLAG_IDENT_MASK);
-        if (item.base_type != OBJ_BOOKS)
+        if (should_pickup)
+            item.props["needs_autopickup"] = true;
+        else
+            set_item_autopickup(item, AP_FORCE_OFF);
+        
+        if (!always_identify)
         {
             if(is_useless_item(item))
                 if (item.props.exists("needs_autopickup"))
@@ -958,19 +974,6 @@ static bool _id_floor_item(item_def &item)
             mpr("You use a rune to identify the item.");
         }
         return true;
-    }
-    else if (item.base_type == OBJ_WANDS)
-    {
-        if (!get_ident_type(item))
-        {
-            // If the player doesn't want unknown wands picked up, assume
-            // they won't want this wand after it is identified.
-            bool should_pickup = item_needs_autopickup(item);
-            set_ident_type(item, true);
-            if (!should_pickup)
-                set_item_autopickup(item, AP_FORCE_OFF);
-            return true;
-        }
     }
 
     return false;
@@ -1025,6 +1028,10 @@ void pickup_menu(int item_link)
                 const bool take_all = (num_to_take == mitm[j].quantity);
                 iflags_t oldflags = mitm[j].flags;
                 clear_item_pickup_flags(mitm[j]);
+
+                // re-enable autopickup
+                if (fully_identified(mitm[j]) && item_autopickup_level(mitm[j]) == AP_FORCE_OFF)
+                    set_item_autopickup(mitm[j], AP_FORCE_NONE);
 
                 // If we cleared any flags on the items, but the pickup was
                 // partial, reset the flags for the items that remain on the
@@ -1360,6 +1367,10 @@ bool pickup_single_item(int link, int qty)
 
     if (qty < 1 || qty > item->quantity)
         qty = item->quantity;
+
+    // re-enable autopickup
+    if (fully_identified(*item) && item_autopickup_level(*item) == AP_FORCE_OFF)
+        set_item_autopickup(*item, AP_FORCE_NONE);
 
     iflags_t oldflags = item->flags;
     clear_item_pickup_flags(*item);

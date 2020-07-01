@@ -9,6 +9,7 @@ ae += <figurine of a ziggurat
 ae += <lightning rod
 ae += <lamp of fire
 ae += <phial of floods
+ae += <phantom mirror
 
 ## autopickup artifacts, throwing nets, and aux armour, unless you can't use them
 :  local no_dup_list =
@@ -30,6 +31,18 @@ ae += <phial of floods
 :    ["ring of protection from cold"]=2,
 :    ["ring of ice"]=1,
 :    ["ring of fire"]=1,
+:    ["ring of see invisible"]=1,
+:    ["ring of flight"]=1,
+:    ["ring of poison resistance"]=1,
+:    ["ring of resist corrosion"]=1,
+:    ["ring of insulation"]=1,
+:    ["amulet of the gourmand"]=1,
+:    ["amulet of regeneration"]=1,
+:    ["amulet of rage"]=1,
+:    ["amulet of guardian spirit"]=1,
+:    ["amulet of faith"]=1,
+:    ["amulet of magic regeneration"]=1,
+:    ["amulet of the acrobat"]=1,
 :    }
 :
 :  local armour_slots = {cloak="Cloak", helmet="Helmet", gloves="Gloves", boots="Boots"}
@@ -79,12 +92,3 @@ ae += [^n]identified.*spellbook
 : add_autopickup_func(function (it, name)
 :   return it.stacks() or nil
 : end)
-
-# Excluding amulets as you only need one of each. (If you know the subtype
-# that means you already have one of it.). Some items may already be excluded
-# as bad_item, e.g. inaccuracy.
-ae += amulet of (nothing|inaccuracy|the gourmand|regeneration)
-ae += amulet of (rage|guardian spirit|faith|magic regeneration|the acrobat)
-
-# Likewise for some rings.
-ae += ring of (see invisible|flight|poison resistance|resist corrosion|insulation)

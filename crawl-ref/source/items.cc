@@ -1366,8 +1366,8 @@ bool pickup_single_item(int link, int qty)
         qty = item->quantity;
 
     // re-enable autopickup
-    if (fully_identified(item) && item_autopickup_level(item) == AP_FORCE_OFF)
-        set_item_autopickup(item, AP_FORCE_NONE);
+    if (fully_identified(*item) && item_autopickup_level(*item) == AP_FORCE_OFF)
+        set_item_autopickup(*item, AP_FORCE_NONE);
 
     iflags_t oldflags = item->flags;
     clear_item_pickup_flags(*item);

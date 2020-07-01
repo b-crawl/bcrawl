@@ -9,6 +9,7 @@ ae += <figurine of a ziggurat
 ae += <lightning rod
 ae += <lamp of fire
 ae += <phial of floods
+ae += <phantom mirror
 
 ## autopickup artifacts, throwing nets, and aux armour, unless you can't use them
 :  local no_dup_list =

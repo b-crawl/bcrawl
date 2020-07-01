@@ -960,7 +960,7 @@ static bool _id_floor_item(item_def &item)
     if (always_identify || runes_in_pack())
     {
         bool should_pickup = item_needs_autopickup(item);
-        set_ident_type(item, true);
+        set_ident_flags(item, ISFLAG_IDENT_MASK);
         if (should_pickup)
             item.props["needs_autopickup"] = true;
         else

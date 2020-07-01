@@ -6716,6 +6716,7 @@ bool monster::angered_by_attacks() const
     case MONS_LIGHTNING_SPIRE:
     case MONS_BALL_LIGHTNING:
     case MONS_FIRE_VORTEX:
+    case MONS_DANCING_WEAPON:
         return false;
     default:
         return !has_ench(ENCH_INSANE)

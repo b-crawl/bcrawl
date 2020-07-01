@@ -1026,6 +1026,10 @@ void pickup_menu(int item_link)
                 iflags_t oldflags = mitm[j].flags;
                 clear_item_pickup_flags(mitm[j]);
 
+                // re-enable autopickup
+                if (fully_identified(mitm[j]) && item_autopickup_level(mitm[j]) == AP_FORCE_OFF)
+                    set_item_autopickup(mitm[j], AP_FORCE_NONE);
+
                 // If we cleared any flags on the items, but the pickup was
                 // partial, reset the flags for the items that remain on the
                 // floor.

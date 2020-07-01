@@ -940,17 +940,33 @@ void item_check()
 // only wands and books are fully identified.
 static bool _id_floor_item(item_def &item)
 {
-    int runes = runes_in_pack();
-    if (runes || item.base_type == OBJ_BOOKS)
+    if (fully_identified(item))
+        return false;
+    
+    bool always_identify = false;
+    switch(item.base_type)
     {
-        if (fully_identified(item))
-            return false;
-
-        // fix autopickup for previously-unknown books (hack)
-        if (item_needs_autopickup(item))
+    case OBJ_BOOKS:
+    case OBJ_WANDS:
+        always_identify = true;
+        break;
+    case OBJ_SCROLLS:
+        if (item.sub_type == SCR_IDENTIFY)
+            always_identify = true;
+        break;
+    default: break;
+    }
+    
+    if (always_identify || runes_in_pack())
+    {
+        bool should_pickup = item_needs_autopickup(item);
+        set_ident_type(item, true);
+        if (should_pickup)
             item.props["needs_autopickup"] = true;
-        set_ident_flags(item, ISFLAG_IDENT_MASK);
-        if (item.base_type != OBJ_BOOKS)
+        else
+            set_item_autopickup(item, AP_FORCE_OFF);
+        
+        if (!always_identify)
         {
             if(is_useless_item(item))
                 if (item.props.exists("needs_autopickup"))
@@ -958,19 +974,6 @@ static bool _id_floor_item(item_def &item)
             mpr("You use a rune to identify the item.");
         }
         return true;
-    }
-    else if (item.base_type == OBJ_WANDS)
-    {
-        if (!get_ident_type(item))
-        {
-            // If the player doesn't want unknown wands picked up, assume
-            // they won't want this wand after it is identified.
-            bool should_pickup = item_needs_autopickup(item);
-            set_ident_type(item, true);
-            if (!should_pickup)
-                set_item_autopickup(item, AP_FORCE_OFF);
-            return true;
-        }
     }
 
     return false;

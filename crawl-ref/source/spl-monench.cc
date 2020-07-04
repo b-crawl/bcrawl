@@ -35,9 +35,16 @@ int englaciate(coord_def where, int pow, actor *agent)
         return 0;
     }
 
-    int duration = (roll_dice(3, pow) / 6
-                    - random2(victim->get_hit_dice()))
-                    * BASELINE_DELAY;
+    int duration = roll_dice(3, pow) / 4;
+    
+    if ((!mons && you.get_mutation_level(MUT_COLD_BLOODED))
+        || (mons && mons_class_flag(mons->type, M_COLD_BLOOD)))
+    {
+        duration *= 2;
+    }
+
+    duration -= random2(victim->get_hit_dice());
+    duration *= BASELINE_DELAY;
 
     if (duration <= 0)
     {
@@ -48,11 +55,6 @@ int englaciate(coord_def where, int pow, actor *agent)
         return 0;
     }
 
-    if ((!mons && you.get_mutation_level(MUT_COLD_BLOODED))
-        || (mons && mons_class_flag(mons->type, M_COLD_BLOOD)))
-    {
-        duration *= 2;
-    }
 
     if (!mons)
         return slow_player(duration);

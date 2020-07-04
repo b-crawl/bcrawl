@@ -1053,8 +1053,11 @@ static set<spell_type> _vehumet_eligible_gift_spells(set<spell_type> excluded_sp
 
 static int _vehumet_weighting(spell_type spell)
 {
-    int bias = 100 + elemental_preference(spell, 10);
-    return bias;
+    int fail = raw_spell_fail(spell);
+    int power = calc_spell_power(spell, true, true, true, 2) + 10;
+    int chance = (fail + 15) * (100 - fail) * power * power;
+    chance = chance/256 + 1;
+    return chance;
 }
 
 static spell_type _vehumet_find_spell_gift(set<spell_type> excluded_spells)

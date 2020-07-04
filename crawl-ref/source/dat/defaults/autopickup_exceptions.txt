@@ -59,8 +59,10 @@ ae += <phantom mirror
 :
 :  aux_type = armour_slots[sub_type]
 :  if aux_type then
-:    equipped_item = items.equipped_at(aux_type)
-:    return not equipped_item
+:    local equipped_item = items.equipped_at(aux_type)
+:    if not equipped_item then return true end
+:    if it.branded and not (equipped_item.branded or equipped_item.plus ~= 0) then return true end
+:    return false
 :  end
 :  
 :  local dup_count = no_dup_list[sub_type]

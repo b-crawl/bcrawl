@@ -381,8 +381,7 @@ bool targeter_imb::set_aim(coord_def a)
 
     coord_def end = path_taken[path_taken.size() - 1];
 
-    // IMB never splashes if you self-target.
-    if (end == origin)
+    if (grid_distance(end, origin) <= 1)
         return true;
 
     bool first = true;
@@ -390,9 +389,7 @@ bool targeter_imb::set_aim(coord_def a)
     for (auto c : path_taken)
     {
         cur_path.push_back(c);
-        if (!(anyone_there(c)
-              && !beam.ignores_monster((monster_at(c))))
-            && c != end)
+        if (!(anyone_there(c) && !beam.ignores_monster((monster_at(c)))))
         {
             continue;
         }

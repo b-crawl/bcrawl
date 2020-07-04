@@ -389,7 +389,7 @@ bool targeter_imb::set_aim(coord_def a)
     for (auto c : path_taken)
     {
         cur_path.push_back(c);
-        if (!(anyone_there(c) && !beam.ignores_monster((monster_at(c)))))
+        if (!(anyone_there(c) && !beam.ignores_monster((monster_at(c)))) || grid_distance(c, origin) <= 1)
         {
             continue;
         }

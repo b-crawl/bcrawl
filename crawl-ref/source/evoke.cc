@@ -622,20 +622,6 @@ string manual_skill_names(bool short_text)
         return skill_names(skills);
 }
 
-static const pop_entry pop_spiders[] =
-{ // Sack of Spiders
-  {  0,  13,   40, FALL, MONS_WORKER_ANT },
-  {  0,  13,   80, FALL, MONS_SOLDIER_ANT },
-  {  6,  19,   80, PEAK, MONS_REDBACK},
-  {  8,  27,   90, PEAK, MONS_REDBACK },
-  { 10,  27,   10, SEMI, MONS_ORB_SPIDER },
-  { 12,  29,  100, PEAK, MONS_JUMPING_SPIDER },
-  { 13,  29,  110, PEAK, MONS_TARANTELLA },
-  { 15,  29,  120, PEAK, MONS_WOLF_SPIDER },
-  { 21,  27,   18, RISE, MONS_GHOST_MOTH },
-  { 0,0,0,FLAT,MONS_0 }
-};
-
 static bool _box_of_beasts(item_def &box)
 {
     const int surge = pakellas_surge_devices() + you.spec_evoke();
@@ -682,42 +668,35 @@ static bool _box_of_beasts(item_def &box)
     return true;
 }
 
-static bool _sack_of_spiders_veto_mon(monster_type mon)
-{
-   // Don't summon any beast that would anger your god.
-    return player_will_anger_monster(mon);
-}
-
-
 static bool _sack_of_spiders(item_def &sack)
 {
-    const int surge = pakellas_surge_devices() + you.spec_evoke();
-    surge_power(surge);
     mpr("You reach into the bag...");
-
-    const int evo_skill = you.skill(SK_EVOCATIONS);
-    int rnd_factor = 1 + random2(2);
-    int count = player_adjust_evoc_power(
-            rnd_factor + random2(div_rand_round(evo_skill * 10, 30)), surge);
-    const int power = player_adjust_evoc_power(evo_skill, surge);
-
-    if (x_chance_in_y(5, 10 + power))
-    {
-        mpr("...but nothing happens.");
-        return false;
-    }
-
     bool success = false;
+
+    monster_type mon = = random_choose_weighted(
+            10, MONS_REDBACK,
+            5, MONS_WOLF_SPIDER,
+            4, MONS_JUMPING_SPIDER,
+            3, MONS_TARANTELLA,
+            3, MONS_ORB_SPIDER);
+    
+    int monster_value = 70;
+    switch(mon)
+    {
+    case MONS_REDBACK: monster_value = 70; break;
+    case MONS_WOLF_SPIDER: monster_value = 140; break;
+    case MONS_JUMPING_SPIDER: monster_value = 140; break;
+    case MONS_TARANTELLA: monster_value = 140; break;
+    case MONS_ORB_SPIDER: monster_value = 140; break;
+    default: break;
+    }
+    
+    int power = 70 + you.skill(SK_EVOCATIONS, 10);
+    int count = div_rand_round(power, monster_value) + 1;
+    count = random2(count) + random2(count);
 
     for (int n = 0; n < count; n++)
     {
-        // Invoke mon-pick with our custom list
-        monster_type mon = pick_monster_from(pop_spiders,
-                                             max(1, min(27,
-                                             player_adjust_evoc_power(
-                                                 you.skill(SK_EVOCATIONS),
-                                                 surge))),
-                                             _sack_of_spiders_veto_mon);
         mgen_data mg(mon, BEH_FRIENDLY, you.pos(), MHITYOU, MG_AUTOFOE);
         mg.set_summoned(&you, 3 + random2(4), 0);
         if (create_monster(mg))
@@ -727,52 +706,15 @@ static bool _sack_of_spiders(item_def &sack)
     if (success)
     {
         mpr("...and things crawl out!");
-        // Also generate webs on hostile monsters and trap them.
-        const int rad = LOS_DEFAULT_RANGE / 2 + 2;
-        for (monster_near_iterator mi(you.pos(), LOS_SOLID); mi; ++mi)
-        {
-            trap_def *trap = trap_at((*mi)->pos());
-            // Don't destroy non-web traps or try to trap monsters
-            // currently caught by something.
-            if (you.pos().distance_from((*mi)->pos()) > rad
-                || (!trap && grd((*mi)->pos()) != DNGN_FLOOR)
-                || (trap && trap->type != TRAP_WEB)
-                || (*mi)->friendly()
-                || (*mi)->caught())
-            {
-                continue;
-            }
 
-            // web chance increases with proximity & evo skill
-            // code here uses double negatives; sorry! i blame the other guy
-            // don't try to make surge affect web chance; too messy.
-            const int web_dist_factor
-                = 100 * (you.pos().distance_from((*mi)->pos()) - 1) / rad;
-            const int web_skill_factor = 2 * (27 - you.skill(SK_EVOCATIONS));
-            const int web_chance = 100 - web_dist_factor - web_skill_factor;
-            if (x_chance_in_y(web_chance, 100))
-            {
-                if (trap && trap->type == TRAP_WEB)
-                    destroy_trap((*mi)->pos());
-
-                place_specific_trap((*mi)->pos(), TRAP_WEB, 1); // 1 ammo = temp
-                // Reveal the trap
-                grd((*mi)->pos()) = DNGN_TRAP_WEB;
-                trap = trap_at((*mi)->pos());
-                trap->trigger(**mi);
-            }
-
-        }
-        // After gettin' some bugs, check for destruction.
-        if (one_chance_in(3))
+        // for backwards compatibility
+        if (sack.quantity > 1)
         {
             mpr("The now-empty bag unravels in your hand.");
-            ASSERT(in_inventory(sack));
             dec_inv_item_quantity(sack.link, 1);
         }
     }
     else
-        // Failed to create monster for some reason
         mpr("...but nothing happens.");
 
     return success;
@@ -1647,8 +1589,16 @@ bool evoke_item(int slot, bool check_range)
             break;
 
         case MISC_SACK_OF_SPIDERS:
+            if (!evoker_charges(item.sub_type))
+            {
+                mpr("That is presently inert.");
+                return false;
+            }
             if (_sack_of_spiders(item))
-                practise_evoking(1);
+            {
+                expend_xp_evoker(item.sub_type);
+                practise_evoking(3);
+            }
             break;
 
         case MISC_LIGHTNING_ROD:

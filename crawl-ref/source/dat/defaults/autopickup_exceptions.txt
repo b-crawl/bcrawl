@@ -9,6 +9,7 @@ ae += <figurine of a ziggurat
 ae += <lightning rod
 ae += <lamp of fire
 ae += <phial of floods
+ae += <sack of spiders
 ae += <phantom mirror
 
 ## autopickup artifacts, throwing nets, and aux armour, unless you can't use them
@@ -18,6 +19,7 @@ ae += <phantom mirror
 :    ["phial of floods"]=1,
 :    ["fan of gales"]=1,
 :    ["lightning rod"]=1,
+:    ["sack of spiders"]=1,
 :    ["ring of flight"]=1,
 :    ["ring of poison resistance"]=1,
 :    ["ring of wizardry"]=1,

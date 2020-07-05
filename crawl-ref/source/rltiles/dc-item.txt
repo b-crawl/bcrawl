@@ -1009,6 +1009,7 @@ misc_ancient_crate MISC_ANCIENT_CRATE
 misc_dusty_tome MISC_DUSTY_TOME
 %rim 0
 misc_sack MISC_SACK_OF_SPIDERS
+misc_sack_inert MISC_SACK_OF_SPIDERS_INERT
 misc_phantom_mirror MISC_PHANTOM_MIRROR
 misc_zigfig MISC_ZIGGURAT
 misc_quad MISC_QUAD_DAMAGE

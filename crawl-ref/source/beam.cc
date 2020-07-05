@@ -4945,8 +4945,6 @@ void bolt::affect_monster(monster* mon)
         heard = noisy(loudness, pos(), source_id) || heard;
         noise_generated = true;
     }
-    
-    _maybe_imb_explosion(this, pos());
 
     if (!mon->alive())
         return;
@@ -5005,6 +5003,8 @@ void bolt::affect_monster(monster* mon)
         // Now hurt monster.
         mon->hurt(agent(), final, flavour, KILLED_BY_BEAM, "", "", false);
     }
+
+    _maybe_imb_explosion(this, pos());
 
     if (mon->alive())
         monster_post_hit(mon, final);

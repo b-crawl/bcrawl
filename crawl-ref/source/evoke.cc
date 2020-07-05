@@ -691,8 +691,9 @@ static bool _sack_of_spiders(item_def &sack)
     }
     
     int power = 70 + you.skill(SK_EVOCATIONS, 10);
-    int count = div_rand_round(power*power, 140*monster_value) + 1;
-    count = random2(count) + random2(count);
+    int x = power*power;
+    int y = 140*monster_value;
+    int count = random2(div_rand_round(x, y) + 1) + random2(div_rand_round(x, y) + 1);
 
     int summon_count = 0;
     for (int n = 0; n < count; n++)

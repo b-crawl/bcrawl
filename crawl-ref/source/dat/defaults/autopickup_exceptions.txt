@@ -49,6 +49,7 @@ ae += <phantom mirror
 :  
 :add_autopickup_func(function (it, name)
 :  if it.is_useless then return false end
+:  if it.stacks() then return true end
 :  
 :  local sub_type = it.subtype()
 :  
@@ -90,7 +91,3 @@ ae += forbidden
 
 # Ignore books you have already seen
 ae += [^n]identified.*spellbook
-
-: add_autopickup_func(function (it, name)
-:   return it.stacks() or nil
-: end)

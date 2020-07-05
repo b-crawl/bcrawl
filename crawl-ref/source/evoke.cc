@@ -671,7 +671,6 @@ static bool _box_of_beasts(item_def &box)
 static bool _sack_of_spiders(item_def &sack)
 {
     mpr("You reach into the bag...");
-    bool success = false;
 
     monster_type mon = random_choose_weighted(
             10, MONS_REDBACK,
@@ -695,17 +694,21 @@ static bool _sack_of_spiders(item_def &sack)
     int count = div_rand_round(power, monster_value) + 1;
     count = random2(count) + random2(count);
 
+    int summon_count = 0;
     for (int n = 0; n < count; n++)
     {
         mgen_data mg(mon, BEH_FRIENDLY, you.pos(), MHITYOU, MG_AUTOFOE);
         mg.set_summoned(&you, 3 + random2(4), 0);
         if (create_monster(mg))
-            success = true;
+            summon_count++;
     }
 
-    if (success)
+    if (summon_count)
     {
-        mpr("...and things crawl out!");
+        if (summon_count > 1)
+            mpr("...and spiders crawl out!");
+        else
+            mpr("...and a spider crawls out!");
 
         // for backwards compatibility
         if (sack.quantity > 1)
@@ -717,7 +720,7 @@ static bool _sack_of_spiders(item_def &sack)
     else
         mpr("...but nothing happens.");
 
-    return success;
+    return (summon_count > 0);
 }
 
 static bool _make_zig(item_def &zig)

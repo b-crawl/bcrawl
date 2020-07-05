@@ -542,7 +542,7 @@ static special_missile_type _determine_missile_brand(const item_def& item,
         rc = random_choose_weighted(45, SPMSL_POISONED,
                                     10, SPMSL_DISPERSAL,
                                     15, SPMSL_EXPLODING,
-                                    nw, SPMSL_NORMAL);
+                                    nw, SPMSL_POISONED);
         break;
     
     default:

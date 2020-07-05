@@ -715,7 +715,7 @@ static bool _sack_of_spiders(item_def &sack)
         if (sack.quantity > 1)
         {
             mpr("The now-empty bag unravels in your hand.");
-            dec_inv_item_quantity(sack.link, 1);
+            dec_inv_item_quantity(sack.link, sack.quantity - 1);
         }
     }
     else

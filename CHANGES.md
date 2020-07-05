@@ -58,6 +58,7 @@
   - v1.22: Monks start with a scroll of remove curse.
   - v1.24.2: Chaos Knights are treated as still worshipping Xom if they convert to another deity.
   - v1.26: Warpers start with Apportation.
+  - v1.26.2: Ice Elementalists start with Ice Form.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -213,6 +214,8 @@
   - v1.24.3: Blade Hands has a smaller base damage bonus, but has increased attack speed as if it has the speed brand. (Cheibriados still allows it.)
   - v1.25: Lehudib's Crystal Spear is penetrating.
   - v1.26: Conjure Ball Lightning has adjusted scaling with power, and ball lightning can be directed like other summons.
+  - v1.26.2: Metabolic Englaciation slows enemies for longer, especially cold-blooded enemies.
+  - v1.26.2: Iskenderun's Mystic Blast explosions work differently: instead of exploding at short range and potentially missing the target when they explode, shots have a chance to explode that increases linearly with distance to 100%, and only explode when they hit.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -288,6 +291,7 @@
   - v1.26: Yredelemnul's Injury Mirror ability has lower piety costs that are linear with damage and decrease with Invocations, to make it less of a trap. (Previously, the piety cost was sqrt(dmg)). It also costs (damage/3) mana.
   - v1.26: Yredelemnul's Drain Life ability causes exhaustion.
   - v1.26: The hunger costs of some god abilities are removed.
+  - v1.26.2: Vehumet spell gifts are more biased towards what the player has skills for.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -348,6 +352,7 @@
   - v1.24: Exploding ammunition has higher explosion damage (2d5 -> 3d8).
   - v1.24: Steel ammunition is changed: instead of having 30% higher item base damage, it has 80% higher total base damage, but has a higher base delay (15 -> 20) and min delay (0.7 -> 1.2).
   - v1.25: Daggers have a bonus of (unarmed/3) to base damage.
+  - v1.26.2: Plain tomahawks are replaced by poisoned tomahawks.
 
 #### Removed Items
   - Amulet of Harm

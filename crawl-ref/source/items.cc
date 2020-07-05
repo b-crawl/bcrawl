@@ -2478,6 +2478,8 @@ bool copy_item_to_grid(item_def &item, const coord_def& p,
             }
         }
     }
+    else
+        quant_drop = 1;
 
     // Item not found in current stack, add new item to top.
     int new_item_idx = get_mitm_slot(10);

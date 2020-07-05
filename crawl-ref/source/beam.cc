@@ -5004,8 +5004,6 @@ void bolt::affect_monster(monster* mon)
         mon->hurt(agent(), final, flavour, KILLED_BY_BEAM, "", "", false);
     }
 
-    _maybe_imb_explosion(this, pos());
-
     if (mon->alive())
         monster_post_hit(mon, final);
     // The monster (e.g. a spectral weapon) might have self-destructed in its
@@ -5052,6 +5050,7 @@ void bolt::affect_monster(monster* mon)
         }
     }
 
+    _maybe_imb_explosion(this, pos());
     extra_range_used += range_used_on_hit();
 }
 

@@ -689,12 +689,12 @@ unsigned int item_value(item_def item, bool ident)
             break;
 
         case MISC_FAN_OF_GALES:
+        case MISC_SACK_OF_SPIDERS:
             valued += 300;
             break;
 
         case MISC_PHANTOM_MIRROR:
         case MISC_BOX_OF_BEASTS:
-        case MISC_SACK_OF_SPIDERS:
             valued += 200;
             break;
 

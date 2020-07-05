@@ -3066,7 +3066,7 @@ int evoker_charge_xp_debt(int evoker_type)
     case MISC_LIGHTNING_ROD:
         return 3;
     case MISC_SACK_OF_SPIDERS:
-        return 20;
+        return 18;
     default:
         return 10;
     }

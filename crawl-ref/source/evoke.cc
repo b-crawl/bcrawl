@@ -673,7 +673,7 @@ static bool _sack_of_spiders(item_def &sack)
     mpr("You reach into the bag...");
     bool success = false;
 
-    monster_type mon = = random_choose_weighted(
+    monster_type mon = random_choose_weighted(
             10, MONS_REDBACK,
             5, MONS_WOLF_SPIDER,
             4, MONS_JUMPING_SPIDER,

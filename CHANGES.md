@@ -216,6 +216,7 @@
   - v1.26: Conjure Ball Lightning has adjusted scaling with power, and ball lightning can be directed like other summons.
   - v1.26.2: Metabolic Englaciation slows enemies for longer, especially cold-blooded enemies.
   - v1.26.2: Iskenderun's Mystic Blast explosions work differently: instead of exploding at short range and potentially missing the target when they explode, shots have a chance to explode that increases linearly with distance to 100%, and only explode when they hit.
+  - v1.26.2: Petrify has a spell power multiplier for players.
 
 #### Removed Spells
   - Summon Guardian Golem

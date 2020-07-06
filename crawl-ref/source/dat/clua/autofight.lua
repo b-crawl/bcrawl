@@ -955,7 +955,12 @@ function newTupleSet()
 end
 
 function floodFillWalls(x, y)
+    if not x or not y then
+        crawl.mpr("No pillar selected.")
+        return nil
+    end
     if travel.feature_traversable(view.feature_at(x, y)) then
+        crawl.mpr("No pillar selected.")
         return nil
     end
     local counter = 1

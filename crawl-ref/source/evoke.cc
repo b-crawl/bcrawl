@@ -670,7 +670,7 @@ static bool _box_of_beasts(item_def &box)
 
 static bool _sack_of_spiders(item_def &sack)
 {
-    mpr("You reach into the bag...");
+    mpr("You reach into the bag");
 
     monster_type mon = random_choose_weighted(
             10, MONS_REDBACK,
@@ -707,9 +707,9 @@ static bool _sack_of_spiders(item_def &sack)
     if (summon_count)
     {
         if (summon_count > 1)
-            mpr("...and spiders crawl out!");
+            mpr("and spiders crawl out!");
         else
-            mpr("...and a spider crawls out!");
+            mpr("and a spider crawls out!");
 
         // for backwards compatibility
         if (sack.quantity > 1)
@@ -719,7 +719,7 @@ static bool _sack_of_spiders(item_def &sack)
         }
     }
     else
-        mpr("...but nothing happens.");
+        mpr("but nothing happens.");
 
     return (summon_count > 0);
 }

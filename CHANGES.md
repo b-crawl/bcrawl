@@ -353,6 +353,7 @@
   - v1.24: Steel ammunition is changed: instead of having 30% higher item base damage, it has 80% higher total base damage, but has a higher base delay (15 -> 20) and min delay (0.7 -> 1.2).
   - v1.25: Daggers have a bonus of (unarmed/3) to base damage.
   - v1.26.2: Plain tomahawks are replaced by poisoned tomahawks.
+  - v1.26.2: The sack of spiders now recharges with experience instead of being consumable. It summons a number of spiders proportional to (Evocations + 7)^2 on average.
 
 #### Removed Items
   - Amulet of Harm

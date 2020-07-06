@@ -2029,36 +2029,6 @@ int get_crosstrain_points(skill_type sk)
 }
 
 /**
- * Is the provided skill one of the elemental spellschools?
- *
- * @param sk    The skill in question.
- * @return      Whether it is fire, ice, earth, or air.
- */
-static bool _skill_is_elemental(skill_type sk)
-{
-    return sk == SK_FIRE_MAGIC || sk == SK_EARTH_MAGIC
-           || sk == SK_AIR_MAGIC || sk == SK_ICE_MAGIC;
-}
-
-/**
- * How skilled is the player at the elemental components of a spell?
- *
- * @param spell     The type of spell in question.
- * @param scale     Scaling factor for skill.
- * @return          The player's skill at the elemental parts of a given spell.
- */
-int elemental_preference(spell_type spell, int scale)
-{
-    skill_set skill_list;
-    spell_skills(spell, skill_list);
-    int preference = 0;
-    for (skill_type sk : skill_list)
-        if (_skill_is_elemental(sk))
-            preference += you.skill(sk, scale);
-    return preference;
-}
-
-/**
  * Compare skill levels
  *
  * It compares the level of 2 skills, and breaks ties by using skill order.

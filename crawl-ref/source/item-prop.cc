@@ -3001,6 +3001,7 @@ static const map<int, const char*> debt_map = {
     { MISC_PHIAL_OF_FLOODS,     "phial_debt" },
     { MISC_HORN_OF_GERYON,      "horn_debt" },
     { MISC_LIGHTNING_ROD,       "rod_debt" },
+    { MISC_SACK_OF_SPIDERS,     "sack_debt" },
 };
 
 /**
@@ -3060,9 +3061,15 @@ int evoker_max_charges(int evoker_type)
  */
 int evoker_charge_xp_debt(int evoker_type)
 {
-    return evoker_type == MISC_LIGHTNING_ROD
-        ? XP_EVOKE_LIGHTNING_ROD_DEBT
-        : XP_EVOKE_DEBT;
+    switch(evoker_type)
+    {
+    case MISC_LIGHTNING_ROD:
+        return 3;
+    case MISC_SACK_OF_SPIDERS:
+        return 18;
+    default:
+        return 10;
+    }
 }
 
 /**

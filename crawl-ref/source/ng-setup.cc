@@ -235,7 +235,7 @@ static void _give_ammo(weapon_type weapon, int plus)
         if (species_can_throw_large_rocks(you.species))
             newgame_make_item(OBJ_MISSILES, MI_LARGE_ROCK, 100 + (plus * 20));
         else if (you.body_size(PSIZE_TORSO) <= SIZE_SMALL)
-            newgame_make_item(OBJ_MISSILES, MI_TOMAHAWK, 240 + (60 * plus));
+            newgame_make_item(OBJ_MISSILES, MI_TOMAHAWK, 240 + (60 * plus), 0, SPMSL_POISONED);
         else
             newgame_make_item(OBJ_MISSILES, MI_JAVELIN, 150 + (30 * plus));
         newgame_make_item(OBJ_MISSILES, MI_THROWING_NET, 2);

@@ -909,10 +909,8 @@ A talisman which allows entry into the Realm of Zot.
 %%%%
 sack of spiders
 
-A woven silk bag. Opening it will release a number of spiders and other
-insects, as well as creating webs nearby. Evocations skill increases its
-effectiveness. There is a one in three chance of accidentally destroying the
-sack when using it.
+A woven silk bag. Opening it can release one or more spiders. Evocations skill
+increases the number of spiders released.
 %%%%
 sacred scourge
 

@@ -1447,13 +1447,7 @@ void hep_remove_incarnate()
 
 bool vehumet_supports_spell(spell_type spell)
 {
-    if (spell_typematch(spell, SPTYP_CONJURATION))
-        return true;
-
-    // Conjurations work by conjuring up a chunk of short-lived matter and
-    // propelling it towards the victim. This is the most popular way, but
-    // by no means it has a monopoly for being destructive.
-    // Vehumet loves all direct physical destruction.
+    // Vehumet supports all direct damage spells.
     switch(spell)
     {
     case SPELL_SHATTER:
@@ -1464,13 +1458,15 @@ bool vehumet_supports_spell(spell_type spell)
     case SPELL_FREEZE:
     case SPELL_IGNITE_POISON:
     case SPELL_OZOCUBUS_REFRIGERATION:
-    case SPELL_OLGREBS_TOXIC_RADIANCE:
     case SPELL_VIOLENT_UNRAVELLING:
     case SPELL_INNER_FLAME:
     case SPELL_IGNITION:
         return true;
-    default:
+    case SPELL_DAZZLING_SPRAY:
+    case SPELL_SPELLFORGED_SERVITOR:
         return false;
+    default:
+        return spell_typematch(spell, SPTYP_CONJURATION);
     }
 }
 

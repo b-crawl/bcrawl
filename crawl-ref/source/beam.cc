@@ -2114,8 +2114,7 @@ bool imb_can_splash(coord_def origin, coord_def center,
         return false;
 
     // Don't go far away from the caster (not enough momentum).
-    if (grid_distance(origin, center + (target - center)*2)
-        > you.current_vision)
+    if (grid_distance(origin, target) > you.current_vision)
     {
         return false;
     }
@@ -2167,14 +2166,14 @@ void bolt_parent_init(const bolt &parent, bolt &child)
 
 static void _maybe_imb_explosion(bolt *parent, coord_def center)
 {
-    if (parent->origin_spell != SPELL_ISKENDERUNS_MYSTIC_BLAST
-        || parent->in_explosion_phase)
+    if (parent->origin_spell != SPELL_ISKENDERUNS_MYSTIC_BLAST || parent->in_explosion_phase)
     {
         return;
     }
     const int dist = grid_distance(parent->source, center);
-    if (dist == 0 || (!parent->is_tracer && !x_chance_in_y(3, 2 + 2 * dist)))
+    if (dist <= 1 || (!parent->is_tracer && !x_chance_in_y(dist - 1, 5)))
         return;
+    
     bolt beam;
 
     bolt_parent_init(*parent, beam);
@@ -2394,8 +2393,6 @@ void bolt::affect_endpoint()
         explode();
         return;
     }
-
-    _maybe_imb_explosion(this, pos());
 
     const cloud_type cloud = get_cloud_type();
 
@@ -3841,6 +3838,10 @@ void bolt::affect_player()
         you.backlight();
         break;
     
+    case SPELL_ISKENDERUNS_MYSTIC_BLAST:
+        _maybe_imb_explosion(this, pos());
+        break;
+    
     default: break;
     }
 
@@ -5049,6 +5050,7 @@ void bolt::affect_monster(monster* mon)
         }
     }
 
+    _maybe_imb_explosion(this, pos());
     extra_range_used += range_used_on_hit();
 }
 

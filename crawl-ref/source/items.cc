@@ -1520,21 +1520,25 @@ bool is_stackable_item(const item_def &item)
     if (!item.defined())
         return false;
 
-    if (item.base_type == OBJ_MISSILES
-        || item.base_type == OBJ_FOOD
-        || item.base_type == OBJ_SCROLLS
-        || item.base_type == OBJ_POTIONS
-        || item.base_type == OBJ_GOLD)
+    switch(item.base_type)
     {
+    case OBJ_MISSILES:
+    case OBJ_FOOD:
+    case OBJ_SCROLLS:
+    case OBJ_POTIONS:
+    case OBJ_GOLD:
         return true;
-    }
-
-    if (item.is_type(OBJ_MISCELLANY, MISC_PHANTOM_MIRROR)
-        || item.is_type(OBJ_MISCELLANY, MISC_ZIGGURAT)
-        || item.is_type(OBJ_MISCELLANY, MISC_SACK_OF_SPIDERS)
-        || item.is_type(OBJ_MISCELLANY, MISC_BOX_OF_BEASTS))
-    {
-        return true;
+    case OBJ_MISCELLANY:
+        switch (item.sub_type)
+        {
+        case MISC_PHANTOM_MIRROR:
+        case MISC_ZIGGURAT:
+        case MISC_BOX_OF_BEASTS:
+            return true;
+        default: break;
+        }
+        break;
+    default: break;
     }
 
     return false;
@@ -2474,6 +2478,8 @@ bool copy_item_to_grid(item_def &item, const coord_def& p,
             }
         }
     }
+    else
+        quant_drop = 1;
 
     // Item not found in current stack, add new item to top.
     int new_item_idx = get_mitm_slot(10);

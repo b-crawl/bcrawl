@@ -914,7 +914,24 @@ _mon_hex_zap(ZAP_HIBERNATION, BEAM_HIBERNATION),
     6
 },
 
-_mon_hex_zap(ZAP_PETRIFY, BEAM_PETRIFY),
+{
+    ZAP_PETRIFY,
+    "",
+    200,
+    nullptr,
+    new tohit_calculator<0, 13, 8>,
+    nullptr,
+    new tohit_calculator<0, 1, 3>,
+    BLACK,
+    true,
+    BEAM_PETRIFY,
+    NUM_DCHAR_TYPES,
+    false,
+    false,
+    false,
+    0
+},
+
 _mon_hex_zap(ZAP_PORKALATOR, BEAM_PORKALATOR, 100, RED),
 _mon_hex_zap(ZAP_SLEEP, BEAM_SLEEP),
 

@@ -670,8 +670,6 @@ static bool _box_of_beasts(item_def &box)
 
 static bool _sack_of_spiders(item_def &sack)
 {
-    mpr("You reach into the bag");
-
     monster_type mon = random_choose_weighted(
             10, MONS_REDBACK,
             5, MONS_WOLF_SPIDER,
@@ -704,22 +702,22 @@ static bool _sack_of_spiders(item_def &sack)
             summon_count++;
     }
 
+    string message_end = "";
     if (summon_count)
     {
         if (summon_count > 1)
-            mpr("and spiders crawl out!");
+            message_end = "and spiders crawl out!";
         else
-            mpr("and a spider crawls out!");
+            message_end = "and a spider crawls out!";
 
         // for backwards compatibility
         if (sack.quantity > 1)
-        {
-            mpr("The now-empty bag unravels in your hand.");
             dec_inv_item_quantity(sack.link, sack.quantity - 1);
-        }
     }
     else
-        mpr("but nothing happens.");
+        message_end = "but nothing happens.";
+
+    mprf("You reach into the bag, %s", message_end.c_str());
 
     return (summon_count > 0);
 }

@@ -307,7 +307,10 @@ bool ranged_attack::handle_phase_hit()
             if (enough_mp(2, true, false))
                 dec_mp(2);
             else
+            {
+                mprf(MSGCH_DURATION, "Without mana to sustain it, your spell exhausts itself with your attack.");
                 you.duration[DUR_FIRE_ARROW] = 0;
+            }
             
             if (real_dmg > 0)
                 damage_done += real_dmg;

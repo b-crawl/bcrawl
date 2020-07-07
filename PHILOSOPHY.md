@@ -50,6 +50,10 @@ Still, it's impossible to completely eliminate repetitive or otherwise uninteres
 
 Optimal strategies should involve some specialization and some diversification.
 
+#### implied strategies should be supported
+
+If a player takes a well-reasoned leap of faith with a character's build based on information the game provides to them, the game should try to catch them.
+
 #### design ideology should be tested
 
 Changes should be evaluated based on their effect in practice, not based on what they "should" do according to some design ideology.

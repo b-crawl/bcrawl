@@ -217,6 +217,7 @@
   - v1.26.2: Metabolic Englaciation slows enemies for longer, especially cold-blooded enemies.
   - v1.26.2: Iskenderun's Mystic Blast explosions work differently: instead of exploding at short range and potentially missing the target when they explode, shots have a chance to explode that increases linearly with distance to 100%, and only explode when they hit.
   - v1.26.2: Petrify has a spell power multiplier for players.
+  - v1.26.3: If Flaming Arrows is active but the player has insufficient mana, and the player fires, the effect activates one more time and the duration ends.
 
 #### Removed Spells
   - Summon Guardian Golem

@@ -582,7 +582,7 @@ Creates a short burst of flame.
 %%%%
 Flaming Arrows spell
 
-Infuses the caster's projectiles with magical flame linked to the caster's magical reserves.
+Infuses the caster's physical projectiles with magical flame linked to the caster's magical reserves.
 When hitting a target, infused projectiles draw magical power to create a burst of flame.
 This does additional damage that is reduced by armour, making this spell most
 effective against unarmoured foes.

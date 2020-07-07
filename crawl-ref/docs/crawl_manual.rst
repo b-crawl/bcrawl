@@ -205,14 +205,14 @@ Strength
   Affects your ability to use heavy armours and large shields effectively.
 
 Intelligence
-  Abbreviated to "Int". Affects how well you can cast spells and how much
-  nutrition spellcasting takes.
+  Abbreviated to "Int". Affects your chance of success and spell power
+  when casting spells.
 
 Dexterity
-  Abbreviated to "Dex". Slightly increases your accuracy with melee and ranged weapons.
-  Significantly affects your ability to dodge attacks when you have trained dodging,
-  your general effectiveness with small shields, your stealth, and your effectiveness
-  when stabbing unaware enemies.
+  Abbreviated to "Dex". Affects your ability to dodge attacks when you
+  have trained dodging, your general effectiveness with small shields,
+  your stealth, and your effectiveness when stabbing unaware enemies.
+  Slightly increases your accuracy with melee and ranged weapons.
 
 Attributes grow permanently from gaining levels, and may increase or decrease
 temporarily from mutations or while using certain artefacts or abilities.

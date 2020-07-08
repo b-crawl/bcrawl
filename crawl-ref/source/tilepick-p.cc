@@ -1028,7 +1028,7 @@ void tilep_calc_flags(const dolls_data &doll, int flag[])
     {
         flag[TILEP_PART_HAIR] = TILEP_FLAG_HIDE;
     }
-    else if (is_player_tile(base_part, TILEP_BASE_FELID))
+    else if (is_player_tile(base_part, TILEP_BASE_FELID) || base_part == TILEP_TRAN_STATUE_FELID)
     {
         flag[TILEP_PART_CLOAK] = TILEP_FLAG_HIDE;
         flag[TILEP_PART_BOOTS] = TILEP_FLAG_HIDE;
@@ -1049,7 +1049,7 @@ void tilep_calc_flags(const dolls_data &doll, int flag[])
         flag[TILEP_PART_DRCWING]=TILEP_FLAG_HIDE;
         flag[TILEP_PART_DRCHEAD]=TILEP_FLAG_HIDE;
     }
-    else if (is_player_tile(base_part, TILEP_BASE_OCTOPODE))
+    else if (is_player_tile(base_part, TILEP_BASE_OCTOPODE) || base_part == TILEP_TRAN_STATUE_OCTOPODE)
     {
         flag[TILEP_PART_CLOAK] = TILEP_FLAG_HIDE;
         flag[TILEP_PART_BOOTS] = TILEP_FLAG_HIDE;

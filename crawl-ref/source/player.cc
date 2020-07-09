@@ -5691,6 +5691,12 @@ int calc_hunger(int food_cost)
     return food_cost;
 }
 
+void player_attack_hunger(int time_taken);
+{
+    int cost = div_rand_round(27 * time_taken, 10);
+    make_hungry(cost, true);
+}
+
 /*
  * Approximate the loudest noise the player heard in the last
  * turn, possibly rescaling. This gets updated every

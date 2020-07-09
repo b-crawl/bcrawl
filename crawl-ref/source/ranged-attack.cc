@@ -166,7 +166,6 @@ bool ranged_attack::handle_phase_attempted()
 {
     attacker->attacking(defender, true);
     attack_occurred = true;
-    attacker->make_hungry(3, true);
 
     return true;
 }

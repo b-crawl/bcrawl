@@ -175,7 +175,7 @@ static bool _reaching_weapon_attack(const item_def& wpn)
                     // Let's assume friendlies cooperate.
                     mpr("You could not reach far enough!");
                     you.time_taken = attack_delay;
-                    make_hungry(3, true);
+                    player_attack_hunger(attack_delay);
                     return true;
                 }
             }
@@ -196,7 +196,7 @@ static bool _reaching_weapon_attack(const item_def& wpn)
         // of invisible monsters.
         mpr("You attack empty space.");
         you.time_taken = attack_delay;
-        make_hungry(3, true);
+        player_attack_hunger(attack_delay);
         return true;
     }
     else if (!fight_melee(&you, mons))
@@ -207,7 +207,7 @@ static bool _reaching_weapon_attack(const item_def& wpn)
             // a failed attempt to reach further should not be free; instead,
             // charge the same as a successful attempt.
             you.time_taken = attack_delay;
-            make_hungry(3, true);
+            player_attack_hunger(attack_delay);
             you.turn_is_over = true;
         }
         else

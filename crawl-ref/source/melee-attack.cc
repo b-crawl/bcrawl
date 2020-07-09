@@ -184,11 +184,13 @@ bool melee_attack::handle_phase_attempted()
     if (attacker->is_player())
     {
         // Set delay now that we know the attack won't be cancelled.
-        if (!is_riposte
-             && (wu_jian_attack == WU_JIAN_ATTACK_NONE))
+        if (!is_riposte && (wu_jian_attack == WU_JIAN_ATTACK_NONE))
         {
             you.time_taken = you.attack_delay().roll();
         }
+        
+        if (!is_riposte)
+            player_attack_hunger(you.time_taken);
 
         const caction_type cact_typ = is_riposte ? CACT_RIPOSTE : CACT_MELEE;
         if (weapon)
@@ -235,9 +237,6 @@ bool melee_attack::handle_phase_attempted()
 
         check_autoberserk();
     }
-
-    // The attacker loses nutrition.
-    attacker->make_hungry(3, true);
 
     // Xom thinks fumbles are funny...
     if (attacker->fumbles_attack())

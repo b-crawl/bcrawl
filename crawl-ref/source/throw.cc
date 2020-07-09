@@ -1010,6 +1010,7 @@ bool throw_it(bolt &pbolt, int throw_2, dist *target)
     }
 
     you.time_taken = you.attack_delay(&item).roll();
+    player_attack_hunger(you.time_taken);
 
     // Create message.
     mprf("You %s%s %s.",

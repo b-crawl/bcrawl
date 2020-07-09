@@ -703,6 +703,7 @@ public:
                            bool slow_cold_blood = true) override;
     void god_conduct(conduct_type thing_done, int level) override;
 
+    void player_attack_hunger(int time_taken);
     void make_hungry(int nutrition, bool silent = true) override;
     bool poison(actor *agent, int amount = 1, bool force = false) override;
     bool sicken(int amount) override;

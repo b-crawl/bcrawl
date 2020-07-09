@@ -104,6 +104,7 @@
   - v1.24.3: Unarmed attacks in normal form have higher base accuracy. Claws no longer increase unarmed accuracy. Some transmutation forms have a smaller bonus to unarmed accuracy.
   - v1.25: Unarmed attack speed is changed to (27 / (27 + skill)). This change has no effect at 0 skill or max skill, but increases attack speed by ~12% at 13 skill. This is compensation for the shield penalty rework, for weapon brand buffs, for reduced accuracy of some transmutation forms, and for shorter branches.
   - v1.26.3: Spell hunger no longer depends on intelligence. The new formula is (135*(level - 1) - 40*spellcasting).
+  - v1.26.3: Hunger adjustments: waiting a turn still costs 3 nutrition, but now regenerating mana is +3, attacks are +27 per 10 auts, rations and chunks give +10% nutrition, and the difference between "hungry" and "very hungry" is larger.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -144,6 +145,7 @@
   - v1.19.1: Oni can receive Kikubaaqudgha's final spell gifts.
   - v1.24.1: Merfolk have higher aptitudes for long blades (+1 -> +2) and staves (-2 -> -1).
   - v1.26: If a Demonspawn demonic guardian has an adjacent empty space, the player can fire through it, which will cause it to move to an empty space. Otherwise, it cannot be fired through.
+  - v1.26.3: Centaurs have better aptitudes and attributes, but can only eat rations.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

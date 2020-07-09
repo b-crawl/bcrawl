@@ -444,7 +444,7 @@ static const ability_def Ability_List[] =
     { ABIL_ELYVILON_LESSER_HEALING, "Lesser Healing", 2, 0, 100,
       generic_cost::fixed(1), {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_ELYVILON_HEAL_OTHER, "Heal Other",
-      2, 0, 250, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
+      2, 0, 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_ELYVILON_PURIFICATION, "Purification",
       3, 0, 300, 3, {fail_basis::invo, 20, 5, 20}, abflag::conf_ok },
     { ABIL_ELYVILON_GREATER_HEALING, "Greater Healing",
@@ -506,7 +506,7 @@ static const ability_def Ability_List[] =
     { ABIL_FEDHAS_FUNGAL_BLOOM, "Fungal Bloom",
       0, 0, 0, 0, {fail_basis::invo}, abflag::none },
     { ABIL_FEDHAS_SUNLIGHT, "Sunlight",
-      2, 0, 50, 1, {fail_basis::invo, 30, 6, 20}, abflag::none },
+      2, 0, 0, 1, {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_FEDHAS_EVOLUTION, "Evolution",
       2, 0, 0, 0, {fail_basis::invo, 30, 6, 20}, abflag::piety },
     { ABIL_FEDHAS_PLANT_RING, "Growth",
@@ -514,7 +514,7 @@ static const ability_def Ability_List[] =
     { ABIL_FEDHAS_SPAWN_SPORES, "Reproduction",
       4, 0, 100, 1, {fail_basis::invo, 60, 4, 25}, abflag::none },
     { ABIL_FEDHAS_RAIN, "Rain",
-      4, 0, 150, 4, {fail_basis::invo, 70, 4, 25}, abflag::none },
+      4, 0, 0, 4, {fail_basis::invo, 70, 4, 25}, abflag::none },
 
     // Cheibriados
     { ABIL_CHEIBRIADOS_TIME_BEND, "Bend Time",

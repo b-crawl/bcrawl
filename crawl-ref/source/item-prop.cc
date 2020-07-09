@@ -717,8 +717,8 @@ struct food_def
 static int Food_index[NUM_FOODS];
 static const food_def Food_prop[] =
 {
-    { FOOD_RATION,       "ration",       3400,  1900,  3400 },
-    { FOOD_CHUNK,        "chunk",        1000,  1300,     0 },
+    { FOOD_RATION,       "ration",       3740,  2090,  3740 },
+    { FOOD_CHUNK,        "chunk",        1100,  1430,     0 },
 
 #if TAG_MAJOR_VERSION == 34
     // is_real_food assumes we list FOOD_ROYAL_JELLY as the first removed

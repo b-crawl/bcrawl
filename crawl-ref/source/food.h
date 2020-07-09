@@ -12,14 +12,14 @@
 #define HUNGER_STARVING       900
 #define HUNGER_NEAR_STARVING 1433
 #define HUNGER_VERY_HUNGRY   1966
-#define HUNGER_HUNGRY        2500
-#define HUNGER_SATIATED      6900
-#define HUNGER_FULL          8900
-#define HUNGER_VERY_FULL    10900
+#define HUNGER_HUNGRY        3300
+#define HUNGER_SATIATED      7500
+#define HUNGER_FULL          9500
+#define HUNGER_VERY_FULL    11500
 #define HUNGER_ENGORGED     39900
 
-#define HUNGER_DEFAULT       5900
-#define HUNGER_MAXIMUM      11900
+#define HUNGER_DEFAULT       6700
+#define HUNGER_MAXIMUM      12500
 
 // Must match the order of hunger_state_t enums
 constexpr int hunger_threshold[HS_ENGORGED + 1] =

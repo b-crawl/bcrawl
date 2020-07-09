@@ -416,7 +416,7 @@ static int _acquirement_food_subtype(bool /*divine*/, int& quantity)
     else
         type_wanted = FOOD_RATION;
 
-    quantity = 3 + random2(5);
+    quantity = 6 + random2(7);
 
     // giving more of the lower food value items
     if (type_wanted == FOOD_CHUNK)

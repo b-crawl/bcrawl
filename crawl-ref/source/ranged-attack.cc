@@ -312,15 +312,7 @@ bool ranged_attack::handle_phase_hit()
             
             int real_dmg = resist_adjust_damage(defender, BEAM_FIRE, base_dmg);
             real_dmg = defender->apply_ac(real_dmg);
-            
-            if (enough_mp(2, true, false))
-                dec_mp(2);
-            else
-            {
-                mprf(MSGCH_DURATION, "Without mana to sustain it, your spell exhausts itself with your attack.");
-                you.duration[DUR_FIRE_ARROW] = 0;
-            }
-            
+                        
             if (real_dmg > 0)
             {
                 if (needs_message)
@@ -328,6 +320,14 @@ bool ranged_attack::handle_phase_hit()
                         projectile->name(DESC_THE).c_str(),
                         attack_strength_punctuation(real_dmg).c_str());
                 inflict_damage(real_dmg);
+            }
+            
+            if (enough_mp(2, true, false))
+                dec_mp(2);
+            else
+            {
+                mprf(MSGCH_DURATION, "Without mana to sustain it, your spell exhausts itself with your attack.");
+                you.duration[DUR_FIRE_ARROW] = 0;
             }
         }
     }

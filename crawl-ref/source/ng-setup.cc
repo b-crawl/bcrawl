@@ -406,8 +406,10 @@ static void _give_starting_food()
         sub_type = FOOD_CHUNK;
         break;
     case SP_TROLL:
-    case SP_CENTAUR:
         quantity = 2;
+        break;
+    case SP_CENTAUR:
+        quantity = 3;
         break;
     default: break;
     }

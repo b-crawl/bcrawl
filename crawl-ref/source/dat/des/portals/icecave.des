@@ -750,14 +750,13 @@ dgn.set_random_mon_list("white imp w:35 / ufetubus w:35 / ice devil w:30")
 MONS:    white imp / ufetubus
 MONS:    ice devil
 MONS:    ice statue
-MONS:    patrolling reaper ; scythe ego:freezing
+MONS:    patrolling gelid demonspawn
 MONS:    blizzard demon
 MONS:    ice fiend
 : if dgn.persist.ice_cave_hard then
-# Swap out the reaper for the standard ice fiend or blizzard demons,
+# Swap out the gelid demonspawn for the standard ice fiend,
 # alongside making the ice devil placements stronger.
-SUBST:   2 = 1:2 2:13, 0 = 2, 4 = 5
-SHUFFLE: 5` / `6
+SUBST:   2 = 1:2 2:13, 0 = 2, 4 = 6
 : else
 SUBST:   2 = .:5 2:12, 0 = 21, ` = .
 : end

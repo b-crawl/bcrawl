@@ -2451,9 +2451,9 @@ static void _swing_at_target(coord_def move)
         }
         else if (!you.fumbles_attack())
             mpr("You swing at nothing.");
-        make_hungry(3, true);
         // Take the usual attack delay.
         you.time_taken = you.attack_delay().roll();
+        player_attack_hunger(you.time_taken);
     }
     you.turn_is_over = true;
     return;

@@ -405,12 +405,14 @@ static void _give_starting_food()
     case SP_GHOUL:
         sub_type = FOOD_CHUNK;
         break;
+    case SP_TROLL:
+        quantity = 2;
+        break;
+    case SP_CENTAUR:
+        quantity = 3;
+        break;
     default: break;
     }
-
-    // Give another one for hungry species.
-    if (you.get_mutation_level(MUT_FAST_METABOLISM))
-        quantity = 2;
 
     newgame_make_item(base_type, sub_type, quantity);
 }

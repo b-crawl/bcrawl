@@ -11,8 +11,8 @@ learners and can hop long distances, but are otherwise slow and easily seen.
 %%%%
 Centaur
 
-Swift, strong and bulky, Centaurs are particularly skilled with ranged
-weaponry.
+Swift and strong but bulky and unable to digest meat, Centaurs are particularly
+skilled with bows, but are also competent melee fighters with a powerful kick.
 %%%%
 Deep Dwarf
 

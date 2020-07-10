@@ -62,15 +62,15 @@ static const map<species_type, species_def> species_data =
     -1, 1, 0, 3,
     MONS_CENTAUR,
     HT_LAND, US_ALIVE, SIZE_LARGE,
-    10, 7, 4, // 21
+    12, 8, 4, // 24
     { STAT_STR, STAT_DEX }, 4,
     { { MUT_TOUGH_SKIN, 3, 1 }, { MUT_FAST, 2, 1 },  { MUT_DEFORMED, 1, 1 },
-      { MUT_HOOVES, 3, 1 }, },
+      { MUT_HOOVES, 3, 1 }, { MUT_HERBIVOROUS, 1, 1 }, },
     {},
     {},
     { JOB_FIGHTER, JOB_HUNTER, JOB_WARPER, JOB_ARCANE_MARKSMAN,
     JOB_ARCHAEOLOGIST, JOB_MARTIAL_ARTIST },
-    { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS,
+    { SK_MACES_FLAILS, SK_AXES, SK_POLEARMS, SK_LONG_BLADES,
       SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
 } },
 

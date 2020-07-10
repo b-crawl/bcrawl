@@ -1236,18 +1236,14 @@ int player_hunger_rate(bool temp)
 {
     int hunger = 3;
 
-    if (temp
-        && (you.duration[DUR_REGENERATION]
-            || you.duration[DUR_TROGS_HAND])
-        && you.hp < you.hp_max)
-    {
-        hunger += 4;
-    }
+    hunger += you.get_mutation_level(MUT_FAST_METABOLISM)
+            - you.get_mutation_level(MUT_SLOW_METABOLISM);
 
-    {
-        hunger += you.get_mutation_level(MUT_FAST_METABOLISM)
-                - you.get_mutation_level(MUT_SLOW_METABOLISM);
-    }
+    if (you.magic_points < you.max_magic_points)
+        hunger += min(hunger, 3);
+
+    if (temp && (you.hp < you.hp_max) && you.duration[DUR_REGENERATION])
+        hunger += min(hunger, 3);
 
     // If Cheibriados has slowed your life processes, you will hunger less.
     if (have_passive(passive_t::slow_metabolism))
@@ -5693,6 +5689,12 @@ int calc_hunger(int food_cost)
         return food_cost/2;
     }
     return food_cost;
+}
+
+void player_attack_hunger(int time_taken)
+{
+    int cost = div_rand_round(27 * time_taken, 10);
+    make_hungry(cost, true);
 }
 
 /*

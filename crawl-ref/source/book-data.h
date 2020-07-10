@@ -248,6 +248,7 @@ static const vector<spell_type> spellbook_templates[] =
 #endif
 
 {   // Book of Power
+    SPELL_FULMINANT_PRISM,
     SPELL_BATTLESPHERE,
     SPELL_POISON_ARROW,
     SPELL_IRON_SHOT,

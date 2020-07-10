@@ -705,7 +705,7 @@ bool fill_status_info(int status, status_info& inf)
     case DUR_FIRE_ARROW:
     {
         if (!enough_mp(2, true, false))
-            inf.light_colour = DARKGREY;
+            inf.light_colour = CYAN;
         break;
     }
 

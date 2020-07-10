@@ -290,18 +290,26 @@ bool ranged_attack::handle_phase_hit()
     }
     else
     {
-        damage_done = 0;
-
-        if (attacker->is_player() && you.duration[DUR_FIRE_ARROW])
+        damage_done = calc_damage();       
+        if (damage_done > 0)
+        {
+            if (!handle_phase_damaged())
+                return false;
+        }
+        else if (needs_message)
+        {
+            mprf("%s %s %s but does no damage.",
+                 projectile->name(DESC_THE).c_str(),
+                 attack_verb.c_str(),
+                 defender->name(DESC_THE).c_str());
+        }
+        
+        if (attacker->is_player() && you.duration[DUR_FIRE_ARROW] && defender->alive())
         {
             int pow = you.props["fire_arrow_power"].get_int();
             int base_dmg = div_rand_round(pow + 12, 5);
             
-            bolt beam;
-            beam.flavour = BEAM_FIRE;
-            beam.thrower = KILL_YOU;
-            
-            int real_dmg = mons_adjust_flavoured(defender->as_monster(), beam, base_dmg);
+            int real_dmg = resist_adjust_damage(defender, BEAM_FIRE, base_dmg);
             real_dmg = defender->apply_ac(real_dmg);
             
             if (enough_mp(2, true, false))
@@ -313,22 +321,13 @@ bool ranged_attack::handle_phase_hit()
             }
             
             if (real_dmg > 0)
-                damage_done += real_dmg;
-        }
-
-        damage_done += calc_damage();       
-        
-        if (damage_done > 0 || projectile->is_type(OBJ_MISSILES, MI_NEEDLE))
-        {
-            if (!handle_phase_damaged())
-                return false;
-        }
-        else if (needs_message)
-        {
-            mprf("%s %s %s but does no damage.",
-                 projectile->name(DESC_THE).c_str(),
-                 attack_verb.c_str(),
-                 defender->name(DESC_THE).c_str());
+            {
+                if (needs_message)
+                    mprf("%s is used to channel a burst of flame%s",
+                        projectile->name(DESC_THE).c_str(),
+                        attack_strength_punctuation(real_dmg).c_str());
+                inflict_damage(real_dmg);
+            }
         }
     }
 

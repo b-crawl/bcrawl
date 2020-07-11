@@ -4727,13 +4727,10 @@ void explore_discoveries::found_item(const coord_def &pos, const item_def &i)
             if (greed_inducing && (Options.explore_stop & ES_GREEDY_ITEM))
                 ; // Stop for this condition
             else if (!greed_inducing
-                     && (Options.explore_stop & ES_ITEM
-                         || Options.explore_stop & ES_GLOWING_ITEM
-                            && i.flags & ISFLAG_COSMETIC_MASK
-                         || Options.explore_stop & ES_ARTEFACT
-                            && i.flags & ISFLAG_ARTEFACT_MASK
-                         || Options.explore_stop & ES_RUNE
-                            && i.base_type == OBJ_RUNES))
+                     && (ES_item
+                         || ES_glow && i.flags & ISFLAG_COSMETIC_MASK
+                         || ES_art && i.flags & ISFLAG_ARTEFACT_MASK
+                         || ES_rune && i.base_type == OBJ_RUNES))
             {
                 ; // More conditions to stop for
             }
@@ -4745,7 +4742,7 @@ void explore_discoveries::found_item(const coord_def &pos, const item_def &i)
     add_item(i);
     es_flags |=
         (you.running == RMODE_EXPLORE_GREEDY) ? ES_GREEDY_PICKUP_MASK :
-        (Options.explore_stop & ES_ITEM) ? ES_ITEM : ES_NONE;
+        ES_item ? ES_ITEM : ES_NONE;
 }
 
 // Expensive O(n^2) duplicate search, but we can live with that.

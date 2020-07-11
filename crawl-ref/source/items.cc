@@ -944,6 +944,7 @@ static bool _id_floor_item(item_def &item)
         return false;
     
     bool always_identify = false;
+    bool recheck_autopickup = false;
     switch(item.base_type)
     {
     case OBJ_BOOKS:
@@ -954,6 +955,8 @@ static bool _id_floor_item(item_def &item)
         if (item.sub_type == SCR_IDENTIFY)
             always_identify = true;
         break;
+    case OBJ_ARMOUR:
+        recheck_autopickup = true;
     default: break;
     }
     
@@ -968,7 +971,7 @@ static bool _id_floor_item(item_def &item)
         
         if (!always_identify)
         {
-            if(is_useless_item(item))
+            if(is_useless_item(item) || (recheck_autopickup && !item_needs_autopickup(item)))
                 if (item.props.exists("needs_autopickup"))
                     item.props.erase("needs_autopickup");
             mpr("You use a rune to identify the item.");

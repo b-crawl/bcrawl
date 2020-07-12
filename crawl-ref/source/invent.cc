@@ -390,14 +390,13 @@ void InvMenu::select_item_index(int idx, int qty, bool draw_cursor)
 
     InvEntry *ie = static_cast<InvEntry*>(items[idx]);
 
+    bool starred = ie->has_star();
     bool should_toggle_star = _item_is_permadrop_candidate(ie->item[0])
-        && (ie->has_star() || _mode_special_drop);
+        && (starred || _mode_special_drop);
 
     if (should_toggle_star)
     {
-        // Toggle starred items back to selected-but-not-starred in this mode
-        // instead of turning them all the way off.
-        qty = _mode_special_drop ? -2 : 0;
+        qty = (_mode_special_drop && !starred) ? -2 : 0;
         ie->set_star(!ie->has_star());
     }
     Menu::select_item_index(idx, qty, draw_cursor);

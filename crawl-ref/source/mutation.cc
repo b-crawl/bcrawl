@@ -2404,11 +2404,15 @@ static bool _slot_is_unique(const mut_array_t &mut,
 static vector<demon_mutation_info> _select_ds_mutations()
 {
     int ct_of_tier[] = { 1, 1, 2, 1 };
-    // 1 in 10 chance to create a monstrous set
-    if (one_chance_in(10))
+    // 1 in 3 chance to create a monstrous set
+    if (one_chance_in(3))
     {
         ct_of_tier[0] = 3;
         ct_of_tier[1] = 0;
+        if (one_chance_in(2))
+            ct_of_tier[2]++;
+        else
+            ct_of_tier[3]++;
     }
 
 try_again:
@@ -2789,16 +2793,8 @@ void check_monster_detect()
 
 int augmentation_amount()
 {
-    int amount = 0;
-    const int level = you.get_mutation_level(MUT_AUGMENTATION);
-
-    for (int i = 0; i < level; ++i)
-    {
-        if (you.hp >= ((i + level) * you.hp_max) / (2 * level))
-            amount++;
-    }
-
-    return amount;
+    int level = you.get_mutation_level(MUT_AUGMENTATION);
+    return (4 * level * you.hp) / you.hp_max;
 }
 
 void reset_powered_by_death_duration()

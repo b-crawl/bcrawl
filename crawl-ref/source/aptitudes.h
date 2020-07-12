@@ -257,7 +257,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_MUMMY,           SK_THROWING,       -2),
     APT(SP_MUMMY,           SK_ARMOUR,         -2),
     APT(SP_MUMMY,           SK_DODGING,        -2),
-    APT(SP_MUMMY,           SK_STEALTH,        -1),
+    APT(SP_MUMMY,           SK_STEALTH,         1),
 #if TAG_MAJOR_VERSION == 34
     APT(SP_MUMMY,           SK_STABBING,      UNUSABLE_SKILL),
 #endif

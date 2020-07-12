@@ -1067,7 +1067,7 @@ void game_options::reset_options()
     assign_item_slot       = SS_FORWARD;
     show_god_gift          = MB_MAYBE;
 
-    explore_stop           = (ES_ITEM | ES_STAIR | ES_PORTAL | ES_BRANCH
+    explore_stop           = (ES_GLOWING_ITEM | ES_STAIR | ES_PORTAL | ES_BRANCH
                               | ES_SHOP | ES_ALTAR | ES_RUNED_DOOR
                               | ES_TRANSPORTER | ES_GREEDY_PICKUP_SMART
                               | ES_GREEDY_VISITED_ITEM_STACK);

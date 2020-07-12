@@ -54,7 +54,14 @@ void make_hungry(int hunger_amount, bool suppress_msg,
         return;
 
     if (you_foodless())
+    {
+        if (div_rand_round(hunger_amount * (you.experience_level - 1), 300000))
+        {
+            mprf(MSGCH_WARN, "You feel your body degrading from exertion and time.");
+            rot_hp(1);
+        }
         return;
+    }
 
     if (magic)
         hunger_amount = calc_hunger(hunger_amount);

@@ -4712,12 +4712,15 @@ void explore_discoveries::add_item(const item_def &i)
 
 bool _interesting_item(const item_def &i)
 {
+    if (is_useless_item(i))
+        return false;
+    
     switch (i.base_type)
     {
     case OBJ_WEAPONS:
     {
         item_def* your_weapon = you.weapon();
-        bool glowing = (i.flags & ISFLAG_COSMETIC_MASK);
+        bool glowing = (i.flags & ISFLAG_COSMETIC_MASK) || (get_weapon_brand(i) != SPWPN_NORMAL);
         if (glowing && your_weapon
                 && get_weapon_brand(*your_weapon) == SPWPN_NORMAL
                 && your_weapon->base_type != OBJ_STAVES)
@@ -4733,7 +4736,10 @@ bool _interesting_item(const item_def &i)
     }
     
     case OBJ_ARMOUR:
-        return (i.flags & ISFLAG_COSMETIC_MASK) || (you.experience_level <= 3);
+        return (i.flags & ISFLAG_COSMETIC_MASK)
+                || static_cast<special_armour_type>(i.brand) != SPARM_NORMAL
+                || armour_type_is_hide(i.sub_type)
+                || (you.experience_level <= 3);
 
     case OBJ_WANDS:
         return false;
@@ -4741,8 +4747,6 @@ bool _interesting_item(const item_def &i)
     case OBJ_JEWELLERY:
     case OBJ_MISCELLANY:
     case OBJ_STAVES:
-        return true;
-
     case OBJ_BOOKS:
     case OBJ_ORBS:
     case OBJ_RUNES:

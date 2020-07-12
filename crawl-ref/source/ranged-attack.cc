@@ -321,6 +321,11 @@ bool ranged_attack::handle_phase_hit()
                         attack_strength_punctuation(real_dmg).c_str());
                 inflict_damage(real_dmg);
             }
+            else if (needs_message)
+            {
+                mprf("%s is used to channel a burst of flame, but it deals no damage.",
+                    projectile->name(DESC_THE).c_str());
+            }
             
             if (enough_mp(2, true, false))
                 dec_mp(2);

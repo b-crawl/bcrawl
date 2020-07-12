@@ -4712,7 +4712,7 @@ void explore_discoveries::add_item(const item_def &i)
 
 bool _interesting_item(const item_def &i)
 {
-    switch (item.base_type)
+    switch (i.base_type)
     {
     case OBJ_WEAPONS:
     {

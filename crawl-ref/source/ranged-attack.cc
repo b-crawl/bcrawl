@@ -308,7 +308,7 @@ bool ranged_attack::handle_phase_hit()
         if (attacker->is_player() && you.duration[DUR_FIRE_ARROW] && defender->alive())
         {
             int pow = you.props["fire_arrow_power"].get_int();
-            int base_dmg = div_rand_round(pow + 12, 5);
+            int base_dmg = div_rand_round(pow*6 + 60, 25);
             
             int real_dmg = resist_adjust_damage(defender, BEAM_FIRE, base_dmg);
             real_dmg = defender->apply_ac(real_dmg);

@@ -4738,7 +4738,7 @@ bool _interesting_item(const item_def &i)
     case OBJ_ARMOUR:
         return (i.flags & ISFLAG_COSMETIC_MASK)
                 || static_cast<special_armour_type>(i.brand) != SPARM_NORMAL
-                || armour_type_is_hide(i.sub_type)
+                || armour_type_is_hide(static_cast<armour_type>i.sub_type)
                 || (you.experience_level <= 3);
 
     case OBJ_WANDS:

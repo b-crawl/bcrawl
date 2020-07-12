@@ -4710,6 +4710,48 @@ void explore_discoveries::add_item(const item_def &i)
     hints_first_item(i);
 }
 
+bool _interesting_item(const item_def &i)
+{
+    switch (item.base_type)
+    {
+    case OBJ_WEAPONS:
+    {
+        item_def* your_weapon = you.weapon();
+        bool glowing = (i.flags & ISFLAG_COSMETIC_MASK);
+        if (glowing && your_weapon
+                && get_weapon_brand(*your_weapon) == SPWPN_NORMAL
+                && your_weapon->base_type != OBJ_STAVES)
+            return true;
+        if (!your_weapon)
+        {
+            int skill = you.skill(SK_UNARMED_COMBAT);
+            if (skill <= 2 || (glowing && skill <= 6))
+                return true;
+        }
+        
+        return false;
+    }
+    
+    case OBJ_ARMOUR:
+        return (i.flags & ISFLAG_COSMETIC_MASK) || (you.experience_level <= 3);
+
+    case OBJ_WANDS:
+        return false;
+
+    case OBJ_JEWELLERY:
+    case OBJ_MISCELLANY:
+    case OBJ_STAVES:
+        return true;
+
+    case OBJ_BOOKS:
+    case OBJ_ORBS:
+    case OBJ_RUNES:
+        return true;
+    
+    default: return false;
+    }
+}
+
 void explore_discoveries::found_item(const coord_def &pos, const item_def &i)
 {
     if (you.running == RMODE_EXPLORE_GREEDY)
@@ -4728,7 +4770,7 @@ void explore_discoveries::found_item(const coord_def &pos, const item_def &i)
                 ; // Stop for this condition
             else if (!greed_inducing
                      && (ES_item
-                         || ES_glow && i.flags & ISFLAG_COSMETIC_MASK
+                         || ES_glow && _interesting_item(i)
                          || ES_art && i.flags & ISFLAG_ARTEFACT_MASK
                          || ES_rune && i.base_type == OBJ_RUNES))
             {

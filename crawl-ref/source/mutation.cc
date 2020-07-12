@@ -2793,16 +2793,8 @@ void check_monster_detect()
 
 int augmentation_amount()
 {
-    int amount = 0;
-    const int level = you.get_mutation_level(MUT_AUGMENTATION);
-
-    for (int i = 0; i < level; ++i)
-    {
-        if (you.hp >= ((i + level) * you.hp_max) / (2 * level))
-            amount++;
-    }
-
-    return amount;
+    int level = you.get_mutation_level(MUT_AUGMENTATION);
+    return (4 * level * you.hp) / you.hp_max;
 }
 
 void reset_powered_by_death_duration()

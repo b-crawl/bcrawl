@@ -470,7 +470,7 @@ int calc_spell_power(spell_type spell, bool apply_intel, bool fail_rate_check,
         power /= (10 + 3 * you.get_mutation_level(MUT_SUBDUED_MAGIC));
 
         // Augmentation boosts spell power at high HP.
-        power *= 10 + 4 * augmentation_amount();
+        power *= 10 + augmentation_amount();
         power /= 10;
 
         // Each level of horror reduces spellpower by 10%

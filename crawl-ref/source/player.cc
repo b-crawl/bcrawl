@@ -2568,7 +2568,7 @@ static void _handle_temp_mutation(int exp)
         temp_mutation_wanes();
 }
 
-/// update stat loss
+/// update stat loss and rot
 static void _handle_stat_loss(int exp)
 {
     if (!(you.attribute[ATTR_STAT_LOSS_XP] > 0))
@@ -2580,6 +2580,15 @@ static void _handle_stat_loss(int exp)
     dprf("Stat loss points: %d", you.attribute[ATTR_STAT_LOSS_XP]);
     if (you.attribute[ATTR_STAT_LOSS_XP] <= 0)
         _recover_stat();
+    
+    if (player_rotted() && you_foodless())
+    {
+        int exp_to_next = exp_needed(you.experience_level + 1) - exp_needed(you.experience_level);
+        exp_to_next = max(exp_to_next, 40);
+
+        int unrot_amount = div_rand_round(exp * you.experience_level, exp_to_next);
+        unrot_hp(unrot_amount);
+    }
 }
 
 /// update xp drain

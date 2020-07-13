@@ -4706,63 +4706,6 @@ void explore_discoveries::add_item(const item_def &i)
     items.emplace_back(itemname, i);
 }
 
-bool _interesting_item(const item_def &i)
-{
-    if (is_useless_item(i))
-        return false;
-    
-    switch (i.base_type)
-    {
-    case OBJ_WEAPONS:
-    {
-        item_def* your_weapon = you.weapon();
-        bool glowing = (i.flags & ISFLAG_COSMETIC_MASK && !runes_in_pack())
-                || (get_weapon_brand(i) != SPWPN_NORMAL);
-        if (glowing && your_weapon
-                && get_weapon_brand(*your_weapon) == SPWPN_NORMAL
-                && your_weapon->base_type != OBJ_STAVES)
-            return true;
-        if (!your_weapon)
-        {
-            int skill = you.skill(SK_UNARMED_COMBAT);
-            if (skill <= 2 || (glowing && skill <= 6))
-                return true;
-        }
-        
-        return false;
-    }
-    
-    case OBJ_ARMOUR:
-        return (i.flags & ISFLAG_COSMETIC_MASK && !runes_in_pack())
-                || static_cast<special_armour_type>(i.brand) != SPARM_NORMAL
-                || armour_type_is_hide(static_cast<armour_type>(i.sub_type))
-                || (you.experience_level <= 3);
-
-    case OBJ_WANDS:  // disabled autopickup means the player doesn't care
-        return false;
-
-    case OBJ_MISCELLANY:
-        switch(i.sub_type)
-        {  // don't stop for misc with autopickup disabled by carrying it
-        case MISC_ZIGGURAT:
-        case MISC_LIGHTNING_ROD:
-        case MISC_LAMP_OF_FIRE:
-        case MISC_PHIAL_OF_FLOODS:
-        case MISC_SACK_OF_SPIDERS:
-            return false;
-        default: return true;
-        }
-    case OBJ_JEWELLERY:
-    case OBJ_STAVES:
-    case OBJ_BOOKS:
-    case OBJ_ORBS:
-    case OBJ_RUNES:
-        return true;
-    
-    default: return false;
-    }
-}
-
 void explore_discoveries::found_item(const coord_def &pos, const item_def &i)
 {
     if (you.running == RMODE_EXPLORE_GREEDY)
@@ -4780,10 +4723,7 @@ void explore_discoveries::found_item(const coord_def &pos, const item_def &i)
             if (greed_inducing && (Options.explore_stop & ES_GREEDY_ITEM))
                 ; // Stop for this condition
             else if (!greed_inducing
-                     && (ES_item
-                         || ES_glow && _interesting_item(i)
-                         || ES_art && i.flags & ISFLAG_ARTEFACT_MASK
-                         || ES_rune && i.base_type == OBJ_RUNES))
+                     && (ES_item || ES_rune && i.base_type == OBJ_RUNES))
             {
                 ; // More conditions to stop for
             }

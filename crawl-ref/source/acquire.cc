@@ -1482,6 +1482,9 @@ bool acquirement(object_class_type class_wanted, int agent,
         if(you.species == SP_FELID)
             item_type_count -= 2;
         
+        if(you.get_mutation_level(MUT_NO_ARTIFICE))
+            item_type_count -= 1;
+        
         bool no_food = you_foodless();
         if(no_food)
             item_type_count -= 1;
@@ -1534,8 +1537,11 @@ bool acquirement(object_class_type class_wanted, int agent,
             index++;
         }
         
-        stock[index] = acquirement_create_item_general(OBJ_MISCELLANY, agent, tempQuiet, stock_loc, debug, false);
-        index++;
+        if(!you.get_mutation_level(MUT_NO_ARTIFICE))
+        {
+            stock[index] = acquirement_create_item_general(OBJ_MISCELLANY, agent, tempQuiet, stock_loc, debug, false);
+            index++;
+        }
         
         if(!no_food)
         {

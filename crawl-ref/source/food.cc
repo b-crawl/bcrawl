@@ -53,7 +53,8 @@ void make_hungry(int hunger_amount, bool suppress_msg,
     if (crawl_state.disables[DIS_HUNGER])
         return;
 
-    if (you_foodless())
+    bool foodless = you_foodless() || (you.species == SP_VAMPIRE && you.hunger_state <= HS_STARVING);
+    if (foodless)
     {
         if (div_rand_round(hunger_amount * (you.experience_level - 1), 200000))
         {

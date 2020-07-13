@@ -1258,8 +1258,6 @@ int player_hunger_rate(bool temp)
         {
         case HS_FAINTING:
         case HS_STARVING:
-            hunger = 0;
-            break;
         case HS_NEAR_STARVING:
         case HS_VERY_HUNGRY:
         case HS_HUNGRY:
@@ -2587,7 +2585,7 @@ static void _handle_stat_loss(int exp)
         exp_to_next = max(exp_to_next, 40);
 
         int x = exp;
-        if (you_foodless())
+        if (you_foodless() || you.species == SP_VAMPIRE)
             x *= you.experience_level;
         int unrot_amount = div_rand_round(x, exp_to_next);
         if (unrot_amount)

@@ -2581,13 +2581,17 @@ static void _handle_stat_loss(int exp)
     if (you.attribute[ATTR_STAT_LOSS_XP] <= 0)
         _recover_stat();
     
-    if (player_rotted() && you_foodless())
+    if (player_rotted())
     {
         int exp_to_next = exp_needed(you.experience_level + 1) - exp_needed(you.experience_level);
         exp_to_next = max(exp_to_next, 40);
 
-        int unrot_amount = div_rand_round(exp * you.experience_level, exp_to_next);
-        unrot_hp(unrot_amount);
+        int x = exp;
+        if (you_foodless())
+            x *= you.experience_level;
+        int unrot_amount = div_rand_round(x, exp_to_next);
+        if (unrot_amount)
+            unrot_hp(unrot_amount);
     }
 }
 

@@ -147,6 +147,7 @@
   - v1.26: If a Demonspawn demonic guardian has an adjacent empty space, the player can fire through it, which will cause it to move to an empty space. Otherwise, it cannot be fired through.
   - v1.27: Centaurs have better aptitudes and attributes, but can only eat rations.
   - v1.27.1: Demonspawn have a higher chance (1/10 -> 1/3) of being monstrous. Monstrous demonspawn now get either 3 T2 and 1 T3 mutation, or 2 T2 and 2 T3 mutations.
+  - v1.27.1: Characters that don't need food will slowly rot over time instead, and can recover from HP rot by gaining experience. (This should not significantly affect normal gameplay.)
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

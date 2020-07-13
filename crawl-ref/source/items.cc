@@ -3299,7 +3299,7 @@ bool _interesting_item(const item_def &i)
         return (i.flags & ISFLAG_COSMETIC_MASK && !runes_in_pack())
                 || static_cast<special_armour_type>(i.brand) != SPARM_NORMAL
                 || armour_type_is_hide(static_cast<armour_type>(i.sub_type))
-                || (you.experience_level <= 3);
+                || (you.experience_level <= 4 && _item_different_than_inv(i, _identical_types));
 
     case OBJ_WANDS:  // disabled autopickup means the player doesn't care
         return false;
@@ -3315,8 +3315,11 @@ bool _interesting_item(const item_def &i)
             return false;
         default: return true;
         }
-    case OBJ_JEWELLERY:
+    
     case OBJ_STAVES:
+        return _item_different_than_inv(i, _identical_types);
+    
+    case OBJ_JEWELLERY:
     case OBJ_BOOKS:
     case OBJ_ORBS:
     case OBJ_RUNES:

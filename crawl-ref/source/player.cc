@@ -1258,8 +1258,6 @@ int player_hunger_rate(bool temp)
         {
         case HS_FAINTING:
         case HS_STARVING:
-            hunger = 0;
-            break;
         case HS_NEAR_STARVING:
         case HS_VERY_HUNGRY:
         case HS_HUNGRY:
@@ -2568,18 +2566,31 @@ static void _handle_temp_mutation(int exp)
         temp_mutation_wanes();
 }
 
-/// update stat loss
+/// update stat loss and rot
 static void _handle_stat_loss(int exp)
 {
-    if (!(you.attribute[ATTR_STAT_LOSS_XP] > 0))
-        return;
+    if ((you.attribute[ATTR_STAT_LOSS_XP] > 0))
+    {
+        int loss = div_rand_round(exp * 3 / 2,
+                                  max(1, calc_skill_cost(you.skill_cost_level) - 3));
+        you.attribute[ATTR_STAT_LOSS_XP] -= loss;
+        dprf("Stat loss points: %d", you.attribute[ATTR_STAT_LOSS_XP]);
+        if (you.attribute[ATTR_STAT_LOSS_XP] <= 0)
+            _recover_stat();
+    }
+    
+    if (player_rotted())
+    {
+        int exp_to_next = exp_needed(you.experience_level + 1) - exp_needed(you.experience_level);
+        exp_to_next = max(exp_to_next, 40);
 
-    int loss = div_rand_round(exp * 3 / 2,
-                              max(1, calc_skill_cost(you.skill_cost_level) - 3));
-    you.attribute[ATTR_STAT_LOSS_XP] -= loss;
-    dprf("Stat loss points: %d", you.attribute[ATTR_STAT_LOSS_XP]);
-    if (you.attribute[ATTR_STAT_LOSS_XP] <= 0)
-        _recover_stat();
+        int x = exp;
+        if (you_foodless() || you.species == SP_VAMPIRE)
+            x *= you.experience_level;
+        int unrot_amount = div_rand_round(x, exp_to_next);
+        if (unrot_amount)
+            unrot_hp(unrot_amount);
+    }
 }
 
 /// update xp drain

@@ -331,7 +331,7 @@ spret frog_hop(bool fail)
  */
 spret controlled_blink(bool fail, bool safe_cancel, int power)
 {
-    int range = min(LOS_RADIUS, (LOS_RADIUS * (power - 37)) / 63);
+    int range = min(LOS_RADIUS, (LOS_RADIUS * power * power) / 10000);
     range = max(1, range);
     coord_def target;
     targeter_smite tgt(&you, range);

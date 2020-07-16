@@ -1916,7 +1916,7 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
         return cast_blink(fail);
 
     case SPELL_CONTROLLED_BLINK:
-        return cast_controlled_blink(fail);
+        return cast_controlled_blink(fail, true, powc);
 
     case SPELL_CONJURE_FLAME:
         return conjure_flame(&you, powc, beam.target, fail);

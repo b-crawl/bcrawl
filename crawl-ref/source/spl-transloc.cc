@@ -329,10 +329,12 @@ spret frog_hop(bool fail)
  *                      for e.g. ?blink with blurryvis)
  * @return              Whether the blink succeeded, aborted, or was miscast.
  */
-spret controlled_blink(bool fail, bool safe_cancel)
+spret controlled_blink(bool fail, bool safe_cancel, int power)
 {
+    int range = min(LOS_RADIUS, (LOS_RADIUS * power) / 200);
+    range = max(1, range);
     coord_def target;
-    targeter_smite tgt(&you, LOS_RADIUS);
+    targeter_smite tgt(&you, range);
     tgt.obeys_mesmerise = true;
     if (!_find_cblink_target(target, safe_cancel, "blink", &tgt))
         return spret::abort;
@@ -389,7 +391,7 @@ spret cast_blink(bool fail)
  * @param safe    Whether it's safe to abort (not e.g. unknown ?blink)
  * @return        Whether the spell was successfully cast, aborted, or miscast.
  */
-spret cast_controlled_blink(bool fail, bool safe)
+spret cast_controlled_blink(bool fail, bool safe, int power)
 {
     // don't prompt if it's useless
     if (you.no_tele(true, true, true))
@@ -418,7 +420,7 @@ spret cast_controlled_blink(bool fail, bool safe)
         return cast_blink(fail);
     }
 
-    return controlled_blink(fail, safe);
+    return controlled_blink(fail, safe, power);
 }
 
 void you_teleport()

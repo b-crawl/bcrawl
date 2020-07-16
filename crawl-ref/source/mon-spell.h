@@ -1372,7 +1372,7 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
-    {  MST_PHANTASMAL_WARRIOR,
+    {  MST_BLINK_CLOSE,
       {
        { SPELL_BLINK_CLOSE, 67, MON_SPELL_MAGICAL },
       }

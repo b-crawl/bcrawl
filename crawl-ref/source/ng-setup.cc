@@ -603,20 +603,25 @@ static void _setup_generic(const newgame_def& ng)
     // This function depends on stats and mutations being finalised.
     _give_items_skills(ng);
 
-    if (you.species == SP_DEEP_DWARF && you.religion == GOD_NO_GOD)
+    if (you.species == SP_DEEP_DWARF)
     {
-        if (you.char_class == JOB_NECROMANCER)
+        if (you.religion == GOD_NO_GOD)
         {
-            you.religion = GOD_MAKHLEB;
-            you.piety = 40;
+            if (you.char_class == JOB_NECROMANCER)
+            {
+                you.religion = GOD_MAKHLEB;
+                you.piety = 40;
+            }
+            else
+            {
+                you.religion = GOD_ELYVILON;
+                you.piety = 35;
+                if (you.char_class == JOB_MONK)
+                    you.piety = 70;
+            }
         }
         else
-        {
-            you.religion = GOD_ELYVILON;
-            you.piety = 35;
-            if (you.char_class == JOB_MONK)
-                you.piety = 70;
-        }
+            newgame_make_item(OBJ_POTIONS, POT_AMBROSIA);
     }
 
     if (you.species == SP_DEMONSPAWN)

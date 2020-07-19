@@ -94,12 +94,12 @@ Beastly Appendage spell
     if you.race() == "Octopode" then
         return "Causes a vicious spike to grow from one of the caster's " ..
                "tentacles, increasing the damage of their extra tentacle " ..
-               "attacks."
+               "attacks. This transformation also makes the caster slightly more robust."
     else
         return "Causes monstrous horns or talons to grow from the caster's " ..
                "body, granting them a chance of making an extra attack in " ..
                "melee. It is not powerful enough to meld armour or enhance " ..
-               "appendages that are already nonhuman."
+               "appendages that are already nonhuman. This transformation also makes the caster slightly more robust."
     end
 }}
 %%%%

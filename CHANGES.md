@@ -59,6 +59,7 @@
   - v1.24.2: Chaos Knights are treated as still worshipping Xom if they convert to another deity.
   - v1.26: Warpers start with Apportation.
   - v1.26.2: Ice Elementalists start with Ice Form.
+  - v1.27.2: Transmuters start with Passwall.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -148,6 +149,7 @@
   - v1.27: Centaurs have better aptitudes and attributes, but can only eat rations.
   - v1.27.1: Demonspawn have a higher chance (1/10 -> 1/3) of being monstrous. Monstrous demonspawn now get either 3 T2 and 1 T3 mutation, or 2 T2 and 2 T3 mutations.
   - v1.27.1: Characters that don't need food will slowly rot over time instead, and can recover from HP rot by gaining experience. (This should not significantly affect normal gameplay.)
+  - v1.27.2: Deep Dwarves that don't start with Elyvilon or Makhleb now start with a potion of ambrosia.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -223,6 +225,7 @@
   - v1.26.2: Iskenderun's Mystic Blast explosions work differently: instead of exploding at short range and potentially missing the target when they explode, shots have a chance to explode that increases linearly with distance to 100%, and only explode when they hit.
   - v1.26.2: Petrify has a spell power multiplier for players.
   - v1.27: If Flaming Arrows is active but the player has insufficient mana, and the player fires, the effect activates one more time and the duration ends.
+  - v1.27.2: Controlled Blink is level 7 and its range scales with power^2.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -299,6 +302,7 @@
   - v1.26: Yredelemnul's Drain Life ability causes exhaustion.
   - v1.26: The hunger costs of some god abilities are removed.
   - v1.26.2: Vehumet spell gifts are more biased towards what the player has skills for.
+  - v1.27.2: Ashenzari restores mana when you explore.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -462,6 +466,10 @@
   - v1.26: High level player ghosts are less likely to have low level spells.
   - v1.26: Water nymphs swim very quickly instead of teleporting to water near players, and have Primal Wave.
   - v1.26: Ice statues can regenerate.
+  - v1.27.2: Ufetubi have Blink Close.
+  - v1.27.2: Cacodemons have a corrosive melee attack.
+  - v1.27.2: Blizzard demons have a freezing melee attack.
+  - v1.27.2: Green deaths have a poison melee attack.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

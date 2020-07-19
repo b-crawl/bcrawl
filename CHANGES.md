@@ -227,7 +227,6 @@
   - v1.26.2: Petrify has a spell power multiplier for players.
   - v1.27: If Flaming Arrows is active but the player has insufficient mana, and the player fires, the effect activates one more time and the duration ends.
   - v1.27.2: Controlled Blink is level 7 and its range scales with power^2.
-  - v1.27.2: Beastly Appendage gives +10% HP.
 
 #### Removed Spells
   - Summon Guardian Golem

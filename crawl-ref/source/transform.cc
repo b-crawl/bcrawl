@@ -1410,15 +1410,7 @@ static bool _slot_conflict(equipment_type eq)
     // until they get something that doesn't conflict with their randart
     // of überness.
     if (you.equip[eq] != -1)
-    {
-        // Horns + hat is fine.
-        if (eq != EQ_HELMET
-            || you.melded[eq]
-            || is_hard_helmet(*(you.slot_item(eq))))
-        {
-            return true;
-        }
-    }
+        return true;
 
     for (int mut = 0; mut < NUM_MUTATIONS; mut++)
         if (you.has_mutation(static_cast<mutation_type>(mut)) && eq == beastly_slot(mut))

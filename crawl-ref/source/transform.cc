@@ -1502,11 +1502,7 @@ static int _transform_duration(transformation which_trans, int pow)
 
 static int _beastly_appendage_level(int appendage)
 {
-    switch (appendage)
-    {
-    case MUT_HORNS: return 2;
-    default:        return 3;
-    }
+    return 3;
 }
 
 /**

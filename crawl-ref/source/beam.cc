@@ -2663,8 +2663,7 @@ void bolt::affect_place_clouds()
     if (cloud_struct* cloud = cloud_at(p))
     {
         // fire cancelling cold & vice versa
-        if ((cloud->type == CLOUD_COLD
-             && (flavour == BEAM_FIRE || flavour == BEAM_LAVA))
+        if ((cloud->type == CLOUD_COLD && flavour == BEAM_FIRE)
             || (cloud->type == CLOUD_FIRE && flavour == BEAM_COLD))
         {
             if (player_can_hear(p))

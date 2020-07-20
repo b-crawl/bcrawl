@@ -1010,21 +1010,24 @@ public:
 
     int get_damage() const override
     {
+        // Hooves used to bypass AC. Then they were stronger than talons.
+        // But this is all hidden non-obvious info. Now the difference is just flavor.
+        // Any differences would need to be an effect with a message for transparency.
         if (you.has_usable_hooves())
         {
             // Max hoof damage: 10.
-            return damage + you.get_mutation_level(MUT_HOOVES) * 5 / 3;
+            return damage + you.get_mutation_level(MUT_HOOVES) * 2 - 1;
         }
 
         if (you.has_usable_talons())
         {
-            // Max talon damage: 9.
-            return damage + 1 + you.get_mutation_level(MUT_TALONS);
+            // Max talon damage: 10.
+            return damage + you.get_mutation_level(MUT_TALONS) * 2 - 1;
         }
 
-        // Max spike damage: 8.
+        // Max spike damage: 11.
         // ... yes, apparently tentacle spikes are "kicks".
-        return damage + you.get_mutation_level(MUT_TENTACLE_SPIKE);
+        return damage + you.get_mutation_level(MUT_TENTACLE_SPIKE) * 2;
     }
 
     string get_verb() const override

@@ -1372,7 +1372,7 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
-    {  MST_PHANTASMAL_WARRIOR,
+    {  MST_BLINK_CLOSE,
       {
        { SPELL_BLINK_CLOSE, 67, MON_SPELL_MAGICAL },
       }
@@ -1540,7 +1540,6 @@ static const mon_spellbook mspell_list[] =
     // ('1') Fiends and friends.
     {  MST_EXECUTIONER,
       {
-       { SPELL_PAIN, 21, MON_SPELL_MAGICAL },
        { SPELL_HASTE, 41, MON_SPELL_MAGICAL },
       }
     },
@@ -1995,7 +1994,7 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_MARA,
       {
-       { SPELL_PAIN, 14, MON_SPELL_MAGICAL },
+       { SPELL_BOLT_OF_DRAINING, 14, MON_SPELL_MAGICAL },
        { SPELL_BOLT_OF_FIRE, 14, MON_SPELL_MAGICAL },
        { SPELL_FAKE_MARA_SUMMON, 14, MON_SPELL_MAGICAL },
        { SPELL_SUMMON_ILLUSION, 14, MON_SPELL_MAGICAL },

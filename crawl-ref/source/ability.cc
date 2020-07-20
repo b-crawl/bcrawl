@@ -2043,7 +2043,6 @@ static spret _do_ability(const ability_def& abil, bool fail)
         if (!invis_allowed())
             return spret::abort;
         fail_check();
-        surge_power(you.spec_evoke());
         potionlike_effect(POT_INVISIBILITY,
                           player_adjust_evoc_power(
                               you.skill(SK_EVOCATIONS, 2) + 5));
@@ -2073,9 +2072,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         }
         else
         {
-            surge_power(you.spec_evoke());
-            fly_player(
-                player_adjust_evoc_power(you.skill(SK_EVOCATIONS, 2) + 30));
+            fly_player(player_adjust_evoc_power(you.skill(SK_EVOCATIONS, 2) + 30));
         }
         break;
 

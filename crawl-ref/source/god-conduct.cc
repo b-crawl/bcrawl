@@ -931,11 +931,11 @@ static like_map divine_likes[] =
             0, 0, 0, nullptr,
             [] (int &piety, int &denom, const monster* /*victim*/)
             {
-                const int level = denom; // also = piety
                 const int base_gain = 8; // base gain per dungeon level
                 // levels: x1, x1.25, x1.5, x1.75, x2
                 piety = base_gain + base_gain * you.bondage_level / 4;
-                denom = level;
+                if (you.piety >= piety_breakpoint(0))
+                    inc_mp(div_rand_round(piety, 100));
             }
         } },
     },

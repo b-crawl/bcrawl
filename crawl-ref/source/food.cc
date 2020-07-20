@@ -404,6 +404,29 @@ static hunger_state_t _max_chunk_state(bool like_chunks = player_likes_chunks())
     return like_chunks ? HS_VERY_FULL : HS_HUNGRY;
 }
 
+bool _auto_eat_chunks()
+{
+    bool eating_heals = false;
+    if (you.species == SP_GHOUL)
+    {
+        if (player_rotted())
+            return true;
+        eating_heals = true;
+    }
+    else if (you.undead_state())
+        return false;
+    else if (you.wearing(EQ_AMULET, AMU_THE_GOURMAND))
+        eating_heals = true;
+
+    if (you.hunger_state <= HS_NEAR_STARVING)
+        return true;
+
+    if (eating_heals)
+        return you.hp < (you.hp_max * Options.rest_wait_percent + 99) / 100;
+    
+    return true;
+}
+
 /** Make the prompt for chunk eating/corpse draining.
  *
  *  @param only_auto Don't actually make a prompt: if there are
@@ -477,13 +500,7 @@ int prompt_eat_chunks(bool only_auto)
             string item_name = menu_colour_item_name(*item, DESC_A);
 
             const bool bad = is_bad_food(*item);
-
-            // Allow undead to use easy_eat, but not auto_eat, since the player
-            // might not want to drink blood as a vampire and might want to save
-            // chunks as a ghoul. Ghouls can auto_eat if they have rotted hp.
-            const bool no_auto = (you.undead_state()
-                    && !(you.species == SP_GHOUL && player_rotted()))
-                || you.wearing(EQ_AMULET, AMU_THE_GOURMAND);
+            bool no_auto = !_auto_eat_chunks();
 
             // If this chunk is safe to eat, just do so without prompting.
             if (easy_eat && !bad && i_feel_safe() && !(only_auto && no_auto))

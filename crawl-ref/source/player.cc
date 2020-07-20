@@ -1258,6 +1258,7 @@ int player_hunger_rate(bool temp)
         {
         case HS_FAINTING:
         case HS_STARVING:
+            break;  // triggers rot clock in make_hungry
         case HS_NEAR_STARVING:
         case HS_VERY_HUNGRY:
         case HS_HUNGRY:

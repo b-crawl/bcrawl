@@ -418,6 +418,9 @@ bool _auto_eat_chunks()
     else if (you.wearing(EQ_AMULET, AMU_THE_GOURMAND))
         eating_heals = true;
 
+    if (you.hunger_state <= HS_NEAR_STARVING)
+        return true;
+
     if (eating_heals)
         return you.hp < (you.hp_max * Options.rest_wait_percent + 99) / 100;
     

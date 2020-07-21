@@ -15,3 +15,6 @@
 #rest_wait_both = false
 
 tile_full_screen = false
+
+auto_butcher = true
+auto_butcher_max_chunks = 2

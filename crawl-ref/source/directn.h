@@ -201,12 +201,6 @@ private:
     // There is something else lying underneath.
     void print_items_description() const;
 
-    // Lava.
-    //
-    // If boring_too is false, then don't print anything on boring
-    // terrain (i.e. floor.)
-    void print_floor_description(bool boring_too) const;
-
     string target_interesting_terrain_description() const;
     string target_cloud_description() const;
     string target_sanctuary_description() const;

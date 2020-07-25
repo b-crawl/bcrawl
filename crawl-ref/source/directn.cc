@@ -431,7 +431,6 @@ void direction_chooser::describe_cell() const
             print_items_description();
         if (just_looking || show_floor_desc)
         {
-            print_floor_description(show_boring_feats);
             if (!did_cloud)
                 _print_cloud_desc(target());
         }
@@ -1534,22 +1533,6 @@ void direction_chooser::print_items_description() const
         return;
 
     item_check(&target());
-}
-
-void direction_chooser::print_floor_description(bool boring_too) const
-{
-    const dungeon_feature_type feat = grd(target());
-    if (!boring_too && feat == DNGN_FLOOR)
-        return;
-
-#ifdef DEBUG_DIAGNOSTICS
-    // [ds] Be more verbose in debug mode.
-    if (you.wizard)
-        _debug_describe_feature_at(target());
-    else
-#endif
-    mprf(MSGCH_EXAMINE_FILTER, "%s",
-         feature_description_at(target(), true).c_str());
 }
 
 void direction_chooser::reinitialize_move_flags()

@@ -1533,16 +1533,7 @@ void direction_chooser::print_items_description() const
     if (!in_bounds(target()))
         return;
 
-    const item_def* item = top_item_at(target());
-    if (!item)
-        return;
-
-    // Print the first item.
-    mprf(MSGCH_FLOOR_ITEMS, "%s.",
-         menu_colour_item_name(*item, DESC_A).c_str());
-
-    if (multiple_items_at(target()))
-        mprf(MSGCH_FLOOR_ITEMS, "There is something else lying underneath.");
+    item_check(&target());
 }
 
 void direction_chooser::print_floor_description(bool boring_too) const
@@ -2806,9 +2797,10 @@ vector<dungeon_feature_type> features_by_desc(const base_pattern &pattern)
     return features;
 }
 
-void describe_floor()
+void describe_floor(const coord_def* pos_ptr)
 {
-    dungeon_feature_type grid = env.map_knowledge(you.pos()).feat();
+    coord_def pos = pos_ptr ? *pos_ptr : you.pos();
+    dungeon_feature_type grid = env.map_knowledge(pos).feat();
 
     const char* prefix = "There is ";
     string feat;
@@ -2826,8 +2818,7 @@ void describe_floor()
         break;
     }
 
-    feat = feature_description_at(you.pos(), true,
-                               DESC_A, false);
+    feat = feature_description_at(pos, true, DESC_A, false);
     if (feat.empty())
         return;
 
@@ -2838,8 +2829,6 @@ void describe_floor()
         return;
 
     mprf(channel, "%s%s here.", prefix, feat.c_str());
-    if (grid == DNGN_ENTER_GAUNTLET)
-        mprf(MSGCH_EXAMINE, "Beware, the minotaur awaits!");
 }
 
 static string _base_feature_desc(dungeon_feature_type grid, trap_type trap)

@@ -2588,9 +2588,7 @@ string mutation_overview()
             mutations.push_back(str);
     }
 
-    // a bit more stuff
-    if (you.species == SP_OGRE || you.species == SP_TROLL
-        || species_is_draconian(you.species) || you.species == SP_SPRIGGAN)
+    if (you.species == SP_OGRE || species_is_draconian(you.species) || you.species == SP_SPRIGGAN)
     {
         mutations.emplace_back("unfitting armour");
     }

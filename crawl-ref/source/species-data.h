@@ -507,7 +507,7 @@ static const map<species_type, species_def> species_data =
     5, 9, 10, // 24
     { STAT_STR, STAT_INT, STAT_DEX }, 4,
     { { MUT_CARNIVOROUS, 1, 1 }, { MUT_MUTATION_RESISTANCE, 1, 1 },
-      { MUT_TALONS, 1, 1 }, },
+      { MUT_TALONS, 1, 1 }, { MUT_PASSIVE_MAPPING, 2, 1 }, },
     {},
     {},
     { JOB_FIGHTER, JOB_HUNTER, JOB_BERSERKER, JOB_REAVER, JOB_WARPER, JOB_ARCANE_MARKSMAN, JOB_ASSASSIN, JOB_SPELUNKER, JOB_EARTH_ELEMENTALIST },

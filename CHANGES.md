@@ -79,6 +79,7 @@
   - v1.24.1: Adjusted unarmed damage is shown on the % screen.
   - v1.26: Scoring is changed: scores are now ((2.75*10^11 * sqrt(runes) * (1 + wins) + 3.36*10^7 * sqrt(experience)) / (turns + 1000)); "wins" is 1 for winning games, and 0 otherwise.
   - v1.26.1: Portals and shops no longer have a (small) chance to randomly be mimics.
+  - v1.27.3: Players can inspect full item stacks in view, not just the top item.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -151,6 +152,7 @@
   - v1.27.1: Demonspawn have a higher chance (1/10 -> 1/3) of being monstrous. Monstrous demonspawn now get either 3 T2 and 1 T3 mutation, or 2 T2 and 2 T3 mutations.
   - v1.27.1: Characters that don't need food will slowly rot over time instead, and can recover from HP rot by gaining experience. (This should not significantly affect normal gameplay.)
   - v1.27.2: Deep Dwarves that don't start with Elyvilon or Makhleb now start with a potion of ambrosia.
+  - v1.27.3: Kobolds have Passive Mapping 2.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

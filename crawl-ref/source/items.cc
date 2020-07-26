@@ -835,14 +835,15 @@ static void _maybe_give_corpse_hint(const item_def& item)
     }
 }
 
-void item_check()
+void item_check(const coord_def* pos_ptr)
 {
-    describe_floor();
-    origin_set(you.pos());
+    coord_def pos = pos_ptr ? *pos_ptr : you.pos();
+    describe_floor(pos_ptr);
+    origin_set(pos);
 
     ostream& strm = msg::streams(MSGCH_FLOOR_ITEMS);
 
-    auto items = item_list_on_square(you.visible_igrd(you.pos()));
+    auto items = item_list_on_square(you.visible_igrd(pos));
 
     if (items.empty())
         return;

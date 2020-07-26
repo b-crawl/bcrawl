@@ -491,8 +491,12 @@ command_type TravelDelay::move_cmd() const
 
 void BaseRunDelay::handle()
 {
+    bool first_move = false;
     if (!started)
+    {
+        first_move = true;
         started = true;
+    }
     // Handle inconsistencies between the delay queue and you.running.
     // We don't want to send the game into a deadlock.
     if (!you.running)
@@ -507,8 +511,11 @@ void BaseRunDelay::handle()
 
     command_type cmd = CMD_NO_CMD;
 
-    if ((want_move() && you.confused()) || !i_feel_safe(true, want_move()))
+    if ((want_move() && you.confused()) ||
+        (!(unsafe_once && first_move) && !i_feel_safe(true, want_move())))
+    {
         stop_running();
+    }
     else
     {
         if (want_autoeat() && _auto_eat())

@@ -697,6 +697,9 @@ static bool _is_slot_cursed(equipment_type eq)
 
 bool god_id_item(item_def& item, bool silent)
 {
+    if (fully_identified(item))
+        return false;
+    
     iflags_t old_ided = item.flags & ISFLAG_IDENT_MASK;
     iflags_t ided = 0;
 

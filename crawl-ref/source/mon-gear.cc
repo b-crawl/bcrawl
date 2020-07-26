@@ -1087,27 +1087,29 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
     switch (type)
     {
     case MONS_KOBOLD:
-        // A few of the smarter kobolds have blowguns.
         if (one_chance_in(10) && level > 1)
         {
             item.base_type = OBJ_WEAPONS;
             item.sub_type  = WPN_BLOWGUN;
             break;
         }
-        // intentional fallthrough
-    case MONS_BIG_KOBOLD:
-        if (x_chance_in_y(3, 5))     // give hand weapon
+        if (x_chance_in_y(3, 5))
         {
             item.base_type = OBJ_WEAPONS;
-            item.sub_type  = random_choose(WPN_DAGGER,      WPN_DAGGER,
-                                           WPN_SHORT_SWORD, WPN_SHORT_SWORD,
-                                           WPN_CLUB,        WPN_WHIP);
-        }
-        else if (one_chance_in(30) && level > 2)
-        {
-            item.base_type = OBJ_WEAPONS;
-            item.sub_type  = WPN_HAND_CROSSBOW;
+            item.sub_type  = random_choose(WPN_DAGGER, WPN_DAGGER,
+                                           WPN_SHORT_SWORD, WPN_FALCHION,
+                                           WPN_CLUB, WPN_WHIP);
             break;
+        }
+        break;
+    
+    case MONS_BIG_KOBOLD:
+        if (x_chance_in_y(4, 5))
+        {
+            item.base_type = OBJ_WEAPONS;
+            item.sub_type  = random_choose(WPN_MACE, WPN_LONG_SWORD,
+                                           WPN_SHORT_SWORD, WPN_RAPIER,
+                                           WPN_TRIDENT, WPN_HAND_CROSSBOW);
         }
         break;
 

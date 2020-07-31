@@ -422,7 +422,7 @@ bool _auto_eat_chunks()
         return true;
 
     if (eating_heals)
-        return you.hp < (you.hp_max * Options.rest_wait_percent + 99) / 100;
+        return you.hp < (you.hp_max * (Options.rest_wait_percent - 12) + 99) / 100;
     
     return true;
 }

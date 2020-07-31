@@ -148,17 +148,7 @@ end
 ################################################################################
 # Lair entries
 ################################################################################
-# Dummy Lair entry
-NAME:   lair_entry_dummy
-TAGS:   lair_entry extra transparent
-WEIGHT: 30
-ORIENT: float
-KFEAT:  O = enter_lair
-MAP
-O
-ENDMAP
 
-######################################
 # Generic Lair entry.
 #
 NAME:    david_lair_generic

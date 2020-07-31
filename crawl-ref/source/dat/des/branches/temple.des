@@ -99,7 +99,11 @@ NAME:   temple_statues
 TAGS:   transparent
 : temple_entry(_G)
 MAP
-GOG
+..G..
+.....
+G.O.G
+.....
+..G..
 ENDMAP
 
 NAME:   temple_green
@@ -905,14 +909,6 @@ pc...cp
 pc...cp
  cc.cc
   p@p
-ENDMAP
-
-NAME:   minmay_temple_entry_proselytizer
-TAGS:   transparent
-KMONS:  O = orc priest
-: temple_entry(_G)
-MAP
-O
 ENDMAP
 
 NAME:   minmay_temple_entry_stoned_glass

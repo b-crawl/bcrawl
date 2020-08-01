@@ -222,6 +222,7 @@ TAGS:   lair_entry no_monster_gen no_pool_fixup transparent
 ORIENT: float
 MONS:   dryad, plant, bullfrog
 KMONS:  w = elephant
+KFEAT:  w = deep_water
 KFEAT:  O = enter_lair
 NSUBST: p = 3:2 / 1:3 / *:.
 MAP

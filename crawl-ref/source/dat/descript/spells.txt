@@ -327,9 +327,9 @@ Creates a blazing column of magical flame in a targeted empty location.
 %%%%
 Controlled Blink spell
 
-Translocates the caster a short distance, with precise control. Be wary that
-controlled translocations will cause the subject to become contaminated with
-magical energy.
+Translocates the caster with precise control; the distance increases
+with spellpower. Be wary that controlled translocations will cause the
+subject to become contaminated with magical energy.
 %%%%
 Corona spell
 

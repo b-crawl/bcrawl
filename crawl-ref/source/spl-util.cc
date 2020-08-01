@@ -1017,12 +1017,21 @@ int spell_range(spell_type spell, int pow, bool allow_bonus)
 
     const int powercap = spell_power_cap(spell);
 
-    if (powercap <= pow)
-        return min(maxrange, (int)you.current_vision);
+    if (spell != SPELL_CONTROLLED_BLINK) {
+        if (powercap <= pow)
+            return min(maxrange, (int)you.current_vision);
 
-    // Round appropriately.
-    return min((int)you.current_vision,
-           (pow * (maxrange - minrange) + powercap / 2) / powercap + minrange);
+        // Round appropriately.
+        return min((int)you.current_vision,
+                   (pow * (maxrange - minrange) + powercap / 2) / 
+                   powercap + minrange);
+    } else {
+        pow = min(powercap, pow);
+        return 
+            min (((int) you.current_vision), 
+                 (max (minrange,
+                       min(maxrange, (maxrange * pow * pow) / 10000))));
+    }
 }
 
 /**
@@ -1410,6 +1419,7 @@ bool spell_no_hostile_in_range(spell_type spell)
     case SPELL_FULMINANT_PRISM:
     case SPELL_SUMMON_LIGHTNING_SPIRE:
     case SPELL_FALSE_IMAGE:
+    case SPELL_CONTROLLED_BLINK:
     // This can always potentially hit out-of-LOS, although this is conditional
     // on spell-power.
     case SPELL_FIRE_STORM:

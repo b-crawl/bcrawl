@@ -260,7 +260,7 @@ static const struct spell_desc spelldata[] =
     SPFLAG_ESCAPE | SPFLAG_EMERGENCY | SPFLAG_UTILITY,
     7,
     100,
-    -1, -1,
+    1, LOS_RADIUS,
     2, 0, // Not noisier than Blink, to keep this spell relevant
           // for stabbers. [rob]
     TILEG_CONTROLLED_BLINK,

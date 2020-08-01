@@ -148,17 +148,7 @@ end
 ################################################################################
 # Lair entries
 ################################################################################
-# Dummy Lair entry
-NAME:   lair_entry_dummy
-TAGS:   lair_entry extra transparent
-WEIGHT: 30
-ORIENT: float
-KFEAT:  O = enter_lair
-MAP
-O
-ENDMAP
 
-######################################
 # Generic Lair entry.
 #
 NAME:    david_lair_generic
@@ -227,34 +217,26 @@ x..yy.O.yy...
 y...@........
 ENDMAP
 
-# Obligatory Oklob Plant Lair Entry Vault
-NAME:   dpeg_oklobed_lair
+NAME:   bhauth_dryad_lair
 TAGS:   lair_entry no_monster_gen no_pool_fixup transparent
 ORIENT: float
-MONS:   fungus, plant, oklob plant
+MONS:   dryad, plant, bullfrog
+KMONS:  S = statue name:moss-covered name_adjective tile:mons_statue_mage \
+             hp:36 hd:3 spells:summon_small_mammal.80.magical.instant
+KMONS:  H = orc name:hermit name_suffix spells:summon_ice_beast.80.wizard
 KFEAT:  O = enter_lair
-: if you.absdepth() < 10 then
-SUBST:  A = 11., B = 2.
-: else
-SUBST:  A = 2
-:    if you.absdepth() < 11 then
-NSUBST: B = 2 = 3... / * = 2.
-:    else
-NSUBST: B = 3 = 33... / * = 2.
-:    end
-: end
+KMONS:  E = elephant
+KFEAT:  E = deep_water
+NSUBST: p = 3:2 / 1:3 / 1:H / *:.
+NSUBST: W = 1:E / *:W
+NSUBST: T = 2:t / *:.
+NSUBST: R = 3:t / *:.
 MAP
-...xxxxxxx...
-..x...w...x..
-....x...x....
-...xxBBBxx...
-.x..BAAAB..x.
-.xw.BAOAB.wx.
-.x..BAAAB..x.
-...xxBBBxx...
-....x...x....
-..x...w...x..
-...xxxxxxx...
+RRRTTTT
+tttWppp
+t1SWpOp
+tttWppp
+RRRTTTT
 ENDMAP
 
 # Grove Lair entry

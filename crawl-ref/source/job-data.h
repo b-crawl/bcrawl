@@ -208,7 +208,7 @@ static const map<job_type, job_def> job_data =
     { SP_HILL_ORC, SP_TROLL, SP_CENTAUR, SP_MERFOLK, SP_GARGOYLE, SP_HUMAN, SP_VAMPIRE, SP_FELID, SP_FORMICID, SP_SAND_DWARF },
     { "robe", "potion of agility" },
     WCHOICE_NONE,
-    { { SK_FIGHTING, 3 }, { SK_UNARMED_COMBAT, 4 }, { SK_DODGING, 3 }, { SK_STEALTH, 1 }, { SK_SPELLCASTING, 1 }, { SK_HEXES, 1 }, },
+    { { SK_FIGHTING, 3 }, { SK_WEAPON, 4 }, { SK_DODGING, 3 }, { SK_STEALTH, 1 }, { SK_SPELLCASTING, 1 }, { SK_HEXES, 1 }, },
 } },
 
 { JOB_MONK, {
@@ -279,7 +279,7 @@ static const map<job_type, job_def> job_data =
       SP_TROLL, },
     { "arrow q:120", "robe", "book of Changes", "potion of lignification" },
     WCHOICE_NONE,
-    { { SK_FIGHTING, 1 }, { SK_UNARMED_COMBAT, 3 }, { SK_DODGING, 2 },
+    { { SK_FIGHTING, 1 }, { SK_WEAPON, 3 }, { SK_DODGING, 2 },
       { SK_SPELLCASTING, 2 }, { SK_TRANSMUTATIONS, 2 }, },
 } },
 

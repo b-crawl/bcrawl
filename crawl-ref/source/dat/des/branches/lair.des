@@ -221,16 +221,22 @@ NAME:   bhauth_dryad_lair
 TAGS:   lair_entry no_monster_gen no_pool_fixup transparent
 ORIENT: float
 MONS:   dryad, plant, bullfrog
-KMONS:  w = elephant
-KFEAT:  w = deep_water
+KMONS:  S = statue name:moss-covered name_adjective tile:mons_statue_mage \
+             hp:36 hd:3 spells:summon_small_mammal.80.magical.instant
+KMONS:  H = orc name:hermit name_suffix spells:summon_ice_beast.80.wizard
 KFEAT:  O = enter_lair
-NSUBST: p = 3:2 / 1:3 / *:.
+KMONS:  E = elephant
+KFEAT:  E = deep_water
+NSUBST: p = 3:2 / 1:3 / 1:H / *:.
+NSUBST: W = 1:E / *:W
+NSUBST: T = 2:t / *:.
+NSUBST: R = 3:t / *:.
 MAP
-.......
+RRRTTTT
 tttWppp
-t1wWpOp
+t1SWpOp
 tttWppp
-.......
+RRRTTTT
 ENDMAP
 
 # Grove Lair entry

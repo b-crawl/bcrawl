@@ -7,18 +7,6 @@
 ##############################################################################
 # Orcish Mines entries
 ##############################################################################
-# Dummy Orc entry
-
-NAME:   orc_0_dummy
-TAGS:   orc_entry transparent
-WEIGHT: 50
-ORIENT: float
-KFEAT:  O = enter_orcish_mines
-MAP
-O
-ENDMAP
-
-##############################################################################
 # Freedom of Choice
 #
 NAME: david_orc_1_choice

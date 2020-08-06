@@ -72,6 +72,22 @@ end
 # Shoals entry vaults
 ##############################################################################
 
+NAME:    bhauth_shoals_entry_angry_harpies
+TAGS:    shoals_entry
+ORIENT:  float
+MONS:    harpy, moth of wrath
+NSUBST:  M = 3:1 / 1:2 / *:.
+KFEAT:   O = enter_shoals
+MAP
+.......
+.cc=cc.
+.cMMMc.
+.nMOMn.
+.cMMMc.
+.ccncc.
+.......
+ENDMAP
+
 NAME:   minmay_shoals_entry_lonely_mermaid
 TAGS:   shoals_entry no_monster_gen transparent
 ORIENT: float

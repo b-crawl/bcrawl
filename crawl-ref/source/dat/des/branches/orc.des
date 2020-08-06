@@ -451,6 +451,22 @@ MAP
 ENDMAP
 
 #######################
+# berserkers and a priest to oversee them
+#
+NAME:   bhauth_orc_berserkers
+TAGS:   orc_entry transparent
+ORIENT: float
+KMONS:  B = orc warrior ; war axe . chain mail . potion of berserk rage
+KMONS:  P = orc priest ; robe plus:1 . wand of digging charges:4
+NSUBST: E = 4:B / 1:P / *:.
+KFEAT:  O = enter_orcish_mines
+MAP
+EEE
+EOE
+EEE
+ENDMAP
+
+#######################
 # elemental pike-orcs
 #
 NAME:   bhauth_orc_entry_pike_square

@@ -462,11 +462,11 @@ KMONS:  C = orc knight ; spear ego:draining . medium shield . scale mail ego:pos
 KMONS:  D = orc knight ; spear ego:venom . medium shield . scale mail ego:poison_resistance
 KFEAT:  O = enter_orcish_mines
 MAP
-I.I.I
+I.c.I
 .A.B.
-I.O.I
+c.O.c
 .C.D.
-I.I.I
+I.c.I
 ENDMAP
 
 #######################

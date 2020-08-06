@@ -6,13 +6,6 @@
 # Snake Pit entry vaults
 ##############################################################################
 
-NAME:   dummy_snake_entry
-TAGS:   snake_entry transparent
-KFEAT:  O = enter_snake_pit
-MAP
-O
-ENDMAP
-
 NAME:   minmay_snake_entry_guardpost_small
 TAGS:   snake_entry transparent
 ORIENT: float

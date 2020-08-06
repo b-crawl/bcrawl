@@ -72,13 +72,6 @@ end
 # Shoals entry vaults
 ##############################################################################
 
-NAME:   shoals_dummy_entry
-TAGS:   shoals_entry transparent
-KFEAT:  O = enter_shoals
-MAP
-O
-ENDMAP
-
 NAME:   minmay_shoals_entry_lonely_mermaid
 TAGS:   shoals_entry no_monster_gen transparent
 ORIENT: float

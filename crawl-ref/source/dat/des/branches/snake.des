@@ -11,15 +11,16 @@ TAGS:   snake_entry no_monster_gen
 ORIENT: float
 KFEAT:  O = enter_snake_pit
 KMONS:  O = sphinx
+KMONS:  A = anaconda skeleton
 MAP
 cccc.cccc
-c.......c
+c...A...c
 c.ccncc.c
 c.cG.Gc.c
-n...O...n
+nA..O..An
 c.cG.Gc.c
 c.ccncc.c
-c.......c
+c...A...c
 cccc.cccc
 ENDMAP
 

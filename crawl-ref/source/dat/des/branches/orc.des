@@ -451,6 +451,25 @@ MAP
 ENDMAP
 
 #######################
+# elemental pike-orcs
+#
+NAME:   bhauth_orc_entry_pike_square
+TAGS:   orc_entry transparent
+ORIENT: float
+KMONS:  A = orc knight ; spear ego:flaming . medium shield . scale mail ego:fire_resistance
+KMONS:  B = orc knight ; spear ego:freezing . medium shield . scale mail ego:cold_resistance
+KMONS:  C = orc knight ; spear ego:draining . medium shield . scale mail ego:positive_energy
+KMONS:  D = orc knight ; spear ego:venom . medium shield . scale mail ego:poison_resistance
+KFEAT:  O = enter_orcish_mines
+MAP
+I.I.I
+.A.B.
+I.O.I
+.C.D.
+I.I.I
+ENDMAP
+
+#######################
 # Small temple
 #
 NAME:   minmay_orc_entry_temple_small

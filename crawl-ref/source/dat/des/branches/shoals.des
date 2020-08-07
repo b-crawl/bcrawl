@@ -72,6 +72,22 @@ end
 # Shoals entry vaults
 ##############################################################################
 
+NAME:    bhauth_shoals_entry_nymph_pool
+TAGS:    shoals_entry
+KFEAT:   N = shallow_water
+KMONS:   N = water nymph
+KFEAT:   E = shallow_water
+KMONS:   E = water elemental
+NSUBST:  X = 1:N / 2:E / *:W
+KFEAT:   O = enter_shoals
+MAP
+nn+nn
+nXXXn
++XOX+
+nXXXn
+nn+nn
+ENDMAP
+
 NAME:    bhauth_shoals_entry_angry_harpies
 TAGS:    shoals_entry
 ORIENT:  float

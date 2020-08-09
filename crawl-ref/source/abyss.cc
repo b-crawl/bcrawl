@@ -172,6 +172,11 @@ static int _abyssal_rune_roll()
 {
     if (you.runes[RUNE_ABYSSAL] || you.depth < ABYSSAL_RUNE_MIN_LEVEL)
         return -1;
+    
+    // don't let lucky AKs get extremely high scores
+    if (you.experience_level < 10 && !runes_in_pack())
+        return -1;
+    
     const bool god_favoured = have_passive(passive_t::attract_abyssal_rune);
 
     const double depth = you.depth + god_favoured;

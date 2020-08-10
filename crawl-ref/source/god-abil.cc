@@ -6690,6 +6690,7 @@ spret uskayaw_grand_finale(bool fail)
     crawl_state.cancel_cmd_repeat();
 
     set_piety(piety_breakpoint(0)); // Reset piety to 1*.
+    set_mp(you.max_magic_points);  // refill mana
 
     return spret::success;
 }

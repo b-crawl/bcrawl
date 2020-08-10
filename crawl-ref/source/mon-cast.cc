@@ -942,8 +942,19 @@ static bool _monster_will_buff(const monster &caster, const monster &targ)
     if (!mons_atts_aligned(caster.temp_attitude(), targ.real_attitude()))
         return false;
 
-    if (caster.type == MONS_IRONBRAND_CONVOKER || mons_enslaved_soul(caster))
+    if (mons_enslaved_soul(caster))
         return true; // will buff any ally
+
+    switch(caster.type)
+    {
+    case MONS_IRONBRAND_CONVOKER:
+    case MONS_OGRE_MAGE:
+    case MONS_WIZARD:
+    case MONS_SALAMANDER_MYSTIC:
+    case MONS_WARMONGER:
+        return true;
+    default: break;
+    }
 
     if (targ.is_holy() && caster.is_holy())
         return true;

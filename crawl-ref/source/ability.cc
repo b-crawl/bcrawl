@@ -3186,7 +3186,7 @@ static void _pay_ability_costs(const ability_def& abil)
     dprf("Cost: mp=%d; hp=%d; food=%d; piety=%d",
          abil.mp_cost, hp_cost, food_cost, piety_cost);
 
-    if (abil.mp_cost)
+    if (abil.mp_cost && abil.ability != ABIL_USKAYAW_GRAND_FINALE)
         dec_mp(abil.mp_cost);
 
     if (abil.hp_cost)

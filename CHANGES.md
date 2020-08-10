@@ -306,6 +306,7 @@
   - v1.26: The hunger costs of some god abilities are removed.
   - v1.26.2: Vehumet spell gifts are more biased towards what the player has skills for.
   - v1.27.2: Ashenzari restores mana when you explore.
+  - v1.27.5: Uskayaw's Line Pass ability causes 5 to 7 turns of exhaustion.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

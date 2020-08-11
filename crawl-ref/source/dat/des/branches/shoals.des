@@ -72,11 +72,36 @@ end
 # Shoals entry vaults
 ##############################################################################
 
-NAME:   shoals_dummy_entry
-TAGS:   shoals_entry transparent
-KFEAT:  O = enter_shoals
+NAME:    bhauth_shoals_entry_nymph_pool
+TAGS:    shoals_entry
+KFEAT:   N = shallow_water
+KMONS:   N = water nymph
+KFEAT:   E = shallow_water
+KMONS:   E = water elemental
+NSUBST:  X = 1:N / 2:E / *:W
+KFEAT:   O = enter_shoals
 MAP
-O
+nn+nn
+nXXXn
++XOX+
+nXXXn
+nn+nn
+ENDMAP
+
+NAME:    bhauth_shoals_entry_angry_harpies
+TAGS:    shoals_entry
+ORIENT:  float
+MONS:    harpy, moth of wrath
+NSUBST:  M = 3:1 / 1:2 / *:.
+KFEAT:   O = enter_shoals
+MAP
+.......
+.cc=cc.
+.cMMMc.
+.nMOMn.
+.cMMMc.
+.ccncc.
+.......
 ENDMAP
 
 NAME:   minmay_shoals_entry_lonely_mermaid

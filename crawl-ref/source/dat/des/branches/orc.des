@@ -7,18 +7,6 @@
 ##############################################################################
 # Orcish Mines entries
 ##############################################################################
-# Dummy Orc entry
-
-NAME:   orc_0_dummy
-TAGS:   orc_entry transparent
-WEIGHT: 50
-ORIENT: float
-KFEAT:  O = enter_orcish_mines
-MAP
-O
-ENDMAP
-
-##############################################################################
 # Freedom of Choice
 #
 NAME: david_orc_1_choice
@@ -460,6 +448,41 @@ MAP
 1.1
 .O.
 1.1
+ENDMAP
+
+#######################
+# berserkers and a priest to oversee them
+#
+NAME:   bhauth_orc_berserkers
+TAGS:   orc_entry transparent
+ORIENT: float
+KMONS:  B = orc warrior ; war axe . chain mail . potion of berserk rage
+KMONS:  P = orc priest ; robe plus:1 . wand of digging charges:4
+NSUBST: E = 4:B / 1:P / *:.
+KFEAT:  O = enter_orcish_mines
+MAP
+EEE
+EOE
+EEE
+ENDMAP
+
+#######################
+# elemental pike-orcs
+#
+NAME:   bhauth_orc_entry_pike_square
+TAGS:   orc_entry transparent
+ORIENT: float
+KMONS:  A = orc knight ; spear ego:flaming . medium shield . scale mail ego:fire_resistance
+KMONS:  B = orc knight ; spear ego:freezing . medium shield . scale mail ego:cold_resistance
+KMONS:  C = orc knight ; spear ego:draining . medium shield . scale mail ego:positive_energy
+KMONS:  D = orc knight ; spear ego:venom . medium shield . scale mail ego:poison_resistance
+KFEAT:  O = enter_orcish_mines
+MAP
+I.c.I
+.A.B.
+c.O.c
+.C.D.
+I.c.I
 ENDMAP
 
 #######################

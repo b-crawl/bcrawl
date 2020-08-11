@@ -6,11 +6,22 @@
 # Snake Pit entry vaults
 ##############################################################################
 
-NAME:   dummy_snake_entry
-TAGS:   snake_entry transparent
+NAME:   bhauth_snake_entry_sphinx_in_a_box
+TAGS:   snake_entry no_monster_gen
+ORIENT: float
 KFEAT:  O = enter_snake_pit
+KMONS:  O = sphinx
+KMONS:  A = anaconda skeleton
 MAP
-O
+cccc.cccc
+c...A...c
+c.ccncc.c
+c.cG.Gc.c
+nA..O..An
+c.cG.Gc.c
+c.ccncc.c
+c...A...c
+cccc.cccc
 ENDMAP
 
 NAME:   minmay_snake_entry_guardpost_small

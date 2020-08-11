@@ -32,6 +32,24 @@ end
 ###############################################################################
 
 ############################################################
+# a pokemon trainer with 3 mutant beasts
+#
+NAME:    bhauth_vaults_entry_pokemon
+TAGS:    vaults_entry
+MONS:    mature mutant beast
+KMONS:   W = wizard name:beastmaster name_adjective spells:haste_other.30.wizard;ensnare.30.wizard;heal_other.30.wizard ; robe
+NSUBST:  M = 1:W / 3:1 / *:.
+KFEAT:   O = enter_vaults
+KFEAT:   = = runed_clear_door
+MAP
+vv=vv
+vMMMv
+nMOMn
+vMMMv
+vvnvv
+ENDMAP
+
+############################################################
 # Generic Vaults entry
 #
 NAME:    david_vaults_1

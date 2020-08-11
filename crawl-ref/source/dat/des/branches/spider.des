@@ -31,13 +31,6 @@ end
 # Spider Nest entry vaults
 ##############################################################################
 
-NAME:   dummy_spider_entry
-TAGS:   spider_entry transparent
-KFEAT:  O = enter_spider_nest
-MAP
-O
-ENDMAP
-
 NAME:   spider_nest_entry_a
 TAGS:   spider_entry patrolling no_monster_gen transparent
 KFEAT:  O = enter_spider_nest

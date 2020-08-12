@@ -611,7 +611,7 @@ static const ability_def Ability_List[] =
         4, 0, 200, 0, {fail_basis::invo}, abflag::exhaustion},
     { ABIL_USKAYAW_GRAND_FINALE, "Grand Finale",
         8, 0, 500, generic_cost::fixed(0),
-        {fail_basis::invo, 120 + piety_breakpoint(4), 5, 1}, abflag::none},
+        {fail_basis::invo, 120 + piety_breakpoint(4), 5, 1}, abflag::piety},
 
     // Hepliaklqana
     { ABIL_HEPLIAKLQANA_RECALL, "Recall Ancestor",

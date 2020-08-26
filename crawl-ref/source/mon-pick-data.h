@@ -258,6 +258,7 @@ static const pop_entry pop_lair[] =
   { 11, 12,   32, FLAT, MONS_DIRE_ELEPHANT },
   {  5, 12,   32, FLAT, MONS_ALLIGATOR },
   {  6, 12,   32, FLAT, MONS_MANTICORE },
+  {  6, 12,   32, FLAT, MONS_GOLIATH_FROG },
   {  6, 12,   32, FLAT, MONS_ANACONDA },
   {  8, 12,   32, FLAT, MONS_WOLF_SPIDER },
   { 0,0,0,FLAT,MONS_0 }

@@ -98,6 +98,7 @@ enum monster_type                      // menv[].type
     MONS_BLINK_FROG,
 #if TAG_MAJOR_VERSION > 34
     MONS_BARACHI,
+    MONS_GOLIATH_FROG,
     MONS_BEAR,                  // genus
 #endif
     MONS_GRIZZLY_BEAR,
@@ -1052,6 +1053,7 @@ enum monster_type                      // menv[].type
     MONS_TEST_STATUE,
     MONS_ONI,
     MONS_FALSE_IMAGE,
+    MONS_GOLIATH_FROG,
 #endif
 
     NUM_MONSTERS,               // used for polymorph

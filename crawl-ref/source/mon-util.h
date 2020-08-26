@@ -248,6 +248,7 @@ mon_attack_def mons_attack_spec(const monster& mon, int attk_number, bool base_f
 string mon_attack_name(attack_type attack, bool with_object = true);
 bool flavour_triggers_damageless(attack_flavour flavour);
 int flavour_damage(attack_flavour flavour, int HD, bool random = true);
+bool flavour_has_reach(attack_flavour flavour);
 
 corpse_effect_type mons_corpse_effect(monster_type mc);
 

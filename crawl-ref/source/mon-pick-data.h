@@ -267,7 +267,6 @@ static const pop_entry pop_swamp[] =
 { // Swamp
   {  0,  3, 2000, FLAT, MONS_NO_MONSTER }, // was plant + fungus
   { -7,  3,  480, RISE, MONS_SLIME_CREATURE },
-  { -3,  2,  245, SEMI, MONS_SHADOW },
   { -1,  4,  480, SEMI, MONS_SPRIGGAN_RIDER },
   { -1,  3,   40, PEAK, MONS_UGLY_THING },
   {  0,  3, 1000, FLAT, MONS_ALLIGATOR },

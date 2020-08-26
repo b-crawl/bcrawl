@@ -234,16 +234,6 @@ static bool _grid_has_perceived_item(const coord_def& pos)
     return you.visible_igrd(pos) != NON_ITEM;
 }
 
-static bool _grid_has_perceived_multiple_items(const coord_def& pos)
-{
-    int count = 0;
-
-    for (stack_iterator si(pos, true); si && count < 2; ++si)
-        ++count;
-
-    return count > 1;
-}
-
 bool Stash::unmark_trapping_nets()
 {
     bool changed = false;

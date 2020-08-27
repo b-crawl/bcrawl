@@ -153,6 +153,7 @@
   - v1.27.1: Characters that don't need food will slowly rot over time instead, and can recover from HP rot by gaining experience. (This should not significantly affect normal gameplay.)
   - v1.27.2: Deep Dwarves that don't start with Elyvilon or Makhleb now start with a potion of ambrosia.
   - v1.27.3: Kobolds have Passive Mapping 2.
+  - v1.27.6: The "Thin Skeletal Structure" Demonspawn mutation is replaced by "Flexible Skeleton" which gives +3/+6/+15 dexterity but halves base AC of body armour at level 3.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -229,6 +230,7 @@
   - v1.26.2: Petrify has a spell power multiplier for players.
   - v1.27: If Flaming Arrows is active but the player has insufficient mana, and the player fires, the effect activates one more time and the duration ends.
   - v1.27.2: Controlled Blink is level 7 and its range scales with power^2.
+  - v1.27.6: Spectral Weapons can see invisible.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -475,6 +477,7 @@
   - v1.27.2: Cacodemons have a corrosive melee attack.
   - v1.27.2: Blizzard demons have a freezing melee attack.
   - v1.27.2: Green deaths have a poison melee attack.
+  - v1.27.6: Goliath frogs (made by PleasingFungus) are added. They move quickly, have an acidic reaching attack, and can appear in the Swamp.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

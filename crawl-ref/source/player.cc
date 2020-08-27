@@ -3324,8 +3324,6 @@ int player_stealth()
 
     // Mutations.
     stealth += STEALTH_PIP * you.get_mutation_level(MUT_NIGHTSTALKER);
-    stealth += (STEALTH_PIP / 2)
-                * you.get_mutation_level(MUT_THIN_SKELETAL_STRUCTURE);
     stealth += STEALTH_PIP * you.get_mutation_level(MUT_CAMOUFLAGE);
     const int how_transparent = you.get_mutation_level(MUT_TRANSLUCENT_SKIN);
     if (how_transparent)
@@ -6133,10 +6131,10 @@ int player::base_ac_from(const item_def &armour, int scale) const
 
     // The deformed don't fit into body armour very well.
     // (This includes nagas and centaurs.)
-    if (get_armour_slot(armour) == EQ_BODY_ARMOUR && get_mutation_level(MUT_DEFORMED))
-    {
+    bool deformed_type_mut = get_mutation_level(MUT_DEFORMED)
+            || (get_mutation_level(MUT_THIN_SKELETAL_STRUCTURE) >= 3);
+    if (get_armour_slot(armour) == EQ_BODY_ARMOUR && deformed_type_mut)
         return AC - base / 2;
-    }
 
     return AC;
 }

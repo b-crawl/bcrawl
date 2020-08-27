@@ -382,12 +382,15 @@ static int _dex_modifier(bool innate_only)
     // mutations
     result += 2 * (_mut_level(MUT_AGILE, innate_only)
                   - _mut_level(MUT_CLUMSY, innate_only));
-#if TAG_MAJOR_VERSION == 34
-    result += _mut_level(MUT_FLEXIBLE_WEAK, innate_only)
-              - _mut_level(MUT_STRONG_STIFF, innate_only);
-    result -= _mut_level(MUT_ROUGH_BLACK_SCALES, innate_only);
-#endif
-    result += 2 * _mut_level(MUT_THIN_SKELETAL_STRUCTURE, innate_only);
+    
+    int flexible_skeleton_level = _mut_level(MUT_THIN_SKELETAL_STRUCTURE, innate_only);
+    switch (flexible_skeleton_level)
+    {
+    case 1: result += 3; break;
+    case 2: result += 6; break;
+    case 3: result += 15; break;
+    default: break;
+    }
 
     return result;
 }

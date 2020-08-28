@@ -2274,7 +2274,7 @@ DEPTH:   D:12-, Elf, !Elf:$
 MONS:    red devil ; spear | trident . ring mail | scale mail
 MONS:    red devil ; spear | trident . buckler
 MONS:    red devil ; spear good_item | trident good_item
-MONS:    red devil ; spear | trident . tomahawk
+MONS:    red devil ; spear | trident . tomahawk ego:poisoned q:10
 SHUFFLE: 1234
 KMASK:   l = no_monster_gen
 MAP

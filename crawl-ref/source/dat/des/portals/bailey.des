@@ -67,12 +67,12 @@ end
 
 -- Axes.
 function axe_returning(e)
-  e.mons("generate_awake kobold ; tomahawk q:60 / \
-          generate_awake hobgoblin ; tomahawk q:60")
+  e.mons("generate_awake kobold ; tomahawk ego:poisoned q:60 / \
+          generate_awake hobgoblin ; tomahawk ego:poisoned q:60")
 end
 
 function kobold_axe_returning(e)
-  e.mons("generate_awake kobold ; tomahawk q:60 w:8 | tomahawk q:30 ego:dispersal")
+  e.mons("generate_awake kobold ; tomahawk ego:poisoned q:60 w:8 | tomahawk q:30 ego:dispersal")
 end
 
 function easy_axe_fighter(e)
@@ -183,7 +183,7 @@ WEIGHT: 5
 : local rnd = crawl.random2(2)
 : if rnd == 0 then
 MONS:   goblin ; hand axe / hobgoblin ; hand axe / orc ; hand axe
-MONS:   goblin ; tomahawk q:16 / hobgoblin ; tomahawk q:16 / orc ; tomahawk q:16
+MONS:   goblin ; tomahawk ego:poisoned q:16 / hobgoblin ; tomahawk ego:poisoned q:16 / orc ; tomahawk ego:poisoned q:16
 SUBST: 1 = 122
 :   bailey_portal_axe(_G)
 : elseif rnd == 1 then
@@ -207,7 +207,7 @@ NAME: enter_bailey_5
 TAGS: transparent
 : local rnd = crawl.random2(2)
 : if rnd == 0 then
-MONS: goblin ; tomahawk q:16
+MONS: goblin ; tomahawk ego:poisoned q:16
 :   bailey_portal_axe(_G)
 : elseif rnd == 1 then
 MONS: goblin ; spear
@@ -311,7 +311,7 @@ TAGS: transparent
 WEIGHT: 1
 : local rnd = crawl.random2(2)
 : if rnd == 0 then
-MONS: orc ; tomahawk q:16 . hand axe
+MONS: orc ; tomahawk ego:poisoned q:16 . hand axe
 MONS: gnoll ; hand axe / goblin ; hand axe
 :   bailey_portal_axe(_G)
 : elseif rnd == 1 then
@@ -559,7 +559,7 @@ SUBST:   N = nc
 SUBST:   H = W.
 # the following KMONS duplicates monster 1 from kobold_axe_returning
 KFEAT:   ( = exit_bailey
-KMONS:   ( = generate_awake kobold ; tomahawk q:16
+KMONS:   ( = generate_awake kobold ; tomahawk ego:poisoned q:16
 #
 : kobold_axe_returning(_G)
 : easy_axe_fighter(_G)

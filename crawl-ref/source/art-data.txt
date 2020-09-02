@@ -1391,7 +1391,7 @@ ENUM:     HENDRICKS
 NAME:     Hendrick's axe
 OBJ:      OBJ_WEAPONS/WPN_BATTLEAXE
 TILE:     urand_hendricks
-TILE_EQ:  battleaxe
+TILE_EQ:  hendricks
 COLOUR:   ETC_BONE
 INSCRIP:  *noise, frenzy,
 BRAND:    SPWPN_DISTORTION

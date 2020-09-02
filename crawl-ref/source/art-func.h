@@ -1510,6 +1510,9 @@ static void _HENDRICKS_melee_effects(item_def* weapon, actor* attacker,
             if (mon->behaviour == BEH_SLEEP)
                 mon->behaviour = BEH_WANDER;
             mon->go_frenzy(attacker);
+            
+            if (coinflip() && mons_can_be_blinded(mon->type))
+                mon->add_ench(mon_enchant(ENCH_BLIND, 1, attacker, 10 + random2(60)));
         }
         else
             defender->go_berserk(false);

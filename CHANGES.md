@@ -372,6 +372,8 @@
   - v1.25: Daggers have a bonus of (unarmed/3) to base damage.
   - v1.26.2: Plain tomahawks are replaced by poisoned tomahawks.
   - v1.26.2: The sack of spiders now recharges with experience instead of being consumable. It summons a number of spiders proportional to (Evocations + 7)^2 on average.
+  - v1.26: Rings of attention give stealth-- instead of stealth-.
+  - v1.26.1: Scrolls of identify are identified when touched.
 
 #### Removed Items
   - Amulet of Harm
@@ -417,8 +419,7 @@
   - v1.23.1: The Elemental Staff is a quarterstaff.
   - v1.23.1: The Sword of Cerebov has higher base damage (17 -> 20) and delay (17 -> 19).
   - v1.23.2: The Robe of Vines gains +7 strength.
-  - v1.26: Rings of attention give stealth-- instead of stealth-.
-  - v1.26.1: Scrolls of identify are identified when touched.
+  - v1.27.6: Hendrick's Axe is a +6 battleaxe of distortion giving +6 dexterity that makes noise and can frenzy enemies it hits. The frenzied enemies have a chance to also be blinded briefly.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

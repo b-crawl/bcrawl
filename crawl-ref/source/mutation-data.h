@@ -1404,19 +1404,19 @@ static const mutation_def mut_data[] =
 },
 
 { MUT_THIN_SKELETAL_STRUCTURE, 2, 3, mutflag::good, false,
-  "thin skeletal structure",
+  "flexible skeleton",
 
-  {"You have a somewhat thin skeletal structure. (Dex +2, Stealth)",
-   "You have a moderately thin skeletal structure. (Dex +4, Stealth+)",
-   "You have an unnaturally thin skeletal structure. (Dex +6, Stealth++)"},
+  {"Your skeleton is somewhat flexible. (Dex +3)",
+   "Your skeleton is quite flexible. (Dex +6)",
+   "Your bones are mutable (Dex +15) but body armour is less effective."},
 
-  {"Your bones become slightly less dense.",
-   "Your bones become somewhat less dense.",
-   "Your bones become less dense."},
+  {"Your bones become flexible.",
+   "Your bones become more flexible.",
+   "Your skeletal structure becomes mutable."},
 
   {"Your skeletal structure returns to normal.",
-   "Your skeletal structure densifies.",
-   "Your skeletal structure densifies."},
+   "Your bones become less flexible.",
+   "Your skeletal structure is no longer mutable."},
 },
 
 { MUT_YELLOW_SCALES, 2, 3, mutflag::good, true,

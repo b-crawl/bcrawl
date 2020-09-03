@@ -153,6 +153,7 @@
   - v1.27.1: Characters that don't need food will slowly rot over time instead, and can recover from HP rot by gaining experience. (This should not significantly affect normal gameplay.)
   - v1.27.2: Deep Dwarves that don't start with Elyvilon or Makhleb now start with a potion of ambrosia.
   - v1.27.3: Kobolds have Passive Mapping 2.
+  - v1.27.6: The "Thin Skeletal Structure" Demonspawn mutation is replaced by "Flexible Skeleton" which gives +3/+6/+15 dexterity but halves base AC of body armour at level 3.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -229,6 +230,7 @@
   - v1.26.2: Petrify has a spell power multiplier for players.
   - v1.27: If Flaming Arrows is active but the player has insufficient mana, and the player fires, the effect activates one more time and the duration ends.
   - v1.27.2: Controlled Blink is level 7 and its range scales with power^2.
+  - v1.27.6: Spectral Weapons can see invisible.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -370,6 +372,8 @@
   - v1.25: Daggers have a bonus of (unarmed/3) to base damage.
   - v1.26.2: Plain tomahawks are replaced by poisoned tomahawks.
   - v1.26.2: The sack of spiders now recharges with experience instead of being consumable. It summons a number of spiders proportional to (Evocations + 7)^2 on average.
+  - v1.26: Rings of attention give stealth-- instead of stealth-.
+  - v1.26.1: Scrolls of identify are identified when touched.
 
 #### Removed Items
   - Amulet of Harm
@@ -415,8 +419,7 @@
   - v1.23.1: The Elemental Staff is a quarterstaff.
   - v1.23.1: The Sword of Cerebov has higher base damage (17 -> 20) and delay (17 -> 19).
   - v1.23.2: The Robe of Vines gains +7 strength.
-  - v1.26: Rings of attention give stealth-- instead of stealth-.
-  - v1.26.1: Scrolls of identify are identified when touched.
+  - v1.27.6: Hendrick's Axe is a +6 battleaxe of distortion giving +6 dexterity that makes noise and can frenzy enemies it hits. The frenzied enemies have a chance to also be blinded briefly.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -475,6 +478,7 @@
   - v1.27.2: Cacodemons have a corrosive melee attack.
   - v1.27.2: Blizzard demons have a freezing melee attack.
   - v1.27.2: Green deaths have a poison melee attack.
+  - v1.27.6: Goliath frogs (made by PleasingFungus) are added. They move quickly, have an acidic reaching attack, and can appear in the Swamp.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

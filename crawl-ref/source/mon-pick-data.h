@@ -258,6 +258,7 @@ static const pop_entry pop_lair[] =
   { 11, 12,   32, FLAT, MONS_DIRE_ELEPHANT },
   {  5, 12,   32, FLAT, MONS_ALLIGATOR },
   {  6, 12,   32, FLAT, MONS_MANTICORE },
+  {  6, 12,   32, FLAT, MONS_GOLIATH_FROG },
   {  6, 12,   32, FLAT, MONS_ANACONDA },
   {  8, 12,   32, FLAT, MONS_WOLF_SPIDER },
   { 0,0,0,FLAT,MONS_0 }
@@ -267,7 +268,6 @@ static const pop_entry pop_swamp[] =
 { // Swamp
   {  0,  3, 2000, FLAT, MONS_NO_MONSTER }, // was plant + fungus
   { -7,  3,  480, RISE, MONS_SLIME_CREATURE },
-  { -3,  2,  245, SEMI, MONS_SHADOW },
   { -1,  4,  480, SEMI, MONS_SPRIGGAN_RIDER },
   { -1,  3,   40, PEAK, MONS_UGLY_THING },
   {  0,  3, 1000, FLAT, MONS_ALLIGATOR },
@@ -285,6 +285,7 @@ static const pop_entry pop_swamp[] =
   {  0,  3,  435, RISE, MONS_THORN_HUNTER },
   {  0,  3,  385, RISE, MONS_GHOST_CRAB },
   {  1,  3,  180, RISE, MONS_DEATH_DRAKE },
+  {  1,  3,  180, RISE, MONS_GOLIATH_FROG },
   {  0,  4,  425, SEMI, MONS_SHAMBLING_MANGROVE },
   {  0,  4,  120, RISE, MONS_BOGGART },
   {  0,  6,   52, SEMI, MONS_VERY_UGLY_THING },

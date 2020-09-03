@@ -248,6 +248,7 @@ mon_attack_def mons_attack_spec(const monster& mon, int attk_number, bool base_f
 string mon_attack_name(attack_type attack, bool with_object = true);
 bool flavour_triggers_damageless(attack_flavour flavour);
 int flavour_damage(attack_flavour flavour, int HD, bool random = true);
+bool flavour_has_reach(attack_flavour flavour);
 
 corpse_effect_type mons_corpse_effect(monster_type mc);
 
@@ -304,7 +305,6 @@ bool mons_class_fast_regen(monster_type mc);
 int mons_zombie_size(monster_type mc);
 monster_type mons_zombie_base(const monster& mon);
 bool mons_class_is_zombified(monster_type mc);
-bool mons_class_is_hybrid(monster_type mc);
 bool mons_class_is_animated_weapon(monster_type type);
 monster_type mons_base_type(const monster& mon);
 bool mons_class_can_leave_corpse(monster_type mc);

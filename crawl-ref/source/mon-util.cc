@@ -1687,11 +1687,6 @@ bool mons_class_is_zombified(monster_type mc)
         || mc == MONS_SPECTRAL_THING;
 }
 
-bool mons_class_is_hybrid(monster_type mc)
-{
-    return mons_class_flag(mc, M_HYBRID);
-}
-
 bool mons_class_is_animated_weapon(monster_type type)
 {
     return type == MONS_DANCING_WEAPON || type == MONS_SPECTRAL_WEAPON;
@@ -2157,6 +2152,25 @@ int flavour_damage(attack_flavour flavour, int HD, bool random)
             return HD * 5 / 2;
         default:
             return 0;
+    }
+}
+
+/**
+ * Does a monster attacking with this flavour reach as if using a polearm?
+ *
+ * @param flavour   The attack flavour in question; e.g. AF_COLD.
+ * @return          Whether the flavour grants inherent reach.
+ */
+bool flavour_has_reach(attack_flavour flavour)
+{
+    switch (flavour)
+    {
+        case AF_REACH:
+        case AF_REACH_STING:
+        case AF_REACH_TONGUE:
+            return true;
+        default:
+            return false;
     }
 }
 

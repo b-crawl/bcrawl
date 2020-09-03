@@ -1485,3 +1485,40 @@ static void _BATTLE_world_reacts(item_def *item)
     if (!find_spectral_weapon(&you) && there_are_monsters_nearby(true, true, false))
         your_spells(SPELL_SPECTRAL_WEAPON, 0, false);
 }
+
+////////////////////////////////////////////////////
+
+static void _HENDRICKS_melee_effects(item_def* weapon, actor* attacker,
+                                    actor* defender, bool mondied, int dam)
+{
+    if (coinflip())
+        noisy(17 + random2(8), attacker->pos());
+
+    if (one_chance_in(4))
+    {
+        if (defender->holiness() & MH_NONLIVING
+            || defender->is_player() && !you.can_go_berserk(false, false, false)
+            || defender->is_monster() && !defender->as_monster()->can_go_frenzy())
+        {
+            return;
+        }
+
+        if (defender->is_monster())
+        {
+            monster* mon = defender->as_monster();
+            // Wake up the monster so that it can frenzy.
+            if (mon->behaviour == BEH_SLEEP)
+                mon->behaviour = BEH_WANDER;
+            mon->go_frenzy(attacker);
+            
+            if (coinflip() && mons_can_be_blinded(mon->type))
+                mon->add_ench(mon_enchant(ENCH_BLIND, 1, attacker, 10 + random2(60)));
+        }
+        else
+            defender->go_berserk(false);
+
+        if (attacker->is_player())
+            did_god_conduct(DID_HASTY, 6 + random2(3), true);
+    }
+}
+

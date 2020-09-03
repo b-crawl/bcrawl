@@ -702,3 +702,7 @@ This hand crossbow uses a complex and unusual mechanism, and is enchanted to mag
 butterfly sword
 
 This sword seems to have a mind of its own, and it wants to move quickly. When used in combat, it can also summon butterflies.
+%%%%
+Hendrick's axe
+
+The warrior-musician Hendrick wielded this axe until his spirit was sealed inside it by an ancient lich. Now, it plays itself when used in battle, distorting space as well as sound and driving its victims into a hallucinogenic frenzy.

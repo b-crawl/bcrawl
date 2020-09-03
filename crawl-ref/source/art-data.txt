@@ -1387,6 +1387,18 @@ BASE_DELAY: -1
 BRAND:    SPWPN_VORPAL
 VALUE:    800
 
+ENUM:     HENDRICKS
+NAME:     Hendrick's axe
+OBJ:      OBJ_WEAPONS/WPN_BATTLEAXE
+TILE:     urand_hendricks
+TILE_EQ:  hendricks
+COLOUR:   ETC_BONE
+INSCRIP:  *noise, frenzy,
+BRAND:    SPWPN_DISTORTION
+PLUS:     6
+DEX:      6
+VALUE:    1200
+
 # This entry must always be last.
 ENUM:   DUMMY2
 NAME:   DUMMY UNRANDART 2

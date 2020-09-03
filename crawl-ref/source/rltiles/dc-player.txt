@@ -564,6 +564,7 @@ arga ARGA
 demon_axe DEMON_AXE
 axe_of_woe AXE_OF_WOE
 frostbite FROSTBITE
+hendricks HENDRICKS
 ## launchers
 blowgun_assassin BLOWGUN_ASSASSIN
 punk PUNK

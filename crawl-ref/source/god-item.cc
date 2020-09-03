@@ -313,6 +313,8 @@ bool is_hasty_item(const item_def& item, bool calc_unid)
             return true;
         if (calc_unid || item_brand_known(item))
             return get_weapon_brand(item) == SPWPN_SPEED;
+        if (is_unrandom_artefact(item, UNRAND_HENDRICKS))
+            return true;
     }
 
     if (!calc_unid && !item_type_known(item))

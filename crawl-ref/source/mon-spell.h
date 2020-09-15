@@ -25,7 +25,7 @@
 static const mon_spellbook mspell_list[] =
 {
 
-    /* Crimson imp, phantom, blink frog. */
+    /* phantom, blink frog */
     {  MST_BLINKER,
       {
        { SPELL_BLINK, 29, MON_SPELL_MAGICAL },
@@ -1440,6 +1440,12 @@ static const mon_spellbook mspell_list[] =
     },
 
     // ('5') Minor demons.
+    {  MST_CRIMSON_IMP,
+      {
+       { SPELL_FLAME_TONGUE, 15, MON_SPELL_MAGICAL },
+      }
+    },
+
     {  MST_WHITE_IMP,
       {
        { SPELL_THROW_FROST, 52, MON_SPELL_MAGICAL },

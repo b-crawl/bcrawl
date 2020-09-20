@@ -1494,7 +1494,7 @@ static void _HENDRICKS_melee_effects(item_def* weapon, actor* attacker,
     if (coinflip())
         noisy(17 + random2(8), attacker->pos());
 
-    if (one_chance_in(4))
+    if (one_chance_in(4) && defender->alive())
     {
         if (defender->holiness() & MH_NONLIVING
             || defender->is_player() && !you.can_go_berserk(false, false, false)

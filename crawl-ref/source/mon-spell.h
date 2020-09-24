@@ -1380,8 +1380,8 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_EIDOLON,
       {
-       { SPELL_BOLT_OF_DRAINING, 21, MON_SPELL_MAGICAL },
-       { SPELL_CAUSE_FEAR, 21, MON_SPELL_MAGICAL },
+       { SPELL_PHANTOM_MIRROR, 20, MON_SPELL_MAGICAL },
+       { SPELL_BOLT_OF_DRAINING, 20, MON_SPELL_MAGICAL },
       }
     },
 

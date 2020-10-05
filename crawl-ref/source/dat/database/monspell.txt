@@ -472,10 +472,6 @@ obsidian statue cast
 
 @The_monster@'s eyes glow briefly.
 %%%%
-hippogriff cast
-
-@The_monster@ flaps its wings @at@ @target@.
-%%%%
 # Sphinxes can't gesture or point.
 sphinx cast
 
@@ -514,6 +510,10 @@ Airstrike wind drake cast
 Wind Blast wind drake cast
 
 @The_monster@ exhales a fierce blast of wind!
+%%%%
+Wind Blast hippogriff cast
+
+@The_monster@ flaps its wings @at@ @target@.
 %%%%
 dryad cast
 

@@ -194,3 +194,6 @@ bool wu_jian_can_wall_jump_in_principle(const coord_def& target);
 bool wu_jian_can_wall_jump(const coord_def& target, string &error_ret);
 bool wu_jian_do_wall_jump(coord_def targ, bool ability);
 spret wu_jian_wall_jump_ability();
+
+void okawaru_remove_heroism();
+void okawaru_remove_finesse();

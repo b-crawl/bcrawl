@@ -359,7 +359,7 @@ static const mon_spellbook mspell_list[] =
     {  MST_WIND_DRAKE,
       {
        { SPELL_WIND_BLAST, 50, MON_SPELL_NATURAL | MON_SPELL_BREATH },
-       { SPELL_AIRSTRIKE, 29, MON_SPELL_NATURAL },
+       { SPELL_AIRSTRIKE, 29, MON_SPELL_MAGICAL },
        { SPELL_DEFLECT_MISSILES, 29, MON_SPELL_NATURAL },
       }
     },

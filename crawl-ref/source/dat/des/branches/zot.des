@@ -243,7 +243,7 @@ ccccccccccccccccccccccc
 ENDMAP
 
 NAME:   evilmike_zot_entry_argh
-TAGS:   no_monster_gen zot_entry patrolling
+TAGS:   no_monster_gen zot_entry patrolling no_pool_fixup
 # Grey dracs can escape from the islands if they have water. This is intentional.
 SUBST:  G: GXm., m: mmlw
 KFEAT:  m = iron_grate
@@ -261,9 +261,9 @@ MONS:   draconian stormcaller
 MAP
 xxxxxxxxxxxx@xxxxxxxxxxxx
 xxx........---........xxx
-xxmmm.....G.-.G.....mmmxx
+xx=mm.....G.-.G.....mm=xx
 x.m4m.......-.......m4m.x
-x.mm=...G...-...G...=mm.x
+x.mmm...G...-...G...mmm.x
 x..........---..........x
 x.....G....---....G.....x
 x..........---..........x
@@ -279,9 +279,9 @@ x...G.....-----.....G...x
 x..........---..........x
 x.....G....---....G.....x
 x..........---..........x
-x.mm=...G...-...G...=mm.x
+x.mmm...G...-...G...mmm.x
 x.m4m.......-.......m4m.x
-xxmmm.....G.-.G.....mmmxx
+xx=mm.....G.-.G.....mm=xx
 xxx........---........xxx
 xxxxxxxxxxxx@xxxxxxxxxxxx
 ENDMAP

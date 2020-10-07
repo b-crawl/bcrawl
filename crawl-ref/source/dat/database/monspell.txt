@@ -513,7 +513,7 @@ Wind Blast wind drake cast
 %%%%
 Wind Blast hippogriff cast
 
-@The_monster@ flaps its wings @at@ @target@.
+@The_monster@ flaps its wings!
 %%%%
 dryad cast
 

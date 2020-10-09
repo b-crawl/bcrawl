@@ -1376,7 +1376,7 @@ static spret _phantom_mirror()
                               div_rand_round(mon->get_experience_level(), 3),
                               &you, INFINITE_DURATION));
 
-    int break_chance = _mirror_break_chance(victim->get_experience_level());
+    int break_chance = _mirror_break_chance(victim->get_hit_dice());
     bool mirror_break = x_chance_in_y(break_chance, 100);
 
     mon->behaviour = BEH_SEEK;

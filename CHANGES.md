@@ -374,6 +374,7 @@
   - v1.26.2: The sack of spiders now recharges with experience instead of being consumable. It summons a number of spiders proportional to (Evocations + 7)^2 on average.
   - v1.26: Rings of attention give stealth-- instead of stealth-.
   - v1.26.1: Scrolls of identify are identified when touched.
+  - v1.26.7: Phantom mirrors have a chance to not break, based on target HD and player level.
 
 #### Removed Items
   - Amulet of Harm
@@ -479,6 +480,11 @@
   - v1.27.2: Blizzard demons have a freezing melee attack.
   - v1.27.2: Green deaths have a poison melee attack.
   - v1.27.6: Goliath frogs (made by PleasingFungus) are added. They move quickly, have an acidic reaching attack, and can appear in the Swamp.
+  - v1.27.7: Eidolons are reworked, and now have Phantom Mirror and Bolt of Draining.
+  - v1.27.7: Shadow wraiths are faster and do more damage.
+  - v1.27.7: Hippogriffs have Wind Blast.
+  - v1.27.7: Crimson imps blink when hitting instead of randomly, and have a low chance to cast Flame Tongue.
+  - v1.27.7: Bats have lower evasion.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

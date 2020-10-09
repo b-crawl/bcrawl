@@ -1296,6 +1296,22 @@ static bool _phial_of_floods()
     return false;
 }
 
+int _mirror_break_chance(int target_hd)
+{
+    int xl = you.experience_level;
+    int scaled_hd = target_hd + (target_hd - 1)/2;
+    int break_chance = (scaled_hd * scaled_hd * 100) / (xl * xl);
+    return min(100, break_chance);
+}
+
+vector<string> _desc_phantom_mirror_break(const monster_info& mi)
+{
+    int chance = _mirror_break_chance(mi.hd);
+    vector<string> descs;
+    descs.push_back(make_stringf("chance to break mirror: %d%%", chance));
+    return descs;
+}
+
 static spret _phantom_mirror()
 {
     bolt beam;
@@ -1303,11 +1319,13 @@ static spret _phantom_mirror()
     dist spd;
     targeter_smite tgt(&you, LOS_RADIUS, 0, 0);
 
+    desc_filter additional_desc = bind(_desc_phantom_mirror_break, placeholders::_1);
     direction_chooser_args args;
     args.restricts = DIR_TARGET;
     args.needs_path = false;
     args.self = CONFIRM_CANCEL;
     args.top_prompt = "Aiming: <white>Phantom Mirror</white>";
+    args.get_desc_func = additional_desc;
     args.hitfunc = &tgt;
     if (!spell_direction(spd, beam, &args))
         return spret::abort;
@@ -1359,13 +1377,16 @@ static spret _phantom_mirror()
                               div_rand_round(mon->get_experience_level(), 3),
                               &you, INFINITE_DURATION));
 
+    int break_chance = _mirror_break_chance(victim->get_hit_dice());
+    bool mirror_break = x_chance_in_y(break_chance, 100);
+
     mon->behaviour = BEH_SEEK;
     set_nearest_monster_foe(mon);
 
-    mprf("You reflect %s with the mirror, and the mirror shatters!",
-         victim->name(DESC_THE).c_str());
+    mprf("You reflect %s with the mirror%s!",
+         victim->name(DESC_THE).c_str(), (mirror_break ? ", and the mirror shatters" : ""));
 
-    return spret::success;
+    return mirror_break ? spret::success : spret::fail;
 }
 
 bool evoke_check(int slot, bool quiet)

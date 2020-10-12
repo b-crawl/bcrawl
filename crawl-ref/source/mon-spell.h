@@ -25,7 +25,7 @@
 static const mon_spellbook mspell_list[] =
 {
 
-    /* Crimson imp, phantom, blink frog. */
+    /* phantom, blink frog */
     {  MST_BLINKER,
       {
        { SPELL_BLINK, 29, MON_SPELL_MAGICAL },
@@ -359,7 +359,7 @@ static const mon_spellbook mspell_list[] =
     {  MST_WIND_DRAKE,
       {
        { SPELL_WIND_BLAST, 50, MON_SPELL_NATURAL | MON_SPELL_BREATH },
-       { SPELL_AIRSTRIKE, 29, MON_SPELL_NATURAL },
+       { SPELL_AIRSTRIKE, 29, MON_SPELL_MAGICAL },
        { SPELL_DEFLECT_MISSILES, 29, MON_SPELL_NATURAL },
       }
     },
@@ -993,6 +993,12 @@ static const mon_spellbook mspell_list[] =
     },
 
     // ('H') Animal hybrids.
+    {  MST_HIPPOGRIFF,
+      {
+       { SPELL_WIND_BLAST, 50, MON_SPELL_MAGICAL },
+      }
+    },
+
     {  MST_MANTICORE,
       {
        { SPELL_THROW_BARBS, 100, MON_SPELL_NATURAL },
@@ -1380,8 +1386,8 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_EIDOLON,
       {
-       { SPELL_BOLT_OF_DRAINING, 21, MON_SPELL_MAGICAL },
-       { SPELL_CAUSE_FEAR, 21, MON_SPELL_MAGICAL },
+       { SPELL_PHANTOM_MIRROR, 20, MON_SPELL_MAGICAL },
+       { SPELL_BOLT_OF_DRAINING, 20, MON_SPELL_MAGICAL },
       }
     },
 
@@ -1440,6 +1446,12 @@ static const mon_spellbook mspell_list[] =
     },
 
     // ('5') Minor demons.
+    {  MST_CRIMSON_IMP,
+      {
+       { SPELL_FLAME_TONGUE, 15, MON_SPELL_MAGICAL },
+      }
+    },
+
     {  MST_WHITE_IMP,
       {
        { SPELL_THROW_FROST, 52, MON_SPELL_MAGICAL },

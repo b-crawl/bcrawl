@@ -243,7 +243,7 @@ ccccccccccccccccccccccc
 ENDMAP
 
 NAME:   evilmike_zot_entry_argh
-TAGS:   no_monster_gen zot_entry patrolling
+TAGS:   no_monster_gen zot_entry patrolling no_pool_fixup
 # Grey dracs can escape from the islands if they have water. This is intentional.
 SUBST:  G: GXm., m: mmlw
 KFEAT:  m = iron_grate
@@ -261,7 +261,7 @@ MONS:   draconian stormcaller
 MAP
 xxxxxxxxxxxx@xxxxxxxxxxxx
 xxx........---........xxx
-xxmmm.....G.-.G.....mmmxx
+xx=mm.....G.-.G.....mm=xx
 x.m4m.......-.......m4m.x
 x.mmm...G...-...G...mmm.x
 x..........---..........x
@@ -281,7 +281,7 @@ x.....G....---....G.....x
 x..........---..........x
 x.mmm...G...-...G...mmm.x
 x.m4m.......-.......m4m.x
-xxmmm.....G.-.G.....mmmxx
+xx=mm.....G.-.G.....mm=xx
 xxx........---........xxx
 xxxxxxxxxxxx@xxxxxxxxxxxx
 ENDMAP
@@ -735,15 +735,15 @@ MAP
 ............................
 ..mmm..................mmm..
 ..m1m..................m1m..
-..mmm...mmmwwwwwwmmm...mmm..
+..mm=...mmmwwwwwwmmm...=mm..
 ........m1mwwwwwwm1m........
-........mmmwwwwwwmmm........
+........mm=wwwwww=mm........
 mmm.....www...}..www.....mmm
-m1m.....www..)...www.....m1m
+m1=.....www..)...www.....=1m
 mmm.....www...]..www.....mmm
-........mmmwwwwwwmmm........
+........mm=wwwwww=mm........
 ........m1mwwwwwwm1m........
-..mmm...mmmwwwwwwmmm...mmm..
+..mm=...mmmwwwwwwmmm...=mm..
 ..m1m..................m1m..
 ..mmm..................mmm..
 ............................
@@ -762,11 +762,11 @@ MAP
 ................
 ..mmmwwwwwwmmm..
 ..m1mwwwwwwm1m..
-..mmmwwwwwwmmm..
+..mm=wwwwww=mm..
 ..www...}..www..
 ..www..)...www..
 ..www...]..www..
-..mmmwwwwwwmmm..
+..mm=wwwwww=mm..
 ..m1mwwwwwwm1m..
 ..mmmwwwwwwmmm..
 ................

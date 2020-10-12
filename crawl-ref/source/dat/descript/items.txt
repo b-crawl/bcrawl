@@ -661,10 +661,11 @@ negative energies.
 %%%%
 phantom mirror
 
-A hand mirror which can create a reflection of a nearby creature, shattering
-in the process. The reflection's duration increases with Evocations skill and
-decreases with the magic resistance of the target. It is, invariably, slightly
-weaker than the creature it mirrors.
+A hand mirror which can create a reflection of a nearby creature that is slightly
+weaker than the creature it mirrors. The reflection's duration increases with Evocations
+skill and decreases with the magic resistance of the target.
+
+When used, this has a chance to break which depends on the relative power of the user and target.
 %%%%
 phial of floods
 

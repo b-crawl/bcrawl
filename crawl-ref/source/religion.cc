@@ -2725,6 +2725,13 @@ void excommunication(bool voluntary, god_type new_god)
         you.props[XOM_PIETY_KEY] = old_piety;
         break;
 
+    case GOD_OKAWARU:
+        if (you.duration[DUR_HEROISM])
+            okawaru_remove_heroism();
+        if (you.duration[DUR_FINESSE])
+            okawaru_remove_finesse();
+        break;
+
     default:
         break;
     }

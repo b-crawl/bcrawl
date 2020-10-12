@@ -1010,8 +1010,7 @@ An imposing, muscular figure engulfed in a cloud of searing flame.
 %%%%
 eidolon
 
-An ancient skeletal apparition, sheathed in a cloud of mist. Its form glows
-white-hot with debilitating energy.
+An animated shadow, flickering from one form to another and surrounded by negative energy.
 %%%%
 eldritch tentacle
 

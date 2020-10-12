@@ -511,6 +511,10 @@ Wind Blast wind drake cast
 
 @The_monster@ exhales a fierce blast of wind!
 %%%%
+Wind Blast hippogriff cast
+
+@The_monster@ flaps its wings!
+%%%%
 dryad cast
 
 @The_monster@ calls out to the forest.

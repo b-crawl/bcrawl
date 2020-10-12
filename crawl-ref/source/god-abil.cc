@@ -4594,6 +4594,20 @@ bool gozag_bribe_branch()
     return false;
 }
 
+void okawaru_remove_heroism()
+{
+    mprf(MSGCH_DURATION, "You feel like a meek peon again.");
+    you.duration[DUR_HEROISM] = 0;
+    you.redraw_evasion      = true;
+    you.redraw_armour_class = true;
+}
+
+void okawaru_remove_finesse()
+{
+    mprf(MSGCH_DURATION, "%s", you.hands_act("slow", "down.").c_str());
+    you.duration[DUR_FINESSE] = 0;
+}
+
 static int _upheaval_radius(int pow)
 {
     return pow >= 100 ? 2 : 1;

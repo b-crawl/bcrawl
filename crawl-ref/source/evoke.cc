@@ -1339,9 +1339,8 @@ static spret _phantom_mirror()
         return spret::abort;
     }
 
-    // Mirrored monsters (including by Mara, rakshasas) can still be
-    // re-reflected.
-    if (victim->is_summoned() || !actor_is_illusion_cloneable(victim))
+    if (victim->is_summoned() || !actor_is_illusion_cloneable(victim)
+            || mons_genus(victim->type) == MONS_VAMPIRE)
     {
         mpr("The mirror can't reflect that.");
         return spret::abort;

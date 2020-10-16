@@ -1317,6 +1317,8 @@ vector<string> _desc_target_mr(const monster_info& mi)
     int mons_mr = mi.res_magic();
     string mr_text = (mons_mr == MAG_IMMUNE) ?
         "∞" : std::string((mons_mr / MR_PIP) + 1, '+');
+    if (mons_mr % MR_PIP >= MR_PIP/2)
+        mr_text += "-";
     mr_text = "target MR: " + mr_text;
 
     vector<string> descs;

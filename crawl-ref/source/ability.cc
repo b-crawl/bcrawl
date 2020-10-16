@@ -2088,6 +2088,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_EVOKE_RATSKIN: // ratskin cloak
+    {
         fail_check();
         mpr("The rats of the Dungeon answer your call.");
 
@@ -2102,7 +2103,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         }
 
         break;
-
+    }
     case ABIL_EVOKE_THUNDER: // robe of Clouds
         fail_check();
         mpr("The folds of your robe billow into a mighty storm.");

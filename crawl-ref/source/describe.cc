@@ -3783,35 +3783,31 @@ static void _print_bar(int value, int scale, string name,
     result << name << " ";
 
     const int display_max = value ? value : base_value;
-    const bool currently_disabled = !value && base_value;
 
-    if (currently_disabled)
-      result << "(";
-
-    for (int i = 0; i * scale < display_max; i++)
+    int i = 0;
+    int sum = scale;
+    while (true)
     {
         result << "+";
+        
+        if (sum >= display_max)
+        {
+            if (sum - scale/2 < display_max)
+                result << "-";
+            break;
+        }
+        
         if (i % 5 == 4)
             result << " ";
+        
+        sum += scale;
+        i++;
     }
-
-    if (currently_disabled)
-      result << ")";
 
 #ifdef DEBUG_DIAGNOSTICS
     if (!you.suppress_wizard)
         result << " (" << value << ")";
 #endif
-
-    if (currently_disabled)
-    {
-        result << " (Normal " << name << ")";
-
-#ifdef DEBUG_DIAGNOSTICS
-        if (!you.suppress_wizard)
-            result << " (" << base_value << ")";
-#endif
-    }
 }
 
 /**

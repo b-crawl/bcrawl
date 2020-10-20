@@ -295,7 +295,6 @@ static const pop_entry pop_swamp[] =
 
 static const pop_entry pop_shoals[] =
 { // Shoals
-  {  0,  4,   90, FALL, MONS_CENTAUR },
   { -1,  2,  355, SEMI, MONS_FAUN },
   {  0,  4,  180, FALL, MONS_HIPPOGRIFF },
   { -1,  5,  300, SEMI, MONS_WATER_NYMPH },

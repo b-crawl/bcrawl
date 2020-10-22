@@ -995,7 +995,8 @@ static const mon_spellbook mspell_list[] =
     // ('H') Animal hybrids.
     {  MST_HIPPOGRIFF,
       {
-       { SPELL_WIND_BLAST, 50, MON_SPELL_MAGICAL },
+       { SPELL_WIND_BLAST, 20, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
+       { SPELL_BECKONING, 20, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
       }
     },
 

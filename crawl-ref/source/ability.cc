@@ -2088,20 +2088,22 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_EVOKE_RATSKIN: // ratskin cloak
+    {
         fail_check();
         mpr("The rats of the Dungeon answer your call.");
 
-        for (int i = 0; i < (coinflip() + 1); ++i)
+        int rat_count = 1 + random2(2);
+        for (int i = 0; i < rat_count; ++i)
         {
             monster_type mon = coinflip() ? MONS_HELL_RAT : MONS_RIVER_RAT;
 
             mgen_data mg(mon, BEH_FRIENDLY, you.pos(), MHITYOU);
             if (monster *m = create_monster(mg))
-                m->add_ench(mon_enchant(ENCH_FAKE_ABJURATION, 3));
+                m->add_ench(mon_enchant(ENCH_FAKE_ABJURATION, 2));
         }
 
         break;
-
+    }
     case ABIL_EVOKE_THUNDER: // robe of Clouds
         fail_check();
         mpr("The folds of your robe billow into a mighty storm.");

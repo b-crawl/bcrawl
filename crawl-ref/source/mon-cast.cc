@@ -452,7 +452,13 @@ static const map<spell_type, mons_spell_logic> spell_to_logic = {
         MSPELL_LOGIC_NONE, 10,
     } },
     { SPELL_BECKONING, {
-        _always_worthwhile, _fire_simple_beam, _zap_setup(SPELL_BECKONING),
+        [](const monster &caster)
+        {
+            const actor* foe = caster.get_foe();
+            int targ_distance = grid_distance(foe->pos(), caster.pos());
+            return (targ_distance > 1);
+        },
+        _fire_simple_beam, _zap_setup(SPELL_BECKONING),
         MSPELL_LOGIC_NONE, 10,
     } },
     { SPELL_DRAIN_MAGIC, _hex_logic(SPELL_DRAIN_MAGIC, nullptr, 6) },

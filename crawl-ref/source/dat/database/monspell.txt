@@ -515,6 +515,10 @@ Wind Blast hippogriff cast
 
 @The_monster@ flaps its wings!
 %%%%
+Beckoning hippogriff cast
+
+@The_monster@ flaps its wings!
+%%%%
 dryad cast
 
 @The_monster@ calls out to the forest.

@@ -1218,7 +1218,7 @@ static int _actor_cloud_damage(const actor *act,
 
         const int lightning_dam = _cloud_damage_output(act,
                                                        _cloud2beam(cloud.type),
-                                                       cloud_base_damage,
+                                                       turns_per_lightning * (6 + random2(16)),
                                                        maximum_damage);
 
         if (maximum_damage)

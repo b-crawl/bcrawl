@@ -80,6 +80,7 @@
   - v1.26: Scoring is changed: scores are now ((2.75*10^11 * sqrt(runes) * (1 + wins) + 3.36*10^7 * sqrt(experience)) / (turns + 1000)); "wins" is 1 for winning games, and 0 otherwise.
   - v1.26.1: Portals and shops no longer have a (small) chance to randomly be mimics.
   - v1.27.3: Players can inspect full item stacks in view, not just the top item.
+  - v1.27.8: Monster info has more resolution: "++-" is halfway between "++" and "+++".
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -108,6 +109,7 @@
   - v1.27: Spell hunger no longer depends on intelligence. The new formula is (135*(level - 1) - 40*spellcasting).
   - v1.27: Hunger adjustments: waiting a turn still costs 3 nutrition, but now regenerating mana is +3, attacks are +27 per 10 auts, rations and chunks give +10% nutrition, and the difference between "hungry" and "very hungry" is larger.
   - v1.27.2: The "MP-powered wands" mutation gives a larger (+1/3 -> +1/2) power bonus.
+  - v1.27.8: Storm clouds deal significantly more damage.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -485,6 +487,7 @@
   - v1.27.7: Hippogriffs have Wind Blast.
   - v1.27.7: Crimson imps blink when hitting instead of randomly, and have a low chance to cast Flame Tongue.
   - v1.27.7: Bats have lower evasion.
+  - v1.27.8: Hippogriffs have both Wind Blast and Beckoning as instant abilities.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

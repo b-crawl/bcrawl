@@ -455,6 +455,8 @@ static const map<spell_type, mons_spell_logic> spell_to_logic = {
         [](const monster &caster)
         {
             const actor* foe = caster.get_foe();
+            if (!foe)
+                return false;
             int targ_distance = grid_distance(foe->pos(), caster.pos());
             return (targ_distance > 1);
         },

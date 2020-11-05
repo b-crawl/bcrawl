@@ -180,7 +180,7 @@ ENDMAP
 
 NAME:    hangedman_research_metamorphosis
 MONS:    wolf spider, ice beast, vampire bat, hog
-MONS:    insubstantial wisp, porcupine
+MONS:    will-o'-wisp, porcupine
 KMONS:   D = fire dragon
 COLOUR:  .0123456D = lightmagenta
 FTILE:   .n+0123456D = floor_nerves
@@ -199,7 +199,7 @@ dcbadacbd
 ENDMAP
 
 NAME:   hangedman_research_quantum
-MONS:   insubstantial wisp w:7 / blink frog / jumping spider w:7, spatial vortex
+MONS:   will-o'-wisp w:7 / blink frog / jumping spider w:7, spatial vortex
 KMONS:  D = eldritch tentacle
 MARKER: D = lua:fog_machine { cloud_type = "translocational energy", \
             pow_min = 3, pow_max = 10, delay = 50, size = 1, walk_dist = 1 }

@@ -33,7 +33,7 @@
         e.mons("glowing shapeshifter")
         e.mons("very ugly thing / ugly thing w:5")
         e.mons("ball lightning")
-        e.mons("insubstantial wisp")
+        e.mons("will-o'-wisp")
         e.mons("crystal guardian")
         e.kmons("8 = dancing weapon")
         e.kmons("9 = war gargoyle")

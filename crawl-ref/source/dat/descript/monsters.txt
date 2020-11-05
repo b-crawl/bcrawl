@@ -1444,7 +1444,7 @@ infernal demonspawn
 
 <demonspawn>
 %%%%
-insubstantial wisp
+will-o'-wisp
 
 A thin wisp of floating gas, flickering, disappearing and reforming in a
 disconcertingly random fashion while building up an electrical charge.

@@ -645,7 +645,7 @@ Lightning Bolt electric golem cast
 %%%%
 will-o'-wisp cast
 
-@The_monster@ thrums sharply.
+@The_monster@ blinks in a hypnotic pattern.
 %%%%
 Blink will-o'-wisp cast
 

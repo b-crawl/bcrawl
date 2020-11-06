@@ -692,19 +692,19 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_FIRE_CRAB,
       {
-       { SPELL_FLAMING_CLOUD, 62, MON_SPELL_NATURAL },
+       { SPELL_FLAMING_CLOUD, 62, MON_SPELL_NATURAL | MON_SPELL_BREATH },
       }
     },
 
     {  MST_GHOST_CRAB,
       {
-       { SPELL_SPECTRAL_CLOUD, 62, MON_SPELL_NATURAL },
+       { SPELL_SPECTRAL_CLOUD, 62, MON_SPELL_NATURAL | MON_SPELL_BREATH },
       }
     },
 
     {  MST_APOCALYPSE_CRAB,
       {
-       { SPELL_CHAOS_BREATH, 62, MON_SPELL_NATURAL },
+       { SPELL_CHAOS_BREATH, 62, MON_SPELL_NATURAL | MON_SPELL_BREATH },
       }
     },
 

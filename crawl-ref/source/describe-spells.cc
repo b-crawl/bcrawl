@@ -486,7 +486,7 @@ static string _effect_string(spell_type spell, const monster_info *mon_owner)
     if (!hd)
         return "";
 
-    if (testbits(get_spell_flags(spell), spflag::MR_check))
+    if (testbits(get_spell_flags(spell), SPFLAG_MR_CHECK))
     {
         // MR chances only make sense vs a player
         if (!crawl_state.need_save

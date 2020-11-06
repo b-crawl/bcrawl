@@ -711,7 +711,7 @@ static const mon_spellbook mspell_list[] =
     // ('v') Vortices.
     {  MST_INSUBSTANTIAL_WISP,
       {
-       { SPELL_MESMERISE, 33, MON_SPELL_MAGICAL },
+       { SPELL_MESMERISE, 6, MON_SPELL_MAGICAL },
        { SPELL_BLINK, 5, MON_SPELL_MAGICAL },
       }
     },

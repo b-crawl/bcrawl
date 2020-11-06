@@ -1449,7 +1449,7 @@ static const mon_spellbook mspell_list[] =
     // ('5') Minor demons.
     {  MST_CRIMSON_IMP,
       {
-       { SPELL_FLAME_TONGUE, 15, MON_SPELL_MAGICAL },
+       { SPELL_FLAME_TONGUE, 15, MON_SPELL_MAGICAL | MON_SPELL_BREATH },
       }
     },
 

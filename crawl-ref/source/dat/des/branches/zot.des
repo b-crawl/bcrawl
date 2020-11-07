@@ -243,9 +243,10 @@ ccccccccccccccccccccccc
 ENDMAP
 
 NAME:   evilmike_zot_entry_argh
-TAGS:   no_monster_gen zot_entry patrolling no_pool_fixup
+TAGS:   no_monster_gen zot_entry patrolling no_pool_fixup transparent
 # Grey dracs can escape from the islands if they have water. This is intentional.
 SUBST:  G: GXm., m: mmlw
+KMASK:  4 = opaque
 KFEAT:  m = iron_grate
 SUBST:  x: Xccv
 NSUBST: 2 = 2:2 / *:-

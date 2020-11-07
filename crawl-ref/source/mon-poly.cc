@@ -538,7 +538,11 @@ bool monster_polymorph(monster* mons, monster_type targetc,
     }
 
     if (!force_beh)
+    {
         player_angers_monster(mons);
+        if (!mons->is_shapeshifter())
+            mon->add_ench(mon_enchant(ENCH_CONFUSION, 1, &you, 10 + random2(20)));
+    }
 
     // Xom likes watching monsters being polymorphed.
     if (can_see)

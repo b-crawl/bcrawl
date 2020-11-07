@@ -185,12 +185,12 @@ static const form_entry formdata[] =
 
 {
     transformation::wisp, MONS_INSUBSTANTIAL_WISP, "Wisp", "wisp-form", "wisp",
-    "an will-o'-wisp.",
+    "a will-o'-wisp.",
     EQF_ALL, mrd(MR_RES_FIRE, 2) | mrd(MR_RES_COLD, 2) | MR_RES_ELEC
              | MR_RES_STICKY_FLAME | mrd(MR_RES_NEG, 3) | MR_RES_ACID
              | MR_RES_PETRIFY,
     BAD_DURATION, 0, 0, SIZE_TINY, 10,
-    5, 0, 50, false, 0, 10, 5,
+    5, 0, 50, true, -10, 10, 5,
     SPWPN_NORMAL, LIGHTGREY, "Misty tendrils", { "touch", "hit",
                                                  "engulf", "engulf" },
     FC_ENABLE, FC_FORBID, FC_FORBID, false, false,

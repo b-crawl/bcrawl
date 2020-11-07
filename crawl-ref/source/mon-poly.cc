@@ -548,7 +548,7 @@ bool monster_polymorph(monster* mons, monster_type targetc,
     {
         player_angers_monster(mons);
         if (!mons->is_shapeshifter() && !_jiyva_slime_target(targetc))
-            mons->add_ench(mon_enchant(ENCH_CONFUSION, 1, nullptr, 10 + random2(20)));
+            mons->add_ench(mon_enchant(ENCH_CONFUSION, 1, nullptr, 11 + random2(60)));
     }
 
     // Xom likes watching monsters being polymorphed.

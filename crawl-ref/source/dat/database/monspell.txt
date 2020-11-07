@@ -643,13 +643,13 @@ Lightning Bolt electric golem cast
 
 @The_monster@ hurls @beam@ @at@ @target@.
 %%%%
-will-o'-wisp cast
+Mesmerise will-o'-wisp cast
 
 @The_monster@ blinks in a hypnotic pattern.
 %%%%
-Blink will-o'-wisp cast
+Haunt will-o'-wisp cast
 
-__NONE
+@The_monster@ forms a magic circle of ghostly light.
 %%%%
 unseen Warning Cry howler monkey cast
 

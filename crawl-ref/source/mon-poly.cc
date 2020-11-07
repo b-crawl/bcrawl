@@ -179,13 +179,19 @@ static bool _is_poly_power_unsuitable(poly_power_type power,
 
 static bool _jiyva_slime_target(monster_type targetc)
 {
-    return you_worship(GOD_JIYVA)
-           && (targetc == MONS_DEATH_OOZE
-              || targetc == MONS_OOZE
-              || targetc == MONS_JELLY
-              || targetc == MONS_SLIME_CREATURE
-              || targetc == MONS_ACID_BLOB
-              || targetc == MONS_AZURE_JELLY);
+    if (you_worship(GOD_JIYVA))
+        switch (targetc)
+        {
+        case MONS_DEATH_OOZE:
+        case MONS_OOZE:
+        case MONS_JELLY:
+        case MONS_SLIME_CREATURE:
+        case MONS_ACID_BLOB:
+        case MONS_AZURE_JELLY:
+            return true;
+        default: break;
+        }
+    return false;
 }
 
 void change_monster_type(monster* mons, monster_type targetc)
@@ -541,8 +547,8 @@ bool monster_polymorph(monster* mons, monster_type targetc,
     if (!force_beh)
     {
         player_angers_monster(mons);
-        if (!mons->is_shapeshifter())
-            mon->add_ench(mon_enchant(ENCH_CONFUSION, 1, &you, 10 + random2(20)));
+        if (!mons->is_shapeshifter() && !_jiyva_slime_target(targetc))
+            mons->add_ench(mon_enchant(ENCH_CONFUSION, 1, &you, 10 + random2(20)));
     }
 
     // Xom likes watching monsters being polymorphed.

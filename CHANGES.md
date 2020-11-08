@@ -158,6 +158,7 @@
   - v1.27.2: Deep Dwarves that don't start with Elyvilon or Makhleb now start with a potion of ambrosia.
   - v1.27.3: Kobolds have Passive Mapping 2.
   - v1.27.6: The "Thin Skeletal Structure" Demonspawn mutation is replaced by "Flexible Skeleton" which gives +3/+6/+15 dexterity but halves base AC of body armour at level 3.
+  - v1.28: Vine Stalkers and their evolutions have a better Dodging aptitude (+0 -> +1).
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.

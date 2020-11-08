@@ -3400,10 +3400,15 @@ static void _do_autopickup()
         }
         else
         {
-            if ((Options.explore_stop & ES_ARTEFACT) && (mi.flags & ISFLAG_ARTEFACT_MASK))
-                interesting_non_autopickup = true;
-            if ((Options.explore_stop & ES_GLOWING_ITEM) && _interesting_item(mi))
-                interesting_non_autopickup = true;
+            if (((Options.explore_stop & ES_ARTEFACT) && (mi.flags & ISFLAG_ARTEFACT_MASK))
+                    || ((Options.explore_stop & ES_GLOWING_ITEM) && _interesting_item(mi)))
+            {
+                if (!(mi.flags & ISFLAG_HANDLED))
+                {
+                    interesting_non_autopickup = true;
+                    mi.flags |= ISFLAG_HANDLED;
+                }
+            }
         }
         o = next;
     }

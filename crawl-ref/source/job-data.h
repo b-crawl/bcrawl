@@ -176,7 +176,7 @@ static const map<job_type, job_def> job_data =
       SP_CENTAUR, },
     { "leather armour", "helmet", "throwing net q:3" },
     WCHOICE_GOOD,
-    { { SK_FIGHTING, 2 }, { SK_THROWING, 2 }, { SK_DODGING, 3 },
+    { { SK_FIGHTING, 3 }, { SK_THROWING, 2 }, { SK_DODGING, 3 },
       { SK_WEAPON, 3}, },
 } },
 

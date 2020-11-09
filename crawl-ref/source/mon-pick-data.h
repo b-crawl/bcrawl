@@ -444,7 +444,6 @@ static const pop_entry pop_vaults[] =
 static const pop_entry pop_crypt[] =
 { // Crypt (OOD cap: 5)
   { -3,  3,   70, PEAK, MONS_SHADOW },
-  { -3,  3,   40, PEAK, MONS_WIGHT },
   { -3,  3,   45, PEAK, MONS_FLYING_SKULL },
   { -3,  3,   75, SEMI, MONS_NECROMANCER },
   { -3,  3,   75, SEMI, MONS_DEATH_KNIGHT },

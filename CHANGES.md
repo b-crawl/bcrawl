@@ -61,6 +61,7 @@
   - v1.26.2: Ice Elementalists start with Ice Form.
   - v1.27.2: Transmuters start with Passwall.
   - v1.28: Skalds have "good" starting weapons, like Fighters do.
+  - v1.28: Gladiators that can wear hats but not helmets get a +1 hat instead of a +0 hat.
 
 #### Features
   - All items are automatically identified if the player has a rune.

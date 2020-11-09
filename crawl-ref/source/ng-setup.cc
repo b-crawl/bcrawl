@@ -139,8 +139,10 @@ item_def* newgame_make_item(object_class_type base,
         switch (item.sub_type)
         {
         case ARM_HELMET:
-        case ARM_HAT:
             item.sub_type = ARM_HAT;
+            item.plus = 1;
+            break;
+        case ARM_HAT:
             break;
         case ARM_BUCKLER:
             item.sub_type = ARM_SHIELD;

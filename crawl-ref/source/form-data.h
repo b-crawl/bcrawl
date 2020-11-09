@@ -96,7 +96,7 @@ static const form_entry formdata[] =
 {
     transformation::ice_beast, MONS_ICE_BEAST, "Ice", "ice-form", "ice",
     "a creature of crystalline ice.",
-    EQF_PHYSICAL, MR_RES_POISON | MR_VUL_FIRE | mrd(MR_RES_COLD, 3),
+    EQF_CLOAK_ONLY, MR_RES_POISON | MR_VUL_FIRE | mrd(MR_RES_COLD, 3),
     FormDuration(30, PS_DOUBLE, 100), 0, 0, SIZE_LARGE, 12,
     5, 12, 0, true, 0, 6, 12,
     SPWPN_FREEZING, WHITE, "", DEFAULT_VERBS,

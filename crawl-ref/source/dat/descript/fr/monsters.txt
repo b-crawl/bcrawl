@@ -1168,7 +1168,7 @@ inept item mimic
 
 Apparemment un objet abandonné, mais en réalité, une bête déguisée.
 %%%%
-insubstantial wisp
+will-o'-wisp
 
 Une mince volute de gaz flottant, vacillante, se dissipant puis se reformant
 d'une manière aléatoire et déconcertante.

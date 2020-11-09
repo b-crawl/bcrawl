@@ -60,6 +60,10 @@
   - v1.26: Warpers start with Apportation.
   - v1.26.2: Ice Elementalists start with Ice Form.
   - v1.27.2: Transmuters start with Passwall.
+  - v1.28: Skalds have "good" starting weapons, like Fighters do.
+  - v1.28: Gladiators that can wear hats but not helmets get a +1 hat instead of a +0 hat.
+  - v1.28: Chaos Knights start with a scroll of teleportation.
+  - v1.28: Abyssal Knights start with ring mail instead of leather armour.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -81,6 +85,7 @@
   - v1.26.1: Portals and shops no longer have a (small) chance to randomly be mimics.
   - v1.27.3: Players can inspect full item stacks in view, not just the top item.
   - v1.27.8: Monster info has more resolution: "++-" is halfway between "++" and "+++".
+  - v1.28: Monster spell damage info (by PleasingFungus) is merged.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -110,6 +115,7 @@
   - v1.27: Hunger adjustments: waiting a turn still costs 3 nutrition, but now regenerating mana is +3, attacks are +27 per 10 auts, rations and chunks give +10% nutrition, and the difference between "hungry" and "very hungry" is larger.
   - v1.27.2: The "MP-powered wands" mutation gives a larger (+1/3 -> +1/2) power bonus.
   - v1.27.8: Storm clouds deal significantly more damage.
+  - v1.28: Player wisp form has a weaker but electric-branded melee attack, can cast spells, and has reduced spell failure.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -156,6 +162,7 @@
   - v1.27.2: Deep Dwarves that don't start with Elyvilon or Makhleb now start with a potion of ambrosia.
   - v1.27.3: Kobolds have Passive Mapping 2.
   - v1.27.6: The "Thin Skeletal Structure" Demonspawn mutation is replaced by "Flexible Skeleton" which gives +3/+6/+15 dexterity but halves base AC of body armour at level 3.
+  - v1.28: Vine Stalkers and their evolutions have a better Dodging aptitude (+0 -> +1).
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -377,6 +384,7 @@
   - v1.26: Rings of attention give stealth-- instead of stealth-.
   - v1.26.1: Scrolls of identify are identified when touched.
   - v1.26.7: Phantom mirrors have a chance to not break, based on target HD and player level.
+  - v1.28: Wands of polymorph will confuse transformed monsters for 1 to 7 turns.
 
 #### Removed Items
   - Amulet of Harm
@@ -488,6 +496,8 @@
   - v1.27.7: Crimson imps blink when hitting instead of randomly, and have a low chance to cast Flame Tongue.
   - v1.27.7: Bats have lower evasion.
   - v1.27.8: Hippogriffs have both Wind Blast and Beckoning as instant abilities.
+  - v1.28: More monster spells use the breath timer: crimson imps casting Flame Tongue, and all crab breath abilities.
+  - v1.28: Insubstantial wisps are replaced by will-o'-wisps, which are batty enemies with a weak electric melee attack and have a low chance to cast Haunt and Mesmerise.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

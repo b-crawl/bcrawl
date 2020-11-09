@@ -31,7 +31,7 @@ static const map<species_type, species_def> species_data =
     { { MUT_TENGU_FLIGHT, 2, 9 } },  // this is still called tengu flight
     { },                             // for legacy reasons
     { },
-    { JOB_SKALD, JOB_ARCANE_MARKSMAN, JOB_WIZARD, JOB_CONJURER, 
+    { JOB_SKALD, JOB_ARCANE_MARKSMAN, JOB_ENCHANTER, JOB_WIZARD, JOB_CONJURER, 
       JOB_SUMMONER, JOB_FIRE_ELEMENTALIST, JOB_AIR_ELEMENTALIST,
       JOB_VENOM_MAGE, JOB_REAVER },
     { SK_SHORT_BLADES, SK_LONG_BLADES, SK_STAVES, SK_BOWS, SK_CROSSBOWS },

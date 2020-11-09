@@ -636,7 +636,7 @@ Any equipped cloak, helmet, gloves, boots and body armour are melded.
 %%%%
 Wisp status
 
-You have been transformed into an insubstantial wisp of gas. You move quickly
+You have been transformed into an will-o'-wisp of gas. You move quickly
 and are highly evasive, and you occasionally blink at random. You are resistant
 to fire, cold, electricity and acid, and immune to poison, rotting and
 negative energy.

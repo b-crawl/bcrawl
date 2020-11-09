@@ -121,18 +121,19 @@ static bool _valid_morph(monster* mons, monster_type new_mclass)
     }
 
     // Various inappropriate polymorph targets.
-    if ( !(mons_class_holiness(new_mclass) & mons_class_holiness(mons->type))
-        // normally holiness just needs to overlap, but we don't want
-        // shapeshifters to become demons
-        || mons->is_shapeshifter() && !(mons_class_holiness(new_mclass) & MH_NATURAL)
+    if (   new_mclass == MONS_PROGRAM_BUG
+        || new_mclass == MONS_NO_MONSTER
         || mons_class_flag(new_mclass, M_UNFINISHED)  // no unfinished monsters
         || mons_class_flag(new_mclass, M_CANT_SPAWN)  // no dummy monsters
         || mons_class_flag(new_mclass, M_NO_POLY_TO)  // explicitly disallowed
         || mons_class_flag(new_mclass, M_UNIQUE)      // no uniques
         || !mons_class_gives_xp(new_mclass)           // no tentacle parts or
                                                       // harmless things
+        || !(mons_class_holiness(new_mclass) & mons_class_holiness(mons->type))
+        // normally holiness just needs to overlap, but we don't want
+        // shapeshifters to become demons
+        || mons->is_shapeshifter() && !(mons_class_holiness(new_mclass) & MH_NATURAL)
         || !mons_class_is_threatening(new_mclass)
-        || new_mclass == MONS_PROGRAM_BUG
 
         // 'morph targets are _always_ "base" classes, not derived ones.
         || new_mclass != mons_species(new_mclass)
@@ -167,27 +168,30 @@ static bool _is_poly_power_unsuitable(poly_power_type power,
     switch (power)
     {
     case PPT_LESS:
-        return tgt_pow > src_pow - 3 + relax * 3 / 2
-                || (power == PPT_LESS && tgt_pow < src_pow - relax / 2);
+        return tgt_pow < src_pow - 3 - relax || tgt_pow > src_pow - 1 + relax;
     case PPT_MORE:
-        return tgt_pow < src_pow + 2 - relax
-                || (power == PPT_MORE && tgt_pow > src_pow + relax);
+        return tgt_pow < src_pow + 1 - relax || tgt_pow > src_pow + 3 + relax;
     default:
     case PPT_SAME:
-        return tgt_pow < src_pow - relax
-                || tgt_pow > src_pow + relax * 3 / 2;
+        return tgt_pow < src_pow - relax || tgt_pow > src_pow + relax;
     }
 }
 
 static bool _jiyva_slime_target(monster_type targetc)
 {
-    return you_worship(GOD_JIYVA)
-           && (targetc == MONS_DEATH_OOZE
-              || targetc == MONS_OOZE
-              || targetc == MONS_JELLY
-              || targetc == MONS_SLIME_CREATURE
-              || targetc == MONS_ACID_BLOB
-              || targetc == MONS_AZURE_JELLY);
+    if (you_worship(GOD_JIYVA))
+        switch (targetc)
+        {
+        case MONS_DEATH_OOZE:
+        case MONS_OOZE:
+        case MONS_JELLY:
+        case MONS_SLIME_CREATURE:
+        case MONS_ACID_BLOB:
+        case MONS_AZURE_JELLY:
+            return true;
+        default: break;
+        }
+    return false;
 }
 
 void change_monster_type(monster* mons, monster_type targetc)
@@ -541,7 +545,11 @@ bool monster_polymorph(monster* mons, monster_type targetc,
     }
 
     if (!force_beh)
+    {
         player_angers_monster(mons);
+        if (!mons->is_shapeshifter() && !_jiyva_slime_target(targetc))
+            mons->add_ench(mon_enchant(ENCH_CONFUSION, 1, nullptr, 11 + random2(60)));
+    }
 
     // Xom likes watching monsters being polymorphed.
     if (can_see)

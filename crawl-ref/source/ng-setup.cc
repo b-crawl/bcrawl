@@ -135,18 +135,25 @@ item_def* newgame_make_item(object_class_type base,
 
     // If the character is restricted in wearing the requested armour,
     // hand out a replacement instead.
-    if (item.base_type == OBJ_ARMOUR
-        && !can_wear_armour(item, false, false))
-    {
-        if (item.sub_type == ARM_HELMET || item.sub_type == ARM_HAT)
+    if (item.base_type == OBJ_ARMOUR && !can_wear_armour(item, false, false))
+        switch (item.sub_type)
+        {
+        case ARM_HELMET:
             item.sub_type = ARM_HAT;
-        else if (item.sub_type == ARM_BUCKLER)
+            item.plus = 1;
+            break;
+        case ARM_HAT:
+            break;
+        case ARM_BUCKLER:
             item.sub_type = ARM_SHIELD;
-        else if (is_shield(item))
+            break;
+        case ARM_SHIELD:
             item.sub_type = ARM_BUCKLER;
-        else
+            break;
+        default:
             item.sub_type = ARM_ROBE;
-    }
+            break;
+        }
     
     if(item.sub_type == AMU_GUARDIAN_SPIRIT)
     {

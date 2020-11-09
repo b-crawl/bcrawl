@@ -766,6 +766,16 @@ static bool _dgn_square_is_passable(const coord_def &c)
         || !(env.level_map_mask(c) & MMT_OPAQUE) && dgn_square_travel_ok(c);
 }
 
+static bool _dgn_square_is_boring(const coord_def &c)
+{
+    // ignore vault squares by the same algorithm as _dgn_square_is_passable,
+    // but in this case find only floor squares.
+    const dungeon_feature_type feat = env.grid(c);
+    return (feat_has_solid_floor(feat) || feat_is_door(feat))
+        && (env.level_map_mask(c) & MMT_PASSABLE
+            || !(env.level_map_mask(c) & MMT_OPAQUE));
+}
+
 static bool _dgn_square_is_ever_passable(const coord_def &c)
 {
     if (!(env.level_map_mask(c) & MMT_OPAQUE))
@@ -930,10 +940,13 @@ static bool _is_exit_stair(const coord_def &c)
 //
 // If fill is non-zero, it fills any disconnected regions with fill.
 //
+// TODO: refactor this to something more usable
 static int _process_disconnected_zones(int x1, int y1, int x2, int y2,
                 bool choose_stairless,
                 dungeon_feature_type fill,
-                bool (*passable)(const coord_def &) = _dgn_square_is_passable)
+                bool (*passable)(const coord_def &) = _dgn_square_is_passable,
+                bool (*fill_check)(const coord_def &) = nullptr,
+                int fill_small_zones = 0)
 {
     memset(travel_point_distance, 0, sizeof(travel_distance_grid_t));
     int nzones = 0;
@@ -949,9 +962,12 @@ static int _process_disconnected_zones(int x1, int y1, int x2, int y2,
                 continue;
             }
 
+            int zone_size = 0;
+            auto inc_zone_size = [&zone_size](const coord_def &) { zone_size++; };
+
             const bool found_exit_stair =
                 _dgn_fill_zone(coord_def(x, y), ++nzones,
-                               _dgn_point_record_stub,
+                               inc_zone_size,
                                passable,
                                choose_stairless ? (at_branch_bottom() ?
                                                    _is_upwards_exit_stair :
@@ -961,7 +977,8 @@ static int _process_disconnected_zones(int x1, int y1, int x2, int y2,
             // have stairs.
             if (choose_stairless && found_exit_stair)
                 ++ngood;
-            else if (fill)
+            else if (fill
+                && (fill_small_zones <= 0 || zone_size <= fill_small_zones))
             {
                 // Don't fill in areas connected to vaults.
                 // We want vaults to be accessible; if the area is disconneted
@@ -969,6 +986,7 @@ static int _process_disconnected_zones(int x1, int y1, int x2, int y2,
                 // vetoed later on.
                 bool veto = false;
                 vector<coord_def> coords;
+                dprf("Filling zone %d", nzones);
                 for (int fy = y1; fy <= y2 ; ++fy)
                 {
                     for (int fx = x1; fx <= x2; ++fx)
@@ -980,7 +998,7 @@ static int _process_disconnected_zones(int x1, int y1, int x2, int y2,
                                 veto = true;
                                 break;
                             }
-                            else
+                            else if (!fill_check || fill_check(coord_def(fx, fy)))
                                 coords.emplace_back(fx, fy);
                         }
                     }
@@ -1004,6 +1022,17 @@ int dgn_count_disconnected_zones(bool choose_stairless,
 {
     return _process_disconnected_zones(0, 0, GXM-1, GYM-1, choose_stairless,
                                        fill);
+}
+
+static void _fill_small_disconnected_zones()
+{
+    // debugging tip: change the feature to something like lava that will be
+    // very noticeable.
+    // TODO: make even more agressive, up to ~25?
+    _process_disconnected_zones(0, 0, GXM-1, GYM-1, true, DNGN_ROCK_WALL,
+                                       _dgn_square_is_passable,
+                                       _dgn_square_is_boring,
+                                       10);
 }
 
 static void _fixup_hell_stairs()
@@ -1064,10 +1093,12 @@ static void _pandemonium_rune_detection()
         mprf(MSGCH_ORB, "You detect a rune of Zot on this floor by its effect on the portals!");
 }
 
-static void _mask_vault(const vault_placement &place, unsigned mask)
+static void _mask_vault(const vault_placement &place, unsigned mask,
+                        function<bool(const coord_def &)> skip_fun = nullptr)
 {
     for (vault_place_iterator vi(place); vi; ++vi)
-        env.level_map_mask(*vi) |= mask;
+        if (!skip_fun || !skip_fun(vi.vault_pos())) // alert: `skip_fun` takes vault coords
+            env.level_map_mask(*vi) |= mask;
 }
 
 static void _dgn_apply_map_index(const vault_placement &place, int map_index)
@@ -1111,7 +1142,15 @@ dgn_register_place(const vault_placement &place, bool register_vault)
         if (place.map.has_tag("passable"))
             _mask_vault(place, MMT_PASSABLE);
         else if (!transparent)
-            _mask_vault(place, MMT_OPAQUE);
+        {
+            // mask everything except for any marked vault exits as opaque.
+            // (If there's some use for opaque exits, this would be possible
+            // to do with an explicit mask -- but this may lead to vault
+            // placements where e.g. an exit leads to a wall. With one exit,
+            // it may lead to isolated opaque vaults.)
+            _mask_vault(place, MMT_OPAQUE,
+                [&place](const coord_def &c) { return place.is_exit(c); });
+        }
     }
 
     // Find tags matching properties.
@@ -2019,6 +2058,8 @@ static void _dgn_verify_connectivity(unsigned nvaults)
     // disconnected.
     if (dgn_zones && nvaults != env.level_vaults.size())
     {
+        _fill_small_disconnected_zones();
+
         const int newzones = dgn_count_disconnected_zones(false);
 
 #ifdef DEBUG_STATISTICS
@@ -6868,6 +6909,8 @@ int vault_placement::connect(bool spotty) const
 // the code path in apply_grid; but actual modifications to the level
 // are so intertwined with that code path it would be actually quite messy
 // to try and avoid the duplication.
+// TODO: this should be const, but a lot of mapdef stuff is not properly
+// marked for this
 dungeon_feature_type vault_placement::feature_at(const coord_def &c)
 {
     // Can't check outside bounds of vault
@@ -6884,7 +6927,7 @@ dungeon_feature_type vault_placement::feature_at(const coord_def &c)
     return _vault_inspect(*this, feat, mapsp);
 }
 
-bool vault_placement::is_space(const coord_def &c)
+bool vault_placement::is_space(const coord_def &c) const
 {
     // Can't check outside bounds of vault
     if (size.zero() || c.x > size.x || c.y > size.y)
@@ -6893,7 +6936,7 @@ bool vault_placement::is_space(const coord_def &c)
     const int feat = map.map.glyph(c);
     return feat == ' ';
 }
-bool vault_placement::is_exit(const coord_def &c)
+bool vault_placement::is_exit(const coord_def &c) const
 {
     // Can't check outside bounds of vault
     if (size.zero() || c.x > size.x || c.y > size.y)
@@ -7031,6 +7074,11 @@ coord_def vault_place_iterator::operator * () const
 const coord_def *vault_place_iterator::operator -> () const
 {
     return &pos;
+}
+
+coord_def vault_place_iterator::vault_pos() const
+{
+    return pos - tl;
 }
 
 vault_place_iterator &vault_place_iterator::operator ++ ()

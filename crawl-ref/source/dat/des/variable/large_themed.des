@@ -2287,7 +2287,7 @@ vvrrvvvvvvv
 ENDMAP
 
 NAME: cheibrodos_cascadia
-TAGS: no_item_gen no_monster_gen no_pool_fixup
+TAGS: no_item_gen no_monster_gen no_pool_fixup transparent
 DEPTH: Depths
 ORIENT: northwest
 MONS: wizard, ice devil, ice dragon , frost giant, blizzard demon, lich

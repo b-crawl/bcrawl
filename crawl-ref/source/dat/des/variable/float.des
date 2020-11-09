@@ -263,7 +263,7 @@ ENDMAP
 
 NAME:    infiniplex_staircase_zigzag_1
 ORIENT:  float
-TAGS:    extra luniq_staircase decor
+TAGS:    extra luniq_staircase decor transparent
 DEPTH:   D:2-, !D:$, Depths:2-, !Depths:$
 WEIGHT:  3
 NSUBST:  @ 1:@ / *:x
@@ -555,7 +555,7 @@ ENDMAP
 
 NAME:    infiniplex_staircase_9_rooms
 ORIENT:  float
-TAGS:    extra luniq_staircase no_monster_gen decor
+TAGS:    extra luniq_staircase no_monster_gen decor transparent
 DEPTH:   D:2-, !D:$, Depths:2-, !Depths:$
 WEIGHT:  2
 # Room contents
@@ -789,7 +789,7 @@ ENDMAP
 # This is replaced by infiniplex_staircase_pool_lava for low levels
 NAME:    infiniplex_staircase_pool
 ORIENT:  float
-TAGS:    extra luniq_staircase decor
+TAGS:    extra luniq_staircase decor transparent
 DEPTH:   D, !D:$, Lair, Swamp
 WEIGHT:  2 (D), 20 (Swamp)
 SUBST:   D = ww.
@@ -814,7 +814,7 @@ ENDMAP
 #    There are a few small changes to accout for lava being impassible.
 NAME:    infiniplex_staircase_pool_lava
 ORIENT:  float
-TAGS:    extra luniq_staircase decor
+TAGS:    extra luniq_staircase decor transparent
 DEPTH:   Depths
 WEIGHT:  2
 SUBST:   D = ll.
@@ -2223,7 +2223,7 @@ ENDMAP
 ##############################################################################
 
 NAME:   nicolae_whirlpool
-TAGS:   patrolling no_pool_fixup no_rotate no_monster_gen
+TAGS:   patrolling no_pool_fixup no_rotate no_monster_gen transparent
 ORIENT: float
 MONS:   centaur, centaur warrior
 DEPTH:  D:6-, Depths
@@ -2611,6 +2611,7 @@ ENDMAP
 #
 # (Arguably doesn't work as well in Zot / entering Zot, but moths of wrath...)
 NAME:   grunt_twist_and_shout
+TAGS:   transparent
 ORIENT: centre
 DEPTH:  Depths, Zot, !Zot:$
 PLACE:  Depths:$
@@ -4423,58 +4424,6 @@ x1..xxExx..Yx
 xxxxxE@Exxxxx
 ENDMAP
 
-NAME:  gammafunk_mikee_crab_dinner
-TAGS:  no_monster_gen no_trap_gen patrolling
-DEPTH: D:10-, Depths, Lair:3-, Swamp, Zot
-ORIENT: float
-KMONS: F = apocalypse crab
-KITEM: F = |
-: if you.in_branch("D") then
-MONS:  fire crab, ghost crab, entropy weaver
-: elseif you.in_branch("Depths") then
-MONS:  apocalypse crab
-KMONS: 2 = apocalypse crab
-KMONS: 3 = flayed ghost
-KITEM: 2 = *
-SUBST: = = +, E = D
-: elseif you.in_branch("Lair") then
-MONS:  fire crab, ghost crab, entropy weaver
-SUBST: c = x
-: elseif you.in_branch("Swamp") then
-MONS:  ghost crab, apocalypse crab, spriggan druid
-SUBST: c = xxxt
-: elseif you.in_branch("Zot") then
-MONS:  apocalypse crab
-KMONS: 2 = apocalypse crab
-KMONS: 3 = curse toe
-KITEM: 2 = *
-SUBST: = = +, E = D
-: end
-SUBST: D = 1., E = 2.
-NSUBST: 3 = 2:3 / 3.
-{{
-dgn.delayed_decay(_G, '-', 'troll skeleton / minotaur skeleton ' ..
-                           '/ deep dwarf skeleton / centaur skeleton')
-}}
-MAP
-ccccccccccc
-=.-...1.-.c
-ccccccccc.c
-c.3...E.c1c
-c.ccccc.c.c
-c-c-*3c.c-c
-c.c.c*c.c.c
-c1c.c*c2c3c
-c.c2c|c.c.c
-c.c.cFc-c.c
-c-c.c|c.c.c
-cDc.ccc3cDc
-c.cE....c-c
-c.ccccccc.c
-c.-3...1..c
-ccccccccccc
-ENDMAP
-
 NAME: gammafunk_cloud_chamber
 TAGS: no_monster_gen no_trap_gen no_tele_into
 DEPTH: D:4-, Lair
@@ -5824,7 +5773,7 @@ ENDMAP
 # non-D branches)
 
 NAME:   grunt_deathspiral_large
-TAGS:   patrolling uniq_deathspiral
+TAGS:   patrolling uniq_deathspiral transparent
 DEPTH:  Depths, !Depths:$
 ORIENT: centre
 SHUFFLE: )]}>
@@ -5876,7 +5825,7 @@ cc..c..cc..cc...ccc+cccc..c..c...c..c
 ENDMAP
 
 NAME: grunt_deathspiral_small
-TAGS: patrolling uniq_deathspiral
+TAGS: patrolling uniq_deathspiral transparent
 DEPTH: Depths, !Depths:$, Crypt, !Crypt:$, \
        Dis, !Dis:$, Geh, !Geh:$, Tar, !Tar:$, Coc, !Coc:$, \
        Zot, !Zot:$
@@ -6163,6 +6112,7 @@ ENDMAP
 
 NAME:   minmay_ornate_pinched
 DEPTH:  D:8-, !D:$, Depths, !Depths:$
+TAGS:   transparent
 ORIENT: float
 SUBST:  0 = 0., 9 = 99.
 SUBST:  x : x:7 c:1 v:1 b:1
@@ -7394,6 +7344,7 @@ ENDMAP
 
 NAME:   grunt_arcs
 ORIENT: float
+TAGS:   transparent
 DEPTH:  Depths
 KMONS:  0 = 0 band
 KMONS:  9 = 9 band
@@ -8866,7 +8817,7 @@ cc```wwwcccncccwww'''cc
 ENDMAP
 
 NAME: cheibrodos_barr_body
-TAGS: no_item_gen no_monster_gen
+TAGS: no_item_gen no_monster_gen transparent
 DEPTH: D:4-12
 ORIENT: float
 NSUBST: " = 1:9 / 2:0 / 2=0., ; = 2:0 / 2=0.
@@ -8890,7 +8841,7 @@ MAP
 ENDMAP
 
 NAME: cheibrodos_old_hovel
-TAGS: no_item_gen no_monster_gen
+TAGS: no_item_gen no_monster_gen transparent
 DEPTH: D:2-4
 ORIENT: float
 KMONS: P = plant
@@ -8910,7 +8861,7 @@ MAP
 ENDMAP
 
 NAME: cheibrodos_fzero
-TAGS: no_item_gen no_monster_gen
+TAGS: no_item_gen no_monster_gen transparent
 DEPTH: D:5-
 ORIENT: float
 NSUBST: " = 3:0 / 3=0. / 1=9.., ` = 3:0 / 2=0. / 1=9..
@@ -9740,15 +9691,15 @@ ENDMAP
 # and here's the obligatory big vault with lots of xp and |s
 NAME:    minmay_complete_graph
 ORIENT:  float
-TAGS:    transparent
+TAGS:    no_tele_into
 DEPTH:   D:11-, Depths
 # average of 16 0s, 8 9s, and 4 8s
 SUBST:   0 = 0 .:170, 9 = 9 .:140, 8 = 8 .:50
-SUBST:   x : xcvb, ! = .xcvbTV|9, ? : .:100 TTTTV
+SUBST:   x : ncvb, ! = .xcvbTV|9, ? : .:100 TTTTV
 MAP
-            xxx@G@xxx
+            xxx===xxx
           xxx0000000xxx
-        xxx00x00000x00xxx
+        xxx00x00G00x00xxx
       xxx00xx0x000x0xx00xxx
     xxx00xxx0x0x0x0x0xxx00xxx
     xG000000000000000000000Gx
@@ -9761,9 +9712,9 @@ MAP
 xx0x00xx99999xxx8xxx99999xx00x0xx
 x0x0x0x99xx9x8xx8xx8x9xx99x0x0x0x
 x00x000xx99xxx8x8x8xxx99xx000x00x
-@000x0xxx99xxxx|||xxxx99xxx0x000@
-G00000999?98888|!|88889?99900000G
-@000x0xxx99xxxx|||xxxx99xxx0x000@
+=000x0xxx99xxxx|||xxxx99xxx0x000=
+=0G000999?98888|!|88889?999000G0=
+=000x0xxx99xxxx|||xxxx99xxx0x000=
 x00x000xx99xxx8x8x8xxx99xx000x00x
 x0x0x0x99xx9x8xx8xx8x9xx99x0x0x0x
 xx0x00xx99999xxx8xxx99999xx00x0xx
@@ -9776,9 +9727,9 @@ xx0x00xx99999xxx8xxx99999xx00x0xx
     xG000000000000000000000Gx
     xxx00xxx0x0x0x0x0xxx00xxx
       xxx00xx0x000x0xx00xxx
-        xxx00x00000x00xxx
+        xxx00x00G00x00xxx
           xxx0000000xxx
-            xxx@G@xxx
+            xxx===xxx
 ENDMAP
 
 NAME:   minmay_s_stair_smasher

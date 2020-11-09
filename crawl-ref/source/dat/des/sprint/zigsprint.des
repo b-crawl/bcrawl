@@ -161,7 +161,7 @@ function choose_mset_1(e)
     e.kmons("1 = ice beast / polar bear / white imp / simulacrum")
 -- Air
   elseif rnd < 87 then
-    e.kmons("1 = insubstantial wisp / air elemental w:5")
+    e.kmons("1 = will-o'-wisp / air elemental w:5")
 -- Earth
   elseif rnd < 89 then
     e.kmons("1 = toenail golem")
@@ -255,7 +255,7 @@ function choose_mset_2(e)
                rime drake / freezing wraith / ice devil")
 -- Air
   elseif rnd < 88 then
-    e.kmons("1 = insubstantial wisp / air elemental / wind drake w:5")
+    e.kmons("1 = will-o'-wisp / air elemental / wind drake w:5")
 -- Earth
   elseif rnd < 90 then
     e.kmons("1 = toenail golem / earth elemental / gargoyle w:2")
@@ -368,7 +368,7 @@ function choose_mset_3(e)
                blizzard demon")
 -- Air
   elseif rnd < 77 then
-    e.kmons("1 = insubstantial wisp / air elemental / wind drake / spriggan air mage /\
+    e.kmons("1 = will-o'-wisp / air elemental / wind drake / spriggan air mage /\
                storm dragon / titan w:2")
 -- Earth
   elseif rnd < 79 then
@@ -501,7 +501,7 @@ local rnd = crawl.random2(142)
                ice fiend w:5 / blizzard demon")
 -- Air
   elseif rnd < 84 then
-    e.kmons("1 = insubstantial wisp / air elemental / wind drake / spriggan air mage /\
+    e.kmons("1 = will-o'-wisp / air elemental / wind drake / spriggan air mage /\
                storm dragon / titan / electric golem")
 -- Earth
   elseif rnd < 87 then

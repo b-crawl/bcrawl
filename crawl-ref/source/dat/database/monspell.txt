@@ -643,13 +643,13 @@ Lightning Bolt electric golem cast
 
 @The_monster@ hurls @beam@ @at@ @target@.
 %%%%
-insubstantial wisp cast
+Mesmerise will-o'-wisp cast
 
-@The_monster@ thrums sharply.
+@The_monster@ blinks in a hypnotic pattern.
 %%%%
-Blink insubstantial wisp cast
+Haunt will-o'-wisp cast
 
-__NONE
+@The_monster@ forms a magic circle of ghostly light.
 %%%%
 unseen Warning Cry howler monkey cast
 
@@ -668,6 +668,10 @@ Warning Cry vault sentinel cast
 @The_monster@ blows a loud note on a signal horn!
 %%%%
 Fireball hell hog cast
+
+@The_monster@ breathes @beam@ @at@ @target@.
+%%%%
+Flame Tongue crimson imp cast
 
 @The_monster@ breathes @beam@ @at@ @target@.
 %%%%

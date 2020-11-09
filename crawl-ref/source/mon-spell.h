@@ -692,27 +692,28 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_FIRE_CRAB,
       {
-       { SPELL_FLAMING_CLOUD, 62, MON_SPELL_NATURAL },
+       { SPELL_FLAMING_CLOUD, 62, MON_SPELL_NATURAL | MON_SPELL_BREATH },
       }
     },
 
     {  MST_GHOST_CRAB,
       {
-       { SPELL_SPECTRAL_CLOUD, 62, MON_SPELL_NATURAL },
+       { SPELL_SPECTRAL_CLOUD, 62, MON_SPELL_NATURAL | MON_SPELL_BREATH },
       }
     },
 
     {  MST_APOCALYPSE_CRAB,
       {
-       { SPELL_CHAOS_BREATH, 62, MON_SPELL_NATURAL },
+       { SPELL_CHAOS_BREATH, 62, MON_SPELL_NATURAL | MON_SPELL_BREATH },
       }
     },
 
     // ('v') Vortices.
     {  MST_INSUBSTANTIAL_WISP,
       {
-       { SPELL_BLINK, 18, MON_SPELL_MAGICAL },
-       { SPELL_DISCHARGE, 32, MON_SPELL_MAGICAL },
+       { SPELL_HAUNT, 2, MON_SPELL_MAGICAL },
+       { SPELL_MESMERISE, 1, MON_SPELL_MAGICAL },
+       { SPELL_BLINK, 5, MON_SPELL_MAGICAL },
       }
     },
 
@@ -1449,7 +1450,7 @@ static const mon_spellbook mspell_list[] =
     // ('5') Minor demons.
     {  MST_CRIMSON_IMP,
       {
-       { SPELL_FLAME_TONGUE, 15, MON_SPELL_MAGICAL },
+       { SPELL_FLAME_TONGUE, 15, MON_SPELL_MAGICAL | MON_SPELL_BREATH },
       }
     },
 

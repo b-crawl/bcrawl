@@ -1503,7 +1503,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_VINE_STALKER,    SK_CROSSBOWS,      -1),
     APT(SP_VINE_STALKER,    SK_THROWING,       -1),
     APT(SP_VINE_STALKER,    SK_ARMOUR,         -2),
-    APT(SP_VINE_STALKER,    SK_DODGING,         0),
+    APT(SP_VINE_STALKER,    SK_DODGING,         1),
     APT(SP_VINE_STALKER,    SK_STEALTH,         4),
 #if TAG_MAJOR_VERSION == 34
     APT(SP_VINE_STALKER,    SK_STABBING,      UNUSABLE_SKILL),
@@ -1542,7 +1542,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_MANA_STALKER,    SK_CROSSBOWS,      -1),
     APT(SP_MANA_STALKER,    SK_THROWING,       -1),
     APT(SP_MANA_STALKER,    SK_ARMOUR,         -2),
-    APT(SP_MANA_STALKER,    SK_DODGING,         0),
+    APT(SP_MANA_STALKER,    SK_DODGING,         1),
     APT(SP_MANA_STALKER,    SK_STEALTH,         4),
 #if TAG_MAJOR_VERSION == 34
     APT(SP_MANA_STALKER,    SK_STABBING,      UNUSABLE_SKILL),
@@ -1581,7 +1581,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_TWILIGHT_STALKER,    SK_CROSSBOWS,      -1),
     APT(SP_TWILIGHT_STALKER,    SK_THROWING,       -1),
     APT(SP_TWILIGHT_STALKER,    SK_ARMOUR,         -2),
-    APT(SP_TWILIGHT_STALKER,    SK_DODGING,         0),
+    APT(SP_TWILIGHT_STALKER,    SK_DODGING,         1),
     APT(SP_TWILIGHT_STALKER,    SK_STEALTH,         4),
 #if TAG_MAJOR_VERSION == 34
     APT(SP_TWILIGHT_STALKER,    SK_STABBING,      UNUSABLE_SKILL),
@@ -1620,7 +1620,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_JUNGLE_STALKER,    SK_CROSSBOWS,      -1),
     APT(SP_JUNGLE_STALKER,    SK_THROWING,       -1),
     APT(SP_JUNGLE_STALKER,    SK_ARMOUR,         -2),
-    APT(SP_JUNGLE_STALKER,    SK_DODGING,         0),
+    APT(SP_JUNGLE_STALKER,    SK_DODGING,         1),
     APT(SP_JUNGLE_STALKER,    SK_STEALTH,         4),
 #if TAG_MAJOR_VERSION == 34
     APT(SP_JUNGLE_STALKER,    SK_STABBING,      UNUSABLE_SKILL),

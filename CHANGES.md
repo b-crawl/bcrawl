@@ -60,6 +60,7 @@
   - v1.26: Warpers start with Apportation.
   - v1.26.2: Ice Elementalists start with Ice Form.
   - v1.27.2: Transmuters start with Passwall.
+  - v1.28: Skalds have "good" starting weapons, like Fighters do.
 
 #### Features
   - All items are automatically identified if the player has a rune.

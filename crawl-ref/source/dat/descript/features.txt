@@ -637,8 +637,8 @@ A magical trap which will displace anyone passing over it to a random place on
 the same dungeon level. It is worn with age, and will dissipate on use.
 
 {{
-    if you.in_branch("Zot") then
-        return "Proximity to the Orb of Zot will cause this trap to only" ..
+    if you.where():find("Zot") then
+        return "Proximity to the Orb of Zot will cause this trap to only " ..
 		"blink its victims instead of teleporting them."
     end
 }}
@@ -649,8 +649,8 @@ A magical trap which will displace anyone passing over it to a random place on
 the same dungeon level.
 
 {{
-    if you.in_branch("Zot") then
-        return "Proximity to the Orb of Zot will cause this trap to only" ..
+    if you.where():find("Zot") then
+        return "Proximity to the Orb of Zot will cause this trap to only " ..
 		"blink its victims instead of teleporting them."
     end
 }}

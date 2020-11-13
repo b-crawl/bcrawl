@@ -571,14 +571,17 @@ static void _describe_book(const spellbook_contents &book,
         const int range_len = range_str.empty() ? 0 : 3;
         const int effect_range_space = effect_len && range_len ? 1 : 0;
         const int chop_len = 29 - effect_len - range_len - effect_range_space;
-
+        
         string spell_name = spell_title(spell);
-        if (spell == SPELL_LEHUDIBS_CRYSTAL_SPEAR
-            && chop_len < (int)spell_name.length())
-        {
-            // looks nicer than Lehudib's Crystal S
-            spell_name = "Crystal Spear";
-        }
+        if (chop_len < (int)spell_name.length())
+            switch (spell)  // some names are too long with damage info
+            {
+            case SPELL_LEHUDIBS_CRYSTAL_SPEAR:
+                spell_name = "Crystal Spear"; break;
+            case SPELL_ISKENDERUNS_MYSTIC_BLAST:
+                spell_name = "Mystic Blast"; break;
+            default: break;
+            }
 
         description += formatted_string::parse_string(
                 make_stringf("%c - %s%s%s%s", spell_letter,

@@ -2671,6 +2671,7 @@ static void tag_read_you(reader &th)
             you.training_targets[j] = 0;
 #endif
     }
+    you.experience_pool = 0;
 
     you.auto_training = unmarshallBoolean(th);
 

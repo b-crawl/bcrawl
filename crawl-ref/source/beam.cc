@@ -4484,9 +4484,7 @@ void bolt::knockback_actor(actor *act, int dam)
         return;
 
     const int distance =
-        (origin_spell == SPELL_FORCE_LANCE)
-            ? 1 + div_rand_round(ench_power, 40) :
-        (origin_spell == SPELL_CHILLING_BREATH) ? 2 : 1;
+        (origin_spell == SPELL_FORCE_LANCE) ? 1 + div_rand_round(ench_power, 40) : 1;
 
     const int roll = origin_spell == SPELL_FORCE_LANCE
                      ? 7 + 0.27 * ench_power
@@ -4534,19 +4532,10 @@ void bolt::knockback_actor(actor *act, int dam)
 
     if (you.can_see(*act))
     {
-        if (origin_spell == SPELL_CHILLING_BREATH)
-        {
-            mprf("%s %s blown backwards by the freezing wind.",
-                 act->name(DESC_THE).c_str(),
-                 act->conj_verb("are").c_str());
-        }
-        else
-        {
-            mprf("%s %s knocked back by the %s.",
-                 act->name(DESC_THE).c_str(),
-                 act->conj_verb("are").c_str(),
-                 name.c_str());
-        }
+        mprf("%s %s knocked back by the %s.",
+             act->name(DESC_THE).c_str(),
+             act->conj_verb("are").c_str(),
+             name.c_str());
     }
 
     if (act->pos() != newpos)
@@ -6665,7 +6654,6 @@ bool bolt::can_knockback(const actor &act, int dam) const
         return false;
 
     return flavour == BEAM_WATER && origin_spell == SPELL_PRIMAL_WAVE
-           || origin_spell == SPELL_CHILLING_BREATH && act.airborne()
            || origin_spell == SPELL_FORCE_LANCE && dam;
 }
 

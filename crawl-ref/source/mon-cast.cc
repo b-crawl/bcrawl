@@ -1537,6 +1537,7 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         beam.pierce     = true;
         if (real_spell == SPELL_CHILLING_BREATH)
         {
+            beam.hit         = AUTOMATIC_HIT;
             beam.name        = "chilling blast";
             beam.aux_source  = "blast of chilling breath";
             beam.short_name  = "frost";

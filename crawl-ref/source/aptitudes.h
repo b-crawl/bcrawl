@@ -268,7 +268,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
     APT(SP_MUMMY,           SK_UNARMED_COMBAT, -2),
     APT(SP_MUMMY,           SK_SPELLCASTING,    2),
     APT(SP_MUMMY,           SK_CONJURATIONS,   -2),
-    APT(SP_MUMMY,           SK_HEXES,          -1),
+    APT(SP_MUMMY,           SK_HEXES,           0),
     APT(SP_MUMMY,           SK_CHARMS,         -2),
     APT(SP_MUMMY,           SK_SUMMONINGS,     -2),
     APT(SP_MUMMY,           SK_NECROMANCY,      0),

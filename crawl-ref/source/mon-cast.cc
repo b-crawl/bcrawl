@@ -4435,8 +4435,10 @@ static void _mons_summon_elemental(monster &mons, mon_spell_slot slot, bolt&)
 
 static void _mons_cast_haunt(monster* mons)
 {
-    ASSERT(mons->get_foe());
-    const coord_def fpos = mons->get_foe()->pos();
+    actor* foe = mons->get_foe();
+    if (!foe)
+        return;
+    const coord_def fpos = foe->pos();
 
     _do_high_level_summon(mons, SPELL_HAUNT, pick_random_wraith,
                           random_range(2, 3), GOD_NO_GOD, &fpos, _haunt_fixup);

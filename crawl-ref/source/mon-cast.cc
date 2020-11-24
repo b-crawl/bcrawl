@@ -1446,14 +1446,14 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         break;
 
     case SPELL_FIRE_BREATH:
+    case SPELL_FLAMING_BREATH:
         zappy(spell_to_zap(real_spell), power, true, beam);
         beam.aux_source = "blast of fiery breath";
         beam.short_name = "flames";
         break;
 
     case SPELL_SEARING_BREATH:
-        if (mons && mons->type == MONS_XTAHUA)
-            power = power * 3/2;
+        power = power * 3/2;
         zappy(spell_to_zap(real_spell), power, true, beam);
         beam.aux_source  = "blast of searing breath";
         break;

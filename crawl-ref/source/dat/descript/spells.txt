@@ -587,6 +587,10 @@ When hitting a target, infused projectiles draw magical power to create a burst 
 This does additional damage that is reduced by armour, making this spell most
 effective against unarmoured foes.
 %%%%
+Flaming Breath spell
+
+Breathes a blast of fire that leaves a cloud of flames at its endpoint.
+%%%%
 Flaming Cloud spell
 
 Conjures up a large cloud of roaring flames.

@@ -64,6 +64,7 @@ static const zap_info zap_data[] =
     BEAM_POISON,
     NUM_DCHAR_TYPES,
     true,
+    true,
     false,
     0
 },
@@ -80,6 +81,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_POISON,
     NUM_DCHAR_TYPES,
+    true,
     true,
     false,
     0
@@ -98,6 +100,7 @@ static const zap_info zap_data[] =
     BEAM_DEVASTATION,
     NUM_DCHAR_TYPES,
     true,
+    true,
     false,
     0
 },
@@ -115,6 +118,7 @@ static const zap_info zap_data[] =
     BEAM_FRAG,
     NUM_DCHAR_TYPES,
     true,
+    true,
     false,
     0
 },
@@ -131,6 +135,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_MMISSILE,
     NUM_DCHAR_TYPES,
+    true,
     false,
     false,
     0
@@ -148,6 +153,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_MMISSILE,
     DCHAR_FIRED_MISSILE,
+    true,
     false,
     false,
     0
@@ -165,6 +171,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_DAMNATION,
     NUM_DCHAR_TYPES,
+    true,
     false,
     true,
     0
@@ -183,6 +190,7 @@ static const zap_info zap_data[] =
     BEAM_MIASMA,
     NUM_DCHAR_TYPES,
     true,
+    true,
     false,
     0
 },
@@ -199,6 +207,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_HOLY,
     NUM_DCHAR_TYPES,
+    true,
     true,
     false,
     0
@@ -217,6 +226,7 @@ static const zap_info zap_data[] =
     BEAM_PETRIFYING_CLOUD,
     NUM_DCHAR_TYPES,
     true,
+    true,
     false,
     0
 },
@@ -234,6 +244,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_NEG,
     NUM_DCHAR_TYPES,
+    true,
     false,
     true,
     0 // Noise comes from explosion
@@ -251,6 +262,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_ICE,
     NUM_DCHAR_TYPES,
+    true,
     false,
     false,
     0
@@ -268,6 +280,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_ICE,
     NUM_DCHAR_TYPES,
+    true,
     false,
     false,
     0
@@ -285,6 +298,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_LAVA,
     DCHAR_FIRED_ZAP,
+    true,
     false,
     false,
     0
@@ -304,6 +318,7 @@ static const zap_info zap_data[] =
     BEAM_CHAOS,
     NUM_DCHAR_TYPES,
     true,
+    true,
     false,
     0
 },
@@ -320,6 +335,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_COLD,
     NUM_DCHAR_TYPES,
+    true,
     true,
     false,
     0
@@ -338,6 +354,7 @@ static const zap_info zap_data[] =
     BEAM_FIRE,
     NUM_DCHAR_TYPES,
     true,
+    true,
     false,
     0
 },
@@ -354,6 +371,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_FIRE,
     NUM_DCHAR_TYPES,
+    true,
     true,
     false,
     0
@@ -372,6 +390,7 @@ static const zap_info zap_data[] =
     BEAM_ELECTRICITY,
     DCHAR_FIRED_ZAP,
     true,
+    true,
     false,
     0
 },
@@ -388,6 +407,7 @@ static const zap_info zap_data[] =
     false,
     BEAM_FIRE,
     NUM_DCHAR_TYPES,
+    true,
     true,
     false,
     0
@@ -1085,6 +1105,7 @@ _mon_hex_zap(ZAP_BANISHMENT, BEAM_BANISH, 150),
     false,
     BEAM_ACID,
     NUM_DCHAR_TYPES,
+    true,
     false,
     false,
     6

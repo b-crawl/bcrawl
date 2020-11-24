@@ -1540,19 +1540,6 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         beam.damage     = dice_def(2, 7 + (power / 13));
         break;
 
-    case SPELL_SHADOW_BOLT:
-        beam.name     = "shadow bolt";
-        beam.pierce   = true;
-        // deliberate fall-through
-    case SPELL_SHADOW_SHARD:
-        if (real_spell == SPELL_SHADOW_SHARD)
-            beam.name  = "shadow shard";
-        beam.damage   = dice_def(3, 8 + power / 11);
-        beam.colour   = MAGENTA;
-        beam.flavour  = BEAM_MMISSILE;
-        beam.hit      = 17 + power / 25;
-        break;
-
     case SPELL_FLAMING_CLOUD:
         zappy(spell_to_zap(real_spell), power, true, beam);
         beam.aux_source   = "blast of fiery breath";

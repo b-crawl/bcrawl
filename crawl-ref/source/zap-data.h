@@ -1559,7 +1559,7 @@ _mon_hex_zap(ZAP_SLEEP, BEAM_SLEEP),
     true,
     BEAM_RUPTURE,
     NUM_DCHAR_TYPES,
-    false,
+    true,
     false,
     false,
     0 // dubious

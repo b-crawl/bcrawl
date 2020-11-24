@@ -13,6 +13,7 @@
 #include "dungeon.h"
 #include "los.h"
 #include "message.h"
+#include "mon-project.h"
 #include "mon-abil.h"
 #include "mon-book.h"
 #include "mon-cast.h"

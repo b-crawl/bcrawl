@@ -1453,15 +1453,15 @@ Hill Orcs
   cousins (the Cave Orcs) possess below the ground, descend in search of plunder
   and adventure.
 
-  Hill Orcs are more robust than Humans. Their forte is brute-force fighting,
-  and they are skilled at using most hand weapons (particularly axes, with which
-  they are experts), though they are not particularly good at using missile
-  weapons. Hill Orcs are passable users of most types of magic and are
-  particularly skilled with Fire.
+  Hill Orcs are more robust than Humans. Their forte is instinctive fighting,
+  so they can use all melee weapons with equal skill. Orcish warriors typically
+  prefer using heavy armour if it is available.
 
-  Many Orcs feel superior to all other species and beings, and they have formed
-  a religion around that idea. Only Orcs can worship Beogh, the Orc god. They
-  can join Beogh even without an altar whenever an orc priest is in sight.
+  Hill Orcs are also decent magic users; some focus on destructive magic or
+  summoning rather than fighting.
+
+  Most Orcs of the Dungeon worship Beogh, but they are generally particularly
+  attuned to whatever deity they worship.
 
 Merfolk
   The Merfolk are a hybrid species of half-human, half-fish that typically live
@@ -1484,31 +1484,14 @@ Merfolk
   still remains. The instability of their own morphogenic matrix has made them
   very accomplished transmuters, but most other magic seems foreign to them.
 
-Halflings
-  Halflings, who are named for being about half the size of Humans, live in
-  small villages. They live simple lives and have simple interests. Sometimes a
-  particularly restless Halfling will leave his or her village in search of
-  adventure.
-
-  Halflings are very small but surprisingly hardy for their size, even having an
-  innate resistance to mutagenic effects. They can use short blades and shields
-  very well, are passable with long blades, and excel in ranged combat with
-  slings. They are also very stealthy and dextrous, but are poor at magic
-  (except for charms, translocations, and air magic). They advance in levels as
-  rapidly as Humans. Halflings cannot wield large weapons.
-
 Kobolds
-  Kobolds are small, ugly creatures with few redeeming features. They are not
-  the sort of people you would want to spend much time with, unless you happened
-  to be a Kobold yourself.
-
-  They tend to be more agile and weaker than Halflings, and are slightly more
-  talented at using most types of magic, particularly necromancy. They are
-  competent in combat, especially with short blades, maces or crossbows, and are
-  also very adept at using magical devices. They often live as scavengers,
-  surviving on carrion (which they can eat even when not hungry), but are
-  carnivorous and can only eat meat. Kobolds advance in levels as quickly as
-  Humans. Like Halflings, Kobolds cannot wield large weapons.
+  Kobolds are short, vicious creatures with some reptilian features. They often
+  live as scavengers, surviving on carrion (which they can eat even when not
+  hungry), but are carnivorous and can only eat meat.
+  
+  Kobolds advance in levels as quickly as Humans. They are skilled with short
+  blades, as well as most missile weapons, but are too small to use longbows
+  or javelins.
 
 Spriggans
   Spriggans are small magical creatures distantly related to Elves. They love to
@@ -1625,28 +1608,17 @@ Deep Dwarves
   Deep Dwarves are short, hardy people who, unlike their extinct surface
   relatives, never left the underground homelands. Living there for countless
   generations made them turn pale and lose all ability to regenerate health
-  over time, or to have their rate of regeneration hastened by any effects.
-  Deep Dwarves can instead draw on their magical essence to heal, but doing so
-  will gradually deplete their maximum reserves of magic. They are passively
-  able to reduce all incoming damage, and their empathy with the earth allows
-  them to sense their surroundings; these abilities increase in power as they
-  gain experience levels.
+  over time. They instead rely on divine assistance for healing.
+  
+  Deep Dwarves are passively able to reduce all incoming damage, and their
+  empathy with the earth allows them to sense their surroundings; these
+  abilities increase in power as they gain experience levels.
 
   Naturally, Deep Dwarves are quite adept with all arts of avoiding blows and
   damage. Offensively, they are skilled users of axes, crossbows, and slings.
   Deep Dwarves are highly spiritual beings, often portrayed as actual spirits
-  by outsiders; because of this, their skill with invocations is great, and
-  they often rely on divine assistance for healing. They are most at home with
-  the magic of earth and death, eventually gaining some resistance to the dark
-  powers of necromancy.
-
-Deep Elves
-   This is an Elven species who long ago fled the overworld to live in darkness
-   underground. There, they developed their mental powers, evolving a natural
-   gift for all forms of magic (including necromancy and earth magic), and
-   adapted physically to their new environment, becoming shorter, weaker, and
-   losing all colouration. They are poor at melee combat, but excellent
-   at fighting from a distance.
+  by outsiders. They are most at home with the magic of earth and death,
+  eventually gaining some resistance to the dark powers of necromancy.
 
 Felids
   Felids are a breed of cats that have been granted sentience. Originally they

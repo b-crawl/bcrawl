@@ -1556,10 +1556,8 @@ bool acquirement(object_class_type class_wanted, int agent,
         for (unsigned int i = 0; i < stock.size(); i++)
         {
             item_def& item = mitm[stock[i]];
-            if(is_artefact(item))
+            if(is_artefact(item) || item.base_type == OBJ_JEWELLERY)
             {   
-                //Need to explicitly ID artifacts to prevent name mangling
-                //but don't want to hand out ID info like candy
                 set_ident_type(item, true);
                 set_ident_flags(item, ISFLAG_IDENT_MASK);
             }

@@ -116,6 +116,7 @@
   - v1.27.2: The "MP-powered wands" mutation gives a larger (+1/3 -> +1/2) power bonus.
   - v1.27.8: Storm clouds deal significantly more damage.
   - v1.28: Player wisp form has a weaker but electric-branded melee attack, can cast spells, and has reduced spell failure.
+  - v1.28.1: Ice form allows cloaks.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -163,6 +164,8 @@
   - v1.27.3: Kobolds have Passive Mapping 2.
   - v1.27.6: The "Thin Skeletal Structure" Demonspawn mutation is replaced by "Flexible Skeleton" which gives +3/+6/+15 dexterity but halves base AC of body armour at level 3.
   - v1.28: Vine Stalkers and their evolutions have a better Dodging aptitude (+0 -> +1).
+  - v1.28.1: Mummies have a better Hexes aptitude (-1 -> +0).
+  - v1.28.1: White draconian breath always hits.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -498,6 +501,7 @@
   - v1.27.8: Hippogriffs have both Wind Blast and Beckoning as instant abilities.
   - v1.28: More monster spells use the breath timer: crimson imps casting Flame Tongue, and all crab breath abilities.
   - v1.28: Insubstantial wisps are replaced by will-o'-wisps, which are batty enemies with a weak electric melee attack and have a low chance to cast Haunt and Mesmerise.
+  - v1.28.1: White draconian breath always hits.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

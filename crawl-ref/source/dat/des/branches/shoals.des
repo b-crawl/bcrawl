@@ -95,7 +95,7 @@ MONS:    harpy, moth of wrath
 NSUBST:  M = 3:1 / 1:2 / *:.
 KFEAT:   O = enter_shoals
 MAP
-.......
+...@...
 .cc=cc.
 .cMMMc.
 .nMOMn.
@@ -593,7 +593,7 @@ ENDMAP
 NAME: nicolae_shoals_arrival_archipelago
 DEPTH: Shoals
 SHUFFLE: {[(<, abc, def
-SUBST: ade:@, bcf:W
+SUBST: a:@, de:., bcf:W
 MAP
      wwwwb
     www...b

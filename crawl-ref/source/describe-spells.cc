@@ -7,6 +7,7 @@
 
 #include "describe-spells.h"
 
+#include "colour.h"
 #include "delay.h"
 #include "describe.h"
 #include "externs.h"
@@ -15,10 +16,12 @@
 #include "menu.h"
 #include "mon-book.h"
 #include "mon-cast.h"
+#include "mon-project.h" // iood_damage
 #include "monster.h" // SEEN_SPELLS_KEY
 #include "religion.h"
 #include "shopping.h"
 #include "spl-book.h"
+#include "spl-damage.h"
 #include "spl-util.h"
 #include "spl-zap.h"
 #include "stringutil.h"
@@ -477,12 +480,69 @@ static string _range_string(const spell_type &spell, const monster_info *mon_own
     return make_stringf("(<%s>%d</%s>)", range_col, range, range_col);
 }
 
+static dice_def _spell_damage(spell_type spell, int hd)
+{
+    const int pow = mons_power_for_hd(spell, hd);
+
+    switch (spell)
+    {
+        case SPELL_WATERSTRIKE:
+            return waterstrike_damage(hd);
+        case SPELL_IOOD:
+            return iood_damage(pow, INFINITE_DISTANCE);
+        default:
+            break;
+    }
+
+    const zap_type zap = spell_to_zap(spell);
+    if (zap == NUM_ZAPS)
+        return dice_def(0,0);
+
+    return zap_damage(zap, pow, true);
+}
+
+static int _spell_hd(spell_type spell, const monster_info &mon_owner)
+{
+    if (spell == SPELL_SEARING_BREATH && mon_owner.type == MONS_XTAHUA)
+        return mon_owner.hd * 3 / 2;
+    if (mons_spell_is_spell(spell))
+        return mon_owner.spell_hd();
+    return mon_owner.hd;
+}
+
+static colour_t _spell_colour(spell_type spell)
+{
+    const zap_type zap = spell_to_zap(spell);
+    if (zap == NUM_ZAPS)
+        return COL_UNKNOWN;
+    return zap_colour(zap);
+}
+
+static string _colourize(string base, colour_t col)
+{
+    if (col < NUM_TERM_COLOURS)
+    {
+        const string col_name = colour_to_str(col);
+        return make_stringf("<%s>%s</%s>",
+                            col_name.c_str(), base.c_str(), col_name.c_str());
+    }
+    string out = make_stringf("%c", base[0]);
+    for (int i = 1; i < (int)base.length() - 1; i++)
+    {
+        const int term_col = element_colour(col, false, you.pos());
+        const string col_name = colour_to_str(term_col);
+        out += "<" + col_name + ">" + base[i] + "</" + col_name + ">";
+    }
+    out += base[base.length() - 1];
+    return out;
+}
+
 static string _effect_string(spell_type spell, const monster_info *mon_owner)
 {
     if (!mon_owner)
         return "";
 
-    const int hd = mon_owner->spell_hd();
+    const int hd = _spell_hd(spell, *mon_owner);
     if (!hd)
         return "";
 
@@ -502,12 +562,13 @@ static string _effect_string(spell_type spell, const monster_info *mon_owner)
         return make_stringf("(%d%%)", hex_chance(spell, hd));
     }
 
-    const zap_type zap = spell_to_zap(spell);
-    if (zap == NUM_ZAPS)
-        return "";
+    if (spell == SPELL_CHAIN_LIGHTNING)
+    {
+        const int pow = mons_power_for_hd(spell, hd);
+        return make_stringf("(%s)", desc_chain_lightning_dam(pow).c_str());
+    }
 
-    const int pow = mons_power_for_hd(spell, hd);
-    const dice_def dam = zap_damage(zap, pow, true);
+    const dice_def dam = _spell_damage(spell, hd);
     if (dam.num == 0 || dam.size == 0)
         return "";
     return make_stringf("(%dd%d)", dam.num, dam.size);
@@ -565,20 +626,26 @@ static void _describe_book(const spellbook_contents &book,
                                             ? entry->second : ' ';
 
         const string range_str = _range_string(spell, mon_owner, hd);
-        const string effect_str = _effect_string(spell, mon_owner);
+        string effect_str = _effect_string(spell, mon_owner);
 
         const int effect_len = effect_str.length();
         const int range_len = range_str.empty() ? 0 : 3;
         const int effect_range_space = effect_len && range_len ? 1 : 0;
         const int chop_len = 29 - effect_len - range_len - effect_range_space;
 
+        if (effect_len && !testbits(get_spell_flags(spell), SPFLAG_MR_CHECK))
+            effect_str = _colourize(effect_str, _spell_colour(spell));
+
         string spell_name = spell_title(spell);
-        if (spell == SPELL_LEHUDIBS_CRYSTAL_SPEAR
-            && chop_len < (int)spell_name.length())
-        {
-            // looks nicer than Lehudib's Crystal S
-            spell_name = "Crystal Spear";
-        }
+        if (chop_len < (int)spell_name.length())
+            switch (spell)  // some names are too long with damage info
+            {
+            case SPELL_LEHUDIBS_CRYSTAL_SPEAR:
+                spell_name = "Crystal Spear"; break;
+            case SPELL_ISKENDERUNS_MYSTIC_BLAST:
+                spell_name = "Mystic Blast"; break;
+            default: break;
+            }
 
         description += formatted_string::parse_string(
                 make_stringf("%c - %s%s%s%s", spell_letter,
@@ -656,8 +723,11 @@ static void _write_book(const spellbook_contents &book,
                 [&spell](const pair<spell_type,char>& e) { return e.first == spell; });
         const char spell_letter = entry != spell_map.end() ? entry->second : ' ';
         tiles.json_write_string("letter", string(1, spell_letter));
-        
-        tiles.json_write_string("effect", _effect_string(spell, mon_owner));
+
+        string effect_str = _effect_string(spell, mon_owner);
+        if (!testbits(get_spell_flags(spell), SPFLAG_MR_CHECK))
+            effect_str = _colourize(effect_str, _spell_colour(spell));
+        tiles.json_write_string("effect", effect_str);
 
         string range_str = _range_string(spell, mon_owner, hd);
         if (range_str.size() > 0)

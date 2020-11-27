@@ -1128,6 +1128,31 @@ static int _mons_power_hd_factor(spell_type spell, bool random)
     }
 }
 
+/**
+ * Does this spell use spell_hd or just hit_dice for damage and accuracy?
+ *
+ * @param spell The spell in question.
+ * @return True iff the spell should use spell_hd.
+ */
+bool mons_spell_is_spell(spell_type spell)
+{
+    switch (spell)
+    {
+        case SPELL_HOLY_BREATH:
+        case SPELL_SPIT_ACID:
+        case SPELL_ACID_SPLASH:
+        case SPELL_CHAOS_BREATH:
+        case SPELL_COLD_BREATH:
+        case SPELL_CHILLING_BREATH:
+        case SPELL_FIRE_BREATH:
+        case SPELL_SEARING_BREATH:
+        case SPELL_ELECTRICAL_BOLT:
+        case SPELL_FLAMING_CLOUD:
+            return false;
+        default:
+            return true;
+    }
+}
 
 /**
  * What spellpower does a monster with the given spell_hd cast the given spell
@@ -1303,6 +1328,9 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
     beam.origin_spell = real_spell;
     beam.source_id = mons->mid;
     beam.source_name = mons->name(DESC_A, true);
+    
+    if (!mons_spell_is_spell(real_spell))
+        power = mons_power_for_hd(real_spell, mons->get_hit_dice());
 
     const mons_spell_logic* logic = map_find(spell_to_logic, spell_cast);
     if (logic && logic->setup_beam)
@@ -1350,6 +1378,21 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
     case SPELL_TELEPORT_OTHER:
     case SPELL_SANDBLAST:
     case SPELL_HARPOON_SHOT:
+    case SPELL_NOXIOUS_CLOUD:
+    case SPELL_POISONOUS_CLOUD:
+    case SPELL_THORN_VOLLEY:
+    case SPELL_CALL_DOWN_DAMNATION:
+    case SPELL_HURL_DAMNATION:
+    case SPELL_SPIT_POISON:
+    case SPELL_MIASMA_BREATH:
+    case SPELL_GHOSTLY_FIREBALL:
+    case SPELL_FLASH_FREEZE:
+    case SPELL_CRYSTAL_BOLT:
+    case SPELL_SPIT_LAVA:
+    case SPELL_HOLY_BREATH:
+    case SPELL_SPIT_ACID:
+    case SPELL_ACID_SPLASH:
+    case SPELL_ELECTRICAL_BOLT:
         zappy(spell_to_zap(real_spell), power, true, beam);
         break;
 
@@ -1359,6 +1402,11 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
 
     case SPELL_FREEZING_CLOUD: // battlesphere special-case
         zappy(ZAP_MON_FREEZING_CLOUD, power, true, beam);
+        break;
+
+    case SPELL_ENERGY_BOLT:
+        zappy(spell_to_zap(real_spell), power, true, beam);
+        beam.short_name = "energy";
         break;
 
     case SPELL_DISPEL_UNDEAD:
@@ -1375,75 +1423,6 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         beam.foe_ratio = random_range(40, 55);
         break;
 
-    case SPELL_CALL_DOWN_DAMNATION:
-        beam.aux_source   = "hellfire";
-        beam.name         = "hellfire";
-        beam.ex_size      = 1;
-        beam.flavour      = BEAM_DAMNATION;
-        beam.is_explosion = true;
-        beam.colour       = LIGHTRED;
-        beam.aux_source.clear();
-        beam.is_tracer    = false;
-        beam.hit          = 20;
-        beam.damage       = dice_def(3, 15);
-        break;
-
-    case SPELL_NOXIOUS_CLOUD:
-        beam.name     = "noxious blast";
-        beam.damage   = dice_def(1, 0);
-        beam.colour   = GREEN;
-        beam.flavour  = BEAM_MEPHITIC;
-        beam.hit      = 18 + power / 25;
-        beam.pierce   = true;
-        break;
-
-    case SPELL_POISONOUS_CLOUD:
-        beam.name     = "blast of poison";
-        beam.damage   = dice_def(3, 3 + power / 25);
-        beam.colour   = LIGHTGREEN;
-        beam.flavour  = BEAM_POISON;
-        beam.hit      = 18 + power / 25;
-        beam.pierce   = true;
-        break;
-
-    case SPELL_ENERGY_BOLT:        // eye of devastation
-        beam.colour     = YELLOW;
-        beam.name       = "bolt of energy";
-        beam.short_name = "energy";
-        beam.damage     = dice_def(3, 20);
-        beam.hit        = 15 + power / 30;
-        beam.flavour    = BEAM_DEVASTATION; // DEVASTATION is BEAM_MMISSILE
-        beam.pierce     = true;             // (except bloodier)
-        break;
-
-    case SPELL_SPIT_POISON:
-        beam.colour   = GREEN;
-        beam.name     = "splash of poison";
-        beam.damage   = dice_def(1, 4 + power / 10);
-        beam.hit      = 16 + power / 20;
-        beam.flavour  = BEAM_POISON;
-        break;
-
-    case SPELL_SPIT_ACID:
-        beam.colour   = YELLOW;
-        beam.name     = "splash of acid";
-        beam.damage   = dice_def(3, 7);
-
-        // Natural ability, so don't use spell_hd here
-        beam.hit      = 20 + (3 * mons->get_hit_dice());
-        beam.flavour  = BEAM_ACID;
-        break;
-
-    case SPELL_ACID_SPLASH:      // yellow draconian
-        beam.colour   = YELLOW;
-        beam.name     = "glob of acid";
-        beam.damage   = dice_def(3, 7);
-
-        // Natural ability, so don't use spell_hd here
-        beam.hit      = 20 + (3 * mons->get_hit_dice());
-        beam.flavour  = BEAM_ACID;
-        break;
-
     case SPELL_MEPHITIC_CLOUD:
         beam.name     = "stinking cloud";
         beam.damage   = dice_def(1, 0);
@@ -1453,34 +1432,9 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         beam.is_explosion = true;
         break;
 
-    case SPELL_MIASMA_BREATH:      // death drake
-        beam.name     = "foul vapour";
-        beam.damage   = dice_def(3, 5 + power / 24);
-        beam.colour   = DARKGREY;
-        beam.flavour  = BEAM_MIASMA;
-        beam.hit      = 17 + power / 20;
-        beam.pierce   = true;
-        break;
-
-    case SPELL_HURL_DAMNATION:           // fiend's hellfire
-        beam.name         = "hellfire";
-        beam.aux_source   = "hellfire";
-        beam.colour       = LIGHTRED;
-        beam.damage       = dice_def(3, 20);
-        beam.hit          = 24;
-        beam.flavour      = BEAM_DAMNATION;
-        beam.pierce       = true; // needed?
-        beam.is_explosion = true;
-        break;
-
     case SPELL_METAL_SPLINTERS:
-        beam.name       = "spray of metal splinters";
+        zappy(spell_to_zap(real_spell), power, true, beam);
         beam.short_name = "metal splinters";
-        beam.damage     = dice_def(3, 20 + power / 20);
-        beam.colour     = CYAN;
-        beam.flavour    = BEAM_FRAG;
-        beam.hit        = 19 + power / 30;
-        beam.pierce     = true;
         break;
 
     case SPELL_BLINK_OTHER:
@@ -1492,65 +1446,34 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         break;
 
     case SPELL_FIRE_BREATH:
-    case SPELL_SEARING_BREATH:
     case SPELL_FLAMING_BREATH:
-        beam.name       = "blast of flame";
+        zappy(spell_to_zap(real_spell), power, true, beam);
         beam.aux_source = "blast of fiery breath";
         beam.short_name = "flames";
-        beam.damage     = dice_def(3, (mons->get_hit_dice() * 2));
-        beam.colour     = RED;
-        beam.hit        = 30;
-        beam.flavour    = BEAM_FIRE;
-        beam.pierce     = true;
-        if (real_spell == SPELL_SEARING_BREATH)
-        {
-            beam.name        = "searing blast";
-            beam.aux_source  = "blast of searing breath";
-        }
-        else if (real_spell == SPELL_FLAMING_BREATH)
-        {
-            beam.aux_source  = "blast of flaming breath";
-            beam.damage.size = 65 * beam.damage.size / 100;
-        }
+        break;
 
+    case SPELL_SEARING_BREATH:
+        power = power * 3/2;
+        zappy(spell_to_zap(real_spell), power, true, beam);
+        beam.aux_source  = "blast of searing breath";
         break;
 
     case SPELL_CHAOS_BREATH:
-        beam.name         = "blast of chaos";
+        zappy(spell_to_zap(real_spell), power, true, beam);
         beam.aux_source   = "blast of chaotic breath";
-        beam.damage       = dice_def(1, 3 * mons->get_hit_dice() / 2);
-        beam.colour       = ETC_RANDOM;
-        beam.hit          = 30;
-        beam.flavour      = BEAM_CHAOS;
-        beam.pierce       = true;
+        break;
+
+    case SPELL_COLD_BREATH:
+        zappy(spell_to_zap(real_spell), power, true, beam);
+        beam.aux_source = "blast of icy breath";
+        beam.short_name = "frost";
         break;
 
     case SPELL_CHILLING_BREATH:
-    case SPELL_COLD_BREATH:
-        beam.name       = "blast of cold";
-        beam.aux_source = "blast of icy breath";
-        beam.short_name = "frost";
-        beam.damage     = dice_def(3, (mons->get_hit_dice() * 2));
-        beam.colour     = WHITE;
-        beam.hit        = 30;
-        beam.flavour    = BEAM_COLD;
-        beam.pierce     = true;
-        if (real_spell == SPELL_CHILLING_BREATH)
-        {
-            beam.name        = "chilling blast";
-            beam.aux_source  = "blast of chilling breath";
-            beam.short_name  = "frost";
-            beam.damage.size = 65 * beam.damage.size / 100;
-        }
-        break;
-
-    case SPELL_HOLY_BREATH:
-        beam.name     = "blast of cleansing flame";
-        beam.damage   = dice_def(3, mons->get_hit_dice());
-        beam.colour   = ETC_HOLY;
-        beam.flavour  = BEAM_HOLY;
-        beam.hit      = 18 + power / 25;
-        beam.pierce   = true;
+        zappy(spell_to_zap(real_spell), power, true, beam);
+        beam.name = "chilling breath";
+        beam.aux_source  = "blast of chilling breath";
+        beam.short_name  = "frost";
         break;
 
     case SPELL_PORKALATOR:
@@ -1569,13 +1492,8 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         break;
 
     case SPELL_PETRIFYING_CLOUD:
-        beam.name     = "blast of calcifying dust";
-        beam.colour   = WHITE;
-        beam.damage   = dice_def(2, 6);
-        beam.hit      = AUTOMATIC_HIT;
-        beam.flavour  = BEAM_PETRIFYING_CLOUD;
+        zappy(spell_to_zap(real_spell), power, true, beam);
         beam.foe_ratio = 30;
-        beam.pierce   = true;
         break;
 
 #if TAG_MAJOR_VERSION == 34
@@ -1607,20 +1525,8 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         beam.pierce   = true;
         break;
 
-    case SPELL_GHOSTLY_FIREBALL:
-        _setup_ghostly_beam(beam, power, 3);
-        break;
-
     case SPELL_DIMENSION_ANCHOR:
         beam.flavour    = BEAM_DIMENSION_ANCHOR;
-        break;
-
-    case SPELL_THORN_VOLLEY:
-        beam.colour   = BROWN;
-        beam.name     = "volley of thorns";
-        beam.damage   = dice_def(3, 5 + (power / 13));
-        beam.hit      = 20 + power / 15;
-        beam.flavour  = BEAM_MMISSILE;
         break;
 
     // XXX: This seems needed to give proper spellcasting messages, even though
@@ -1634,75 +1540,15 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         beam.damage     = dice_def(2, 7 + (power / 13));
         break;
 
-    case SPELL_FLASH_FREEZE:
-        beam.name     = "flash freeze";
-        beam.damage   = dice_def(3, 7 + (power / 12));
-        beam.colour   = WHITE;
-        beam.flavour  = BEAM_ICE;
-        beam.hit      = 5 + power / 3;
-        break;
-
-    case SPELL_SHADOW_BOLT:
-        beam.name     = "shadow bolt";
-        beam.pierce   = true;
-        // deliberate fall-through
-    case SPELL_SHADOW_SHARD:
-        if (real_spell == SPELL_SHADOW_SHARD)
-            beam.name  = "shadow shard";
-        beam.damage   = dice_def(3, 8 + power / 11);
-        beam.colour   = MAGENTA;
-        beam.flavour  = BEAM_MMISSILE;
-        beam.hit      = 17 + power / 25;
-        break;
-
-    case SPELL_CRYSTAL_BOLT:
-        beam.name     = "crystal bolt";
-        beam.damage   = dice_def(3, 8 + power / 11);
-        beam.colour   = GREEN;
-        beam.flavour  = BEAM_CRYSTAL;
-        beam.hit      = 17 + power / 25;
-        beam.pierce   = true;
-        break;
-
-    case SPELL_SPIT_LAVA:
-        beam.name        = "glob of lava";
-        beam.damage      = dice_def(3, 10);
-        beam.hit         = 20;
-        beam.colour      = RED;
-        beam.glyph       = dchar_glyph(DCHAR_FIRED_ZAP);
-        beam.flavour     = BEAM_LAVA;
-        break;
-
-    case SPELL_ELECTRICAL_BOLT:
-        beam.name        = "bolt of electricity";
-        beam.damage      = dice_def(3, 3 + mons->get_hit_dice());
-        beam.hit         = 35;
-        beam.colour      = LIGHTCYAN;
-        beam.glyph       = dchar_glyph(DCHAR_FIRED_ZAP);
-        beam.flavour     = BEAM_ELECTRICITY;
-        beam.pierce      = true;
-        break;
-
     case SPELL_FLAMING_CLOUD:
-        beam.name         = "blast of flame";
+        zappy(spell_to_zap(real_spell), power, true, beam);
         beam.aux_source   = "blast of fiery breath";
         beam.short_name   = "flames";
-        beam.damage       = dice_def(1, 3 * mons->get_hit_dice() / 2);
-        beam.colour       = RED;
-        beam.hit          = 30;
-        beam.flavour      = BEAM_FIRE;
-        beam.pierce       = true;
         break;
 
     case SPELL_THROW_BARBS:
-        beam.name        = "volley of spikes";
-        beam.aux_source  = "volley of spikes";
+        zappy(spell_to_zap(real_spell), power, true, beam);
         beam.hit_verb    = "skewers";
-        beam.hit         = 27;
-        beam.damage      = dice_def(2, 13);
-        beam.glyph       = dchar_glyph(DCHAR_FIRED_MISSILE);
-        beam.colour      = LIGHTGREY;
-        beam.flavour     = BEAM_MISSILE;
         break;
 
     case SPELL_DEATH_RATTLE:
@@ -4434,8 +4280,10 @@ static void _mons_summon_elemental(monster &mons, mon_spell_slot slot, bolt&)
 
 static void _mons_cast_haunt(monster* mons)
 {
-    ASSERT(mons->get_foe());
-    const coord_def fpos = mons->get_foe()->pos();
+    actor* foe = mons->get_foe();
+    if (!foe)
+        return;
+    const coord_def fpos = foe->pos();
 
     _do_high_level_summon(mons, SPELL_HAUNT, pick_random_wraith,
                           random_range(2, 3), GOD_NO_GOD, &fpos, _haunt_fixup);
@@ -5440,9 +5288,9 @@ static bool _spell_charged(monster *mons)
 }
 
 /// How much damage does the given monster do when casting Waterstrike?
-dice_def waterstrike_damage(const monster &mons)
+dice_def waterstrike_damage(int spell_hd)
 {
-    return dice_def(3, 7 + mons.spell_hd(SPELL_WATERSTRIKE));
+    return dice_def(3, 7 + spell_hd);
 }
 
 /**
@@ -5803,7 +5651,7 @@ void mons_cast(monster* mons, bolt pbolt, spell_type spell_cast,
     {
         pbolt.flavour    = BEAM_WATER;
 
-        int damage_taken = waterstrike_damage(*mons).roll();
+        int damage_taken = waterstrike_damage(mons->spell_hd(spell_cast)).roll();
         damage_taken = foe->beam_resists(pbolt, damage_taken, false);
         damage_taken = foe->apply_ac(damage_taken);
 
@@ -6464,7 +6312,7 @@ void mons_cast(monster* mons, bolt pbolt, spell_type spell_cast,
         return;
 
     case SPELL_IOOD:
-        cast_iood(mons, 6 * mons->spell_hd(spell_cast), &pbolt);
+        cast_iood(mons, splpow, &pbolt);
         return;
 
     case SPELL_AWAKEN_FOREST:

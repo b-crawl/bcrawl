@@ -2880,9 +2880,11 @@ void level_change(bool skip_attribute_increase)
                         break;
                     case GOD_XOM:
                         simple_god_message(" says: Have you ever been to Pandemonium? I hear it's nice this time of year.");
+                        more();
                         break;
                     default:
                         simple_god_message(" says: The lords of Pandemonium are watching you. If you wish to go there, you may need to do so soon.");
+                        more();
                         break;
                     }
                 }

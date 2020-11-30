@@ -1158,8 +1158,10 @@ RLTILES_CFLAGS := $(ALL_CFLAGS) -Wno-tautological-compare
 
 DOC_BASE        := ../docs
 DOC_TEMPLATES   := $(DOC_BASE)/template
-GENERATED_DOCS  := $(DOC_BASE)/aptitudes.txt $(DOC_BASE)/aptitudes-wide.txt $(DOC_BASE)/FAQ.html $(DOC_BASE)/crawl_manual.txt
-GENERATED_HEADERS := art-enum.h config.h mon-mst.h #the rest are private
+GENERATED_DOCS  := $(DOC_BASE)/aptitudes.txt $(DOC_BASE)/aptitudes-wide.txt $(DOC_BASE)/FAQ.html $(DOC_BASE)/crawl_manual.txt $(DOC_BASE)/quickstart.txt
+# Headers that need to exist before attempting to compile cc files
+GENERATED_HEADERS := art-enum.h config.h mon-mst.h
+# All other generated files will be created later
 GENERATED_FILES := $(GENERATED_HEADERS) art-data.h mi-enum.h \
                    $(RLTILES)/dc-unrand.txt build.h compflag.h dat/dlua/tags.lua \
                    cmd-name.h
@@ -1327,6 +1329,11 @@ $(DOC_BASE)/aptitudes-wide.txt: $(DOC_TEMPLATES)/apt-tmpl-wide.txt species-data.
 
 $(DOC_BASE)/FAQ.html: dat/database/FAQ.txt util/FAQ2html.pl
 	$(QUIET_GEN)./util/FAQ2html.pl $< $@
+
+# Generate a .txt version because some servers need it
+# TODO: actually render this
+$(DOC_BASE)/quickstart.txt: $(DOC_BASE)/quickstart.md
+	$(QUIET_COPY)$(COPY) $< $@
 
 $(DOC_BASE)/crawl_manual.txt: $(DOC_BASE)/crawl_manual.rst util/unrest.pl
 	$(QUIET_GEN)util/unrest.pl <$< >$@

@@ -3646,6 +3646,9 @@ bool god_hates_your_god(god_type god, god_type your_god)
 
 bool god_hates_killing(god_type god, const monster& mon)
 {
+    if (invalid_monster(&mon))
+        return false;
+
     // Must be at least a creature of sorts. Smacking down an enchanted
     // weapon or disrupting a lightning doesn't count. Technically, this
     // might raise a concern about necromancy but zombies traditionally

@@ -994,6 +994,8 @@ static void _input()
         revive();
     }
 
+    apply_exp();
+
     // Unhandled things that should have caused death.
     ASSERT(you.hp > 0);
 

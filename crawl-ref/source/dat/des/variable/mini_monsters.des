@@ -698,7 +698,7 @@ ENDMAP
 
 # A plain guardian serpent vault. (nrook)
 NAME:  nrook_guardian_serpent_ordinary
-DEPTH: D:9-, Snake, Crypt
+DEPTH: D:10-, Snake, Crypt
 TAGS:  no_monster_gen no_item_gen transparent
 : if you.in_branch("Crypt") then
 TAGS:  extra

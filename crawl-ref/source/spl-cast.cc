@@ -2253,10 +2253,7 @@ string spell_damage_string(spell_type spell)
     const dice_def dam = _spell_damage(spell);
     if (dam.num == 0 || dam.size == 0)
         return "";
-    string mult = "";
-    if (spell == SPELL_FOXFIRE)
-        mult = "2x";
-    return make_stringf("%s%dd%d", mult.c_str(), dam.num, dam.size);
+    return make_stringf("%dd%d", dam.num, dam.size);
 }
 
 string spell_power_string(spell_type spell)

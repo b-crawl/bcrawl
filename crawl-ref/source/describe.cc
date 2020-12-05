@@ -2873,7 +2873,7 @@ static string _player_spell_stats(const spell_type spell)
 
     const string damage_string = spell_damage_string(spell);
     if (damage_string != "") {
-        description += "\nDamage : ";
+        description += "\nDamage: ";
         description += damage_string;
     }
     const int acc = spell_acc(spell);

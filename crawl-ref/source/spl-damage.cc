@@ -912,7 +912,7 @@ spret cast_airstrike(int pow, const dist &beam, bool fail)
 static int _shatter_mon_dice(const monster *mon)
 {
     if (!mon)
-        return 0;
+        return 3;
 
     // Removed a lot of silly monsters down here... people, just because
     // it says ice, rock, or iron in the name doesn't mean it's actually
@@ -950,26 +950,25 @@ static int _shatter_mon_dice(const monster *mon)
     }
 }
 
+dice_def shatter_damage(int pow, monster *mon)
+{
+    return dice_def(_shatter_mon_dice(mon), 5 + pow / 3);
+}
+
 static int _shatter_monsters(coord_def where, int pow, actor *agent)
 {
-    int damage = 0;
-    dice_def dam_dice(0, 5 + pow / 3); // Number of dice set below.
     monster* mon = monster_at(where);
 
     if (!mon || !mon->alive() || mon == agent)
         return 0;
 
-    int shatter_dice = _shatter_mon_dice(mon);
-    if(shatter_dice)
-    {
-        dam_dice.num = shatter_dice;
-        damage = max(0, dam_dice.roll() - random2(mon->armour_class()));
+    const dice_def dam_dice = shatter_damage(pow, mon);
+    int damage = max(0, dam_dice.roll() - random2(mon->armour_class()));
 
-        if (agent->is_player())
-            _player_hurt_monster(*mon, damage, BEAM_MMISSILE);
-        else if (damage)
-            mon->hurt(agent, damage);
-    }
+    if (agent->is_player())
+        _player_hurt_monster(*mon, damage, BEAM_MMISSILE);
+    else if (damage)
+        mon->hurt(agent, damage);
 
     return damage;
 }

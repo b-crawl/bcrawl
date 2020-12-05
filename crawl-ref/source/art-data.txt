@@ -420,13 +420,18 @@ DEX:      3
 BOOL:     seeinv
 
 NAME:    giant club "Skullcrusher"
-OBJ:     OBJ_WEAPONS/WPN_GIANT_CLUB
-PLUS:    +3
+OBJ:     OBJ_WEAPONS/WPN_GIANT_SPIKED_CLUB
+PLUS:    +1
 COLOUR:  BROWN
 TILE:    urand_skullcrusher
 TILE_EQ: giant_club_slant
-BRAND:   SPWPN_SPEED
-STR:     7
+BRAND:   SPWPN_ANTIMAGIC
+TYPE:    giant stone club
+BASE_DAM: +16
+AC:       6
+MAGIC:    1
+LIFE:     1
+BOOL:     nospell, drain
 
 NAME:     glaive of the Guard
 OBJ:      OBJ_WEAPONS/WPN_GLAIVE

@@ -685,6 +685,7 @@ _mon_hex_zap(ZAP_CONFUSE, BEAM_CONFUSION),
     BEAM_FIRE,
     NUM_DCHAR_TYPES,
     false,
+    false,
     true,
     0
 },

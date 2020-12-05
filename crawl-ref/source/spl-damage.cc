@@ -1744,7 +1744,6 @@ spret cast_ignition(const actor *agent, int pow, bool fail)
         bolt beam_visual;
         beam_visual.set_agent(agent);
         beam_visual.flavour       = BEAM_VISUAL;
-        // XXX: why is this different from fireball?
         beam_visual.glyph         = dchar_glyph(DCHAR_FIRED_BURST);
         beam_visual.colour        = RED;
         beam_visual.ex_size       = 1;

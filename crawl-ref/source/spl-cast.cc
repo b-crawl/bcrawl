@@ -2246,8 +2246,8 @@ dice_def _spell_damage(spell_type spell)
             return freeze_damage(power);
         case SPELL_IOOD:
             return iood_damage(power, INFINITE_DISTANCE);
-        //case SPELL_IRRADIATE:
-        //    return irradiate_damage(power);
+        case SPELL_IRRADIATE:
+            return irradiate_damage(power);
         //case SPELL_SHATTER:
         //    return shatter_damage(power);
         default:

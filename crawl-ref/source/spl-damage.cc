@@ -963,9 +963,10 @@ static int _shatter_monsters(coord_def where, int pow, actor *agent)
         return 0;
 
     const dice_def dam_dice = shatter_damage(pow, mon);
-    int damage = max(0, dam_dice.roll() - random2(mon->armour_class()));
+    int base_dmg = dam_dice.roll();
+    int damage = max(0, base_dmg - random2(mon->armour_class()));
 
-    if (agent->is_player())
+    if (agent->is_player() && base_dmg)
         _player_hurt_monster(*mon, damage, BEAM_MMISSILE);
     else if (damage)
         mon->hurt(agent, damage);

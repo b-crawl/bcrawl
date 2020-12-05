@@ -2244,6 +2244,8 @@ dice_def _spell_damage(spell_type spell)
     {
         case SPELL_FREEZE:
             return freeze_damage(power);
+        case SPELL_FULMINANT_PRISM:
+            return prism_damage(prism_hd(power, false), true);
         case SPELL_IOOD:
             return iood_damage(power, INFINITE_DISTANCE);
         case SPELL_IRRADIATE:

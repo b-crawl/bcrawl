@@ -2240,8 +2240,19 @@ dice_def _spell_damage(spell_type spell)
     const int power = _spell_power(spell);
     if (power < 0)
         return dice_def(0,0);
-    if (spell == SPELL_IOOD)
-        return iood_damage(power, INFINITE_DISTANCE);
+    switch (spell)
+    {
+        case SPELL_FREEZE:
+            return freeze_damage(power);
+        case SPELL_IOOD:
+            return iood_damage(power, INFINITE_DISTANCE);
+        //case SPELL_IRRADIATE:
+        //    return irradiate_damage(power);
+        //case SPELL_SHATTER:
+        //    return shatter_damage(power);
+        default:
+            break;
+    }
     const zap_type zap = spell_to_zap(spell);
     if (zap == NUM_ZAPS)
         return dice_def(0,0);

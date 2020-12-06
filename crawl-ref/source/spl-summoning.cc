@@ -688,25 +688,24 @@ bool summon_berserker(int pow, actor *caster, monster_type override_mons)
     {
         if (pow <= 100)
         {
-            // bears
             mon = random_choose(MONS_BLACK_BEAR, MONS_POLAR_BEAR);
         }
         else if (pow <= 140)
         {
-            // ogres
-            mon = random_choose_weighted(1, MONS_TWO_HEADED_OGRE, 2, MONS_OGRE);
+            mon = random_choose_weighted(1, MONS_TWO_HEADED_OGRE,
+                                         2, MONS_OGRE,
+                                         1, MONS_TROLL);
         }
         else if (pow <= 180)
         {
-            // trolls
-            mon = random_choose_weighted(3, MONS_TROLL,
-                                         3, MONS_DEEP_TROLL,
+            mon = random_choose_weighted(3, MONS_DEEP_TROLL,
                                          2, MONS_IRON_TROLL);
         }
         else
         {
-            // giants
-            mon = random_choose(MONS_CYCLOPS, MONS_STONE_GIANT);
+            mon = random_choose_weighted(2, MONS_ETTIN,
+                                         2, MONS_IRON_TROLL,
+                                         1, MONS_JUGGERNAUT);
         }
     }
 

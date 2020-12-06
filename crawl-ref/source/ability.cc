@@ -2513,7 +2513,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
     case ABIL_TROG_BROTHERS_IN_ARMS:
         fail_check();
         // Trog abilities don't use or train invocations.
-        summon_berserker(you.piety +
+        summon_berserker(you.piety / 2 + div_rand_round(you.experience_level * 15, 4) +
                          random2(you.piety/4) - random2(you.piety/4),
                          &you);
         break;

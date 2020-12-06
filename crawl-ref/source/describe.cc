@@ -2881,7 +2881,7 @@ static string _player_spell_stats(const spell_type spell)
     {
         ostringstream acc_str;
         _print_bar(acc, 3, "", acc_str);
-        description += "\nAccuracy: :" + acc_str.str();
+        description += "\nAccuracy: " + acc_str.str();
     }
 
     description += "\nRange : ";

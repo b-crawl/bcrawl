@@ -102,6 +102,11 @@ function trove.get_trove_item(e, value, base_item)
        {base="miscellaneous", type="horn of Geryon"} }
 
   local wpn = {
+       {base="weapon", type="great mace", quant=3+d(3)+d(3)},
+       {base="weapon", type="bardiche", quant=3+d(3)+d(3)},
+       {base="weapon", type="scythe", quant=2+d(3)+d(3)},
+       {base="weapon", type="great sword", quant=3+d(3)+d(3)},
+       {base="weapon", type="quick blade", quant=2+d(3)+d(3)},
        {base="weapon", type="demon whip", quant=2+d(3)+d(3)},
        {base="weapon", type="demon trident", quant=2+d(3)+d(3)},
        {base="weapon", type="demon blade", quant=2+d(3)+d(3)} }

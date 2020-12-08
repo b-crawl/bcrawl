@@ -433,7 +433,7 @@ bool _auto_eat_chunks()
  *                   things to auto_eat, eat them, and exit otherwise.
  *  @returns -1 for cancel, 1 for eaten, 0 for not eaten,
  */
-int prompt_eat_chunks(bool only_auto)
+int prompt_eat_chunks(bool only_auto, bool allow_rations)
 {
     // Full herbivores cannot eat chunks.
     if (you.get_mutation_level(MUT_HERBIVOROUS) > 0)
@@ -469,25 +469,25 @@ int prompt_eat_chunks(bool only_auto)
     }
 
     // Then search through the inventory.
-    for (auto &item : you.inv)
-    {
-        if (!item.defined())
-            continue;
+    // Vampires can't eat anything in their inventory.
+    if (you.species != SP_VAMPIRE)
+        for (auto &item : you.inv)
+        {
+            if (!item.defined())
+                continue;
 
-        // Vampires can't eat anything in their inventory.
-        if (you.species == SP_VAMPIRE)
-            continue;
+            if (item.base_type != OBJ_FOOD)
+                continue;
+            if (!allow_rations && item.sub_type != FOOD_CHUNK)
+                continue;
 
-        if (item.base_type != OBJ_FOOD || item.sub_type != FOOD_CHUNK)
-            continue;
+            // Don't prompt for bad food types.
+            if (is_bad_food(item))
+                continue;
 
-        // Don't prompt for bad food types.
-        if (is_bad_food(item))
-            continue;
-
-        found_valid = true;
-        chunks.push_back(&item);
-    }
+            found_valid = true;
+            chunks.push_back(&item);
+        }
 
     const bool easy_eat = Options.easy_eat_chunks || only_auto;
 

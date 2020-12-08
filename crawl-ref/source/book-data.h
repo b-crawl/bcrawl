@@ -104,6 +104,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_AGONY,
     SPELL_DISPEL_UNDEAD,
     SPELL_BOLT_OF_DRAINING,
+    SPELL_BORGNJORS_VILE_CLUTCH,
 },
 
 {   // Book of Misfortune
@@ -157,8 +158,8 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_PAIN,
     SPELL_ANIMATE_SKELETON,
     SPELL_VAMPIRIC_DRAINING,
-    SPELL_REGENERATION,
     SPELL_ANIMATE_DEAD,
+    SPELL_DISPEL_UNDEAD,
     SPELL_BOLT_OF_DRAINING,
 },
 
@@ -208,9 +209,9 @@ static const vector<spell_type> spellbook_templates[] =
 #endif
 
 {   // Book of Unlife
+    SPELL_REGENERATION,
     SPELL_RECALL,
     SPELL_ANIMATE_DEAD,
-    SPELL_BORGNJORS_VILE_CLUTCH,
     SPELL_DEATH_CHANNEL,
     SPELL_SIMULACRUM,
 },

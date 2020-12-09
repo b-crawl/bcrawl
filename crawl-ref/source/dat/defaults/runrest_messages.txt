@@ -57,8 +57,6 @@ ignore += sound:
 stop += god:
 stop += tutorial:
 
-ignore += You are feeling hungry.
-
 ignore += You feel a little less mighty now
 ignore += You feel a little less agile now
 ignore += You feel like a meek peon again

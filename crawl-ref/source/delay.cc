@@ -1311,7 +1311,7 @@ bool interrupt_activity(activity_interrupt_type ai,
     if (ai == AI_HUNGRY) 
     {
         if (delay->want_autoeat() && _auto_eat()
-                && prompt_eat_chunks(true, you.hunger_state < HS_NEAR_STARVING) == 1))
+                && prompt_eat_chunks(true, you.hunger_state < HS_NEAR_STARVING) == 1)
             return false;
         else if (you.species == SP_VAMPIRE)
             switch (you.hunger_state)

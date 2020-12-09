@@ -64,6 +64,7 @@
   - v1.28: Gladiators that can wear hats but not helmets get a +1 hat instead of a +0 hat.
   - v1.28: Chaos Knights start with a scroll of teleportation.
   - v1.28: Abyssal Knights start with ring mail instead of leather armour.
+  - v1.28.2: Necromancers start with Dispel Undead instead of Regeneration.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -86,6 +87,8 @@
   - v1.27.3: Players can inspect full item stacks in view, not just the top item.
   - v1.27.8: Monster info has more resolution: "++-" is halfway between "++" and "+++".
   - v1.28: Monster spell damage info (by PleasingFungus) is merged.
+  - v1.28.2: During autotravel, players will automatically eat a ration when starving.
+  - v1.28.2: Player spells have damage and accuracy info. (by PleasingFungus)
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -117,6 +120,7 @@
   - v1.27.8: Storm clouds deal significantly more damage.
   - v1.28: Player wisp form has a weaker but electric-branded melee attack, can cast spells, and has reduced spell failure.
   - v1.28.1: Ice form allows cloaks.
+  - v1.28.2: Trove entry fees and spawn locations are adjusted.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -322,6 +326,7 @@
   - v1.27.2: Ashenzari restores mana when you explore.
   - v1.27.5: Uskayaw's Line Pass ability causes 5 to 7 turns of exhaustion.
   - v1.27.5: Uskayaw's Grand Finale ability fully refills mana.
+  - v1.28.2: Trog summons are adjusted to not become weaker at maximum piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -388,6 +393,8 @@
   - v1.26.1: Scrolls of identify are identified when touched.
   - v1.26.7: Phantom mirrors have a chance to not break, based on target HD and player level.
   - v1.28: Wands of polymorph will confuse transformed monsters for 1 to 7 turns.
+  - v1.28.2: Whips (not demon whips) have a lower min delay. (0.5 -> 0.3)
+  - v1.28.2: Evocable invisibility has lower failure chance but lower duration and significantly less duration scaling with Evocations skill.
 
 #### Removed Items
   - Amulet of Harm

@@ -802,10 +802,15 @@ int weapon_min_delay(const item_def &weapon, bool check_speed)
         min_delay = 10;
         break;
     case SK_MACES_FLAILS:
-        if (weapon.sub_type == WPN_GREAT_MACE)
+        switch (weapon.sub_type)
+        {
+        case WPN_WHIP:
+            min_delay = min(3, min_delay);
+        case WPN_GREAT_MACE:
             min_delay = min(10, min_delay);
-        else
+        default:
             min_delay = min(7, min_delay);
+        }
         break;
     case SK_STAVES:
         min_delay = 6;

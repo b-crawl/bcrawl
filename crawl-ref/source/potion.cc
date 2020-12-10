@@ -545,10 +545,11 @@ public:
         }
 
         // Now multiple invisiblity casts aren't as good. -- bwr
+        int pow_dur = random2((pow+2) / 2) + random2((pow+1) / 2);
         if (!you.duration[DUR_INVIS])
-            you.set_duration(DUR_INVIS, 15 + random2(pow), 100);
+            you.set_duration(DUR_INVIS, 15 + pow_dur, 100);
         else
-            you.increase_duration(DUR_INVIS, random2(pow), 100);
+            you.increase_duration(DUR_INVIS, pow_dur, 100);
         return true;
     }
 

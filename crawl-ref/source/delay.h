@@ -198,9 +198,10 @@ public:
 
     /**
      *@return true if the delay involves using the item in this way (and
-     * therefore the item should not be messed with).
+     * therefore the item should not be messed with). If item is nullptr,
+     * returns whether the delay type ever uses items in this way.
      */
-    virtual bool is_being_used(const item_def& /*item*/) const
+    virtual bool is_being_used(const item_def* /*item*/, operation_types /*oper*/) const
     {
         return false;
     }
@@ -236,11 +237,6 @@ public:
     {
         return "armour_on";
     }
-
-    bool is_being_used(const item_def& item) const override
-    {
-        return &item == &equip;
-    }
 };
 
 class ArmourOffDelay : public Delay
@@ -270,11 +266,6 @@ public:
     {
         return "armour_on";
     }
-
-    bool is_being_used(const item_def& item) const override
-    {
-        return &item == &equip;
-    }
 };
 
 class JewelleryOnDelay : public Delay
@@ -292,11 +283,6 @@ public:
     const char* name() const override
     {
         return "jewellery_on";
-    }
-
-    bool is_being_used(const item_def& item) const override
-    {
-        return &item == &jewellery;
     }
 };
 
@@ -424,11 +410,6 @@ public:
     const char* name() const override
     {
         return "drop_item";
-    }
-
-    bool is_being_used(const item_def& item_) const override
-    {
-        return &item_ == &item;
     }
 };
 
@@ -714,11 +695,6 @@ public:
     const char* name() const override
     {
         return "blurry_vision";
-    }
-
-    bool is_being_used(const item_def& item) const override
-    {
-        return &item == &scroll;
     }
 };
 

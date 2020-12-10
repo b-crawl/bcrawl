@@ -21,7 +21,6 @@
 #include "colour.h"
 #include "coordit.h"
 #include "database.h"
-#include "delay.h"
 #include "dgn-event.h"
 #include "dgn-overview.h"
 #include "directn.h"
@@ -6219,12 +6218,6 @@ void monster::steal_item_from_player()
         //      a wand from your pocket.
         if (item_is_equipped(you.inv[m]))
             continue;
-
-        // Maurice isn't skilled enough to steal stuff you're in the middle of
-        // using.
-        for (const /*shared_ptr<Delay>*/auto& delay : you.delay_queue)
-            if (delay->is_being_used(you.inv[m]))
-                continue;
 
         mon_inv_type monslot = item_to_mslot(you.inv[m]);
         if (monslot == NUM_MONSTER_SLOTS)

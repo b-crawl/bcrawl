@@ -1142,10 +1142,10 @@ static const struct spell_desc spelldata[] =
     SPELL_AGONY, "Agony",
     SPTYP_NECROMANCY,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NOT_SELF | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK,
-    5,
+    4,
     200,
     LOS_RADIUS, LOS_RADIUS,
-    4, 0,
+    2, 0,
     TILEG_AGONY,
 },
 

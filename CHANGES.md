@@ -247,6 +247,7 @@
   - v1.27: If Flaming Arrows is active but the player has insufficient mana, and the player fires, the effect activates one more time and the duration ends.
   - v1.27.2: Controlled Blink is level 7 and its range scales with power^2.
   - v1.27.6: Spectral Weapons can see invisible.
+  - v1.28.2: Agony is level 4.
 
 #### Removed Spells
   - Summon Guardian Golem

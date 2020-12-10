@@ -102,7 +102,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_CORPSE_ROT,
     SPELL_SUBLIMATION_OF_BLOOD,
     SPELL_AGONY,
-    SPELL_DISPEL_UNDEAD,
     SPELL_BOLT_OF_DRAINING,
     SPELL_BORGNJORS_VILE_CLUTCH,
 },
@@ -160,7 +159,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_VAMPIRIC_DRAINING,
     SPELL_ANIMATE_DEAD,
     SPELL_DISPEL_UNDEAD,
-    SPELL_BOLT_OF_DRAINING,
+    SPELL_AGONY,
 },
 
 {   // Book of Callings
@@ -212,6 +211,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_REGENERATION,
     SPELL_RECALL,
     SPELL_ANIMATE_DEAD,
+    SPELL_DISPEL_UNDEAD,
     SPELL_DEATH_CHANNEL,
     SPELL_SIMULACRUM,
 },
@@ -251,7 +251,7 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Power
     SPELL_FULMINANT_PRISM,
-    SPELL_BATTLESPHERE,
+    SPELL_BOLT_OF_DRAINING,
     SPELL_POISON_ARROW,
     SPELL_IRON_SHOT,
     SPELL_IOOD,
@@ -331,6 +331,7 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Annihilations
+    SPELL_IOOD,
     SPELL_ICICLE_BURST,
     SPELL_CHAIN_LIGHTNING,
     SPELL_LEHUDIBS_CRYSTAL_SPEAR,
@@ -343,6 +344,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SUMMON_GREATER_DEMON,
     SPELL_HAUNT,
     SPELL_MALIGN_GATEWAY,
+    SPELL_SPELLFORGED_SERVITOR,
     SPELL_SUMMON_HORRIBLE_THINGS,
 },
 

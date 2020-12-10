@@ -64,7 +64,7 @@
   - v1.28: Gladiators that can wear hats but not helmets get a +1 hat instead of a +0 hat.
   - v1.28: Chaos Knights start with a scroll of teleportation.
   - v1.28: Abyssal Knights start with ring mail instead of leather armour.
-  - v1.28.2: Necromancers start with Dispel Undead instead of Regeneration.
+  - v1.28.2: Necromancers start with Dispel Undead and Agony instead of Regeneration and Bolt of Draining.
 
 #### Features
   - All items are automatically identified if the player has a rune.

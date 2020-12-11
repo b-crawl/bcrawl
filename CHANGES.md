@@ -442,6 +442,7 @@
   - v1.23.1: The Sword of Cerebov has higher base damage (17 -> 20) and delay (17 -> 19).
   - v1.23.2: The Robe of Vines gains +7 strength.
   - v1.27.6: Hendrick's Axe is a +6 battleaxe of distortion giving +6 dexterity that makes noise and can frenzy enemies it hits. The frenzied enemies have a chance to also be blinded briefly.
+  - v1.28.2: Skullcrusher is reworked: +1, 38 base dmg, 1.9 base delay, antimagic, -Cast *Drain rN+ MR+ AC+6.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

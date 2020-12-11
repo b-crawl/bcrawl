@@ -2350,7 +2350,7 @@ spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)
     coord_def &last_aim = caster->props[THUNDERBOLT_AIM_KEY].get_coord();
 
 
-    if (last_turn && last_turn + 1 == you.num_turns)
+    if (last_turn && last_turn + 1 == you.num_turns && last_aim != you.pos())
         prev = last_aim;
 
     targeter_thunderbolt hitfunc(caster, spell_range(SPELL_THUNDERBOLT, pow),

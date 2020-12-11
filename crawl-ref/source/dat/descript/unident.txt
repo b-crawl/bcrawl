@@ -30,7 +30,8 @@ loud, but the nature of that power is not a priori apparent.
 %%%%
 staff
 
-A staff improved with arcane powers of unknown nature.
+A staff imbued with arcane powers of unknown nature.
+Or possibly just a wooden walking stick.
 %%%%
 wand
 

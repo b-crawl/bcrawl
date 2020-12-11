@@ -336,7 +336,7 @@ static const ability_def Ability_List[] =
       0, 0, 600, 0, {fail_basis::evo, 50, 2}, abflag::none },
 
     { ABIL_EVOKE_TURN_INVISIBLE, "Evoke Invisibility",
-      2, 0, 250, 0, {fail_basis::evo, 60, 2}, abflag::none },
+      2, 0, 250, 0, {fail_basis::evo, 50, 2}, abflag::none },
 #if TAG_MAJOR_VERSION == 34
     { ABIL_EVOKE_TURN_VISIBLE, "Turn Visible",
       0, 0, 0, 0, {}, abflag::starve_ok },
@@ -2043,9 +2043,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         if (!invis_allowed())
             return spret::abort;
         fail_check();
-        potionlike_effect(POT_INVISIBILITY,
-                          player_adjust_evoc_power(
-                              you.skill(SK_EVOCATIONS, 2) + 5));
+        potionlike_effect(POT_INVISIBILITY, div_rand_round(you.skill(SK_EVOCATIONS, 7), 6));
         contaminate_player(1000 + random2(2000), true);
         break;
 
@@ -2513,7 +2511,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
     case ABIL_TROG_BROTHERS_IN_ARMS:
         fail_check();
         // Trog abilities don't use or train invocations.
-        summon_berserker(you.piety +
+        summon_berserker(you.piety / 2 + div_rand_round(you.experience_level * 15, 4) +
                          random2(you.piety/4) - random2(you.piety/4),
                          &you);
         break;

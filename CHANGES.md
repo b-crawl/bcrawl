@@ -64,6 +64,10 @@
   - v1.28: Gladiators that can wear hats but not helmets get a +1 hat instead of a +0 hat.
   - v1.28: Chaos Knights start with a scroll of teleportation.
   - v1.28: Abyssal Knights start with ring mail instead of leather armour.
+  - v1.28.2: Necromancers start with Dispel Undead and Agony instead of Regeneration and Bolt of Draining.
+  - v1.28.2: Enchanters start with Cause Fear.
+  - v1.28.2: Archaeologists start with a blowgun and 6 curare needles.
+  - v1.28.2: Gladiators start with a potion of heal wounds.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -86,6 +90,8 @@
   - v1.27.3: Players can inspect full item stacks in view, not just the top item.
   - v1.27.8: Monster info has more resolution: "++-" is halfway between "++" and "+++".
   - v1.28: Monster spell damage info (by PleasingFungus) is merged.
+  - v1.28.2: During autotravel, players will automatically eat a ration when starving.
+  - v1.28.2: Player spells have damage and accuracy info. (by PleasingFungus)
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -117,6 +123,7 @@
   - v1.27.8: Storm clouds deal significantly more damage.
   - v1.28: Player wisp form has a weaker but electric-branded melee attack, can cast spells, and has reduced spell failure.
   - v1.28.1: Ice form allows cloaks.
+  - v1.28.2: Trove entry fees and spawn locations are adjusted.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -243,6 +250,7 @@
   - v1.27: If Flaming Arrows is active but the player has insufficient mana, and the player fires, the effect activates one more time and the duration ends.
   - v1.27.2: Controlled Blink is level 7 and its range scales with power^2.
   - v1.27.6: Spectral Weapons can see invisible.
+  - v1.28.2: Agony is level 4.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -322,6 +330,7 @@
   - v1.27.2: Ashenzari restores mana when you explore.
   - v1.27.5: Uskayaw's Line Pass ability causes 5 to 7 turns of exhaustion.
   - v1.27.5: Uskayaw's Grand Finale ability fully refills mana.
+  - v1.28.2: Trog summons are adjusted to not become weaker at maximum piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -388,6 +397,8 @@
   - v1.26.1: Scrolls of identify are identified when touched.
   - v1.26.7: Phantom mirrors have a chance to not break, based on target HD and player level.
   - v1.28: Wands of polymorph will confuse transformed monsters for 1 to 7 turns.
+  - v1.28.2: Whips (not demon whips) have a lower min delay (0.5 -> 0.3) and higher base delay (11 -> 12).
+  - v1.28.2: Evocable invisibility has lower failure chance but lower duration and significantly less duration scaling with Evocations skill.
 
 #### Removed Items
   - Amulet of Harm
@@ -434,6 +445,7 @@
   - v1.23.1: The Sword of Cerebov has higher base damage (17 -> 20) and delay (17 -> 19).
   - v1.23.2: The Robe of Vines gains +7 strength.
   - v1.27.6: Hendrick's Axe is a +6 battleaxe of distortion giving +6 dexterity that makes noise and can frenzy enemies it hits. The frenzied enemies have a chance to also be blinded briefly.
+  - v1.28.2: Skullcrusher is reworked: +1, 38 base dmg, 1.9 base delay, antimagic, -Cast *Drain rN+ MR+ AC+6.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

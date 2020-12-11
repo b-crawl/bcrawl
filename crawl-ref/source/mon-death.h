@@ -28,6 +28,7 @@
                                                 : BEH_HOSTILE)
 
 struct bolt;
+struct dice_def;
 
 item_def* monster_die(monster& mons, const actor *killer, bool silent = false,
                       bool wizard = false, bool fake = false);
@@ -43,6 +44,7 @@ item_def* place_monster_corpse(const monster& mons, bool silent,
                                                     bool force = false);
 
 void monster_cleanup(monster* mons);
+dice_def prism_damage(int hd, bool fully_powered);
 void setup_spore_explosion(bolt & beam, const monster& origin);
 void record_monster_defeat(const monster* mons, killer_type killer);
 void unawaken_vines(const monster* mons, bool quiet);

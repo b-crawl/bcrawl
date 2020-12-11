@@ -378,20 +378,20 @@ static const weapon_def Weapon_prop[] =
         SK_MACES_FLAILS, SIZE_LITTLE, SIZE_LITTLE, MI_NONE,
         DAMV_CRUSHING, 0, 0, 0, {} },
 #endif
-    { WPN_WHIP,              "whip",                6,  2, 11,
+    { WPN_WHIP,              "whip",                6,  2, 12,
         SK_MACES_FLAILS, SIZE_LITTLE, SIZE_LITTLE, MI_NONE,
         DAMV_SLASHING, 4, 0, 25, {
             { SPWPN_NORMAL,        34 },
-            { SPWPN_VENOM,         16 },
-            { SPWPN_ELECTROCUTION, 16 },
-            { SPWPN_DRAINING,       7 },
-            { SPWPN_FREEZING,       6 },
-            { SPWPN_FLAMING,        6 },
+            { SPWPN_ELECTROCUTION, 13 },
+            { SPWPN_FLAMING,       13 },
+            { SPWPN_DRAINING,       9 },
+            { SPWPN_VENOM,          7 },
+            { SPWPN_PAIN,           7 },
+            { SPWPN_FREEZING,       5 },
             { SPWPN_VAMPIRISM,      5 },
-            { SPWPN_PAIN,           4 },
             { SPWPN_HOLY_WRATH,     3 },
             { SPWPN_DISTORTION,     2 },
-            { SPWPN_ANTIMAGIC,      1 },
+            { SPWPN_ANTIMAGIC,      2 },
         }},
 #if TAG_MAJOR_VERSION == 34
     { WPN_HAMMER,            "hammer",              7,  3, 13,
@@ -890,11 +890,6 @@ bool item_is_cursable(const item_def &item, bool ignore_holy_wrath)
     if (!ignore_holy_wrath
         && item.base_type == OBJ_WEAPONS
         && (get_weapon_brand(item) == SPWPN_HOLY_WRATH
-#if TAG_MAJOR_VERSION == 34
-            || you.duration[DUR_EXCRUCIATING_WOUNDS]
-               && item_is_equipped(item)
-               && you.props[ORIGINAL_BRAND_KEY].get_int() == SPWPN_HOLY_WRATH
-#endif
     ))
     {
         return false;
@@ -952,14 +947,7 @@ void do_curse_item(item_def &item, bool quiet)
     }
 
     // Holy wrath weapons cannot be cursed.
-    if (item.base_type == OBJ_WEAPONS
-        && (get_weapon_brand(item) == SPWPN_HOLY_WRATH
-#if TAG_MAJOR_VERSION == 34
-            || you.duration[DUR_EXCRUCIATING_WOUNDS]
-               && item_is_equipped(item)
-               && you.props[ORIGINAL_BRAND_KEY].get_int() == SPWPN_HOLY_WRATH
-#endif
-    ))
+    if (item.base_type == OBJ_WEAPONS && (get_weapon_brand(item) == SPWPN_HOLY_WRATH))
     {
         if (!quiet)
         {

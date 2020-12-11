@@ -688,25 +688,24 @@ bool summon_berserker(int pow, actor *caster, monster_type override_mons)
     {
         if (pow <= 100)
         {
-            // bears
             mon = random_choose(MONS_BLACK_BEAR, MONS_POLAR_BEAR);
         }
         else if (pow <= 140)
         {
-            // ogres
-            mon = random_choose_weighted(1, MONS_TWO_HEADED_OGRE, 2, MONS_OGRE);
+            mon = random_choose_weighted(1, MONS_TWO_HEADED_OGRE,
+                                         2, MONS_OGRE,
+                                         1, MONS_TROLL);
         }
         else if (pow <= 180)
         {
-            // trolls
-            mon = random_choose_weighted(3, MONS_TROLL,
-                                         3, MONS_DEEP_TROLL,
+            mon = random_choose_weighted(3, MONS_DEEP_TROLL,
                                          2, MONS_IRON_TROLL);
         }
         else
         {
-            // giants
-            mon = random_choose(MONS_CYCLOPS, MONS_STONE_GIANT);
+            mon = random_choose_weighted(2, MONS_ETTIN,
+                                         2, MONS_IRON_TROLL,
+                                         1, MONS_JUGGERNAUT);
         }
     }
 
@@ -2634,6 +2633,23 @@ monster* find_battlesphere(const actor* agent)
         return nullptr;
 }
 
+static int _battlesphere_hd(int pow, bool random = true)
+{
+    if (random)
+        return 1 + div_rand_round(pow, 11);
+    return 1 + pow / 11;
+}
+
+static dice_def _battlesphere_damage(int hd)
+{
+    return dice_def(2, 5 + hd);
+}
+
+dice_def battlesphere_damage(int pow)
+{
+    return _battlesphere_damage(_battlesphere_hd(pow, false));
+}
+
 spret cast_battlesphere(actor* agent, int pow, god_type god, bool fail)
 {
     fail_check();
@@ -2676,7 +2692,7 @@ spret cast_battlesphere(actor* agent, int pow, god_type god, bool fail)
                                          : SAME_ATTITUDE(agent->as_monster()),
                       agent->pos(), agent->mindex());
         mg.set_summoned(agent, 0, SPELL_BATTLESPHERE, god);
-        mg.hd = 1 + div_rand_round(pow, 11);
+        mg.hd = _battlesphere_hd(pow);
         battlesphere = create_monster(mg);
 
         if (battlesphere)
@@ -2977,7 +2993,7 @@ bool fire_battlesphere(monster* mons)
         beam.name       = "barrage of energy";
         beam.range      = LOS_RADIUS;
         beam.hit        = AUTOMATIC_HIT;
-        beam.damage     = dice_def(2, 5 + mons->get_hit_dice());
+        beam.damage     = _battlesphere_damage(mons->get_hit_dice());
         beam.glyph      = dchar_glyph(DCHAR_FIRED_ZAP);
         beam.colour     = MAGENTA;
         beam.flavour    = BEAM_MMISSILE;
@@ -3065,6 +3081,13 @@ bool fire_battlesphere(monster* mons)
     return used;
 }
 
+int prism_hd(int pow, bool random)
+{
+    if (random)
+        return div_rand_round(pow, 10);
+    return pow / 10;
+}
+
 spret cast_fulminating_prism(actor* caster, int pow,
                                   const coord_def& where, bool fail)
 {
@@ -3112,7 +3135,7 @@ spret cast_fulminating_prism(actor* caster, int pow,
 
     fail_check();
 
-    int hd = div_rand_round(pow, 10);
+    const int hd = prism_hd(pow);
 
     mgen_data prism_data = mgen_data(MONS_FULMINANT_PRISM,
                                      caster->is_player()

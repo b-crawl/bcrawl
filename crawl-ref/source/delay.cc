@@ -521,7 +521,7 @@ void BaseRunDelay::handle()
         if (want_autoeat() && _auto_eat())
         {
             const interrupt_block block_interrupts;
-            if (prompt_eat_chunks(true) == 1)
+            if (prompt_eat_chunks(true, you.hunger_state < HS_NEAR_STARVING) == 1)
                 return;
         }
 
@@ -1308,10 +1308,21 @@ bool interrupt_activity(activity_interrupt_type ai,
     const auto delay = current_delay();
 
     // If we get hungry while traveling, let's try to auto-eat a chunk.
-    if (ai == AI_HUNGRY && delay->want_autoeat() && _auto_eat()
-        && prompt_eat_chunks(true) == 1)
+    if (ai == AI_HUNGRY) 
     {
-        return false;
+        if (delay->want_autoeat() && _auto_eat()
+                && prompt_eat_chunks(true, you.hunger_state < HS_NEAR_STARVING) == 1)
+            return false;
+        else if (you.species == SP_VAMPIRE)
+            switch (you.hunger_state)
+            {
+            case HS_HUNGRY:
+            case HS_SATIATED:
+                break;
+            default: return false;
+            }
+        else if (you.hunger_state > HS_NEAR_STARVING)
+            return false;
     }
 
     dprf("Activity interrupt: %s", _activity_interrupt_name(ai));

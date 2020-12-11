@@ -673,6 +673,24 @@ _mon_hex_zap(ZAP_CONFUSE, BEAM_CONFUSION),
 },
 
 {
+    ZAP_IGNITION,
+    "fireball",
+    200,
+    new calcdice_calculator<3, 10, 1, 3>, // less than fireball
+    new tohit_calculator<40>,
+    nullptr,
+    nullptr,
+    RED,
+    false,
+    BEAM_FIRE,
+    NUM_DCHAR_TYPES,
+    false,
+    false,
+    true,
+    0
+},
+
+{
     ZAP_TELEPORT_OTHER,
     "",
     100,

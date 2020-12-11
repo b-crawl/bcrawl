@@ -39,6 +39,7 @@
 #include "misc.h"
 #include "mon-behv.h"
 #include "mon-cast.h"
+#include "mon-death.h"
 #include "mon-place.h"
 #include "mon-project.h"
 #include "mon-util.h"
@@ -1184,9 +1185,7 @@ static unique_ptr<targeter> _spell_targeter(spell_type spell, int pow,
         return make_unique<targeter_cloud>(&you, range);
     case SPELL_THUNDERBOLT:
         return make_unique<targeter_thunderbolt>(&you, range,
-            (you.props.exists(THUNDERBOLT_LAST_KEY)
-             && you.props[THUNDERBOLT_LAST_KEY].get_int() + 1 == you.num_turns) ?
-                you.props[THUNDERBOLT_AIM_KEY].get_coord() : coord_def());
+                                            get_thunderbolt_last_aim(&you));
     case SPELL_LRD:
         return make_unique<targeter_fragment>(&you, pow, range);
     case SPELL_FULMINANT_PRISM:
@@ -2211,13 +2210,17 @@ int power_to_barcount(int power)
     return breakpoint_rank(power, breakpoints, ARRAYSZ(breakpoints)) + 1;
 }
 
-static int _spell_power_bars(spell_type spell)
+static int _spell_power(spell_type spell)
 {
     const int cap = spell_power_cap(spell);
     if (cap == 0)
         return -1;
-    const int power = min(calc_spell_power(spell, true, false, false), cap);
-    return power_to_barcount(power);
+    return min(calc_spell_power(spell, true, false, false), cap);
+}
+
+static int _spell_power_bars(spell_type spell)
+{
+    return power_to_barcount(_spell_power(spell));
 }
 
 #ifdef WIZARD
@@ -2230,6 +2233,58 @@ static string _wizard_spell_power_numeric_string(spell_type spell)
     return make_stringf("%d (%d)", power, cap);
 }
 #endif
+
+dice_def _spell_damage(spell_type spell)
+{
+    const int power = _spell_power(spell);
+    if (power < 0)
+        return dice_def(0,0);
+    switch (spell)
+    {
+        case SPELL_FREEZE:
+            return freeze_damage(power);
+        case SPELL_FULMINANT_PRISM:
+            return prism_damage(prism_hd(power, false), true);
+        case SPELL_IOOD:
+            return iood_damage(power, INFINITE_DISTANCE);
+        case SPELL_IRRADIATE:
+            return irradiate_damage(power);
+        case SPELL_SHATTER:
+            return shatter_damage(power);
+        case SPELL_BATTLESPHERE:
+            return battlesphere_damage(power);
+        default:
+            break;
+    }
+    const zap_type zap = spell_to_zap(spell);
+    if (zap == NUM_ZAPS)
+        return dice_def(0,0);
+    return zap_damage(zap, power, false);
+}
+
+string spell_damage_string(spell_type spell)
+{
+    const dice_def dam = _spell_damage(spell);
+    if (dam.num == 0 || dam.size == 0)
+        return "";
+    return make_stringf("%dd%d", dam.num, dam.size);
+}
+
+int spell_acc(spell_type spell)
+{
+    const zap_type zap = spell_to_zap(spell);
+    if (zap == NUM_ZAPS)
+        return -1;
+    if (zap_explodes(zap) || zap_is_enchantment(zap))
+        return -1;
+    const int power = _spell_power(spell);
+    if (power < 0)
+        return -1;
+    const int acc = zap_to_hit(zap, power, false);
+    if (acc == AUTOMATIC_HIT)
+        return -1;
+    return acc;
+}
 
 string spell_power_string(spell_type spell)
 {

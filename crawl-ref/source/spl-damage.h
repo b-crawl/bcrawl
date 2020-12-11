@@ -5,6 +5,7 @@
 #include "spl-cast.h"
 
 struct bolt;
+struct dice_def;
 class dist;
 
 void setup_fire_storm(const actor *source, int pow, bolt &beam);
@@ -25,9 +26,12 @@ bool mons_shatter(monster* caster, bool actual = true);
 void shillelagh(actor *wielder, coord_def where, int pow);
 spret vampiric_drain(int pow, monster* mons, bool fail);
 spret cast_freeze(int pow, monster* mons, bool fail);
+dice_def freeze_damage(int pow);
 spret cast_airstrike(int pow, const dist &beam, bool fail);
 spret cast_shatter(int pow, bool fail);
+dice_def shatter_damage(int pow, monster *mons = nullptr);
 spret cast_irradiate(int powc, actor* who, bool fail);
+dice_def irradiate_damage(int powc);
 bool ignite_poison_affects(const actor* act);
 spret cast_ignite_poison(actor *agent, int pow, bool fail,
                               bool tracer = false);
@@ -45,6 +49,7 @@ spret cast_tornado(int powc, bool fail);
 void tornado_damage(actor *caster, int dur, bool is_vortex = false);
 void cancel_tornado(bool tloc = false);
 void tornado_move(const coord_def &pos);
+coord_def get_thunderbolt_last_aim(actor *caster);
 spret cast_thunderbolt(actor *caster, int pow, coord_def aim,
                             bool fail);
 

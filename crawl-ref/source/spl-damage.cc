@@ -808,6 +808,11 @@ spret vampiric_drain(int pow, monster* mons, bool fail)
     return spret::success;
 }
 
+dice_def freeze_damage(int pow)
+{
+    return dice_def(1, 3 + pow / 3);
+}
+
 spret cast_freeze(int pow, monster* mons, bool fail)
 {
     if (!mons || mons->submerged())
@@ -843,7 +848,7 @@ spret cast_freeze(int pow, monster* mons, bool fail)
     beam.flavour = BEAM_COLD;
     beam.thrower = KILL_YOU;
 
-    const int orig_hurted = roll_dice(1, 3 + pow / 3);
+    const int orig_hurted = freeze_damage(pow).roll();
     int hurted = mons_adjust_flavoured(mons, beam, orig_hurted);
     mprf("You freeze %s%s%s",
          mons->name(DESC_THE).c_str(),
@@ -907,7 +912,7 @@ spret cast_airstrike(int pow, const dist &beam, bool fail)
 static int _shatter_mon_dice(const monster *mon)
 {
     if (!mon)
-        return 0;
+        return 3;
 
     // Removed a lot of silly monsters down here... people, just because
     // it says ice, rock, or iron in the name doesn't mean it's actually
@@ -945,26 +950,26 @@ static int _shatter_mon_dice(const monster *mon)
     }
 }
 
+dice_def shatter_damage(int pow, monster *mon)
+{
+    return dice_def(_shatter_mon_dice(mon), 5 + pow / 3);
+}
+
 static int _shatter_monsters(coord_def where, int pow, actor *agent)
 {
-    int damage = 0;
-    dice_def dam_dice(0, 5 + pow / 3); // Number of dice set below.
     monster* mon = monster_at(where);
 
     if (!mon || !mon->alive() || mon == agent)
         return 0;
 
-    int shatter_dice = _shatter_mon_dice(mon);
-    if(shatter_dice)
-    {
-        dam_dice.num = shatter_dice;
-        damage = max(0, dam_dice.roll() - random2(mon->armour_class()));
+    const dice_def dam_dice = shatter_damage(pow, mon);
+    int base_dmg = dam_dice.roll();
+    int damage = max(0, base_dmg - random2(mon->armour_class()));
 
-        if (agent->is_player())
-            _player_hurt_monster(*mon, damage, BEAM_MMISSILE);
-        else if (damage)
-            mon->hurt(agent, damage);
-    }
+    if (agent->is_player() && base_dmg)
+        _player_hurt_monster(*mon, damage, BEAM_MMISSILE);
+    else if (damage)
+        mon->hurt(agent, damage);
 
     return damage;
 }
@@ -1261,6 +1266,13 @@ static bool _irradiate_is_safe()
     return true;
 }
 
+dice_def irradiate_damage(int pow)
+{
+    const int dice = 6;
+    const int max_dam = 18 + div_rand_round(pow*2, 3);
+    return calc_dice(dice, max_dam);
+}
+
 /**
  * Irradiate the given cell. (Per the spell.)
  *
@@ -1274,14 +1286,12 @@ static int _irradiate_cell(coord_def where, int pow, actor *agent)
     if (!mons || !mons->alive())
         return 0; // XXX: handle damaging the player for mons casts...?
 
-    const int dice = 6;
-    const int max_dam = 18 + div_rand_round(pow*2, 3);
-    const dice_def dam_dice = calc_dice(dice, max_dam);
+    const dice_def dam_dice = irradiate_damage(pow);
     const int dam = dam_dice.roll();
     mprf("%s is blasted with magical radiation%s",
          mons->name(DESC_THE).c_str(),
          attack_strength_punctuation(dam).c_str());
-    dprf("irr for %d (%d pow, max %d)", dam, pow, max_dam);
+    dprf("irr for %d (%d pow, %dd%d)", dam, pow, dam_dice.num, dam_dice.size);
 
     if (agent->deity() == GOD_FEDHAS && fedhas_protects(*mons))
     {
@@ -1751,16 +1761,10 @@ spret cast_ignition(const actor *agent, int pow, bool fail)
 
         // Used to deal damage; invisible
         bolt beam_actual;
+        zappy(ZAP_IGNITION, pow, false, beam_actual);
         beam_actual.set_agent(agent);
-        beam_actual.flavour       = BEAM_FIRE;
-        beam_actual.real_flavour  = BEAM_FIRE;
-        beam_actual.glyph         = 0;
-        beam_actual.damage        = calc_dice(3, 10 + pow/3); // less than fireball
-        beam_actual.name          = "fireball";
-        beam_actual.colour        = RED;
         beam_actual.ex_size       = 0;
-        beam_actual.is_explosion  = true;
-        beam_actual.loudness      = 0;
+        beam_actual.origin_spell  = SPELL_IGNITION;
         beam_actual.apply_beam_conducts();
 
 #ifdef DEBUG_DIAGNOSTICS
@@ -2338,19 +2342,33 @@ static bool _elec_not_immune(const actor *act)
                                     && fedhas_protects(*act->as_monster()));
 }
 
-spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)
+coord_def get_thunderbolt_last_aim(actor *caster)
 {
-    coord_def prev;
+    const int &last_turn = caster->props[THUNDERBOLT_LAST_KEY].get_int();
+    const coord_def &last_aim = caster->props[THUNDERBOLT_AIM_KEY].get_coord();
 
+    // check against you.pos() in case the player has moved instantaneously,
+    // via mesmerise, wjc, etc. In principle, this should probably also
+    // record and check the player's location on their last cast.
+    if (last_turn && last_turn + 1 == you.num_turns && last_aim != you.pos())
+        return last_aim;
+    else
+        return coord_def();
+}
+
+static void _set_thundervolt_last_aim(actor *caster, coord_def aim)
+{
     int &last_turn = caster->props[THUNDERBOLT_LAST_KEY].get_int();
     coord_def &last_aim = caster->props[THUNDERBOLT_AIM_KEY].get_coord();
 
+    last_turn = you.num_turns;
+    last_aim = aim;
+}
 
-    if (last_turn && last_turn + 1 == you.num_turns)
-        prev = last_aim;
-
-    targeter_thunderbolt hitfunc(caster, spell_range(SPELL_THUNDERBOLT, pow),
-                                 prev);
+spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)
+{
+    coord_def prev = get_thunderbolt_last_aim(caster);
+    targeter_thunderbolt hitfunc(caster, spell_range(SPELL_THUNDERBOLT, pow), prev);
     hitfunc.set_aim(aim);
 
     if (caster->is_player()
@@ -2408,9 +2426,7 @@ spret cast_thunderbolt(actor *caster, int pow, coord_def aim, bool fail)
         beam.fire();
     }
 
-    last_turn = you.num_turns;
-    last_aim = aim;
-
+    _set_thundervolt_last_aim(caster, aim);
     return spret::success;
 }
 

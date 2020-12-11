@@ -1403,7 +1403,7 @@ static const mutation_def mut_data[] =
    "Your thin metallic scales recede somewhat."},
 },
 
-{ MUT_THIN_SKELETAL_STRUCTURE, 2, 3, mutflag::good, false,
+{ MUT_THIN_SKELETAL_STRUCTURE, 0, 3, mutflag::good, false,
   "flexible skeleton",
 
   {"Your skeleton is somewhat flexible. (Dex +3)",

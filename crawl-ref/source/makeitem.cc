@@ -297,9 +297,6 @@ bool is_weapon_brand_ok(int type, int brand, bool strict)
     if (brand <= SPWPN_NORMAL)
         return true;
 
-    if (type == WPN_QUICK_BLADE && brand == SPWPN_SPEED)
-        return false;
-
     if (type == WPN_BLOWGUN)
         return false;
 
@@ -309,7 +306,6 @@ bool is_weapon_brand_ok(int type, int brand, bool strict)
     case SPWPN_NORMAL:
     case SPWPN_VENOM:
     case SPWPN_PROTECTION:
-    case SPWPN_SPEED:
     case SPWPN_VORPAL:
     case SPWPN_CHAOS:
     case SPWPN_HOLY_WRATH:
@@ -317,6 +313,11 @@ bool is_weapon_brand_ok(int type, int brand, bool strict)
     case SPWPN_FLAMING:
     case SPWPN_FREEZING:
     case SPWPN_PETRIFY:
+        break;
+    
+    case SPWPN_SPEED:
+        if (type == WPN_QUICK_BLADE || type == WPN_WHIP)
+            return false;
         break;
 
     // Melee-only brands.

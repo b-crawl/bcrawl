@@ -102,6 +102,11 @@ function trove.get_trove_item(e, value, base_item)
        {base="miscellaneous", type="horn of Geryon"} }
 
   local wpn = {
+       {base="weapon", type="great mace", quant=3+d(3)+d(3)},
+       {base="weapon", type="bardiche", quant=3+d(3)+d(3)},
+       {base="weapon", type="scythe", quant=2+d(3)+d(3)},
+       {base="weapon", type="great sword", quant=3+d(3)+d(3)},
+       {base="weapon", type="quick blade", quant=2+d(3)+d(3)},
        {base="weapon", type="demon whip", quant=2+d(3)+d(3)},
        {base="weapon", type="demon trident", quant=2+d(3)+d(3)},
        {base="weapon", type="demon blade", quant=2+d(3)+d(3)} }
@@ -113,11 +118,15 @@ function trove.get_trove_item(e, value, base_item)
   end
 
   local arm = {
+       {base="armour", type="large shield", quant=1+d(2)+d(2)},
+       {base="armour", type="plate armour", quant=2+d(2)+d(3)},
+       {base="armour", type="steam dragon scales", quant=d(2)+d(2)},
+       {base="armour", type="acid dragon scales", quant=d(2)+d(2)},
        {base="armour", type="gold dragon scales", quant=1+d(2)},
        {base="armour", type="storm dragon scales", quant=d(2)+d(2)},
        {base="armour", type="shadow dragon scales", quant=d(2)+d(2)},
-       {base="armour", type="fire dragon scales", quant=d(3)+d(3)},
-       {base="armour", type="ice dragon scales", quant=d(3)+d(3)} }
+       {base="armour", type="fire dragon scales", quant=d(2)+d(2)},
+       {base="armour", type="ice dragon scales", quant=d(2)+d(2)} }
 
   if you.race() ~= "Felid" and you.race() ~= "Octopode" then
     for _, toll in ipairs(arm) do
@@ -127,11 +136,12 @@ function trove.get_trove_item(e, value, base_item)
 
   local pots = {
        {base="potion", type="resistance", quant=2+d(3)},
+       {base="potion", type="haste", quant=2+d(3)},
        {base="potion", type="agility", quant=4+d(3)+d(2)} }
 
   local heal_pots = {
-       {base="potion", type="curing", quant=12+d(4)+d(4)},
-       {base="potion", type="heal wounds", quant=8+d(3)+d(3)} }
+       {base="potion", type="curing", quant=8+d(6)+d(6)},
+       {base="potion", type="heal wounds", quant=4+d(3)+d(3)} }
 
   if you.race() ~= "Mummy" then
     if you.race() ~= "Vine Stalker" then
@@ -149,8 +159,8 @@ function trove.get_trove_item(e, value, base_item)
   end
 
   local stasis_tolls = {
-       {base="scroll", type="blinking", quant=2+d(3)+d(3)},
-       {base="scroll", type="teleportation", quant=10+d(4)+d(4)} }
+       {base="scroll", type="blinking", quant=2+d(3)+d(2)},
+       {base="scroll", type="teleportation", quant=6+d(5)+d(3)} }
 
   if you.race() ~= "Formicid" then
     for _, toll in ipairs(stasis_tolls) do
@@ -272,7 +282,7 @@ function trove.spell_skills (e)
 end
 }}
 
-default-depth: D:10-, Depths, Elf, Vaults
+default-depth: D:8-, Depths, Vaults
 
 ##############################################################################
 #

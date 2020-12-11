@@ -158,8 +158,10 @@ celebrants.
 %%%%
 giant club "Skullcrusher"
 
-A massive enchanted cudgel that augments the already considerable strength of
-anyone mighty enough to wield it.
+A giant club of dark stone once worshipped by a tribe of ogres that rebelled against
+the magi. It appears to be made of black granite, but is strong enough to shatter boulders.
+
+It hungrily sucks in nearby magical power, and grants its wielder skin as hard as stone.
 %%%%
 glaive of the Guard
 

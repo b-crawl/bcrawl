@@ -878,7 +878,7 @@ bool actor_cloud_immune(const actor &act, cloud_type type)
             else
                 return (act.res_steam() > 0) || you.duration[DUR_FIRE_SHIELD];
         case CLOUD_MIASMA:
-            return act.res_rotting() > 0;
+            return act.res_rotting() > 0 || act.is_unbreathing();
         case CLOUD_PETRIFY:
             return act.res_petrify();
         case CLOUD_SPECTRAL:

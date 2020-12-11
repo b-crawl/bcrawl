@@ -394,7 +394,7 @@
   - v1.26.1: Scrolls of identify are identified when touched.
   - v1.26.7: Phantom mirrors have a chance to not break, based on target HD and player level.
   - v1.28: Wands of polymorph will confuse transformed monsters for 1 to 7 turns.
-  - v1.28.2: Whips (not demon whips) have a lower min delay. (0.5 -> 0.3)
+  - v1.28.2: Whips (not demon whips) have a lower min delay (0.5 -> 0.3) and higher base delay (11 -> 12).
   - v1.28.2: Evocable invisibility has lower failure chance but lower duration and significantly less duration scaling with Evocations skill.
 
 #### Removed Items

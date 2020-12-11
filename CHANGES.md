@@ -66,6 +66,7 @@
   - v1.28: Abyssal Knights start with ring mail instead of leather armour.
   - v1.28.2: Necromancers start with Dispel Undead and Agony instead of Regeneration and Bolt of Draining.
   - v1.28.2: Enchanters start with Cause Fear.
+  - v1.28.2: Archaeologists start with a blowgun and 6 curare needles.
 
 #### Features
   - All items are automatically identified if the player has a rune.

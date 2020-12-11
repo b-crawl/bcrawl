@@ -16,8 +16,8 @@ vulnerable to attacks from afar.
 %%%%
 Archaeologist
 
-Archaeologists were led to the dungeon by an ancient tome, and hope to uncover
-the mysteries of both their tome and the dungeon itself.
+Archaeologists were led to the Dungeon by an ancient tome, and hope to uncover
+the mysteries of both their tome and the Dungeon itself.
 %%%%
 Artificer
 
@@ -61,8 +61,8 @@ spell. Their other starting spells focus on destruction as well.
 %%%%
 Gladiator
 
-Gladiators are ready for the arena with light armour, nets, and a weapon of
-their choice.
+Escaped slaves seeking freedom in the Dungeon, gladiators enter it with 
+light armour, nets, a healing potion, and a weapon of their choice.
 %%%%
 Hunter
 
@@ -112,7 +112,7 @@ They start with a simple weapon, a shield, and some ways to slow down enemies.
 %%%%
 Spelunker
 
-Spelunkers enter the dungeon fully equipped for cave exploration.
+Spelunkers enter the Dungeon fully equipped for cave exploration.
 %%%%
 Summoner
 

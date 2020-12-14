@@ -644,6 +644,13 @@ void update_monsters_in_view()
                 if (!you.stasis())
                     do_force_more = true;
                 break;
+            
+            // these were previously in messages.txt, but that triggers on seeing zombies
+            case MONS_VAULT_WARDEN:
+            case MONS_IRONBRAND_CONVOKER:
+                do_force_more = true;
+                break;
+            
             default: break;
             }
         }

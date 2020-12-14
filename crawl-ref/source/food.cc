@@ -415,7 +415,7 @@ bool _auto_eat_chunks()
     }
     else if (you.undead_state())
         return false;
-    else if (you.wearing(EQ_AMULET, AMU_THE_GOURMAND))
+    else if (you.wearing(EQ_AMULET, AMU_THE_GOURMAND) && you.species != SP_DEEP_DWARF)
         eating_heals = true;
 
     if (you.hunger_state <= HS_NEAR_STARVING)

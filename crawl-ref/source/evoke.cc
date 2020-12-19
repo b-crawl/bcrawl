@@ -339,6 +339,12 @@ int wand_mp_cost()
     return min(you.magic_points, you.get_mutation_level(MUT_MP_WANDS) * 3);
 }
 
+int wand_power()
+{
+    const int mp_cost = wand_mp_cost();
+    return (15 + you.skill(SK_EVOCATIONS, 7) / 2) * (mp_cost + 6) / 6;
+}
+
 void zap_wand(int slot)
 {
     if (inv_count() < 1)
@@ -364,8 +370,6 @@ void zap_wand(int slot)
         mpr("You cannot evoke magical items.");
         return;
     }
-
-    const int mp_cost = wand_mp_cost();
 
     int item_slot;
     if (slot != -1)
@@ -396,13 +400,8 @@ void zap_wand(int slot)
     if (you.equip[EQ_WEAPON] == item_slot)
         you.wield_change = true;
 
-    if (wand.charges <= 0)
-    {
-        mpr("This wand has no charges.");
-        return;
-    }
-
-    int power = (15 + you.skill(SK_EVOCATIONS, 7) / 2) * (mp_cost + 6) / 6;
+    const int mp_cost = wand_mp_cost();
+    const int power = wand_power();
 
     const spell_type spell =
         spell_in_wand(static_cast<wand_type>(wand.sub_type));

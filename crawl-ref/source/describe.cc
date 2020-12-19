@@ -2113,12 +2113,24 @@ string get_item_description(const item_def &item, bool verbose,
             }
         }
 #endif
+    case OBJ_WANDS:
+        if (item_type_known(item))
+        {
+            description << "\n";
 
+            const spell_type spell = spell_in_wand(static_cast<wand_type>(item.sub_type));
+
+            const string damage_str = spell_damage_string(spell, true);
+            if (damage_str != "")
+                description << "\nDamage: " << damage_str;
+
+            description << "\nNoise: " << spell_noise_string(spell);
+        }
+        break;
     case OBJ_SCROLLS:
     case OBJ_ORBS:
     case OBJ_GOLD:
     case OBJ_RUNES:
-    case OBJ_WANDS:
 #if TAG_MAJOR_VERSION == 34
     case OBJ_RODS:
 #endif

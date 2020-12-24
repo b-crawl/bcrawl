@@ -2222,7 +2222,7 @@ static int _spell_power(spell_type spell, bool evoked)
 
 static int _spell_power_bars(spell_type spell)
 {
-    return power_to_barcount(_spell_power(spell));
+    return power_to_barcount(_spell_power(spell, false));
 }
 
 #ifdef WIZARD

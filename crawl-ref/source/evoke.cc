@@ -489,18 +489,6 @@ bool skill_has_manual(skill_type skill)
     return manual_slot_for_skill(skill) != -1;
 }
 
-void archaeologist_open_crate(item_def& crate)
-{
-    unrand_type type = (unrand_type)crate.props[ARCHAEOLOGIST_CRATE_ITEM].get_int();
-    make_item_unrandart(crate, type);
-    item_colour(crate);
-    item_set_appearance(crate);
-    mprf("The crate's locking mechanism finally gives in, revealing %s!",
-        crate.name(DESC_THE).c_str());
-    crate.props.erase(ARCHAEOLOGIST_CRATE_ITEM);
-    you.props[ARCHAEOLOGIST_TRIGGER_CRATE_ON_PICKUP] = false;
-}
-
 void archaeologist_read_tome(item_def& tome)
 {
     tome.base_type = OBJ_SCROLLS;

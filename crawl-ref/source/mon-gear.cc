@@ -202,6 +202,9 @@ static void _give_wand(monster* mon, int level)
     case MONS_IJYB:
         idx = items(false, OBJ_WANDS, WAND_POLYMORPH, level);
         break;
+    case MONS_MAURICE:
+        idx = items(false, OBJ_WANDS, WAND_FLAME, level);
+        break;
     case MONS_VASHNIA:
         idx = items(false, OBJ_WANDS, WAND_DIGGING, level);
         break;
@@ -1036,6 +1039,7 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
                 { WPN_LONGBOW,                  1 },
         } } },
         { MONS_SONJA, { { { WPN_BLOWGUN, 1 } } } },
+        { MONS_MAURICE, { { { WPN_BLOWGUN, 1 } } } },
         // salamanders only have secondary weapons; melee or bow, not both
         { MONS_SALAMANDER, {
             { { WPN_HALBERD,                    5 },
@@ -1421,6 +1425,10 @@ static void _give_ammo(monster* mon, int level, bool mons_summoned)
             
             switch(mon->type)
             {
+            case MONS_MAURICE:
+                needle_brand = SPMSL_POISONED;
+                quantity = random_range(20, 60);
+                break;
             case MONS_SONJA:
                 needle_brand = SPMSL_CURARE;
                 quantity = random_range(8, 20);

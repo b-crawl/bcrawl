@@ -545,3 +545,4 @@
   - v1.22: Dispater is giant.
   - v1.23: Urug is slightly stronger.
   - v1.26: Dispater and Asmodeus have higher HD.
+  - v1.28.3: Maurice is reworked: he has Invisibility, Blink Other, Blink Away, Portal Projectile, a blowgun, and a wand of flame, and his melee attacks while invisible deal extra damage but reveal him.

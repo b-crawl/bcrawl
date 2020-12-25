@@ -174,7 +174,7 @@ static int _abyssal_rune_roll()
         return -1;
     
     // don't let lucky AKs get extremely high scores
-    if ((you.experience_level * you.num_turns) < 15000 && !runes_in_pack())
+    if ((you.experience_level * you.num_turns) < 25000 && !runes_in_pack())
         return -1;
     
     const bool god_favoured = have_passive(passive_t::attract_abyssal_rune);

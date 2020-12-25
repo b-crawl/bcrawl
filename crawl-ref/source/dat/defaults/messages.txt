@@ -193,7 +193,5 @@ force_more_message += A flood of memories washes over you
 force_more_message += .*floating eye.*into view.
 force_more_message += .*doom hound.*into view.
 force_more_message += .*shambling mangrove.*into view.
-force_more_message += .*vault warden.*into view.
-force_more_message += .*ironbrand convoker.*into view.
 
 force_more_message += dangerous foe

@@ -1287,11 +1287,11 @@ static int _irradiate_cell(coord_def where, int pow, actor *agent)
         return 0; // XXX: handle damaging the player for mons casts...?
 
     const dice_def dam_dice = irradiate_damage(pow);
-    const int dam = dam_dice.roll();
+    const int base_dam = dam_dice.roll();
+    const int dam = mons->apply_ac(base_dam);
     mprf("%s is blasted with magical radiation%s",
          mons->name(DESC_THE).c_str(),
          attack_strength_punctuation(dam).c_str());
-    dprf("irr for %d (%d pow, %dd%d)", dam, pow, dam_dice.num, dam_dice.size);
 
     if (agent->deity() == GOD_FEDHAS && fedhas_protects(*mons))
     {

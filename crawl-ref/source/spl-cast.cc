@@ -2210,17 +2210,19 @@ int power_to_barcount(int power)
     return breakpoint_rank(power, breakpoints, ARRAYSZ(breakpoints)) + 1;
 }
 
-static int _spell_power(spell_type spell)
+static int _spell_power(spell_type spell, bool evoked)
 {
     const int cap = spell_power_cap(spell);
     if (cap == 0)
         return -1;
-    return min(calc_spell_power(spell, true, false, false), cap);
+    const int pow = evoked ? wand_power()
+                           : calc_spell_power(spell, true, false, false);
+    return min(pow, cap);
 }
 
 static int _spell_power_bars(spell_type spell)
 {
-    return power_to_barcount(_spell_power(spell));
+    return power_to_barcount(_spell_power(spell, false));
 }
 
 #ifdef WIZARD
@@ -2234,9 +2236,9 @@ static string _wizard_spell_power_numeric_string(spell_type spell)
 }
 #endif
 
-dice_def _spell_damage(spell_type spell)
+static dice_def _spell_damage(spell_type spell, bool evoked)
 {
-    const int power = _spell_power(spell);
+    const int power = _spell_power(spell, evoked);
     if (power < 0)
         return dice_def(0,0);
     switch (spell)
@@ -2262,9 +2264,9 @@ dice_def _spell_damage(spell_type spell)
     return zap_damage(zap, power, false);
 }
 
-string spell_damage_string(spell_type spell)
+string spell_damage_string(spell_type spell, bool evoked)
 {
-    const dice_def dam = _spell_damage(spell);
+    const dice_def dam = _spell_damage(spell, evoked);
     if (dam.num == 0 || dam.size == 0)
         return "";
     return make_stringf("%dd%d", dam.num, dam.size);
@@ -2277,7 +2279,7 @@ int spell_acc(spell_type spell)
         return -1;
     if (zap_explodes(zap) || zap_is_enchantment(zap))
         return -1;
-    const int power = _spell_power(spell);
+    const int power = _spell_power(spell, false);
     if (power < 0)
         return -1;
     const int acc = zap_to_hit(zap, power, false);

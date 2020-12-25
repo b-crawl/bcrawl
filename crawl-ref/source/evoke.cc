@@ -339,6 +339,12 @@ int wand_mp_cost()
     return min(you.magic_points, you.get_mutation_level(MUT_MP_WANDS) * 3);
 }
 
+int wand_power()
+{
+    const int mp_cost = wand_mp_cost();
+    return (15 + you.skill(SK_EVOCATIONS, 7) / 2) * (mp_cost + 6) / 6;
+}
+
 void zap_wand(int slot)
 {
     if (inv_count() < 1)
@@ -364,8 +370,6 @@ void zap_wand(int slot)
         mpr("You cannot evoke magical items.");
         return;
     }
-
-    const int mp_cost = wand_mp_cost();
 
     int item_slot;
     if (slot != -1)
@@ -396,13 +400,8 @@ void zap_wand(int slot)
     if (you.equip[EQ_WEAPON] == item_slot)
         you.wield_change = true;
 
-    if (wand.charges <= 0)
-    {
-        mpr("This wand has no charges.");
-        return;
-    }
-
-    int power = (15 + you.skill(SK_EVOCATIONS, 7) / 2) * (mp_cost + 6) / 6;
+    const int mp_cost = wand_mp_cost();
+    const int power = wand_power();
 
     const spell_type spell =
         spell_in_wand(static_cast<wand_type>(wand.sub_type));
@@ -488,18 +487,6 @@ int get_all_manual_charges_for_skill(skill_type skill)
 bool skill_has_manual(skill_type skill)
 {
     return manual_slot_for_skill(skill) != -1;
-}
-
-void archaeologist_open_crate(item_def& crate)
-{
-    unrand_type type = (unrand_type)crate.props[ARCHAEOLOGIST_CRATE_ITEM].get_int();
-    make_item_unrandart(crate, type);
-    item_colour(crate);
-    item_set_appearance(crate);
-    mprf("The crate's locking mechanism finally gives in, revealing %s!",
-        crate.name(DESC_THE).c_str());
-    crate.props.erase(ARCHAEOLOGIST_CRATE_ITEM);
-    you.props[ARCHAEOLOGIST_TRIGGER_CRATE_ON_PICKUP] = false;
 }
 
 void archaeologist_read_tome(item_def& tome)

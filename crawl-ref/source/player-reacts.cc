@@ -598,19 +598,19 @@ static void _decrement_durations()
         switch(you.form)
         {
         case transformation::spider:
-            last_forever = calc_spell_power(SPELL_SPIDER_FORM, true, false, false) >= 15;
+            last_forever = you.has_spell(SPELL_SPIDER_FORM) && calc_spell_power(SPELL_SPIDER_FORM, true) >= 15;
             break;
         case transformation::ice_beast:
-            last_forever = calc_spell_power(SPELL_ICE_FORM, true, false, false) >= 25;
+            last_forever = you.has_spell(SPELL_ICE_FORM) && calc_spell_power(SPELL_ICE_FORM, true) >= 25;
             break;
         case transformation::statue:
-            last_forever = calc_spell_power(SPELL_STATUE_FORM, true, false, false) >= 50;
+            last_forever = you.has_spell(SPELL_STATUE_FORM) && calc_spell_power(SPELL_STATUE_FORM, true) >= 50;
             break;
         case transformation::dragon:
-            last_forever = calc_spell_power(SPELL_DRAGON_FORM, true, false, false) >= 75;
+            last_forever = you.has_spell(SPELL_DRAGON_FORM) && calc_spell_power(SPELL_DRAGON_FORM, true) >= 75;
             break;
         case transformation::lich:
-            last_forever = calc_spell_power(SPELL_NECROMUTATION, true, false, false) >= 100;
+            last_forever = you.has_spell(SPELL_NECROMUTATION) && calc_spell_power(SPELL_NECROMUTATION, true) >= 100;
             break;
         default: break;
         }

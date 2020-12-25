@@ -871,14 +871,14 @@ bool actor_cloud_immune(const actor &act, cloud_type type)
         case CLOUD_MEPHITIC:
             return act.res_poison() > 0 || act.is_unbreathing();
         case CLOUD_POISON:
-            return act.res_poison() > 0;
+            return act.res_poison() > 0 || act.is_unbreathing();
         case CLOUD_STEAM:
             if (!act.is_player())
                 return act.res_steam() > 0;
             else
                 return (act.res_steam() > 0) || you.duration[DUR_FIRE_SHIELD];
         case CLOUD_MIASMA:
-            return act.res_rotting() > 0;
+            return act.res_rotting() > 0 || act.is_unbreathing();
         case CLOUD_PETRIFY:
             return act.res_petrify();
         case CLOUD_SPECTRAL:

@@ -92,6 +92,8 @@
   - v1.28: Monster spell damage info (by PleasingFungus) is merged.
   - v1.28.2: During autotravel, players will automatically eat a ration when starving.
   - v1.28.2: Player spells have damage and accuracy info. (by PleasingFungus)
+  - v1.28.3: Wands have damage info. (by PleasingFungus)
+  - v1.28.3: Displayed player stealth is uncapped. (by hellmonk)
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -251,6 +253,7 @@
   - v1.27.2: Controlled Blink is level 7 and its range scales with power^2.
   - v1.27.6: Spectral Weapons can see invisible.
   - v1.28.2: Agony is level 4.
+  - v1.28.3: Irradiate damage is affected by monster AC.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -542,3 +545,4 @@
   - v1.22: Dispater is giant.
   - v1.23: Urug is slightly stronger.
   - v1.26: Dispater and Asmodeus have higher HD.
+  - v1.28.3: Maurice is reworked: he has Invisibility, Blink Other, Blink Away, Portal Projectile, a blowgun, and a wand of flame, and his melee attacks while invisible deal extra damage but reveal him.

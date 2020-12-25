@@ -585,9 +585,13 @@ Lugonu welcome
 Lugonu says: Spread carnage and corruption!
 %%%%
 Lugonu newgame
-
-Lugonu says: Depart the Abyss and spread corruption, my servant!
-<lightgrey>(use the <w>a</w>bility menu to exit the Abyss)</lightgrey>
+{{
+    if you.where():find("Abyss") then
+        return "Lugonu says: Depart the Abyss and spread its sealed potential!" ..
+        "\n<lightgrey>(use the <w>a</w>bility menu to exit the Abyss)</lightgrey>"
+    else return "Lugonu says: Bring the Abyss to your world, my servant!"
+    end
+}}
 %%%%
 Makhleb welcome
 

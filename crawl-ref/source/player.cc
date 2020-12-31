@@ -8593,7 +8593,7 @@ bool player::immune_to_hex(const spell_type hex) const
     case SPELL_SLEEP:
         return !actor::can_sleep();
     case SPELL_DREAM_DUST:
-        return !actor::can_sleep() || actor::is_unbreathing();
+        return !actor::can_sleep() || player::is_unbreathing();
     case SPELL_HIBERNATION:
         return !can_hibernate();
     default:

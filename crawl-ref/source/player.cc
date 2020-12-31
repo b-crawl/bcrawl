@@ -8591,8 +8591,9 @@ bool player::immune_to_hex(const spell_type hex) const
         return res_poison() == 3;
     // don't include the hidden "sleep immunity" duration
     case SPELL_SLEEP:
-    case SPELL_DREAM_DUST:
         return !actor::can_sleep();
+    case SPELL_DREAM_DUST:
+        return !actor::can_sleep() || actor::is_unbreathing();
     case SPELL_HIBERNATION:
         return !can_hibernate();
     default:

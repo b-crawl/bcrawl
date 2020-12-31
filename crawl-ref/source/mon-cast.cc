@@ -5371,7 +5371,7 @@ static void _dream_sheep_sleep(monster& mons, actor& foe)
     // stronger effect. Too-weak attempts get blanked.
     // Special note: a single sheep has a 1 in 25 chance to succeed.
     int sleep_pow = min(150, random2(num_sheep * 25) + 1);
-    if (sleep_pow < MIN_DREAM_SUCCESS_POWER)
+    if (sleep_pow < MIN_DREAM_SUCCESS_POWER || foe.is_unbreathing())
         sleep_pow = 0;
 
     // Communicate with the player.

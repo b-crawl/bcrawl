@@ -6481,7 +6481,6 @@ bool monster::is_web_immune() const
     switch (mons_genus(type))
     {
     case MONS_SPIDER:
-    case MONS_MOTH:
     case MONS_DEMONIC_CRAWLER:
     case MONS_JELLY:
         return true;

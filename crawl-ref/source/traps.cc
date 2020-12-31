@@ -341,8 +341,16 @@ bool monster_caught_in_net(monster* mon, actor* agent)
     {
         if (you.can_see(*mon))
         {
-            mprf("The net passes right through %s!",
-                 mon->name(DESC_THE).c_str());
+            switch (mon->type)
+            {
+            case MONS_WATER_ELEMENTAL:
+            case MONS_ELEMENTAL_WELLSPRING:
+                mprf("The net has no effect on %s!", mon->name(DESC_THE).c_str());
+                break;
+            default:
+                mprf("The net passes through %s!", mon->name(DESC_THE).c_str());
+                break;
+            }
         }
         return false;
     }

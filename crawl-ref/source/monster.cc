@@ -6487,7 +6487,7 @@ bool monster::is_web_immune() const
     default: break;
     }
     
-    return (type == MONS_ARACHNE || is_insubstantial())
+    return (type == MONS_ARACHNE || is_insubstantial());
 }
 
 // Followers of Yredelemnul and Dithmenos don't have their accuracy

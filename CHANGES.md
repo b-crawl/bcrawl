@@ -517,6 +517,10 @@
   - v1.28: More monster spells use the breath timer: crimson imps casting Flame Tongue, and all crab breath abilities.
   - v1.28: Insubstantial wisps are replaced by will-o'-wisps, which are batty enemies with a weak electric melee attack and have a low chance to cast Haunt and Mesmerise.
   - v1.28.1: White draconian breath always hits.
+  - v1.28.4: The sleep ability of dream sheep does not affect unbreathing players, such as players in tree form.
+  - v1.28.4: "Human" monsters often have weapons.
+  - v1.28.4: Moths are no longer immune to webs.
+  - v1.28.4: Water elementals and elemental wellsprings are treated as being insubstantial.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

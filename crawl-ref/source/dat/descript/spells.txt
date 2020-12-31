@@ -510,6 +510,7 @@ Dream Dust spell
 
 Overwhelms the target with soporific dream dust, putting them to sleep.
 Additional dream sheep will increase the strength and duration of this effect.
+This has no effect on targets that do not sleep and/or breathe.
 %%%%
 Druid's Call spell
 

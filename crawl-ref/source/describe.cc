@@ -2091,28 +2091,6 @@ string get_item_description(const item_def &item, bool verbose,
         }
         break;
 
-    case OBJ_POTIONS:
-#ifdef DEBUG_BLOOD_POTIONS
-        // List content of timer vector for blood potions.
-        if (!dump && is_blood_potion(item))
-        {
-            item_def stack = static_cast<item_def>(item);
-            CrawlHashTable &props = stack.props;
-            if (!props.exists("timer"))
-                description << "\nTimers not yet initialized.";
-            else
-            {
-                CrawlVector &timer = props["timer"].get_vector();
-                ASSERT(!timer.empty());
-
-                description << "\nQuantity: " << stack.quantity
-                            << "        Timer size: " << (int) timer.size();
-                description << "\nTimers:\n";
-                for (const CrawlStoreValue& store : timer)
-                    description << store.get_int() << "  ";
-            }
-        }
-#endif
     case OBJ_WANDS:
         if (item_type_known(item))
         {
@@ -2127,6 +2105,8 @@ string get_item_description(const item_def &item, bool verbose,
             description << "\nNoise: " << spell_noise_string(spell);
         }
         break;
+
+    case OBJ_POTIONS:
     case OBJ_SCROLLS:
     case OBJ_ORBS:
     case OBJ_GOLD:

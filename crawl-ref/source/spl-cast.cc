@@ -2255,6 +2255,8 @@ static dice_def _spell_damage(spell_type spell, bool evoked)
             return shatter_damage(power);
         case SPELL_BATTLESPHERE:
             return battlesphere_damage(power);
+        case SPELL_LRD:
+            return dice_def(3, 5 + power / 5);
         default:
             break;
     }

@@ -533,6 +533,11 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
             { SPWPN_CHAOS, 1 },
             { SPWPN_ELECTROCUTION, 1 },
         } } },
+        { MONS_HUMAN,
+            { { { WPN_TRIDENT,       3 },
+                { WPN_QUARTERSTAFF,  3 },
+                { NUM_WEAPONS,       6 },
+        } } },
         { MONS_HAROLD, { { { WPN_TRIDENT, 1 } }, { 1, 0, 2 }, {
             { SPWPN_VENOM, 1 },
             { SPWPN_FLAMING, 1 },
@@ -1000,6 +1005,11 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
 
     static const map<monster_type, mon_weapon_spec> secondary_weapon_specs = {
         { MONS_IJYB, { { { WPN_HUNTING_SLING, 1 } } } },
+        { MONS_HUMAN,
+            { { { WPN_HUNTING_SLING,  4 },
+                { WPN_FUSTIBALUS,     3 },
+                { NUM_WEAPONS,        8 },
+        } } },
         { MONS_JOSEPH, { { { WPN_HUNTING_SLING, 1 } } } },
         { MONS_DEEP_ELF_ARCHER, // XXX: merge w/centaur warrior primary?
             { { { WPN_SHORTBOW,         2 },

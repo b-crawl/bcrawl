@@ -6478,12 +6478,17 @@ item_def* monster::disarm()
  */
 bool monster::is_web_immune() const
 {
-    return mons_genus(type) == MONS_SPIDER
-            || type == MONS_ARACHNE
-            || mons_genus(type) == MONS_MOTH
-            || mons_genus(type) == MONS_DEMONIC_CRAWLER
-            || is_insubstantial()
-            || mons_genus(type) == MONS_JELLY;
+    switch (mons_genus(type))
+    {
+    case MONS_SPIDER:
+    case MONS_MOTH:
+    case MONS_DEMONIC_CRAWLER:
+    case MONS_JELLY:
+        return true;
+    default: break;
+    }
+    
+    return (type == MONS_ARACHNE || is_insubstantial())
 }
 
 // Followers of Yredelemnul and Dithmenos don't have their accuracy

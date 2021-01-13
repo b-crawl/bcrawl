@@ -1381,7 +1381,6 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
     case SPELL_NOXIOUS_CLOUD:
     case SPELL_POISONOUS_CLOUD:
     case SPELL_THORN_VOLLEY:
-    case SPELL_HURL_DAMNATION:
     case SPELL_SPIT_POISON:
     case SPELL_MIASMA_BREATH:
     case SPELL_GHOSTLY_FIREBALL:
@@ -1423,6 +1422,7 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
         break;
 
     case SPELL_CALL_DOWN_DAMNATION: // Set explosion size for tracer
+    case SPELL_HURL_DAMNATION:
         zappy(spell_to_zap(real_spell), power, true, beam);
         beam.ex_size = 1;
         break;

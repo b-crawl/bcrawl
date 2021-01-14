@@ -2885,7 +2885,7 @@ void level_change(bool skip_attribute_increase)
             {
                 mprf(MSGCH_INTRINSIC_GAIN, "You have reached level %d!", new_exp);
                 
-                if (new_exp == (max_xl - 3) && !player_in_branch(BRANCH_PANDEMONIUM))
+                if (new_exp == (max_xl - 3) && !player_in_branch(BRANCH_PANDEMONIUM) && !player_has_orb())
                 {
                     switch(you.religion)
                     {
@@ -2906,8 +2906,8 @@ void level_change(bool skip_attribute_increase)
             
             if (hit_max_level)
             {
-                mprf(MSGCH_WARN, "The lords of Pandemonium have recognized you as a threat, and redirect portals to contain you!");
-                if (player_in_branch(BRANCH_PANDEMONIUM))
+                mprf(MSGCH_WARN, "The lords of Pandemonium have recognized you as a threat, and redirect portals to contain you!\nBut perhaps the legendary Orb of Zot could overpower their protections.");
+                if (player_in_branch(BRANCH_PANDEMONIUM) && !player_has_orb())
                     env.spawn_random_rate = 0;
             }
 

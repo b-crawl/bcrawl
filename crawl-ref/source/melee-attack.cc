@@ -312,6 +312,14 @@ bool melee_attack::handle_phase_dodged()
                  attack_strength_punctuation(damage_done).c_str());
         }
     }
+
+    if (attacker->is_player())
+    {
+        // Upset only non-sleeping non-fleeing monsters if we missed.
+        if (!defender->asleep() && !mons_is_fleeing(*defender->as_monster()))
+            behaviour_event(defender->as_monster(), ME_WHACK, attacker);
+    }
+
     if (defender->is_player())
         count_action(CACT_DODGE, DODGE_EVASION);
 
@@ -1485,10 +1493,6 @@ void melee_attack::player_warn_miss()
     mprf("%s%s.",
          player_why_missed().c_str(),
          defender->name(DESC_THE).c_str());
-
-    // Upset only non-sleeping non-fleeing monsters if we missed.
-    if (!defender->asleep() && !mons_is_fleeing(*defender->as_monster()))
-        behaviour_event(defender->as_monster(), ME_WHACK, attacker);
 }
 
 // A couple additive modifiers that should be applied to both unarmed and

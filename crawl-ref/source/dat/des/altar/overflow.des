@@ -2288,6 +2288,50 @@ MAP
 .......
 ENDMAP
 
+### Wu Jian overflow altars ###################################################
+
+NAME:   nzn_wu_jian_council_hall
+TAGS:   temple_overflow_1 temple_overflow_wu_jian no_monster_gen no_item_gen
+DEPTH:  D:2-9
+KFEAT:  _ = altar_wu_jian
+MAP
+    x@x
+  xxx.xxx
+ xxG...Gxx
+xx.......xx
+xG..._...Gx
+xx.......xx
+ xxG...Gxx
+  xxxGxxx
+    xxx
+ENDMAP
+
+NAME:    nzn_wu_jian_contemplation
+TAGS:    temple_overflow_1 temple_overflow_wu_jian no_monster_gen no_item_gen
+TAGS:    no_pool_fixup
+DEPTH:   D:2-9
+ITEM:    mundane spear / w:2 mundane quarterstaff / w:2 mundane trident, stone
+NSUBST:  ' = 3=e / ', " = 4=W / ', t = t / d / -
+SUBST:   ` = '
+KFEAT:   _ = altar_wu_jian
+FTILE:   e' = floor_sand
+FTILE:   td- = floor_grass
+COLOUR:  e' = yellow
+COLOUR:  d- = green
+MAP
+ x@x
+xx.xxxxxxxxxx
+x'`.```'``"Wx
+x```.`'``"WWx
+x'`.````"WWWx
+x`.t`'``"WWWx
+x`t_t`'`"WWWx
+x``t.'`'`"WWx
+x'`'`.``'`"Wx
+xxxxxx.xxxxxx
+     x@x
+ENDMAP
+
 ### Xom overflow altars #######################################################
 
 NAME:   tgw_xom

@@ -2936,6 +2936,14 @@ void level_change(bool skip_attribute_increase)
 
             switch (you.species)
             {
+            case SP_AVARIEL:
+                if (you.experience_level == 9)
+                {
+                you.attribute[ATTR_PERM_FLIGHT] = 1;
+                float_player();
+                }
+                break;
+                
             case SP_NAGA:
                 if (!(you.experience_level % 3))
                 {

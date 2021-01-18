@@ -3433,7 +3433,7 @@ bool is_useless_item(const item_def &item, bool temp)
         case SCR_TELEPORTATION:
             return you.species == SP_FORMICID
                    || crawl_state.game_is_sprint()
-                   || player_in_branch(BRANCH_GAUNTLET);
+                   || temp && player_in_branch(BRANCH_GAUNTLET);
         case SCR_BLINKING:
             return you.species == SP_FORMICID;
         case SCR_AMNESIA:

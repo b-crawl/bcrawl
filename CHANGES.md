@@ -19,6 +19,7 @@
   - v1.20: Early out-of-depth monsters do not spawn with their band. This reduces the number of Orc Priests on D:2.
   - v1.20: Some gods will warn the player about doing Elf or Slime at a low XL.
   - v1.23: Orange crystal statues can appear in Spider.
+  - v1.28.5: Players that reached their max experience level can enter Pandemonium while holding the Orb of Zot. 
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)

@@ -1381,7 +1381,6 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
     case SPELL_NOXIOUS_CLOUD:
     case SPELL_POISONOUS_CLOUD:
     case SPELL_THORN_VOLLEY:
-    case SPELL_CALL_DOWN_DAMNATION:
     case SPELL_HURL_DAMNATION:
     case SPELL_SPIT_POISON:
     case SPELL_MIASMA_BREATH:
@@ -1421,6 +1420,11 @@ bolt mons_spell_beam(const monster* mons, spell_type spell_cast, int power,
     case SPELL_FIRE_STORM:
         setup_fire_storm(mons, power / 2, beam);
         beam.foe_ratio = random_range(40, 55);
+        break;
+
+    case SPELL_CALL_DOWN_DAMNATION: // Set explosion size for tracer
+        zappy(spell_to_zap(real_spell), power, true, beam);
+        beam.ex_size = 1;
         break;
 
     case SPELL_MEPHITIC_CLOUD:
@@ -2228,9 +2232,9 @@ static vector<coord_def> _get_push_spaces_max_tension(const coord_def& pos,
         find_connected_identical(pos, all_door);
         dungeon_feature_type old_feat = grd(pos);
 
-        act->move_to_pos(c);
+        act->set_position(c);
         int new_tension = _tension_door_closed(all_door, old_feat);
-        act->move_to_pos(pos);
+        act->set_position(pos);
 
         if (new_tension == max_tension)
             best.push_back(c);
@@ -2280,20 +2284,27 @@ static bool _should_force_door_shut(const coord_def& door)
     {
         coord_def newpos =
                 _get_push_spaces_max_tension(you.pos(), &veto_spots).front();
-        you.move_to_pos(newpos);
+        you.set_position(newpos);
     }
 
     const int new_tension = _tension_door_closed(all_door, old_feat);
 
     if (player_in_door)
-        you.move_to_pos(oldpos);
+        you.set_position(oldpos);
+
+    dprf("Considering sealing cur tension: %d, new tension: %d",
+         cur_tension, new_tension);
 
     // If closing the door would reduce player tension by too much, probably
     // it is scarier for the player to leave it open and thus it should be left
     // open
-
-    // Currently won't allow tension to be lowered by more than 33%
-    return ((cur_tension - new_tension) * 3) <= cur_tension;
+    //
+    // Currently won't allow tension to be lowered by more than 33%.
+    //
+    // Also, if there's 0 tension, we require the door closure to create
+    // tensiion, otherwise we'll probably just lock the player away from the
+    // warden.
+    return 1 + cur_tension * 66 <= new_tension * 100;
 }
 
 static bool _seal_doors_and_stairs(const monster* warden,

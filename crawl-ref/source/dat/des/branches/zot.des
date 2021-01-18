@@ -905,17 +905,17 @@ KMONS: F = orb of fire att:neutral
 KFEAT: F = W
 MAP
      @
-xxxxx+xxxxx
+xxmxx=xxmxx
 xWWWWWWWWWx
 xWMWWMWWMWx
 xWWXWXWXWWx
-xWWWmmmWWWx
-xWMXmFmXMWx
-xWWWmmmWWWx
+mWWWmmmWWWm
+mWMXmFmXMWm
+mWWWmmmWWWm
 xWWXWXWXWWx
 xWMWWMWWMWx
 xWWWWWWWWWx
-xxxxxxxxxxx
+xxxxmmmxxxx
 ENDMAP
 
 ###################################################

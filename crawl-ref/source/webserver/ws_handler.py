@@ -637,6 +637,22 @@ class CrawlWebSocket(tornado.websocket.WebSocketHandler):
             elif not self.watched_game:
                 self.logger.warning("Didn't know how to handle msg: %s",
                                     obj["msg"])
+        except OSError as e:
+            # maybe should throw a custom exception from the socket call rather
+            # than rely on these cases?
+            excerpt = message[:50] if len(message) > 50 else message
+            trunc = "..." if len(message) > 50 else ""
+            if e.errno == errno.EAGAIN or e.errno == errno.ENOBUFS:
+                # errno is different on mac vs linux, maybe also depending on
+                # python version
+                self.logger.warning(
+                    "Socket buffer full; skipping JSON message ('%r%s')!",
+                                excerpt, trunc)
+            else:
+                self.logger.warning(
+                                "Error while handling JSON message ('%r%s')!",
+                                excerpt, trunc,
+                                exc_info=True)
         except Exception:
             self.logger.warning("Error while handling JSON message!",
                                 exc_info=True)

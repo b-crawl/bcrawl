@@ -921,22 +921,36 @@ void take_stairs(dungeon_feature_type force_stair, bool going_up,
     dungeon_feature_type how = force_stair ? force_stair : old_feat;
     
     // Panlord portal diverts
+    bool orb_stair_msg = false;
     if(you.max_level >= you.get_max_xl())
-        if (player_has_orb())
-            mprf(MSGCH_ORB, "The power of the Orb breaks the dimensional shunt like a soap bubble!");
-        else
-            switch (how)
+        switch (how)
+        {
+        case DNGN_ENTER_PANDEMONIUM:
+            if (player_has_orb())
+                orb_stair_msg = true;
+            else
             {
-            case DNGN_ENTER_PANDEMONIUM:
                 how = DNGN_ENTER_ABYSS;
                 mprf(MSGCH_WARN, "The portal is diverted to the Abyss!\nPerhaps the legendary Orb of Zot could overpower the changes to the portal...");
-                break;
-            case DNGN_TRANSIT_PANDEMONIUM:
+            }
+            break;
+        case DNGN_TRANSIT_PANDEMONIUM:
+            if (player_has_orb())
+                orb_stair_msg = true;
+            else
+            {
                 how = DNGN_EXIT_THROUGH_ABYSS;
                 mprf(MSGCH_WARN, "The portal is diverted to the Abyss!");
-                break;
-            default: break;
             }
+            break;
+        case DNGN_EXIT_DUNGEON:
+            if (player_has_orb())
+                orb_stair_msg = true;
+            break;
+        default: break;
+        }
+        if (orb_stair_msg)
+            mprf(MSGCH_ORB, "The power of the Orb breaks the dimensional shunt like a soap bubble!");
 
     // Taking a shaft manually (stepping on a known shaft, or using shaft ability)
     const bool known_shaft = (!force_stair

@@ -5485,6 +5485,7 @@ void player::init_skills()
     skill_points.init(0);
     ct_skill_points.init(0);
     skill_order.init(MAX_SKILL_ORDER);
+    skill_manual_points.init(0);
     training_targets.init(0);
     exercises.clear();
     exercises_all.clear();

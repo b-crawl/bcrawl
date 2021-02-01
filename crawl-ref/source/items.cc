@@ -1851,38 +1851,23 @@ bool move_item_to_inv(int obj, int quant_got, bool quiet)
     return keep_going;
 }
 
-static void _get_book(const item_def& it, bool quiet, bool allow_auto_hide)
+static void _get_book(const item_def& it)
 {
-    vector<spell_type> spells;
-    if (!quiet)
+    if (it.sub_type != BOOK_MANUAL)
+    {
         mprf("You pick up %s and begin reading...", it.name(DESC_A).c_str());
-    for (spell_type st : spells_in_book(it))
-    {
-        if (!you.spell_library[st])
-        {
-            you.spell_library.set(st, true);
-            bool memorise = you_can_memorise(st);
-            if (memorise)
-                spells.push_back(st);
-            if (!memorise || (Options.auto_hide_spells && allow_auto_hide))
-                you.hidden_spells.set(st, true);
-        }
+
+        if (!library_add_spells(spells_in_book(it)))
+            mpr("Unfortunately, you learned nothing new.");
+        return;
     }
-    if (!quiet)
-    {
-        if (!spells.empty())
-        {
-            vector<string> spellnames(spells.size());
-            transform(spells.begin(), spells.end(), spellnames.begin(), spell_title);
-            mprf("You add the spell%s %s to your library.",
-                 spellnames.size() > 1 ? "s" : "",
-                 comma_separated_line(spellnames.begin(),
-                                      spellnames.end()).c_str());
-        }
-        else
-            mpr("Unfortunately, it added no spells to the library.");
-    }
-    shopping_list.spells_added_to_library(spells, quiet);
+
+    const skill_type sk = static_cast<skill_type>(it.plus);
+    if (you.skill_manual_points[sk])
+        mprf("You pick up another %s and continue studying.", it.name(DESC_PLAIN).c_str());
+    else
+        mprf("You pick up %s and begin studying.", it.name(DESC_A).c_str());
+    you.skill_manual_points[sk] += it.skill_points;
 }
 
 // Adds all books in the player's inventory to library.
@@ -1892,9 +1877,9 @@ void add_held_books_to_library()
 {
     for (item_def& it : you.inv)
     {
-        if (it.base_type == OBJ_BOOKS && it.sub_type != BOOK_MANUAL)
+        if (it.base_type == OBJ_BOOKS)
         {
-            _get_book(it, true, false);
+            _get_book(it);
             destroy_item(it);
         }
     }
@@ -2208,7 +2193,7 @@ static bool _merge_items_into_inv(item_def &it, int quant_got,
         get_gold(it, quant_got, quiet);
         return true;
     }
-    if (you.species != SP_ONI && it.base_type == OBJ_BOOKS && it.sub_type != BOOK_MANUAL)
+    if (you.species != SP_ONI || it.sub_type == BOOK_MANUAL)
     {
         _get_book(it, quiet, true);
         return true;

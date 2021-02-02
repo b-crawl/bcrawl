@@ -229,33 +229,7 @@ enum tag_minor_version
     TAG_MINOR_GAUNTLET_TRAPPED,    // It was briefly possible to get trapped in a specific gauntlet map.
     TAG_MINOR_REMOVE_DECKS,        // Decks are no more
     TAG_MINOR_GAMESEEDS,           // Game seeds + rng state saved
-<<<<<<< HEAD
-=======
-    TAG_MINOR_YELLOW_DRACONIAN_RACID, // Change yellow draconians' rAcid fake mutation to a true mutation.
-    TAG_MINOR_THROW_CONSOLIDATION, // Throwing brands consolidated
-    TAG_MINOR_VAMPIRE_NO_EAT,      // Decouple Vampires from the food system
-    TAG_MINOR_SINGULAR_THEY,       // Add singular they pronouns
-    TAG_MINOR_ABYSS_UNIQUE_VAULTS, // Separate abyss vault tracking from main dungeon
-    TAG_MINOR_INCREMENTAL_PREGEN,  // save tracks whether the game is an incremental pregen game
-    TAG_MINOR_NO_SUNLIGHT,         // Removal of Fedhas' Sunlight
-    TAG_MINOR_POSITIONAL_MAGIC,    // Positional attack magic overhaul
-    TAG_MINOR_GHOST_MAGIC,         // Ghost update for positional magic
-    TAG_MINOR_MORE_GHOST_MAGIC,    // Update already placed ghosts for positional magic
-    TAG_MINOR_DUMMY_AGILITY,       // Convert garbage "agility" potions into stab
-    TAG_MINOR_TRACK_REGEN_ITEMS,   // Regen items take effect only after maxhp is reached
-    TAG_MINOR_MORGUE_SCREENSHOTS,  // Screenshots morgue section
-    TAG_MINOR_UNSTACK_TREMORSTONES, // Unstack tins of tremorstones
-    TAG_MINOR_MONSTER_TYPE_SIZE,   // Consistently marshall monster_type enums
-    TAG_MINOR_SHAFT_CARD,          // Remove the Shaft card
-    TAG_MINOR_LOAF_BUST,           // Remove rations, eating, and hunger mechanics
-    TAG_MINOR_REVEALED_TRAPS,      // No skill check to spot traps
-    TAG_MINOR_BARDING_MERGE,       // Merge naga and centaur bardings.
-    TAG_MINOR_MERGE_VETOES,        // Merge veto tags in vaults
-    TAG_MINOR_APPENDAGE,           // Change beastly appendage
-    TAG_MINOR_REALLY_UNSTACK_EVOKERS, // Unstack all evokers
-    TAG_MINOR_SETPOLY,             // Despoiler polymorph wands
     TAG_MINOR_GOLDIFY_MANUALS,     // Move manuals out of the inventory
->>>>>>> b15c29f0ac (Goldify manuals)
 #endif
     NUM_TAG_MINORS,
     TAG_MINOR_VERSION = NUM_TAG_MINORS - 1

@@ -1310,6 +1310,18 @@ vector<string> desc_success_chance(const monster_info& mi, int pow, bool evoked,
     return descs;
 }
 
+static vector<string> _desc_meph_chance(const monster_info& mi)
+{
+    if (!mi.mresists & MR_RES_POISON || mons_is_unbreathing(mi.type))
+        return vector<string>{"not susceptible"};
+
+    int pct_chance = 2;
+    const int MEPH_HD_CAP = 21;
+    if (mi.hd < MEPH_HD_CAP)
+        pct_chance = 100 - (100 * mi.hd / MEPH_HD_CAP);
+    return vector<string>{make_stringf("chance to affect: %d%%", pct_chance)};
+}
+
 // for Mana Rupture
 vector<string> _desc_target_mr(const monster_info& mi)
 {
@@ -1412,9 +1424,16 @@ spret your_spells(spell_type spell, int powc, bool allow_fail,
             additional_desc = bind(desc_success_chance, placeholders::_1,
                                    eff_pow, evoked_item, hitfunc.get());
         }
-        else if (spell == SPELL_RUPTURE)
+        
+        switch(spell)
         {
+        case SPELL_RUPTURE:
             additional_desc = bind(_desc_target_mr, placeholders::_1);
+            break;
+        case SPELL_MEPHITIC_CLOUD:
+            additional_desc = bind(_desc_meph_chance, placeholders::_1);
+            break;
+        default: break;
         }
 
         string title = make_stringf("Aiming: <w>%s</w>", spell_title(spell));

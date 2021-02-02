@@ -1689,6 +1689,26 @@ string skill_title_by_rank(skill_type best_skill, uint8_t skill_rank,
 
     string result;
 
+    if (you.species == SP_ONI)
+        switch (best_skill)
+        {
+        case SK_CONJURATIONS:
+        case SK_HEXES:
+        case SK_CHARMS:
+        case SK_SUMMONINGS:
+        case SK_NECROMANCY:
+        case SK_TRANSLOCATIONS:
+        case SK_TRANSMUTATIONS:
+        case SK_FIRE_MAGIC:
+        case SK_ICE_MAGIC:
+        case SK_AIR_MAGIC:
+        case SK_EARTH_MAGIC:
+        case SK_POISON_MAGIC:
+            best_skill = SK_SPELLCASTING;
+            break;
+        default: break;
+        }
+
     if (best_skill < NUM_SKILLS)
     {
         switch (best_skill)

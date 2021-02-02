@@ -2193,9 +2193,9 @@ static bool _merge_items_into_inv(item_def &it, int quant_got,
         get_gold(it, quant_got, quiet);
         return true;
     }
-    if (you.species != SP_ONI || it.sub_type == BOOK_MANUAL)
+    if (it.base_type == OBJ_BOOKS && (you.species != SP_ONI || it.sub_type == BOOK_MANUAL))
     {
-        _get_book(it, quiet, true);
+        _get_book(it);
         return true;
     }
 

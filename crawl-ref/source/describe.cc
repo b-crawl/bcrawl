@@ -1150,7 +1150,7 @@ static void _append_weapon_stats(string &description, const item_def &item)
     "\nBase attack delay: %.1f  Base accuracy: %s"
     "\nThis weapon's minimum attack delay (%.1f) is reached at skill level %d.",
         (float) property(item, PWPN_SPEED) / 10,
-        weap_acc_str,
+        weap_acc_str.str().c_str(),
         (float) weapon_min_delay(item, item_brand_known(item)) / 10,
         mindelay_skill / 10);
 

@@ -1147,7 +1147,7 @@ static void _append_weapon_stats(string &description, const item_def &item)
 	_print_bar(property(item, PWPN_HIT) + 10, 5, "", weap_acc_str);
 
     description += make_stringf(
-    "\nBase attack delay: %.1f  Base accuracy: %s"
+    "\nBase attack delay: %.1f  Base accuracy:%s"
     "\nThis weapon's minimum attack delay (%.1f) is reached at skill level %d.",
         (float) property(item, PWPN_SPEED) / 10,
         weap_acc_str.str().c_str(),

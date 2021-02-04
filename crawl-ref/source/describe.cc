@@ -1143,11 +1143,14 @@ static void _append_weapon_stats(string &description, const item_def &item)
                                     bullet_dmg, adj_bullet_dmg/10, adj_bullet_dmg%10);
     }
 
+	ostringstream weap_acc_str;
+	_print_bar(property(item, PWPN_HIT) + 10, 5, "", weap_acc_str);
+
     description += make_stringf(
-    "\nBase accuracy: %+d  Base attack delay: %.1f"
+    "\nBase attack delay: %.1f  Base accuracy: %s"
     "\nThis weapon's minimum attack delay (%.1f) is reached at skill level %d.",
-        property(item, PWPN_HIT),
         (float) property(item, PWPN_SPEED) / 10,
+        weap_acc_str,
         (float) weapon_min_delay(item, item_brand_known(item)) / 10,
         mindelay_skill / 10);
 

@@ -135,8 +135,6 @@ const int MAX_SKILL_LEVEL = 27;
 const int MAX_EXP_TOTAL = 8999999;
 const int EXERCISE_QUEUE_SIZE = 100;
 
-const int MIN_HIT_MISS_PERCENTAGE = 5;
-
 const int BASELINE_DELAY  = 10;
 const int INVIS_CONTAM_PER_TURN = 30;
 

@@ -52,7 +52,7 @@ enum species_type
     SP_BARACHI,
     SP_GNOLL,
     SP_FAIRY,
-    SP_DUSK_WALKER,
+    SP_ENT,
     SP_SAND_DWARF,
     SP_ONI,
     SP_AVARIEL,

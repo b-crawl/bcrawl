@@ -302,6 +302,8 @@ static const ability_def Ability_List[] =
       0, 0, 75, 0, {fail_basis::xl, 20, 1}, abflag::breath },
     { ABIL_TRAN_BAT, "Bat Form",
       2, 0, 0, 0, {}, abflag::none },
+    { ABIL_ENT_PASSWALL, "Passwall",
+      1, 0, 0, 0, {}, abflag::none },
 
     { ABIL_BREATHE_ACID, "Breathe Acid",
       0, 0, 125, 0, {fail_basis::xl, 30, 1}, abflag::breath },
@@ -2764,6 +2766,11 @@ static spret _do_ability(const ability_def& abil, bool fail)
         }
         break;
 
+    case ABIL_ENT_PASSWALL:
+        fail_check();
+        return cast_passwall(you.pos(), you.experience_level * 4, fail);
+        break;
+
     case ABIL_JIYVA_CALL_JELLY:
     {
         fail_check();
@@ -3413,6 +3420,11 @@ vector<talent> your_talents(bool check_confused, bool include_unusable)
         && you.form != transformation::bat)
     {
         _add_talent(talents, ABIL_TRAN_BAT, check_confused);
+    }
+
+    if (you.species == SP_ENT)
+    {
+        _add_talent(talents, ABIL_ENT_PASSWALL, check_confused);
     }
 
     bool racial_flight = you.racial_permanent_flight();

@@ -234,6 +234,8 @@ static bool _feat_is_passwallable(dungeon_feature_type feat)
     case DNGN_SLIMY_WALL:
     case DNGN_CLEAR_ROCK_WALL:
         return true;
+    case DNGN_TREE:
+        return (you.species == SP_ENT);
     default:
         return false;
     }
@@ -398,7 +400,8 @@ spret cast_passwall(const coord_def& c, int pow, bool fail)
     }
     else if (p.check_moveto())
     {
-        start_delay<PasswallDelay>(p.actual_walls() + 1, p.actual_dest);
+        int delay_turns = p.actual_walls() + (you.species == SP_ENT ? 0 : 1);
+        start_delay<PasswallDelay>(delay_turns, p.actual_dest);
         return spret::success;
     }
 

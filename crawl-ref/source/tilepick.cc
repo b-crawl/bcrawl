@@ -3378,6 +3378,9 @@ tileidx_t tileidx_ability(const ability_type ability)
     // Deep Dwarves
     case ABIL_HEAL_WOUNDS:
         return TILEG_ABILITY_HEAL_WOUNDS;
+    // Ents
+    case ABIL_ENT_PASSWALL:
+        return TILEG_ABILITY_ENT_PASSWALL;
     // Formicids
     case ABIL_DIG:
         return TILEG_ABILITY_DIG;

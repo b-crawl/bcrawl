@@ -350,8 +350,8 @@ hands_reqd_type player::hands_reqd(const item_def &item, bool base) const
     const int wpn_type = OBJ_WEAPONS == item.base_type ? item.sub_type
                          : OBJ_STAVES == item.base_type ? WPN_STAFF
                                                         : WPN_UNKNOWN;
-    // All weapons except gc and gsc are one-handed for Fo
-    if (species == SP_FORMICID)
+    // All weapons except gc and gsc are one-handed for Fo and En
+    if (species == SP_FORMICID || species == SP_ENT)
     {
         return wpn_type == WPN_GIANT_CLUB || wpn_type == WPN_GIANT_SPIKED_CLUB
                ? HANDS_TWO : HANDS_ONE;

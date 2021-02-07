@@ -642,8 +642,9 @@ tileidx_t tilep_species_to_base_tile(int sp, int level)
     case SP_JUNGLE_STALKER:
         return TILEP_BASE_VINE_STALKER;
     case SP_TWILIGHT_STALKER:
-    case SP_DUSK_WALKER:
         return TILEP_BASE_DUSK_WALKER;
+    case SP_ENT:
+        return TILEP_BASE_ENT;
     case SP_BARACHI:
         return TILEP_BASE_BARACHI;
     case SP_SKELETON:

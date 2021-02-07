@@ -321,22 +321,20 @@ static const map<species_type, species_def> species_data =
       SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
 } },
 
-{ SP_DUSK_WALKER, {
-    "DW",
-    "Dusk Walker", nullptr, nullptr,
+{ SP_ENT, {
+    "En",
+    "Ent", nullptr, nullptr,
     SPF_NONE,
-    -1, -1, 0, 6,
-    MONS_SHADOW,
-    HT_LAND, US_ALIVE, SIZE_MEDIUM,
-    8, 8, 8, // 24
-    { STAT_STR, STAT_INT, STAT_DEX }, 4,
-    {{ MUT_NIGHTSTALKER, 1, 4}, { MUT_FANGS, 2, 1 }, { MUT_STEALTHY_ARMOUR, 1, 1 },
-    { MUT_FANGS, 1, 8 }, { MUT_NIGHTSTALKER, 1, 12}, { MUT_NIGHTSTALKER, 1, 20}},
-    {"Your attacks drain your enemies."},
-    {"draining touch"},
-    { JOB_FIGHTER, JOB_GLADIATOR, JOB_ASSASSIN, JOB_SPELUNKER, JOB_EARTH_ELEMENTALIST,
-    JOB_ARCHAEOLOGIST },
-    { SK_STAVES, SK_SHORT_BLADES},
+    -1, 4, 0, 4,
+    MONS_SHAMBLING_MANGROVE,
+    HT_LAND, US_ALIVE, SIZE_LARGE,
+    15, 8, 5, // 28
+    { STAT_STR, STAT_INT }, 4,
+    {},
+    {"You move and act slowly.", "You can pass through walls and trees."},
+    {"slow actions", "passwall"},
+    { JOB_FIGHTER, JOB_BERSERKER, JOB_SLOTH_APOSTLE, JOB_SKALD, JOB_EARTH_ELEMENTALIST, JOB_CONJURER, JOB_VENOM_MAGE },
+    { SK_MACES_FLAILS, SK_POLEARMS, SK_UNARMED_COMBAT, SK_STAVES, SK_BOWS },
 } },
 
 { SP_FELID, {

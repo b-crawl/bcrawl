@@ -333,7 +333,7 @@ static const map<species_type, species_def> species_data =
     {},
     {"You move and act slowly.", "You can pass through walls and trees."},
     {"slow actions", "passwall"},
-    { JOB_FIGHTER, JOB_BERSERKER, JOB_SLOTH_APOSTLE, JOB_SKALD, JOB_EARTH_ELEMENTALIST, JOB_CONJURER, JOB_VENOM_MAGE },
+    { JOB_FIGHTER, JOB_MONK, JOB_BERSERKER, JOB_SLOTH_APOSTLE, JOB_SKALD, JOB_EARTH_ELEMENTALIST, JOB_CONJURER, JOB_VENOM_MAGE },
     { SK_MACES_FLAILS, SK_POLEARMS, SK_UNARMED_COMBAT, SK_STAVES, SK_BOWS },
 } },
 

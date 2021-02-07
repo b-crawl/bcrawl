@@ -2767,9 +2767,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_ENT_PASSWALL:
-        fail_check();
-        return cast_passwall(you.pos(), you.experience_level * 4, fail);
-        break;
+        return your_spells(SPELL_PASSWALL, you.experience_level * 4, false);
 
     case ABIL_JIYVA_CALL_JELLY:
     {

@@ -1326,7 +1326,7 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
         break;
 
     case SPELL_PASSWALL:
-        if (you.species == SP_ENT)
+        if (you.species == SP_ENT && !fake_spell)
             return "you can already pass through walls.";
         if (temp && you.is_stationary())
             return "you can't move.";

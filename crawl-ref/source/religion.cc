@@ -2879,6 +2879,10 @@ bool player_can_join_god(god_type which_god)
     if (which_god == GOD_FEDHAS && you.holiness() & MH_UNDEAD)
         return false;
 
+    // Ents can't use necromancy.
+    if (which_god == GOD_KIKUBAAQUDGHA && you.species == SP_ENT)
+        return false;
+
     if (which_god == GOD_GOZAG && you.gold < gozag_service_fee())
         return false;
 

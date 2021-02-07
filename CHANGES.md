@@ -139,7 +139,7 @@
   - Deep Elves and Tengu have been merged into Avariel, winged elves with good aptitudes for magic.
   - v1.13: Skeletons have -20% HP, but have good aptitudes, guardian spirit, and heal when casting spells. They also gain reduced encumbrance from armour and health regeneration from kills.
   - v1.13.1: Djinni get Wild Magic, Berserkitis, Blurry Vision, and Blink mutations. After their berserk rages end, they never pass out and get a few turns of Brilliance.
-  - v1.29: Ents are large, have plant resistances, +40% HP, and high natural AC. They have an innate Passwall ability that can also go through trees, and can use 2-handed weapons (other than giant clubs) with a shield. They also have an unarmed damage bonus equivalent to 1.5 levels of claws. However, they take 1.4x as long to do all actions, can't transform, can't use Necromancy, and can't wear body armour.
+  - v1.29: Ents are large, have plant resistances, +40% HP, and high natural AC. They have an innate Passwall ability that can also go through trees, and can use 2-handed weapons (other than giant clubs) with a shield. They also have an unarmed damage bonus equivalent to 1.5 levels of claws. However, they take 1.4x as long to do all actions, can't transform, can't train Necromancy, and can't wear body armour.
 
 #### Species Changes
   - Hill Orcs use Fighting as their skill for all weapons.
@@ -527,7 +527,7 @@
   - v1.28.4: Moths are no longer immune to webs.
   - v1.28.4: Water elementals and elemental wellsprings are treated as being insubstantial.
   - v1.29: Hellwings can blink away, taking the player with them.
-  - v1.29: Greater mummies have fewer spell sets.
+  - v1.29: Greater mummies have fewer spell sets, including one with Summon Greater Demon.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

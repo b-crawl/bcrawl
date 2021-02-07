@@ -1249,6 +1249,9 @@ int attack::calc_base_unarmed_damage()
     if (you.has_usable_claws())
         damage += you.has_claws() * 2;
 
+    if (you.species == SP_ENT)
+        damage += 3;
+
     if (you.form_uses_xl())
         damage += div_rand_round(you.experience_level, 3);
     else

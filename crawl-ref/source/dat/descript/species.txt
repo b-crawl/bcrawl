@@ -38,10 +38,10 @@ Draconian
 Draconians are versatile hybrids. They mature when reaching level 7 and develop
 a colour.
 %%%%
-Dusk walker
+Ent
 
-Dusk walkers are stealthy predators who were cursed long ago for an ancient crime.
-They hide in the shadows to avoid the wrathful gaze of the gods.
+Ents are sentient trees. They are naturally tough, and can use large weapons
+with shields, but they do everything slowly.
 %%%%
 Fairy
 

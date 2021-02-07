@@ -95,6 +95,7 @@
   - v1.28.2: Player spells have damage and accuracy info. (by PleasingFungus)
   - v1.28.3: Wands have damage info. (by PleasingFungus)
   - v1.28.3: Displayed player stealth is uncapped. (by hellmonk)
+  - v1.29: Manuals no longer take up inventory space. (by PleasingFungus)
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -127,6 +128,8 @@
   - v1.28: Player wisp form has a weaker but electric-branded melee attack, can cast spells, and has reduced spell failure.
   - v1.28.1: Ice form allows cloaks.
   - v1.28.2: Trove entry fees and spawn locations are adjusted.
+  - v1.29: Effectiveness of dexterity is no longer stepped down above 18.
+  - v1.29: Attacks no longer have a flat chance to force a hit or miss.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -136,6 +139,7 @@
   - Deep Elves and Tengu have been merged into Avariel, winged elves with good aptitudes for magic.
   - v1.13: Skeletons have -20% HP, but have good aptitudes, guardian spirit, and heal when casting spells. They also gain reduced encumbrance from armour and health regeneration from kills.
   - v1.13.1: Djinni get Wild Magic, Berserkitis, Blurry Vision, and Blink mutations. After their berserk rages end, they never pass out and get a few turns of Brilliance.
+  - v1.29: Ents are large, have plant resistances, +40% HP, and high natural AC. They have an innate Passwall ability that can also go through trees, and can use 2-handed weapons (other than giant clubs) with a shield. They also have an unarmed damage bonus equivalent to 1.5 levels of claws. However, they take 1.4x as long to do all actions, can't transform, can't use Necromancy, and can't wear body armour.
 
 #### Species Changes
   - Hill Orcs use Fighting as their skill for all weapons.
@@ -522,6 +526,8 @@
   - v1.28.4: "Human" monsters often have weapons.
   - v1.28.4: Moths are no longer immune to webs.
   - v1.28.4: Water elementals and elemental wellsprings are treated as being insubstantial.
+  - v1.29: Hellwings can blink away, taking the player with them.
+  - v1.29: Greater mummies have fewer spell sets.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

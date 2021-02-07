@@ -806,10 +806,13 @@ int weapon_min_delay(const item_def &weapon, bool check_speed)
         {
         case WPN_WHIP:
             min_delay = min(3, min_delay);
+            break;
         case WPN_GREAT_MACE:
             min_delay = min(10, min_delay);
+            break;
         default:
             min_delay = min(7, min_delay);
+            break;
         }
         break;
     case SK_STAVES:

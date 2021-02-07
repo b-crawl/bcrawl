@@ -5743,7 +5743,7 @@ int calc_hunger(int food_cost)
 
 void player_attack_hunger(int time_taken)
 {
-    int cost = div_rand_round(27 * time_taken, 10);
+    int cost = div_rand_round(27 * time_taken, (you.species == SP_ENT ? 14 : 10));
     make_hungry(cost, true);
 }
 

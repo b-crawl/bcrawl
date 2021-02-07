@@ -1064,6 +1064,15 @@ void tilep_calc_flags(const dolls_data &doll, int flag[])
         flag[TILEP_PART_DRCWING]=TILEP_FLAG_HIDE;
         flag[TILEP_PART_DRCHEAD]=TILEP_FLAG_HIDE;
     }
+    else if (is_player_tile(base_part, TILEP_BASE_ENT))
+    {
+        flag[TILEP_PART_BOOTS] = TILEP_FLAG_HIDE;
+        flag[TILEP_PART_LEG]   = TILEP_FLAG_HIDE;
+        flag[TILEP_PART_BODY]  = TILEP_FLAG_HIDE;
+        flag[TILEP_PART_BEARD] = TILEP_FLAG_HIDE;
+        flag[TILEP_PART_DRCWING]=TILEP_FLAG_HIDE;
+        flag[TILEP_PART_DRCHEAD]=TILEP_FLAG_HIDE;
+    }
     else if (is_player_tile(base_part, TILEP_BASE_ONI))
     {
         flag[TILEP_PART_LEG]   = TILEP_FLAG_HIDE;

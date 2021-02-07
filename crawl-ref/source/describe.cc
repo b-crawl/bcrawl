@@ -929,6 +929,8 @@ int estimate_adjusted_dmg(int base_dmg, skill_type wpn_skill, int scale)
         int unarmed_dmg = get_form()->get_base_unarmed_damage();
         if (you.has_usable_claws())
             unarmed_dmg += you.has_claws() * 2;
+        if (you.species == SP_ENT)
+            unarmed_dmg += 3;
 
         unarmed_dmg *= scale;
 
@@ -1143,8 +1145,8 @@ static void _append_weapon_stats(string &description, const item_def &item)
                                     bullet_dmg, adj_bullet_dmg/10, adj_bullet_dmg%10);
     }
 
-	ostringstream weap_acc_str;
-	_print_bar(property(item, PWPN_HIT) + 10, 5, "", weap_acc_str);
+    ostringstream weap_acc_str;
+    _print_bar(property(item, PWPN_HIT) + 10, 5, "", weap_acc_str);
 
     description += make_stringf(
     "\nBase attack delay: %.1f  Base accuracy:%s"

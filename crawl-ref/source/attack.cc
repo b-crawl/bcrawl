@@ -1249,6 +1249,9 @@ int attack::calc_base_unarmed_damage()
     if (you.has_usable_claws())
         damage += you.has_claws() * 2;
 
+    if (you.species == SP_ENT)
+        damage += 3;
+
     if (you.form_uses_xl())
         damage += div_rand_round(you.experience_level, 3);
     else
@@ -1343,8 +1346,6 @@ int attack::test_hit(int to_land, int ev, bool randomise_ev)
         ev = random2avg(2*ev, 2);
     if (to_land >= AUTOMATIC_HIT)
         return true;
-    else if (x_chance_in_y(MIN_HIT_MISS_PERCENTAGE, 100))
-        margin = (random2(2) ? 1 : -1) * AUTOMATIC_HIT;
     else
         margin = to_land - ev;
 

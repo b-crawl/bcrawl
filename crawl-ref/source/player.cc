@@ -781,13 +781,18 @@ maybe_bool you_can_wear(equipment_type eq, bool temp)
 
 bool player_has_feet(bool temp, bool include_mutations)
 {
-    if (you.species == SP_NAGA
-        || you.species == SP_FELID
-        || you.species == SP_OCTOPODE
-        || you.species == SP_DJINNI
-        || you.fishtail && temp)
+    switch (you.species)
     {
+    case SP_NAGA:
+    case SP_FELID:
+    case SP_OCTOPODE:
+    case SP_DJINNI:
+    case SP_ENT:
         return false;
+    default:
+        if (you.fishtail && temp)
+            return false;
+        break;
     }
 
     if (include_mutations &&
@@ -2008,6 +2013,12 @@ int player_speed()
     else if (you.duration[DUR_HASTE])
         ps = haste_div(ps);
 
+    if (you.species == SP_ENT)
+    {
+        ps *= 14;
+        ps /= 10;
+    }
+
     if (you.form == transformation::statue || you.duration[DUR_PETRIFYING])
     {
         ps *= 15;
@@ -2166,7 +2177,7 @@ static int _player_scale_evasion(int prescaled_ev, const int scale)
  * What is the player's bonus to EV from dodging when not paralyzed, after
  * accounting for size & body armour penalties?
  *
- * First, calculate base dodge bonus (linear with dodging * stepdowned dex),
+ * First, calculate base dodge bonus (linear with dodging * dex),
  * and armour dodge penalty (base armour evp, increased for small races &
  * decreased for large, then with a magic "3" subtracted from it to make the
  * penalties not too harsh).
@@ -2188,10 +2199,8 @@ static int _player_scale_evasion(int prescaled_ev, const int scale)
  */
 static int _player_armour_adjusted_dodge_bonus(int scale)
 {
-    const int ev_dex = stepdown(you.dex(), 18, ROUND_CLOSE, MAX_STAT_VALUE);
-
     const int dodge_bonus =
-        (70 + you.skill(SK_DODGING, 10) * ev_dex) * scale
+        (70 + you.skill(SK_DODGING, 10) * you.dex()) * scale
         / (20 - _player_evasion_size_factor()) / 10;
 
     const int armour_dodge_penalty = you.unadjusted_body_armour_penalty() - 3;
@@ -2958,6 +2967,11 @@ void level_change(bool skip_attribute_increase)
                     mprf(MSGCH_INTRINSIC_GAIN, "Your skin feels tougher.");
                     you.redraw_armour_class = true;
                 }
+                break;
+
+            case SP_ENT:
+                mprf(MSGCH_INTRINSIC_GAIN, "Your bark feels tougher.");
+                you.redraw_armour_class = true;
                 break;
 
             case SP_FAIRY:
@@ -5485,6 +5499,7 @@ void player::init_skills()
     skill_points.init(0);
     ct_skill_points.init(0);
     skill_order.init(MAX_SKILL_ORDER);
+    skill_manual_points.init(0);
     training_targets.init(0);
     exercises.clear();
     exercises_all.clear();
@@ -6205,6 +6220,9 @@ int player::racial_ac(bool temp) const
         case SP_TROLL:
             AC = (300 + 100*((experience_level + 1) / 2));
             break;
+        case SP_ENT:
+            AC = (700 + 100*experience_level);
+            break;
         default: break;
         }
     }
@@ -6363,6 +6381,8 @@ int player::gdr_perc() const
         body_base_AC = 5; break;
     case SP_TROLL:
         body_base_AC = 6; break;
+    case SP_ENT:
+        body_base_AC = 8; break;
     default: break;
     }
     
@@ -6424,6 +6444,8 @@ mon_holy_type player::holiness(bool temp) const
         holi = MH_UNDEAD;
     else if (species == SP_GARGOYLE)
         holi = MH_NONLIVING;
+    else if (species == SP_ENT)
+        holi = MH_PLANT;
     else
         holi = MH_NATURAL;
 

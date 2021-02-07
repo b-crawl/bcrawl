@@ -1674,6 +1674,11 @@ bool transform(int pow, transformation which_trans, bool involuntary,
             msg = "Your unliving flesh cannot be transformed in this way.";
             success = false;
         }
+        if (you.species == SP_ENT)
+        {
+            msg = "you can't transform in this way.";
+            success = false;
+        }
     }
 
     if (!just_check && previous_trans != transformation::none)

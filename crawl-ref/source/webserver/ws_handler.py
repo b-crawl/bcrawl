@@ -44,20 +44,18 @@ def remove_in_lobbys(process):
 
 
 def write_dgl_status_file():
-    f = None
+    process_info = ["%s#%s#%s#0x0#%s#%s#" %
+                            (socket.username, socket.game_id,
+                             (socket.process.human_readable_where()),
+                             str(socket.process.idle_time()),
+                             str(socket.process.watcher_count()))
+                        for socket in list(sockets)
+                        if socket.username and socket.is_running()]
     try:
-        f = open(config.dgl_status_file, "w")
-        for socket in list(sockets):
-            if socket.username and socket.is_running():
-                f.write("%s#%s#%s#0x0#%s#%s#\n" %
-                        (socket.username, socket.game_id,
-                         (socket.process.human_readable_where()),
-                         str(socket.process.idle_time()),
-                         str(socket.process.watcher_count())))
+        with open(config.dgl_status_file, "w") as f:
+            f.write("\n".join(process_info))
     except (OSError, IOError) as e:
         logging.warning("Could not write dgl status file: %s", e)
-    finally:
-        if f: f.close()
 
 def purge_login_tokens():
     for token in list(login_tokens):
@@ -639,6 +637,22 @@ class CrawlWebSocket(tornado.websocket.WebSocketHandler):
             elif not self.watched_game:
                 self.logger.warning("Didn't know how to handle msg: %s",
                                     obj["msg"])
+        except OSError as e:
+            # maybe should throw a custom exception from the socket call rather
+            # than rely on these cases?
+            excerpt = message[:50] if len(message) > 50 else message
+            trunc = "..." if len(message) > 50 else ""
+            if e.errno == errno.EAGAIN or e.errno == errno.ENOBUFS:
+                # errno is different on mac vs linux, maybe also depending on
+                # python version
+                self.logger.warning(
+                    "Socket buffer full; skipping JSON message ('%r%s')!",
+                                excerpt, trunc)
+            else:
+                self.logger.warning(
+                                "Error while handling JSON message ('%r%s')!",
+                                excerpt, trunc,
+                                exc_info=True)
         except Exception:
             self.logger.warning("Error while handling JSON message!",
                                 exc_info=True)

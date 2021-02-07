@@ -3433,7 +3433,7 @@ bool is_useless_item(const item_def &item, bool temp)
         case SCR_TELEPORTATION:
             return you.species == SP_FORMICID
                    || crawl_state.game_is_sprint()
-                   || player_in_branch(BRANCH_GAUNTLET);
+                   || temp && player_in_branch(BRANCH_GAUNTLET);
         case SCR_BLINKING:
             return you.species == SP_FORMICID;
         case SCR_AMNESIA:
@@ -3504,9 +3504,11 @@ bool is_useless_item(const item_def &item, bool temp)
             return !you.can_safely_mutate(temp);
 
         case POT_LIGNIFY:
-            return you.undead_state(temp)
-                   && (you.species != SP_VAMPIRE
-                       || temp && you.hunger_state < HS_SATIATED);
+            if (you.species == SP_VAMPIRE)
+                return (temp && you.hunger_state < HS_SATIATED);
+            if (you.species == SP_ENT)
+                return true;
+            return you.undead_state(temp);
 
 #if TAG_MAJOR_VERSION == 34
         case POT_PORRIDGE:
@@ -3706,9 +3708,7 @@ bool is_useless_item(const item_def &item, bool temp)
         // If we're here, it's a manual.
         if (you.skills[item.plus] >= 27)
             return true;
-        if (is_useless_skill((skill_type)item.plus))
-            return true;
-        return false;
+        return is_useless_skill((skill_type)item.plus);
 
     default:
         return false;

@@ -783,7 +783,10 @@ void MemoriseDelay::finish()
 
 void PasswallDelay::finish()
 {
-    mpr("You finish merging with the rock.");
+    if (you.species == SP_ENT)
+        mpr("You finish moving.");
+    else
+        mpr("You finish merging with the rock.");
     // included in default force_more_message
 
     if (dest.x == 0 || dest.y == 0)

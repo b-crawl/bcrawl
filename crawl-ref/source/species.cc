@@ -439,12 +439,6 @@ void change_species_to(species_type sp)
     you.species = sp;
     you.chr_species_name = species_name(sp);
 
-    // Change permanent mutations, but preserve non-permanent ones.
-    uint8_t prev_muts[NUM_MUTATIONS];
-
-    for (int i = 0; i < NUM_MUTATIONS; ++i)
-        prev_muts[i] = you.mutation[i];
-    
     // remove all innate mutations
     for (const auto& lum : get_species_def(old_sp).level_up_mutations)
         if (lum.xp_level <= you.experience_level)

@@ -94,6 +94,11 @@ Heal Wounds ability
 Heals the user significantly, with a chance of permanently reducing the user's
 maximum magic capacity by one.
 %%%%
+Passwall ability
+
+Allows passage through rock walls and trees. This takes time proportional to the distance traveled,
+during which you will be helpless.
+%%%%
 Dig ability
 
 Allows making tunnels through soft rock and rusted grates. Activating the

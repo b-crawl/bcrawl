@@ -1221,6 +1221,8 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
         }
         if (temp && you.is_lifeless_undead())
             return "your current blood level is not sufficient.";
+        if (you.species == SP_ENT)
+            return "you can't transform in this way.";
         break;
 
     case SPELL_REGENERATION:
@@ -1324,6 +1326,8 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
         break;
 
     case SPELL_PASSWALL:
+        if (you.species == SP_ENT && !fake_spell)
+            return "you can already pass through walls.";
         if (temp && you.is_stationary())
             return "you can't move.";
         break;

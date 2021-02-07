@@ -642,8 +642,9 @@ tileidx_t tilep_species_to_base_tile(int sp, int level)
     case SP_JUNGLE_STALKER:
         return TILEP_BASE_VINE_STALKER;
     case SP_TWILIGHT_STALKER:
-    case SP_DUSK_WALKER:
         return TILEP_BASE_DUSK_WALKER;
+    case SP_ENT:
+        return TILEP_BASE_ENT;
     case SP_BARACHI:
         return TILEP_BASE_BARACHI;
     case SP_SKELETON:
@@ -1060,6 +1061,15 @@ void tilep_calc_flags(const dolls_data &doll, int flag[])
         flag[TILEP_PART_HAIR]  = TILEP_FLAG_HIDE;
         flag[TILEP_PART_BEARD] = TILEP_FLAG_HIDE;
         flag[TILEP_PART_SHADOW]= TILEP_FLAG_HIDE;
+        flag[TILEP_PART_DRCWING]=TILEP_FLAG_HIDE;
+        flag[TILEP_PART_DRCHEAD]=TILEP_FLAG_HIDE;
+    }
+    else if (is_player_tile(base_part, TILEP_BASE_ENT))
+    {
+        flag[TILEP_PART_BOOTS] = TILEP_FLAG_HIDE;
+        flag[TILEP_PART_LEG]   = TILEP_FLAG_HIDE;
+        flag[TILEP_PART_BODY]  = TILEP_FLAG_HIDE;
+        flag[TILEP_PART_BEARD] = TILEP_FLAG_HIDE;
         flag[TILEP_PART_DRCWING]=TILEP_FLAG_HIDE;
         flag[TILEP_PART_DRCHEAD]=TILEP_FLAG_HIDE;
     }

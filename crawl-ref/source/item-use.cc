@@ -699,29 +699,43 @@ bool can_wear_armour(const item_def &item, bool verbose, bool ignore_temporary)
 
     const int sub_type = item.sub_type;
     const equipment_type slot = get_armour_slot(item);
-        // Octopodes can
-    if (you.species == SP_OCTOPODE && slot != EQ_HELMET
-                                   && slot != EQ_SHIELD
-                                   && slot != EQ_CLOAK
-        || you.species == SP_FELID && slot != EQ_CLOAK)
+    
+    switch (you.species)
     {
-        if (verbose)
-            mpr("You can't wear that!");
-        return false;
-    }
-
-    if (you.species == SP_FAIRY && slot == EQ_BODY_ARMOUR)
-    {
-        if (verbose)
-            mprf("Your wings are too delicate to wear that!");
-        return false;
-    }
-
-    if (you.species == SP_TROLL && slot == EQ_BODY_ARMOUR)
-    {
-        if (verbose)
-            mprf("You can't wear that!");
-        return false;
+    case SP_OCTOPODE:
+        if (slot != EQ_HELMET && slot != EQ_SHIELD && slot != EQ_CLOAK)
+        {
+            if (verbose)
+                mpr("You can't wear that!");
+            return false;
+        }
+        break;
+    case SP_FELID:
+        if (slot != EQ_CLOAK)
+        {
+            if (verbose)
+                mpr("You can't wear that!");
+            return false;
+        }
+        break;
+    case SP_FAIRY:
+        if (slot == EQ_BODY_ARMOUR)
+        {
+            if (verbose)
+                mprf("Your wings are too delicate to wear that!");
+            return false;
+        }
+        break;
+    case SP_TROLL:
+    case SP_ENT:
+        if (slot == EQ_BODY_ARMOUR)
+        {
+            if (verbose)
+                mprf("You can't wear that!");
+            return false;
+        }
+        break;
+    default: break;
     }
 
     if (species_is_draconian(you.species) && slot == EQ_BODY_ARMOUR)

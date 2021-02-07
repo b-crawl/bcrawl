@@ -38,9 +38,7 @@ enum ability_type
     ABIL_WISP_BLINK,
 #endif
     ABIL_STOP_FLYING,
-#if TAG_MAJOR_VERSION == 34
-    ABIL_MUMMY_RESTORATION,
-#endif
+    ABIL_ENT_PASSWALL,
     // Vampires
     ABIL_TRAN_BAT,
 #if TAG_MAJOR_VERSION == 34

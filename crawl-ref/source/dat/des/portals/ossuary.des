@@ -162,6 +162,7 @@ MAP
 ENDMAP
 
 NAME: nicolae_ossuary_entry_catacombs
+TAGS:   transparent
 FTILE: O1s+ABC = floor_sandstone
 COLOUR: 1s = yellow
 NSUBST: A = + / c, B = + / c, C = + / c, s = 1:O / 4:1 / *:1.....
@@ -181,6 +182,7 @@ ccccccccc
 ENDMAP
 
 NAME: nicolae_ossuary_entry_false_entrances
+TAGS: transparent
 NSUBST: O = O / >
 SHUFFLE: AB/AB/AB/BA
 SUBST: A = m, B = c

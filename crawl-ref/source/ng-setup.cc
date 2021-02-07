@@ -346,7 +346,8 @@ static void _give_items_skills(const newgame_def& ng)
 
     case JOB_SPELUNKER:
         add_spell_to_memory(SPELL_CORONA);
-        add_spell_to_memory(SPELL_PASSWALL);
+        if (you.species != SP_ENT)
+            add_spell_to_memory(SPELL_PASSWALL);
         break;
 
     case JOB_NECROMANCER:

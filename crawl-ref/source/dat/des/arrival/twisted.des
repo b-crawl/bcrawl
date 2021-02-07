@@ -698,7 +698,7 @@ KMASK: uU = no_item_gen
 : -- The corpseless. Before the game starts, you.monster() is "program bug".
 : if (not crawl.game_started()) or race == "Vampire"
 :     or race == "Mummy" or race == "Ghoul" or race == "Skeleton"
-:     or race == "Gargoyle" or race == "Vine Stalker" or race == "Djinni"
+:     or race == "Gargoyle" or race == "Vine Stalker" or race == "Ent" or race == "Djinni"
 :     or race == "Yak" then
 :   mons = "human"
 : end

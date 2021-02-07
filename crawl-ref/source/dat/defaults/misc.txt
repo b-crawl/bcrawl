@@ -31,6 +31,7 @@ autoinscribe += ( ration):!d
 autoinscribe += figurine:!*
 
 item_slot ^= ( ration):e
+item_slot ^= (scroll of identify):i
 item_slot ^= (potion of blood):q
 
 explore_stop = artifacts, glowing_items, stairs, altars, portals, branches, runed_doors, runes, greedy_pickup_smart

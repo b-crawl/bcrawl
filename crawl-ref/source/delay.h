@@ -378,7 +378,7 @@ class PasswallDelay : public Delay
 
     void tick() override
     {
-        mprf(MSGCH_MULTITURN_ACTION, "You continue meditating on the rock.");
+        mprf(MSGCH_MULTITURN_ACTION, "You continue meditating on the barrier.");
     }
 
     void finish() override;

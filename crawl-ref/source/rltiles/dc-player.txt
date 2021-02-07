@@ -95,6 +95,7 @@ oni_m
 oni2_f
 oni2_m
 ent ENT
+ent2
 
 # draconians
 draconian_f DRACONIAN DRACONIAN_FIRST

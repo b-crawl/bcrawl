@@ -330,7 +330,9 @@ static const map<species_type, species_def> species_data =
     HT_LAND, US_ALIVE, SIZE_LARGE,
     15, 8, 5, // 28
     { STAT_STR, STAT_INT }, 4,
-    {},
+    { { MUT_POISON_RESISTANCE, 1, 1 },
+      { MUT_NEGATIVE_ENERGY_RESISTANCE, 3, 1 },
+      { MUT_TORMENT_RESISTANCE, 1, 1 }, },
     {"You move and act slowly.", "You can pass through walls and trees."},
     {"slow actions", "passwall"},
     { JOB_FIGHTER, JOB_MONK, JOB_BERSERKER, JOB_SLOTH_APOSTLE, JOB_SKALD, JOB_EARTH_ELEMENTALIST, JOB_CONJURER, JOB_VENOM_MAGE },

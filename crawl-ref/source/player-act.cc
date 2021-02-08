@@ -646,6 +646,8 @@ string player::unarmed_attack_name() const
     }
     else if (has_usable_tentacles(true))
         default_name = "Tentacles";
+    else if (you.species == SP_ENT)
+        default_name = "Branches";
     else
     {
         default_name = "Fist";

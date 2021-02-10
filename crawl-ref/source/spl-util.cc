@@ -1267,6 +1267,8 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
         // Prohibited to all undead.
         if (you.undead_state(temp))
             return "you're too dead.";
+        if (you.species == SP_ENT)
+            return "you don't have flesh that can be reanimated this way.";
         break;
     case SPELL_DEATHS_DOOR:
         if (temp && you.duration[DUR_DEATHS_DOOR])
@@ -1278,9 +1280,11 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
             return "you're too dead.";
         break;
     case SPELL_NECROMUTATION:
-        // only prohibted to actual undead, not lichformed players
+        // only prohibited to actual undead, not lichformed players
         if (you.undead_state(false))
             return "you're too dead.";
+        if (you.species == SP_ENT)
+            return "you can't transform in this way.";
         break;
 
     case SPELL_OZOCUBUS_ARMOUR:

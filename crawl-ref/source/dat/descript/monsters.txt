@@ -1274,6 +1274,12 @@ green draconian
 
 A muscular green-scaled humanoid with a reptilian tail and small wings.
 %%%%
+greenwood witch
+
+Followers of the ancient forest ways, these witches patrol their sacred
+woodlands on a pair of stilt-like chicken legs. They have mastered a variety
+of spells to incapacitate intruders.
+%%%%
 grey draconian
 
 A muscular grey-scaled humanoid with a reptilian tail and small wings.

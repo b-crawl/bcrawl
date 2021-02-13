@@ -411,6 +411,7 @@ enum monster_type                      // menv[].type
     MONS_TENGU_WARRIOR,
     MONS_TENGU_CONJURER,
     MONS_TENGU_REAVER,
+    MONS_GREENWOOD_WITCH,
 #endif
     MONS_MINOTAUR,
     MONS_NAGA,
@@ -1059,6 +1060,7 @@ enum monster_type                      // menv[].type
     MONS_IRONHEART_BEASTMASTER,
     MONS_ROCKSLIME,
     MONS_ZENATA,
+    MONS_GREENWOOD_WITCH,
 #endif
 
     NUM_MONSTERS,               // used for polymorph

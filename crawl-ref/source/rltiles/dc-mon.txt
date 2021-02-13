@@ -678,6 +678,9 @@ manticore MONS_MANTICORE
 harpy MONS_HARPY
 sphinx MONS_SPHINX
 minotaur MONS_MINOTAUR
+%rim 0
+greenwood_witch MONS_GREENWOOD_WITCH
+%rim 1
 tengu MONS_TENGU
 tengu_conjurer MONS_TENGU_CONJURER
 tengu_warrior MONS_TENGU_WARRIOR

@@ -2015,6 +2015,7 @@ int make_mons_armour(monster_type type, int level)
     case MONS_SALAMANDER_MYSTIC:
     case MONS_SERVANT_OF_WHISPERS:
     case MONS_RAGGED_HIEROPHANT:
+    case MONS_GREENWOOD_WITCH:
         item.base_type = OBJ_ARMOUR;
         item.sub_type  = ARM_ROBE;
         break;

@@ -994,6 +994,14 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
+    { MST_GREENWOOD_WITCH,
+      {
+       { SPELL_SLEEP, 15, MON_SPELL_WIZARD },
+       { SPELL_POLYMORPH, 15, MON_SPELL_WIZARD },
+       { SPELL_BOLT_OF_DRAINING, 30, MON_SPELL_WIZARD },
+      }
+    },
+
     {  MST_SPHINX,
       {
        { SPELL_SENTINEL_MARK, 11, MON_SPELL_WIZARD },

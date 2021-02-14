@@ -113,7 +113,8 @@ Meta-commands
 -------------
 ^A        CMD_TOGGLE_AUTOPICKUP
 ^C        CMD_CLEAR_MAP
-^D, ~     CMD_MACRO_ADD
+~         CMD_MACRO_MENU
+^M, ^D    CMD_MACRO_ADD
 <unbound> CMD_TOGGLE_SOUND      (only when compiled with sound)
 ^Q        CMD_QUIT
 ^R        CMD_REDRAW_SCREEN

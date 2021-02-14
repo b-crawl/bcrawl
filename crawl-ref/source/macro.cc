@@ -1023,59 +1023,62 @@ protected:
     bool is_keymap;
 };
 
-void macro_add_query()
+void macro_menu(bool show_menu)
 {
     int input;
     bool keymap = false;
     KeymapContext keymc = KMC_DEFAULT;
 
     // TODO: roll this all into a single menu with subsections
-
     clear_messages();
-    // TODO: add a (r)eset option in case you mess up?
-    mprf(MSGCH_PROMPT, "(m)acro, keymap "
-                       "[(k) default, (x) level-map, (t)argeting, "
-                       "(c)onfirm, m(e)nu], (s)ave? ");
-    input = m_getch();
-    int low = toalower(input);
+    
+    if (show_menu)
+    {
+        // TODO: add a (r)eset option in case you mess up?
+        mprf(MSGCH_PROMPT, "(m)acro, keymap "
+                           "[(k) default, (x) level-map, (t)argeting, "
+                           "(c)onfirm, m(e)nu], (s)ave? ");
+        input = m_getch();
+        int low = toalower(input);
 
-    if (low == 'k')
-    {
-        keymap = true;
-        keymc  = KMC_DEFAULT;
-    }
-    else if (low == 'x')
-    {
-        keymap = true;
-        keymc  = KMC_LEVELMAP;
-    }
-    else if (low == 't')
-    {
-        keymap = true;
-        keymc  = KMC_TARGETING;
-    }
-    else if (low == 'c')
-    {
-        keymap = true;
-        keymc  = KMC_CONFIRM;
-    }
-    else if (low == 'e')
-    {
-        keymap = true;
-        keymc  = KMC_MENU;
-    }
-    else if (low == 'm')
-        keymap = false;
-    else if (input == 's')
-    {
-        mpr("Saving macros.");
-        macro_save();
-        return;
-    }
-    else
-    {
-        mpr("Aborting.");
-        return;
+        if (low == 'k')
+        {
+            keymap = true;
+            keymc  = KMC_DEFAULT;
+        }
+        else if (low == 'x')
+        {
+            keymap = true;
+            keymc  = KMC_LEVELMAP;
+        }
+        else if (low == 't')
+        {
+            keymap = true;
+            keymc  = KMC_TARGETING;
+        }
+        else if (low == 'c')
+        {
+            keymap = true;
+            keymc  = KMC_CONFIRM;
+        }
+        else if (low == 'e')
+        {
+            keymap = true;
+            keymc  = KMC_MENU;
+        }
+        else if (low == 'm')
+            keymap = false;
+        else if (input == 's')
+        {
+            mpr("Saving macros.");
+            macro_save();
+            return;
+        }
+        else
+        {
+            mpr("Aborting.");
+            return;
+        }
     }
 
     // reference to the appropriate mapping
@@ -1175,34 +1178,43 @@ void macro_add_query()
 
     mprf(MSGCH_WARN, "Current Action for %s: %s",
                                 key_str.c_str(), action_str.c_str());
-    mprf(MSGCH_PROMPT, "Do you wish to (r)edefine, %s%sor (a)bort? ",
-        keymap ? "" : "redefine (R)aw, ",
-        starts_empty ? "" : "(c)lear, ");
-
-    input = getch_ck();
-
-    input = toalower(input);
-    if (!starts_empty && input == 'c')
-    {
-        mprf("Cleared %s '%s' => '%s'.",
-             macro_type.c_str(),
-             key_str.c_str(),
-             action_str.c_str());
-        macro_del(mapref, key);
-        crawl_state.unsaved_macros = true;
-        return;
-    }
-    else if (input != 'r' && input != 'R')
-    {
-        canned_msg(MSG_OK);
-        return;
-    }
-
+    
     keyseq action;
-    if (input == 'R' && !keymap) // why isn't raw input mode used for keymaps?
-        _input_action_raw(macro_type, &action);
+    if (show_menu)
+    {
+        mprf(MSGCH_PROMPT, "Do you wish to (r)edefine, %s%sor (a)bort? ",
+            keymap ? "" : "redefine (R)aw, ",
+            starts_empty ? "" : "(c)lear, ");
+
+        input = getch_ck();
+
+        input = toalower(input);
+        if (!starts_empty && input == 'c')
+        {
+            mprf("Cleared %s '%s' => '%s'.",
+                 macro_type.c_str(),
+                 key_str.c_str(),
+                 action_str.c_str());
+            macro_del(mapref, key);
+            crawl_state.unsaved_macros = true;
+            return;
+        }
+        else if (input != 'r' && input != 'R')
+        {
+            canned_msg(MSG_OK);
+            return;
+        }
+
+        if (input == 'R' && !keymap) // why isn't raw input mode used for keymaps?
+            _input_action_raw(macro_type, &action);
+        else
+            _input_action_text(macro_type, &action);
+    }
     else
+    {
+        mpr("(Press escape to abort, or return to clear current macro.)");
         _input_action_text(macro_type, &action);
+    }
 
     if (action.empty())
     {

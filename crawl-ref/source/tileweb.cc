@@ -25,6 +25,7 @@
 #include "json-wrapper.h"
 #include "lang-fake.h"
 #include "libutil.h"
+#include "macro.h"
 #include "map-knowledge.h"
 #include "menu.h"
 #include "message.h"
@@ -369,7 +370,8 @@ wint_t TilesFramework::_handle_control_message(sockaddr_un addr, string data)
         JsonWrapper keycode = json_find_member(obj.node, "keycode");
         keycode.check(JSON_NUMBER);
 
-        c = (int) keycode->number_;
+        // TODO: remove this fixup call
+        c = function_keycode_fixup((int) keycode->number_);
     }
     else if (msgtype == "spectator_joined")
     {

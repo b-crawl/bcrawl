@@ -96,6 +96,7 @@
   - v1.28.3: Wands have damage info. (by PleasingFungus)
   - v1.28.3: Displayed player stealth is uncapped. (by hellmonk)
   - v1.29: Manuals no longer take up inventory space. (by PleasingFungus)
+  - v1.29.2: There is a new menu for macros. "~" brings up the full menu, while control-M and control-D bring up a simplified menu.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.

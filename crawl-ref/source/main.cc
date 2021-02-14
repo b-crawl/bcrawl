@@ -1766,7 +1766,8 @@ void process_command(command_type cmd)
     // Repeat commands.
     case CMD_REPEAT_CMD:     _do_cmd_repeat();  break;
     case CMD_PREV_CMD_AGAIN: _do_prev_cmd_again(); break;
-    case CMD_MACRO_ADD:      macro_add_query();    break;
+    case CMD_MACRO_MENU:     macro_menu();    break;
+    case CMD_MACRO_ADD:      macro_menu(false);    break;
 
     // Toggle commands.
     case CMD_DISABLE_MORE: crawl_state.show_more_prompt = false; break;

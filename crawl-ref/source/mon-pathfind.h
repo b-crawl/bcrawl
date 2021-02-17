@@ -1,6 +1,5 @@
 #pragma once
 
-#include "coord-def.h"
 #include "defines.h"
 #include "fixedvector.h"
 #include "maybe-bool.h"

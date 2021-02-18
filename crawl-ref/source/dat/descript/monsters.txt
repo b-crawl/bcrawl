@@ -2123,9 +2123,9 @@ life force of living beings.
 shambling mangrove
 
 A gnarled mangrove, possessed of sapience and a cantankerous disposition. Its
-roots run deep through the water and soil of its marshy home and can make
-footing very difficult for those who provoke its ire. Marsh fauna are often
-found nesting within its branches, and may not take kindly to being disturbed.
+roots run deep through the water and soil and can make footing very difficulty
+for those who provoke its ire. Fauna are often found nesting within its 
+branches, and may not take kindly to being disturbed.
 %%%%
 shapeshifter
 
@@ -2404,8 +2404,8 @@ powerful, even among giants.
 %%%%
 thorn hunter
 
-A predatory marsh plant, possessed of motility and a rudimentary intelligence.
-It ensnares its prey with protrusions of spiny brambles and then skewers the
+A predatory plant, possessed of motility and a rudimentary intelligence. It 
+ensnares its prey with protrusions of spiny brambles and then skewers the
 trapped creatures with its razor-sharp thorns.
 %%%%
 toadstool

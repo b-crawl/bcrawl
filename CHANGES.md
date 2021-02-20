@@ -96,7 +96,7 @@
   - v1.28.3: Wands have damage info. (by PleasingFungus)
   - v1.28.3: Displayed player stealth is uncapped. (by hellmonk)
   - v1.29: Manuals no longer take up inventory space. (by PleasingFungus)
-  - v1.29.2: There is a new menu for macros. "~" brings up the full menu, while control-M and control-D bring up a simplified menu.
+  - v1.29.2: There is a new menu for macros. "~" brings up the full menu, while control-M and control-space bring up a simplified menu.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -340,6 +340,7 @@
   - v1.27.5: Uskayaw's Line Pass ability causes 5 to 7 turns of exhaustion.
   - v1.27.5: Uskayaw's Grand Finale ability fully refills mana.
   - v1.28.2: Trog summons are adjusted to not become weaker at maximum piety.
+  - v1.29.3: Lugonu gives monsters created by Corrupt a Corona enchantment, to avoid the player angering invisible monsters.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

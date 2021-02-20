@@ -106,7 +106,8 @@
 {'!', CMD_ANNOTATE_LEVEL},
 {'$', CMD_LIST_GOLD},
 {CONTROL('D'), CMD_MACRO_ADD},
-{CONTROL('M'), CMD_MACRO_ADD},
+// control-space; was control-M but that uses the code for return
+{-64, CMD_MACRO_ADD},
 {'~', CMD_MACRO_MENU},
 #ifdef WIZARD
 {'&', CMD_WIZARD},

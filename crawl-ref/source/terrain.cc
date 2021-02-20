@@ -580,7 +580,38 @@ dungeon_feature_type altar_for_god(god_type god)
  */
 bool feat_is_altar(dungeon_feature_type grid)
 {
-    return feat_altar_god(grid) != GOD_NO_GOD;
+    switch (grid)
+    {
+    case DNGN_ALTAR_ZIN:
+    case DNGN_ALTAR_SHINING_ONE:
+    case DNGN_ALTAR_KIKUBAAQUDGHA:
+    case DNGN_ALTAR_YREDELEMNUL:
+    case DNGN_ALTAR_XOM:
+    case DNGN_ALTAR_VEHUMET:
+    case DNGN_ALTAR_OKAWARU:
+    case DNGN_ALTAR_MAKHLEB:
+    case DNGN_ALTAR_SIF_MUNA:
+    case DNGN_ALTAR_TROG:
+    case DNGN_ALTAR_NEMELEX_XOBEH:
+    case DNGN_ALTAR_ELYVILON:
+    case DNGN_ALTAR_LUGONU:
+    case DNGN_ALTAR_BEOGH:
+    case DNGN_ALTAR_JIYVA:
+    case DNGN_ALTAR_FEDHAS:
+    case DNGN_ALTAR_CHEIBRIADOS:
+    case DNGN_ALTAR_ASHENZARI:
+    case DNGN_ALTAR_DITHMENOS:
+    case DNGN_ALTAR_GOZAG:
+    case DNGN_ALTAR_QAZLAL:
+    case DNGN_ALTAR_RU:
+    case DNGN_ALTAR_PAKELLAS:
+    case DNGN_ALTAR_USKAYAW:
+    case DNGN_ALTAR_HEPLIAKLQANA:
+    case DNGN_ALTAR_WU_JIAN:
+    case DNGN_ALTAR_ECUMENICAL:
+        return true;
+    default: return false;
+    }
 }
 
 /** Is this feature an altar to the player's god?

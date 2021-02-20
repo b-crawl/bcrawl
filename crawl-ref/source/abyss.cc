@@ -1794,7 +1794,11 @@ static bool _spawn_corrupted_servant_near(const coord_def &pos)
         mgen_data mg(mons, BEH_NEUTRAL, p);
         mg.set_summoned(0, 5, 0).set_non_actor_summoner("Lugonu's corruption");
         mg.place = BRANCH_ABYSS;
-        return create_monster(mg);
+        monster* mon = create_monster(mg);
+        // invis monsters blocking the player make Corrupt too dangerous to use
+        if (mon)
+            mon->add_ench(mon_enchant(ENCH_CORONA, 1));
+        return mon;
     }
 
     return false;

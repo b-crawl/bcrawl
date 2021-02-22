@@ -891,7 +891,8 @@ void floor_transition(dungeon_feature_type how,
     request_autopickup();
     
     if(!going_up && feat_is_staircase(how) && one_chance_in(25)
-        && !(player_in_branch(BRANCH_DUNGEON) && you.depth < 4))
+        && !(player_in_branch(BRANCH_DUNGEON) && you.depth < 4)
+        && !feat_is_portal(how))
     {
         mpr("Near the exit of the stairs, a rune flashes!");
         if (you.no_tele(true, true))

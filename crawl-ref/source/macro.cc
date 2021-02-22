@@ -1212,18 +1212,22 @@ void macro_menu(bool show_menu)
     }
     else
     {
-        mpr("(Press escape to abort, or return to clear current macro.)");
         _input_action_text(macro_type, &action);
     }
 
-    if (action.empty())
+    if (action.empty() && !starts_empty)
     {
-        const bool deleted_macro = macro_del(mapref, key);
-        if (deleted_macro)
+        if (yesno("Clear macro?", true, 'Y'))
         {
-            mprf("Deleted %s for '%s'.",
-                 macro_type.c_str(),
-                 key_str.c_str());
+            const bool deleted_macro = macro_del(mapref, key);
+            if (deleted_macro)
+            {
+                mprf("Deleted %s for '%s'.",
+                     macro_type.c_str(),
+                     key_str.c_str());
+            }
+            else
+                canned_msg(MSG_OK);
         }
         else
             canned_msg(MSG_OK);

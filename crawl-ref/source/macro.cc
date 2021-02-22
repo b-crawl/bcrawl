@@ -1213,7 +1213,7 @@ void macro_menu(bool show_menu)
     else
     {
         mpr("(Press escape to abort, or return to clear current macro.)");
-        _input_action_raw(macro_type, &action);
+        _input_action_text(macro_type, &action);
     }
 
     if (action.empty())

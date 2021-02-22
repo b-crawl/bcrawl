@@ -1215,9 +1215,9 @@ void macro_menu(bool show_menu)
         _input_action_text(macro_type, &action);
     }
 
-    if (action.empty() && !starts_empty)
+    if (action.empty())
     {
-        if (yesno("Clear macro?", true, 'Y'))
+        if (!starts_empty && yesno("Clear macro?", true, 'Y'))
         {
             const bool deleted_macro = macro_del(mapref, key);
             if (deleted_macro)

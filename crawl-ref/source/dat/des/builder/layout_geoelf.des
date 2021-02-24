@@ -146,7 +146,7 @@ TAGS:   no_rotate no_vmirror no_hmirror
 
   -- generate the layout
   geoelf.generate(_G, room_data, corridor_data, extra_corridor_fraction,
-                  fancy_room_fraction, false, false)
+                  fancy_room_fraction, false, false, false)
 }}
 MAP
 ENDMAP
@@ -289,7 +289,7 @@ TAGS:   no_rotate no_vmirror no_hmirror
 
   -- generate the layout
   geoelf.generate(_G, room_data, corridor_data, extra_corridor_fraction,
-                  fancy_room_fraction, false, false)
+                  fancy_room_fraction, false, false, false)
 }}
 MAP
 ENDMAP
@@ -546,7 +546,7 @@ TAGS:   no_rotate no_vmirror no_hmirror
 
   -- generate the layout
   geoelf.generate(_G, room_data, corridor_data, extra_corridor_fraction,
-                  fancy_room_fraction, false, false)
+                  fancy_room_fraction, false, false, false)
 }}
 MAP
 ENDMAP

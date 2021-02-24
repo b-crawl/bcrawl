@@ -361,7 +361,8 @@ end
 
 function geoelf.generate (e, room_data, corridor_data,
                           extra_fraction, fancy_room_fraction,
-                          only_trees, force_open_room_edge)
+                          only_trees, force_open_room_edge,
+                          in_slime)
   if (room_data == nil) then
     crawl.mpr("Error: No room data array")
   end
@@ -431,12 +432,14 @@ function geoelf.generate (e, room_data, corridor_data,
                                open    = (geoelf.glyphs.ALL_FLOORLIKE ..
                                           geoelf.glyphs.ALL_DOORS),
                                replace = geoelf.glyphs.FLOOR }
-  e.add_windows {wall   = geoelf.glyphs.ALL_WALLLIKE,
-                 open   = geoelf.glyphs.ALL_FLOORLIKE,
-                 window = geoelf.glyphs.GLASS }
-  geoelf.make_glass_doors(e)
-  geoelf.glyphs.assign_glyphs(e, only_trees)
-  e.subst(geoelf.glyphs.FOUNTAIN .. " = TTUV")
+  if not in_slime then
+    e.add_windows {wall   = geoelf.glyphs.ALL_WALLLIKE,
+                   open   = geoelf.glyphs.ALL_FLOORLIKE,
+                   window = geoelf.glyphs.GLASS }
+    geoelf.make_glass_doors(e)
+    geoelf.glyphs.assign_glyphs(e, only_trees)
+    e.subst(geoelf.glyphs.FOUNTAIN .. " = TTUV")
+  end
 
   if (geoelf.debug) then
     -- print the map to console

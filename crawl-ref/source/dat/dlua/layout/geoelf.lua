@@ -356,13 +356,16 @@ end
 --                           edge
 --    -> the maps normally look better with this off, but can
 --       become disconnected in a few very rare cases
+--  -> in_slime: Whether to use the Slime variant of the layout
+--  -> fancy_room_fraction: The fraction of the rooms that are
+--                          made from stone (Slime only)
 -- Returns: N/A
 --
 
 function geoelf.generate (e, room_data, corridor_data,
                           extra_fraction, fancy_room_fraction,
                           only_trees, force_open_room_edge,
-                          in_slime)
+                          in_slime, stone_room_fraction)
   if (room_data == nil) then
     crawl.mpr("Error: No room data array")
   end
@@ -386,6 +389,12 @@ function geoelf.generate (e, room_data, corridor_data,
   end
   if (force_open_room_edge == nil) then
     crawl.mpr("Error: force_open_room_edge is nil")
+  end
+  if (in_slime == nil) then
+    crawl.mpr("Error: in_slime is nil")
+  end
+  if (stone_room_fraction == nil) then
+    crawl.mpr("Error: stone_room_fraction is nil")
   end
 
   if (geoelf.debug) then
@@ -420,7 +429,8 @@ function geoelf.generate (e, room_data, corridor_data,
     if (not room_data[draw_order[i]].is_dummy) then
       geoelf.rooms.draw(e, room_data, corridor_data, draw_order[i],
                         (crawl.random_real() < fancy_room_fraction),
-                        force_open_room_edge)
+                        force_open_room_edge, in_slime, 
+                        (crawl.random_real() < stone_room_fraction))
     end
   end
 
@@ -437,9 +447,9 @@ function geoelf.generate (e, room_data, corridor_data,
                    open   = geoelf.glyphs.ALL_FLOORLIKE,
                    window = geoelf.glyphs.GLASS }
     geoelf.make_glass_doors(e)
+  end
     geoelf.glyphs.assign_glyphs(e, only_trees)
     e.subst(geoelf.glyphs.FOUNTAIN .. " = TTUV")
-  end
 
   if (geoelf.debug) then
     -- print the map to console

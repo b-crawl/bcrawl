@@ -45,7 +45,10 @@ TAGS:   no_rotate no_vmirror no_hmirror
   local radius_min = math.floor(2.5 - depth_fraction + crawl.random_real())
   local radius_max = math.floor(5 - depth_fraction + crawl.random_real())
   local extra_corridor_fraction = 0.6 + depth_fraction * 0.2
-  local fancy_room_fraction = 0
+  -- fraction of stone rooms that can be fancy
+  local fancy_room_fraction = 0.3
+  -- fraction of rooms that are stone (decrease by 0.3 per floor)
+  local stone_room_fraction = 0.9 - depth_fraction
 
   -- create the arrays
   local room_data         = { count = 0 }
@@ -130,7 +133,7 @@ TAGS:   no_rotate no_vmirror no_hmirror
 
   -- generate the layout
   geoelf.generate(_G, room_data, corridor_data, extra_corridor_fraction,
-                  fancy_room_fraction, false, false, true)
+                  fancy_room_fraction, false, false, true, stone_room_fraction)
 }}
 MAP
 ENDMAP

@@ -23,6 +23,7 @@ geoelf.glyphs    = {}    -- Namespace for glyph constants, etc.
 --
 
 geoelf.glyphs.WALL           = 'x'
+geoelf.glyphs.STONE          = 'c'
 geoelf.glyphs.DOOR           = '+'
 geoelf.glyphs.FLOOR          = '.'
 geoelf.glyphs.CORRIDOR       = '_'
@@ -90,6 +91,7 @@ geoelf.glyphs.ALL_FLOORLIKE   = geoelf.glyphs.FLOOR ..
 -- for room floors
 geoelf.glyphs.OPEN_SUBSTITUTIONS =
   { [geoelf.glyphs.WALL]           = geoelf.glyphs.FLOOR,
+    [geoelf.glyphs.STONE]          = geoelf.glyphs.FLOOR,
     [geoelf.glyphs.DOOR]           = geoelf.glyphs.CORRIDOR,
     [geoelf.glyphs.FLOOR]          = geoelf.glyphs.FLOOR,
     [geoelf.glyphs.CORRIDOR]       = geoelf.glyphs.CORRIDOR,
@@ -109,9 +111,10 @@ geoelf.glyphs.OPEN_SUBSTITUTIONS =
     [geoelf.glyphs.GLASS_FOUNTAIN] = geoelf.glyphs.FLOOR
   }
 
--- for the wall around a room
+-- for the wall around a room in Elf
 geoelf.glyphs.BORDER_SUBSTITUTIONS =
   { [geoelf.glyphs.WALL]           = geoelf.glyphs.WALL,
+    [geoelf.glyphs.STONE]          = geoelf.glyphs.STONE,
     [geoelf.glyphs.DOOR]           = geoelf.glyphs.DOOR,
     [geoelf.glyphs.FLOOR]          = geoelf.glyphs.WALL,
     [geoelf.glyphs.CORRIDOR]       = geoelf.glyphs.DOOR,
@@ -131,9 +134,33 @@ geoelf.glyphs.BORDER_SUBSTITUTIONS =
     [geoelf.glyphs.GLASS_FOUNTAIN] = geoelf.glyphs.GLASS_FOUNTAIN,
   }
 
--- for the line one around the room wall
+-- for the wall around a room in Slime
+geoelf.glyphs.STONE_BORDER_SUBSTITUTIONS =
+{ [geoelf.glyphs.WALL]           = geoelf.glyphs.STONE,
+  [geoelf.glyphs.STONE]          = geoelf.glyphs.STONE,
+  [geoelf.glyphs.DOOR]           = geoelf.glyphs.DOOR,
+  [geoelf.glyphs.FLOOR]          = geoelf.glyphs.STONE,
+  [geoelf.glyphs.CORRIDOR]       = geoelf.glyphs.DOOR,
+  [geoelf.glyphs.TREE]           = geoelf.glyphs.STONE,
+  [geoelf.glyphs.BUSH]           = geoelf.glyphs.STONE,
+  [geoelf.glyphs.PLANT]          = geoelf.glyphs.STONE,
+  [geoelf.glyphs.FUNGUS]         = geoelf.glyphs.STONE,
+  [geoelf.glyphs.STATUE]         = geoelf.glyphs.STONE,
+  [geoelf.glyphs.FOUNTAIN]       = geoelf.glyphs.STONE,
+  [geoelf.glyphs.GLASS]          = geoelf.glyphs.STONE,
+  [geoelf.glyphs.GLASS_DOOR]     = geoelf.glyphs.STONE,
+  [geoelf.glyphs.GLASS_TREE]     = geoelf.glyphs.STONE,
+  [geoelf.glyphs.GLASS_BUSH]     = geoelf.glyphs.STONE,
+  [geoelf.glyphs.GLASS_PLANT]    = geoelf.glyphs.STONE,
+  [geoelf.glyphs.GLASS_FUNGUS]   = geoelf.glyphs.STONE,
+  [geoelf.glyphs.GLASS_STATUE]   = geoelf.glyphs.STONE,
+  [geoelf.glyphs.GLASS_FOUNTAIN] = geoelf.glyphs.STONE,
+}
+
+-- for the line one around the room wall in Elf
 geoelf.glyphs.OUTLINE_SUBSTITUTIONS =
   { [geoelf.glyphs.WALL]           = geoelf.glyphs.WALL,
+    [geoelf.glyphs.STONE]          = geoelf.glyphs.STONE,
     [geoelf.glyphs.DOOR]           = geoelf.glyphs.DOOR,
     [geoelf.glyphs.FLOOR]          = geoelf.glyphs.FLOOR,
     [geoelf.glyphs.CORRIDOR]       = geoelf.glyphs.CORRIDOR,
@@ -151,6 +178,29 @@ geoelf.glyphs.OUTLINE_SUBSTITUTIONS =
     [geoelf.glyphs.GLASS_FUNGUS]   = geoelf.glyphs.GLASS_FUNGUS,
     [geoelf.glyphs.GLASS_STATUE]   = geoelf.glyphs.GLASS_STATUE,
     [geoelf.glyphs.GLASS_FOUNTAIN] = geoelf.glyphs.GLASS_FOUNTAIN,
+  }
+
+-- for the line one around the room wall in Slime
+geoelf.glyphs.STONE_OUTLINE_SUBSTITUTIONS =
+  { [geoelf.glyphs.WALL]           = geoelf.glyphs.STONE,
+    [geoelf.glyphs.STONE]          = geoelf.glyphs.STONE,
+    [geoelf.glyphs.DOOR]           = geoelf.glyphs.DOOR,
+    [geoelf.glyphs.FLOOR]          = geoelf.glyphs.FLOOR,
+    [geoelf.glyphs.CORRIDOR]       = geoelf.glyphs.CORRIDOR,
+    [geoelf.glyphs.TREE]           = geoelf.glyphs.FLOOR,
+    [geoelf.glyphs.BUSH]           = geoelf.glyphs.FLOOR,
+    [geoelf.glyphs.PLANT]          = geoelf.glyphs.FLOOR,
+    [geoelf.glyphs.FUNGUS]         = geoelf.glyphs.FLOOR,
+    [geoelf.glyphs.STATUE]         = geoelf.glyphs.FLOOR,
+    [geoelf.glyphs.FOUNTAIN]       = geoelf.glyphs.FLOOR,
+    [geoelf.glyphs.GLASS]          = geoelf.glyphs.STONE,
+    [geoelf.glyphs.GLASS_DOOR]     = geoelf.glyphs.STONE,
+    [geoelf.glyphs.GLASS_TREE]     = geoelf.glyphs.STONE,
+    [geoelf.glyphs.GLASS_BUSH]     = geoelf.glyphs.STONE,
+    [geoelf.glyphs.GLASS_PLANT]    = geoelf.glyphs.STONE,
+    [geoelf.glyphs.GLASS_FUNGUS]   = geoelf.glyphs.STONE,
+    [geoelf.glyphs.GLASS_STATUE]   = geoelf.glyphs.STONE,
+    [geoelf.glyphs.GLASS_FOUNTAIN] = geoelf.glyphs.STONE,
   }
 
 -- choosing a random feature
@@ -255,4 +305,7 @@ function geoelf.glyphs.assign_glyphs (e, only_trees)
   --e.tile( geoelf.glyphs.GLASS_FUNGUS   .. " = stained_glass_fungus")
   --e.tile( geoelf.glyphs.GLASS_STATUE   .. " = stained_glass_statue")
   --e.tile( geoelf.glyphs.GLASS_FOUNTAIN .. " = stained_glass_fountain")
+
+  --Stone walls (Slime only)
+  e.kfeat(geoelf.glyphs.STONE .. " = stone_wall")
 end

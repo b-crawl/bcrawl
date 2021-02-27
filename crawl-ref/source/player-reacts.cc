@@ -175,8 +175,13 @@ static void _decrement_petrification(int delay)
         string flesh_equiv = "flesh";
         if(!get_form()->flesh_equivalent.empty())
             flesh_equiv = get_form()->flesh_equivalent;
-        else if (you.species == SP_SKELETON)
-            flesh_equiv = "bones";
+        else
+            switch (you.species)
+            {
+            case SP_SKELETON: flesh_equiv = "bones"; break;
+            case SP_ENT: flesh_equiv = "wood"; break;
+            default: break;
+            }
 
         mprf(MSGCH_DURATION, "You turn to %s and can move again.",
              flesh_equiv.c_str());

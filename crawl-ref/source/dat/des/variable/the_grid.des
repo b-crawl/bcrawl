@@ -118,7 +118,7 @@ function the_grid_main_setup(e,no_doors)
 end
 }}
 
-default-depth: D:7-, Depths, Elf
+default-depth: D:8-, Depths, Elf
 
 ################################################################################
 # Original (9x9 square) main vaults
@@ -419,7 +419,7 @@ ENDMAP
 #
 NAME:       minmay_the_grid_triangle_9x9_recursive_2
 ORIENT:     float
-DEPTH:      D:7-, Depths, Elf
+DEPTH:      D:8-, Depths, Elf
 SUBVAULT:   A : the_grid_triangle_9x9_prize
 SUBVAULT:   B : the_grid_triangle_9x9
 SUBVAULT:   C : the_grid_triangle_9x9

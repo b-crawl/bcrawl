@@ -1595,9 +1595,10 @@ bool acquirement(object_class_type class_wanted, int agent,
             for (unsigned int i = 0; i < stock.size(); ++i)
             {
                 const item_def& item = mitm[stock[i]];
-                if (item != NON_ITEM)
+                string item_name = item.name(DESC_PLAIN, false, true);
+                if (item_name[0] != '!')
                 {
-                    mprf("%c: %s", selection_key, item.name(DESC_PLAIN, false, true).c_str());
+                    mprf("%c: %s", selection_key, item_name.c_str());
                     made_count++;
                 }
                 selection_key++;

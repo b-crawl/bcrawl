@@ -1590,12 +1590,34 @@ bool acquirement(object_class_type class_wanted, int agent,
             else
                 mprf(MSGCH_PROMPT, "\nAcquire which item? (Press ! for descriptions.)");
             
+            int made_count = 0;
             char selection_key = 'A';
             for (unsigned int i = 0; i < stock.size(); ++i)
             {
                 const item_def& item = mitm[stock[i]];
-                mprf("%c: %s", selection_key, item.name(DESC_PLAIN, false, true).c_str());
+                if (item != NON_ITEM)
+                {
+                    mprf("%c: %s", selection_key, item.name(DESC_PLAIN, false, true).c_str());
+                    made_count++;
+                }
                 selection_key++;
+            }
+
+            // temp fix for failed acq bug: return the scroll
+            if (!made_count)
+            {
+                for (unsigned int i =0; i < selected.size(); i++)
+                {
+                    item_def& item = mitm[stock[i]];
+                    destroy_item(item);
+                }
+
+                string error;
+                create_item_named("scroll of acquirement q:1", you.pos(), &error);
+                if (!error.empty())
+                    mprf(MSGCH_ERROR, "Error: %s", error.c_str());
+                
+                return false;
             }
             flush_prev_message();
             

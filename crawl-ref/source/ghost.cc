@@ -602,7 +602,8 @@ void ghost_demon::init_dancing_weapon(const item_def& weapon, int power)
 
 void ghost_demon::init_spectral_weapon(const item_def& weapon, int power)
 {
-    int damg = property(weapon, PWPN_DAMAGE);
+    int dmg = property(weapon, PWPN_DAMAGE);
+    int delay = property(weapon, PWPN_SPEED);
 
     if (power > 100)
         power = 100;
@@ -612,14 +613,14 @@ void ghost_demon::init_spectral_weapon(const item_def& weapon, int power)
 
     // Offense and defenses all scale with power.
     xl        = 2 + div_rand_round(power, 4);
-    damage    = damg;
+    damage    = dmg;
     int scale = 250 * 150 / (50 + power);
     damage   *= scale + 125;
     damage   /= scale;
 
-    speed  = 30;
-    ev     = 10 + div_rand_round(power, 10);
-    ac     = 2 + div_rand_round(power, 10);
+    speed  = 380 / delay;
+    ev     = div_rand_round((100 + power) * 14, delay * 8);
+    ac     = div_rand_round((20 + power) * dmg, 60);
     max_hp = 10 + div_rand_round(power, 3);
 }
 

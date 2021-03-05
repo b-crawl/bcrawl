@@ -1638,9 +1638,13 @@ void scorefile_entry::init(time_t dt)
         int win_multiplier = 1;
         if (death_type == KILLED_BY_WINNING)
             win_multiplier = 2;
+        
+        int adjusted_turncount = you.num_turns;
+        if (you.species == SP_FELID)
+            adjusted_turncount += 1000;
 
 // ~=((2.75*10^11 * sqrt(runes) * (1 + wins) + 3.36*10^7 * sqrt(experience)) / (turns + 1000))
-        points = (experience_score_int + (rune_score_int * win_multiplier)) / (you.num_turns + 1000);
+        points = (experience_score_int + (rune_score_int * win_multiplier)) / (adjusted_turncount + 1000);
     }
     else
         ASSERT(crawl_state.game_is_sprint());

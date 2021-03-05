@@ -917,6 +917,10 @@ static void _equip_armour_effect(item_def& arm, bool unmeld,
             else
                 mpr("You feel powerful.");
             break;
+        
+        case SPARM_MANA_REGEN:
+            mpr("You feel your recovery of magical power quicken.");
+            break;
 
         case SPARM_SPIRIT_SHIELD:
             _spirit_shield_message(unmeld);
@@ -1082,6 +1086,10 @@ static void _unequip_armour_effect(item_def& item, bool meld,
 
     case SPARM_ARCHMAGI:
         mpr("You feel strangely numb.");
+        break;
+
+    case SPARM_MANA_REGEN:
+        mpr("You feel your recovery of magical power slow down.");
         break;
 
     case SPARM_SPIRIT_SHIELD:

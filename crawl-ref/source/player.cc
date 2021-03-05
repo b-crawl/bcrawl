@@ -1173,6 +1173,10 @@ int player_mp_regen()
     if (you.get_mutation_level(MUT_MANA_REGENERATION))
         regen_amount *= 2;
 
+    item_def *body_arm = you.slot_item(EQ_BODY_ARMOUR);
+    if (body_arm && get_armour_ego_type(*body_arm) == SPARM_MANA_REGEN)
+        regen_amount *= 2;
+
     if (you.props[MANA_REGEN_AMULET_ACTIVE].get_int() == 1)
         regen_amount += 25;
 

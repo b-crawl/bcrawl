@@ -842,11 +842,12 @@ static special_armour_type _generate_armour_type_ego(armour_type type,
     case ARM_ROBE:
         return random_choose_weighted(1, SPARM_RESISTANCE,
                                       1, SPARM_ARCHMAGI,
-                                      2, SPARM_NORMAL,
                                       2, SPARM_COLD_RESISTANCE,
                                       2, SPARM_FIRE_RESISTANCE,
                                       2, SPARM_POSITIVE_ENERGY,
-                                      4, SPARM_MAGIC_RESISTANCE);
+                                      4, SPARM_MAGIC_RESISTANCE,
+                                      8, SPARM_MANA_REGEN,
+                                      20, SPARM_NORMAL);
 
     case ARM_PLATE_ARMOUR:
         return random_choose_weighted(26, SPARM_FIRE_RESISTANCE,
@@ -1184,7 +1185,7 @@ static void _generate_armour_item(item_def& item, bool allow_uniques,
         set_item_ego_type(item, OBJ_ARMOUR,
                           _generate_armour_ego(item, item_level));
     }
-    else if ((forced_ego || item.sub_type == ARM_HAT
+    else if ((forced_ego || item.sub_type == ARM_HAT || item.sub_type == ARM_ROBE
                     || x_chance_in_y(51 + item_level, 250))
                 && !item.is_mundane() || force_good)
     {

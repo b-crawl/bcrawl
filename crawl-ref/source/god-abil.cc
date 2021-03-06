@@ -1404,12 +1404,11 @@ bool elyvilon_divine_vigour()
         mprf("%s grants you divine vigour.",
              god_name(GOD_ELYVILON).c_str());
 
-        const int vigour_amt = 1 + you.skill_rdiv(SK_INVOCATIONS, 1, 3);
+        const int vigour_amt = 60 + you.skill_rdiv(SK_INVOCATIONS, 10);
         const int old_hp_max = you.hp_max;
         const int old_mp_max = you.max_magic_points;
         you.attribute[ATTR_DIVINE_VIGOUR] = vigour_amt;
-        you.set_duration(DUR_DIVINE_VIGOUR,
-                         40 + you.skill_rdiv(SK_INVOCATIONS, 5, 2));
+        you.set_duration(DUR_DIVINE_VIGOUR, 40 + you.skill_rdiv(SK_INVOCATIONS, 5, 2));
 
         calc_hp();
         inc_hp((you.hp_max * you.hp + old_hp_max - 1)/old_hp_max - you.hp);

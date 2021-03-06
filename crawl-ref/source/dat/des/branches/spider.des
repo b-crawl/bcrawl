@@ -426,32 +426,17 @@ ENDMAP
 
 NAME:   hangedman_spider_trapstep
 TAGS:   no_monster_gen no_pool_fixup patrolling allow_dup
-DEPTH:  Spider:1-2, Zot, !Zot:$
+DEPTH:  Spider:1-2
 KMONS:  0 = patrolling hornet
 KMONS:  1 = tarantella
-: if you.in_branch("Zot") then
-KMONS:  2* = jumping spider / orb spider w:5
-KMONS:  3| = ghost moth / moth of wrath
-KITEM:  | = any good_item
-KFEAT:  ` = known zot trap
-KFEAT:  ^ = web w:7 / known web trap w:1 / any trap w:1 / . w:7
-:   if you.depth() == dgn.br_depth("Zot") - 1 then
-KFEAT:  ~ = zot trap w:20 / web w:8 / known web trap w:2 / . w:5
-:   else
-KFEAT:  ~ = zot trap w:15 / shaft trap / web w:4 / known web trap w:1 / . w:5
-:   end
-NSUBST: 4 = 1:122 / 1:112
-SUBST:  X = c
-: else
 KMONS:  2 = tarantella
 KMONS:  3 = orb spider
 KITEM:  | = superb_item / any good_item w:5
 KFEAT:  ` = known shaft trap
-KFEAT:  ^ = web w:9 / known web trap w:1 / . w:6
-KFEAT:  ~ = shaft trap w:15 / web / . w:5
+KFEAT:  ^ = web w:10 / . w:6
+KFEAT:  ~ = shaft trap w:5 / web w:5 / . w:5
 NSUBST: 4 = 1:2 / *:W
 SUBST:  X = x
-: end
 KITEM:  * = star_item / superb_item w:5
 KFEAT:  123*| = shallow_water
 KMASK:  . = !no_monster_gen

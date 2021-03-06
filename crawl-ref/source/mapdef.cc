@@ -4959,6 +4959,7 @@ int str_to_ego(object_class_type item_type, string ego_str)
         "repulsion",
         "cloud_immunity",
         "stasis",
+        "magic recovery",
         nullptr
     };
     COMPILE_CHECK(ARRAYSZ(armour_egos) == NUM_REAL_SPECIAL_ARMOURS);

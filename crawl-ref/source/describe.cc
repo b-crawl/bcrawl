@@ -1734,6 +1734,9 @@ static string _describe_armour(const item_def &item, bool verbose)
             description += "It increases the power of its wearer's "
                 "magical spells.";
             break;
+        case SPARM_MANA_REGEN:
+            description += "It doubles the wearer's natural recovery of magical power.";
+            break;
 #if TAG_MAJOR_VERSION == 34
         case SPARM_PRESERVATION:
             description += "It does nothing special.";

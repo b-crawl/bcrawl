@@ -19,7 +19,8 @@
   - v1.20: Early out-of-depth monsters do not spawn with their band. This reduces the number of Orc Priests on D:2.
   - v1.20: Some gods will warn the player about doing Elf or Slime at a low XL.
   - v1.23: Orange crystal statues can appear in Spider.
-  - v1.28.5: Players that reached their max experience level can enter Pandemonium while holding the Orb of Zot. 
+  - v1.28.5: Players that reached their max experience level can enter Pandemonium while holding the Orb of Zot.
+  - v1.30: The Hall of Zot in Zot:5 has a slightly different shape.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -182,6 +183,7 @@
   - v1.28: Vine Stalkers and their evolutions have a better Dodging aptitude (+0 -> +1).
   - v1.28.1: Mummies have a better Hexes aptitude (-1 -> +0).
   - v1.28.1: White draconian breath always hits.
+  - v1.30: To balance high scores across species, felid turn counts are treated as 1000 higher than for other species for scoring purposes.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -261,6 +263,7 @@
   - v1.27.6: Spectral Weapons can see invisible.
   - v1.28.2: Agony is level 4.
   - v1.28.3: Irradiate damage is affected by monster AC.
+  - v1.30: Spectral weapon AC and EV are reworked: AC is multiplied by weapon base damage, and EV is divided by weapon base delay.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -342,6 +345,7 @@
   - v1.27.5: Uskayaw's Grand Finale ability fully refills mana.
   - v1.28.2: Trog summons are adjusted to not become weaker at maximum piety.
   - v1.29.3: Lugonu gives monsters created by Corrupt a Corona enchantment, to avoid the player angering invisible monsters.
+  - v1.30: Elyvilon's Divine Vigour ability now gives an absolute bonus to HP and MP instead of a percent bonus. This new bonus is (6 + Invocations)\*10/3 for HP and (6 + Invocations)\*5/4 for MP.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -410,6 +414,7 @@
   - v1.28: Wands of polymorph will confuse transformed monsters for 1 to 7 turns.
   - v1.28.2: Whips (not demon whips) have a lower min delay (0.5 -> 0.3) and higher base delay (11 -> 12).
   - v1.28.2: Evocable invisibility has lower failure chance but lower duration and significantly less duration scaling with Evocations skill.
+  - v1.30: Robes can have the new "magic recovery" ego, which doubles natural mana regeneration.
 
 #### Removed Items
   - Amulet of Harm

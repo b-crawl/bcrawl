@@ -3398,7 +3398,7 @@ spret cast_infestation(int pow, bolt &beam, bool fail)
     fail_check();
 
     _setup_infestation(beam, pow);
-    mpr("You call forth a plague of scarabs!");
+    mpr("You call forth a plague of wasps!");
     beam.explode();
 
     return spret::success;

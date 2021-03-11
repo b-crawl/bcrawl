@@ -264,7 +264,7 @@ void manage_fire_shield(int delay)
 
 spret cast_corpse_rot(bool fail)
 {
-    if (!you.res_rotting())
+    if (!actor_cloud_immune(you, CLOUD_MIASMA))
     {
         for (stack_iterator si(you.pos()); si; ++si)
         {

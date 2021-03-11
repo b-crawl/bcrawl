@@ -116,6 +116,8 @@ const vector<god_power> god_powers[NUM_GODS] =
     { { 1, ABIL_KIKU_RECEIVE_CORPSES, "receive cadavers from Kikubaaqudgha" },
       { 2, "Kikubaaqudgha is protecting you from necromantic miscasts and death curses.",
            "Kikubaaqudgha no longer protects you from necromantic miscasts or death curses." },
+      { 2, "Foul miasma strengthens you rather than harming you.",
+           "Foul miasma no longer strengthens you." },
       { 3, "Kikubaaqudgha is fully protecting you from necromantic miscasts and death curses.",
            "Kikubaaqudgha no longer fully protects you from necromantic miscasts or death curses." },
       { 4, "Kikubaaqudgha is protecting you from unholy torment.",

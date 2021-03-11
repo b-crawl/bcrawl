@@ -234,12 +234,12 @@ static void _give_wand(monster* mon, int level)
 
 static void _give_potion(monster* mon, int level)
 {
-    if (mons_species(mon->type) == MONS_VAMPIRE
-        && (one_chance_in(5) || mon->type == MONS_JORY))
+    monster_type mon_type =  mon->type;
+    if (mons_species(mon_type) == MONS_VAMPIRE
+        && (one_chance_in(5) || mon_type == MONS_JORY))
     {
         // This handles initialization of stack timer.
-        const int thing_created =
-            items(false, OBJ_POTIONS, POT_BLOOD, level);
+        const int thing_created = items(false, OBJ_POTIONS, POT_BLOOD, level);
 
         if (thing_created == NON_ITEM)
             return;
@@ -247,16 +247,24 @@ static void _give_potion(monster* mon, int level)
         mitm[thing_created].flags = ISFLAG_KNOW_TYPE;
         give_specific_item(mon, thing_created);
     }
-    else if (mons_is_unique(mon->type) && one_chance_in(4)
+    else if (mons_is_unique(mon_type) && one_chance_in(4)
                 && _should_give_unique_item(mon))
     {
-        const int thing_created = items(false, OBJ_POTIONS, OBJ_RANDOM,
-                                        level);
-
+        const int thing_created = items(false, OBJ_POTIONS, OBJ_RANDOM, level);
         if (thing_created == NON_ITEM)
             return;
 
         mitm[thing_created].flags = 0;
+        give_specific_item(mon, thing_created);
+    }
+    else if (mon_type == MONS_KILLER_KLOWN && one_chance_in(4))
+    {
+        const int thing_created = items(false, OBJ_POTIONS, POT_MUTATION, level);
+
+        if (thing_created == NON_ITEM)
+            return;
+
+        mitm[thing_created].flags = ISFLAG_KNOW_TYPE;
         give_specific_item(mon, thing_created);
     }
 }

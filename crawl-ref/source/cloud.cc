@@ -1284,7 +1284,7 @@ int actor_apply_cloud(actor *act)
                 }
                 break;
             case GOD_KIKUBAAQUDGHA:
-                if (you.piety >= piety_breakpoint(1))
+                if (cloud.type == CLOUD_MIASMA && you.piety >= piety_breakpoint(1))
                 {
                     mprf(MSGCH_DURATION, "The miasma strengthens you!");
                     

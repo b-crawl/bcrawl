@@ -633,9 +633,9 @@ void update_monsters_in_view()
                     || mon->has_spell(SPELL_BLINK_ALLIES_ENCIRCLE))
                 do_force_more = true;
             
-            item_def *missile = mon->inv[MSLOT_MISSILE];
-            if (missile)
-                switch (missile->sub_type)
+            int missile_ref = mon->inv[MSLOT_MISSILE];
+            if (missile_ref != NON_ITEM)
+                switch (mitm[missile_ref].sub_type)
                 {
                 case MI_THROWING_NET:
                     do_force_more = true;

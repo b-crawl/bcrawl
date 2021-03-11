@@ -740,12 +740,16 @@ void actor::accum_has_constricted()
         entry.second += you.time_taken;
 }
 
-int constrict_effective_size(const actor* attacker)
+size_type constrict_effective_size(const actor* attacker)
 {
-    int size = attacker->body_size(PSIZE_BODY);
+    size_type size = attacker->body_size(PSIZE_BODY);
     if (attacker->is_monster())
-        if (mons_genus(attacker->type) == MONS_JELLY)
-            size += 4;
+        switch (attacker->type)
+        {
+        case MONS_DEATH_OOZE:
+            size = SIZE_BIG; break;
+        default: break;
+        }
     return size;
 }
 
@@ -759,7 +763,7 @@ bool actor::can_constrict(const actor* defender, bool direct) const
                && !defender->is_constricted()
                && can_see(*defender)
                && !confused()
-               && constrict_effective_size(this) >= defender->body_size(PSIZE_BODY)
+               && (int)constrict_effective_size(this) >= defender->body_size(PSIZE_BODY)
                && defender->res_constrict() < 3
                && adjacent(pos(), defender->pos());
     }

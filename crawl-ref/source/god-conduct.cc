@@ -364,7 +364,7 @@ static peeve_map divine_peeves[] =
         } },
         { DID_SPELL_PRACTISE, {
             "you train magic skills", true,
-            1, 0, nullptr, " doesn't appreciate your training magic!"
+            1, 0, nullptr, " doesn't appreciate you training magic!"
         } },
     },
     // GOD_NEMELEX_XOBEH,

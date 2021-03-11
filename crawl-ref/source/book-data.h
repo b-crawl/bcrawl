@@ -224,6 +224,7 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Book of Battle
     SPELL_INFUSION,
     SPELL_SONG_OF_SLAYING,
+    SPELL_SWIFTNESS,
     SPELL_SPECTRAL_WEAPON,
     SPELL_REGENERATION,
     SPELL_OZOCUBUS_ARMOUR,

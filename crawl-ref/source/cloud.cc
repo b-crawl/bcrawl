@@ -1289,12 +1289,12 @@ int actor_apply_cloud(actor *act)
                     mprf(MSGCH_DURATION, "The miasma strengthens you!");
                     
                     bool were_brilliant = you.duration[DUR_BRILLIANCE] > 0;
-                    you.increase_duration(DUR_BRILLIANCE, 2, 40);
+                    you.increase_duration(DUR_BRILLIANCE, 3, 4);
                     if (!were_brilliant)
                         notify_stat_change(STAT_INT, 5, true);
                     
                     bool were_mighty = you.duration[DUR_MIGHT] > 0;
-                    you.increase_duration(DUR_MIGHT, 2, 40);
+                    you.increase_duration(DUR_MIGHT, 3, 4);
                     if (!were_mighty)
                         notify_stat_change(STAT_STR, 5, true);
                 }

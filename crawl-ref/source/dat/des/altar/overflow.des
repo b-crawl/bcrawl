@@ -2518,7 +2518,7 @@ TAGS:   patrolling
 DEPTH:  D:2-
 MONS:   goblin, kobold
 NSUBST: D = 2=1 / 2=2
-KMONS:  _ = kobold brigand
+KMONS:  _ = big kobold
 KFEAT:  _ = altar_uskayaw
 : interest_check(_G)
 MAP

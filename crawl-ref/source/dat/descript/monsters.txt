@@ -829,7 +829,8 @@ and calls forth the dead.
 %%%%
 death ooze
 
-A putrid undead mass of decaying flesh that spurts pestilent slime.
+A putrid undead mass of decaying flesh, using tentacles of pestilent slime to move swiftly
+and grab its victims.
 %%%%
 death scarab
 

@@ -118,7 +118,7 @@ const vector<god_power> god_powers[NUM_GODS] =
            "Kikubaaqudgha no longer protects you from necromantic miscasts or death curses." },
       { 2, "Foul miasma strengthens you rather than harming you.",
            "Foul miasma no longer strengthens you." },
-      { 3, "Kikubaaqudgha is fully protecting you from necromantic miscasts and death curses.",
+      { 3, "Kikubaaqudgha fully protects you from necromantic miscasts and death curses.",
            "Kikubaaqudgha no longer fully protects you from necromantic miscasts or death curses." },
       { 4, "Kikubaaqudgha is protecting you from unholy torment.",
            "Kikubaaqudgha will no longer protect you from unholy torment." },

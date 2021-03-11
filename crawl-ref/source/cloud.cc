@@ -1297,6 +1297,8 @@ int actor_apply_cloud(actor *act)
                     you.increase_duration(DUR_MIGHT, 3, 4);
                     if (!were_mighty)
                         notify_stat_change(STAT_STR, 5, true);
+                    
+                    _dissipate_cloud(cloud);
                 }
                 break;
             default: break;

@@ -30,6 +30,7 @@
 #include "mon-death.h"
 #include "mon-place.h"
 #include "nearby-danger.h" // Compass (for random_walk, CloudGenerator)
+#include "player-stats.h"
 #include "religion.h"
 #include "shout.h"
 #include "spl-util.h"

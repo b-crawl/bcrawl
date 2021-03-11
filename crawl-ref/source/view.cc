@@ -633,7 +633,7 @@ void update_monsters_in_view()
                     || mon->has_spell(SPELL_BLINK_ALLIES_ENCIRCLE))
                 do_force_more = true;
             
-            item_def *missile = mon->inv[MSLOT_MISSILE].get();
+            item_def *missile = mon->inv[MSLOT_MISSILE];
             if (missile)
                 switch (missile->sub_type)
                 {
@@ -645,7 +645,7 @@ void update_monsters_in_view()
                     if (you.experience_level <= 13)
                         do_force_more = true;
                     break;
-                case MI_STONE
+                case MI_STONE:
                     if (you.experience_level <= 2)
                         do_force_more = true;
                     break;

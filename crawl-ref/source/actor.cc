@@ -740,6 +740,15 @@ void actor::accum_has_constricted()
         entry.second += you.time_taken;
 }
 
+int constrict_effective_size(const actor* attacker)
+{
+    int size = attacker->body_size(PSIZE_BODY);
+    if (attacker->is_monster())
+        if (mons_genus(attacker->type) == MONS_JELLY)
+            size += 4;
+    return size;
+}
+
 bool actor::can_constrict(const actor* defender, bool direct) const
 {
     ASSERT(defender); // XXX: change to actor &defender
@@ -750,7 +759,7 @@ bool actor::can_constrict(const actor* defender, bool direct) const
                && !defender->is_constricted()
                && can_see(*defender)
                && !confused()
-               && body_size(PSIZE_BODY) >= defender->body_size(PSIZE_BODY)
+               && constrict_effective_size(this) >= defender->body_size(PSIZE_BODY)
                && defender->res_constrict() < 3
                && adjacent(pos(), defender->pos());
     }

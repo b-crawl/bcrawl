@@ -70,6 +70,7 @@
   - v1.28.2: Enchanters start with Cause Fear.
   - v1.28.2: Archaeologists start with a blowgun and 6 curare needles.
   - v1.28.2: Gladiators start with a potion of heal wounds.
+  - v1.30.1: Skalds start with Swiftness.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -332,7 +333,7 @@
   - v1.22: The Wu Jian Council hates evil actions, but still allows all species.
   - v1.23: Ashenzari gives Evocations skill for staves with an active evoked ability, and some Staves and Spellcasting skill for all other staves.
   - v1.23.2: Nemelex cards that are individually drawn can be cancelled.
-  - v1.23.4: Deep Dwarves that convert to Ru start at \*\*\* piety.
+  - v1.23.4: Deep Dwarves that convert to Ru start at 3\* piety.
   - v1.23.4: Monks that convert to Uskayaw gain 800 to 1200 turns of agility status.
   - v1.24: Throwable ammunition gifts are less likely to be branded.
   - v1.26: If a Hepliaklqana ancestor has an adjacent empty space, the player can fire through their ancestor, which will cause it to move to an empty space.
@@ -346,6 +347,7 @@
   - v1.28.2: Trog summons are adjusted to not become weaker at maximum piety.
   - v1.29.3: Lugonu gives monsters created by Corrupt a Corona enchantment, to avoid the player angering invisible monsters.
   - v1.30: Elyvilon's Divine Vigour ability now gives an absolute bonus to HP and MP instead of a percent bonus. This new bonus is (6 + Invocations)\*10/3 for HP and (6 + Invocations)\*5/4 for MP.
+  - v1.30.1: Kikubaaqudgha worshippers at \*\* piety can get brief Might and Brilliance effects by standing in miasma.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -536,6 +538,9 @@
   - v1.28.4: Water elementals and elemental wellsprings are treated as being insubstantial.
   - v1.29: Hellwings can blink away, taking the player with them.
   - v1.29: Greater mummies have fewer spell sets, including one with Summon Greater Demon.
+  - v1.30.1: Killer Klowns have a chance to drop a potion of mutation.
+  - v1.30.1: Azure jellies have fewer but stronger attacks.
+  - v1.30.1: Death oozes act slower but move faster and can constrict.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

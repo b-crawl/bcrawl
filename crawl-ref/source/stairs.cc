@@ -951,8 +951,8 @@ void take_stairs(dungeon_feature_type force_stair, bool going_up,
             break;
         default: break;
         }
-        if (orb_stair_msg)
-            mprf(MSGCH_ORB, "The power of the Orb breaks the dimensional shunt like a soap bubble!");
+    if (orb_stair_msg)
+        mprf(MSGCH_ORB, "The power of the Orb breaks the dimensional shunt like a soap bubble!");
 
     // Taking a shaft manually (stepping on a known shaft, or using shaft ability)
     const bool known_shaft = (!force_stair

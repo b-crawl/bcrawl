@@ -3077,6 +3077,13 @@ void read_scroll(item_def& scroll)
             // IDing scrolls. (Not an interesting ID game mechanic!)
         }
 
+        if (get_mitm_slot(10) == NON_ITEM)
+        {
+            mpr("The scroll fails to activate.");
+            cancel_scroll = true;
+            break;
+        }
+
         if (in_inventory(scroll))
             dec_inv_item_quantity(link, 1);
         else

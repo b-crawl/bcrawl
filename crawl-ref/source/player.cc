@@ -7784,9 +7784,10 @@ void player::increase_duration(duration_type dur, int turns, int cap,
         mpr(msg);
     cap *= BASELINE_DELAY;
 
+	int old_duration = duration[dur];
     duration[dur] += turns * BASELINE_DELAY;
     if (cap && duration[dur] > cap)
-        duration[dur] = cap;
+        duration[dur] = max(cap, old_duration);
 }
 
 void player::set_duration(duration_type dur, int turns,

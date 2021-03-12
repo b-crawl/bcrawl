@@ -633,6 +633,25 @@ void update_monsters_in_view()
                     || mon->has_spell(SPELL_BLINK_ALLIES_ENCIRCLE))
                 do_force_more = true;
             
+            int missile_ref = mon->inv[MSLOT_MISSILE];
+            if (missile_ref != NON_ITEM)
+                switch (mitm[missile_ref].sub_type)
+                {
+                case MI_THROWING_NET:
+                    do_force_more = true;
+                    break;
+                case MI_TOMAHAWK:
+                case MI_JAVELIN:
+                    if (you.experience_level <= 13)
+                        do_force_more = true;
+                    break;
+                case MI_STONE:
+                    if (you.experience_level <= 2)
+                        do_force_more = true;
+                    break;
+                default: break;
+                }
+            
             switch (mon->type)
             {
             case MONS_DREAM_SHEEP:

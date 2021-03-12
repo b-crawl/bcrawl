@@ -30,6 +30,7 @@
 #include "mon-death.h"
 #include "mon-place.h"
 #include "nearby-danger.h" // Compass (for random_walk, CloudGenerator)
+#include "player-stats.h"
 #include "religion.h"
 #include "shout.h"
 #include "spl-util.h"
@@ -878,7 +879,8 @@ bool actor_cloud_immune(const actor &act, cloud_type type)
             else
                 return (act.res_steam() > 0) || you.duration[DUR_FIRE_SHIELD];
         case CLOUD_MIASMA:
-            return act.res_rotting() > 0 || act.is_unbreathing();
+            return act.res_rotting() > 0 || act.is_unbreathing()
+                    || (act.is_player() && you_worship(GOD_KIKUBAAQUDGHA) && you.piety >= piety_breakpoint(1));
         case CLOUD_PETRIFY:
             return act.res_petrify();
         case CLOUD_SPECTRAL:
@@ -1272,14 +1274,35 @@ int actor_apply_cloud(actor *act)
     if (actor_cloud_immune(*act, cloud))
     {
         if(player)
-        {
-            if (you.religion == GOD_QAZLAL && you.piety >= piety_breakpoint(0))
+            switch (you.religion)
             {
-                inc_mp(2 + random2(2));
-                _dissipate_cloud(cloud);
+            case GOD_QAZLAL:
+                if (you.piety >= piety_breakpoint(0))
+                {
+                    inc_mp(2 + random2(2));
+                    _dissipate_cloud(cloud);
+                }
+                break;
+            case GOD_KIKUBAAQUDGHA:
+                if (cloud.type == CLOUD_MIASMA && you.piety >= piety_breakpoint(1))
+                {
+                    mprf(MSGCH_DURATION, "The miasma strengthens you!");
+                    
+                    bool were_brilliant = you.duration[DUR_BRILLIANCE] > 0;
+                    you.increase_duration(DUR_BRILLIANCE, 3, 4);
+                    if (!were_brilliant)
+                        notify_stat_change(STAT_INT, 5, true);
+                    
+                    bool were_mighty = you.duration[DUR_MIGHT] > 0;
+                    you.increase_duration(DUR_MIGHT, 3, 6);
+                    if (!were_mighty)
+                        notify_stat_change(STAT_STR, 5, true);
+                    
+                    _dissipate_cloud(cloud);
+                }
+                break;
+            default: break;
             }
-        }
-        
         return 0;
     }
 

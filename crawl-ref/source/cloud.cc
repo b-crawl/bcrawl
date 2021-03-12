@@ -1294,7 +1294,7 @@ int actor_apply_cloud(actor *act)
                         notify_stat_change(STAT_INT, 5, true);
                     
                     bool were_mighty = you.duration[DUR_MIGHT] > 0;
-                    you.increase_duration(DUR_MIGHT, 3, 4);
+                    you.increase_duration(DUR_MIGHT, 3, 6);
                     if (!were_mighty)
                         notify_stat_change(STAT_STR, 5, true);
                     

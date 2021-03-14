@@ -372,10 +372,18 @@ function attack(allow_movement)
       crawl.mpr("No target in view!")
     end
   elseif info.attack_type == 3 then
-    if AUTOFIGHT_FIRE_STOP then
-      attack_fire_stop(x,y)
+    local ammo = items.fired_item()
+    if not have_ranged() and ammo ~= nil then
+      local ammo_type = ammo.subtype()
+      if ammo_type == "bolt" or ammo_type == "arrow" or ammo_type == "sling bullet" then
+        crawl.do_commands({"CMD_WEAPON_SWAP"})
+      end
     else
-      attack_fire(x,y)
+      if AUTOFIGHT_FIRE_STOP then
+        attack_fire_stop(x,y)
+      else
+        attack_fire(x,y)
+      end
     end
   elseif info.attack_type == 2 then
     attack_melee(x,y)

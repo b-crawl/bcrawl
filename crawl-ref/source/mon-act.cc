@@ -2742,6 +2742,12 @@ static bool _mons_can_displace(const monster* mpusher,
             if (mons_is_beast(mpusher->type))
                 return true;
             break;
+        case MONS_ELEPHANT:
+        case MONS_DIRE_ELEPHANT:
+        case MONS_HELLEPHANT:
+            if (mpusher->type == MONS_IRONHEART_BEASTMASTER)
+                return false;
+            break;
         
         default: break;
     }

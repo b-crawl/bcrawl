@@ -240,10 +240,8 @@ void leave_player_shadow(coord_def pos)
         {
             if (monster* neighbor = monster_at(*ai))
                 if (!neighbor->friendly() && neighbor->foe == MHITYOU)
-                {
-                    neighbor->foe = clone->mindex();
-                    neighbor->target = pos;
-                }
+                    for (int i=0; i<4; i++)
+                        behaviour_event(neighbor, ME_WHACK, clone);
         }
     }
     else

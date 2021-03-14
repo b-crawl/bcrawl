@@ -745,8 +745,7 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         { MONS_TWO_HEADED_OGRE,         { DOUBLE_OGRE_WEAPONS } },
         { MONS_IRON_GIANT,              { DOUBLE_OGRE_WEAPONS } },
         { MONS_IRONBOUND_BEASTMASTER,
-            { { { WPN_WHIP,             5 },
-                { WPN_QUARTERSTAFF,     4 },
+            { { { WPN_WHIP,             8 },
                 { WPN_DEMON_WHIP,       1 },
         } } },
         { MONS_ETTIN,
@@ -1914,7 +1913,6 @@ int make_mons_armour(monster_type type, int level)
     case MONS_SLAVE:
     case MONS_GRUM:
     case MONS_SPRIGGAN_BERSERKER:
-    case MONS_IRONBOUND_BEASTMASTER:
         item.base_type = OBJ_ARMOUR;
         item.sub_type  = ARM_ANIMAL_SKIN;
         break;
@@ -1962,6 +1960,7 @@ int make_mons_armour(monster_type type, int level)
     case MONS_FREDERICK:
     case MONS_VAULT_GUARD:
     case MONS_VAULT_WARDEN:
+    case MONS_IRONBOUND_BEASTMASTER:
     case MONS_ANCIENT_CHAMPION:
     case MONS_MINOTAUR:
         item.base_type = OBJ_ARMOUR;

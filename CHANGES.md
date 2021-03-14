@@ -348,6 +348,8 @@
   - v1.29.3: Lugonu gives monsters created by Corrupt a Corona enchantment, to avoid the player angering invisible monsters.
   - v1.30: Elyvilon's Divine Vigour ability now gives an absolute bonus to HP and MP instead of a percent bonus. This new bonus is (6 + Invocations)\*10/3 for HP and (6 + Invocations)\*5/4 for MP.
   - v1.30.1: Kikubaaqudgha worshippers at \*\* piety can get brief Might and Brilliance effects by standing in miasma.
+  - v1.31: Player shadows created by Dithmenos's Shadow Step ability draw aggro from creatures next to them when created.
+  - v1.31: Cheibriados's Bend Time Ability lasts longer and its success scales with monster movement speed.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -541,6 +543,10 @@
   - v1.30.1: Killer Klowns have a chance to drop a potion of mutation.
   - v1.30.1: Azure jellies have fewer but stronger attacks.
   - v1.30.1: Death oozes act slower but move faster and can constrict.
+  - v1.31: Ironbrand convokers are renamed to ironheart convokers.
+  - v1.31: The new "ironheart beastmaster" enemy appears in Vaults. They have a reaching melee attack, spawn together with dire elephants, and can make nearby beasts act more often.
+  - v1.31: The new "rockslime" enemy appears in Depths and Vaults. They are very tough and fast, and can trample, but get confused briefly when their attacks miss. They are not true slimes, but rather, similar to gargoyles and elementals. They can also burrow through walls.
+  - v1.31: Yaktaurs and yaktaur captains shoot more quickly.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

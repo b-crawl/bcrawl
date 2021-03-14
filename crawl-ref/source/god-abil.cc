@@ -3867,6 +3867,10 @@ bool dithmenos_shadow_step()
     const actor *victim = actor_at(sdirect.target);
     mprf("You step into %s shadow.",
          apostrophise(victim->name(DESC_THE)).c_str());
+    
+    you.stop_constricting_all(true, true);
+    you.stop_being_constricted(true);
+
     // Using 'stepped = true' here because it's Shadow *Step*.
     // This helps to evade splash upon landing on water.
     moveto_location_effects(grd(old_pos), true, old_pos);

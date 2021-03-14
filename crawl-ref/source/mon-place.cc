@@ -1936,7 +1936,7 @@ static const map<monster_type, band_set> bands_by_leader = {
     { MONS_MOLTEN_GARGOYLE,  { {0, 0, []() {
         return you.where_are_you == BRANCH_DESOLATION;
     }},                            {{ BAND_MOLTEN_GARGOYLES, {2, 3} }}}},
-    { MONS_IRONBOUND_BEASTMASTER, { {}, {{ BAND_DIRE_ELEPHANTS, {2, 3}, true }}}},
+    { MONS_IRONHEART_BEASTMASTER, { {}, {{ BAND_DIRE_ELEPHANTS, {2, 3}, true }}}},
     { MONS_WIZARD,  { {0, 0, []() {
         return player_in_branch(BRANCH_VAULTS);
     }},                            {{ BAND_UGLY_THINGS, {0, 8}, true }}}},
@@ -2232,11 +2232,11 @@ static const map<band_type, vector<member_possibilites>> band_membership = {
                                   {MONS_DEMONIC_CRAWLER, 2}}}},
 
     { BAND_VAULT_WARDEN,        {{{MONS_VAULT_SENTINEL, 4},
-                                  {MONS_IRONBRAND_CONVOKER, 6},
+                                  {MONS_IRONHEART_CONVOKER, 6},
                                   {MONS_IRONHEART_PRESERVER, 5}},
         // one fancy pal, and a 50% chance of another
                                 {{MONS_VAULT_SENTINEL, 4},
-                                 {MONS_IRONBRAND_CONVOKER, 6},
+                                 {MONS_IRONHEART_CONVOKER, 6},
                                  {MONS_IRONHEART_PRESERVER, 5},
                                  {MONS_VAULT_GUARD, 15}},
 
@@ -2325,7 +2325,7 @@ static const map<band_type, vector<member_possibilites>> band_membership = {
 
     // one supporter, and maybe more
     { BAND_SALTLINGS,           {{{MONS_GUARDIAN_SERPENT, 1},
-                                  {MONS_IRONBRAND_CONVOKER, 1},
+                                  {MONS_IRONHEART_CONVOKER, 1},
                                   {MONS_RAGGED_HIEROPHANT, 2},
                                   {MONS_SERVANT_OF_WHISPERS, 2},
                                   {MONS_PEACEKEEPER, 2}},
@@ -2335,7 +2335,7 @@ static const map<band_type, vector<member_possibilites>> band_membership = {
                                   {MONS_SERVANT_OF_WHISPERS, 5},
                                   {MONS_PEACEKEEPER, 5},
                                   {MONS_MOLTEN_GARGOYLE, 5},
-                                  {MONS_IRONBRAND_CONVOKER, 2},
+                                  {MONS_IRONHEART_CONVOKER, 2},
                                   {MONS_GUARDIAN_SERPENT, 2},
                                   {MONS_IMPERIAL_MYRMIDON, 2}}}},
 };

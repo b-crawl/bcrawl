@@ -955,7 +955,7 @@ static bool _monster_will_buff(const monster &caster, const monster &targ)
 
     switch(caster.type)
     {
-    case MONS_IRONBRAND_CONVOKER:
+    case MONS_IRONHEART_CONVOKER:
     case MONS_OGRE_MAGE:
     case MONS_WIZARD:
     case MONS_SALAMANDER_MYSTIC:
@@ -4991,7 +4991,7 @@ static const pop_entry _planerend_elf[] =
 static const pop_entry _planerend_vaults[] =
 { // Vaults enemies
   {  1,   1,   80, FLAT, MONS_VAULT_SENTINEL },
-  {  1,   1,   40, FLAT, MONS_IRONBRAND_CONVOKER },
+  {  1,   1,   40, FLAT, MONS_IRONHEART_CONVOKER },
   {  1,   1,  100, FLAT, MONS_WAR_GARGOYLE },
   { 0,0,0,FLAT,MONS_0 }
 };

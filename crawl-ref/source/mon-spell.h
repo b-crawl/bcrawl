@@ -569,7 +569,7 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
-    {  MST_IRONBRAND_CONVOKER,
+    {  MST_IRONHEART_CONVOKER,
       {
        { SPELL_WORD_OF_RECALL, 30, MON_SPELL_WIZARD },
        { SPELL_MIGHT_OTHER, 30, MON_SPELL_WIZARD },
@@ -1196,7 +1196,7 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
-    {  MST_IRONBOUND_BEASTMASTER,
+    {  MST_IRONHEART_BEASTMASTER,
       {
        { SPELL_GOAD_BEASTS, 40, MON_SPELL_NATURAL },
       }

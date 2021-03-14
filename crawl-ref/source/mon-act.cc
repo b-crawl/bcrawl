@@ -3605,9 +3605,19 @@ static bool _monster_move(monster* mons)
                 else
                     noisy(25, target, "You hear a crashing sound.");
             }
-            // Dissolution dissolves walls.
+            // Dissolution and rockslimes
             else if (player_can_hear(mons->pos() + mmov))
-                mprf(MSGCH_SOUND, "You hear a sizzling sound.");
+                switch (mons->type)
+                {
+                case MONS_DISSOLUTION:
+                    mprf(MSGCH_SOUND, "You hear a sizzling sound.");
+                    break;
+                case MONS_ROCKSLIME:
+                default:
+                    mprf(MSGCH_SOUND, "You hear a grinding noise.");
+                    break;
+                }
+                
         }
     }
 

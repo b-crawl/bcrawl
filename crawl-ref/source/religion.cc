@@ -1138,7 +1138,7 @@ static bool _give_trog_oka_gift(bool forced)
         break;
     case GOD_SHINING_ONE:
         if (_need_missile_gift(3))
-            if((you.piety >= piety_breakpoint(2) && random2(you.piety) > 70 && one_chance_in(8))
+            if((you.piety >= piety_breakpoint(2) && random2(you.piety) > 70 && one_chance_in(10))
                     || forced)
                 gift_type = OBJ_MISSILES;
         break;

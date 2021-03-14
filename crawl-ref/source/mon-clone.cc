@@ -235,6 +235,13 @@ void leave_player_shadow(coord_def pos)
         clone->add_ench(mon_enchant(ENCH_SHORT_LIVED, 1, nullptr, duration*10));
         
         mpr("You leave a shadowy clone behind.");
+        
+        for (adjacent_iterator ai(pos); ai; ++ai)
+        {
+            if (monster* mon = monster_at(*ai))
+                if (!mon->friendly())
+                    behaviour_event(mons, ME_WHACK, clone);
+        }
     }
     else
         mpr("You leave a puff of smoke behind.");

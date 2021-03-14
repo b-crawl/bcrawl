@@ -239,8 +239,11 @@ void leave_player_shadow(coord_def pos)
         for (adjacent_iterator ai(pos); ai; ++ai)
         {
             if (monster* neighbor = monster_at(*ai))
-                if (!neighbor->friendly())
-                    behaviour_event(neighbor, ME_WHACK, clone);
+                if (!neighbor->friendly() && neighbor->foe == MHITYOU)
+                {
+                    neighbor->foe = clone->mindex();
+                    neighbor->behaviour = BEH_SEEK;
+                }
         }
     }
     else

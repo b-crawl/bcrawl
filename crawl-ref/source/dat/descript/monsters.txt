@@ -2022,6 +2022,8 @@ rockslime
 An oozing avalanche of magically animated rock.
 It consumes only the metal and bone from its victims, using them to reinforce
 itself even further.
+
+It moves very quickly, but can become confused when its attacks are dodged.
 %%%%
 the Royal Jelly
 

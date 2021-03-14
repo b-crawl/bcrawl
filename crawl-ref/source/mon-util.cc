@@ -1005,8 +1005,9 @@ bool mons_class_is_slime(monster_type mc)
     switch (mons_genus(mc))
     {
     case MONS_JELLY:
-        if (mc != MONS_ROCKSLIME)
-            return true;
+        if (mc == MONS_ROCKSLIME)
+            return false;
+        else return true;
     case MONS_FLOATING_EYE:
     case MONS_GLOWING_ORANGE_BRAIN:
         return true;

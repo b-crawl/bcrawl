@@ -322,7 +322,7 @@ bool melee_attack::handle_phase_dodged()
     else if (mons_base_type(*attacker->as_monster()) == MONS_ROCKSLIME)
     {
         monster* attacking_mon = attacker->as_monster();
-        attacking_mon->add_ench(mon_enchant(ENCH_CONFUSION, 1, nullptr, 15 + random2(21)));
+        attacking_mon->add_ench(mon_enchant(ENCH_CONFUSION, 1, nullptr, 6 + random2(11)));
         simple_monster_message(*attacking_mon, " appears confused.");
     }
 

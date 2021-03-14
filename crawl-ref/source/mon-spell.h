@@ -1192,7 +1192,7 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_IRONHEART_BEASTMASTER,
       {
-       { SPELL_GOAD_BEASTS, 40, MON_SPELL_NATURAL },
+       { SPELL_GOAD_BEASTS, 40, MON_SPELL_NATURAL | MON_SPELL_INSTANT },
       }
     },
 

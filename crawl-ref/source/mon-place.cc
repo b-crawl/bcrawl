@@ -1938,7 +1938,7 @@ static const map<monster_type, band_set> bands_by_leader = {
     }},                            {{ BAND_MOLTEN_GARGOYLES, {2, 3} }}}},
     { MONS_IRONHEART_BEASTMASTER, { {}, {{ BAND_DIRE_ELEPHANTS, {2, 3}, true }}}},
     { MONS_WIZARD,  { {0, 0, []() {
-        return player_in_branch(BRANCH_VAULTS);
+        return player_in_branch(BRANCH_VAULTS) || player_in_branch(BRANCH_DEPTHS);
     }},                            {{ BAND_UGLY_THINGS, {0, 8}, true }}}},
 
     // special-cased band-sizes

@@ -233,6 +233,7 @@ void leave_player_shadow(coord_def pos)
         _mons_load_player_enchantments(mon, clone);
         mon->reset();
         clone->add_ench(mon_enchant(ENCH_SHORT_LIVED, 1, nullptr, duration*10));
+        clone->gain_energy(EUT_MOVE);
         
         mpr("You leave a shadowy clone behind.");
         
@@ -240,8 +241,7 @@ void leave_player_shadow(coord_def pos)
         {
             if (monster* neighbor = monster_at(*ai))
                 if (!neighbor->friendly() && neighbor->foe == MHITYOU)
-                    for (int i=0; i<4; i++)
-                        behaviour_event(neighbor, ME_WHACK, clone);
+                    neighbor->foe = clone->mindex();
         }
     }
     else

@@ -348,7 +348,7 @@
   - v1.29.3: Lugonu gives monsters created by Corrupt a Corona enchantment, to avoid the player angering invisible monsters.
   - v1.30: Elyvilon's Divine Vigour ability now gives an absolute bonus to HP and MP instead of a percent bonus. This new bonus is (6 + Invocations)\*10/3 for HP and (6 + Invocations)\*5/4 for MP.
   - v1.30.1: Kikubaaqudgha worshippers at \*\* piety can get brief Might and Brilliance effects by standing in miasma.
-  - v1.31: Player shadows created by Dithmenos's Shadow Step ability draw aggro from creatures next to them when created.
+  - v1.31: Player shadows created by Dithmenos's Shadow Step ability act once immediately when created.
   - v1.31: Cheibriados's Bend Time Ability lasts longer and its success scales with monster movement speed.
 
 #### New Items

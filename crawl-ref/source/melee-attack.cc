@@ -320,7 +320,11 @@ bool melee_attack::handle_phase_dodged()
             behaviour_event(defender->as_monster(), ME_WHACK, attacker);
     }
     else if (mons_base_type(*attacker->as_monster()) == MONS_ROCKSLIME)
-        attacker->as_monster()->add_ench(mon_enchant(ENCH_CONFUSION, 1, nullptr, 15 + random2(21)));
+    {
+        monster* attacking_mon = attacker->as_monster();
+        attacking_mon->add_ench(mon_enchant(ENCH_CONFUSION, 1, nullptr, 15 + random2(21)));
+        simple_monster_message(*attacking_mon, " appears confused.");
+    }
 
     if (defender->is_player())
         count_action(CACT_DODGE, DODGE_EVASION);
@@ -1402,8 +1406,8 @@ bool melee_attack::player_aux_apply(unarmed_attack_type atk)
                 const bool spell_user = defender->antimagic_susceptible();
 
                 antimagic_affects_defender(damage_done * 32);
-				
-				bool no_mp_regen = have_passive(passive_t::no_mp_regen);
+                
+                bool no_mp_regen = have_passive(passive_t::no_mp_regen);
 
                 if (!no_mp_regen || spell_user)
                 {

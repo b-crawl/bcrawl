@@ -8034,8 +8034,8 @@ static bool _ms_waste_of_time(monster* mon, mon_spell_slot slot)
     case SPELL_GOAD_BEASTS:
         for (monster_near_iterator mi(mon, LOS_NO_TRANS); mi; ++mi)
             if (_valid_goad_beasts_target(mon, *mi))
-                return ai_action::good();
-        return ai_action::impossible();
+                return false;
+        return true;
 
 #if TAG_MAJOR_VERSION == 34
     case SPELL_SUMMON_TWISTER:

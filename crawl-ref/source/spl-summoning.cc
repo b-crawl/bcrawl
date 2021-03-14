@@ -796,8 +796,7 @@ bool tukima_affects(const actor &target)
            && !is_range_weapon(*wpn)
            && !is_special_unrandom_artefact(*wpn)
            && !mons_class_is_animated_weapon(target.type)
-           && !mons_is_hepliaklqana_ancestor(target.type)
-           && target.type != MONS_IRONHEART_BEASTMASTER;
+           && !mons_is_hepliaklqana_ancestor(target.type);
 }
 
 /**

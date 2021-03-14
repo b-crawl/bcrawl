@@ -484,6 +484,7 @@ enum monster_type                      // menv[].type
     MONS_VAULT_WARDEN,
     MONS_IRONBRAND_CONVOKER,
     MONS_IRONHEART_PRESERVER,
+    MONS_IRONBOUND_BEASTMASTER,
     MONS_IMPERIAL_MYRMIDON,
     MONS_SERVANT_OF_WHISPERS,
     MONS_RAGGED_HIEROPHANT,
@@ -1054,6 +1055,7 @@ enum monster_type                      // menv[].type
     MONS_ONI,
     MONS_FALSE_IMAGE,
     MONS_GOLIATH_FROG,
+    MONS_IRONBOUND_BEASTMASTER,
 #endif
 
     NUM_MONSTERS,               // used for polymorph

@@ -6166,10 +6166,11 @@ void monster::react_to_damage(const actor *oppressor, int damage,
 reach_type monster::reach_range() const
 {
     const mon_attack_def attk(mons_attack_spec(*this, 0));
-    if (flavour_has_reach(attk.flavour) && attk.damage)
-        return REACH_TWO;
-
     const item_def *wpn = primary_weapon();
+    if (flavour_has_reach(attk.flavour) && attk.damage)
+        if (this->type != MONS_IRONHEART_BEASTMASTER || wpn)
+            return REACH_TWO;
+
     if (wpn)
         return weapon_reach(*wpn);
     return REACH_NONE;

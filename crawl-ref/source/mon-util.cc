@@ -4271,7 +4271,6 @@ monster_type royal_jelly_ejectable_monster()
 {
     return random_choose(MONS_ACID_BLOB,
                          MONS_AZURE_JELLY,
-                         MONS_ROCKSLIME,
                          MONS_DEATH_OOZE);
 }
 

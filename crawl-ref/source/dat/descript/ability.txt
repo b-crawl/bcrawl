@@ -523,9 +523,9 @@ more likely to spit acid at higher Invocations.
 # Cheibriados
 Bend Time ability
 
-Attempts to slow down everyone adjacent to you. Fast and weak enemies are more likely
-to be affected, and high Invocations skill makes it harder to resist and slow enemies
-for longer.
+Attempts to slow down everyone adjacent to you. Fast and weak creatures are more
+likely to be affected, and high Invocations skill makes its effects harder to
+resist and last longer.
 %%%%
 Temporal Distortion ability
 

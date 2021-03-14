@@ -238,9 +238,9 @@ void leave_player_shadow(coord_def pos)
         
         for (adjacent_iterator ai(pos); ai; ++ai)
         {
-            if (monster* mon = monster_at(*ai))
-                if (!mon->friendly())
-                    behaviour_event(mons, ME_WHACK, clone);
+            if (monster* neighbor = monster_at(*ai))
+                if (!neighbor->friendly())
+                    behaviour_event(neighbor, ME_WHACK, clone);
         }
     }
     else

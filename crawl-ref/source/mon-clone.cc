@@ -242,7 +242,7 @@ void leave_player_shadow(coord_def pos)
                 if (!neighbor->friendly() && neighbor->foe == MHITYOU)
                 {
                     neighbor->foe = clone->mindex();
-                    neighbor->behaviour = BEH_SEEK;
+                    neighbor->target = pos;
                 }
         }
     }

@@ -4054,8 +4054,8 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_GOAD_BEASTS, "Goad Beasts",
-    spschool::hexes,
-    spflag::area | spflag::monster | spflag::selfench,
+    SPTYP_HEXES,
+    SPFLAG_AREA | SPFLAG_MONSTER | SPFLAG_SELFENCH,
     6,
     0,
     -1, -1,

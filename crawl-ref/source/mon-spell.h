@@ -1017,12 +1017,6 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
-    {  MST_PORTAL_PROJECTILE,
-      {
-       { SPELL_PORTAL_PROJECTILE, 75, MON_SPELL_WIZARD },
-      }
-    },
-
     // ('K') Kobolds.
     {  MST_KOBOLD_DEMONOLOGIST,
       {

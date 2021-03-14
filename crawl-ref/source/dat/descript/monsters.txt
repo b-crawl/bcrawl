@@ -2024,9 +2024,9 @@ tends to form great swarms with its kin.
 %%%%
 rockslime
 
-An oozing avalanche of magically animated rock.
-It consumes only the metal and bone from its victims, using them to reinforce
-itself even further.
+An oozing avalanche of magically animated rock, capable of traveling through
+rock walls by merging with them. It consumes only the metal and bone from its
+victims, using them to reinforce itself even further.
 
 It moves very quickly, but can become confused when its attacks are dodged.
 %%%%

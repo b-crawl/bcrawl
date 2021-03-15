@@ -546,7 +546,7 @@
   - v1.30.1: Death oozes act slower but move faster and can constrict.
   - v1.31: Ironbrand convokers are renamed to ironheart convokers.
   - v1.31: The new "ironheart beastmaster" enemy appears in Vaults. They have a reaching melee attack, spawn together with dire elephants, and can make nearby beasts act more often.
-  - v1.31: The new "rockslime" enemy appears in Depths and Vaults. They are not true slimes, but rather, similar to gargoyles and elementals. They are very tough and fast, and can trample, but get confused briefly when their attacks miss. They can also burrow through walls.
+  - v1.31: The new "rockslime" enemy appears in Depths and Zot. They are not true slimes, but rather, similar to gargoyles and elementals. They are very tough and fast, and can trample, but get confused briefly when their attacks miss. They can also burrow through walls.
   - v1.31: Yaktaurs and yaktaur captains shoot more quickly.
   - v1.31: In Vaults and Depths, ugly things now appear together with wizards.
 

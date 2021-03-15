@@ -793,7 +793,8 @@ void ouch(int dam, kill_method_type death_type, mid_t source, const char *aux,
     {
         if (you.form == transformation::shadow)
         {
-            drain_amount = (dam - (dam / 2));
+            drain_amount = div_rand_round(dam * 40, max(80, you.hp_max));
+            drain_amount = max(1, drain_amount);
             dam /= 2;
         }
         if (you.petrified())

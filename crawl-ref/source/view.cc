@@ -666,7 +666,7 @@ void update_monsters_in_view()
             
             // these were previously in messages.txt, but that triggers on seeing zombies
             case MONS_VAULT_WARDEN:
-            case MONS_IRONBRAND_CONVOKER:
+            case MONS_IRONHEART_CONVOKER:
                 do_force_more = true;
                 break;
             

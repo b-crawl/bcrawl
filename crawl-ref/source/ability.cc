@@ -2844,7 +2844,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
 
     case ABIL_CHEIBRIADOS_TIME_BEND:
         fail_check();
-        cheibriados_time_bend(16 + you.skill(SK_INVOCATIONS, 8));
+        cheibriados_time_bend(80 + you.skill(SK_INVOCATIONS, 10));
         break;
 
     case ABIL_CHEIBRIADOS_DISTORTION:

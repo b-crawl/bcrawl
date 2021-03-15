@@ -641,6 +641,9 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
     if (want_band)
         mg.flags |= MG_PERMIT_BANDS;
 
+    if (mons_class_requires_band(mg.cls) && ! mg.flags & MG_PERMIT_BANDS)
+        return 0;
+
     if (mg.cls == MONS_NO_MONSTER || mg.cls == MONS_PROGRAM_BUG)
         return 0;
 
@@ -1731,8 +1734,10 @@ struct band_set
     vector<band_info> bands;
 };
 
+// We handle Vaults centaur warriors specially.
 static const band_conditions centaur_band_condition
-    = { 3, 10, []() { return !player_in_branch(BRANCH_SHOALS); }};
+    = { 3, 10, []() { return !player_in_branch(BRANCH_SHOALS)
+                          && !player_in_branch(BRANCH_VAULTS); }};
 
 // warrior & mage spawn alone more frequently at shallow depths of Snake
 static const band_conditions naga_band_condition
@@ -1931,6 +1936,10 @@ static const map<monster_type, band_set> bands_by_leader = {
     { MONS_MOLTEN_GARGOYLE,  { {0, 0, []() {
         return you.where_are_you == BRANCH_DESOLATION;
     }},                            {{ BAND_MOLTEN_GARGOYLES, {2, 3} }}}},
+    { MONS_IRONHEART_BEASTMASTER, { {}, {{ BAND_DIRE_ELEPHANTS, {2, 3}, true }}}},
+    { MONS_WIZARD,  { {0, 0, []() {
+        return player_in_branch(BRANCH_VAULTS) || player_in_branch(BRANCH_DEPTHS);
+    }},                            {{ BAND_UGLY_THINGS, {0, 8}, true }}}},
 
     // special-cased band-sizes
     { MONS_SPRIGGAN_DRUID,  { {3}, {{ BAND_SPRIGGAN_DRUID, {0, 1} }}}},
@@ -1996,6 +2005,16 @@ static band_type _choose_band(monster_type mon_type, int *band_size_p,
         }
         break;
     }
+
+    // Per-branch hacks. TODO: move this into the main branch structure
+    // (probably moving conditionals inside band_info?)
+    case MONS_CENTAUR_WARRIOR:
+        if (player_in_branch(BRANCH_VAULTS))
+        {
+            band = BAND_CENTAUR_WARRIORS;
+            band_size = random_range(2, 4);
+        }
+        break;
 
     case MONS_SATYR:
         if (!one_chance_in(3))
@@ -2077,6 +2096,7 @@ static const map<band_type, vector<member_possibilites>> band_membership = {
     { BAND_MERFOLK_IMPALER,     {{{MONS_MERFOLK, 1}}}},
     { BAND_MERFOLK_JAVELINEER,  {{{MONS_MERFOLK, 1}}}},
     { BAND_ELEPHANT,            {{{MONS_ELEPHANT, 1}}}},
+    { BAND_DIRE_ELEPHANTS,      {{{MONS_DIRE_ELEPHANT, 1}}}},
     { BAND_FIRE_BATS,           {{{MONS_FIRE_BAT, 1}}}},
     { BAND_HELL_HOGS,           {{{MONS_HELL_HOG, 1}}}},
     { BAND_HELL_RATS,           {{{MONS_HELL_RAT, 1}}}},
@@ -2101,6 +2121,7 @@ static const map<band_type, vector<member_possibilites>> band_membership = {
     { BAND_DANCING_WEAPONS,     {{{MONS_DANCING_WEAPON, 1}}}},
     { BAND_SLIME_CREATURES,     {{{MONS_SLIME_CREATURE, 1}}}},
     { BAND_SPRIGGAN_RIDERS,     {{{MONS_SPRIGGAN_RIDER, 1}}}},
+    { BAND_CENTAUR_WARRIORS,    {{{MONS_CENTAUR_WARRIOR, 1}}}},
     { BAND_MOLTEN_GARGOYLES,    {{{MONS_MOLTEN_GARGOYLE, 1}}}},
     { BAND_SKELETAL_WARRIORS,   {{{MONS_SKELETAL_WARRIOR, 1}}}},
     { BAND_THRASHING_HORRORS,   {{{MONS_THRASHING_HORROR, 1}}}},
@@ -2211,11 +2232,11 @@ static const map<band_type, vector<member_possibilites>> band_membership = {
                                   {MONS_DEMONIC_CRAWLER, 2}}}},
 
     { BAND_VAULT_WARDEN,        {{{MONS_VAULT_SENTINEL, 4},
-                                  {MONS_IRONBRAND_CONVOKER, 6},
+                                  {MONS_IRONHEART_CONVOKER, 6},
                                   {MONS_IRONHEART_PRESERVER, 5}},
         // one fancy pal, and a 50% chance of another
                                 {{MONS_VAULT_SENTINEL, 4},
-                                 {MONS_IRONBRAND_CONVOKER, 6},
+                                 {MONS_IRONHEART_CONVOKER, 6},
                                  {MONS_IRONHEART_PRESERVER, 5},
                                  {MONS_VAULT_GUARD, 15}},
 
@@ -2304,7 +2325,7 @@ static const map<band_type, vector<member_possibilites>> band_membership = {
 
     // one supporter, and maybe more
     { BAND_SALTLINGS,           {{{MONS_GUARDIAN_SERPENT, 1},
-                                  {MONS_IRONBRAND_CONVOKER, 1},
+                                  {MONS_IRONHEART_CONVOKER, 1},
                                   {MONS_RAGGED_HIEROPHANT, 2},
                                   {MONS_SERVANT_OF_WHISPERS, 2},
                                   {MONS_PEACEKEEPER, 2}},
@@ -2314,7 +2335,7 @@ static const map<band_type, vector<member_possibilites>> band_membership = {
                                   {MONS_SERVANT_OF_WHISPERS, 5},
                                   {MONS_PEACEKEEPER, 5},
                                   {MONS_MOLTEN_GARGOYLE, 5},
-                                  {MONS_IRONBRAND_CONVOKER, 2},
+                                  {MONS_IRONHEART_CONVOKER, 2},
                                   {MONS_GUARDIAN_SERPENT, 2},
                                   {MONS_IMPERIAL_MYRMIDON, 2}}}},
 };

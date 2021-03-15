@@ -350,7 +350,19 @@ function af_food_is_low()
   end
 end
 
+local autoswap_weapons = false
+
 function attack(allow_movement)
+  if not have_ranged() then
+    local ammo = items.fired_item()
+    autoswap_weapons = false
+    if ammo ~= nil then
+      local ammo_type = ammo.subtype()
+      if ammo_type == "bolt" or ammo_type == "arrow" or ammo_type == "sling bullet" then
+        autoswap_weapons = true
+      end
+    end
+  end
   local x, y, info = get_target(not allow_movement)
   local caught = you.caught()
   if af_hp_is_low() then
@@ -372,10 +384,18 @@ function attack(allow_movement)
       crawl.mpr("No target in view!")
     end
   elseif info.attack_type == 3 then
-    if AUTOFIGHT_FIRE_STOP then
-      attack_fire_stop(x,y)
+    if not have_ranged() and autoswap_weapons then
+      crawl.do_commands({"CMD_WEAPON_SWAP"})
     else
-      attack_fire(x,y)
+      if autoswap_weapons and -info.distance < 2 then
+        crawl.do_commands({"CMD_WEAPON_SWAP"})
+      else
+        if AUTOFIGHT_FIRE_STOP then
+          attack_fire_stop(x,y)
+        else
+          attack_fire(x,y)
+        end
+      end
     end
   elseif info.attack_type == 2 then
     attack_melee(x,y)

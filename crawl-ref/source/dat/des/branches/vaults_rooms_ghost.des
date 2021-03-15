@@ -17,7 +17,7 @@
 
 NAME:   advil_vaults_ghost_guards
 KITEM:  12 = superb_item / star_item
-KMONS:  1 = vault guard / ironbrand convoker / ironheart preserver / \
+KMONS:  1 = vault guard / ironheart convoker / ironheart preserver / \
             vault warden
 KMONS:  2 = vault warden
 KMONS:  3 = player ghost
@@ -38,7 +38,7 @@ ENDMAP
 # based on st_lines
 NAME:   advil_vaults_ghost_lines
 KITEM:  123 = superb_item / star_item
-KMONS:  1 = vault guard / ironbrand convoker / ironheart preserver / \
+KMONS:  1 = vault guard / ironheart convoker / ironheart preserver / \
             vault warden
 KMONS:  2 = vault warden
 KMONS:  3 = player ghost

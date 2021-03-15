@@ -733,7 +733,7 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
                 { WPN_WAR_AXE,          3 },
                 { WPN_MORNINGSTAR,      3 },
         } } },
-        { MONS_IRONBRAND_CONVOKER,      { IRON_WEAPONS } },
+        { MONS_IRONHEART_CONVOKER,      { IRON_WEAPONS } },
         { MONS_IRONHEART_PRESERVER,     { IRON_WEAPONS } },
         { MONS_SIGMUND, { { { WPN_SCYTHE, 1 } } } },
         { MONS_REAPER, { { { WPN_SCYTHE, 1 } }, {}, {}, 1 } },
@@ -744,6 +744,10 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         } } },
         { MONS_TWO_HEADED_OGRE,         { DOUBLE_OGRE_WEAPONS } },
         { MONS_IRON_GIANT,              { DOUBLE_OGRE_WEAPONS } },
+        { MONS_IRONHEART_BEASTMASTER,
+            { { { WPN_WHIP,             8 },
+                { WPN_DEMON_WHIP,       1 },
+        } } },
         { MONS_ETTIN,
             { { { WPN_DIRE_FLAIL,       9 },
                 { WPN_GREAT_MACE,       1 },
@@ -1956,6 +1960,7 @@ int make_mons_armour(monster_type type, int level)
     case MONS_FREDERICK:
     case MONS_VAULT_GUARD:
     case MONS_VAULT_WARDEN:
+    case MONS_IRONHEART_BEASTMASTER:
     case MONS_ANCIENT_CHAMPION:
     case MONS_MINOTAUR:
         item.base_type = OBJ_ARMOUR;
@@ -1963,7 +1968,8 @@ int make_mons_armour(monster_type type, int level)
         break;
 
     case MONS_VAULT_SENTINEL:
-    case MONS_IRONBRAND_CONVOKER:
+    case MONS_IRONHEART_CONVOKER:
+    case MONS_IRONHEART_PRESERVER:
         item.base_type = OBJ_ARMOUR;
         item.sub_type  = random_choose(ARM_RING_MAIL,   ARM_SCALE_MAIL);
         break;
@@ -2069,7 +2075,6 @@ int make_mons_armour(monster_type type, int level)
         break;
 
     case MONS_TENGU_WARRIOR:
-    case MONS_IRONHEART_PRESERVER:
         item.base_type = OBJ_ARMOUR;
         item.sub_type  = random_choose(ARM_LEATHER_ARMOUR, ARM_RING_MAIL);
         break;

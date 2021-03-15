@@ -3440,8 +3440,8 @@ void cheibriados_time_bend(int pow)
         monster* mon = monster_at(*ai);
         if (mon && !mon->is_stationary())
         {
-            int res_margin = roll_dice(mon->get_hit_dice(), 3);
-            res_margin -= random2avg(pow, 2);
+            int res_margin = roll_dice(3, mon->get_hit_dice() * mon->action_energy(EUT_MOVE)) / mon->speed;
+            res_margin -= random2avg(pow/5, 2);
             if (res_margin > 0)
             {
                 mprf("%s%s",
@@ -3454,7 +3454,7 @@ void cheibriados_time_bend(int pow)
                 make_stringf(" rebukes %s.",
                              mon->name(DESC_THE).c_str()).c_str(),
                              GOD_CHEIBRIADOS);
-            do_slow_monster(*mon, &you);
+            do_slow_monster(*mon, &you, pow - random2(31));
         }
     }
 }
@@ -3867,6 +3867,10 @@ bool dithmenos_shadow_step()
     const actor *victim = actor_at(sdirect.target);
     mprf("You step into %s shadow.",
          apostrophise(victim->name(DESC_THE)).c_str());
+    
+    you.stop_constricting_all(true, true);
+    you.stop_being_constricted(true);
+
     // Using 'stepped = true' here because it's Shadow *Step*.
     // This helps to evade splash upon landing on water.
     moveto_location_effects(grd(old_pos), true, old_pos);

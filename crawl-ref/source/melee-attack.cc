@@ -319,6 +319,12 @@ bool melee_attack::handle_phase_dodged()
         if (!defender->asleep() && !mons_is_fleeing(*defender->as_monster()))
             behaviour_event(defender->as_monster(), ME_WHACK, attacker);
     }
+    else if (mons_base_type(*attacker->as_monster()) == MONS_ROCKSLIME)
+    {
+        monster* attacking_mon = attacker->as_monster();
+        attacking_mon->add_ench(mon_enchant(ENCH_CONFUSION, 1, nullptr, 6 + random2(11)));
+        simple_monster_message(*attacking_mon, " appears confused.");
+    }
 
     if (defender->is_player())
         count_action(CACT_DODGE, DODGE_EVASION);
@@ -408,8 +414,8 @@ bool melee_attack::handle_phase_hit()
             Hints.hints_melee_counter++;
 
         // TODO: Remove this (placed here so I can get rid of player_attack)
-        if (have_passive(passive_t::convert_orcs)
-            && mons_genus(defender->mons_species()) == MONS_ORC
+        if (mons_genus(defender->mons_species()) == MONS_ORC
+            && have_passive(passive_t::convert_orcs)
             && !defender->is_summoned()
             && !defender->as_monster()->is_shapeshifter()
             && you.see_cell(defender->pos()) && defender->asleep())
@@ -1400,16 +1406,18 @@ bool melee_attack::player_aux_apply(unarmed_attack_type atk)
                 const bool spell_user = defender->antimagic_susceptible();
 
                 antimagic_affects_defender(damage_done * 32);
+                
+                bool no_mp_regen = have_passive(passive_t::no_mp_regen);
 
-                if (!have_passive(passive_t::no_mp_regen) || spell_user)
+                if (!no_mp_regen || spell_user)
                 {
                     mprf("You %s %s %s.",
-                         have_passive(passive_t::no_mp_regen) ? "disrupt" : "drain",
+                         no_mp_regen ? "disrupt" : "drain",
                          defender->as_monster()->pronoun(PRONOUN_POSSESSIVE).c_str(),
                          spell_user ? "magic" : "power");
                 }
 
-                if (!have_passive(passive_t::no_mp_regen)
+                if (!no_mp_regen
                     && you.magic_points != you.max_magic_points
                     && !defender->as_monster()->is_summoned()
                     && !mons_is_firewood(*defender->as_monster()))

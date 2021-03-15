@@ -923,7 +923,7 @@ KMONS: S = vault sentinel
 KMONS: G = vault guard
 KMONS: W = vault warden
 KMONS: P = ironheart preserver
-KMONS: C = ironbrand convoker
+KMONS: C = ironheart convoker
 SUBST: | = ||*
 MAP
    xxxxxxx
@@ -1254,7 +1254,7 @@ KFEAT: g = iron_grate
 KFEAT: ^ = alarm trap
 KMONS: 1 = vault guard
 KMONS: 2 = vault warden
-KMONS: 3 = ironheart preserver / ironbrand convoker
+KMONS: 3 = ironheart preserver / ironheart convoker
 NSUBST: 1 = 4:1 / 1:2 / 1:3 / *:., . = 2:^ / *:.
 SUBST: ' = .
 KPROP: P = no_tele_into

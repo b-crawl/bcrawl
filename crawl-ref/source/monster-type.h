@@ -482,8 +482,9 @@ enum monster_type                      // menv[].type
 #if TAG_MAJOR_VERSION > 34
     MONS_VAULT_SENTINEL,
     MONS_VAULT_WARDEN,
-    MONS_IRONBRAND_CONVOKER,
+    MONS_IRONHEART_CONVOKER,
     MONS_IRONHEART_PRESERVER,
+    MONS_IRONHEART_BEASTMASTER,
     MONS_IMPERIAL_MYRMIDON,
     MONS_SERVANT_OF_WHISPERS,
     MONS_RAGGED_HIEROPHANT,
@@ -909,7 +910,7 @@ enum monster_type                      // menv[].type
 
     MONS_VAULT_SENTINEL,
     MONS_VAULT_WARDEN,
-    MONS_IRONBRAND_CONVOKER,
+    MONS_IRONHEART_CONVOKER,
     MONS_IRONHEART_PRESERVER,
 
     MONS_ZOMBIE,
@@ -1054,6 +1055,8 @@ enum monster_type                      // menv[].type
     MONS_ONI,
     MONS_FALSE_IMAGE,
     MONS_GOLIATH_FROG,
+    MONS_IRONHEART_BEASTMASTER,
+    MONS_ROCKSLIME,
 #endif
 
     NUM_MONSTERS,               // used for polymorph

@@ -1002,9 +1002,18 @@ bool mons_is_abyssal_only(monster_type mc)
 // Monsters considered as "slime" for Jiyva.
 bool mons_class_is_slime(monster_type mc)
 {
-    return mons_genus(mc) == MONS_JELLY
-           || mons_genus(mc) == MONS_FLOATING_EYE
-           || mons_genus(mc) == MONS_GLOWING_ORANGE_BRAIN;
+    switch (mons_genus(mc))
+    {
+    case MONS_JELLY:
+        if (mc == MONS_ROCKSLIME)
+            return false;
+        else return true;
+    case MONS_FLOATING_EYE:
+    case MONS_GLOWING_ORANGE_BRAIN:
+        return true;
+    default:
+        return false;
+    }
 }
 
 bool mons_is_slime(const monster& mon)
@@ -1015,6 +1024,11 @@ bool mons_is_slime(const monster& mon)
 bool herd_monster(const monster& mon)
 {
     return mons_class_flag(mon.type, M_HERD);
+}
+
+bool mons_class_requires_band(monster_type mc)
+{
+    return mons_class_flag(mc, M_REQUIRE_BAND);
 }
 
 // Plant or fungus or really anything with
@@ -4264,7 +4278,9 @@ mon_inv_type item_to_mslot(const item_def &item)
 
 monster_type royal_jelly_ejectable_monster()
 {
-    return random_choose(MONS_ACID_BLOB, MONS_AZURE_JELLY, MONS_DEATH_OOZE);
+    return random_choose(MONS_ACID_BLOB,
+                         MONS_AZURE_JELLY,
+                         MONS_DEATH_OOZE);
 }
 
 // Replaces @foe_god@ and @god_is@ with foe's god name.

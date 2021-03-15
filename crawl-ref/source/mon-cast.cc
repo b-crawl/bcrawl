@@ -955,7 +955,7 @@ static bool _monster_will_buff(const monster &caster, const monster &targ)
 
     switch(caster.type)
     {
-    case MONS_IRONBRAND_CONVOKER:
+    case MONS_IRONHEART_CONVOKER:
     case MONS_OGRE_MAGE:
     case MONS_WIZARD:
     case MONS_SALAMANDER_MYSTIC:
@@ -1787,6 +1787,7 @@ bool setup_mons_cast(const monster* mons, bolt &pbolt, spell_type spell_cast,
     case SPELL_GREATER_SERVANT_MAKHLEB:
     case SPELL_BIND_SOULS:
     case SPELL_DREAM_DUST:
+    case SPELL_GOAD_BEASTS:
         pbolt.range = 0;
         pbolt.glyph = 0;
         return true;
@@ -1920,6 +1921,13 @@ static bool _valid_druids_call_target(const monster* caller, const monster* call
            && mons_habitat(*callee) != HT_WATER
            && mons_habitat(*callee) != HT_LAVA
            && !callee->is_travelling();
+}
+
+static bool _valid_goad_beasts_target(const monster* goader, const monster* beast)
+{
+    return mons_aligned(goader, beast) && mons_is_beast(beast->type)
+           && !beast->is_shapeshifter()
+           && beast->see_cell(goader->pos());
 }
 
 static bool _mirrorable(const monster* agent, const monster* mon)
@@ -2884,6 +2892,21 @@ static void _cast_druids_call(const monster* mon)
 
     for (int i = 0; i < num; ++i)
         _place_druids_call_beast(mon, mon_list[i], target);
+}
+
+static void _cast_goad_beasts(const monster* mon)
+{
+    // Gain moves from the goad.
+    bool goaded = false;
+    for (monster_near_iterator mi(mon, LOS_NO_TRANS); mi; ++mi)
+        if (_valid_goad_beasts_target(mon, *mi))
+        {
+            mi->gain_energy(EUT_MOVE);
+            goaded = true;
+        }
+    
+    if (goaded)
+        simple_monster_message(*mon, " goads on nearby beasts.");
 }
 
 static double _angle_between(coord_def origin, coord_def p1, coord_def p2)
@@ -4968,7 +4991,7 @@ static const pop_entry _planerend_elf[] =
 static const pop_entry _planerend_vaults[] =
 { // Vaults enemies
   {  1,   1,   80, FLAT, MONS_VAULT_SENTINEL },
-  {  1,   1,   40, FLAT, MONS_IRONBRAND_CONVOKER },
+  {  1,   1,   40, FLAT, MONS_IRONHEART_CONVOKER },
   {  1,   1,  100, FLAT, MONS_WAR_GARGOYLE },
   { 0,0,0,FLAT,MONS_0 }
 };
@@ -6752,6 +6775,10 @@ void mons_cast(monster* mons, bolt pbolt, spell_type spell_cast,
         _mons_upheaval(*mons, *foe);
         return;
 
+    case SPELL_GOAD_BEASTS:
+        _cast_goad_beasts(mons);
+        return;
+
     }
 
     if (spell_is_direct_explosion(spell_cast))
@@ -8010,6 +8037,12 @@ static bool _ms_waste_of_time(monster* mon, mon_spell_slot slot)
     case SPELL_FLAMING_CLOUD:
     case SPELL_CHAOS_BREATH:
         return no_clouds;
+    
+    case SPELL_GOAD_BEASTS:
+        for (monster_near_iterator mi(mon, LOS_NO_TRANS); mi; ++mi)
+            if (_valid_goad_beasts_target(mon, *mi))
+                return false;
+        return true;
 
 #if TAG_MAJOR_VERSION == 34
     case SPELL_SUMMON_TWISTER:

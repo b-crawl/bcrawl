@@ -2730,12 +2730,26 @@ static bool _mons_can_displace(const monster* mpusher,
     if (invalid_monster_index(ipushee))
         return false;
 
-    if (mpusher->type == MONS_WANDERING_MUSHROOM
-        && mpushee->type == MONS_TOADSTOOL
-        || mpusher->type == MONS_TOADSTOOL
-           && mpushee->type == MONS_WANDERING_MUSHROOM)
+    switch (mpushee->type)
     {
-        return true;
+        case MONS_WANDERING_MUSHROOM:
+        case MONS_TOADSTOOL:
+            if (mpusher->type == MONS_WANDERING_MUSHROOM || mpusher->type == MONS_TOADSTOOL)
+                return true;
+            break;
+        
+        case MONS_IRONHEART_BEASTMASTER:
+            if (mons_is_beast(mpusher->type))
+                return true;
+            break;
+        case MONS_ELEPHANT:
+        case MONS_DIRE_ELEPHANT:
+        case MONS_HELLEPHANT:
+            if (mpusher->type == MONS_IRONHEART_BEASTMASTER)
+                return false;
+            break;
+        
+        default: break;
     }
 
     if (!mpushee->has_action_energy()
@@ -3591,9 +3605,19 @@ static bool _monster_move(monster* mons)
                 else
                     noisy(25, target, "You hear a crashing sound.");
             }
-            // Dissolution dissolves walls.
+            // Dissolution and rockslimes
             else if (player_can_hear(mons->pos() + mmov))
-                mprf(MSGCH_SOUND, "You hear a sizzling sound.");
+                switch (mons->type)
+                {
+                case MONS_DISSOLUTION:
+                    mprf(MSGCH_SOUND, "You hear a sizzling sound.");
+                    break;
+                case MONS_ROCKSLIME:
+                default:
+                    mprf(MSGCH_SOUND, "You hear a grinding noise.");
+                    break;
+                }
+                
         }
     }
 

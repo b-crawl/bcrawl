@@ -1192,6 +1192,7 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         item.sub_type  = MI_LARGE_ROCK;
         break;
 
+    case MONS_IRONHEART_BEASTMASTER:
     case MONS_MERFOLK_IMPALER:
     case MONS_MERFOLK_JAVELINEER:
     case MONS_AGNES:

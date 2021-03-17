@@ -964,7 +964,10 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_EYE_OF_DEVASTATION,
       {
-       { SPELL_ENERGY_BOLT, 60, MON_SPELL_MAGICAL },
+       { SPELL_ICEBLAST, 25, MON_SPELL_MAGICAL },
+       { SPELL_ORB_OF_ELECTRICITY, 25, MON_SPELL_MAGICAL },
+       { SPELL_FORCE_LANCE, 20, MON_SPELL_MAGICAL },
+       { SPELL_LRD, 20, MON_SPELL_MAGICAL },
       }
     },
 
@@ -976,10 +979,10 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_GREAT_ORB_OF_EYES,
       {
-       { SPELL_PARALYSE, 12, MON_SPELL_MAGICAL },
-       { SPELL_DISINTEGRATE, 12, MON_SPELL_MAGICAL },
-       { SPELL_DRAIN_MAGIC, 12, MON_SPELL_MAGICAL },
-       { SPELL_CONFUSE, 12, MON_SPELL_MAGICAL },
+       { SPELL_ENERGY_BOLT, 20, MON_SPELL_MAGICAL },
+       { SPELL_DISINTEGRATE, 20, MON_SPELL_MAGICAL },
+       { SPELL_DRAIN_MAGIC, 20, MON_SPELL_MAGICAL },
+       { SPELL_CONFUSE, 20, MON_SPELL_MAGICAL },
       }
     },
 

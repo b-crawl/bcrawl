@@ -3813,7 +3813,6 @@ ENDMAP
 
 NAME:   minmay_small_thing
 DEPTH:  D:4-8
-SUBST:  9 = 999.
 MAP
  xxxxxxxxxx
 xx........@
@@ -3824,7 +3823,7 @@ xx..xx.x.xx
  xx.xxxxx.x
 xx..x*.x.xx
 x..xxx.x.*x
-xx...9.9.xx
+xx.0.0.0.xx
  xxxxxxxxx
 ENDMAP
 

@@ -964,6 +964,7 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_EYE_OF_DEVASTATION,
       {
+       { SPELL_REPEL_MISSILES, 100, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
        { SPELL_FORCE_LANCE, 100, MON_SPELL_MAGICAL },
        { SPELL_BLINK_CLOSE, 100, MON_SPELL_WIZARD },
       }

@@ -1023,6 +1023,7 @@ static const pop_entry pop_depths[] =
   {  2,  8,  185, SEMI, MONS_SPRIGGAN_BERSERKER },
   {  2, 10,   55, FLAT, MONS_SPRIGGAN_DEFENDER },
   {  2, 10,   25, FLAT, MONS_FLOATING_EYE },
+  {  2, 10,   25, FLAT, MONS_EYE_OF_DEVASTATION },
   {  3, 14,   40, FLAT, MONS_STORM_DRAGON },
   {  3, 14,   40, FLAT, MONS_IRON_DRAGON },
   {  1,  5,   25, SEMI, MONS_DEEP_ELF_HIGH_PRIEST },

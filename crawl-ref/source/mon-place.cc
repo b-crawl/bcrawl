@@ -1736,8 +1736,17 @@ struct band_set
 
 // We handle Vaults centaur warriors specially.
 static const band_conditions centaur_band_condition
-    = { 3, 10, []() { return !player_in_branch(BRANCH_SHOALS)
-                          && !player_in_branch(BRANCH_VAULTS); }};
+    = { 3, 10, []()
+    {
+        switch (you.where_are_you)
+        {
+        case BRANCH_SHOALS:
+        case BRANCH_VAULTS:
+        case BRANCH_DEPTHS:
+            return false;
+        default: return true;
+        }
+    }};
 
 // warrior & mage spawn alone more frequently at shallow depths of Snake
 static const band_conditions naga_band_condition
@@ -1936,7 +1945,7 @@ static const map<monster_type, band_set> bands_by_leader = {
     { MONS_MOLTEN_GARGOYLE,  { {0, 0, []() {
         return you.where_are_you == BRANCH_DESOLATION;
     }},                            {{ BAND_MOLTEN_GARGOYLES, {2, 3} }}}},
-    { MONS_IRONHEART_BEASTMASTER, { {}, {{ BAND_DIRE_ELEPHANTS, {2, 3}, true }}}},
+    { MONS_IRONHEART_BEASTMASTER, { {}, {{ BAND_DIRE_ELEPHANTS, {2, 4}, true }}}},
     { MONS_WIZARD,  { {0, 0, []() {
         return player_in_branch(BRANCH_VAULTS) || player_in_branch(BRANCH_DEPTHS);
     }},                            {{ BAND_UGLY_THINGS, {0, 8}, true }}}},
@@ -2009,10 +2018,14 @@ static band_type _choose_band(monster_type mon_type, int *band_size_p,
     // Per-branch hacks. TODO: move this into the main branch structure
     // (probably moving conditionals inside band_info?)
     case MONS_CENTAUR_WARRIOR:
-        if (player_in_branch(BRANCH_VAULTS))
+        switch (you.where_are_you)
         {
+        case BRANCH_VAULTS:
+        case BRANCH_DEPTHS:
             band = BAND_CENTAUR_WARRIORS;
             band_size = random_range(2, 4);
+            break;
+        default: break;
         }
         break;
 

@@ -889,7 +889,10 @@ void floor_transition(dungeon_feature_type how,
 
     autotoggle_autopickup(false);
     request_autopickup();
-    
+
+    you.duration[DUR_GOZAG_GOLD_AURA] = 0;
+    you.props[GOZAG_GOLD_AURA_KEY] = 0;
+
     if(!going_up && feat_is_staircase(how) && one_chance_in(25)
         && !(player_in_branch(BRANCH_DUNGEON) && you.depth < 4)
         && !feat_is_portal(how))

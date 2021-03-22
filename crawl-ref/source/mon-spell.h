@@ -980,7 +980,7 @@ static const mon_spellbook mspell_list[] =
       {
        { SPELL_ENERGY_BOLT, 40, MON_SPELL_MAGICAL },
        { SPELL_DISINTEGRATE, 40, MON_SPELL_MAGICAL },
-       { SPELL_DRAIN_MAGIC, 40, MON_SPELL_MAGICAL },
+       { SPELL_DRAINING_GAZE, 40, MON_SPELL_MAGICAL },
        { SPELL_CONFUSE, 40, MON_SPELL_MAGICAL },
       }
     },

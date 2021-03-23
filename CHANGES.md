@@ -555,7 +555,7 @@
   - v1.31: In Vaults and Depths, ugly things now appear together with wizards.
   - v1.31.1: Rockslimes have more HP.
   - v1.31.1: Ironheart beastmasters carry better whips and attack faster.
-  - v1.31.1: Eyes of devastation are reworked: they move slowly, have Force Lance, Blink Close, and Repel Missiles, and can cast 4 times per turn.
+  - v1.31.1: Eyes of devastation are reworked: they move slowly, have Force Lance, Blink Close, and Repel Missiles, and can cast 3 times per turn.
   - v1.31.1: Great orbs of eyes are reworked: they have Energy Bolt, Disintegrate, Draining Gaze, and Confuse, and can cast 2 times per turn.
   - v1.31.1: Naga ritualists have Summon Mana Viper, Summon Vermin, Olgreb's Toxic Radiance, and Virulence.
   - v1.31.1: Salamander mystics have Force Lance, Bolt of Magma, and Haste Other, and cast more often.

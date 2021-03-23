@@ -1290,7 +1290,7 @@ bool physiology_mutation_conflict(mutation_type mutat)
     }
 
     // Already immune/resistant.
-    if ((you.species == SP_GARGOYLE) && mutat == MUT_POISON_RESISTANCE)
+    if ((you.species == SP_GARGOYLE || you.species == SP_ENT) && mutat == MUT_POISON_RESISTANCE)
         return true;
 
     // We can't use is_useless_skill() here, since species that can still wear

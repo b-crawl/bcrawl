@@ -89,7 +89,7 @@ Kobolds are small, stealthy, skilled with short blades and ranged weapons, and h
 Merfolk
 
 Half fish, half human, Merfolk are citizens of both water and land. They are
-strong combatants, and adept at using magic to assist in battle.
+skilled with polearms, dodging, and transmutations, but inept with shields.
 %%%%
 Minotaur
 

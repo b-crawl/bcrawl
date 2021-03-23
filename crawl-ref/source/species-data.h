@@ -523,13 +523,13 @@ static const map<species_type, species_def> species_data =
     MONS_MERFOLK,
     HT_WATER, US_ALIVE, SIZE_MEDIUM,
     8, 7, 9, // 24
-    { STAT_STR, STAT_INT, STAT_DEX }, 5,
+    { STAT_DEX }, 3,
     {},
     { "You revert to your normal form in water.",
       "You are very nimble and swift while swimming.",
       "You are very stealthy in the water. (Stealth+)" },
     { "change form in water", "swift swim", "stealthy swim" },
-    { JOB_FIGHTER, JOB_GLADIATOR, JOB_MONK, JOB_HUNTER, JOB_BERSERKER, JOB_ABYSSAL_KNIGHT, JOB_SKALD, JOB_TRANSMUTER, JOB_SUMMONER, JOB_ICE_ELEMENTALIST, JOB_MARTIAL_ARTIST },
+    { JOB_GLADIATOR, JOB_MONK, JOB_HUNTER, JOB_BERSERKER, JOB_ABYSSAL_KNIGHT, JOB_SKALD, JOB_TRANSMUTER, JOB_SUMMONER, JOB_ICE_ELEMENTALIST, JOB_MARTIAL_ARTIST },
     { SK_POLEARMS, SK_LONG_BLADES },
 } },
 

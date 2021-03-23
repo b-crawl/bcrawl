@@ -2732,9 +2732,8 @@ static bool _mons_can_displace(const monster* mpusher,
 
     switch (mpushee->type)
     {
-        case MONS_WANDERING_MUSHROOM:
         case MONS_TOADSTOOL:
-            if (mpusher->type == MONS_WANDERING_MUSHROOM || mpusher->type == MONS_TOADSTOOL)
+            if (mpusher->type == MONS_WANDERING_MUSHROOM)
                 return true;
             break;
         

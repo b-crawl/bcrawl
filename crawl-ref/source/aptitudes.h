@@ -1117,7 +1117,7 @@ static const species_skill_aptitude species_skill_aptitudes[] =
 #if TAG_MAJOR_VERSION == 34
     APT(SP_MERFOLK,         SK_STABBING,      UNUSABLE_SKILL),
 #endif
-    APT(SP_MERFOLK,         SK_SHIELDS,         0),
+    APT(SP_MERFOLK,         SK_SHIELDS,        -4),
 #if TAG_MAJOR_VERSION == 34
     APT(SP_MERFOLK,         SK_TRAPS,         UNUSABLE_SKILL),
 #endif

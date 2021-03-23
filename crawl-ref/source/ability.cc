@@ -532,7 +532,7 @@ static const ability_def Ability_List[] =
     { ABIL_ASHENZARI_CURSE, "Curse Item",
       0, 0, 0, 0, {fail_basis::invo}, abflag::none },
     { ABIL_ASHENZARI_SCRYING, "Scrying",
-      4, 0, 0, 2, {fail_basis::invo}, abflag::instant },
+      4, 0, 0, 1, {fail_basis::invo}, abflag::instant },
     { ABIL_ASHENZARI_TRANSFER_KNOWLEDGE, "Transfer Knowledge",
       0, 0, 0, 10, {fail_basis::invo}, abflag::none },
     { ABIL_ASHENZARI_END_TRANSFER, "End Transfer Knowledge",
@@ -2364,6 +2364,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
 
         if (mons && you.can_see(*mons) && mons->is_illusion())
         {
+            fail_check();
             simple_monster_message(*mons, "'s clone doesn't have a soul to enslave!");
             // Still costs a turn to gain the information.
             return spret::success;
@@ -2429,9 +2430,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         if (!spell_direction(spd, beam))
             return spret::abort;
 
-        int power = you.skill(SK_INVOCATIONS, 1)
-                    + random2(1 + you.skill(SK_INVOCATIONS, 1))
-                    + random2(1 + you.skill(SK_INVOCATIONS, 1));
+        int power = you.skill(SK_INVOCATIONS, 3);
 
         // Since the actual beam is random, check with BEAM_MMISSILE.
         if (!player_tracer(ZAP_DEBUGGING_RAY, power, beam, beam.range))
@@ -2446,7 +2445,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         case 1: zapping(ZAP_PAIN, power, beam); break;
         case 2: zapping(ZAP_STONE_ARROW, power, beam); break;
         case 3: zapping(ZAP_SHOCK, power, beam); break;
-        case 4: zapping(ZAP_BREATHE_ACID, power / 7, beam); break;
+        case 4: zapping(ZAP_THROW_FROST, power, beam); break;
         }
         break;
     }

@@ -603,13 +603,14 @@ void update_monsters_in_view()
                 case MONS_WIZARD:
                 case MONS_LICH:
                 case MONS_VAMPIRE_KNIGHT:
-                case MONS_GREAT_ORB_OF_EYES:
                 case MONS_SPHINX:
                 // banishment
                 case MONS_DEEP_ELF_SORCERER:
                 case MONS_DEEP_ELF_DEMONOLOGIST:
                 // misc foes dangerous for their level
                 case MONS_WATER_NYMPH:
+                case MONS_GREAT_ORB_OF_EYES:
+                case MONS_EYE_OF_DEVASTATION:
                     do_force_more = true;
                     break;
                 

@@ -164,7 +164,7 @@ const vector<god_power> god_powers[NUM_GODS] =
 
     // Makhleb
     { { 1, "gain health from killing" },
-      { 2, ABIL_MAKHLEB_MINOR_DESTRUCTION, "harness Makhleb's destructive might" },
+      { 1, ABIL_MAKHLEB_MINOR_DESTRUCTION, "harness Makhleb's destructive might" },
       { 3, ABIL_MAKHLEB_LESSER_SERVANT_OF_MAKHLEB, "summon a lesser servant of Makhleb" },
       { 4, ABIL_MAKHLEB_MAJOR_DESTRUCTION, "hurl Makhleb's greater destruction" },
       { 5, ABIL_MAKHLEB_GREATER_SERVANT_OF_MAKHLEB, "summon a greater servant of Makhleb" },

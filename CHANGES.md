@@ -186,6 +186,7 @@
   - v1.28.1: Mummies have a better Hexes aptitude (-1 -> +0).
   - v1.28.1: White draconian breath always hits.
   - v1.30: To balance high scores across species, felid turn counts are treated as 1000 higher than for other species for scoring purposes.
+  - v1.31.1: Merfolk gain 1 dexterity every 3 levels, and have -4 Shields aptitude.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -351,6 +352,9 @@
   - v1.30.1: Kikubaaqudgha worshippers at \*\* piety can get brief Might and Brilliance effects by standing in miasma.
   - v1.31: Player shadows created by Dithmenos's Shadow Step ability act once immediately when created.
   - v1.31: Cheibriados's Bend Time Ability lasts longer and its success scales with monster movement speed.
+  - v1.31.1: Gozag's gold distraction effect expires when taking stairs.
+  - v1.31.1: Makhleb gives Minor Destruction at \* piety. Its damage scales more with Invocations, and its acid effect is replaced by Throw Frost.
+  - v1.31.1: Ashenzari's Scrying ability costs less piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -549,6 +553,12 @@
   - v1.31: The new "rockslime" enemy appears in Depths and Zot. They are not true slimes, but rather, similar to gargoyles and elementals. They are very tough and fast, and can trample, but get confused briefly when their attacks miss. They can also burrow through walls.
   - v1.31: Yaktaurs and yaktaur captains shoot more quickly.
   - v1.31: In Vaults and Depths, ugly things now appear together with wizards.
+  - v1.31.1: Rockslimes have more HP.
+  - v1.31.1: Ironheart beastmasters carry better whips and attack faster.
+  - v1.31.1: Eyes of devastation are reworked: they move slowly, have Force Lance, Blink Close, and Repel Missiles, and can cast 4 times per turn.
+  - v1.31.1: Great orbs of eyes are reworked: they have Energy Bolt, Disintegrate, Draining Gaze, and Confuse, and can cast 2 times per turn.
+  - v1.31.1: Naga ritualists have Summon Mana Viper, Summon Vermin, Olgreb's Toxic Radiance, and Virulence.
+  - v1.31.1: Salamander mystics have Force Lance, Bolt of Magma, and Haste Other, and cast more often.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

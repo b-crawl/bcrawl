@@ -532,7 +532,7 @@ static const ability_def Ability_List[] =
     { ABIL_ASHENZARI_CURSE, "Curse Item",
       0, 0, 0, 0, {fail_basis::invo}, abflag::none },
     { ABIL_ASHENZARI_SCRYING, "Scrying",
-      4, 0, 0, 2, {fail_basis::invo}, abflag::instant },
+      4, 0, 0, 1, {fail_basis::invo}, abflag::instant },
     { ABIL_ASHENZARI_TRANSFER_KNOWLEDGE, "Transfer Knowledge",
       0, 0, 0, 10, {fail_basis::invo}, abflag::none },
     { ABIL_ASHENZARI_END_TRANSFER, "End Transfer Knowledge",

@@ -1215,40 +1215,59 @@ bool physiology_mutation_conflict(mutation_type mutat)
     if (_is_covering(mutat) && _body_covered() >= 3)
         return true;
 
-    // Only Nagas and Draconians can get this one.
-    if (you.species != SP_NAGA && !species_is_draconian(you.species)
-        && mutat == MUT_STINGER)
+    switch (mutat)
     {
-        return true;
-    }
+    case MUT_STINGER:
+        if (you.species != SP_NAGA && !species_is_draconian(you.species))
+            return true;
+        break;
+    
+    case MUT_TENTACLE_SPIKE:
+        if (you.species != SP_OCTOPODE)
+            return true;
+        break;
+    
+    case MUT_THIN_SKELETAL_STRUCTURE:
+    case MUT_HORNS:
+        // No bones for thin skeletal structure, and too squishy for horns.
+        if (you.species == SP_OCTOPODE)
+            return true;
+        break;
+    
+    case MUT_HOOVES:
+    case MUT_TALONS:
+        // Merfolk have no feet in the natural form, and we never allow mutations
+        // that show up only in a certain transformation.
+        if (!player_has_feet(false, false) || you.species == SP_MERFOLK)
+            return true;
+        break;
+    
+    case MUT_SPIT_POISON:
+        // Only nagas can get upgraded poison spit.
+        if (you.species != SP_NAGA)
+            return true;
+        break;
 
-    // Need tentacles to grow something on them.
-    if (you.species != SP_OCTOPODE && mutat == MUT_TENTACLE_SPIKE)
-        return true;
-
-    // No bones for thin skeletal structure, and too squishy for horns.
-    if (you.species == SP_OCTOPODE
-        && (mutat == MUT_THIN_SKELETAL_STRUCTURE || mutat == MUT_HORNS))
-    {
-        return true;
-    }
-
-    // No feet.
-    if (!player_has_feet(false, false)
-        && (mutat == MUT_HOOVES || mutat == MUT_TALONS))
-    {
-        return true;
-    }
-
-    // Only nagas can get upgraded poison spit.
-    if (you.species != SP_NAGA && mutat == MUT_SPIT_POISON)
-        return true;
-
-    // Only Draconians (and gargoyles) can get wings.
-    if (!species_is_draconian(you.species) && you.species != SP_GARGOYLE
-        && mutat == MUT_BIG_WINGS)
-    {
-        return true;
+    case MUT_BIG_WINGS:
+        // Only Draconians (and gargoyles) can get wings.
+        if (!species_is_draconian(you.species) && you.species != SP_GARGOYLE)
+            return true;
+        break;
+    
+    case MUT_CLAWS:
+        // Felids have innate claws, and unlike trolls/ghouls, there are no
+        // increases for them. And octopodes have no hands.
+        if (you.species == SP_FELID || you.species == SP_OCTOPODE || you.species == SP_ENT)
+            return true;
+        break;
+    
+    case MUT_POISON_RESISTANCE:
+        // Already immune/resistant.
+        if (you.species == SP_GARGOYLE || you.species == SP_ENT)
+            return true;
+        break;
+    
+    default: break;
     }
 
     // Vampires' healing and thirst rates depend on their blood level.
@@ -1256,22 +1275,6 @@ bool physiology_mutation_conflict(mutation_type mutat)
         && (mutat == MUT_CARNIVOROUS || mutat == MUT_HERBIVOROUS
             || mutat == MUT_REGENERATION || mutat == MUT_INHIBITED_REGENERATION
             || mutat == MUT_FAST_METABOLISM || mutat == MUT_SLOW_METABOLISM))
-    {
-        return true;
-    }
-
-    // Felids have innate claws, and unlike trolls/ghouls, there are no
-    // increases for them. And octopodes have no hands.
-    if ((you.species == SP_FELID || you.species == SP_OCTOPODE || you.species == SP_ENT)
-         && mutat == MUT_CLAWS)
-    {
-        return true;
-    }
-
-    // Merfolk have no feet in the natural form, and we never allow mutations
-    // that show up only in a certain transformation.
-    if (you.species == SP_MERFOLK
-        && (mutat == MUT_TALONS || mutat == MUT_HOOVES))
     {
         return true;
     }
@@ -1288,10 +1291,6 @@ bool physiology_mutation_conflict(mutation_type mutat)
             return true;
         }
     }
-
-    // Already immune/resistant.
-    if ((you.species == SP_GARGOYLE || you.species == SP_ENT) && mutat == MUT_POISON_RESISTANCE)
-        return true;
 
     // We can't use is_useless_skill() here, since species that can still wear
     // body armour can sacrifice armour skill with Ru.

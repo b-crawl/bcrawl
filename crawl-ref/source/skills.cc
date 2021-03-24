@@ -1731,6 +1731,8 @@ string skill_title_by_rank(skill_type best_skill, uint8_t skill_rank,
                 result = "Blood Saint";
                 break;
             }
+            else if (species == SP_GARGOYLE && skill_rank == 5 && god == GOD_JIYVA)
+                result = "Rockslime";
             else if (god != GOD_NO_GOD)
                 result = god_title(god, species, piety);
             break;

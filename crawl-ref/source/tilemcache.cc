@@ -332,7 +332,6 @@ bool mcache_monster::get_weapon_offset(tileidx_t mon_tile,
         *ofs_y = 0;
         break;
     // Shift to the left.
-    case TILEP_MONS_GNOLL:
     case TILEP_MONS_GNOLL_SHAMAN:
     case TILEP_MONS_GNOLL_SERGEANT:
     case TILEP_MONS_GRUM:
@@ -365,6 +364,7 @@ bool mcache_monster::get_weapon_offset(tileidx_t mon_tile,
     case TILEP_MONS_BIG_KOBOLD:
     case TILEP_MONS_EFREET:
     case TILEP_MONS_VAMPIRE_MAGE:
+    case TILEP_MONS_GNOLL:
         *ofs_x = -3;
         *ofs_y = 0;
         break;

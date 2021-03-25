@@ -210,6 +210,13 @@ float scaled_skill_cost(skill_type sk)
     return (float)next_level / baseline;
 }
 
+
+void _transfer_skill_xp(skill_type source, skill_type target, int apt)
+{
+    you.skill_points[target] += skill_exp_needed_with_apt(you.skills[source], apt) + 1;
+    you.skills[source] = 0;
+}
+
 // Characters are actually granted skill points, not skill levels.
 // Here we take racial aptitudes into account in determining final
 // skill levels.
@@ -228,13 +235,21 @@ void reassess_starting_skills()
         you.skill_points[sk] = you.skills[sk] ?
             skill_exp_needed_with_apt(you.skills[sk], apt) + 1 : 0;
 
-        if (sk == SK_DODGING && you.skills[SK_ARMOUR]
-            && (is_useless_skill(SK_ARMOUR) || you_can_wear(EQ_BODY_ARMOUR) != MB_TRUE))
+        switch (sk)
         {
+        case SK_DODGING:
             // No one who can't wear mundane heavy armour should start with
             // the Armour skill -- D:1 dragon armour is too unlikely.
-            you.skill_points[sk] += skill_exp_needed_with_apt(you.skills[SK_ARMOUR], apt) + 1;
-            you.skills[SK_ARMOUR] = 0;
+            if (you.skills[SK_ARMOUR] && (is_useless_skill(SK_ARMOUR) || you_can_wear(EQ_BODY_ARMOUR) != MB_TRUE))
+                _transfer_skill_xp(SK_ARMOUR, sk, apt);
+            break;
+        case SK_SPELLCASTING:
+            if (you.species == SP_ONI)
+                for (skill_type school = SK_FIRST_MAGIC_SCHOOL; school++; school <= SK_LAST_MAGIC)
+                    if (you.skills[school])
+                        _transfer_skill_xp(school, sk, 1);
+            break;
+        default: break;
         }
 
         if (!you.skill_points[sk])

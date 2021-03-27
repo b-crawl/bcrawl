@@ -137,8 +137,6 @@ void give_job_skills(job_type job)
             
             if (you.species == SP_FELID && job == JOB_FIGHTER)
                 amount += 2;
-            if (you.species == SP_HILL_ORC && !ranged_job)
-                skill = SK_FIGHTING;
             
             // Don't give throwing hunters Short Blades skill.
             if (ranged_job && !(weap && is_range_weapon(*weap)))

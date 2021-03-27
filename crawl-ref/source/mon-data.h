@@ -302,7 +302,7 @@ static monsterentry mondata[] =
 // ants and formicids ('a')
 {
     MONS_WORKER_ANT, 'a', RED, "worker ant",
-    M_NO_SKELETON,
+    M_NO_SKELETON | M_BURROWS,
     MR_VUL_POISON,
     10, MONS_WORKER_ANT, MONS_WORKER_ANT, MH_NATURAL, 10,
     { {AT_BITE, AF_POISON, 8}, AT_NO_ATK, AT_NO_ATK, AT_NO_ATK },

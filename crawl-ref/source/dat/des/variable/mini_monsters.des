@@ -210,7 +210,7 @@ ENDMAP
 NAME:   minivault_29
 TAGS:   uniq_anthill transparent
 DEPTH:  D:8-13, Lair:2-, Spider
-MONS:   patrolling worker ant, soldier ant
+MONS:   worker ant, soldier ant
 MONS:   entropy weaver, patrolling queen ant
 : if (you.branch() == "Lair" and you.absdepth() < 14)
 :  or you.absdepth() < 12 then
@@ -237,7 +237,7 @@ ENDMAP
 NAME:   zaba_anthell
 TAGS:   no_rotate uniq_anthill
 DEPTH:  D:8-13, Lair:2-, Spider
-MONS:   patrolling worker ant, soldier ant
+MONS:   worker ant, soldier ant
 MONS:   entropy weaver, patrolling queen ant
 SUBST:  X = x.
 NSUBST: @ = 1:@ / * = x.
@@ -268,7 +268,7 @@ ENDMAP
 NAME:  zaba_antful_of_joy
 TAGS:  no_rotate uniq_anthill
 DEPTH: D:8-13, Lair:2-, Spider
-MONS:  patrolling worker ant, soldier ant
+MONS:  worker ant, soldier ant
 MONS:  entropy weaver, patrolling queen ant
 KFEAT: ^ = known alarm trap
 : if (you.branch() == "Lair" and you.absdepth() < 14)
@@ -331,7 +331,7 @@ ENDMAP
 NAME:   minmay_another_anthill
 TAGS:   uniq_anthill transparent
 DEPTH:  D:8-13, Lair:2-, Spider
-MONS:   patrolling worker ant, worker ant, soldier ant
+MONS:   worker ant, worker ant, soldier ant
 MONS:   entropy weaver, patrolling queen ant
 : if (you.branch() == "Lair" and you.absdepth() < 14)
 :  or you.absdepth() < 12 then

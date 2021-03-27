@@ -260,6 +260,10 @@ void reassess_starting_skills()
             default: break;
             }
             break;
+        case SP_SPRIGGAN:
+            if (sk == SK_CONJURATIONS)
+                target = SK_SPELLCASTING;
+            break;
         default: break;
         }
 

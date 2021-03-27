@@ -215,10 +215,10 @@ float scaled_skill_cost(skill_type sk)
 // skill levels.
 void reassess_starting_skills()
 {
-    for (skill_type sk = SK_LAST_SKILL; sk > SK_FIRST_SKILL; sk--)
+    for (skill_type sk = SK_LAST_SKILL; sk >= SK_FIRST_SKILL; sk--)
         you.skill_points[sk] = 0;
     
-    for (skill_type sk = SK_LAST_SKILL; sk > SK_FIRST_SKILL; sk--)
+    for (skill_type sk = SK_LAST_SKILL; sk >= SK_FIRST_SKILL; sk--)
     {
         int apt = 0;
         if (sk == SK_SPELLCASTING)
@@ -273,7 +273,7 @@ void reassess_starting_skills()
         you.skills[sk] = 0;
     }
 
-    for (skill_type sk = SK_LAST_SKILL; sk > SK_FIRST_SKILL; sk--)
+    for (skill_type sk = SK_LAST_SKILL; sk >= SK_FIRST_SKILL; sk--)
     {
         if (is_useless_skill(sk))
             you.skill_points[sk] = 0;

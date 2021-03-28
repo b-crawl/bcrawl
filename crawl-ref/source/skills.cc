@@ -215,34 +215,73 @@ float scaled_skill_cost(skill_type sk)
 // skill levels.
 void reassess_starting_skills()
 {
-    // go backwards, need to do Dodging before Armour
-    // "sk >= SK_FIRST_SKILL" might be optimised away, so do this differently.
-    for (skill_type next = NUM_SKILLS; next > SK_FIRST_SKILL; )
+    for (skill_type sk = SK_LAST_SKILL; sk >= SK_FIRST_SKILL; sk--)
+        you.skill_points[sk] = 0;
+    
+    for (skill_type sk = SK_LAST_SKILL; sk >= SK_FIRST_SKILL; sk--)
     {
-        skill_type sk = --next;
-        
         int apt = 0;
-        if(sk == SK_SPELLCASTING)
+        if (sk == SK_SPELLCASTING)
             apt = -1;
 
-        you.skill_points[sk] = you.skills[sk] ?
-            skill_exp_needed_with_apt(you.skills[sk], apt) + 1 : 0;
+        skill_type target = sk;
 
-        if (sk == SK_DODGING && you.skills[SK_ARMOUR]
-            && (is_useless_skill(SK_ARMOUR) || you_can_wear(EQ_BODY_ARMOUR) != MB_TRUE))
+        switch (sk)
         {
-            // No one who can't wear mundane heavy armour should start with
-            // the Armour skill -- D:1 dragon armour is too unlikely.
-            you.skill_points[sk] += skill_exp_needed_with_apt(you.skills[SK_ARMOUR], apt) + 1;
-            you.skills[SK_ARMOUR] = 0;
+        case SK_ARMOUR:
+            // no one who can't wear mundane heavy armour should start with Armour skill
+            if (is_useless_skill(SK_ARMOUR) || you_can_wear(EQ_BODY_ARMOUR) != MB_TRUE)
+                target = SK_DODGING;
+            break;
+        default: break;
+        }
+        
+        switch (you.species)
+        {
+        case SP_ONI:
+            if (sk >= SK_FIRST_MAGIC_SCHOOL && sk <= SK_LAST_MAGIC)
+            {
+                target = SK_SPELLCASTING;
+                apt = 1;
+            }
+            break;
+        case SP_HILL_ORC:
+            switch (sk)
+            {
+            case SK_SHORT_BLADES:
+            case SK_LONG_BLADES:
+            case SK_AXES:
+            case SK_MACES_FLAILS:
+            case SK_POLEARMS:
+            case SK_STAVES:
+            case SK_UNARMED_COMBAT:
+                target = SK_FIGHTING;
+                break;
+            default: break;
+            }
+            break;
+        case SP_SPRIGGAN:
+            if (sk == SK_CONJURATIONS)
+                target = SK_SPELLCASTING;
+            break;
+        default: break;
         }
 
+        if (you.skills[sk])
+            you.skill_points[target] += skill_exp_needed_with_apt(you.skills[sk], apt) + 1;
+
+        you.skills[sk] = 0;
+    }
+
+    for (skill_type sk = SK_LAST_SKILL; sk >= SK_FIRST_SKILL; sk--)
+    {
+        if (is_useless_skill(sk))
+            you.skill_points[sk] = 0;
+        
         if (!you.skill_points[sk])
             continue;
 
         // Find out what level that earns this character.
-        you.skills[sk] = 0;
-
         for (int lvl = 1; lvl <= 8; ++lvl)
         {
             if (you.skill_points[sk] > skill_exp_needed(lvl, sk))
@@ -264,14 +303,6 @@ void reassess_starting_skills()
             you.skill_points[sk] = skill_exp_needed(1, sk);
             you.skills[sk] = 1;
         }
-    }
-
-    // Zero useless skills, just to be safe.
-    for (skill_type next = NUM_SKILLS; next > SK_FIRST_SKILL; )
-    {
-        skill_type sk = --next;
-        if(is_useless_skill(sk))
-            you.skills[sk] = 0;
     }
 }
 

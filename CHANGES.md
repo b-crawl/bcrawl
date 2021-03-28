@@ -559,6 +559,8 @@
   - v1.31.1: Great orbs of eyes are reworked: they have Energy Bolt, Disintegrate, Draining Gaze, and Confuse, and can cast 2 times per turn.
   - v1.31.1: Naga ritualists have Summon Mana Viper, Summon Vermin, Olgreb's Toxic Radiance, and Virulence.
   - v1.31.1: Salamander mystics have Force Lance, Bolt of Magma, and Haste Other, and cast more often.
+  - v1.31.2: Worker ants can burrow through rock walls.
+  - v1.31.2: Soldier ants have rebalanced stats and are overall stronger.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

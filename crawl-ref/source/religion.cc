@@ -2815,15 +2815,11 @@ static bool _transformed_player_can_join_god(god_type which_god)
 {
     if (which_god == GOD_ZIN && you.form != transformation::none)
         return false; // zin hates everything
-    // all these clauses are written with a ! in front of them, so that
-    // the stuff to the right of that is uniformly "gods that hate this form"
+
     switch (you.form)
     {
     case transformation::lich:
         return !(is_good_god(which_god) || which_god == GOD_FEDHAS);
-    case transformation::statue:
-    case transformation::wisp:
-        return !(which_god == GOD_YREDELEMNUL);
     default:
         return true;
     }

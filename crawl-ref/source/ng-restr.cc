@@ -135,8 +135,11 @@ char_choice_restriction weapon_restriction(weapon_type wpn,
         {
         case JOB_GLADIATOR:
         case JOB_SKALD:
-        case JOB_MONK:
             break;
+        
+        // always suggested because it's better than the other starting options
+        case JOB_MONK:
+            return CC_UNRESTRICTED;
         
         case JOB_FIGHTER:
             if (ng.species == SP_FORMICID || ng.species == SP_ENT)

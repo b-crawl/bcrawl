@@ -141,7 +141,9 @@ char_choice_restriction weapon_restriction(weapon_type wpn,
     if (wpn == WPN_QUARTERSTAFF)
         switch (ng.job)
         {
-        case JOB_GLADIATOR: break;
+        case JOB_GLADIATOR:
+        case JOB_SKALD:
+            break;
         
         case JOB_FIGHTER:
             if (ng.species == SP_FORMICID || ng.species == SP_ENT)

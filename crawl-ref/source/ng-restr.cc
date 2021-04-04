@@ -135,6 +135,7 @@ char_choice_restriction weapon_restriction(weapon_type wpn,
         {
         case JOB_GLADIATOR:
         case JOB_SKALD:
+        case JOB_MONK:
             break;
         
         case JOB_FIGHTER:

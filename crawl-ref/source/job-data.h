@@ -27,7 +27,7 @@ static const map<job_type, job_def> job_data =
     4, 4, 4,
     { SP_DEMONSPAWN, SP_FORMICID, SP_GHOUL, SP_HILL_ORC, SP_HUMAN, SP_MINOTAUR, },
     { "ring mail", "tomahawk ego:dispersal q:10", "stone q:40" },
-    WCHOICE_PLAIN,
+    WCHOICE_GOOD,
     { { SK_FIGHTING, 3 }, { SK_ARMOUR, 1 }, { SK_DODGING, 1 },
       { SK_INVOCATIONS, 2 }, { SK_WEAPON, 2 }, { SK_THROWING, 1 }, },
 } },

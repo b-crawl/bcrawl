@@ -130,14 +130,6 @@ char_choice_restriction weapon_restriction(weapon_type wpn,
     if (ng.species == SP_FELID && wpn != WPN_UNARMED)
         return CC_BANNED;
 
-    // These recommend short blades because they're good at stabbing,
-    // but the fighter's armour hinders that.
-    if ((ng.species == SP_NAGA || ng.species == SP_VAMPIRE)
-         && ng.job == JOB_FIGHTER && wpn == WPN_RAPIER)
-    {
-        return CC_RESTRICTED;
-    }
-
     if (wpn == WPN_QUARTERSTAFF)
         switch (ng.job)
         {

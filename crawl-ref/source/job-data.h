@@ -50,7 +50,7 @@ static const map<job_type, job_def> job_data =
     WCHOICE_PLAIN,
     { { SK_FIGHTING, 2 }, { SK_SHIELDS, 2 }, { SK_WEAPON, 2 },
     { SK_STEALTH, 3 }, 
-    { SK_SPELLCASTING, 1 }, { SK_HEXES, 1 }, { SK_EVOCATIONS, 1 } },
+    { SK_SPELLCASTING, 1 }, { SK_HEXES, 2 }, { SK_EVOCATIONS, 1 } },
 } },
 
 { JOB_ARCANE_MARKSMAN, {

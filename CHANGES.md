@@ -71,7 +71,6 @@
   - v1.28.2: Archaeologists start with a blowgun and 6 curare needles.
   - v1.28.2: Gladiators start with a potion of heal wounds.
   - v1.30.1: Skalds start with Swiftness.
-  - v1.31.3: Skalds have "good" starting weapons.
   - v1.31.3: Abyssal Knights have "good" starting weapons instead of +1 "plain" weapons.
   - v1.31.3: Monks, Skalds, and Ent Fighters can start with a quarterstaff.
 

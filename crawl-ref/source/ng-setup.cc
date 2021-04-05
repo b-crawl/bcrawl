@@ -362,9 +362,7 @@ static void _give_items_skills(const newgame_def& ng)
         break;
     }
 
-    if (you.char_class == JOB_ABYSSAL_KNIGHT)
-        newgame_make_item(OBJ_WEAPONS, ng.weapon, 1, +1);
-    else if (you.char_class == JOB_CHAOS_KNIGHT)
+    if (you.char_class == JOB_CHAOS_KNIGHT)
         newgame_make_item(OBJ_WEAPONS, ng.weapon, 1, 0, SPWPN_CHAOS);
     else if (job_gets_ranged_weapons(you.char_class))
         _give_ranged_weapon(ng.weapon, you.char_class == JOB_HUNTER ? 1 : 0);

@@ -3741,6 +3741,9 @@ bool mons_should_fire(bolt &beam, bool ignore_good_idea)
     // If we hit no friends, fire away.
     if (beam.friend_info.count == 0)
         return true;
+    
+    if (beam.flavour == BEAM_DISINTEGRATION)
+        return false;
 
     // Only fire if they do acceptably low collateral damage.
     return beam.foe_info.power >=

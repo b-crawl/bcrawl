@@ -2799,6 +2799,87 @@ xxcccccccct....cccP.P.P1P...P1P.P.Pccc....tcccccccc.
 ENDMAP
 
 ##############################################################################
+# this replaced due_jungle_book in mainline
+NAME:    gammafunk_necro_jungle_book
+TAGS:    no_pool_fixup no_wall_fixup no_monster_gen patrolling
+PLACE:   Lair:$
+ORIENT:  north
+# A necromancy-themed loot item behind the obsidian statue.
+ITEM:    morg w:1 / rapier ego:pain w:5 / rapier ego:draining w:5 \
+         / quickblade ego:pain w:5 / quickblade ego:draining w:5 \
+         / demon blade ego:draining / sword of zonguldruk w:1 \
+         / great sword ego:draining / triple sword ego:draining \
+         / demon whip ego:pain w:5 / demon whip ego:draining w:5 \
+         / eveningstar ego:draining / scetpre of torment w:1 \
+         / great mace ego:draining / majin-bo w:1 / lajatang ego:draining \
+         / broad axe ego:draining / battleaxe ego:draining \
+         / executioner's axe ego:draining / shadow dragon scales \
+         / cigotuvi's embrace w:1 / amulet of regeneration randart \
+         / ring of positive energy randart / staff of death \
+         / book of necromancy / book of death / book of unlife \
+         / randbook owner:Kikubaaqudgh disc:necromancy \
+         / necronomicon w:1
+KMONS:   p = withered plant
+MONS:    elephant skeleton / elephant zombie / spectral elephant \
+         / elephant simulacrum / spectral cane toad / cane toad simulacrum
+MONS:    elephant, cane toad / death yak
+MONS:    spectral death yak / death yak simulacrum / dire elephant skeleton \
+         / dire elephant zombie / spectral dire elephant \
+         / dire elephant simulacrum
+MONS:    dire elephant, necromancer, obsidian statue
+# The anaconda's name is Kaa.
+KMONS:   R = spectral anaconda
+KFEAT:   R = deep_water
+# Thin out elephant/dire elephant bands of central necromancers a bit.
+SUBST:   2 = 22., 5 = 55.
+# DE/FH/JK will always have a monster set, with one a guaranteed necromancer
+# plus band, next a 50% chance to be a # necromancer band, 50% chance to be
+# derived undead band, last guaranteed derived undead band. Necromancer band is
+# 4 live monsters on average, mostly elephants, sometimes other beasts mixed
+# in. Derived undead band is a stonger derived undead with 4 weaker ones on
+# average.
+SHUFFLE: DE / FH / JK
+SUBST:   D = 6, E = 2223-
+SHUFFLE: FH / '"
+SUBST:   F = 6, H = 2223-, 'J = 4
+NSUBST:  " = 2=1 / 11-, K = 2=1 / 11-
+# LM / NO / PQ each have 50% chance of being a derived undead band, 50% chance
+# of nothing.
+SHUFFLE: LM / NO / PQ
+SHUFFLE: LM / '"
+SUBST:   L = 4, '" = -
+NSUBST:  M = 2=1 / 11-
+SHUFFLE: NO / '"
+SUBST:   N = 4, '" = -
+NSUBST:  O = 2=1 / 11-
+SHUFFLE: PQ / '"
+SUBST:   P = 4, '" = -
+NSUBST:  Q = 2=1 / 11-
+SUBST:   a = tttxxc, p = p-, q = xxx--, - = -:200 ', ' = 12345
+COLOUR:  t = brown
+TILE:    t = dngn_tree_dead
+TILE:    G = dngn_statue_elephant
+: set_feature_name("tree", "dead tree")
+MAP
+   xxxcccccccc
+  xxtttqqLqqqcc
+ xxttqppMMM-pqcc
+xxxttp---MM--pqcc                           ttttt
+xxtt--xxpq--q--qcccccccccccccccccccccccccccccaaGttp..@
+xtt7ttxccc++c++ccccccccccccccccccccccccccccaaaKKJttpp.
+xtdttxcccG--c--OOGcc-WWccGpppGccpppccQQ-----ppGKKGttt.
+xtttxccccp-pcp-OON+--WwW+-55%|cG-2--+QQQppc-cp-Kaaatp.
+xxxcccccc-c-ccccOGcpWwwR+-56**c|$22-cPpcccc---caaccc..
+xxccccccc+cp--pccccpwwwwcG5ppGc*%22-cccc---pc+ccccccc.
+xxccGEEpp-cccc---pcWWWWpccnnnccG62ppcp--pcccc-ppHHGcc.
+xxcc*DE--pccccccc-cccWpcccGpGcccppccc-cccccccp--HF*cc.
+xxccGEEpppccttaccp-pcccccGpYpGccnncp-pccattccpppHHGcc.
+ xxcccccccctp..pccc-----------------cccp..ptcccccccc.
+  axacccatp.....ptcccccccc+++cccccccctp....pptcccatp.@
+    @........@@...........@@@....a......@@..........@
+ENDMAP
+
+##############################################################################
 # Standard occultist works do make demons out of distorted animals, after all.
 #
 NAME:    evil_forest

@@ -548,6 +548,8 @@ static bool _artp_can_go_on_item(artefact_prop_type prop, const item_def &item,
 
     const object_class_type item_class = item.base_type;
 
+    // warning: using some item calls may not work here, for example,
+    // get_weapon_brand; the `item` object is not fully set up.
     switch (prop)
     {
         case ARTP_ELECTRICITY:
@@ -584,7 +586,7 @@ static bool _artp_can_go_on_item(artefact_prop_type prop, const item_def &item,
             // no contradictory props
         case ARTP_MAGICAL_POWER:
             return item_class != OBJ_WEAPONS
-                   || get_weapon_brand(item) != SPWPN_ANTIMAGIC;
+                   || extant_props[ARTP_BRAND] != SPWPN_ANTIMAGIC;
             // not quite as interesting on armour, since you swap it less
             // rings have 2 slots, so little swap pressure
         case ARTP_FRAGILE:

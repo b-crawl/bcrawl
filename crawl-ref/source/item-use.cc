@@ -483,7 +483,11 @@ bool wield_weapon(bool auto_wield, int slot, bool show_weff_messages,
 
     if (prompt_failed(item_slot))
         return false;
-    else if (item_slot == you.equip[EQ_WEAPON])
+    
+    // Reset the warning counter.
+    you.received_weapon_warning = false;
+
+    if (item_slot == you.equip[EQ_WEAPON])
     {
         if (Options.equip_unequip)
             item_slot = SLOT_BARE_HANDS;
@@ -493,9 +497,6 @@ bool wield_weapon(bool auto_wield, int slot, bool show_weff_messages,
             return true;
         }
     }
-
-    // Reset the warning counter.
-    you.received_weapon_warning = false;
 
     if (item_slot == SLOT_BARE_HANDS)
     {

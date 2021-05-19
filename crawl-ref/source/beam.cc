@@ -5948,7 +5948,11 @@ const map<spell_type, explosion_sfx> spell_explosions = {
     { SPELL_FREEZING_BLAST, {
         "The freezing blast explodes!",
         "an explosion",
-    } }
+    } },
+    { SPELL_DISINTEGRATE, {
+        "",
+        "an explosion",
+    } },
 };
 
 // Takes a bolt and refines it for use in the explosion function.

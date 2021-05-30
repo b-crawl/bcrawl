@@ -811,8 +811,8 @@ xx....xx..........xxx.........xxx.........xx...x
 ENDMAP
 
 NAME:    nicolae_snake_serpentine_bazaar
-PLACE:   Snake
 TAGS:    no_pool_fixup transparent
+DEPTH: Snake
 KFEAT:   a = weapon shop
 KFEAT:   p = armour shop
 KFEAT:   q = antiques shop
@@ -851,6 +851,7 @@ ENDMAP
 
 NAME:  nicolae_snake_slithery_corners
 TAGS:  extra transparent
+DEPTH: Snake
 SUBST: D : TGG., E : TGG., F : TGG.
 MAP
      ccc
@@ -877,6 +878,7 @@ ENDMAP
 
 NAME:  nicolae_snake_slithery_hallway
 TAGS:  extra transparent
+DEPTH: Snake
 SUBST: D : TGG., E : TGG., F : TGG.
 MAP
   cccccccccccccccccccccccccccccccccc
@@ -890,6 +892,7 @@ ENDMAP
 
 NAME:   nicolae_snake_snake_lake
 TAGS:   extra transparent
+DEPTH: Snake
 KMONS:  1 = plant
 KFEAT:  1 = . w:40 / W
 NSUBST: t = . / t
@@ -916,6 +919,7 @@ ENDMAP
 # Although sometimes it's not a hallway.
 NAME:  nicolae_snake_yet_another_twisty_hallway
 TAGS:  extra transparent
+DEPTH: Snake
 : if crawl.one_chance_in(5) then
 SUBST: x = -, . = x, @- = .
 : end
@@ -943,6 +947,7 @@ ENDMAP
 
 NAME:    nicolae_snake_gridmaze_big_u
 TAGS:    extra transparent
+DEPTH: Snake
 SHUFFLE: DEFHJ, KL/MN, KL, OPQRSZ, apqrsy, z-
 SUBST:   DEFHKMz = x, JLNPQRSZpqrsy- = ., Oa = _
 CLEAR:   _
@@ -975,6 +980,7 @@ ENDMAP
 
 NAME:    nicolae_snake_gridmaze_entwining
 TAGS:    extra transparent
+DEPTH: Snake
 SHUFFLE: DE/FH, DE, JK, LM, NOPQRSZap
 SUBST:   HDJL = x, FEKMOPQRSZap = ., N = _
 CLEAR:   _
@@ -1007,6 +1013,7 @@ ENDMAP
 
 NAME:    nicolae_snake_gridmaze_spiral
 TAGS:    extra transparent
+DEPTH: Snake
 SHUFFLE: DE/FH/JK/LM/pq, DE, NO, PQRSZa
 SUBST:   DFJLNp = x, EHKMOQRSZaq = ., P = _
 CLEAR:   _
@@ -1039,6 +1046,7 @@ ENDMAP
 
 NAME:    nicolae_snake_gridmaze_squiggle
 TAGS:    extra transparent
+DEPTH: Snake
 : if crawl.one_chance_in(3) then
 SUBST:   DHK = x, EFJ = .
 : elseif crawl.coinflip() then
@@ -1078,6 +1086,7 @@ ENDMAP
 
 NAME:    nicolae_snake_gridmaze_swirls
 TAGS:    extra transparent
+DEPTH: Snake
 SHUFFLE: DE, FH, JKLMNO
 SUBST:   DF = x, EHKLMNO = ., J = _
 CLEAR:   _
@@ -1110,6 +1119,7 @@ ENDMAP
 
 NAME:    nicolae_snake_gridmaze_tees
 TAGS:    extra transparent
+DEPTH: Snake
 SHUFFLE: DE, FH, JK, LM, NOPQRSZ
 SUBST:   DFJL = x, EHKMOPQRSZ = ., N = _
 CLEAR:   _
@@ -1142,6 +1152,7 @@ ENDMAP
 
 NAME:    nicolae_snake_gridmaze_waves
 TAGS:    extra transparent
+DEPTH: Snake
 SHUFFLE: DE, FH, JKLMNOPQ
 SUBST:   DF = x, EHKLMNOPQ = ., J = _
 CLEAR:   _
@@ -1174,6 +1185,7 @@ ENDMAP
 
 NAME:    nicolae_snake_gridmaze_zigzag
 TAGS:    extra transparent
+DEPTH: Snake
 SHUFFLE: DE, FH, JK, LMNOP
 SUBST:   DFJ = x, EHKMNOP = ., L = _
 CLEAR:   _
@@ -1453,6 +1465,7 @@ ENDMAP
 
 NAME:   nicolae_snake_boneroom
 TAGS:   transparent
+DEPTH: Snake
 MONS:   naga ritualist band / naga sharpshooter band / naga warrior band \
         / naga mage band / nagaraja w:5
 NSUBST: E = . / 1, F = . / 1, q = | / 2=* / 3=% / $.
@@ -1477,6 +1490,7 @@ xxxxxxxxxxxxxxxxxxxxxxx+xxx
 ENDMAP
 
 NAME:   nicolae_snake_bzzzt
+DEPTH: Snake
 KMONS:  1 = electric eel
 KMONS:  2 = shock serpent
 KFEAT:  1 = w
@@ -1499,6 +1513,7 @@ ENDMAP
 
 NAME: nicolae_snake_coiling_death
 TAGS: transparent
+DEPTH: Snake
 MONS: naga sharpshooter band
 MONS: naga warrior band / naga mage band / naga ritualist band
 MAP
@@ -1517,6 +1532,7 @@ ENDMAP
 
 NAME:    nicolae_snake_crotalidae_crossing
 TAGS:    transparent
+DEPTH: Snake
 ORIENT:  float
 KMONS:   0 = 0 / 0 band
 : if you.depth() == 1 then
@@ -1562,6 +1578,7 @@ ENDMAP
 
 NAME:   nicolae_snake_dead_anacondas
 TAGS:   no_pool_fixup transparent no_monster_gen patrolling
+DEPTH: Snake
 KMONS:  1 = anaconda skeleton / anaconda zombie
 KMONS:  2 = anaconda skeleton w:5 / anaconda zombie w:5 / spectral anaconda \
         / anaconda simulacrum
@@ -1586,6 +1603,7 @@ ENDMAP
 
 NAME:    nicolae_snake_ghostly_warrior_ritual
 TAGS:    patrolling transparent
+DEPTH: Snake
 MONS:    naga ritualist / naga mage, naga warrior
 MONS:    phantasmal warrior / spectral naga warrior w:3
 SUBST:   D : bc, E : bc
@@ -1609,6 +1627,7 @@ ENDMAP
 
 NAME:   nicolae_snake_guarding_the_ruins
 TAGS:   patrolling transparent
+DEPTH: Snake
 MONS:   naga / salamander / nothing w:5, naga warrior band
 NSUBST: D = . / x, E = . / x, F = . / x, H = . / x, J = . / x, K = . / x, \
         L = . / x, M = . / x, N = . / x, O = . / x, P = . / x, Q = . / x
@@ -1636,6 +1655,7 @@ ENDMAP
 # - Wiktionary
 NAME:   nicolae_snake_herptile_family_reunion
 TAGS:   no_pool_fixup patrolling transparent
+DEPTH: Snake
 MONS:   anaconda / black mamba / shock serpent / mana viper / sea snake / \
         guardian serpent
 MONS:   goliath frog, alligator, snapping turtle, alligator snapping turtle
@@ -1665,6 +1685,7 @@ ENDMAP
 
 NAME:    nicolae_snake_mages_go_home
 TAGS:    transparent
+DEPTH: Snake
 MONS:    mana viper
 MONS:    naga w:20 ; any weapon ego:antimagic / \
             naga warrior ; any weapon ego:antimagic / \
@@ -1690,6 +1711,7 @@ ENDMAP
 
 NAME:    nicolae_snake_magic_snake_eye
 TAGS:    patrolling transparent
+DEPTH: Snake
 ITEM:    any book, any wand / any magical staff, any jewellery / any wand
 ITEM:    any scroll, any potion
 MONS:    naga mage / naga ritualist / naga sharpshooter / salamander mystic
@@ -1724,6 +1746,7 @@ ENDMAP
 
 NAME:   nicolae_snake_naga_rites
 TAGS:   patrolling transparent
+DEPTH: Snake
 KMONS:  1* = black mamba w:15 / mana viper / anaconda w:5
 KMONS:  2 = naga ritualist
 KMONS:  3 = naga ritualist band
@@ -1751,6 +1774,7 @@ ENDMAP
 
 NAME:    nicolae_snake_omega
 TAGS:    no_pool_fixup transparent
+DEPTH: Snake
 # It is intentional that sometimes the front doors merge into a big 1x4 door.
 SHUFFLE: MNO
 SUBST:   D : GTUw%0., E : GTUw%0., F : GTUw%0., H : GTUw%0., J : GTUw%0.
@@ -1773,6 +1797,7 @@ ENDMAP
 
 NAME:    nicolae_snake_salamander_fort
 TAGS:    patrolling transparent
+DEPTH: Snake
 KMONS:   1 = salamander mystic band
 KMONS:   2 = salamander / salamander mystic w:5
 KFEAT:   12 = l
@@ -1798,6 +1823,7 @@ ENDMAP
 
 NAME:   nicolae_snake_salamander_jacuzzi
 TAGS:   transparent
+DEPTH: Snake
 KMONS:  L = salamander
 KFEAT:  L = l
 NSUBST: D = + / +c / +cc
@@ -1822,6 +1848,7 @@ ENDMAP
 
 NAME:  nicolae_snake_salamander_zone
 TAGS:  transparent
+DEPTH: Snake
 KITEM: 2 = *
 KITEM: 3 = |
 KMONS: 1S = salamander
@@ -1859,6 +1886,7 @@ ENDMAP
 # id-keys-snakes/virginia_snake_identification.htm
 NAME:   nicolae_snake_scaly_snakehead
 TAGS:   no_pool_fixup patrolling transparent
+DEPTH: Snake
 KMONS:  12 = guardian serpent / naga w:20 / salamander / anaconda w:20 / \
              naga warrior / black mamba w:20 / mana viper / nothing w:80
 KMONS:  3 = naga mage / naga ritualist / naga sharpshooter / shock serpent / \
@@ -1932,6 +1960,7 @@ ENDMAP
 
 NAME:   nicolae_snake_snakes_in_the_grass
 TAGS:   transparent
+DEPTH: Snake
 KMONS:  1 = plant
 KFEAT:  1 = . w:30 / W
 KFEAT:  . = . w:50 / W
@@ -1959,6 +1988,7 @@ ENDMAP
 
 NAME:  nicolae_snake_snakewalk
 TAGS:  transparent
+DEPTH: Snake
 KMONS: 0 = 0 / 0 band
 KMONS: 9 = 9 / 9 band
 KMONS: 8 = 8 / 8 band
@@ -1985,6 +2015,7 @@ ENDMAP
 
 NAME:  nicolae_snake_storage_room
 TAGS:  patrolling transparent
+DEPTH: Snake
 KMONS: 0 = 0 / 0 band
 KMONS: 9 = 9 / 9 band
 KMONS: 8 = 8 / 8 band

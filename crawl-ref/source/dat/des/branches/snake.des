@@ -2527,7 +2527,7 @@ PLACE:  Snake:$
 ORIENT: north
 MONS:   naga sharpshooter / naga warrior / naga ritualist / anaconda ench:glowing_shapeshifter
 MONS:   nagaraja ench:glowing_shapeshifter
-TILE:   G = dngn_statue_dragon
+TILE:   G = dngn_statue_naga
 KITEM:  O = serpentine rune of Zot
 # ten high tier monsters and ten normal spawns on average
 SUBST:  1 = ..1

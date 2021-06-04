@@ -43,7 +43,7 @@ An amulet with no special properties.
 amulet of rage
 
 An amulet that enables its wearer to attempt to enter a state of berserk rage, and grants
-them enough awareness during their berserk rages to drink potions, throw items, and use wands.
+them enough awareness during their berserk rages to drink potions and throw items.
 It also decreases the difficulty of maintaining a berserk rage while not attacking enemies in melee.
 %%%%
 amulet of reflection

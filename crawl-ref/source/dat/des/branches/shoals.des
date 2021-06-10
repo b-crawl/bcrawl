@@ -2000,11 +2000,11 @@ TAGS:  no_pool_fixup transparent water_ok patrolling
 KPROP: .'Ww = no_tide
 KITEM: 1 = % w:15 / $ / * / | w:5
 KMONS: p = plant
-KMONS: 1 = bog body
+KMONS: 1 = goliath frog / shambling mangrove / alligator snapping turtle
 KFEAT: ~ = w
 KFEAT: M = W
-KFEAT: t = mangrove
-SUBST: - = ., . = p.., t = tx, ' = % 1:20 .:80
+SUBST: - = ., . = p.., t = tx
+NSUBST: ' = 3:1 / *:.
 MAP
          xx
       ~~xx---@@xxxx

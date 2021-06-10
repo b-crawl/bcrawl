@@ -6906,7 +6906,7 @@ NAME:    minmay_guarded_unrand_skullcrusher
 TAGS:    transparent
 DEPTH:   D:12-, Crypt
 MONS:    flying skull
-: if you.branch() == "Crypt" then
+: if you.in_branch("Crypt") then
 MONS:    curse skull
 NSUBST:  d = 1:d / *:*
 : else

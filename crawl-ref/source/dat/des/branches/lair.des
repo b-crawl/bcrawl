@@ -1130,11 +1130,20 @@ NAME:    grunt_forest_small_clearings
 TAGS:    transparent extra decor
 DEPTH:   Lair
 MONS:    plant / bush
+<<<<<<< HEAD
 KITEM:   d = ration
 KMASK:   G = no_monster_gen
 SHUFFLE: Ww. / ''` / ''`
 SUBST:   t = t.., '` = 1:49 d:7 .:405
 SUBST:   G = w., W = WW., w = wwW
+=======
+KPROP:   G = no_tele_into
+SHUFFLE: Ww. / ''` / ''`
+SUBST:   t = t.., '` = 1:49 .:405
+SUBST:   G = w-, W = WW., w = wwW
+KMASK:   w- = no_monster_gen
+KMASK:   w- = opaque
+>>>>>>> 7e0d850643 (fix: a batch of vault opacity fixes)
 MAP
  tt@@@tt
 t.......t

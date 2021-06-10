@@ -200,8 +200,9 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
 
     bool first = true;
     coord_def source, target;
+    coord_def last_target = caster->pos();
 
-    for (source = caster->pos(); pow > 0;
+    for (source = last_target; pow > 0;
          pow -= 8 + random2(13), source = target)
     {
         // infinity as far as this spell is concerned
@@ -224,10 +225,15 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
             if (beam.ignores_monster(*mi))
                 continue;
 
+            coord_def mi_pos = mi->pos();
             dist = grid_distance(source, mi->pos());
 
             // check for the source of this arc
             if (!dist)
+                continue;
+
+            // don't allow bounce loops between 2 targets
+            if (mi_pos == last_target)
                 continue;
 
             // randomise distance (arcs don't care about a couple of feet)
@@ -278,7 +284,7 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
         // now check if the player is a target
         dist = grid_distance(source, you.pos());
 
-        if (dist)       // i.e., player was not the source
+        if (dist && spell_cast != SPELL_CHAIN_LIGHTNING)  // player was not the source
         {
             // distance randomised (as above)
             dist += (random2(3) - 1);
@@ -331,6 +337,7 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
 
         beam.source = source;
         beam.target = target;
+        last_target = target;
         switch (spell_cast)
         {
             case SPELL_CHAIN_LIGHTNING:
@@ -349,21 +356,10 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
                 break;
         }
 
-        // Be kinder to the caster.
         if (target == caster->pos())
         {
-
-            // This should not hit the caster, too scary as a player effect and
-            // too kind to the player as a monster effect.
-            if (spell_cast == SPELL_CHAIN_OF_CHAOS)
-            {
-                beam.real_flavour = BEAM_VISUAL;
-                beam.flavour      = BEAM_VISUAL;
-            }
-
-            // Reduce damage when the spell arcs to the caster.
-            beam.damage.num = max(1, beam.damage.num / 2);
-            beam.damage.size = max(3, beam.damage.size / 2);
+            beam.real_flavour = BEAM_VISUAL;
+            beam.flavour      = BEAM_VISUAL;
         }
         beam.fire();
     }

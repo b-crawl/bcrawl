@@ -263,8 +263,13 @@ effects. The arc can touch upon the caster without harming them.
 Chain Lightning spell
 
 Releases a massive electrical discharge that arcs from target to target until
-it grounds out. It may ground out harmlessly if there are no targets
-sufficiently close to the caster. Its damage partially bypasses armour.
+it grounds out. Each arc to a target produces an explosion of electricity.
+
+The spell protects the caster from being targeted by the discharge, but not
+from its explosions.
+
+The discharge may ground out harmlessly if there are no targets
+sufficiently close to the caster. Also, its damage partially bypasses armour.
 %%%%
 Chaos Breath spell
 

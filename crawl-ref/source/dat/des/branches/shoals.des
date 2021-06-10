@@ -1672,43 +1672,6 @@ MAP
     .......
 ENDMAP
 
-NAME:   nicolae_shoals_abyss_on_the_beach
-DEPTH:   Shoals
-TAGS:   transparent
-KPROP:  =aDPQ'_ = no_tide
-KITEM:  _ = *
-KITEM:  P = |
-KMONS:  p = plant
-KMONS:  1P_ = thrashing horror / wretched star / chaos spawn / zombie / \
-              small abomination / large abomination / ancient zyme / neqoxec / \
-              apocalypse crab / spatial vortex / worldbinder / shining eye
-KMONS:  2 = apocalypse crab
-KFEAT:  D = demonic_tree
-KFEAT:  P = enter_abyss
-KFEAT:  _ = altar_lugonu
-KFEAT:  q = x
-NSUBST: 2 = 2 / 2=2.
-SUBST:  z = wx, M = w., . = p...., 1 = 1', a = q:80 c:40 D:20 vb'
-FTILE:  =aD1P'_ = floor_nerves
-TILE:   q = wall_abyss
-MAP
-   wwwwwwwww
-  wwwwwwwwwww
- wwwzzzzzzzwww
-wwwzxxxxxxxzwww
-wwzxxaaaaaxxzww
-wwzxaa1P1aaxzww
-wwzxa1'1'1axzww
-wwzxa1'_'1axzww
-MMzxa1'''1axzMM
-.MMxaa'''aaxMM.
-..Mxxxc=cxxxM..
-....2.....2....
- ......2......
-  ...........
-   .........
-ENDMAP
-
 NAME:   nicolae_shoals_beach_cooler
 DEPTH:   Shoals
 TAGS:   no_pool_fixup water_ok transparent no_trap_gen

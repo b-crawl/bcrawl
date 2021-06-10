@@ -337,7 +337,7 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
 
         beam.source = source;
         beam.target = target;
-        last_target = target;
+        last_target = source;
         switch (spell_cast)
         {
             case SPELL_CHAIN_LIGHTNING:

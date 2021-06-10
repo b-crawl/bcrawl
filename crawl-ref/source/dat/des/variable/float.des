@@ -7795,11 +7795,17 @@ DEPTH: D:11-, Depths
 TAGS: no_item_gen no_monster_gen
 ORIENT: float
 : if you.in_branch("D") then
+<<<<<<< HEAD
 MONS: deep elf mage w:8 / fire elemental w:5 / nothing, wizard
+=======
+ITEM: randbook / any scroll / short sword / pair of gloves
+MONS: deep elf pyromancer w:8 / fire elemental w:5 / nothing, wizard
+>>>>>>> 1d930f0793 (fix: a batch of tele closet fixes)
 : else
+ITEM: randbook / any scroll / short sword / pair of gloves \
+kite shield
 MONS: wizard w:5 / fire elemental w:5 / nothing, lich
 : end
-ITEM: randbook / any scroll
 SUBST: - = .lx
 MAP
 llllll

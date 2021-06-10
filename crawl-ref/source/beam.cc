@@ -5953,6 +5953,10 @@ const map<spell_type, explosion_sfx> spell_explosions = {
         "",
         "an explosion",
     } },
+    { SPELL_CHAIN_LIGHTNING, {
+        "",
+        "an explosion",
+    } },
 };
 
 // Takes a bolt and refines it for use in the explosion function.

@@ -6107,13 +6107,20 @@ bool bolt::explode(bool show_more, bool hole_in_the_middle)
 
     if (!is_tracer)
     {
-        loudness = explosion_noise(r);
+        
 
-        // Not an "explosion", but still a bit noisy at the target location.
-        if (origin_spell == SPELL_INFESTATION
-            || origin_spell == SPELL_BORGNJORS_VILE_CLUTCH)
+        switch (origin_spell)
         {
+        case SPELL_INFESTATION:
+        case SPELL_BORGNJORS_VILE_CLUTCH:
             loudness = spell_effect_noise(origin_spell);
+            break;
+        case SPELL_CHAIN_LIGHTNING:
+            loudness = 9;
+            break;
+        default:
+            loudness = explosion_noise(r);
+            break;
         }
 
         // Lee's Rapid Deconstruction can target the tiles on the map

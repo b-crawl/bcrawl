@@ -399,7 +399,7 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
         }
     }
 
-    noisy(sqrt(noise_sum / 7), org, caster->mid);
+    noisy(sqrt(noise_sum / 2), org, caster->mid);
 
     if (dur <= 0)
         return;

@@ -1034,8 +1034,7 @@ A type of fish capable of generating a powerful electric field.
 elemental wellspring
 
 A swirling conflux of elemental water streaming from the elemental plane into
-this one. Powerful spirits and mighty floods flow from it, at the expense of
-the gateway's stability.
+this one, with powerful spirits and mighty floods flowing from it.
 %%%%
 elephant
 

@@ -2218,7 +2218,8 @@ static void _post_monster_move(monster* mons)
             }
     }
 
-    if (mons->type == MONS_WATER_NYMPH)
+    if (mons->type == MONS_WATER_NYMPH
+        || mons->type == MONS_ELEMENTAL_WELLSPRING)
     {
         for (adjacent_iterator ai(mons->pos(), false); ai; ++ai)
             if (feat_has_solid_floor(grd(*ai))
@@ -2231,7 +2232,8 @@ static void _post_monster_move(monster* mons)
                          apostrophise(mons->name(DESC_THE)).c_str(),
                          feature_description_at(*ai, false, DESC_THE).c_str());
                 }
-                temp_change_terrain(*ai, DNGN_SHALLOW_WATER, random_range(50, 80),
+                temp_change_terrain(*ai, DNGN_SHALLOW_WATER,
+                                    random_range(50, 80),
                                     TERRAIN_CHANGE_FLOOD, mons);
             }
     }

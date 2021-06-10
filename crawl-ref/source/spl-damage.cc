@@ -166,6 +166,15 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
     bolt beam;
 
     // initialise beam structure
+    beam.source_id      = caster->mid;
+    beam.thrower        = caster->is_player() ? KILL_YOU_MISSILE : KILL_MON_MISSILE;
+    beam.range          = 8;
+    beam.hit            = AUTOMATIC_HIT;
+    beam.obvious_effect = true;
+    beam.pierce         = false;       // since we want to stop at our target
+    beam.is_explosion   = false;
+    beam.is_tracer      = false;
+    beam.origin_spell   = spell_cast;
     switch (spell_cast)
     {
         case SPELL_CHAIN_LIGHTNING:
@@ -173,6 +182,7 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
             beam.aux_source     = "chain lightning";
             beam.glyph          = dchar_glyph(DCHAR_FIRED_ZAP);
             beam.flavour        = BEAM_ELECTRICITY;
+            beam.is_explosion   = true;
             break;
         case SPELL_CHAIN_OF_CHAOS:
             beam.name           = "arc of chaos";
@@ -184,15 +194,6 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
             die("buggy chain spell %d cast", spell_cast);
             break;
     }
-    beam.source_id      = caster->mid;
-    beam.thrower        = caster->is_player() ? KILL_YOU_MISSILE : KILL_MON_MISSILE;
-    beam.range          = 8;
-    beam.hit            = AUTOMATIC_HIT;
-    beam.obvious_effect = true;
-    beam.pierce         = false;       // since we want to stop at our target
-    beam.is_explosion   = false;
-    beam.is_tracer      = false;
-    beam.origin_spell   = spell_cast;
 
     if (const monster* mons = caster->as_monster())
         beam.source_name = mons->name(DESC_PLAIN, true);

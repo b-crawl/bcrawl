@@ -545,15 +545,10 @@ TAGS:   transparent no_pool_fixup uniq_hell_entry_tar
 WEIGHT: 5
 COLOUR: . = magenta
 FTILE:  .O = floor_infernal_blank
-<<<<<<< HEAD
-NSUBST: w = 5=F / *:w
-KMONS:  F = spectral swamp worm
-=======
 NSUBST: w = 2=F / 2=F. / w
 # E is tiles not adjacent to walkable space
 NSUBST: E = 2=FE / E
 KMONS:  F = spectral caustic shrike
->>>>>>> cb30e825f4 (fix: avoid vetoing islands in pf_hell_entry_tar_river)
 KFEAT:  EFw = deep_water
 KMASK:  Ww = no_monster_gen
 : hell_entry_feature(_G, 'O')

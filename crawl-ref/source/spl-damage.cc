@@ -199,12 +199,15 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
         beam.source_name = mons->name(DESC_PLAIN, true);
 
     bool first = true;
-    coord_def source, target;
-    coord_def last_target = caster->pos();
+    coord_def source = caster->pos();
+    coord_def target;
+    coord_def last_target = source;
 
-    for (source = last_target; pow > 0;
-         pow -= 8 + random2(13), source = target)
-    {
+    int bounces = div_rand_round(isqrt(max(pow, 1) * 100), 20) + random2(2);
+    int power_decrement = pow / (bounces * 2);
+
+    for (int bounce = 0; bounce < bounces; bounce++)
+    {       
         // infinity as far as this spell is concerned
         // (Range - 1) is used because the distance is randomised and
         // may be shifted by one.
@@ -337,13 +340,12 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
 
         beam.source = source;
         beam.target = target;
-        last_target = source;
         switch (spell_cast)
         {
             case SPELL_CHAIN_LIGHTNING:
                 beam.colour = LIGHTBLUE;
                 beam.damage = caster->is_player()
-                    ? calc_dice(5, 10 + pow * 2 / 3)
+                    ? calc_dice(5, 18 + isqrt(max(pow, 1) * 80))
                     : calc_dice(5, 46 + pow / 6);
                 break;
             case SPELL_CHAIN_OF_CHAOS:
@@ -362,6 +364,10 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
             beam.flavour      = BEAM_VISUAL;
         }
         beam.fire();
+        
+        last_target = source;
+        source = target;
+        pow -= power_decrement;
     }
 
     return spret::success;

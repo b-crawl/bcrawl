@@ -1617,7 +1617,7 @@ static const struct spell_desc spelldata[] =
     8,
     200,
     -1, -1,
-    8, 25,
+    8, 10,
     TILEG_CHAIN_LIGHTNING,
 },
 

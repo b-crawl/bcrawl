@@ -105,7 +105,7 @@ bool WindSystem::has_wind(coord_def c)
 
 static void _set_tornado_durations(int powc)
 {
-    int dur = 60;
+    int dur = isqrt(50 * max(powc, 1));
     you.duration[DUR_TORNADO] = dur;
     if (!get_form()->forbids_flight())
     {
@@ -250,7 +250,10 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
 
     // Not stored so unwielding that staff will reduce damage.
     if (caster->is_player())
+    {
         pow = calc_spell_power(SPELL_TORNADO, true);
+        pow = sqrt(110 * max(pow, 1));
+    }
     else
         // Note that this spellpower multiplier for Vortex is based on Air
         // Elementals, which have low HD.
@@ -399,7 +402,7 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
         }
     }
 
-    noisy(sqrt(noise_sum / 2), org, caster->mid);
+    noisy(sqrt(max(noise_sum / 2, 100)), org, caster->mid);
 
     if (dur <= 0)
         return;

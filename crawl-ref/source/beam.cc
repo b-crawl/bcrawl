@@ -6113,10 +6113,8 @@ bool bolt::explode(bool show_more, bool hole_in_the_middle)
         {
         case SPELL_INFESTATION:
         case SPELL_BORGNJORS_VILE_CLUTCH:
-            loudness = spell_effect_noise(origin_spell);
-            break;
         case SPELL_CHAIN_LIGHTNING:
-            loudness = 9;
+            loudness = spell_effect_noise(origin_spell);
             break;
         default:
             loudness = explosion_noise(r);

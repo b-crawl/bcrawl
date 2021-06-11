@@ -141,6 +141,7 @@ bool cast_smitey_hellfire(int pow, bolt &beam)
     return true;
 }
 
+// todo: update this
 string desc_chain_lightning_dam(int pow)
 {
     // Damage is 5d(9.2 + pow / 30), but if lots of targets are around
@@ -158,7 +159,21 @@ string desc_chain_lightning_dam(int pow)
     return make_stringf("%d-%d", min, max);
 }
 
-// XXX no friendly check
+static bool _chain_lightning_harms(const actor *act)
+{
+    if (act->is_monster())
+    {
+        // Harmless to these monsters, so don't prompt about them.
+        if (act->res_elec() >= 3
+            || you.deity() == GOD_FEDHAS && fedhas_protects(*act->as_monster()))
+        {
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
+
 spret cast_chain_spell(spell_type spell_cast, int pow,
                             const actor *caster, bool fail)
 {
@@ -177,22 +192,29 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
     beam.origin_spell   = spell_cast;
     switch (spell_cast)
     {
-        case SPELL_CHAIN_LIGHTNING:
-            beam.name           = "lightning arc";
-            beam.aux_source     = "chain lightning";
-            beam.glyph          = dchar_glyph(DCHAR_FIRED_ZAP);
-            beam.flavour        = BEAM_ELECTRICITY;
-            beam.is_explosion   = true;
-            break;
-        case SPELL_CHAIN_OF_CHAOS:
-            beam.name           = "arc of chaos";
-            beam.aux_source     = "chain of chaos";
-            beam.glyph          = dchar_glyph(DCHAR_FIRED_ZAP);
-            beam.flavour        = BEAM_CHAOS;
-            break;
-        default:
-            die("buggy chain spell %d cast", spell_cast);
-            break;
+    case SPELL_CHAIN_LIGHTNING:
+        if (caster->is_player())
+        {
+            targeter_los hitfunc(&you, LOS_ARENA);
+            if (stop_attack_prompt(hitfunc, "attack", _chain_lightning_harms))
+                return spret::abort;
+        }
+
+        beam.name           = "lightning arc";
+        beam.aux_source     = "chain lightning";
+        beam.glyph          = dchar_glyph(DCHAR_FIRED_ZAP);
+        beam.flavour        = BEAM_ELECTRICITY;
+        beam.is_explosion   = true;
+        break;
+    case SPELL_CHAIN_OF_CHAOS:
+        beam.name           = "arc of chaos";
+        beam.aux_source     = "chain of chaos";
+        beam.glyph          = dchar_glyph(DCHAR_FIRED_ZAP);
+        beam.flavour        = BEAM_CHAOS;
+        break;
+    default:
+        die("buggy chain spell %d cast", spell_cast);
+        break;
     }
 
     if (const monster* mons = caster->as_monster())

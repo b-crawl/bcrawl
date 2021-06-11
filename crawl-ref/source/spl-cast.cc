@@ -2255,7 +2255,7 @@ static string _wizard_spell_power_numeric_string(spell_type spell)
 }
 #endif
 
-static dice_def _spell_damage(spell_type spell, bool evoked)
+static dice_def _spell_damage(spell_type spell, bool evoked, int& base_dmg)
 {
     const int power = _spell_power(spell, evoked);
     if (power < 0)
@@ -2276,6 +2276,9 @@ static dice_def _spell_damage(spell_type spell, bool evoked)
             return battlesphere_damage(power);
         case SPELL_LRD:
             return dice_def(3, 5 + power / 5);
+        case SPELL_AIRSTRIKE:
+            base_dmg = 7;
+            return dice_def(1, 2 + power / 7);
         default:
             break;
     }
@@ -2287,10 +2290,24 @@ static dice_def _spell_damage(spell_type spell, bool evoked)
 
 string spell_damage_string(spell_type spell, bool evoked)
 {
-    const dice_def dam = _spell_damage(spell, evoked);
-    if (dam.num == 0 || dam.size == 0)
+    int base_dmg = 0;
+    const dice_def dam = _spell_damage(spell, evoked, base_dmg);
+    bool info = false;
+    string base_str = "";
+    string dice_str = "";
+    if (dam.num != 0 && dam.size != 0)
+    {
+        dice_str = make_stringf("%dd%d", dam.num, dam.size);
+        info = true;
+    }
+    if (base_dmg != 0)
+    {
+        base_str = make_stringf("%d%s", base_dmg, info ? " + " : "");
+        info = true;
+    }
+    if (!info)
         return "";
-    return make_stringf("%dd%d", dam.num, dam.size);
+    return make_stringf("%s%s", base_str.c_str(), dice_str.c_str());
 }
 
 int spell_acc(spell_type spell)

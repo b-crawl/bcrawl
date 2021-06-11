@@ -205,6 +205,8 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
 
     int bounces = div_rand_round(isqrt(max(pow, 1) * 100), 20) + random2(2);
     int power_decrement = pow / (bounces * 2);
+    
+    bool player_targetable = spell_cast != SPELL_CHAIN_LIGHTNING || !caster->is_player();
 
     for (int bounce = 0; bounce < bounces; bounce++)
     {       
@@ -287,7 +289,7 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
         // now check if the player is a target
         dist = grid_distance(source, you.pos());
 
-        if (dist && spell_cast != SPELL_CHAIN_LIGHTNING)  // player was not the source
+        if (dist && player_targetable)  // player was not the source
         {
             // distance randomised (as above)
             dist += (random2(3) - 1);

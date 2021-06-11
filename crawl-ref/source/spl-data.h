@@ -472,7 +472,7 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_TORNADO, "Tornado",
-    SPTYP_AIR | SPTYP_HEXES | SPTYP_TRANSLOCATION,
+    SPTYP_AIR | SPTYP_TRANSLOCATION,
     SPFLAG_AREA,
     8,
     200,

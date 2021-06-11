@@ -2278,6 +2278,8 @@ static dice_def _spell_damage(spell_type spell, bool evoked, int& base_dmg)
             return dice_def(3, 5 + power / 5);
         case SPELL_VAMPIRIC_DRAINING:
             return dice_def(2, max(1, power / 4));
+        case SPELL_VIOLENT_UNRAVELLING:
+            return dice_def(3, 3 + power / 6);
         case SPELL_AIRSTRIKE:
             base_dmg = 7;
             return dice_def(1, 2 + power / 7);

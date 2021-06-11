@@ -114,8 +114,7 @@ Foxfire card
 
 The card depicts a swamp at night, suffused with an eerie glow.
 
-Drawing this card will summon forth flying swarms. Some of their members may
-be hostile.
+Drawing this card will summon forth some flying allies, and some weaker flying foes.
 %%%%
 the Rangers card
 

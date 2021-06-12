@@ -269,6 +269,8 @@
   - v1.28.2: Agony is level 4.
   - v1.28.3: Irradiate damage is affected by monster AC.
   - v1.30: Spectral weapon AC and EV are reworked: AC is multiplied by weapon base damage, and EV is divided by weapon base delay.
+  - v1.31.6: Chain Lightning is reworked: it explodes on each hit, can't target the player, has adjusted damage, and can't loop between 2 targets. It also produces less noise.
+  - v1.31.6: Tornado is a level 8 Air/Translocations spell, and has adjusted damage.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -357,6 +359,7 @@
   - v1.31.1: Gozag's gold distraction effect expires when taking stairs.
   - v1.31.1: Makhleb gives Minor Destruction at \* piety. Its damage scales more with Invocations, and its acid effect is replaced by Throw Frost.
   - v1.31.1: Ashenzari's Scrying ability costs less piety.
+  - v1.31.6: Nemelex's Foxfire card has a different set of summons, and now always creates some flying allies and an equal number of weaker flying enemies.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -563,6 +566,7 @@
   - v1.31.1: Salamander mystics have Force Lance, Bolt of Magma, and Haste Other, and cast more often.
   - v1.31.2: Worker ants can burrow through rock walls.
   - v1.31.2: Soldier ants have rebalanced stats and are overall stronger.
+  - v1.31.6: Elemental wellsprings have Summon Water Elementals instead of creating water elementals when they use Primal Wave.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

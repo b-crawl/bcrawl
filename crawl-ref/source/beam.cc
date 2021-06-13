@@ -5137,6 +5137,7 @@ bool bolt::has_saving_throw() const
     case BEAM_IRRESISTIBLE_CONFUSION:
     case BEAM_VILE_CLUTCH:
     case BEAM_INNER_FLAME:
+    case BEAM_VIRULENCE:
         return false;
     case BEAM_BLINK: // resistable only if used by the player
         return (agent() && agent()->is_player());

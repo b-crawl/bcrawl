@@ -1384,34 +1384,43 @@ static void _summon_flying(int power)
 {
     const int power_level = _get_power_level(power);
 
-    const monster_type flytypes[] =
+    const monster_type flytypes[][4] = 
     {
-        MONS_INSUBSTANTIAL_WISP, MONS_WYVERN, MONS_KILLER_BEE,
-        MONS_VAMPIRE_MOSQUITO, MONS_HORNET
+        {
+            MONS_BAT
+        },
+        {
+            MONS_KILLER_BEE, MONS_FIRE_BAT
+        },
+        {
+            MONS_WYVERN, MONS_VAMPIRE_MOSQUITO, MONS_HORNET
+        },
+        {
+            MONS_SPARK_WASP, MONS_MELIAI, MONS_MANTICORE, MONS_SPHINX
+        }
     };
-    const int num_flytypes = ARRAYSZ(flytypes);
+    const int sizes[] = { 1, 2, 3, 4 };
 
     // Choose what kind of monster.
-    monster_type result;
-    const int how_many = 2 + random2(3) + power_level * 3;
+    const int how_many = 2 + random2(3) + random2(3);
     bool hostile_invis = false;
 
-    do
-    {
-        result = flytypes[random2(num_flytypes - 2) + power_level];
-    }
-    while (is_good_god(you.religion) && result == MONS_VAMPIRE_MOSQUITO);
+    monster_type friendly_mon = flytypes[power_level+1][random2(sizes[power_level+1])];
+    monster_type hostile_mon = flytypes[power_level][random2(sizes[power_level])];
 
     for (int i = 0; i < how_many; ++i)
     {
-        const bool hostile = one_chance_in(power_level + 4);
-
         create_monster(
-            mgen_data(result,
-                      hostile ? BEH_HOSTILE : BEH_FRIENDLY, you.pos(), MHITYOU,
+            mgen_data(friendly_mon,
+                      BEH_FRIENDLY, you.pos(), MHITYOU,
                       MG_AUTOFOE).set_summoned(&you, 3, 0));
 
-        if (hostile && mons_class_flag(result, M_INVIS) && !you.can_see_invisible())
+        create_monster(
+            mgen_data(hostile_mon,
+                      BEH_HOSTILE, you.pos(), MHITYOU,
+                      MG_AUTOFOE).set_summoned(&you, 3, 0));
+
+        if (mons_class_flag(hostile_mon, M_INVIS) && !you.can_see_invisible())
             hostile_invis = true;
     }
 

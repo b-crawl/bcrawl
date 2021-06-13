@@ -69,6 +69,7 @@ NAME:  marbit_kobold_abyss_entry
 TAGS:  no_monster_gen nolayout_encompass
 WEIGHT: 5
 MONS:  big kobold ; tomahawk ego:dispersal, kobold demonologist
+KPROP: 1 = no_tele_into
 : abyss_entry(_G, '_')
 MAP
 xxxxxxxxxxxxxxx

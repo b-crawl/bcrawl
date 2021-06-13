@@ -1691,24 +1691,8 @@ void handle_monster_move(monster* mons)
         const int gold = you.props[GOZAG_GOLD_AURA_KEY].get_int();
         if (bernoulli(gold, 3.0/100.0))
         {
-            if (gozag_gold_in_los(mons))
-            {
-                simple_monster_message(*mons,
-                    " becomes distracted by the nearby gold, dreaming of "
-                    "imaginary riches.");
-            }
-            else if (you.gold > 0)
-            {
-                simple_monster_message(*mons,
-                    " becomes distracted by your gold, dreaming of "
-                    "imaginary riches.");
-            }
-            else
-            {
-                // Just in case!
-                simple_monster_message(*mons,
-                            " is distracted by dreams of imaginary riches.");
-            }
+            simple_monster_message(*mons,
+                " is distracted by your dazzling golden aura.");
 
             mons->add_ench(
                 mon_enchant(ENCH_GOLD_LUST, 1, nullptr,
@@ -2234,7 +2218,8 @@ static void _post_monster_move(monster* mons)
             }
     }
 
-    if (mons->type == MONS_WATER_NYMPH)
+    if (mons->type == MONS_WATER_NYMPH
+        || mons->type == MONS_ELEMENTAL_WELLSPRING)
     {
         for (adjacent_iterator ai(mons->pos(), false); ai; ++ai)
             if (feat_has_solid_floor(grd(*ai))
@@ -2247,7 +2232,8 @@ static void _post_monster_move(monster* mons)
                          apostrophise(mons->name(DESC_THE)).c_str(),
                          feature_description_at(*ai, false, DESC_THE).c_str());
                 }
-                temp_change_terrain(*ai, DNGN_SHALLOW_WATER, random_range(50, 80),
+                temp_change_terrain(*ai, DNGN_SHALLOW_WATER,
+                                    random_range(50, 80),
                                     TERRAIN_CHANGE_FLOOD, mons);
             }
     }

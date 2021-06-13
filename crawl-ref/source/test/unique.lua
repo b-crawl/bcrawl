@@ -44,24 +44,24 @@ local function run_unique_tests()
   test_uniques_branch("Dis", 2)
 
   for depth = 1, 12 do
-    test_uniques_blank("D", depth, 3)
-    test_uniques_random("D", depth, 3)
+    test_uniques_blank("D", depth, 1)
+    test_uniques_random("D", depth, 1)
   end
   for depth = 1, 5 do
-    test_uniques_blank("Depths", depth, 3)
-    test_uniques_random("Depths", depth, 3)
+    test_uniques_blank("Depths", depth, 1)
+    test_uniques_random("Depths", depth, 1)
   end
 
   for depth = 1, 2 do
-    test_uniques_blank("Dis", depth, 3)
-    test_uniques_random("Dis", depth, 3)
+    test_uniques_blank("Dis", depth, 1)
+    test_uniques_random("Dis", depth, 1)
   end
 
   for depth = 3, 1, -1 do
-    test_uniques_blank("Swamp", depth, 3)
+    test_uniques_blank("Swamp", depth, 1)
     if depth < 3 then
       -- otherwise problem with lernaean, like Dispater above
-      test_uniques_random("Swamp", depth, 3)
+      test_uniques_random("Swamp", depth, 1)
     end
   end
 end

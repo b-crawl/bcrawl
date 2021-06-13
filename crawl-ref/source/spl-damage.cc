@@ -141,6 +141,7 @@ bool cast_smitey_hellfire(int pow, bolt &beam)
     return true;
 }
 
+// todo: update this
 string desc_chain_lightning_dam(int pow)
 {
     // Damage is 5d(9.2 + pow / 30), but if lots of targets are around
@@ -158,7 +159,21 @@ string desc_chain_lightning_dam(int pow)
     return make_stringf("%d-%d", min, max);
 }
 
-// XXX no friendly check
+static bool _chain_lightning_harms(const actor *act)
+{
+    if (act->is_monster())
+    {
+        // Harmless to these monsters, so don't prompt about them.
+        if (act->res_elec() >= 3
+            || you.deity() == GOD_FEDHAS && fedhas_protects(*act->as_monster()))
+        {
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
+
 spret cast_chain_spell(spell_type spell_cast, int pow,
                             const actor *caster, bool fail)
 {
@@ -166,24 +181,6 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
     bolt beam;
 
     // initialise beam structure
-    switch (spell_cast)
-    {
-        case SPELL_CHAIN_LIGHTNING:
-            beam.name           = "lightning arc";
-            beam.aux_source     = "chain lightning";
-            beam.glyph          = dchar_glyph(DCHAR_FIRED_ZAP);
-            beam.flavour        = BEAM_ELECTRICITY;
-            break;
-        case SPELL_CHAIN_OF_CHAOS:
-            beam.name           = "arc of chaos";
-            beam.aux_source     = "chain of chaos";
-            beam.glyph          = dchar_glyph(DCHAR_FIRED_ZAP);
-            beam.flavour        = BEAM_CHAOS;
-            break;
-        default:
-            die("buggy chain spell %d cast", spell_cast);
-            break;
-    }
     beam.source_id      = caster->mid;
     beam.thrower        = caster->is_player() ? KILL_YOU_MISSILE : KILL_MON_MISSILE;
     beam.range          = 8;
@@ -193,16 +190,48 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
     beam.is_explosion   = false;
     beam.is_tracer      = false;
     beam.origin_spell   = spell_cast;
+    switch (spell_cast)
+    {
+    case SPELL_CHAIN_LIGHTNING:
+        if (caster->is_player())
+        {
+            targeter_los hitfunc(&you, LOS_ARENA);
+            if (stop_attack_prompt(hitfunc, "attack", _chain_lightning_harms))
+                return spret::abort;
+        }
+
+        beam.name           = "lightning arc";
+        beam.aux_source     = "chain lightning";
+        beam.glyph          = dchar_glyph(DCHAR_FIRED_ZAP);
+        beam.flavour        = BEAM_ELECTRICITY;
+        beam.is_explosion   = true;
+        break;
+    case SPELL_CHAIN_OF_CHAOS:
+        beam.name           = "arc of chaos";
+        beam.aux_source     = "chain of chaos";
+        beam.glyph          = dchar_glyph(DCHAR_FIRED_ZAP);
+        beam.flavour        = BEAM_CHAOS;
+        break;
+    default:
+        die("buggy chain spell %d cast", spell_cast);
+        break;
+    }
 
     if (const monster* mons = caster->as_monster())
         beam.source_name = mons->name(DESC_PLAIN, true);
 
     bool first = true;
-    coord_def source, target;
+    coord_def source = caster->pos();
+    coord_def target;
+    coord_def last_target = source;
 
-    for (source = caster->pos(); pow > 0;
-         pow -= 8 + random2(13), source = target)
-    {
+    int bounces = div_rand_round(isqrt(max(pow, 1) * 100), 20) + random2(2);
+    int power_decrement = pow / (bounces * 2);
+    
+    bool player_targetable = spell_cast != SPELL_CHAIN_LIGHTNING || !caster->is_player();
+
+    for (int bounce = 0; bounce < bounces; bounce++)
+    {       
         // infinity as far as this spell is concerned
         // (Range - 1) is used because the distance is randomised and
         // may be shifted by one.
@@ -223,10 +252,15 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
             if (beam.ignores_monster(*mi))
                 continue;
 
+            coord_def mi_pos = mi->pos();
             dist = grid_distance(source, mi->pos());
 
             // check for the source of this arc
             if (!dist)
+                continue;
+
+            // don't allow bounce loops between 2 targets
+            if (mi_pos == last_target)
                 continue;
 
             // randomise distance (arcs don't care about a couple of feet)
@@ -277,7 +311,7 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
         // now check if the player is a target
         dist = grid_distance(source, you.pos());
 
-        if (dist)       // i.e., player was not the source
+        if (dist && player_targetable)  // player was not the source
         {
             // distance randomised (as above)
             dist += (random2(3) - 1);
@@ -335,7 +369,7 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
             case SPELL_CHAIN_LIGHTNING:
                 beam.colour = LIGHTBLUE;
                 beam.damage = caster->is_player()
-                    ? calc_dice(5, 10 + pow * 2 / 3)
+                    ? calc_dice(5, 18 + isqrt(max(pow, 1) * 80))
                     : calc_dice(5, 46 + pow / 6);
                 break;
             case SPELL_CHAIN_OF_CHAOS:
@@ -348,23 +382,16 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
                 break;
         }
 
-        // Be kinder to the caster.
         if (target == caster->pos())
         {
-
-            // This should not hit the caster, too scary as a player effect and
-            // too kind to the player as a monster effect.
-            if (spell_cast == SPELL_CHAIN_OF_CHAOS)
-            {
-                beam.real_flavour = BEAM_VISUAL;
-                beam.flavour      = BEAM_VISUAL;
-            }
-
-            // Reduce damage when the spell arcs to the caster.
-            beam.damage.num = max(1, beam.damage.num / 2);
-            beam.damage.size = max(3, beam.damage.size / 2);
+            beam.real_flavour = BEAM_VISUAL;
+            beam.flavour      = BEAM_VISUAL;
         }
         beam.fire();
+        
+        last_target = source;
+        source = target;
+        pow -= power_decrement;
     }
 
     return spret::success;

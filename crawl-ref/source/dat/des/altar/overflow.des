@@ -475,10 +475,10 @@ TAGS:  uniq_altar_dithmenos temple_overflow_1 temple_overflow_dithmenos decor
 DEPTH: D:4-
 KFEAT: C = altar_dithmenos
 {{
-  if you.absdepth() >= 14 then
+  if you.absdepth() >= 9 then
      mons("shadow")
   else
-     local imp_weight = 9 - you.absdepth()
+     local imp_weight = 9 - you.depth()
      if imp_weight > 0 then
          local phantom_weight = 9 - imp_weight
          mons("phantom w:" .. phantom_weight ..
@@ -1746,6 +1746,7 @@ NAME:  okawaru_altar_gauntlet_db
 TAGS:  uniq_altar_okawaru temple_overflow_1 temple_overflow_okawaru
 DEPTH: D:2-9
 KFEAT: _ = altar_okawaru
+KPROP: 1 = no_tele_into
 MONS:  goblin; stone q:5 / hobgoblin; stone q:5 / gnoll; stone q:5 /\
        orc; stone q:5 / kobold; stone q:5
 MAP
@@ -2864,7 +2865,7 @@ ENDMAP
 NAME:   tgw_xom
 DEPTH:  D:2-, Depths
 TAGS:   no_item_gen no_monster_gen temple_overflow_1 temple_overflow_xom
-TAGS:   uniq_altar_xom
+TAGS:   uniq_altar_xom no_tele_into
 KFEAT:  _ = altar_xom
 MONS:   place:D:1
 MONS:   orc ; club ego:chaos | dagger ego:chaos | spear ego:chaos
@@ -3001,15 +3002,16 @@ ENDMAP
 NAME:   led_xom_imps
 DEPTH:  D:3-5
 TAGS:   temple_overflow_1 temple_overflow_xom uniq_altar_xom
+MONS:   crimson imp, crimson imp ; dagger ego:chaos
+KPROP:  1 = no_tele_into
+NSUBST: 1 = 2 / 1
 KFEAT:  _ = altar_xom
-KFEAT:  T = known teleport trap
-NSUBST: I = 1:1 / 3:2
-MONS: crimson imp ; dagger ego:chaos ident:type, crimson imp ; nothing
+KFEAT:  ^ = known teleport trap
 MAP
 xxxx+xxxx
-xIT...TIx
+x1^...^1x
 xxx._.xxx
-xIT...TIx
+x1^...^1x
 xxxx+xxxx
 ENDMAP
 

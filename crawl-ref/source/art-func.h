@@ -435,7 +435,7 @@ static void _PRUNE_melee_effects(item_def* weapon, actor* attacker,
 
 static void _TORMENT_equip(item_def *item, bool *show_msgs, bool unmeld)
 {
-    _equip_mpr(show_msgs, "A terribly searing pain shoots up your arm!");
+    _equip_mpr(show_msgs, "A terrible, searing pain shoots up your arm!");
 }
 
 static void _TORMENT_melee_effects(item_def* weapon, actor* attacker,

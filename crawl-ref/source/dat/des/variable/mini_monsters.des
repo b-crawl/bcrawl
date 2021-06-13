@@ -6906,7 +6906,7 @@ NAME:    minmay_guarded_unrand_skullcrusher
 TAGS:    transparent
 DEPTH:   D:12-, Crypt
 MONS:    flying skull
-: if you.branch() == "Crypt" then
+: if you.in_branch("Crypt") then
 MONS:    curse skull
 NSUBST:  d = 1:d / *:*
 : else
@@ -7027,6 +7027,7 @@ MAP
 ENDMAP
 
 NAME:    chequers_guarded_unrand_mask_of_the_dragon
+TAGS:    no_monster_gen no_trap_gen
 DEPTH:   Zot, !Zot:$
 TAGS:    no_monster_gen no_trap_gen
 : if you.unrands("mask_of_the_dragon") then
@@ -7043,7 +7044,8 @@ SUBST: DEFH = -
 # Place monsters randomly.
 # 3 of each dragon (and up to 4 random extras), 3 ghost moth, 3 moth of wrath
 MONS:    storm dragon, shadow dragon, golden dragon, ghost moth, moth of wrath
-NSUBST:  - = 3:1 / 3:2 / 3:3 / 4=123... / 3:4 / 3:5 / *:.
+NSUBST:  - = 3=1 / 3=2 / 3=3 / 4=123--- / 3=4 / 3=5 / -
+KMASK: . = !opaque
 # Place transporters
 MARKER: P = lua:transp_loc("mask_of_the_dragon_entry")
 MARKER: Q = lua:transp_dest_loc("mask_of_the_dragon_entry")

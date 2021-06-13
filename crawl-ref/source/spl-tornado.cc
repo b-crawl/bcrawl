@@ -105,7 +105,7 @@ bool WindSystem::has_wind(coord_def c)
 
 static void _set_tornado_durations(int powc)
 {
-    int dur = 60;
+    int dur = isqrt(50 * max(powc, 1));
     you.duration[DUR_TORNADO] = dur;
     if (!get_form()->forbids_flight())
     {
@@ -216,17 +216,6 @@ static coord_def _rotate(coord_def org, coord_def from,
     return best;
 }
 
-static int _rdam(int rage)
-{
-    // integral of damage done until given age-radius
-    if (rage <= 0)
-        return 0;
-    else if (rage < 10)
-        return sqr(rage) / 2;
-    else
-        return rage * 10 - 50;
-}
-
 static int _tornado_age(const actor *caster, bool is_vortex = false)
 {
     string name;
@@ -261,14 +250,17 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
 
     // Not stored so unwielding that staff will reduce damage.
     if (caster->is_player())
+    {
         pow = calc_spell_power(SPELL_TORNADO, true);
+        pow = sqrt(110 * max(pow, 1));
+    }
     else
         // Note that this spellpower multiplier for Vortex is based on Air
         // Elementals, which have low HD.
         pow = caster->as_monster()->get_hit_dice() * (is_vortex ? 12 : 4);
     dprf("Doing tornado, dur %d, effective power %d", dur, pow);
     const coord_def org = caster->pos();
-    int noise = 0;
+    int noise_sum = 1;
     WindSystem winds(org);
 
     const coord_def old_player_pos = you.pos();
@@ -294,18 +286,10 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
             ++cnt_all;
             ++count_i;
         }
-        // effective age at radius r
-        int rage = age - _age_needed(r);
-        /* Not just "portion of time affected":
-                          **
-                        **
-                  ----++----
-                    **......
-                  **........
-           here, damage done is 3/4, not 1/2.
-        */
-        // effective duration at the radius
-        int rdur = _rdam(rage + abs(dur)) - _rdam(rage);
+
+        // base for damage calculation, scaled by delay after AC check
+        int rdur = (100 * max_radius) / (max_radius + r);
+
         rdurs[r] = rdur;
         // power at the radius
         int rpow = div_rand_round(pow * cnt_open * rdur, cnt_all * 100);
@@ -313,7 +297,7 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
         if (!rpow)
             break;
 
-        noise = max(div_rand_round(r * rdur * 3, 100), noise);
+        noise_sum += rpow * r;
 
         vector<coord_def> clouds;
         for (; dam_i && dam_i.radius() == r; ++dam_i)
@@ -332,7 +316,7 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
             if (!winds.has_wind(*dam_i))
                 continue;
 
-            bool leda = false; // squares with ledaed enemies are no-go
+            bool immobile = false; // squares with immobile enemies are no-go
             if (actor* victim = actor_at(*dam_i))
             {
                 if (victim->submerged())
@@ -349,15 +333,13 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
                 if (victim->is_player() && get_form()->forbids_flight())
                     continue;
 
-                leda = victim->liquefied_ground()
-                       || victim->is_monster()
-                          && _mons_is_unmovable(victim->as_monster());
+                immobile = victim->is_monster() && _mons_is_unmovable(victim->as_monster());
                 if (!victim->res_tornado())
                 {
                     if (victim->is_monster())
                     {
                         monster *mon = victim->as_monster();
-                        if (!leda)
+                        if (!immobile)
                         {
                             // fly the monster so you get only one attempt
                             // at tossing them into water/lava
@@ -369,7 +351,7 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
                         }
                         behaviour_event(mon, ME_ANNOY, caster);
                     }
-                    else if (!leda)
+                    else if (!immobile)
                     {
                         bool standing = !you.airborne();
                         if (standing)
@@ -386,6 +368,7 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
                         int dmg = victim->apply_ac(
                                     div_rand_round(roll_dice(9, rpow), 15),
                                     0, AC_PROPORTIONAL);
+                        dmg = div_rand_round(dmg * dur, 10);
                         dprf("damage done: %d", dmg);
                         victim->hurt(caster, dmg, BEAM_AIR, KILLED_BY_BEAM,
                                      "", "tornado");
@@ -399,7 +382,7 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
                     }
                 }
 
-                if (victim->alive() && !leda && dur > 0)
+                if (victim->alive() && !immobile && dur > 0)
                     move_dest[victim->mid] = victim->pos();
             }
 
@@ -414,12 +397,12 @@ void tornado_damage(actor *caster, int dur, bool is_vortex)
             clouds.push_back(*dam_i);
             swap_clouds(clouds[random2(clouds.size())], *dam_i);
 
-            if (!leda)
+            if (!immobile)
                 move_avail.push_back(*dam_i);
         }
     }
 
-    noisy(noise, org, caster->mid);
+    noisy(sqrt(max(noise_sum / 2, 100)), org, caster->mid);
 
     if (dur <= 0)
         return;

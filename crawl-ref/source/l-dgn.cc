@@ -565,6 +565,16 @@ static int dgn_name(lua_State *ls)
     PLUARET(string, map->name.c_str());
 }
 
+// the "filename" here isn't really correct, and has `_` substituted for
+// `/`. I'm not entirely sure why, thought maybe it has something to do with
+// the filenames used in the des cache (which fit this pattern but with
+// different extensions)
+static int dgn_filename(lua_State *ls)
+{
+    MAP(ls, 1, map);
+    PLUARET(string, map->file.c_str());
+}
+
 typedef
     flood_find<map_def::map_feature_finder, map_def::map_bounds_check>
     map_flood_finder;
@@ -610,6 +620,16 @@ static int dgn_any_point_connected(lua_State *ls)
 static int dgn_has_exit_from(lua_State *ls)
 {
     return dgn_map_pathfind(ls, 3, &map_flood_finder::has_exit_from);
+}
+
+static int _dgn_count_disconnected_zones(lua_State *ls)
+{
+    PLUARET(number, dgn_count_disconnected_zones(false));
+}
+
+static int _dgn_count_tele_zones(lua_State *ls)
+{
+    PLUARET(number, dgn_count_tele_zones(true));
 }
 
 static void dlua_push_coordinates(lua_State *ls, const coord_def &c)
@@ -1751,6 +1771,7 @@ const struct luaL_reg dgn_dlib[] =
 { "reset_level", _dgn_reset_level },
 
 { "name", dgn_name },
+{ "filename", dgn_filename },
 { "depth", dgn_depth },
 { "place", dgn_place },
 { "desc", dgn_desc },
@@ -1794,6 +1815,8 @@ const struct luaL_reg dgn_dlib[] =
 { "points_connected", dgn_points_connected },
 { "any_point_connected", dgn_any_point_connected },
 { "has_exit_from", dgn_has_exit_from },
+{ "count_disconnected_zones", _dgn_count_disconnected_zones },
+{ "count_tele_zones", _dgn_count_tele_zones },
 { "gly_point", dgn_gly_point },
 { "gly_points", dgn_gly_points },
 { "original_map", dgn_original_map },

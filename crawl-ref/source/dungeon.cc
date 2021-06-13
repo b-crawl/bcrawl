@@ -744,8 +744,20 @@ bool dgn_square_travel_ok(const coord_def &c)
         const trap_def * const trap = trap_at(c);
         return !(trap && trap->type == TRAP_TELEPORT_PERMANENT);
     }
-    else
-        return feat_is_traversable(feat);
+    else // the mimic check here relies on full placement operating, e.g. not &L
+        return feat_is_traversable(feat) || feature_mimic_at(c);
+}
+
+static bool _dgn_square_is_tele_connected(const coord_def &c)
+{
+    // all solid features get marked with no_tele_into, including doors, so
+    // undo this more or less so that this function can be used for connectivity
+    // checking; except when the entire vault is notele
+    const bool vault_notele = dgn_vault_at(c)
+                    && dgn_vault_at(c)->map.has_tag("no_tele_into");
+    return (!(env.pgrid(c) & FPROP_NO_TELE_INTO)
+                            || !vault_notele && feat_is_solid(env.grid(c)))
+        && dgn_square_travel_ok(c);
 }
 
 static bool _dgn_square_is_passable(const coord_def &c)
@@ -1017,6 +1029,16 @@ static int _process_disconnected_zones(int x1, int y1, int x2, int y2,
     return nzones - ngood;
 }
 
+int dgn_count_tele_zones(bool choose_stairless)
+{
+    dprf("Counting teleport zones");
+    return _process_disconnected_zones(0, 0, GXM-1, GYM-1, choose_stairless,
+                                    DNGN_UNSEEN, _dgn_square_is_tele_connected);
+}
+
+// Count number of mutually isolated zones. If choose_stairless, only count
+// zones with no stairs in them. If fill is set to anything other than
+// DNGN_UNSEEN, chosen zones will be filled with the provided feature.
 int dgn_count_disconnected_zones(bool choose_stairless,
                                  dungeon_feature_type fill)
 {
@@ -1097,7 +1119,7 @@ static void _mask_vault(const vault_placement &place, unsigned mask,
                         function<bool(const coord_def &)> skip_fun = nullptr)
 {
     for (vault_place_iterator vi(place); vi; ++vi)
-        if (!skip_fun || !skip_fun(vi.vault_pos())) // alert: `skip_fun` takes vault coords
+        if (!skip_fun || !skip_fun(*vi))
             env.level_map_mask(*vi) |= mask;
 }
 
@@ -1144,12 +1166,15 @@ dgn_register_place(const vault_placement &place, bool register_vault)
         else if (!transparent)
         {
             // mask everything except for any marked vault exits as opaque.
-            // (If there's some use for opaque exits, this would be possible
-            // to do with an explicit mask -- but this may lead to vault
-            // placements where e.g. an exit leads to a wall. With one exit,
-            // it may lead to isolated opaque vaults.)
+            // This uses vault exits marked by @, +, = on the vault edge, and
+            // in a pinch, spaces in floats that are necessary for exits.
+            // (This is overridden by explicit masking, or no_exits.)
             _mask_vault(place, MMT_OPAQUE,
-                [&place](const coord_def &c) { return place.is_exit(c); });
+                [&place](const coord_def &c)
+                {
+                    return !place.map.has_tag("no_exits")
+                        && count(place.exits.begin(), place.exits.end(), c);
+                });
         }
     }
 

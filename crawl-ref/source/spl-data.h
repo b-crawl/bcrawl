@@ -472,9 +472,9 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_TORNADO, "Tornado",
-    SPTYP_AIR,
+    SPTYP_AIR | SPTYP_TRANSLOCATION,
     SPFLAG_AREA,
-    9,
+    8,
     200,
     TORNADO_RADIUS, TORNADO_RADIUS,
     5, 0,
@@ -1617,7 +1617,7 @@ static const struct spell_desc spelldata[] =
     8,
     200,
     -1, -1,
-    8, 25,
+    8, 10,
     TILEG_CHAIN_LIGHTNING,
 },
 
@@ -2960,12 +2960,12 @@ static const struct spell_desc spelldata[] =
 {
     SPELL_VIRULENCE, "Virulence",
     SPTYP_POISON | SPTYP_HEXES,
-    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK,
-    4,
-    200,
-    LOS_RADIUS, LOS_RADIUS,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER,
+    7,
+    0,
+    5, 5,
     2, 0,
-    TILEG_GENERIC_MONSTER_SPELL,
+    TILEG_VIRULENCE,
 },
 
 #if TAG_MAJOR_VERSION == 34

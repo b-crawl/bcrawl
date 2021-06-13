@@ -2192,7 +2192,11 @@ item_def* monster_die(monster& mons, killer_type killer,
                 silent = true;
             }
             else
+            {
+                simple_monster_message(mons, " turns to gold and falls from the air.",
+                                       MSGCH_MONSTER_DAMAGE, MDAM_DEAD);
                 killer = KILL_RESET;
+            }
         }
 
         if (was_banished && !summoned_it && !hard_reset
@@ -2250,13 +2254,6 @@ item_def* monster_die(monster& mons, killer_type killer,
              && !wizard && !mons_reset)
     {
         _druid_final_boon(&mons);
-    }
-    else if (mons.type == MONS_ELEMENTAL_WELLSPRING
-             && mons.mindex() == killer_index)
-    {
-        if (!silent)
-            simple_monster_message(mons, " exhausts itself and dries up.");
-        silent = true;
     }
 
     const bool death_message = !silent && !did_death_message

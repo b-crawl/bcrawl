@@ -702,7 +702,7 @@ static void _decrement_durations()
         if (_decrement_a_duration(DUR_TORNADO, delay,
                                   "The winds around you start to calm down."))
         {
-            you.duration[DUR_TORNADO_COOLDOWN] = random_range(35, 45);
+            you.duration[DUR_TORNADO_COOLDOWN] = random_range(55, 65);
         }
     }
 

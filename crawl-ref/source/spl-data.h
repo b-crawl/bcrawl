@@ -2960,12 +2960,12 @@ static const struct spell_desc spelldata[] =
 {
     SPELL_VIRULENCE, "Virulence",
     SPTYP_POISON | SPTYP_HEXES,
-    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK,
-    4,
-    200,
-    LOS_RADIUS, LOS_RADIUS,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER,
+    7,
+    0,
+    5, 5,
     2, 0,
-    TILEG_GENERIC_MONSTER_SPELL,
+    TILEG_VIRULENCE,
 },
 
 #if TAG_MAJOR_VERSION == 34

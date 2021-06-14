@@ -197,7 +197,7 @@ MAP
 ENDMAP
 
 NAME:   lemuel_upstairs_altar
-DEPTH:  D:2-, Vaults, Elf, Crypt
+DEPTH:  D:2-, Elf, !Elf:$, Crypt, !Crypt:$
 ORIENT: float
 SUBST:  T:T., )=)}], c:ccx
 KMASK:  T = no_monster_gen

@@ -1416,7 +1416,7 @@ ENDMAP
 ##############################################################################
 
 NAME:     elven_hall_of_blades_hangedman_original
-TAGS:     no_dump no_item_gen no_monster_gen
+TAGS:     no_item_gen no_monster_gen
 PLACE:    Elf:2
 ORIENT:   north
 MONS:     deep elf mage
@@ -1482,7 +1482,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=A=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ENDMAP
 
 NAME:     elven_hall_of_blades_hangedman_alternative
-TAGS:     no_dump no_item_gen no_monster_gen
+TAGS:     no_item_gen no_monster_gen
 PLACE:    Elf:2
 WEIGHT:   5
 ORIENT:   north
@@ -1536,7 +1536,7 @@ ENDMAP
 # Due to the orientation of this vault, I decided to just have a built-in
 # entry, rather than trying to make the existing entry subvaults fit.
 NAME:     nicolae_elf_blades_crystal_corner
-TAGS:     no_dump no_item_gen no_monster_gen
+TAGS:     no_item_gen no_monster_gen
 PLACE:    Elf:2
 ORIENT:   northwest
 MONS:     deep elf mage
@@ -1612,7 +1612,7 @@ ENDMAP
 # main hall, so instead of having distinct "left" and "right" sides relative
 # to the entrance, the layout is mostly "forward" from the entrance.
 NAME:     nicolae_elf_blades_splatter_lattice
-TAGS:     no_dump no_item_gen no_monster_gen
+TAGS:     no_item_gen no_monster_gen
 PLACE:    Elf:2
 ORIENT:   north
 MONS:     deep elf mage

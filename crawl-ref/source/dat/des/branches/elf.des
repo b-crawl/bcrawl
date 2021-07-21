@@ -1457,9 +1457,9 @@ NAME:     nicolae_elf_blades_crystal_corner
 TAGS:     no_dump no_item_gen no_monster_gen
 PLACE:    Elf:2
 ORIENT:   northwest
-MONS:     deep elf pyromancer / deep elf zephyrmancer
+MONS:     deep elf mage
 MONS:     deep elf knight w:22 / \
-          deep elf pyromancer w:1 / deep elf zephyrmancer w:1
+          deep elf mage w:1
 MONS:     deep elf blademaster, dancing weapon
 : halls_of_blades_weapon(_G)
 MONS:     patrolling dancing weapon ; dagger good_item | mundane falchion w:6
@@ -1533,9 +1533,9 @@ NAME:     nicolae_elf_blades_splatter_lattice
 TAGS:     no_dump no_item_gen no_monster_gen
 PLACE:    Elf:2
 ORIENT:   north
-MONS:     deep elf pyromancer / deep elf zephyrmancer
+MONS:     deep elf mage
 MONS:     deep elf knight w:22 / \
-          deep elf pyromancer w:1 / deep elf zephyrmancer w:1
+          deep elf mage w:1
 MONS:     deep elf blademaster, dancing weapon
 KMONS:    E = dancing weapon
 : halls_of_blades_weapon(_G)

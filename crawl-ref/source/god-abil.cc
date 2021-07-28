@@ -4175,8 +4175,12 @@ static void _setup_gozag_shop(int index, vector<shop_type> &valid_shops)
     ASSERT(!you.props.exists(make_stringf(GOZAG_SHOPKEEPER_NAME_KEY, index)));
 
     shop_type type = NUM_SHOPS;
+    int shop_price = gozag_price_for_shop();
     if (index == 0 && !you_foodless(false))
+    {
         type = SHOP_FOOD;
+        shop_price /= 2;
+    }
     else
     {
         int choice = random2(valid_shops.size());
@@ -4198,8 +4202,7 @@ static void _setup_gozag_shop(int index, vector<shop_type> &valid_shops)
                                                       "Emporium", "Shop")
                                       : "";
 
-    you.props[make_stringf(GOZAG_SHOP_COST_KEY, index)].get_int()
-        = gozag_price_for_shop();
+    you.props[make_stringf(GOZAG_SHOP_COST_KEY, index)].get_int() = shop_price;
 }
 
 /**

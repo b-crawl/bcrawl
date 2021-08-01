@@ -1325,6 +1325,11 @@ int acquirement_create_item_general(object_class_type class_wanted,
         case OBJ_MISSILES:
             if (!divine)
                 acq_item.quantity *= 5;
+            else
+            {
+                int gift_count = you.num_total_gifts[you.religion];
+                acq_item.quantity = acq_item.quantity * (12 + gift_count) / (12 + 2 * gift_count);
+            }
             break;
         default:
             if (quant > 1)

@@ -362,6 +362,8 @@ static const ability_def Ability_List[] =
       0, 0, 0, 0, {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_ZIN_VITALISATION, "Vitalisation",
       2, 0, 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
+    { ABIL_ZIN_MANNA, "Manna",
+      2, 0, 0, 2, {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_ZIN_IMPRISON, "Imprison",
       5, 0, 0, 4, {fail_basis::invo, 60, 5, 20}, abflag::none },
     { ABIL_ZIN_SANCTUARY, "Sanctuary",
@@ -2160,6 +2162,18 @@ static spret _do_ability(const ability_def& abil, bool fail)
     case ABIL_ZIN_VITALISATION:
         fail_check();
         zin_vitalisation();
+        break;
+
+    case ABIL_ZIN_MANNA:
+        fail_check();
+        int thing_created = items(true, OBJ_FOOD, FOOD_RATION, 1, 0, you.religion);
+        if (thing_created == NON_ITEM || !move_item_to_grid(&thing_created, you.pos()))
+        {
+            canned_msg(MSG_NOTHING_HAPPENS);
+            you.turn_is_over = true;
+            return spret::abort;
+        }
+        simple_god_message(" grants you sustenance!");
         break;
 
     case ABIL_ZIN_IMPRISON:

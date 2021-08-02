@@ -170,6 +170,10 @@ Temporarily provides protection from poison, confusion, petrification, rotting
 and sickness, and increases and sustains your strength, intelligence and
 dexterity. The increases to your attributes are determined by Invocations skill.
 %%%%
+Manna ability
+
+Calls upon Zin to provide sustenance.
+%%%%
 Imprison ability
 
 Temporarily imprisons a monster in walls of silver. The duration of the prison

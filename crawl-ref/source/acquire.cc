@@ -1327,7 +1327,7 @@ int acquirement_create_item_general(object_class_type class_wanted,
             else
             {
                 int gift_count = you.num_total_gifts[you.religion];
-                acq_item.quantity = acq_item.quantity * (12 + gift_count) / (12 + 2 * gift_count);
+                acq_item.quantity = acq_item.quantity * (14 + gift_count) / (12 + 2 * gift_count);
             }
             break;
         default:

@@ -95,8 +95,6 @@ const vector<god_power> god_powers[NUM_GODS] =
       { 3, ABIL_ZIN_MANNA, "call upon Zin for sustenance" },
       { 4, ABIL_ZIN_IMPRISON, "call upon Zin to imprison the lawless" },
       { 5, ABIL_ZIN_SANCTUARY, "call upon Zin to create a sanctuary" },
-      { 6, "Zin will cleanse your potions of mutation.",
-           "Zin will no longer cleanse your potions of mutation." },
       {-1, ABIL_ZIN_DONATE_GOLD, "donate money to Zin" },
     },
 

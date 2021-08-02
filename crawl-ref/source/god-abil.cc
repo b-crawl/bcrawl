@@ -1280,6 +1280,10 @@ bool zin_vitalisation()
     notify_stat_change(STAT_INT, stamina_amt, true);
     notify_stat_change(STAT_DEX, stamina_amt, true);
 
+    if (one_chance_in(3))
+        if (delete_mutation(RANDOM_MUTATION, "Zin's power", false))
+            mprf(MSGCH_GOD, you.religion, "Zin's power cleanses your form.");
+
     return true;
 }
 

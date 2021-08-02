@@ -2165,6 +2165,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_ZIN_MANNA:
+    {
         fail_check();
         int thing_created = items(true, OBJ_FOOD, FOOD_RATION, 1, 0, you.religion);
         if (thing_created == NON_ITEM || !move_item_to_grid(&thing_created, you.pos()))
@@ -2175,6 +2176,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         }
         simple_god_message(" grants you sustenance!");
         break;
+    }
 
     case ABIL_ZIN_IMPRISON:
     {

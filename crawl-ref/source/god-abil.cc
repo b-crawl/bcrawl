@@ -3576,6 +3576,7 @@ void cheibriados_temporal_distortion()
     you.moveto(old_pos);
     you.duration[DUR_TIME_STEP] = 0;
 
+    you.increase_duration(DUR_EXHAUSTED, 4 + random2(3));
     mpr("You warp the flow of time around you!");
 }
 

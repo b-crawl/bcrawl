@@ -524,7 +524,7 @@ static const ability_def Ability_List[] =
     { ABIL_CHEIBRIADOS_TIME_BEND, "Bend Time",
       3, 0, 0, 1, {fail_basis::invo, 40, 4, 20}, abflag::none },
     { ABIL_CHEIBRIADOS_DISTORTION, "Temporal Distortion",
-      4, 0, 0, 1, {fail_basis::invo, 60, 5, 20}, abflag::instant|abflag::exhaustion },
+      4, 0, 0, 0, {fail_basis::invo, 60, 5, 20}, abflag::instant|abflag::exhaustion },
     { ABIL_CHEIBRIADOS_SLOUCH, "Slouch",
       5, 0, 0, 8, {fail_basis::invo, 60, 4, 25}, abflag::none },
     { ABIL_CHEIBRIADOS_TIME_STEP, "Step From Time",
@@ -2861,6 +2861,11 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_CHEIBRIADOS_DISTORTION:
+        if (you.duration[DUR_EXHAUSTED])
+        {
+            mpr("You are too exhausted.");
+            return spret::abort;
+        }
         fail_check();
         cheibriados_temporal_distortion();
         break;

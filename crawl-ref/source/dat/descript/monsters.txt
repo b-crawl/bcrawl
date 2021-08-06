@@ -2589,9 +2589,8 @@ in search of prey, which it kills with its deadly venom.
 %%%%
 worker ant
 
-A wingless black insect with sharp mandibles capable of injecting a deadly
-poison. It is a worker, and thus tasked with gathering food — any living being
-it encounters is a potential meal.
+A wingless black insect with sharp mandibles capable of injecting poison.
+It is a worker, and thus tasked mainly with digging and gathering food — such as you.
 %%%%
 worldbinder
 

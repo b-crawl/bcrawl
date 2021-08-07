@@ -509,7 +509,7 @@ public:
 
     bool effect(bool=true, int=40, bool=true) const override
     {
-        const int ambrosia_turns = 3 + random2(8);
+        int ambrosia_turns = 3 + random2(8);
         if (have_passive(passive_t::long_potions))
             ambrosia_turns *= 2;
 

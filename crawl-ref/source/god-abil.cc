@@ -3473,6 +3473,8 @@ static bool _deferrable(coord_def where)
     {
         return false;
     }
+    
+    return true;
 }
 
 static bool _act_deferrable(const actor *act)
@@ -3506,7 +3508,6 @@ bool cheibriados_slouch()
         }
 
     targeter_los hitfunc(&you, LOS_DEFAULT);
-    mpr("You can feel time thicken for a moment.");
 
     apply_area_visible(_defer_monsters, you.pos());
     return true;

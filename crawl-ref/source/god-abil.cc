@@ -3463,64 +3463,42 @@ void cheibriados_time_bend(int pow)
     }
 }
 
-static int _slouch_damage(monster *mon)
-{
-    // Please change handle_monster_move in mon-act.cc to match.
-    const int jerk_num = mon->type == MONS_SIXFIRHY ? 8
-                       : mon->type == MONS_JIANGSHI ? 48
-                                                    : 1;
-
-    const int jerk_denom = mon->type == MONS_SIXFIRHY ? 24
-                         : mon->type == MONS_JIANGSHI ? 90
-                                                      : 1;
-
-    const int player_numer = BASELINE_DELAY * BASELINE_DELAY * BASELINE_DELAY;
-    return 4 * (mon->speed * BASELINE_DELAY * jerk_num
-                           / mon->action_energy(EUT_MOVE) / jerk_denom
-                - player_numer / player_movement_speed() / player_speed());
-}
-
-static bool _slouchable(coord_def where)
+static bool _deferrable(coord_def where)
 {
     monster* mon = monster_at(where);
     if (mon == nullptr || mon->is_stationary() || mon->cannot_move()
         || mons_is_projectile(mon->type)
-        || mon->asleep() && !mons_is_confused(*mon))
+        || mon->asleep()
+        || mon->friendly())
     {
         return false;
     }
-
-    return _slouch_damage(mon) > 0;
 }
 
-static bool _act_slouchable(const actor *act)
+static bool _act_deferrable(const actor *act)
 {
     if (act->is_player())
-        return false;  // too slow-witted
-    return _slouchable(act->pos());
+        return false;
+    return _deferrable(act->pos());
 }
 
-static int _slouch_monsters(coord_def where)
+static int _defer_monsters(coord_def where)
 {
-    if (!_slouchable(where))
+    if (!_deferrable(where))
         return 0;
 
     monster* mon = monster_at(where);
     ASSERT(mon);
-
-    // Between 1/2 and 3/2 of _slouch_damage(), but weighted strongly
-    // towards the middle.
-    const int dmg = roll_dice(_slouch_damage(mon), 3) / 2;
-
-    mon->hurt(&you, dmg, BEAM_MMISSILE, KILLED_BY_BEAM, "", "", true);
+    blink_away(mon, &you, false, false);
+    
     return 1;
 }
 
 bool cheibriados_slouch()
 {
-    int count = apply_area_visible(_slouchable, you.pos());
+    int count = apply_area_visible(_deferrable, you.pos());
     if (!count)
-        if (!yesno("There's no one hasty visible. Invoke Slouch anyway?",
+        if (!yesno("No targets are visible. Attempt to defer foes anyway?",
                    true, 'n'))
         {
             canned_msg(MSG_OK);
@@ -3528,13 +3506,9 @@ bool cheibriados_slouch()
         }
 
     targeter_los hitfunc(&you, LOS_DEFAULT);
-    if (stop_attack_prompt(hitfunc, "harm", _act_slouchable))
-        return false;
-
     mpr("You can feel time thicken for a moment.");
-    dprf("your speed is %d", player_movement_speed());
 
-    apply_area_visible(_slouch_monsters, you.pos());
+    apply_area_visible(_defer_monsters, you.pos());
     return true;
 }
 

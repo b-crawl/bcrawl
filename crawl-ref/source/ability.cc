@@ -525,10 +525,10 @@ static const ability_def Ability_List[] =
       3, 0, 0, 1, {fail_basis::invo, 40, 4, 20}, abflag::none },
     { ABIL_CHEIBRIADOS_DISTORTION, "Temporal Distortion",
       4, 0, 0, 0, {fail_basis::invo, 60, 5, 20}, abflag::instant|abflag::exhaustion },
-    { ABIL_CHEIBRIADOS_SLOUCH, "Slouch",
-      5, 0, 0, 8, {fail_basis::invo, 60, 4, 25}, abflag::none },
+    { ABIL_CHEIBRIADOS_DEFER, "Defer",
+      5, 0, 0, 4, {fail_basis::invo, 60, 4, 25}, abflag::none },
     { ABIL_CHEIBRIADOS_TIME_STEP, "Step From Time",
-      10, 0, 0, 10, {fail_basis::invo, 80, 4, 25}, abflag::none },
+      6, 0, 0, 8, {fail_basis::invo, 80, 4, 25}, abflag::exhaustion },
 
     // Ashenzari
     { ABIL_ASHENZARI_CURSE, "Curse Item",
@@ -2850,9 +2850,15 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_CHEIBRIADOS_TIME_STEP:
+        if (you.duration[DUR_EXHAUSTED])
+        {
+            mpr("You are too exhausted.");
+            return spret::abort;
+        }
         fail_check();
         cheibriados_time_step(max(1, you.skill(SK_INVOCATIONS, 10)
                                      * you.piety / 100));
+        you.increase_duration(DUR_EXHAUSTED, 10 + random2(5));
         break;
 
     case ABIL_CHEIBRIADOS_TIME_BEND:
@@ -2870,7 +2876,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         cheibriados_temporal_distortion();
         break;
 
-    case ABIL_CHEIBRIADOS_SLOUCH:
+    case ABIL_CHEIBRIADOS_DEFER:
         fail_check();
         if (!cheibriados_slouch())
             return spret::abort;

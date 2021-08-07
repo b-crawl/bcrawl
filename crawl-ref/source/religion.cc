@@ -265,6 +265,8 @@ const vector<god_power> god_powers[NUM_GODS] =
     { { 0, ABIL_CHEIBRIADOS_TIME_BEND, "bend time to slow others" },
       { 1, "Cheibriados slows and strengthens your metabolism.",
            "Cheibriados no longer slows and strengthens your metabolism." },
+      { 1, "Potions that augment you last longer.",
+           "Your potions no longer have increased duration." },
       { 3, ABIL_CHEIBRIADOS_DISTORTION, "warp the flow of time around you" },
       { 4, ABIL_CHEIBRIADOS_DEFER, "move away your foes" },
       { 5, ABIL_CHEIBRIADOS_TIME_STEP, "step out of the time flow" },

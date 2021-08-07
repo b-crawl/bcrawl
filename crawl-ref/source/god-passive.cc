@@ -316,6 +316,7 @@ static const vector<god_passive> god_passives[] =
         },
         // TODO: this one should work regardless of penance
         {  1, passive_t::slow_metabolism, "have a slowed metabolism" },
+        {  1, passive_t::long_potions, "potions that augment you last longer" },
     },
 
     // Ashenzari

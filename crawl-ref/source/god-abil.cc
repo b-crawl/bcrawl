@@ -3477,28 +3477,23 @@ static bool _deferrable(coord_def where)
     return true;
 }
 
-static bool _act_deferrable(const actor *act)
-{
-    if (act->is_player())
-        return false;
-    return _deferrable(act->pos());
-}
-
-static int _defer_monsters(coord_def where)
-{
-    if (!_deferrable(where))
-        return 0;
-
-    monster* mon = monster_at(where);
-    ASSERT(mon);
-    blink_away(mon, &you, false, false);
-    
-    return 1;
-}
-
 bool cheibriados_slouch()
 {
-    int count = apply_area_visible(_deferrable, you.pos());
+    int count = 0;
+    vector<monster*> targets;
+    for (radius_iterator ri(you.pos(), LOS_DEFAULT); ri; ++ri)
+    {
+        coord_def square = *ri;
+        if (!_deferrable(square))
+            continue;
+
+        monster* mon = monster_at(square);
+        ASSERT(mon);
+        targets.push_back(mon);
+        if (you.can_see(*mon))
+            count++;
+    }
+
     if (!count)
         if (!yesno("No targets are visible. Attempt to defer foes anyway?",
                    true, 'n'))
@@ -3507,9 +3502,9 @@ bool cheibriados_slouch()
             return false;
         }
 
-    targeter_los hitfunc(&you, LOS_DEFAULT);
-
-    apply_area_visible(_defer_monsters, you.pos());
+    for (int i = 0; i < targets.size(); i++)
+        blink_away(targets[i], &you, false, false, true);
+    
     return true;
 }
 

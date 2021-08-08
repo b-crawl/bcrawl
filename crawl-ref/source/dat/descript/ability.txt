@@ -534,10 +534,9 @@ Temporal Distortion ability
 Warps the flow of time, causing monsters to skip forwards in time relative to
 you.
 %%%%
-Slouch ability
+Defer ability
 
-Causes damage to everyone in sight who is moving faster than you, dealing more
-damage with greater differences in speed.
+Causes mobile foes to blink away from you.
 %%%%
 Step From Time ability
 

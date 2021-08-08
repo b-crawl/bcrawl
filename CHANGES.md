@@ -361,6 +361,14 @@
   - v1.31.1: Makhleb gives Minor Destruction at \* piety. Its damage scales more with Invocations, and its acid effect is replaced by Throw Frost.
   - v1.31.1: Ashenzari's Scrying ability costs less piety.
   - v1.32: Nemelex's Foxfire card has a different set of summons, and now always creates some flying allies and an equal number of weaker flying enemies.
+  - v1.33: Zin no longer cleanses potions of mutation. Instead, Vitalisation has a 1/3 chance to remove a mutation. 
+  - v1.33: Zin gains the Manna ability, which creates 1 ration. 
+  - v1.33: Cheibriados's Slouch ability is replaced by Defer, which costs half as much piety. Defer blinks all hostile monsters to locations farther from the player.
+  - v1.33: Cheibriados's Step from Time ability costs less mana and slightly less piety, but causes exhaustion.
+  - v1.33: The Temporal Distortion ability of Cheibriados and Demigods now costs no piety but causes exhaustion.
+  - v1.33: Cheibriados doubles the duration of all potions with a duration except for potions of haste, flight, and invisibility.
+  - v1.33: Ammunition gifts from gods become smaller as you receive gifts, gradually approaching half their original size.
+  - v1.33: Calling food shops with Gozag has half the cost of calling other shops.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -568,6 +576,9 @@
   - v1.31.2: Worker ants can burrow through rock walls.
   - v1.31.2: Soldier ants have rebalanced stats and are overall stronger.
   - v1.32: Elemental wellsprings have Summon Water Elementals instead of creating water elementals when they use Primal Wave.
+  - v1.33: Plants have lower AC.
+  - v1.33: Flying skulls deal more melee damage and have a small chance to cast Haunt and Sentinel Mark.
+  - v1.33: Deep elf knights have a reworked spell set and deal more melee damage.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

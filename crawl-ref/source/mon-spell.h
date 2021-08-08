@@ -771,6 +771,13 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
+    {  MST_FLYING_SKULL,
+      {
+       { SPELL_HAUNT, 3, MON_SPELL_MAGICAL | MON_SPELL_NOISY },
+       { SPELL_SENTINEL_MARK, 6, MON_SPELL_MAGICAL | MON_SPELL_NOISY },
+      }
+    },
+
     {  MST_CURSE_SKULL,
       {
        { SPELL_SUMMON_UNDEAD, 48, MON_SPELL_MAGICAL | MON_SPELL_NOISY },

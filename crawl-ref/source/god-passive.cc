@@ -314,9 +314,9 @@ static const vector<god_passive> god_passives[] =
         {  0, passive_t::slow_abyss,
               "GOD will NOW slow the Abyss"
         },
-        // TODO: this one should work regardless of penance
         {  1, passive_t::slow_metabolism, "have a slowed metabolism" },
         {  1, passive_t::long_potions, "potions that augment you last longer" },
+        {  1, passive_t::clarity, "are NOW clear of mind" },
     },
 
     // Ashenzari

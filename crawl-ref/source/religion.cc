@@ -92,10 +92,9 @@ const vector<god_power> god_powers[NUM_GODS] =
     // Zin
     { { 1, ABIL_ZIN_RECITE, "recite Zin's Axioms of Law" },
       { 2, ABIL_ZIN_VITALISATION, "call upon Zin for vitalisation" },
-      { 3, ABIL_ZIN_IMPRISON, "call upon Zin to imprison the lawless" },
+      { 3, ABIL_ZIN_MANNA, "call upon Zin for sustenance" },
+      { 4, ABIL_ZIN_IMPRISON, "call upon Zin to imprison the lawless" },
       { 5, ABIL_ZIN_SANCTUARY, "call upon Zin to create a sanctuary" },
-      { 6, "Zin will cleanse your potions of mutation.",
-           "Zin will no longer cleanse your potions of mutation." },
       {-1, ABIL_ZIN_DONATE_GOLD, "donate money to Zin" },
     },
 
@@ -266,8 +265,12 @@ const vector<god_power> god_powers[NUM_GODS] =
     { { 0, ABIL_CHEIBRIADOS_TIME_BEND, "bend time to slow others" },
       { 1, "Cheibriados slows and strengthens your metabolism.",
            "Cheibriados no longer slows and strengthens your metabolism." },
+      { 1, "Potions that augment you last longer.",
+           "Your potions no longer have increased duration." },
+      { 1, "The enlightenment of Cheibriados keeps your mind clear.",
+           "Cheibriados no longer keeps your mind clear." },
+      { 2, ABIL_CHEIBRIADOS_DEFER, "move away your foes" },
       { 3, ABIL_CHEIBRIADOS_DISTORTION, "warp the flow of time around you" },
-      { 4, ABIL_CHEIBRIADOS_SLOUCH, "inflict damage on those overly hasty" },
       { 5, ABIL_CHEIBRIADOS_TIME_STEP, "step out of the time flow" },
     },
 
@@ -844,7 +847,7 @@ static void _inc_gift_timeout(int val)
 // These are sorted in order of power.
 static monster_type _yred_servants[] =
 {
-    MONS_MUMMY, MONS_WIGHT, MONS_FLYING_SKULL, MONS_WRAITH,
+    MONS_MUMMY, MONS_WIGHT, MONS_VAMPIRE_MOSQUITO, MONS_WRAITH,
     MONS_VAMPIRE, MONS_SKELETAL_WARRIOR, MONS_PHANTASMAL_WARRIOR,
     MONS_FREEZING_WRAITH, MONS_VAMPIRE_KNIGHT, MONS_GHOUL,
     MONS_PROFANE_SERVITOR, MONS_BONE_DRAGON

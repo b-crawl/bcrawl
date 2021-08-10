@@ -3407,12 +3407,12 @@ tileidx_t tileidx_ability(const ability_type ability)
 
     // Divine abilities
     // Zin
-    case ABIL_ZIN_SUSTENANCE:
-        return TILEG_TODO;
     case ABIL_ZIN_RECITE:
         return TILEG_ABILITY_ZIN_RECITE;
     case ABIL_ZIN_VITALISATION:
         return TILEG_ABILITY_ZIN_VITALISATION;
+    case ABIL_ZIN_MANNA:
+        return TILEG_ABILITY_ZIN_MANNA;
     case ABIL_ZIN_IMPRISON:
         return TILEG_ABILITY_ZIN_IMPRISON;
     case ABIL_ZIN_SANCTUARY:
@@ -3560,7 +3560,7 @@ tileidx_t tileidx_ability(const ability_type ability)
         return TILEG_ABILITY_CHEIBRIADOS_TIME_STEP;
     case ABIL_CHEIBRIADOS_TIME_BEND:
         return TILEG_ABILITY_CHEIBRIADOS_BEND_TIME;
-    case ABIL_CHEIBRIADOS_SLOUCH:
+    case ABIL_CHEIBRIADOS_DEFER:
         return TILEG_ABILITY_CHEIBRIADOS_SLOUCH;
     case ABIL_CHEIBRIADOS_DISTORTION:
         return TILEG_ABILITY_CHEIBRIADOS_TEMPORAL_DISTORTION;

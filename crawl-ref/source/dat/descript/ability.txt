@@ -169,6 +169,12 @@ Vitalisation ability
 Temporarily provides protection from poison, confusion, petrification, rotting
 and sickness, and increases and sustains your strength, intelligence and
 dexterity. The increases to your attributes are determined by Invocations skill.
+
+The touch of Zin's power also has a chance to remove mutations.
+%%%%
+Manna ability
+
+Calls upon Zin to provide sustenance.
 %%%%
 Imprison ability
 
@@ -180,10 +186,6 @@ Sanctuary ability
 Creates a divine refuge for a short duration. While you are inside the
 sanctuary, monsters will not attack you, but the protection will disappear at
 once should you breach the divine peace.
-%%%%
-Cure All Mutations ability
-
-Cures all your mutations — but only once.
 %%%%
 # The Shining One
 Divine Shield ability
@@ -484,7 +486,7 @@ already one before it died.
 # Fedhas
 Fungal Bloom ability
 
-Call up Fedhas to accelerate the natural process of decay, transforming all
+Calls upon Fedhas to accelerate the natural process of decay, transforming all
 corpses nearby into fast-growing, short-lived toadstools. Zombies, ghouls,
 and necrophages are considered walking corpses, and are affected accordingly;
 zombies rot into skeletons, and ghouls and necrophages rot away entirely,
@@ -532,10 +534,9 @@ Temporal Distortion ability
 Warps the flow of time, causing monsters to skip forwards in time relative to
 you.
 %%%%
-Slouch ability
+Defer ability
 
-Causes damage to everyone in sight who is moving faster than you, dealing more
-damage with greater differences in speed.
+Causes mobile foes to blink away from you.
 %%%%
 Step From Time ability
 

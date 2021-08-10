@@ -292,12 +292,14 @@ void monster_teleport(monster* mons, bool instan, bool silent)
 // because of a memory problem described below. (isn't this fixed now? -rob)
 static coord_def random_space_weighted(actor* moved, actor* target,
                                        bool close, bool keep_los = true,
-                                       bool allow_sanct = true)
+                                       bool allow_sanct = true, bool force_sign = false)
 {
     vector<coord_weight> dests;
     const coord_def tpos = target->pos();
-
-    for (radius_iterator ri(moved->pos(), LOS_NO_TRANS); ri; ++ri)
+    const coord_def mpos = moved->pos();
+    int initial_dist = (mpos - tpos).rdist();
+    
+    for (radius_iterator ri(mpos, LOS_NO_TRANS); ri; ++ri)
     {
         if (!valid_blink_destination(moved, *ri, !allow_sanct)
             || (keep_los && !target->see_cell_no_trans(*ri)))
@@ -308,9 +310,17 @@ static coord_def random_space_weighted(actor* moved, actor* target,
         int weight;
         int dist = (tpos - *ri).rdist();
         if (close)
+        {
+            if (dist > initial_dist)
+                continue;
             weight = (LOS_RADIUS - dist) * (LOS_RADIUS - dist);
+        }
         else
+        {
+            if (dist < initial_dist)
+                continue;
             weight = dist;
+        }
         if (weight < 0)
             weight = 0;
         dests.emplace_back(*ri, weight);
@@ -339,7 +349,7 @@ void blink_other_close(actor* victim, const coord_def &target)
 }
 
 // Blink a monster away from the caster.
-bool blink_away(monster* mon, actor* caster, bool from_seen, bool self_cast)
+bool blink_away(monster* mon, actor* caster, bool from_seen, bool self_cast, bool force_sign)
 {
     ASSERT(mon); // XXX: change to monster &mon
     ASSERT(caster); // XXX: change to actor &caster
@@ -347,7 +357,7 @@ bool blink_away(monster* mon, actor* caster, bool from_seen, bool self_cast)
     if (from_seen && !mon->can_see(*caster))
         return false;
     bool jumpy = self_cast && mon->is_jumpy();
-    coord_def dest = random_space_weighted(mon, caster, false, false, true);
+    coord_def dest = random_space_weighted(mon, caster, false, false, true, force_sign);
     if (dest.origin())
         return false;
     bool success = mon->blink_to(dest, false, jumpy);

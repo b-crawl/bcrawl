@@ -362,6 +362,8 @@ static const ability_def Ability_List[] =
       0, 0, 0, 0, {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_ZIN_VITALISATION, "Vitalisation",
       2, 0, 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
+    { ABIL_ZIN_MANNA, "Manna",
+      2, 0, 0, 2, {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_ZIN_IMPRISON, "Imprison",
       5, 0, 0, 4, {fail_basis::invo, 60, 5, 20}, abflag::none },
     { ABIL_ZIN_SANCTUARY, "Sanctuary",
@@ -522,11 +524,11 @@ static const ability_def Ability_List[] =
     { ABIL_CHEIBRIADOS_TIME_BEND, "Bend Time",
       3, 0, 0, 1, {fail_basis::invo, 40, 4, 20}, abflag::none },
     { ABIL_CHEIBRIADOS_DISTORTION, "Temporal Distortion",
-      4, 0, 0, 3, {fail_basis::invo, 60, 5, 20}, abflag::instant },
-    { ABIL_CHEIBRIADOS_SLOUCH, "Slouch",
-      5, 0, 0, 8, {fail_basis::invo, 60, 4, 25}, abflag::none },
+      4, 0, 0, 0, {fail_basis::invo, 60, 5, 20}, abflag::instant|abflag::exhaustion },
+    { ABIL_CHEIBRIADOS_DEFER, "Defer",
+      5, 0, 0, 4, {fail_basis::invo, 60, 4, 25}, abflag::none },
     { ABIL_CHEIBRIADOS_TIME_STEP, "Step From Time",
-      10, 0, 0, 10, {fail_basis::invo, 80, 4, 25}, abflag::none },
+      6, 0, 0, 8, {fail_basis::invo, 80, 4, 25}, abflag::exhaustion },
 
     // Ashenzari
     { ABIL_ASHENZARI_CURSE, "Curse Item",
@@ -2149,8 +2151,6 @@ static spret _do_ability(const ability_def& abil, bool fail)
             you.attribute[ATTR_RECITE_SEED] = random2(2187); // 3^7
             you.duration[DUR_RECITE] = 3 * BASELINE_DELAY;
             mprf("You clear your throat and prepare to recite.");
-            you.increase_duration(DUR_RECITE_COOLDOWN,
-                                  3 + random2(10) + random2(30));
         }
         else
         {
@@ -2163,6 +2163,20 @@ static spret _do_ability(const ability_def& abil, bool fail)
         fail_check();
         zin_vitalisation();
         break;
+
+    case ABIL_ZIN_MANNA:
+    {
+        fail_check();
+        int thing_created = items(true, OBJ_FOOD, FOOD_RATION, 1, 0, you.religion);
+        if (thing_created == NON_ITEM || !move_item_to_grid(&thing_created, you.pos()))
+        {
+            canned_msg(MSG_NOTHING_HAPPENS);
+            you.turn_is_over = true;
+            return spret::abort;
+        }
+        simple_god_message(" grants you sustenance!");
+        break;
+    }
 
     case ABIL_ZIN_IMPRISON:
     {
@@ -2836,9 +2850,15 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_CHEIBRIADOS_TIME_STEP:
+        if (you.duration[DUR_EXHAUSTED])
+        {
+            mpr("You are too exhausted.");
+            return spret::abort;
+        }
         fail_check();
         cheibriados_time_step(max(1, you.skill(SK_INVOCATIONS, 10)
                                      * you.piety / 100));
+        you.increase_duration(DUR_EXHAUSTED, 10 + random2(5));
         break;
 
     case ABIL_CHEIBRIADOS_TIME_BEND:
@@ -2847,11 +2867,16 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_CHEIBRIADOS_DISTORTION:
+        if (you.duration[DUR_EXHAUSTED])
+        {
+            mpr("You are too exhausted.");
+            return spret::abort;
+        }
         fail_check();
         cheibriados_temporal_distortion();
         break;
 
-    case ABIL_CHEIBRIADOS_SLOUCH:
+    case ABIL_CHEIBRIADOS_DEFER:
         fail_check();
         if (!cheibriados_slouch())
             return spret::abort;

@@ -171,19 +171,11 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
-    {  MST_DEEP_ELF_KNIGHT_I,
+    {  MST_DEEP_ELF_KNIGHT,
       {
-       { SPELL_THROW_ICICLE, 24, MON_SPELL_WIZARD },
-       { SPELL_HASTE, 12, MON_SPELL_WIZARD },
-       { SPELL_INVISIBILITY, 12, MON_SPELL_WIZARD },
-      }
-    },
-
-    {  MST_DEEP_ELF_KNIGHT_II,
-      {
-       { SPELL_STONE_ARROW, 24, MON_SPELL_WIZARD },
-       { SPELL_ISKENDERUNS_MYSTIC_BLAST, 12, MON_SPELL_WIZARD },
-       { SPELL_HASTE, 12, MON_SPELL_WIZARD },
+       { SPELL_MIGHT, 20, MON_SPELL_WIZARD },
+       { SPELL_HASTE, 20, MON_SPELL_WIZARD },
+       { SPELL_BLINK_CLOSE, 10, MON_SPELL_WIZARD },
       }
     },
 
@@ -776,6 +768,13 @@ static const mon_spellbook mspell_list[] =
       {
        { SPELL_BOLT_OF_DRAINING, 42, MON_SPELL_WIZARD },
        { SPELL_HASTE, 21, MON_SPELL_WIZARD },
+      }
+    },
+
+    {  MST_FLYING_SKULL,
+      {
+       { SPELL_HAUNT, 3, MON_SPELL_MAGICAL | MON_SPELL_NOISY | MON_SPELL_NO_SILENT },
+       { SPELL_SENTINEL_MARK, 6, MON_SPELL_MAGICAL | MON_SPELL_NOISY | MON_SPELL_NO_SILENT },
       }
     },
 

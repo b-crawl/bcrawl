@@ -1280,6 +1280,10 @@ bool zin_vitalisation()
     notify_stat_change(STAT_INT, stamina_amt, true);
     notify_stat_change(STAT_DEX, stamina_amt, true);
 
+    if (one_chance_in(3))
+        if (delete_mutation(RANDOM_MUTATION, "Zin's power", false))
+            mprf(MSGCH_GOD, you.religion, "Zin's power cleanses your form.");
+
     return true;
 }
 
@@ -3459,78 +3463,48 @@ void cheibriados_time_bend(int pow)
     }
 }
 
-static int _slouch_damage(monster *mon)
-{
-    // Please change handle_monster_move in mon-act.cc to match.
-    const int jerk_num = mon->type == MONS_SIXFIRHY ? 8
-                       : mon->type == MONS_JIANGSHI ? 48
-                                                    : 1;
-
-    const int jerk_denom = mon->type == MONS_SIXFIRHY ? 24
-                         : mon->type == MONS_JIANGSHI ? 90
-                                                      : 1;
-
-    const int player_numer = BASELINE_DELAY * BASELINE_DELAY * BASELINE_DELAY;
-    return 4 * (mon->speed * BASELINE_DELAY * jerk_num
-                           / mon->action_energy(EUT_MOVE) / jerk_denom
-                - player_numer / player_movement_speed() / player_speed());
-}
-
-static bool _slouchable(coord_def where)
+static bool _deferrable(coord_def where)
 {
     monster* mon = monster_at(where);
     if (mon == nullptr || mon->is_stationary() || mon->cannot_move()
         || mons_is_projectile(mon->type)
-        || mon->asleep() && !mons_is_confused(*mon))
+        || mon->asleep()
+        || mon->friendly())
     {
         return false;
     }
-
-    return _slouch_damage(mon) > 0;
-}
-
-static bool _act_slouchable(const actor *act)
-{
-    if (act->is_player())
-        return false;  // too slow-witted
-    return _slouchable(act->pos());
-}
-
-static int _slouch_monsters(coord_def where)
-{
-    if (!_slouchable(where))
-        return 0;
-
-    monster* mon = monster_at(where);
-    ASSERT(mon);
-
-    // Between 1/2 and 3/2 of _slouch_damage(), but weighted strongly
-    // towards the middle.
-    const int dmg = roll_dice(_slouch_damage(mon), 3) / 2;
-
-    mon->hurt(&you, dmg, BEAM_MMISSILE, KILLED_BY_BEAM, "", "", true);
-    return 1;
+    
+    return true;
 }
 
 bool cheibriados_slouch()
 {
-    int count = apply_area_visible(_slouchable, you.pos());
+    int count = 0;
+    vector<monster*> targets;
+    for (radius_iterator ri(you.pos(), LOS_DEFAULT); ri; ++ri)
+    {
+        coord_def square = *ri;
+        if (!_deferrable(square))
+            continue;
+
+        monster* mon = monster_at(square);
+        ASSERT(mon);
+        targets.push_back(mon);
+        if (you.can_see(*mon))
+            count++;
+    }
+
     if (!count)
-        if (!yesno("There's no one hasty visible. Invoke Slouch anyway?",
+        if (!yesno("No targets are visible. Attempt to defer foes anyway?",
                    true, 'n'))
         {
             canned_msg(MSG_OK);
             return false;
         }
 
-    targeter_los hitfunc(&you, LOS_DEFAULT);
-    if (stop_attack_prompt(hitfunc, "harm", _act_slouchable))
-        return false;
-
-    mpr("You can feel time thicken for a moment.");
-    dprf("your speed is %d", player_movement_speed());
-
-    apply_area_visible(_slouch_monsters, you.pos());
+    for (int i = 0; i < targets.size(); i++)
+        blink_away(targets[i], &you, false, false, true);
+    
     return true;
 }
 
@@ -3572,6 +3546,7 @@ void cheibriados_temporal_distortion()
     you.moveto(old_pos);
     you.duration[DUR_TIME_STEP] = 0;
 
+    you.increase_duration(DUR_EXHAUSTED, 4 + random2(3));
     mpr("You warp the flow of time around you!");
 }
 
@@ -4175,8 +4150,12 @@ static void _setup_gozag_shop(int index, vector<shop_type> &valid_shops)
     ASSERT(!you.props.exists(make_stringf(GOZAG_SHOPKEEPER_NAME_KEY, index)));
 
     shop_type type = NUM_SHOPS;
+    int shop_price = gozag_price_for_shop();
     if (index == 0 && !you_foodless(false))
+    {
         type = SHOP_FOOD;
+        shop_price /= 2;
+    }
     else
     {
         int choice = random2(valid_shops.size());
@@ -4198,8 +4177,7 @@ static void _setup_gozag_shop(int index, vector<shop_type> &valid_shops)
                                                       "Emporium", "Shop")
                                       : "";
 
-    you.props[make_stringf(GOZAG_SHOP_COST_KEY, index)].get_int()
-        = gozag_price_for_shop();
+    you.props[make_stringf(GOZAG_SHOP_COST_KEY, index)].get_int() = shop_price;
 }
 
 /**

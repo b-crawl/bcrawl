@@ -519,6 +519,14 @@ Beckoning hippogriff cast
 
 @The_monster@ flaps its wings!
 %%%%
+flying skull cast targeted
+
+@The_monster@ screams @at@ @target@!
+%%%%
+flying skull cast
+
+@The_monster@ screams!
+%%%%
 dryad cast
 
 @The_monster@ calls out to the forest.

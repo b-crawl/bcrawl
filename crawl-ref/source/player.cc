@@ -3146,8 +3146,8 @@ void level_change(bool skip_attribute_increase)
 
             case SP_ONI:
             {
-                int const min_lev[] = {1,2,2,3,4,5,6,6,6,7,7,8,9};
-                int const max_lev[] = {1,2,3,4,5,5,6,7,7,8,8,9,9};
+                int const min_lev[] = {1,2,3,4,4,5,5,6,6,7,7,8,8};
+                int const max_lev[] = {2,3,4,5,5,6,6,7,7,8,8,9,9};
 
                 if (!(you.experience_level % 2))
                 {

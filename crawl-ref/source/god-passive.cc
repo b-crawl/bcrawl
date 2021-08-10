@@ -155,11 +155,6 @@ static const vector<god_passive> god_passives[] =
         },
         { -1, passive_t::warn_shapeshifter,
               "GOD will NOW warn you about shapeshifters"
-        },
-        {
-          6, passive_t::cleanse_mut_potions,
-              "GOD cleanses your potions of mutation",
-              "GOD no longer cleanses your potions of mutation",
         }
     },
 
@@ -319,8 +314,9 @@ static const vector<god_passive> god_passives[] =
         {  0, passive_t::slow_abyss,
               "GOD will NOW slow the Abyss"
         },
-        // TODO: this one should work regardless of penance
         {  1, passive_t::slow_metabolism, "have a slowed metabolism" },
+        {  1, passive_t::long_potions, "potions that augment you last longer" },
+        {  1, passive_t::clarity, "are NOW clear of mind" },
     },
 
     // Ashenzari

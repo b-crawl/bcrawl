@@ -2057,8 +2057,7 @@ item_def* monster_die(monster& mons, killer_type killer,
     if (MON_KILL(killer)
         && !invalid_monster_index(killer_index)
         && ((menv[killer_index].type == MONS_SPECTRAL_WEAPON
-             && menv[killer_index].summoner == MID_PLAYER)
-            || mons_is_player_shadow(menv[killer_index])))
+             && menv[killer_index].summoner == MID_PLAYER)))
     {
         killer_index = you.mindex();
     }

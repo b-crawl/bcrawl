@@ -5,7 +5,7 @@ class monster;
 
 void blink_other_close(actor* victim, const coord_def& target);
 bool blink_away(monster* mon, bool self_cast = false);
-bool blink_away(monster* mon, actor* caster, bool from_seen = true, bool self_cast = false);
+bool blink_away(monster* mon, actor* caster, bool from_seen = true, bool self_cast = false, bool force_sign = false);
 void blink_range(monster* mon);
 void blink_close(monster* mon);
 void mons_relocated(monster* mons);

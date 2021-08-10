@@ -1207,8 +1207,7 @@ int acquirement_create_item_general(object_class_type class_wanted,
 {
     ASSERT(class_wanted != OBJ_RANDOM);
 
-    const bool divine = (agent == GOD_OKAWARU || agent == GOD_XOM
-                         || agent == GOD_TROG || agent == GOD_DEMIGOD);
+    const bool divine = (agent == GOD_OKAWARU || agent == GOD_XOM || agent == GOD_TROG);
     int thing_created = NON_ITEM;
     int quant = 1;
 #define MAX_ACQ_TRIES 40
@@ -1314,16 +1313,28 @@ int acquirement_create_item_general(object_class_type class_wanted,
 
         ASSERT(acq_item.is_valid());
 
-        if (class_wanted == OBJ_WANDS)
-            acq_item.plus = acq_item.plus * 2 + random2(2);
-        else if (class_wanted == OBJ_GOLD)
+        switch (class_wanted)
         {
+        case OBJ_WANDS:
+            acq_item.plus = acq_item.plus * 2 + random2(2);
+            break;
+        case OBJ_GOLD:
             acq_item.quantity = 200 + random2(1401);
+            break;
+        case OBJ_MISSILES:
+            if (!divine)
+                acq_item.quantity *= 5;
+            else
+            {
+                int gift_count = you.num_total_gifts[you.religion];
+                acq_item.quantity = acq_item.quantity * (14 + gift_count) / (12 + 2 * gift_count);
+            }
+            break;
+        default:
+            if (quant > 1)
+                acq_item.quantity = quant;
+            break;
         }
-        else if (class_wanted == OBJ_MISSILES && !divine)
-            acq_item.quantity *= 5;
-        else if (quant > 1)
-            acq_item.quantity = quant;
 
         // Remove curse flag from item, unless worshipping Ashenzari.
         if (have_passive(passive_t::want_curses))

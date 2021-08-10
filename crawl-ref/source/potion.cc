@@ -326,7 +326,14 @@ public:
 
         mprf(MSGCH_DURATION, "You feel %s all of a sudden.",
              were_mighty ? "mightier" : "very mighty");
-        you.increase_duration(DUR_MIGHT, 35 + random2(pow), 80);
+        int dur = 35 + random2(pow);
+        int max = 80;
+        if (have_passive(passive_t::long_potions))
+        {
+            dur *= 2;
+            max *= 2;
+        }
+        you.increase_duration(DUR_MIGHT, dur, max);
         if (!were_mighty)
             notify_stat_change(STAT_STR, 5, true);
         return true;
@@ -350,7 +357,14 @@ public:
 
         mprf(MSGCH_DURATION, "You feel %sclever all of a sudden.",
              were_brilliant ? "more " : "");
-        you.increase_duration(DUR_BRILLIANCE, 35 + random2(pow), 80);
+        int dur = 35 + random2(pow);
+        int max = 80;
+        if (have_passive(passive_t::long_potions))
+        {
+            dur *= 2;
+            max *= 2;
+        }
+        you.increase_duration(DUR_BRILLIANCE, dur, max);
         if (!were_brilliant)
             notify_stat_change(STAT_INT, 5, true);
         return true;
@@ -375,7 +389,14 @@ public:
         mprf(MSGCH_DURATION, "You feel %sagile all of a sudden.",
              were_agile ? "more " : "");
 
-        you.increase_duration(DUR_AGILITY, 35 + random2(pow), 80);
+        int dur = 35 + random2(pow);
+        int max = 80;
+        if (have_passive(passive_t::long_potions))
+        {
+            dur *= 2;
+            max *= 2;
+        }
+        you.increase_duration(DUR_AGILITY, dur, max);
 
         if (!were_agile)
             notify_stat_change(STAT_DEX, 5, true);
@@ -488,7 +509,10 @@ public:
 
     bool effect(bool=true, int=40, bool=true) const override
     {
-        const int ambrosia_turns = 3 + random2(8);
+        int ambrosia_turns = 3 + random2(8);
+        if (have_passive(passive_t::long_potions))
+            ambrosia_turns *= 2;
+
         if (confuse_player(ambrosia_turns, false, true))
         {
             print_potion_heal_message();
@@ -726,7 +750,10 @@ public:
     bool effect(bool=true, int pow = 40, bool=true) const override
     {
         mprf(MSGCH_DURATION, "You feel protected.");
-        you.increase_duration(DUR_RESISTANCE, random2(pow) + 35);
+        int dur = 35 + random2(pow);
+        if (have_passive(passive_t::long_potions))
+            dur *= 2;
+        you.increase_duration(DUR_RESISTANCE, dur);
         return true;
     }
 };

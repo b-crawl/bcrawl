@@ -2381,7 +2381,7 @@ static bool _seal_doors_and_stairs(const monster* warden,
             vector<coord_def> excludes;
             for (const auto &dc : all_door)
             {
-                grd(dc) = DNGN_CLOSED_DOOR;
+                dgn_close_door(dc);
                 set_terrain_changed(dc);
                 dungeon_events.fire_position_event(DET_DOOR_CLOSED, dc);
 
@@ -4229,10 +4229,10 @@ static monster_type _pick_undead_summon()
 {
     static monster_type undead[] =
     {
-        MONS_NECROPHAGE, MONS_JIANGSHI, MONS_HUNGRY_GHOST, MONS_FLAYED_GHOST,
-        MONS_ZOMBIE, MONS_SKELETON, MONS_SIMULACRUM, MONS_SPECTRAL_THING,
-        MONS_FLYING_SKULL, MONS_MUMMY, MONS_VAMPIRE, MONS_WIGHT, MONS_WRAITH,
-        MONS_SHADOW_WRAITH, MONS_FREEZING_WRAITH, MONS_PHANTASMAL_WARRIOR, MONS_SHADOW
+        MONS_NECROPHAGE, MONS_JIANGSHI, MONS_FLAYED_GHOST,
+        MONS_ZOMBIE, MONS_SKELETON, MONS_SKELETON, MONS_SIMULACRUM, MONS_SPECTRAL_THING,
+        MONS_WIGHT, MONS_VAMPIRE_MOSQUITO, MONS_WRAITH, MONS_SHADOW,
+        MONS_FREEZING_WRAITH, MONS_PHANTASMAL_WARRIOR
     };
 
     return RANDOM_ELEMENT(undead);

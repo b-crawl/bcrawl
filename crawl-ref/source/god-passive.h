@@ -250,6 +250,9 @@ enum class passive_t
     wu_jian_lunge,
     wu_jian_whirlwind,
     wu_jian_wall_jump,
+    
+    /// Chei increases potion duration
+    long_potions,
 };
 
 enum ru_interference

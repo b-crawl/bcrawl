@@ -366,7 +366,7 @@
   - v1.33: Cheibriados's Slouch ability is replaced by Defer, which costs half as much piety. Defer blinks all hostile monsters to locations farther from the player.
   - v1.33: Cheibriados's Step from Time ability costs less mana and slightly less piety, but causes exhaustion.
   - v1.33: The Temporal Distortion ability of Cheibriados and Demigods now costs no piety but causes exhaustion.
-  - v1.33: At \* piety, Cheibriados doubles the duration of all potions with a duration except for potions of haste, berserk, flight, and invisibility.
+  - v1.33: At * piety, Cheibriados doubles the duration of potions of might, agility, brilliance, resistance, and ambrosia.
   - v1.33: At \* piety, Cheibriados grants clarity.
   - v1.33: Ammunition gifts from gods become smaller as you receive gifts, gradually approaching half their original size.
   - v1.33: Calling food shops with Gozag has half the cost of calling other shops.

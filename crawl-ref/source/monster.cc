@@ -410,9 +410,12 @@ random_var monster::attack_delay(const item_def *projectile,
         return random_var(10);
 
     random_var delay(property(*weap, PWPN_SPEED));
+    delay = (random_var(10) + delay);
     if (get_weapon_brand(*weap) == SPWPN_SPEED)
-        delay = div_rand_round(delay * 2, 3);
-    return (random_var(10) + delay) / 2;
+        delay = div_rand_round(delay, 3);
+    else
+        delay = div_rand_round(delay, 2);
+    return delay;
 }
 
 int monster::has_claws(bool allow_tran) const

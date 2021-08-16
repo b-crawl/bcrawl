@@ -945,8 +945,8 @@ MAP
   x..xxxxxxy........yyx...yxx        BBBBBBBBBBBBBBBBBBBBBBBBBB
   xx..yyyyy................yxxx      BBBBBBBBBBBBBBBBBBBBBBBBBB
    xx.............LLLL.......yxxx    BBBBBBBBBBBBBBBBBBBBBBBBBB
-    xxy.........LLlullLL.......yxxx  BBBBBBBBBBBBBBBBBBBBBBBBBB
-   xxy.........LllllllllLLL......yxxxBBBBBBBBBBBBBBBBBBBBBBBBBB
+    xxy.........LLllllLL.......yxxx  BBBBBBBBBBBBBBBBBBBBBBBBBB
+   xxy.........LllllulllLLL......yxxxBBBBBBBBBBBBBBBBBBBBBBBBBB
   xxy.........LllllllllllllLLL.....y.BBBBBBBBBBBBBBBBBBBBBBBBBB
  xxy........LLllllllllllllllllLLL...lBBBBBBBBBBBBBBBBBBBBBBBBBB
 xxy....LLlLllllllllllllllllllllllL...BBBBBBBBBBBBBBBBBBBBBBBBBB
@@ -955,7 +955,7 @@ xLl.LlllllllllllllllllllllllllllL..y.BBBBBBBBBBBBBBBBBBBBBBBBBB
 xlllllllllllllllllGllllllllllllllLLxxBBBBBBBBBBBBBBBBBBBBBBBBBB
 xxlllllllllllllGlllllGllllllllllllxx BBBBBBBBBBBBBBBBBBBBBBBBBB
  xxlllllllllllVlllllllVllllllllllxx  BBBBBBBBBBBBBBBBBBBBBBBBBB
-  xxullllllllGlllllllllGllllllluxx   BBBBBBBBBBBBBBBBBBBBBBBBBB
+  xxlllllllllGlllllllllGllllllllxx   BBBBBBBBBBBBBBBBBBBBBBBBBB
    xxxllllllllllllllllllllllllxxx    BBBBBBBBBBBBBBBBBBBBBBBBBB
      xxllllllllGlllllGlllllllxx      BBBBBBBBBBBBBBBBBBBBBBBBBB
       xxllllllllllGlllllllllxx       BBBBBBBBBBBBBBBBBBBBBBBBBB

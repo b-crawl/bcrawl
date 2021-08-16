@@ -176,9 +176,7 @@ bool trap_def::is_known(const actor* act) const
 
 bool trap_def::is_bad_for_player() const
 {
-    return type == TRAP_ALARM
-           || type == TRAP_DISPERSAL
-           || type == TRAP_ZOT;
+    return type == TRAP_ALARM || type == TRAP_ZOT;
 }
 
 bool trap_def::is_safe(actor* act) const

@@ -2310,16 +2310,19 @@ ENDMAP
 NAME:   tgw_trog
 TAGS:   no_item_gen no_monster_gen patrolling
 TAGS:   temple_overflow_1 temple_overflow_trog uniq_altar_trog
-DEPTH:  D:2-, Depths:1-2
+DEPTH:  D:2-, Depths:1-3
 KFEAT:  _ = altar_trog
 KPROP:  1 = no_tele_into
-: if you.absdepth() < 9 then
-MONS:   moth of wrath, rat / worm w:5
+: if you.absdepth() < 7 then
+KMONS: B = kobold name:berserker name_suffix spells:berserker_rage.50.natural
+: else if you.absdepth() < 10 then
+KMONS: B = human name:berserker name_suffix spells:berserker_rage.50.natural
 : else if you.absdepth() < 16 then
-MONS:   moth of wrath, yak w:5
+KMONS: B = ogre name:berserker name_suffix spells:berserker_rage.50.natural
 : else
-MONS:   moth of wrath, two-headed ogre / dire elephant w:5
+KMONS: B = ettin name:berserker name_suffix spells:berserker_rage.50.natural
 : end
+NSUBST: b = 5:B / *:.
 ITEM:   any weapon
 NSUBST: M = 4:d / *:.
 SUBST:  + = +....
@@ -2327,12 +2330,12 @@ KFEAT:  o = iron_grate
 MAP
       xxxxxxx
      xxxMMMxxx
-    xxMMM2MMMxx
-   xxMM22_22MMxx
-   xx.........xx
-   x....ooo....x
-   x...oo1oo...x
-   x....ooo....x
+    xxMMMbMMMxx
+   xxMMbb_bbMMxx
+   xx.bbbbbbb.xx
+   x...........x
+   x...........x
+   x...........x
    x...........x
    xx.........xx
     xx.......xx

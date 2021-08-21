@@ -2315,9 +2315,9 @@ KFEAT:  _ = altar_trog
 KPROP:  1 = no_tele_into
 : if you.absdepth() < 7 then
 KMONS: B = kobold name:berserker name_suffix spells:berserker_rage.50.natural
-: else if you.absdepth() < 10 then
+: elseif you.absdepth() < 10 then
 KMONS: B = human name:berserker name_suffix spells:berserker_rage.50.natural
-: else if you.absdepth() < 16 then
+: elseif you.absdepth() < 16 then
 KMONS: B = ogre name:berserker name_suffix spells:berserker_rage.50.natural
 : else
 KMONS: B = ettin name:berserker name_suffix spells:berserker_rage.50.natural

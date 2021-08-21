@@ -439,6 +439,7 @@
   - v1.28.2: Whips (not demon whips) have a lower min delay (0.5 -> 0.3) and higher base delay (11 -> 12).
   - v1.28.2: Evocable invisibility has lower failure chance but lower duration and significantly less duration scaling with Evocations skill.
   - v1.30: Robes can have the new "magic recovery" ego, which doubles natural mana regeneration.
+  - v1.33.1: Scrolls of noise mark the player.
 
 #### Removed Items
   - Amulet of Harm
@@ -580,6 +581,7 @@
   - v1.33: Plants have lower AC.
   - v1.33: Flying skulls deal more melee damage and have a small chance to cast Haunt and Sentinel Mark.
   - v1.33: Deep elf knights have a reworked spell set and deal more melee damage.
+  - v1.33.1: Hellephants have stronger melee attacks and don't blink.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

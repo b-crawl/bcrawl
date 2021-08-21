@@ -2310,11 +2310,12 @@ ENDMAP
 NAME:   tgw_trog
 TAGS:   no_item_gen no_monster_gen patrolling
 TAGS:   temple_overflow_1 temple_overflow_trog uniq_altar_trog
-DEPTH:  D:2-, Depths:1-3
+DEPTH:  D:3-, Depths:1-3
 KFEAT:  _ = altar_trog
 KPROP:  1 = no_tele_into
 : if you.absdepth() < 7 then
-KMONS: B = kobold name:berserker name_suffix spells:berserker_rage.50.natural
+KMONS: B = kobold name:berserker name_suffix spells:berserker_rage.50.natural \
+       / goblin name:berserker name_suffix spells:berserker_rage.50.natural
 : elseif you.absdepth() < 10 then
 KMONS: B = human name:berserker name_suffix spells:berserker_rage.50.natural
 : elseif you.absdepth() < 16 then
@@ -2326,7 +2327,6 @@ NSUBST: b = 5:B / *:.
 ITEM:   any weapon
 NSUBST: M = 4:d / *:.
 SUBST:  + = +....
-KFEAT:  o = iron_grate
 MAP
       xxxxxxx
      xxxMMMxxx

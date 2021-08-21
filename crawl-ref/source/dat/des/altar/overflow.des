@@ -2310,13 +2310,15 @@ ENDMAP
 NAME:   tgw_trog
 TAGS:   no_item_gen no_monster_gen patrolling
 TAGS:   temple_overflow_1 temple_overflow_trog uniq_altar_trog
-DEPTH:  D:2-9
+DEPTH:  D:2-, Depths:1-2
 KFEAT:  _ = altar_trog
 KPROP:  1 = no_tele_into
-: if you.absdepth() < 16 then
+: if you.absdepth() < 9 then
 MONS:   moth of wrath, rat / worm w:5
+: else if you.absdepth() < 16 then
+MONS:   moth of wrath, yak w:5
 : else
-MONS:   moth of wrath, dire elephant / boulder beetle w:5
+MONS:   moth of wrath, two-headed ogre / dire elephant w:5
 : end
 ITEM:   any weapon
 NSUBST: M = 4:d / *:.

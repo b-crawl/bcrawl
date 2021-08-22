@@ -408,12 +408,12 @@ static attack_flavour _very_ugly_thing_flavour_upgrade(attack_flavour u_att_flav
 {
     switch (u_att_flav)
     {
-    case AF_FIRE:
-        u_att_flav = AF_STICKY_FLAME;
-        break;
-
     case AF_POISON:
         u_att_flav = AF_POISON_STRONG;
+        break;
+
+    case AF_ACID:
+        u_att_flav = AF_CORRODE;
         break;
 
     default:
@@ -506,7 +506,7 @@ void ghost_demon::init_ugly_thing(bool very_ugly, bool only_mutate,
     // Pick a compatible attack flavour for this colour.
     att_flav = _ugly_thing_colour_to_flavour(colour);
     if (colour == MAGENTA)
-        damage = damage * 4 / 3; // +5 for uglies, +9 for v uglies
+        damage = damage * 3 / 2;
 
     // Pick a compatible resistance for this attack flavour.
     ugly_thing_add_resistance(false, att_flav);

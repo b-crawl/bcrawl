@@ -585,6 +585,9 @@
   - v1.33: Flying skulls deal more melee damage and have a small chance to cast Haunt and Sentinel Mark.
   - v1.33: Deep elf knights have a reworked spell set and deal more melee damage.
   - v1.33.1: Hellephants have stronger melee attacks and don't blink.
+  - v1.33.1: Purple ugly things and very ugly things deal more damage.
+  - v1.33.1: Red very ugly things have bonus fire damage instead of sticky flame attacks.
+  - v1.33.1: Brown very ugly things have corrosive attacks instead of acid attacks.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

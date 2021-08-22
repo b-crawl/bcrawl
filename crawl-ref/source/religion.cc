@@ -342,10 +342,13 @@ const vector<god_power> god_powers[NUM_GODS] =
     {
       { 1, ABIL_USKAYAW_STOMP, "stomp with the beat" },
       { 2, ABIL_USKAYAW_LINE_PASS, "pass through a line of other dancers" },
-      { 3, "Uskayaw will force your foes to helplessly watch your dance.",
-           "Uskayaw will no longer force your foes to helplessly watch your dance."},
+      { 2, "do at least one heavy attack when moving towards foes",
+           "perform lunging strikes" },
+      { 3, "Uskayaw will force your foes to helplessly watch your dance." },
+      { 3, "Uskayaw protects you from magical silence.",
+           "Uskayaw no longer protects you from magical silence." },
       { 4, "Uskayaw will force your foes to share their pain.",
-           "Uskayaw will no longer force your foes to share their pain."},
+           "Uskayaw will no longer force your foes to share their pain." },
       { 5, ABIL_USKAYAW_GRAND_FINALE, "merge with and destroy a victim" },
     },
 

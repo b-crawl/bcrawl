@@ -386,7 +386,15 @@ static const duration_def duration_data[] =
       BLUE, "Slay",
       "singing", "song of slaying",
       "Your melee attacks are strengthened by your song.", D_DISPELLABLE | D_EXPIRES,
-      {{ "", []() { if (you.props[SONG_OF_SLAYING_KEY]) mpr("Your song has ended.");} },
+      {{ "", []()
+        {
+            if (you.props[SONG_OF_SLAYING_KEY])
+            {
+                mpr("Your song has ended.");
+                you.redraw_armour_class = true;
+            }
+        }
+        },
         { "Your song is almost over." }}, 6},
     { DUR_FIRE_ARROW,
       BLUE, "Flame",

@@ -420,6 +420,33 @@ ENDMAP
 ##############################################################################
 ##############################################################################
 
+NAME:    bhauth_shapeshifter_school
+DEPTH:   Elf, !Elf:$
+TAGS:    no_monster_gen
+ORIENT:  float
+KMONS: E = floating eye / eye of devastation / great orb of eyes
+NSUBST: E = 3:E / *:.
+KMONS: M = tarantella / wolf spider / emperor scorpion
+NSUBST: M = 3:M / *:.
+KMONS: N = anaconda / shock serpent / sea snake / mana viper
+NSUBST: N = 3:N / *:.
+KMONS: T = elephant / dire elephant / hellephant
+NSUBST: T = 3:T / *:.
+SHUFFLE: EMNT
+KMONS: S = glowing shapeshifter / shapeshifter
+NSUBST: F = 5:S / *:.
+KFEAT: = = runed_clear_door
+MAP
+ccccc+ccccc
+cEEEc.cMMMc
+cEEEc.cMMMc
+c===c+c===c
+cFFF...FFFc
+c.FFFFFFF.c
+cG.FFFFF.Gc
+ccccccccccc
+ENDMAP
+
 NAME:    elven_spread
 TAGS:    no_dump extra allow_dup nolayout_encompass luniq
 PLACE:   Elf:1

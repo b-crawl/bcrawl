@@ -174,6 +174,11 @@ bool trap_def::is_known(const actor* act) const
     die("invalid actor type");
 }
 
+bool trap_def::is_bad_for_player() const
+{
+    return type == TRAP_ALARM || type == TRAP_ZOT;
+}
+
 bool trap_def::is_safe(actor* act) const
 {
     if (!act)

@@ -877,17 +877,19 @@ void move_player_action(coord_def move)
 
     you.apply_berserk_penalty = !attacking;
 
-    if (!attacking && you_worship(GOD_CHEIBRIADOS) && one_chance_in(10)
-        && you.run())
-    {
-        did_god_conduct(DID_HASTY, 1, true);
-    }
-
     bool did_wu_jian_attack = false;
-    if (you_worship(GOD_WU_JIAN) && !attacking)
+    switch (you.religion)
     {
-        did_wu_jian_attack = wu_jian_post_move_effects(did_wall_jump,
-                                                       initial_position);
+    case GOD_CHEIBRIADOS:
+        if (!attacking && one_chance_in(10) && you.run())
+            did_god_conduct(DID_HASTY, 1, true);
+        break;
+    case GOD_WU_JIAN:
+    case GOD_USKAYAW:
+        if (!attacking)
+            did_wu_jian_attack = wu_jian_post_move_effects(did_wall_jump, initial_position);
+        break;
+    default: break;
     }
 
     // If you actually moved you are eligible for amulet of the acrobat.

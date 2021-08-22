@@ -492,7 +492,11 @@ bool silenced(const coord_def& p)
         return false;
     if (!_agrid_valid)
         _update_agrid();
-    return _check_agrid_flag(p, areaprop::silence);
+    bool silenced = _check_agrid_flag(p, areaprop::silence);
+    if (silenced && p == you.pos()
+            && you.religion == GOD_USKAYAW && you.piety >= piety_breakpoint(2))
+        silenced = false;
+    return silenced;
 }
 
 /////////////

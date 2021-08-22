@@ -2,11 +2,14 @@
 
 #include "god-conduct.h"
 
+#include <cmath>
+
 #include "god-abil.h" // ru sac key
 #include "god-item.h" // is_*_spell
 #include "libutil.h"
 #include "message.h"
 #include "monster.h"
+#include "mon-tentacle.h"
 #include "mon-util.h"
 #include "religion.h"
 #include "state.h"
@@ -1243,9 +1246,15 @@ void did_hurt_conduct(conduct_type thing_done,
 
     if (you_worship(GOD_USKAYAW))
     {
+        // copied from mons_threat_level
+        const monster& threat = get_tentacle_head(victim);
+        double factor = sqrt(exp_needed(you.experience_level) / 30.0);
+        int tension = exper_value(threat, false) / (1 + factor);
+        tension = max(0, tension);
+        
         // Give a "value" for the percent of the monster's hp done in damage,
-        // scaled by the monster's threat level.11
-        int value = random2(3) + sqr((mons_threat_level(victim) + 1) * 2)
+        // scaled by the monster's threat level.
+        int value = isqrt(1 + tension * 78)
                 * damage_done / (victim.max_hit_points);
 
         you.props[USKAYAW_NUM_MONSTERS_HURT].get_int() += 1;

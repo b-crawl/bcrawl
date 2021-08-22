@@ -2317,12 +2317,16 @@ int player_shield_class()
                 + min(you.skill(SK_SHIELDS, 38), 3 * 38);
 
         int stat = 0;
-        if (item.sub_type == ARM_BUCKLER)
-            stat = you.dex() * 38;
-        else if (item.sub_type == ARM_LARGE_SHIELD)
-            stat = you.dex() * 12 + you.strength() * 26;
-        else
-            stat = you.dex() * 19 + you.strength() * 19;
+        switch (item.sub_type)
+        {
+        case ARM_BUCKLER:
+            stat = you.dex() * 38; break;
+        case ARM_SHIELD:
+            stat = you.dex() * 19 + you.strength() * 19; break;
+        case ARM_LARGE_SHIELD:
+            stat = you.dex() * 12 + you.strength() * 26; break;
+        default: break;
+        }
         stat = stat * (base_shield + 13) / 26;
 
         shield += stat;
@@ -7785,7 +7789,7 @@ void player::increase_duration(duration_type dur, int turns, int cap,
         mpr(msg);
     cap *= BASELINE_DELAY;
 
-	int old_duration = duration[dur];
+    int old_duration = duration[dur];
     duration[dur] += turns * BASELINE_DELAY;
     if (cap && duration[dur] > cap)
         duration[dur] = max(cap, old_duration);

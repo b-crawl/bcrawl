@@ -370,6 +370,9 @@
   - v1.33: At \* piety, Cheibriados grants clarity.
   - v1.33: Ammunition gifts from gods become smaller as you receive gifts, gradually approaching half their original size.
   - v1.33: Calling food shops with Gozag has half the cost of calling other shops.
+  - v1.33.1: Uskayaw's piety gain is reworked to decrease the disadvantage of slow heavy attacks.
+  - v1.33.1: Uskayaw grants lunge attacks (the same as Wu Jian's) at \*\* piety.
+  - v1.33.1: Uskayaw grants immunity to silence (the same as Wu Jian's) at \*\*\* piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -439,6 +442,7 @@
   - v1.28.2: Whips (not demon whips) have a lower min delay (0.5 -> 0.3) and higher base delay (11 -> 12).
   - v1.28.2: Evocable invisibility has lower failure chance but lower duration and significantly less duration scaling with Evocations skill.
   - v1.30: Robes can have the new "magic recovery" ego, which doubles natural mana regeneration.
+  - v1.33.1: Scrolls of noise mark the player.
 
 #### Removed Items
   - Amulet of Harm
@@ -580,6 +584,10 @@
   - v1.33: Plants have lower AC.
   - v1.33: Flying skulls deal more melee damage and have a small chance to cast Haunt and Sentinel Mark.
   - v1.33: Deep elf knights have a reworked spell set and deal more melee damage.
+  - v1.33.1: Hellephants have stronger melee attacks and don't blink.
+  - v1.33.1: Purple ugly things and very ugly things deal more damage.
+  - v1.33.1: Red very ugly things have bonus fire damage instead of sticky flame attacks.
+  - v1.33.1: Brown very ugly things have corrosive attacks instead of acid attacks.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

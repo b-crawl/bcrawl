@@ -385,7 +385,9 @@ static const vector<god_passive> god_passives[] =
     },
 
     // Uskayaw
-    { },
+    {
+        { 2, passive_t::wu_jian_lunge, "do at least one heavy attack when moving towards foes." },
+    },
 
     // Hepliaklqana
     {

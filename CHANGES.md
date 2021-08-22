@@ -370,6 +370,9 @@
   - v1.33: At \* piety, Cheibriados grants clarity.
   - v1.33: Ammunition gifts from gods become smaller as you receive gifts, gradually approaching half their original size.
   - v1.33: Calling food shops with Gozag has half the cost of calling other shops.
+  - v1.33.1: Uskayaw's piety gain is reworked to decrease the disadvantage of slow heavy attacks.
+  - v1.33.1: Uskayaw grants lunge attacks (the same as Wu Jian's) at \*\* piety.
+  - v1.33.1: Uskayaw grants immunity to silence (the same as Wu Jian's) at \*\*\* piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

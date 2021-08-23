@@ -5642,9 +5642,6 @@ void radiate_pain_bond(const monster& mon, int damage, const monster* original_t
                 damage = target->hurt(&you, damage, BEAM_SHARED_PAIN, KILLED_BY_MONSTER, "", "", false);
             else
                 damage = target->hurt(&you, damage, BEAM_SHARED_PAIN);
-
-            if (damage > 0)
-                radiate_pain_bond(*target, damage, original_target);
         }
     }
 }

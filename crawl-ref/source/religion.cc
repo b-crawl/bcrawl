@@ -1218,27 +1218,6 @@ static bool _gift_jiyva_gift(bool forced)
     return false;
 }
 
-static bool _handle_uskayaw_ability_unlocks()
-{
-    bool success = false;
-    // Uskayaw's triggered abilities trigger if you set the timer to -1.
-    // We do this so that we trigger at the end of the round instead of
-    // at the time we deal damage.
-    if (you.piety == piety_breakpoint(2)
-        && you.props[USKAYAW_AUDIENCE_TIMER].get_int() == 0)
-    {
-        you.props[USKAYAW_AUDIENCE_TIMER] = -1;
-        success = true;
-    }
-    else if (you.piety == piety_breakpoint(3)
-        && you.props[USKAYAW_BOND_TIMER].get_int() == 0)
-    {
-        you.props[USKAYAW_BOND_TIMER] = -1;
-        success = true;
-    }
-    return success;
-}
-
 static bool _gift_sif_kiku_gift(bool forced)
 {
     if (you.species == SP_ONI)
@@ -1809,10 +1788,6 @@ bool do_god_gift(bool forced)
 
         case GOD_JIYVA:
             success = _gift_jiyva_gift(forced);
-            break;
-
-        case GOD_USKAYAW:
-            success = _handle_uskayaw_ability_unlocks();
             break;
 
         case GOD_KIKUBAAQUDGHA:

@@ -357,6 +357,9 @@ static void _handle_uskayaw_piety(int time_taken)
 
         gain_piety(piety_gain);
         you.props[USKAYAW_AUT_SINCE_PIETY_GAIN] = 0;
+
+        you.props[USKAYAW_AUDIENCE_TIMER] = max(0, you.props[USKAYAW_AUDIENCE_TIMER].get_int() - piety_gain);
+        you.props[USKAYAW_BOND_TIMER] = max(0, you.props[USKAYAW_BOND_TIMER].get_int() - piety_gain);
     }
     else if (you.piety > piety_breakpoint(0))
     {
@@ -396,21 +399,21 @@ static void _handle_uskayaw_time(int time_taken)
     // need to trigger the abilities this turn. Otherwise we'll decrement the
     // timer down to a minimum of 0, at which point it becomes eligible to
     // trigger again.
-    if (audience_timer == -1 || (you.piety >= piety_breakpoint(2)
-            && x_chance_in_y(time_taken, 100 + audience_timer)))
+    if (audience_timer == -1
+            || (you.piety >= piety_breakpoint(2) && audience_timer <= time_taken))
     {
         uskayaw_prepares_audience();
     }
     else
         you.props[USKAYAW_AUDIENCE_TIMER] = max(0, audience_timer - time_taken);
 
-    if (bond_timer == -1 || (you.piety >= piety_breakpoint(3)
-            && x_chance_in_y(time_taken, 100 + bond_timer)))
+    if (bond_timer == -1
+            || (you.piety >= piety_breakpoint(3) && bond_timer <= time_taken))
     {
         uskayaw_bonds_audience();
     }
     else
-        you.props[USKAYAW_BOND_TIMER] =  max(0, bond_timer - time_taken);
+        you.props[USKAYAW_BOND_TIMER] = max(0, bond_timer - time_taken);
 }
 
 /**

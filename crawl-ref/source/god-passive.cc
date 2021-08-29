@@ -935,8 +935,9 @@ unsigned int ash_skill_point_boost(skill_type sk, int scaled_skill)
 {
     unsigned int skill_points = 0;
 
-    skill_points += (you.skill_boost[sk] * 2 + 1) * (piety_rank() + 1)
-                    * max(scaled_skill, 1) * species_apt_factor(sk);
+    int skill = max(scaled_skill, 1);
+    skill_points += (you.skill_boost[sk] * 2 + 1) * isqrt(skill * skill * min(161, you.piety));
+
     return skill_points;
 }
 

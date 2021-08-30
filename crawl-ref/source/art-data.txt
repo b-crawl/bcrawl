@@ -1407,7 +1407,7 @@ DEX:      6
 VALUE:    1200
 
 ENUM:    VISION
-NAME:    Amulet of Vision
+NAME:    amulet of Vision
 OBJ:     OBJ_JEWELLERY/AMU_NOTHING
 TILE:    urand_vision
 COLOUR:  ETC_SILVER

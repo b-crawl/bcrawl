@@ -35,6 +35,7 @@
 #include "mgen-data.h"     // For Sceptre of Asmodeus evoke
 #include "mon-death.h"     // For demon axe's SAME_ATTITUDE
 #include "mon-place.h"     // For Sceptre of Asmodeus evoke
+#include "mon-poly.h"      // For Plutonium Sword
 #include "nearby-danger.h" // For Staff of Battle
 #include "player.h"
 #include "player-stats.h"
@@ -865,19 +866,52 @@ static void _PLUTONIUM_SWORD_melee_effects(item_def* weapon, actor* attacker,
                                            actor* defender, bool mondied,
                                            int dam)
 {
-    if (!mondied && one_chance_in(5)
-        && (!defender->is_monster()
-             || !mons_immune_magic(*defender->as_monster())))
+    if (attacker->is_player() && !mondied)
     {
-        mpr("Mutagenic energy flows through the plutonium sword!");
-        const int pow = random2(9);
-        MiscastEffect(defender, attacker, MELEE_MISCAST,
-                      SPTYP_TRANSMUTATION, pow, random2(70),
-                      "the plutonium sword", NH_NEVER);
-
-        if (attacker->is_player())
-            did_god_conduct(DID_CHAOS, 3);
+        monster* mons = defender->as_monster();
+        if (you.magic_points >= 4)
+        {
+            const int base_dam = calc_dice(6, 36).roll();
+            const int dmg = mons->apply_ac(base_dam);
+            if (dmg)
+            {
+                mprf("%s is blasted with magical radiation%s",
+                     mons->name(DESC_THE).c_str(),
+                     attack_strength_punctuation(dmg).c_str());
+                
+                mons->hurt(&you, dmg, BEAM_MMISSILE, KILLED_BY_BEAM, "", "", false);
+                
+                if (mons->alive() && mons->can_polymorph())
+                {
+                    if (one_chance_in(20))
+                        monster_polymorph(mons, RANDOM_MONSTER, PPT_LESS);
+                    
+                    mons->malmutate("");
+                }
+                
+                dec_mp(4);
+                did_god_conduct(DID_CHAOS, 4);
+            }
+        }
     }
+}
+
+static bool _PLUTONIUM_SWORD_evoke(item_def *item, bool* did_work, bool* unevokable)
+{
+    if (you.magic_points >= you.max_magic_points)
+    {
+        mpr("Your reserves of magic are already full.");
+        return false;
+    }
+    mpr("You channel some magical energy.");
+    contaminate_player(1050 + random2(400));
+    inc_mp(div_rand_round(you.skill(SK_EVOCATIONS, 10), 20));
+    *did_work = true;
+    practise_evoking(1);
+    did_god_conduct(DID_CHANNEL, 1, true);
+    did_god_conduct(DID_CHAOS, 1);
+
+    return false;
 }
 
 ///////////////////////////////////////////////////

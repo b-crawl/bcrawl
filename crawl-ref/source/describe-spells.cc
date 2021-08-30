@@ -571,7 +571,7 @@ static string _effect_string(spell_type spell, const monster_info *mon_owner)
         return make_stringf("(%s)", desc_chain_lightning_dam(pow).c_str());
     }
     case SPELL_SMITING:
-        return "10-12";
+        return "(10-12)";
     default: break;
     }
 

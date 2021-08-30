@@ -901,7 +901,8 @@ static bool _PLUTONIUM_SWORD_evoke(item_def *item, bool* did_work, bool* unevoka
     if (you.magic_points >= you.max_magic_points)
     {
         mpr("Your reserves of magic are already full.");
-        return false;
+        *unevokable = true;
+        return true;
     }
     mpr("You channel some magical energy.");
     contaminate_player(1050 + random2(400));

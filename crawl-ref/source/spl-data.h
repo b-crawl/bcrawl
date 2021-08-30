@@ -2939,10 +2939,10 @@ static const struct spell_desc spelldata[] =
     SPELL_DISCORD, "Discord",
     SPTYP_HEXES,
     SPFLAG_AREA | SPFLAG_HASTY,
-    8,
+    7,
     200,
     -1, -1,
-    6, 0,
+    12, 0,
     TILEG_DISCORD,
 },
 

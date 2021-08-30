@@ -121,8 +121,10 @@ spret cast_summon_small_mammal(int pow, god_type god, bool fail)
 
     monster_type mon = MONS_PROGRAM_BUG;
 
-    if (x_chance_in_y(10, pow + 1))
-        mon = random_choose(MONS_BAT, MONS_RAT);
+    if (pow < 15)
+        mon = MONS_RAT;
+    else if (pow < 25)
+        mon = MONS_JACKAL;
     else
         mon = MONS_QUOKKA;
 

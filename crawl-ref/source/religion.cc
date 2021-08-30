@@ -3318,11 +3318,6 @@ static void _join_zin()
     }
 }
 
-// probably unused
-static void _join_demigod()
-{
-}
-
 // Setup for joining the easygoing followers of Cheibriados.
 static void _join_cheibriados()
 {
@@ -3331,9 +3326,22 @@ static void _join_cheibriados()
     notify_stat_change();
 }
 
+static void _join_ashenzari()
+{
+    ash_check_bondage();
+    
+    string error;
+    create_item_named("amulet of vision", you.pos(), &error);
+    if (!error.empty())
+    {
+        mprf(MSGCH_ERROR, "Error: %s", error.c_str());
+        return;
+    }
+}
+
 /// What special things happen when you join a god?
 static const map<god_type, function<void ()>> on_join = {
-    { GOD_ASHENZARI, []() { ash_check_bondage(); }},
+    { GOD_ASHENZARI, _join_ashenzari },
     { GOD_BEOGH, update_player_symbol },
     { GOD_CHEIBRIADOS, _join_cheibriados },
     { GOD_FEDHAS, []() {
@@ -3346,7 +3354,6 @@ static const map<god_type, function<void ()>> on_join = {
     { GOD_GOZAG, _join_gozag },
     { GOD_JIYVA, _join_jiyva },
     { GOD_HEPLIAKLQANA, _join_hepliaklqana },
-    { GOD_DEMIGOD, _join_demigod },
     { GOD_RU, _join_ru },
     { GOD_TROG, _join_trog },
     { GOD_ZIN, _join_zin },

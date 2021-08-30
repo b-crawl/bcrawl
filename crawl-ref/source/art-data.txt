@@ -1411,7 +1411,7 @@ NAME:    Amulet of Vision
 OBJ:     OBJ_JEWELLERY/AMU_NOTHING
 TILE:    urand_vision
 COLOUR:  ETC_SILVER
-BOOL:    seeinv, nogen
+BOOL:    seeinv, curse, nogen
 
 # This entry must always be last.
 ENUM:   DUMMY2

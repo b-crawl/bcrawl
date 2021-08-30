@@ -3332,6 +3332,7 @@ static void _join_ashenzari()
     
     string error;
     create_item_named("amulet of vision", you.pos(), &error);
+    simple_god_message(" offers you an amulet.");
     if (!error.empty())
     {
         mprf(MSGCH_ERROR, "Error: %s", error.c_str());

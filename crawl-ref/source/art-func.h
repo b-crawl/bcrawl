@@ -883,7 +883,7 @@ static void _PLUTONIUM_SWORD_melee_effects(item_def* weapon, actor* attacker,
                 
                 if (mons->alive() && mons->can_polymorph())
                 {
-                    if (one_chance_in(20))
+                    if (one_chance_in(12))
                         monster_polymorph(mons, RANDOM_MONSTER, PPT_LESS);
                     
                     mons->malmutate("");

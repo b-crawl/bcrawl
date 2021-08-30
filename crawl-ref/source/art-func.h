@@ -905,7 +905,7 @@ static bool _PLUTONIUM_SWORD_evoke(item_def *item, bool* did_work, bool* unevoka
     }
     mpr("You channel some magical energy.");
     contaminate_player(1050 + random2(400));
-    inc_mp(div_rand_round(you.skill(SK_EVOCATIONS, 10), 20));
+    inc_mp(3 + div_rand_round(you.skill(SK_EVOCATIONS, 10), 40));
     *did_work = true;
     practise_evoking(1);
     did_god_conduct(DID_CHANNEL, 1, true);

@@ -1406,6 +1406,13 @@ PLUS:     6
 DEX:      6
 VALUE:    1200
 
+ENUM:    VISION
+NAME:    Amulet of Vision
+OBJ:     OBJ_JEWELLERY/AMU_NOTHING
+TILE:    urand_vision
+COLOUR:  ETC_SILVER
+BOOL:    seeinv, nogen
+
 # This entry must always be last.
 ENUM:   DUMMY2
 NAME:   DUMMY UNRANDART 2

@@ -644,6 +644,9 @@ spret cast_summon_dragon(actor *caster, int pow, god_type god, bool fail)
 
 spret cast_summon_mana_viper(int pow, god_type god, bool fail)
 {
+    if (otr_stop_summoning_prompt())
+        return spret::abort;
+    
     fail_check();
 
     mgen_data viper = _pal_data(MONS_MANA_VIPER, 2, god,

@@ -3598,7 +3598,7 @@ static bool _monster_move(monster* mons)
                     noisy(25, target, "You hear a crashing sound.");
             }
             // Dissolution and rockslimes
-            else if (player_can_hear(mons->pos() + mmov))
+            else if (player_can_hear(mons->pos() + mmov, 16))
                 switch (mons->type)
                 {
                 case MONS_DISSOLUTION:

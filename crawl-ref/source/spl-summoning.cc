@@ -313,6 +313,9 @@ spret cast_summon_scorpions(actor* caster, int pow, god_type god, bool fail)
 
 spret cast_summon_ice_beast(int pow, god_type god, bool fail)
 {
+    if (caster->is_player() && otr_stop_summoning_prompt())
+        return spret::abort;
+    
     fail_check();
     const int dur = min(2 + (random2(pow) / 4), 4);
 
@@ -399,6 +402,9 @@ spret cast_monstrous_menagerie(actor* caster, int pow, god_type god, bool fail)
 
 spret cast_summon_hydra(actor *caster, int pow, god_type god, bool fail)
 {
+    if (caster->is_player() && otr_stop_summoning_prompt())
+        return spret::abort;
+    
     fail_check();
     // Power determines number of heads. Minimum 4 heads, maximum 12.
     // Rare to get more than 8.

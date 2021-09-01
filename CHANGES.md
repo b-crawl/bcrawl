@@ -602,6 +602,7 @@
   - v1.33.1: Brown very ugly things have corrosive attacks instead of acid attacks.
   - v1.34: Deep elf mages have adjusted spell sets. All sets include one conjuration spell, one related summoning spell, and Blink.
   - v1.34: Orc priests have less HP.
+  - v1.34: Iron golems attack faster, deal more melee damage, and cast Quicksilver Bolt when at long range.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

@@ -1636,6 +1636,12 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
+    {  MST_IRON_GOLEM,
+      {
+       { SPELL_QUICKSILVER_BOLT, 80, MON_SPELL_MAGICAL | MON_SPELL_LONG_RANGE },
+      }
+    },
+
     {  MST_ICE_STATUE,
       {
        { SPELL_BOLT_OF_COLD, 20, MON_SPELL_MAGICAL },

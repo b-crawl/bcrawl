@@ -1467,7 +1467,9 @@ an incredible punch.
 iron golem
 
 A large, ponderous and very solid statue of metal, given the power of
-locomotion through some esoteric means.
+locomotion through some esoteric means. Its glowing eye can fire bolts
+of dispelling energy, but the golem requires some time to recharge after
+each shot, so it only fires them at long range.
 %%%%
 iron imp
 

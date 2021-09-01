@@ -601,6 +601,7 @@
   - v1.33.1: Red very ugly things have bonus fire damage instead of sticky flame attacks.
   - v1.33.1: Brown very ugly things have corrosive attacks instead of acid attacks.
   - v1.34: Deep elf mages have adjusted spell sets. All sets include one conjuration spell, one related summoning spell, and Blink.
+  - v1.34: Orc priests have less HP.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

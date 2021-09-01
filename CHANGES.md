@@ -603,6 +603,7 @@
   - v1.34: Deep elf mages have adjusted spell sets. All sets include one conjuration spell, one related summoning spell, and Blink.
   - v1.34: Orc priests have less HP.
   - v1.34: Iron golems attack faster, deal more melee damage, and cast Quicksilver Bolt when at long range.
+  - v1.34: Mana vipers are immune to electricity.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

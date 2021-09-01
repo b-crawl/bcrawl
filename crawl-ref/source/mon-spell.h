@@ -121,24 +121,24 @@ static const mon_spellbook mspell_list[] =
     // ('e') Elves.
     {  MST_DEEP_ELF_MAGE_I,
       {
-       { SPELL_BOLT_OF_FIRE, 30, MON_SPELL_WIZARD },
-       { SPELL_FIRE_ELEMENTALS, 15, MON_SPELL_WIZARD },
+       { SPELL_LIGHTNING_BOLT, 30, MON_SPELL_WIZARD },
+       { SPELL_SUMMON_MANA_VIPER, 20, MON_SPELL_WIZARD },
        { SPELL_BLINK, 10, MON_SPELL_WIZARD },
       }
     },
 
     {  MST_DEEP_ELF_MAGE_II,
       {
-       { SPELL_BOLT_OF_COLD, 30, MON_SPELL_WIZARD },
-       { SPELL_SUMMON_ICE_BEAST, 15, MON_SPELL_WIZARD },
+       { SPELL_PRIMAL_WAVE, 30, MON_SPELL_WIZARD },
+       { SPELL_WATER_ELEMENTALS, 20, MON_SPELL_WIZARD },
        { SPELL_BLINK, 10, MON_SPELL_WIZARD },
       }
     },
 
     {  MST_DEEP_ELF_MAGE_III,
       {
-       { SPELL_LIGHTNING_BOLT, 30, MON_SPELL_WIZARD },
-       { SPELL_AIR_ELEMENTALS, 15, MON_SPELL_WIZARD },
+       { SPELL_STONE_ARROW, 30, MON_SPELL_WIZARD },
+       { SPELL_EARTH_ELEMENTALS, 20, MON_SPELL_WIZARD },
        { SPELL_BLINK, 10, MON_SPELL_WIZARD },
       }
     },
@@ -146,15 +146,7 @@ static const mon_spellbook mspell_list[] =
     {  MST_DEEP_ELF_MAGE_IV,
       {
        { SPELL_BOLT_OF_DRAINING, 30, MON_SPELL_WIZARD },
-       { SPELL_SUMMON_DEMON, 15, MON_SPELL_WIZARD },
-       { SPELL_BLINK, 10, MON_SPELL_WIZARD },
-      }
-    },
-
-    {  MST_DEEP_ELF_MAGE_V,
-      {
-       { SPELL_STONE_ARROW, 30, MON_SPELL_WIZARD },
-       { SPELL_EARTH_ELEMENTALS, 15, MON_SPELL_WIZARD },
+       { SPELL_SUMMON_DEMON, 20, MON_SPELL_WIZARD },
        { SPELL_BLINK, 10, MON_SPELL_WIZARD },
       }
     },

@@ -137,6 +137,7 @@
   - v1.28.2: Trove entry fees and spawn locations are adjusted.
   - v1.29: Effectiveness of dexterity is no longer stepped down above 18.
   - v1.29: Attacks no longer have a flat chance to force a hit or miss.
+  - v1.34: Players gain full experience for all monster deaths, instead of half experience for kills by summons.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -272,6 +273,10 @@
   - v1.32: Chain Lightning is reworked: it explodes on each hit, can't target the player, has adjusted damage, and can't loop between 2 targets. It also produces less noise.
   - v1.32: Tornado is a level 8 Air/Translocations spell, and has adjusted damage.
   - v1.32: Virulence is reworked: players can learn it, it's level 7, it has range 5, and it does not check magic resistance.
+  - v1.34: Summon Small Mammal gives either a rat, a jackal, or a quokka. The selection is not random and depends on spell power.
+  - v1.34: Discord is level 7.
+  - v1.34: Shadow Creatures is level 7.
+  - v1.34: Several summoning spells have adjusted summon caps.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -373,6 +378,12 @@
   - v1.33.1: Uskayaw's piety gain is reworked to balance weapons somewhat better and eliminate piety gain breakpoints.
   - v1.33.1: Uskayaw grants lunge attacks (the same as Wu Jian's) at \*\* piety.
   - v1.33.1: Uskayaw grants immunity to silence at \*\*\* piety.
+  - v1.34: Uskayaw grants piety for attacking summons as if half the actual damage was done, instead of no piety.
+  - v1.34: Uskayaw's pain bond can't recursively share damage.
+  - v1.34: Grand Finale resets Uskayaw's timers for paralysis and pain bond.
+  - v1.34: Instead of a random chance for earlier paralysis and pain bond, gaining piety reduces Uskayaw's timers for paralysis and pain bond.
+  - v1.34: Ashenzari grants an amulet of see invisible on joining.
+  - v1.34: Ashenzari skill boosts are slightly higher at lower aptitudes. They are larger than before at below +4 aptitude.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -490,6 +501,7 @@
   - v1.23.2: The Robe of Vines gains +7 strength.
   - v1.27.6: Hendrick's Axe is a +6 battleaxe of distortion giving +6 dexterity that makes noise and can frenzy enemies it hits. The frenzied enemies have a chance to also be blinded briefly.
   - v1.28.2: Skullcrusher is reworked: +1, 38 base dmg, 1.9 base delay, antimagic, -Cast *Drain rN+ MR+ AC+6.
+  - v1.34: The Plutonium Sword is now a +8 triple sword that drains 4 mana to cast a weak Irradiate on what it hits. If the target survives, it has a 1/12 chance to be polymorphed. Also, the sword can be evoked to gain mana and contamination.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -588,6 +600,7 @@
   - v1.33.1: Purple ugly things and very ugly things deal more damage.
   - v1.33.1: Red very ugly things have bonus fire damage instead of sticky flame attacks.
   - v1.33.1: Brown very ugly things have corrosive attacks instead of acid attacks.
+  - v1.34: Deep elf mages have adjusted spell sets. All sets include one conjuration spell, one related summoning spell, and Blink.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

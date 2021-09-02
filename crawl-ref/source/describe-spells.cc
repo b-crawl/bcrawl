@@ -537,6 +537,7 @@ static string _colourize(string base, colour_t col)
     return out;
 }
 
+// todo: merge with mons_human_readable_spell_damage_string
 static string _effect_string(spell_type spell, const monster_info *mon_owner)
 {
     if (!mon_owner)
@@ -562,10 +563,16 @@ static string _effect_string(spell_type spell, const monster_info *mon_owner)
         return make_stringf("(%d%%)", hex_chance(spell, hd));
     }
 
-    if (spell == SPELL_CHAIN_LIGHTNING)
+    switch (spell)
+    {
+    case SPELL_CHAIN_LIGHTNING:
     {
         const int pow = mons_power_for_hd(spell, hd);
         return make_stringf("(%s)", desc_chain_lightning_dam(pow).c_str());
+    }
+    case SPELL_SMITING:
+        return "(10-12)";
+    default: break;
     }
 
     const dice_def dam = _spell_damage(spell, hd);

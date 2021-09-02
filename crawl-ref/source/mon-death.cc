@@ -723,25 +723,7 @@ static bool _is_pet_kill(killer_type killer, int i)
 
 int exp_rate(int killer)
 {
-    if (killer == MHITYOU || killer == YOU_FAULTLESS)
-        return 2;
-    
-    // Damage by the spectral weapon is considered to be the player's damage ---
-    // so the player does not lose any exp from dealing damage with a spectral weapon summon
-    // ditto hep ancestors (sigh)
-    monster_type killer_type = menv[killer].type;
-    if (!invalid_monster_index(killer)
-        && (killer_type == MONS_SPECTRAL_WEAPON || killer_type == MONS_PLAYER_ILLUSION
-            || mons_is_hepliaklqana_ancestor(killer_type))
-        && menv[killer].summoner == MID_PLAYER)
-    {
-        return 2;
-    }
-
-    if (_is_pet_kill(KILL_MON, killer))
-        return 1;
-
-    return 0;
+    return 2;
 }
 
 // Elyvilon will occasionally (5% chance) protect the life of one of

@@ -121,8 +121,10 @@ spret cast_summon_small_mammal(int pow, god_type god, bool fail)
 
     monster_type mon = MONS_PROGRAM_BUG;
 
-    if (x_chance_in_y(10, pow + 1))
-        mon = random_choose(MONS_BAT, MONS_RAT);
+    if (pow < 15)
+        mon = MONS_RAT;
+    else if (pow < 25)
+        mon = MONS_JACKAL;
     else
         mon = MONS_QUOKKA;
 
@@ -260,7 +262,7 @@ spret cast_call_canine_familiar(int pow, god_type god, bool fail)
 
 spret cast_summon_scorpions(actor* caster, int pow, god_type god, bool fail)
 {
-    if (otr_stop_summoning_prompt())
+    if (caster->is_player() && otr_stop_summoning_prompt())
         return spret::abort;
     
     fail_check();
@@ -311,6 +313,9 @@ spret cast_summon_scorpions(actor* caster, int pow, god_type god, bool fail)
 
 spret cast_summon_ice_beast(int pow, god_type god, bool fail)
 {
+    if (otr_stop_summoning_prompt())
+        return spret::abort;
+    
     fail_check();
     const int dur = min(2 + (random2(pow) / 4), 4);
 
@@ -397,6 +402,9 @@ spret cast_monstrous_menagerie(actor* caster, int pow, god_type god, bool fail)
 
 spret cast_summon_hydra(actor *caster, int pow, god_type god, bool fail)
 {
+    if (caster->is_player() && otr_stop_summoning_prompt())
+        return spret::abort;
+    
     fail_check();
     // Power determines number of heads. Minimum 4 heads, maximum 12.
     // Rare to get more than 8.
@@ -642,6 +650,9 @@ spret cast_summon_dragon(actor *caster, int pow, god_type god, bool fail)
 
 spret cast_summon_mana_viper(int pow, god_type god, bool fail)
 {
+    if (otr_stop_summoning_prompt())
+        return spret::abort;
+    
     fail_check();
 
     mgen_data viper = _pal_data(MONS_MANA_VIPER, 2, god,
@@ -3415,18 +3426,18 @@ static const map<spell_type, summon_cap> summonsdata =
 {
     // Beasts
     { SPELL_SUMMON_BUTTERFLIES,         { 8, 5 } },
-    { SPELL_SUMMON_SMALL_MAMMAL,        { 4, 2 } },
+    { SPELL_SUMMON_SMALL_MAMMAL,        { 2, 2 } },
     { SPELL_CALL_CANINE_FAMILIAR,       { 1, 2 } },
     { SPELL_SUMMON_ICE_BEAST,           { 2, 3 } },
     { SPELL_SUMMON_HYDRA,               { 1, 2 } },
     { SPELL_SUMMON_MANA_VIPER,          { 2, 2 } },
     { SPELL_SUMMON_SCORPIONS,           { 1, 2 } },
     // Demons
-    { SPELL_CALL_IMP,                   { 3, 3 } },
-    { SPELL_SUMMON_DEMON,               { 3, 2 } },
-    { SPELL_SUMMON_GREATER_DEMON,       { 3, 2 } },
+    { SPELL_CALL_IMP,                   { 2, 3 } },
+    { SPELL_SUMMON_DEMON,               { 2, 2 } },
+    { SPELL_SUMMON_GREATER_DEMON,       { 2, 2 } },
     // General monsters
-    { SPELL_MONSTROUS_MENAGERIE,        { 3, 2 } },
+    { SPELL_MONSTROUS_MENAGERIE,        { 4, 2 } },
     { SPELL_SUMMON_HORRIBLE_THINGS,     { 8, 8 } },
     { SPELL_SHADOW_CREATURES,           { 4, 2 } },
     { SPELL_SUMMON_LIGHTNING_SPIRE,     { 1, 2 } },

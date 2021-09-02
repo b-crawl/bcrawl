@@ -4473,13 +4473,18 @@ int monster::hurt(const actor *agent, int amount, beam_type flavour,
 
         // Hurt conducts -- pain bond is exempted for balance/gameplay reasons.
         // Damage over time effects are excluded for similar reasons.
-        if (agent && agent->is_player() && mons_gives_xp(*this, *agent)
+        if (you.religion == GOD_USKAYAW  // for performance
+            && agent && agent->is_player()
             && flavour != BEAM_SHARED_PAIN
             && flavour != BEAM_STICKY_FLAME
             && kill_type != KILLED_BY_POISON
-            && kill_type != KILLED_BY_CLOUD)
+            && kill_type != KILLED_BY_CLOUD
+            && this->summoner != MID_PLAYER)
         {
-           did_hurt_conduct(DID_HURT_FOE, *this, amount);
+            int adj_amount = amount;
+            if (!mons_gives_xp(*this, *agent))
+                adj_amount /= 2;
+            did_hurt_conduct(DID_HURT_FOE, *this, adj_amount);
         }
 
         // Handle pain bond behavior here. Is technically passive damage.

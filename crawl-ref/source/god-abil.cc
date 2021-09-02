@@ -6687,6 +6687,9 @@ spret uskayaw_grand_finale(bool fail)
     set_piety(piety_breakpoint(0)); // Reset piety to 1*.
     set_mp(you.max_magic_points);  // refill mana
 
+    you.props[USKAYAW_BOND_TIMER] = 0;
+    you.props[USKAYAW_AUDIENCE_TIMER] = 0;
+
     return spret::success;
 }
 

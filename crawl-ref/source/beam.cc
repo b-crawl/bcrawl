@@ -4213,7 +4213,10 @@ void bolt::tracer_affect_monster(monster* mon)
             is_explosion = true;
         break;
     case BEAM_RUPTURE:
-        if(!(mon->has_ench(ENCH_SHORT_LIVED) || mon->summoner))
+        if(!(mon->has_ench(ENCH_ABJ)
+                || mon->has_ench(ENCH_FAKE_ABJURATION)
+                || mon->has_ench(ENCH_SHORT_LIVED)
+                || mon->type == MONS_FULMINANT_PRISM))
             is_explosion = true;
         break;
     default: break;
@@ -5784,7 +5787,10 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
 
     case BEAM_RUPTURE:
     {
-        if (mon->has_ench(ENCH_SHORT_LIVED) || mon->summoner)
+        if (mon->has_ench(ENCH_ABJ)
+                || mon->has_ench(ENCH_FAKE_ABJURATION)
+                || mon->has_ench(ENCH_SHORT_LIVED)
+                || mon->type == MONS_FULMINANT_PRISM)
         {
             simple_monster_message(*mon, " loses its magical cohesion.");
             monster_die(*mon, KILL_DISMISSED, NON_MONSTER);

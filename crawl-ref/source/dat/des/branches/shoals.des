@@ -1628,9 +1628,9 @@ ORIENT: float
 KMONS: " = merfolk siren / w:5 merfolk
 KMONS: ' = merfolk aquamancer
 KMONS: ` = water elemental
-KFEAT: " = w
-KFEAT: ' = w
-KFEAT: ` = w
+KFEAT: " = W
+KFEAT: ' = W
+KFEAT: ` = W
 FTILE: - = floor_marble
 COLOUR: c- = white
 KPROP: .- = no_tide
@@ -1654,20 +1654,20 @@ NSUBST: ' = 1:' / *:_, w = 3:` / 1=`w / *:w
 MAP
 .......
 .c---c.
-.-www-.   ........
-.-w"w-.   .c----c.
-.-www-.   .-wwww-.
-.c---c.   .-ww'w-.
-...........-w'ww-.
-          .-wwww-.
+.-WWW-.   ........
+.-W"W-.   .c----c.
+.-WWW-.   .-WWWW-.
+.c---c.   .-WW'W-.
+...........-W'WW-.
+          .-WWWW-.
           .c----c.
           ........
           .
     .......
     .c---c.
-    .-www-.
-    .-w"w-.
-    .-www-.
+    .-WWW-.
+    .-W"W-.
+    .-WWW-.
     .c---c.
     .......
 ENDMAP

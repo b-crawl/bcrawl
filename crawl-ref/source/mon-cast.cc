@@ -5482,6 +5482,8 @@ static void _mons_upheaval(monster& mons, actor& foe)
         }
     }
 
+    shuffle_array(affected);
+
     for (coord_def pos : affected)
     {
         beam.draw(pos);

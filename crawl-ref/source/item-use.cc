@@ -2906,13 +2906,29 @@ void read(item_def* scroll)
             return;
         }
 
-        if (scroll->sub_type == SCR_BLINKING
-            && orb_limits_translocation()
-            && !yesno("Your blink will be uncontrolled - continue anyway?",
-                      false, 'n'))
+        switch (which_scroll)
         {
-            canned_msg(MSG_OK);
-            return;
+        case SCR_BLINKING:
+            if (orb_limits_translocation()
+                && !yesno("Your blink will be uncontrolled - continue anyway?",
+                          false, 'n'))
+            {
+                canned_msg(MSG_OK);
+                return;
+            }
+            break;
+        case SCR_SILENCE:
+        case SCR_HOLY_WORD:
+        case SCR_SUMMONING:
+            if (!there_are_monsters_nearby(true, true)
+                    && !yesno(make_stringf("Really %s with no enemies visible nearby?",
+                    verb_object.c_str()).c_str(), false, 'n'))
+            {
+                canned_msg(MSG_OK);
+                return;
+            }
+            break;
+        default: break;
         }
     }
 

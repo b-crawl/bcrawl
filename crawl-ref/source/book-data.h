@@ -311,9 +311,9 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Book of Dreams
     SPELL_HIBERNATION,
     SPELL_DARKNESS,
-    SPELL_SHADOW_CREATURES,
     SPELL_BORGNJORS_VILE_CLUTCH,
     SPELL_INFESTATION,
+    SPELL_SHADOW_CREATURES,
     SPELL_TIME_STOP,
 },
 

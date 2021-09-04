@@ -1911,16 +1911,16 @@ MONS:    draconian annihilator / draconian knight
 : end
 MAP
 ............
-.xxmxxxxmxx.
-.x.?....?.x.
-.x........x.
-.x.xx++xx.x.
-.+1xd33dx.+.
-.+.xd33dx1+.
-.x.xx++xx.x.
-.x........x.
-.x.?....?.x.
-.xxmxxxxmxx.
+.ccnccccncc.
+.c.?....?.c.
+.c........c.
+.c.cc++cc.c.
+.+1cd33dc.+.
+.+.cd33dc1+.
+.c.cc++cc.c.
+.c........c.
+.c.?....?.c.
+.ccnccccncc.
 ............
 ENDMAP
 

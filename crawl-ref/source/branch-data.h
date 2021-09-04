@@ -154,7 +154,7 @@ const Branch branches[NUM_BRANCHES] =
       'H', {}, BRANCH_NOISE_NORMAL },
 
     { BRANCH_DIS, BRANCH_VESTIBULE, 1, 1, 2, 28,
-      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
+      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END | BFLAG_NO_SHAFTS,
       DNGN_ENTER_DIS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Dis", "the Iron City of Dis", "Dis",
       "You enter the Iron City of Dis!\n"
@@ -163,7 +163,7 @@ const Branch branches[NUM_BRANCHES] =
       'I', { RUNE_DIS }, BRANCH_NOISE_NORMAL },
 
     { BRANCH_GEHENNA, BRANCH_VESTIBULE, 1, 1, 2, 28,
-      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
+      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END | BFLAG_NO_SHAFTS,
       DNGN_ENTER_GEHENNA, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Gehenna", "Gehenna", "Geh",
       "You enter the fiery wasteland Gehenna!\n"
@@ -172,7 +172,7 @@ const Branch branches[NUM_BRANCHES] =
       'G', { RUNE_GEHENNA }, BRANCH_NOISE_NORMAL },
 
     { BRANCH_COCYTUS, BRANCH_VESTIBULE, 1, 1, 2, 28,
-      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
+      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END | BFLAG_NO_SHAFTS,
       DNGN_ENTER_COCYTUS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Cocytus", "Cocytus", "Coc",
       "You enter the frozen wasteland Cocytus!\n"
@@ -181,7 +181,7 @@ const Branch branches[NUM_BRANCHES] =
       'X', { RUNE_COCYTUS }, BRANCH_NOISE_NORMAL },
 
     { BRANCH_TARTARUS, BRANCH_VESTIBULE, 1, 1, 2, 28,
-      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
+      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END | BFLAG_NO_SHAFTS,
       DNGN_ENTER_TARTARUS, DNGN_ENTER_HELL, DNGN_ENTER_HELL,
       "Tartarus", "Tartarus", "Tar",
       "You enter the decaying netherworld Tartarus!\n"

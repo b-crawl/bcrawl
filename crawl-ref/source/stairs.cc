@@ -526,7 +526,7 @@ static level_id _travel_destination(const dungeon_feature_type how,
         && there_are_monsters_nearby(true, false, false)
         && !feat_is_portal(how))
     {
-        mpr("As you climb the stairs, a rune flashes!");
+        mprf(MSGCH_WARN, "As you climb the stairs, a rune flashes!");
         if (you.no_tele(true, true))
             canned_msg(MSG_STRANGE_STASIS);
         else if (orb_limits_translocation())
@@ -897,7 +897,7 @@ void floor_transition(dungeon_feature_type how,
         && !(player_in_branch(BRANCH_DUNGEON) && you.depth < 4)
         && !feat_is_portal(how))
     {
-        mpr("Near the exit of the stairs, a rune flashes!");
+        mprf(MSGCH_WARN, "Near the exit of the stairs, a rune flashes!");
         if (you.no_tele(true, true))
             canned_msg(MSG_STRANGE_STASIS);
         else if (orb_limits_translocation())

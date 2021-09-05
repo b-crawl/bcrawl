@@ -4473,7 +4473,7 @@ int monster::hurt(const actor *agent, int amount, beam_type flavour,
 
         // Hurt conducts -- pain bond is exempted for balance/gameplay reasons.
         // Damage over time effects are excluded for similar reasons.
-        if (you.religion == GOD_USKAYAW  // for performance
+        if (you.religion == GOD_USKAYAW
             && agent && agent->is_player()
             && flavour != BEAM_SHARED_PAIN
             && flavour != BEAM_STICKY_FLAME
@@ -4485,11 +4485,17 @@ int monster::hurt(const actor *agent, int amount, beam_type flavour,
             if (!mons_gives_xp(*this, *agent))
                 adj_amount /= 2;
             did_hurt_conduct(DID_HURT_FOE, *this, adj_amount);
+            
+            if (you.piety >= piety_breakpoint(3) && !has_ench(ENCH_PAIN_BOND))
+            {
+                int power = you.skill(SK_INVOCATIONS, 7) + you.experience_level
+                             - this->get_hit_dice();
+                int duration = 20 + random2avg(power, 2);
+                this->add_ench(mon_enchant(ENCH_PAIN_BOND, 1, &you, duration));
+            }
         }
 
         // Handle pain bond behavior here. Is technically passive damage.
-        // radiate_pain_bond may do additional damage by recursively looping
-        // back to the original trigger.
         if (has_ench(ENCH_PAIN_BOND) && flavour != BEAM_SHARED_PAIN)
         {
             int hp_before_pain_bond = hit_points;

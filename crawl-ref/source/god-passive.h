@@ -288,7 +288,6 @@ ru_interference get_ru_attack_interference_level();
 monster* shadow_monster(bool equip = true);
 void shadow_monster_reset(monster *mon);
 void uskayaw_prepares_audience();
-void uskayaw_bonds_audience();
 
 void wu_jian_wall_jump_effects(const coord_def& old_pos);
 bool wu_jian_has_momentum(wu_jian_attack_type);

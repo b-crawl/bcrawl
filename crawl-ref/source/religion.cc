@@ -347,8 +347,8 @@ const vector<god_power> god_powers[NUM_GODS] =
       { 3, "Uskayaw will force your foes to helplessly watch your dance." },
       { 3, "Uskayaw protects you from magical silence.",
            "Uskayaw no longer protects you from magical silence." },
-      { 4, "Uskayaw will force your foes to share their pain.",
-           "Uskayaw will no longer force your foes to share their pain." },
+      { 4, "Uskayaw will link foes you attack so they share their pain.",
+           "Uskayaw will no longer link foes you attack." },
       { 5, ABIL_USKAYAW_GRAND_FINALE, "merge with and destroy a victim" },
     },
 

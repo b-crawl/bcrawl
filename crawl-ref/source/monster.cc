@@ -33,6 +33,7 @@
 #include "god-abil.h"
 #include "god-conduct.h"
 #include "god-item.h"
+#include "god-passive.h"
 #include "item-name.h"
 #include "item-prop.h"
 #include "item-status-flag-type.h"
@@ -4473,7 +4474,7 @@ int monster::hurt(const actor *agent, int amount, beam_type flavour,
 
         // Hurt conducts -- pain bond is exempted for balance/gameplay reasons.
         // Damage over time effects are excluded for similar reasons.
-        if (you.religion == GOD_USKAYAW  // for performance
+        if (you.religion == GOD_USKAYAW
             && agent && agent->is_player()
             && flavour != BEAM_SHARED_PAIN
             && flavour != BEAM_STICKY_FLAME
@@ -4481,15 +4482,25 @@ int monster::hurt(const actor *agent, int amount, beam_type flavour,
             && kill_type != KILLED_BY_CLOUD
             && this->summoner != MID_PLAYER)
         {
-            int adj_amount = amount;
-            if (!mons_gives_xp(*this, *agent))
-                adj_amount /= 2;
-            did_hurt_conduct(DID_HURT_FOE, *this, adj_amount);
+            if (!has_ench(ENCH_PAIN_BOND) && have_passive(passive_t::pain_bond))
+            {
+                int power = 100 + you.skill(SK_INVOCATIONS, 10);
+                int duration = div_rand_round(power * 10, 10 + this->get_hit_dice());
+                this->add_ench(mon_enchant(ENCH_PAIN_BOND, 1, &you, duration));
+            }
+
+            if (flavour != BEAM_STOMP)
+            {
+                int adj_amount = amount * 3;
+                int denom = 2;
+                if (!mons_gives_xp(*this, *agent))
+                    denom *= 2;
+                adj_amount = div_rand_round(adj_amount, denom);
+                did_hurt_conduct(DID_HURT_FOE, *this, adj_amount);
+            }
         }
 
         // Handle pain bond behavior here. Is technically passive damage.
-        // radiate_pain_bond may do additional damage by recursively looping
-        // back to the original trigger.
         if (has_ench(ENCH_PAIN_BOND) && flavour != BEAM_SHARED_PAIN)
         {
             int hp_before_pain_bond = hit_points;

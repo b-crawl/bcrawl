@@ -2046,6 +2046,12 @@ static spret _do_ability(const ability_def& abil, bool fail)
     case ABIL_EVOKE_TURN_INVISIBLE:     // cloaks, randarts
         if (!invis_allowed())
             return spret::abort;
+        if (get_contamination_level()
+                && !yesno("Really evoke invisibility before your magical contamination has dissipated?", false, 'n'))
+        {
+            canned_msg(MSG_OK);
+            return spret::abort;
+        }
         fail_check();
         potionlike_effect(POT_INVISIBILITY, div_rand_round(you.skill(SK_EVOCATIONS, 7), 6));
         contaminate_player(1000 + random2(2000), true);

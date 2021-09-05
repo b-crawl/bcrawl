@@ -521,24 +521,29 @@ static level_id _travel_destination(const dungeon_feature_type how,
             dest.depth = 1;
         return dest;
     }
-    else if(going_up && feat_is_staircase(how) && one_chance_in(25)
+    else if (going_up && feat_is_staircase(how)
         && !(player_in_branch(BRANCH_DUNGEON) && you.depth < 3)
         && there_are_monsters_nearby(true, false, false)
         && !feat_is_portal(how))
     {
-        mpr("As you climb the stairs, a rune flashes!");
-        if (you.no_tele(true, true))
-            canned_msg(MSG_STRANGE_STASIS);
-        else if (orb_limits_translocation())
+        if (one_chance_in(25))
         {
-            uncontrolled_blink();
-            return dest;
+            mprf(MSGCH_WARN, "As you climb the stairs, a rune flashes!");
+            if (you.no_tele(true, true))
+                canned_msg(MSG_STRANGE_STASIS);
+            else if (orb_limits_translocation())
+            {
+                uncontrolled_blink();
+                return dest;
+            }
+            else
+            {
+                you.teleport(true, false);
+                return dest;
+            }
         }
         else
-        {
-            you.teleport(true, false);
-            return dest;
-        }
+            mpr("A rune on the stairs sparks and fizzles.");            
     }
 
     if (shaft)
@@ -893,19 +898,24 @@ void floor_transition(dungeon_feature_type how,
     you.duration[DUR_GOZAG_GOLD_AURA] = 0;
     you.props[GOZAG_GOLD_AURA_KEY] = 0;
 
-    if(!going_up && feat_is_staircase(how) && one_chance_in(25)
+    if(!going_up && feat_is_staircase(how)
         && !(player_in_branch(BRANCH_DUNGEON) && you.depth < 4)
         && !feat_is_portal(how))
     {
-        mpr("Near the exit of the stairs, a rune flashes!");
-        if (you.no_tele(true, true))
-            canned_msg(MSG_STRANGE_STASIS);
-        else if (orb_limits_translocation())
+        if (one_chance_in(25))
         {
-            uncontrolled_blink();
+            mprf(MSGCH_WARN, "Near the exit of the stairs, a rune flashes!");
+            if (you.no_tele(true, true))
+                canned_msg(MSG_STRANGE_STASIS);
+            else if (orb_limits_translocation())
+            {
+                uncontrolled_blink();
+            }
+            else
+                you.teleport(true, false);
         }
         else
-            you.teleport(true, false);
+            mpr("A rune on the stairs sparks and fizzles.");
     }
 }
 

@@ -387,6 +387,7 @@ static const vector<god_passive> god_passives[] =
     // Uskayaw
     {
         { 2, passive_t::wu_jian_lunge, "do at least one heavy attack when moving towards foes." },
+        { 2, passive_t::pain_bond, "do at least one heavy attack when moving towards foes." },
     },
 
     // Hepliaklqana
@@ -1696,41 +1697,4 @@ void uskayaw_prepares_audience()
     }
     else // Reset the timer because we didn't actually execute.
         you.props[USKAYAW_AUDIENCE_TIMER] = 0;
-}
-
-/**
- * Apply pain bond to the monster in this cell.
- */
-static int _bond_audience(coord_def where)
-{
-    if (!_check_for_uskayaw_targets(where))
-        return 0;
-
-    monster* mons = monster_at(where);
-
-    int power = you.skill(SK_INVOCATIONS, 7) + you.experience_level
-                 - mons->get_hit_dice();
-    int duration = 20 + random2avg(power, 2);
-    mons->add_ench(mon_enchant(ENCH_PAIN_BOND, 1, &you, duration));
-
-    return 1;
-}
-
-/**
- * On hitting **** piety, all the monsters are pain bonded.
- */
-void uskayaw_bonds_audience()
-{
-    int count = apply_area_visible(_check_for_uskayaw_targets, you.pos());
-    if (count > 1)
-    {
-        simple_god_message(" links your audience in an emotional bond!");
-        apply_area_visible(_bond_audience, you.pos());
-
-        // Increment a delay timer to prevent players from spamming this ability
-        // via piety loss and gain. Timer is in AUT.
-        you.props[USKAYAW_BOND_TIMER] = 300 + random2(201);
-    }
-    else // Reset the timer because we didn't actually execute.
-        you.props[USKAYAW_BOND_TIMER] = 0;
 }

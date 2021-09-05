@@ -5625,11 +5625,7 @@ void radiate_pain_bond(const monster& mon, int damage, const monster* original_t
         if (!target->has_ench(ENCH_PAIN_BOND))
             continue;
 
-        int distance = target->pos().distance_from(mon.pos());
-        if (distance > 3)
-            continue;
-
-        damage = max(0, div_rand_round(damage * (4 - distance), 5));
+        // int distance = target->pos().distance_from(mon.pos());
 
         if (damage > 0)
         {

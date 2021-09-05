@@ -1911,16 +1911,16 @@ MONS:    draconian annihilator / draconian knight
 : end
 MAP
 ............
-.xxmxxxxmxx.
-.x.?....?.x.
-.x........x.
-.x.xx++xx.x.
-.+1xd33dx.+.
-.+.xd33dx1+.
-.x.xx++xx.x.
-.x........x.
-.x.?....?.x.
-.xxmxxxxmxx.
+.ccnccccncc.
+.c.?....?.c.
+.c........c.
+.c.cc++cc.c.
+.+1cd33dc.+.
+.+.cd33dc1+.
+.c.cc++cc.c.
+.c........c.
+.c.?....?.c.
+.ccnccccncc.
 ............
 ENDMAP
 
@@ -6632,8 +6632,8 @@ KMONS:   J = Louise / hell knight, hell knight / nothing
 KMONS:   K = Frances / hell knight, hell knight / nothing
 KMONS:   L = Agnes / spriggan defender, spriggan defender / nothing
 KMONS:   M = Rupert / vampire knight, vampire knight / nothing
-KMONS:   N = Asterion / ancient champion, ancient champion / nothing
-KMONS:   O = Frederick / draconian knight, draconian knight / nothing
+KMONS:   N = Asterion / death knight, death knight / nothing
+KMONS:   O = Frederick / ancient champion, ancient champion / nothing
 KMONS:   P = Sojobo / tengu reaver, tengu reaver / nothing
 : if crawl.one_chance_in(50) then
 KMONS:   S = dancing weapon ; singing sword

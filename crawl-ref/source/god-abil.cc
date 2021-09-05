@@ -6417,7 +6417,7 @@ static bool _get_stomped(monster& mons)
     int die_size = 2 + div_rand_round(you.skill(SK_INVOCATIONS), 2);
     damage += roll_dice(2, die_size);
 
-    mons.hurt(&you, damage, BEAM_ENERGY, KILLED_BY_BEAM, "", "", true);
+    mons.hurt(&you, damage, BEAM_STOMP, KILLED_BY_BEAM, "", "", true);
 
     if (mons.alive() && you.can_see(mons))
         print_wounds(mons);
@@ -6446,6 +6446,7 @@ bool uskayaw_stomp()
     mpr("You stomp with the beat, sending a shockwave through the revelers "
             "around you!");
     apply_monsters_around_square(_get_stomped, you.pos());
+    you.props[USKAYAW_AUT_SINCE_PIETY_GAIN] = 0;
     return true;
 }
 
@@ -6578,6 +6579,8 @@ bool uskayaw_line_pass()
         move_player_to_grid(beam.target, false);
     }
 
+    you.props[USKAYAW_AUT_SINCE_PIETY_GAIN] = 0;
+
     crawl_state.cancel_cmd_again();
     crawl_state.cancel_cmd_repeat();
 
@@ -6686,8 +6689,6 @@ spret uskayaw_grand_finale(bool fail)
 
     set_piety(piety_breakpoint(0)); // Reset piety to 1*.
     set_mp(you.max_magic_points);  // refill mana
-
-    you.props[USKAYAW_BOND_TIMER] = 0;
     you.props[USKAYAW_AUDIENCE_TIMER] = 0;
 
     return spret::success;

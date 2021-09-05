@@ -26,6 +26,7 @@ stop += emerges from the mists of memory
 
 # Traps
 #
+ignore += A rune on the stairs sparks and fizzles
 ignore += You found a web!
 stop += found.*trap
 stop += You have blundered into a Zot trap
@@ -47,7 +48,7 @@ ignore += .*pass through a line of other dancers.*
 ignore += .*attack as you dance towards foes.*
 ignore += .*force your foes to helplessly watch your dance\.
 ignore += .*protects you from magical silence\.
-ignore += .*force your foes to share their pain\.
+ignore += .*link foes you attack.*
 ignore += .*merge with and destroy a victim.*
 
 ignore += talk:

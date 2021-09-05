@@ -6578,6 +6578,8 @@ bool uskayaw_line_pass()
         move_player_to_grid(beam.target, false);
     }
 
+    you.props[USKAYAW_AUT_SINCE_PIETY_GAIN] = 0;
+
     crawl_state.cancel_cmd_again();
     crawl_state.cancel_cmd_repeat();
 

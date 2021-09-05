@@ -104,6 +104,7 @@
   - v1.29.2: There is a new menu for macros. "~" brings up the full menu, while control-M and control-space bring up a simplified menu.
   - v1.29.4: Entering timed portals can no longer teleport the player like normal stairs can.
   - v1.31: If wielding a melee weapon with ammo for a launcher quivered, autofight will automatically swap weapons based on enemy range.
+  - v1.34.1: Players get a message any time they take stairs and a teleport *could* have happened.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.

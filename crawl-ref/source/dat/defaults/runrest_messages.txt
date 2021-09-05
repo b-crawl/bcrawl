@@ -26,6 +26,7 @@ stop += emerges from the mists of memory
 
 # Traps
 #
+ignore += A rune on the stairs sparks and fizzles
 ignore += You found a web!
 stop += found.*trap
 stop += You have blundered into a Zot trap

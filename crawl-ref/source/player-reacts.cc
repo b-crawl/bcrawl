@@ -362,9 +362,13 @@ static void _handle_uskayaw_piety(int time_taken)
     }
     else if (you.piety > piety_breakpoint(0))
     {
-        // If we didn't do a dance action and we can lose piety, we're going
-        // to lose piety proportional to the time since the last time we took
-        // a dance action and hurt a monster.
+        // exponential piety loss
+        int exp_loss = div_rand_round(piety_scale(you.piety), 50);
+        exp_loss = min(exp_loss, you.piety - piety_breakpoint(0));
+        if (exp_loss > 0)
+            lose_piety(exp_loss);
+
+        // no-combat piety loss
         int time_since_gain = you.props[USKAYAW_AUT_SINCE_PIETY_GAIN].get_int();
         time_since_gain += time_taken;
 
@@ -373,7 +377,7 @@ static void _handle_uskayaw_piety(int time_taken)
         if (time_since_gain > 30)
         {
             int piety_lost = min(you.piety - piety_breakpoint(0),
-                    div_rand_round(time_since_gain, 10));
+                    div_rand_round(time_since_gain, 20));
 
             if (piety_lost > 0)
                 lose_piety(piety_lost);
@@ -400,7 +404,7 @@ static void _handle_uskayaw_time(int time_taken)
     // timer down to a minimum of 0, at which point it becomes eligible to
     // trigger again.
     if (audience_timer == -1
-            || (you.piety >= piety_breakpoint(2) && audience_timer <= time_taken))
+            || (you.piety >= piety_breakpoint(3) && audience_timer <= time_taken))
     {
         uskayaw_prepares_audience();
     }

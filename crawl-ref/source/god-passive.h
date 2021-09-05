@@ -253,6 +253,9 @@ enum class passive_t
     
     /// Chei increases potion duration
     long_potions,
+    
+    /// Usk passive
+    pain_bond,
 };
 
 enum ru_interference

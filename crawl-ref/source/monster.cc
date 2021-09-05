@@ -33,6 +33,7 @@
 #include "god-abil.h"
 #include "god-conduct.h"
 #include "god-item.h"
+#include "god-passive.h"
 #include "item-name.h"
 #include "item-prop.h"
 #include "item-status-flag-type.h"
@@ -4481,18 +4482,20 @@ int monster::hurt(const actor *agent, int amount, beam_type flavour,
             && kill_type != KILLED_BY_CLOUD
             && this->summoner != MID_PLAYER)
         {
-            if (you.piety >= piety_breakpoint(3) && !has_ench(ENCH_PAIN_BOND))
+            if (!has_ench(ENCH_PAIN_BOND) && have_passive(passive_t::pain_bond))
             {
-                int power = you.skill(SK_INVOCATIONS, 7) + you.experience_level
-                             - this->get_hit_dice();
-                int duration = 20 + random2avg(power, 2);
+                int power = 100 + you.skill(SK_INVOCATIONS, 10);
+                int duration = div_rand_round(power * 10, 10 + this->get_hit_dice());
                 this->add_ench(mon_enchant(ENCH_PAIN_BOND, 1, &you, duration));
             }
 
-            int adj_amount = amount;
-            if (!mons_gives_xp(*this, *agent))
-                adj_amount /= 2;
-            did_hurt_conduct(DID_HURT_FOE, *this, adj_amount);
+            if (flavour != BEAM_STOMP)
+            {
+                int adj_amount = amount * 6;
+                if (!mons_gives_xp(*this, *agent))
+                    adj_amount /= 2;
+                did_hurt_conduct(DID_HURT_FOE, *this, adj_amount);
+            }
         }
 
         // Handle pain bond behavior here. Is technically passive damage.

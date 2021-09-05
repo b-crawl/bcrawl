@@ -6417,7 +6417,7 @@ static bool _get_stomped(monster& mons)
     int die_size = 2 + div_rand_round(you.skill(SK_INVOCATIONS), 2);
     damage += roll_dice(2, die_size);
 
-    mons.hurt(&you, damage, BEAM_ENERGY, KILLED_BY_BEAM, "", "", true);
+    mons.hurt(&you, damage, BEAM_STOMP, KILLED_BY_BEAM, "", "", true);
 
     if (mons.alive() && you.can_see(mons))
         print_wounds(mons);
@@ -6446,6 +6446,7 @@ bool uskayaw_stomp()
     mpr("You stomp with the beat, sending a shockwave through the revelers "
             "around you!");
     apply_monsters_around_square(_get_stomped, you.pos());
+    you.props[USKAYAW_AUT_SINCE_PIETY_GAIN] = 0;
     return true;
 }
 

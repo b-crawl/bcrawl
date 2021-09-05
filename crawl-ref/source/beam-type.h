@@ -15,6 +15,7 @@ enum beam_type                  // bolt::flavour
     BEAM_ACID,
     BEAM_MIASMA,
     BEAM_WATER,
+    BEAM_STOMP,
 
     BEAM_SPORE,
     BEAM_POISON_ARROW,

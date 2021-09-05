@@ -2047,7 +2047,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         if (!invis_allowed())
             return spret::abort;
         if (get_contamination_level()
-                && !yesno("Really evoke invisibility before your magical contamination has dissipated?", false, 'n')
+                && !yesno("Really evoke invisibility before your magical contamination has dissipated?", false, 'n'))
         {
             canned_msg(MSG_OK);
             return spret::abort;

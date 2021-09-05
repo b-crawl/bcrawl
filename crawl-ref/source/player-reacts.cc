@@ -363,7 +363,7 @@ static void _handle_uskayaw_piety(int time_taken)
     else if (you.piety > piety_breakpoint(0))
     {
         // exponential piety loss
-        int exp_loss = div_rand_round(piety_scale(you.piety), 50);
+        int exp_loss = div_rand_round(piety_scale(you.piety), 25);
         exp_loss = min(exp_loss, you.piety - piety_breakpoint(0));
         if (exp_loss > 0)
             lose_piety(exp_loss);

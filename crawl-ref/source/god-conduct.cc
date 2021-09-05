@@ -1026,7 +1026,7 @@ static like_map divine_likes[] =
             "time do not interest Uskayaw", true, 1, 1, 0, nullptr,
             [] (int &piety, int &denom, const monster* /*victim*/)
             {
-                denom = 4;
+                denom = 1;
             }
         } },
     },

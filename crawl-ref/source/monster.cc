@@ -4491,9 +4491,11 @@ int monster::hurt(const actor *agent, int amount, beam_type flavour,
 
             if (flavour != BEAM_STOMP)
             {
-                int adj_amount = amount * 6;
+                int adj_amount = amount * 3;
+                int denom = 2;
                 if (!mons_gives_xp(*this, *agent))
-                    adj_amount /= 2;
+                    denom *= 2;
+                adj_amount = div_rand_round(adj_amount, denom);
                 did_hurt_conduct(DID_HURT_FOE, *this, adj_amount);
             }
         }

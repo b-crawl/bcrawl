@@ -90,7 +90,7 @@
   - v1.20: Guaranteed damage reduction percent is shown always, not just in wizmode.
   - v1.24: Weapons show their base damage adjusted by player strength and skills.
   - v1.24.1: Adjusted unarmed damage is shown on the % screen.
-  - v1.26: Scoring is changed: scores are now ((2.75*10^11 * sqrt(runes) * (1 + wins) + 3.36*10^7 * sqrt(experience)) / (turns + 1000)); "wins" is 1 for winning games, and 0 otherwise.
+  - v1.26: Scoring is changed: scores are now ((2.75\*10^11 * sqrt(runes) * (1 + wins) + 3.36\*10^7 * sqrt(experience)) / (turns + 1000)); "wins" is 1 for winning games, and 0 otherwise.
   - v1.26.1: Portals and shops no longer have a (small) chance to randomly be mimics.
   - v1.27.3: Players can inspect full item stacks in view, not just the top item.
   - v1.27.8: Monster info has more resolution: "++-" is halfway between "++" and "+++".

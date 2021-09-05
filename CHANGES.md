@@ -21,6 +21,7 @@
   - v1.23: Orange crystal statues can appear in Spider.
   - v1.28.5: Players that reached their max experience level can enter Pandemonium while holding the Orb of Zot.
   - v1.30: The Hall of Zot in Zot:5 has a slightly different shape.
+  - v1.34.1: Hell branches don't have shafts.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -384,6 +385,9 @@
   - v1.34: Instead of a random chance for earlier paralysis and pain bond, gaining piety reduces Uskayaw's timers for paralysis and pain bond.
   - v1.34: Ashenzari grants an amulet of see invisible on joining.
   - v1.34: Ashenzari skill boosts are slightly higher at lower aptitudes. They are larger than before at below +4 aptitude.
+  - v1.34.1: Uskayaw's pain bond is reworked: instead of enchanting every visible enemy once, every enemy the player attacks gains the pain bond enchantment with a greater duration, and every such enemy takes full shared damage regardless of distance.
+  - v1.34.1: Uskayaw's powers are rearranged: Stomp at \*, pain bond and lunge attacks at \*\*, Line Pass and silence immunity at \*\*\*, paralysis at \*\*\*\*, and Grand Finale at \*\*\*\*\*.
+  - v1.34.1: Uskayaw grants 50% more piety, but Uskayaw piety constantly decays at a rate proportional to its current value.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

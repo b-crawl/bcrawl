@@ -381,6 +381,8 @@ static void _handle_uskayaw_piety(int time_taken)
         }
         you.props[USKAYAW_AUT_SINCE_PIETY_GAIN] = time_since_gain;
     }
+    else  // resting should reset timer without extra waiting
+        you.props[USKAYAW_AUDIENCE_TIMER] = 0;
 
     // Re-initialize Uskayaw piety variables
     you.props[USKAYAW_NUM_MONSTERS_HURT] = 0;

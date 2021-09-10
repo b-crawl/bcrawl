@@ -684,18 +684,18 @@ ENDMAP
 # Lake of fire
 #
 NAME:  lemuel_lake_of_fire
-DEPTH: Zot
-SUBST: * =*l
-KMONS: * = orb of fire
-KFEAT: * = l
+DEPTH: Zot, !Zot:1
+NSUBST: L = 2:F / *:l
+KMONS: F = orb of fire
+KFEAT: F = l
 SUBST: .=.l
 MAP
  ..ll..
 ..llll..
-.llllll.
-.ll**ll.
-.ll**ll.
-.llllll.
+.llLLll.
+.lLLLLl.
+.lLLLLl.
+.llLLll.
 ..llll..
  ..ll..
 ENDMAP

@@ -1014,8 +1014,12 @@ void player_reacts()
     // increment constriction durations
     you.accum_has_constricted();
 
-    const int food_use = div_rand_round(player_hunger_rate() * you.time_taken,
-                                        BASELINE_DELAY);
+    int food_tick = BASELINE_DELAY;
+    if (have_passive(passive_t::slow_metabolism))
+        food_tick *= 2;
+    if (you.form == transformation::statue)
+        food_tick = (food_tick * 3) / 2;
+    const int food_use = div_rand_round(player_hunger_rate() * you.time_taken, food_tick);
     if (food_use > 0 && you.hunger > 0)
         make_hungry(food_use, true);
 

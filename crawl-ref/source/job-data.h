@@ -24,7 +24,7 @@ static const map<job_type, job_def> job_data =
 
 { JOB_ABYSSAL_KNIGHT, {
     "AK", "Abyssal Knight",
-    4, 4, 4,
+    5, 2, 5,
     { SP_DEMONSPAWN, SP_FORMICID, SP_GHOUL, SP_HILL_ORC, SP_HUMAN, SP_MINOTAUR, },
     { "ring mail", "tomahawk ego:dispersal q:10", "stone q:40" },
     WCHOICE_GOOD,

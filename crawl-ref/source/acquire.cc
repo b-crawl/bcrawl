@@ -1630,7 +1630,7 @@ bool acquirement(object_class_type class_wanted, int agent,
                 if (!error.empty())
                     mprf(MSGCH_ERROR, "Error: %s", error.c_str());
                 else
-                    mpr(The scroll of acquirement finds you a scroll of acquirement!);
+                    mpr("The scroll of acquirement finds you a scroll of acquirement!");
                 return false;
             }
             else

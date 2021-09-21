@@ -133,7 +133,7 @@ static const map<job_type, job_def> job_data =
       SP_GHOUL, SP_OCTOPODE, SP_FAIRY, SP_ENT },
     { "book of Geomancy", "stone q:300", "robe", },
     WCHOICE_NONE,
-    { { SK_TRANSMUTATIONS, 1 }, { SK_EARTH_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
+    { { SK_WEAPON, 1 }, { SK_TRANSMUTATIONS, 1 }, { SK_EARTH_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
       { SK_DODGING, 2 }, { SK_STEALTH, 2 }, }
 } },
 

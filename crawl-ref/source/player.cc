@@ -1241,6 +1241,7 @@ void update_mana_regen_amulet_attunement()
         you.props[MANA_REGEN_AMULET_ACTIVE] = 0;
 }
 
+// some hunger adjustments done in player_reacts() instead
 int player_hunger_rate(bool temp)
 {
     int hunger = 3;
@@ -1253,10 +1254,6 @@ int player_hunger_rate(bool temp)
 
     if (temp && (you.hp < you.hp_max) && you.duration[DUR_REGENERATION])
         hunger += min(hunger, 3);
-
-    // If Cheibriados has slowed your life processes, you will hunger less.
-    if (have_passive(passive_t::slow_metabolism))
-        hunger /= 2;
 
     if (hunger < 1)
         hunger = 1;

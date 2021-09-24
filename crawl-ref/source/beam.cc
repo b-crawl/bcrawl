@@ -1207,7 +1207,7 @@ void bolt::do_fire()
 
             prompt += ". Continue anyway?";
 
-            if (!yesno(prompt.c_str(), false, 'n'))
+            if (!yesno(prompt.c_str(), true, 'n'))
             {
                 canned_msg(MSG_OK);
                 beam_cancelled = true;

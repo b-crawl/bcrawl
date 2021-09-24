@@ -923,7 +923,7 @@ bool direction_chooser::move_is_ok() const
                 else if (self != CONFIRM_NONE
                          && Options.allow_self_target != CONFIRM_NONE)
                 {
-                    return yesno("Really target yourself?", false, 'n');
+                    return yesno("Really target yourself?", true, 'n');
                 }
             }
 

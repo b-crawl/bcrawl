@@ -24,7 +24,7 @@ static const map<job_type, job_def> job_data =
 
 { JOB_ABYSSAL_KNIGHT, {
     "AK", "Abyssal Knight",
-    4, 4, 4,
+    5, 2, 5,
     { SP_DEMONSPAWN, SP_FORMICID, SP_GHOUL, SP_HILL_ORC, SP_HUMAN, SP_MINOTAUR, },
     { "ring mail", "tomahawk ego:dispersal q:10", "stone q:40" },
     WCHOICE_GOOD,
@@ -133,7 +133,7 @@ static const map<job_type, job_def> job_data =
       SP_GHOUL, SP_OCTOPODE, SP_FAIRY, SP_ENT },
     { "book of Geomancy", "stone q:300", "robe", },
     WCHOICE_NONE,
-    { { SK_TRANSMUTATIONS, 1 }, { SK_EARTH_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
+    { { SK_WEAPON, 1 }, { SK_TRANSMUTATIONS, 1 }, { SK_EARTH_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
       { SK_DODGING, 2 }, { SK_STEALTH, 2 }, }
 } },
 

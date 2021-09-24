@@ -1262,18 +1262,18 @@ void apply_variations(const tile_flavour &flv, tileidx_t *bg,
     tileidx_t orig = (*bg) & TILE_FLAG_MASK;
     tileidx_t flag = (*bg) & (~TILE_FLAG_MASK);
 
-    // TODO: allow the stone type to be set in a cleaner way.
-    if (player_in_branch(BRANCH_GAUNTLET))
+    switch (you.where_are_you)
     {
+    case BRANCH_GAUNTLET:
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_WALL_LAB_STONE;
         else if (orig == TILE_DNGN_METAL_WALL)
             orig = TILE_WALL_LAB_METAL;
         else if (orig == TILE_WALL_PERMAROCK)
             orig = TILE_WALL_PERMAROCK_BROWN;
-    }
-    else if (player_in_branch(BRANCH_CRYPT))
-    {
+        break;
+        
+    case BRANCH_CRYPT:
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_WALL_CRYPT;
         else if (orig == TILE_DNGN_METAL_WALL)
@@ -1282,59 +1282,73 @@ void apply_variations(const tile_flavour &flv, tileidx_t *bg,
             orig = TILE_DNGN_OPEN_DOOR_CRYPT;
         else if (orig == TILE_DNGN_CLOSED_DOOR)
             orig = TILE_DNGN_CLOSED_DOOR_CRYPT;
-    }
-    else if (player_in_branch(BRANCH_TOMB))
-    {
+        break;
+    
+    case BRANCH_TOMB:
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_WALL_TOMB;
-    }
-    else if (player_in_branch(BRANCH_DIS))
-    {
+        break;
+    
+    case BRANCH_DIS:
         if (orig == TILE_DNGN_METAL_WALL)
             orig = TILE_DNGN_METAL_IRON;
         else if (orig == TILE_DNGN_CRYSTAL)
             orig = TILE_WALL_EMERALD;
-    }
-    else if (player_in_branch(BRANCH_COCYTUS))
-    {
+        break;
+    
+    case BRANCH_COCYTUS:
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_WALL_ICY_STONE;
-    }
-    else if (player_in_branch(BRANCH_TARTARUS))
-    {
+        break;
+    
+    case BRANCH_TARTARUS:
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_WALL_COBALT_STONE;
         else if (orig == TILE_DNGN_CRYSTAL)
             orig = TILE_WALL_EMERALD;
         else if (orig == TILE_DNGN_METAL_WALL)
             orig = TILE_DNGN_METAL_WALL_DARKGRAY;
-    }
-    else if (player_in_branch(BRANCH_GEHENNA))
-    {
+        break;
+    
+    case BRANCH_GEHENNA:
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_DNGN_STONE_WALL_RED;
         if (orig == TILE_DNGN_METAL_WALL)
             orig = TILE_DNGN_METAL_WALL_RED;
-    }
-    else if (player_in_branch(BRANCH_BAILEY))
-    {
+        break;
+    
+    case BRANCH_BAILEY:
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_WALL_STONE_SMOOTH;
-    }
-    else if (player_in_branch(BRANCH_OSSUARY))
-    {
+        break;
+    
+    case BRANCH_OSSUARY:
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_DNGN_STONE_WALL_BROWN;
-    }
-    else if (player_in_branch(BRANCH_SLIME))
-    {
+        break;
+    
+    case BRANCH_SLIME:
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_STONE_WALL_SLIME;
-    }
-    else if (player_in_branch(BRANCH_VAULTS))
-    {
+        break;
+    
+    case BRANCH_VAULTS:
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_STONE_WALL_VAULT;
+        break;
+    
+    case BRANCH_SPIDER:
+        if (orig == TILE_DNGN_STONE_WALL)
+            orig = TILE_STONE_WALL_SPIDER;
+        break;
+    
+    case BRANCH_SWAMP:
+    case BRANCH_SEWER:
+        if (orig == TILE_DNGN_STONE_WALL)
+            orig = TILE_WALL_STONE_MOSSY;
+        break;
+    
+    default: break;
     }
 
     if (orig == TILE_FLOOR_NORMAL)

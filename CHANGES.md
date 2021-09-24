@@ -74,6 +74,7 @@
   - v1.30.1: Skalds start with Swiftness.
   - v1.31.3: Abyssal Knights have "good" starting weapons instead of +1 "plain" weapons.
   - v1.31.3: Monks, Skalds, and Ent Fighters can start with a quarterstaff.
+  - v1.34.2: Earth Elementalists start with 1 Unarmed skill.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -140,6 +141,7 @@
   - v1.29: Effectiveness of dexterity is no longer stepped down above 18.
   - v1.29: Attacks no longer have a flat chance to force a hit or miss.
   - v1.34: Players gain full experience for all monster deaths, instead of half experience for kills by summons.
+  - v1.34.2: Monsters can't attack immediately after Blink Allies Encircling.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -279,6 +281,7 @@
   - v1.34: Discord is level 7.
   - v1.34: Shadow Creatures is level 7.
   - v1.34: Several summoning spells have adjusted summon caps.
+  - v1.34.2: Statue Form decreases hunger rate by 1/3.
 
 #### Removed Spells
   - Summon Guardian Golem

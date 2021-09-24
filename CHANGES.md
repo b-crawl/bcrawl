@@ -612,6 +612,7 @@
   - v1.34: Orc priests have less HP.
   - v1.34: Iron golems attack faster, deal more melee damage, and cast Quicksilver Bolt when at long range.
   - v1.34: Mana vipers are immune to electricity.
+  - v1.34.2: Draconian scorchers have a reworked spell set: Bolt of Magma, Fire Summon, and Hurl Hellfire.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

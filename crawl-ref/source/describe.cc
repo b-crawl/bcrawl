@@ -3678,11 +3678,6 @@ static string _monster_attacks_description(const monster_info& mi)
         }
 
         int dam = attack.damage;
-        if (mons_class_flag(mi.type, M_ARCHER)
-            && info.weapon && is_range_weapon(*info.weapon))
-        {
-            dam += archer_bonus_damage(mi.hd);
-        }
 
         // Damage is listed in parentheses for attacks with a flavour
         // description, but not for plain attacks.
@@ -3712,6 +3707,12 @@ static string _monster_attacks_description(const monster_info& mi)
                                                   attack_descs.end(),
                                                   "; and ", "; ");
         result << ".\n";
+    }
+
+    if (mons_class_flag(mi.type, M_ARCHER))
+    {
+        result << make_stringf("It can deal up to %d extra damage when attacking with ranged weaponry.\n",
+                                archer_bonus_damage(mi.hd));
     }
 
     if (mi.type == MONS_ROYAL_JELLY)

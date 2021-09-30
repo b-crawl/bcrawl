@@ -3685,7 +3685,7 @@ DUMMY(MONS_MERGED_SLIME_CREATURE, 'J', LIGHTGREEN, "merged slime creature",
 },
 
 {
-    MONS_REVENANT, 'L', CYAN, "revenant",
+    MONS_REVENANT, 'z', CYAN, "revenant",
     M_SEE_INVIS | M_SPEAKS,
     mrd(MR_RES_COLD, 2),
     18, MONS_REVENANT, MONS_REVENANT, MH_UNDEAD, MAG_IMMUNE,

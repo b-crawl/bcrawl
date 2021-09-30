@@ -416,7 +416,7 @@ int ranged_attack::apply_damage_modifiers(int damage, int damage_max)
     ASSERT(attacker->is_monster());
     if (attacker->as_monster()->is_archer())
     {
-        const int bonus = attacker->get_hit_dice() * 4 / 3;
+        const int bonus = archer_bonus_damage(attacker->get_hit_dice());
         damage += random2avg(bonus, 2);
     }
     return damage;

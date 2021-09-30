@@ -1125,3 +1125,8 @@ bool otr_stop_summoning_prompt(string verb)
         return true;
     }
 }
+
+int archer_bonus_damage(int hd)
+{
+    return hd * 4 / 3;
+}

@@ -85,22 +85,21 @@ string unpacifiable_reason(const monster_info& mi)
     if (mi.intel() <= I_BRAINLESS // no self-awareness
         || mons_is_tentacle_or_tentacle_segment(mi.type)) // body part
     {
-        return generic_reason;
+        return "You cannot pacify mindless monsters!";
     }
 
     const mon_holy_type holiness = mi.holi;
 
     if (!(holiness & (MH_HOLY | MH_UNDEAD | MH_DEMONIC | MH_NATURAL)))
-        return generic_reason;
+        return "You cannot pacify this type of monster!";
 
     if (mons_class_is_stationary(mi.type)) // not able to leave the level
-        return generic_reason;
+        return "You cannot pacify stationary monsters!";
 
-    if (mi.is(MB_SLEEPING)) // not aware of what is happening
+    if (mi.is(MB_SLEEPING) || mi.is(MB_DORMANT)) // not aware of what is happening
     {
-        return make_stringf("You cannot pacify this monster while %s is "
-                            "sleeping!",
-                            mi.pronoun(PRONOUN_SUBJECTIVE));
+        return make_stringf("You cannot pacify this monster while %s is %s!",
+                mi.pronoun(PRONOUN_SUBJECTIVE), mi.is(MB_SLEEPING) ? "asleep" : "dormant");
     }
 
     // pacifiable, maybe!

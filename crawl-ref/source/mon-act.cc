@@ -283,7 +283,7 @@ static void _swim_or_move_energy(monster& mon)
 
 static bool _unfriendly_or_impaired(const monster& mon)
 {
-    return !mon.wont_attack() || mon.has_ench(ENCH_INSANE) || mon.confused();
+    return !mon.wont_attack() || mon.confused();
 }
 
 // Check up to eight grids in the given direction for whether there's a

@@ -3102,7 +3102,7 @@ bool monster::strict_neutral() const
 
 bool monster::wont_attack() const
 {
-    return friendly() || good_neutral() || strict_neutral();
+    return (friendly() || good_neutral() || strict_neutral()) && !has_ench(ENCH_INSANE);
 }
 
 bool monster::pacified() const

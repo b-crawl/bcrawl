@@ -1725,8 +1725,16 @@ spret mass_enchantment(enchant_type wh_enchant, int pow, bool fail)
     bool did_msg = false;
 
     // Give mass enchantments a power multiplier.
-    pow *= 3;
-    pow /= 2;
+    switch (wh_enchant)
+    {
+    case ENCH_INSANE:
+        break;
+    
+    default:
+        pow *= 3;
+        pow /= 2;
+        break;
+    }
 
     pow = min(pow, 200);
 

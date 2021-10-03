@@ -6478,7 +6478,7 @@ bool player::undead_or_demonic() const
     return undead_state() || species == SP_DEMONSPAWN || species == SP_ONI;
 }
 
-bool player::is_holy(bool check_spells) const
+bool player::is_holy() const
 {
     return bool(holiness() & MH_HOLY) || is_good_god(religion);
 }

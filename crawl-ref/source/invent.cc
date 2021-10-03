@@ -1653,7 +1653,7 @@ bool needs_handle_warning(const item_def &item, operation_types oper,
     if (!item_type_known(item))
         return false;
 
-    if (oper == OPER_REMOVE
+    if ((oper == OPER_REMOVE || oper == OPER_PUTON)
         && item.is_type(OBJ_JEWELLERY, AMU_FAITH)
         && !(you_worship(GOD_RU) && you.piety >= piety_breakpoint(5))
         && !you_worship(GOD_GOZAG)

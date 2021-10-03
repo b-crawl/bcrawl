@@ -6464,9 +6464,6 @@ mon_holy_type player::holiness(bool temp) const
         holi = MH_NONLIVING;
     }
 
-    if (is_good_god(religion))
-        holi |= MH_HOLY;
-
     if (is_evil_god(religion) || species == SP_DEMONSPAWN || species == SP_ONI)
         holi |= MH_EVIL;
 
@@ -6483,7 +6480,7 @@ bool player::undead_or_demonic() const
 
 bool player::is_holy(bool check_spells) const
 {
-    return bool(holiness() & MH_HOLY);
+    return bool(holiness() & MH_HOLY) || is_good_god(religion);
 }
 
 bool player::is_nonliving(bool temp) const

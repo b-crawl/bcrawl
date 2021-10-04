@@ -946,7 +946,7 @@ bool bad_attack(const monster *mon, string& adj, string& suffix,
         return true;
     }
 
-    if (mon->neutral() && is_good_god(you.religion))
+    if (mon->neutral() && is_good_god(you.religion) && !mon->has_ench(ENCH_INSANE))
     {
         adj += "neutral ";
         if (you_worship(GOD_SHINING_ONE) || you_worship(GOD_ELYVILON))
@@ -1124,4 +1124,9 @@ bool otr_stop_summoning_prompt(string verb)
         canned_msg(MSG_OK);
         return true;
     }
+}
+
+int archer_bonus_damage(int hd)
+{
+    return hd * 4 / 3;
 }

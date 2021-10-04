@@ -3102,7 +3102,7 @@ bool monster::strict_neutral() const
 
 bool monster::wont_attack() const
 {
-    return friendly() || good_neutral() || strict_neutral();
+    return (friendly() || good_neutral() || strict_neutral()) && !has_ench(ENCH_INSANE);
 }
 
 bool monster::pacified() const
@@ -3530,10 +3530,6 @@ mon_holy_type monster::holiness(bool /*temp*/) const
 
     mon_holy_type holi = mons_class_holiness(type);
 
-    // Assume that all unknown gods are not holy.
-    if (is_priest() && is_good_god(god))
-        holi |= MH_HOLY;
-
     // Assume that all unknown gods are evil.
     if (is_priest() && (is_evil_god(god) || is_unknown_god(god)))
         holi |= MH_EVIL;
@@ -3557,9 +3553,14 @@ bool monster::undead_or_demonic() const
     return bool(holi & (MH_UNDEAD | MH_DEMONIC));
 }
 
-bool monster::is_holy(bool check_spells) const
+/**
+ * Is the monster innately holy, or a priest of a good god?
+ *
+ * @return Whether the monster is considered holy.
+ **/
+bool monster::is_holy() const
 {
-    return bool(holiness() & MH_HOLY);
+    return bool(holiness() & MH_HOLY) || (is_priest() && is_good_god(god));
 }
 
 bool monster::is_nonliving(bool /*temp*/) const
@@ -5143,7 +5144,8 @@ bool monster::can_go_frenzy() const
 
 bool monster::can_go_berserk() const
 {
-    return bool(holiness() & MH_NATURAL) && can_go_frenzy();
+    return bool(holiness() & (MH_NATURAL | MH_DEMONIC | MH_HOLY))
+           && can_go_frenzy();
 }
 
 bool monster::berserk() const
@@ -5756,7 +5758,9 @@ void monster::lose_energy(energy_use_type et, int div, int mult)
     // Randomize movement cost slightly, to make it less predictable,
     // and make pillar-dancing not entirely safe.
     // No randomization for allies following you to avoid traffic jam
-    if ((et == EUT_MOVE || et == EUT_SWIM) && (!friendly() || foe != MHITYOU))
+    if ((et == EUT_MOVE || et == EUT_SWIM)
+            && (!friendly() || foe != MHITYOU)
+            && type != MONS_ORB_OF_DESTRUCTION)
         energy_loss += random2(3) - 1;
 
     speed_increment -= energy_loss;

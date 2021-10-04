@@ -1725,8 +1725,16 @@ spret mass_enchantment(enchant_type wh_enchant, int pow, bool fail)
     bool did_msg = false;
 
     // Give mass enchantments a power multiplier.
-    pow *= 3;
-    pow /= 2;
+    switch (wh_enchant)
+    {
+    case ENCH_INSANE:
+        break;
+    
+    default:
+        pow *= 3;
+        pow /= 2;
+        break;
+    }
 
     pow = min(pow, 200);
 
@@ -2172,6 +2180,7 @@ void bolt_parent_init(const bolt &parent, bolt &child)
     child.attitude       = parent.attitude;
 
     child.pierce         = parent.pierce ;
+    child.aimed_at_spot  = parent.aimed_at_spot;
     child.is_explosion   = parent.is_explosion;
     child.ex_size        = parent.ex_size;
     child.foe_ratio      = parent.foe_ratio;

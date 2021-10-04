@@ -142,6 +142,7 @@
   - v1.29: Attacks no longer have a flat chance to force a hit or miss.
   - v1.34: Players gain full experience for all monster deaths, instead of half experience for kills by summons.
   - v1.34.2: Monsters can't attack immediately after Blink Allies Encircling.
+  - v1.34.3: Demons and holy creatures can go berserk.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -282,6 +283,8 @@
   - v1.34: Shadow Creatures is level 7.
   - v1.34: Several summoning spells have adjusted summon caps.
   - v1.34.2: Statue Form decreases hunger rate by 1/3.
+  - v1.34.3: Discord no longer has a power multiplier.
+  - v1.34.3: Orbs of destruction no longer have random energy.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -392,6 +395,7 @@
   - v1.34.1: Uskayaw's pain bond is reworked: instead of enchanting every visible enemy once, every enemy the player attacks gains the pain bond enchantment with a greater duration, and every such enemy takes full shared damage regardless of distance.
   - v1.34.1: Uskayaw's powers are rearranged: Stomp at \*, pain bond and lunge attacks at \*\*, Line Pass and silence immunity at \*\*\*, paralysis at \*\*\*\*, and Grand Finale at \*\*\*\*\*.
   - v1.34.1: Uskayaw grants 50% more piety, but Uskayaw piety constantly decays at a rate proportional to its current value.
+  - v1.34.3: Frenzied enemies are not considered neutral for the purposes of conduct.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

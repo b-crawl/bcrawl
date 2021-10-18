@@ -282,8 +282,7 @@ static bool _iood_shielded(monster& mon, actor &victim)
 dice_def iood_damage(int pow, int dist)
 {
     pow = stepdown_value(pow, 30, 30, 200, -1);
-    if (dist < 4)
-        pow = pow * (dist*2+3) / 10;
+    pow = min(pow, (pow * dist) / 5);
     return dice_def(9, pow / 4);
 }
 

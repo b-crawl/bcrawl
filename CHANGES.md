@@ -399,6 +399,7 @@
   - v1.34.1: Uskayaw's powers are rearranged: Stomp at \*, pain bond and lunge attacks at \*\*, Line Pass and silence immunity at \*\*\*, paralysis at \*\*\*\*, and Grand Finale at \*\*\*\*\*.
   - v1.34.1: Uskayaw grants 50% more piety, but Uskayaw piety constantly decays at a rate proportional to its current value.
   - v1.34.3: Frenzied enemies are not considered neutral for the purposes of conduct.
+  - v1.34.4: At \*\* piety, Mahkeb multiplies melee attack delay by (current_hp + max_hp) / (2 \* max_hp).
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

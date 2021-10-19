@@ -305,7 +305,7 @@ random_var player::attack_delay(const item_def *projectile, bool rescale) const
         attk_delay += shield_penalty;
     }
 
-    if (you.religion == GOD_MAKHLEB && you.piety > piety_breakpoint(1) && !projectile)
+    if (you.religion == GOD_MAKHLEB && you.piety >= piety_breakpoint(1) && !projectile)
         attk_delay = div_rand_round(attk_delay * (you.hp + you.hp_max),
                 max(2, 2 * you.hp_max));
 

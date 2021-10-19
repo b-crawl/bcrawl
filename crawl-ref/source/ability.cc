@@ -2467,7 +2467,8 @@ static spret _do_ability(const ability_def& abil, bool fail)
             return spret::abort;
 
         fail_check();
-        beam.origin_spell = SPELL_NO_SPELL; // let zapping reset this
+        // SPELL_NO_SPELL is reset by zapping, which triggers Pain self-damage
+        beam.origin_spell = SPELL_RANDOM_BOLT;
 
         switch (random2(5))
         {

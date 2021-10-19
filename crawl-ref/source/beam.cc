@@ -5406,6 +5406,14 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         const int dam = resist_adjust_damage(mon, flavour, damage.roll());
         if (dam)
         {
+            // Casting pain costs 1 hp.
+            // Deep Dwarves' damage reduction always blocks at least 1 hp.
+            if (origin_spell == SPELL_PAIN && agent() && agent()->is_player()
+                && (you.species != SP_DEEP_DWARF && !player_res_torment()))
+            {
+                dec_hp(1, false);
+            }
+            
             if (you.see_cell(mon->pos()))
             {
                 mprf("%s writhes in agony%s",

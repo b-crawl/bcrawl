@@ -285,6 +285,9 @@
   - v1.34.2: Statue Form decreases hunger rate by 1/3.
   - v1.34.3: Discord no longer has a power multiplier.
   - v1.34.3: Orbs of destruction no longer have random energy.
+  - v1.34.4: Orbs of destruction deal less damage at range 4 or less.
+  - v1.34.4: Casting Pain no longer damages the player unless it deals damage.
+  - v1.34.4: Bolt of Magma has 25% more damage scaling with power for players.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -396,6 +399,7 @@
   - v1.34.1: Uskayaw's powers are rearranged: Stomp at \*, pain bond and lunge attacks at \*\*, Line Pass and silence immunity at \*\*\*, paralysis at \*\*\*\*, and Grand Finale at \*\*\*\*\*.
   - v1.34.1: Uskayaw grants 50% more piety, but Uskayaw piety constantly decays at a rate proportional to its current value.
   - v1.34.3: Frenzied enemies are not considered neutral for the purposes of conduct.
+  - v1.34.4: At \*\* piety, Mahkeb multiplies melee attack delay by (current_hp + max_hp) / (2 \* max_hp).
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -646,3 +650,4 @@
   - v1.23: Urug is slightly stronger.
   - v1.26: Dispater and Asmodeus have higher HD.
   - v1.28.3: Maurice is reworked: he has Invisibility, Blink Other, Blink Away, Portal Projectile, a blowgun, and a wand of flame, and his melee attacks while invisible deal extra damage but reveal him.
+  - v1.34.4: Asmodeus gains Haste and Summon Illusion.

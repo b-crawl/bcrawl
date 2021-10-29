@@ -130,7 +130,7 @@ void tile_default_flv(branch_type br, int depth, tile_flavour &flv)
         return;
 
     case BRANCH_CRYPT:
-        flv.wall  = TILE_WALL_BRICK_GRAY;
+        flv.wall  = TILE_ROCK_WALL_CRYPT;
         flv.floor = TILE_FLOOR_CRYPT;
         return;
 

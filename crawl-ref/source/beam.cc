@@ -5876,10 +5876,13 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
     
     case BEAM_MELEE:
     {
+        obvious_effect = true;
+        
         if (!mon || !mon->alive())
             return MON_AFFECTED;
         
         melee_attack hew(&you, mon);
+        hew.is_projected = true;
         hew.attack();
         return MON_AFFECTED;
     }

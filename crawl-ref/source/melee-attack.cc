@@ -68,7 +68,7 @@ melee_attack::melee_attack(actor *attk, actor *defn,
     ::attack(attk, defn),
 
     attack_number(attack_num), effective_attack_number(effective_attack_num),
-    cleaving(is_cleaving), is_riposte(false),
+    cleaving(is_cleaving), is_riposte(false), is_projected(false),
     wu_jian_attack(WU_JIAN_ATTACK_NONE),
     wu_jian_number_of_targets(1)
 {
@@ -84,7 +84,8 @@ melee_attack::melee_attack(actor *attk, actor *defn,
 bool melee_attack::can_reach()
 {
     return attk_type == AT_HIT && weapon && weapon_reach(*weapon) > REACH_NONE
-           || flavour_has_reach(attk_flavour);
+           || flavour_has_reach(attk_flavour)
+           || is_projected;
 }
 
 bool melee_attack::handle_phase_attempted()

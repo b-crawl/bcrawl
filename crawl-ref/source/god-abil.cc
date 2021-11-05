@@ -3802,7 +3802,7 @@ bool makhleb_hew()
         args.mode = TARG_ANY;
         args.needs_path = false;
         args.top_prompt = "Aiming: <white>Hew</white>";
-        args.range = 8;
+        args.range = range;
 
         if (!spell_direction(beam, hew, &args))
             return false;

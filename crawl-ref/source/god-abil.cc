@@ -3817,6 +3817,14 @@ bool makhleb_hew()
         if (!beam.isValid || beam.target == you.pos())
             return false;         // early return
 
+        coord_def beam_delta = beam.delta;
+        if (grid_distance(you.pos(), beam.target) > range)
+        {
+            clear_messages();
+            mprf("That target is out of range.");
+            continue;
+        }
+
         monster* beholder = you.get_beholder(beam.target);
         if (beholder)
         {

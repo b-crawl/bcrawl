@@ -5881,12 +5881,11 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         if (!mon || !mon->alive())
             return MON_AFFECTED;
         
-        // Should Hew be 1 turn, or attack speed?
-        // int initial_time = you.time_taken;
+        int initial_time = you.time_taken;
         melee_attack hew(&you, mon);
         hew.is_projected = true;
         hew.attack();
-        // you.time_taken = initial_time;
+        you.time_taken = initial_time;
         return MON_AFFECTED;
     }
 

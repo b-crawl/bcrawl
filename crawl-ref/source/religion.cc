@@ -166,7 +166,7 @@ const vector<god_power> god_powers[NUM_GODS] =
       { 1, ABIL_MAKHLEB_MINOR_DESTRUCTION, "harness Makhleb's destructive might" },
       { 2, "Makhleb will speed up your melee attacks when your health is low.",
            "Makhleb will no longer speed up your melee attacks." },
-      { 3, ABIL_MAKHLEB_LESSER_SERVANT_OF_MAKHLEB, "summon a lesser servant of Makhleb" },
+      { 3, ABIL_MAKHLEB_HEW, "cut a path through your enemies" },
       { 4, ABIL_MAKHLEB_MAJOR_DESTRUCTION, "hurl Makhleb's greater destruction" },
       { 5, ABIL_MAKHLEB_GREATER_SERVANT_OF_MAKHLEB, "summon a greater servant of Makhleb" },
     },

@@ -6686,6 +6686,7 @@ static string _beam_type_name(beam_type type)
     case BEAM_INFESTATION:           return "infestation";
     case BEAM_VILE_CLUTCH:           return "vile clutch";
     case BEAM_SHACKLE:               return "shackles";
+    case BEAM_STOMP:                 return "stomp";
     case BEAM_MELEE:                 return "hew";
     case NUM_BEAMS:                  die("invalid beam type");
     }

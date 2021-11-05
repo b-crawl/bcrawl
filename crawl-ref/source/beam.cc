@@ -5914,7 +5914,7 @@ int bolt::range_used_on_hit() const
             used = 0; break;
         default:
             if (name == "line pass")
-                used = 1;
+                used = 0;
             else
                 used = BEAM_STOP;
             break;

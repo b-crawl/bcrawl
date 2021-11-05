@@ -2483,6 +2483,8 @@ static spret _do_ability(const ability_def& abil, bool fail)
     case ABIL_MAKHLEB_HEW:
         if (_abort_if_stationary())
             return spret::abort;
+        if (!wielded_weapon_check(you.weapon()))
+            return spret::abort;
         fail_check();
         if (!makhleb_hew())
             return spret::abort;

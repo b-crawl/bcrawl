@@ -5881,9 +5881,12 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         if (!mon || !mon->alive())
             return MON_AFFECTED;
         
+        // Should Hew be 1 turn, or attack speed?
+        // int initial_time = you.time_taken;
         melee_attack hew(&you, mon);
         hew.is_projected = true;
         hew.attack();
+        // you.time_taken = initial_time;
         return MON_AFFECTED;
     }
 
@@ -5902,8 +5905,21 @@ int bolt::range_used_on_hit() const
     // Non-beams can only affect one thing (player/monster).
     if (!pierce)
         used = BEAM_STOP;
-    else if (is_enchantment() && name != "line pass")
-        used = (flavour == BEAM_DIGGING ? 0 : BEAM_STOP);
+    else if (is_enchantment())
+    {
+        switch (flavour)
+        {
+        case BEAM_MELEE:
+        case BEAM_DIGGING:
+            used = 0; break;
+        default:
+            if (name == "line pass")
+                used = 1;
+            else
+                used = BEAM_STOP;
+            break;
+        }
+    }
     // Hellfire stops for nobody!
     else if (flavour == BEAM_DAMNATION)
         used = 0;

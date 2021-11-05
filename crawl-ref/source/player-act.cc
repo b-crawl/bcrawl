@@ -291,6 +291,12 @@ random_var player::attack_delay(const item_def *projectile, bool rescale) const
             attk_delay = div_rand_round(attk_delay * 2, 3);
     }
 
+    if (you.religion == GOD_MAKHLEB && you.piety >= piety_breakpoint(1) && !projectile)
+    {   // to prevent integer overflow (?)
+        int multiplier = div_rand_round(max(1, (you.hp + you.hp_max)) * 20, max(2, 2 * you.hp_max));
+        attk_delay = div_rand_round(attk_delay * multiplier, 20);
+    }
+
     // At the moment it never gets this low anyway.
     attk_delay = rv::max(attk_delay, random_var(3));
 
@@ -304,10 +310,6 @@ random_var player::attack_delay(const item_def *projectile, bool rescale) const
                            DELAY_SCALE);
         attk_delay += shield_penalty;
     }
-
-    if (you.religion == GOD_MAKHLEB && you.piety >= piety_breakpoint(1) && !projectile)
-        attk_delay = div_rand_round(attk_delay * (you.hp + you.hp_max),
-                max(2, 2 * you.hp_max));
 
     if (you.duration[DUR_FINESSE])
     {

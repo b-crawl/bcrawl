@@ -41,6 +41,7 @@
 #include "libutil.h"
 #include "losglobal.h"
 #include "los.h"
+#include "melee-attack.h"
 #include "message.h"
 #include "mon-behv.h"
 #include "mon-death.h"
@@ -5150,6 +5151,7 @@ bool bolt::has_saving_throw() const
     case BEAM_VILE_CLUTCH:
     case BEAM_INNER_FLAME:
     case BEAM_VIRULENCE:
+    case BEAM_MELEE:
         return false;
     case BEAM_BLINK: // resistable only if used by the player
         return (agent() && agent()->is_player());
@@ -5871,6 +5873,21 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
             obvious_effect = true;
         return MON_AFFECTED;
     }
+    
+    case BEAM_MELEE:
+    {
+        obvious_effect = true;
+        
+        if (!mon || !mon->alive())
+            return MON_AFFECTED;
+        
+        int initial_time = you.time_taken;
+        melee_attack hew(&you, mon);
+        hew.is_projected = true;
+        hew.attack();
+        you.time_taken = initial_time;
+        return MON_AFFECTED;
+    }
 
     default:
         break;
@@ -5887,8 +5904,21 @@ int bolt::range_used_on_hit() const
     // Non-beams can only affect one thing (player/monster).
     if (!pierce)
         used = BEAM_STOP;
-    else if (is_enchantment() && name != "line pass")
-        used = (flavour == BEAM_DIGGING ? 0 : BEAM_STOP);
+    else if (is_enchantment())
+    {
+        switch (flavour)
+        {
+        case BEAM_MELEE:
+        case BEAM_DIGGING:
+            used = 0; break;
+        default:
+            if (name == "line pass")
+                used = 0;
+            else
+                used = BEAM_STOP;
+            break;
+        }
+    }
     // Hellfire stops for nobody!
     else if (flavour == BEAM_DAMNATION)
         used = 0;
@@ -6674,6 +6704,8 @@ static string _beam_type_name(beam_type type)
     case BEAM_INFESTATION:           return "infestation";
     case BEAM_VILE_CLUTCH:           return "vile clutch";
     case BEAM_SHACKLE:               return "shackles";
+    case BEAM_STOMP:                 return "stomp";
+    case BEAM_MELEE:                 return "hew";
     case NUM_BEAMS:                  die("invalid beam type");
     }
     die("unknown beam type");

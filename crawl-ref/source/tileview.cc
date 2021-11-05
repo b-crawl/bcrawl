@@ -130,7 +130,7 @@ void tile_default_flv(branch_type br, int depth, tile_flavour &flv)
         return;
 
     case BRANCH_CRYPT:
-        flv.wall  = TILE_WALL_BRICK_GRAY;
+        flv.wall  = TILE_ROCK_WALL_CRYPT;
         flv.floor = TILE_FLOOR_CRYPT;
         return;
 
@@ -1346,6 +1346,11 @@ void apply_variations(const tile_flavour &flv, tileidx_t *bg,
     case BRANCH_SEWER:
         if (orig == TILE_DNGN_STONE_WALL)
             orig = TILE_WALL_STONE_MOSSY;
+        break;
+    
+    case BRANCH_SHOALS:
+        if (orig == TILE_DNGN_STONE_WALL)
+            orig = TILE_STONE_WALL_SHOALS;
         break;
     
     default: break;

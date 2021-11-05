@@ -1026,14 +1026,16 @@ ENDMAP
 
 NAME:    hangedman_misty_isle
 TAGS:    transparent no_monster_gen no_pool_fixup patrolling
-DEPTH:   D:7-12
-KMONS:   123 = sky beast
-KMONS:   45 = will-o'-wisp
-KMONS:   6 = steam dragon
-KITEM:   15% = any / gold
-KITEM:   36 = gold, star_item
+DEPTH:   D:8-12
+KMONS:   Y = sky beast
+KMONS:   P = will-o'-wisp
+KMONS:   S = steam dragon
+KITEM:   G = any / gold
+KITEM:   I = gold, star_item
 KFEAT:   F = shallow_water
+NSUBST:  M = 1:P / 1:S / 3:Y / 2:I / 2:G / *:.
 SHUFFLE: Ww, aA, bB, cC, dD
+NSUBST:  R = 4:x / 2:W / *:.
 SUBST:   abcd = ., ABCD = x, X = xx.
 MARKER:  F = lua:fog_machine {cloud_type = "thin mist", \
              pow_min = 5, pow_max = 12, delay_min = 28, delay_max = 42, \
@@ -1043,11 +1045,11 @@ MAP
   ...a....b...
  ...AWWWWWWB...
 ...XFwwwwwwFB..
-..AWWw.x2.wwWb.
-.aWww.16x%.wW..
-..Ww..xxx..wW..
-..Ww.%x35.wwWd.
-.cWww.4x.wWWD..
+..AWWwMMRMwwWb.
+.aWwwMRxxRMwW..
+..WwMRxxxRMwW..
+..WwMRxxRMwwWd.
+.cWwwMRMMwWWD..
 ..CFwwwwwwFX...
 ...CWWWWWWD...
  ...c....d...

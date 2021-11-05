@@ -366,13 +366,6 @@ x......x.....x.
 ENDMAP
 
 ##############################################################################
-NAME:   dpeg_arrival_tiny_a
-TAGS:   arrival
-ORIENT: float
-MAP
-{
-ENDMAP
-
 NAME:   dpeg_arrival_tiny_b
 TAGS:   arrival
 WEIGHT: 2

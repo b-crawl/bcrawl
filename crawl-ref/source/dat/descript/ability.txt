@@ -296,10 +296,10 @@ Minor Destruction ability
 Shoots a random harmful blast at the targeted creature. Damage and accuracy
 are increased by Invocations skill.
 %%%%
-Lesser Servant of Makhleb ability
+Hew ability
 
-Summons a minor demon. Failing to use this ability correctly will turn the
-demon hostile.
+Cuts a path through a line of enemies, hitting each with one melee attack.
+Maximum distance is increased by Invocations skill.
 %%%%
 Major Destruction ability
 

@@ -414,8 +414,8 @@ static const ability_def Ability_List[] =
     // Makhleb
     { ABIL_MAKHLEB_MINOR_DESTRUCTION, "Minor Destruction",
       0, scaling_cost::fixed(1), 0, 0, {fail_basis::invo, 40, 5, 20}, abflag::none },
-    { ABIL_MAKHLEB_LESSER_SERVANT_OF_MAKHLEB, "Lesser Servant of Makhleb",
-      0, scaling_cost::fixed(4), 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::hostile },
+    { ABIL_MAKHLEB_HEW, "Hew",
+      0, scaling_cost::fixed(4), 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_MAKHLEB_MAJOR_DESTRUCTION, "Major Destruction",
       0, scaling_cost::fixed(6), 0, generic_cost::range(0, 1),
       {fail_basis::invo, 60, 4, 25}, abflag::none },
@@ -986,7 +986,6 @@ ability_type fixup_ability(ability_type ability)
 
     case ABIL_ELYVILON_HEAL_OTHER:
     case ABIL_TSO_SUMMON_DIVINE_WARRIOR:
-    case ABIL_MAKHLEB_LESSER_SERVANT_OF_MAKHLEB:
     case ABIL_MAKHLEB_GREATER_SERVANT_OF_MAKHLEB:
     case ABIL_TROG_BROTHERS_IN_ARMS:
     case ABIL_GOZAG_BRIBE_BRANCH:
@@ -2481,12 +2480,12 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
     }
 
-    case ABIL_MAKHLEB_LESSER_SERVANT_OF_MAKHLEB:
-        summon_demon_type(random_choose(MONS_HELLWING, MONS_NEQOXEC,
-                                        MONS_ORANGE_DEMON, MONS_SMOKE_DEMON,
-                                        MONS_YNOXINUL),
-                          20 + you.skill(SK_INVOCATIONS, 3),
-                          GOD_MAKHLEB, 0, !fail);
+    case ABIL_MAKHLEB_HEW:
+        if (_abort_if_stationary())
+            return spret::abort;
+        fail_check();
+        if (!makhleb_hew())
+            return spret::abort;
         break;
 
     case ABIL_MAKHLEB_MAJOR_DESTRUCTION:

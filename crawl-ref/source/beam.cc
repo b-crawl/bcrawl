@@ -41,6 +41,7 @@
 #include "libutil.h"
 #include "losglobal.h"
 #include "los.h"
+#include "melee-attack.h"
 #include "message.h"
 #include "mon-behv.h"
 #include "mon-death.h"
@@ -5150,6 +5151,7 @@ bool bolt::has_saving_throw() const
     case BEAM_VILE_CLUTCH:
     case BEAM_INNER_FLAME:
     case BEAM_VIRULENCE:
+    case BEAM_MELEE:
         return false;
     case BEAM_BLINK: // resistable only if used by the player
         return (agent() && agent()->is_player());
@@ -5869,6 +5871,16 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         mon->add_ench(mon_enchant(ENCH_SHACKLE, 0, &you, dur));
         if (simple_monster_message(*mon, " is shackled."))
             obvious_effect = true;
+        return MON_AFFECTED;
+    }
+    
+    case BEAM_MELEE:
+    {
+        if (!mon || !mon->alive())
+            return MON_AFFECTED;
+        
+        melee_attack hew(&you, mon);
+        hew.attack();
         return MON_AFFECTED;
     }
 
@@ -6674,6 +6686,7 @@ static string _beam_type_name(beam_type type)
     case BEAM_INFESTATION:           return "infestation";
     case BEAM_VILE_CLUTCH:           return "vile clutch";
     case BEAM_SHACKLE:               return "shackles";
+    case BEAM_MELEE:                 return "hew";
     case NUM_BEAMS:                  die("invalid beam type");
     }
     die("unknown beam type");

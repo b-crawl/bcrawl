@@ -184,6 +184,8 @@ bool uskayaw_stomp();
 bool uskayaw_line_pass();
 spret uskayaw_grand_finale(bool fail);
 
+bool makhleb_hew();
+
 bool hepliaklqana_choose_ancestor_type(int ancestor_type);
 spret hepliaklqana_incarnate(bool fail);
 void hep_remove_incarnate();

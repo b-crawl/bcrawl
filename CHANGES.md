@@ -400,6 +400,8 @@
   - v1.34.1: Uskayaw grants 50% more piety, but Uskayaw piety constantly decays at a rate proportional to its current value.
   - v1.34.3: Frenzied enemies are not considered neutral for the purposes of conduct.
   - v1.34.4: At \*\* piety, Mahkeb multiplies melee attack delay by (current_hp + max_hp) / (2 \* max_hp).
+  - v1.34.5: Makhleb's attack speed bonus multiplier applies before shield penalty, instead of after it.
+  - v1.34.5: TSO abilities are available earlier: Divine Shield at \*, ammo gifts at \*\*, and Cleansing Flame at \*\*\*.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

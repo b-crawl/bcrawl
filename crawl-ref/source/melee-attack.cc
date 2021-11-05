@@ -3373,6 +3373,10 @@ void melee_attack::cleave_setup()
     if (attacker->pos() == defender->pos())
         return;
 
+    // don't multi-cleave starting position when using Hew
+    if (!adjacent(attack_position, defender->pos())
+        return;
+
     // We need to get the list of the remaining potential targets now because
     // if the main target dies, its position will be lost.
     get_cleave_targets(*attacker, defender->pos(), cleave_targets,

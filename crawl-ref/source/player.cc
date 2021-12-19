@@ -6674,6 +6674,10 @@ int player_res_magic(bool calc_unid, bool temp)
     if (you.form == transformation::ice_beast && temp)
         rm += (MR_PIP * 2);
 
+    // Trog berserk
+    if (have_passive(passive_t::berserk_mr_bonus) && you.duration[DUR_BERSERK] && temp)
+        rm += MR_PIP * 2;
+
     // Enchantment effect
     if (you.duration[DUR_LOWERED_MR] && temp)
         rm /= 2;
@@ -8502,7 +8506,7 @@ void player_end_berserk()
     if (one_chance_in(10 + you.get_mutation_level(MUT_BERSERK) * 25)
             && you.species != SP_DJINNI)
     {
-        if (you.religion == GOD_TROG && you.piety >= piety_breakpoint(1))
+        if (you.religion == GOD_TROG)
             mprf(MSGCH_GOD, you.religion, "You almost pass out, but Trog's vigour flows through you.");
         else
         {

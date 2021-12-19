@@ -6674,10 +6674,6 @@ int player_res_magic(bool calc_unid, bool temp)
     if (you.form == transformation::ice_beast && temp)
         rm += (MR_PIP * 2);
 
-    // Trog's Hand
-    if (you.duration[DUR_TROGS_HAND] && temp)
-        rm += MR_PIP * 2;
-
     // Enchantment effect
     if (you.duration[DUR_LOWERED_MR] && temp)
         rm /= 2;
@@ -8507,7 +8503,7 @@ void player_end_berserk()
             && you.species != SP_DJINNI)
     {
         if (you.religion == GOD_TROG && you.piety >= piety_breakpoint(1))
-            mprf(MSGCH_GOD, you.religion, "You almost pass out, but Trog's vigour flows through your veins.");
+            mprf(MSGCH_GOD, you.religion, "You almost pass out, but Trog's vigour flows through you.");
         else
         {
             mprf(MSGCH_WARN, "You pass out from exhaustion.");

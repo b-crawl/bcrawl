@@ -147,8 +147,8 @@ enum class passive_t
     /// Protection against necromancy miscasts and mummy death curses.
     miscast_protection_necromancy,
 
-    /// Chance to extend berserk duration and avoid paralysis, piety dependent.
-    extend_berserk,
+    /// MR++ while berserk.
+    berserk_mr_bonus,
 
     /// Gold aura that distracts enemies.
     gold_aura,

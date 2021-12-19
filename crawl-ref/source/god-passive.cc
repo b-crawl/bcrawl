@@ -224,6 +224,9 @@ static const vector<god_passive> god_passives[] =
         { -1, passive_t::abjuration_protection,
               "GOD NOW protects your allies from abjuration"
         },
+        {  2, passive_t::berserk_mr_bonus,
+              "NOW resist magical effects better while berserk",
+        },
     },
 
     // Nemelex

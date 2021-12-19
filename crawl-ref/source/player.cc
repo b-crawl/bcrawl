@@ -6676,7 +6676,7 @@ int player_res_magic(bool calc_unid, bool temp)
 
     // Trog berserk
     if (have_passive(passive_t::berserk_mr_bonus) && you.duration[DUR_BERSERK] && temp)
-        rm += MR_PIP * 2;
+        rm += MR_PIP * 3;
 
     // Enchantment effect
     if (you.duration[DUR_LOWERED_MR] && temp)

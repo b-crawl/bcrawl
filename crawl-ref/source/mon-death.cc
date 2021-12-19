@@ -2056,18 +2056,7 @@ item_def* monster_die(monster& mons, killer_type killer,
     // Various sources of berserk extension on kills.
     if (killer == KILL_YOU && you.berserk())
     {
-        if (have_passive(passive_t::extend_berserk)
-            && you.piety > random2(1000))
-        {
-            const int bonus = (3 + random2avg(10, 2)) / 2;
-
-            you.increase_duration(DUR_BERSERK, bonus);
-
-            mprf(MSGCH_GOD, you.religion,
-                 "You feel the power of %s in you as your rage grows.",
-                 uppercase_first(god_name(you.religion)).c_str());
-        }
-        else if (player_equip_unrand(UNRAND_BLOODLUST) && coinflip())
+        if (player_equip_unrand(UNRAND_BLOODLUST) && coinflip())
         {
             const int bonus = (2 + random2(4)) / 2;
             you.increase_duration(DUR_BERSERK, bonus);

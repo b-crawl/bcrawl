@@ -189,6 +189,8 @@ const vector<god_power> god_powers[NUM_GODS] =
     // Trog
     {
       { 1, ABIL_TROG_BERSERK, "go berserk at will" },
+      { 2, "Trog protects you from fainting after berserk rages.",
+           "Trog no longer protects you from fainting after berserk rages." },
       { 2, ABIL_TROG_REGEN_MR, "call upon Trog for regeneration and magic resistance" },
       { 3, "Trog will fully protect you from unholy torment while you are berserk.",
            "Trog will no longer protect you from unholy torment." },

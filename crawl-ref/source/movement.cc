@@ -892,6 +892,13 @@ void move_player_action(coord_def move)
         break;
     default: break;
     }
+    
+    if (did_wu_jian_attack && you.hunger_state <= HS_STARVING
+            && !you_foodless() && you.species != SP_VAMPIRE)
+    {
+        mprf(MSGCH_WARN, "You are starving!");
+        more();
+    }
 
     // If you actually moved you are eligible for amulet of the acrobat.
     if (!attacking && moving && !did_wu_jian_attack && !did_wall_jump)

@@ -847,7 +847,7 @@ static void _describe_regen(status_info& inf)
         else
             inf.light_colour = _dur_colour(BLUE, dur_expiring(DUR_TROGS_HAND));
         inf.light_text   = "Regen";
-        else if (no_heal)
+        if (no_heal)
             inf.light_colour = DARKGREY;
     }
 

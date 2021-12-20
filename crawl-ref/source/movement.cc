@@ -38,6 +38,7 @@
 #include "random.h"
 #include "religion.h"
 #include "shout.h"
+#include "spl-summoning.h"
 #include "state.h"
 #include "stringutil.h"
 #include "terrain.h"
@@ -685,6 +686,7 @@ void move_player_action(coord_def move)
     }
 
     const bool running = you_are_delayed() && current_delay()->is_run();
+    coord_def prev_pos = you.pos();
 
     if (!attacking && (targ_pass || can_wall_jump)
         && moving && !beholder && !fmonger)
@@ -758,8 +760,6 @@ void move_player_action(coord_def move)
         you.stop_directly_constricting_all(true);
         if (you.is_directly_constricted())
             you.stop_being_constricted();
-
-        coord_def prev_pos = you.pos();
         
         // Don't trigger traps when confusion causes no move.
         if (you.pos() != targ && targ_pass)

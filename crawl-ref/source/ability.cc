@@ -394,8 +394,6 @@ static const ability_def Ability_List[] =
     // Yredelemnul
     { ABIL_YRED_INJURY_MIRROR, "Injury Mirror",
       0, 0, 0, 0, {fail_basis::invo, 40, 4, 20}, abflag::piety|abflag::variable_mp },
-    { ABIL_YRED_ANIMATE_REMAINS, "Animate Remains",
-      2, 0, 200, 0, {fail_basis::invo, 40, 4, 20}, abflag::none },
     { ABIL_YRED_RECALL_UNDEAD_SLAVES, "Recall Undead Slaves",
       2, 0, 0, 0, {fail_basis::invo, 50, 4, 20}, abflag::none },
     { ABIL_YRED_ANIMATE_DEAD, "Animate Dead",
@@ -2322,17 +2320,6 @@ static spret _do_ability(const ability_def& abil, bool fail)
         }
         you.duration[DUR_MIRROR_DAMAGE] = 9 * BASELINE_DELAY
                      + random2avg(you.piety * BASELINE_DELAY, 2) / 10;
-        break;
-
-    case ABIL_YRED_ANIMATE_REMAINS:
-        fail_check();
-        canned_msg(MSG_ANIMATE_REMAINS);
-        if (animate_remains(you.pos(), CORPSE_BODY, BEH_FRIENDLY,
-                            MHITYOU, &you, "", GOD_YREDELEMNUL) < 0)
-        {
-            mpr("There are no remains here to animate!");
-            return spret::abort;
-        }
         break;
 
     case ABIL_YRED_ANIMATE_DEAD:

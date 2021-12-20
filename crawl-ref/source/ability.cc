@@ -438,7 +438,7 @@ static const ability_def Ability_List[] =
       0, 0, 200, 2, {fail_basis::invo, piety_breakpoint(2), 0, 1}, abflag::none },
     { ABIL_TROG_BROTHERS_IN_ARMS, "Brothers in Arms",
       0, 0, 0, generic_cost::range(5, 6),
-      {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::none },
+      {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::exhaustion },
 
     // Elyvilon
     { ABIL_ELYVILON_LIFESAVING, "Divine Protection",
@@ -2529,11 +2529,16 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_TROG_BROTHERS_IN_ARMS:
+        if (you.duration[DUR_EXHAUSTED])
+        {
+            mpr("You are too exhausted.");
+            return spret::abort;
+        }
         fail_check();
         // Trog abilities don't use or train invocations.
-        summon_berserker(you.piety / 2 + div_rand_round(you.experience_level * 15, 4) +
-                         random2(you.piety/4) - random2(you.piety/4),
-                         &you);
+        if (summon_berserker(you.piety / 2 + div_rand_round(you.experience_level * 15, 4) +
+                random2(you.piety/4) - random2(you.piety/4), &you))
+            you.increase_duration(DUR_EXHAUSTED, 10 + random2(5));
         break;
 
     case ABIL_SIF_MUNA_DIVINE_ENERGY:

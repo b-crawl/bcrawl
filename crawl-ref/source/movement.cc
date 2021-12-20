@@ -902,7 +902,8 @@ void move_player_action(coord_def move)
         more();
     }
     
-    if (you.religion == GOD_YREDELEMNUL && moving && prev_pos != you.pos())
+    if (you.religion == GOD_YREDELEMNUL && you.piety >= piety_breakpoint(0)
+            && moving && prev_pos != you.pos())
         animate_remains(prev_pos, CORPSE_BODY, BEH_FRIENDLY,
                             MHITYOU, &you, "", GOD_YREDELEMNUL);
 

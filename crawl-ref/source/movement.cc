@@ -38,6 +38,7 @@
 #include "random.h"
 #include "religion.h"
 #include "shout.h"
+#include "spl-summoning.h"
 #include "state.h"
 #include "stringutil.h"
 #include "terrain.h"
@@ -685,6 +686,7 @@ void move_player_action(coord_def move)
     }
 
     const bool running = you_are_delayed() && current_delay()->is_run();
+    coord_def prev_pos = you.pos();
 
     if (!attacking && (targ_pass || can_wall_jump)
         && moving && !beholder && !fmonger)
@@ -744,7 +746,7 @@ void move_player_action(coord_def move)
                 auto cloud = static_cast<cloud_type>(
                     you.props[XOM_CLOUD_TRAIL_TYPE_KEY].get_int());
                 ASSERT(cloud != CLOUD_NONE);
-                check_place_cloud(cloud,you.pos(), random_range(3, 10), &you,
+                check_place_cloud(cloud, you.pos(), random_range(3, 10), &you,
                                   0, -1);
             }
         }
@@ -758,7 +760,7 @@ void move_player_action(coord_def move)
         you.stop_directly_constricting_all(true);
         if (you.is_directly_constricted())
             you.stop_being_constricted();
-
+        
         // Don't trigger traps when confusion causes no move.
         if (you.pos() != targ && targ_pass)
             move_player_to_grid(targ, true);
@@ -892,6 +894,18 @@ void move_player_action(coord_def move)
         break;
     default: break;
     }
+    
+    if (did_wu_jian_attack && you.hunger_state <= HS_STARVING
+            && !you_foodless() && you.species != SP_VAMPIRE)
+    {
+        mprf(MSGCH_WARN, "You are starving!");
+        more();
+    }
+    
+    if (you.religion == GOD_YREDELEMNUL && you.piety >= piety_breakpoint(0)
+            && moving && prev_pos != you.pos())
+        animate_remains(prev_pos, CORPSE_BODY, BEH_FRIENDLY,
+                            MHITYOU, &you, "", GOD_YREDELEMNUL);
 
     // If you actually moved you are eligible for amulet of the acrobat.
     if (!attacking && moving && !did_wu_jian_attack && !did_wall_jump)

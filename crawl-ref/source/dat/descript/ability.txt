@@ -344,10 +344,9 @@ to berserk again for a short time.
 %%%%
 Trog's Hand ability
 
-Invokes a powerful regeneration ability which stacks with all other sources and
-is effective even on those who would not otherwise be able to regenerate. While
-active, the user will also be granted significant protection from hostile
-enchantments.
+Invokes a powerful regeneration ability that immediately recovers the ability
+to enter a berserk rage. Regeneration from this stacks with all other sources and
+is effective even on those who would not otherwise be able to regenerate.
 %%%%
 Brothers in Arms ability
 

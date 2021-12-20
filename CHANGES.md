@@ -403,6 +403,14 @@
   - v1.34.5: Makhleb's attack speed bonus multiplier applies before shield penalty, instead of after it.
   - v1.34.5: Makhleb's Lesser Servant ability is replaced by Hew, which makes the player pass through a line of enemies and attack each of them one time. Cleaving can only apply to the first attack.
   - v1.34.5: TSO abilities are available earlier: Divine Shield at \*, ammo gifts at \*\*, and Cleansing Flame at \*\*\*.
+  - v1.35: Yredelemnul's Animate Remains ability is replaced by passively animating corpses when the player moves off of them.
+  - v1.35: Trog always stops the player from fainting after berserk ends, even at low piety.
+  - v1.35: Trog no longer extends berserk rages on killing monsters.
+  - v1.35: Trog's Hand removes -Berserk but doesn't provide MR++.
+  - v1.35: Trog grants MR+++ while berserk at \*\*\*.
+  - v1.35: Trog's torment protection while berserk comes later, at \*\*\*\*.
+  - v1.35: Trog's Brothers in Arms ability gives exhaustion.
+  - v1.35: Using Wu Jian attacks while starving gives a warning.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -624,6 +632,8 @@
   - v1.34: Iron golems attack faster, deal more melee damage, and cast Quicksilver Bolt when at long range.
   - v1.34: Mana vipers are immune to electricity.
   - v1.34.2: Draconian scorchers have a reworked spell set: Bolt of Magma, Fire Summon, and Hurl Hellfire.
+  - v1.35: Scorpions are edible.
+  - v1.35: Giant cockroaches are inedible.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

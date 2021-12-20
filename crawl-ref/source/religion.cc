@@ -131,7 +131,8 @@ const vector<god_power> god_powers[NUM_GODS] =
     },
 
     // Yredelemnul
-    { { 1, ABIL_YRED_ANIMATE_REMAINS, "animate remains" },
+    { { 1, "Yredelemnul will animate corpses you pass over.",
+           "Yredelemnul will no longer animate corpses." },
       { 2, ABIL_YRED_RECALL_UNDEAD_SLAVES, "recall your undead slaves" },
       { 2, ABIL_YRED_INJURY_MIRROR, "mirror injuries on your foes" },
       { 3, ABIL_YRED_ANIMATE_DEAD, "animate legions of the dead" },
@@ -188,11 +189,15 @@ const vector<god_power> god_powers[NUM_GODS] =
 
     // Trog
     {
+      { 0, "Trog protects you from fainting after berserk rages.",
+           "Trog no longer protects you from fainting after berserk rages." },
       { 1, ABIL_TROG_BERSERK, "go berserk at will" },
-      { 2, ABIL_TROG_REGEN_MR, "call upon Trog for regeneration and magic resistance" },
-      { 3, "Trog will fully protect you from unholy torment while you are berserk.",
-           "Trog will no longer protect you from unholy torment." },
+      { 2, ABIL_TROGS_HAND, "call upon Trog for regeneration and vigour" },
+      { 3, "Trog will increase your resistance to enchantments while you are berserk.",
+           "Trog will no longer increase your resistance to enchantments." },
       { 4, ABIL_TROG_BROTHERS_IN_ARMS, "call in reinforcements" },
+      { 4, "Trog will fully protect you from unholy torment while you are berserk.",
+           "Trog will no longer protect you from unholy torment." },
       { 5, "Trog will gift you weapons as you gain piety.",
            "Trog will no longer gift you weapons." },
     },

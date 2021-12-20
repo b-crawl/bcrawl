@@ -224,9 +224,8 @@ static const vector<god_passive> god_passives[] =
         { -1, passive_t::abjuration_protection,
               "GOD NOW protects your allies from abjuration"
         },
-        {  0, passive_t::extend_berserk,
-              "can NOW maintain berserk longer, and are less likely to pass out",
-              "can NOW maintain berserk as long, and are more likely to pass out"
+        {  3, passive_t::berserk_mr_bonus,
+              "NOW resist magical effects better while berserk",
         },
     },
 

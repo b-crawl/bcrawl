@@ -6674,9 +6674,9 @@ int player_res_magic(bool calc_unid, bool temp)
     if (you.form == transformation::ice_beast && temp)
         rm += (MR_PIP * 2);
 
-    // Trog's Hand
-    if (you.duration[DUR_TROGS_HAND] && temp)
-        rm += MR_PIP * 2;
+    // Trog berserk
+    if (you.duration[DUR_BERSERK] && have_passive(passive_t::berserk_mr_bonus) && temp)
+        rm += MR_PIP * 3;
 
     // Enchantment effect
     if (you.duration[DUR_LOWERED_MR] && temp)
@@ -8503,16 +8503,12 @@ void player_end_berserk()
     //       avoid the mutation being a "death sentence" to
     //       certain characters.
 
-    if (one_chance_in(10 + you.get_mutation_level(MUT_BERSERK) * 25))
+    if (one_chance_in(10 + you.get_mutation_level(MUT_BERSERK) * 25)
+            && you.species != SP_DJINNI)
     {
-        // Note the beauty of Trog! They get an extra save that's at
-        // the very least 20% and goes up to 100%.
-        if (have_passive(passive_t::extend_berserk)
-            && x_chance_in_y(you.piety, piety_breakpoint(5)))
-        {
-            mpr("Trog's vigour flows through your veins.");
-        }
-        else if (you.species != SP_DJINNI)
+        if (you.religion == GOD_TROG)
+            mprf(MSGCH_GOD, you.religion, "You almost pass out, but Trog's vigour flows through you.");
+        else
         {
             mprf(MSGCH_WARN, "You pass out from exhaustion.");
             you.increase_duration(DUR_PARALYSIS, roll_dice(1, 4));

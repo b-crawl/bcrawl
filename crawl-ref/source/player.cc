@@ -1603,7 +1603,7 @@ bool player_res_torment(bool random)
         return true;
     }
 
-    if (in_good_standing(GOD_TROG, 2) && you.duration[DUR_BERSERK])
+    if (in_good_standing(GOD_TROG, 3) && you.duration[DUR_BERSERK])
         return true;
 
     return (get_form()->res_neg() == 3) || you.petrified();

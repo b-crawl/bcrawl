@@ -2525,7 +2525,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
     case ABIL_TROGS_HAND:
         fail_check();
         // Trog abilities don't use or train invocations.
-        trog_do_trogs_hand(you.piety / 2);
+        trog_do_trogs_hand(you.piety);
         break;
 
     case ABIL_TROG_BROTHERS_IN_ARMS:

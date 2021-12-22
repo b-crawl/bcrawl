@@ -1481,17 +1481,16 @@ bool vehumet_supports_spell(spell_type spell)
 
 void trog_do_trogs_hand(int pow)
 {
-    you.increase_duration(DUR_TROGS_HAND,
-                          5 + roll_dice(2, pow / 3 + 1), 100);
-    
+    int factor = div_rand_round(pow, 8) + 1;
+    you.increase_duration(DUR_TROGS_HAND, 7 + roll_dice(2, factor), 100);
+
     bool was_no_berserk = false;
-    
     if (you.duration[DUR_BERSERK_COOLDOWN])
     {
         you.duration[DUR_BERSERK_COOLDOWN] = 0;
         was_no_berserk = true;
     }
-    
+
     mprf("Your skin crawls%s.", was_no_berserk ? ", and Trog's vigour flows through you" : "");
 }
 

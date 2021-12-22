@@ -1161,7 +1161,7 @@ int player_regen(bool apply_bonuses)
 
     // Trog's Hand. This circumvents sickness or inhibited regeneration.
     if (apply_bonuses && you.duration[DUR_TROGS_HAND])
-        rr += 100;
+        rr += (you.experience_level + 3) * 10;
 
     return rr;
 }

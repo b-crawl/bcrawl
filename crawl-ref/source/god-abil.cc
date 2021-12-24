@@ -1481,8 +1481,9 @@ bool vehumet_supports_spell(spell_type spell)
 
 void trog_do_trogs_hand(int pow)
 {
-    int factor = div_rand_round(pow, 8) + 1;
-    you.increase_duration(DUR_TROGS_HAND, 7 + roll_dice(2, factor), 100);
+    int factor = div_rand_round(pow + 7*8, 16);
+    int dur = factor + roll_dice(2, factor);
+    you.increase_duration(DUR_TROGS_HAND, dur, 120);
 
     bool was_no_berserk = false;
     if (you.duration[DUR_BERSERK_COOLDOWN])

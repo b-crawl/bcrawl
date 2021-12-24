@@ -967,11 +967,10 @@ COLOUR:  ETC_GOLD
 TILE:    urand_robustness
 
 NAME:    ring of the Mage
-OBJ:     OBJ_JEWELLERY/RING_WIZARDRY
+OBJ:     OBJ_JEWELLERY/RING_PROTECTION_FROM_MAGIC
 COLOUR:  ETC_ENCHANT
 TILE:    urand_mage
-INT:     3
-MAGIC:   2
+BOOL:    archmagi
 
 NAME:     brooch of Shielding
 OBJ:      OBJ_JEWELLERY/AMU_REFLECTION

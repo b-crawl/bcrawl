@@ -268,7 +268,7 @@ int actor::archmagi(bool calc_unid, bool items) const
     if (!items)
         return 0;
 
-    return wearing_ego(EQ_ALL_ARMOUR, SPARM_ARCHMAGI, calc_unid);
+    return wearing_ego(EQ_ALL_ARMOUR, SPARM_ARCHMAGI, calc_unid) + scan_artefacts(ARTP_ARCHMAGI);
 }
 
 /**

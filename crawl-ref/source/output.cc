@@ -2424,9 +2424,6 @@ static vector<formatted_string> _get_overview_resistances(
                         || sh && shield_reflects(*sh);
     out += _resist_composer("Reflect", cwidth, reflect) + "\n";
 
-    const int harm = you.extra_harm(calc_unid);
-    out += _resist_composer("Harm", cwidth, harm) + "\n";
-
     const int rclar = you.clarity(calc_unid);
     const int stasis = you.stasis();
     // TODO: what about different levels of anger/berserkitis?

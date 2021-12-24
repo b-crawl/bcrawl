@@ -242,6 +242,14 @@ static void _equip_artefact_effect(item_def &item, bool *show_msgs, bool unmeld,
     if (proprt[ARTP_CONTAM] && msg && !unmeld)
         mpr("You feel a build-up of mutagenic energy.");
 
+    if (proprt[ARTP_ARCHMAGI] && msg && !unmeld)
+    {
+        if (!you.skill(SK_SPELLCASTING))
+            mpr("You feel strangely lacking in power.");
+        else
+            mpr("You feel powerful.");
+    }
+
     if (!unmeld && !item.cursed() && proprt[ARTP_CURSE])
         do_curse_item(item, !msg);
 
@@ -352,6 +360,9 @@ static void _unequip_artefact_effect(item_def &item,
         mpr("Mutagenic energies flood into your body!");
         contaminate_player(7000, true);
     }
+
+    if (proprt[ARTP_ARCHMAGI] && msg && !meld)
+        mpr("You feel strangely numb.");
 
     if (proprt[ARTP_DRAIN] && !meld)
         drain_player(150, true, true);

@@ -596,6 +596,8 @@ static bool _artp_can_go_on_item(artefact_prop_type prop, const item_def &item,
         case ARTP_HARM:
             return item_class != OBJ_JEWELLERY && extant_props[ARTP_DRAIN];
             // only get harm with *Drain
+        case ARTP_ARCHMAGI:
+            return item.is_type(OBJ_ARMOUR, ARM_ROBE);
         default:
             return true;
     }

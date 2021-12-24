@@ -923,6 +923,7 @@ INSCRIP: Umbra
 OBJ:     OBJ_JEWELLERY/RING_STEALTH
 COLOUR:  ETC_DARK
 TILE:    urand_shadows
+LIFE:    1
 BOOL:    inv
 VALUE:   400
 

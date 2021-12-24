@@ -3614,7 +3614,7 @@ bool god_hates_your_god(god_type god, god_type your_god)
         return true;
     
     case GOD_MAKHLEB:
-        if(your_god == GOD_LUGONU)
+        if(your_god == GOD_LUGONU || your_god == GOD_TROG)
             return false;
         return true;
     

@@ -143,6 +143,7 @@
   - v1.34: Players gain full experience for all monster deaths, instead of half experience for kills by summons.
   - v1.34.2: Monsters can't attack immediately after Blink Allies Encircling.
   - v1.34.3: Demons and holy creatures can go berserk.
+  - v1.35.1: Archmagi can stack up to 2.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -411,6 +412,8 @@
   - v1.35: Trog's torment protection while berserk comes later, at \*\*\*\*.
   - v1.35: Trog's Brothers in Arms ability gives exhaustion.
   - v1.35: Using Wu Jian attacks while starving gives a warning.
+  - v1.35.1: Trog's Hand regeneration scales with player XL, and is increased on average.
+  - v1.35.1: Makhleb won't punish followers for converting to Trog.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -529,6 +532,8 @@
   - v1.27.6: Hendrick's Axe is a +6 battleaxe of distortion giving +6 dexterity that makes noise and can frenzy enemies it hits. The frenzied enemies have a chance to also be blinded briefly.
   - v1.28.2: Skullcrusher is reworked: +1, 38 base dmg, 1.9 base delay, antimagic, -Cast *Drain rN+ MR+ AC+6.
   - v1.34: The Plutonium Sword is now a +8 triple sword that drains 4 mana to cast a weak Irradiate on what it hits. If the target survives, it has a 1/12 chance to be polymorphed. Also, the sword can be evoked to gain mana and contamination.
+  - v1.35.1: The Ring of the Mage is reworked: it now gives MR+ and Archmagi.
+  - v1.35.1: The Ring of Shadows now gives rN+.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

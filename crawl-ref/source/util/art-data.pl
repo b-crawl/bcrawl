@@ -18,6 +18,7 @@ my %field_type = (
     AC       => "num",
     ANGRY    => "num",
     APPEAR   => "str",
+    ARCHMAGI => "bool",
     BASE_ACC => "num",
     BASE_DAM => "num",
     BASE_DELAY => "num",
@@ -494,7 +495,7 @@ my @art_order = (
     "BASE_DELAY", "HP", "CLARITY", "BASE_ACC", "BASE_DAM", "\n",
     "RMSL", "FOG", "REGEN", "unused", "NO_UPGRADE", "RCORR", "\n",
     "RMUT", "unused", "CORRODE", "DRAIN", "SLOW", "FRAGILE", "\n",
-    "SH", "HARM", "\n",
+    "SH", "HARM", "ARCHMAGI", "\n",
     "}",
 
     "equip_func", "unequip_func", "world_reacts_func", "melee_effects_func",

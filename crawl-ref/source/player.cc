@@ -1161,7 +1161,7 @@ int player_regen(bool apply_bonuses)
 
     // Trog's Hand. This circumvents sickness or inhibited regeneration.
     if (apply_bonuses && you.duration[DUR_TROGS_HAND])
-        rr += 100;
+        rr += (you.experience_level + 3) * 10;
 
     return rr;
 }
@@ -1603,7 +1603,7 @@ bool player_res_torment(bool random)
         return true;
     }
 
-    if (in_good_standing(GOD_TROG, 2) && you.duration[DUR_BERSERK])
+    if (in_good_standing(GOD_TROG, 3) && you.duration[DUR_BERSERK])
         return true;
 
     return (get_form()->res_neg() == 3) || you.petrified();

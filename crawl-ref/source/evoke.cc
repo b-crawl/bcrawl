@@ -1263,6 +1263,12 @@ static spret _phantom_mirror()
                               div_rand_round(mon->get_experience_level(), 3),
                               &you, INFINITE_DURATION));
 
+    // items can't copy divine enchantments
+    mon->del_ench(ENCH_SOUL_RIPE);
+    mon->del_ench(ENCH_PAIN_BOND);
+    mon->del_ench(ENCH_MIRROR_DAMAGE);
+    mon->del_ench(ENCH_GOLD_LUST);
+
     int break_chance = _mirror_break_chance(victim->get_hit_dice());
     bool mirror_break = x_chance_in_y(break_chance, 100);
 

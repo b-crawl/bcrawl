@@ -398,7 +398,12 @@ spret cast_cloud_cone(const actor *caster, int pow, const coord_def &pos,
     fail_check();
 
     random_picker<cloud_type, NUM_CLOUD_TYPES> cloud_picker;
+    
+    selection_loop:
     cloud_type cloud = cloud_picker.pick(cloud_cone_clouds, pow, CLOUD_NONE);
+    if (cloud == CLOUD_NEGATIVE_ENERGY
+            && divine_peeves[you.religion].count(DID_EVIL))
+        goto selection_loop;
 
     for (const auto &entry : hitfunc.zapped)
     {

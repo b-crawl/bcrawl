@@ -1262,6 +1262,11 @@ void did_hurt_conduct(conduct_type thing_done,
     }
 }
 
+bool god_hates_action(conduct_type thing_to_do, god_type god)
+{
+    return map_find(divine_peeves[god], thing_to_do);
+}
+
 /**
  * Will this god definitely be upset if you cast this spell?
  *

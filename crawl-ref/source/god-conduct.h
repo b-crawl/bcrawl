@@ -38,6 +38,7 @@ void did_hurt_conduct(conduct_type thing_done, const monster &victim, int damage
 
 void god_conduct_turn_start();
 
+bool god_hates_action(conduct_type thing_to_do, god_type god);
 bool god_punishes_spell(spell_type spell, god_type god);
 bool god_hates_cannibalism(god_type god);
 

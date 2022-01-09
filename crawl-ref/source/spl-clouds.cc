@@ -18,6 +18,7 @@
 #include "env.h"
 #include "fprop.h"
 #include "fight.h"
+#include "god-conduct.h"
 #include "items.h"
 #include "level-state-type.h"
 #include "message.h"
@@ -402,7 +403,7 @@ spret cast_cloud_cone(const actor *caster, int pow, const coord_def &pos,
     selection_loop:
     cloud_type cloud = cloud_picker.pick(cloud_cone_clouds, pow, CLOUD_NONE);
     if (cloud == CLOUD_NEGATIVE_ENERGY
-            && divine_peeves[you.religion].count(DID_EVIL))
+            && god_hates_action(DID_EVIL, you.religion))
         goto selection_loop;
 
     for (const auto &entry : hitfunc.zapped)

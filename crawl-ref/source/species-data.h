@@ -580,7 +580,7 @@ static const map<species_type, species_def> species_data =
     SPF_SMALL_TORSO,
     0, 2, 0, 5,
     MONS_NAGA,
-    HT_LAND, US_ALIVE, SIZE_LARGE,
+    HT_WATER, US_ALIVE, SIZE_LARGE,
     10, 8, 6, // 24
     { STAT_STR, STAT_INT, STAT_DEX }, 4,
     { { MUT_ACUTE_VISION, 1, 1 }, { MUT_SLOW, 2, 1 },  { MUT_DEFORMED, 1, 1 },

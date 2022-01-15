@@ -79,9 +79,17 @@ spret ice_armour(int pow, bool fail)
 
 spret deflection(int pow, bool fail)
 {
+    bool deflecting = you.attribute[ATTR_DEFLECT_MISSILES];
+    if (deflecting)
+        if(!yesno("Really dispel your missile deflection?", true, 'n'))
+        {
+            canned_msg(MSG_OK);
+            return spret::abort;
+        }
+    
     fail_check();
     
-    if(!you.attribute[ATTR_DEFLECT_MISSILES])
+    if(!deflecting)
     {
         you.attribute[ATTR_DEFLECT_MISSILES] = 1;
         mpr("You feel very safe from missiles.");

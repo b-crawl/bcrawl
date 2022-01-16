@@ -648,6 +648,7 @@
   - v1.35: Giant cockroaches are inedible.
   - v1.35.2: Naga monsters can swim.
   - v1.35.2: Soul eaters are insubstantial.
+  - v1.35.2: Dart slugs use their ability slowly.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

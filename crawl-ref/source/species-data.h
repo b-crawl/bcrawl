@@ -644,7 +644,7 @@ static const map<species_type, species_def> species_data =
     { STAT_STR, STAT_INT, STAT_DEX }, 5,
     { { MUT_CAMOUFLAGE, 1, 1 }, { MUT_GELATINOUS_BODY, 1, 1 }, },
     { "You cannot wear most types of armour.",
-      "You are very stealthy in the water. (Stealth+)" 
+      "You are very stealthy in the water. (Stealth+)", 
       "Your unusual nervous system resists paralysis." },
     { "almost no armour", "stealthy swim", "resist paralysis" },
     { JOB_FIGHTER, JOB_TRANSMUTER, JOB_WIZARD, JOB_ASSASSIN, JOB_SPELUNKER,

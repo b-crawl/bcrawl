@@ -3373,7 +3373,14 @@ void bolt::affect_player_enchantment(bool resistible)
         break;
 
     case BEAM_PARALYSIS:
-        you.paralyse(agent(), 2 + random2(3));
+        if (you.species == SP_OCTOPODE)
+        {
+            mpr("Your unusual nervous system partially resists the paralysis!")
+            confuse_player(5 + random2(3));
+        }
+        else
+            you.paralyse(agent(), 2 + random2(3));
+        
         obvious_effect = true;
         break;
 

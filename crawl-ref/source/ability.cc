@@ -2746,8 +2746,13 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_FEDHAS_FUNGAL_BLOOM:
-        fedhas_fungal_bloom();
-        return spret::success;
+        if (fedhas_fungal_bloom())
+            return spret::success;
+        else
+        {
+            mpr("There is nothing nearby to decay.");
+            return spret::abort;
+        }
 
     case ABIL_FEDHAS_SUNLIGHT:
         return fedhas_sunlight(fail);

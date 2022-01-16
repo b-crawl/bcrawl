@@ -292,6 +292,7 @@
   - v1.34.4: Casting Pain no longer damages the player unless it deals damage.
   - v1.34.4: Bolt of Magma has 25% more damage scaling with power for players.
   - v1.35.2: Enchantments with a power multiplier (such as Agony) no longer have effective power capped at 200.
+  - v1.35.2: Virulence is level 6.
 
 #### Removed Spells
   - Summon Guardian Golem

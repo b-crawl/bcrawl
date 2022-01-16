@@ -2961,7 +2961,7 @@ static const struct spell_desc spelldata[] =
     SPELL_VIRULENCE, "Virulence",
     SPTYP_POISON | SPTYP_HEXES,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER,
-    7,
+    6,
     0,
     5, 5,
     2, 0,

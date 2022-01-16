@@ -419,6 +419,7 @@
   - v1.35.1: Trog's Hand regeneration scales with player XL, and is increased on average.
   - v1.35.1: Makhleb won't punish followers for converting to Trog.
   - v1.35.2: Fedhas's Rain ability is removed.
+  - v1.35.2: Fedhas's Spawn Spores ability comes later, at \*\*\*\*\*.
   - v1.35.2: Fedhas's Fungal Bloom ability restores mana, with the amount per corpse increasing with Invocations.
 
 #### New Items

@@ -650,6 +650,8 @@
   - v1.35.2: Naga monsters can swim.
   - v1.35.2: Soul eaters are insubstantial.
   - v1.35.2: Dart slugs use their ability slowly.
+  - v1.35.2: Angels cast Minor Healing instantly.
+  - v1.35.2: Daevas cast Smiting instantly.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

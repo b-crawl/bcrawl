@@ -780,13 +780,13 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_ANGEL,
       {
-       { SPELL_MINOR_HEALING, 62, MON_SPELL_MAGICAL },
+       { SPELL_MINOR_HEALING, 50, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
       }
     },
 
     {  MST_DAEVA,
       {
-       { SPELL_SMITING, 64, MON_SPELL_MAGICAL },
+       { SPELL_SMITING, 50, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
       }
     },
 

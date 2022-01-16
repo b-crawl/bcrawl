@@ -1745,6 +1745,13 @@ static const mon_spellbook mspell_list[] =
        { SPELL_AWAKEN_EARTH, 25, MON_SPELL_WIZARD },
       }
     },
+    
+    {  MST_GRUM,
+      {
+       { SPELL_SMITING, 15, MON_SPELL_WIZARD },
+       { SPELL_DRUIDS_CALL, 15, MON_SPELL_WIZARD },
+      }
+    },
 
     // ('h') Carnivorous quadrupeds.
     {  MST_NATASHA,

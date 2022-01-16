@@ -680,3 +680,4 @@
   - v1.26: Dispater and Asmodeus have higher HD.
   - v1.28.3: Maurice is reworked: he has Invisibility, Blink Other, Blink Away, Portal Projectile, a blowgun, and a wand of flame, and his melee attacks while invisible deal extra damage but reveal him.
   - v1.34.4: Asmodeus gains Haste and Summon Illusion.
+  - v1.35.2: Grum gains Smiting and Druid's Call, and is fast.

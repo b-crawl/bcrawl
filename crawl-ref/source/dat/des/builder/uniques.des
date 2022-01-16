@@ -140,7 +140,7 @@ WEIGHT: 5, 15(Lair)
 : place_unique(_G, "Gastronok")
 
 NAME:   uniq_grum
-DEPTH:  D:8-11, Lair:1
+DEPTH:  D:8-11, Lair
 : place_unique(_G, "Grum band")
 
 NAME:   uniq_grinder

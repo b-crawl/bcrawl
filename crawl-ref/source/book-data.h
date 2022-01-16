@@ -104,7 +104,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_AGONY,
     SPELL_BOLT_OF_DRAINING,
     SPELL_BORGNJORS_VILE_CLUTCH,
-    SPELL_VIRULENCE,
 },
 
 {   // Book of Misfortune

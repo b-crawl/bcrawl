@@ -488,7 +488,8 @@ Fungal Bloom ability
 Calls upon Fedhas to accelerate the natural process of decay, transforming all
 corpses nearby into fast-growing, short-lived toadstools. Zombies rot into skeletons, and ghouls and necrophages rot away entirely, granting no experience.
 
-Decaying corpses this way can restore your magical power, with the amount restored increasing with your Invocations skill.
+Decaying corpses this way can restore your magical power, with the amount
+restored increasing with your Invocations skill.
 %%%%
 Sunlight ability
 

@@ -195,9 +195,9 @@ const vector<god_power> god_powers[NUM_GODS] =
       { 2, ABIL_TROGS_HAND, "call upon Trog for regeneration and vigour" },
       { 3, "Trog will increase your resistance to enchantments while you are berserk.",
            "Trog will no longer increase your resistance to enchantments." },
-      { 4, ABIL_TROG_BROTHERS_IN_ARMS, "call in reinforcements" },
       { 4, "Trog will fully protect you from unholy torment while you are berserk.",
            "Trog will no longer protect you from unholy torment." },
+      { 4, ABIL_TROG_BROTHERS_IN_ARMS, "call in reinforcements" },
       { 5, "Trog will gift you weapons as you gain piety.",
            "Trog will no longer gift you weapons." },
     },
@@ -264,8 +264,7 @@ const vector<god_power> god_powers[NUM_GODS] =
       { 1, ABIL_FEDHAS_SUNLIGHT, "call sunshine" },
       { 2, ABIL_FEDHAS_EVOLUTION, "induce evolution" },
       { 3, ABIL_FEDHAS_PLANT_RING, "cause a ring of plants to grow" },
-      { 4, ABIL_FEDHAS_SPAWN_SPORES, "spawn explosive spores" },
-      { 5, ABIL_FEDHAS_RAIN, "control the weather" },
+      { 5, ABIL_FEDHAS_SPAWN_SPORES, "spawn explosive spores" },
     },
 
     // Cheibriados

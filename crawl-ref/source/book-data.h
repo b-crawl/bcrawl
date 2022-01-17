@@ -39,10 +39,10 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Summonings
     SPELL_RECALL,
-    SPELL_AURA_OF_ABJURATION,
     SPELL_SUMMON_DEMON,
     SPELL_SUMMON_FOREST,
     SPELL_SUMMON_MANA_VIPER,
+    SPELL_AURA_OF_ABJURATION,
     SPELL_SHADOW_CREATURES,
 },
 
@@ -104,7 +104,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_AGONY,
     SPELL_BOLT_OF_DRAINING,
     SPELL_BORGNJORS_VILE_CLUTCH,
-    SPELL_VIRULENCE,
 },
 
 {   // Book of Misfortune
@@ -200,6 +199,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_PORTAL_PROJECTILE,
     SPELL_BECKONING,
     SPELL_FORCE_LANCE,
+    SPELL_AURA_OF_ABJURATION,
     SPELL_DISPERSAL,
     SPELL_CONTROLLED_BLINK,
 },

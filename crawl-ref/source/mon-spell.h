@@ -780,13 +780,13 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_ANGEL,
       {
-       { SPELL_MINOR_HEALING, 62, MON_SPELL_MAGICAL },
+       { SPELL_MINOR_HEALING, 50, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
       }
     },
 
     {  MST_DAEVA,
       {
-       { SPELL_SMITING, 64, MON_SPELL_MAGICAL },
+       { SPELL_SMITING, 50, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
       }
     },
 
@@ -1743,6 +1743,13 @@ static const mon_spellbook mspell_list[] =
        { SPELL_IRON_SHOT, 16, MON_SPELL_WIZARD },
        { SPELL_PETRIFY, 14, MON_SPELL_WIZARD },
        { SPELL_AWAKEN_EARTH, 25, MON_SPELL_WIZARD },
+      }
+    },
+    
+    {  MST_GRUM,
+      {
+       { SPELL_SMITING, 15, MON_SPELL_WIZARD },
+       { SPELL_DRUIDS_CALL, 15, MON_SPELL_WIZARD },
       }
     },
 

@@ -1397,7 +1397,7 @@ spret cast_random_effects(int pow, bolt& beam, bool fail)
 
     fail_check();
 
-    // list of possible effects.
+    selection_loop:
     zap_type zap = random_choose(ZAP_INNER_FLAME,
                                  ZAP_SLEEP,
                                  ZAP_SLOW,
@@ -1409,6 +1409,11 @@ spret cast_random_effects(int pow, bolt& beam, bool fail)
                                  ZAP_BOLT_OF_DRAINING,
                                  ZAP_VENOM_BOLT,
                                  ZAP_MALMUTATE);
+    if (zap == ZAP_BOLT_OF_DRAINING && god_hates_action(DID_EVIL, you.religion))
+        goto selection_loop;
+    if (zap == ZAP_MALMUTATE && god_hates_action(DID_CHAOS, you.religion))
+        goto selection_loop;
+
     beam.origin_spell = SPELL_NO_SPELL; // let zapping reset this
 
     zapping(zap, pow, beam, false);

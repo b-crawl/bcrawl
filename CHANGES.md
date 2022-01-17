@@ -196,6 +196,8 @@
   - v1.28.1: White draconian breath always hits.
   - v1.30: To balance high scores across species, felid turn counts are treated as 1000 higher than for other species for scoring purposes.
   - v1.31.1: Merfolk gain 1 dexterity every 3 levels, and have -4 Shields aptitude.
+  - v1.35.2: Naga can swim.
+  - v1.35.2: When an octopode would be paralyzed, it's confused instead.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -289,6 +291,9 @@
   - v1.34.4: Orbs of destruction deal less damage at range 4 or less.
   - v1.34.4: Casting Pain no longer damages the player unless it deals damage.
   - v1.34.4: Bolt of Magma has 25% more damage scaling with power for players.
+  - v1.35.2: Enchantments with a power multiplier (such as Agony) no longer have effective power capped at 200.
+  - v1.35.2: Virulence is level 6.
+  - v1.35.2: Aura of Abjuration is level 6.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -414,6 +419,9 @@
   - v1.35: Using Wu Jian attacks while starving gives a warning.
   - v1.35.1: Trog's Hand regeneration scales with player XL, and is increased on average.
   - v1.35.1: Makhleb won't punish followers for converting to Trog.
+  - v1.35.2: Fedhas's Rain ability is removed.
+  - v1.35.2: Fedhas's Spawn Spores ability comes later, at \*\*\*\*\*.
+  - v1.35.2: Fedhas's Fungal Bloom ability restores mana, with the amount per corpse increasing with Invocations.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -484,6 +492,8 @@
   - v1.28.2: Evocable invisibility has lower failure chance but lower duration and significantly less duration scaling with Evocations skill.
   - v1.30: Robes can have the new "magic recovery" ego, which doubles natural mana regeneration.
   - v1.33.1: Scrolls of noise mark the player.
+  - v1.35.2: Phantom Mirrors no longer copy divine enchantments such as Uskayaw's Pain Bond.
+  - v1.35.2: Wand effects are rerolled if they would cause penance.
 
 #### Removed Items
   - Amulet of Harm
@@ -639,6 +649,11 @@
   - v1.34.2: Draconian scorchers have a reworked spell set: Bolt of Magma, Fire Summon, and Hurl Hellfire.
   - v1.35: Scorpions are edible.
   - v1.35: Giant cockroaches are inedible.
+  - v1.35.2: Naga monsters can swim.
+  - v1.35.2: Soul eaters are insubstantial.
+  - v1.35.2: Dart slugs use their ability slowly.
+  - v1.35.2: Angels cast Minor Healing instantly.
+  - v1.35.2: Daevas cast Smiting instantly.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -669,3 +684,4 @@
   - v1.26: Dispater and Asmodeus have higher HD.
   - v1.28.3: Maurice is reworked: he has Invisibility, Blink Other, Blink Away, Portal Projectile, a blowgun, and a wand of flame, and his melee attacks while invisible deal extra damage but reveal him.
   - v1.34.4: Asmodeus gains Haste and Summon Illusion.
+  - v1.35.2: Grum gains Smiting and Druid's Call, and is fast.

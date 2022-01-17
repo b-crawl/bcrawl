@@ -515,8 +515,6 @@ static const ability_def Ability_List[] =
       2, 0, 100, 4, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_FEDHAS_SPAWN_SPORES, "Reproduction",
       4, 0, 100, 1, {fail_basis::invo, 60, 4, 25}, abflag::none },
-    { ABIL_FEDHAS_RAIN, "Rain",
-      4, 0, 0, 4, {fail_basis::invo, 70, 4, 25}, abflag::none },
 
     // Cheibriados
     { ABIL_CHEIBRIADOS_TIME_BEND, "Bend Time",
@@ -2748,8 +2746,13 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_FEDHAS_FUNGAL_BLOOM:
-        fedhas_fungal_bloom();
-        return spret::success;
+        if (fedhas_fungal_bloom())
+            return spret::success;
+        else
+        {
+            mpr("There is nothing nearby to decay.");
+            return spret::abort;
+        }
 
     case ABIL_FEDHAS_SUNLIGHT:
         return fedhas_sunlight(fail);
@@ -2758,15 +2761,6 @@ static spret _do_ability(const ability_def& abil, bool fail)
         fail_check();
         if (!fedhas_plant_ring_from_rations())
             return spret::abort;
-        break;
-
-    case ABIL_FEDHAS_RAIN:
-        fail_check();
-        if (!fedhas_rain(you.pos()))
-        {
-            canned_msg(MSG_NOTHING_HAPPENS);
-            return spret::abort;
-        }
         break;
 
     case ABIL_FEDHAS_SPAWN_SPORES:

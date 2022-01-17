@@ -2549,11 +2549,10 @@ int fedhas_fungal_bloom()
 
     if (kills)
         mpr("That felt like a moral victory.");
-
-    if (!processed_count)
-    {
-        canned_msg(MSG_NOTHING_HAPPENS);
-    }
+    
+    int mp_inc = processed_count * (you.skill(SK_INVOCATIONS, 10) + random2(80));
+    mp_inc = div_rand_round(mp_inc, 70);
+    inc_mp(mp_inc);
 
     return processed_count;
 }

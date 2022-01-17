@@ -293,6 +293,7 @@
   - v1.34.4: Bolt of Magma has 25% more damage scaling with power for players.
   - v1.35.2: Enchantments with a power multiplier (such as Agony) no longer have effective power capped at 200.
   - v1.35.2: Virulence is level 6.
+  - v1.35.2: Aura of Abjuration is level 6.
 
 #### Removed Spells
   - Summon Guardian Golem

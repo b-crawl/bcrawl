@@ -417,10 +417,10 @@ static const struct spell_desc spelldata[] =
     SPELL_AURA_OF_ABJURATION, "Aura of Abjuration",
     SPTYP_SUMMONING,
     SPFLAG_AREA | SPFLAG_NEUTRAL | SPFLAG_ESCAPE,
-    5,
+    6,
     200,
     -1, -1,
-    5, 0,
+    4, 0,
     TILEG_MASS_ABJURATION,
 },
 

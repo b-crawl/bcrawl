@@ -258,12 +258,11 @@ Fedhas powers
 
 Plants and fungi will not attack Fedhas' worshippers without provocation.
 Corpses on different levels will rot away; followers can also induce this decay
-directly to create fungi. Fedhas' worshippers may walk through plants or fungi,
-and even fire missiles or spells through them without causing harm. Fedhas
-grants the ability to promote plants and fungi into stronger species. Followers
-can eventually grow a wall of plants and create explosive spores from corpses.
-They are also granted some control over the weather, being able to call
-sunlight and eventually rainstorms.
+directly to create fungi and recover magical power. Fedhas' worshippers may
+walk through plants or fungi, and even fire missiles or spells through them
+without causing harm. Fedhas grants the ability to call sunlight and to promote
+plants and fungi into stronger species. Followers can eventually grow a wall of
+plants and create explosive spores from corpses.
 %%%%
 Gozag powers
 
@@ -273,8 +272,8 @@ distracted by imaginings of great wealth. Stalwarts can purchase immediate help
 in the form of potions, and may also pay to attract shopkeepers into the
 dungeon. Particularly well-off adherents may bribe the inhabitants of a branch
 of the dungeon to turn a blind eye to their presence, or even to change their
-allegiance. But remember that time is money; Gozag's prices may increase over time
-due to inflation.
+allegiance. But remember that time is money; Gozag's prices may increase over
+time due to inflation.
 %%%%
 Hepliaklqana powers
 

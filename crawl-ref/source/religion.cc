@@ -3592,6 +3592,11 @@ bool god_hates_your_god(god_type god, god_type your_god)
             return true;
         return false;
     
+    case GOD_FEDHAS:
+        if(your_god == GOD_ELYVILON)
+            return false;
+        return true;
+    
     case GOD_USKAYAW:
         if(your_god == GOD_WU_JIAN)
             return false;

@@ -446,7 +446,7 @@ static const ability_def Ability_List[] =
     { ABIL_ELYVILON_LESSER_HEALING, "Lesser Healing", 2, 0, 100,
       generic_cost::fixed(1), {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_ELYVILON_HEAL_OTHER, "Heal Other",
-      2, 0, 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
+      2, 0, 0, 1, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_ELYVILON_PURIFICATION, "Purification",
       3, 0, 200, 3, {fail_basis::invo, 20, 5, 20}, abflag::conf_ok },
     { ABIL_ELYVILON_GREATER_HEALING, "Greater Healing",

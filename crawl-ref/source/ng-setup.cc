@@ -157,7 +157,7 @@ item_def* newgame_make_item(object_class_type base,
     
     if (item.base_type == OBJ_JEWELLERY && item.sub_type == AMU_GUARDIAN_SPIRIT)
     {
-        switch(you.species)
+        switch (you.species)
         {
         case SP_DEEP_DWARF:
         case SP_SKELETON:
@@ -166,6 +166,17 @@ item_def* newgame_make_item(object_class_type base,
         default: break;
         }
         you.equip[get_item_slot(item)] = slot;
+    }
+
+    if (item.base_type == OBJ_SCROLLS && item.sub_type == SCR_TELEPORTATION)
+    {
+        if (you.species == SP_FORMICID)
+        {
+        item.quantity = 1;
+        item.base_type = OBJ_WANDS;
+        item.sub_type = WAND_RANDOM_EFFECTS;
+        item.charges = 6;
+        }
     }
 
     // Make sure we didn't get a stack of shields or such nonsense.

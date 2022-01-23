@@ -1194,16 +1194,11 @@ void torment_player(actor *attacker, torment_source_type taux)
     {
         if (hploss > 0)
         {
-            if (random2(600) < you.piety) // 13.33% to 33.33% chance
-            {
-                hploss = 0;
+            hploss /= 4;
+            if (!hploss)
                 simple_god_message(" shields you from torment!");
-            }
-            else if (random2(250) < you.piety) // 24% to 80% chance
-            {
-                hploss -= random2(hploss - 1);
+            else
                 simple_god_message(" partially shields you from torment!");
-            }
         }
     }
 

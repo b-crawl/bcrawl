@@ -127,7 +127,7 @@ DEPTH:  D:4-6
 : place_unique(_G, "Eustachio")
 
 NAME:   uniq_frances
-DEPTH:  D:12-, Elf:1, Swamp:1-2, Snake:1-2, Shoals:1-2, Spider:1-2
+DEPTH:  D:10-, Elf:1-2, Swamp:1-2, Snake, Shoals, Spider:1-2
 : place_unique(_G, "Frances")
 
 NAME:   uniq_fannar

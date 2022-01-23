@@ -3334,7 +3334,6 @@ static void _do_autopickup()
     int o = you.visible_igrd(you.pos());
 
     bool interesting_non_autopickup = false;
-    string pickup_warning;
     while (o != NON_ITEM)
     {
         const int next = mitm[o].link;
@@ -3376,8 +3375,8 @@ static void _do_autopickup()
             else
             {
                 n_tried_pickup++;
-                pickup_warning = "Your pack is full.";
                 mi.flags = iflags;
+				mprf(MSGCH_FLOOR_ITEMS, "<blue>You can't pick up %s.</blue>", mi.name(DESC_THE).c_str());
             }
         }
         else
@@ -3394,9 +3393,6 @@ static void _do_autopickup()
         }
         o = next;
     }
-
-    if (!pickup_warning.empty())
-        mpr(pickup_warning);
 
     if (did_pickup)
         you.turn_is_over = true;

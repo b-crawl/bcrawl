@@ -816,25 +816,7 @@ void explore_pickup_event(int did_pickup, int tried_pickup)
     // pick up, so the only thing to do is to stop.
     if (tried_pickup && you.running == RMODE_EXPLORE_GREEDY)
     {
-        if (explore_stopped_pos == you.pos())
-        {
-            const string prompt =
-                make_stringf("Could not pick up %s here; shall I ignore %s?",
-                             tried_pickup == 1? "an item" : "some items",
-                             tried_pickup == 1? "it" : "them");
-
-            // Make Escape => 'n' and stop run.
-            explicit_keymap map;
-            map[ESCAPE] = 'n';
-            map[CONTROL('G')] = 'n';
-            if (yesno(prompt.c_str(), true, 'y', true, false, false, &map))
-            {
-                mark_items_non_pickup_at(you.pos());
-                // Don't stop explore.
-                return;
-            }
-            canned_msg(MSG_OK);
-        }
+        mark_items_non_pickup_at(you.pos());
         explore_stopped_pos = you.pos();
         stop_delay();
     }

@@ -155,7 +155,7 @@ item_def* newgame_make_item(object_class_type base,
             break;
         }
     
-    if(item.sub_type == AMU_GUARDIAN_SPIRIT)
+    if (item.base_type == OBJ_JEWELLERY && item.sub_type == AMU_GUARDIAN_SPIRIT)
     {
         switch(you.species)
         {

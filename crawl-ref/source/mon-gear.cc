@@ -628,6 +628,11 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
             { { { WPN_SHORT_SWORD,      3 },
                 { WPN_RAPIER,           1 },
         } } },
+        { MONS_FRANCES,
+            { { { WPN_HALBERD,          4 },
+                { WPN_GLAIVE,           1 },
+                { WPN_GREAT_MACE,       1 },
+        } } },
         { MONS_ASTERION, {
             { { WPN_DEMON_WHIP,         1 },
               { WPN_DEMON_BLADE,        1 },
@@ -678,7 +683,6 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         { MONS_BLORK_THE_ORC,           { NAGA_WEAPONS } },
         { MONS_DANCING_WEAPON,          { NAGA_WEAPONS, {}, {}, 1 } },
         { MONS_SPECTRAL_WEAPON,         { NAGA_WEAPONS } }, // for mspec placement
-        { MONS_FRANCES,                 { NAGA_WEAPONS } },
         { MONS_SKELETAL_WARRIOR,        { NAGA_WEAPONS } },
         { MONS_PALE_DRACONIAN,          { NAGA_WEAPONS } },
         { MONS_RED_DRACONIAN,           { NAGA_WEAPONS } },
@@ -1203,6 +1207,10 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
     case MONS_AGNES:
         if (!one_chance_in(3))
             level = ISPEC_GOOD_ITEM;
+        break;
+
+    case MONS_FRANCES:
+        level = ISPEC_GOOD_ITEM;
         break;
 
     case MONS_MERFOLK:
@@ -1925,7 +1933,6 @@ int make_mons_armour(monster_type type, int level)
 
     case MONS_ASTERION:
     case MONS_EDMUND:
-    case MONS_FRANCES:
     case MONS_RUPERT:
     {
         item.base_type = OBJ_ARMOUR;
@@ -1952,10 +1959,12 @@ int make_mons_armour(monster_type type, int level)
 
     case MONS_ORC_WARLORD:
     case MONS_SAINT_ROKA:
-        // Being at the top has its privileges. :)
+    case MONS_FRANCES:
         if (one_chance_in(3))
             level = ISPEC_GOOD_ITEM;
-        // deliberate fall through
+        item.base_type = OBJ_ARMOUR;
+        item.sub_type  = random_choose(ARM_CHAIN_MAIL, ARM_PLATE_ARMOUR);
+        break;
 
     case MONS_ORC_KNIGHT:
     case MONS_ORC_WARRIOR:

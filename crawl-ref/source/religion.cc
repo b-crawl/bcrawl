@@ -3592,6 +3592,11 @@ bool god_hates_your_god(god_type god, god_type your_god)
             return true;
         return false;
     
+    case GOD_FEDHAS:
+        if(your_god == GOD_ELYVILON)
+            return false;
+        return true;
+    
     case GOD_USKAYAW:
         if(your_god == GOD_WU_JIAN)
             return false;
@@ -3739,6 +3744,14 @@ bool god_hates_spell(spell_type spell, god_type god, bool fake_spell)
     case GOD_CHEIBRIADOS:
         if (is_hasty_spell(spell))
             return true;
+        break;
+    case GOD_FEDHAS:
+        switch (spell)
+        {
+        case SPELL_SUMMON_HORRIBLE_THINGS:
+            return true;
+        default: break;
+        }
         break;
     default:
         break;

@@ -199,8 +199,8 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_PORTAL_PROJECTILE,
     SPELL_BECKONING,
     SPELL_FORCE_LANCE,
-    SPELL_AURA_OF_ABJURATION,
     SPELL_DISPERSAL,
+    SPELL_AURA_OF_ABJURATION,
     SPELL_CONTROLLED_BLINK,
 },
 

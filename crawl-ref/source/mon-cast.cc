@@ -7921,8 +7921,7 @@ static bool _ms_waste_of_time(monster* mon, mon_spell_slot slot)
         return !_trace_los(mon, _torment_vulnerable)
                || you.visible_to(mon)
                   && friendly
-                  && !player_res_torment(false)
-                  && !player_kiku_res_torment();
+                  && !player_res_torment(false);
     case SPELL_CHAIN_LIGHTNING:
         return !_trace_los(mon, _elec_vulnerable)
                 || you.visible_to(mon) && friendly; // don't zap player

@@ -3810,7 +3810,7 @@ static const struct spell_desc spelldata[] =
 {
     SPELL_GREATER_SERVANT_MAKHLEB, "Greater Servant of Makhleb",
     SPTYP_SUMMONING,
-    SPFLAG_UNHOLY | SPFLAG_SELFENCH | SPFLAG_MONS_ABJURE,
+    SPFLAG_UNHOLY | SPFLAG_SELFENCH,
     7,
     200,
     -1, -1,

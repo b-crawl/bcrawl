@@ -89,7 +89,7 @@ MARKER: # = lua:fog_machine { \
             pow_max = 5, delay_min = 100, delay_max = 150, \
             size = 4, start_clouds = 1, \
             excl_rad = 1, \
-            cloud_type = "flame" }
+            cloud_type = "purple smoke" }
 KFEAT:  # = l
 FTILE:  ' = floor_rough_red
 COLOUR: ' = red

@@ -75,6 +75,7 @@
   - v1.31.3: Abyssal Knights have "good" starting weapons instead of +1 "plain" weapons.
   - v1.31.3: Monks, Skalds, and Ent Fighters can start with a quarterstaff.
   - v1.34.2: Earth Elementalists start with 1 Unarmed skill.
+  - v1.35.3: Formicid Chaos Knights start with a wand of random effects.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -106,6 +107,7 @@
   - v1.29.4: Entering timed portals can no longer teleport the player like normal stairs can.
   - v1.31: If wielding a melee weapon with ammo for a launcher quivered, autofight will automatically swap weapons based on enemy range.
   - v1.34.1: Players get a message any time they take stairs and a teleport *could* have happened.
+  - v1.35.3: Autopickup failing when inventory is full only stops autoexplore instead of forcing a prompt response.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -422,6 +424,10 @@
   - v1.35.2: Fedhas's Rain ability is removed.
   - v1.35.2: Fedhas's Spawn Spores ability comes later, at \*\*\*\*\*.
   - v1.35.2: Fedhas's Fungal Bloom ability restores mana, with the amount per corpse increasing with Invocations.
+  - v1.35.3: Fedhas won't punish followers for converting to Elyvilon.
+  - v1.35.3: Kikubaaqudgha's torment protection is a flat 75% reduction instead of randomized and based on piety.
+  - v1.35.3: Kikubaaqudgha's Torment ability costs less piety.
+  - v1.35.3: Elyvilon's Heal Other ability costs less piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -685,3 +691,4 @@
   - v1.28.3: Maurice is reworked: he has Invisibility, Blink Other, Blink Away, Portal Projectile, a blowgun, and a wand of flame, and his melee attacks while invisible deal extra damage but reveal him.
   - v1.34.4: Asmodeus gains Haste and Summon Illusion.
   - v1.35.2: Grum gains Smiting and Druid's Call, and is fast.
+  - v1.35.3: Frances is stronger and only casts Summon Demon.

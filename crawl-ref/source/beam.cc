@@ -3589,6 +3589,7 @@ void bolt::affect_player_enchantment(bool resistible)
             agent()->heal(amount);
         }
         obvious_effect = true;
+        stop_delay(false);
         break;
     }
 

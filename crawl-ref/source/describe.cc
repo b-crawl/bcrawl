@@ -462,6 +462,20 @@ void add_inscription(item_def &item, string inscrip)
     item.inscription += inscrip;
 }
 
+void clear_inscription(item_def &item, std::string to_remove)
+{
+    if (!item.inscription.empty())
+    {
+        std::string inscrip = item.inscription;
+        size_t pos = inscrip.find(to_remove);
+        if (pos != std::string::npos)
+        {
+            inscrip.erase(pos, to_remove.length());
+            item.inscription = inscrip;
+        }
+    }
+}
+
 static const char* _jewellery_base_ability_description(int subtype)
 {
     switch (subtype)

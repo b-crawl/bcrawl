@@ -108,6 +108,7 @@
   - v1.31: If wielding a melee weapon with ammo for a launcher quivered, autofight will automatically swap weapons based on enemy range.
   - v1.34.1: Players get a message any time they take stairs and a teleport *could* have happened.
   - v1.35.3: Autopickup failing when inventory is full only stops autoexplore instead of forcing a prompt response.
+  - v1.35.4: Failed item pickup adds a "pickup" inscription, which is removed if the item is picked up.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -660,6 +661,7 @@
   - v1.35.2: Dart slugs use their ability slowly.
   - v1.35.2: Angels cast Minor Healing instantly.
   - v1.35.2: Daevas cast Smiting instantly.
+  - v1.35.4: Moths of wrath and ghost moths are vulnerable to fire.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

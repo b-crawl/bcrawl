@@ -95,6 +95,7 @@ const char* get_size_adj(const size_type size, bool ignore_medium = false);
 const char* jewellery_base_ability_string(int subtype);
 string artefact_inscription(const item_def& item);
 void add_inscription(item_def &item, string inscrip);
+void clear_inscription(item_def &item, std::string to_remove);
 
 string trap_name(trap_type trap);
 string full_trap_name(trap_type trap);

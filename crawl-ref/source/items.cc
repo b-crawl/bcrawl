@@ -1022,17 +1022,24 @@ void pickup_menu(int item_link)
             next = mitm[j].link;
             if (&mitm[j] == sel.item)
             {
+                item_def &item = mitm[j];
                 if (j == item_link)
                     item_link = next;
 
                 int num_to_take = sel.quantity;
-                const bool take_all = (num_to_take == mitm[j].quantity);
-                iflags_t oldflags = mitm[j].flags;
-                clear_item_pickup_flags(mitm[j]);
+                const bool take_all = (num_to_take == item.quantity);
+                iflags_t oldflags = item.flags;
+                clear_item_pickup_flags(item);
 
                 // re-enable autopickup
-                if (fully_identified(mitm[j]) && item_autopickup_level(mitm[j]) == AP_FORCE_OFF)
-                    set_item_autopickup(mitm[j], AP_FORCE_NONE);
+                if (fully_identified(item) && item_autopickup_level(item) == AP_FORCE_OFF)
+                    set_item_autopickup(item, AP_FORCE_NONE);
+
+                if (!item.inscription.empty())
+                {
+                    clear_inscription(item, ", pickup");
+                    clear_inscription(item, "pickup");
+                }
 
                 // If we cleared any flags on the items, but the pickup was
                 // partial, reset the flags for the items that remain on the
@@ -1041,8 +1048,12 @@ void pickup_menu(int item_link)
                 {
                     n_tried_pickup++;
                     pickup_warning = "You can't carry that many items.";
-                    if (mitm[j].defined())
-                        mitm[j].flags = oldflags;
+                    if (item.defined())
+                        item.flags = oldflags;
+                    
+                    string inscrip = item.inscription;
+                    if (inscrip.empty() || inscrip.find("pickup") == std::string::npos)
+                        add_inscription(item, "pickup");
                 }
                 else
                 {
@@ -1050,8 +1061,8 @@ void pickup_menu(int item_link)
                     // If we deliberately chose to take only part of a
                     // pile, we consider the rest to have been
                     // "dropped."
-                    if (!take_all && mitm[j].defined())
-                        mitm[j].flags |= ISFLAG_DROPPED;
+                    if (!take_all && item.defined())
+                        item.flags |= ISFLAG_DROPPED;
                 }
             }
         }
@@ -1373,6 +1384,12 @@ bool pickup_single_item(int link, int qty)
     if (fully_identified(*item) && item_autopickup_level(*item) == AP_FORCE_OFF)
         set_item_autopickup(*item, AP_FORCE_NONE);
 
+    if (!item->inscription.empty())
+    {
+        clear_inscription(*item, ", pickup");
+        clear_inscription(*item, "pickup");
+    }
+
     iflags_t oldflags = item->flags;
     clear_item_pickup_flags(*item);
     const bool pickup_succ = move_item_to_inv(link, qty);
@@ -1383,6 +1400,9 @@ bool pickup_single_item(int link, int qty)
     {
         mpr("You can't carry that many items.");
         learned_something_new(HINT_FULL_INVENTORY);
+        string inscrip = item->inscription;
+        if (inscrip.empty() || inscrip.find("pickup") == std::string::npos)
+            add_inscription(*item, "pickup");
         return false;
     }
     return true;
@@ -1583,14 +1603,6 @@ bool items_similar(const item_def &item1, const item_def &item2)
 #define NO_MERGE_FLAGS (ISFLAG_MIMIC | ISFLAG_SUMMONED)
     if ((item1.flags & NO_MERGE_FLAGS) != (item2.flags & NO_MERGE_FLAGS))
         return false;
-
-    // The inscriptions can differ if one of them is blank, but if they
-    // are differing non-blank inscriptions then don't stack.
-    if (item1.inscription != item2.inscription
-        && !item1.inscription.empty() && !item2.inscription.empty())
-    {
-        return false;
-    }
 
     return true;
 }
@@ -1962,15 +1974,6 @@ static bool _merge_stackable_item_into_inv(const item_def &it, int quant_got,
     {
         if (!items_stack(you.inv[inv_slot], it))
             continue;
-
-        // If the object on the ground is inscribed, but not
-        // the one in inventory, then the inventory object
-        // picks up the other's inscription.
-        if (!(it.inscription).empty()
-            && you.inv[inv_slot].inscription.empty())
-        {
-            you.inv[inv_slot].inscription = it.inscription;
-        }
 
         merge_item_stacks(it, you.inv[inv_slot], quant_got);
         inc_inv_item_quantity(inv_slot, quant_got);
@@ -3376,7 +3379,8 @@ static void _do_autopickup()
             {
                 n_tried_pickup++;
                 mi.flags = iflags;
-				mprf(MSGCH_FLOOR_ITEMS, "<blue>You can't pick up %s.</blue>", mi.name(DESC_THE).c_str());
+                mprf(MSGCH_FLOOR_ITEMS, "<blue>You can't pick up %s.</blue>", mi.name(DESC_THE).c_str());
+                add_inscription(mi, "pickup");
             }
         }
         else

@@ -1050,6 +1050,8 @@ void pickup_menu(int item_link)
                     pickup_warning = "You can't carry that many items.";
                     if (item.defined())
                         item.flags = oldflags;
+                    item.flags |= ISFLAG_DROPPED;
+                    item.flags &= ~ISFLAG_THROWN;
                     
                     string inscrip = item.inscription;
                     if (inscrip.empty() || inscrip.find("pickup") == std::string::npos)
@@ -3380,7 +3382,12 @@ static void _do_autopickup()
                 n_tried_pickup++;
                 mi.flags = iflags;
                 mprf(MSGCH_FLOOR_ITEMS, "<blue>You can't pick up %s.</blue>", mi.name(DESC_THE).c_str());
-                add_inscription(mi, "pickup");
+                mi.flags |= ISFLAG_DROPPED;
+                mi.flags &= ~ISFLAG_THROWN;
+                
+                string inscrip = mi.inscription;
+                if (inscrip.empty() || inscrip.find("pickup") == std::string::npos)
+                    add_inscription(mi, "pickup");
             }
         }
         else

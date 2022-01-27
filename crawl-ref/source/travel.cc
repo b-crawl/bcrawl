@@ -816,7 +816,6 @@ void explore_pickup_event(int did_pickup, int tried_pickup)
     // pick up, so the only thing to do is to stop.
     if (tried_pickup && you.running == RMODE_EXPLORE_GREEDY)
     {
-        mark_items_non_pickup_at(you.pos());
         explore_stopped_pos = you.pos();
         stop_delay();
     }

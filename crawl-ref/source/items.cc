@@ -1983,15 +1983,6 @@ static bool _merge_stackable_item_into_inv(const item_def &it, int quant_got,
         if (!items_stack(you.inv[inv_slot], it))
             continue;
 
-        // If the object on the ground is inscribed, but not
-        // the one in inventory, then the inventory object
-        // picks up the other's inscription.
-        if (!(it.inscription).empty()
-            && you.inv[inv_slot].inscription.empty())
-        {
-            you.inv[inv_slot].inscription = it.inscription;
-        }
-
         merge_item_stacks(it, you.inv[inv_slot], quant_got);
         inc_inv_item_quantity(inv_slot, quant_got);
         you.last_pickup[inv_slot] = quant_got;

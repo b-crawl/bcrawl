@@ -780,22 +780,16 @@ xxxxxxxtttttttx
 xxxxxxxxxxxxxxx
 ENDMAP
 
-# The oklob plant may be abusable (if so, remove it).
 NAME:    tgw_fedhas
 TAGS:    no_item_gen no_monster_gen
 TAGS:    temple_overflow_1 temple_overflow_fedhas uniq_altar_fedhas
 DEPTH:   Lair, D:2-
 KFEAT:   _ = altar_fedhas
 KPROP:   xzd3P = no_tele_into
-MONS:    plant, fungus, oklob plant, bush, toadstool
+MONS:    plant, fungus, fungus, bush, toadstool
 KITEM:   d = ration / nothing w:20
 KFEAT:   d = floor
 SUBST:   x = TTPPPPP.
-# Only make "oklob behind bushes" situation possible a bit deeper.
-: if you.absdepth() > 5 then
-SHUFFLE: PQR
-SUBST:   Q = 114, R = 11124
-: end
 SUBST:   P = 112
 SUBST:   z = .
 SHUFFLE: ...", TU

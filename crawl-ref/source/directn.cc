@@ -2787,6 +2787,7 @@ void describe_floor(const coord_def* pos_ptr)
 
     const char* prefix = "There is ";
     string feat;
+    bool prompt_xv = false;
 
     switch (grid)
     {
@@ -2795,6 +2796,22 @@ void describe_floor(const coord_def* pos_ptr)
 
     case DNGN_ENTER_SHOP:
         prefix = "There is an entrance to ";
+        break;
+
+    case DNGN_ENTER_ORC:
+    case DNGN_ENTER_LAIR:
+    case DNGN_ENTER_SLIME:
+    case DNGN_ENTER_VAULTS:
+    case DNGN_ENTER_CRYPT:
+    case DNGN_ENTER_ZOT:
+    case DNGN_ENTER_SNAKE:
+    case DNGN_ENTER_ELF:
+    case DNGN_ENTER_TOMB:
+    case DNGN_ENTER_SWAMP:
+    case DNGN_ENTER_SHOALS:
+    case DNGN_ENTER_SPIDER:
+    case DNGN_ENTER_DEPTHS:
+        prompt_xv = true;
         break;
 
     default:
@@ -2812,6 +2829,8 @@ void describe_floor(const coord_def* pos_ptr)
         return;
 
     mprf(channel, "%s%s here.", prefix, feat.c_str());
+    if (prompt_xv)
+        mpr("(Use \"xv\" to examine it for information about this branch.)");
 }
 
 static string _base_feature_desc(dungeon_feature_type grid, trap_type trap)

@@ -40,7 +40,7 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
-    /* Eyes of draining and ghost moths. */
+    /* Ghost moths. */
     {  MST_DRAIN_GAZE,
       {
        { SPELL_DRAINING_GAZE, 100, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
@@ -929,6 +929,13 @@ static const mon_spellbook mspell_list[] =
     {  MST_FLOATING_EYE,
       {
        { SPELL_PARALYSIS_GAZE, 80, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
+      }
+    },
+
+    {  MST_EYE_OF_DRAINING,
+      {
+       { SPELL_DRAINING_GAZE, 50, MON_SPELL_MAGICAL },
+       { SPELL_DRAIN_LIFE, 40, MON_SPELL_MAGICAL },
       }
     },
 

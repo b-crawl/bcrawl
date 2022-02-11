@@ -2780,7 +2780,7 @@ vector<dungeon_feature_type> features_by_desc(const base_pattern &pattern)
     return features;
 }
 
-void describe_floor(const coord_def* pos_ptr)
+void describe_floor(const coord_def* pos_ptr, bool show_prompts)
 {
     coord_def pos = pos_ptr ? *pos_ptr : you.pos();
     dungeon_feature_type grid = env.map_knowledge(pos).feat();
@@ -2817,6 +2817,8 @@ void describe_floor(const coord_def* pos_ptr)
     default:
         break;
     }
+
+    prompt_xv = prompt_xv && show_prompts;
 
     feat = feature_description_at(pos, true, DESC_A, false);
     if (feat.empty())

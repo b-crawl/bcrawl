@@ -3327,7 +3327,7 @@ static void _do_autopickup()
 
     if (!can_autopickup())
     {
-        item_check(you.pos(), true);
+        item_check(nullptr, true);
         return;
     }
 
@@ -3411,7 +3411,7 @@ static void _do_autopickup()
     if (you.last_pickup.empty())
         you.last_pickup = tmp_l_p;
 
-    item_check(you.pos(), true);
+    item_check(nullptr, true);
 
     explore_pickup_event(n_did_pickup, n_tried_pickup);
     

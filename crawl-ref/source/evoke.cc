@@ -230,6 +230,7 @@ static bool _evoke_horn_of_geryon()
     const int surge = pakellas_surge_devices();
     surge_power(you.spec_evoke() + surge);
     mprf(MSGCH_SOUND, "You produce a hideous howling noise!");
+    noisy(15, you.pos()); // same as hell effect noise
     did_god_conduct(DID_EVIL, 3);
     int num = 1;
     const int adjusted_power =

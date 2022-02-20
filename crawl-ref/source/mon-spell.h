@@ -935,7 +935,7 @@ static const mon_spellbook mspell_list[] =
     {  MST_EYE_OF_DRAINING,
       {
        { SPELL_DRAINING_GAZE, 50, MON_SPELL_MAGICAL },
-       { SPELL_DRAIN_LIFE, 40, MON_SPELL_MAGICAL },
+       { SPELL_VAMPIRIC_DRAINING, 50, MON_SPELL_MAGICAL },
       }
     },
 

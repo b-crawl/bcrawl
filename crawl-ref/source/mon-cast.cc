@@ -7302,8 +7302,9 @@ static monster* _find_ally_to_throw(const monster &mons)
             continue;
         }
 
-        // Don't try to throw anything constricted.
-        if (throwee->is_constricted())
+        // Don't try to throw anything constricted or otherwise absurd
+        if (throwee->is_constricted() || throwee->is_stationary() ||
+            mons_is_tentacle_or_tentacle_segment(throwee->type))
             continue;
 
         // otherwise throw whoever's furthest from our target.

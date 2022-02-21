@@ -516,7 +516,7 @@ ENDMAP
 # Giant frogs, specifically. Combined weight 40.
 
 ############################################################################
-# Two fairly watery vaults with (usually) two bullfrogs in the end.
+# Two fairly watery vaults with one bullfrog at the end.
 # Loot are good items, and often a scroll of blinking.
 #
 NAME:     sewer_frog_island_01
@@ -529,10 +529,10 @@ MONS:     frilled lizard / ball python w:5 / giant cockroach / \
           generate_awake frilled lizard / generate_awake ball python w:5 / \
           generate_awake giant cockroach / generate_awake \
           leopard gecko / adder w:8 / nothing w:8
-NSUBST:   ! = 2:! / *:w
+NSUBST:   ! = 1:! / *:w
 KFEAT:    ! = w
 COLOUR:   ! = green
-KMONS:    ! = bullfrog / nothing w:2
+KMONS:    ! = bullfrog
 : sewer_setup(_G)
 MAP
 ccccccccccccccccccccccccccccccccccc
@@ -570,7 +570,7 @@ ENDMAP
 NAME:     sewer_frog_island_02
 TAGS:     no_item_gen no_monster_gen no_pool_fixup
 ORIENT:   encompass
-NSUBST:   ! = 2:! / *:w
+NSUBST:   ! = 1:! / *:w
 SUBST:    - = WWWW.
 KMONS:    W = frilled lizard / ball python / giant cockroach / \
               leopard gecko / ooze / adder w:4 / \
@@ -578,7 +578,7 @@ KMONS:    W = frilled lizard / ball python / giant cockroach / \
 KFEAT:    W = W
 KFEAT:    ! = w
 COLOUR:   ! = green
-KMONS:    ! = bullfrog / nothing w:2
+KMONS:    ! = bullfrog
 SHUFFLE:  edfgh$*
 ITEM:     nothing, nothing
 ITEM:     scroll of teleportation w:2 / scroll of blinking

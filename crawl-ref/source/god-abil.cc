@@ -3823,7 +3823,6 @@ bool makhleb_hew()
         if (!beam.isValid || beam.target == you.pos())
             return false;         // early return
 
-        coord_def beam_delta = beam.delta;
         if (grid_distance(you.pos(), beam.target) > range)
         {
             clear_messages();

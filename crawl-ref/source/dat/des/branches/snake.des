@@ -13,15 +13,15 @@ KFEAT:  O = enter_snake_pit
 KMONS:  O = sphinx
 KMONS:  A = anaconda skeleton
 MAP
-cccc@cccc
+cccn@nccc
 c...A...c
 c.ccncc.c
-c.cG.Gc.c
-nA..O..An
-c.cG.Gc.c
+n.cG.Gc.n
+cA..O..Ac
+n.cG.Gc.n
 c.ccncc.c
 c...A...c
-cccc@cccc
+cccn@nccc
 ENDMAP
 
 NAME:   minmay_snake_entry_guardpost_small

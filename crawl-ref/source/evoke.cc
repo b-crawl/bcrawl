@@ -1157,7 +1157,8 @@ static bool _phial_of_floods()
             }
         }
         
-        int randomized_power = you.skill(SK_EVOCATIONS, 10) + random2(70) - 50;
+        int evo_skill = you.skill(SK_EVOCATIONS, 10);
+        int randomized_power = evo_skill + random2(70) - 50;
         int num_elementals = 1 + max(0, randomized_power/60);
 
         bool created = false;
@@ -1171,8 +1172,7 @@ static bool _phial_of_floods()
             mgen_data mg (MONS_WATER_ELEMENTAL, attitude, elementals[n], 0,
                           MG_FORCE_BEH | MG_FORCE_PLACE);
             mg.set_summoned(&you, 3, SPELL_NO_SPELL);
-            mg.hd = player_adjust_evoc_power(
-                        6 + you.skill_rdiv(SK_EVOCATIONS, 2, 15), surge);
+            mg.hd = 6 + div_rand_round(evo_skill * 3, 70);
             if (create_monster(mg))
                 created = true;
         }

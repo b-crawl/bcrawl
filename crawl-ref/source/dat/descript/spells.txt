@@ -180,13 +180,11 @@ every creature it strikes.
 Bolt of Draining spell
 
 Fires a penetrating bolt of negative energy, which drains any living creature
-it strikes. The range of the bolt is decreased by one for every creature it
-hits.
+it strikes.
 %%%%
 Bolt of Fire spell
 
-Fires a penetrating bolt of flames. The range of the bolt is decreased by one
-for every creature it strikes.
+Fires a penetrating bolt of flames.
 %%%%
 Bolt of Magma spell
 

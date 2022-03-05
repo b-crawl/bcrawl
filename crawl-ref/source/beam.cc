@@ -5933,6 +5933,9 @@ int bolt::range_used_on_hit() const
     {
     case BEAM_DAMNATION:
     case BEAM_ELECTRICITY:
+    case BEAM_MMISSILE:
+    case BEAM_NEG:
+    case BEAM_FIRE:
         used = 0;
         break;
     default:

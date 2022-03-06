@@ -817,16 +817,20 @@ static void _SHADOWS_unequip(item_def *item, bool *show_msgs)
 }
 
 ///////////////////////////////////////////////////
+static void _shillelagh_pluses(item_def *item)
+{
+    item->plus = you.skill(SK_MACES_FLAILS, 1);
+}
+
 static void _DEVASTATOR_equip(item_def *item, bool *show_msgs, bool unmeld)
 {
     _equip_mpr(show_msgs, "Time to lay down the shillelagh law.");
+    _shillelagh_pluses(item);
 }
 
-static void _DEVASTATOR_melee_effects(item_def* item, actor* attacker,
-                                      actor* defender, bool mondied, int dam)
+static void _DEVASTATOR_world_reacts(item_def *item)
 {
-    if (dam)
-        shillelagh(attacker, defender->pos(), dam);
+    _shillelagh_pluses(item);
 }
 
 ///////////////////////////////////////////////////

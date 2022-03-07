@@ -1920,8 +1920,8 @@ int make_mons_armour(monster_type type, int level)
     case MONS_IMPERIAL_MYRMIDON:
     case MONS_ZENATA:
         item.base_type = OBJ_ARMOUR;
-        item.sub_type  = random_choose_weighted(3, ARM_LEATHER_ARMOUR,
-                                                2, ARM_RING_MAIL);
+        item.sub_type  = random_choose_weighted(3, ARM_SCALE_MAIL,
+                                                2, ARM_PLATE_ARMOUR);
         break;
 
     case MONS_TERENCE:

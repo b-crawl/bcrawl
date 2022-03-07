@@ -1696,7 +1696,8 @@ bool needs_handle_warning(const item_def &item, operation_types oper,
 
         if (is_artefact(item) && artefact_property(item, ARTP_CONTAM))
         {
-            if (_is_wielded(item) && you_worship(GOD_ZIN))
+            if (_is_wielded(item)
+                    && you_worship(GOD_ZIN) && player_severe_contamination())
                 penance = true;
             return true;
         }
@@ -1714,7 +1715,7 @@ bool needs_handle_warning(const item_def &item, operation_types oper,
         if (is_artefact(item) && artefact_property(item, ARTP_CONTAM))
         {
             if ((oper == OPER_TAKEOFF || oper == OPER_REMOVE)
-                 && you_worship(GOD_ZIN))
+                 && you_worship(GOD_ZIN) && player_severe_contamination())
             {
                 penance = true;
             }

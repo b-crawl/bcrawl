@@ -958,12 +958,6 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
               { NUM_SPECIAL_WEAPONS, 1 } },
             1,
         } },
-        { MONS_INFERNAL_DEMONSPAWN,     { DS_WEAPONS } },
-        { MONS_GELID_DEMONSPAWN,        { DS_WEAPONS } },
-        { MONS_TORTUROUS_DEMONSPAWN,    { DS_WEAPONS } },
-        { MONS_CORRUPTER,               { DS_WEAPONS } },
-        { MONS_BLACK_SUN,               { DS_WEAPONS } },
-        { MONS_BLOOD_SAINT, {
         { MONS_ZENATA, {
             { { WPN_TRIPLE_SWORD,       1 },
               { WPN_EXECUTIONERS_AXE,   1 },
@@ -972,6 +966,12 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
               { WPN_LAJATANG,           1 },
             }, { 1, 2, 5 },
         } },
+        { MONS_INFERNAL_DEMONSPAWN,     { DS_WEAPONS } },
+        { MONS_GELID_DEMONSPAWN,        { DS_WEAPONS } },
+        { MONS_TORTUROUS_DEMONSPAWN,    { DS_WEAPONS } },
+        { MONS_CORRUPTER,               { DS_WEAPONS } },
+        { MONS_BLACK_SUN,               { DS_WEAPONS } },
+        { MONS_BLOOD_SAINT, {
             { { WPN_DAGGER,             4 },
               { WPN_QUARTERSTAFF,       1 } },
         } },

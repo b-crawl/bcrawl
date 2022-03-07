@@ -1056,6 +1056,8 @@ TYPE:     shillelagh
 TILE:     urand_shillelagh
 TILE_EQ:  shillelagh
 BOOL:     special
+BASE_DAM: +1
+STEALTH:  1
 # hrm, nothing fitting, shouldn't be elemental but should be marked
 COLOUR:   WHITE
 VALUE:    600

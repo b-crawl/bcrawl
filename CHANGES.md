@@ -698,3 +698,4 @@
   - v1.34.4: Asmodeus gains Haste and Summon Illusion.
   - v1.35.2: Grum gains Smiting and Druid's Call, and is fast.
   - v1.35.3: Frances is stronger and only casts Summon Demon.
+  - v1.35.5: Zenata (by PleasingFungus) is merged. She summons dancing weapons, and can also cast Awaken Earth and Resonance Strike.

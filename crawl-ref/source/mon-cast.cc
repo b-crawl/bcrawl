@@ -4314,7 +4314,7 @@ static void _mons_summon_elemental(monster &mons, mon_spell_slot slot, bolt&)
 static void _mons_summon_dancing_weapons(monster &mons, mon_spell_slot slot, bolt&)
 {
     // TODO: scale by power?
-    const int count = random_range(2, 4);
+    const int count = random_range(2, 3);
     for (int i = 0; i < count; i++)
         _summon(mons, MONS_DANCING_WEAPON, 3, slot);
 }

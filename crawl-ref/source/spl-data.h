@@ -4065,8 +4065,8 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_SHEZAS_DANCE, "Sheza's Dance",
-    spschool::summoning | spschool::earth,
-    spflag::mons_abjure | spflag::monster,
+    SPTYP_SUMMONING | SPTYP_EARTH,
+    SPFLAG_MONSTER,
     5,
     200,
     -1, -1,

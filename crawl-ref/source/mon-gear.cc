@@ -964,6 +964,14 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         { MONS_CORRUPTER,               { DS_WEAPONS } },
         { MONS_BLACK_SUN,               { DS_WEAPONS } },
         { MONS_BLOOD_SAINT, {
+        { MONS_ZENATA, {
+            { { WPN_TRIPLE_SWORD,       1 },
+              { WPN_EXECUTIONERS_AXE,   1 },
+              { WPN_BARDICHE,           1 },
+              { WPN_EVENINGSTAR,        1 },
+              { WPN_LAJATANG,           1 },
+            }, { 1, 2, 5 },
+        } },
             { { WPN_DAGGER,             4 },
               { WPN_QUARTERSTAFF,       1 } },
         } },
@@ -1899,7 +1907,7 @@ int make_mons_armour(monster_type type, int level)
 
     case MONS_SOJOBO:
         level = ISPEC_GOOD_ITEM;
-        // deliberate fall-through
+        // deliberate fall-through to gnoll sergeant
     case MONS_GNOLL_SERGEANT:
     case MONS_TENGU_REAVER:
         item.base_type = OBJ_ARMOUR;
@@ -1910,6 +1918,7 @@ int make_mons_armour(monster_type type, int level)
 
     case MONS_JOSEPH:
     case MONS_IMPERIAL_MYRMIDON:
+    case MONS_ZENATA:
         item.base_type = OBJ_ARMOUR;
         item.sub_type  = random_choose_weighted(3, ARM_LEATHER_ARMOUR,
                                                 2, ARM_RING_MAIL);

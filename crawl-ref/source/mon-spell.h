@@ -1702,7 +1702,8 @@ static const mon_spellbook mspell_list[] =
     {  MST_ZENATA,
       {
        { SPELL_RESONANCE_STRIKE, 40, MON_SPELL_WIZARD },
-       { SPELL_SHEZAS_DANCE, 30, MON_SPELL_WIZARD },
+       { SPELL_SHEZAS_DANCE, 25, MON_SPELL_WIZARD },
+       { SPELL_AWAKEN_EARTH, 15, MON_SPELL_WIZARD },
       }
     },
 

@@ -554,6 +554,7 @@
   - v1.35.1: The Ring of the Mage is reworked: it now gives MR+ and Archmagi.
   - v1.35.1: The Ring of Shadows now gives rN+.
   - v1.35.5: Devastator is reworked: instead of causing explosions, it's a club with enchantment equal to Maces & Flails skill.
+  - v1.35.5: The Captain's Cutlass is a scimitar instead of a rapier.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

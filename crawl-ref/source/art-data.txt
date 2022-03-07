@@ -647,10 +647,11 @@ BOOL:     nogen, notac
 
 ENUM:     CAPTAIN
 NAME:     captain's cutlass
-OBJ:      OBJ_WEAPONS/WPN_RAPIER
+OBJ:      OBJ_WEAPONS/WPN_SCIMITAR
 TYPE:     cutlass
 INSCRIP:  disarm
 PLUS:     +7
+BASE_DELAY: -1
 COLOUR:   DARKGREY
 TILE:     urand_cutlass
 TILE_EQ:  capt_cutlass

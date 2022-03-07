@@ -430,6 +430,7 @@
   - v1.35.3: Kikubaaqudgha's torment protection is a flat 75% reduction instead of randomized and based on piety.
   - v1.35.3: Kikubaaqudgha's Torment ability costs less piety.
   - v1.35.3: Elyvilon's Heal Other ability costs less piety.
+  - v1.35.5: Dithmenos's Shadow Form ability costs less piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

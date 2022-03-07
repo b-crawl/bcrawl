@@ -541,7 +541,7 @@ static const ability_def Ability_List[] =
       0, 0, 0, generic_cost::fixed(1),
       {fail_basis::invo, 30, 6, 20}, abflag::exhaustion },
     { ABIL_DITHMENOS_SHADOW_FORM, "Shadow Form",
-      9, 0, 0, 12, {fail_basis::invo, 80, 4, 25}, abflag::skill_drain },
+      9, 0, 0, 8, {fail_basis::invo, 80, 4, 25}, abflag::skill_drain },
 
     // Ru
     { ABIL_RU_DRAW_OUT_POWER, "Draw Out Power", 0, 0, 0, 0,

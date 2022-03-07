@@ -5288,7 +5288,7 @@ static void _cast_resonance_strike(monster &caster, mon_spell_slot, bolt&)
         mprf("A blast of power from the earth%s strikes %s%s",
              constructs_desc.c_str(),
              target->name(DESC_THE).c_str(),
-             attack_strength_punctuation(dam));
+             attack_strength_punctuation(dam).c_str());
     }
     target->hurt(&caster, dam, BEAM_MISSILE, KILLED_BY_BEAM,
                  "", "by a resonance strike");

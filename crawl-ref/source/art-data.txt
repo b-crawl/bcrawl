@@ -1051,6 +1051,7 @@ BOOL:     clarity
 BRAND:    SPWPN_VORPAL
 
 NAME:     shillelagh "Devastator"
+INSCRIP:  shatter,
 OBJ:      OBJ_WEAPONS/WPN_CLUB
 TYPE:     shillelagh
 TILE:     urand_shillelagh

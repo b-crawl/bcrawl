@@ -1263,10 +1263,10 @@ void shillelagh(actor *wielder, coord_def where, int pow)
 
     // need to do this again to do the actual damage
     for (adjacent_iterator ai(where, false); ai; ++ai)
-        _shatter_monsters(*ai, pow * 3 / 2, wielder);
+        _shatter_monsters(*ai, pow, wielder);
 
     if ((you.pos() - wielder->pos()).rdist() <= 1 && in_bounds(you.pos()))
-        _shatter_player(pow, wielder, true);
+        _shatter_player(pow / 2, wielder, true);
 }
 
 /**

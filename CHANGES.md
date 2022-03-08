@@ -553,7 +553,7 @@
   - v1.34: The Plutonium Sword is now a +8 triple sword that drains 4 mana to cast a weak Irradiate on what it hits. If the target survives, it has a 1/12 chance to be polymorphed. Also, the sword can be evoked to gain mana and contamination.
   - v1.35.1: The Ring of the Mage is reworked: it now gives MR+ and Archmagi.
   - v1.35.1: The Ring of Shadows now gives rN+.
-  - v1.35.5: Devastator is reworked: instead of causing explosions, it's a club with enchantment equal to Maces & Flails skill.
+  - v1.35.5: Devastator now has enchantment equal to Maces & Flails skill. Its explosions are now less common but stronger, with chance scaling with Maces & Flails skill.
   - v1.35.5: The Captain's Cutlass is a scimitar instead of a rapier.
 
 #### Normal Monsters

@@ -833,6 +833,13 @@ static void _DEVASTATOR_world_reacts(item_def *item)
     _shillelagh_pluses(item);
 }
 
+static void _DEVASTATOR_melee_effects(item_def* item, actor* attacker,
+                                      actor* defender, bool mondied, int dam)
+{
+    if (dam && x_chance_in_y(you.skill(SK_MACES_FLAILS, 10) - 50, 360))
+        shillelagh(attacker, defender->pos(), dam*2);
+}
+
 ///////////////////////////////////////////////////
 static void _DRAGONSKIN_equip(item_def *item, bool *show_msgs, bool unmeld)
 {

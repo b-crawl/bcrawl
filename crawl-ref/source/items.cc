@@ -835,10 +835,10 @@ static void _maybe_give_corpse_hint(const item_def& item)
     }
 }
 
-void item_check(const coord_def* pos_ptr)
+void item_check(const coord_def* pos_ptr, bool show_prompts)
 {
     coord_def pos = pos_ptr ? *pos_ptr : you.pos();
-    describe_floor(pos_ptr);
+    describe_floor(pos_ptr, show_prompts);
     origin_set(pos);
 
     ostream& strm = msg::streams(MSGCH_FLOOR_ITEMS);
@@ -3327,7 +3327,7 @@ static void _do_autopickup()
 
     if (!can_autopickup())
     {
-        item_check();
+        item_check(nullptr, true);
         return;
     }
 
@@ -3411,7 +3411,7 @@ static void _do_autopickup()
     if (you.last_pickup.empty())
         you.last_pickup = tmp_l_p;
 
-    item_check();
+    item_check(nullptr, true);
 
     explore_pickup_event(n_did_pickup, n_tried_pickup);
     

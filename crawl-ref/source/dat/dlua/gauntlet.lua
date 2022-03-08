@@ -375,7 +375,7 @@ tier2_gauntlet_arenas = {
     first  = {mons = "apocalypse crab", min = 1, max = 1},
   },
   {
-    second = {mons = "flying skull band", min = 2, max = 3},
+    second = {mons = "flying skull band", min = 1, max = 1},
   },
   {
     first  = {mons = "death drake", min = 1, max = 1},

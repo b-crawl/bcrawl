@@ -3790,7 +3790,7 @@ ORIENT:  encompass
 WEIGHT:  4
 : local altar_count = get_altar_count(_G, 13)
 : nsubst("B = " .. altar_count .. ":B / *:'")
-MARKER:  F = lua:fog_machine { cloud_type = "freezing vapour", \
+MARKER:  F = lua:fog_machine { cloud_type = "noxious fumes", \
              pow_min = 3, pow_max = 5, delay = 5, start_clouds = 3, \
              size = 2, spread_rate = 0, excl_rad = 0 }
 COLOUR:  c = white

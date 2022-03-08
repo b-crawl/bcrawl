@@ -3593,3 +3593,33 @@ xxxxxxxppprrrrrr.._-x
            x--xxx--xx
            xxxxxxxxxx
 ENDMAP
+
+##############################################################
+NAME:    dreamdust_arrival_worm_warning
+TAGS:    arrival no_monster_gen transparent
+ORIENT:  float
+WEIGHT:  5
+: dgn.delayed_decay(_G, 'M', 'worm corpse')
+# Bunch of player species
+KITEM:   ? = deep dwarf skeleton / deep elf skeleton / demigod skeleton / \
+             demonspawn skeleton / draconian skeleton / felid skeleton / \
+             formicid skeleton / ghoul skeleton / gnoll skeleton / \
+             orc skeleton / human skeleton / kobold skeleton / \
+             merfolk skeleton / minotaur skeleton / naga skeleton / \
+             octopode skeleton / ogre skeleton / spriggan skeleton / \
+             tengu skeleton / troll skeleton
+KITEM:    S = hunting sling
+MAP
+   vvv
+vvvv>vvvv
+vY.???.Yv
+v..?M?..v
+v..???..v
+v.l...l.v
+v.l.{.l.v
+v.l...l.v
+v.l.S.l.v
+v.l...l.v
+v.......v
+vvv...vvv
+ENDMAP

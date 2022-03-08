@@ -4064,6 +4064,17 @@ static const struct spell_desc spelldata[] =
 },
 
 {
+    SPELL_SHEZAS_DANCE, "Sheza's Dance",
+    SPTYP_SUMMONING | SPTYP_EARTH,
+    SPFLAG_MONSTER,
+    5,
+    200,
+    -1, -1,
+    0, 0,
+    TILEG_GENERIC_MONSTER_SPELL,
+},
+
+{
     SPELL_NO_SPELL, "nonexistent spell",
     SPTYP_NONE,
     SPFLAG_TESTING,

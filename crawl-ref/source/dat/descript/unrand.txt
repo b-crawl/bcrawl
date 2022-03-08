@@ -533,7 +533,7 @@ strength to the wielder.
 %%%%
 shillelagh "Devastator"
 
-A wooden cudgel, loaded with more than just lead.
+A simple wooden cudgel, with surprising depth in the hands of a master.
 %%%%
 dragonskin cloak
 

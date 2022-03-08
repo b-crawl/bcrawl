@@ -478,5 +478,6 @@ enum spell_type : int
     SPELL_SONIC_WAVE,
     SPELL_ICICLE_BURST,
     SPELL_GOAD_BEASTS,
+    SPELL_SHEZAS_DANCE,
     NUM_SPELLS
 };

@@ -19,6 +19,11 @@ Orcish Mines
 The Orcish Mines are filled with the cave orcs native to the Dungeon, their
 humanoid labourers, and piles of freshly mined gold. Enterprising merchants
 have set up trading posts to help relieve the orcs of the latter.
+
+Resistance to hostile enchantments may be useful here.
+
+Visiting the Lair of Beasts before this branch is recommended for most
+adventurers.
 %%%%
 Elven Halls
 
@@ -26,6 +31,12 @@ The Elven Halls are home to the deep elves, a race that turned their backs on
 the sun long ago. Their halls are filled with riches, but a deadly welcome
 awaits any would-be robbers. In their long seclusion, the deep elves have
 perfected dark sorceries of a power the orcs can only dream of!
+
+Resistance to electricity, negative energy, and hostile enchantments is
+important here.
+
+Acquiring a rune of Zot before entering this branch is recommended for most
+adventurers.
 %%%%
 Lair
 
@@ -35,6 +46,11 @@ rather than sliced, burnt or stabbed.
 
 The Lair contains the entrances to one of the Swamp or the Shoals, one of the
 Snake Pit or the Spider Nest, and to the Pits of Slime.
+
+Resistance to poison, cold, and hostile enchantments may be useful here.
+
+Visiting the Lair of Beasts before reaching the bottom of the Dungeon is
+recommended for most adventurers.
 %%%%
 Swamp
 
@@ -42,6 +58,9 @@ A swampy wasteland, the Swamp is filled with ooze, muck, flies and large
 slavering carnivorous monsters.
 
 A dungeon features only one of the Swamp and Shoals branches.
+
+Resistance to poison is important here, and resistance to negative energy,
+electricity, cold, and hostile enchantments may be useful.
 %%%%
 Shoals
 
@@ -50,6 +69,9 @@ seemingly endless sea. The merfolk have made it their home, alongside many
 dreaded sea creatures.
 
 A dungeon features only one of the Shoals and Swamp branches.
+
+Resistance to hostile enchantments is important here, and resistance to fire
+and poison may be useful.
 %%%%
 Snake Pit
 
@@ -57,6 +79,9 @@ The corridors of the Snake Pit are home to all varieties of serpent, and are
 inhabited by a society of powerful nagas and salamanders.
 
 A dungeon features only one of the Snake Pit and Spider Nest branches.
+
+Resistance to poison is important here, and resistance to fire and electricity
+may be useful.
 %%%%
 Spider Nest
 
@@ -64,6 +89,9 @@ The crumbling, web-choked caverns of the Spider Nest are packed with poisonous
 arthropods and assorted creepy-crawlies.
 
 A dungeon features only one of the Spider Nest and Snake Pit branches.
+
+Resistance to poison is important here, and resistance to corrosion and
+electricity may be useful.
 %%%%
 Slime Pits
 
@@ -71,18 +99,29 @@ The Slime Pits are the amorphous realm of acids, jellies and slimes. Even the
 walls drip with painful acid. Any trace of intelligent beings has long been
 dissolved. Still, there are rumours of great treasures deep down, hidden safely
 away in secret chambers without any entrance.
+
+Resistance to corrosion and hostile enchantments is important here, and
+resistance to cold may be useful.
+
+Visiting the Depths before this branch is recommended for most adventurers.
 %%%%
 Vaults
 
 Possibly constructed by some powerful madman, the Vaults are said to be home to
 great treasures. The blood spattered liberally around the entrance suggests
 that there is a certain amount of violence, too.
+
+Acquiring a rune of Zot before entering this branch is recommended for most
+adventurers.
 %%%%
 Crypt
 
 The Crypt is a huge repository for the ancient dead. The air is chill and
 fetid, the walls cold and damp. Bones are strewn liberally everywhere, and
 every noise echoes worryingly, violating the overbearing silence of the grave.
+
+Resistance to negative energy and hostile enchantments is important here, and
+resistance to cold may be useful.
 %%%%
 Tomb
 
@@ -125,6 +164,9 @@ madness, frenzy and lunacy, that it has been locked securely against random
 trespassers. Only the most demented adventurers would dare gather the required
 keys, break the seal and penetrate deeper — all in the vain hope for a fabled
 artefact no one has ever laid eyes on before.
+
+Resistance to fire and electricity is important here, and all other resistances
+may be useful.
 %%%%
 Abyss
 
@@ -257,6 +299,12 @@ Depths
 
 The Depths are the deepest part of the dungeon proper, subject to the
 corrupting influence of the Realm of Zot without being considered a part of it.
+
+Resistance to hostile enchantments is important here, and all other resistances
+may be useful.
+
+Visiting the Vaults before entering this branch is recommended for most
+adventurers.
 %%%%
 Desolation
 

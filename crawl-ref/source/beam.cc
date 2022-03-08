@@ -5927,17 +5927,21 @@ int bolt::range_used_on_hit() const
             break;
         }
     }
-    // Hellfire stops for nobody!
-    else if (flavour == BEAM_DAMNATION)
-        used = 0;
-    // Generic explosion.
     else if (is_explosion || is_big_cloud())
         used = BEAM_STOP;
-    // Lightning goes through things.
-    else if (flavour == BEAM_ELECTRICITY)
+    else switch(flavour)
+    {
+    case BEAM_DAMNATION:
+    case BEAM_ELECTRICITY:
+    case BEAM_MMISSILE:
+    case BEAM_NEG:
+    case BEAM_FIRE:
         used = 0;
-    else
+        break;
+    default:
         used = 1;
+        break;
+    }
 
     // Assume we didn't hit, after all.
     if (is_tracer && source_id == MID_PLAYER && used > 0
@@ -5945,9 +5949,6 @@ int bolt::range_used_on_hit() const
     {
         return 0;
     }
-
-    if (in_explosion_phase)
-        return used;
 
     return used;
 }

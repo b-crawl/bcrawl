@@ -180,13 +180,11 @@ every creature it strikes.
 Bolt of Draining spell
 
 Fires a penetrating bolt of negative energy, which drains any living creature
-it strikes. The range of the bolt is decreased by one for every creature it
-hits.
+it strikes.
 %%%%
 Bolt of Fire spell
 
-Fires a penetrating bolt of flames. The range of the bolt is decreased by one
-for every creature it strikes.
+Fires a penetrating bolt of flames.
 %%%%
 Bolt of Magma spell
 
@@ -1219,6 +1217,12 @@ from ice, bone, or any wall-like substance (such as rock, metal or crystal), as
 well as those turned to stone by petrification. It is less effective against
 flying, gelatinous and insubstantial creatures. It may also destroy nearby
 walls.
+%%%%
+Sheza's Dance spell
+
+Summons weapons from far and wide - a dagger newly forged, a sword long-rusted
+in a moldering tomb, an axe still steaming with the blood of its victim -
+animating them and sending them out to attack.
 %%%%
 Shock spell
 

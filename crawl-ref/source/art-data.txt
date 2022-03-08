@@ -647,10 +647,11 @@ BOOL:     nogen, notac
 
 ENUM:     CAPTAIN
 NAME:     captain's cutlass
-OBJ:      OBJ_WEAPONS/WPN_RAPIER
+OBJ:      OBJ_WEAPONS/WPN_SCIMITAR
 TYPE:     cutlass
 INSCRIP:  disarm
 PLUS:     +7
+BASE_DELAY: -1
 COLOUR:   DARKGREY
 TILE:     urand_cutlass
 TILE_EQ:  capt_cutlass
@@ -1055,9 +1056,9 @@ OBJ:      OBJ_WEAPONS/WPN_CLUB
 TYPE:     shillelagh
 TILE:     urand_shillelagh
 TILE_EQ:  shillelagh
-PLUS:     +6
-BASE_DAM: +3
 BOOL:     special
+BASE_DAM: +1
+STEALTH:  1
 # hrm, nothing fitting, shouldn't be elemental but should be marked
 COLOUR:   WHITE
 VALUE:    600

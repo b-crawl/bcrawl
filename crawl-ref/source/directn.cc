@@ -2780,13 +2780,14 @@ vector<dungeon_feature_type> features_by_desc(const base_pattern &pattern)
     return features;
 }
 
-void describe_floor(const coord_def* pos_ptr)
+void describe_floor(const coord_def* pos_ptr, bool show_prompts)
 {
     coord_def pos = pos_ptr ? *pos_ptr : you.pos();
     dungeon_feature_type grid = env.map_knowledge(pos).feat();
 
     const char* prefix = "There is ";
     string feat;
+    bool prompt_xv = false;
 
     switch (grid)
     {
@@ -2797,9 +2798,27 @@ void describe_floor(const coord_def* pos_ptr)
         prefix = "There is an entrance to ";
         break;
 
+    case DNGN_ENTER_ORC:
+    case DNGN_ENTER_LAIR:
+    case DNGN_ENTER_SLIME:
+    case DNGN_ENTER_VAULTS:
+    case DNGN_ENTER_CRYPT:
+    case DNGN_ENTER_ZOT:
+    case DNGN_ENTER_SNAKE:
+    case DNGN_ENTER_ELF:
+    case DNGN_ENTER_TOMB:
+    case DNGN_ENTER_SWAMP:
+    case DNGN_ENTER_SHOALS:
+    case DNGN_ENTER_SPIDER:
+    case DNGN_ENTER_DEPTHS:
+        prompt_xv = true;
+        break;
+
     default:
         break;
     }
+
+    prompt_xv = prompt_xv && show_prompts;
 
     feat = feature_description_at(pos, true, DESC_A, false);
     if (feat.empty())
@@ -2812,6 +2831,8 @@ void describe_floor(const coord_def* pos_ptr)
         return;
 
     mprf(channel, "%s%s here.", prefix, feat.c_str());
+    if (prompt_xv)
+        mpr("(Use \"xv\" to examine it for information about this branch.)");
 }
 
 static string _base_feature_desc(dungeon_feature_type grid, trap_type trap)

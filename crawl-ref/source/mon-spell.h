@@ -40,7 +40,7 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
-    /* Eyes of draining and ghost moths. */
+    /* Ghost moths. */
     {  MST_DRAIN_GAZE,
       {
        { SPELL_DRAINING_GAZE, 100, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
@@ -932,6 +932,13 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
+    {  MST_EYE_OF_DRAINING,
+      {
+       { SPELL_DRAINING_GAZE, 50, MON_SPELL_MAGICAL },
+       { SPELL_VAMPIRIC_DRAINING, 50, MON_SPELL_MAGICAL },
+      }
+    },
+
     {  MST_GOLDEN_EYE,
       {
        { SPELL_CONFUSION_GAZE, 100, MON_SPELL_MAGICAL | MON_SPELL_INSTANT },
@@ -1690,6 +1697,15 @@ static const mon_spellbook mspell_list[] =
     // ---------------------
     // Uniques' spellbooks
     // ---------------------
+
+    // ('a') "Ancients".
+    {  MST_ZENATA,
+      {
+       { SPELL_RESONANCE_STRIKE, 40, MON_SPELL_WIZARD },
+       { SPELL_SHEZAS_DANCE, 25, MON_SPELL_WIZARD },
+       { SPELL_AWAKEN_EARTH, 15, MON_SPELL_WIZARD },
+      }
+    },
 
     // ('c') Centaurs and such.
     {  MST_NESSOS,

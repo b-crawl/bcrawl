@@ -291,3 +291,7 @@ Xtahua title
 
 Xtahua the Ancient
 %%%%
+Zenata title
+
+Zenata, Seeker of Sheza
+%%%%

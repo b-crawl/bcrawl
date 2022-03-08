@@ -827,6 +827,7 @@ enum monster_type                      // menv[].type
     MONS_MOON_TROLL,
     MONS_BAI_SUZHEN,
     MONS_BAI_SUZHEN_DRAGON,
+    MONS_ZENATA,
 #endif
     // Sprint uniques:
     MONS_CHUCK,
@@ -1057,6 +1058,7 @@ enum monster_type                      // menv[].type
     MONS_GOLIATH_FROG,
     MONS_IRONHEART_BEASTMASTER,
     MONS_ROCKSLIME,
+    MONS_ZENATA,
 #endif
 
     NUM_MONSTERS,               // used for polymorph

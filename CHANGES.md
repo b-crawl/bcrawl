@@ -297,6 +297,7 @@
   - v1.35.2: Enchantments with a power multiplier (such as Agony) no longer have effective power capped at 200.
   - v1.35.2: Virulence is level 6.
   - v1.35.2: Aura of Abjuration is level 6.
+  - v1.35.5: Lehudib's Crystal Spear, Bolt of Draining, and Bolt of Fire no longer lose 1 range when hitting a creature.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -429,6 +430,7 @@
   - v1.35.3: Kikubaaqudgha's torment protection is a flat 75% reduction instead of randomized and based on piety.
   - v1.35.3: Kikubaaqudgha's Torment ability costs less piety.
   - v1.35.3: Elyvilon's Heal Other ability costs less piety.
+  - v1.35.5: Dithmenos's Shadow Form ability costs less piety.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -551,6 +553,8 @@
   - v1.34: The Plutonium Sword is now a +8 triple sword that drains 4 mana to cast a weak Irradiate on what it hits. If the target survives, it has a 1/12 chance to be polymorphed. Also, the sword can be evoked to gain mana and contamination.
   - v1.35.1: The Ring of the Mage is reworked: it now gives MR+ and Archmagi.
   - v1.35.1: The Ring of Shadows now gives rN+.
+  - v1.35.5: Devastator now has enchantment equal to Maces & Flails skill. Its explosions are now less common but stronger, with chance scaling with Maces & Flails skill.
+  - v1.35.5: The Captain's Cutlass is a scimitar instead of a rapier.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -662,6 +666,8 @@
   - v1.35.2: Angels cast Minor Healing instantly.
   - v1.35.2: Daevas cast Smiting instantly.
   - v1.35.4: Moths of wrath and ghost moths are vulnerable to fire.
+  - v1.35.5: Eyes of draining are fast and can cast Vampiric Draining.
+  - v1.35.5: Green deaths are immune to poison.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -694,3 +700,4 @@
   - v1.34.4: Asmodeus gains Haste and Summon Illusion.
   - v1.35.2: Grum gains Smiting and Druid's Call, and is fast.
   - v1.35.3: Frances is stronger and only casts Summon Demon.
+  - v1.35.5: Zenata (by PleasingFungus) is merged. She summons dancing weapons, and can also cast Awaken Earth and Resonance Strike.

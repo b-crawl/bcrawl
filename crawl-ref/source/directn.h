@@ -294,7 +294,7 @@ void terse_describe_square(const coord_def &c, bool in_range = true);
 void full_describe_square(const coord_def &c, bool cleanup = true);
 void get_square_desc(const coord_def &c, describe_info &inf);
 
-void describe_floor(const coord_def* pos_ptr = nullptr);
+void describe_floor(const coord_def* pos_ptr = nullptr, bool show_prompts = false);
 string get_monster_equipment_desc(const monster_info& mi,
                                   //bool full_desc = true,
                                   mons_equip_desc_level_type level = DESC_FULL,

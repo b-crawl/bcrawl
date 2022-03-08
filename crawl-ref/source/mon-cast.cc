@@ -127,6 +127,7 @@ static void _cast_resonance_strike(monster &mons, mon_spell_slot, bolt&);
 static void _cast_flay(monster &caster, mon_spell_slot, bolt&);
 static void _cast_still_winds(monster &caster, mon_spell_slot, bolt&);
 static void _mons_summon_elemental(monster &caster, mon_spell_slot, bolt&);
+static void _mons_summon_dancing_weapons(monster &caster, mon_spell_slot, bolt&);
 static bool _los_spell_worthwhile(const monster &caster, spell_type spell);
 static void _setup_fake_beam(bolt& beam, const monster&, int = -1);
 static void _branch_summon(monster &caster, mon_spell_slot slot, bolt&);
@@ -356,6 +357,7 @@ static const map<spell_type, mons_spell_logic> spell_to_logic = {
 #if TAG_MAJOR_VERSION == 34
     { SPELL_IRON_ELEMENTALS, { _always_worthwhile, _mons_summon_elemental } },
 #endif
+    { SPELL_SHEZAS_DANCE, { _always_worthwhile, _mons_summon_dancing_weapons } },
     { SPELL_HASTE_OTHER, {
         _always_worthwhile,
         _fire_simple_beam,
@@ -4309,6 +4311,14 @@ static void _mons_summon_elemental(monster &mons, mon_spell_slot slot, bolt&)
         _summon(mons, *mtyp, 3, slot);
 }
 
+static void _mons_summon_dancing_weapons(monster &mons, mon_spell_slot slot, bolt&)
+{
+    // TODO: scale by power?
+    const int count = random_range(2, 3);
+    for (int i = 0; i < count; i++)
+        _summon(mons, MONS_DANCING_WEAPON, 3, slot);
+}
+
 static void _mons_cast_haunt(monster* mons)
 {
     actor* foe = mons->get_foe();
@@ -5275,9 +5285,10 @@ static void _cast_resonance_strike(monster &caster, mon_spell_slot, bolt&)
 
     if (you.see_cell(target->pos()))
     {
-        mprf("A blast of power from the earth%s strikes %s!",
+        mprf("A blast of power from the earth%s strikes %s%s",
              constructs_desc.c_str(),
-             target->name(DESC_THE).c_str());
+             target->name(DESC_THE).c_str(),
+             attack_strength_punctuation(dam).c_str());
     }
     target->hurt(&caster, dam, BEAM_MISSILE, KILLED_BY_BEAM,
                  "", "by a resonance strike");
@@ -7302,8 +7313,9 @@ static monster* _find_ally_to_throw(const monster &mons)
             continue;
         }
 
-        // Don't try to throw anything constricted.
-        if (throwee->is_constricted())
+        // Don't try to throw anything constricted or otherwise absurd
+        if (throwee->is_constricted() || throwee->is_stationary() ||
+            mons_is_tentacle_or_tentacle_segment(throwee->type))
             continue;
 
         // otherwise throw whoever's furthest from our target.

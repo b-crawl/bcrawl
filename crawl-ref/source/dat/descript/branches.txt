@@ -111,6 +111,9 @@ Possibly constructed by some powerful madman, the Vaults are said to be home to
 great treasures. The blood spattered liberally around the entrance suggests
 that there is a certain amount of violence, too.
 
+Resistance to hostile enchantments is important here, and all other resistances
+may be useful.
+
 Acquiring a rune of Zot before entering this branch is recommended for most
 adventurers.
 %%%%
@@ -299,9 +302,6 @@ Depths
 
 The Depths are the deepest part of the dungeon proper, subject to the
 corrupting influence of the Realm of Zot without being considered a part of it.
-
-Resistance to hostile enchantments is important here, and all other resistances
-may be useful.
 
 Visiting the Vaults before entering this branch is recommended for most
 adventurers.

@@ -327,8 +327,8 @@ static const map<spell_type, mons_spell_logic> spell_to_logic = {
         MSPELL_NO_AUTO_NOISE,
     } },
     { SPELL_STILL_WINDS, { _should_still_winds, _cast_still_winds } },
-    { SPELL_SMITING, { _caster_has_foe, _cast_smiting, } },
-    { SPELL_RESONANCE_STRIKE, { _caster_has_foe, _cast_resonance_strike, } },
+    { SPELL_SMITING, { _caster_sees_foe, _cast_smiting, } },
+    { SPELL_RESONANCE_STRIKE, { _caster_sees_foe, _cast_resonance_strike, } },
     { SPELL_FLAY, {
         [](const monster &caster) {
             const actor* foe = caster.get_foe(); // XXX: check vis?

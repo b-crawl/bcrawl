@@ -73,7 +73,7 @@ end
 ##############################################################################
 
 NAME:    bhauth_shoals_entry_nymph_pool
-TAGS:    shoals_entry
+TAGS:    shoals_entry no_tele_into
 KFEAT:   N = shallow_water
 KMONS:   N = water nymph
 KFEAT:   E = shallow_water

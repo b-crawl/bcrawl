@@ -1140,15 +1140,11 @@ string attack::defender_name(bool allow_reflexive)
 
 int attack::player_stat_modify_damage(int damage)
 {
-    int dammod = 39;
-
-    if (you.strength() > 10)
-        dammod += (random2(you.strength() - 9) * 2);
-    else if (you.strength() < 10)
-        dammod -= (random2(11 - you.strength()) * 3);
-
-    damage *= dammod;
-    damage /= 39;
+    // base dmg at 10 strength
+    int strength_factor = 26 + you.strength();
+    int dmg_product = damage * strength_factor;
+    int dmg_randomized = dmg_product + random2(dmg_product);
+    int dmg_out = div_rand_round(dmg_randomized, 54);
 
     return damage;
 }

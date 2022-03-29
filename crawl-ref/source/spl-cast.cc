@@ -528,9 +528,6 @@ static int _spell_enhancement(spell_type spell)
     if (typeflags & SPTYP_AIR)
         enhanced += player_spec_air();
 
-    if (you.form == transformation::shadow)
-        enhanced -= 2;
-
     if (you.form == transformation::dragon)
         enhanced += 1;
 

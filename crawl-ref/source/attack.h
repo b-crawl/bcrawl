@@ -6,6 +6,7 @@
 #include "mon-enum.h"
 #include "ouch.h"
 #include "pronoun-type.h"
+#include "stat-type.h"
 
 // Used throughout inheriting classes, define them here for universal access
 const int HIT_WEAK   = 7;

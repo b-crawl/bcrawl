@@ -1147,7 +1147,7 @@ int attack::player_stat_modify_damage(int damage, stat_type which_stat)
     int dmg_randomized = dmg_product + random2(dmg_product);
     int dmg_out = div_rand_round(dmg_randomized, 54);
 
-    return damage;
+    return dmg_out;
 }
 
 int attack::player_apply_weapon_skill(int damage)

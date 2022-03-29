@@ -1138,10 +1138,11 @@ string attack::defender_name(bool allow_reflexive)
         return def_name(DESC_THE);
 }
 
-int attack::player_stat_modify_damage(int damage)
+int attack::player_stat_modify_damage(int damage, stat_type which_stat)
 {
     // base dmg at 10 strength
-    int strength_factor = 26 + you.strength();
+    int stat = you.stat(which_stat, false);
+    int strength_factor = max(10, 26 + stat);
     int dmg_product = damage * strength_factor;
     int dmg_randomized = dmg_product + random2(dmg_product);
     int dmg_out = div_rand_round(dmg_randomized, 54);
@@ -1306,7 +1307,8 @@ int attack::calc_damage()
         potential_damage = using_weapon() || wpn_skill == SK_THROWING
             ? weapon_damage() : calc_base_unarmed_damage();
 
-        potential_damage = player_stat_modify_damage(potential_damage);
+        stat_type which_stat = (wpn_skill == SK_SHORT_BLADES) ? STAT_DEX : STAT_STR;
+        potential_damage = player_stat_modify_damage(potential_damage, which_stat);
 
         damage = random2(potential_damage+1);
 

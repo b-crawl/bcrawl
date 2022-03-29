@@ -5671,9 +5671,13 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
     }
 
     case BEAM_INNER_FLAME:
+        actor* hex_agent = agent();
+        if (*hex_agent == you)
+            hex_agent = &YOU_FAULTLESS;
+
         if (!mon->has_ench(ENCH_INNER_FLAME)
             && !mon->is_summoned()
-            && mon->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, agent())))
+            && mon->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, hex_agent)))
         {
             if (simple_monster_message(*mon,
                                        (mon->body_size(PSIZE_BODY) > SIZE_BIG)

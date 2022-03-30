@@ -1142,8 +1142,8 @@ int attack::player_stat_modify_damage(int damage, stat_type which_stat)
 {
     // base dmg at 10 strength
     int stat = you.stat(which_stat, false);
-    int strength_factor = max(10, 26 + stat);
-    int dmg_product = damage * strength_factor;
+    int stat_factor = max(10, 26 + stat);
+    int dmg_product = damage * stat_factor;
     int dmg_randomized = dmg_product + random2(dmg_product);
     int dmg_out = div_rand_round(dmg_randomized, 54);
 

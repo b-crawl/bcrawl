@@ -1482,6 +1482,7 @@ static const mon_spellbook mspell_list[] =
       {
        { SPELL_POISON_ARROW, 42, MON_SPELL_MAGICAL },
        { SPELL_POISONOUS_CLOUD, 21, MON_SPELL_MAGICAL },
+       { SPELL_VIRULENCE, 21, MON_SPELL_MAGICAL },
       }
     },
 
@@ -1628,7 +1629,8 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_ELECTRIC_GOLEM,
       {
-       { SPELL_LIGHTNING_BOLT, 44, MON_SPELL_MAGICAL },
+       { SPELL_LIGHTNING_BOLT, 40, MON_SPELL_MAGICAL },
+       { SPELL_BLINKBOLT, 20, MON_SPELL_MAGICAL | MON_SPELL_LONG_RANGE },
        { SPELL_BLINK, 22, MON_SPELL_MAGICAL },
       }
     },

@@ -3165,7 +3165,7 @@ void read_scroll(item_def& scroll)
             if (mons_immune_magic(**mi) || mi->is_summoned())
                 continue;
 
-            if (mi->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, &you)))
+            if (mi->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, &menv[YOU_FAULTLESS])))
                 had_effect = true;
         }
 

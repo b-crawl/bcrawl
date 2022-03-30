@@ -6,6 +6,7 @@
 #include "mon-enum.h"
 #include "ouch.h"
 #include "pronoun-type.h"
+#include "stat-type.h"
 
 // Used throughout inheriting classes, define them here for universal access
 const int HIT_WEAK   = 7;
@@ -187,7 +188,7 @@ protected:
     attack_flavour random_chaos_attack_flavour();
     bool apply_poison_damage_brand();
 
-    virtual int  player_stat_modify_damage(int damage);
+    virtual int  player_stat_modify_damage(int damage, stat_type which_stat = STAT_STR);
     virtual int  player_apply_weapon_skill(int damage);
     virtual int  player_apply_fighting_skill(int damage, bool aux);
     virtual int  player_apply_misc_modifiers(int damage);

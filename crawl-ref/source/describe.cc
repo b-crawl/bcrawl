@@ -937,6 +937,7 @@ static string _describe_mutant_beast(const monster_info &mi)
 int estimate_adjusted_dmg(int base_dmg, skill_type wpn_skill, int scale)
 {
     int adj_dmg = scale * base_dmg;
+    stat_type which_stat = STAT_STR;
     
     switch (wpn_skill)
     {
@@ -958,6 +959,11 @@ int estimate_adjusted_dmg(int base_dmg, skill_type wpn_skill, int scale)
         adj_dmg += unarmed_dmg;
         break;
     }
+
+    case SK_SHORT_BLADES:
+        which_stat = STAT_DEX;
+        break;
+
     case SK_THROWING:
         adj_dmg += (you.skill(wpn_skill, scale) * min(4, base_dmg)) / 4;
         break;
@@ -968,16 +974,13 @@ int estimate_adjusted_dmg(int base_dmg, skill_type wpn_skill, int scale)
         break;
     }
 
-    int dammod = 39;
-    if (you.strength() > 10)
-        dammod += you.strength() - 9;
-    else if (you.strength() < 10)
-        dammod -= (11 - you.strength()) * 3 / 2;
-    adj_dmg *= dammod;
-    adj_dmg /= 39;
-
     adj_dmg *= 3000 + you.skill(SK_FIGHTING, 50);
     adj_dmg /= 3000;
+
+    int stat = you.stat(which_stat, false);
+    int stat_factor = max(10, 26 + stat);
+    adj_dmg = (adj_dmg * stat_factor) / 36;
+
     return adj_dmg;
 }
 
@@ -1239,8 +1242,8 @@ static string _describe_weapon(const item_def &item, bool verbose)
             {
                 string adj = (item.sub_type == WPN_DAGGER) ? "extremely"
                                                            : "particularly";
-                description += "\n\nIt is " + adj + " good for stabbing"
-                               " unaware enemies.";
+                description += "\n\nIts damage is affected by dexterity rather than strength, "
+                               "and it is " + adj + " good for stabbing unaware enemies.";
             }
             break;
         default:

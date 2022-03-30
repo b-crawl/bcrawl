@@ -4457,6 +4457,9 @@ void bolt::monster_post_hit(monster* mon, int dmg)
         {
             if (actor *victim = actor_at(*ai))
             {
+                if (victim->is_monster() && this->ignores_monster(victim->as_monster()))
+                    continue;
+                
                 if (you.see_cell(*ai))
                 {
                     mprf("The acid splashes onto %s!",
@@ -5668,9 +5671,14 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
     }
 
     case BEAM_INNER_FLAME:
+    {
+        actor* flame_agent = agent();
+        if (flame_agent->is_player())
+            flame_agent = &menv[YOU_FAULTLESS];
+
         if (!mon->has_ench(ENCH_INNER_FLAME)
             && !mon->is_summoned()
-            && mon->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, agent())))
+            && mon->add_ench(mon_enchant(ENCH_INNER_FLAME, 0, flame_agent)))
         {
             if (simple_monster_message(*mon,
                                        (mon->body_size(PSIZE_BODY) > SIZE_BIG)
@@ -5681,6 +5689,7 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
             }
         }
         return MON_AFFECTED;
+    }
 
     case BEAM_DIMENSION_ANCHOR:
         if (!mon->has_ench(ENCH_DIMENSION_ANCHOR)

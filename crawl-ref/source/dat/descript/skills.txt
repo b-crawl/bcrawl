@@ -6,7 +6,8 @@ Fighting skill increases your accuracy and damage in physical combat, and increa
 Short Blades
 
 Short Blades are more effective than any other weapon type at stabbing helpless
-foes.
+foes. Unlike all other weapons, their damage is dependent on dexterity rather
+than strength.
 
 Being skilled with Short Blades will allow you to attack more quickly with all
 weapons of this type, as well as increasing your accuracy and damage with them.

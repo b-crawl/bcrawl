@@ -147,6 +147,9 @@
   - v1.34.2: Monsters can't attack immediately after Blink Allies Encircling.
   - v1.34.3: Demons and holy creatures can go berserk.
   - v1.35.1: Archmagi can stack up to 2.
+  - v1.36: Weapon damage scaling with strength is simplified to (26 + strength)/36.
+  - v1.36: Short blade damage scales with dexterity instead of strength.
+  - v1.36: Inner flame explosions no longer anger allies.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -431,6 +434,7 @@
   - v1.35.3: Kikubaaqudgha's Torment ability costs less piety.
   - v1.35.3: Elyvilon's Heal Other ability costs less piety.
   - v1.35.5: Dithmenos's Shadow Form ability costs less piety.
+  - v1.36: Dithmenos's Shadow Form ability no longer has a spell power penalty.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -668,6 +672,8 @@
   - v1.35.4: Moths of wrath and ghost moths are vulnerable to fire.
   - v1.35.5: Eyes of draining are fast and can cast Vampiric Draining.
   - v1.35.5: Green deaths are immune to poison.
+  - v1.36: Electric golems have fewer but stronger melee attacks, including one that can blink away, taking the player with them. They can cast Blinkbolt at long range.
+  - v1.36: Green deaths can cast Virulence.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -701,3 +707,4 @@
   - v1.35.2: Grum gains Smiting and Druid's Call, and is fast.
   - v1.35.3: Frances is stronger and only casts Summon Demon.
   - v1.35.5: Zenata (by PleasingFungus) is merged. She summons dancing weapons, and can also cast Awaken Earth and Resonance Strike.
+  - v1.36: Zenata can see invisible.

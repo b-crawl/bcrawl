@@ -673,6 +673,7 @@
   - v1.35.5: Eyes of draining are fast and can cast Vampiric Draining.
   - v1.35.5: Green deaths are immune to poison.
   - v1.36: Electric golems have fewer but stronger melee attacks, including one that can blink away, taking the player with them. They can cast Blinkbolt at long range.
+  - v1.36: Green deaths can cast Virulence.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

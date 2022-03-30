@@ -1482,6 +1482,7 @@ static const mon_spellbook mspell_list[] =
       {
        { SPELL_POISON_ARROW, 42, MON_SPELL_MAGICAL },
        { SPELL_POISONOUS_CLOUD, 21, MON_SPELL_MAGICAL },
+       { SPELL_VIRULENCE, 21, MON_SPELL_MAGICAL },
       }
     },
 

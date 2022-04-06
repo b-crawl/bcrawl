@@ -166,10 +166,9 @@ try to struggle free.
 Constr status
 
 You are being constricted by an enemy and will take an increasing amount of
-damage over time. You are unable to move (or blink) away from the enemy,
-although you can struggle to escape by attempting to do so, and will become
-increasingly more likely to succeed and break the constriction when doing so
-multiple times.
+damage over time. You have a chance to fail to move, but will become
+increasingly more likely to succeed and break the constriction when attempting
+to multiple times. While constricted, reading scrolls has a chance to fail.
 %%%%
 Mesm status
 

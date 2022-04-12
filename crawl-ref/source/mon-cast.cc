@@ -5340,7 +5340,7 @@ dice_def waterstrike_damage(int spell_hd)
  */
 dice_def resonance_strike_base_damage(const monster &mons)
 {
-    return dice_def(3, mons.spell_hd(SPELL_RESONANCE_STRIKE));
+    return dice_def(2, mons.spell_hd(SPELL_RESONANCE_STRIKE));
 }
 
 static const int MIN_DREAM_SUCCESS_POWER = 25;

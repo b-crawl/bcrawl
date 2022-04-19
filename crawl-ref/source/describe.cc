@@ -3734,6 +3734,11 @@ static string _monster_attacks_description(const monster_info& mi)
                                 archer_bonus_damage(mi.hd));
     }
 
+    if (mons_class_flag(mi.type, M_BURROWS))
+    {
+        result << "It can burrow through rock walls.\n";
+    }
+
     if (mi.type == MONS_ROYAL_JELLY)
     {
         result << "It will release varied jellies when damaged or killed, with"

@@ -1459,8 +1459,8 @@ static void _pre_monster_move(monster& mons)
     case MONS_CRAZY_YIUF:
         if (player_has_orb())
         {
-            mon->attitude = ATT_FRIENDLY;
-            mons_att_changed(mon);
+            mons.attitude = ATT_FRIENDLY;
+            mons_att_changed(&mons);
         }
         break;
     

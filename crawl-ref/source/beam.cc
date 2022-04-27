@@ -5235,7 +5235,7 @@ bool ench_flavour_affects_monster(beam_type flavour, const monster* mon,
         break;
 
     case BEAM_INNER_FLAME:
-        rc = !((mon->is_summoned() && !(mon->has_ench(ENCH_PHANTOM_MIRROR) && is_tracer && !mons_aligned(&you, mon)))
+        rc = !((mon->is_summoned() && !(mon->has_ench(ENCH_PHANTOM_MIRROR) && !mons_aligned(&you, mon)))
                 || mon->has_ench(ENCH_INNER_FLAME));
         break;
 

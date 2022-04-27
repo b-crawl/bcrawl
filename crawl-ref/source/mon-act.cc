@@ -1407,20 +1407,6 @@ static void _pre_monster_move(monster& mons)
 {
     mons.hit_points = min(mons.max_hit_points, mons.hit_points);
 
-    if (mons.type == MONS_SPATIAL_MAELSTROM
-        && !player_in_branch(BRANCH_ABYSS)
-        && !player_in_branch(BRANCH_ZIGGURAT))
-    {
-        for (int i = 0; i < you.time_taken; ++i)
-        {
-            if (one_chance_in(100))
-            {
-                mons.banish(&mons);
-                return;
-            }
-        }
-    }
-
     if (mons.has_ench(ENCH_HEXED))
     {
         const actor* const agent =
@@ -1429,26 +1415,50 @@ static void _pre_monster_move(monster& mons)
             mons.del_ench(ENCH_HEXED);
     }
 
-    if (mons.type == MONS_SNAPLASHER_VINE
-        && mons.props.exists("vine_awakener"))
+    switch (mons.type)
     {
-        monster* awakener = monster_by_mid(mons.props["vine_awakener"].get_int());
-        if (awakener && !awakener->can_see(mons))
+    case MONS_SNAPLASHER_VINE:
+        if (mons.props.exists("vine_awakener"))
         {
-            simple_monster_message(mons, " falls limply to the ground.");
+            monster* awakener = monster_by_mid(mons.props["vine_awakener"].get_int());
+            if (awakener && !awakener->can_see(mons))
+            {
+                simple_monster_message(mons, " falls limply to the ground.");
+                monster_die(mons, KILL_RESET, NON_MONSTER);
+                return;
+            }
+        }
+        break;
+    
+    case MONS_BALL_LIGHTNING:
+        // Dissipate player ball lightnings that have left the player's sight
+        // (monsters are allowed to 'cheat', as with orb of destruction)
+        if (mons.summoner == MID_PLAYER
+            && !cell_see_cell(you.pos(), mons.pos(), LOS_SOLID))
+        {
             monster_die(mons, KILL_RESET, NON_MONSTER);
             return;
         }
+        break;
+    
+    case MONS_SPATIAL_MAELSTROM:
+        if (!player_in_branch(BRANCH_ABYSS)
+            && !player_in_branch(BRANCH_ZIGGURAT))
+        {
+            for (int i = 0; i < you.time_taken; ++i)
+            {
+                if (one_chance_in(100))
+                {
+                    mons.banish(&mons);
+                    return;
+                }
+            }
+        }
+        break;
+    
+    default: break;
     }
 
-    // Dissipate player ball lightnings that have left the player's sight
-    // (monsters are allowed to 'cheat', as with orb of destruction)
-    if (mons.type == MONS_BALL_LIGHTNING && mons.summoner == MID_PLAYER
-        && !cell_see_cell(you.pos(), mons.pos(), LOS_SOLID))
-    {
-        monster_die(mons, KILL_RESET, NON_MONSTER);
-        return;
-    }
 
     if (mons_stores_tracking_data(mons))
     {

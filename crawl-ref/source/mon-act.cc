@@ -1456,9 +1456,16 @@ static void _pre_monster_move(monster& mons)
         }
         break;
     
+    case MONS_CRAZY_YIUF:
+        if (player_has_orb())
+        {
+            mon->attitude = ATT_FRIENDLY;
+            mons_att_changed(mon);
+        }
+        break;
+    
     default: break;
     }
-
 
     if (mons_stores_tracking_data(mons))
     {

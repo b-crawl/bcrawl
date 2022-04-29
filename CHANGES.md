@@ -709,3 +709,5 @@
   - v1.35.3: Frances is stronger and only casts Summon Demon.
   - v1.35.5: Zenata (by PleasingFungus) is merged. She summons dancing weapons, and can also cast Awaken Earth and Resonance Strike.
   - v1.36: Zenata can see invisible.
+  - v1.36.1: Kirke's pigs no longer give experience.
+  - v1.36.1: Crazy Yiuf becomes friendly if the player has the Orb of Zot.

@@ -811,6 +811,7 @@ monster* place_monster(mgen_data mg, bool force_pos, bool dont_place)
                 member->props["pikel_band"] = true;
                 break;
             case MONS_KIRKE:
+                member->flags |= MF_NO_REWARD;
                 member->props["kirke_band"] = true;
                 break;
             default: break;

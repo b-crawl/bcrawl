@@ -2567,7 +2567,7 @@ spret cast_spellforged_servitor(int pow, god_type god, bool fail)
     return spret::success;
 }
 
-static int abjuration(int pow, monster *mon)
+int abjuration(int pow, monster *mon)
 {
     // Scale power into something comparable to summon lifetime.
     const int abjdur = pow * 12;

@@ -227,13 +227,16 @@ VALUE:   1000
 BOOL:    poison
 
 NAME:    staff of Wucad Mu
-INSCRIP: channel
+INSCRIP: +Abjure
 OBJ:     OBJ_WEAPONS/WPN_STAFF
 PLUS:    +9
 COLOUR:  ETC_MAGIC
 TILE:    spwpn_wucad_mu
 TILE_EQ: wucad_mu
+MP:      +20
+BRAND:   SPWPN_VORPAL
 VALUE:   1000
+BOOL:    drain
 
 NAME:    Vampire's Tooth
 OBJ:     OBJ_WEAPONS/WPN_QUICK_BLADE

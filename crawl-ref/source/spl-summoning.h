@@ -102,6 +102,7 @@ spret cast_haunt(int pow, const coord_def& where, god_type god, bool fail);
 
 spret cast_aura_of_abjuration(int pow, bool fail);
 void do_aura_of_abjuration(int delay);
+int abjuration(int pow, monster *mon);
 
 monster* find_battlesphere(const actor* agent);
 spret cast_battlesphere(actor* agent, int pow, god_type god, bool fail);

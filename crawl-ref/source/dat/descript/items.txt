@@ -1221,7 +1221,8 @@ If this kills a creature which is not summoned, a powerful explosion results.
 %%%%
 wand of charming
 
-A magical device which causes slavish obedience in a creature.
+A magical device which causes a creature to become fiercely, but briefly,
+loyal to the user.
 %%%%
 wand of flame
 

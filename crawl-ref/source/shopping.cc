@@ -409,7 +409,7 @@ unsigned int item_value(item_def item, bool ident)
             case WAND_ICEBLAST:
                 wand_power = 60;
                 break;
-            case WAND_ENSLAVEMENT:
+            case WAND_CHARMING:
             case WAND_PARALYSIS:
                 wand_power = 40;
                 break;

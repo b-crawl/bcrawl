@@ -3423,7 +3423,7 @@ void bolt::affect_player_enchantment(bool resistible)
         mprf(MSGCH_WARN, "Your will is overpowered!");
         confuse_player(5 + random2(3));
         obvious_effect = true;
-        break;     // enslavement - confusion?
+        break;     // charming - confusion?
 
     case BEAM_BANISH:
         if (YOU_KILL(thrower))

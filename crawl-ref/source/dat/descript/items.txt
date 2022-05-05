@@ -1219,7 +1219,7 @@ pattern of magic. If it succeeds, it deals heavy damage that bypasses armour.
 
 If this kills a creature which is not summoned, a powerful explosion results.
 %%%%
-wand of enslavement
+wand of charming
 
 A magical device which causes slavish obedience in a creature.
 %%%%

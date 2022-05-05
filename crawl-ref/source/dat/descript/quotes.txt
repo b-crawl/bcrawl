@@ -478,7 +478,7 @@ little chance against the tall athletic Edmund, proposed, on the contrary, for
 them to divide the realm as their fathers had done.”
     -Thomas Keightley, _The History of England_. 1839.
 %%%%
-Enslavement spell
+Charming spell
 
 “He held up his hand, and they all stopped, and I thought he seemed to be
 saying, ‘All these lives will I give you, ay, and many more and greater,
@@ -3185,9 +3185,9 @@ wand of disintegration
 “The same nuclear chain reaction that produces badly needed electrical energy when harnessed in a reactor, may kill thousands when abruptly released in an atomic bomb.”
     -Wernher von Braun.
 %%%%
-wand of enslavement
+wand of charming
 
-<Enslavement spell>
+<Charming spell>
 %%%%
 wand of flame
 

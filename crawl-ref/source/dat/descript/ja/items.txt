@@ -681,7 +681,7 @@ wand of disintegration
 硬質の壁を除いてあらゆる物質構造を崩壊させる魔法の道具だ。
 肉体は言うまでもなく固定された石像でさえ崩壊する。
 %%%%
-wand of enslavement
+wand of charming
 
 対象を奴隷として服従させる魔法の道具だ。
 %%%%

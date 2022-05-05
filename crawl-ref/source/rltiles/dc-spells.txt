@@ -42,7 +42,7 @@ confusing_touch CONFUSING_TOUCH
 corona CORONA
 darkness DARKNESS
 discord DISCORD
-enslavement ENSLAVEMENT
+charming CHARMING
 haste HASTE
 infusion INFUSION
 flaming_arrows FLAMING_ARROWS

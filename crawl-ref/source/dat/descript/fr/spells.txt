@@ -280,7 +280,7 @@ Ce sort transforme temporairement le sorcier en un grand dragon cracheur de
 feu. Les sorciers draconiens conserveront leur couleur et leur souffle initial
 une fois transformés.
 %%%%
-Enslavement spell
+Charming spell
 
 Ce sort force une créature hostile à se battre à vos côtés pour un moment.
 %%%%

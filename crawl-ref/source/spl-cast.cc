@@ -794,19 +794,16 @@ bool cast_a_spell(bool check_range, spell_type spell)
 
     int cost = spell_mana(spell);
     int sifcast_amount = 0;
+    if (you.attribute[ATTR_DIVINE_ENERGY])
+    {
+        sifcast_amount = cost;
+        cost = 0;
+    }
     if (!enough_mp(cost, true))
     {
-        if (you.attribute[ATTR_DIVINE_ENERGY])
-        {
-            sifcast_amount = cost - you.magic_points;
-            cost = you.magic_points;
-        }
-        else
-        {
-            mpr("You don't have enough magic to cast that spell.");
-            crawl_state.zero_turns_taken();
-            return false;
-        }
+        mpr("You don't have enough magic to cast that spell.");
+        crawl_state.zero_turns_taken();
+        return false;
     }
 
     if (check_range && spell_no_hostile_in_range(spell))

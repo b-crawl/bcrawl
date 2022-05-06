@@ -37,7 +37,8 @@ KMONS:  e = vampire / yaktaur / w:5 frost giant / w:5 fire giant /\
 KMONS:  i = titan
   : end
 KMONS:  P = plant
-KMONS:  h = generate_awake human / generate_awake elf / generate_awake kobold
+KMONS:  h = generate_awake human att:neutral /\
+            generate_awake elf att:neutral / generate_awake kobold att:neutral
 : dgn.delayed_decay(_G, 'h', 'elf chunk / q:2 human chunk / q:2 kobold chunk')
 KFEAT:  = = floor
 KPROP:  4 = no_tele_into

@@ -431,7 +431,7 @@ static const ability_def Ability_List[] =
     { ABIL_SIF_MUNA_CHANNEL_ENERGY, "Channel Magic",
       0, 0, 200, 2, {fail_basis::invo, 60, 4, 25}, abflag::none },
     { ABIL_SIF_MUNA_MOMENT_OF_MAGIC, "Moment of Magic",
-      2, 0, 0, 3, {fail_basis::invo, 80, 4, 20}, abflag::instant | abflag::exhaustion },
+      0, 0, 0, 3, {fail_basis::invo, 80, 4, 20}, abflag::instant | abflag::exhaustion },
 
     // Trog
     { ABIL_TROG_BERSERK, "Berserk",

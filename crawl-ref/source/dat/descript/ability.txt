@@ -332,6 +332,10 @@ Forget Spell ability
 
 Removes a known spell from memory, so as to free memory to learn others.
 %%%%
+Moment of Magic ability
+
+Allows the user to cast a single spell instantly.
+%%%%
 # Trog
 Berserk ability
 

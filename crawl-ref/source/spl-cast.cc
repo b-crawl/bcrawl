@@ -895,7 +895,16 @@ bool cast_a_spell(bool check_range, spell_type spell)
         you.set_duration(DUR_NO_CAST, 3 + random2avg(sifcast_amount * 2, 2));
     }
 
-    if(!you.duration[DUR_TIME_STOP] || spell_difficulty(spell) > 4)
+    bool instant_cast = false;
+    if(you.duration[DUR_TIME_STOP] && spell_difficulty(spell) <= 4)
+        instant_cast = true;
+    if(you.duration[DUR_MOMENT_OF_MAGIC])
+    {
+        instant_cast = true;
+        you.duration[DUR_MOMENT_OF_MAGIC] = 0;
+        you.increase_duration(DUR_EXHAUSTED, 12 + random2(5));
+    }
+    if(!instant_cast)
         you.turn_is_over = true;
     alert_nearby_monsters();
 

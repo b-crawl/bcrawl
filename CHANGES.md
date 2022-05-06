@@ -435,6 +435,8 @@
   - v1.35.3: Elyvilon's Heal Other ability costs less piety.
   - v1.35.5: Dithmenos's Shadow Form ability costs less piety.
   - v1.36: Dithmenos's Shadow Form ability no longer has a spell power penalty.
+  - v1.36.1: Sif Muna's Divine Energy is used for spell mana costs even if the player has mana.
+  - v1.36.1: Sif Muna gains the Moment of Magic ability at \*\*\*\*\*, which allows the player to cast one spell instantly and causes exhaustion.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

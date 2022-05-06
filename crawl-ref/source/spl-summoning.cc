@@ -2567,12 +2567,11 @@ spret cast_spellforged_servitor(int pow, god_type god, bool fail)
     return spret::success;
 }
 
-static int _abjuration(int pow, monster *mon)
+int abjuration(int pow, monster *mon)
 {
     // Scale power into something comparable to summon lifetime.
     const int abjdur = pow * 12;
 
-    // XXX: make this a prompt
     if (mon->wont_attack())
         return false;
 
@@ -2633,7 +2632,7 @@ void do_aura_of_abjuration(int delay)
 {
     const int pow = you.props["abj_aura_pow"].get_int() * delay / 10;
     for (monster_near_iterator mi(you.pos(), LOS_NO_TRANS); mi; ++mi)
-        _abjuration(pow / 2, *mi);
+        abjuration(pow / 2, *mi);
 }
 
 monster* find_battlesphere(const actor* agent)

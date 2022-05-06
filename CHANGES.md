@@ -435,6 +435,8 @@
   - v1.35.3: Elyvilon's Heal Other ability costs less piety.
   - v1.35.5: Dithmenos's Shadow Form ability costs less piety.
   - v1.36: Dithmenos's Shadow Form ability no longer has a spell power penalty.
+  - v1.36.1: Sif Muna's Divine Energy is used for spell mana costs even if the player has mana.
+  - v1.36.1: Sif Muna gains the Moment of Magic ability at \*\*\*\*\*, which allows the player to cast one spell instantly and causes exhaustion.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -559,6 +561,7 @@
   - v1.35.1: The Ring of Shadows now gives rN+.
   - v1.35.5: Devastator now has enchantment equal to Maces & Flails skill. Its explosions are now less common but stronger, with chance scaling with Maces & Flails skill.
   - v1.35.5: The Captain's Cutlass is a scimitar instead of a rapier.
+  - v1.36.1: The Staff of Wucad Mu is reworked: it's a +9 vorpal staff with +20 mana and *Drain, and it can be evoked to regain mana by abjuring hostile summons.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -674,6 +677,8 @@
   - v1.35.5: Green deaths are immune to poison.
   - v1.36: Electric golems have fewer but stronger melee attacks, including one that can blink away, taking the player with them. They can cast Blinkbolt at long range.
   - v1.36: Green deaths can cast Virulence.
+  - v1.36.1: Centaurs and centaur warriors move and shoot quickly instead of being fast.
+  - v1.36.1: Friendly zombies and skeletons aren't angered by player attacks.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -708,3 +713,5 @@
   - v1.35.3: Frances is stronger and only casts Summon Demon.
   - v1.35.5: Zenata (by PleasingFungus) is merged. She summons dancing weapons, and can also cast Awaken Earth and Resonance Strike.
   - v1.36: Zenata can see invisible.
+  - v1.36.1: Kirke's pigs no longer give experience.
+  - v1.36.1: Crazy Yiuf becomes friendly if the player has the Orb of Zot.

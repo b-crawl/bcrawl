@@ -430,6 +430,8 @@ static const ability_def Ability_List[] =
       0, 0, 0, 8, {fail_basis::invo}, abflag::none },
     { ABIL_SIF_MUNA_CHANNEL_ENERGY, "Channel Magic",
       0, 0, 200, 2, {fail_basis::invo, 60, 4, 25}, abflag::none },
+    { ABIL_SIF_MUNA_MOMENT_OF_MAGIC, "Moment of Magic",
+      0, 0, 0, 3, {fail_basis::invo, 90, 4, 20}, abflag::instant | abflag::exhaustion },
 
     // Trog
     { ABIL_TROG_BERSERK, "Berserk",
@@ -2566,6 +2568,19 @@ static spret _do_ability(const ability_def& abil, bool fail)
         fail_check();
         you.increase_duration(DUR_CHANNEL_ENERGY,
             4 + random2avg(you.skill_rdiv(SK_INVOCATIONS, 2, 3), 2), 100);
+        break;
+    }
+
+    case ABIL_SIF_MUNA_MOMENT_OF_MAGIC:
+    {
+        if (you.duration[DUR_EXHAUSTED])
+        {
+            mpr("You are too exhausted.");
+            return spret::abort;
+        }
+        fail_check();
+        you.increase_duration(DUR_MOMENT_OF_MAGIC, 3);
+        mprf(MSGCH_GOD, you.religion, "Sif Muna grants you a moment for magic.");
         break;
     }
 

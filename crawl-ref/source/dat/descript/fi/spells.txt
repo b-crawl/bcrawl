@@ -49,7 +49,7 @@ Debugging Ray spell
 
 Säde joka tekee massiivista vahinkoa (1500 hp) ja osuu aina.
 %%%%
-Enslavement spell
+Charming spell
 
 Tämä taika saa vaarallisen olennon taistelemaan puolellasi hetkeksi aikaa.
 %%%%

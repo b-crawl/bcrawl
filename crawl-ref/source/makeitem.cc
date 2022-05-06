@@ -1274,7 +1274,7 @@ static int _random_wand_subtype()
                                   8, WAND_ACID,
                                   6, WAND_DISINTEGRATION,
                                   6, WAND_DIGGING,
-                                  5, WAND_ENSLAVEMENT,
+                                  5, WAND_CHARMING,
                                   3, WAND_CLOUDS,
                                   3, WAND_SCATTERSHOT);
 }
@@ -1291,7 +1291,7 @@ bool is_high_tier_wand(int type)
 {
     switch (type)
     {
-    case WAND_ENSLAVEMENT:
+    case WAND_CHARMING:
     case WAND_PARALYSIS:
     case WAND_ACID:
     case WAND_ICEBLAST:

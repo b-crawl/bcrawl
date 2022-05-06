@@ -3423,7 +3423,7 @@ void bolt::affect_player_enchantment(bool resistible)
         mprf(MSGCH_WARN, "Your will is overpowered!");
         confuse_player(5 + random2(3));
         obvious_effect = true;
-        break;     // enslavement - confusion?
+        break;     // charming - confusion?
 
     case BEAM_BANISH:
         if (YOU_KILL(thrower))
@@ -5235,7 +5235,8 @@ bool ench_flavour_affects_monster(beam_type flavour, const monster* mon,
         break;
 
     case BEAM_INNER_FLAME:
-        rc = !(mon->is_summoned() || mon->has_ench(ENCH_INNER_FLAME));
+        rc = !((mon->is_summoned() && !(mon->has_ench(ENCH_PHANTOM_MIRROR) && !mons_aligned(&you, mon)))
+                || mon->has_ench(ENCH_INNER_FLAME));
         break;
 
     case BEAM_PETRIFY:

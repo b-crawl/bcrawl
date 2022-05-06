@@ -527,7 +527,7 @@ Energy Bolt spell
 Fires a bolt of highly destructive energy. The range of the bolt is decreased
 by one for every creature it strikes.
 %%%%
-Enslavement spell
+Charming spell
 
 Causes an otherwise hostile creature to fight on the caster's side for a while.
 %%%%

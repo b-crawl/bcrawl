@@ -314,9 +314,10 @@ turn the demon hostile.
 # Sif Muna
 Divine Energy ability
 
-Calls on Sif Muna for divine energy. While active, Sif Muna will allow you to
-cast spells even with insufficient reserves of magic. Doing so will cause you
-to briefly lose access to your magic after the spell is cast.
+While active, you will draw upon Sif Muna's divine energy to cast spells
+instead of using your own magical power. Doing so will cause you to briefly
+lose access to your magic after the spell is cast, for a duration increasing
+with the amount of divine energy used.
 %%%%
 Stop Divine Energy ability
 
@@ -331,6 +332,10 @@ that increases with Invocations skill.
 Forget Spell ability
 
 Removes a known spell from memory, so as to free memory to learn others.
+%%%%
+Moment of Magic ability
+
+Allows the user to cast a single spell instantly.
 %%%%
 # Trog
 Berserk ability

@@ -1733,7 +1733,7 @@ ITEM:    * / |
 ITEM:    book of hexes / book of misfortune / book of debilitation / \
          randbook disc:hexes / shortbow good_item / longbow good_item / \
          hunting sling good_item / fustibalus good_item
-ITEM:    wand of enslavement / wand of paralysis / phial of floods / any wand
+ITEM:    wand of charming / wand of paralysis / phial of floods / any wand
 ITEM:    scroll of vulnerability / scroll of fear / any scroll / any potion
 KMONS:   1 = merfolk avatar
 KMONS:   2 = faun w:20 / centaur / nothing
@@ -1888,7 +1888,7 @@ kfeat("F = general shop name:" .. owner .. " type:Merfolk suffix:Magic ; \
       ring of see invisible | ring of protection from magic | amulet of reflection | \
       amulet of the acrobat | randbook disc:poison | randbook disc:hexes | \
       randbook disc:ice | randbook disc:summoning | phial of floods | \
-      wand of clouds | lightning rod | wand of enslavement | wand of iceblast | \
+      wand of clouds | lightning rod | wand of charming | wand of iceblast | \
       randbook disc:transmutation" )
 -- If you're not a merfolk and can't get to the shops on your own, the owner
 -- will be more than happy to help make arrangements. With an additional

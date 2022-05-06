@@ -558,7 +558,7 @@ i-iceblast WAND_ICEBLAST
 i-teleportation WAND_REMOVEME8
 i-lightning WAND_REMOVEME11
 i-polymorph WAND_POLYMORPH
-i-enslavement WAND_ENSLAVEMENT
+i-charming WAND_CHARMING
 i-acid WAND_ACID
 i-random_effects WAND_RANDOM_EFFECTS
 i-disintegration WAND_DISINTEGRATION

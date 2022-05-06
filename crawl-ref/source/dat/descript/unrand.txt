@@ -53,9 +53,9 @@ immunity to all venoms while wielded.
 %%%%
 staff of Wucad Mu
 
-A crystal staff overflowing with magical energies. It can be evoked to restore
-large amounts of magical energy, but with the risk of damaging the user's mind.
-Its power depends on the wielder's Evocations skill.
+A staff with a large crystal that can store a great deal of magical power. A
+wielder skilled in Evocations can also use it to drain magical power from
+nearby summoned creatures, reducing their remaining duration in this realm.
 %%%%
 Vampire's Tooth
 

@@ -20,6 +20,7 @@
 
 #define ART_FUNC_H
 
+#include "act-iter.h"      // For monster_near_iterator
 #include "areas.h"         // For silenced() and invalidate_agrid()
 #include "attack.h"        // For attack_strength_punctuation()
 #include "beam.h"          // For Lajatang of Order's silver damage
@@ -42,8 +43,8 @@
 #include "spl-cast.h"      // For evokes
 #include "spl-damage.h"
 #include "spl-goditem.h"   // For Sceptre of Torment tormenting
-#include "spl-miscast.h"   // For Staff of Wucad Mu and Scythe of Curses miscasts
-#include "spl-summoning.h" // For Zonguldrok animating dead
+#include "spl-miscast.h"
+#include "spl-summoning.h" // For Zonguldrok animating dead and Wucad abjuration
 #include "terrain.h"       // For storm bow
 #include "transform.h"     // For glaive of prune
 #include "view.h"          // For arc blade's discharge effect
@@ -460,42 +461,6 @@ static void _TROG_unequip(item_def *item, bool *show_msgs)
 
 ////////////////////////////////////////////////////
 
-static void _wucad_backfire()
-{
-    switch (random2(7))
-    {
-    case 0:
-    case 1:
-        switch (random2(4))
-        {
-        case 0:
-            mpr("Weird images run through your mind.");
-            break;
-        case 1:
-            mpr("Your head hurts.");
-            break;
-        case 2:
-            mpr("You feel a strange surge of energy.");
-            break;
-        case 3:
-            mpr("You feel uncomfortable.");
-            break;
-        }
-        break;
-    case 2:
-    case 3:
-        confuse_player(2 + random2(4));
-        break;
-    case 4:
-    case 5:
-        dec_mp(5 + random2(20));
-        break;
-    case 6:
-        lose_stat(STAT_INT, 1 + random2avg(5, 2));
-        break;
-    }
-}
-
 static bool _WUCAD_MU_evoke(item_def *item, bool* did_work, bool* unevokable)
 {
     if (you.magic_points == you.max_magic_points)
@@ -505,22 +470,23 @@ static bool _WUCAD_MU_evoke(item_def *item, bool* did_work, bool* unevokable)
         return true;
     }
 
-    if (!x_chance_in_y(you.skill(SK_EVOCATIONS, 100) + 100, 2500))
-        return false;
-
-    if (one_chance_in(4))
+    int evo_skill = you.skill(SK_EVOCATIONS, 10);
+    int power = evo_skill + 50;
+    int limit = you.max_magic_points - you.magic_points;
+    int mp_gained = 0;
+    
+    mpr("You gaze into the orb.");
+    for (monster_near_iterator mi(you.pos(), LOS_NO_TRANS); mi; ++mi)
     {
-        _wucad_backfire();
-        did_god_conduct(DID_CHANNEL, 10, true);
-        return false;
+        if (abjuration(power / 2, *mi))
+            if (mi->get_experience_level() > (mp_gained + 1)
+                    && x_chance_in_y(evo_skill, 270))
+                mp_gained++;
+        if (mp_gained >= limit)
+            break;
     }
-
-    mpr("Magical energy flows into your mind!");
-
-    const int mp_inc_base = 3 + random2(5);
-    inc_mp(mp_inc_base + you.skill_rdiv(SK_EVOCATIONS, 1, 3));
-    make_hungry(50, false, true);
-
+    
+    inc_mp(mp_gained);
     *did_work = true;
     practise_evoking(1);
     did_god_conduct(DID_CHANNEL, 10, true);

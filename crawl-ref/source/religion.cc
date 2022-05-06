@@ -183,6 +183,8 @@ const vector<god_power> god_powers[NUM_GODS] =
       { 3, ABIL_SIF_MUNA_CHANNEL_ENERGY, "call upon Sif Muna for magical energy"},
       { 4, ABIL_SIF_MUNA_FORGET_SPELL, "freely open your mind to new spells",
           "forget spells at will" },
+      { 5, ABIL_SIF_MUNA_MOMENT_OF_MAGIC, "cast a single spell instantly",
+          "instant cast" },
       { 6, "Sif Muna is fully protecting you from the effects of miscast magic.",
            "Sif Muna no longer fully protects you from the effects of miscast magic." },
     },

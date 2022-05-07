@@ -158,7 +158,7 @@ static const char *divine_title[][8] =
         "Traumaturge",        "Battlemage",            "Warlock",                  "Luminary of Lethal Lore"},
 
     // Okawaru -- battle theme.
-    {"Coward",             "Struggler",             "Combatant",                "Warrior",
+    {"Coward",             "Struggler",             "Combatant",                "@Genus@-At-Arms",
         "Knight",             "Warmonger",             "Commander",                "Victor of a Thousand Battles"},
 
     // Makhleb -- chaos theme.

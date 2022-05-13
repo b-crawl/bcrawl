@@ -890,6 +890,7 @@ bool cast_a_spell(bool check_range, spell_type spell)
         simple_god_message(" grants you divine energy.");
         mpr("You briefly lose access to your magic!");
         you.set_duration(DUR_NO_CAST, 3 + random2avg(sifcast_amount * 2, 2));
+        you.attribute[ATTR_DIVINE_ENERGY] = 0;
     }
 
     bool instant_cast = false;

@@ -1293,7 +1293,7 @@ static bool _gift_sif_kiku_gift(bool forced)
         you.num_total_gifts[you.religion]++;
         // Timeouts are meaningless for Kiku.
         if (!you_worship(GOD_KIKUBAAQUDGHA))
-            _inc_gift_timeout(40 + random2avg(19, 2));
+            _inc_gift_timeout(60 + random2avg(28, 2));
         take_note(Note(NOTE_GOD_GIFT, you.religion));
     }
 

@@ -2077,6 +2077,7 @@ static void _gain_piety_point()
         {
         case GOD_JIYVA:
         case GOD_NEMELEX_XOBEH:
+        case GOD_SIF_MUNA:
             break;
         default:
             if (!one_chance_in(4))

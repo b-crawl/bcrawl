@@ -2578,6 +2578,11 @@ static spret _do_ability(const ability_def& abil, bool fail)
             mpr("You are too exhausted.");
             return spret::abort;
         }
+        if (you.duration[DUR_MOMENT_OF_MAGIC])
+        {
+            mpr("Sif Muna is already granting you a moment for magic.");
+            return spret::abort;
+        }
         fail_check();
         you.increase_duration(DUR_MOMENT_OF_MAGIC, 3);
         mprf(MSGCH_GOD, you.religion, "Sif Muna grants you a moment for magic.");

@@ -2580,12 +2580,12 @@ static spret _do_ability(const ability_def& abil, bool fail)
         }
         if (you.duration[DUR_MOMENT_OF_MAGIC])
         {
-            mpr("Sif Muna is already granting you a moment for magic.");
+            mprf("%s is already granting you a moment for magic.", god_name(you.religion).c_str());
             return spret::abort;
         }
         fail_check();
         you.increase_duration(DUR_MOMENT_OF_MAGIC, 3);
-        mprf(MSGCH_GOD, you.religion, "Sif Muna grants you a moment for magic.");
+        mprf(MSGCH_GOD, you.religion, "%s grants you a moment for magic.", god_name(you.religion).c_str());
         break;
     }
 

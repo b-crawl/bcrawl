@@ -383,7 +383,7 @@ static const ability_def Ability_List[] =
 
     // Kikubaaqudgha
     { ABIL_KIKU_RECEIVE_CORPSES, "Receive Corpses",
-      3, 0, 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
+      2, 0, 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_KIKU_TORMENT, "Torment",
       4, 0, 400, 3, {fail_basis::invo, 60, 5, 20}, abflag::none },
     { ABIL_KIKU_GIFT_NECRONOMICON, "Receive Necronomicon", 0, 0, 0, 0,

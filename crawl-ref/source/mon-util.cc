@@ -2873,7 +2873,7 @@ void define_monster(monster& mons)
 
     case MONS_TIAMAT:
         // Initialise to a random draconian type.
-        draconian_change_colour(&mons);
+        tiamat_change_colour(&mons);
         monbase = mons.base_monster;
         col = mons.colour;
         break;

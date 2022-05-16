@@ -56,7 +56,7 @@
 static bool _slime_split_merge(monster* thing);
 
 // Currently only used for Tiamat.
-void draconian_change_colour(monster* drac)
+void tiamat_change_colour(monster* drac)
 {
     if (mons_genus(drac->type) != MONS_DRACONIAN)
         return;

@@ -10,7 +10,7 @@ struct bolt;
 
 bool mon_special_ability(monster* mons);
 
-void draconian_change_colour(monster* drac);
+void tiamat_change_colour(monster* drac);
 
 bool ugly_thing_mutate(monster& ugly, bool force = true);
 bool slime_creature_polymorph(monster& slime);

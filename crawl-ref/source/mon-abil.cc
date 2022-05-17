@@ -55,18 +55,18 @@
 
 static bool _slime_split_merge(monster* thing);
 
-// Currently only used for Tiamat.
 void tiamat_change_colour(monster* drac)
 {
     if (mons_genus(drac->type) != MONS_DRACONIAN)
         return;
 
-    drac->base_monster = random_choose(MONS_RED_DRACONIAN,
+    monster_type base_type = random_choose(MONS_RED_DRACONIAN,
                                        MONS_WHITE_DRACONIAN,
                                        MONS_BLACK_DRACONIAN,
                                        MONS_GREEN_DRACONIAN,
                                        MONS_PURPLE_DRACONIAN,
                                        MONS_YELLOW_DRACONIAN);
+    drac->base_monster = base_type;
     drac->colour = mons_class_colour(drac->base_monster);
 
     // Get rid of the old breath weapon first.
@@ -76,7 +76,7 @@ void tiamat_change_colour(monster* drac)
         if (!(slot.flags & MON_SPELL_BREATH))
             drac->spells.push_back(slot);
 
-    drac->spells.push_back(drac_breath(draco_or_demonspawn_subspecies(*drac)));
+    drac->spells.push_back(tiamat_breath(base_type));
 }
 
 bool ugly_thing_mutate(monster& ugly, bool force)

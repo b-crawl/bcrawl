@@ -1888,7 +1888,7 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_MIASMA_BREATH, "Miasma Breath",
-    SPTYP_CONJURATION,
+    SPTYP_CONJURATION | SPTYP_POISON,
     SPFLAG_DIR_OR_TARGET | SPFLAG_UNCLEAN | SPFLAG_MONSTER
         | SPFLAG_NEEDS_TRACER | SPFLAG_CLOUD,
     6,

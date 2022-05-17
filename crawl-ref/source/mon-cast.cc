@@ -38,6 +38,7 @@
 #include "mapmark.h"
 #include "message.h"
 #include "misc.h"
+#include "mon-abil.h"
 #include "mon-act.h"
 #include "mon-behv.h"
 #include "mon-clone.h"
@@ -4077,7 +4078,11 @@ bool handle_mon_spell(monster* mons)
 
     // Dragons now have a time-out on their breath weapons, draconians too!
     if (flags & MON_SPELL_BREATH)
+    {
         setup_breath_timeout(mons);
+        if (mons->type == MONS_TIAMAT)
+            tiamat_change_colour(mons);
+    }
 
     // FINALLY! determine primary spell effects {dlb}:
     if (spell_cast == SPELL_BLINK || spell_cast == SPELL_CONTROLLED_BLINK)

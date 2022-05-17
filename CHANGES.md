@@ -150,6 +150,7 @@
   - v1.36: Weapon damage scaling with strength is simplified to (26 + strength)/36.
   - v1.36: Short blade damage scales with dexterity instead of strength.
   - v1.36: Inner flame explosions no longer anger allies.
+  - v1.36.2: Monster breath attacks have a timeout of 2 to 5 turns instead of 1 to 5 turns.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.

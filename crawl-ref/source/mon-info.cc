@@ -1683,16 +1683,19 @@ size_type monster_info::body_size() const
     const size_type class_size = mons_class_body_size(base_type);
 
     // Slime creature size is increased by the number merged.
-    if (type == MONS_SLIME_CREATURE)
+    switch(type)
     {
-        if (slime_size == 2)
-            return SIZE_MEDIUM;
-        else if (slime_size == 3)
-            return SIZE_LARGE;
-        else if (slime_size == 4)
-            return SIZE_BIG;
-        else if (slime_size == 5)
-            return SIZE_GIANT;
+    case MONS_SLIME_CREATURE:
+        switch (slime_size)
+        {
+        case 2: return SIZE_MEDIUM;
+        case 3: return SIZE_LARGE;
+        case 4: return SIZE_BIG;
+        case 5: return SIZE_GIANT;
+        default: break;
+        }
+    
+    default: break;
     }
 
     return class_size;

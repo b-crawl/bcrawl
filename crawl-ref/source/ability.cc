@@ -2542,8 +2542,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_SIF_MUNA_DIVINE_ENERGY:
-        simple_god_message(" will now grant you divine energy when your "
-                           "reserves of magic are depleted.");
+        simple_god_message(" will now grant you divine energy to cast a spell.");
         mpr("You will briefly lose access to your magic after casting a "
             "spell in this manner.");
         you.attribute[ATTR_DIVINE_ENERGY] = 1;

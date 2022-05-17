@@ -204,6 +204,9 @@
   - v1.31.1: Merfolk gain 1 dexterity every 3 levels, and have -4 Shields aptitude.
   - v1.35.2: Naga can swim.
   - v1.35.2: When an octopode would be paralyzed, it's confused instead.
+  - v1.36.2: Kikubaaqudgha's Receive Corpse ability costs less mana (3 -> 2).
+  - v1.36.2: Sif Muna's Divine Energy automatically ends when used.
+  - v1.36.2: Sif Muna's book gifts happen less often but don't reduce piety gain.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -301,6 +304,7 @@
   - v1.35.2: Virulence is level 6.
   - v1.35.2: Aura of Abjuration is level 6.
   - v1.35.5: Lehudib's Crystal Spear, Bolt of Draining, and Bolt of Fire no longer lose 1 range when hitting a creature.
+  - v1.36.2: Dragon's Call ends when moving to a different level.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -715,3 +719,4 @@
   - v1.36: Zenata can see invisible.
   - v1.36.1: Kirke's pigs no longer give experience.
   - v1.36.1: Crazy Yiuf becomes friendly if the player has the Orb of Zot.
+  - v1.36.2: Tiamat is giant, has much stronger breath attacks, and changes color after using a breath attack instead of having a 1/3 chance each turn.

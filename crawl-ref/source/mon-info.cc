@@ -1695,6 +1695,9 @@ size_type monster_info::body_size() const
         default: break;
         }
     
+    case MONS_TIAMAT:
+        return SIZE_GIANT;
+    
     default: break;
     }
 

@@ -2788,7 +2788,7 @@ void mons_load_spells(monster& mon)
         return mon.load_ghost_spells();
 
     mon.spells.clear();
-    if (mons_genus(mon.type) == MONS_DRACONIAN)
+    if (mons_genus(mon.type) == MONS_DRACONIAN && mon.type != MONS_TIAMAT)
     {
         mon_spell_slot breath = drac_breath(draco_or_demonspawn_subspecies(mon));
         if (breath.spell != SPELL_NO_SPELL)

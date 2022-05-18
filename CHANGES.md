@@ -150,6 +150,7 @@
   - v1.36: Weapon damage scaling with strength is simplified to (26 + strength)/36.
   - v1.36: Short blade damage scales with dexterity instead of strength.
   - v1.36: Inner flame explosions no longer anger allies.
+  - v1.36.2: Monster breath attacks have a timeout of 2 to 5 turns instead of 1 to 5 turns.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -204,6 +205,9 @@
   - v1.31.1: Merfolk gain 1 dexterity every 3 levels, and have -4 Shields aptitude.
   - v1.35.2: Naga can swim.
   - v1.35.2: When an octopode would be paralyzed, it's confused instead.
+  - v1.36.2: Kikubaaqudgha's Receive Corpse ability costs less mana (3 -> 2).
+  - v1.36.2: Sif Muna's Divine Energy automatically ends when used.
+  - v1.36.2: Sif Muna's book gifts happen less often but don't reduce piety gain.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -301,6 +305,8 @@
   - v1.35.2: Virulence is level 6.
   - v1.35.2: Aura of Abjuration is level 6.
   - v1.35.5: Lehudib's Crystal Spear, Bolt of Draining, and Bolt of Fire no longer lose 1 range when hitting a creature.
+  - v1.36.2: Dragon's Call ends when moving to a different level.
+  - v1.36.2: Battlespheres are immune to clouds.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -562,6 +568,7 @@
   - v1.35.5: Devastator now has enchantment equal to Maces & Flails skill. Its explosions are now less common but stronger, with chance scaling with Maces & Flails skill.
   - v1.35.5: The Captain's Cutlass is a scimitar instead of a rapier.
   - v1.36.1: The Staff of Wucad Mu is reworked: it's a +9 vorpal staff with +20 mana and *Drain, and it can be evoked to regain mana by abjuring hostile summons.
+  - v1.36.2: The Fencer's Gloves have a higher riposte chance (1/3 -> 2/3).
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -715,3 +722,4 @@
   - v1.36: Zenata can see invisible.
   - v1.36.1: Kirke's pigs no longer give experience.
   - v1.36.1: Crazy Yiuf becomes friendly if the player has the Orb of Zot.
+  - v1.36.2: Tiamat is giant, has much stronger breath attacks, is no longer cold-blooded, and changes color after using a breath attack instead of having a 1/3 chance each turn.

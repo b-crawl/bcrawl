@@ -158,7 +158,7 @@ static const char *divine_title[][8] =
         "Traumaturge",        "Battlemage",            "Warlock",                  "Luminary of Lethal Lore"},
 
     // Okawaru -- battle theme.
-    {"Coward",             "Struggler",             "Combatant",                "Warrior",
+    {"Coward",             "Struggler",             "Combatant",                "@Genus@-At-Arms",
         "Knight",             "Warmonger",             "Commander",                "Victor of a Thousand Battles"},
 
     // Makhleb -- chaos theme.
@@ -202,8 +202,8 @@ static const char *divine_title[][8] =
      "Contemplative",         "Epochal",               "Timeless",                 "@Adj@ Aeon"},
 
     // Ashenzari -- divination theme
-    {"Star-crossed",       "Cursed",                "Initiated",                "Soothsayer",
-        "Seer",               "Oracle",                "Illuminatus",              "Omniscient"},
+    {"Star-crossed",       "Cursed",                "Initiated",                "Seer",
+        "Oracle",            "Illuminatus",            "Prince of Secrets",        "Omniscient"},
 
     // Dithmenos -- darkness theme
     {"Ember",              "Gloomy",                "Darkened",                 "Extinguished",

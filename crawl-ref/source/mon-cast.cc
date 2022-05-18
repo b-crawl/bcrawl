@@ -38,6 +38,7 @@
 #include "mapmark.h"
 #include "message.h"
 #include "misc.h"
+#include "mon-abil.h"
 #include "mon-act.h"
 #include "mon-behv.h"
 #include "mon-clone.h"
@@ -4075,10 +4076,6 @@ bool handle_mon_spell(monster* mons)
         return true;
     }
 
-    // Dragons now have a time-out on their breath weapons, draconians too!
-    if (flags & MON_SPELL_BREATH)
-        setup_breath_timeout(mons);
-
     // FINALLY! determine primary spell effects {dlb}:
     if (spell_cast == SPELL_BLINK || spell_cast == SPELL_CONTROLLED_BLINK)
     {
@@ -4122,6 +4119,13 @@ bool handle_mon_spell(monster* mons)
     // Reflection, fireballs, etc.
     if (!mons->alive())
         return true;
+
+    if (flags & MON_SPELL_BREATH)
+    {
+        setup_breath_timeout(mons);
+        if (mons->type == MONS_TIAMAT)
+            tiamat_change_colour(mons);
+    }
 
     if (!(flags & MON_SPELL_INSTANT))
     {
@@ -4501,7 +4505,7 @@ void setup_breath_timeout(monster* mons)
     if (mons->has_ench(ENCH_BREATH_WEAPON))
         return;
 
-    int timeout = roll_dice(1, 5);
+    int timeout = 2 + random2(4);
 
     dprf("breath timeout: %d", timeout);
 

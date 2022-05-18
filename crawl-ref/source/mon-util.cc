@@ -2689,8 +2689,9 @@ unique_books get_unique_spells(const monster_info &mi,
         // ever gets multiple sets of natural abilities.
         if (mons_genus(mi.type) == MONS_DRACONIAN && i == 0)
         {
-            const mon_spell_slot breath =
-                drac_breath(mi.draco_or_demonspawn_subspecies());
+            const mon_spell_slot breath = mi.type == MONS_TIAMAT ? 
+                tiamat_breath(mi.draco_or_demonspawn_subspecies())
+                : drac_breath(mi.draco_or_demonspawn_subspecies());
             if (breath.flags & flags && breath.spell != SPELL_NO_SPELL)
                 slots.push_back(breath);
             // No other spells; quit right away.
@@ -2756,6 +2757,28 @@ mon_spell_slot drac_breath(monster_type drac_type)
     return slot;
 }
 
+mon_spell_slot tiamat_breath(monster_type drac_type)
+{
+    spell_type sp;
+    switch (drac_type)
+    {
+    case MONS_BLACK_DRACONIAN:   sp = SPELL_ORB_OF_ELECTRICITY; break;
+    case MONS_YELLOW_DRACONIAN:  sp = SPELL_CORROSIVE_BOLT; break;
+    case MONS_GREEN_DRACONIAN:   sp = SPELL_MIASMA_BREATH; break;
+    case MONS_PURPLE_DRACONIAN:  sp = SPELL_QUICKSILVER_BOLT; break;
+    case MONS_RED_DRACONIAN:     sp = SPELL_FIRE_STORM; break;
+    case MONS_WHITE_DRACONIAN:   sp = SPELL_GLACIATE; break;
+    case MONS_PALE_DRACONIAN:    sp = SPELL_STEAM_BALL; break;
+    default: break;
+    }
+
+    mon_spell_slot slot;
+    slot.spell = sp;
+    slot.freq = 62;
+    slot.flags = MON_SPELL_NATURAL | MON_SPELL_BREATH;
+    return slot;
+}
+
 void mons_load_spells(monster& mon)
 {
     vector<mon_spellbook_type> books = _mons_spellbook_list(mon.type);
@@ -2767,7 +2790,9 @@ void mons_load_spells(monster& mon)
     mon.spells.clear();
     if (mons_genus(mon.type) == MONS_DRACONIAN)
     {
-        mon_spell_slot breath = drac_breath(draco_or_demonspawn_subspecies(mon));
+        mon_spell_slot breath = mon.type == MONS_TIAMAT ? 
+                tiamat_breath(draco_or_demonspawn_subspecies(mon))
+                : drac_breath(draco_or_demonspawn_subspecies(mon));
         if (breath.spell != SPELL_NO_SPELL)
             mon.spells.push_back(breath);
     }
@@ -2873,7 +2898,7 @@ void define_monster(monster& mons)
 
     case MONS_TIAMAT:
         // Initialise to a random draconian type.
-        draconian_change_colour(&mons);
+        tiamat_change_colour(&mons);
         monbase = mons.base_monster;
         col = mons.colour;
         break;

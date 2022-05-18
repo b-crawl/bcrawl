@@ -1293,7 +1293,7 @@ static bool _gift_sif_kiku_gift(bool forced)
         you.num_total_gifts[you.religion]++;
         // Timeouts are meaningless for Kiku.
         if (!you_worship(GOD_KIKUBAAQUDGHA))
-            _inc_gift_timeout(40 + random2avg(19, 2));
+            _inc_gift_timeout(60 + random2avg(28, 2));
         take_note(Note(NOTE_GOD_GIFT, you.religion));
     }
 
@@ -2073,15 +2073,21 @@ static void _gain_piety_point()
 
         // Slow down piety gain to account for the fact that gifts
         // no longer have a piety cost for getting them.
-        // Jiyva is an exception because there's usually a time-out and
-        // the gifts aren't that precious.
-        if (!one_chance_in(4) && !you_worship(GOD_JIYVA)
-            && !you_worship(GOD_NEMELEX_XOBEH))
+        switch (you.religion)
         {
+        case GOD_JIYVA:
+        case GOD_NEMELEX_XOBEH:
+        case GOD_SIF_MUNA:
+            break;
+        default:
+            if (!one_chance_in(4))
+            {
 #ifdef DEBUG_PIETY
-            mprf(MSGCH_DIAGNOSTICS, "Piety slowdown due to gift timeout.");
+                mprf(MSGCH_DIAGNOSTICS, "Piety slowdown due to gift timeout.");
 #endif
-            return;
+                return;
+            }
+            break;
         }
     }
 

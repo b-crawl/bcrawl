@@ -383,7 +383,7 @@ static const ability_def Ability_List[] =
 
     // Kikubaaqudgha
     { ABIL_KIKU_RECEIVE_CORPSES, "Receive Corpses",
-      3, 0, 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
+      2, 0, 0, 2, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_KIKU_TORMENT, "Torment",
       4, 0, 400, 3, {fail_basis::invo, 60, 5, 20}, abflag::none },
     { ABIL_KIKU_GIFT_NECRONOMICON, "Receive Necronomicon", 0, 0, 0, 0,
@@ -2542,8 +2542,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_SIF_MUNA_DIVINE_ENERGY:
-        simple_god_message(" will now grant you divine energy when your "
-                           "reserves of magic are depleted.");
+        simple_god_message(" will now grant you divine energy to cast a spell.");
         mpr("You will briefly lose access to your magic after casting a "
             "spell in this manner.");
         you.attribute[ATTR_DIVINE_ENERGY] = 1;
@@ -2578,9 +2577,14 @@ static spret _do_ability(const ability_def& abil, bool fail)
             mpr("You are too exhausted.");
             return spret::abort;
         }
+        if (you.duration[DUR_MOMENT_OF_MAGIC])
+        {
+            mprf("%s is already granting you a moment for magic.", god_name(you.religion).c_str());
+            return spret::abort;
+        }
         fail_check();
         you.increase_duration(DUR_MOMENT_OF_MAGIC, 3);
-        mprf(MSGCH_GOD, you.religion, "Sif Muna grants you a moment for magic.");
+        mprf(MSGCH_GOD, you.religion, "%s grants you a moment for magic.", god_name(you.religion).c_str());
         break;
     }
 

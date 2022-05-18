@@ -1238,6 +1238,11 @@ void new_level(bool restore)
         return;
 
     cancel_tornado();
+    if (you.duration[DUR_DRAGON_CALL])
+    {
+        you.duration[DUR_DRAGON_CALL] = 0;
+        you.duration[DUR_DRAGON_CALL_COOLDOWN] = random_range(160, 260);
+    }
 
     if (player_in_branch(BRANCH_ZIGGURAT))
         you.zig_max = max(you.zig_max, you.depth);

@@ -462,6 +462,7 @@ monster_type draconian_colour_by_name(const string &colour);
 string  demonspawn_base_name(monster_type mon_type);
 monster_type demonspawn_base_by_name(const string &colour);
 mon_spell_slot drac_breath(monster_type drac_type);
+mon_spell_slot tiamat_breath(monster_type drac_type);
 
 monster_type random_monster_at_grid(const coord_def& p, bool species = false);
 

@@ -179,10 +179,10 @@ df += potions? of blood
 : end
 # keep: heal wounds,hasting,teleportation
 ae += wand of (random effects|slowing|magic darts|flame|frost|confusion)
-ae += wand of (enslavement|paralysis|invisibility|lightning|fireball)
+ae += wand of (charming|paralysis|invisibility|lightning|fireball)
 ae += wand of (cold|digging|disintegration|draining|fire|polymorph)
 df += wand of (random effects|slowing|magic darts|flame|frost|confusion)
-df += wand of (enslavement|paralysis|invisibility|lightning|fireball)
+df += wand of (charming|paralysis|invisibility|lightning|fireball)
 df += wand of (cold|digging|disintegration|draining|fire|polymorph)
 
 ################################################################

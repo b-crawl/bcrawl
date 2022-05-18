@@ -568,6 +568,7 @@
   - v1.35.5: Devastator now has enchantment equal to Maces & Flails skill. Its explosions are now less common but stronger, with chance scaling with Maces & Flails skill.
   - v1.35.5: The Captain's Cutlass is a scimitar instead of a rapier.
   - v1.36.1: The Staff of Wucad Mu is reworked: it's a +9 vorpal staff with +20 mana and *Drain, and it can be evoked to regain mana by abjuring hostile summons.
+  - v1.36.2: The Fencer's Gloves have a higher riposte chance (1/3 -> 2/3).
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

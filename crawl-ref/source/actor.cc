@@ -222,6 +222,9 @@ bool actor::stasis(bool calc_unid, bool items) const
 
 bool actor::cloud_immune(bool calc_unid, bool items) const
 {
+    if (is_monster() && this->type == MONS_BATTLESPHERE)
+        return true;
+
     const item_def *body_armour = slot_item(EQ_BODY_ARMOUR);
     return items && (wearing_ego(EQ_CLOAK, SPARM_CLOUD_IMMUNE, calc_unid)
                      || (body_armour

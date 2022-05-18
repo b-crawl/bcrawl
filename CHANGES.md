@@ -306,6 +306,7 @@
   - v1.35.2: Aura of Abjuration is level 6.
   - v1.35.5: Lehudib's Crystal Spear, Bolt of Draining, and Bolt of Fire no longer lose 1 range when hitting a creature.
   - v1.36.2: Dragon's Call ends when moving to a different level.
+  - v1.36.2: Battlespheres are immune to clouds.
 
 #### Removed Spells
   - Summon Guardian Golem

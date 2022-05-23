@@ -155,7 +155,7 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Necromancy
     SPELL_PAIN,
-    SPELL_ANIMATE_SKELETON,
+    SPELL_NECROTIZE,
     SPELL_VAMPIRIC_DRAINING,
     SPELL_ANIMATE_DEAD,
     SPELL_AGONY,

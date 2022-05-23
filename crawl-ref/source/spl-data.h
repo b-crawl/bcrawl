@@ -654,7 +654,7 @@ static const struct spell_desc spelldata[] =
 #endif
 
 {
-    SPELL_ANIMATE_SKELETON, "Animate Skeleton",
+    SPELL_NECROTIZE, "Animate Skeleton",
     SPTYP_NECROMANCY,
     SPFLAG_CORPSE_VIOLATING | SPFLAG_UTILITY,
     1,

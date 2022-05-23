@@ -1805,7 +1805,7 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
     case SPELL_SUMMON_FOREST:
         return cast_summon_forest(&you, powc, god, fail);
 
-    case SPELL_ANIMATE_SKELETON:
+    case SPELL_NECROTIZE:
         return cast_animate_skeleton(god, fail);
 
     case SPELL_ANIMATE_DEAD:

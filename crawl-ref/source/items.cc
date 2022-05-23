@@ -829,7 +829,7 @@ static void _maybe_give_corpse_hint(const item_def& item)
         return;
 
     if (item.is_type(OBJ_CORPSES, CORPSE_BODY)
-        && you.has_spell(SPELL_ANIMATE_SKELETON))
+        && you.has_spell(SPELL_NECROTIZE))
     {
         learned_something_new(HINT_ANIMATE_CORPSE_SKELETON);
     }

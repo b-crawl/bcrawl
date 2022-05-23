@@ -5456,6 +5456,13 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
                 obvious_effect = true;
             }
             mon->hurt(agent(), dam, flavour);
+            
+            if (!mon->alive())
+            {
+                mon->props["reaping_damage"].get_int() += dam;
+                mon->props["reaper"].get_int() = agent()->mid;
+            }
+            
             return MON_AFFECTED;
         }
         return MON_UNAFFECTED;

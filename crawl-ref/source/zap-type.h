@@ -115,5 +115,6 @@ enum zap_type
     ZAP_ELECTRICAL_BOLT,
     ZAP_FLAMING_CLOUD,
     ZAP_IGNITION,
+    ZAP_NECROTIZE,
     NUM_ZAPS
 };

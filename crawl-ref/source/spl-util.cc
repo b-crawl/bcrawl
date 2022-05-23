@@ -1337,7 +1337,6 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
         break;
 
     case SPELL_ANIMATE_DEAD:
-    case SPELL_NECROTIZE:
     case SPELL_DEATH_CHANNEL:
     case SPELL_SIMULACRUM:
     case SPELL_INFESTATION:

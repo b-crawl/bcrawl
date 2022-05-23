@@ -5455,13 +5455,14 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
                      attack_strength_punctuation(dam).c_str());
                 obvious_effect = true;
             }
-            mon->hurt(agent(), dam, flavour);
             
-            if (!mon->alive())
+            if (dam >= mon->hit_points)
             {
-                mon->props["reaping_damage"].get_int() += dam;
+                mon->props["reaping_damage"].get_int() = mon->damage_total + dam;
                 mon->props["reaper"].get_int() = agent()->mid;
+                mon->props["always_corpse"] = true;
             }
+            mon->hurt(agent(), dam, flavour);
             
             return MON_AFFECTED;
         }

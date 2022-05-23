@@ -656,10 +656,10 @@ static const struct spell_desc spelldata[] =
 {
     SPELL_NECROTIZE, "Necrotize",
     SPTYP_NECROMANCY,
-    SPFLAG_CORPSE_VIOLATING | SPFLAG_UTILITY,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK | SPFLAG_CORPSE_VIOLATING,
     1,
-    0,
-    -1, -1,
+    50,
+    5, 5,
     1, 0,
     TILEG_ANIMATE_SKELETON,
 },

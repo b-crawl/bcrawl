@@ -644,7 +644,7 @@ static const mutation_def mut_data[] =
 #endif
 
 { MUT_HEX_ENHANCER, 0, 2, mutflag::good, false,
-  "in touch with curses",
+  "strong hexes",
 
   {"Your hexes are more powerful.",
    "Your hexes are more powerful.",

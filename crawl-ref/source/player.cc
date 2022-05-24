@@ -1720,9 +1720,6 @@ int player_spec_death()
     // Staves
     sd += you.wearing(EQ_STAFF, STAFF_DEATH);
 
-    // species:
-    sd += you.get_mutation_level(MUT_NECRO_ENHANCER);
-
     // transformations:
     if (you.form == transformation::lich)
         sd++;
@@ -1788,7 +1785,12 @@ int player_spec_conj()
 
 int player_spec_hex()
 {
-    return 0;
+    int sc = 0;
+
+    // species:
+    sd += min(1, you.get_mutation_level(MUT_HEX_ENHANCER));
+
+    return sc;
 }
 
 int player_spec_charm()

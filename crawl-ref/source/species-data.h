@@ -564,7 +564,7 @@ static const map<species_type, species_def> species_data =
       { MUT_TORMENT_RESISTANCE, 1, 1 },
       { MUT_UNBREATHING, 1, 1 },
       { MUT_CLARITY, 1, 1 },
-      { MUT_NECRO_ENHANCER, 1, 13 }, { MUT_NECRO_ENHANCER, 1, 26 }, },
+      { MUT_HEX_ENHANCER, 1, 1 }, },
     { "You do not eat or drink.",
       "Your flesh is vulnerable to fire." },
     { "no food or potions", "fire vulnerability" },

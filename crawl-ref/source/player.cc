@@ -1788,7 +1788,7 @@ int player_spec_hex()
     int sc = 0;
 
     // species:
-    sd += min(1, you.get_mutation_level(MUT_HEX_ENHANCER));
+    sc += min(1, you.get_mutation_level(MUT_HEX_ENHANCER));
 
     return sc;
 }

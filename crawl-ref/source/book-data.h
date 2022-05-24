@@ -170,7 +170,7 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Maledictions
-    SPELL_CORONA,
+    SPELL_SLOW,
     SPELL_HIBERNATION,
     SPELL_CONFUSE,
     SPELL_TUKIMAS_DANCE,
@@ -261,6 +261,7 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Cantrips
+    SPELL_CORONA,
     SPELL_SUMMON_BUTTERFLIES,
     SPELL_SANDBLAST,
     SPELL_INFUSION,

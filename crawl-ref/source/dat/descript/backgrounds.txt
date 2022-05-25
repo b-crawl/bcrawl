@@ -88,7 +88,7 @@ and a protective amulet.
 Necromancer
 
 Necromancers are wizards specializing in the practice of death magic. They
-start out with the Pain spell.
+start out with the Necrotize spell.
 %%%%
 Reaver
 

@@ -689,6 +689,7 @@
   - v1.36: Green deaths can cast Virulence.
   - v1.36.1: Centaurs and centaur warriors move and shoot quickly instead of being fast.
   - v1.36.1: Friendly zombies and skeletons aren't angered by player attacks.
+  - v1.36.3: Tengu conjurers have simplified and slightly stronger spell sets.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

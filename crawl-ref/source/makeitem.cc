@@ -764,7 +764,7 @@ static bool _try_make_armour_artefact(item_def& item, int force_type,
         if (get_armour_slot(item) == EQ_BODY_ARMOUR)
             item.plus = max(static_cast<int>(item.plus), random2(2));
         else
-            item.plus = max(static_cast<int>(item.plus), random_range(-5, 1));
+            item.plus = max(static_cast<int>(item.plus), random_range(-5, 0));
 
         // Needs to be done after the barding chance else we get randart
         // bardings named Boots of xy.

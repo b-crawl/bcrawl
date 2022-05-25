@@ -77,6 +77,7 @@
   - v1.34.2: Earth Elementalists start with 1 Unarmed skill.
   - v1.35.3: Formicid Chaos Knights start with a wand of random effects.
   - v1.36.3: Enchanters start with Slow instead of Corona.
+  - v1.36.3: Necromancers start with a +0 dagger of pain instead of a +1 dagger.
 
 #### Features
   - All items are automatically identified if the player has a rune.

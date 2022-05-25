@@ -760,9 +760,11 @@ static bool _try_make_armour_artefact(item_def& item, int force_type,
                 do_curse_item(item);
         }
 
-        // On body armour, an enchantment of less than 0 is never viable.
+        // min randart armour enchantments: 0 for body armour, -5 for aux
         if (get_armour_slot(item) == EQ_BODY_ARMOUR)
             item.plus = max(static_cast<int>(item.plus), random2(2));
+        else
+            item.plus = max(static_cast<int>(item.plus), random_range(-5, 1));
 
         // Needs to be done after the barding chance else we get randart
         // bardings named Boots of xy.

@@ -1996,16 +1996,13 @@ spret cast_simulacrum(int pow, god_type god, bool fail)
     canned_msg(MSG_ANIMATE_REMAINS);
 
     item_def& corpse = mitm[co];
-    // How many simulacra can this particular monster give at maximum.
-    int num_sim  = 1 + random2(max_corpse_chunks(corpse.mon_type));
-    num_sim  = stepdown_value(num_sim, 4, 4, 12, 12);
 
     mgen_data mg = _pal_data(MONS_SIMULACRUM, 0, god, SPELL_SIMULACRUM);
     mg.set_base(corpse.mon_type);
 
-    // Can't create more than the max for the monster.
-    int how_many = min(8, 4 + random2(pow) / 20);
-    how_many = min<int>(how_many, num_sim);
+    int how_many = (pow + random2(pow)) / 19;
+    how_many = min(how_many, 8);
+    how_many = max(how_many, 1);
 
     if (corpse.props.exists(CORPSE_HEADS))
     {

@@ -307,6 +307,7 @@
   - v1.36.2: Dragon's Call ends when moving to a different level.
   - v1.36.2: Battlespheres are immune to clouds.
   - v1.36.3: Pain and Animate Skeleton are replaced for players by Necrotize, which is the same as Pain but creates a zombie when it kills a creature.
+  - v1.36.3: The number of simulacra created by Simulacrum no longer depends on corpse properties.
 
 #### Removed Spells
   - Summon Guardian Golem

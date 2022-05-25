@@ -692,6 +692,7 @@
   - v1.36.1: Centaurs and centaur warriors move and shoot quickly instead of being fast.
   - v1.36.1: Friendly zombies and skeletons aren't angered by player attacks.
   - v1.36.3: Tengu conjurers have simplified and slightly stronger spell sets.
+  - v1.36.3: War gargoyles have higher AC, higher melee damage, and no spells.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

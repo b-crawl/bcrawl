@@ -668,6 +668,12 @@ spell_type ghost_demon::translate_spell(spell_type spell) const
         return SPELL_SUMMON_DRAGON;
     case SPELL_SWIFTNESS:
         return SPELL_SPRINT;
+    case SPELL_NECROTIZE:
+        return SPELL_PAIN;
+    case SPELL_ICICLE_BURST:
+        return SPELL_BOLT_OF_COLD;
+    case SPELL_RUPTURE:  // ???
+        return SPELL_STRIP_RESISTANCE;
     default:
         break;
     }

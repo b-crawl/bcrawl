@@ -32,11 +32,12 @@ Reanimates all corpses and skeletons in the vicinity as followers. This magic
 is unstable, so eventually those reanimated will crumble to dust. Zombies and
 skeletons cannot leave the level they were created on.
 %%%%
-Animate Skeleton spell
+Necrotize spell
 
-Reanimates a single skeleton as a follower, even if that skeleton is still
-encased in flesh. This magic is unstable, so eventually those reanimated will
-crumble to dust. Skeletons cannot leave the level they were created on.
+Creates a magical link with a creature and transfers raw necromantic energy,
+injuring it. If successful, the caster suffers minor damage from the backlash.
+
+If a living creature is killed by this, it is reanimated as a zombie.
 %%%%
 Apportation spell
 

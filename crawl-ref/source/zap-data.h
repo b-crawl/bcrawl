@@ -821,6 +821,24 @@ _mon_hex_zap(ZAP_CHARMING, BEAM_ENSLAVE),
 },
 
 {
+    ZAP_NECROTIZE,
+    "",
+    100,
+    new dicedef_calculator<1, 4, 1, 5>,
+    new tohit_calculator<0, 7, 2>,
+    new dicedef_calculator<1, 7, 1, 20>,
+    new tohit_calculator<0, 1, 3>,
+    BLACK,
+    true,
+    BEAM_NECROTIZE,
+    NUM_DCHAR_TYPES,
+    false,
+    false,
+    false,
+    1 // XXX: Should this be soundless?
+},
+
+{
     ZAP_STICKY_FLAME,
     "sticky flame",
     100,

@@ -978,11 +978,9 @@ void make_book_kiku_gift(item_def &book, bool first)
         bool can_regen = you.species != SP_DEEP_DWARF
             && you.species != SP_MUMMY && you.species != SP_SKELETON;
 
-        chosen_spells[0] = SPELL_PAIN;
+        chosen_spells[0] = SPELL_NECROTIZE;
         chosen_spells[1] = SPELL_CORPSE_ROT;
-        chosen_spells[2] = SPELL_ANIMATE_SKELETON;
-
-        chosen_spells[3] = (!can_regen || coinflip())
+        chosen_spells[2] = (!can_regen || coinflip())
             ? SPELL_VAMPIRIC_DRAINING : SPELL_REGENERATION;
     }
     else

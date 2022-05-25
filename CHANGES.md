@@ -76,6 +76,8 @@
   - v1.31.3: Monks, Skalds, and Ent Fighters can start with a quarterstaff.
   - v1.34.2: Earth Elementalists start with 1 Unarmed skill.
   - v1.35.3: Formicid Chaos Knights start with a wand of random effects.
+  - v1.36.3: Enchanters start with Slow instead of Corona.
+  - v1.36.3: Necromancers start with a +0 dagger of pain instead of a +1 dagger.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -205,9 +207,7 @@
   - v1.31.1: Merfolk gain 1 dexterity every 3 levels, and have -4 Shields aptitude.
   - v1.35.2: Naga can swim.
   - v1.35.2: When an octopode would be paralyzed, it's confused instead.
-  - v1.36.2: Kikubaaqudgha's Receive Corpse ability costs less mana (3 -> 2).
-  - v1.36.2: Sif Muna's Divine Energy automatically ends when used.
-  - v1.36.2: Sif Muna's book gifts happen less often but don't reduce piety gain.
+  - v1.36.3: Mummies have a Hexes enhancer from level 1 instead of gaining a Necromancy enhancer at levels 13 and 26.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -307,6 +307,8 @@
   - v1.35.5: Lehudib's Crystal Spear, Bolt of Draining, and Bolt of Fire no longer lose 1 range when hitting a creature.
   - v1.36.2: Dragon's Call ends when moving to a different level.
   - v1.36.2: Battlespheres are immune to clouds.
+  - v1.36.3: Pain and Animate Skeleton are replaced for players by Necrotize, which is the same as Pain but creates a zombie when it kills a creature.
+  - v1.36.3: The number of simulacra created by Simulacrum no longer depends on corpse properties.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -443,6 +445,9 @@
   - v1.36: Dithmenos's Shadow Form ability no longer has a spell power penalty.
   - v1.36.1: Sif Muna's Divine Energy is used for spell mana costs even if the player has mana.
   - v1.36.1: Sif Muna gains the Moment of Magic ability at \*\*\*\*\*, which allows the player to cast one spell instantly and causes exhaustion.
+  - v1.36.2: Kikubaaqudgha's Receive Corpse ability costs less mana (3 -> 2).
+  - v1.36.2: Sif Muna's Divine Energy automatically ends when used.
+  - v1.36.2: Sif Muna's book gifts happen less often but don't reduce piety gain.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -686,6 +691,8 @@
   - v1.36: Green deaths can cast Virulence.
   - v1.36.1: Centaurs and centaur warriors move and shoot quickly instead of being fast.
   - v1.36.1: Friendly zombies and skeletons aren't angered by player attacks.
+  - v1.36.3: Tengu conjurers have simplified and slightly stronger spell sets.
+  - v1.36.3: War gargoyles have higher AC, higher melee damage, and no spells.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

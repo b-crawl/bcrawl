@@ -2542,7 +2542,7 @@ A particularly evil-looking wolf, usually found in the company of orcs.
 war gargoyle
 
 A rare type of gargoyle, constructed from a solid steel statue and imbued with
-vicious strength, speed, and weaponized breath.
+vicious strength and speed.
 %%%%
 warmonger
 

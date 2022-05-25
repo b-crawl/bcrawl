@@ -1946,79 +1946,6 @@ int animate_dead(actor *caster, int /*pow*/, beh_type beha,
     return number_raised;
 }
 
-spret cast_animate_skeleton(god_type god, bool fail)
-{
-    bool found = false;
-
-    for (stack_iterator si(you.pos(), true); si; ++si)
-    {
-        if (si->base_type == OBJ_CORPSES
-            && mons_class_can_be_zombified(si->mon_type)
-            && mons_skeleton(si->mon_type))
-        {
-            found = true;
-        }
-    }
-
-    if (!found)
-    {
-        mpr("There is nothing here that can be animated!");
-        return spret::abort;
-    }
-
-    fail_check();
-    canned_msg(MSG_ANIMATE_REMAINS);
-
-    const char* no_space = "...but the skeleton had no space to rise!";
-
-    // First, we try to animate a skeleton if there is one.
-    const int animate_skel_result = animate_remains(you.pos(), CORPSE_SKELETON,
-                                                    BEH_FRIENDLY, MHITYOU,
-                                                    &you, "", god);
-    if (animate_skel_result != -1)
-    {
-        if (animate_skel_result == 0)
-            mpr(no_space);
-        return spret::success;
-    }
-
-    // If not, look for a corpse and butcher it.
-    for (stack_iterator si(you.pos(), true); si; ++si)
-    {
-        if (si->is_type(OBJ_CORPSES, CORPSE_BODY)
-            && mons_skeleton(si->mon_type)
-            && mons_class_can_be_zombified(si->mon_type))
-        {
-            butcher_corpse(*si, true);
-            mpr("Before your eyes, flesh is ripped from the corpse!");
-            request_autopickup();
-            // Only convert the top one.
-            break;
-        }
-    }
-
-    // Now we try again to animate a skeleton.
-    // this return type is insanely stupid
-    const int animate_result = animate_remains(you.pos(), CORPSE_SKELETON,
-                                               BEH_FRIENDLY, MHITYOU, &you, "",
-                                               god);
-    dprf("result: %d", animate_result);
-    switch (animate_result)
-    {
-        case -1:
-            mpr("There is no skeleton here to animate!");
-            break;
-        case 0:
-            mpr(no_space);
-            break;
-        default:
-            // success, messages already printed
-            break;
-    }
-
-    return spret::success;
-}
-
 spret cast_animate_dead(int pow, god_type god, bool fail)
 {
     if (!animate_dead(&you, pow, BEH_FRIENDLY, MHITYOU, &you, "", god, false))
@@ -2069,16 +1996,13 @@ spret cast_simulacrum(int pow, god_type god, bool fail)
     canned_msg(MSG_ANIMATE_REMAINS);
 
     item_def& corpse = mitm[co];
-    // How many simulacra can this particular monster give at maximum.
-    int num_sim  = 1 + random2(max_corpse_chunks(corpse.mon_type));
-    num_sim  = stepdown_value(num_sim, 4, 4, 12, 12);
 
     mgen_data mg = _pal_data(MONS_SIMULACRUM, 0, god, SPELL_SIMULACRUM);
     mg.set_base(corpse.mon_type);
 
-    // Can't create more than the max for the monster.
-    int how_many = min(8, 4 + random2(pow) / 20);
-    how_many = min<int>(how_many, num_sim);
+    int how_many = (pow + random2(pow)) / 19;
+    how_many = min(how_many, 8);
+    how_many = max(how_many, 1);
 
     if (corpse.props.exists(CORPSE_HEADS))
     {

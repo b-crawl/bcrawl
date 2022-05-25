@@ -3655,7 +3655,6 @@ bool is_useless_item(const item_def &item, bool temp)
             return false;
 
         if (you.has_spell(SPELL_ANIMATE_DEAD)
-            || you.has_spell(SPELL_ANIMATE_SKELETON)
             || you.has_spell(SPELL_SIMULACRUM)
             || you_worship(GOD_YREDELEMNUL) && !you.penance[GOD_YREDELEMNUL]
                && you.piety >= piety_breakpoint(0))

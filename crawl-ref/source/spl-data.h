@@ -654,12 +654,12 @@ static const struct spell_desc spelldata[] =
 #endif
 
 {
-    SPELL_ANIMATE_SKELETON, "Animate Skeleton",
+    SPELL_NECROTIZE, "Necrotize",
     SPTYP_NECROMANCY,
-    SPFLAG_CORPSE_VIOLATING | SPFLAG_UTILITY,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_MR_CHECK | SPFLAG_CORPSE_VIOLATING,
     1,
-    0,
-    -1, -1,
+    50,
+    5, 5,
     1, 0,
     TILEG_ANIMATE_SKELETON,
 },
@@ -1593,7 +1593,7 @@ static const struct spell_desc spelldata[] =
     SPTYP_ICE | SPTYP_NECROMANCY,
     SPFLAG_CORPSE_VIOLATING,
     6,
-    200,
+    100,
     -1, -1,
     5, 0,
     TILEG_SIMULACRUM,
@@ -3687,7 +3687,7 @@ static const struct spell_desc spelldata[] =
 {
     SPELL_RUPTURE, "Mana Rupture",
     SPTYP_CONJURATION | SPTYP_HEXES,
-    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_NOT_SELF | SPFLAG_NO_GHOST | SPFLAG_CHAOTIC,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER | SPFLAG_NOT_SELF | SPFLAG_CHAOTIC,
     7,
     200,
     3, 3,

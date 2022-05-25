@@ -643,15 +643,15 @@ static const mutation_def mut_data[] =
 },
 #endif
 
-{ MUT_NECRO_ENHANCER, 0, 2, mutflag::good, false,
-  "in touch with death",
+{ MUT_HEX_ENHANCER, 0, 2, mutflag::good, false,
+  "strong hexes",
 
-  {"You are in touch with the powers of death.",
-   "You are strongly in touch with the powers of death.",
+  {"Your hexes are more powerful.",
+   "Your hexes are more powerful.",
    ""},
 
-  {"You feel more in touch with the powers of death.",
-   "You feel more in touch with the powers of death.",
+  {"You feel more in touch with curses.",
+   "You feel more in touch with curses.",
    ""},
 
   {"", "", ""},

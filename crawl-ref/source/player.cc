@@ -1178,7 +1178,7 @@ int player_mp_regen()
         regen_amount *= 2;
 
     if (you.props[MANA_REGEN_AMULET_ACTIVE].get_int() == 1)
-        regen_amount += 25;
+        regen_amount += 3 * you.experience_level;
 
     if (player_equip_unrand(UNRAND_ETHERIC_CAGE))
         regen_amount += 100;

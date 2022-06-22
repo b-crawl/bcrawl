@@ -348,7 +348,7 @@ static const pop_entry pop_spider[] =
   {  0,  3,  700, FLAT, MONS_REDBACK },
   {  0,  3,  500, FLAT, MONS_ORB_SPIDER },
   {  0,  5,  100, FLAT, MONS_TORPOR_SNAIL },
-  {  0,  5,  100, FLAT, MONS_WORKER_ANT },
+  {  0,  5,  200, FLAT, MONS_WORKER_ANT },
   {  0,  5,  190, SEMI, MONS_EMPEROR_SCORPION },
   {  0,  5,  190, SEMI, MONS_ORANGE_STATUE },
   {  0,  5,  155, SEMI, MONS_MOTH_OF_WRATH },

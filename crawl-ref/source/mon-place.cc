@@ -1888,7 +1888,7 @@ static const map<monster_type, band_set> bands_by_leader = {
     { MONS_MERFOLK_IMPALER, { mf_band_condition,
                                   {{ BAND_MERFOLK_IMPALER, {2, 5} }}}},
     { MONS_ELEPHANT,        { {}, {{ BAND_ELEPHANT, {2, 6} }}}},
-    { MONS_REDBACK,         { {}, {{ BAND_REDBACK, {1, 6} }}}},
+    { MONS_REDBACK,         { {}, {{ BAND_REDBACK, {1, 5} }}}},
     { MONS_ENTROPY_WEAVER,  { {}, {{ BAND_REDBACK, {1, 5} }}}},
     { MONS_JUMPING_SPIDER,  { {2}, {{ BAND_JUMPING_SPIDER, {1, 6} }}}},
     { MONS_TARANTELLA,      { {2}, {{ BAND_TARANTELLA, {1, 5} }}}},

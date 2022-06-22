@@ -52,7 +52,7 @@ static const pop_entry pop_d[] =
   {  6, 13,  825, SEMI, MONS_ORC_WARRIOR },
   {  6, 13,  335, SEMI, MONS_WIGHT },
   {  6, 13,  335, SEMI, MONS_NO_MONSTER }, // Old ballistomycete spore weight.
-  {  6, 12,  415, SEMI, MONS_BIG_KOBOLD },
+  {  6, 12,  415, SEMI, MONS_KOBOLD_BRIGAND },
   {  6, 12,   89, PEAK, MONS_STEAM_DRAGON },
   {  6, 14,  615, SEMI, MONS_HIPPOGRIFF },
   {  6, 14,  350, SEMI, MONS_HUNGRY_GHOST },

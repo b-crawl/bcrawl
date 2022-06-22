@@ -462,7 +462,7 @@ big fish
 
 Un gros poisson avec une large mâchoire pleine de dents.
 %%%%
-big kobold
+kobold brigand
 
 Un kobold qui est plus gros et fort que la plupart des kobolds, et souvent
 armé.

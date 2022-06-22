@@ -1563,18 +1563,18 @@ DEPTH:  D:3-13
 KMONS:  pq = plant / fungus
 KFEAT:  q = W
 KMONS:  O = player ghost
-MONS:   kobold, big kobold, kobold demonologist
+MONS:   kobold, kobold brigand, kobold demonologist
 KMONS:  D = kobold ; blowgun . needle ego:curare | needle ego:poisoned . dagger
-KMONS:  E = big kobold ; blowgun . needle ego:curare | \
+KMONS:  E = kobold brigand ; blowgun . needle ego:curare | \
                 needle ego:poisoned w:5 . dagger | short sword | whip
 KMONS:  F = kobold ; wand of flame | wand of acid | wand of polymorph | \
                 wand of charming | wand of paralysis | \
                 wand of disintegration . dagger
-KMONS:  H = big kobold ; wand of flame | wand of acid | wand of polymorph | \
+KMONS:  H = kobold brigand ; wand of flame | wand of acid | wand of polymorph | \
                 wand of charming | wand of paralysis | \
                 wand of disintegration . dagger | short sword | whip
 KMONS:  J = kobold ; dagger ego:distortion
-KMONS:  K = big kobold ; dagger ego:distortion | short sword ego:distortion | \
+KMONS:  K = kobold brigand ; dagger ego:distortion | short sword ego:distortion | \
                 whip ego:distortion
 # Define some kobolds with more general nasty ego weapons.
 {{
@@ -1585,9 +1585,9 @@ KMONS:  K = big kobold ; dagger ego:distortion | short sword ego:distortion | \
     local quality = crawl.coinflip() and "randart" or "good_item"
     good_def = random_item_def(weapons, egos, quality, "|")
     kmons("L = kobold ; " .. basic_def)
-    kmons("M = big kobold ; " .. basic_def)
+    kmons("M = kobold brigand ; " .. basic_def)
     kmons("N = kobold ; " .. good_def)
-    kmons("P = big kobold ; " .. good_def)
+    kmons("P = kobold brigand ; " .. good_def)
 }}
 # 50% of time put statue/tree/fountain with plants and vertical wall, otherwise
 # add some diagonal wall instead. The second shuffle makes any statue sometimes
@@ -1987,7 +1987,7 @@ kmons("z = tengu warrior ; " .. wrathful_weapon("warrior", "randart") ..
       "    . buckler good_item | medium shield good_item")
 }}
 :     if you.depth() < 9 then
-MONS:   big kobold / gnoll sergeant / ogre / orc warrior
+MONS:   kobold brigand / gnoll sergeant / ogre / orc warrior
 MONS:   troll
 MONS:   cyclops
 SUBST:  d = *, e = *%, f = %$, ghij= -

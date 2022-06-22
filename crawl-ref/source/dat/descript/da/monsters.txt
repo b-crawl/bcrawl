@@ -388,7 +388,7 @@ big fish
 
 En korpulent fisk med et bredt tandsmil.
 %%%%
-big kobold
+kobold brigand
 
 En kobold som er større og barskere end den almindelige kobold og ofte
 bevæbnet.

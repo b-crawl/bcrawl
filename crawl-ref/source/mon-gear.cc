@@ -1141,7 +1141,7 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         }
         break;
     
-    case MONS_BIG_KOBOLD:
+    case MONS_KOBOLD_BRIGAND:
         if (x_chance_in_y(4, 5))
         {
             item.base_type = OBJ_WEAPONS;
@@ -1535,7 +1535,7 @@ static void _give_ammo(monster* mon, int level, bool mons_summoned)
         switch (mon->type)
         {
         case MONS_KOBOLD:
-        case MONS_BIG_KOBOLD:
+        case MONS_KOBOLD_BRIGAND:
             if (x_chance_in_y(2, 5))
             {
                 weap_type  = MI_STONE;

@@ -175,7 +175,7 @@ big fish
 
 Miesīga zivs ar plašu, zobiem pilnu muti.
 %%%%
-big kobold
+kobold brigand
 
 Kobolts, kas ir lielāks un sīkstāks, nekā parastie kobolti, un nereti ir
 bruņots.

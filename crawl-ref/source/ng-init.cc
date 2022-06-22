@@ -69,16 +69,20 @@ void initialise_branch_depths()
         }
     }
 
-    // You will get one of Shoals/Swamp and one of Spider/Snake.
-    // This way you get one "water" branch and one "poison" branch.
-    vector<branch_type> disabled_branch;
-    disabled_branch.push_back(random_choose(BRANCH_SWAMP, BRANCH_SHOALS));
-    disabled_branch.push_back(random_choose(BRANCH_SNAKE, BRANCH_SPIDER));
+    // You will get 2 of Shoals/Swamp/Spider/Snake.
+    branch_type s_branches[4];
+    s_branches[0] = BRANCH_SPIDER;
+    s_branches[1] = BRANCH_SNAKE;
+    s_branches[2] = BRANCH_SWAMP;
+    s_branches[3] = BRANCH_SHOALS;
+    for (int i = 0; i < 4; i++)
+        std::swap(s_branches[i], s_branches[random2(4)]);
 
-    for (branch_type disabled : disabled_branch)
+    for (int i = 0; i < 2; i++)
     {
-        dprf("Disabling branch: %s", branches[disabled].shortname);
-        brentry[disabled].clear();
+        branch_type disabled_branch = s_branches[i];
+        dprf("Disabling branch: %s", branches[disabled_branch].shortname);
+        brentry[disabled_branch].clear();
     }
 
     for (branch_iterator it; it; ++it)

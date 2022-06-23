@@ -22,6 +22,8 @@
   - v1.28.5: Players that reached their max experience level can enter Pandemonium while holding the Orb of Zot.
   - v1.30: The Hall of Zot in Zot:5 has a slightly different shape.
   - v1.34.1: Hell branches don't have shafts.
+  - v1.36.4: Worker ants can appear in Spider.
+  - v1.36.4: Any combination of 2 of (Swamp, Shoals, Snake, Spider) can appear in Lair, instead of (Swamp or Shoals) and (Snake or Spider).
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -78,6 +80,8 @@
   - v1.35.3: Formicid Chaos Knights start with a wand of random effects.
   - v1.36.3: Enchanters start with Slow instead of Corona.
   - v1.36.3: Necromancers start with a +0 dagger of pain instead of a +1 dagger.
+  - v1.36.4: Fire Elementalists start with a wand of flame with 4 charges.
+  - v1.36.4: Skalds start with an amulet of magic regeneration.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -520,6 +524,8 @@
   - v1.33.1: Scrolls of noise mark the player.
   - v1.35.2: Phantom Mirrors no longer copy divine enchantments such as Uskayaw's Pain Bond.
   - v1.35.2: Wand effects are rerolled if they would cause penance.
+  - v1.36.4: Amulets of magic regeneration give 0.03 mana regeneration per player level instead of a flat 0.25 mana regeneration.
+  - v1.36.4: Lightning rods have a chance to blind hit monsters, based on HD and damage before resistances.
 
 #### Removed Items
   - Amulet of Harm
@@ -693,6 +699,11 @@
   - v1.36.1: Friendly zombies and skeletons aren't angered by player attacks.
   - v1.36.3: Tengu conjurers have simplified and slightly stronger spell sets.
   - v1.36.3: War gargoyles have higher AC, higher melee damage, and no spells.
+  - v1.36.4: Tarantellas deal more melee damage. (19 -> 20)
+  - v1.36.4: Wolf spiders are slightly faster. (15 -> 16)
+  - v1.36.4: Jumping spiders are no longer fast, deal more melee damage (20 -> 34), have a poison attack instead of an entangling attack, use Blink Close instantly, and have higher HD.
+  - v1.36.4: Redbacks are no longer fast, but gain an additional melee attack that entangles.
+  - v1.36.4: Apocalypse crabs deal more melee damage. (15 -> 25)
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

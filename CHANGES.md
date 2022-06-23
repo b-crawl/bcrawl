@@ -524,7 +524,7 @@
   - v1.33.1: Scrolls of noise mark the player.
   - v1.35.2: Phantom Mirrors no longer copy divine enchantments such as Uskayaw's Pain Bond.
   - v1.35.2: Wand effects are rerolled if they would cause penance.
-  - v1.36.4: Amulets of magic regeneration give 0.03 mana regeneration per player level instead of a flat 0.25 mana regeneration.
+  - v1.36.4: Amulets of magic regeneration give 0.02 \* (player level + 1) mana regeneration instead of a flat 0.25 mana regeneration.
   - v1.36.4: Lightning rods have a chance to blind hit monsters, based on HD and damage before resistances.
 
 #### Removed Items

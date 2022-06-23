@@ -163,7 +163,7 @@ static const map<job_type, job_def> job_data =
     0, 7, 5,
     { SP_AVARIEL, SP_HILL_ORC, SP_NAGA, SP_DEMIGOD, SP_GARGOYLE,
       SP_FAIRY },
-    { "robe", "book of Flames", "stone q:40" },
+    { "robe", "book of Flames", "wand of flame charges:4", "stone q:40" },
     WCHOICE_NONE,
     { { SK_CONJURATIONS, 1 }, { SK_FIRE_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
       { SK_DODGING, 2 }, { SK_STEALTH, 2 }, },

@@ -284,8 +284,8 @@ enum dungeon_feature_type
     DNGN_OPEN_CLEAR_DOOR,
     DNGN_RUNED_CLEAR_DOOR,
     DNGN_SEALED_CLEAR_DOOR,
-#endif
     DNGN_RUNELIGHT,
+#endif
 
     NUM_FEATURES
 };

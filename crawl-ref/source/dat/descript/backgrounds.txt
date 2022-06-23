@@ -81,14 +81,14 @@ They are skilled at unarmed combat and have learned to confuse enemies with thei
 %%%%
 Monk
 
-Monks are pilgrims on a journey of spiritual discovery, and gain additional piety
-with the first god they worship. They start with a simple weapon of their choice
-and a protective amulet.
+Monks are pilgrims on a journey of spiritual discovery, and gain additional
+piety with the first god they worship. They start with a simple weapon of their
+choice and a protective amulet.
 %%%%
 Necromancer
 
 Necromancers are wizards specializing in the practice of death magic. They
-start out with the Necrotize spell.
+start out with the Necrotize spell and an enchanted dagger.
 %%%%
 Reaver
 
@@ -103,11 +103,12 @@ and poisoned needles.
 Skald
 
 Skalds are melee fighters who can boost themselves in battle with spells from
-the Charms school.
+the Charms school. They start with a weapon of their choice, a scroll of fear,
+and an amulet of magic regeneration.
 %%%%
 Sloth Apostle
 
-Apostles of Sloth worship Cheibriados, and believe the world needs more "Slack".
+Apostles of Sloth worship Cheibriados and believe the world needs more "Slack".
 They start with a simple weapon, a shield, and some ways to slow down enemies.
 %%%%
 Spelunker

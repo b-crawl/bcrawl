@@ -704,6 +704,7 @@
   - v1.36.4: Jumping spiders are no longer fast, deal more melee damage (20 -> 34), have a poison attack instead of an entangling attack, use Blink Close instantly, and have higher HD.
   - v1.36.4: Redbacks are no longer fast, but gain an additional melee attack that entangles.
   - v1.36.4: Apocalypse crabs deal more melee damage. (15 -> 25)
+  - v1.36.4: Big kobolds are renamed to kobold brigands.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

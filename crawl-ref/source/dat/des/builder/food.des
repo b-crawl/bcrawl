@@ -119,7 +119,7 @@ TAGS:     uniq_second_food extra chance_second_food
 SUBVAULT: X : fruiting_plant
 SUBVAULT: W : fruiting_plant
 KITEM:    p =  potion of degeneration w:5 / potion of ambrosia w:1 / nothing
-MONS:     big kobold ; wand of flame ident:type . short sword
+MONS:     kobold brigand ; wand of flame ident:type . short sword
 MAP
 XXXXX..WWWWW
 XXXXX..WWWWW
@@ -202,8 +202,8 @@ SUBVAULT: Z : fruiting_plant
 KMONS:    A = three-headed hydra / w:5 two-headed hydra
 KMONS:    B = dream sheep
 KMONS:    C = yak
-KMONS:    D = big kobold
-KMONS:    E = big kobold ; nothing
+KMONS:    D = kobold brigand
+KMONS:    E = kobold brigand ; nothing
 KMONS:    F = plant
 KITEM:    C = ration
 KITEM:    E = falchion ego:flaming ident:type / \

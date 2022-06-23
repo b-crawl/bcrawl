@@ -1196,6 +1196,7 @@ static void _update_abyss_terrain(const coord_def &p,
 
     switch (currfeat)
     {
+        case DNGN_RUNELIGHT:
         case DNGN_EXIT_ABYSS:
         case DNGN_ABYSSAL_STAIR:
             return;

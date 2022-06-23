@@ -208,6 +208,9 @@ enum dungeon_feature_type
     DNGN_DRY_FOUNTAIN_BLOOD,
 #endif
     DNGN_DRY_FOUNTAIN,
+#if TAG_MAJOR_VERSION > 34
+    DNGN_RUNELIGHT,
+#endif
 
     // Not meant to ever appear in grd().
     DNGN_EXPLORE_HORIZON, // dummy for redefinition
@@ -281,6 +284,7 @@ enum dungeon_feature_type
     DNGN_OPEN_CLEAR_DOOR,
     DNGN_RUNED_CLEAR_DOOR,
     DNGN_SEALED_CLEAR_DOOR,
+    DNGN_RUNELIGHT,
 #endif
 
     NUM_FEATURES

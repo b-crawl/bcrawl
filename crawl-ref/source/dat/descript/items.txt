@@ -32,9 +32,10 @@ targeting monsters via ranged attacks or spells.
 %%%%
 amulet of magic regeneration
 
-An amulet that draws energy from its surroundings and adds to its wearer's recovery of
-magical power. To function, it must first attune itself to the wearer's
-body with full reserves of magic.
+An amulet that draws energy from its surroundings and adds to its wearer's
+recovery of magical power. Its effect increases as its wearer becomes more
+experienced. To function, it must first attune itself to the wearer's body with
+full reserves of magic.
 %%%%
 amulet of nothing
 
@@ -67,7 +68,8 @@ amulet of the acrobat
 
 An amulet that allows the user to tumble and roll to evade the blows of their
 enemies, but only while moving and waiting. While taking other actions the
-amulet conveys no benefits. In order to function, it must first attune itself to the wearer's body at full health.
+amulet conveys no benefits. In order to function, it must first attune itself
+to the wearer's body at full health.
 %%%%
 ancient crate
 
@@ -598,10 +600,12 @@ with almost no hindrance to spellcasting or stealthy movement.
 %%%%
 lightning rod
 
-A rod that allows its wielder to fire unavoidable blasts of lightning.
-Consecutive evocations cause the discharge to be sustained,
-which allows it to be spread across an area at
-the cost of reduced damage to each target.
+A rod that allows its wielder to fire unavoidable blasts of lightning which can
+be bright enough to briefly blind their targets. Tougher, more experienced
+creatures are less likely to be blinded.
+
+Consecutive evocations cause the discharge to be sustained, which allows it to
+be spread across an area at the cost of reduced damage to each target.
 %%%%
 long sword
 

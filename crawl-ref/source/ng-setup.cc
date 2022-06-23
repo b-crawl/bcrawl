@@ -155,16 +155,17 @@ item_def* newgame_make_item(object_class_type base,
             break;
         }
     
-    if (item.base_type == OBJ_JEWELLERY && item.sub_type == AMU_GUARDIAN_SPIRIT)
+    if (item.base_type == OBJ_JEWELLERY)
     {
-        switch (you.species)
-        {
-        case SP_DEEP_DWARF:
-        case SP_SKELETON:
-            item.sub_type = AMU_MANA_REGENERATION;
-            break;
-        default: break;
-        }
+        if (item.sub_type == AMU_GUARDIAN_SPIRIT)
+            switch (you.species)
+            {
+            case SP_DEEP_DWARF:
+            case SP_SKELETON:
+                item.sub_type = AMU_MANA_REGENERATION;
+                break;
+            default: break;
+            }
         you.equip[get_item_slot(item)] = slot;
     }
 

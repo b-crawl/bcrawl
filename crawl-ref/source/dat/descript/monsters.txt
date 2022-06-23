@@ -627,7 +627,7 @@ A sacred, self-created sunbird, representative of rebirth. It has ascended
 past the cycles of life and death, and calls upon aspects of both, rising forth
 from death in a burst of unholy flame.
 %%%%
-big kobold
+kobold brigand
 
 A kobold that is bigger and tougher than the ordinary kobold, and often armed.
 %%%%

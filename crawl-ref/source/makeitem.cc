@@ -859,6 +859,13 @@ static special_armour_type _generate_armour_type_ego(armour_type type,
                                        7, SPARM_POSITIVE_ENERGY,
                                        7, SPARM_PONDEROUSNESS);
 
+    case ARM_LEATHER_ARMOUR:
+        return random_choose_weighted(7, SPARM_POISON_RESISTANCE,
+                                      6, SPARM_FIRE_RESISTANCE,
+                                      5, SPARM_MAGIC_RESISTANCE,
+                                      3, SPARM_COLD_RESISTANCE,
+                                      1, SPARM_POSITIVE_ENERGY);
+
     // other body armour
     default:
         break;

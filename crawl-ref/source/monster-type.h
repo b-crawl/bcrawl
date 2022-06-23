@@ -349,7 +349,7 @@ enum monster_type                      // menv[].type
     MONS_GNOLL_SERGEANT,
     MONS_BOGGART,
     MONS_KOBOLD,
-    MONS_BIG_KOBOLD,
+    MONS_KOBOLD_BRIGAND,
     MONS_KOBOLD_DEMONOLOGIST,
     MONS_ORC,
     MONS_ORC_WARRIOR,

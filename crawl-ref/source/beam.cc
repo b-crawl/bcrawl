@@ -1427,6 +1427,16 @@ int mons_adjust_flavoured(monster* mons, bolt &pbolt, int hurted,
         break;
 
     case BEAM_ELECTRICITY:
+        if (pbolt.aux_source == "lightning rod" && mons_can_be_dazzled(mons->type))
+        {
+            int hd = mons->get_hit_dice();
+            int dur = div_rand_round(2 * hurted * BASELINE_DELAY, hd);
+            if (x_chance_in_y(hurted, hd * 2))
+            {
+                simple_monster_message(*mons, " is blinded by the flash.");
+                mons->add_ench(mon_enchant(ENCH_BLIND, 1, pbolt.agent(), dur));
+            }
+        }
         hurted = resist_adjust_damage(mons, pbolt.flavour, hurted);
         if (!hurted)
         {

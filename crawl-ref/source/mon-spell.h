@@ -643,7 +643,7 @@ static const mon_spellbook mspell_list[] =
     {  MST_JUMPING_SPIDER,
       {
        { SPELL_BLINK_CLOSE, 34, MON_SPELL_NATURAL | MON_SPELL_INSTANT },
-       { SPELL_BLINK_AWAY, 26, MON_SPELL_NATURAL },
+       { SPELL_BLINK_AWAY, 20, MON_SPELL_NATURAL },
       }
     },
 

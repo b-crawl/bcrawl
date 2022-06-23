@@ -935,6 +935,7 @@ void feat_splash_noise(dungeon_feature_type feat)
     }
 }
 
+>>>>>>> 39ea5eca172 (Despoiler the Abyss rune (mostly))
 /** Does this feature destroy any items that fall into it?
  */
 bool feat_destroys_items(dungeon_feature_type feat)

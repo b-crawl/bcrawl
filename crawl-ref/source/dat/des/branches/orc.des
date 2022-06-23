@@ -2202,7 +2202,7 @@ WEIGHT: 5
 ORIENT: southwest
 MONS:   saltling, orc-shaped pillar of salt
 MONS:   orc knight w:30 / two-headed ogre / troll / \
-        orc sorcerer w:15 / cyclops / ettin w:2 / stone giant w:1
+        orc sorcerer w:15 / cyclops w:11 / halazid warlock w:4 / imperial myrmidon w:3
 MONS:   orc knight band / orc warlord band w:5
 KMONS:  _ = orc high priest
 SUBST:  ' = ."", ; = c", ! = x:3 .

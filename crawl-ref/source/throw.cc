@@ -914,6 +914,7 @@ bool throw_it(bolt &pbolt, int throw_2, dist *target)
             pbolt.friend_info.reset();
             pbolt.foe_ratio = 100;
             pbolt.is_tracer = true;
+            pbolt.overshoot_prompt = false;
 
             pbolt.fire();
 
@@ -921,6 +922,8 @@ bool throw_it(bolt &pbolt, int throw_2, dist *target)
 
             pbolt.hit    = 0;
             pbolt.damage = dice_def();
+            if (pbolt.friendly_past_target)
+                pbolt.aimed_at_spot = true;
         }
     }
 

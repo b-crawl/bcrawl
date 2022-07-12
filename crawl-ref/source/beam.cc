@@ -324,7 +324,7 @@ bool player_tracer(zap_type ztype, int power, bolt &pbolt, int range)
         return false;
     }
 
-    if (pbolt.friendly_past_target)
+    if (pbolt.friendly_past_target && !pierce)
         pbolt.aimed_at_spot = true;
 
     // Set to non-tracing for actual firing.

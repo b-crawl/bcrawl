@@ -6372,26 +6372,39 @@ int player::armour_class(bool /*calc_unid*/) const
 int player::gdr_perc() const
 {
     double dex_factor = 1;
+    double armor_factor = 1;
     double form_bonus = 0;
     switch (form)
     {
     case transformation::dragon:
         form_bonus = 16;
         dex_factor = 0.8;
+        armor_factor = 0;
         break;
+    
     case transformation::ice_beast:
         form_bonus = 19;
         dex_factor = 0.9;
+        armor_factor = 0;
         break;
+    
     case transformation::statue:
         form_bonus = 20;
         dex_factor = 0.69;
+        armor_factor = 0;
         break;
+    
     case transformation::tree:
         form_bonus = 40;
         dex_factor = 0.4;
+        armor_factor = 0;
         break;
-    default:
+    
+    case transformation::none:
+    case transformation::blade_hands:
+    case transformation::appendage:
+    case transformation::lich:
+    case transformation::shadow:
         switch(species)
         {
         case SP_GARGOYLE:
@@ -6403,8 +6416,14 @@ int player::gdr_perc() const
         default: break;
         }
         break;
+    
+    default:
+        armor_factor = 0;
+        break;
     }
-    int gdr = 7 * sqrt(you.dex() * dex_factor + you.skill(SK_ARMOUR, 10) * 0.1 + form_bonus);
+    
+    double gdr_factor = you.dex() * dex_factor + you.skill(SK_ARMOUR, 10) * armor_factor * 0.1 + form_bonus;
+    int gdr = 7 * sqrt(max(0, gdr_factor));
 
     return gdr;
 }

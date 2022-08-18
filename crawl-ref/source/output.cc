@@ -2410,7 +2410,11 @@ static vector<formatted_string> _get_overview_resistances(
     // Second column, resist name is 9 chars
     out.clear();
     cwidth = 9;
-    
+
+    int GDR_percent = you.gdr_perc();
+    if (GDR_percent)
+        out += make_stringf("GDR: %d%%\n", GDR_percent);
+
     const int archmagi = you.archmagi();
     if (archmagi)
         out += _resist_composer("Archmagi", cwidth, archmagi, archmagi) + "\n";

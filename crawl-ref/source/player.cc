@@ -6423,7 +6423,7 @@ int player::gdr_perc() const
     }
     
     double gdr_factor = you.dex() * dex_factor + you.skill(SK_ARMOUR, 10) * armor_factor * 0.1 + form_bonus;
-    int gdr = 7 * sqrt(max(0, gdr_factor));
+    int gdr = 7 * sqrt(max(0.0, gdr_factor));
 
     return gdr;
 }

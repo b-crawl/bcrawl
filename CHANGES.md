@@ -747,3 +747,4 @@
   - v1.36.1: Kirke's pigs no longer give experience.
   - v1.36.1: Crazy Yiuf becomes friendly if the player has the Orb of Zot.
   - v1.36.2: Tiamat is giant, has much stronger breath attacks, is no longer cold-blooded, and changes color after using a breath attack instead of having a 1/3 chance each turn.
+  - v1.36.5: Erica has a reworked spell set: Fireball, Mystic Blast, Slow, and Berserker Rage.

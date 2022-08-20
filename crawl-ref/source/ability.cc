@@ -2076,7 +2076,6 @@ static spret _do_ability(const ability_def& abil, bool fail)
     case ABIL_EVOKE_FLIGHT:             // ring, boots, randarts
         fail_check();
         ASSERT(!get_form()->forbids_flight());
-        if (you.wearing_ego(EQ_ALL_ARMOUR, SPARM_FLYING))
         {
             bool standing = !you.airborne();
             you.attribute[ATTR_PERM_FLIGHT] = 1;
@@ -2084,10 +2083,6 @@ static spret _do_ability(const ability_def& abil, bool fail)
                 float_player();
             else
                 mpr("You feel more buoyant.");
-        }
-        else
-        {
-            fly_player(player_adjust_evoc_power(you.skill(SK_EVOCATIONS, 2) + 30));
         }
         break;
 

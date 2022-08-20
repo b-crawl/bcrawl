@@ -115,6 +115,8 @@
   - v1.34.1: Players get a message any time they take stairs and a teleport *could* have happened.
   - v1.35.3: Autopickup failing when inventory is full only stops autoexplore instead of forcing a prompt response.
   - v1.35.4: Failed item pickup adds a "pickup" inscription, which is removed if the item is picked up.
+  - v1.36.5: Missile attacks are automatically stopped at the targeted square when they could continue to hit a friendly target.
+  - v1.36.5: GDR is shown with resistances.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -157,6 +159,7 @@
   - v1.36: Short blade damage scales with dexterity instead of strength.
   - v1.36: Inner flame explosions no longer anger allies.
   - v1.36.2: Monster breath attacks have a timeout of 2 to 5 turns instead of 1 to 5 turns.
+  - v1.36.5: Guaranteed damage reduction (GDR) calculation is reworked. It's now normally proportional to sqrt(dexterity + armour_skill).
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -526,6 +529,7 @@
   - v1.35.2: Wand effects are rerolled if they would cause penance.
   - v1.36.4: Amulets of magic regeneration give 0.02 \* (player level + 1) mana regeneration instead of a flat 0.25 mana regeneration.
   - v1.36.4: Lightning rods have a chance to blind hit monsters, based on HD and damage before resistances.
+  - v1.36.5: Evoked flight no longer expires.
 
 #### Removed Items
   - Amulet of Harm
@@ -705,6 +709,7 @@
   - v1.36.4: Redbacks are no longer fast, but gain an additional melee attack that entangles.
   - v1.36.4: Apocalypse crabs deal more melee damage. (15 -> 25)
   - v1.36.4: Big kobolds are renamed to kobold brigands.
+  - v1.36.5: Friendly torpor snails can slow hostile monsters.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -742,3 +747,4 @@
   - v1.36.1: Kirke's pigs no longer give experience.
   - v1.36.1: Crazy Yiuf becomes friendly if the player has the Orb of Zot.
   - v1.36.2: Tiamat is giant, has much stronger breath attacks, is no longer cold-blooded, and changes color after using a breath attack instead of having a 1/3 chance each turn.
+  - v1.36.5: Erica has a reworked spell set: Fireball, Mystic Blast, Slow, and Berserker Rage.

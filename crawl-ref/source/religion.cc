@@ -2850,7 +2850,7 @@ static bool _god_rejects_loveless(god_type god)
     }
 }
 
-bool player_can_join_god(god_type which_god)
+bool player_can_join_god(god_type which_god, bool temp)
 {
     if (you.species == SP_DEMIGOD)
         return false;
@@ -2876,13 +2876,13 @@ bool player_can_join_god(god_type which_god)
     if (which_god == GOD_KIKUBAAQUDGHA && you.species == SP_ENT)
         return false;
 
-    if (which_god == GOD_GOZAG && you.gold < gozag_service_fee())
+    if (which_god == GOD_GOZAG && you.gold < gozag_service_fee() && temp)
         return false;
 
     if (you.get_mutation_level(MUT_NO_LOVE) && _god_rejects_loveless(which_god))
         return false;
 
-    return _transformed_player_can_join_god(which_god);
+    return !temp || _transformed_player_can_join_god(which_god);
 }
 
 // Handle messaging and identification for items/equipment on conversion.

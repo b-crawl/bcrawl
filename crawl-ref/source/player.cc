@@ -6371,39 +6371,59 @@ int player::armour_class(bool /*calc_unid*/) const
   **/
 int player::gdr_perc() const
 {
+    double dex_factor = 1;
+    double armor_factor = 1;
+    double form_bonus = 0;
     switch (form)
     {
     case transformation::dragon:
-        return 34; // base AC 8
+        form_bonus = 16;
+        dex_factor = 0.8;
+        armor_factor = 0;
+        break;
+    
     case transformation::ice_beast:
+        form_bonus = 19;
+        dex_factor = 0.9;
+        armor_factor = 0;
+        break;
+    
     case transformation::statue:
-        return 39; // like plate (AC 10)
+        form_bonus = 20;
+        dex_factor = 0.69;
+        armor_factor = 0;
+        break;
+    
     case transformation::tree:
-        return 48;
+        form_bonus = 40;
+        dex_factor = 0.4;
+        armor_factor = 0;
+        break;
+    
+    case transformation::none:
+    case transformation::blade_hands:
+    case transformation::appendage:
+    case transformation::lich:
+    case transformation::shadow:
+        switch(species)
+        {
+        case SP_GARGOYLE:
+            form_bonus = 12; break;
+        case SP_TROLL:
+            form_bonus = 4; break;
+        case SP_ENT:
+            form_bonus = 10; break;
+        default: break;
+        }
+        break;
+    
     default:
+        armor_factor = 0;
         break;
     }
-
-    int body_base_AC = 0;
-    switch(species)
-    {
-    case SP_GARGOYLE:
-        body_base_AC = 5; break;
-    case SP_TROLL:
-        body_base_AC = 6; break;
-    case SP_ENT:
-        body_base_AC = 8; break;
-    default: break;
-    }
     
-    const item_def *body_armour = slot_item(EQ_BODY_ARMOUR, false);
-    if (body_armour)
-        body_base_AC += property(*body_armour, PARM_AC);
-
-    // We take a sqrt here because damage prevented by GDR is
-    // actually proportional to the square of the GDR percentage
-    // (assuming you have enough AC).
-    int gdr = 14 * sqrt(max(body_base_AC - 2, 0));
+    double gdr_factor = you.dex() * dex_factor + you.skill(SK_ARMOUR, 10) * armor_factor * 0.1 + form_bonus;
+    int gdr = 7 * sqrt(max(0.0, gdr_factor));
 
     return gdr;
 }

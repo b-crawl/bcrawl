@@ -845,7 +845,10 @@ static void _print_stats_ac(int x, int y)
         text_col = RED;
 
     string ac = make_stringf("%2d ", you.armour_class());
-    ac += make_stringf("(%d%%) ", you.gdr_perc());
+#ifdef WIZARD
+    if (you.wizard)
+        ac += make_stringf("(%d%%) ", you.gdr_perc());
+#endif
     textcolour(text_col);
     CGOTOXY(x+4, y, GOTO_STAT);
     CPRINTF("%-12s", ac.c_str());
@@ -2407,7 +2410,11 @@ static vector<formatted_string> _get_overview_resistances(
     // Second column, resist name is 9 chars
     out.clear();
     cwidth = 9;
-    
+
+    int GDR_percent = you.gdr_perc();
+    if (GDR_percent)
+        out += make_stringf("GDR: %d%%\n", GDR_percent);
+
     const int archmagi = you.archmagi();
     if (archmagi)
         out += _resist_composer("Archmagi", cwidth, archmagi, archmagi) + "\n";

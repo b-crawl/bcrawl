@@ -988,23 +988,17 @@ static void _equip_armour_effect(item_def& arm, bool unmeld,
 
 /**
  * The player lost a source of permafly. End their flight if there was
- * no other source, evoking a ring of flight "for free" if possible.
+ * no other source, evoking flight "for free" if possible.
  */
 void lose_permafly_source()
 {
     const bool had_perm_flight = you.attribute[ATTR_PERM_FLIGHT];
 
     if (had_perm_flight
-        && !you.wearing_ego(EQ_ALL_ARMOUR, SPARM_FLYING)
-        && !you.racial_permanent_flight())
+        && !you.racial_permanent_flight()
+        && !you.evokable_flight())
     {
         you.attribute[ATTR_PERM_FLIGHT] = 0;
-        if (you.evokable_flight())
-        {
-            fly_player(
-                player_adjust_evoc_power(you.skill(SK_EVOCATIONS, 2) + 30),
-                true);
-        }
     }
 
     // since a permflight item can keep tempflight evocations going
@@ -1462,11 +1456,11 @@ static void _unequip_jewellery_effect(item_def &item, bool mesg, bool meld,
         break;
 
     case RING_FLIGHT:
-        if (you.cancellable_flight() && !you.evokable_flight())
-        {
-            you.duration[DUR_FLIGHT] = 0;
-            land_player();
-        }
+        // Save current flight status so we can restore it on reequip?
+        // you.attribute[ATTR_LAST_FLIGHT_STATUS] =
+        //    you.attribute[ATTR_PERM_FLIGHT];
+
+        lose_permafly_source();
         break;
 
     case RING_MAGICAL_POWER:

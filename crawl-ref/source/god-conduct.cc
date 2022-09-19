@@ -936,7 +936,7 @@ static like_map divine_likes[] =
             {
                 const int base_gain = 8; // base gain per dungeon level
                 piety = base_gain + base_gain * you.bondage_level / 100;
-                if (you.piety >= piety_breakpoint(0))
+                if (you.piety >= piety_breakpoint(1))
                     inc_mp(div_rand_round(piety, 100));
             }
         } },

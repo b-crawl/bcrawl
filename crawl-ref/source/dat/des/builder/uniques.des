@@ -454,8 +454,7 @@ ENDMAP
 
 NAME:   uniq_ignacio
 DEPTH:  Pan
-CHANCE: 10%
-# TODO: use regular unique code instead?
+CHANCE: 15%
 TAGS:   transparent extra allow_dup luniq_ignacio
 veto {{
   if you.uniques("Ignacio") then

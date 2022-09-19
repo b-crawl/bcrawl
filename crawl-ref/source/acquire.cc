@@ -1579,7 +1579,9 @@ bool acquirement(object_class_type class_wanted, int agent,
 
         const bool id_stock         = true;
               bool viewing          = false;
-    
+
+        ui::pop_layout();
+
         while (true)
         {
             if (crawl_state.seen_hups)

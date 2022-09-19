@@ -3069,7 +3069,8 @@ void melee_attack::do_passive_freeze()
         if (mon->alive())
         {
             mon->expose_to_element(BEAM_COLD, orig_hurted);
-            print_wounds(*mon);
+            // These messages might cause lag when playing online.
+            // print_wounds(*mon);
         }
     }
 }

@@ -2031,6 +2031,10 @@ void set_terrain_changed(const coord_def p)
         }
         break;
     
+    case DNGN_PASSAGE_OF_GOLUBRIA:
+        env.level_state |= LSTATE_GOLUBRIA;
+        break;
+    
     default: break;
     }
 

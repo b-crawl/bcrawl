@@ -2005,10 +2005,13 @@ void set_terrain_changed(const coord_def p)
     if (cell_is_solid(p))
         delete_cloud(p);
 
-    if (grd(p) == DNGN_SLIMY_WALL)
-        env.level_state |= LSTATE_SLIMY_WALL;
-    else if (grd(p) == DNGN_OPEN_DOOR)
+    switch (grd(p))
     {
+    case DNGN_SLIMY_WALL:
+        env.level_state |= LSTATE_SLIMY_WALL;
+        break;
+    
+    case DNGN_OPEN_DOOR:
         // Restore colour from door-change markers
         for (map_marker *marker : env.markers.get_markers_at(p))
         {
@@ -2026,6 +2029,9 @@ void set_terrain_changed(const coord_def p)
                 }
             }
         }
+        break;
+    
+    default: break;
     }
 
     env.map_knowledge(p).flags |= MAP_CHANGED_FLAG;

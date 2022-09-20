@@ -713,6 +713,7 @@
   - v1.36.4: Apocalypse crabs deal more melee damage. (15 -> 25)
   - v1.36.4: Big kobolds are renamed to kobold brigands.
   - v1.36.5: Friendly torpor snails can slow hostile monsters.
+  - v1.37: Apises are fast. (10 -> 14 speed)
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

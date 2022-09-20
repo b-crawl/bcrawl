@@ -892,11 +892,11 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
         } },
         { MONS_AGNES,       { { { WPN_LAJATANG, 1 } } } },
         { MONS_SONJA, {
-            { { WPN_DAGGER,             1 },
+            { { WPN_DAGGER,             2 },
               { WPN_SHORT_SWORD,        1 }, }, {},
-            { { SPWPN_DISTORTION,       3 },
+            { { SPWPN_DISTORTION,       2 },
               { SPWPN_VENOM,            2 },
-              { SPWPN_DRAINING,         1 } },
+              { SPWPN_DRAINING,         2 } },
         } },
         { MONS_MAURICE,
             { { { WPN_DAGGER,           1 },
@@ -1072,7 +1072,10 @@ int make_mons_weapon(monster_type type, int level, bool melee_only)
                 { WPN_SHORTBOW,                 1 },
                 { WPN_LONGBOW,                  1 },
         } } },
-        { MONS_SONJA, { { { WPN_BLOWGUN, 1 } } } },
+        { MONS_SONJA, {
+            { { WPN_HAND_CROSSBOW,      1 } }, {1, 1, 4},
+            { { SPWPN_VENOM,            1 } }
+        } },
         { MONS_MAURICE, { { { WPN_BLOWGUN, 1 } } } },
         // salamanders only have secondary weapons; melee or bow, not both
         { MONS_SALAMANDER, {

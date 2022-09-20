@@ -1929,8 +1929,8 @@ static const mon_spellbook mspell_list[] =
     // ('K') Kobolds.
     {  MST_SONJA,
       {
-       { SPELL_BLINK, 28, MON_SPELL_WIZARD },
-       { SPELL_TELEPORT_SELF, 28, MON_SPELL_WIZARD | MON_SPELL_EMERGENCY },
+       { SPELL_BLINK, 22, MON_SPELL_WIZARD },
+       { SPELL_TELEPORT_SELF, 35, MON_SPELL_WIZARD | MON_SPELL_EMERGENCY },
       }
     },
 

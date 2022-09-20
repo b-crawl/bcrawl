@@ -205,7 +205,8 @@ Borgnjor's Vile Clutch spell
 
 Calls forth hands from corpses interred beneath the dungeon floor long ago.
 Enemies caught in the area will be held in place and constricted until they
-break free.
+break free. It cannot affect enemies that are flying, swimming in deep water,
+insubstantial, or too spiny to grab.
 %%%%
 Brain Feed spell
 

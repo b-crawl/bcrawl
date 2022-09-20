@@ -212,11 +212,11 @@ Ashenzari powers
 Followers of Ashenzari use cursed equipment as a conduit between themselves and
 the world. Piety can be gained by exploring while so bound, but uncursing
 equipment amounts to breaking links to the soul and will reduce piety.
-Followers gain the power to scry through walls, gain magical power as they
-explore, borrow the skills of spirits to boost their own through associated
-cursed equipment, perceive the invisible, and preserve their mental clarity.
-The truly devout will gain the ability to transfer a portion of their
-knowledge from one skill to another.
+Followers gain the power to borrow Ashenzari's knowledge through their cursed
+equipment to improve their skills, scry through walls, gain magical power as
+they explore, perceive the invisible, and preserve their mental clarity. The
+truly devout can gain the ability to transfer a portion of their knowledge from
+one skill to another.
 %%%%
 Beogh powers
 

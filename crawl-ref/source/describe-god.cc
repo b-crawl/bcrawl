@@ -262,80 +262,6 @@ string god_title(god_type which_god, species_type which_species, int piety)
     return replace_keys(title, replacements);
 }
 
-static string _describe_ash_skill_boost()
-{
-    if (!you.bondage_level)
-    {
-        return "Ashenzari won't support your skills until you bind yourself "
-               "with cursed items.";
-    }
-
-    static const char* bondage_parts[NUM_ET] = { "Weapon hand", "Shield hand",
-                                                 "Armour", "Jewellery" };
-    static const char* bonus_level[3] = { "Low", "Medium", "High" };
-    ostringstream desc;
-    desc.setf(ios::left);
-    desc << "<white>";
-    desc << setw(18) << "Bound part";
-    desc << setw(30) << "Boosted skills";
-    desc << "Bonus\n";
-    desc << "</white>";
-
-    for (int i = ET_WEAPON; i < NUM_ET; i++)
-    {
-        if (you.bondage[i] <= 0 || i == ET_SHIELD && you.bondage[i] == 3)
-            continue;
-
-        desc << setw(18);
-        if (i == ET_WEAPON && you.bondage[i] == 3)
-            desc << "Hands";
-        else
-            desc << bondage_parts[i];
-
-        string skills;
-        map<skill_type, int8_t> boosted_skills = ash_get_boosted_skills(eq_type(i));
-        const int8_t bonus = boosted_skills.begin()->second;
-        auto it = boosted_skills.begin();
-
-        // First, we keep only one magic school skill (conjuration).
-        // No need to list all of them since we boost all or none.
-        while (it != boosted_skills.end())
-        {
-            if (it->first > SK_CONJURATIONS && it->first <= SK_LAST_MAGIC)
-            {
-                boosted_skills.erase(it);
-                it = boosted_skills.begin();
-            }
-            else
-                ++it;
-        }
-
-        it = boosted_skills.begin();
-        while (!boosted_skills.empty())
-        {
-            // For now, all the bonuses from the same bounded part have
-            // the same level.
-            ASSERT(bonus == it->second);
-            if (it->first == SK_CONJURATIONS)
-                skills += "Magic schools";
-            else
-                skills += skill_name(it->first);
-
-            if (boosted_skills.size() > 2)
-                skills += ", ";
-            else if (boosted_skills.size() == 2)
-                skills += " and ";
-
-            boosted_skills.erase(it++);
-        }
-
-        desc << setw(30) << skills;
-        desc << bonus_level[bonus -1] << "\n";
-    }
-
-    return desc.str();
-}
-
 typedef pair<int, string> ancestor_upgrade;
 
 static const map<monster_type, vector<ancestor_upgrade> > ancestor_data =
@@ -618,11 +544,6 @@ static formatted_string _god_extra_description(god_type which_god)
     switch (which_god)
     {
         case GOD_ASHENZARI:
-            if (have_passive(passive_t::bondage_skill_boost))
-            {
-                _add_par(desc, "Curse skill supports:");
-                _add_par(desc,  _describe_ash_skill_boost());
-            }
             break;
         case GOD_BEOGH:
             if (you_worship(GOD_BEOGH))
@@ -1035,11 +956,7 @@ static formatted_string _god_overview_description(god_type which_god)
         if (!you_worship(which_god))
             desc.cprintf("%s", _god_penance_message(which_god).c_str());
         else
-        {
             desc.cprintf("%s", _describe_favour(which_god).c_str());
-            if (which_god == GOD_ASHENZARI)
-                desc.cprintf("\n%s", ash_describe_bondage(ETF_ALL, true).c_str());
-        }
     }
     
     desc += _describe_god_powers(which_god);
@@ -1153,11 +1070,7 @@ static void _send_god_ui(god_type god, bool is_altar)
 
     tiles.json_write_string("description", getLongDescription(god_name(god)));
     if (you_worship(god))
-    {
         tiles.json_write_string("title", god_title(god, you.species, you.piety));
-        if (god == GOD_ASHENZARI)
-            tiles.json_write_string("bondage", ash_describe_bondage(ETF_ALL, true));
-    }
     if(god != GOD_DEMIGOD)
     {
         tiles.json_write_string("favour", you_worship(god) ?

@@ -454,21 +454,15 @@ ENDMAP
 
 NAME:   uniq_ignacio
 DEPTH:  Pan
-CHANCE: 25%
-# TODO: use regular unique code instead?
+CHANCE: 15%
 TAGS:   transparent extra allow_dup luniq_ignacio
 veto {{
   if you.uniques("Ignacio") then
     return true -- don't spam the list of vaults
   end
   if not dgn.persist.ignacio_spawned then
-    local runes = count_pan_runes()
-    if crawl.x_chance_in_y(runes * runes, 100) then
-      dgn.persist.ignacio_spawned = true
-      dgn.persist.ignacio_forbid = crawl.coinflip()
-    else
-      return true
-    end
+    dgn.persist.ignacio_spawned = true
+    dgn.persist.ignacio_forbid = crawl.coinflip()
   end
   if dgn.persist.ignacio_forbid then
     return true

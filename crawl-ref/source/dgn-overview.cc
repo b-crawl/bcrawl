@@ -1084,30 +1084,13 @@ bool connected_branch_can_exist(branch_type br)
         int swamp = stair_level.count(BRANCH_SWAMP);
         int shoals = stair_level.count(BRANCH_SHOALS);
         int s_total = spider + snake + swamp + shoals;
-        switch (br)
-        {
-        BRANCH_SPIDER:
-            if (!spider && s_total >= 2)
-                return false;
-            break;
-        BRANCH_SNAKE: 
-            if (!snake && s_total >= 2)
-                return false;
-            break;
-        BRANCH_SWAMP: 
-            if (!swamp && s_total >= 2)
-                return false;
-            break;
-        BRANCH_SHOALS: 
-            if (!shoals && s_total >= 2)
-                return false;
-            break;
-        default: break;
-        }
+        if (s_total >= 2)
+            return false;
         }
         break;
+    
     default: break;
     }
-
+    
     return true;
 }

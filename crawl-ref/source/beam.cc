@@ -5277,7 +5277,7 @@ bool ench_flavour_affects_monster(beam_type flavour, const monster* mon,
     case BEAM_VILE_CLUTCH:
         rc = !mons_aligned(&you, mon)
                 && you.can_constrict(mon, false)
-                && !mons->airborne();
+                && !mon->airborne();
         break;
 
     case BEAM_SHACKLE:

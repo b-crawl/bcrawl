@@ -316,6 +316,7 @@
   - v1.36.2: Battlespheres are immune to clouds.
   - v1.36.3: Pain and Animate Skeleton are replaced for players by Necrotize, which is the same as Pain but creates a zombie when it kills a creature.
   - v1.36.3: The number of simulacra created by Simulacrum no longer depends on corpse properties.
+  - v1.37: Borgnjor's Vile Clutch can't affect flying monsters.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -455,6 +456,8 @@
   - v1.36.2: Kikubaaqudgha's Receive Corpse ability costs less mana (3 -> 2).
   - v1.36.2: Sif Muna's Divine Energy automatically ends when used.
   - v1.36.2: Sif Muna's book gifts happen less often but don't reduce piety gain.
+  - v1.37: Ashenzari gives skill boosts at \*, and gives scrying and mana regeneration from exploration at \*\*.
+  - v1.37: Ashenzari skill boosts are based on the percent of equipment slots cursed, and affect all skills equally. Empty slots have a smaller penalty. Weapon, body armor, and non-octopode ring slots have a higher weight.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

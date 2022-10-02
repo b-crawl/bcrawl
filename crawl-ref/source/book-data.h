@@ -56,9 +56,9 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Ice
     SPELL_ENGLACIATION,
+    SPELL_FREEZING_CLOUD,
     SPELL_OZOCUBUS_REFRIGERATION,
     SPELL_BOLT_OF_COLD,
-    SPELL_FREEZING_CLOUD,
     SPELL_SIMULACRUM,
 },
 

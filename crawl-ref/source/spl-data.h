@@ -282,8 +282,8 @@ static const struct spell_desc spelldata[] =
     SPTYP_ICE | SPTYP_AIR,
     SPFLAG_TARGET | SPFLAG_AREA | SPFLAG_NEEDS_TRACER
         | SPFLAG_CLOUD,
-    6,
-    200,
+    5,
+    100,
     5, 5,
     6, 2,
     TILEG_FREEZING_CLOUD,

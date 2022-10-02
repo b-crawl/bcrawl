@@ -3160,7 +3160,7 @@ spret cast_icicle_burst(const actor *caster, int pow, const coord_def &pos,
 
     int die_size = 8 + div_rand_round(pow, 10);
     beam.damage = dice_def(2, die_size);
-    beam.hit = 7;
+    beam.hit = 4;
 
     // Choose a random number of 'pellets' to fire for each beam in the spread.
     // total pellets has O(beam_count^2)

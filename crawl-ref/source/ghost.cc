@@ -622,6 +622,8 @@ void ghost_demon::init_spectral_weapon(const item_def& weapon, int power)
     ev     = div_rand_round((100 + power) * 14, delay * 8);
     ac     = div_rand_round((20 + power) * dmg, 60);
     max_hp = 10 + div_rand_round(power, 3);
+    
+    see_invis = true;
 }
 
 // Used when creating ghosts: goes through and finds spells for the

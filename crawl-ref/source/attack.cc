@@ -1315,7 +1315,7 @@ int attack::calc_damage()
             break;
 
         case SK_CROSSBOWS:
-            if (base_dmg <= 12)
+            if (base_dmg <= 13)
                 which_stat = STAT_DEX;
             break;
         

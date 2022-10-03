@@ -964,6 +964,11 @@ int estimate_adjusted_dmg(int base_dmg, skill_type wpn_skill, int scale)
         which_stat = STAT_DEX;
         break;
 
+    case SK_CROSSBOWS:
+        if (base_dmg <= 12)
+            which_stat = STAT_DEX;
+        break;
+
     case SK_THROWING:
         adj_dmg += (you.skill(wpn_skill, scale) * min(4, base_dmg)) / 4;
         break;
@@ -1244,6 +1249,13 @@ static string _describe_weapon(const item_def &item, bool verbose)
                                                            : "particularly";
                 description += "\n\nIts damage is affected by dexterity rather than strength, "
                                "and it is " + adj + " good for stabbing unaware enemies.";
+            }
+            break;
+        case SK_CROSSBOWS:
+            {
+            int base_dmg = property(item, PWPN_DAMAGE);
+            if (base_dmg <= 12)
+                description += "\n\nIts damage is affected by dexterity rather than strength."
             }
             break;
         default:

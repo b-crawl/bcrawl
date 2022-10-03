@@ -1307,7 +1307,20 @@ int attack::calc_damage()
         potential_damage = using_weapon() || wpn_skill == SK_THROWING
             ? weapon_damage() : calc_base_unarmed_damage();
 
-        stat_type which_stat = (wpn_skill == SK_SHORT_BLADES) ? STAT_DEX : STAT_STR;
+        stat_type which_stat = STAT_STR;
+        switch (wpn_skill)
+        {
+        case SK_SHORT_BLADES:
+            which_stat = STAT_DEX;
+            break;
+
+        case SK_CROSSBOWS:
+            if (base_dmg <= 12)
+                which_stat = STAT_DEX;
+            break;
+        
+        default: break;
+        }
         potential_damage = player_stat_modify_damage(potential_damage, which_stat);
 
         damage = random2(potential_damage+1);

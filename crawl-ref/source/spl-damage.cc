@@ -1389,7 +1389,12 @@ spret cast_irradiate(int powc, actor* who, bool fail)
     }, who->pos(), true, 8);
 
     if (who->is_player())
-        contaminate_player(1000 + random2(500));
+    {
+        contaminate_player(700 + random2(300));
+        mprf(MSGCH_WARN, "Your magic feels %stainted.",
+             you.duration[DUR_SAP_MAGIC] ? "more " : "");
+        you.increase_duration(DUR_SAP_MAGIC, random_range(8, 12), 50);
+    }
     return spret::success;
 }
 

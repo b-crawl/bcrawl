@@ -4090,6 +4090,12 @@ static string _monster_stat_description(const monster_info& mi)
     // Might be better to have some place where players can see holiness &
     // information about holiness.......?
 
+    if (mons_class_flag(mi.type, M_INSUBSTANTIAL))
+    {
+        result << uppercase_first(pronoun)
+               << " is insubstantial and immune to ensnarement.\n";
+    }
+
     if (mi.intel() <= I_BRAINLESS)
     {
         // Matters for Ely.

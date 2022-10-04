@@ -49,8 +49,8 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Book of Fire
     SPELL_FIREBALL,
     SPELL_BOLT_OF_MAGMA,
-    SPELL_BOLT_OF_FIRE,
     SPELL_RING_OF_FLAMES,
+    SPELL_BOLT_OF_FIRE,
     SPELL_IGNITION,
 },
 

@@ -56,10 +56,10 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Ice
     SPELL_ENGLACIATION,
-    SPELL_FREEZING_CLOUD,
     SPELL_OZOCUBUS_REFRIGERATION,
     SPELL_BOLT_OF_COLD,
     SPELL_SIMULACRUM,
+    SPELL_GLACIATE,
 },
 
 {   // Book of Spatial Translocations
@@ -90,7 +90,7 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of the Tempests
-    SPELL_LIGHTNING_BOLT,
+    SPELL_CONJURE_BALL_LIGHTNING,
     SPELL_ICICLE_BURST,
     SPELL_CHAIN_LIGHTNING,
     SPELL_IGNITION,
@@ -182,11 +182,12 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SHOCK,
     SPELL_SWIFTNESS,
     SPELL_DISCHARGE,
-    SPELL_AIRSTRIKE,
     SPELL_LIGHTNING_BOLT,
+    SPELL_FREEZING_CLOUD,
 },
 
 {   // Book of the Sky
+    SPELL_AIRSTRIKE,
     SPELL_SUMMON_LIGHTNING_SPIRE,
     SPELL_SILENCE,
     SPELL_DEFLECT_MISSILES,

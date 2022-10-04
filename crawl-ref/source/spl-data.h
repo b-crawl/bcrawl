@@ -136,9 +136,9 @@ static const struct spell_desc spelldata[] =
     SPELL_LIGHTNING_BOLT, "Lightning Bolt",
     SPTYP_CONJURATION | SPTYP_AIR,
     SPFLAG_DIR_OR_TARGET | SPFLAG_NEEDS_TRACER,
-    5,
-    200,
-    4, 11, // capped at LOS, yet this 11 matters since range increases linearly
+    4,
+    100,
+    2, 8, // capped at LOS, but range increases linearly
     5, 25,
     TILEG_LIGHTNING_BOLT,
 },

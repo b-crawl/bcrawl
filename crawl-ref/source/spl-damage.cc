@@ -364,6 +364,9 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
 
         beam.source = source;
         beam.target = target;
+        beam.draw_delay = 5;
+        beam.explode_delay = 25;
+        
         switch (spell_cast)
         {
             case SPELL_CHAIN_LIGHTNING:
@@ -3080,6 +3083,7 @@ spret cast_scattershot(const actor *caster, int pow, const coord_def &pos,
     beam.source_name = caster->name(DESC_PLAIN, true);
     zappy(ZAP_SCATTERSHOT, pow, false, beam);
     beam.aux_source  = beam.name;
+    beam.draw_delay = 5;   // in ms, 1/3 the default
 
     if (!caster->is_player())
         beam.damage   = dice_def(3, 4 + (pow / 18));
@@ -3162,6 +3166,7 @@ spret cast_icicle_burst(const actor *caster, int pow, const coord_def &pos,
     beam.source_name = caster->name(DESC_PLAIN, true);
     zappy(ZAP_ICICLE_BURST, pow, false, beam);
     beam.aux_source  = beam.name;
+    beam.draw_delay = 5;   // in ms, 1/3 the default
 
     int die_size = 8 + div_rand_round(pow, 10);
     beam.damage = dice_def(2, die_size);

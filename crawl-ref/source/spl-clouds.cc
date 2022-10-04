@@ -175,23 +175,26 @@ spret cast_big_c(int pow, spell_type spl, const actor *caster, bolt &beam,
     }
 
     cloud_type cty = CLOUD_NONE;
-    //XXX: there should be a better way to specify beam cloud types
+    int cloud_count = 0;
     switch (spl)
     {
         case SPELL_POISONOUS_CLOUD:
             beam.flavour = BEAM_POISON;
             beam.name = "blast of poison";
             cty = CLOUD_POISON;
+            cloud_count = 8 + random2(3);
             break;
         case SPELL_HOLY_BREATH:
             beam.flavour = BEAM_HOLY;
             beam.origin_spell = SPELL_HOLY_BREATH;
             cty = CLOUD_HOLY;
+            cloud_count = 8 + random2(3);
             break;
         case SPELL_FREEZING_CLOUD:
             beam.flavour = BEAM_COLD;
-            beam.name = "freezing blast";
+            beam.name = "freezing cold";
             cty = CLOUD_COLD;
+            cloud_count = 1 + div_rand_round(pow * 2, 25);
             break;
         default:
             mpr("That kind of cloud doesn't exist!");
@@ -210,7 +213,7 @@ spret cast_big_c(int pow, spell_type spl, const actor *caster, bolt &beam,
 
     fail_check();
 
-    big_cloud(cty, caster, beam.target, pow, 8 + random2(3), -1);
+    big_cloud(cty, caster, beam.target, pow, cloud_count, -1);
     noisy(spell_effect_noise(spl), beam.target);
     return spret::success;
 }

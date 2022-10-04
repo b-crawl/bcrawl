@@ -1255,7 +1255,7 @@ static string _describe_weapon(const item_def &item, bool verbose)
             {
             int base_dmg = property(item, PWPN_DAMAGE);
             if (base_dmg <= 13)
-                description += "\n\nIts damage is affected by dexterity rather than strength."
+                description += "\n\nIts damage is affected by dexterity rather than strength.";
             }
             break;
         default:

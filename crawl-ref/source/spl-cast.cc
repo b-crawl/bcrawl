@@ -1333,6 +1333,26 @@ vector<string> _desc_target_mr(const monster_info& mi)
     return descs;
 }
 
+static vector<string> _desc_insubstantial(const monster_info& mi)
+{
+    vector<string> descs;
+    if (mons_class_flag(mi.type, M_INSUBSTANTIAL))
+        descs.push_back("insubstantial");
+
+    return descs;
+}
+
+static vector<string> _desc_clutch_immune(const monster_info& mi)
+{
+    vector<string> descs;
+    if (mons_class_flag(mi.type, M_FLIES))
+        descs.push_back("flying");
+    if (mons_class_flag(mi.type, M_INSUBSTANTIAL))
+        descs.push_back("insubstantial");
+
+    return descs;
+}
+
 /**
  * Targets and fires player-cast spells & spell-like effects.
  *
@@ -1428,6 +1448,12 @@ spret your_spells(spell_type spell, int powc, bool allow_fail,
             break;
         case SPELL_MEPHITIC_CLOUD:
             additional_desc = bind(_desc_meph_chance, placeholders::_1);
+            break;
+        case SPELL_STICKY_FLAME:
+            additional_desc = bind(_desc_insubstantial, placeholders::_1);
+            break;
+        case SPELL_BORGNJORS_VILE_CLUTCH:
+            additional_desc = bind(_desc_clutch_immune, placeholders::_1);
             break;
         default: break;
         }

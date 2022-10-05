@@ -36,7 +36,7 @@ static const map<job_type, job_def> job_data =
     "AE", "Air Elementalist",
     0, 7, 5,
     { SP_AVARIEL, SP_BASE_DRACONIAN, SP_FELID, SP_FAIRY, SP_HUMAN },
-    { "robe", "book of Air", "potion of flight" },
+    { "robe", "book of Air", "potion of flight", "potion of resistance" },
     WCHOICE_NONE,
     { { SK_AIR_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
       { SK_CONJURATIONS, 1 }, { SK_CHARMS, 1 },

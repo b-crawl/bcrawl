@@ -38,7 +38,8 @@ static const map<job_type, job_def> job_data =
     { SP_AVARIEL, SP_BASE_DRACONIAN, SP_FELID, SP_FAIRY, SP_HUMAN },
     { "robe", "book of Air", "potion of flight" },
     WCHOICE_NONE,
-    { { SK_CONJURATIONS, 1 }, { SK_AIR_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
+    { { SK_AIR_MAGIC, 3 }, { SK_SPELLCASTING, 2 },
+      { SK_CONJURATIONS, 1 }, { SK_CHARMS, 1 },
       { SK_DODGING, 2 }, { SK_STEALTH, 2 }, },
 } },
 

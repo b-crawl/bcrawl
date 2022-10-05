@@ -71,6 +71,7 @@ enum book_type
 #endif
     BOOK_REBUKES,
     BOOK_LIGHTNING,
+    BOOK_BOMBARDMENT,
     NUM_BOOKS
 };
 

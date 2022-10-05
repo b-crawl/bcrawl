@@ -137,6 +137,10 @@ book of beasts
 A book of spells focused on the summoning of beasts. Its pages nip at careless
 readers' fingers.
 %%%%
+book of bombardment
+
+A book of spells that conjure a beam or launch a projectile.
+%%%%
 book of burglary
 
 A book containing many diverse spells useful for theft, breaking and entering,

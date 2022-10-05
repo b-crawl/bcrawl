@@ -247,9 +247,7 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Power
     SPELL_FULMINANT_PRISM,
-    SPELL_BOLT_OF_DRAINING,
-    SPELL_POISON_ARROW,
-    SPELL_IRON_SHOT,
+    SPELL_CONJURE_BALL_LIGHTNING,
     SPELL_IOOD,
     SPELL_SPELLFORGED_SERVITOR,
 },
@@ -367,6 +365,13 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SUMMON_LIGHTNING_SPIRE,
     SPELL_CONJURE_BALL_LIGHTNING,
     SPELL_CHAIN_LIGHTNING,
+},
+
+{   // Book of Bombardment
+    SPELL_BOLT_OF_DRAINING,
+	SPELL_BOLT_OF_COLD,
+    SPELL_POISON_ARROW,
+    SPELL_IRON_SHOT,
 },
 
 };

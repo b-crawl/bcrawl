@@ -1845,15 +1845,14 @@ spret cast_ignition(const actor *agent, int pow, bool fail)
 }
 
 static int _discharge_monsters(const coord_def &where, int pow,
-                               const actor &agent)
+                               const actor &agent, int recursions_left)
 {
     actor* victim = actor_at(where);
 
     if (!victim || !victim->alive())
         return 0;
 
-    int damage = (&agent == victim) ? random2(3 + div_rand_round(pow, 15))
-                                    : 1 + random2(5 + div_rand_round(pow, 7));
+    int damage = 1 + div_rand_round(pow, 7);
 
     bolt beam;
     beam.flavour    = BEAM_ELECTRICITY; // used for mons_adjust_flavoured
@@ -1870,6 +1869,7 @@ static int _discharge_monsters(const coord_def &where, int pow,
 
     if (victim->is_player())
     {
+        damage = max(1, damage-1);
         dprf("You: static discharge damage: %d", damage);
         damage = check_your_resists(damage, BEAM_ELECTRICITY,
                                     "static discharge");
@@ -1916,18 +1916,12 @@ static int _discharge_monsters(const coord_def &where, int pow,
 
     // Recursion to give us chain-lightning -- bwr
     // Low power slight chance added for low power characters -- bwr
-    if ((pow * random2(10) >= 40)
+    if (recursions_left > 0)
     {
-        pow /= random_range(2, 3);
-        damage += apply_random_around_square([pow, &agent] (coord_def where2) {
-            return _discharge_monsters(where2, pow, agent);
-        }, where, true, 1);
-    }
-    else if (damage > 0)
-    {
-        // Only printed if we did damage, so that the messages in
-        // cast_discharge() are clean. -- bwr
-        mpr("The lightning grounds out.");
+        pow /= 2;
+        damage += apply_random_around_square([pow, &agent, recursions_left] (coord_def where2) {
+            return _discharge_monsters(where2, pow, agent, recursions_left-1);
+        }, where, true, 2);
     }
 
     return damage;
@@ -1975,13 +1969,14 @@ spret cast_discharge(int pow, const actor &agent, bool fail, bool prompt)
 
     fail_check();
 
-    const int num_targs = 1 + random2(2 + div_rand_round(pow, 20));
+    int num_targs = 2;
+    int recursions = 1;
     const int dam =
-        apply_random_around_square([pow, &agent] (coord_def target) {
-            return _discharge_monsters(target, pow, agent);
+        apply_random_around_square([pow, &agent, recursions] (coord_def target) {
+            return _discharge_monsters(target, pow, agent, recursions);
         }, agent.pos(), true, num_targs);
 
-    dprf("Arcs: %d Damage: %d", num_targs, dam);
+    dprf("Damage: %d", dam);
 
     if (dam > 0)
         scaled_delay(100);

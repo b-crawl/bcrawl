@@ -178,6 +178,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_DISCHARGE,
     SPELL_SHOCK,
     SPELL_SWIFTNESS,
+    SPELL_MEPHITIC_CLOUD,
     SPELL_LIGHTNING_BOLT,
 },
 
@@ -369,7 +370,7 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Bombardment
     SPELL_BOLT_OF_DRAINING,
-	SPELL_BOLT_OF_COLD,
+    SPELL_BOLT_OF_COLD,
     SPELL_POISON_ARROW,
     SPELL_IRON_SHOT,
 },

@@ -136,11 +136,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SUMMON_HYDRA,
 },
 
-#if TAG_MAJOR_VERSION > 34
-{   // Book of Battle
-},
-#endif
-
 {   // Book of Clouds
     SPELL_POISONOUS_VAPOURS,
     SPELL_MEPHITIC_CLOUD,
@@ -212,8 +207,12 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SIMULACRUM,
 },
 
-#if TAG_MAJOR_VERSION == 34
-{   // Book of Control
+{   // Book of Rebukes
+    SPELL_CONFUSE,
+    SPELL_DAZZLING_SPRAY,
+    SPELL_PETRIFY,
+    SPELL_VIOLENT_UNRAVELLING,
+    SPELL_SILENCE,
 },
 
 {   // Book of Battle
@@ -224,7 +223,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_REGENERATION,
     SPELL_OZOCUBUS_ARMOUR,
 },
-#endif
 
 {   // Book of Geomancy
     SPELL_SANDBLAST,
@@ -241,10 +239,12 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SHATTER,
 },
 
-#if TAG_MAJOR_VERSION == 34
-{   // Book of Wizardry
+{   // Book of Bombardment
+    SPELL_BOLT_OF_DRAINING,
+    SPELL_BOLT_OF_COLD,
+    SPELL_POISON_ARROW,
+    SPELL_IRON_SHOT,
 },
-#endif
 
 {   // Book of Power
     SPELL_FULMINANT_PRISM,
@@ -270,10 +270,13 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_INVISIBILITY
 },
 
-#if TAG_MAJOR_VERSION == 34
-{   // Akashic Record
+{   // Book of Lightning
+    SPELL_DISCHARGE,
+    SPELL_LIGHTNING_BOLT,
+    SPELL_SUMMON_LIGHTNING_SPIRE,
+    SPELL_CONJURE_BALL_LIGHTNING,
+    SPELL_CHAIN_LIGHTNING,
 },
-#endif
 
 {   // Book of Debilitation
     SPELL_CORONA,
@@ -350,29 +353,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_HAUNT,
     SPELL_BORGNJORS_REVIVIFICATION,
     SPELL_NECROMUTATION,
-},
-
-{   // Book of Rebukes
-    SPELL_CONFUSE,
-    SPELL_DAZZLING_SPRAY,
-    SPELL_PETRIFY,
-    SPELL_VIOLENT_UNRAVELLING,
-    SPELL_SILENCE,
-},
-
-{   // Book of Lightning
-    SPELL_DISCHARGE,
-    SPELL_LIGHTNING_BOLT,
-    SPELL_SUMMON_LIGHTNING_SPIRE,
-    SPELL_CONJURE_BALL_LIGHTNING,
-    SPELL_CHAIN_LIGHTNING,
-},
-
-{   // Book of Bombardment
-    SPELL_BOLT_OF_DRAINING,
-    SPELL_BOLT_OF_COLD,
-    SPELL_POISON_ARROW,
-    SPELL_IRON_SHOT,
 },
 
 };

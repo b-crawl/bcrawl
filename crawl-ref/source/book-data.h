@@ -72,12 +72,11 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Enchantments
-    SPELL_SILENCE,
     SPELL_BATTLESPHERE,
     SPELL_PIERCING_SHOT,
     SPELL_DEFLECT_MISSILES,
-    SPELL_INFESTATION,
-    SPELL_DISCORD,
+    SPELL_RING_OF_FLAMES,
+    SPELL_TIME_STOP,
 },
 
 {   // Young Poisoner's Handbook
@@ -107,11 +106,9 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Misfortune
-    SPELL_CONFUSE,
-    SPELL_DAZZLING_SPRAY,
-    SPELL_PETRIFY,
-    SPELL_VIOLENT_UNRAVELLING,
     SPELL_ENGLACIATION,
+    SPELL_INFESTATION,
+    SPELL_DISCORD,
     SPELL_RUPTURE,
 },
 
@@ -358,6 +355,14 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_HAUNT,
     SPELL_BORGNJORS_REVIVIFICATION,
     SPELL_NECROMUTATION,
+},
+
+{   // Book of Rebukes
+    SPELL_CONFUSE,
+    SPELL_DAZZLING_SPRAY,
+    SPELL_PETRIFY,
+    SPELL_VIOLENT_UNRAVELLING,
+    SPELL_SILENCE,
 },
 
 };

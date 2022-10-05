@@ -69,6 +69,7 @@ enum book_type
 #if TAG_MAJOR_VERSION == 34
     BOOK_BUGGY_DESTRUCTION,
 #endif
+    BOOK_REBUKES,
     NUM_BOOKS
 };
 

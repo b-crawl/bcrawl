@@ -1108,6 +1108,7 @@ static const char* _book_type_name(int booktype)
     case BOOK_CANTRIPS:               return "Cantrips";
     case BOOK_PARTY_TRICKS:           return "Party Tricks";
     case BOOK_DEBILITATION:           return "Debilitation";
+    case BOOK_REBUKES:                return "Rebukes";
     case BOOK_DRAGON:                 return "the Dragon";
     case BOOK_BURGLARY:               return "Burglary";
     case BOOK_DREAMS:                 return "Dreams";

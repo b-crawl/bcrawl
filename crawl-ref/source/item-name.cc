@@ -1097,14 +1097,8 @@ static const char* _book_type_name(int booktype)
 #endif
     case BOOK_ANNIHILATIONS:          return "Annihilations";
     case BOOK_UNLIFE:                 return "Unlife";
-#if TAG_MAJOR_VERSION == 34
-    case BOOK_CONTROL:                return "Control";
-#endif
     case BOOK_GEOMANCY:               return "Geomancy";
     case BOOK_EARTH:                  return "the Earth";
-#if TAG_MAJOR_VERSION == 34
-    case BOOK_WIZARDRY:               return "Wizardry";
-#endif
     case BOOK_POWER:                  return "Power";
     case BOOK_BOMBARDMENT:            return "Bombardment";
     case BOOK_CANTRIPS:               return "Cantrips";
@@ -1211,34 +1205,32 @@ string sub_type_string(const item_def &item, bool known)
     case OBJ_JEWELLERY: return jewellery_type_name(sub_type);
     case OBJ_POTIONS: return potion_type_name(sub_type);
     case OBJ_BOOKS:
-    {
-        if (sub_type == BOOK_MANUAL)
+        switch(sub_type)
         {
+        case BOOK_MANUAL:
+            {
             if (!known)
                 return "manual";
             string bookname = "manual of ";
             bookname += skill_name(static_cast<skill_type>(item.plus));
             return bookname;
-        }
-        else if (sub_type == BOOK_NECRONOMICON)
-            return "Necronomicon";
-        else if (sub_type == BOOK_GRAND_GRIMOIRE)
-            return "Grand Grimoire";
-#if TAG_MAJOR_VERSION == 34
-        else if (sub_type == BOOK_BUGGY_DESTRUCTION)
-            return "tome of obsoleteness";
-#endif
-        else if (sub_type == BOOK_YOUNG_POISONERS)
-            return "Young Poisoner's Handbook";
-        else if (sub_type == BOOK_FEN)
-            return "Fen Folio";
-#if TAG_MAJOR_VERSION == 34
-        else if (sub_type == BOOK_AKASHIC_RECORD)
-            return "Akashic Record";
-#endif
+            }
+            break;
 
-        return string("book of ") + _book_type_name(sub_type);
-    }
+        case BOOK_NECRONOMICON:
+            return "Necronomicon";
+        case BOOK_GRAND_GRIMOIRE:
+            return "Grand Grimoire";
+        case BOOK_BUGGY_DESTRUCTION:
+            return "tome of obsoleteness";
+        case BOOK_YOUNG_POISONERS:
+            return "Young Poisoner's Handbook";
+        case BOOK_FEN:
+            return "Fen Folio";
+
+        default:
+            return string("book of ") + _book_type_name(sub_type);
+        }
     case OBJ_STAVES: return staff_type_name(static_cast<stave_type>(sub_type));
 #if TAG_MAJOR_VERSION == 34
     case OBJ_RODS:   return "removed rod";

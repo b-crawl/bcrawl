@@ -922,6 +922,7 @@ Causes confusion in all who gaze upon the caster.
 Mephitic Cloud spell
 
 Conjures up a short-lived cloud of noxious fumes, which may cause confusion.
+The sudden creation of the conjured gas is quite loud.
 %%%%
 Mesmerise spell
 

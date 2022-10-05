@@ -70,6 +70,7 @@ enum book_type
     BOOK_BUGGY_DESTRUCTION,
 #endif
     BOOK_REBUKES,
+    BOOK_LIGHTNING,
     NUM_BOOKS
 };
 

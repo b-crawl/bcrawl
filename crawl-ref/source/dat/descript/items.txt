@@ -222,6 +222,10 @@ book of ice
 
 A book of advanced magical spells using the element of Ice.
 %%%%
+book of lightning
+
+A book of magical spells for creating electrical discharges.
+%%%%
 book of maledictions
 
 A book of Hexes, describing spells to confound and weaken.

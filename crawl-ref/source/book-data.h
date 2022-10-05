@@ -91,7 +91,6 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Book of the Tempests
     SPELL_CONJURE_BALL_LIGHTNING,
     SPELL_ICICLE_BURST,
-    SPELL_CHAIN_LIGHTNING,
     SPELL_IGNITION,
     SPELL_TORNADO,
     SPELL_SHATTER,
@@ -180,15 +179,12 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SWIFTNESS,
     SPELL_DISCHARGE,
     SPELL_LIGHTNING_BOLT,
-    SPELL_FREEZING_CLOUD,
 },
 
 {   // Book of the Sky
     SPELL_AIRSTRIKE,
-    SPELL_SUMMON_LIGHTNING_SPIRE,
     SPELL_SILENCE,
     SPELL_DEFLECT_MISSILES,
-    SPELL_CONJURE_BALL_LIGHTNING,
     SPELL_TORNADO,
 },
 
@@ -363,6 +359,14 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_PETRIFY,
     SPELL_VIOLENT_UNRAVELLING,
     SPELL_SILENCE,
+},
+
+{   // Book of Lightning
+    SPELL_DISCHARGE,
+    SPELL_LIGHTNING_BOLT,
+    SPELL_SUMMON_LIGHTNING_SPIRE,
+    SPELL_CONJURE_BALL_LIGHTNING,
+    SPELL_CHAIN_LIGHTNING,
 },
 
 };

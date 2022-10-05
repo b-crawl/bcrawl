@@ -74,7 +74,6 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Book of Enchantments
     SPELL_BATTLESPHERE,
     SPELL_PIERCING_SHOT,
-    SPELL_DEFLECT_MISSILES,
     SPELL_RING_OF_FLAMES,
     SPELL_TIME_STOP,
 },
@@ -268,6 +267,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_BECKONING,
     SPELL_TUKIMAS_DANCE,
     SPELL_INVISIBILITY
+    SPELL_DEFLECT_MISSILES,
 },
 
 {   // Book of Lightning

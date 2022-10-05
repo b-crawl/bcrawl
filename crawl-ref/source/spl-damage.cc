@@ -1852,9 +1852,8 @@ static int _discharge_monsters(const coord_def &where, int pow,
     if (!victim || !victim->alive())
         return 0;
 
-    int damage = (&agent == victim) ? 1 + random2(3 + pow / 15)
-                                    : 3 + random2(5 + pow / 10
-                                                  + (random2(pow) / 10));
+    int damage = (&agent == victim) ? random2(3 + div_rand_round(pow, 15))
+                                    : random2(5 + div_rand_round(pow, 7));
 
     bolt beam;
     beam.flavour    = BEAM_ELECTRICITY; // used for mons_adjust_flavoured
@@ -1871,7 +1870,6 @@ static int _discharge_monsters(const coord_def &where, int pow,
 
     if (victim->is_player())
     {
-        damage = 1 + random2(3 + pow / 15);
         dprf("You: static discharge damage: %d", damage);
         damage = check_your_resists(damage, BEAM_ELECTRICITY,
                                     "static discharge");
@@ -1918,7 +1916,7 @@ static int _discharge_monsters(const coord_def &where, int pow,
 
     // Recursion to give us chain-lightning -- bwr
     // Low power slight chance added for low power characters -- bwr
-    if ((pow >= 10 && !one_chance_in(4)) || (pow >= 3 && one_chance_in(10)))
+    if ((pow * random2(10) >= 40)
     {
         pow /= random_range(2, 3);
         damage += apply_random_around_square([pow, &agent] (coord_def where2) {

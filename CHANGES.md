@@ -82,6 +82,9 @@
   - v1.36.3: Necromancers start with a +0 dagger of pain instead of a +1 dagger.
   - v1.36.4: Fire Elementalists start with a wand of flame with 4 charges.
   - v1.36.4: Skalds start with an amulet of magic regeneration.
+  - v1.37.1: Air Elementalists start with Mephitic Cloud instead of Airstrike.
+  - v1.37.1: Air Elementalists start with 1 Charms skill.
+  - v1.37.1: Air Elementalists start with a potion of resistance.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -160,6 +163,7 @@
   - v1.36: Inner flame explosions no longer anger allies.
   - v1.36.2: Monster breath attacks have a timeout of 2 to 5 turns instead of 1 to 5 turns.
   - v1.36.5: Guaranteed damage reduction (GDR) calculation is reworked. It's now normally proportional to sqrt(dexterity + armour_skill).
+  - v1.37.1: Base health regeneration of players is now 0.1 + HP/600 per turn. This is higher than before at low levels.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -207,8 +211,8 @@
   - v1.27.2: Deep Dwarves that don't start with Elyvilon or Makhleb now start with a potion of ambrosia.
   - v1.27.3: Kobolds have Passive Mapping 2.
   - v1.27.6: The "Thin Skeletal Structure" Demonspawn mutation is replaced by "Flexible Skeleton" which gives +3/+6/+15 dexterity but halves base AC of body armour at level 3.
-  - v1.28: Vine Stalkers and their evolutions have a better Dodging aptitude (+0 -> +1).
-  - v1.28.1: Mummies have a better Hexes aptitude (-1 -> +0).
+  - v1.28: Vine Stalkers and their evolutions have a better Dodging aptitude. (+0 -> +1)
+  - v1.28.1: Mummies have a better Hexes aptitude. (-1 -> +0)
   - v1.28.1: White draconian breath always hits.
   - v1.30: To balance high scores across species, felid turn counts are treated as 1000 higher than for other species for scoring purposes.
   - v1.31.1: Merfolk gain 1 dexterity every 3 levels, and have -4 Shields aptitude.
@@ -291,7 +295,6 @@
   - v1.26.2: Petrify has a spell power multiplier for players.
   - v1.27: If Flaming Arrows is active but the player has insufficient mana, and the player fires, the effect activates one more time and the duration ends.
   - v1.27.2: Controlled Blink is level 7 and its range scales with power^2.
-  - v1.27.6: Spectral Weapons can see invisible.
   - v1.28.2: Agony is level 4.
   - v1.28.3: Irradiate damage is affected by monster AC.
   - v1.30: Spectral weapon AC and EV are reworked: AC is multiplied by weapon base damage, and EV is divided by weapon base delay.
@@ -317,6 +320,15 @@
   - v1.36.3: Pain and Animate Skeleton are replaced for players by Necrotize, which is the same as Pain but creates a zombie when it kills a creature.
   - v1.36.3: The number of simulacra created by Simulacrum no longer depends on corpse properties.
   - v1.37: Borgnjor's Vile Clutch can't affect flying monsters.
+  - v1.37.1: Static Discharge is level 1, always arcs to 2 adjacent targets, and always arcs from each initial target to 2 adjacent targets. Its damage is adjusted, and it creates more noise.
+  - v1.37.1: Shock is level 2 but has a higher power cap.
+  - v1.37.1: Lightning Bolt is level 4 but has shorter range at low power.
+  - v1.37.1: Spectral Weapons can see invisible.
+  - v1.37.1: Freezing Cloud is level 5 but produces fewer clouds at low power.
+  - v1.37.1: Steam Barrier is level 5.
+  - v1.37.1: Icicle Burst has lower accuracy (7 -> 5).
+  - v1.37.1: Irradiate causes the Sap Magic status for 8 to 12 turns, which increases spell failure chance when spells are cast.
+  - v1.37.1: Summon Ice Beast summon duration is always 2, the same as Summon Mana Viper, instead of 2 to 4.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -493,7 +505,7 @@
   - v1.17.2: Lamps of fire scale somewhat better with Evocations skill.
   - v1.17.2: Blowguns have higher base delay. (10 -> 12)
   - v1.18: The fustibalus has higher base damage (10 -> 11) and base delay (14 -> 15).
-  - v1.18: Executioner's axes have lower base delay (20 -> 19).
+  - v1.18: Executioner's axes have lower base delay. (20 -> 19)
   - v1.19.1: Bucklers can be equipped and unequipped in 1 turn.
   - v1.19.1: A staff of power gives less (15 -> 12) extra max mana.
   - v1.20: Scrolls of acquirement give a choice of specific items instead of categories.
@@ -515,7 +527,7 @@
   - v1.23.2: Health regeneration from potions of ambrosia scales with experience level, with an increased amount over level 8.
   - v1.23.4: Some bows have the new Seeking brand, which makes weapons as accurate as if the user has 50 skill and 50 Fighting.
   - v1.24: Silver javelins are no longer generated.
-  - v1.24: Exploding ammunition has higher explosion damage (2d5 -> 3d8).
+  - v1.24: Exploding ammunition has higher explosion damage. (2d5 -> 3d8)
   - v1.24: Steel ammunition is changed: instead of having 30% higher item base damage, it has 80% higher total base damage, but has a higher base delay (15 -> 20) and min delay (0.7 -> 1.2).
   - v1.25: Daggers have a bonus of (unarmed/3) to base damage.
   - v1.26.2: Plain tomahawks are replaced by poisoned tomahawks.
@@ -533,6 +545,8 @@
   - v1.36.4: Amulets of magic regeneration give 0.02 \* (player level + 1) mana regeneration instead of a flat 0.25 mana regeneration.
   - v1.36.4: Lightning rods have a chance to blind hit monsters, based on HD and damage before resistances.
   - v1.36.5: Evoked flight no longer expires.
+  - v1.37.1: Hand crossbow damage scales with dexterity instead of strength.
+  - v1.37.1: Hand crossbows have higher base damage. (12 -> 13)
 
 #### Removed Items
   - Amulet of Harm
@@ -586,7 +600,7 @@
   - v1.35.5: Devastator now has enchantment equal to Maces & Flails skill. Its explosions are now less common but stronger, with chance scaling with Maces & Flails skill.
   - v1.35.5: The Captain's Cutlass is a scimitar instead of a rapier.
   - v1.36.1: The Staff of Wucad Mu is reworked: it's a +9 vorpal staff with +20 mana and *Drain, and it can be evoked to regain mana by abjuring hostile summons.
-  - v1.36.2: The Fencer's Gloves have a higher riposte chance (1/3 -> 2/3).
+  - v1.36.2: The Fencer's Gloves have a higher riposte chance. (1/3 -> 2/3)
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

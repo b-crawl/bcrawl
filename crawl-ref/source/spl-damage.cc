@@ -1853,7 +1853,7 @@ static int _discharge_monsters(const coord_def &where, int pow,
         return 0;
 
     int damage = (&agent == victim) ? random2(3 + div_rand_round(pow, 15))
-                                    : random2(5 + div_rand_round(pow, 7));
+                                    : 1 + random2(5 + div_rand_round(pow, 7));
 
     bolt beam;
     beam.flavour    = BEAM_ELECTRICITY; // used for mons_adjust_flavoured
@@ -1975,7 +1975,7 @@ spret cast_discharge(int pow, const actor &agent, bool fail, bool prompt)
 
     fail_check();
 
-    const int num_targs = 1 + random2(random_range(1, 3) + pow / 20);
+    const int num_targs = 1 + random2(2 + div_rand_round(pow, 20));
     const int dam =
         apply_random_around_square([pow, &agent] (coord_def target) {
             return _discharge_monsters(target, pow, agent);

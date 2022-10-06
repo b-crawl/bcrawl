@@ -266,7 +266,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_APPORTATION,
     SPELL_BECKONING,
     SPELL_TUKIMAS_DANCE,
-    SPELL_INVISIBILITY
+    SPELL_INVISIBILITY,
     SPELL_DEFLECT_MISSILES,
 },
 

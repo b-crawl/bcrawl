@@ -137,6 +137,10 @@ book of beasts
 A book of spells focused on the summoning of beasts. Its pages nip at careless
 readers' fingers.
 %%%%
+book of bombardment
+
+A book of spells that conjure a beam or launch a projectile.
+%%%%
 book of burglary
 
 A book containing many diverse spells useful for theft, breaking and entering,
@@ -178,8 +182,8 @@ grotesque art depicting scenes of disgusting decay.
 %%%%
 book of debilitation
 
-A spellbook containing Hexes that obstruct and impede, compiled by rebels
-fighting an empire long-since passed.
+A spellbook containing Hexes compiled by rebels fighting an empire long-since
+passed.
 %%%%
 book of dreams
 
@@ -188,8 +192,8 @@ and cryptic digressions to describe spells drawn from the mystic's visions.
 %%%%
 book of enchantments
 
-A spellbook containing an assortment of powerful Hexes and Charms, which
-sparkles and shimmers as the pages are flipped.
+A spellbook containing an assortment of powerful Charms magic, which sparkles
+and shimmers as the pages are flipped.
 %%%%
 book of fire
 
@@ -222,6 +226,10 @@ book of ice
 
 A book of advanced magical spells using the element of Ice.
 %%%%
+book of lightning
+
+A book of magical spells for creating electrical discharges.
+%%%%
 book of maledictions
 
 A book of Hexes, describing spells to confound and weaken.
@@ -251,6 +259,10 @@ book of power
 
 A book of powerful magic spells, crackling and shuddering with barely-contained
 energies.
+%%%%
+book of rebukes
+
+A book containing spells meant to exploit weaknesses to bring mighty foes low.
 %%%%
 book of spatial translocations
 

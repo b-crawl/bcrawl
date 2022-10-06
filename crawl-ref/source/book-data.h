@@ -49,16 +49,16 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Book of Fire
     SPELL_FIREBALL,
     SPELL_BOLT_OF_MAGMA,
-    SPELL_BOLT_OF_FIRE,
     SPELL_RING_OF_FLAMES,
+    SPELL_BOLT_OF_FIRE,
     SPELL_IGNITION,
 },
 
 {   // Book of Ice
     SPELL_ENGLACIATION,
+    SPELL_FREEZING_CLOUD,
     SPELL_OZOCUBUS_REFRIGERATION,
     SPELL_BOLT_OF_COLD,
-    SPELL_FREEZING_CLOUD,
     SPELL_SIMULACRUM,
 },
 
@@ -72,12 +72,10 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Enchantments
-    SPELL_SILENCE,
     SPELL_BATTLESPHERE,
     SPELL_PIERCING_SHOT,
-    SPELL_DEFLECT_MISSILES,
-    SPELL_INFESTATION,
-    SPELL_DISCORD,
+    SPELL_RING_OF_FLAMES,
+    SPELL_TIME_STOP,
 },
 
 {   // Young Poisoner's Handbook
@@ -90,9 +88,8 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of the Tempests
-    SPELL_LIGHTNING_BOLT,
+    SPELL_CONJURE_BALL_LIGHTNING,
     SPELL_ICICLE_BURST,
-    SPELL_CHAIN_LIGHTNING,
     SPELL_IGNITION,
     SPELL_TORNADO,
     SPELL_SHATTER,
@@ -107,11 +104,9 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Misfortune
-    SPELL_CONFUSE,
-    SPELL_DAZZLING_SPRAY,
-    SPELL_PETRIFY,
-    SPELL_VIOLENT_UNRAVELLING,
     SPELL_ENGLACIATION,
+    SPELL_INFESTATION,
+    SPELL_DISCORD,
     SPELL_RUPTURE,
 },
 
@@ -139,11 +134,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_POISON_ARROW,
     SPELL_SUMMON_HYDRA,
 },
-
-#if TAG_MAJOR_VERSION > 34
-{   // Book of Battle
-},
-#endif
 
 {   // Book of Clouds
     SPELL_POISONOUS_VAPOURS,
@@ -179,18 +169,17 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Air
+    SPELL_DISCHARGE,
     SPELL_SHOCK,
     SPELL_SWIFTNESS,
-    SPELL_DISCHARGE,
-    SPELL_AIRSTRIKE,
+    SPELL_MEPHITIC_CLOUD,
     SPELL_LIGHTNING_BOLT,
 },
 
 {   // Book of the Sky
-    SPELL_SUMMON_LIGHTNING_SPIRE,
+    SPELL_AIRSTRIKE,
     SPELL_SILENCE,
     SPELL_DEFLECT_MISSILES,
-    SPELL_CONJURE_BALL_LIGHTNING,
     SPELL_TORNADO,
 },
 
@@ -217,8 +206,12 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SIMULACRUM,
 },
 
-#if TAG_MAJOR_VERSION == 34
-{   // Book of Control
+{   // Book of Rebukes
+    SPELL_CONFUSE,
+    SPELL_DAZZLING_SPRAY,
+    SPELL_PETRIFY,
+    SPELL_VIOLENT_UNRAVELLING,
+    SPELL_SILENCE,
 },
 
 {   // Book of Battle
@@ -229,7 +222,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_REGENERATION,
     SPELL_OZOCUBUS_ARMOUR,
 },
-#endif
 
 {   // Book of Geomancy
     SPELL_SANDBLAST,
@@ -246,16 +238,16 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SHATTER,
 },
 
-#if TAG_MAJOR_VERSION == 34
-{   // Book of Wizardry
+{   // Book of Bombardment
+    SPELL_BOLT_OF_DRAINING,
+    SPELL_BOLT_OF_COLD,
+    SPELL_POISON_ARROW,
+    SPELL_IRON_SHOT,
 },
-#endif
 
 {   // Book of Power
     SPELL_FULMINANT_PRISM,
-    SPELL_BOLT_OF_DRAINING,
-    SPELL_POISON_ARROW,
-    SPELL_IRON_SHOT,
+    SPELL_CONJURE_BALL_LIGHTNING,
     SPELL_IOOD,
     SPELL_SPELLFORGED_SERVITOR,
 },
@@ -274,13 +266,17 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_APPORTATION,
     SPELL_BECKONING,
     SPELL_TUKIMAS_DANCE,
-    SPELL_INVISIBILITY
+    SPELL_INVISIBILITY,
+    SPELL_DEFLECT_MISSILES,
 },
 
-#if TAG_MAJOR_VERSION == 34
-{   // Akashic Record
+{   // Book of Lightning
+    SPELL_DISCHARGE,
+    SPELL_LIGHTNING_BOLT,
+    SPELL_SUMMON_LIGHTNING_SPIRE,
+    SPELL_CONJURE_BALL_LIGHTNING,
+    SPELL_CHAIN_LIGHTNING,
 },
-#endif
 
 {   // Book of Debilitation
     SPELL_CORONA,

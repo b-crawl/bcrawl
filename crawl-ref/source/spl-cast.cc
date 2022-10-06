@@ -1176,6 +1176,7 @@ static unique_ptr<targeter> _spell_targeter(spell_type spell, int pow,
     case SPELL_FIRE_STORM:
         return make_unique<targeter_smite>(&you, range, 2, pow > 76 ? 3 : 2);
     case SPELL_FREEZING_CLOUD:
+        return make_unique<targeter_cloud>(&you, range, 1 + pow*2/25, 1 + (pow*2+24)/25);
     case SPELL_POISONOUS_CLOUD:
     case SPELL_HOLY_BREATH:
         return make_unique<targeter_cloud>(&you, range);
@@ -1333,6 +1334,26 @@ vector<string> _desc_target_mr(const monster_info& mi)
     return descs;
 }
 
+static vector<string> _desc_insubstantial(const monster_info& mi)
+{
+    vector<string> descs;
+    if (mons_class_flag(mi.type, M_INSUBSTANTIAL))
+        descs.push_back("insubstantial");
+
+    return descs;
+}
+
+static vector<string> _desc_clutch_immune(const monster_info& mi)
+{
+    vector<string> descs;
+    if (mons_class_flag(mi.type, M_FLIES))
+        descs.push_back("flying");
+    if (mons_class_flag(mi.type, M_INSUBSTANTIAL))
+        descs.push_back("insubstantial");
+
+    return descs;
+}
+
 /**
  * Targets and fires player-cast spells & spell-like effects.
  *
@@ -1428,6 +1449,12 @@ spret your_spells(spell_type spell, int powc, bool allow_fail,
             break;
         case SPELL_MEPHITIC_CLOUD:
             additional_desc = bind(_desc_meph_chance, placeholders::_1);
+            break;
+        case SPELL_STICKY_FLAME:
+            additional_desc = bind(_desc_insubstantial, placeholders::_1);
+            break;
+        case SPELL_BORGNJORS_VILE_CLUTCH:
+            additional_desc = bind(_desc_clutch_immune, placeholders::_1);
             break;
         default: break;
         }

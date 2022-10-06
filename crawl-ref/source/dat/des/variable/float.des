@@ -4944,20 +4944,14 @@ ENDMAP
 
 #############################################################################
 # Oklob gauntlet
-# average of 2.2 oklobs, and at most 5 of them
+# 3 to 4 oklobs guarding stairs
 NAME:    dpeg_oklob_gauntlet
-DEPTH:   Depths, !Depths:$, Lair, Snake, Elf
+DEPTH:   Lair:2-
 ORIENT:  float
-MONS:    plant, oklob plant, thorn hunter, acid blob
+MONS:    plant, oklob plant
 SHUFFLE: ]}) / def
-NSUBST:  ' = 1:2 / 4 = 11122 / *:1
+NSUBST:  ' = 3:2 / 1:12 / *:1
 NSUBST:  " = 1:W / * = wwW, ` = 1:W / * = wwW
-SUBST:   def = |*
-: if you.in_branch("Depths") then
-NSUBST:  3 = 1:3 / 1:4 / *:34...
-: else
-SUBST:   3 = .
-: end
 MAP
 xxxxxxxxxxxxx
 xxxxx]})xxxxx

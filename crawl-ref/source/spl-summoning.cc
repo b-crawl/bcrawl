@@ -317,7 +317,7 @@ spret cast_summon_ice_beast(int pow, god_type god, bool fail)
         return spret::abort;
     
     fail_check();
-    const int dur = min(2 + (random2(pow) / 4), 4);
+    const int dur = 2;
 
     mgen_data ice_beast = _pal_data(MONS_ICE_BEAST, dur, god,
                                     SPELL_SUMMON_ICE_BEAST);

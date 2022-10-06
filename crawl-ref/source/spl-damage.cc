@@ -364,6 +364,9 @@ spret cast_chain_spell(spell_type spell_cast, int pow,
 
         beam.source = source;
         beam.target = target;
+        beam.draw_delay = 5;
+        beam.explode_delay = 25;
+        
         switch (spell_cast)
         {
             case SPELL_CHAIN_LIGHTNING:
@@ -1389,7 +1392,12 @@ spret cast_irradiate(int powc, actor* who, bool fail)
     }, who->pos(), true, 8);
 
     if (who->is_player())
-        contaminate_player(1000 + random2(500));
+    {
+        contaminate_player(700 + random2(300));
+        mprf(MSGCH_WARN, "Your magic feels %stainted.",
+             you.duration[DUR_SAP_MAGIC] ? "more " : "");
+        you.increase_duration(DUR_SAP_MAGIC, random_range(8, 12), 50);
+    }
     return spret::success;
 }
 
@@ -1837,16 +1845,14 @@ spret cast_ignition(const actor *agent, int pow, bool fail)
 }
 
 static int _discharge_monsters(const coord_def &where, int pow,
-                               const actor &agent)
+                               const actor &agent, int recursions_left)
 {
     actor* victim = actor_at(where);
 
     if (!victim || !victim->alive())
         return 0;
 
-    int damage = (&agent == victim) ? 1 + random2(3 + pow / 15)
-                                    : 3 + random2(5 + pow / 10
-                                                  + (random2(pow) / 10));
+    int damage = 1 + div_rand_round(pow, 7);
 
     bolt beam;
     beam.flavour    = BEAM_ELECTRICITY; // used for mons_adjust_flavoured
@@ -1863,7 +1869,7 @@ static int _discharge_monsters(const coord_def &where, int pow,
 
     if (victim->is_player())
     {
-        damage = 1 + random2(3 + pow / 15);
+        damage = max(1, damage-1);
         dprf("You: static discharge damage: %d", damage);
         damage = check_your_resists(damage, BEAM_ELECTRICITY,
                                     "static discharge");
@@ -1910,18 +1916,12 @@ static int _discharge_monsters(const coord_def &where, int pow,
 
     // Recursion to give us chain-lightning -- bwr
     // Low power slight chance added for low power characters -- bwr
-    if ((pow >= 10 && !one_chance_in(4)) || (pow >= 3 && one_chance_in(10)))
+    if (recursions_left > 0)
     {
-        pow /= random_range(2, 3);
-        damage += apply_random_around_square([pow, &agent] (coord_def where2) {
-            return _discharge_monsters(where2, pow, agent);
-        }, where, true, 1);
-    }
-    else if (damage > 0)
-    {
-        // Only printed if we did damage, so that the messages in
-        // cast_discharge() are clean. -- bwr
-        mpr("The lightning grounds out.");
+        pow /= 2;
+        damage += apply_random_around_square([pow, &agent, recursions_left] (coord_def where2) {
+            return _discharge_monsters(where2, pow, agent, recursions_left-1);
+        }, where, true, 2);
     }
 
     return damage;
@@ -1969,13 +1969,14 @@ spret cast_discharge(int pow, const actor &agent, bool fail, bool prompt)
 
     fail_check();
 
-    const int num_targs = 1 + random2(random_range(1, 3) + pow / 20);
+    int num_targs = 2;
+    int recursions = 1;
     const int dam =
-        apply_random_around_square([pow, &agent] (coord_def target) {
-            return _discharge_monsters(target, pow, agent);
+        apply_random_around_square([pow, &agent, recursions] (coord_def target) {
+            return _discharge_monsters(target, pow, agent, recursions);
         }, agent.pos(), true, num_targs);
 
-    dprf("Arcs: %d Damage: %d", num_targs, dam);
+    dprf("Damage: %d", dam);
 
     if (dam > 0)
         scaled_delay(100);
@@ -3075,6 +3076,7 @@ spret cast_scattershot(const actor *caster, int pow, const coord_def &pos,
     beam.source_name = caster->name(DESC_PLAIN, true);
     zappy(ZAP_SCATTERSHOT, pow, false, beam);
     beam.aux_source  = beam.name;
+    beam.draw_delay = 5;   // in ms, 1/3 the default
 
     if (!caster->is_player())
         beam.damage   = dice_def(3, 4 + (pow / 18));
@@ -3157,10 +3159,11 @@ spret cast_icicle_burst(const actor *caster, int pow, const coord_def &pos,
     beam.source_name = caster->name(DESC_PLAIN, true);
     zappy(ZAP_ICICLE_BURST, pow, false, beam);
     beam.aux_source  = beam.name;
+    beam.draw_delay = 5;   // in ms, 1/3 the default
 
     int die_size = 8 + div_rand_round(pow, 10);
     beam.damage = dice_def(2, die_size);
-    beam.hit = 7;
+    beam.hit = 5;
 
     // Choose a random number of 'pellets' to fire for each beam in the spread.
     // total pellets has O(beam_count^2)

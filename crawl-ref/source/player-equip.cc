@@ -346,12 +346,8 @@ static void _unequip_artefact_effect(item_def &item,
     notify_stat_change(STAT_INT, -proprt[ARTP_INTELLIGENCE], true);
     notify_stat_change(STAT_DEX, -proprt[ARTP_DEXTERITY],    true);
 
-    if (proprt[ARTP_FLY] != 0 && you.cancellable_flight()
-        && !you.evokable_flight())
-    {
-        you.duration[DUR_FLIGHT] = 0;
-        land_player();
-    }
+    if (proprt[ARTP_FLY] != 0)
+        lose_permafly_source();
 
     if (proprt[ARTP_INVISIBLE] != 0)
         _unequip_invis();

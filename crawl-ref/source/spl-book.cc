@@ -149,7 +149,6 @@ int book_rarity(book_type which_book)
     switch (which_book)
     {
     case BOOK_MINOR_MAGIC:
-    case BOOK_MISFORTUNE:
     case BOOK_CANTRIPS:
         return 1;
 
@@ -174,19 +173,24 @@ int book_rarity(book_type which_book)
         return 5;
 
     case BOOK_CLOUDS:
-    case BOOK_POWER:
+    case BOOK_LIGHTNING:
+    case BOOK_REBUKES:
         return 6;
 
     case BOOK_ENCHANTMENTS:
     case BOOK_PARTY_TRICKS:
+    case BOOK_POWER:
+    case BOOK_BOMBARDMENT:
         return 7;
 
     case BOOK_TRANSFIGURATIONS:
     case BOOK_BEASTS:
+    case BOOK_MISFORTUNE:
+    case BOOK_ALCHEMY:
+    case BOOK_ICE:
         return 8;
 
     case BOOK_FIRE:
-    case BOOK_ICE:
     case BOOK_SKY:
     case BOOK_EARTH:
     case BOOK_UNLIFE:
@@ -199,7 +203,6 @@ int book_rarity(book_type which_book)
         return 11;
 
     case BOOK_BURGLARY:
-    case BOOK_ALCHEMY:
     case BOOK_DREAMS:
     case BOOK_FEN:
         return 12;

@@ -812,8 +812,10 @@ Irradiate spell
 Transmutes an ultra-thin layer of the caster's skin (or equivalent) directly
 into pure magical energy, blasting adjacent creatures. It heavily deforms
 its targets, weakening them and reducing their armour. The caster is not left
-entirely unaffected; some of the magic lingers, enough to leave them
-dangerously contaminated after a few castings.
+entirely unaffected: their magic is destabilized, and casting further spells
+shortly afterwards will increase the risk of their spells failing. Also, some
+of the magic lingers, enough to leave the caster dangerously contaminated after
+several castings.
 %%%%
 Iskenderun's Battlesphere spell
 
@@ -920,6 +922,7 @@ Causes confusion in all who gaze upon the caster.
 Mephitic Cloud spell
 
 Conjures up a short-lived cloud of noxious fumes, which may cause confusion.
+The sudden creation of the conjured gas is quite loud.
 %%%%
 Mesmerise spell
 
@@ -1345,9 +1348,11 @@ Causes the caster to move across terrain more rapidly for a short duration.
 %%%%
 Static Discharge spell
 
-Causes chaotic movement of electrical charges between creatures adjacent to the caster.
-These charges may arc to other adjacent creatures, or back to the caster, before eventually grounding
-out. Damage from these discharges bypasses armour, and is reduced when arcing to the caster.
+Causes chaotic movement of electrical charges around up to two creatures
+adjacent to the caster. These discharges will arc to up to two adjacent targets
+before grounding out. Damage from these discharges bypasses armour, and is
+slightly reduced when arcing to the caster. The damage dealt increases with the
+spell's power, but its other properties are unaffected.
 %%%%
 Statue Form spell
 

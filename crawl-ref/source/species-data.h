@@ -411,8 +411,8 @@ static const map<species_type, species_def> species_data =
     HT_LAND, US_SEMI_UNDEAD, SIZE_MEDIUM,
     11, 6, 8, // 25
     { STAT_STR }, 4,
-    { { MUT_CARNIVOROUS, 1, 1 }, { MUT_FAST, 2, 1 }, { MUT_CLAWS, 1, 1 },
-      { MUT_NEGATIVE_ENERGY_RESISTANCE, 1, 1 },
+    { { MUT_CARNIVOROUS, 1, 1 }, { MUT_FAST, 1, 1 }, { MUT_HOP, 1, 1},
+      { MUT_CLAWS, 1, 1 }, { MUT_NEGATIVE_ENERGY_RESISTANCE, 1, 1 },
       { MUT_HALF_TORMENT_RESISTANCE, 1, 1 }, },
     { "Eating raw meat heals you." },
     { },

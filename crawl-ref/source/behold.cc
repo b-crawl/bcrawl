@@ -252,8 +252,11 @@ bool player::possible_beholder(const monster* mon) const
     return mon && mon->alive() && !mon->submerged()
         && cell_see_cell(pos(), mon->pos(), LOS_SOLID_SEE) && mon->see_cell_no_trans(pos())
         && !mon->wont_attack() && !mon->pacified()
-        && ((mons_is_siren_beholder(mon->type)
-             || mon->has_spell(SPELL_MESMERISE))
+        && (
+            you.species == SP_GHOUL
+            || player_equip_unrand(UNRAND_DEMON_AXE)
+            || (
+            (mons_is_siren_beholder(mon->type) || mon->has_spell(SPELL_MESMERISE))
             && !silenced(pos())
             && !mon->is_silenced()
             && !mon->confused()
@@ -261,5 +264,6 @@ bool player::possible_beholder(const monster* mon) const
             && !mon->berserk_or_insane()
             && !mons_is_fleeing(*mon)
             && !is_sanctuary(pos())
-          || player_equip_unrand(UNRAND_DEMON_AXE));
+            )
+            );
 }

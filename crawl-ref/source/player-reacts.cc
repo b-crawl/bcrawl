@@ -838,49 +838,41 @@ static void _mesmerise_ghoul_players(int time_taken)
     if (you.species != SP_GHOUL)
         return;
 
-	if (you.hp <= (you.hp_max * 3) / 4)
-		return;
-	
-	if (!x_chance_in_y(time_taken, 25))
-		return;
+    if (you.hp <= (you.hp_max * 3) / 4)
+        return;
+    
+    if (!x_chance_in_y(time_taken, 25))
+        return;
 
-	// based on obsidian axe
-	monster *mon = nullptr;
+    // based on obsidian axe
+    monster *mon = nullptr;
     for (distance_iterator di(you.pos(), true, true, LOS_RADIUS); di; ++di)
     {
         mon = monster_at(*di);
         if (mon && you.can_see(*mon)
             && you.possible_beholder(mon)
             && mons_is_threatening(*mon)
-            && mon->corpse_thingy != CE_NOCORPSE)
+            && determine_chunk_effect(mons_corpse_effect(mon->type)) == CE_CLEAN)
         {
             break;
         }
     }
-	
-	if (mon)
-	{
-    monster& closest = *mon;
-
-    if (!you.beheld_by(closest))
+    
+    if (mon)
     {
-        mprf("Visions of eating %s fill your mind.",
-				closest.name(DESC_THE).c_str());
+        monster& closest = *mon;
 
-        // To avoid trapping the player, other beholders are removed.
-        you.clear_beholders();
+        if (!you.beheld_by(closest))
+        {
+            // To avoid trapping the player, other beholders are removed.
+            you.clear_beholders();
+                        
+            you.add_beholder(closest, true);
+            
+            mprf("Visions of eating %s fill your mind.",
+                    closest.name(DESC_THE).c_str());
+        }
     }
-
-	/*
-    if (you.confused())
-    {
-        mpr("Your confusion fades away as the thirst for blood takes over your mind.");
-        you.duration[DUR_CONF] = 0;
-    }
-	*/
-
-    you.add_beholder(closest, true);
-	}
 
 }
 

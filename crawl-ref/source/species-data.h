@@ -414,7 +414,7 @@ static const map<species_type, species_def> species_data =
     { { MUT_CARNIVOROUS, 1, 1 }, { MUT_FAST, 2, 1 }, { MUT_CLAWS, 1, 1 },
       { MUT_NEGATIVE_ENERGY_RESISTANCE, 1, 1 },
       { MUT_HALF_TORMENT_RESISTANCE, 1, 1 }, },
-    { "You heal from eating raw meat." },
+    { "Eating raw meat heals you." },
     { },
     { JOB_FIGHTER, JOB_GLADIATOR, JOB_MONK, JOB_ABYSSAL_KNIGHT,
       JOB_NECROMANCER, JOB_ENCHANTER },

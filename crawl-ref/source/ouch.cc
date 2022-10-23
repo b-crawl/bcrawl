@@ -950,7 +950,7 @@ void ouch(int dam, kill_method_type death_type, mid_t source, const char *aux,
             if (drain_amount > 0)
                 drain_player(drain_amount, true, true);
             
-            if (you.species == SP_GHOUL)
+            if (you.species == SP_GHOUL && you.beheld())
             {
                 int threshold_hp = (you.hp_max * 3) / 4;
                 if (you.hp <= threshold_hp && you.hp + dam > threshold_hp)

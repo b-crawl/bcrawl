@@ -949,6 +949,16 @@ void ouch(int dam, kill_method_type death_type, mid_t source, const char *aux,
             }
             if (drain_amount > 0)
                 drain_player(drain_amount, true, true);
+            
+            if (you.species == SP_GHOUL)
+            {
+                int threshold_hp = (you.hp_max * 3) / 4;
+                if (you.hp <= threshold_hp && you.hp + dam > threshold_hp)
+                {
+                    mpr("Your self-preservation overcomes your need to hunt.");
+                    you.clear_beholders();
+                }
+            }
         }
         if (you.hp > 0)
           return;

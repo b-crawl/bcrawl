@@ -426,23 +426,15 @@ static const mutation_def mut_data[] =
   {"You no longer feel jittery.", "", ""},
 },
 
-#if TAG_MAJOR_VERSION == 34
-{ MUT_STRONG_STIFF, 0, 3, mutflag::good, false,
-  "strong stiff",
+{ MUT_HALF_TORMENT_RESISTANCE, 0, 1, mutflag::good, false,
+  "partial torment resistance",
 
-  {"Your muscles are strong, but stiff. (Str +1, Dex -1)",
-   "Your muscles are very strong, but stiff. (Str +2, Dex -2)",
-   "Your muscles are extremely strong, but stiff. (Str +3, Dex -3)"},
-
-  {"Your muscles feel sore.",
-   "Your muscles feel sore.",
-   "Your muscles feel sore."},
-
-  {"Your muscles feel loose.",
-   "Your muscles feel loose.",
-   "Your muscles feel loose."},
+  {"You are less affected by unholy pain and torment.", "", ""},
+  {"You feel a strange anaesthesia.", "", ""},
+  {"", "", ""},
 },
 
+#if TAG_MAJOR_VERSION == 34
 { MUT_FLEXIBLE_WEAK, 0, 3, mutflag::good, false,
   "flexible weak",
 

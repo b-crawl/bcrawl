@@ -4879,7 +4879,7 @@ void bolt::affect_monster(monster* mon)
         return;
     }
 
-    if (is_explosion && !in_explosion_phase)
+    if (is_explosion && !in_explosion_phase && !pierce)
     {
         // It hit a monster, so the beam should terminate.
         // Don't actually affect the monster; the explosion

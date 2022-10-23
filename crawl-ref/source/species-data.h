@@ -417,8 +417,8 @@ static const map<species_type, species_def> species_data =
     { "Eating raw meat heals you." },
     { },
     { JOB_FIGHTER, JOB_GLADIATOR, JOB_MONK, JOB_ABYSSAL_KNIGHT,
-      JOB_NECROMANCER, JOB_ENCHANTER },
-    { SK_UNARMED_COMBAT, SK_BOWS, SK_CROSSBOWS, SK_SLINGS },
+      JOB_NECROMANCER },
+    { SK_UNARMED_COMBAT, SK_BOWS, SK_CROSSBOWS },
 } },
 
 { SP_GNOLL, {

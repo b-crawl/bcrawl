@@ -60,8 +60,8 @@ Highly curious, they gain experience for seeing enemies, not for defeating them.
 %%%%
 Ghoul
 
-Humanoids cursed with endless hunger by a magical contagion. When uninjured,
-they may become mesmerized by nearby walking meat.
+Humanoids cursed with endless hunger by a necromantic contagion. When
+uninjured, they may become mesmerised by nearby walking meat.
 %%%%
 Gargoyle
 

@@ -1265,6 +1265,8 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
         if (temp && you.hp_max < 21)
             return "you lack the resilience to cast this spell.";
         // Prohibited to all undead.
+        if (you.species == SP_GHOUL)
+            break;
         if (you.undead_state(temp))
             return "you're too dead.";
         if (you.species == SP_ENT)
@@ -1281,6 +1283,8 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
         break;
     case SPELL_NECROMUTATION:
         // only prohibited to actual undead, not lichformed players
+        if (you.species == SP_GHOUL)
+            return "that would make you unable to eat meat.";
         if (you.undead_state(false))
             return "you're too dead.";
         if (you.species == SP_ENT)

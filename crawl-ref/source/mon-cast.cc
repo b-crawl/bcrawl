@@ -166,7 +166,6 @@ struct mons_spell_logic
 };
 
 static bool _always_worthwhile(const monster &caster) { return true; }
-static bool _caster_has_foe(const monster &caster) { return caster.foe != 0; }
 static mons_spell_logic _conjuration_logic(spell_type spell);
 static mons_spell_logic _hex_logic(spell_type spell,
                                    function<bool(const monster&)> extra_logic

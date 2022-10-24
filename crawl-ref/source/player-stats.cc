@@ -313,10 +313,6 @@ static int _strength_modifier(bool innate_only)
     // mutations
     result += 2 * (_mut_level(MUT_STRONG, innate_only)
                    - _mut_level(MUT_WEAK, innate_only));
-#if TAG_MAJOR_VERSION == 34
-    result += _mut_level(MUT_STRONG_STIFF, innate_only)
-              - _mut_level(MUT_FLEXIBLE_WEAK, innate_only);
-#endif
 
     return result;
 }

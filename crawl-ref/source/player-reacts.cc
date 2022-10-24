@@ -833,28 +833,47 @@ static void _decrement_durations()
             _decrement_simple_duration((duration_type) i, delay);
 }
 
-/**
- * Handles player ghoul rotting over time.
- */
-static void _rot_ghoul_players()
+static void _mesmerise_ghoul_players(int time_taken)
 {
     if (you.species != SP_GHOUL)
         return;
 
-    int resilience = 400;
-    if (have_passive(passive_t::slow_metabolism))
-        resilience = resilience * 3 / 2;
+    if (you.hp <= (you.hp_max * 3) / 4)
+        return;
+    
+    if (!x_chance_in_y(time_taken, 25))
+        return;
 
-    // Faster rotting when hungry.
-    if (you.hunger_state < HS_SATIATED)
-        resilience >>= HS_SATIATED - you.hunger_state;
-
-    if (one_chance_in(resilience))
+    // based on obsidian axe
+    monster *mon = nullptr;
+    for (distance_iterator di(you.pos(), true, true, LOS_RADIUS); di; ++di)
     {
-        dprf("rot rate: 1/%d", resilience);
-        mprf(MSGCH_WARN, "You feel your flesh rotting away.");
-        rot_hp(1);
+        mon = monster_at(*di);
+        if (mon && you.can_see(*mon)
+            && you.possible_beholder(mon)
+            && mons_is_threatening(*mon)
+            && determine_chunk_effect(mons_corpse_effect(mon->type)) == CE_CLEAN)
+        {
+            break;
+        }
     }
+    
+    if (mon)
+    {
+        monster& closest = *mon;
+
+        if (!you.beheld_by(closest))
+        {
+            // To avoid trapping the player, other beholders are removed.
+            you.clear_beholders();
+                        
+            you.add_beholder(closest, true);
+            
+            mprf("Visions of eating %s fill your mind.",
+                    closest.name(DESC_THE).c_str());
+        }
+    }
+
 }
 
 static void _handle_emergency_flight()
@@ -1001,7 +1020,7 @@ void player_reacts()
     handle_starvation();
 
     _decrement_durations();
-    _rot_ghoul_players();
+    _mesmerise_ghoul_players(you.time_taken);
 
     // Translocations and possibly other duration decrements can
     // escape a player from beholders and fearmongers. These should

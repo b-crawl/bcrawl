@@ -324,7 +324,7 @@ bool player_tracer(zap_type ztype, int power, bolt &pbolt, int range)
         return false;
     }
 
-    if (pbolt.friendly_past_target && !pbolt.pierce)
+    if (pbolt.friendly_past_target)
         pbolt.aimed_at_spot = true;
 
     // Set to non-tracing for actual firing.
@@ -4276,7 +4276,7 @@ void bolt::tracer_affect_monster(monster* mon)
     // Special explosions (current exploding missiles) aren't
     // auto-hit, so we need to explode them at every possible
     // end-point?
-    if (special_explosion)
+    if (special_explosion && !pierce)
     {
         bolt orig = *special_explosion;
         affect_endpoint();

@@ -125,9 +125,6 @@ static const int conflict[][3] =
     { MUT_REGENERATION,        MUT_INHIBITED_REGENERATION,  0},
     { MUT_ACUTE_VISION,        MUT_BLURRY_VISION,           0},
     { MUT_FAST,                MUT_SLOW,                    0},
-#if TAG_MAJOR_VERSION == 34
-    { MUT_STRONG_STIFF,        MUT_FLEXIBLE_WEAK,           1},
-#endif
     { MUT_STRONG,              MUT_WEAK,                    1},
     { MUT_CLEVER,              MUT_DOPEY,                   1},
     { MUT_AGILE,               MUT_CLUMSY,                  1},

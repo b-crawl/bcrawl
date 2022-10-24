@@ -219,6 +219,7 @@
   - v1.35.2: Naga can swim.
   - v1.35.2: When an octopode would be paralyzed, it's confused instead.
   - v1.36.3: Mummies have a Hexes enhancer from level 1 instead of gaining a Necromancy enhancer at levels 13 and 26.
+  - v1.37.2: Ghouls are reworked: they have half torment resistance, rPois, rN+, 0.8 movement speed, range 4 hopping, adjusted aptitudes, and adjusted attributes. They don't rot randomly, but now have a chance to be mesmerised when they can see something edible and are above 75% health. Their mesmerisation is broken if they fall below 75% health.
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -728,6 +729,7 @@
   - v1.36.4: Big kobolds are renamed to kobold brigands.
   - v1.36.5: Friendly torpor snails can slow hostile monsters.
   - v1.37: Apises are fast. (10 -> 14 speed)
+  - v1.37.2: Ghouls are fast. (10 -> 12 speed)
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

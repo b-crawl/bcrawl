@@ -1551,22 +1551,31 @@ undead_form_reason lifeless_prevents_form(transformation which_trans,
     if (which_trans == transformation::shadow)
         return UFR_GOOD; // even the undead can use dith's shadow form
 
-    if (you.species != SP_VAMPIRE)
-        return UFR_TOO_DEAD; // ghouls & mummies can't become anything else
-
-    if (which_trans == transformation::lich)
-        return UFR_TOO_DEAD; // vampires can never lichform
-
-    if (which_trans == transformation::bat) // can batform above satiated
+    switch (you.species)
     {
-        if (involuntary && you.hunger_state < HS_SATIATED)
-            return UFR_TOO_DEAD;
+    case SP_VAMPIRE:
+        if (which_trans == transformation::lich)
+            return UFR_TOO_DEAD; // vampires can never lichform
 
-        return you.hunger_state > HS_SATIATED ? UFR_GOOD : UFR_TOO_DEAD;
+        if (which_trans == transformation::bat) // can batform above satiated
+        {
+            if (involuntary && you.hunger_state < HS_SATIATED)
+                return UFR_TOO_DEAD;
+
+            return you.hunger_state > HS_SATIATED ? UFR_GOOD : UFR_TOO_DEAD;
+        }
+
+        // other forms can only be entered when satiated or above.
+        return you.hunger_state >= HS_SATIATED ? UFR_GOOD : UFR_TOO_DEAD;
+
+    case SP_GHOUL:
+        if (which_trans == transformation::lich)
+            return UFR_TOO_DEAD; // lore-wise, now a result of their curse rather than undeadness
+        return UFR_GOOD;
+
+    default:
+        return UFR_TOO_DEAD;  // mummies can't become anything else
     }
-
-    // other forms can only be entered when satiated or above.
-    return you.hunger_state >= HS_SATIATED ? UFR_GOOD : UFR_TOO_DEAD;
 }
 
 /**

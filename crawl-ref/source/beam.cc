@@ -4276,7 +4276,7 @@ void bolt::tracer_affect_monster(monster* mon)
     // Special explosions (current exploding missiles) aren't
     // auto-hit, so we need to explode them at every possible
     // end-point?
-    if (special_explosion)
+    if (special_explosion && !pierce)
     {
         bolt orig = *special_explosion;
         affect_endpoint();
@@ -4879,7 +4879,7 @@ void bolt::affect_monster(monster* mon)
         return;
     }
 
-    if (is_explosion && !in_explosion_phase && !pierce)
+    if (is_explosion && !in_explosion_phase)
     {
         // It hit a monster, so the beam should terminate.
         // Don't actually affect the monster; the explosion

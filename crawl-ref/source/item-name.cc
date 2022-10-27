@@ -3500,11 +3500,17 @@ bool is_useless_item(const item_def &item, bool temp)
             return !you.can_safely_mutate(temp);
 
         case POT_LIGNIFY:
-            if (you.species == SP_VAMPIRE)
+            switch (you.species)
+            {
+            case SP_VAMPIRE:
                 return (temp && you.hunger_state < HS_SATIATED);
-            if (you.species == SP_ENT)
+            case SP_ENT:
                 return true;
-            return you.undead_state(temp);
+            case SP_GHOUL:
+                return false;
+            default:
+                return you.undead_state(temp);
+            }                
 
 #if TAG_MAJOR_VERSION == 34
         case POT_PORRIDGE:

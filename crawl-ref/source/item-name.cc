@@ -3510,7 +3510,7 @@ bool is_useless_item(const item_def &item, bool temp)
                 return false;
             default:
                 return you.undead_state(temp);
-            }                
+            }
 
 #if TAG_MAJOR_VERSION == 34
         case POT_PORRIDGE:
@@ -3595,8 +3595,7 @@ bool is_useless_item(const item_def &item, bool temp)
             return !is_bad_item(item, temp);
 
         case RING_FLIGHT:
-            return you.permanent_flight()
-                   || you.racial_permanent_flight()
+            return you.racial_permanent_flight()
                    || you.get_mutation_level(MUT_NO_ARTIFICE);
 
         case RING_STEALTH:

@@ -105,20 +105,20 @@ function ch_stash_search_annotate_item(it)
 
   if it.class(true) == "armour" and not it.artefact then
     local props = {
-      ["troll"] = "Regen+",
-      ["iron troll"] = "Regen+ rF+ rC+",
-      ["steam"] = "rSteam",
-      ["acid"] = "rCorr",
-      ["quicksilver"] = "MR+",
-      ["swamp"] = "rPois",
-      ["fire"] = "rF++ rC-",
-      ["ice"] = "rC++ rF-",
-      ["pearl"] = "rN+",
-      ["storm"] = "rElec",
-      ["shadow"] = "Stlth++++",
-      ["gold"] = "rF+ rC+ rPois"
+      ["troll l"] = "Regen+",
+      ["iron tr"] = "Regen+ rF+ rC+",
+      ["steam d"] = "rSteam",
+      ["acid dr"] = "rCorr",
+      ["quicksi"] = "MR+",
+      ["swamp d"] = "rPois",
+      ["fire dr"] = "rF++ rC-",
+      ["ice dra"] = "rC++ rF-",
+      ["pearl d"] = "rN+",
+      ["storm d"] = "rElec",
+      ["shadow "] = "Stlth++++",
+      ["gold dr"] = "rF+ rC+ rPois"
     }
-    local t = it.name("base"):match("%w+")
+    local t = string.sub(it.name("base"), 1, 7)
     if props[t] then
       annot = annot .. "{" .. props[t] .. "} "
     end

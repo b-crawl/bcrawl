@@ -2677,7 +2677,7 @@ void display_runes()
         for (branch_iterator it(BRANCH_ITER_DANGER); it; ++it)
         {
             const branch_type br = it->id;
-            if (!connected_branch_can_exist(br))
+            if (!stair_level.count(br) && !connected_branch_can_exist(br))
                 continue;
 
             for (auto rune : branches[br].runes)

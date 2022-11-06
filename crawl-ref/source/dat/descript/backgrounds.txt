@@ -6,8 +6,8 @@ spread corruption and chaos.
 %%%%
 Air Elementalist
 
-Air Elementalists have learned the Shock spell. Later on, their selection of
-Air Magic spells provides them with the flexibility to survive.
+Air Elementalists have learned the Static Discharge spell. Their starting
+spells include powerful but loud and dangerous magic.
 %%%%
 Arcane Marksman
 

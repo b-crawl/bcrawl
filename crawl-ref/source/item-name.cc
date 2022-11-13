@@ -2655,6 +2655,9 @@ static MenuEntry* _fixup_runeorb_entry(MenuEntry* me)
     return entry;
 }
 
+// from dgn-overview.cc, for knowing which S branches exist
+// extern map<branch_type, set<level_id> > stair_level;
+
 void display_runes()
 {
     auto col = runes_in_pack() < ZOT_ENTRY_RUNES ?  "lightgrey" :
@@ -2677,7 +2680,7 @@ void display_runes()
         for (branch_iterator it(BRANCH_ITER_DANGER); it; ++it)
         {
             const branch_type br = it->id;
-            if (!stair_level.count(br) && !connected_branch_can_exist(br))
+            if (!brentry[br].is_valid() && !connected_branch_can_exist(br))
                 continue;
 
             for (auto rune : branches[br].runes)

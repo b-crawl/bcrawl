@@ -658,7 +658,7 @@ static void _hs_close(FILE *handle, const string &scores)
 
 static bool _hs_read(FILE *scores, scorefile_entry &dest)
 {
-    char inbuf[1300];
+    char inbuf[1500];
     if (!scores || feof(scores))
         return false;
 

@@ -3192,7 +3192,7 @@ void level_change(bool skip_attribute_increase)
             }
             
             case SP_HIGH_ELF:
-                update_can_train();
+                init_can_train();
 
             default:
             finish:

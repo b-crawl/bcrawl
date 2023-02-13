@@ -76,8 +76,8 @@ excellent physical attributes, but must learn all skills at once.
 %%%%
 High Elf
 
-High Elves are obsessed with their interests, and won't train skills below one
-third their level, rounded down. They gain intelligence and dexterity quickly.
+High Elves are obsessed with their individual interests, and won't train skills below one
+third their level, rounded down. They gain intelligence and dexterity very quickly.
 %%%%
 Hill Orc
 

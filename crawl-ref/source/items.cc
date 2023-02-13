@@ -68,6 +68,7 @@
 #include "rot.h"
 #include "shopping.h"
 #include "showsymb.h"
+#include "skills.h"
 #include "slot-select-mode.h"
 #include "sound.h"
 #include "spl-book.h"

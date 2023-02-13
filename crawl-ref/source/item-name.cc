@@ -3711,6 +3711,9 @@ bool is_useless_item(const item_def &item, bool temp)
         // If we're here, it's a manual.
         if (you.skills[item.plus] >= 27)
             return true;
+        if (you.species == SP_HIGH_ELF
+                && (you.experience_level / 3 > you.skill((skill_type)item.plus, 2, true)))
+            return true;
         return is_useless_skill((skill_type)item.plus);
 
     default:

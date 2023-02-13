@@ -573,7 +573,7 @@ static void _check_stop_train()
         if (you.skill_manual_points[sk])
         {
             if (!(you.species == SP_HIGH_ELF
-                    && (you.experience_level / 3 > you.skill(sk, 1, true))))
+                    && (you.experience_level / 3 > you.skill(sk, 2, true))))
                 continue;
         }
 

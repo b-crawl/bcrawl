@@ -460,7 +460,13 @@ static void _init_queue(list<skill_type> &queue, FixedVector<T, SIZE> &array)
 static void _erase_from_stop_train(const skill_set &can_train)
 {
     for (skill_type sk : can_train)
+    {
+        if (you.species == SP_HIGH_ELF)
+            if (you.experience_level / 3 > you.skill(sk, 1, true))
+                continue;
+        
         you.stop_train.erase(sk);
+    }
 }
 
 /*
@@ -551,7 +557,7 @@ static void _check_stop_train()
     // Gnolls can't stop training skills.
     if (you.species == SP_GNOLL)
         return;
-
+        
     _check_inventory_skills();
     _check_spell_skills();
     _check_abil_skills();
@@ -565,7 +571,11 @@ static void _check_stop_train()
         if (is_invalid_skill(sk))
             continue;
         if (you.skill_manual_points[sk])
-            continue;
+        {
+            if (!(you.species == SP_HIGH_ELF
+                    && (you.experience_level / 3 > you.skill(sk, 1, true))));
+                continue;
+        }
 
         if (skill_trained(sk) && you.training[sk])
             skills.insert(sk);
@@ -599,14 +609,20 @@ bool training_restricted(skill_type sk)
     switch (sk)
     {
     case SK_FIGHTING:
+    case SK_SPELLCASTING:
+        return false;
     // Requiring missiles would mean disabling the skill when you run out.
     case SK_THROWING:
     case SK_ARMOUR:
     case SK_DODGING:
     case SK_STEALTH:
     case SK_UNARMED_COMBAT:
-    case SK_SPELLCASTING:
+        if (you.species == SP_HIGH_ELF)
+            if (you.experience_level / 3 > you.skill(sk, 1, true))
+                return true;
         return false;
+    case SK_INVOCATIONS:
+        return !(you.species == SP_HIGH_ELF);
     default:
         return true;
     }

@@ -843,24 +843,26 @@ static const map<species_type, species_def> species_data =
     {}, // not a starting race
     {}, // not a starting race
 } },
+#endif
 
 { SP_HIGH_ELF, {
     "HE",
     "High Elf", "Elven", "Elf",
     SPF_ELVEN,
-    -1, -1, 1, 4,
+    -1, 0, 1, 4,
     MONS_ELF,
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
-    7, 11, 10, // 28
-    { STAT_INT, STAT_DEX }, 3,
+    7, 9, 8, // 24
+    { STAT_INT, STAT_DEX }, 1,
     {},
-    {},
-    {},
-    {},
-    {},
+    { "You can't train low skills.", },
+    { "obsessive focus", },
+    { JOB_GLADIATOR, JOB_SKALD, JOB_ARCANE_MARKSMAN, JOB_TRANSMUTER, 
+      JOB_WIZARD, JOB_CONJURER, JOB_SUMMONER, JOB_FIRE_ELEMENTALIST, JOB_AIR_ELEMENTALIST, },
+    { SK_SHORT_BLADES, SK_LONG_BLADES, SK_STAVES, SK_BOWS },
 } },
 
-#endif
+
 // Ideally this wouldn't be necessary...
 { SP_UNKNOWN, { // Line 1: enum
     "??", // Line 2: abbrev

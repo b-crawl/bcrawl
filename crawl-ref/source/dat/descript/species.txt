@@ -1,8 +1,8 @@
 %%%%
 Avariel
 
-Avariel are winged elves that learn to fly swiftly as they gain experience. They are frail
-but love to fight, mostly with spells, but also with weapons.
+Avariel are winged elves that learn to fly swiftly as they gain experience.
+They are frail but love to fight, mostly with spells, but also with weapons.
 %%%%
 Barachi
 
@@ -31,7 +31,8 @@ they grow.
 %%%%
 Djinni
 
-Djinni are floating primordial spirits, with powerful but unstable magic. In melee combat, they often go berserk.
+Djinni are floating primordial spirits, with powerful but unstable magic. In
+melee combat, they often go berserk.
 %%%%
 Draconian
 
@@ -73,10 +74,15 @@ Gnoll
 Gnolls are canine-like humanoids. They have incredible proficiency and
 excellent physical attributes, but must learn all skills at once.
 %%%%
+High Elf
+
+High Elves are obsessed with their interests, and won't train skills below one
+third their level, rounded down. They gain intelligence and dexterity quickly.
+%%%%
 Hill Orc
 
-Orcs are instinctive fighters, training fighting in general rather than specific
-melee weapons. Some are skilled in offensive magic.
+Orcs are instinctive fighters, training fighting in general rather than
+specific melee weapons. Some are skilled in offensive magic.
 %%%%
 Human
 
@@ -84,7 +90,8 @@ Humans advance quickly in levels and have equal abilities in most skills.
 %%%%
 Kobold
 
-Kobolds are small, stealthy, skilled with short blades and ranged weapons, and have a natural sense for the dungeon's structure.
+Kobolds are small, stealthy, skilled with short blades and ranged weapons, and
+have a natural sense for the dungeon's structure.
 %%%%
 Merfolk
 

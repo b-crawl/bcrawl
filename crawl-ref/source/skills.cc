@@ -531,6 +531,9 @@ static void _check_start_train()
     {
         if (is_invalid_skill(sk) || is_useless_skill(sk))
             continue;
+        if (you.species == SP_HIGH_ELF)
+            if (you.experience_level / 3 > you.skill(sk, 1, true))
+                continue;
 
         if (!you.can_train[sk] && you.train[sk])
             skills.insert(sk);

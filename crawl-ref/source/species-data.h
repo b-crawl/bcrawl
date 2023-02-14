@@ -854,7 +854,7 @@ static const map<species_type, species_def> species_data =
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
     7, 9, 8, // 24
     { STAT_INT, STAT_DEX }, 1,
-    {},
+    { {MUT_MP_WANDS, 1, 1}, },
     { "You can't train low skills.", },
     { "obsessive focus", },
     { JOB_GLADIATOR, JOB_SKALD, JOB_ARCANE_MARKSMAN, JOB_TRANSMUTER, 

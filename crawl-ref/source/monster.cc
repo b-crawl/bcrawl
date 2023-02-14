@@ -2276,7 +2276,7 @@ static string _mon_special_name(const monster& mon, description_level_type desc,
     if (mon.type == MONS_NO_MONSTER)
         return "DEAD MONSTER";
     else if (mon.mid == MID_YOU_FAULTLESS)
-        return "INVALID YOU_FAULTLESS";
+        return "the player character";
     else if (invalid_monster_type(mon.type) && mon.type != MONS_PROGRAM_BUG)
         return _invalid_monster_str(mon.type);
 

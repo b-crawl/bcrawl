@@ -2655,6 +2655,9 @@ static MenuEntry* _fixup_runeorb_entry(MenuEntry* me)
     return entry;
 }
 
+// from dgn-overview.cc, for knowing which S branches exist
+// extern map<branch_type, set<level_id> > stair_level;
+
 void display_runes()
 {
     auto col = runes_in_pack() < ZOT_ENTRY_RUNES ?  "lightgrey" :
@@ -2677,7 +2680,7 @@ void display_runes()
         for (branch_iterator it(BRANCH_ITER_DANGER); it; ++it)
         {
             const branch_type br = it->id;
-            if (!connected_branch_can_exist(br))
+            if (!brentry[br].is_valid() && !connected_branch_can_exist(br))
                 continue;
 
             for (auto rune : branches[br].runes)
@@ -3500,11 +3503,17 @@ bool is_useless_item(const item_def &item, bool temp)
             return !you.can_safely_mutate(temp);
 
         case POT_LIGNIFY:
-            if (you.species == SP_VAMPIRE)
+            switch (you.species)
+            {
+            case SP_VAMPIRE:
                 return (temp && you.hunger_state < HS_SATIATED);
-            if (you.species == SP_ENT)
+            case SP_ENT:
                 return true;
-            return you.undead_state(temp);
+            case SP_GHOUL:
+                return false;
+            default:
+                return you.undead_state(temp);
+            }
 
 #if TAG_MAJOR_VERSION == 34
         case POT_PORRIDGE:
@@ -3589,8 +3598,7 @@ bool is_useless_item(const item_def &item, bool temp)
             return !is_bad_item(item, temp);
 
         case RING_FLIGHT:
-            return you.permanent_flight()
-                   || you.racial_permanent_flight()
+            return you.racial_permanent_flight()
                    || you.get_mutation_level(MUT_NO_ARTIFICE);
 
         case RING_STEALTH:
@@ -3702,6 +3710,9 @@ bool is_useless_item(const item_def &item, bool temp)
         }
         // If we're here, it's a manual.
         if (you.skills[item.plus] >= 27)
+            return true;
+        if (you.species == SP_HIGH_ELF
+                && (you.experience_level / 3 > you.skill((skill_type)item.plus, 2, true)))
             return true;
         return is_useless_skill((skill_type)item.plus);
 

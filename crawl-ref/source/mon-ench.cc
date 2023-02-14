@@ -191,6 +191,10 @@ bool monster::add_ench(const mon_enchant &ench)
     {
         remove_summons();
     }
+
+    if (ench.ench == ENCH_PARALYSIS)
+        stop_directly_constricting_all();
+
     return true;
 }
 

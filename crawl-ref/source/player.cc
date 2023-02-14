@@ -3190,6 +3190,9 @@ void level_change(bool skip_attribute_increase)
                     break;
                 }
             }
+            
+            case SP_HIGH_ELF:
+                init_can_train();
 
             default:
             finish:

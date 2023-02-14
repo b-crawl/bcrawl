@@ -3694,40 +3694,10 @@ MAP
 ...........
 ENDMAP
 
-NAME:   lemuel_flamethrower_1
-DEPTH:  D:5-, Depths, Elf, Geh
-TAGS:   layout_rooms layout_city
-MARKER: * = lua:fog_machine { cloud_type="flame", \
-            pow_min = 20, pow_max = 40, delay = 150, \
-            size = 2, walk_dist = 0, spread_rate= 75 }
-COLOUR: * = red
-SUBST:  * = .
-:  if you.in_branch("Geh") then
-TAGS:   transparent extra
-:  end
-MAP
-xxxxxxxxxxxxx
-xxxxxxxxxxxxx
-xxxxxxxxxxxxx
-xxxxxxxxxxxxx
-xxxxxxGxxxxxx
-.............
-@...........@
-.............
-xxxxxx.xxxxxx
-xxxxxx.xxxxxx
-xxxxxx.xxxxxx
-xxxxxx*xxxxxx
-xxxxxxxxxxxxx
-xxxxxxxxxxxxx
-xxxxxxxxxxxxx
-xxxxxxxxxxxxx
-ENDMAP
-
 # Little wisps of steam around the lava, and then occasionally a big
 # eruption. No warning needed here - the steam does very little damage.
 NAME:   lemuel_old_faithful
-DEPTH:  D, Depths, Lair, Geh
+DEPTH:  D:4-, Depths, Lair, Geh
 TAGS:   uniq_geyser no_monster_gen transparent
 MONS:   nothing,nothing
 MARKER: 1 = lua:fog_machine { cloud_type="steam", \

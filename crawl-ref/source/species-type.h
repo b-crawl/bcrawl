@@ -3,9 +3,7 @@
 enum species_type
 {
     SP_HUMAN,
-#if TAG_MAJOR_VERSION == 34
     SP_HIGH_ELF,
-#endif
     SP_MANA_STALKER,
     SP_TWILIGHT_STALKER,
     SP_JUNGLE_STALKER,

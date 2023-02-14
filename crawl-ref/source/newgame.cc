@@ -189,8 +189,9 @@ void choose_tutorial_character(newgame_def& ng_choice)
 static const species_type species_order[] =
 {
     // comparatively human-like looks
-    SP_HUMAN,          SP_AVARIEL,
-    SP_DEEP_DWARF,     SP_HILL_ORC,
+    SP_HUMAN,          SP_HIGH_ELF,
+    SP_AVARIEL,        SP_DEEP_DWARF,
+    SP_HILL_ORC,
     // small species
     SP_KOBOLD,         SP_SAND_DWARF,
     SP_SPRIGGAN,       SP_FAIRY,
@@ -1232,6 +1233,7 @@ static species_group species_groups[] =
             SP_ONI,
             SP_DJINNI,
             SP_VAMPIRE,
+            SP_HIGH_ELF,
             SP_FORMICID,
             SP_NAGA,
             SP_BARACHI,

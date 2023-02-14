@@ -731,6 +731,7 @@
   - v1.36.5: Friendly torpor snails can slow hostile monsters.
   - v1.37: Apises are fast. (10 -> 14 speed)
   - v1.37.2: Ghouls are fast. (10 -> 12 speed)
+  - v1.38: Neqoxecs no longer fly.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

@@ -174,6 +174,7 @@
   - v1.13: Skeletons have -20% HP, but have good aptitudes, guardian spirit, and heal when casting spells. They also gain reduced encumbrance from armour and health regeneration from kills.
   - v1.13.1: Djinni get Wild Magic, Berserkitis, Blurry Vision, and Blink mutations. After their berserk rages end, they never pass out and get a few turns of Brilliance.
   - v1.29: Ents are large, have plant resistances, +40% HP, and high natural AC. They have an innate Passwall ability that can also go through trees, and can use 2-handed weapons (other than giant clubs) with a shield. They also have an unarmed damage bonus equivalent to 1.5 levels of claws. However, they take 1.4x as long to do all actions, can't transform, can't train Necromancy, and can't wear body armour.
+  - v1.38: High Elves have good aptitudes and gain 1 intelligence or dexterity every level, but refuse to train any skill with a level below (experience_level / 3) rounded down. (The required skill level for training is reduced 50% by manuals.)
 
 #### Species Changes
   - Hill Orcs use Fighting as their skill for all weapons.

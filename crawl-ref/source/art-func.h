@@ -1507,12 +1507,17 @@ static void _HENDRICKS_melee_effects(item_def* weapon, actor* attacker,
     {
         noisy(17 + random2(8), attacker->pos());
         
-        if (defender->is_monster())
+        if (defender->is_monster() && defender->alive())
         {
             monster* mon = defender->as_monster();
             
             if (coinflip() && mons_can_be_blinded(mon->type))
+            {
+                if (!mon->has_ench(ENCH_BLIND))
+                    mprf("%s vision becomes distorted and hazy.",
+                         apostrophise(defender->name(DESC_THE)).c_str());
                 mon->add_ench(mon_enchant(ENCH_BLIND, 1, attacker, 10 + random2(60)));
+            }
         }
     }
 }

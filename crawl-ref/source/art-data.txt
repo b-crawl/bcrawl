@@ -218,6 +218,7 @@ VALUE:   800
 BOOL:    special, no_upgrade
 
 NAME:    staff of Olgreb
+INSCRIP: +Poison
 OBJ:     OBJ_WEAPONS/WPN_STAFF
 PLUS:    +9
 COLOUR:  ETC_POISON
@@ -597,7 +598,7 @@ STEALTH:  1
 
 NAME:    plutonium sword
 OBJ:     OBJ_WEAPONS/WPN_TRIPLE_SWORD
-INSCRIP:  irradiate,
+INSCRIP:  irradiate, +Channel
 PLUS:    +8
 COLOUR:  ETC_MUTAGENIC
 TILE:    urand_plutonium
@@ -1404,7 +1405,7 @@ OBJ:      OBJ_WEAPONS/WPN_BATTLEAXE
 TILE:     urand_hendricks
 TILE_EQ:  hendricks
 COLOUR:   ETC_BONE
-INSCRIP:  *noise, frenzy,
+INSCRIP:  *noise, +Frenzy
 BRAND:    SPWPN_DISTORTION
 PLUS:     6
 DEX:      6

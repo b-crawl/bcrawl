@@ -4987,8 +4987,8 @@ SUBST:   x = x:2 .
 SHUFFLE: xcv
 SUBST:   y = x
 #
-NSUBST:  K = 3:2 *:1
-NSUBST:  P = 10:1 *:.
+NSUBST:  K = 3:2 / *:1
+NSUBST:  P = 10:1 / *:.
 MONS:    plant, oklob plant
 MAP
 xxxxxxxxxxxxxxx

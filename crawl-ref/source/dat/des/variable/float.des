@@ -4988,19 +4988,19 @@ SHUFFLE: xcv
 SUBST:   y = x
 #
 NSUBST:  K = 3:2 / *:1
-NSUBST:  P = 10:1 / *:.
+NSUBST:  P = 24:1 / *:.
 MONS:    plant, oklob plant
 MAP
 xxxxxxxxxxxxxxx
 xxxx...K...xxxx
 xx...PP1PP...xx
-xx..P.....P..xx
+xx..P.PPP.P..xx
 x.PP..."...PP.x
-x.P....'....P.x
-xK1..aA{Bb..1Kx
-x.P....'....P.x
+x.PP...'...PP.x
+xK1P.aA{Bb.P1Kx
+x.PP...'...PP.x
 x.P...."...PP.x
-xx.P......P..xx
+xx.P..PPP.P..xx
 xx..PPP1PPP..xx
 xxxx...K...xxxx
 xxxxxxxxxxxxxxx

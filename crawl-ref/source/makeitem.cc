@@ -1136,7 +1136,7 @@ static void _generate_armour_item(item_def& item, bool allow_uniques,
 
     // Scarves always get an ego, and are never enchanted.
     if (item.sub_type == ARM_SCARF)
-        set_item_ego_type(item, OBJ_ARMOUR, _generate_armour_ego(item));
+        set_item_ego_type(item, OBJ_ARMOUR, _generate_armour_ego(item, item_level));
 
     // Forced randart.
     if (item_level == ISPEC_RANDART)
@@ -1184,12 +1184,6 @@ static void _generate_armour_item(item_def& item, bool allow_uniques,
 
         if (item_level == ISPEC_BAD)
             do_curse_item(item);
-    }
-    // Scarves always get an ego.
-    else if (item.sub_type == ARM_SCARF)
-    {
-        set_item_ego_type(item, OBJ_ARMOUR,
-                          _generate_armour_ego(item, item_level));
     }
     else if ((forced_ego || item.sub_type == ARM_HAT || item.sub_type == ARM_ROBE
                     || x_chance_in_y(51 + item_level, 250))

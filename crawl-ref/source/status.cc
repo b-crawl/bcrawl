@@ -1044,7 +1044,7 @@ static void _describe_missiles(status_info& inf)
 
     if (level == 2)
     {
-        bool enough_mana = you.magic_points || you.species == SP_DJINNI;
+        bool enough_mana = you.magic_points;
         inf.light_colour = enough_mana ? LIGHTMAGENTA : DARKGREY;
         inf.light_text   = "DMsl";
         inf.short_text   = "deflect missiles";

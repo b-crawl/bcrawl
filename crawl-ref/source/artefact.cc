@@ -525,6 +525,22 @@ static void _add_randart_weapon_brand(const item_def &item,
         item_props[ARTP_BRAND] = SPWPN_NORMAL;
 }
 
+static special_armour_type _randart_armour_brand(const item_def &item)
+{
+    switch (item.sub_type)
+    {
+    case ARM_SCARF:
+        return random_choose_weighted(1, SPARM_SPIRIT_SHIELD,
+                                      1, SPARM_RESISTANCE,
+                                      1, SPARM_REPULSION,
+                                      1, SPARM_CLOUD_IMMUNE,
+                                      1, SPARM_INVISIBILITY,
+                                      1, SPARM_STASIS);
+    default:
+        return SPARM_NORMAL;
+    }
+}
+
 /**
  * Can the given artefact property be placed on the given item?
  *
@@ -883,6 +899,12 @@ static void _get_randart_properties(const item_def &item,
     // make sure all weapons have a brand
     if (item_class == OBJ_WEAPONS)
         _add_randart_weapon_brand(item, item_props);
+    // force scarves to have egos
+    else if (item_class == OBJ_ARMOUR
+             && item_props[ARTP_BRAND] == SPARM_NORMAL)
+    {
+        item_props[ARTP_BRAND] = _randart_armour_brand(item);
+    }
 
     // randomly pick properties from the list, choose an appropriate value,
     // then subtract them from the good/bad/enhance count as needed
@@ -1537,6 +1559,21 @@ static bool _randart_is_redundant(const item_def &item,
     return false;
 }
 
+static bool _armour_ego_conflicts(artefact_properties_t &proprt)
+{
+    switch (proprt[ARTP_BRAND])
+    {
+    case SPARM_RESISTANCE:
+        return proprt[ARTP_FIRE] || proprt[ARTP_COLD];
+    case SPARM_INVISIBILITY:
+        return proprt[ARTP_INVISIBLE];
+    case SPARM_STASIS:
+        return proprt[ARTP_PREVENT_TELEPORTATION];
+    default:
+        return false;
+    }
+}
+
 static bool _randart_is_conflicting(const item_def &item,
                                      artefact_properties_t &proprt)
 {
@@ -1548,7 +1585,10 @@ static bool _randart_is_conflicting(const item_def &item,
         return true;
     }
 
-    if (item.base_type != OBJ_JEWELLERY)
+    if (item.base_type == OBJ_ARMOUR && _armour_ego_conflicts(proprt))
+        return true;
+    
+	if (item.base_type != OBJ_JEWELLERY)
         return false;
 
     if (item.sub_type == RING_WIZARDRY && proprt[ARTP_INTELLIGENCE] < 0)

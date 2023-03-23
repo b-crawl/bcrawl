@@ -206,6 +206,7 @@ static void _give_wand(monster* mon, int level)
         idx = items(false, OBJ_WANDS, WAND_FLAME, level);
         break;
     case MONS_VASHNIA:
+    case MONS_THE_ENCHANTRESS:
         idx = items(false, OBJ_WANDS, WAND_DIGGING, level);
         break;
     default:

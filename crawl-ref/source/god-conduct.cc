@@ -1031,7 +1031,16 @@ static like_map divine_likes[] =
     },
     // GOD_HEPLIAKLQANA
     {
-        { DID_EXPLORATION, EXPLORE_RESPONSE },
+        { DID_EXPLORATION, {
+            "you explore the world", false,
+            0, 0, 0, nullptr,
+            [] (int &piety, int &denom, const monster* /*victim*/)
+            {
+                piety = 14;
+                if (you.piety >= piety_breakpoint(2))
+                    inc_hp(div_rand_round(24, 100));
+            }
+        } },
     },
     // GOD_WU_JIAN
     {

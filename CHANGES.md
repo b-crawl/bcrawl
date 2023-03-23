@@ -472,6 +472,7 @@
   - v1.36.2: Sif Muna's book gifts happen less often but don't reduce piety gain.
   - v1.37: Ashenzari gives skill boosts at \*, and gives scrying and mana regeneration from exploration at \*\*.
   - v1.37: Ashenzari skill boosts are based on the percent of equipment slots cursed, and affect all skills equally. Empty slots have a smaller penalty. Weapon, body armor, and non-octopode ring slots have a higher weight.
+  - v1.38.1: Hepliaklqana gains HP regeneration from exploring at \*\*\*. The HP recovered is proportional to Invocations skill.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -549,6 +550,7 @@
   - v1.36.5: Evoked flight no longer expires.
   - v1.37.1: Hand crossbow damage scales with dexterity instead of strength.
   - v1.37.1: Hand crossbows have higher base damage. (12 -> 13)
+  - v1.38.1: Scarves can be randarts.
 
 #### Removed Items
   - Amulet of Harm
@@ -603,6 +605,7 @@
   - v1.35.5: The Captain's Cutlass is a scimitar instead of a rapier.
   - v1.36.1: The Staff of Wucad Mu is reworked: it's a +9 vorpal staff with +20 mana and *Drain, and it can be evoked to regain mana by abjuring hostile summons.
   - v1.36.2: The Fencer's Gloves have a higher riposte chance. (1/3 -> 2/3)
+  - v1.38.1: Hendrick's Axe no longer has a chance to frenzy on hit. Instead, it can be evoked for 1 mana to make noise and cast a weak Discord with power based on Axes skill. It keeps the chance to blind on hit.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -732,6 +735,8 @@
   - v1.37: Apises are fast. (10 -> 14 speed)
   - v1.37.2: Ghouls are fast. (10 -> 12 speed)
   - v1.38: Neqoxecs no longer fly.
+  - v1.38.1: Jiangshi act more quickly instead of moving quickly.
+  - v1.38.1: Wretched stars have low magic resistance instead of infinite magic resistance.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -772,3 +777,4 @@
   - v1.36.5: Erica has a reworked spell set: Fireball, Mystic Blast, Slow, and Berserker Rage.
   - v1.37: Ignacio appears more often, and has higher melee damage but fewer attacks.
   - v1.37: Sonja has more HP, higher magic resistance, higher damage but fewer attacks, and carries an enchanted hand crossbow instead of a blowgun.
+  - v1.38.1: The Enchantress is reworked. She now casts: Haste, Might Other, Slow, Dimension Anchor, Mass Confusion, and Deflect Missiles. Her melee attacks now cause magic vulnerability. She now acts quickly instead of moving quickly, deals slightly more melee damage, and always has a wand of digging.

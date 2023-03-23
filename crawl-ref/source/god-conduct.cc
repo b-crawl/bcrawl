@@ -1038,7 +1038,8 @@ static like_map divine_likes[] =
             {
                 piety = 14;
                 if (you.piety >= piety_breakpoint(2))
-                    inc_hp(div_rand_round(24, 100));
+                    if (x_chance_in_y(you.skill(SK_INVOCATIONS, 10), 800))
+                        inc_hp(1);
             }
         } },
     },

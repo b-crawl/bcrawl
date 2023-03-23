@@ -1504,33 +1504,41 @@ static void _HENDRICKS_melee_effects(item_def* weapon, actor* attacker,
                                     actor* defender, bool mondied, int dam)
 {
     if (coinflip())
-        noisy(17 + random2(8), attacker->pos());
-
-    if (one_chance_in(4) && defender->alive())
     {
-        if (defender->holiness() & MH_NONLIVING
-            || defender->is_player() && !you.can_go_berserk(false, false, false)
-            || defender->is_monster() && !defender->as_monster()->can_go_frenzy())
-        {
-            return;
-        }
-
-        if (defender->is_monster())
+        noisy(17 + random2(8), attacker->pos());
+        
+        if (defender->is_monster() && defender->alive())
         {
             monster* mon = defender->as_monster();
-            // Wake up the monster so that it can frenzy.
-            if (mon->behaviour == BEH_SLEEP)
-                mon->behaviour = BEH_WANDER;
-            mon->go_frenzy(attacker);
             
             if (coinflip() && mons_can_be_blinded(mon->type))
+            {
+                if (!mon->has_ench(ENCH_BLIND))
+                    mprf("%s vision becomes distorted and hazy.",
+                         apostrophise(defender->name(DESC_THE)).c_str());
                 mon->add_ench(mon_enchant(ENCH_BLIND, 1, attacker, 10 + random2(60)));
+            }
         }
-        else
-            defender->go_berserk(false);
-
-        if (attacker->is_player())
-            did_god_conduct(DID_HASTY, 6 + random2(3), true);
     }
 }
+
+static bool _HENDRICKS_evoke(item_def *item, bool* did_work, bool* unevokable)
+{
+    noisy(17 + random2(8), you.pos());
+    int axe_skill = you.skill(SK_AXES, 10);
+    if (x_chance_in_y(axe_skill, 100) && enough_mp(1, false))
+    {
+        int power = div_rand_round(axe_skill, 7);
+        mpr("You strum your axe, and make an amazing distorted noise!");
+        dec_mp(1);
+        mass_enchantment(ENCH_INSANE, power, 0);
+    }
+    else
+        mpr("You ineptly strum your axe, and merely make distorted noise.");
+    *did_work = true;
+
+    return false;
+}
+
+
 

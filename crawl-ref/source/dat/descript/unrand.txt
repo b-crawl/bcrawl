@@ -707,7 +707,7 @@ This sword seems to have a mind of its own, and it wants to move quickly. When u
 %%%%
 Hendrick's axe
 
-The warrior-musician Hendrick wielded this axe until his spirit was sealed inside it by an ancient lich. Now, it plays itself when used in battle, distorting space as well as sound and driving its victims into a hallucinogenic frenzy.
+The warrior-musician Hendrick wielded this axe until his spirit was sealed inside it by an ancient lich. Now, it plays itself when used in battle, distorting space as well as sound, and it can be strummed by skilled axe users to drive nearby creatures into a hallucinogenic frenzy.
 %%%%
 Amulet of Vision
 

@@ -280,12 +280,14 @@ Hepliaklqana powers
 Hepliaklqana's worshippers are served by a guardian formed from a part of their
 life essence, in the shape of their greatest ancestor. This ancestor is at
 first remembered as they were at the start of their fabled adventures, but will
-advance in skill as their descendant does. Hepliaklqana always allows followers
+advance in skill as their descendant does, eventually remembering their ability
+as a knight, battlemage, or hexer. Hepliaklqana always allows followers
 to recall their ancestor to their side, and, even if the ancestor is destroyed,
 Hepliaklqana will call it forth again not long after. Further advancement in
-Hepliaklqana's service allows worshippers to restore and strengthen their
-ancestor, to swap them with other creatures, and to choose how to remember
-their life's talents.
+Hepliaklqana's service allows worshippers to swap their ancestor with other
+creatures, recover health proportional to their Invocations skill as they
+explore the world, and temporarily merge with their ancestor to gain some of
+their skill and vitality.
 %%%%
 Jiyva powers
 

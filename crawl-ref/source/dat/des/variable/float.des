@@ -4976,7 +4976,7 @@ ENDMAP
 # and the walls are always diggable then.
 #
 NAME:    dpeg_oklob_shooting_range
-DEPTH:   Depths, !Depths:$, Lair:2-, Elf:2-
+DEPTH:   Depths:2-, !Depths:$, Lair:2-
 WEIGHT:  2
 ORIENT:  float
 SHUFFLE: ab" / AB'
@@ -4987,23 +4987,22 @@ SUBST:   x = x:2 .
 SHUFFLE: xcv
 SUBST:   y = x
 #
-NSUBST:  1 = 1:2 1:3 *:1
-: wt = (you.absdepth()-10)/2
-: mons("oklob plant w:" .. wt .. " / plant")
+NSUBST:  K = 3:2 / *:1
+NSUBST:  P = 24:1 / *:.
 MONS:    plant, oklob plant
 MAP
 xxxxxxxxxxxxxxx
-xxxx...1...xxxx
-xx...........xx
-xx...........xx
-x......"......x
-x......'......x
-x1...aA{Bb...1x
-x......'......x
-x......"......x
-xx...........xx
-xx...........xx
-xxxx...1...xxxx
+xxxx...K...xxxx
+xx...PP1PP...xx
+xx..P.PPP.P..xx
+x.PP..."...PP.x
+x.PP...'...PP.x
+xK1P.aA{Bb.P1Kx
+x.PP...'...PP.x
+x.P...."...PP.x
+xx.P..PPP.P..xx
+xx..PPP1PPP..xx
+xxxx...K...xxxx
 xxxxxxxxxxxxxxx
 ENDMAP
 

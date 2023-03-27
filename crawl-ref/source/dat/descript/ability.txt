@@ -612,7 +612,7 @@ three lists at a time, with varying prices.
 Call Merchant ability
 
 Sends funds to a merchant to help them set up shop at your location. The cost of
-funding a shop increases with the number of shops funded.{{
+funding a shop increases over time.{{
     if you.race() == "Mummy" then
         return
     end

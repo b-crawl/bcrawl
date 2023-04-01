@@ -35,7 +35,7 @@ end
 # a pokemon trainer with 3 mutant beasts
 #
 NAME:    bhauth_vaults_entry_pokemon
-TAGS:    vaults_entry
+TAGS:    vaults_entry no_tele_into
 MONS:    mature mutant beast
 KMONS:   W = wizard name:beastmaster name_adjective spells:haste_other.30.wizard;ensnare.30.wizard;heal_other.30.wizard ; robe
 NSUBST:  M = 1:W / 3:1 / *:.

@@ -298,8 +298,8 @@ are increased by Invocations skill.
 %%%%
 Hew ability
 
-Cuts a path through a line of enemies, hitting each with one melee attack.
-Maximum distance is increased by Invocations skill.
+Cuts a path through a line of enemies, unerringly hitting each with one melee
+attack. Maximum distance is increased by Invocations skill.
 %%%%
 Major Destruction ability
 

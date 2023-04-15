@@ -5956,6 +5956,7 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         int initial_time = you.time_taken;
         melee_attack hew(&you, mon);
         hew.is_projected = true;
+        hew.ev_margin = AUTOMATIC_HIT;
         hew.attack();
         you.time_taken = initial_time;
         return MON_AFFECTED;

@@ -2753,7 +2753,8 @@ void excommunication(bool voluntary, god_type new_god)
         you.stop_train.insert(abil_skill(abil));
 
     update_can_train();
-    you.can_train.set(SK_INVOCATIONS, false);
+    if (you.species != SP_HIGH_ELF)
+        you.can_train.set(SK_INVOCATIONS, false);
     reset_training();
 
     // Perhaps we abandoned Trog with everything but Spellcasting maxed out.

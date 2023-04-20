@@ -604,7 +604,7 @@ static const ability_def Ability_List[] =
     { ABIL_QAZLAL_ELEMENTAL_FORCE, "Elemental Force",
       6, 0, 0, 6, {fail_basis::invo, 60, 5, 20}, abflag::exhaustion },
     { ABIL_QAZLAL_DISASTER_AREA, "Disaster Area",
-      7, 0, 0, 10, {fail_basis::invo, 70, 4, 25}, abflag::exhaustion },
+      7, 0, 0, 8, {fail_basis::invo, 70, 4, 25}, abflag::exhaustion },
 
     // Uskayaw
     { ABIL_USKAYAW_STOMP, "Stomp",

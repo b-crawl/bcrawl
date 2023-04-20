@@ -4743,13 +4743,14 @@ void okawaru_remove_finesse()
 
 static int _upheaval_radius(int pow)
 {
-    return pow >= 100 ? 2 : 1;
+    return pow > 100 ? 2 : 1;
 }
 
-spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
+spret qazlal_upheaval(coord_def target, bool quiet, bool fail, int radius_pow)
 {
     int pow = you.skill(SK_INVOCATIONS, 6);
-    const int max_radius = _upheaval_radius(pow);
+	radius_pow = (radius_pow == -1) ? pow : radius_pow;
+    const int max_radius = _upheaval_radius(radius_pow);
 
     bolt beam;
     beam.name        = "****";
@@ -4846,7 +4847,7 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
         if (!in_bounds(*ri))
             continue;
 
-        int chance = pow;
+        int chance = radius_pow;
 
         bool adj = adjacent(beam.target, *ri);
         if (!adj && max_radius > 1)

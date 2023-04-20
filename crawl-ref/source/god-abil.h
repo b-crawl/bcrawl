@@ -156,7 +156,7 @@ bool gozag_check_bribe_branch(bool quiet = false);
 bool gozag_bribe_branch();
 
 spret qazlal_upheaval(coord_def target, bool quiet = false,
-                           bool fail = false);
+                           bool fail = false, int radius_pow = -1);
 spret qazlal_elemental_force(bool fail);
 bool qazlal_disaster_area();
 

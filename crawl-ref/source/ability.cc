@@ -2980,7 +2980,7 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_QAZLAL_UPHEAVAL:
-        return qazlal_upheaval(coord_def(), false, fail);
+        return qazlal_upheaval(coord_def(), false, fail, 100);
 
     case ABIL_QAZLAL_ELEMENTAL_FORCE:
         if (you.duration[DUR_EXHAUSTED])

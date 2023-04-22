@@ -1032,6 +1032,7 @@ spret blinkbolt(int power, bolt &beam, bool fail)
 
     fail_check();
 
+	mpr("You burst into living lightning!");
     beam.thrower = KILL_YOU_MISSILE;
     zappy(ZAP_BLINKBOLT, power, false, beam);
     beam.name = "shock of your passage";

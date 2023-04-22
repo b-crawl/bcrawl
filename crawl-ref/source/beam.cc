@@ -2513,7 +2513,8 @@ void bolt::affect_endpoint()
         for (vector<coord_def>::reverse_iterator citr = path_taken.rbegin();
              citr != path_taken.rend(); ++citr)
         {
-            if (act->is_habitable(*citr) && act->blink_to(*citr, false))
+            if (act->is_habitable(*citr) && !monster_at(*citr)
+                    && act->blink_to(*citr, true))
                 return;
         }
         return;

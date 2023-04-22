@@ -156,9 +156,9 @@ bool gozag_check_bribe_branch(bool quiet = false);
 bool gozag_bribe_branch();
 
 spret qazlal_upheaval(coord_def target, bool quiet = false,
-                           bool fail = false);
+                           bool fail = false, int radius_pow = -1, bool safe = false);
 spret qazlal_elemental_force(bool fail);
-bool qazlal_disaster_area();
+bool qazlal_become_storm();
 
 void init_sac_index();
 int get_sacrifice_piety(ability_type sac, bool include_skill = true);

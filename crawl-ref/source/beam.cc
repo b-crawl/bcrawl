@@ -2513,7 +2513,8 @@ void bolt::affect_endpoint()
         for (vector<coord_def>::reverse_iterator citr = path_taken.rbegin();
              citr != path_taken.rend(); ++citr)
         {
-            if (act->is_habitable(*citr) && act->blink_to(*citr, false))
+            if (act->is_habitable(*citr) && !monster_at(*citr)
+                    && act->blink_to(*citr, true))
                 return;
         }
         return;
@@ -5956,6 +5957,7 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         int initial_time = you.time_taken;
         melee_attack hew(&you, mon);
         hew.is_projected = true;
+        hew.ev_margin = AUTOMATIC_HIT;
         hew.attack();
         you.time_taken = initial_time;
         return MON_AFFECTED;

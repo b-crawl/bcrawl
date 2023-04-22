@@ -823,8 +823,12 @@ bool melee_attack::attack()
     // Calculate various ev values and begin to check them to determine the
     // correct handle_phase_ handler.
     const int ev = defender->evasion(EV_IGNORE_NONE, attacker);
-    ev_margin = test_hit(to_hit, ev, !attacker->is_player());
-    bool shield_blocked = attack_shield_blocked(true);
+    bool shield_blocked = false;
+    if (ev_margin != AUTOMATIC_HIT)  // set by eg Hew
+    {
+        ev_margin = test_hit(to_hit, ev, !attacker->is_player());
+        shield_blocked = attack_shield_blocked(true);
+    }
 
     // Stuff for god conduct, this has to remain here for scope reasons.
     god_conduct_trigger conducts[3];

@@ -298,8 +298,8 @@ are increased by Invocations skill.
 %%%%
 Hew ability
 
-Cuts a path through a line of enemies, hitting each with one melee attack.
-Maximum distance is increased by Invocations skill.
+Cuts a path through a line of enemies, unerringly hitting each with one melee
+attack. Maximum distance is increased by Invocations skill.
 %%%%
 Major Destruction ability
 
@@ -612,7 +612,7 @@ three lists at a time, with varying prices.
 Call Merchant ability
 
 Sends funds to a merchant to help them set up shop at your location. The cost of
-funding a shop increases with the number of shops funded.{{
+funding a shop increases over time.{{
     if you.race() == "Mummy" then
         return
     end
@@ -665,10 +665,11 @@ which can cause elemental clouds to coalesce into friendly elementals
 and fill nearby creatures with an inner flame.
 The chance of both effects increases with your Invocations skill.
 %%%%
-Disaster Area ability
+Become The Storm ability
 
-Blasts the entire area around you with powerful natural forces. Invocations
-skill increases both damage and area affected.
+Become a bolt of living lightning, and blast the area around your destination
+with powerful natural forces. Invocations skill increases damage dealt and the
+amount of destruction.
 %%%%
 # Ru
 Draw Out Power ability

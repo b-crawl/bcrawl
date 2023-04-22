@@ -4743,13 +4743,14 @@ void okawaru_remove_finesse()
 
 static int _upheaval_radius(int pow)
 {
-    return pow >= 100 ? 2 : 1;
+    return pow > 100 ? 2 : 1;
 }
 
-spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
+spret qazlal_upheaval(coord_def target, bool quiet, bool fail, int radius_pow, bool is_safe)
 {
     int pow = you.skill(SK_INVOCATIONS, 6);
-    const int max_radius = _upheaval_radius(pow);
+    radius_pow = (radius_pow == -1) ? pow : radius_pow;
+    const int max_radius = _upheaval_radius(radius_pow);
 
     bolt beam;
     beam.name        = "****";
@@ -4845,8 +4846,10 @@ spret qazlal_upheaval(coord_def target, bool quiet, bool fail)
     {
         if (!in_bounds(*ri))
             continue;
+        if (is_safe && (*ri == you.pos()))
+            continue;
 
-        int chance = pow;
+        int chance = radius_pow;
 
         bool adj = adjacent(beam.target, *ri);
         if (!adj && max_radius > 1)
@@ -5046,30 +5049,23 @@ spret qazlal_elemental_force(bool fail)
     return spret::success;
 }
 
-bool qazlal_disaster_area()
+bool qazlal_become_storm()
 {
     bool friendlies = false;
     vector<coord_def> targets;
     vector<int> weights;
     const int pow = you.skill(SK_INVOCATIONS, 6);
+    if (your_spells(SPELL_BLINKBOLT, pow, false) == spret::abort)
+        return false;
+    viewwindow(); // update vision after movement, before explosions
     const int upheaval_radius = _upheaval_radius(pow);
-    for (radius_iterator ri(you.pos(), LOS_RADIUS, C_SQUARE, LOS_NO_TRANS, true);
+    for (radius_iterator ri(you.pos(), 5, C_CIRCLE, LOS_NO_TRANS, true);
          ri; ++ri)
     {
         if (!in_bounds(*ri) || cell_is_solid(*ri))
             continue;
 
-        const monster_info* m = env.map_knowledge(*ri).monsterinfo();
-        if (m && mons_att_wont_attack(m->attitude)
-            && !mons_is_projectile(m->type))
-        {
-            friendlies = true;
-        }
-
-        const int range = you.pos().distance_from(*ri);
         const int dist = grid_distance(you.pos(), *ri);
-        if (range <= upheaval_radius)
-            continue;
 
         targets.push_back(*ri);
         // We weight using the square of grid distance, so monsters fewer tiles
@@ -5080,26 +5076,16 @@ bool qazlal_disaster_area()
         weights.push_back(weight);
     }
 
-    if (targets.empty())
+    if (!targets.empty())
     {
-        mpr("There isn't enough space here!");
-        return false;
+        mprf(MSGCH_GOD, "Nature churns violently around you!");
     }
 
-    if (friendlies
-        && !yesno("There are friendlies around; are you sure you want to hurt "
-                  "them?", true, 'n'))
-    {
-        canned_msg(MSG_OK);
-        return false;
-    }
-
-    mprf(MSGCH_GOD, "Nature churns violently around you!");
-
-    // TODO: should count get a cap proportional to targets.size()?
-    int count = max(1, min((int)targets.size(),
-                            max(you.skill_rdiv(SK_INVOCATIONS, 1, 2),
-                                random2avg(you.skill(SK_INVOCATIONS, 2), 2))));
+    int invo_1 = div_rand_round(you.skill(SK_INVOCATIONS, 10), 40);
+    int invo_2 = div_rand_round(you.skill(SK_INVOCATIONS, 10), 15);
+    int count = max(invo_1, random2avg(invo_2, 2));
+    count = max(1, count);
+    count = min((int)targets.size(), count);
 
     for (int i = 0; i < count; i++)
     {
@@ -5111,7 +5097,7 @@ bool qazlal_disaster_area()
         for (unsigned int j = 0; j < targets.size(); j++)
             if (adjacent(targets[which], targets[j]))
                 weights[j] = max(weights[j] / 2, 1);
-        qazlal_upheaval(targets[which], true);
+        qazlal_upheaval(targets[which], true, false, -1, true);
         targets.erase(targets.begin() + which);
         weights.erase(weights.begin() + which);
     }

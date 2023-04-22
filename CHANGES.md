@@ -473,6 +473,9 @@
   - v1.37: Ashenzari gives skill boosts at \*, and gives scrying and mana regeneration from exploration at \*\*.
   - v1.37: Ashenzari skill boosts are based on the percent of equipment slots cursed, and affect all skills equally. Empty slots have a smaller penalty. Weapon, body armor, and non-octopode ring slots have a higher weight.
   - v1.38.1: Hepliaklqana gains HP regeneration from exploring at \*\*\*. The HP recovered is proportional to Invocations skill.
+  - v1.38.2: Makhleb's Hew ability never misses.
+  - v1.38.2: Qazlal's Disaster Area ability is replaced by Become The Storm. The player first does a Blinkbolt that always hits, then a smaller Disaster Area in a smaller area is done.
+  - v1.38.2: Qazlal's Upheaval ability is always 3x3, instead of its size scaling with Invocations.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

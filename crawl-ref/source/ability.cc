@@ -603,7 +603,7 @@ static const ability_def Ability_List[] =
       5, 0, 0, 1, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_QAZLAL_ELEMENTAL_FORCE, "Elemental Force",
       6, 0, 0, 6, {fail_basis::invo, 60, 5, 20}, abflag::exhaustion },
-    { ABIL_QAZLAL_DISASTER_AREA, "Disaster Area",
+    { ABIL_QAZLAL_BECOME_THE_STORM, "Become The Storm",
       7, 0, 0, 8, {fail_basis::invo, 70, 4, 25}, abflag::exhaustion },
 
     // Uskayaw
@@ -2990,14 +2990,14 @@ static spret _do_ability(const ability_def& abil, bool fail)
         }
         return qazlal_elemental_force(fail);
 
-    case ABIL_QAZLAL_DISASTER_AREA:
+    case ABIL_QAZLAL_BECOME_THE_STORM:
         if (you.duration[DUR_EXHAUSTED])
         {
             mpr("You are too exhausted.");
             return spret::abort;
         }
         fail_check();
-        if (!qazlal_disaster_area())
+        if (!qazlal_become_storm())
             return spret::abort;
         
         you.increase_duration(DUR_EXHAUSTED, 10 + random2(5));

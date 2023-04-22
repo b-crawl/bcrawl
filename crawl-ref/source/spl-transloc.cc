@@ -1024,3 +1024,19 @@ bool beckon(actor &beckoned, const bolt &path)
 
     return true;
 }
+
+spret blinkbolt(int power, bolt &beam, bool fail)
+{
+    if (!player_tracer(ZAP_BLINKBOLT, power, beam))
+        return spret::abort;
+
+    fail_check();
+
+    beam.thrower = KILL_YOU_MISSILE;
+    zappy(ZAP_BLINKBOLT, power, false, beam);
+    beam.name = "shock of your passage";
+    beam.fire();
+
+    return spret::success;
+}
+

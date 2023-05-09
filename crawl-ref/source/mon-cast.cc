@@ -7671,7 +7671,8 @@ static bool _ms_waste_of_time(monster* mon, mon_spell_slot slot)
 
     case SPELL_DEATH_RATTLE:
     case SPELL_MIASMA_BREATH:
-        return !foe || foe->res_rotting() || no_clouds;
+        return !foe
+            || (mon->type != MONS_TIAMAT && (foe->res_rotting() || no_clouds));
 
     case SPELL_DISPEL_UNDEAD:
         // [ds] How is dispel undead intended to interact with vampires?

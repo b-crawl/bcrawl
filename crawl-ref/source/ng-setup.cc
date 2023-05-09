@@ -196,8 +196,20 @@ item_def* newgame_make_item(object_class_type base,
             break;
         case SP_MUMMY:
         case SP_SKELETON:
-            item.base_type = OBJ_SCROLLS;
-            item.sub_type = SCR_TELEPORTATION;
+            // don't give duplicate scrolls; they come in separate item slots
+            switch (item.sub_type)
+            {
+            case POT_DEGENERATION:
+                break;
+            case POT_FLIGHT:
+                item.base_type = OBJ_SCROLLS;
+                item.sub_type = SCR_IDENTIFY;
+                break;
+            default:
+                item.base_type = OBJ_SCROLLS;
+                item.sub_type = SCR_TELEPORTATION;
+                break;
+            }
             break;
         default: break;
         }

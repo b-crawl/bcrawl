@@ -1588,7 +1588,7 @@ static bool _randart_is_conflicting(const item_def &item,
     if (item.base_type == OBJ_ARMOUR && _armour_ego_conflicts(proprt))
         return true;
     
-	if (item.base_type != OBJ_JEWELLERY)
+    if (item.base_type != OBJ_JEWELLERY)
         return false;
 
     if (item.sub_type == RING_WIZARDRY && proprt[ARTP_INTELLIGENCE] < 0)

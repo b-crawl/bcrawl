@@ -2513,9 +2513,20 @@ void bolt::affect_endpoint()
         for (vector<coord_def>::reverse_iterator citr = path_taken.rbegin();
              citr != path_taken.rend(); ++citr)
         {
-            if (act->is_habitable(*citr) && !monster_at(*citr)
-                    && act->blink_to(*citr, true))
-                return;
+            if (act->is_habitable(*citr) && !monster_at(*citr))
+            {
+                if (act->is_player())
+                {
+                    if (*citr != you.pos())
+                    {
+                        stop_delay(true);
+                        move_player_to_grid(*citr, false);
+                        return;
+                    }
+                }
+                else if (act->blink_to(*citr, true))
+                    return;
+            }
         }
         return;
     }

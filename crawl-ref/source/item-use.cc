@@ -3108,6 +3108,7 @@ void read_scroll(item_def& scroll)
         count_action(CACT_USE, OBJ_SCROLLS);
         save_game_state();
         acquirement(OBJ_RANDOM, AQ_SCROLL, false, nullptr, false, true);
+        save_game_state();
         return;
 
     case SCR_FEAR:

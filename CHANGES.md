@@ -85,6 +85,7 @@
   - v1.37.1: Air Elementalists start with Mephitic Cloud instead of Airstrike.
   - v1.37.1: Air Elementalists start with 1 Charms skill.
   - v1.37.1: Air Elementalists start with a potion of resistance.
+  - v1.38.3: When species that can't drink potions have a background that would start with potions, they start with scrolls instead, usually a scroll of teleportation.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -476,6 +477,7 @@
   - v1.38.2: Makhleb's Hew ability never misses.
   - v1.38.2: Qazlal's Disaster Area ability is replaced by Become The Storm. The player first does a Blinkbolt that always hits, then a smaller Disaster Area in a smaller area is done.
   - v1.38.2: Qazlal's Upheaval ability is always 3x3, instead of its size scaling with Invocations.
+  - v1.38.3: Qazlal's Become The Storm ability still works when the player can't teleport.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

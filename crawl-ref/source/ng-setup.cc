@@ -133,29 +133,32 @@ item_def* newgame_make_item(object_class_type base,
     item.plus      = plus;
     item.brand     = force_ego;
 
-    // If the character is restricted in wearing the requested armour,
-    // hand out a replacement instead.
-    if (item.base_type == OBJ_ARMOUR && !can_wear_armour(item, false, false))
-        switch (item.sub_type)
-        {
-        case ARM_HELMET:
-            item.sub_type = ARM_HAT;
-            item.plus = 1;
-            break;
-        case ARM_HAT:
-            break;
-        case ARM_BUCKLER:
-            item.sub_type = ARM_SHIELD;
-            break;
-        case ARM_SHIELD:
-            item.sub_type = ARM_BUCKLER;
-            break;
-        default:
-            item.sub_type = ARM_ROBE;
-            break;
-        }
+    // Give substitutes if items are useless.
+    switch (item.base_type) 
+    {
+    case OBJ_ARMOUR:
+        if (!can_wear_armour(item, false, false))
+            switch (item.sub_type)
+            {
+            case ARM_HELMET:
+                item.sub_type = ARM_HAT;
+                item.plus = 1;
+                break;
+            case ARM_HAT:
+                break;
+            case ARM_BUCKLER:
+                item.sub_type = ARM_SHIELD;
+                break;
+            case ARM_SHIELD:
+                item.sub_type = ARM_BUCKLER;
+                break;
+            default:
+                item.sub_type = ARM_ROBE;
+                break;
+            }
+        break;
     
-    if (item.base_type == OBJ_JEWELLERY)
+    case OBJ_JEWELLERY:
     {
         if (item.sub_type == AMU_GUARDIAN_SPIRIT)
             switch (you.species)
@@ -167,19 +170,54 @@ item_def* newgame_make_item(object_class_type base,
             default: break;
             }
         you.equip[get_item_slot(item)] = slot;
+        break;
     }
-
-    if (item.base_type == OBJ_SCROLLS && item.sub_type == SCR_TELEPORTATION)
-    {
-        if (you.species == SP_FORMICID)
+    
+    case OBJ_SCROLLS:
+        if (item.sub_type == SCR_TELEPORTATION && you.species == SP_FORMICID)
         {
-        item.quantity = 1;
-        item.base_type = OBJ_WANDS;
-        item.sub_type = WAND_RANDOM_EFFECTS;
-        item.charges = 6;
+            item.quantity = 1;
+            item.base_type = OBJ_WANDS;
+            item.sub_type = WAND_RANDOM_EFFECTS;
+            item.charges = 6;
         }
+        break;
+    
+    case OBJ_POTIONS:
+        switch (you.species)
+        {
+        case SP_VINE_STALKER: 
+            if (item.sub_type == POT_HEAL_WOUNDS)
+                item.sub_type = POT_CURING;
+            break;
+        case SP_ENT: 
+            if (item.sub_type == POT_LIGNIFY)
+                item.sub_type = POT_AMBROSIA;
+            break;
+        case SP_MUMMY:
+        case SP_SKELETON:
+            // don't give duplicate scrolls; they come in separate item slots
+            switch (item.sub_type)
+            {
+            case POT_DEGENERATION:
+                break;
+            case POT_FLIGHT:
+                item.base_type = OBJ_SCROLLS;
+                item.sub_type = SCR_IDENTIFY;
+                break;
+            default:
+                item.base_type = OBJ_SCROLLS;
+                item.sub_type = SCR_TELEPORTATION;
+                break;
+            }
+            break;
+        default: break;
+        }
+        break;
+    
+    default: break;
     }
-
+    
     // Make sure we didn't get a stack of shields or such nonsense.
     ASSERT(item.quantity == 1 || is_stackable_item(item));
 

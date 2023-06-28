@@ -185,10 +185,6 @@ Chant Fire Storm cast
 
 @The_monster@ begins to chant a fire storm spell!
 %%%%
-Chant Word of Entropy cast
-
-@The_monster@ begins to chant a word of entropy!
-%%%%
 Call of Chaos cast
 
 @The_monster@ calls on the powers of chaos!

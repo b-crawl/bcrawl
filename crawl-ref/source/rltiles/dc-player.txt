@@ -641,6 +641,7 @@ morningstar MORNINGSTAR
 morningstar2
 eveningstar EVENINGSTAR
 eveningstar2
+eveningstar3
 large_mace LARGE_MACE
 black_whip BLACK_WHIP
 sacred_scourge SACRED_SCOURGE

@@ -95,6 +95,76 @@ bool check_annotation_exclusion_warning()
         }
     }
 
+    switch(grd(you.pos()))
+    {
+    case DNGN_ENTER_ELF:
+    case DNGN_ENTER_FOREST:
+    case DNGN_ENTER_VAULTS:
+        if (you.experience_level < 17)
+            early_branch_entry_warning = true;
+        break;
+    case DNGN_ENTER_DEPTHS:
+        if (you.experience_level < 19)
+            early_branch_entry_warning = true;
+        break;
+    case DNGN_ENTER_SLIME:
+        if (you.experience_level < 19)
+            early_branch_entry_warning = true;
+        break;
+    case DNGN_ENTER_TOMB:
+        if (you.experience_level < 25)
+            early_branch_entry_warning = true;
+        break;
+
+    default: break;
+    }
+
+    if (early_branch_entry_warning)
+    {
+        might_be_dangerous = true;
+
+        switch(you.religion)
+        {
+        case GOD_NO_GOD:
+        case GOD_DEMIGOD:
+            mprf(MSGCH_WARN, "Something about this place makes you nervous.");
+            break;
+
+        case GOD_OKAWARU:
+            simple_god_message(" says: \"I see you desire a challenge, mortal.\"");
+            break;
+        case GOD_USKAYAW:
+            simple_god_message(" says: \"For you, this place is a dance with death. Will you show me your moves?\"");
+            break;
+        case GOD_ZIN:
+        case GOD_SHINING_ONE:
+        case GOD_ELYVILON:
+            simple_god_message(" says: \"This area is dangerous for you, mortal. Take caution.\"");
+            break;
+        case GOD_WU_JIAN:
+            wu_jian_sifu_message(" says: \"I suggest a tactical retreat from here, disciple.\"");
+            break;
+        case GOD_CHEIBRIADOS:
+            simple_god_message(" says: \"There is no need to be hasty about entering this place.\"");
+            break;
+        case GOD_ASHENZARI:
+            simple_god_message(" says: \"I see danger for you here.\"");
+            break;
+        case GOD_HEPLIAKLQANA:
+        {
+            monster *ancestor = hepliaklqana_ancestor_mon();
+            if (ancestor && you.can_see(*ancestor))
+                mprf(MSGCH_WARN, "Your ancestor seems reluctant to enter.");
+            break;
+        }
+        case GOD_SIF_MUNA:
+            simple_god_message(" says: \"Your knowledge may yet be insufficient to navigate this place.\"");
+            break;
+        
+        default: break;
+        }
+    }
+
     if (might_be_dangerous
         && !yesno("Enter next level anyway?", true, 'n', true, false))
     {

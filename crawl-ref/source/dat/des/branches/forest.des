@@ -43,7 +43,7 @@ TAGS:   forest_entry vaults_entry_forest
 KFEAT:  O = enter_forest
 MONS:   spriggan rider
 MONS:   satyr / spriggan druid
-MONS:   apis, ancient bear
+MONS:   apis, black bear
 SUBST:  t = t.
 KMONS:  P = plant / bush
 NSUBST: Q = 3:1 / 1:2
@@ -67,7 +67,7 @@ TAGS:   forest_entry vaults_entry_forest vaults_orient_s
 KFEAT:  O = enter_forest
 MONS:   spriggan rider
 MONS:   satyr / spriggan druid
-MONS:   apis, ancient bear
+MONS:   apis, black bear
 KMONS:  P = plant / bush
 NSUBST: Q = 3:1 / 1:2
 NSUBST: R = 4:3 / 1:4 / 1:5 / *:.
@@ -468,7 +468,7 @@ NAME:   kb_forest_skeletal_bear_cave
 DEPTH:  Forest
 ORIENT: southeast
 MONS:   greenwood witch
-MONS:   ancient bear skeleton
+MONS:   black bear skeleton
 MAP
                    tttttt
                 ttttxxxxx
@@ -673,7 +673,7 @@ MONS:   the Enchantress band
 MONS:   wendigo / shambling mangrove
 MONS:   spriggan air mage / spriggan druid / \
         spriggan berserker / spriggan rider w:5 / \
-        spriggan defender w:5 / ancient bear w:5 / \ 
+        spriggan defender w:5 / black bear w:5 / \ 
         thorn hunter w:5 / shambling mangrove w:5
 MONS:   will-o'-wisp
 KFEAT:  _ = altar_xom
@@ -723,7 +723,7 @@ MONS:     w:20 faun / satyr, spriggan berserker
 KMONS:    4 = caustic shrike
 KMONS:    5 = spriggan defender
 KMONS:    6 = shambling mangrove / thorn hunter
-KMONS:    7 = ancient bear
+KMONS:    7 = black bear
 KMONS:    8 = the Enchantress
 KMONS:    A = water elemental
 KMONS:    L = greenwood witch / wendigo w:30
@@ -780,7 +780,7 @@ ENDMAP
 NAME: gammafunk_forest_column
 TAGS: gammafunk_forest_water_palace_column unrand no_rotate no_flip no_vmirror \
       allow_dup patrolling no_monster_gen
-KMONS:  4 = ancient bear
+KMONS:  4 = black bear
 COLOUR: c = white
 FTILE:  G4. = floor_pebble_cyan
 MAP

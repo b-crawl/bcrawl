@@ -387,12 +387,12 @@ bbbbbbbbnnnbb
         .@.
 ENDMAP
 
-# A small group of powerful orcs has arrived at the border check ahead of you.
+# A small group of tengu has arrived at the border check ahead of you.
 NAME:   nicolae_elf_arrival_no_cutting_in_line
 TAGS:   patrolling
 PLACE:  Elf:1
 ORIENT: float
-KMONS:  O = orc high priest / orc sorcerer
+KMONS:  O = tengu conjurer
 KMONS:  E = deep elf mage
 SUBST:  E = E..., O = O...
 MAP

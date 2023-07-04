@@ -1089,6 +1089,14 @@ bool connected_branch_can_exist(branch_type br)
         }
         break;
     
+    case BRANCH_FOREST:
+        if (stair_level.count(BRANCH_ELF))
+            return false;
+        break;
+    case BRANCH_ELF:
+        if (stair_level.count(BRANCH_FOREST))
+            return false;
+        break;
     default: break;
     }
     

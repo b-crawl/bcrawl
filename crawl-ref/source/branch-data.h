@@ -198,7 +198,7 @@ const Branch branches[NUM_BRANCHES] =
       BLACK, BLACK, // set per-map
       'Z', {}, BRANCH_NOISE_NORMAL },
 
-    { BRANCH_FOREST, BRANCH_LAIR, 5, 6, 5, 19,
+    { BRANCH_FOREST, BRANCH_LAIR, 5, 6, 3, 15,
       BFLAG_SPOTTY,
       DNGN_ENTER_FOREST, DNGN_EXIT_FOREST, NUM_FEATURES,
       "Enchanted Forest", "the Enchanted Forest", "Forest",

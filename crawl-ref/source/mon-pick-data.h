@@ -660,28 +660,23 @@ static const pop_entry pop_zot[] =
 
 static const pop_entry pop_forest[] =
 { // Forest
-  {  1,  5,  120, FALL, MONS_WOLF },
-  {  1,  5,   35, FALL, MONS_BLACK_BEAR },
-  {  1,  5,   50, FLAT, MONS_YAK },
-  {  1,  7,  145, SEMI, MONS_DIRE_ELEPHANT },
-  {  1,  5,   45, FLAT, MONS_HORNET },
-  {  1,  6,   75, FALL, MONS_REDBACK },
-  {  2,  7,   35, SEMI, MONS_WOLF_SPIDER },
-  {  1,  9,   75, SEMI, MONS_OKLOB_PLANT },
-  {  1,  5,  170, FLAT, MONS_DRYAD },
-  {  1,  5,  120, FLAT, MONS_WIND_DRAKE },
-  { -1,  5,   75, SEMI, MONS_FAUN },
-  {  0,  9,  105, SEMI, MONS_SATYR },
-  {  2,  8,   55, SEMI, MONS_SPRIGGAN_DRUID },
-  {  1,  6,  155, SEMI, MONS_SPRIGGAN_RIDER },
-  {  1,  9,  235, SEMI, MONS_SPRIGGAN_BERSERKER },
-  {  1,  8,  155, SEMI, MONS_SPRIGGAN_AIR_MAGE },
-  {  3,  5,  115, RISE, MONS_SPRIGGAN_DEFENDER },
-  {  1,  7,   85, PEAK, MONS_APIS },
-  {  2,  7,  165, SEMI, MONS_SHAMBLING_MANGROVE },
-  {  1,  6,   85, SEMI, MONS_ANACONDA },
-  {  1,  9,  100, PEAK, MONS_THORN_HUNTER },
-  {  1,  5,  125, FLAT, MONS_BUTTERFLY },
+  {  1,  5,  100, FALL, MONS_DEATH_YAK },
+  {  1,  5,  100, FALL, MONS_DIRE_ELEPHANT },
+  {  1,  5,  100, FLAT, MONS_ANACONDA },
+  {  2,  7,   35, FLAT, MONS_WOLF_SPIDER },
+  {  1,  9,   50, FLAT, MONS_OKLOB_PLANT },
+  {  1,  3,   40, SEMI, MONS_DRYAD },
+  {  1,  5,   70, FLAT, MONS_HIPPOGRIFF },
+  {  0,  5,  105, SEMI, MONS_SATYR },
+  {  0,  4,   55, RISE, MONS_SPRIGGAN_DRUID },
+  {  0,  4,  155, FLAT, MONS_SPRIGGAN_RIDER },
+  { -1,  4,   70, RISE, MONS_SPRIGGAN_BERSERKER },
+  {  0,  4,   55, RISE, MONS_SPRIGGAN_AIR_MAGE },
+  {  0,  4,   70, RISE, MONS_SPRIGGAN_DEFENDER },
+  {  0,  5,   60, SEMI, MONS_APIS },
+  {  1,  5,   70, SEMI, MONS_SHAMBLING_MANGROVE },
+  { -2,  4,   70, RISE, MONS_SPARK_WASP },
+  {  1,  5,   70, SEMI, MONS_THORN_HUNTER },
   { 0,0,0,FLAT,MONS_0 }
 };
 
@@ -1263,6 +1258,14 @@ static const pop_entry pop_water_hell[] =
   { 0,0,0,FLAT,MONS_0 }
 };
 
+static const pop_entry pop_water_forest[] =
+{ // Forest branch water monsters
+  {  1,  5,   115, FLAT, MONS_WATER_ELEMENTAL },
+  {  0,  5,    74, RISE, MONS_WATER_NYMPH },
+  {  0,  5,    74, RISE, MONS_ELEMENTAL_WELLSPRING },
+  { 0,0,0,FLAT,MONS_0 }
+};
+
 // This list must be in the same order as the branch-type enum values.
 // Shoals, Abyss, Pan, Zot, D:1-5 liquid monsters are blocked in dungeon.cc
 static const population_list population_water[] =
@@ -1295,7 +1298,7 @@ static const population_list population_water[] =
     POP(water_hell), // Coc
     POP(water_hell), // Tar
     POP(water_generic), // Zot
-    POP(water_generic), // Forest
+    POP(water_forest), // Forest
     POP(water_generic), // Abyss
     POP(water_generic), // Pan
     POP(water_generic), // Zig

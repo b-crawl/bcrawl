@@ -932,10 +932,16 @@ void bolt::burn_wall_effect()
     }
     else if (you.can_smell())
         emit_message("You smell burning wood.");
-    if (whose_kill() == KC_YOU)
+    if (whose_kill() == KC_YOU || (whose_kill() == KC_FRIENDLY && !crawl_state.game_is_arena()))
+    {
         did_god_conduct(DID_KILL_PLANT, 1, god_cares());
-    else if (whose_kill() == KC_FRIENDLY && !crawl_state.game_is_arena())
-        did_god_conduct(DID_KILL_PLANT, 1, god_cares());
+        
+        if (player_in_branch(BRANCH_FOREST))
+        {
+            mpr("The spirits of the forest are upset.");
+            drain_player(15, false, true);
+        }
+    }
 
     // Trees do not burn so readily in a wet environment.
     if (player_in_branch(BRANCH_SWAMP))
@@ -943,12 +949,6 @@ void bolt::burn_wall_effect()
     else
         place_cloud(CLOUD_FOREST_FIRE, pos(), random2(30)+25, agent());
     obvious_effect = true;
-
-    if (player_in_branch(BRANCH_FOREST))
-    {
-        mpr("The spirits of the forest are upset.");
-        drain_player(15, false, true);
-    }
 
     finish_beam();
 }

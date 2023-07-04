@@ -3043,8 +3043,12 @@ void melee_attack::mons_apply_attack_flavour()
         break;
     
     case AF_WENDIGO:
-        if (defender->is_player() && one_chance_in(2))
+        if (defender->is_player() && !you.duration[DUR_WENDIGO] && !you_foodless())
+        {
+            mpr("The wendigo's curse afflicts you with a terrible hunger!");
+            set_duration(DUR_WENDIGO, random_range(20, 40), 40);
             mesmerise_hungry_players(0, true);
+        }
         break;
     }
 }

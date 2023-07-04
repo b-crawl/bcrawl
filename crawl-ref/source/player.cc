@@ -4730,8 +4730,7 @@ bool mesmerise_hungry_players(int time_taken, bool force)
         if (mon && you.can_see(*mon)
             && you.possible_beholder(mon)
             && mons_is_threatening(*mon)
-            && determine_chunk_effect(mons_corpse_effect(mon->type)) == CE_CLEAN
-            && !you_foodless())
+            && determine_chunk_effect(mons_corpse_effect(mon->type)) == CE_CLEAN)
         {
             break;
         }

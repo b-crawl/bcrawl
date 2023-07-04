@@ -493,7 +493,7 @@ ORIENT: north
 PLACE:  Forest:$
 KITEM:  O = superb_item
 KITEM:  1 = superb_item
-KMONS:  O = the Enchantress / Agnes / spriggan air mage / spriggan defender
+KMONS:  O = the Enchantress / Agnes / spriggan defender, spriggan air mage
 KMONS:  1 = spriggan defender
 MONS:   spriggan defender, spriggan berserker, spriggan druid
 MONS:   spriggan rider, spriggan air mage
@@ -562,7 +562,7 @@ MONS:   spriggan druid
 MONS:   spriggan berserker
 MONS:   spriggan air mage
 MONS:   spriggan defender
-MONS:   the Enchantress / Agnes / Jorgrun / spriggan air mage
+KMONS:  O = the Enchantress / Agnes / Jorgrun / spriggan air mage, spriggan air mage
 KMONS:  A = greenwood witch
 KMONS:  B = will-o'-wisp
 KMONS:  X = spriggan rider / spriggan druid / \
@@ -588,7 +588,7 @@ FTILE:  R-~67ABXYfg$*| = floor_normal
 MAP
 ttttttttttttttttttttttttttttttttttttttttttt
 tttCCCCCCCCCCCCCCtttttttttttttttttttttttttt
-tttC-----7------CtttttttttTTTTTttTTTTtttttt
+tttC-----O------CtttttttttTTTTTttTTTTtttttt
 tttC--B------A--CtttQTtttTT.T.Ttt.T.TTTtttt
 tttC----6--6----Ctt..ccccc....cccc.TT.Ttttt
 tttCCCCCC~~CCCCCC....c..1c....c.1c.t.TTtttt
@@ -617,8 +617,8 @@ NAME:   grunt_forest_end_winery
 TAGS:   no_pool_fixup
 PLACE:  Forest:$
 ORIENT: northeast
-MONS:   the Enchantress band 
-MONS:   spriggan berserker / spriggan defender
+KMONS:  O = the Enchantress band, Frances, spriggan defender
+MONS:   spriggan, spriggan berserker / spriggan defender
 MONS:   spriggan druid / spriggan air mage, plant
 MONS:   faun w:20 / satyr / thorn hunter w:5
 MONS:   spark wasp / caustic shrike w:5
@@ -643,7 +643,7 @@ XttT..4d4d4.ce-e-e-e-e-e-e-eceeeeee+|||c.Ttt
 XttT..4d4d4.c-e-e-e-c-e-e-e-c------c|||c.Ttt
 XttT..4d4d4.ce-e2e-ece-e2e-ec------cc+cc.Ttt
 XttT..4d4d4.cc+ccccccc+cccccc------c%**c.Ttt
-XttT..4d4d45c-----3---3-----+----1-c%**c.Ttt
+XttT..4d4d45c-----3---3-----+----O-c%**c.Ttt
 XttT..4d4d4.c-------2-------+------c%**c.Ttt
 XtT...4d4d4.c--wwwwwwwwwww--+------c%**c.Ttt
 XtT...4d4d4.c--wwwwwwwwwww--c------c$$$c.Ttt
@@ -669,11 +669,11 @@ ENDMAP
 NAME:   grunt_forest_end_shrine
 PLACE:  Forest:$
 ORIENT: float
-MONS:   the Enchantress band / Bai Suzhen
-MONS:   wendigo / shambling mangrove
+KMONS:  O = the Enchantress / Bai Suzhen, spriggan air mage
+MONS:   spriggan, wendigo / shambling mangrove
 MONS:   spriggan air mage / spriggan druid / \
         spriggan berserker / spriggan rider w:5 / \
-        spriggan defender w:5 / black bear w:5 / \ 
+        spriggan defender w:5 / \ 
         thorn hunter w:5 / shambling mangrove w:5
 MONS:   will-o'-wisp
 KFEAT:  _ = altar_xom
@@ -690,9 +690,9 @@ Ttt3.........3ttT
 Tt..ccccccccc..tTTTTTTTT
 Tt..c||c4$$$c..ttttttttt
 Tt..c|-c****c.2t..3....t
-Tt..cc+c----+....G.G.G..
-Tt2.c----1_-+..2.......@
-Tt..cc+c----+....G.G.G..
+Tt..cc+c-2-2+....G.G.G..
+Tt2.c-2--O_-+..2.......@
+Tt..cc+c-2-2+....G.G.G..
 Tt..c|-c****c.2t..3....t
 Tt..c||c4$$$c..ttttttttt
 Tt..ccccccccc..tTTTTTTTT
@@ -749,7 +749,7 @@ KMONS:    4 = caustic shrike
 KMONS:    5 = spriggan defender
 KMONS:    6 = shambling mangrove / thorn hunter
 KMONS:    7 = black bear
-KMONS:    8 = the Enchantress / Agnes / spriggan air mage
+KMONS:    8 = the Enchantress / Agnes / spriggan air mage, spriggan air mage
 KMONS:    A = water elemental
 KMONS:    L = greenwood witch / wendigo w:30
 KMONS:    N = water nymph

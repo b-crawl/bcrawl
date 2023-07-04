@@ -95,7 +95,7 @@ const Branch branches[NUM_BRANCHES] =
       'N', { RUNE_SPIDER }, BRANCH_NOISE_QUIET },
 
     { BRANCH_SLIME, BRANCH_ORC, 1, 1, 5, 17,
-      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END | BFLAG_SPOTTY,
+      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
       DNGN_ENTER_SLIME, DNGN_EXIT_SLIME, NUM_FEATURES,
       "Slime Pits", "the Pits of Slime", "Slime",
       nullptr,

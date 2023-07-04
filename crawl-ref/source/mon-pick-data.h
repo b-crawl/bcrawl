@@ -1265,8 +1265,8 @@ static const pop_entry pop_water_hell[] =
 static const pop_entry pop_water_forest[] =
 { // Forest branch water monsters
   {  1,  5,   115, FLAT, MONS_WATER_ELEMENTAL },
-  {  0,  5,    74, RISE, MONS_WATER_NYMPH },
-  {  0,  5,    74, RISE, MONS_ELEMENTAL_WELLSPRING },
+  {  0,  5,    50, RISE, MONS_WATER_NYMPH },
+  {  0,  5,    30, RISE, MONS_ELEMENTAL_WELLSPRING },
   { 0,0,0,FLAT,MONS_0 }
 };
 

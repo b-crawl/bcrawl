@@ -87,8 +87,6 @@ void lose_level();
 bool drain_player(int power = 25, bool announce_full = true,
                   bool ignore_protection = false);
 
-bool mesmerise_hungry_players(int time_taken, bool force = false);
-
 void expose_player_to_element(beam_type flavour, int strength = 0,
                               bool slow_cold_blooded = true);
 

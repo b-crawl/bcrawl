@@ -1114,6 +1114,7 @@ bool poison_is_lethal();
 int poison_survival();
 
 bool miasma_player(actor *who, string source_aux = "");
+bool mesmerise_hungry_players(int time_taken, bool force = false);
 
 bool napalm_player(int amount, string source, string source_aux = "");
 void dec_napalm_player(int delay);

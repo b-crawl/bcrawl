@@ -201,7 +201,7 @@ const Branch branches[NUM_BRANCHES] =
     { BRANCH_FOREST, BRANCH_LAIR, 5, 6, 3, 15,
       BFLAG_SPOTTY,
       DNGN_ENTER_FOREST, DNGN_EXIT_FOREST, NUM_FEATURES,
-      "Enchanted Forest", "the Enchanted Forest", "Forest",
+      "Spriggan Forest", "the Spriggan Forest", "Forest",
       nullptr,
       BROWN, BROWN,
       'F', {}, BRANCH_NOISE_NORMAL },

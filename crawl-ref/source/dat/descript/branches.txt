@@ -38,11 +38,10 @@ important here.
 Acquiring a rune of Zot before entering this branch is recommended for most
 adventurers.
 %%%%
-Enchanted Forest
+Spriggan Forest
 
-Amongst these dark and sinister woods lie the lairs of spriggans, fauns, and
-other creatures capable of bending the minds of unwilling intruders to their
-will.
+Amongst these dark and sinister woods lie the lairs of spriggans and other
+dangerous woodland creatures.
 %%%%
 Lair
 

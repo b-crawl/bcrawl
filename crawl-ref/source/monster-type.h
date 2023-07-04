@@ -273,8 +273,8 @@ enum monster_type                      // menv[].type
 #if TAG_MAJOR_VERSION == 34
     MONS_CLAY_GOLEM,
     MONS_WOOD_GOLEM,
-    MONS_STONE_GOLEM,
 #else
+    MONS_ANCIENT_AUTOMATON,
     MONS_SALTLING,
     MONS_PEACEKEEPER,
 #endif

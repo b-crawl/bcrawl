@@ -535,6 +535,11 @@ A humanoid construct of insubstantial memory, floating through the air. Though
 perhaps somewhat changed in shape and bearing few discernable features, still
 they seem somehow to resemble a warrior from the distantly remembered past.
 %%%%
+ancient automaton
+
+A large steam-powered humanoid construct, patrolling its creators' forlorn
+homeland for intruders.
+%%%%
 ancient champion
 
 An unfathomably ancient skeleton. It has hundreds of golden sigils etched onto

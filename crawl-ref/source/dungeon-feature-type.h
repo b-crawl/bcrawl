@@ -139,9 +139,7 @@ enum dungeon_feature_type
     DNGN_ENTER_SWAMP,
     DNGN_ENTER_SHOALS,
     DNGN_ENTER_SPIDER,
-#if TAG_MAJOR_VERSION == 34
     DNGN_ENTER_FOREST,
-#endif
     DNGN_ENTER_DEPTHS,
 
     // Exits from various branches

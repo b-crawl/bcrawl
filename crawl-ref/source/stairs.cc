@@ -95,6 +95,7 @@ bool check_annotation_exclusion_warning()
         }
     }
 
+    bool early_branch_entry_warning = false;
     switch(grd(you.pos()))
     {
     case DNGN_ENTER_ELF:
@@ -151,12 +152,8 @@ bool check_annotation_exclusion_warning()
             simple_god_message(" says: \"I see danger for you here.\"");
             break;
         case GOD_HEPLIAKLQANA:
-        {
-            monster *ancestor = hepliaklqana_ancestor_mon();
-            if (ancestor && you.can_see(*ancestor))
-                mprf(MSGCH_WARN, "Your ancestor seems reluctant to enter.");
+            mprf(MSGCH_WARN, "You feel a sense of reluctance about entering from your ancestor.");
             break;
-        }
         case GOD_SIF_MUNA:
             simple_god_message(" says: \"Your knowledge may yet be insufficient to navigate this place.\"");
             break;

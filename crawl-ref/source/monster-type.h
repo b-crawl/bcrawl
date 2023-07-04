@@ -274,10 +274,10 @@ enum monster_type                      // menv[].type
     MONS_CLAY_GOLEM,
     MONS_WOOD_GOLEM,
 #else
-    MONS_ANCIENT_AUTOMATON,
     MONS_SALTLING,
     MONS_PEACEKEEPER,
 #endif
+    MONS_ANCIENT_AUTOMATON,
     MONS_IRON_GOLEM,
     MONS_CRYSTAL_GUARDIAN,
     MONS_TOENAIL_GOLEM,

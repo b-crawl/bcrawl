@@ -1630,7 +1630,7 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
-    {  MONS_ANCIENT_AUTOMATON,
+    {  MST_ANCIENT_AUTOMATON,
       {
         { SPELL_IOOD, 40, MON_SPELL_NATURAL },
         { SPELL_STEAM_BALL, 10, MON_SPELL_NATURAL | MON_SPELL_BREATH

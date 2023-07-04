@@ -564,7 +564,7 @@ MONS:   spriggan air mage
 MONS:   spriggan defender
 MONS:   the Enchantress
 KMONS:  A = greenwood witch
-KMONS:  B = pixie
+KMONS:  B = will-o'-wisp
 KMONS:  X = spriggan rider / spriggan druid / \
             spriggan berserker / spriggan defender / \
             spriggan air mage
@@ -675,7 +675,7 @@ MONS:   spriggan air mage / spriggan druid / \
         spriggan berserker / spriggan rider w:5 / \
         spriggan defender w:5 / ancient bear w:5 / \ 
         thorn hunter w:5 / shambling mangrove w:5
-MONS:   pixie
+MONS:   will-o'-wisp
 KFEAT:  _ = altar_xom
 KFEAT:  - = floor
 SUBST:  T = tx

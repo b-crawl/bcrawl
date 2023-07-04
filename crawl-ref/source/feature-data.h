@@ -465,12 +465,13 @@ BRANCH_EXIT(DNGN_EXIT_ORC, "staircase back to the Dungeon", "exit_orcish_mines")
 
 #if TAG_MAJOR_VERSION == 34
 BRANCH_ENTRANCE(DNGN_ENTER_DWARF, "staircase to the Dwarven Hall", "enter_dwarven_hall"),
-BRANCH_ENTRANCE(DNGN_ENTER_FOREST, "staircase to the Enchanted Forest", "enter_forest"),
 BRANCH_ENTRANCE(DNGN_ENTER_BLADE, "staircase to the Hall of Blades", "enter_hall_of_blades"),
 BRANCH_EXIT(DNGN_EXIT_DWARF, "staircase back to the Vaults", "exit_dwarven_hall"),
-BRANCH_EXIT(DNGN_EXIT_FOREST, "staircase back to the Vaults", "exit_forest"),
 BRANCH_EXIT(DNGN_EXIT_BLADE, "staircase back to the Vaults", "exit_hall_of_blades"),
 #endif
+
+BRANCH_ENTRANCE(DNGN_ENTER_FOREST, "staircase to the Enchanted Forest", "enter_forest"),
+BRANCH_EXIT(DNGN_EXIT_FOREST, "staircase back to the Lair", "exit_forest"),
 
 BRANCH_ENTRANCE(DNGN_ENTER_LAIR, "staircase to the Lair", "enter_lair"),
 BRANCH_EXIT(DNGN_EXIT_LAIR, "staircase back to the Dungeon", "exit_lair"),

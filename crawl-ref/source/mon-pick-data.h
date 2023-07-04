@@ -657,7 +657,7 @@ static const pop_entry pop_zot[] =
   {  1,  5,   70, FLAT, MONS_ORB_GUARDIAN },
   { 0,0,0,FLAT,MONS_0 }
 };
-#if TAG_MAJOR_VERSION == 34
+
 static const pop_entry pop_forest[] =
 { // Forest
   {  1,  5,  120, FALL, MONS_WOLF },
@@ -684,7 +684,6 @@ static const pop_entry pop_forest[] =
   {  1,  5,  125, FLAT, MONS_BUTTERFLY },
   { 0,0,0,FLAT,MONS_0 }
 };
-#endif
 
 static const pop_entry pop_abyss[] =
 { // Abyss
@@ -1067,9 +1066,7 @@ static const population_list population[] =
     POP(coc),
     POP(tar),
     POP(zot),
-#if TAG_MAJOR_VERSION == 34
     POP(forest),
-#endif
     POP(abyss),
     POP(pan),
     POP(zig),
@@ -1184,9 +1181,7 @@ static const population_list population_zombie[] =
     POP(generic_late_zombie), // Coc
     POP(generic_late_zombie), // Tar
     POP(zot),
-#if TAG_MAJOR_VERSION == 34
     POP(forest),
-#endif
     POP(generic_late_zombie), // Abyss
     POP(generic_late_zombie), // Pan
     POP(zig),
@@ -1300,9 +1295,7 @@ static const population_list population_water[] =
     POP(water_hell), // Coc
     POP(water_hell), // Tar
     POP(water_generic), // Zot
-#if TAG_MAJOR_VERSION == 34
     POP(water_generic), // Forest
-#endif
     POP(water_generic), // Abyss
     POP(water_generic), // Pan
     POP(water_generic), // Zig
@@ -1412,9 +1405,7 @@ static const population_list population_lava[] =
     POP(lava_hell), // Coc
     POP(lava_hell), // Tar
     POP(lava_generic), // Zot
-#if TAG_MAJOR_VERSION == 34
     POP(lava_generic), // Forest
-#endif
     POP(lava_generic), // Abyss
     POP(lava_generic), // Pan
     POP(lava_generic), // Zig

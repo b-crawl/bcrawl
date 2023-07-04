@@ -676,6 +676,7 @@ static const pop_entry pop_forest[] =
   {  0,  4,   55, RISE, MONS_SPRIGGAN_AIR_MAGE },
   {  0,  4,   70, RISE, MONS_SPRIGGAN_DEFENDER },
   {  1,  4,   50, SEMI, MONS_GREENWOOD_WITCH },
+  {  1,  3,   80, SEMI, MONS_WENDIGO },
   {  0,  5,   60, SEMI, MONS_APIS },
   {  1,  5,   70, SEMI, MONS_SHAMBLING_MANGROVE },
   { -2,  4,   70, RISE, MONS_SPARK_WASP },

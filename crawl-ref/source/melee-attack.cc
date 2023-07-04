@@ -3041,6 +3041,11 @@ void melee_attack::mons_apply_attack_flavour()
         if (coinflip())
             defender->weaken(attacker, 12);
         break;
+    
+    case AF_WENDIGO:
+        if (defender->is_player() && one_chance_in(2))
+            mesmerise_hungry_players(0, true);
+        break;
     }
 }
 

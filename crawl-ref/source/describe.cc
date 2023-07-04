@@ -3580,6 +3580,7 @@ static string _flavour_base_desc(attack_flavour flavour)
         { AF_REACH_STING,       "cause poisoning" },
         { AF_REACH_TONGUE,      "deal extra acid damage" },
         { AF_WEAKNESS,          "cause weakness" },
+        { AF_WENDIGO,           "cause mesmerization" },
         { AF_KITE,              "" },
         { AF_SWOOP,             "" },
         { AF_PLAIN,             "" },

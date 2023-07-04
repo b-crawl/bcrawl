@@ -1030,6 +1030,7 @@ water_nymph MONS_WATER_NYMPH
 bog_body MONS_BOG_BODY
 necrophage MONS_NECROPHAGE
 ghoul MONS_GHOUL
+wendigo MONS_WENDIGO
 
 %sdir mon/unique
 %rim 0

@@ -817,9 +817,7 @@ ENDMAP
 NAME:  gammafunk_forest_pool
 TAGS:  gammafunk_forest_water_palace_pool unrand no_rotate no_vmirror
 TAGS:  allow_dup patrolling no_monster_gen
-SUBST: N = N:20 L
-KMONS: N = water nymph
-KMONS: L = faerie dragon
+KMONS: N = water nymph / will-o'-wisp
 KFEAT: NL = shallow_water
 MAP
 WWW

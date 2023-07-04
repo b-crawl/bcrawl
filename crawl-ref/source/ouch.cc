@@ -31,6 +31,7 @@
 #include "fight.h"
 #include "files.h"
 #include "fineff.h"
+#include "food.h"
 #include "god-abil.h"
 #include "god-passive.h"
 #include "hints.h"
@@ -411,6 +412,49 @@ bool drain_player(int power, bool announce_full, bool ignore_protection)
     }
 
     return false;
+}
+
+static void mesmerise_hungry_players(int time_taken, bool force)
+{
+    if (!force)
+    {
+        if (you.hp <= (you.hp_max * 3) / 4)
+            return false;
+        
+        if (!x_chance_in_y(time_taken, 25))
+            return false;
+    }
+
+    // based on obsidian axe
+    monster *mon = nullptr;
+    for (distance_iterator di(you.pos(), true, true, LOS_RADIUS); di; ++di)
+    {
+        mon = monster_at(*di);
+        if (mon && you.can_see(*mon)
+            && you.possible_beholder(mon)
+            && mons_is_threatening(*mon)
+            && determine_chunk_effect(mons_corpse_effect(mon->type)) == CE_CLEAN
+            && !you_foodless())
+        {
+            break;
+        }
+    }
+    
+    if (mon)
+    {
+        monster& closest = *mon;
+
+        if (!you.beheld_by(closest))
+        {
+            // To avoid trapping the player, other beholders are removed.
+            you.clear_beholders();
+            you.add_beholder(closest, true);
+            
+            mprf("Visions of eating %s fill your mind.",
+                    closest.name(DESC_THE).c_str());
+            return true;
+        }
+    }
 }
 
 static void _xom_checks_damage(kill_method_type death_type,

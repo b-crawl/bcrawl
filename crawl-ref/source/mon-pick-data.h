@@ -289,6 +289,7 @@ static const pop_entry pop_swamp[] =
   {  0,  4,  425, SEMI, MONS_SHAMBLING_MANGROVE },
   {  0,  4,  120, RISE, MONS_BOGGART },
   {  0,  6,   52, SEMI, MONS_VERY_UGLY_THING },
+  {  0,  6,   52, SEMI, MONS_WENDIGO },
   {  1,  3,  525, RISE, MONS_SPRIGGAN_DRUID },
   { 0,0,0,FLAT,MONS_0 }
 };
@@ -992,6 +993,7 @@ static const pop_entry pop_depths[] =
   {  1,  8,  370, FALL, MONS_ETTIN },
   {  1, 10,  100, SEMI, MONS_SPARK_WASP },
   {  1, 12,   60, FLAT, MONS_LICH },
+  {  1, 12,   60, FLAT, MONS_WENDIGO },
   {  1, 12,   40, FLAT, MONS_FLAYED_GHOST },
   {  1, 12,   80, SEMI, MONS_GLOWING_SHAPESHIFTER },
   {  1, 12,   80, SEMI, MONS_TENGU_REAVER },

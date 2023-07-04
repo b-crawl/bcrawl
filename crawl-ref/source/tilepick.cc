@@ -284,7 +284,6 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
     // branch entry stairs
 #if TAG_MAJOR_VERSION == 34
     case DNGN_ENTER_DWARF:
-    case DNGN_ENTER_FOREST:
     case DNGN_ENTER_BLADE:
         return TILE_DNGN_ENTER;
 #endif
@@ -295,6 +294,7 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
     case DNGN_ENTER_ELF:
         return TILE_DNGN_ENTER_ELF;
     case DNGN_ENTER_LAIR:
+    case DNGN_ENTER_FOREST:
         return TILE_DNGN_ENTER_LAIR;
     case DNGN_ENTER_SNAKE:
         return TILE_DNGN_ENTER_SNAKE;
@@ -342,7 +342,6 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
     // branch exit stairs
 #if TAG_MAJOR_VERSION == 34
     case DNGN_EXIT_DWARF:
-    case DNGN_EXIT_FOREST:
     case DNGN_EXIT_BLADE:
         return TILE_DNGN_RETURN;
 #endif
@@ -353,6 +352,7 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
     case DNGN_EXIT_ELF:
         return TILE_DNGN_EXIT_ELF;
     case DNGN_EXIT_LAIR:
+    case DNGN_EXIT_FOREST:
         return TILE_DNGN_EXIT_LAIR;
     case DNGN_EXIT_SNAKE:
         return TILE_DNGN_EXIT_SNAKE;

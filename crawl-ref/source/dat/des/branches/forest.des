@@ -702,6 +702,31 @@ TTtt.........ttTT
   TTTTTTTTTTTTT
 ENDMAP
 
+## A camper cannibalizes his companions to survive and turns into a wendigo
+NAME:  manman_forest_wendigo_camp
+DEPTH: Forest
+MONS:  wendigo
+: dgn.delayed_decay(_G, 'd', 'human skeleton ')
+MARKER: L = lua:fog_machine { cloud_type = "flame", \
+             pow_min = 1000, pow_max = 1000, delay = 1, \
+             size = 1, walk_dist = 0, start_clouds = 1, excl_rad = 0 }
+MAP
+        tttttt
+      tttttttttt
+    tttttt.dtttttt
+  ttttttt....ttttttt
+ tttttttd.....ttttttt
+ttttttt...LL1..tttttt
+ttttttt...LLd..tttttt
+ ttttttt......ttttt
+  tttttttd..ttttt
+    tttttt.tttttt
+      tttt.ttttt
+       ttt.ttt
+        ttdtt
+        tt@tt
+ENDMAP
+
 ###############################################################################
 ## A palace where denizens of the forest gather to worship a powerful
 ## water deity

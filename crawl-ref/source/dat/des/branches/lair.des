@@ -1167,7 +1167,7 @@ t..Q.Q..t
 ENDMAP
 
 # A secluded grove.
-NAME:   forest_entry_grove
+NAME:   lair_entry_grove
 DEPTH:  Lair:2-, !Lair:$
 MONS:   centaur w:4 / spriggan
 MONS:   wolf, black bear, polar bear
@@ -1192,7 +1192,7 @@ xxtttt...ttttxx
    xxtt@@ttx
 ENDMAP
 
-NAME:   grunt_forest_small_clearing_treed
+NAME:   grunt_lair_small_clearing_treed
 TAGS:   transparent patrolling
 DEPTH:  Lair
 MONS:   plant / bush
@@ -1249,7 +1249,7 @@ tt.........w"w...tt
       tt@@@tt
 ENDMAP
 
-NAME:   grunt_forest_large_clearing_hut
+NAME:   grunt_lair_large_clearing_hut
 TAGS:   transparent
 DEPTH:  Lair
 MONS:   plant / bush, spriggan / centaur w:2
@@ -1731,7 +1731,7 @@ ENDMAP
 
 ####
 
-NAME:    bh_autumn_forest_stairs
+NAME:    bh_autumn_lair_stairs
 TAGS:    extra luniq_staircase decor
 DEPTH:   Lair
 WEIGHT:  5

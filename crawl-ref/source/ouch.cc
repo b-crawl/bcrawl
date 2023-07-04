@@ -414,7 +414,7 @@ bool drain_player(int power, bool announce_full, bool ignore_protection)
     return false;
 }
 
-static void mesmerise_hungry_players(int time_taken, bool force)
+bool mesmerise_hungry_players(int time_taken, bool force)
 {
     if (!force)
     {

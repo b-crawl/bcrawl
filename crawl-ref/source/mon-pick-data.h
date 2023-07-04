@@ -665,6 +665,7 @@ static const pop_entry pop_zot[] =
 
 static const pop_entry pop_forest[] =
 { // Forest
+  {  1,  5,  200, FALL, MONS_NO_MONSTER },
   {  1,  5,  100, FALL, MONS_DEATH_YAK },
   {  1,  5,  100, FALL, MONS_DIRE_ELEPHANT },
   {  1,  5,  100, FLAT, MONS_ANACONDA },

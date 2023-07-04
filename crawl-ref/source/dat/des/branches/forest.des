@@ -493,7 +493,7 @@ ORIENT: north
 PLACE:  Forest:$
 KITEM:  O = superb_item
 KITEM:  1 = superb_item
-KMONS:  O = the Enchantress
+KMONS:  O = the Enchantress / Agnes / spriggan air mage / spriggan defender
 KMONS:  1 = spriggan defender
 MONS:   spriggan defender, spriggan berserker, spriggan druid
 MONS:   spriggan rider, spriggan air mage
@@ -562,7 +562,7 @@ MONS:   spriggan druid
 MONS:   spriggan berserker
 MONS:   spriggan air mage
 MONS:   spriggan defender
-MONS:   the Enchantress / Agnes / Jorgrun
+MONS:   the Enchantress / Agnes / Jorgrun / spriggan air mage
 KMONS:  A = greenwood witch
 KMONS:  B = will-o'-wisp
 KMONS:  X = spriggan rider / spriggan druid / \
@@ -749,7 +749,7 @@ KMONS:    4 = caustic shrike
 KMONS:    5 = spriggan defender
 KMONS:    6 = shambling mangrove / thorn hunter
 KMONS:    7 = black bear
-KMONS:    8 = the Enchantress / Agnes
+KMONS:    8 = the Enchantress / Agnes / spriggan air mage
 KMONS:    A = water elemental
 KMONS:    L = greenwood witch / wendigo w:30
 KMONS:    N = water nymph

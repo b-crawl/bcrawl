@@ -932,10 +932,16 @@ void bolt::burn_wall_effect()
     }
     else if (you.can_smell())
         emit_message("You smell burning wood.");
-    if (whose_kill() == KC_YOU)
+    if (whose_kill() == KC_YOU || (whose_kill() == KC_FRIENDLY && !crawl_state.game_is_arena()))
+    {
         did_god_conduct(DID_KILL_PLANT, 1, god_cares());
-    else if (whose_kill() == KC_FRIENDLY && !crawl_state.game_is_arena())
-        did_god_conduct(DID_KILL_PLANT, 1, god_cares());
+        
+        if (player_in_branch(BRANCH_FOREST))
+        {
+            mpr("The spirits of the forest are upset.");
+            drain_player(15, false, true);
+        }
+    }
 
     // Trees do not burn so readily in a wet environment.
     if (player_in_branch(BRANCH_SWAMP))
@@ -965,27 +971,31 @@ void bolt::affect_wall()
         if (!in_bounds(pos()) || !can_affect_wall(pos(), true))
             finish_beam();
 
-        // potentially warn about offending your god by burning trees
-        const bool god_relevant = you.religion == GOD_FEDHAS
-                                  && can_burn_trees();
-        const bool vetoed = env.markers.property_at(pos(), MAT_ANY, "veto_fire")
-                            == "veto";
-        // XXX: should check env knowledge for feat_is_tree()
-        if (god_relevant && feat_is_tree(grd(pos())) && !vetoed
-            && !is_targeting && YOU_KILL(thrower) && !dont_stop_trees)
-        {
-            const string prompt =
-                make_stringf("Are you sure you want to burn %s?",
-                             feature_description_at(pos(), false, DESC_THE,
-                                                    false).c_str());
 
-            if (yesno(prompt.c_str(), false, 'n'))
-                dont_stop_trees = true;
-            else
+        // XXX: should check env knowledge for feat_is_tree()
+        if (feat_is_tree(grd(pos())) && can_burn_trees())
+        {
+            // potentially warn about offending your god by burning trees, or drain in Forest
+            bool warning_relevant = (you.religion == GOD_FEDHAS) || player_in_branch(BRANCH_FOREST);
+            const bool vetoed = env.markers.property_at(pos(), MAT_ANY, "veto_fire")
+                                == "veto";
+
+            if (warning_relevant && !vetoed
+                && !is_targeting && YOU_KILL(thrower) && !dont_stop_trees)
             {
-                canned_msg(MSG_OK);
-                beam_cancelled = true;
-                finish_beam();
+                const string prompt =
+                    make_stringf("Are you sure you want to burn %s?",
+                                 feature_description_at(pos(), false, DESC_THE,
+                                                        false).c_str());
+
+                if (yesno(prompt.c_str(), false, 'n'))
+                    dont_stop_trees = true;
+                else
+                {
+                    canned_msg(MSG_OK);
+                    beam_cancelled = true;
+                    finish_beam();
+                }
             }
         }
 
@@ -2683,6 +2693,7 @@ bool bolt::can_burn_trees() const
     case SPELL_BOLT_OF_MAGMA:
     case SPELL_FIREBALL:
     case SPELL_INNER_FLAME:
+    case SPELL_FIRE_BREATH:
         return true;
     default:
         return false;

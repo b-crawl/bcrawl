@@ -36,7 +36,7 @@ const Branch branches[NUM_BRANCHES] =
       BROWN, BROWN,
       'O', {}, BRANCH_NOISE_NORMAL },
 
-    { BRANCH_ELF, BRANCH_ORC, 1, 1, 3, 15,
+    { BRANCH_ELF, BRANCH_LAIR, 5, 6, 3, 15,
       BFLAG_DANGEROUS_END,
       DNGN_ENTER_ELF, DNGN_EXIT_ELF, NUM_FEATURES,
       "Elven Halls", "the Elven Halls", "Elf",
@@ -94,8 +94,8 @@ const Branch branches[NUM_BRANCHES] =
       BROWN, YELLOW,
       'N', { RUNE_SPIDER }, BRANCH_NOISE_QUIET },
 
-    { BRANCH_SLIME, BRANCH_LAIR, 5, 6, 5, 17,
-      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END | BFLAG_SPOTTY,
+    { BRANCH_SLIME, BRANCH_ORC, 1, 1, 5, 17,
+      BFLAG_NO_ITEMS | BFLAG_DANGEROUS_END,
       DNGN_ENTER_SLIME, DNGN_EXIT_SLIME, NUM_FEATURES,
       "Slime Pits", "the Pits of Slime", "Slime",
       nullptr,
@@ -197,16 +197,14 @@ const Branch branches[NUM_BRANCHES] =
       "You feel the power of the Orb interfering with translocations here.",
       BLACK, BLACK, // set per-map
       'Z', {}, BRANCH_NOISE_NORMAL },
-#if TAG_MAJOR_VERSION == 34
 
-    { BRANCH_FOREST, BRANCH_VAULTS, 2, 3, 5, 19,
+    { BRANCH_FOREST, BRANCH_LAIR, 5, 6, 3, 15,
       BFLAG_SPOTTY,
       DNGN_ENTER_FOREST, DNGN_EXIT_FOREST, NUM_FEATURES,
-      "Forest", "the Enchanted Forest", "Forest",
+      "Spriggan Forest", "the Spriggan Forest", "Forest",
       nullptr,
       BROWN, BROWN,
       'F', {}, BRANCH_NOISE_NORMAL },
-#endif
 
     { BRANCH_ABYSS, NUM_BRANCHES, -1, -1, 5, 24,
       BFLAG_NO_XLEV_TRAVEL | BFLAG_NO_MAP,

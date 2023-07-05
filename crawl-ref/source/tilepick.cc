@@ -284,7 +284,6 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
     // branch entry stairs
 #if TAG_MAJOR_VERSION == 34
     case DNGN_ENTER_DWARF:
-    case DNGN_ENTER_FOREST:
     case DNGN_ENTER_BLADE:
         return TILE_DNGN_ENTER;
 #endif
@@ -295,6 +294,7 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
     case DNGN_ENTER_ELF:
         return TILE_DNGN_ENTER_ELF;
     case DNGN_ENTER_LAIR:
+    case DNGN_ENTER_FOREST:
         return TILE_DNGN_ENTER_LAIR;
     case DNGN_ENTER_SNAKE:
         return TILE_DNGN_ENTER_SNAKE;
@@ -342,7 +342,6 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
     // branch exit stairs
 #if TAG_MAJOR_VERSION == 34
     case DNGN_EXIT_DWARF:
-    case DNGN_EXIT_FOREST:
     case DNGN_EXIT_BLADE:
         return TILE_DNGN_RETURN;
 #endif
@@ -353,6 +352,7 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
     case DNGN_EXIT_ELF:
         return TILE_DNGN_EXIT_ELF;
     case DNGN_EXIT_LAIR:
+    case DNGN_EXIT_FOREST:
         return TILE_DNGN_EXIT_LAIR;
     case DNGN_EXIT_SNAKE:
         return TILE_DNGN_EXIT_SNAKE;
@@ -1066,9 +1066,10 @@ static tileidx_t _zombie_tile_to_simulacrum(const tileidx_t z_tile)
     case TILEP_MONS_ZOMBIE_QUADRUPED_WINGED:
         return TILEP_MONS_SIMULACRUM_QUADRUPED_LARGE;
     case TILEP_MONS_ZOMBIE_BAT:
-    case TILEP_MONS_ZOMBIE_BIRD: /* no bird simulacrum tile */
-    case TILEP_MONS_ZOMBIE_HARPY:
+    case TILEP_MONS_ZOMBIE_HARPY: // much less dangerous than shrikes
         return TILEP_MONS_SIMULACRUM_BAT;
+    case TILEP_MONS_ZOMBIE_BIRD:
+        return TILEP_MONS_SIMULACRUM_SHRIKE;
     case TILEP_MONS_ZOMBIE_BEE:
         return TILEP_MONS_SIMULACRUM_BEE;
     case TILEP_MONS_ZOMBIE_BEETLE:
@@ -2709,7 +2710,7 @@ tileidx_t tileidx_item(const item_def &item)
     case OBJ_ORBS:
         if (item.quantity <= 0)
             return TILE_UNCOLLECTED_ORB;
-        return TILE_ORB + ui_random(tile_main_count(TILE_ORB));
+        return TILE_ORB + (you.frame_no % tile_main_count(TILE_ORB));
 
     case OBJ_MISCELLANY:
         return _tileidx_misc(item);
@@ -3867,6 +3868,11 @@ int enchant_to_int(const item_def &item)
 {
     if (is_random_artefact(item))
         return 4;
+
+    // Dragon scales and troll hides can't have egos.
+    // Only apply their special tiles to randarts.
+    if (armour_is_hide(item))
+        return 0;
 
     switch (item.flags & ISFLAG_COSMETIC_MASK)
     {

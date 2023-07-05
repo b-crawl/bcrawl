@@ -254,6 +254,7 @@ bool player::possible_beholder(const monster* mon) const
         && !mon->wont_attack() && !mon->pacified()
         && (
             you.species == SP_GHOUL
+            || you.duration[DUR_WENDIGO]
             || player_equip_unrand(UNRAND_DEMON_AXE)
             || (
             (mons_is_siren_beholder(mon->type) || mon->has_spell(SPELL_MESMERISE))

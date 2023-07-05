@@ -849,7 +849,7 @@ ENDMAP
 # TODO: Take out special case for non-Orc non-Slime.
 #
 NAME:   layout_caves
-DEPTH:  Orc, Slime
+DEPTH:  Orc
 WEIGHT: 10
 ORIENT: encompass
 TAGS:   overwritable layout allow_dup unrand layout_type_open_caves

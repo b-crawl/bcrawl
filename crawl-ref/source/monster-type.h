@@ -273,11 +273,11 @@ enum monster_type                      // menv[].type
 #if TAG_MAJOR_VERSION == 34
     MONS_CLAY_GOLEM,
     MONS_WOOD_GOLEM,
-    MONS_STONE_GOLEM,
 #else
     MONS_SALTLING,
     MONS_PEACEKEEPER,
 #endif
+    MONS_ANCIENT_AUTOMATON,
     MONS_IRON_GOLEM,
     MONS_CRYSTAL_GUARDIAN,
     MONS_TOENAIL_GOLEM,
@@ -411,6 +411,7 @@ enum monster_type                      // menv[].type
     MONS_TENGU_WARRIOR,
     MONS_TENGU_CONJURER,
     MONS_TENGU_REAVER,
+    MONS_GREENWOOD_WITCH,
 #endif
     MONS_MINOTAUR,
     MONS_NAGA,
@@ -1059,6 +1060,8 @@ enum monster_type                      // menv[].type
     MONS_IRONHEART_BEASTMASTER,
     MONS_ROCKSLIME,
     MONS_ZENATA,
+    MONS_GREENWOOD_WITCH,
+    MONS_WENDIGO,
 #endif
 
     NUM_MONSTERS,               // used for polymorph

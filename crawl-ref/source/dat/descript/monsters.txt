@@ -535,6 +535,11 @@ A humanoid construct of insubstantial memory, floating through the air. Though
 perhaps somewhat changed in shape and bearing few discernable features, still
 they seem somehow to resemble a warrior from the distantly remembered past.
 %%%%
+ancient automaton
+
+A large steam-powered humanoid construct, patrolling its creators' forlorn
+homeland for intruders.
+%%%%
 ancient champion
 
 An unfathomably ancient skeleton. It has hundreds of golden sigils etched onto
@@ -1269,6 +1274,12 @@ green draconian
 
 A muscular green-scaled humanoid with a reptilian tail and small wings.
 %%%%
+greenwood witch
+
+Followers of the ancient forest ways, these witches patrol their sacred
+woodlands on a pair of stilt-like chicken legs. They have mastered a variety
+of spells to incapacitate intruders.
+%%%%
 grey draconian
 
 A muscular grey-scaled humanoid with a reptilian tail and small wings.
@@ -1869,6 +1880,11 @@ orc warrior
 An experienced, armoured and well-armed orc soldier, able to command a small
 mob of its fellows.
 %%%%
+orc berserker
+
+A dangerous orc soldier that carries a potion of berserk rage and charges
+fearlessly into battle.
+%%%%
 orc wizard
 
 An orc who has gained proficiency in the occult arts, using them for martial
@@ -2118,9 +2134,9 @@ life force of living beings.
 shambling mangrove
 
 A gnarled mangrove, possessed of sapience and a cantankerous disposition. Its
-roots run deep through the water and soil of its marshy home and can make
-footing very difficult for those who provoke its ire. Marsh fauna are often
-found nesting within its branches, and may not take kindly to being disturbed.
+roots run deep through the water and soil and can make footing very difficulty
+for those who provoke its ire. Fauna are often found nesting within its 
+branches, and may not take kindly to being disturbed.
 %%%%
 shapeshifter
 
@@ -2399,8 +2415,8 @@ powerful, even among giants.
 %%%%
 thorn hunter
 
-A predatory marsh plant, possessed of motility and a rudimentary intelligence.
-It ensnares its prey with protrusions of spiny brambles and then skewers the
+A predatory plant, possessed of motility and a rudimentary intelligence. It 
+ensnares its prey with protrusions of spiny brambles and then skewers the
 trapped creatures with its razor-sharp thorns.
 %%%%
 toadstool
@@ -2564,6 +2580,13 @@ water nymph
 A capricious nature spirit, deeply bonded with the waters in which she lives.
 Wherever they flow, so may she, and ponds and rivers surge and leap at her
 whim.
+%%%%
+wendigo
+
+A large but emaciated gray-skinned undead figure with the head of a skeletal
+deer, a wendigo is created when a human resorts to cannibalism to survive. It
+desires nothing but to feed on the flesh of the living, and may inflict this
+psychosis upon its prey.
 %%%%
 white draconian
 

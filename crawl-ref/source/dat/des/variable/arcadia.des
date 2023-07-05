@@ -124,9 +124,9 @@ tttttttttttttttttttttttttttttttttttttttttttttttttttttttttxxxxxxxxxxxxxxxxxxxxxxx
 ENDMAP
 
 ################################################################################
-NAME:   grunt_forest_end_chambers
+NAME:   grunt_forest_chambers_depths
 ORIENT: north
-KMONS:  O = the Enchantress patrolling
+KMONS:  O = the Enchantress patrolling / Frances, spriggan defender
 MONS:   spriggan defender, spriggan berserker, spriggan rider, spriggan air mage
 MONS:   faun / centaur warrior / manticore w:5 / yaktaur captain w:5
 MONS:   tengu warrior / two-headed ogre / deep elf knight w:5 / \
@@ -193,10 +193,11 @@ ttttttttttt''''''''''ttt'''''ttttt
 ENDMAP
 
 ################################################################################
-NAME:   grunt_forest_end_winery
+NAME:   grunt_forest_winery_depths
 TAGS:   no_pool_fixup
 ORIENT: northeast
-MONS:   the Enchantress patrolling, thorn hunter / spriggan defender
+KMONS:  O = the Enchantress patrolling / Frances / Margery, spriggan defender
+MONS:   spriggan, thorn hunter / spriggan defender
 MONS:   tengu reaver / glowing shapeshifter hd:13
 MONS:   satyr w:15 / spriggan berserker w:15 / spriggan air mage, faun
 MONS:   tengu conjurer ; quarterstaff . robe . longbow . arrow / \
@@ -229,7 +230,7 @@ XttT..PdPdP.ce-e-e-e-e-e-e-eceeeeee+|||c.Ttxx
 XttT..PdPdP.c-e-e-e-c-e-e-e-c------c|||c.Ttxx
 XttT..PdPdP.ce-e2e-ece-e2e-ec------cc+cc.Ttxx
 XttT..PdPdP.cc+ccccccc+cccccc---2-4c%**c.Ttxx
-XttT..PdPdP5c-----4---4-----+----1-c%**c.Ttxx
+XttT..PdPdP5c-----4---4-----+----O-c%**c.Ttxx
 XttT..PdPdP.c-------2-------+---2-4c%**c.Ttxx
 XtT...PdPdP.c--wwwwwwwwwww--+------c%**c.Ttxx
 XtT...PdPdP.c--wwwwwwwwwww--c------c$$$c.Ttxx
@@ -253,10 +254,10 @@ XXXXXXXXXXXXT@TXXXXXXXXXXXXXXT@TXXXXXXXXXXXxx
 ENDMAP
 
 ################################################################################
-NAME:   grunt_forest_end_shrine
+NAME:   grunt_forest_shrine_depths
 ORIENT: float
-MONS:   the Enchantress patrolling
-MONS:   spriggan defender w:14 / thorn hunter
+KMONS:  O = the Enchantress patrolling / Bai Suzhen, spriggan defender
+MONS:   spriggan, spriggan defender w:14 / thorn hunter
 MONS:   sphinx w:20 / tengu reaver w:15 / deep elf high priest / \
         ettin w:5 ; giant club randart . giant club randart
 MONS:   spriggan air mage w:15 / spriggan druid / spriggan berserker / \
@@ -284,7 +285,7 @@ Tt..ccccccccc..tTTTTTTTT
 Tt..c||c$$$$c..ttttttttt
 Tt..c|-c****c.2t..4....t
 Tt..cc+c2-4-+....G.G.G.@
-Tt2.c-1-4-_-+..2........
+Tt2.c-O-4-_-+..2........
 Tt..cc+c2-4-+....G.G.G.@
 Tt..c|-c****c.2t..4....t
 Tt..c||c$$$$c..ttttttttt

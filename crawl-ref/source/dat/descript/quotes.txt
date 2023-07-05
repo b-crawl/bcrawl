@@ -3267,6 +3267,16 @@ water nymph
 watery tart threw a sword at you.”
     -Monty Python and the Holy Grail, 1975.
 %%%%
+wendigo
+
+“It was a large creature, as tall as a tree, with a lipless mouth and jagged
+teeth. Its breath was a strange hiss, its footprints full of blood, and it ate
+any man, woman or child who ventured into its territory. And those were the lucky 
+ones. Sometimes, the Windigo chose to possess a person instead, and then the
+luckless individual became a Windigo himself, hunting down those he had once loved
+and feasting upon their flesh.”
+    -Ojibwa First Nation (retold by S.E. Schlosser), "Windigo". 2007.
+%%%%
 whip
 
 “Not with a Club, the Heart is broken

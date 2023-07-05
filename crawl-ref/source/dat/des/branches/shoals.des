@@ -74,6 +74,7 @@ end
 
 NAME:    bhauth_shoals_entry_nymph_pool
 TAGS:    shoals_entry no_tele_into
+WEIGHT:  8
 KMONS:   O = water nymph
 KFEAT:   E = shallow_water
 KMONS:   E = water elemental

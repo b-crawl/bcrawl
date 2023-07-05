@@ -164,17 +164,18 @@ static const pop_entry pop_orc[] =
   {  1,  4,   40, FLAT, MONS_TROLL },
   {  1,  4,   12, FLAT, MONS_CYCLOPS },
   {  1,  4,    4, FLAT, MONS_ETTIN },
+  {  1,  4,    4, FLAT, MONS_SLIME_CREATURE },
   { 0,0,0,FLAT,MONS_0 }
 };
 
 static const pop_entry pop_elf[] =
 { // Elven Halls (OOD cap: 7)
-  {  1,  5,   50, FLAT, MONS_ORC_HIGH_PRIEST },
-  {  1,  6,   50, FLAT, MONS_ORC_SORCERER },
   {  1,  7, 2775, FLAT, MONS_DEEP_ELF_MAGE },
   {  1,  7, 1385, FLAT, MONS_DANCING_WEAPON },
   {  1,  7,  925, FLAT, MONS_DEEP_ELF_KNIGHT },
   {  1,  7,  925, FLAT, MONS_DEEP_ELF_ARCHER },
+  {  1,  3,  100, FALL, MONS_TENGU_WARRIOR },
+  {  1,  3,  100, FALL, MONS_TENGU_CONJURER },
   {  1,  7,  345, FLAT, MONS_FIRE_ELEMENTAL },
   {  1,  7,  345, FLAT, MONS_WATER_ELEMENTAL },
   {  1,  7,  345, FLAT, MONS_AIR_ELEMENTAL },
@@ -289,6 +290,7 @@ static const pop_entry pop_swamp[] =
   {  0,  4,  425, SEMI, MONS_SHAMBLING_MANGROVE },
   {  0,  4,  120, RISE, MONS_BOGGART },
   {  0,  6,   52, SEMI, MONS_VERY_UGLY_THING },
+  {  0,  6,   52, SEMI, MONS_WENDIGO },
   {  1,  3,  525, RISE, MONS_SPRIGGAN_DRUID },
   { 0,0,0,FLAT,MONS_0 }
 };
@@ -371,6 +373,7 @@ static const pop_entry pop_slime[] =
   {  1,  5,  200, RISE, MONS_DEATH_OOZE },
   {  2,  5,  100, RISE, MONS_GLOWING_ORANGE_BRAIN },
   {  2,  8,   50, SEMI, MONS_FLOATING_EYE },
+  {  1,  4,  800, FALL, MONS_ANCIENT_AUTOMATON },
   {  1,  5, 2750, FLAT, MONS_NO_MONSTER }, // Old ooze and jelly weight
   { 0,0,0,FLAT,MONS_0 }
 };
@@ -386,6 +389,8 @@ static const pop_entry pop_vaults[] =
   { -2,  6,  136, SEMI, MONS_GREAT_ORB_OF_EYES },
   { -2,  6,  136, SEMI, MONS_DEEP_ELF_KNIGHT },
   { -2,  6,  136, SEMI, MONS_DEEP_ELF_ARCHER },
+  {  1,  3,  100, FALL, MONS_TENGU_WARRIOR },
+  {  1,  3,  100, FALL, MONS_TENGU_CONJURER },
   { -2,  6,  178, PEAK, MONS_ICE_DRAGON },
   { -1,  5,   80, FLAT, MONS_GLOWING_ORANGE_BRAIN },
   { -1,  9,  260, PEAK, MONS_FREEZING_WRAITH },
@@ -657,34 +662,33 @@ static const pop_entry pop_zot[] =
   {  1,  5,   70, FLAT, MONS_ORB_GUARDIAN },
   { 0,0,0,FLAT,MONS_0 }
 };
-#if TAG_MAJOR_VERSION == 34
+
 static const pop_entry pop_forest[] =
 { // Forest
-  {  1,  5,  120, FALL, MONS_WOLF },
-  {  1,  5,   35, FALL, MONS_BLACK_BEAR },
-  {  1,  5,   50, FLAT, MONS_YAK },
-  {  1,  7,  145, SEMI, MONS_DIRE_ELEPHANT },
-  {  1,  5,   45, FLAT, MONS_HORNET },
-  {  1,  6,   75, FALL, MONS_REDBACK },
-  {  2,  7,   35, SEMI, MONS_WOLF_SPIDER },
-  {  1,  9,   75, SEMI, MONS_OKLOB_PLANT },
-  {  1,  5,  170, FLAT, MONS_DRYAD },
-  {  1,  5,  120, FLAT, MONS_WIND_DRAKE },
-  { -1,  5,   75, SEMI, MONS_FAUN },
-  {  0,  9,  105, SEMI, MONS_SATYR },
-  {  2,  8,   55, SEMI, MONS_SPRIGGAN_DRUID },
-  {  1,  6,  155, SEMI, MONS_SPRIGGAN_RIDER },
-  {  1,  9,  235, SEMI, MONS_SPRIGGAN_BERSERKER },
-  {  1,  8,  155, SEMI, MONS_SPRIGGAN_AIR_MAGE },
-  {  3,  5,  115, RISE, MONS_SPRIGGAN_DEFENDER },
-  {  1,  7,   85, PEAK, MONS_APIS },
-  {  2,  7,  165, SEMI, MONS_SHAMBLING_MANGROVE },
-  {  1,  6,   85, SEMI, MONS_ANACONDA },
-  {  1,  9,  100, PEAK, MONS_THORN_HUNTER },
-  {  1,  5,  125, FLAT, MONS_BUTTERFLY },
+  {  1,  5,  200, FALL, MONS_NO_MONSTER },
+  {  1,  5,  100, FALL, MONS_DEATH_YAK },
+  {  1,  5,  100, FALL, MONS_DIRE_ELEPHANT },
+  {  1,  5,  100, FLAT, MONS_ANACONDA },
+  {  1,  5,   35, FLAT, MONS_WOLF_SPIDER },
+  {  1,  5,   35, FLAT, MONS_INSUBSTANTIAL_WISP },
+  {  1,  9,   50, FLAT, MONS_OKLOB_PLANT },
+  {  1,  3,   40, SEMI, MONS_DRYAD },
+  {  1,  4,   40, SEMI, MONS_FIRE_DRAGON },
+  {  1,  5,   70, FLAT, MONS_HIPPOGRIFF },
+  {  0,  5,  105, SEMI, MONS_SATYR },
+  {  0,  4,   55, RISE, MONS_SPRIGGAN_DRUID },
+  {  0,  4,  155, FLAT, MONS_SPRIGGAN_RIDER },
+  { -1,  4,   70, RISE, MONS_SPRIGGAN_BERSERKER },
+  {  0,  4,   55, RISE, MONS_SPRIGGAN_AIR_MAGE },
+  {  0,  4,   70, RISE, MONS_SPRIGGAN_DEFENDER },
+  {  1,  4,   50, SEMI, MONS_GREENWOOD_WITCH },
+  {  1,  3,   80, SEMI, MONS_WENDIGO },
+  {  0,  5,   60, SEMI, MONS_APIS },
+  {  1,  5,   70, SEMI, MONS_SHAMBLING_MANGROVE },
+  { -2,  4,   70, RISE, MONS_SPARK_WASP },
+  {  1,  5,   70, SEMI, MONS_THORN_HUNTER },
   { 0,0,0,FLAT,MONS_0 }
 };
-#endif
 
 static const pop_entry pop_abyss[] =
 { // Abyss
@@ -988,12 +992,11 @@ static const pop_entry pop_depths[] =
   {  1,  6,  225, FLAT, MONS_GREAT_ORB_OF_EYES },
   {  1,  6,  100, FLAT, MONS_GLOWING_ORANGE_BRAIN },
   {  1,  7,  100, FALL, MONS_VAMPIRE_MAGE },
-  {  1,  7,  200, FALL, MONS_TENGU_WARRIOR },
-  {  1,  7,  100, FALL, MONS_TENGU_CONJURER },
   {  1,  8,  500, FLAT, MONS_STONE_GIANT },
   {  1,  8,  370, FALL, MONS_ETTIN },
   {  1, 10,  100, SEMI, MONS_SPARK_WASP },
   {  1, 12,   60, FLAT, MONS_LICH },
+  {  1, 12,   60, FLAT, MONS_WENDIGO },
   {  1, 12,   40, FLAT, MONS_FLAYED_GHOST },
   {  1, 12,   80, SEMI, MONS_GLOWING_SHAPESHIFTER },
   {  1, 12,   80, SEMI, MONS_TENGU_REAVER },
@@ -1067,9 +1070,7 @@ static const population_list population[] =
     POP(coc),
     POP(tar),
     POP(zot),
-#if TAG_MAJOR_VERSION == 34
     POP(forest),
-#endif
     POP(abyss),
     POP(pan),
     POP(zig),
@@ -1184,9 +1185,7 @@ static const population_list population_zombie[] =
     POP(generic_late_zombie), // Coc
     POP(generic_late_zombie), // Tar
     POP(zot),
-#if TAG_MAJOR_VERSION == 34
     POP(forest),
-#endif
     POP(generic_late_zombie), // Abyss
     POP(generic_late_zombie), // Pan
     POP(zig),
@@ -1268,6 +1267,14 @@ static const pop_entry pop_water_hell[] =
   { 0,0,0,FLAT,MONS_0 }
 };
 
+static const pop_entry pop_water_forest[] =
+{ // Forest branch water monsters
+  {  1,  5,   115, FLAT, MONS_WATER_ELEMENTAL },
+  {  0,  5,    50, RISE, MONS_WATER_NYMPH },
+  {  0,  5,    30, RISE, MONS_ELEMENTAL_WELLSPRING },
+  { 0,0,0,FLAT,MONS_0 }
+};
+
 // This list must be in the same order as the branch-type enum values.
 // Shoals, Abyss, Pan, Zot, D:1-5 liquid monsters are blocked in dungeon.cc
 static const population_list population_water[] =
@@ -1300,9 +1307,7 @@ static const population_list population_water[] =
     POP(water_hell), // Coc
     POP(water_hell), // Tar
     POP(water_generic), // Zot
-#if TAG_MAJOR_VERSION == 34
-    POP(water_generic), // Forest
-#endif
+    POP(water_forest), // Forest
     POP(water_generic), // Abyss
     POP(water_generic), // Pan
     POP(water_generic), // Zig
@@ -1412,9 +1417,7 @@ static const population_list population_lava[] =
     POP(lava_hell), // Coc
     POP(lava_hell), // Tar
     POP(lava_generic), // Zot
-#if TAG_MAJOR_VERSION == 34
     POP(lava_generic), // Forest
-#endif
     POP(lava_generic), // Abyss
     POP(lava_generic), // Pan
     POP(lava_generic), // Zig

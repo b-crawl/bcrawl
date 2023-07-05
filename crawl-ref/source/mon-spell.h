@@ -994,6 +994,14 @@ static const mon_spellbook mspell_list[] =
       }
     },
 
+    { MST_GREENWOOD_WITCH,
+      {
+       { SPELL_SLEEP, 15, MON_SPELL_WIZARD },
+       { SPELL_POLYMORPH, 15, MON_SPELL_WIZARD },
+       { SPELL_BOLT_OF_DRAINING, 30, MON_SPELL_WIZARD },
+      }
+    },
+
     {  MST_SPHINX,
       {
        { SPELL_SENTINEL_MARK, 11, MON_SPELL_WIZARD },
@@ -1627,6 +1635,14 @@ static const mon_spellbook mspell_list[] =
     {  MST_IRON_GOLEM,
       {
        { SPELL_QUICKSILVER_BOLT, 80, MON_SPELL_MAGICAL | MON_SPELL_LONG_RANGE },
+      }
+    },
+
+    {  MST_ANCIENT_AUTOMATON,
+      {
+        { SPELL_IOOD, 40, MON_SPELL_NATURAL },
+        { SPELL_STEAM_BALL, 10, MON_SPELL_NATURAL | MON_SPELL_BREATH
+                                | MON_SPELL_NOISY },
       }
     },
 

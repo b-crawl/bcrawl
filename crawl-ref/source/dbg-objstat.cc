@@ -1358,11 +1358,6 @@ void objstat_generate_stats()
             continue;
 
         const branch_type br = it->id;
-#if TAG_MAJOR_VERSION == 34
-        // Don't want to include Forest since it doesn't generate
-        if (br == BRANCH_FOREST)
-            continue;
-#endif
         vector<level_id> levels;
         for (int dep = 1; dep <= brdepth[br]; ++dep)
         {

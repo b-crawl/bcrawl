@@ -85,6 +85,13 @@ void initialise_branch_depths()
         brentry[disabled_branch].clear();
     }
 
+    // Elf or Forest
+    {
+    branch_type disabled_branch = coinflip() ? BRANCH_ELF : BRANCH_FOREST;
+    dprf("Disabling branch: %s", branches[disabled_branch].shortname);
+    brentry[disabled_branch].clear();
+    }
+
     for (branch_iterator it; it; ++it)
         brdepth[it->id] = it->numlevels;
 }

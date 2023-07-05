@@ -453,7 +453,7 @@ PORTAL_EXIT(DNGN_EXIT_DESOLATION, "gate leading back out of this place", "exit_d
     YELLOW, RED, YELLOW, YELLOW, YELLOW,
     (FFT_NOTABLE | FFT_EXAMINE_HINT), MF_STAIR_BRANCH,
 },
-BRANCH_EXIT(DNGN_EXIT_SLIME, "staircase back to the Lair", "exit_slime_pits"),
+BRANCH_EXIT(DNGN_EXIT_SLIME, "staircase back to the Orcish Mines", "exit_slime_pits"),
 
 {
     DNGN_ENTER_ORC, "staircase to the Orcish Mines", "enter_orcish_mines",
@@ -465,12 +465,13 @@ BRANCH_EXIT(DNGN_EXIT_ORC, "staircase back to the Dungeon", "exit_orcish_mines")
 
 #if TAG_MAJOR_VERSION == 34
 BRANCH_ENTRANCE(DNGN_ENTER_DWARF, "staircase to the Dwarven Hall", "enter_dwarven_hall"),
-BRANCH_ENTRANCE(DNGN_ENTER_FOREST, "staircase to the Enchanted Forest", "enter_forest"),
 BRANCH_ENTRANCE(DNGN_ENTER_BLADE, "staircase to the Hall of Blades", "enter_hall_of_blades"),
 BRANCH_EXIT(DNGN_EXIT_DWARF, "staircase back to the Vaults", "exit_dwarven_hall"),
-BRANCH_EXIT(DNGN_EXIT_FOREST, "staircase back to the Vaults", "exit_forest"),
 BRANCH_EXIT(DNGN_EXIT_BLADE, "staircase back to the Vaults", "exit_hall_of_blades"),
 #endif
+
+BRANCH_ENTRANCE(DNGN_ENTER_FOREST, "staircase to the Spriggan Forest", "enter_forest"),
+BRANCH_EXIT(DNGN_EXIT_FOREST, "staircase back to the Lair", "exit_forest"),
 
 BRANCH_ENTRANCE(DNGN_ENTER_LAIR, "staircase to the Lair", "enter_lair"),
 BRANCH_EXIT(DNGN_EXIT_LAIR, "staircase back to the Dungeon", "exit_lair"),
@@ -485,7 +486,7 @@ BRANCH_ENTRANCE(DNGN_ENTER_SNAKE, "staircase to the Snake Pit", "enter_snake_pit
 BRANCH_EXIT(DNGN_EXIT_SNAKE, "staircase back to the Lair", "exit_snake_pit"),
 
 BRANCH_ENTRANCE(DNGN_ENTER_ELF, "staircase to the Elven Halls", "enter_elven_halls"),
-BRANCH_EXIT(DNGN_EXIT_ELF, "staircase back to the Mines", "exit_elven_halls"),
+BRANCH_EXIT(DNGN_EXIT_ELF, "staircase back to the Lair", "exit_elven_halls"),
 
 BRANCH_ENTRANCE(DNGN_ENTER_TOMB, "staircase to the Tomb", "enter_tomb"),
 BRANCH_EXIT(DNGN_EXIT_TOMB, "staircase back to the Crypt", "exit_tomb"),

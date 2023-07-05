@@ -38,6 +38,16 @@ important here.
 Acquiring a rune of Zot before entering this branch is recommended for most
 adventurers.
 %%%%
+Spriggan Forest
+
+Amongst these dark and sinister woods lie the lairs of spriggans and other
+dangerous woodland creatures.
+
+Resistance to hostile enchantments may be useful here.
+
+Acquiring a rune of Zot before entering this branch is recommended for most
+adventurers.
+%%%%
 Lair
 
 Most adventurers find the Lair of Beasts to be an exciting change of climate.
@@ -95,10 +105,10 @@ electricity may be useful.
 %%%%
 Slime Pits
 
-The Slime Pits are the amorphous realm of acids, jellies and slimes. Even the
-walls drip with painful acid. Any trace of intelligent beings has long been
-dissolved. Still, there are rumours of great treasures deep down, hidden safely
-away in secret chambers without any entrance.
+Once a colony of dwarves that dug too deep, the Slime Pits are now the realm of
+amorphous jellies and slimes. Even the walls drip with painful acid. Still,
+there are rumours of great treasures deep down, hidden safely away in secret
+chambers without any entrance.
 
 Resistance to corrosion and hostile enchantments is important here, and
 resistance to cold may be useful.

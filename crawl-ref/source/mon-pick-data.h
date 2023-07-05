@@ -673,6 +673,7 @@ static const pop_entry pop_forest[] =
   {  1,  5,   35, FLAT, MONS_INSUBSTANTIAL_WISP },
   {  1,  9,   50, FLAT, MONS_OKLOB_PLANT },
   {  1,  3,   40, SEMI, MONS_DRYAD },
+  {  1,  4,   40, SEMI, MONS_FIRE_DRAGON },
   {  1,  5,   70, FLAT, MONS_HIPPOGRIFF },
   {  0,  5,  105, SEMI, MONS_SATYR },
   {  0,  4,   55, RISE, MONS_SPRIGGAN_DRUID },

@@ -769,42 +769,6 @@ MAP
     '''''''''''   '''''''''''
 ENDMAP
 
-NAME:   nicolae_slime_rock_hall_of_fame
-TAGS:   transparent
-DEPTH:  Slime:2-, !Slime:$
-KMONS:  R = rockslime
-SUBST:  { = {[(, - = x_
-NSUBST: D = 1=x / 2=x. / 1=R.. / ., E = 1=x / 2=x. / 1=R.. / ., \
-        F = 1=x / 2=x. / 1=R.. / ., H = 1=x / 2=x. / 1=R.. / ., \
-        J = 1=x / 2=x. / 1=R.. / ., K = 1=x / 2=x. / 1=R.. / ., \
-        L = 1=x / 2=x. / 1=R.. / ., M = 1=x / 2=x. / 1=R.. / ., \
-        N = 1=x / 2=x. / 1=R.. / ., O = 1=x / 2=x. / 1=R.. / ., \
-        P = 1=x / 2=x. / 1=R.. / .
-CLEAR:  _
-MAP
-    ---------
- ----xxxxxxx----
- -xxxx.....xxxx-
- -x....LLL....x-
---x.KKKLLLMMM.x--
--xx.KKKLLLMMM.xx----
--x..KKK...MMM..xxxx-
--x.JJJ.....NNN....x-
--x.JJJ..{..NNNOOO.x--
--x.JJJ.....NNNOOO.xx-
--x..HHH.......OOO..x-
--xx.HHHFFF.....PPP.x-
---x.HHHFFF.....PPP.x-
- -x....FFF.....PPP.x-
- -xxxx..EEE........x-
- ----xx.EEEDDD.....
-    --x.EEEDDD....@
-     -x....DDD....@
-     -xxxx......@@@
-     ----xxxxxx
-        -------
-ENDMAP
-
 # Intended as an ending, but I didn't like how it turned out, so I reused the
 # layout and turned it into an ordinary level encompass.
 NAME:    nicolae_slime_spelunking
@@ -1169,7 +1133,7 @@ ENDMAP
 
 NAME:  slime_pit_nicolae_royal_road_to_ruin
 WEIGHT:  6
-KMONS: R = rockslime / quicksilver ooze
+KMONS: R = acid blob / azure jelly
 SUBST: " = cx, ! = cxx.., ' = x., R = RR., 4 = 444.
 : setup_slime_pit_ending(_G)
 MAP

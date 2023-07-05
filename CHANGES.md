@@ -24,6 +24,9 @@
   - v1.34.1: Hell branches don't have shafts.
   - v1.36.4: Worker ants can appear in Spider.
   - v1.36.4: Any combination of 2 of (Swamp, Shoals, Snake, Spider) can appear in Lair, instead of (Swamp or Shoals) and (Snake or Spider).
+  - v1.39: The Spriggan Forest branch is added. It can appear in Lair, and alternates with the Elven Halls.
+  - v1.39: The Elven Halls branch appears in Lair instead of Orc, and alternates with the Spriggan Forest.
+  - v1.39: The Slime Pits branch appears in Orc instead of Lair. Its layout is changed, and it has new endings by nicolae-carpathia.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -478,6 +481,7 @@
   - v1.38.2: Qazlal's Disaster Area ability is replaced by Become The Storm. The player first does a Blinkbolt that always hits, then a smaller Disaster Area in a smaller area is done.
   - v1.38.2: Qazlal's Upheaval ability is always 3x3, instead of its size scaling with Invocations.
   - v1.38.3: Qazlal's Become The Storm ability still works when the player can't teleport.
+  - v1.39: Uskayaw's Grand Finale ability fully refills health as well as mana.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -556,6 +560,7 @@
   - v1.37.1: Hand crossbow damage scales with dexterity instead of strength.
   - v1.37.1: Hand crossbows have higher base damage. (12 -> 13)
   - v1.38.1: Scarves can be randarts.
+  - v1.39: Crystal plate armor encumbrance is reduced. (23 -> 22)
 
 #### Removed Items
   - Amulet of Harm
@@ -742,6 +747,9 @@
   - v1.38: Neqoxecs no longer fly.
   - v1.38.1: Jiangshi act more quickly instead of moving quickly.
   - v1.38.1: Wretched stars have low magic resistance instead of infinite magic resistance.
+  - v1.39: The new "ancient automaton" enemy appears in the Slime Pits. It has a strong melee attack that tramples, and casts Orb of Destruction and Steam Ball.
+  - v1.39: The new "wendigo" enemy appears in the Spriggan Forest, Depths, and Swamp. Its bite can cause players to become mesmerized by a visible edible monster.
+  - v1.39: The new "greenwood witch" enemy appears in the Spriggan Forest. It can cast Sleep, Polymorph, and Bolt of Draining.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

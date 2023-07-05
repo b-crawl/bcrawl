@@ -810,7 +810,7 @@ ENDMAP
 NAME:    nicolae_slime_spelunking
 DEPTH:   Slime:4
 ORIENT:  encompass
-WEIGHT:  5
+WEIGHT:  3
 SUBST:   " = cx, ! = cx., ' = x., 0 = 0009..
 SHUFFLE: {[(, )]}
 MAP
@@ -874,6 +874,7 @@ ENDMAP
 
 # The original!
 NAME:   slime_pit
+WEIGHT:  15
 SUBST:  ' : ' .:1,  ' : ' x:1,  ' = .x
 SUBST:  " : " .:3,  " = .c
 NSUBST: P = O / *|
@@ -952,6 +953,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ENDMAP
 
 NAME:    slime_pit_nicolae_amoeboid
+WEIGHT:  5
 SHUFFLE: PQRS
 NSUBST:  P = 1 / Z, QRS = 4=2 / 2=3 / 230, { = { / [ / ( / 4..
 SUBST:   QRS = 4, ' = x., - = c.
@@ -1030,6 +1032,7 @@ ENDMAP
 
 # An acidless path to the center is likely, but not guaranteed. You'll be fine.
 NAME:   slime_pit_nicolae_inversion
+WEIGHT:  6
 SUBST:  3 = 33., 4 = 444.., ' = x.
 NSUBST: D = S / 4.., E = S / 4.., F = S / 4.., H = S / 4.., \
         S = { / [ / ( / 4.., P = O / *|
@@ -1102,6 +1105,7 @@ ccccn.H..........'xxxxxxxxxxx'....'xxxxxxxxxxx'..........E.ncccc
 ENDMAP
 
 NAME:    slime_pit_nicolae_jellycorners
+WEIGHT:  9
 SHUFFLE: Pp/Qq/Rr/Ss
 SUBST:   ' = x., ! = cx., " = cx, P = 1, QRS = 998, pqr = 4.....
 NSUBST:  p = 2=2 / 2=2. / 2=3 / 3. / 4., \
@@ -1164,6 +1168,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ENDMAP
 
 NAME:  slime_pit_nicolae_royal_road_to_ruin
+WEIGHT:  6
 KMONS: R = rockslime / quicksilver ooze
 SUBST: " = cx, ! = cxx.., ' = x., R = RR., 4 = 444.
 : setup_slime_pit_ending(_G)
@@ -1236,6 +1241,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ENDMAP
 
 NAME:   slime_pit_nicolae_trefoil
+WEIGHT:  5
 SUBST:  ' = x., 4 = 4.
 NSUBST: 1 = 1 / M, M = 4=2 / 3=3 / 2=23 / 4, P = O / *|
 NSUBST: { = { / ., [ = [ / ., ( = ( / .

@@ -122,8 +122,6 @@ bool check_annotation_exclusion_warning()
 
     if (early_branch_entry_warning)
     {
-        might_be_dangerous = true;
-
         switch(you.religion)
         {
         case GOD_NO_GOD:
@@ -158,9 +156,12 @@ bool check_annotation_exclusion_warning()
             simple_god_message(" says: \"Your knowledge may yet be insufficient to navigate this place.\"");
             break;
         
-        default: break;
+        default:
+            early_branch_entry_warning = false;
+            break;
         }
     }
+    might_be_dangerous |= early_branch_entry_warning;
 
     if (might_be_dangerous
         && !yesno("Enter next level anyway?", true, 'n', true, false))

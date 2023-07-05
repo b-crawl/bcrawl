@@ -808,7 +808,7 @@ ENDMAP
 # Intended as an ending, but I didn't like how it turned out, so I reused the
 # layout and turned it into an ordinary level encompass.
 NAME:    nicolae_slime_spelunking
-DEPTH:   Slime:2-, !Slime:$
+DEPTH:   Slime:4
 ORIENT:  encompass
 WEIGHT:  5
 SUBST:   " = cx, ! = cx., ' = x., 0 = 0009..

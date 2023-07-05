@@ -2693,6 +2693,7 @@ bool bolt::can_burn_trees() const
     case SPELL_BOLT_OF_MAGMA:
     case SPELL_FIREBALL:
     case SPELL_INNER_FLAME:
+    case SPELL_FIRE_BREATH:
         return true;
     default:
         return false;

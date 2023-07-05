@@ -219,6 +219,7 @@ ENDMAP
 
 NAME:   bhauth_dryad_lair
 TAGS:   lair_entry no_monster_gen no_pool_fixup transparent
+WEIGHT: 6
 ORIENT: float
 MONS:   dryad, plant, bullfrog
 KMONS:  S = statue name:moss-covered name_adjective tile:mons_statue_mage \

@@ -43,6 +43,8 @@ Spriggan Forest
 Amongst these dark and sinister woods lie the lairs of spriggans and other
 dangerous woodland creatures.
 
+Resistance to hostile enchantments may be useful here.
+
 Acquiring a rune of Zot before entering this branch is recommended for most
 adventurers.
 %%%%

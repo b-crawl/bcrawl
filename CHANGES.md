@@ -27,6 +27,7 @@
   - v1.39: The Spriggan Forest branch is added. It can appear in Lair, and alternates with the Elven Halls.
   - v1.39: The Elven Halls branch appears in Lair instead of Orc, and alternates with the Spriggan Forest.
   - v1.39: The Slime Pits branch appears in Orc instead of Lair. Its layout is changed, and it has new endings by nicolae-carpathia.
+  - v1.39: Warnings about entering dangerous branches at a low XL now ask for confirmation before entering.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)

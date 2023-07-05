@@ -804,7 +804,7 @@ Grand Finale ability
 Merges with a target emotionally and physically, and then bursts forth from
 them, violently splitting them apart and killing them instantly. This ability
 becomes easier to use as the worshipper's piety and Invocations skill increase,
-and fully recovers the user's magical power when it is successful.
+and fully recovers the user's health and magical power if it succeeds.
 
 More violent Uskayaw sects consider their members not to be true worshippers
 until they have performed this rite.

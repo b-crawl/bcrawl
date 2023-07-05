@@ -1880,6 +1880,11 @@ orc warrior
 An experienced, armoured and well-armed orc soldier, able to command a small
 mob of its fellows.
 %%%%
+orc warrior berserker
+
+A dangerous orc soldier that carries a potion of berserk rage and charges
+fearlessly into battle.
+%%%%
 orc wizard
 
 An orc who has gained proficiency in the occult arts, using them for martial

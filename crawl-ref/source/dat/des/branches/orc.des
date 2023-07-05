@@ -456,7 +456,7 @@ ENDMAP
 NAME:   bhauth_orc_berserkers
 TAGS:   orc_entry transparent
 ORIENT: float
-KMONS:  B = orc warrior ; war axe . chain mail . potion of berserk rage ident:type
+KMONS:  B = orc warrior name:berserker name_suffix ; war axe . chain mail . potion of berserk rage ident:type
 KMONS:  P = orc priest ; robe plus:1 . wand of digging charges:4
 NSUBST: E = 4:B / 1:P / *:.
 KFEAT:  O = enter_orcish_mines

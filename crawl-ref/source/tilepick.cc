@@ -3697,6 +3697,7 @@ tileidx_t tileidx_branch(const branch_type br)
     case BRANCH_ELF:
         return TILE_DNGN_ENTER_ELF;
     case BRANCH_LAIR:
+    case BRANCH_FOREST:
         return TILE_DNGN_ENTER_LAIR;
     case BRANCH_SWAMP:
         return TILE_DNGN_ENTER_SWAMP;

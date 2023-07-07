@@ -426,7 +426,7 @@ static void _post_init(bool newc)
     new_level(!newc);
     update_turn_count();
     update_vision_range();
-    you.xray_vision = !!you.duration[DUR_SCRYING];
+    you.xray_vision = you.duration[DUR_SCRYING] || you.duration[DUR_REVELATION];
     init_exclusion_los();
     ash_check_bondage(false);
 

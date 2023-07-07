@@ -549,9 +549,12 @@ unsigned int item_value(item_def item, bool ident)
                 valued += 50;
                 break;
 
+            case SCR_REVELATION:
+                valued += 40;
+                break;
+
             case SCR_AMNESIA:
             case SCR_IMMOLATION:
-            case SCR_MAGIC_MAPPING:
                 valued += 35;
                 break;
 

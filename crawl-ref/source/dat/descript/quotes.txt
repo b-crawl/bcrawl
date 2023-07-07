@@ -2478,7 +2478,7 @@ scroll of immolation
 
 <scroll>
 %%%%
-scroll of magic mapping
+scroll of revelation
 
 <scroll>
 %%%%

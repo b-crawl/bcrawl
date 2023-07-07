@@ -3139,15 +3139,10 @@ void read_scroll(item_def& scroll)
         break;
     }
 
-    case SCR_MAGIC_MAPPING:
-        if (alreadyknown && !is_map_persistent())
-        {
-            cancel_scroll = true;
-            mpr("It would have no effect in this place.");
-            break;
-        }
-        mpr(pre_succ_msg);
+    case SCR_REVELATION:
         magic_mapping(500, 100, false);
+        you.duration[DUR_REVELATION] = you.time_taken + 1;
+        you.xray_vision = true;
         break;
 
     case SCR_TORMENT:

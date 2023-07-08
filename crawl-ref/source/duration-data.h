@@ -323,7 +323,8 @@ static const duration_def duration_data[] =
       }}}},
     { DUR_REVELATION, 0, "", "", "revelation", "", D_NO_FLAGS,
           {{ "", []() {
-          you.xray_vision = false;
+          if (!you.duration[DUR_SCRYING])
+              you.xray_vision = false;
      }}}},
     { DUR_TORNADO,
       LIGHTGREY, "Tornado",

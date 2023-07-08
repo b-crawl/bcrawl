@@ -459,7 +459,7 @@ void revive()
     you.attribute[ATTR_WALL_JUMP_READY] = 0;
     you.los_noise_level = 0;
     you.los_noise_last_turn = 0; // silence in death
-    if (you.duration[DUR_SCRYING])
+    if (you.duration[DUR_SCRYING] || you.duration[DUR_REVELATION])
         you.xray_vision = false;
 
     for (int dur = 0; dur < NUM_DURATIONS; dur++)

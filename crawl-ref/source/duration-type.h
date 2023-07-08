@@ -38,9 +38,7 @@ enum duration_type
     DUR_DIVINE_SHIELD,          // duration of TSO's Divine Shield
     DUR_REGENERATION,
     DUR_SWIFTNESS,
-#if TAG_MAJOR_VERSION == 34
-    DUR_CONTROLLED_FLIGHT,
-#endif
+    DUR_REVELATION,
     DUR_TELEPORT,
 #if TAG_MAJOR_VERSION == 34
     DUR_CONTROL_TELEPORT,

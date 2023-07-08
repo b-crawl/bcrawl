@@ -562,6 +562,7 @@
   - v1.37.1: Hand crossbows have higher base damage. (12 -> 13)
   - v1.38.1: Scarves can be randarts.
   - v1.39: Crystal plate armor encumbrance is reduced. (23 -> 22)
+  - v1.39.1: Scrolls of magic mapping become scrolls of revelation, which also let the player see through walls for 1 turn.
 
 #### Removed Items
   - Amulet of Harm

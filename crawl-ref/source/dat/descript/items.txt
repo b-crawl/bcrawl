@@ -1012,7 +1012,7 @@ scroll of immolation
 A scroll that fills the creatures around the reader with an unstable and
 powerful inner flame.
 %%%%
-scroll of magic mapping
+scroll of revelation
 
 A scroll that reveals the surroundings of the one who reads it.
 %%%%

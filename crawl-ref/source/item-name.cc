@@ -752,7 +752,7 @@ static const char* scroll_type_name(int scrolltype)
     case SCR_TORMENT:            return "torment";
     case SCR_IMMOLATION:         return "immolation";
     case SCR_BLINKING:           return "blinking";
-    case SCR_MAGIC_MAPPING:      return "magic mapping";
+    case SCR_REVELATION:      return "revelation";
     case SCR_FOG:                return "fog";
     case SCR_ACQUIREMENT:        return "acquirement";
     case SCR_BRAND_WEAPON:       return "brand weapon";

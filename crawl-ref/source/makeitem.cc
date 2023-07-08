@@ -116,7 +116,7 @@ static bool _is_boring_item(int type, int sub_type)
         {
         case SCR_REMOVE_CURSE:
         case SCR_IDENTIFY:
-        case SCR_MAGIC_MAPPING:
+        case SCR_REVELATION:
             return true;
         default:
             break;
@@ -1420,7 +1420,7 @@ static void _generate_scroll_item(item_def& item, int force_type,
                  45, SCR_AMNESIA,
                  40, SCR_ENCHANT_ARMOUR,
                  40, SCR_ENCHANT_WEAPON,
-                 40, SCR_MAGIC_MAPPING,
+                 40, SCR_REVELATION,
                  32, SCR_FEAR,
                  32, SCR_FOG,
                  32, SCR_BLINKING,

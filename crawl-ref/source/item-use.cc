@@ -2669,19 +2669,19 @@ static void _vulnerability_scroll()
 
 static bool _is_cancellable_scroll(scroll_type scroll)
 {
-    return scroll == SCR_IDENTIFY
-           || scroll == SCR_BLINKING
-           || scroll == SCR_ENCHANT_ARMOUR
-           || scroll == SCR_AMNESIA
-           || scroll == SCR_REMOVE_CURSE
-#if TAG_MAJOR_VERSION == 34
-           || scroll == SCR_CURSE_ARMOUR
-           || scroll == SCR_CURSE_JEWELLERY
-           || scroll == SCR_RECHARGING
-#endif
-           || scroll == SCR_BRAND_WEAPON
-           || scroll == SCR_ENCHANT_WEAPON
-           || scroll == SCR_MAGIC_MAPPING;
+    switch (scroll)
+    {
+    case SCR_IDENTIFY:
+    case SCR_BLINKING:
+    case SCR_ENCHANT_ARMOUR:
+    case SCR_AMNESIA:
+    case SCR_REMOVE_CURSE:
+    case SCR_BRAND_WEAPON:
+    case SCR_ENCHANT_WEAPON:
+        return true;
+
+    default: return false;
+    }
 }
 
 /**
@@ -3139,15 +3139,10 @@ void read_scroll(item_def& scroll)
         break;
     }
 
-    case SCR_MAGIC_MAPPING:
-        if (alreadyknown && !is_map_persistent())
-        {
-            cancel_scroll = true;
-            mpr("It would have no effect in this place.");
-            break;
-        }
-        mpr(pre_succ_msg);
+    case SCR_REVELATION:
         magic_mapping(500, 100, false);
+        you.duration[DUR_REVELATION] = you.time_taken + 1;
+        you.xray_vision = true;
         break;
 
     case SCR_TORMENT:

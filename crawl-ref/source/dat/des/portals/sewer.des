@@ -631,7 +631,7 @@ MONS:    bullfrog
 ITEM:    potion of curing / potion of heal wounds / potion of might /\
          potion of magic / potion of haste w:5 / potion of brilliance w:5
 ITEM:    scroll of teleportation / scroll of blinking w:5 /\
-         scroll of fear w:5 / scroll of magic mapping / scroll of fog
+         scroll of fear w:5 / scroll of revelation / scroll of fog
 SUBST:   y : yyyyyyW., Y : YYYYYYWw, z = x., Z = wwwxx
 SUBST:   y = W., Y = Ww
 SUBST:   c = c x:1
@@ -789,7 +789,7 @@ KITEM:   ? = potion of flight q:2 w:15 / potion of curing /\
          potion of heal wounds / potion of might / potion of magic /\
          potion of haste w:5 / potion of brilliance w:5
 KITEM:   ! =  scroll of teleportation / scroll of fear w:5 /\
-         scroll of blinking w:3 / scroll of magic mapping w:3 /\
+         scroll of blinking w:3 / scroll of revelation w:3 /\
          scroll of fog w:3
 #      Randomized environment
 SUBST:   . = .WW
@@ -1054,7 +1054,7 @@ KITEM:   ? = potion of flight w:5 / potion of flight q:2 w:5 /\
          potion of curing / potion of heal wounds / potion of might /\
          potion of magic / potion of haste w:5 / potion of brilliance w:5
 KITEM:   ! =  scroll of teleportation / scroll of fear w:5 /\
-         scroll of blinking w:3 / scroll of magic mapping w:3 /\
+         scroll of blinking w:3 / scroll of revelation w:3 /\
          scroll of fog w:3
 : sewer_setup(_G)
 MAP
@@ -1117,7 +1117,7 @@ NSUBST: ? = 4=ef / *=112233
 KITEM:  e = potion of curing / potion of heal wounds / potion of might /\
         potion of magic / potion of haste w:5 / potion of brilliance w:5
 KITEM:  f = scroll of teleportation / scroll of fear w:5 /\
-        scroll of blinking w:3 / scroll of magic mapping w:3 /\
+        scroll of blinking w:3 / scroll of revelation w:3 /\
         scroll of fog w:3
 : sewer_setup(_G)
 MAP
@@ -1212,7 +1212,7 @@ SUBST:   e = !!!!!?????%
 KITEM:   ? = potion of curing / potion of heal wounds / potion of might /\
          potion of magic / potion of haste w:5 / potion of brilliance w:5
 KITEM:   ! =  scroll of teleportation / scroll of fear w:5 /\
-         scroll of blinking w:3 / scroll of magic mapping w:3 /\
+         scroll of blinking w:3 / scroll of revelation w:3 /\
          scroll of fog w:3
 : sewer_setup(_G)
 MAP
@@ -1272,7 +1272,7 @@ COLOUR:  !?% = lightgreen
 KITEM:   ? = potion of curing / potion of heal wounds / potion of might /\
          potion of magic / potion of haste w:5 / potion of brilliance w:5
 KITEM:   ! =  scroll of teleportation / scroll of fear w:5 /\
-         scroll of blinking w:3 / scroll of magic mapping w:3 /\
+         scroll of blinking w:3 / scroll of revelation w:3 /\
          scroll of fog w:3
 SUBST:   . = .W
 SUBST:   X = x.

@@ -321,6 +321,11 @@ static const duration_def duration_data[] =
       {{ "Your astral sight fades away.", []() {
           you.xray_vision = false;
       }}}},
+    { DUR_REVELATION, 0, "", "", "revelation", "", D_NO_FLAGS,
+          {{ "", []() {
+          if (!you.duration[DUR_SCRYING])
+              you.xray_vision = false;
+     }}}},
     { DUR_TORNADO,
       LIGHTGREY, "Tornado",
       "tornado", "",
@@ -647,7 +652,6 @@ static const duration_def duration_data[] =
     { DUR_REPEL_MISSILES, 0, "", "", "old repel missiles", "", D_NO_FLAGS},
     { DUR_DEFLECT_MISSILES, 0, "", "", "old deflect missiles", "", D_NO_FLAGS},
     { DUR_JELLY_PRAYER, 0, "", "", "old jelly prayer", "", D_NO_FLAGS},
-    { DUR_CONTROLLED_FLIGHT, 0, "", "", "old controlled flight", "", D_NO_FLAGS},
     { DUR_SEE_INVISIBLE, 0, "", "", "old see invisible", "", D_NO_FLAGS},
     { DUR_INSULATION, 0, "", "", "old insulation", "", D_NO_FLAGS},
     { DUR_BARGAIN, 0, "", "", "old bargain", "", D_NO_FLAGS},

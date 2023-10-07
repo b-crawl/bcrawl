@@ -6945,9 +6945,10 @@ spret hepliaklqana_incarnate(bool fail)
     }
     inc_hp(heal_power + roll_dice(2, heal_power));
     inc_mp(mana_power + roll_dice(2, mana_power));
-        
+    
     you.increase_duration(DUR_INCARNATE, dur, 200);
-    you.increase_duration(DUR_ANCESTOR_DELAY, dur, 200);
+    int respawn_delay = dur + random_range(3, 25);
+    you.set_duration(DUR_ANCESTOR_DELAY, respawn_delay, 200);
     calc_hp(true, false);
     you.redraw_armour_class = true;
     

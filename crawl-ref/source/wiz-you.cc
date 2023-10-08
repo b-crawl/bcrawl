@@ -929,7 +929,7 @@ void wizard_transform()
         {
             const auto tr = static_cast<transformation>(i);
 #if TAG_MAJOR_VERSION == 34
-            if (tr == transformation::jelly || tr == transformation::porcupine)
+            if (tr == transformation::jelly)
                 continue;
 #endif
             line += make_stringf("[%c] %-10s ", i + 'a', transform_name(tr));
@@ -955,7 +955,7 @@ void wizard_transform()
 
         const auto k_tr = static_cast<transformation>(keyin - 'a');
 #if TAG_MAJOR_VERSION == 34
-        if (k_tr == transformation::jelly || k_tr == transformation::porcupine)
+        if (k_tr == transformation::jelly)
             continue;
 #endif
         form = k_tr;

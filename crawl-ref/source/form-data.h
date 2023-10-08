@@ -65,7 +65,7 @@ static const form_entry formdata[] =
 },
 {
     transformation::spider, MONS_SPIDER, "Spider", "spider-form", "spider",
-    "a venomous arachnid creature.",
+    "a venomous spider.",
     EQF_PHYSICAL, MR_VUL_POISON,
     FormDuration(10, PS_DOUBLE, 60), 0, 5, SIZE_TINY, 10,
     2, 0, 0, true, 10, 10, 5,
@@ -170,18 +170,16 @@ static const form_entry formdata[] =
     "creak", 0, "branch", "root", "sway towards", "wood"
 },
 
-#if TAG_MAJOR_VERSION == 34
 {
-    transformation::porcupine, MONS_PORCUPINE, "Porc", "porcupine-form", "porcupine",
-    "a spiny porcupine.",
-    EQF_ALL, MR_NO_FLAGS,
-    BAD_DURATION, 0, 0, SIZE_TINY, 10,
-    0, 0, 0, false, 0, 0, 3,
-    SPWPN_NORMAL, LIGHTGREY, "Teeth", ANIMAL_VERBS,
-    FC_DEFAULT, FC_FORBID, FC_ENABLE, true, false,
-    "squeak", -8, "front leg", "", "curl into a sanctuary of spikes before", "flesh"
+    transformation::scorpion, MONS_EMPEROR_SCORPION, "Scorpion", "scorpion-form", "scorpion",
+    "a giant scorpion.",
+    EQF_PHYSICAL, MR_RES_POISON,
+    DEFAULT_DURATION, 4, 0, SIZE_GIANT, 12,
+    9, 22, 0, true, 10, 3, 10,
+    SPWPN_NORMAL, LIGHTGREEN, "Claws", ANIMAL_VERBS,
+    FC_DEFAULT, FC_FORBID, FC_FORBID, true, false,
+    "hiss", 0, "front leg", "", "crawl onto", "flesh"
 },
-#endif
 
 {
     transformation::wisp, MONS_INSUBSTANTIAL_WISP, "Wisp", "wisp-form", "wisp", "a will-o'-wisp.",

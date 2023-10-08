@@ -1815,6 +1815,9 @@ int player_spec_poison()
 
     if (player_equip_unrand(UNRAND_OLGREB))
         sp++;
+    
+    if (you.form == transformation::scorpion)
+        sp++;
 
     return sp;
 }
@@ -7286,7 +7289,7 @@ int player::has_tail(bool allow_tran) const
     if (allow_tran)
     {
         // these transformations bring a tail with them
-        if (form == transformation::dragon)
+        if (form == transformation::dragon || form == transformation::scorpion)
             return 1;
 
         // Most transformations suppress a tail.

@@ -1770,7 +1770,6 @@ bool setup_mons_cast(const monster* mons, bolt &pbolt, spell_type spell_cast,
     case SPELL_DEFLECT_MISSILES:
     case SPELL_SUMMON_SCARABS:
 #if TAG_MAJOR_VERSION == 34
-    case SPELL_HUNTING_CRY:
     case SPELL_CONDENSATION_SHIELD:
     case SPELL_CONTROL_UNDEAD:
 #endif
@@ -8073,7 +8072,6 @@ static bool _ms_waste_of_time(monster* mon, mon_spell_slot slot)
     case SPELL_IGNITE_POISON_SINGLE:
     case SPELL_CONDENSATION_SHIELD:
     case SPELL_STONESKIN:
-    case SPELL_HUNTING_CRY:
     case SPELL_CONTROL_WINDS:
     case SPELL_DEATHS_DOOR:
     case SPELL_FULMINANT_PRISM:

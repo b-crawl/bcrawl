@@ -1092,11 +1092,15 @@ public:
 
     int get_damage() const override
     {
+        if (you.form == transformation::scorpion)
+            return damage + 12;
         return damage + max(0, you.get_mutation_level(MUT_STINGER) * 2 - 1);
     }
 
     int get_brand() const override
     {
+        if (you.form == transformation::scorpion)
+            return SPWPN_VENOM;
         return you.get_mutation_level(MUT_STINGER) ? SPWPN_VENOM : SPWPN_NORMAL;
     }
 };

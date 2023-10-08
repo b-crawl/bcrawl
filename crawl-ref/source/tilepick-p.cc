@@ -479,9 +479,7 @@ tileidx_t tileidx_player()
     case transformation::bat:       ch = TILEP_TRAN_BAT;       break;
     case transformation::spider:    ch = TILEP_TRAN_SPIDER;    break;
     case transformation::pig:       ch = TILEP_TRAN_PIG;       break;
-#if TAG_MAJOR_VERSION == 34
-    case transformation::porcupine: ch = TILEP_MONS_PORCUPINE; break;
-#endif
+    case transformation::scorpion:  ch = TILEP_MONS_EMPEROR_SCORPION;  break;
     // non-animals
     case transformation::ice_beast: ch = TILEP_TRAN_ICE_BEAST; break;
     case transformation::wisp:      ch = TILEP_MONS_INSUBSTANTIAL_WISP; break;

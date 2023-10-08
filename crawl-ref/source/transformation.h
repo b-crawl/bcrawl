@@ -13,9 +13,7 @@ enum class transformation
     pig,
     appendage,
     tree,
-#if TAG_MAJOR_VERSION == 34
-    porcupine,
-#endif
+    scorpion,
     wisp,
 #if TAG_MAJOR_VERSION == 34
     jelly,

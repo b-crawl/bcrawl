@@ -615,6 +615,9 @@ static void _decrement_durations()
         case transformation::dragon:
             last_forever = you.has_spell(SPELL_DRAGON_FORM) && calc_spell_power(SPELL_DRAGON_FORM, true) >= 75;
             break;
+        case transformation::scorpion:
+            last_forever = you.has_spell(SPELL_SCORPION_FORM) && calc_spell_power(SPELL_SCORPION_FORM, true) >= 75;
+            break;
         case transformation::lich:
             last_forever = you.has_spell(SPELL_NECROMUTATION) && calc_spell_power(SPELL_NECROMUTATION, true) >= 100;
             break;

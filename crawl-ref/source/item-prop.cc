@@ -149,7 +149,7 @@ static const armour_def Armour_prop[] =
         EQ_SHIELD,      SIZE_LITTLE, SIZE_MEDIUM, true },
     { ARM_SHIELD,               "medium shield",          8,  -30,  45,
         EQ_SHIELD,      SIZE_SMALL,  SIZE_BIG, true    },
-    { ARM_LARGE_SHIELD,         "large shield",          13,  -80,  45,
+    { ARM_LARGE_SHIELD,         "large shield",          13,  -75,  45,
         EQ_SHIELD,      SIZE_MEDIUM, SIZE_GIANT, true  },
 
     // Following all ARM_ entries for the benefit of util/gather_items

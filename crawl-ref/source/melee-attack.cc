@@ -1088,20 +1088,33 @@ class AuxTailslap: public AuxAttackType
 {
 public:
     AuxTailslap()
-    : AuxAttackType(6, "tail-slap") { };
+    : AuxAttackType(4, "tail-slap") { };
 
     int get_damage() const override
     {
         if (you.form == transformation::scorpion)
-            return damage + 12;
-        return damage + max(0, you.get_mutation_level(MUT_STINGER) * 2 - 1);
+            return damage + 14;
+        return damage + max(0, you.get_mutation_level(MUT_STINGER) * 3 - 1);
     }
 
     int get_brand() const override
     {
-        if (you.form == transformation::scorpion)
-            return SPWPN_VENOM;
-        return you.get_mutation_level(MUT_STINGER) ? SPWPN_VENOM : SPWPN_NORMAL;
+        return (you.form == transformation::scorpion || you.get_mutation_level(MUT_STINGER))
+                ? SPWPN_VENOM : SPWPN_NORMAL;
+    }
+    
+    string get_verb() const override
+    {
+        if (you.form == transformation::scorpion || you.get_mutation_level(MUT_STINGER))
+            return "sting";
+        return name;
+    }
+
+    string get_name() const override
+    {
+        if (you.form == transformation::scorpion || you.get_mutation_level(MUT_STINGER))
+            return "stinger";
+        return name;
     }
 };
 
@@ -3480,7 +3493,7 @@ bool melee_attack::_extra_aux_attack(unarmed_attack_type atk)
         return you.get_mutation_level(MUT_HORNS) && !one_chance_in(3);
 
     case UNAT_TAILSLAP:
-        return you.has_usable_tail() && coinflip();
+        return you.has_usable_tail();
 
     case UNAT_PSEUDOPODS:
         return you.has_usable_pseudopods() && !one_chance_in(3);

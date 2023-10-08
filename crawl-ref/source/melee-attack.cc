@@ -3462,7 +3462,7 @@ void melee_attack::chaos_affect_actor(actor *victim)
 bool melee_attack::_extra_aux_attack(unarmed_attack_type atk)
 {
     if (atk != UNAT_CONSTRICT
-        && you.strength() + you.dex() <= random2(50))
+        && 10 + you.dex() <= random2(41))
     {
         return false;
     }

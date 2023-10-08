@@ -241,7 +241,7 @@
   - v1.14.2: Flaming Arrows (L2 Charms/Fire) adds bonus damage to ranged attacks, at the cost of 2 MP per projectile.
   - v1.15: Steam Barrier (L6 Charms/Fire) creates steam clouds around the player, gives rF+ and rC-, reduces player spell power (-1 enhancer level), and gives an AC bonus proportional to its remaining duration.
   - v1.21: Confusing Touch is re-added as a very different spell. It only works while unarmed without a shield, and has a chance based on your level and enemy HD to confuse hit enemies for 1 to 2 turns. It does not prevent players from dealing melee damage, and does not end when it affects an enemy. Currently, it's exclusive to Martial Artists.
-  - v1.39.2: Scorpion Form turns the player into a giant scorpion with a powerful stinger aux attack, rPois, +20% HP, and good AC. This form also has a small penalty to spell success and increases spell power (+1 enhancer level) of poison magic.
+  - v1.39.2: Scorpion Form (L7 Transmutations/Poison) turns the player into a giant scorpion with a powerful stinger aux attack, rPois, +20% HP, and good AC. This form also has a small penalty to spell success and increases spell power (+1 enhancer level) of poison magic.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.

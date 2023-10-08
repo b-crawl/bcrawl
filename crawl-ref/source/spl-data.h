@@ -3647,18 +3647,16 @@ static const struct spell_desc spelldata[] =
     TILEG_GENERIC_MONSTER_SPELL,
 },
 
-#if TAG_MAJOR_VERSION == 34
 {
-    SPELL_HUNTING_CRY, "Hunting Cry",
-    SPTYP_HEXES,
-    SPFLAG_AREA | SPFLAG_MONSTER | SPFLAG_SELFENCH | SPFLAG_NOISY,
-    6,
-    0,
+    SPELL_SCORPION_FORM, "Scorpion Form",
+    SPTYP_TRANSMUTATION | SPTYP_POISON,
+    SPFLAG_HELPFUL | SPFLAG_CHAOTIC | SPFLAG_UTILITY,
+    7,
+    200,
     -1, -1,
-    25, 0,
-    TILEG_ERROR,
+    5, 0,
+    TILEG_SCORPION_FORM,
 },
-#endif
 
 {
     SPELL_CLEANSING_FLAME, "Cleansing Flame",

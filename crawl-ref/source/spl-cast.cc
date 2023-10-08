@@ -1904,6 +1904,9 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
     case SPELL_DRAGON_FORM:
         return cast_transform(powc, transformation::dragon, fail);
 
+    case SPELL_SCORPION_FORM:
+        return cast_transform(powc, transformation::scorpion, fail);
+
     case SPELL_NECROMUTATION:
         return cast_transform(powc, transformation::lich, fail);
 

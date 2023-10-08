@@ -112,6 +112,7 @@ olgrebs_toxic_radiance OLGREBS_TOXIC_RADIANCE
 poison_arrow POISON_ARROW
 poisonous_cloud POISONOUS_CLOUD
 spider_form SPIDER_FORM
+scorpion_form SCORPION_FORM
 sting STING
 venom_bolt VENOM_BOLT
 poisonous_vapours POISONOUS_VAPOURS

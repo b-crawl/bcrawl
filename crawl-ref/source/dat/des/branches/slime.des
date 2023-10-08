@@ -204,16 +204,19 @@ ENDMAP
 NAME:   minmay_slime_entry_oklob_open
 TAGS:   slime_entry
 WEIGHT: 5
-MONS:   oklob plant / nothing w:20
+KMONS:  X = oklob plant
+KMONS:  P = plant / withered plant
+NSUBST: 1 = 2:X / 1:P / *:.
+NSUBST: 2 = 3:P / *:.
 KFEAT:  O = enter_slime_pits
 KFEAT:  Z = altar_jiyva
 MAP
  .....
-.......
-..1111.
-..1OZ1.
-..1111.
-.......
+..2222.
+.211112
+.21OZ12
+.211112
+..2222.
  .....
 ENDMAP
 

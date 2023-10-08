@@ -1815,6 +1815,9 @@ int player_spec_poison()
 
     if (player_equip_unrand(UNRAND_OLGREB))
         sp++;
+    
+    if (you.form == transformation::scorpion)
+        sp++;
 
     return sp;
 }
@@ -4751,6 +4754,7 @@ bool mesmerise_hungry_players(int time_taken, bool force)
             return true;
         }
     }
+    return false;
 }
 
 bool napalm_player(int amount, string source, string source_aux)
@@ -4854,7 +4858,7 @@ void dec_slow_player(int delay)
 
     if (you.torpor_slowed())
     {
-        you.duration[DUR_SLOW] = 1;
+        you.duration[DUR_SLOW] = max(1, you.duration[DUR_SLOW]);
         return;
     }
     if (you.props.exists(TORPOR_SLOWED_KEY))
@@ -7286,7 +7290,7 @@ int player::has_tail(bool allow_tran) const
     if (allow_tran)
     {
         // these transformations bring a tail with them
-        if (form == transformation::dragon)
+        if (form == transformation::dragon || form == transformation::scorpion)
             return 1;
 
         // Most transformations suppress a tail.

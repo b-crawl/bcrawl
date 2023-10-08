@@ -1163,6 +1163,16 @@ Scattershot spell
 Blasts a cone-shaped area in front of the caster with metallic fragments. Its
 damage is strongly reduced by armour.
 %%%%
+Scorpion Form spell
+
+Transforms the caster into a giant scorpion. The caster becomes more robust and
+resistant to poison, and gains a venomous stinger.
+
+While transformed, any equipped weapons and armour are melded. Casting spells
+becomes slightly more difficult, but poison magic becomes more powerful.
+
+With seven bars of power, the effects of this spell last until cancelled.
+%%%%
 Seal Doors spell
 
 Imparts seals on nearby doors and stairs, preventing those not allied with

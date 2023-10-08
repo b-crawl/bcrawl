@@ -183,10 +183,18 @@ bool companion_is_elsewhere(mid_t mid, bool must_exist)
 {
     if (companion_list.count(mid))
     {
-        return companion_list[mid].level != level_id::current()
-               || (player_in_branch(BRANCH_PANDEMONIUM)
-                   && companion_list[mid].level.branch == BRANCH_PANDEMONIUM
-                   && !monster_by_mid(mid));
+        if (companion_list[mid].level != level_id::current())
+            return true;
+        if ((player_in_branch(BRANCH_PANDEMONIUM)
+                && companion_list[mid].level.branch == BRANCH_PANDEMONIUM)
+                && !monster_by_mid(mid))
+            return true;
+        if ((player_in_branch(BRANCH_ABYSS)
+                && companion_list[mid].level.branch == BRANCH_ABYSS)
+                && !monster_by_mid(mid))
+            return true;
+        
+        return false;
     }
 
     return !must_exist;

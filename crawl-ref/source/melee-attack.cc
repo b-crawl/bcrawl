@@ -1088,16 +1088,33 @@ class AuxTailslap: public AuxAttackType
 {
 public:
     AuxTailslap()
-    : AuxAttackType(6, "tail-slap") { };
+    : AuxAttackType(4, "tail-slap") { };
 
     int get_damage() const override
     {
-        return damage + max(0, you.get_mutation_level(MUT_STINGER) * 2 - 1);
+        if (you.form == transformation::scorpion)
+            return damage + 14;
+        return damage + max(0, you.get_mutation_level(MUT_STINGER) * 3 - 1);
     }
 
     int get_brand() const override
     {
-        return you.get_mutation_level(MUT_STINGER) ? SPWPN_VENOM : SPWPN_NORMAL;
+        return (you.form == transformation::scorpion || you.get_mutation_level(MUT_STINGER))
+                ? SPWPN_VENOM : SPWPN_NORMAL;
+    }
+    
+    string get_verb() const override
+    {
+        if (you.form == transformation::scorpion || you.get_mutation_level(MUT_STINGER))
+            return "sting";
+        return name;
+    }
+
+    string get_name() const override
+    {
+        if (you.form == transformation::scorpion || you.get_mutation_level(MUT_STINGER))
+            return "stinger";
+        return name;
     }
 };
 
@@ -3445,7 +3462,7 @@ void melee_attack::chaos_affect_actor(actor *victim)
 bool melee_attack::_extra_aux_attack(unarmed_attack_type atk)
 {
     if (atk != UNAT_CONSTRICT
-        && you.strength() + you.dex() <= random2(50))
+        && 10 + you.dex() <= random2(41))
     {
         return false;
     }
@@ -3476,7 +3493,7 @@ bool melee_attack::_extra_aux_attack(unarmed_attack_type atk)
         return you.get_mutation_level(MUT_HORNS) && !one_chance_in(3);
 
     case UNAT_TAILSLAP:
-        return you.has_usable_tail() && coinflip();
+        return you.has_usable_tail();
 
     case UNAT_PSEUDOPODS:
         return you.has_usable_pseudopods() && !one_chance_in(3);

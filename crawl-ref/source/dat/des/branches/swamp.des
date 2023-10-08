@@ -2372,7 +2372,7 @@ ENDMAP
 # Growth, Death and Undeath, by byrel
 # Presided over by an undead Lernaean hydra
 NAME:    byrel_swamp_growth_death_and_undeath
-TAGS:    no_monster_gen
+TAGS:    no_monster_gen no_tele_into
 PLACE:   Swamp:$
 ORIENT:  float
 MONS:    swamp dragon / swamp drake / hydra

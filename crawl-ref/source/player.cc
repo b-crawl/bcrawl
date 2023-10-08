@@ -4754,6 +4754,7 @@ bool mesmerise_hungry_players(int time_taken, bool force)
             return true;
         }
     }
+    return false;
 }
 
 bool napalm_player(int amount, string source, string source_aux)

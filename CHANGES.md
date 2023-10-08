@@ -169,6 +169,7 @@
   - v1.36.2: Monster breath attacks have a timeout of 2 to 5 turns instead of 1 to 5 turns.
   - v1.36.5: Guaranteed damage reduction (GDR) calculation is reworked. It's now normally proportional to sqrt(dexterity + armour_skill).
   - v1.37.1: Base health regeneration of players is now 0.1 + HP/600 per turn. This is higher than before at low levels.
+  - v1.39.2: The chance of player aux melee attacks is now scaled by (25 + dexterity \* 2.5)% instead of by ((strength + dexterity) \* 2)%.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -240,6 +241,7 @@
   - v1.14.2: Flaming Arrows (L2 Charms/Fire) adds bonus damage to ranged attacks, at the cost of 2 MP per projectile.
   - v1.15: Steam Barrier (L6 Charms/Fire) creates steam clouds around the player, gives rF+ and rC-, reduces player spell power (-1 enhancer level), and gives an AC bonus proportional to its remaining duration.
   - v1.21: Confusing Touch is re-added as a very different spell. It only works while unarmed without a shield, and has a chance based on your level and enemy HD to confuse hit enemies for 1 to 2 turns. It does not prevent players from dealing melee damage, and does not end when it affects an enemy. Currently, it's exclusive to Martial Artists.
+  - v1.39.2: Scorpion Form turns the player into a giant scorpion with a powerful stinger aux attack, rPois, +20% HP, and good AC. This form also has a small penalty to spell success and increases spell power (+1 enhancer level) of poison magic.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.
@@ -483,6 +485,8 @@
   - v1.38.2: Qazlal's Upheaval ability is always 3x3, instead of its size scaling with Invocations.
   - v1.38.3: Qazlal's Become The Storm ability still works when the player can't teleport.
   - v1.39: Uskayaw's Grand Finale ability fully refills health as well as mana.
+  - v1.39.2: Hepliaklqana ancestor recall no longer fails in the Abyss.
+  - v1.39.2: Hepliaklqana ancestors now respawn almost immediately after Incarnate ends.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -563,6 +567,7 @@
   - v1.38.1: Scarves can be randarts.
   - v1.39: Crystal plate armor encumbrance is reduced. (23 -> 22)
   - v1.39.1: Scrolls of magic mapping become scrolls of revelation, which also let the player see through walls for 1 turn.
+  - v1.39.2: Large shields have a lower base shield penalty. (16 -> 15)
 
 #### Removed Items
   - Amulet of Harm

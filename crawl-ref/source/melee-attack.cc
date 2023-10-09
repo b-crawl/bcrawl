@@ -1088,13 +1088,13 @@ class AuxTailslap: public AuxAttackType
 {
 public:
     AuxTailslap()
-    : AuxAttackType(4, "tail-slap") { };
+    : AuxAttackType(6, "tail-slap") { };
 
     int get_damage() const override
     {
         if (you.form == transformation::scorpion)
-            return damage + 14;
-        return damage + max(0, you.get_mutation_level(MUT_STINGER) * 3 - 1);
+            return damage + 12;
+        return damage + max(0, you.get_mutation_level(MUT_STINGER) * 2 - 1);
     }
 
     int get_brand() const override
@@ -3493,7 +3493,8 @@ bool melee_attack::_extra_aux_attack(unarmed_attack_type atk)
         return you.get_mutation_level(MUT_HORNS) && !one_chance_in(3);
 
     case UNAT_TAILSLAP:
-        return you.has_usable_tail();
+        return you.has_usable_tail()
+                && (coinflip() || you.form == transformation::scorpion || you.get_mutation_level(MUT_STINGER));
 
     case UNAT_PSEUDOPODS:
         return you.has_usable_pseudopods() && !one_chance_in(3);

@@ -5058,7 +5058,6 @@ bool qazlal_become_storm()
     if (your_spells(SPELL_BLINKBOLT, pow, false) == spret::abort)
         return false;
     viewwindow(); // update vision after movement, before explosions
-    const int upheaval_radius = _upheaval_radius(pow);
     for (radius_iterator ri(you.pos(), 5, C_CIRCLE, LOS_NO_TRANS, true);
          ri; ++ri)
     {

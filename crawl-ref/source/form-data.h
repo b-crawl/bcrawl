@@ -176,7 +176,7 @@ static const form_entry formdata[] =
     EQF_PHYSICAL, MR_RES_POISON,
     DEFAULT_DURATION, 4, 0, SIZE_GIANT, 12,
     9, 22, 0, true, 10, 3, 10,
-    SPWPN_NORMAL, LIGHTGREEN, "Claws", ANIMAL_VERBS,
+    SPWPN_NORMAL, LIGHTGREEN, "Claws", { "bash", "pinch", "claw", "maul" },
     FC_DEFAULT, FC_FORBID, FC_FORBID, true, false,
     "hiss", 0, "front leg", "", "crawl onto", "flesh"
 },

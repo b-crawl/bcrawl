@@ -1448,7 +1448,9 @@ void elyvilon_remove_divine_vigour()
 
 void hep_remove_incarnate()
 {
-    mprf(MSGCH_DURATION, "Your connection to your ancestor fades.");
+    bool respawned = try_respawn_ancestor(true);
+    if (!respawned)
+        mprf(MSGCH_DURATION, "Your connection to your ancestor fades.");
     you.duration[DUR_INCARNATE] = 0;
     calc_hp();
 }

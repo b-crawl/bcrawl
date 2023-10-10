@@ -500,23 +500,6 @@ static void _handle_recitation(int step)
 }
 
 /**
- * Try to respawn the player's ancestor, if possible.
- */
-static void _try_to_respawn_ancestor()
-{
-     monster *ancestor = create_monster(hepliaklqana_ancestor_gen_data());
-     if (!ancestor)
-         return;
-
-    mprf("%s emerges from the mists of memory!",
-         ancestor->name(DESC_YOUR).c_str());
-    add_companion(ancestor);
-    check_place_cloud(CLOUD_MIST, ancestor->pos(), random_range(1,2),
-                      ancestor); // ;)
-}
-
-
-/**
  * Take a 'simple' duration, decrement it, and print messages as appropriate
  * when it hits 50% and 0% remaining.
  *
@@ -811,7 +794,7 @@ static void _decrement_durations()
         && in_good_standing(GOD_HEPLIAKLQANA)
         && hepliaklqana_ancestor() == MID_NOBODY)
     {
-        _try_to_respawn_ancestor();
+        try_respawn_ancestor();
     }
 
     const bool sanguine_armour_is_valid = sanguine_armour_valid();

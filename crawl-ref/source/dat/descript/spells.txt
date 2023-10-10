@@ -1165,8 +1165,9 @@ damage is strongly reduced by armour.
 %%%%
 Scorpion Form spell
 
-Transforms the caster into a giant scorpion. The caster becomes more robust and
-resistant to poison, and gains a venomous stinger.
+Transforms the caster into a giant scorpion. The caster becomes more robust,
+very resistant to fire, resistant to poison and acid, and gains a powerful
+venomous stinger.
 
 While transformed, any equipped weapons and armour are melded. Casting spells
 becomes slightly more difficult, but poison magic becomes more powerful.

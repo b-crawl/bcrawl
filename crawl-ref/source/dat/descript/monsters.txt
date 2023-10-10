@@ -1722,8 +1722,7 @@ tail. Its mouth drips with venomous saliva.
 %%%%
 naga mage
 
-A naga that has trained in the use of magic, trailed by an eldritch nimbus. It
-is especially skilled in spells dealing with poison and venom.
+A naga that has trained in the use of magic, trailed by an eldritch nimbus.
 %%%%
 naga ritualist
 

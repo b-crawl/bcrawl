@@ -297,5 +297,3 @@ bool wu_jian_post_move_effects(bool did_wall_jump,
                                const coord_def& initial_position);
 void wu_jian_end_of_turn_effects();
 void end_heavenly_storm();
-
-bool try_respawn_ancestor(bool incarnated = false);

@@ -7407,3 +7407,27 @@ spret wu_jian_wall_jump_ability()
     remove_ice_armour_movement();
     return spret::success;
 }
+
+// Try to respawn a Hepliaklqana ancestor, if possible.
+bool try_respawn_ancestor(bool incarnated)
+{
+     monster *ancestor = create_monster(hepliaklqana_ancestor_gen_data());
+     if (!ancestor)
+         return false;
+
+    if (incarnated)
+    {
+        mprf(MSGCH_DURATION, "%s emerges from your body!",
+             ancestor->name(DESC_YOUR).c_str());
+        add_companion(ancestor);
+    }
+    else
+    {
+        mprf("%s emerges from the mists of memory!",
+             ancestor->name(DESC_YOUR).c_str());
+        add_companion(ancestor);
+        check_place_cloud(CLOUD_MIST, ancestor->pos(), random_range(1,2),
+                          ancestor); // ;)
+    }
+    return true;
+}

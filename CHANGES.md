@@ -339,6 +339,9 @@
   - v1.37.1: Icicle Burst has lower accuracy (7 -> 5).
   - v1.37.1: Irradiate causes the Sap Magic status for 8 to 12 turns, which increases spell failure chance when spells are cast.
   - v1.37.1: Summon Ice Beast summon duration is always 2, the same as Summon Mana Viper, instead of 2 to 4.
+  - v1.39.3: Fire Storm is just Fire instead of Fire/Conjurations.
+  - v1.39.3: Ignition is Fire/Hexes instead of just Fire.
+  - v1.39.3: Mana Rupture damage is reduced by about 1/3.
 
 #### Removed Spells
   - Summon Guardian Golem

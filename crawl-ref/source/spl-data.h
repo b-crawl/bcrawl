@@ -494,7 +494,7 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_FIRE_STORM, "Fire Storm",
-    SPTYP_CONJURATION | SPTYP_FIRE,
+    SPTYP_FIRE,
     SPFLAG_TARGET | SPFLAG_AREA | SPFLAG_NEEDS_TRACER,
     9,
     200,
@@ -3929,7 +3929,7 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_IGNITION, "Ignition",
-    SPTYP_FIRE,
+    SPTYP_FIRE | SPTYP_HEXES,
     SPFLAG_AREA,
     8,
     200,

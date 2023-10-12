@@ -5053,7 +5053,6 @@ spret qazlal_elemental_force(bool fail)
 
 bool qazlal_become_storm()
 {
-    bool friendlies = false;
     vector<coord_def> targets;
     vector<int> weights;
     const int pow = you.skill(SK_INVOCATIONS, 6);

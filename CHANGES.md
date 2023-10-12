@@ -487,7 +487,7 @@
   - v1.38.3: Qazlal's Become The Storm ability still works when the player can't teleport.
   - v1.39: Uskayaw's Grand Finale ability fully refills health as well as mana.
   - v1.39.2: Hepliaklqana ancestor recall no longer fails in the Abyss.
-  - v1.39.2: Hepliaklqana ancestors now respawn almost immediately after Incarnate ends.
+  - v1.39.3: Hepliaklqana ancestors now respawn immediately when Incarnate ends.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -758,6 +758,9 @@
   - v1.39: The new "ancient automaton" enemy appears in the Slime Pits. It has a strong melee attack that tramples, and casts Orb of Destruction and Steam Ball.
   - v1.39: The new "wendigo" enemy appears in the Spriggan Forest, Depths, and Swamp. Its bite can cause players to become mesmerized by a visible edible monster.
   - v1.39: The new "greenwood witch" enemy appears in the Spriggan Forest. It can cast Sleep, Polymorph, and Bolt of Draining.
+  - v1.39.3: Scorpions have rF+.
+  - v1.39.3: Emperor scorpions have rF++ and rCorr.
+  - v1.39.3: Naga mages have more HP and a reworked spell set: Mystic Blast, Spectral Cloud, Dimension Anchor, and Haste.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

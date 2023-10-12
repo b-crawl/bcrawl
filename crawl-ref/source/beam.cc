@@ -5926,7 +5926,7 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
             mon->add_ench(lowered_mr);
         
         const int dice = 6;
-        int die_size = div_rand_round(mons_mr*(18*3 + (this->ench_power)*2), 3*100*dice);
+        int die_size = div_rand_round(mons_mr*(30 + this->ench_power), 225*dice);
 
         this->damage       = dice_def(dice, die_size);
         this->colour       = ETC_MUTAGENIC;

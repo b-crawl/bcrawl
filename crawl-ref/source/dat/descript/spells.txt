@@ -1469,7 +1469,8 @@ confuse, mutate or disintegrate.
 %%%%
 Summon Fire Elementals spell
 
-Summons one or more fire elementals.
+Summons a pair of fire elementals. At higher power, more powerful elementals
+are summoned.
 %%%%
 Summon Forest spell
 

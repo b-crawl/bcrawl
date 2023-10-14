@@ -2149,12 +2149,12 @@ static const struct spell_desc spelldata[] =
 
 {
     SPELL_FIRE_ELEMENTALS, "Summon Fire Elementals",
-    SPTYP_SUMMONING,
+    SPTYP_FIRE | SPTYP_SUMMONING,
     SPFLAG_MONSTER | SPFLAG_MONS_ABJURE,
-    5,
-    0,
+    7,
+    150,
     -1, -1,
-    4, 0,
+    10, 0,
     TILEG_FIRE_ELEMENTALS,
 },
 

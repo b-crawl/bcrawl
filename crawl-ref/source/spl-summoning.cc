@@ -311,7 +311,7 @@ spret cast_summon_scorpions(actor* caster, int pow, god_type god, bool fail)
     return spret::success;
 }
 
-spret cast_fire_elementals(actor* caster, int pow, god_type god, bool fail)
+spret cast_summon_fire_elementals(actor* caster, int pow, god_type god, bool fail)
 {
     fail_check();
     monster_type mon = MONS_FIRE_ELEMENTAL;
@@ -319,6 +319,7 @@ spret cast_fire_elementals(actor* caster, int pow, god_type god, bool fail)
     mgen_data mdata = _summon_data(*caster, mon, 4, god,
         SPELL_FIRE_ELEMENTALS);
     mdata.flags |= MG_DONT_CAP;
+    mdata.hd = (4 + div_rand_round(pow, 7));
 
     int seen_count = 0;
     bool first = true;
@@ -331,8 +332,6 @@ spret cast_fire_elementals(actor* caster, int pow, god_type god, bool fail)
         {
             if (you.can_see(*elemental))
                 seen_count++;
-
-            elemental.hd = (4 + div_rand_round(pow, 7));
             
             // link summons for summon cap
             if (mid == -1)

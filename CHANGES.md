@@ -342,6 +342,7 @@
   - v1.39.3: Fire Storm is just Fire instead of Fire/Conjurations.
   - v1.39.3: Ignition is Fire/Hexes instead of just Fire.
   - v1.39.3: Mana Rupture damage is reduced by about 1/3.
+  - v1.39.3: The Invisibility spell has less duration scaling with power. It's now equivalent to a potion of invisibility at 80 spell power instead of 40.
 
 #### Removed Spells
   - Summon Guardian Golem

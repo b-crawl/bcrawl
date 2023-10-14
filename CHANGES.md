@@ -242,7 +242,7 @@
   - v1.15: Steam Barrier (L6 Charms/Fire) creates steam clouds around the player, gives rF+ and rC-, reduces player spell power (-1 enhancer level), and gives an AC bonus proportional to its remaining duration.
   - v1.21: Confusing Touch is re-added as a very different spell. It only works while unarmed without a shield, and has a chance based on your level and enemy HD to confuse hit enemies for 1 to 2 turns. It does not prevent players from dealing melee damage, and does not end when it affects an enemy. Currently, it's exclusive to Martial Artists.
   - v1.39.2: Scorpion Form (L7 Transmutations/Poison) turns the player into a giant scorpion with a powerful stinger aux attack, rPois, +20% HP, and good AC. This form also has a small penalty to spell success and increases spell power (+1 enhancer level) of poison magic.
-  - v1.39.3: Scorpion Form gives rF++ and rCorr.
+  - v1.39.3: Summon Fire Elementals (L7 Fire/Summoning) summons 2 fire elementals. Their HD scales with spell power, which increases their HP, melee damage, and accuracy.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.
@@ -343,6 +343,7 @@
   - v1.39.3: Ignition is Fire/Hexes instead of just Fire.
   - v1.39.3: Mana Rupture damage is reduced by about 1/3.
   - v1.39.3: The Invisibility spell has less duration scaling with power. It's now equivalent to a potion of invisibility at 80 spell power instead of 40.
+  - v1.39.3: Scorpion Form gives rF++ and rCorr.
 
 #### Removed Spells
   - Summon Guardian Golem

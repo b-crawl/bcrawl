@@ -1472,6 +1472,7 @@ bool vehumet_supports_spell(spell_type spell)
     case SPELL_VIOLENT_UNRAVELLING:
     case SPELL_INNER_FLAME:
     case SPELL_IGNITION:
+    case SPELL_FIRE_STORM:
         return true;
     case SPELL_DAZZLING_SPRAY:
     case SPELL_SPELLFORGED_SERVITOR:

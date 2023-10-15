@@ -5168,7 +5168,8 @@ bool bolt::ignores_monster(const monster* mon) const
         return true;
 
     // Fire storm creates these, so we'll avoid affecting them.
-    if (origin_spell == SPELL_FIRE_STORM && mon->type == MONS_FIRE_VORTEX)
+    if (origin_spell == SPELL_FIRE_STORM
+            && (mon->type == MONS_FIRE_VORTEX || mon->type == MONS_FIRE_ELEMENTAL))
         return true;
 
     // Don't blow up blocks of ice with the spell that creates them.

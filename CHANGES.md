@@ -242,7 +242,7 @@
   - v1.15: Steam Barrier (L6 Charms/Fire) creates steam clouds around the player, gives rF+ and rC-, reduces player spell power (-1 enhancer level), and gives an AC bonus proportional to its remaining duration.
   - v1.21: Confusing Touch is re-added as a very different spell. It only works while unarmed without a shield, and has a chance based on your level and enemy HD to confuse hit enemies for 1 to 2 turns. It does not prevent players from dealing melee damage, and does not end when it affects an enemy. Currently, it's exclusive to Martial Artists.
   - v1.39.2: Scorpion Form (L7 Transmutations/Poison) turns the player into a giant scorpion with a powerful stinger aux attack, rPois, +20% HP, and good AC. This form also has a small penalty to spell success and increases spell power (+1 enhancer level) of poison magic.
-  - v1.39.3: Summon Fire Elementals (L7 Fire/Summoning) summons 2 fire elementals. Their HD scales with spell power, which increases their HP, melee damage, and accuracy.
+  - v1.40: Summon Fire Elementals (L7 Fire/Summoning) summons 2 fire elementals. Their HD scales with spell power, which increases their HP, melee damage, and accuracy.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.
@@ -339,12 +339,12 @@
   - v1.37.1: Icicle Burst has lower accuracy (7 -> 5).
   - v1.37.1: Irradiate causes the Sap Magic status for 8 to 12 turns, which increases spell failure chance when spells are cast.
   - v1.37.1: Summon Ice Beast summon duration is always 2, the same as Summon Mana Viper, instead of 2 to 4.
-  - v1.39.3: Fire Storm is just Fire instead of Fire/Conjurations.
-  - v1.39.3: Ignition is Fire/Hexes instead of just Fire.
-  - v1.39.3: Mana Rupture damage is reduced by about 1/3.
-  - v1.39.3: The Invisibility spell has less duration scaling with power. It's now equivalent to a potion of invisibility at 80 spell power instead of 40.
-  - v1.39.3: Scorpion Form gives rF++ and rCorr.
-  - v1.39.3: Spellforged servitors have rF+ rC+ instead of rF++ rC++.
+  - v1.40: Fire Storm is just Fire instead of Fire/Conjurations.
+  - v1.40: Ignition is Fire/Hexes instead of just Fire.
+  - v1.40: Mana Rupture damage is reduced by about 1/3.
+  - v1.40: The Invisibility spell has less duration scaling with power. It's now equivalent to a potion of invisibility at 80 spell power instead of 40.
+  - v1.40: Scorpion Form gives rF++ and rCorr.
+  - v1.40: Spellforged servitors have rF+ rC+ instead of rF++ rC++.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -493,7 +493,7 @@
   - v1.38.3: Qazlal's Become The Storm ability still works when the player can't teleport.
   - v1.39: Uskayaw's Grand Finale ability fully refills health as well as mana.
   - v1.39.2: Hepliaklqana ancestor recall no longer fails in the Abyss.
-  - v1.39.3: Hepliaklqana ancestors now respawn immediately when Incarnate ends.
+  - v1.40: Hepliaklqana ancestors now respawn immediately when Incarnate ends.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -764,10 +764,10 @@
   - v1.39: The new "ancient automaton" enemy appears in the Slime Pits. It has a strong melee attack that tramples, and casts Orb of Destruction and Steam Ball.
   - v1.39: The new "wendigo" enemy appears in the Spriggan Forest, Depths, and Swamp. Its bite can cause players to become mesmerized by a visible edible monster.
   - v1.39: The new "greenwood witch" enemy appears in the Spriggan Forest. It can cast Sleep, Polymorph, and Bolt of Draining.
-  - v1.39.3: Scorpions have rF+.
-  - v1.39.3: Emperor scorpions have rF++ and rCorr.
-  - v1.39.3: Naga mages have more HP and a reworked spell set: Mystic Blast, Spectral Cloud, Dimension Anchor, and Haste.
-  - v1.39.3: Fire elementals are immune to Fire Storm.
+  - v1.40: Scorpions have rF+.
+  - v1.40: Emperor scorpions have rF++ and rCorr.
+  - v1.40: Naga mages have more HP and a reworked spell set: Mystic Blast, Spectral Cloud, Dimension Anchor, and Haste.
+  - v1.40: Fire elementals are immune to Fire Storm.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

@@ -344,6 +344,7 @@
   - v1.39.3: Mana Rupture damage is reduced by about 1/3.
   - v1.39.3: The Invisibility spell has less duration scaling with power. It's now equivalent to a potion of invisibility at 80 spell power instead of 40.
   - v1.39.3: Scorpion Form gives rF++ and rCorr.
+  - v1.39.3: Spellforged servitors have rF+ rC+ instead of rF++ rC++.
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -766,6 +767,7 @@
   - v1.39.3: Scorpions have rF+.
   - v1.39.3: Emperor scorpions have rF++ and rCorr.
   - v1.39.3: Naga mages have more HP and a reworked spell set: Mystic Blast, Spectral Cloud, Dimension Anchor, and Haste.
+  - v1.39.3: Fire elementals are immune to Fire Storm.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

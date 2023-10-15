@@ -89,8 +89,8 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of the Tempests
     SPELL_CONJURE_BALL_LIGHTNING,
+    SPELL_FIRE_ELEMENTALS,
     SPELL_ICICLE_BURST,
-    SPELL_IGNITION,
     SPELL_TORNADO,
     SPELL_SHATTER,
 },
@@ -108,6 +108,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_INFESTATION,
     SPELL_DISCORD,
     SPELL_RUPTURE,
+    SPELL_IGNITION,
 },
 
 {   // Book of Changes

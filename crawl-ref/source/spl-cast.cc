@@ -1797,6 +1797,9 @@ static spret _do_cast(spell_type spell, int powc, const dist& spd,
     case SPELL_SUMMON_HYDRA:
         return cast_summon_hydra(&you, powc, god, fail);
 
+    case SPELL_FIRE_ELEMENTALS:
+        return cast_summon_fire_elementals(&you, powc, god, fail);
+
     case SPELL_SUMMON_MANA_VIPER:
         return cast_summon_mana_viper(powc, god, fail);
 

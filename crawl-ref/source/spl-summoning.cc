@@ -279,7 +279,7 @@ spret cast_summon_scorpions(actor* caster, int pow, god_type god, bool fail)
     int mid = -1;
 
     while(power_left > 0)
-        {
+    {
         if (monster* beast = create_monster(mdata))
         {
             if (you.can_see(*beast))
@@ -298,7 +298,7 @@ spret cast_summon_scorpions(actor* caster, int pow, god_type god, bool fail)
         }
         
         power_left -= 25 + random2(6);
-        }
+    }
     
     if(seen_count)
         {
@@ -306,6 +306,53 @@ spret cast_summon_scorpions(actor* caster, int pow, god_type god, bool fail)
             mpr("Scorpions appear around you.");
         else
             mpr("A scorpion appears.");
+        }
+
+    return spret::success;
+}
+
+spret cast_summon_fire_elementals(actor* caster, int pow, god_type god, bool fail)
+{
+    fail_check();
+    monster_type mon = MONS_FIRE_ELEMENTAL;
+    
+    mgen_data mdata = _summon_data(*caster, mon, 4, god,
+        SPELL_FIRE_ELEMENTALS);
+    mdata.flags |= MG_DONT_CAP;
+    mdata.hd = (4 + div_rand_round(pow, 7));
+
+    int seen_count = 0;
+    bool first = true;
+    int mid = -1;
+
+    int summon_count = 2;
+    while(summon_count > 0)
+    {
+        if (monster* elemental = create_monster(mdata))
+        {
+            if (you.can_see(*elemental))
+                seen_count++;
+            
+            // link summons for summon cap
+            if (mid == -1)
+                mid = elemental->mid;
+            elemental->props["summon_id"].get_int() = mid;
+
+            // Handle cap only for the first of the batch being summoned
+            if (first)
+                summoned_monster(elemental, &you, SPELL_FIRE_ELEMENTALS);
+
+            first = false;
+        }
+        summon_count -= 1;
+    }
+    
+    if(seen_count)
+        {
+        if(seen_count > 1)
+            mpr("Fire elementals appear around you.");
+        else
+            mpr("A fire elemental appears.");
         }
 
     return spret::success;
@@ -3369,6 +3416,7 @@ static const map<spell_type, summon_cap> summonsdata =
     { SPELL_SUMMON_GUARDIAN_GOLEM,      { 1, 2 } },
 #endif
     { SPELL_SPELLFORGED_SERVITOR,       { 1, 2 } },
+    { SPELL_FIRE_ELEMENTALS,            { 1, 2 } },
     // Monster spells
     { SPELL_SUMMON_UFETUBUS,            { 8, 2 } },
     { SPELL_SUMMON_HELL_BEAST,          { 8, 2 } },
@@ -3377,7 +3425,6 @@ static const map<spell_type, summon_cap> summonsdata =
     { SPELL_SUMMON_MUSHROOMS,           { 8, 2 } },
     { SPELL_SUMMON_EYEBALLS,            { 4, 2 } },
     { SPELL_WATER_ELEMENTALS,           { 3, 2 } },
-    { SPELL_FIRE_ELEMENTALS,            { 3, 2 } },
     { SPELL_EARTH_ELEMENTALS,           { 3, 2 } },
     { SPELL_AIR_ELEMENTALS,             { 3, 2 } },
 #if TAG_MAJOR_VERSION == 34

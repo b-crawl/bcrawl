@@ -168,7 +168,7 @@ static bool _decrement_a_duration(duration_type dur, int delay,
 
 static void _decrement_petrification(int delay)
 {
-    if (_decrement_a_duration(DUR_PETRIFIED, delay) && !you.paralysed())
+    if (_decrement_a_duration(DUR_PETRIFIED, delay))
     {
         you.redraw_evasion = true;
 
@@ -183,8 +183,9 @@ static void _decrement_petrification(int delay)
             default: break;
             }
 
-        mprf(MSGCH_DURATION, "You turn to %s and can move again.",
-             flesh_equiv.c_str());
+        mprf(MSGCH_DURATION, "You turn to %s%s.",
+             flesh_equiv.c_str(),
+             you.paralysed() ? "" : " and can move again");
 
         if (you.props.exists(PETRIFIED_BY_KEY))
             you.props.erase(PETRIFIED_BY_KEY);
@@ -197,11 +198,6 @@ static void _decrement_petrification(int delay)
         if ((dur -= delay) <= 0)
         {
             dur = 0;
-            // If we'd kill the player when active flight stops, this will
-            // need to pass the killer. Unlike monsters, almost all flight is
-            // magical, inluding tengu, as there's no flapping of wings. Should
-            // we be nasty to dragon and bat forms?  For now, let's not instakill
-            // them even if it's inconsistent.
             you.fully_petrify(nullptr);
         }
         else if (dur < 15 && old_dur >= 15)
@@ -504,23 +500,6 @@ static void _handle_recitation(int step)
 }
 
 /**
- * Try to respawn the player's ancestor, if possible.
- */
-static void _try_to_respawn_ancestor()
-{
-     monster *ancestor = create_monster(hepliaklqana_ancestor_gen_data());
-     if (!ancestor)
-         return;
-
-    mprf("%s emerges from the mists of memory!",
-         ancestor->name(DESC_YOUR).c_str());
-    add_companion(ancestor);
-    check_place_cloud(CLOUD_MIST, ancestor->pos(), random_range(1,2),
-                      ancestor); // ;)
-}
-
-
-/**
  * Take a 'simple' duration, decrement it, and print messages as appropriate
  * when it hits 50% and 0% remaining.
  *
@@ -815,7 +794,7 @@ static void _decrement_durations()
         && in_good_standing(GOD_HEPLIAKLQANA)
         && hepliaklqana_ancestor() == MID_NOBODY)
     {
-        _try_to_respawn_ancestor();
+        try_respawn_ancestor();
     }
 
     const bool sanguine_armour_is_valid = sanguine_armour_valid();

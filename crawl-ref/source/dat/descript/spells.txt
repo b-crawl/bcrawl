@@ -757,10 +757,9 @@ caster is not affected directly.
 %%%%
 Ignition spell
 
-All foes in the caster's surroundings are engulfed in balls of fire. The caster
-and their allies are protected from the fire and will never be harmed by this
-spell.
-
+Causes all foes in the caster's surroundings to generate explosions of fire.
+The caster and their allies are protected from the fire and will never be
+harmed by this spell.
 %%%%
 Infestation spell
 
@@ -1165,8 +1164,9 @@ damage is strongly reduced by armour.
 %%%%
 Scorpion Form spell
 
-Transforms the caster into a giant scorpion. The caster becomes more robust and
-resistant to poison, and gains a venomous stinger.
+Transforms the caster into a giant scorpion. The caster becomes more robust,
+very resistant to fire, resistant to poison and acid, and gains a powerful
+venomous stinger.
 
 While transformed, any equipped weapons and armour are melded. Casting spells
 becomes slightly more difficult, but poison magic becomes more powerful.
@@ -1469,7 +1469,8 @@ confuse, mutate or disintegrate.
 %%%%
 Summon Fire Elementals spell
 
-Summons one or more fire elementals.
+Summons a pair of fire elementals. At higher power, more powerful elementals
+are summoned.
 %%%%
 Summon Forest spell
 

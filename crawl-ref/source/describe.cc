@@ -3017,6 +3017,7 @@ static string _player_spell_desc(spell_type spell)
     {
         description << "You can sustain at most " + number_in_words(limit)
                     << " creature" << (limit > 1 ? "s" : "")
+                    << " or band" << (limit > 1 ? "s" : "")
                     << " summoned by this spell.\n";
     }
 

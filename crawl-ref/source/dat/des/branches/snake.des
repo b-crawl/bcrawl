@@ -2088,8 +2088,7 @@ ENDMAP
 NAME:    snake_hunt
 PLACE:   Snake:$
 WEIGHT:  20
-TAGS:    no_rotate
-ORIENT:  northwest
+ORIENT:  float
 MONS:    naga / nothing
 MONS:    nagaraja / nothing
 MONS:    guardian serpent / nothing
@@ -2112,43 +2111,40 @@ KITEM:   O = serpentine rune of Zot
 validate {{ return glyphs_connected('{', 'O') }}
 #
 MAP
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxx'xxxcccccxxx"xxxxxxxxxxxxx
-xxxxxxxxxxxxx'xx''''''c4O4c""""""xx"xxxxxxxx
-xxxxxxxxxxx''''''xxxx6646466xxxx""""""xxxxxx
-xxxxxxxx''''xxxxxxxx.5665665.xxxxxxxx""""xxx
-xxxxxxx''xxxx''''xxx..45554..xxx""""xxxx""xx
-xxxxxx''xxx''''''''xxx.666.xxx""""""""xxx""x
-xxxxxx'xxx''''''''''xxxcXcxxx""""""""""xxx"x
-xxxxxx''x''''''''''''xx.3.xx""""""""""""x""x
-xxxxxxx'Y'''''''''''''45354"""""""""""""Z"xx
-xxxxxxxxxx''''''''''xx.....xx""""""""""xxxxx
-xxxxxxxxxxx''''''''xxxxx.xxxxx""""""""xxxxxx
-xxxxxxxxxxxxx''''xxxxxx...xxxxxx""""xxxxxxxx
-xxxxxxxxxxxxxxxxxxxxxxxx+xxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxx!.!xxxxxx.....xxxxxx!.!xxxxxxxx
-xxxxxxxxxx!....._xx...43335...xx_...!!!xxxxx
-xxxxxxxx!......_x.11.4..3..5.22.x_......!xxx
-xxxxxxx!...2...x..11.........22..x...1...!xx
-xxxxxxx!..2..._x......T...T......x_...1..!xx
-xxxxxx!...2...x..2.............1..x...1...!x
-xxxxxx!..2....x.........{.........x....1...!
-xxxxxx!.......x....T...(.[...T.............@
-xxxxxx!..2....x.......ZZZZZ.......x....1...!
-xxxxxxx!..2..._x.................x_...1..!xx
-xxxxxxx!...2..._xx....T...T....xx_...1...!xx
-xxxxxxx!........._xx.........xx_.........!xx
-xxxxxxxx!.........._xxx...xxx_..........!xxx
-xxxxxxxxx!.............x.x.............!xxxx
-xxxxxxxxxx!!.........................!!xxxxx
-xxxxxxxxxxxx!!!.....3.......3.....!!!xxxxxxx
-xxxxxxxxxxxxxxx!!!!!..3.{.3..!!!!!xxxxxxxxxx
-xxxxxxxxxxxxxxxxxxxx!!!...!!!xxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxxxxxxx!@!xxxxxxxxxxxxxxxxxx
+       xxxxxxxxxxxxxxxxxxxxxxxx        
+     xxxxxxxxxxxxxxxxxxxxxxxxxxxxx     
+     xxxxxxxx'xxxcccccxxx"xxxxxxxx     
+   xxxxx'xx''''''c4O4c""""""xx"xxxxx   
+ xxxxx''''''xxxx6646466xxxx""""""xxxxx 
+xxx''''xxxxxxxx.5665665.xxxxxxxx""""xxx
+xx''xxxx''''xxx..45554..xxx""""xxxx""xx
+x''xxx''''''''xxx.666.xxx""""""""xxx""x
+x'xxx''''''''''xxxcXcxxx""""""""""xxx"x
+x''x''''''''''''xx.3.xx""""""""""""x""x
+xx'Y'''''''''''''45354"""""""""""""Z"xx
+xxxxx''''''''''xx.....xx""""""""""xxxxx
+ xxxxx''''''''xxxxx.xxxxx""""""""xxxxx 
+ xxxxxxx''''xxxxxx...xxxxxx""""xxxxxxx 
+  xxxxxxxxxxxxxxxxx+xxxxxxxxxxxxxxxxx  
+ xxxxxxx!.!xxxxxx.....xxxxxx!.!xxxxxxx 
+ xxxx!....._xx...43335...xx_...!!!xxxx 
+xxx!......_x.11.4..3..5.22.x_......!xxx
+xx!...2...x..11.........22..x...1...!xx
+xx!..2..._x......T...T......x_...1..!xx
+x!...2...x..2.............1..x...1...!x
+x!..2....x......nnnnnnn......x....1...!
+x!.......x....T.........T.............@
+x!..2....x...................x....1...!
+xx!..2..._x.................x_...1..!xx
+xx!...2..._xx....T...T....xx_...1...!xx
+xx!........._xx.........xx_.........!xx
+xxx!.........._xxx...xxx_..........!xxx
+ xxx!.............x.x.............!xxx 
+  xxx!!.........................!!xxx  
+   xxxx!!!.....3.......3.....!!!xxxx   
+   xxxxxxx!!!!!..3.{.3..!!!!!xxxxxxx   
+    xxxxxxxxxxx!!!...!!!xxxxxxx        
+       xxxxxxxxxxx!@!xxxxxxx           
 ENDMAP
 
 ################################################################################

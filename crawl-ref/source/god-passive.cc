@@ -1502,3 +1502,6 @@ void uskayaw_prepares_audience()
     else // Reset the timer because we didn't actually execute.
         you.props[USKAYAW_AUDIENCE_TIMER] = 0;
 }
+
+
+

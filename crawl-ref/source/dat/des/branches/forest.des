@@ -621,7 +621,9 @@ KMONS:  O = the Enchantress band, Frances, spriggan defender
 MONS:   spriggan, spriggan berserker / spriggan defender
 MONS:   spriggan druid / spriggan air mage, plant
 MONS:   faun w:20 / satyr / thorn hunter w:5
-MONS:   spark wasp / caustic shrike w:5
+KMONS:  S = spark wasp
+KMONS:  K = caustic shrike
+NSUBST: 6 = 1:K / 4:S / *:d
 KMONS:  7 = water nymph
 KFEAT:  7 = deep_water
 NSUBST: w = 2:7 / *:w
@@ -652,11 +654,11 @@ XtT...4d4d4.c---------------ceeeeee+$$$c.Ttt
 XTT...4d4d4.cc++cccccccccccccccccccccccc.Ttt
 T.......5......5............5............Ttt
 @TT...44444444..444444444444..4444444444.Ttt
-TtT...dddddddd..ddd6dddddddd..ddddddd6dd.Ttt
+TtT...ddd6dd6d..ddd6ddd6dddd..ddd6ddd6dd.Ttt
 XtT...444444445.444444444444.54444444444.Ttt
-XtT...dddddd6d..dddddddddddd..d6dddddddd.Ttt
+XtT...d6dddd6d..d6ddd6dd6ddd..d6dddd6ddd.Ttt
 XttT..44444444.54444444444445.4444444444.Ttt
-XttT..dd6ddddd..ddddddddd6dd..dddddddddd.Ttt
+XttT..dd6ddd6d..dddd6dddd6dd..d6ddd6dddd.Ttt
 XttT..44444444..444444444444..4444444444.Ttt
 XttT.....................................Ttt
 XttT.....................................Ttt

@@ -125,10 +125,7 @@ sub aptitude_table
     for my $sp (sort_species(@SPECIES))
     {
         next if $sp eq 'Mottled Draconian';
-        next if $sp eq 'High Elf';
         next if $sp eq 'Lava Orc';
-        next if $sp eq 'Tengu';
-        next if $sp eq 'Dusk Walker';
         next if $sp eq 'Mana Stalker';
         next if $sp eq 'Twilight Stalker';
         next if $sp eq 'Jungle Stalker';

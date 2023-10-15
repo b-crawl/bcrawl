@@ -3401,7 +3401,7 @@ void bolt::affect_player_enchantment(bool resistible)
 
     case BEAM_INVISIBILITY:
         you.attribute[ATTR_INVIS_UNCANCELLABLE] = 1;
-        potionlike_effect(POT_INVISIBILITY, ench_power);
+        potionlike_effect(POT_INVISIBILITY, ench_power/2);
         contaminate_player(1000 + random2(1000), blame_player);
         obvious_effect = true;
         nasty = false;
@@ -5168,7 +5168,8 @@ bool bolt::ignores_monster(const monster* mon) const
         return true;
 
     // Fire storm creates these, so we'll avoid affecting them.
-    if (origin_spell == SPELL_FIRE_STORM && mon->type == MONS_FIRE_VORTEX)
+    if (origin_spell == SPELL_FIRE_STORM
+            && (mon->type == MONS_FIRE_VORTEX || mon->type == MONS_FIRE_ELEMENTAL))
         return true;
 
     // Don't blow up blocks of ice with the spell that creates them.
@@ -5926,7 +5927,7 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
             mon->add_ench(lowered_mr);
         
         const int dice = 6;
-        int die_size = div_rand_round(mons_mr*(18*3 + (this->ench_power)*2), 3*100*dice);
+        int die_size = div_rand_round(mons_mr*(30 + this->ench_power), 225*dice);
 
         this->damage       = dice_def(dice, die_size);
         this->colour       = ETC_MUTAGENIC;

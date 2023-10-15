@@ -173,10 +173,10 @@ static const form_entry formdata[] =
 {
     transformation::scorpion, MONS_EMPEROR_SCORPION, "Scorpion", "scorpion-form", "scorpion",
     "a giant scorpion.",
-    EQF_PHYSICAL, MR_RES_POISON,
+    EQF_PHYSICAL, MR_RES_POISON | mrd(MR_RES_FIRE, 2) | MR_RES_ACID,
     DEFAULT_DURATION, 4, 0, SIZE_GIANT, 12,
     9, 22, 0, true, 10, 3, 10,
-    SPWPN_NORMAL, LIGHTGREEN, "Claws", ANIMAL_VERBS,
+    SPWPN_NORMAL, LIGHTGREEN, "Claws", { "bash", "pinch", "claw", "maul" },
     FC_DEFAULT, FC_FORBID, FC_FORBID, true, false,
     "hiss", 0, "front leg", "", "crawl onto", "flesh"
 },

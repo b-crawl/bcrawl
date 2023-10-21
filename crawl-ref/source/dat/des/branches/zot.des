@@ -2493,6 +2493,7 @@ ENDMAP
 #
 NAME:   lemuel_draconian_sentries
 DEPTH:  Zot, !Zot:$
+WEIGHT: 1
 ORIENT: float
 TAGS:   no_rotate uniq_draconian_sentries
 MONS:   red draconian scorcher / green draconian stormcaller / yellow draconian stormcaller
@@ -2519,6 +2520,7 @@ ENDMAP
 
 NAME:   lemuel_draconian_sentries_small
 DEPTH:  Zot, !Zot:$
+WEIGHT: 2
 ORIENT: float
 TAGS:   no_rotate uniq_draconian_sentries
 MONS:   red draconian scorcher / green draconian stormcaller / yellow draconian stormcaller

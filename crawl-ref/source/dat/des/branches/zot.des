@@ -2487,26 +2487,6 @@ MAP
  ..ll..
 ENDMAP
 
-###########################
-# Globe of electric golems
-#
-NAME:  lemuel_golem_globe
-DEPTH: Zot
-TAGS:  no_rotate no_exits
-KFEAT: T = permanent teleport trap
-KFEAT: m = iron_grate
-SUBST: 1 = 1.
-MONS:  electric golem
-MAP
-  mmmm
- mm..mm
-mm.11.mm
-m.1TT1.m
-mm.11.mm
- mm..mm
-  mmmm
-ENDMAP
-
 ###################################################################
 # Draconian Sentry Boxes
 # There is an 70% chance all three downstairs will be here.

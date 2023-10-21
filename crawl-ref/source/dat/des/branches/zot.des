@@ -4092,6 +4092,7 @@ ENDMAP
 NAME:   infiniplex_zot_generator
 TAGS:   no_pool_fixup no_item_gen no_monster_gen no_trap_gen
 DEPTH:  Zot, !Zot:$
+WEIGHT: 4
 ORIENT: south
 MONS:   shock serpent w:12 / raiju / sixfirhy, black draconian
 MONS:   war gargoyle / dancing weapon ; scimitar good_item / spark wasp w:5

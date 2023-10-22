@@ -1102,6 +1102,7 @@ static bool _phial_of_floods()
     zappy(ZAP_PRIMAL_WAVE, base_pow, false, beam);
     beam.range = LOS_RADIUS;
     beam.aimed_at_spot = true;
+    beam.hit = AUTOMATIC_HIT;
 
     direction_chooser_args args;
     args.mode = TARG_HOSTILE;

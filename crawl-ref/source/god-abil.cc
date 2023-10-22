@@ -6529,14 +6529,6 @@ int pakellas_effective_hex_power(int pow)
     return pow;
 }
 
-/**
-obsolete, remove
-*/
-int pakellas_surge_devices()
-{
-    return 0;
-}
-
 static bool _mons_stompable(const monster &mons)
 {
     // Don't hurt your own demonic guardians

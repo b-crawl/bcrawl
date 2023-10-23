@@ -688,7 +688,8 @@ static vector<coord_def> _get_jitter_path(coord_def source, coord_def target,
         coord_def jitter = clamp_in_bounds(mid + jitter_rnd);
         if (jitter == mid || jitter.distance_from(mid) < 2 || jitter == source
             || cell_is_solid(jitter)
-            || !cell_see_cell(source, jitter, LOS_NO_TRANS))
+            || !cell_see_cell(source, jitter, LOS_NO_TRANS)
+            || !cell_see_cell(target, jitter, LOS_NO_TRANS))
         {
             continue;
         }

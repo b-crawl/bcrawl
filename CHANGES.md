@@ -495,6 +495,7 @@
   - v1.39: Uskayaw's Grand Finale ability fully refills health as well as mana.
   - v1.39.2: Hepliaklqana ancestor recall no longer fails in the Abyss.
   - v1.40: Hepliaklqana ancestors now respawn immediately when Incarnate ends.
+  - v1.40.1: Lugonu's Bend Space ability is changed: mana cost is increased (1->2), it blinks monsters adjacent to the player's destination instead of their origin, and it has a (Invocations - 5)/25 chance to not cost a turn.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.

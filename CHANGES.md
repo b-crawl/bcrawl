@@ -125,6 +125,7 @@
   - v1.35.4: Failed item pickup adds a "pickup" inscription, which is removed if the item is picked up.
   - v1.36.5: Missile attacks are automatically stopped at the targeted square when they could continue to hit a friendly target.
   - v1.36.5: GDR is shown with resistances.
+  - v1.40.1: Vampires will drain blood from corpses while autoexploring if their auto_butcher setting is higher than their hunger state but lower than the maximum setting.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -575,6 +576,7 @@
   - v1.39: Crystal plate armor encumbrance is reduced. (23 -> 22)
   - v1.39.1: Scrolls of magic mapping become scrolls of revelation, which also let the player see through walls for 1 turn.
   - v1.39.2: Large shields have a lower base shield penalty. (16 -> 15)
+  - v1.40.1: Phials of floods never miss.
 
 #### Removed Items
   - Amulet of Harm

@@ -3354,7 +3354,8 @@ static void _do_autopickup()
             {
                 if (you.species == SP_VAMPIRE
                         && Options.auto_butcher > you.hunger_state
-                        && Options.auto_butcher < HS_ENGORGED)
+                        && Options.auto_butcher < HS_ENGORGED
+                        && mi->is_type(OBJ_CORPSES, CORPSE_BODY))
                     eat_item(mi);
                 if (you_are_delayed() && current_delay()->want_autoeat())
                     butchery(&mi);

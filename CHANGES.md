@@ -632,6 +632,7 @@
   - v1.36.1: The Staff of Wucad Mu is reworked: it's a +9 vorpal staff with +20 mana and *Drain, and it can be evoked to regain mana by abjuring hostile summons.
   - v1.36.2: The Fencer's Gloves have a higher riposte chance. (1/3 -> 2/3)
   - v1.38.1: Hendrick's Axe no longer has a chance to frenzy on hit. Instead, it can be evoked for 1 mana to make noise and cast a weak Discord with power based on Axes skill. It keeps the chance to blind on hit.
+  - v1.40.1: Eos can corona or blind monsters it hits.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

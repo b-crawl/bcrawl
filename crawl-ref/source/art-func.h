@@ -781,7 +781,6 @@ static void _EOS_melee_effects(item_def* weapon, actor* attacker,
             mons->add_ench(mon_enchant(ENCH_CORONA, 1, attacker, random2(80)));
         if (x_chance_in_y(1, 4) && mons_can_be_blinded(mons->type))
             mons->add_ench(mon_enchant(ENCH_BLIND, 1, attacker, random2(50)));
-        }
     }
 }
 

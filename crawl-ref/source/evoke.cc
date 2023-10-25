@@ -1102,7 +1102,6 @@ static bool _phial_of_floods()
     zappy(ZAP_PRIMAL_WAVE, base_pow, false, beam);
     beam.range = LOS_RADIUS;
     beam.aimed_at_spot = true;
-    beam.hit = AUTOMATIC_HIT;
 
     direction_chooser_args args;
     args.mode = TARG_HOSTILE;
@@ -1119,7 +1118,7 @@ static bool _phial_of_floods()
         const int power = player_adjust_evoc_power(base_pow);
         // use real power to recalc hit/dam
         zappy(ZAP_PRIMAL_WAVE, power, false, beam);
-
+        beam.hit = AUTOMATIC_HIT;
         beam.fire();
 
         vector<coord_def> elementals;

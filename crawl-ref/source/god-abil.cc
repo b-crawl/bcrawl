@@ -3440,13 +3440,19 @@ void lugonu_bend_space()
 {
     const int pow = 4 + skill_bump(SK_INVOCATIONS);
     const bool area_warp = random2(pow) > 9;
+    
+    int chance = you.skill(SK_INVOCATIONS, 10) - 50;
+    bool free_blink = x_chance_in_y(chance, 250);
+    if (free_blink)
+        you.turn_is_over = false;
 
-    mprf("Space bends %saround you!", area_warp ? "sharply " : "");
-
-    if (area_warp)
-        _lugonu_warp_area(pow);
+    mprf("Space bends %saround you%s!", area_warp ? "sharply " : "",
+            free_blink ? ", and you emerge a moment in the past" : "");
 
     uncontrolled_blink(true);
+    
+    if (area_warp)
+        _lugonu_warp_area(pow);
 }
 
 void cheibriados_time_bend(int pow)

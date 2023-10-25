@@ -3444,7 +3444,13 @@ void lugonu_bend_space()
     int chance = you.skill(SK_INVOCATIONS, 10) - 50;
     bool free_blink = x_chance_in_y(chance, 250);
     if (free_blink)
+    {
         you.turn_is_over = false;
+        you.elapsed_time_at_last_input = you.elapsed_time;
+        update_turn_count();
+    }
+    else
+        you.turn_is_over = true;
 
     mprf("Space bends %saround you%s!", area_warp ? "sharply " : "",
             free_blink ? ", and you emerge a moment in the past" : "");

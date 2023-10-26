@@ -771,6 +771,19 @@ static void _EOS_unequip(item_def *item, bool *show_msgs)
     invalidate_agrid(true);
 }
 
+static void _EOS_melee_effects(item_def* weapon, actor* attacker,
+                                  actor* defender, bool mondied, int dam)
+{
+    if (!mondied && !defender->is_player())
+    {
+        monster* mons = defender->as_monster();
+        if (x_chance_in_y(1, 3))
+            mons->add_ench(mon_enchant(ENCH_CORONA, 1, attacker, random2(80)));
+        if (x_chance_in_y(1, 4) && mons_can_be_blinded(mons->type))
+            mons->add_ench(mon_enchant(ENCH_BLIND, 1, attacker, random2(50)));
+    }
+}
+
 ///////////////////////////////////////////////////
 static void _SHADOWS_equip(item_def *item, bool *show_msgs, bool unmeld)
 {

@@ -178,7 +178,6 @@ bool ru_apocalypse();
 string ru_sacrifice_vector(ability_type sac);
 
 int pakellas_effective_hex_power(int pow);
-int pakellas_surge_devices();
 
 bool uskayaw_stomp();
 bool uskayaw_line_pass();

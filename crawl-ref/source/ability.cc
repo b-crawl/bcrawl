@@ -460,7 +460,7 @@ static const ability_def Ability_List[] =
     { ABIL_LUGONU_ABYSS_EXIT, "Depart the Abyss",
       1, 0, 0, 10, {fail_basis::invo, 30, 6, 20}, abflag::none },
     { ABIL_LUGONU_BEND_SPACE, "Bend Space",
-      1, scaling_cost::fixed(2), 0, 0, {fail_basis::invo, 40, 5, 20}, abflag::none },
+      2, scaling_cost::fixed(2), 0, 0, {fail_basis::invo, 40, 5, 20}, abflag::none },
     { ABIL_LUGONU_BANISH, "Banish", 4, 0, 0, generic_cost::range(2, 3),
       {fail_basis::invo, 85, 7, 20}, abflag::none },
     { ABIL_LUGONU_CORRUPT, "Corrupt", 7, scaling_cost::fixed(5), 0, 10,
@@ -3222,16 +3222,24 @@ static int _scale_piety_cost(ability_type abil, int original_cost)
 
 static void _pay_ability_costs(const ability_def& abil)
 {
+    switch(abil.ability)
+    {
     // wall jump handles its own timing, because it can be instant if
     // serpent's lash is activated.
-    if (abil.flags & abflag::instant)
-    {
-        you.turn_is_over = false;
-        you.elapsed_time_at_last_input = you.elapsed_time;
-        update_turn_count();
+    case ABIL_WU_JIAN_WALLJUMP:
+    case ABIL_LUGONU_BEND_SPACE:
+        break;
+    default:
+        if (abil.flags & abflag::instant)
+        {
+            you.turn_is_over = false;
+            you.elapsed_time_at_last_input = you.elapsed_time;
+            update_turn_count();
+        }
+        else
+            you.turn_is_over = true;
+        break;
     }
-    else if (abil.ability != ABIL_WU_JIAN_WALLJUMP)
-        you.turn_is_over = true;
 
     const int food_cost  = abil.food_cost + random2avg(abil.food_cost, 2);
     const int piety_cost =

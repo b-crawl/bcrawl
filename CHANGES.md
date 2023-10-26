@@ -125,6 +125,7 @@
   - v1.35.4: Failed item pickup adds a "pickup" inscription, which is removed if the item is picked up.
   - v1.36.5: Missile attacks are automatically stopped at the targeted square when they could continue to hit a friendly target.
   - v1.36.5: GDR is shown with resistances.
+  - v1.40.1: Vampires will drain blood from corpses while autoexploring if their auto_butcher setting is higher than their hunger state but lower than the maximum setting.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -494,6 +495,7 @@
   - v1.39: Uskayaw's Grand Finale ability fully refills health as well as mana.
   - v1.39.2: Hepliaklqana ancestor recall no longer fails in the Abyss.
   - v1.40: Hepliaklqana ancestors now respawn immediately when Incarnate ends.
+  - v1.40.1: Lugonu's Bend Space ability is changed: mana cost is increased (1->2), it blinks monsters adjacent to the player's destination instead of their origin, and it has a (Invocations - 5)/25 chance to not cost a turn.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -575,6 +577,7 @@
   - v1.39: Crystal plate armor encumbrance is reduced. (23 -> 22)
   - v1.39.1: Scrolls of magic mapping become scrolls of revelation, which also let the player see through walls for 1 turn.
   - v1.39.2: Large shields have a lower base shield penalty. (16 -> 15)
+  - v1.40.1: Phials of floods never miss.
 
 #### Removed Items
   - Amulet of Harm
@@ -630,6 +633,7 @@
   - v1.36.1: The Staff of Wucad Mu is reworked: it's a +9 vorpal staff with +20 mana and *Drain, and it can be evoked to regain mana by abjuring hostile summons.
   - v1.36.2: The Fencer's Gloves have a higher riposte chance. (1/3 -> 2/3)
   - v1.38.1: Hendrick's Axe no longer has a chance to frenzy on hit. Instead, it can be evoked for 1 mana to make noise and cast a weak Discord with power based on Axes skill. It keeps the chance to blind on hit.
+  - v1.40.1: Eos can corona or blind monsters it hits.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.

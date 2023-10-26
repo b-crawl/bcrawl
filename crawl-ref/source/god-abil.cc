@@ -1472,6 +1472,7 @@ bool vehumet_supports_spell(spell_type spell)
     case SPELL_VIOLENT_UNRAVELLING:
     case SPELL_INNER_FLAME:
     case SPELL_IGNITION:
+    case SPELL_FIRE_STORM:
         return true;
     case SPELL_DAZZLING_SPRAY:
     case SPELL_SPELLFORGED_SERVITOR:
@@ -3439,13 +3440,25 @@ void lugonu_bend_space()
 {
     const int pow = 4 + skill_bump(SK_INVOCATIONS);
     const bool area_warp = random2(pow) > 9;
+    
+    int chance = you.skill(SK_INVOCATIONS, 10) - 50;
+    bool free_blink = x_chance_in_y(chance, 250);
+    if (free_blink)
+    {
+        you.turn_is_over = false;
+        you.elapsed_time_at_last_input = you.elapsed_time;
+        update_turn_count();
+    }
+    else
+        you.turn_is_over = true;
 
-    mprf("Space bends %saround you!", area_warp ? "sharply " : "");
-
-    if (area_warp)
-        _lugonu_warp_area(pow);
+    mprf("Space bends %saround you%s!", area_warp ? "sharply " : "",
+            free_blink ? ", and you emerge a moment in the past" : "");
 
     uncontrolled_blink(true);
+    
+    if (area_warp)
+        _lugonu_warp_area(pow);
 }
 
 void cheibriados_time_bend(int pow)
@@ -6526,14 +6539,6 @@ obsolete, remove
 int pakellas_effective_hex_power(int pow)
 {
     return pow;
-}
-
-/**
-obsolete, remove
-*/
-int pakellas_surge_devices()
-{
-    return 0;
 }
 
 static bool _mons_stompable(const monster &mons)

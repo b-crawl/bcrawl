@@ -197,7 +197,7 @@ morningstar "Eos"
 
 A jewelled morningstar, glowing brightly with the light of the dawn. It
 illuminates the dungeon's recesses, revealing the machinations of those who
-would prefer to stay invisible.
+would prefer to stay invisible, and can illuminate or blind those it strikes.
 %%%%
 # TAG_MAJOR_VERSION == 34
 spear of the Botono

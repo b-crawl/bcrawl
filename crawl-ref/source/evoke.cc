@@ -227,14 +227,12 @@ static bool _evoke_horn_of_geryon()
         return false;
     }
 
-    const int surge = pakellas_surge_devices();
-    surge_power(you.spec_evoke() + surge);
     mprf(MSGCH_SOUND, "You produce a hideous howling noise!");
     noisy(15, you.pos()); // same as hell effect noise
     did_god_conduct(DID_EVIL, 3);
     int num = 1;
     const int adjusted_power =
-        player_adjust_evoc_power(you.skill(SK_EVOCATIONS, 10), surge);
+        player_adjust_evoc_power(you.skill(SK_EVOCATIONS, 10));
     if (adjusted_power + random2(90) > 130)
         ++num;
     if (adjusted_power + random2(90) > 180)
@@ -513,17 +511,13 @@ string manual_skill_names(bool short_text)
 
 static bool _box_of_beasts(item_def &box)
 {
-    const int surge = pakellas_surge_devices() + you.spec_evoke();
-    surge_power(surge);
     mpr("You open the lid...");
 
     // two rolls to reduce std deviation - +-6 so can get < max even at 27 sk
     int rnd_factor = random2(7);
     rnd_factor -= random2(7);
     const int hd_min = min(27,
-                           player_adjust_evoc_power(
-                               you.skill(SK_EVOCATIONS)
-                               + rnd_factor, surge));
+            player_adjust_evoc_power(you.skill(SK_EVOCATIONS) + rnd_factor));
     const int tier = mutant_beast_tier(hd_min);
     ASSERT(tier < NUM_BEAST_TIERS);
 
@@ -821,9 +815,6 @@ static bool _lamp_of_fire()
         if (you.confused())
             target.confusion_fuzz();
 
-        const int surge = pakellas_surge_devices();
-        surge_power(you.spec_evoke() + surge);
-
         mpr("The flames dance!");
 
         vector<bolt> beams;
@@ -833,8 +824,7 @@ static bool _lamp_of_fire()
         _fill_flame_trails(you.pos(), target.target, beams, num_trails);
 
         const int pow =
-            player_adjust_evoc_power(8 + you.skill_rdiv(SK_EVOCATIONS, 14, 4),
-                                     surge);
+            player_adjust_evoc_power(8 + you.skill_rdiv(SK_EVOCATIONS, 14, 4));
         for (bolt &beam : beams)
         {
             if (beam.source == beam.target)
@@ -1125,12 +1115,10 @@ static bool _phial_of_floods()
             beam.set_target(target);
         }
 
-        const int surge = pakellas_surge_devices();
-        surge_power(you.spec_evoke() + surge);
-        const int power = player_adjust_evoc_power(base_pow, surge);
+        const int power = player_adjust_evoc_power(base_pow);
         // use real power to recalc hit/dam
         zappy(ZAP_PRIMAL_WAVE, power, false, beam);
-
+        beam.hit = AUTOMATIC_HIT;
         beam.fire();
 
         vector<coord_def> elementals;
@@ -1138,11 +1126,9 @@ static bool _phial_of_floods()
         coord_def center = beam.path_taken.back();
         const int rnd_factor = random2(7);
         int num = player_adjust_evoc_power(
-                      5 + you.skill_rdiv(SK_EVOCATIONS, 3, 5) + rnd_factor,
-                      surge);
+                      5 + you.skill_rdiv(SK_EVOCATIONS, 3, 5) + rnd_factor);
         int dur = player_adjust_evoc_power(
-                      40 + you.skill_rdiv(SK_EVOCATIONS, 8, 3),
-                      surge);
+                      40 + you.skill_rdiv(SK_EVOCATIONS, 8, 3));
         for (distance_iterator di(center, true, false, 2); di && num > 0; ++di)
         {
             const dungeon_feature_type feat = grd(*di);
@@ -1238,21 +1224,16 @@ static spret _phantom_mirror()
     if (player_angers_monster(victim, false))
         return spret::abort;
 
-    const int surge = pakellas_surge_devices();
-    surge_power(you.spec_evoke() + surge);
-
     monster* mon = clone_mons(victim, true, nullptr, ATT_FRIENDLY);
     if (!mon)
     {
         canned_msg(MSG_NOTHING_HAPPENS);
         return spret::fail;
     }
-    const int power = player_adjust_evoc_power(5 + you.skill(SK_EVOCATIONS, 3),
-                                               surge);
+    const int power = player_adjust_evoc_power(5 + you.skill(SK_EVOCATIONS, 3));
     int dur = min(6, max(1,
                          player_adjust_evoc_power(
-                             you.skill(SK_EVOCATIONS, 1) / 4 + 1,
-                             surge)
+                             you.skill(SK_EVOCATIONS, 1) / 4 + 1)
                          * (100 - victim->check_res_magic(power)) / 100));
 
     mon->mark_summoned(dur, true, SPELL_PHANTOM_MIRROR);
@@ -1436,11 +1417,8 @@ bool evoke_item(int slot, bool check_range)
                 return false;
             }
 
-            const int surge = pakellas_surge_devices();
-            surge_power(you.spec_evoke() + surge);
             wind_blast(&you,
-                       player_adjust_evoc_power(you.skill(SK_EVOCATIONS, 15),
-                                                surge),
+                       player_adjust_evoc_power(you.skill(SK_EVOCATIONS, 15)),
                        coord_def());
             expend_xp_evoker(item.sub_type);
             practise_evoking(3);

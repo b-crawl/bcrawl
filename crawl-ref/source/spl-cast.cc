@@ -1505,11 +1505,10 @@ spret your_spells(spell_type spell, int powc, bool allow_fail,
 
     if (evoked_item)
     {
-        const int surge = pakellas_surge_devices();
-        powc = player_adjust_evoc_power(powc, surge);
+        powc = player_adjust_evoc_power(powc);
         int mp_cost_of_wand = evoked_item->base_type == OBJ_WANDS
                               ? wand_mp_cost() : 0;
-        surge_power_wand(mp_cost_of_wand + surge * 3);
+        surge_power_wand(mp_cost_of_wand);
     }
     else if (allow_fail)
         surge_power(_spell_enhancement(spell));

@@ -319,7 +319,7 @@ spret cast_summon_fire_elementals(actor* caster, int pow, god_type god, bool fai
     mgen_data mdata = _summon_data(*caster, mon, 4, god,
         SPELL_FIRE_ELEMENTALS);
     mdata.flags |= MG_DONT_CAP;
-    mdata.hd = (4 + div_rand_round(pow, 7));
+    mdata.hd = (3 + div_rand_round(pow, 8));
 
     int seen_count = 0;
     bool first = true;

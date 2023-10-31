@@ -587,25 +587,26 @@ KFEAT:  C = stone_wall
 TILE:   C = wall_marble
 NSUBST: - = 8:| / 20:* / 8:% / 15:$ / *:-
 KFEAT:  - = floor
-FTILE:  R-~67ABXYfg$*| = floor_normal
+KFEAT:  _ = floor
+FTILE:  R-_~67ABXYfg$*| = floor_normal
 MAP
  tttttttttttttttttt     ttttttttttttttt    
  ttCCCCCCCCCCCCCCtttt ttttttttttttttttttt  
  ttC-----O------CtttttttttTTTTTttTTTTttttt 
 tttC--B------A--CtttQTtttTT.T.Ttt.T.TTTttt 
-tttC----6--6----Ctt..ccccc....cccc.TT.Tttt 
+tttC----6__6----Ctt..ccccc....cccc.TT.Tttt 
 tttCCCCCC~~CCCCCC....c..1c....c.1c.t.TTttt 
-tttC||-C6--6C-||CtT..c.1.+....+..cT.TT.ttt 
-tttC||-~----~-||Ctt..ccccc....cccc.TT.Tttt 
- ttC||-C6--6C-||CttQ..................ttttt
- ttCCCCCC~~CCCCCCttttccccc....cccc......ttt
- ttCgggC--X-CfffCttttchxLc....c1.c.....tttt
- ttCggg~----~fffCttttch..+....+.4c..1...ttt
- ttCgggCX--XCfffCttttccccc....cccc...1.tttt
- ttCCCCCC~~CCCCCCttttt...................tt
- ttCR-----X----RCccccccccc....5.........ttt
- ttC--X--------XCcKxKxKxKc......2......tttt
- ttCRX--Y--Y--XRCc.22.3..c.....22......tttt
+tttC||-C6_6C-||CtT..c.1.+....+..cT.TT.ttt 
+tttC||-~____~-||Ctt..ccccc....cccc.TT.Tttt 
+ ttC||-C6__6C-||CttQ..................ttttt
+ ttCCCCCC~~CCCCCCCCttccccc....cccc......ttt
+ ttC---C-_X-CfffffCttchxLc....c1.c.....tttt
+ ttC---~____~_____Cttch..+....+.4c..1...ttt
+ ttC---CX__XCgggggCttccccc....cccc...1.tttt
+ ttCCCCCC~~CCCCCCCCttt...................tt
+ ttCR---__X_---RCccccccccc....5.........ttt
+ ttC--X-____---XCcKxKxKxKc......2......tttt
+ ttCRX--Y__Y--XRCc.22.3..c.....22......tttt
 tttCCCCCC~~CCCCCCc+ccccccc....2.2.....tttt 
 ttt...PP....PP.......................tttt  
 @...................................ttttt  

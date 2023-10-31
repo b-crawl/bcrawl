@@ -500,35 +500,37 @@ MONS:   spriggan rider, spriggan air mage
 MONS:   spriggan defender / spriggan berserker / spriggan druid / \
         spriggan rider / spriggan air mage / nothing w:100
 MONS:   thorn hunter / shambling mangrove
+NSUBST: $ = 30:* / 6:% / *:$
+NSUBST: * = 14:| / *:*
 TILE:   c = wall_marble
 COLOUR: .|*%OT123456+ = lightgray
 FTILE:  .|*%OT123456+ = floor_normal
 MAP
-tttttttttttttttttttttttttttttttttt
-tttttttttttttccccccccttttttttttttt
-tttttttttttccc||||||cccttttttttttt
-ttttttttttcc..........cctttttttttt
-tttttttttcc....4444....ccttttttttt
-tttttttttc..............cttttttttt
-ttttttttcc..6.5....5.6..cctttttttt
-ttttttttc%.6..........6.%ctttttttt
-ttttttttc*.6..........6.*ctttttttt
-ttttttttc*.6....O1....6.*ctttttttt
-ttttttttc*.6....11....6.*ctttttttt
-ttttttttc*.6..........6.*ctttttttt
-ttttttttc%.6..5....5..6.%ctttttttt
-ttttttttcc..6........6..cctttttttt
-tttttttttc..............cttttttttt
-tttttttttcc....4224....ccttttttttt
-ttttcccccccc..........cccccccctttt
+       tttttttttttttttttt         
+    tttttttttccccccccttttttttt    
+   ttttttttccc||||||ccctttttttt   
+   tttttttcc**********ccttttttt   
+   ttttttcc$...4444...$cctttttt   
+   tttttcc$............$ccttttt   
+   ttttcc$..6.5....5.6..$cctttt   
+   ttttc$$.6..........6.$$ctttt   
+   ttttc$$.6..........6.$$ctttt   
+   ttttc$$.6....O1....6.$$ctttt   
+   ttttc$$.6....11....6.$$ctttt   
+   ttttc$$.6..........6.$$ctttt   
+   ttttc$$.6..5....5..6.$$ctttt   
+   ttttcc$..6........6..$cctttt   
+   tttttcc..............ccttttt   
+  tttttttcc....4224....ccttttttt  
+ tttcccccccc..........ccccccccttt 
 tttcc......ccc......ccc......ccttt
 ttcc.4.4.4..cccc++cccc..4.4.4.cctt
 tcc..........c.6..6.c..........cct
-tc%..........c+.66.+c..........%ct
-tc%......1....cccccc....1......%ct
-tc%....T.2....cccccc....2.T....%ct
-tc%...........cccccc...........%ct
-tc%.6........c+.66.+c........6.%ct
+tc$..........c+.66.+c..........$ct
+tc$$.....1....cccccc....1.....$$ct
+tc$$$..T.2....cccccc....2.T..$$$ct
+tc$$..........cccccc..........$$ct
+tc$.6........c+.66.+c........6.$ct
 tcc.6........c.6..6.c........6.cct
 ttc..66.....cccc++cccc.....66..ctt
 ttccc..66..cccc....cccc..66..ccctt
@@ -547,8 +549,8 @@ tttttLLLLLLLLLc++++cLLLLLLtttttttt
 tttttttLLLLLLLLLLLLLLLLttLLLtttttt
 tttttttttttLLLLLLLLLLtttLLLLLttttt
 tttttttttttttttLLLLtttLLLttttttttt
-ttttttttttttttttLLLLLLLttttttttttt
-ttttttttttttttttL@LLtttttttttttttt
+ tttttttttttttttLLLLLLLtttttttttt 
+  ttttttttttttttL@LLtttttttttttt  
 ENDMAP
 
 NAME:   kb_forest_enchantress_palace

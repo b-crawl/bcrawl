@@ -763,15 +763,18 @@ KMONS:    L = greenwood witch / wendigo w:30
 KMONS:    N = water nymph
 KMONS:    S = elemental wellspring
 KFEAT:    ALNS = shallow_water
+NSUBST:   * = 10:$ / *:*
+NSUBST:   $ = 4:% / *:$
 COLOUR:   c = white
 FTILE:    |*123456GTU+. = floor_pebble_cyan
 CLEAR:    E
 MAP
-ttttttttttttttttttttttttttttttttttttttttttttttttt
-Ett.....WWWWWWWWcccccccccccccccccWWWWWWWW.....ttE
-Ett....WWWWWWWWcc*..|||||||||..*ccWWWWWWWW....ttE
-Ett....WWWGLWWWc**.....585.....**cWWWLGWWW....ttE
-Ett....WWWWWWWWc**.4..........4**cWWWWWWWW....ttE
+ ttttttttttttttttttttttttttttttttttttttttttttttt 
+Ett.....WWWWWWWcccccccccccccccccccWWWWWWW.....ttE
+Ett.....WWWWWWcc****|||||||||****ccWWWWWW.....ttE
+Ett....WWWWWWcc****|||||||||||****ccWWWWWW....ttE
+Ett....WWWGLWc*****....585....*****cWLGWWW....ttE
+Ett....WWWWWWc****.4..........4****cWWWWWW....ttE
 Ett....WWWWWccccccccccc+++cccccccccccWWWWW....ttE
 Ett....WWWWccWWWWWWWWWWWWWWWWWWWWWWWccWWWW....ttE
 Ett.1..WWWWcWWWWWWWWWWWWWWWWWWWWWWWWWcWWWW..1.ttE
@@ -793,9 +796,9 @@ Ett....WWWWcWWWWWWWWWW.3.2.WWWWWWWWWWcWWWW....ttE
 Ett....WWLWcWWWWLWWWWW.....WWWWWLWWWWcWWLW....ttE
 Ett.1..WWWWccWWWWWWWWW.....WWWWWWWWWccWWWW..1.ttE
 Ett....WWWWWccccccccccc+++cccccccccccWWWWW....ttE
-Ett....WWWWWWWWc.................cWWWWWWWW....ttE
-Ett....WWWWWWWWc..T...2...3...T..cWWWWWWWW....ttE
-Ett....WWcccWWWc......3...2......cWWWcccWW....ttE
+Ett....WWWWWWWWc$$$...........$$$cWWWWWWWW....ttE
+Ett....WWWWWWWWc$.T...2...3...T.$cWWWWWWWW....ttE
+Ett....WWcccWWWc$.....3...2.....$cWWWcccWW....ttE
 Ett....WWcGcWWWc...T..2...3..T...cWWWcGcWW....ttE
 Ett....WWWWWWWWcc...............ccWWWWWWWW....ttE
 Ett.....WWWWNWWWccccccc+++cccccccWWWNWWWW.....ttE
@@ -807,7 +810,7 @@ Etttttttttt........T.........T........ttttttttttE
 Ettttttttttttt.....................tttttttttttttE
 Ettttttttttttttttt.............tttttttttttttttttE
 Etttttttttttttttttttt.......ttttttttttttttttttttE
-EEEEEEEEEEEEEEEEEEEEEEE.@.EEEEEEEEEEEEEEEEEEEEEEE
+ EEEEEEEEEEEEEEEEEEEEEE.@.EEEEEEEEEEEEEEEEEEEEEE 
 ENDMAP
 
 NAME: gammafunk_forest_column

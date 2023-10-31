@@ -554,7 +554,7 @@ tttttttttttttttLLLLtttLLLttttttttt
 ENDMAP
 
 NAME:   kb_forest_enchantress_palace
-ORIENT: northeast
+ORIENT: float
 PLACE:  Forest:$
 MONS:   spriggan rider / spriggan druid / \
         spriggan berserker / spriggan defender / \
@@ -619,7 +619,7 @@ ENDMAP
 NAME:   grunt_forest_end_winery
 TAGS:   no_pool_fixup
 PLACE:  Forest:$
-ORIENT: northeast
+ORIENT: float
 KMONS:  O = the Enchantress band, Frances, spriggan defender
 MONS:   spriggan, spriggan berserker / spriggan defender
 MONS:   spriggan druid / spriggan air mage, plant
@@ -641,8 +641,8 @@ NSUBST: * = 12:| / *:*
 TILE:   c = wall_vines
 FTILE:  e123+|%*$- = floor_vines
 MAP
-tttttttttttttttttttttttttttttttttttttttttttt
-Xttttttttttttttttttttttttttttttttttttttttttt
+  tttttttttttttttttttttttttttttttttttttttt  
+ tttttttttttttttttttttttttttttttttttttttttt 
 XttTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTtt
 XttT.5...................................Ttt
 XttT..4d4d4.cccccccccccccccccccccccccccc.Ttt
@@ -669,8 +669,8 @@ XttT.....................................Ttt
 XttT.....................................Ttt
 XttTTTTTT...........TTTT...........TTTTTTTtt
 XttttttttTTTTT.TTTTTTTTTTTTTT.TTTTTTTTTTTTtt
-XXtttttttttttT.TttttttttttttT.Tttttttttttttt
-XXXXXXXXXXXXT@TXXXXXXXXXXXXXXT@TXXXXXXXXXXXt
+ XtttttttttttT.TttttttttttttT.Ttttttttttttt 
+  XXXXXXXXXXT@TXXXXXXXXXXXXXXT@TXXXXXXXXXX  
 ENDMAP
 
 NAME:   grunt_forest_end_shrine

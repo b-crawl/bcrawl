@@ -585,34 +585,35 @@ KITEM:  h = ration q:2
 COLOUR: C = white
 KFEAT:  C = stone_wall
 TILE:   C = wall_marble
+NSUBST: - = 11:| / 20:* / 8:% / 15:$ / *:-
 KFEAT:  - = floor
 FTILE:  R-~67ABXYfg$*| = floor_normal
 MAP
-ttttttttttttttttttttttttttttttttttttttttttt
-tttCCCCCCCCCCCCCCtttttttttttttttttttttttttt
-tttC-----O------CtttttttttTTTTTttTTTTtttttt
-tttC--B------A--CtttQTtttTT.T.Ttt.T.TTTtttt
-tttC----6--6----Ctt..ccccc....cccc.TT.Ttttt
-tttCCCCCC~~CCCCCC....c..1c....c.1c.t.TTtttt
-tttC---C6--6C$*|CtT..c.1.+....+..cT.TT.tttt
-tttC---~----~$*|Ctt..ccccc....cccc.TT.Ttttt
-tttC---C6--6C$*|CttQ..................ttttt
-tttCCCCCC~~CCCCCCttttccccc....cccc......ttt
-tttCgggC--X-CfffCttttchxLc....c1.c.....tttt
-tttCggg~----~fffCttttch..+....+.4c..1...ttt
-tttCgggCX--XCfffCttttccccc....cccc...1.tttt
-tttCCCCCC~~CCCCCCttttt...................tt
-tttCR-----X----RCccccccccc....5.........ttt
-tttC--X--------XCcKxKxKxKc......2......tttt
-tttCRX--Y--Y--XRCc.22.3..c.....22......tttt
-tttCCCCCC~~CCCCCCc+ccccccc....2.2.....ttttt
-ttt..................................tttttt
-@...................................ttttttt
-t..TTttttt............5..........ttt.tttttt
+ ttttttttttttttttttttttttttttttttttttttt   
+ ttCCCCCCCCCCCCCCtttttttttttttttttttttttt  
+ ttC-----O------CtttttttttTTTTTttTTTTttttt 
+tttC--B------A--CtttQTtttTT.T.Ttt.T.TTTttt 
+tttC----6--6----Ctt..ccccc....cccc.TT.Tttt 
+tttCCCCCC~~CCCCCC....c..1c....c.1c.t.TTttt 
+tttC---C6--6C|||CtT..c.1.+....+..cT.TT.ttt 
+tttC---~----~|||Ctt..ccccc....cccc.TT.Ttttt
+ ttC---C6--6C|||CttQ..................ttttt
+ ttCCCCCC~~CCCCCCttttccccc....cccc......ttt
+ ttCgggC--X-CfffCttttchxLc....c1.c.....tttt
+ ttCggg~----~fffCttttch..+....+.4c..1...ttt
+ ttCgggCX--XCfffCttttccccc....cccc...1.tttt
+ ttCCCCCC~~CCCCCCttttt...................tt
+ ttCR-----X----RCccccccccc....5.........ttt
+ ttC--X--------XCcKxKxKxKc......2......tttt
+ ttCRX--Y--Y--XRCc.22.3..c.....22......tttt
+tttCCCCCC~~CCCCCCc+ccccccc....2.2.....tttt 
+ttt..................................tttt  
+@...................................ttttt  
+t..TTttttt............5..........ttt.ttttt 
 tttttttttttttttt...............tttttt...ttt
-ttttttttttttttttttt.........tttttttttttt<tt
-ttttttttttttttttttttttt....tttttttttttttttt
-tttttttttttttttttttttt@tt..@ttttttttttttttt
+  ttttttttttttttttt.........tttttttttttt<tt
+   tttttttttttttttttttt....tttttttttttttt  
+   ttttttttttttttttttt@tt..@tttttttttttt   
 ENDMAP
 
 NAME:   grunt_forest_end_winery

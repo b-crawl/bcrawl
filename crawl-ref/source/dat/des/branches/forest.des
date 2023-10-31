@@ -632,7 +632,9 @@ SUBST:  X = xt
 CLEAR:  x
 KFEAT:  : = floor
 ITEM:   ration q:1 / ration q:2 / nothing w:180
-ITEM:   any potion / ration q:1 / nothing w:30
+ITEM:   any potion / ration q:1 w:20 / nothing w:20
+NSUBST: $ = 12:* / 10:% / 20:$ / *:-
+NSUBST: * = 12:| / *:*
 TILE:   c = wall_vines
 FTILE:  e123+|%*$- = floor_vines
 MAP
@@ -641,16 +643,16 @@ Xttttttttttttttttttttttttttttttttttttttttttt
 XttTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTtt
 XttT.5...................................Ttt
 XttT..4d4d4.cccccccccccccccccccccccccccc.Ttt
-XttT..4d4d4.ce-e-e-e-e-e-e-eceeeeee+|||c.Ttt
-XttT..4d4d4.c-e-e-e-c-e-e-e-c------c|||c.Ttt
-XttT..4d4d4.ce-e2e-ece-e2e-ec------cc+cc.Ttt
-XttT..4d4d4.cc+ccccccc+cccccc------c%**c.Ttt
-XttT..4d4d45c-----3---3-----+----O-c%**c.Ttt
-XttT..4d4d4.c-------2-------+------c%**c.Ttt
-XtT...4d4d4.c--wwwwwwwwwww--+------c%**c.Ttt
-XtT...4d4d4.c--wwwwwwwwwww--c------c$$$c.Ttt
-XtT...4d4d4.c-----3---3-----c------c$$$c.Ttt
-XtT...4d4d4.c---------------ceeeeee+$$$c.Ttt
+XttT..4d4d4.c$$$$$$$+$$$$$$$ceeeeeec|||c.Ttt
+XttT..4d4d4.c$$$$$$$c$$$$$$$c------c|||c.Ttt
+XttT..4d4d4.c$$$2$$$c$$$2$$$c------cc+cc.Ttt
+XttT..4d4d4.cc+ccccccc+cccccc------c***c.Ttt
+XttT..4d4d45c-----3---3-----+----O-c***c.Ttt
+XttT..4d4d4.c-------2-------+------c***c.Ttt
+XtT...4d4d4.c--wwwwwwwwwww--+------+***c.Ttt
+XtT...4d4d4.c--wwwwwwwwwww--c------c***c.Ttt
+XtT...4d4d4.c-----3---3-----c------c***c.Ttt
+XtT...4d4d4.c---------------ceeeeeec***c.Ttt
 XTT...4d4d4.cc++cccccccccccccccccccccccc.Ttt
 T.......5......5............5............Ttt
 @TT...44444444..444444444444..4444444444.Ttt

@@ -132,6 +132,11 @@ melee damage and attack speed significantly.
 While transformed, any equipped weapons are melded, and casting spells becomes
 somewhat more difficult.
 %%%%
+Blight spell
+
+Creates an explosion of vile blight, causing all creatures in that area to
+become drained, slowed or confused, and poisoned.
+%%%%
 Blink Allies Away spell
 
 Blinks allies in sight of the caster away from a nearby enemy.
@@ -192,14 +197,6 @@ Bolt of Magma spell
 Fires a penetrating bolt of molten rock. A portion of its damage bypasses
 fire resistance. The range of the bolt is decreased by one for every creature
 it strikes.
-%%%%
-Borgnjor's Revivification spell
-
-Instantly heals any and all wounds suffered by the caster, but also permanently
-decreases their health to a degree inversely related to power.
-
-It is powerful enough to cancel the effects of Death's Door, although doing so
-will briefly paralyse the caster. It has no effect on the undead.
 %%%%
 Borgnjor's Vile Clutch spell
 

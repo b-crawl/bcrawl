@@ -2019,7 +2019,7 @@ bool kiku_gift_necronomicon()
         mprf(MSGCH_GOD, "Terrible necromantic knowledge echoes in your mind!");
         you.spell_library.set(SPELL_DEATH_CHANNEL, true);
         you.spell_library.set(SPELL_HAUNT, true);
-        you.spell_library.set(SPELL_BORGNJORS_REVIVIFICATION, true);
+        you.spell_library.set(SPELL_BLIGHT, true);
         you.spell_library.set(SPELL_NECROMUTATION, true);
     }
     else

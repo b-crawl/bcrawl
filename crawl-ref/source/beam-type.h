@@ -81,7 +81,8 @@ enum beam_type                  // bolt::flavour
     BEAM_SHACKLE,
     BEAM_MELEE,
     BEAM_NECROTIZE,
-    BEAM_LAST_ENCHANTMENT = BEAM_NECROTIZE,
+    BEAM_BLIGHT,
+    BEAM_LAST_ENCHANTMENT = BEAM_BLIGHT,
 
     BEAM_MEPHITIC,
     BEAM_AIR,

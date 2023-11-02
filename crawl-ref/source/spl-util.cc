@@ -1259,19 +1259,6 @@ string spell_uselessness_reason(spell_type spell, bool temp, bool prevent,
         }
         break;
 
-    case SPELL_BORGNJORS_REVIVIFICATION:
-        if (temp && you.hp == you.hp_max)
-            return "you cannot be healed further.";
-        if (temp && you.hp_max < 21)
-            return "you lack the resilience to cast this spell.";
-        // Prohibited to all undead.
-        if (you.species == SP_GHOUL)
-            break;
-        if (you.undead_state(temp))
-            return "you're too dead.";
-        if (you.species == SP_ENT)
-            return "you don't have flesh that can be reanimated this way.";
-        break;
     case SPELL_DEATHS_DOOR:
         if (temp && you.duration[DUR_DEATHS_DOOR])
             return "you are already standing in death's doorway.";

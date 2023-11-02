@@ -6494,7 +6494,7 @@ void bolt::determine_affected_cells(explosion_map& m, const coord_def& delta,
 
     // A bunch of tests for edge cases.
     if (delta.rdist() > centre.rdist()
-        || delta.rdist() > r
+        || delta.cdist() > r
         || count > 10*r
         || !map_bounds(loc)
         || is_sanctuary(loc) && flavour != BEAM_VISUAL)

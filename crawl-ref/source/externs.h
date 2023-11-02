@@ -10,6 +10,7 @@
 #include <cstdint>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 #include <deque>
 #include <list>
 #include <map>
@@ -234,6 +235,11 @@ struct coord_def
     {
         // Replace with max(abs_ce(x), abs_ce(y) when we require C++14.
         return abs_ce(x) > abs_ce(y) ? abs_ce(x) : abs_ce(y);
+    }
+
+    constexpr int cdist() const
+    {
+        return round(sqrt(x*x + y*y));
     }
 
     constexpr bool origin() const

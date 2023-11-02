@@ -89,8 +89,8 @@ function crypt_loot_plus(e)
           "finisher / scythe_of_curses / majin-bo / sceptre_of_torment / " ..
           "undeadhunter")
   e.kitem("i = necronomicon / " .. book .. "necromutation / " ..
-          book .. "death's_door / " .. book .. "haunt / " ..
-          book .. "borgnjor's_revivification / " .. book .. "infestation")
+          book .. "blight / " .. book .. "haunt / " ..
+          book .. "borgnjor's_vile_clutch / " .. book .. "infestation")
   e.kitem("j = lamp of fire w:15 / phial of floods w:15 / " ..
           "fan of gales w:15 / " ..
           "staff of power ident:type, staff of death / staff of power / " ..

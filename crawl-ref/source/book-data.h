@@ -213,6 +213,7 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_PETRIFY,
     SPELL_VIOLENT_UNRAVELLING,
     SPELL_SILENCE,
+    SPELL_BLIGHT,
 },
 
 {   // Book of Battle

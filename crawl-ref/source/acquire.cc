@@ -1201,7 +1201,7 @@ static string _why_reject(const item_def &item, int agent)
     return ""; // all OK
 }
 
-int acquirement_create_item_general(object_class_type class_wanted,
+static int acquirement_create_item_general(object_class_type class_wanted,
                                     int agent, bool quiet,
                                     const coord_def &pos, bool debug, bool move)
 {

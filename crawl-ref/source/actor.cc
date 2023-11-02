@@ -744,7 +744,7 @@ void actor::accum_has_constricted()
         entry.second += you.time_taken;
 }
 
-size_type constrict_effective_size(const actor* attacker)
+static size_type constrict_effective_size(const actor* attacker)
 {
     size_type size = attacker->body_size(PSIZE_BODY);
     if (attacker->is_monster())

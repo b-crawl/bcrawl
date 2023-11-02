@@ -1323,7 +1323,7 @@ static vector<string> _desc_meph_chance(const monster_info& mi)
 }
 
 // for Mana Rupture
-vector<string> _desc_target_mr(const monster_info& mi)
+static vector<string> _desc_target_mr(const monster_info& mi)
 {
     int mons_mr = mi.res_magic();
     string mr_text = (mons_mr == MAG_IMMUNE) ?

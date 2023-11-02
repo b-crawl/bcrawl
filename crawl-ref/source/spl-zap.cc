@@ -38,6 +38,7 @@ static pair<spell_type, zap_type> _spl_zaps[] =
     { SPELL_DISINTEGRATE, ZAP_DISINTEGRATE },
     { SPELL_THROW_ICICLE, ZAP_THROW_ICICLE },
     { SPELL_RUPTURE, ZAP_RUPTURE },
+    { SPELL_BLIGHT, ZAP_BLIGHT },
     // Wizard mode only.
     { SPELL_PORKALATOR, ZAP_PORKALATOR },
     { SPELL_HURL_DAMNATION, ZAP_HURL_DAMNATION },

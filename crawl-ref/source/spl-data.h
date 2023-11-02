@@ -694,7 +694,7 @@ static const struct spell_desc spelldata[] =
     150,
     4, 4,
     8, 0,
-    TILEG_BORGNJORS_REVIVIFICATION,
+    TILEG_BLIGHT,
 },
 
 {

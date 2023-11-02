@@ -1632,11 +1632,11 @@ _mon_hex_zap(ZAP_SLEEP, BEAM_SLEEP),
     nullptr,
     BLACK,
     true,
-    BEAM_RUPTURE,
+    BEAM_BLIGHT,
     NUM_DCHAR_TYPES,
     true,
     false,
-    false,
+    true,
     0 // dubious
 },
 

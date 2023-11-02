@@ -5221,6 +5221,7 @@ bool bolt::has_saving_throw() const
     case BEAM_UNRAVELLED_MAGIC:
     case BEAM_RUPTURE:
     case BEAM_RUPTURED_MAGIC:
+    case BEAM_BLIGHT:
     case BEAM_INFESTATION:
     case BEAM_IRRESISTIBLE_CONFUSION:
     case BEAM_VILE_CLUTCH:
@@ -5996,10 +5997,10 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         
         if (drain_amount >= HD)
         {
+            simple_monster_message(*mon, " disintegrates into miasma!");
             coord_def mon_pos = mon->pos();
             if (mon->alive())
                 monster_die(*mon, KILL_YOU, NON_MONSTER, false);
-            simple_monster_message(*mon, " disintegrates into miasma!");
             place_cloud(CLOUD_MIASMA, mon_pos, 2 + random2avg(8, 2), &you);
             return MON_AFFECTED;
         }
@@ -6180,7 +6181,7 @@ const map<spell_type, explosion_sfx> spell_explosions = {
     } },
     { SPELL_BLIGHT, {
         "The area erupts with magical blight!",
-        "blight noise???",
+        "a squelching noise", // ?
     } },
     { SPELL_ICEBLAST, {
         "The mass of ice explodes!",

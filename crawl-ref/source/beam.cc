@@ -3660,14 +3660,16 @@ void bolt::affect_player_enchantment(bool resistible)
         if (!in_explosion_phase)
             break;
 
-        drain_player(30 + random2(10), false, true);
+        drain_player(40 + random2(15), false, true);
         
         int pois = 2 + ench_power/2 + random2(ench_power/2);
         int rpois = player_res_poison();
         if (rpois < 3)
             poison_player((rpois ? pois / 2 : pois), get_source_name(), "vile blight");
 
-        slow_player(10 + ench_power/2 + random2(ench_power/2));
+        coinflip() ? 
+            slow_player(10 + ench_power/2 + random2(ench_power/2))
+            : confuse_player(2 + random2(3));
 
         obvious_effect = true;
         break;

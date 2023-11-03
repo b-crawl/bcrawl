@@ -6043,12 +6043,23 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
             mon->add_ench(mon_enchant(ENCH_SLOW, 1, &you, dur));
             break;
         case 1:
+            {
             dur = div_rand_round(relative_power, 3) + 10;
-            if (visible)
-                simple_monster_message(*mon, mon->has_ench(ENCH_CONFUSION)
-                                         ? " appears more confused."
-                                         : " appears confused.");
-            mon->add_ench(mon_enchant(ENCH_CONFUSION, 1, &you, dur));
+            bool was_confused = mon->has_ench(ENCH_CONFUSION);
+            if (was_confused)
+            {
+                mon_enchant confuse_ench = mon->get_ench(ENCH_CONFUSION);
+                dur -= confuse_ench.duration;
+            }
+            if (dur > 0)
+            {
+                if (visible)
+                    simple_monster_message(*mon, was_confused
+                                             ? " appears more confused."
+                                             : " appears confused.");
+                mon->add_ench(mon_enchant(ENCH_CONFUSION, 1, &you, dur));
+            }
+            }
             break;
         default: break;
         }

@@ -28,6 +28,7 @@
   - v1.39: The Elven Halls branch appears in Lair instead of Orc, and alternates with the Spriggan Forest.
   - v1.39: The Slime Pits branch appears in Orc instead of Lair. Its layout is changed, and it has new endings by nicolae-carpathia.
   - v1.39: Warnings about entering dangerous branches at a low XL now ask for confirmation before entering.
+  - v1.40.2: Spriggan Forest endings have substantially more loot.
 
 #### Backgrounds
   - Venom Mage, Arcane Marksman, and Warper are completely reworked. (based on Doesnty's work)
@@ -171,6 +172,7 @@
   - v1.36.5: Guaranteed damage reduction (GDR) calculation is reworked. It's now normally proportional to sqrt(dexterity + armour_skill).
   - v1.37.1: Base health regeneration of players is now 0.1 + HP/600 per turn. This is higher than before at low levels.
   - v1.39.2: The chance of player aux melee attacks is now scaled by (25 + dexterity \* 2.5)% instead of by ((strength + dexterity) \* 2)%.
+  - v1.40.2: Large explosions are more circular.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -244,6 +246,7 @@
   - v1.21: Confusing Touch is re-added as a very different spell. It only works while unarmed without a shield, and has a chance based on your level and enemy HD to confuse hit enemies for 1 to 2 turns. It does not prevent players from dealing melee damage, and does not end when it affects an enemy. Currently, it's exclusive to Martial Artists.
   - v1.39.2: Scorpion Form (L7 Transmutations/Poison) turns the player into a giant scorpion with a powerful stinger aux attack, rPois, +20% HP, and good AC. This form also has a small penalty to spell success and increases spell power (+1 enhancer level) of poison magic.
   - v1.40: Summon Fire Elementals (L7 Fire/Summoning) summons 2 fire elementals. Their HD scales with spell power, which increases their HP, melee damage, and accuracy.
+  - v1.40.2: Blight (L7 Necromancy/Poison) causes targets in an area to become drained, slowed or confused, and poisoned. Even undead and nonliving monsters can be drained by this. Poison from this is equal to that from Poison Arrow.
 
 #### Spell Changes
   - At high spell power, transformations now last forever.
@@ -359,6 +362,7 @@
   - v1.15: Ring of Flames
   - v1.17.1: Alistair's Intoxication
   - v1.21.3: Leda's Liquefaction
+  - v1.40.2: Borgnjor's Revivification
 
 #### Gods
   - Ashenzari now curses items for free, but uncursing items loses a large amount of piety.

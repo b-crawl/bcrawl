@@ -676,6 +676,8 @@ spell_type ghost_demon::translate_spell(spell_type spell) const
         return SPELL_BOLT_OF_COLD;
     case SPELL_RUPTURE:  // ???
         return SPELL_STRIP_RESISTANCE;
+    case SPELL_BLIGHT:  // ???
+        return SPELL_CORRUPTING_PULSE;
     default:
         break;
     }

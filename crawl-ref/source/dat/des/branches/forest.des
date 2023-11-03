@@ -500,35 +500,37 @@ MONS:   spriggan rider, spriggan air mage
 MONS:   spriggan defender / spriggan berserker / spriggan druid / \
         spriggan rider / spriggan air mage / nothing w:100
 MONS:   thorn hunter / shambling mangrove
+NSUBST: $ = 30:* / 6:% / *:$
+NSUBST: * = 14:| / *:*
 TILE:   c = wall_marble
 COLOUR: .|*%OT123456+ = lightgray
 FTILE:  .|*%OT123456+ = floor_normal
 MAP
-tttttttttttttttttttttttttttttttttt
-tttttttttttttccccccccttttttttttttt
-tttttttttttccc||||||cccttttttttttt
-ttttttttttcc..........cctttttttttt
-tttttttttcc....4444....ccttttttttt
-tttttttttc..............cttttttttt
-ttttttttcc..6.5....5.6..cctttttttt
-ttttttttc%.6..........6.%ctttttttt
-ttttttttc*.6..........6.*ctttttttt
-ttttttttc*.6....O1....6.*ctttttttt
-ttttttttc*.6....11....6.*ctttttttt
-ttttttttc*.6..........6.*ctttttttt
-ttttttttc%.6..5....5..6.%ctttttttt
-ttttttttcc..6........6..cctttttttt
-tttttttttc..............cttttttttt
-tttttttttcc....4224....ccttttttttt
-ttttcccccccc..........cccccccctttt
+       tttttttttttttttttt         
+    tttttttttccccccccttttttttt    
+   ttttttttccc||||||ccctttttttt   
+   tttttttcc**********ccttttttt   
+   ttttttcc$...4444...$cctttttt   
+   tttttcc$............$ccttttt   
+   ttttcc$..6.5....5.6..$cctttt   
+   ttttc$$.6..........6.$$ctttt   
+   ttttc$$.6..........6.$$ctttt   
+   ttttc$$.6....O1....6.$$ctttt   
+   ttttc$$.6....11....6.$$ctttt   
+   ttttc$$.6..........6.$$ctttt   
+   ttttc$$.6..5....5..6.$$ctttt   
+   ttttcc$..6........6..$cctttt   
+   tttttcc..............ccttttt   
+  tttttttcc....4224....ccttttttt  
+ tttcccccccc..........ccccccccttt 
 tttcc......ccc......ccc......ccttt
 ttcc.4.4.4..cccc++cccc..4.4.4.cctt
 tcc..........c.6..6.c..........cct
-tc%..........c+.66.+c..........%ct
-tc%......1....cccccc....1......%ct
-tc%....T.2....cccccc....2.T....%ct
-tc%...........cccccc...........%ct
-tc%.6........c+.66.+c........6.%ct
+tc$..........c+.66.+c..........$ct
+tc$$.....1....cccccc....1.....$$ct
+tc$$$..T.2....cccccc....2.T..$$$ct
+tc$$..........cccccc..........$$ct
+tc$.6........c+.66.+c........6.$ct
 tcc.6........c.6..6.c........6.cct
 ttc..66.....cccc++cccc.....66..ctt
 ttccc..66..cccc....cccc..66..ccctt
@@ -547,12 +549,12 @@ tttttLLLLLLLLLc++++cLLLLLLtttttttt
 tttttttLLLLLLLLLLLLLLLLttLLLtttttt
 tttttttttttLLLLLLLLLLtttLLLLLttttt
 tttttttttttttttLLLLtttLLLttttttttt
-ttttttttttttttttLLLLLLLttttttttttt
-ttttttttttttttttL@LLtttttttttttttt
+ tttttttttttttttLLLLLLLtttttttttt 
+  ttttttttttttttL@LLtttttttttttt  
 ENDMAP
 
 NAME:   kb_forest_enchantress_palace
-ORIENT: northeast
+ORIENT: float
 PLACE:  Forest:$
 MONS:   spriggan rider / spriggan druid / \
         spriggan berserker / spriggan defender / \
@@ -583,40 +585,42 @@ KITEM:  h = ration q:2
 COLOUR: C = white
 KFEAT:  C = stone_wall
 TILE:   C = wall_marble
+NSUBST: - = 8:| / 20:* / 8:% / 15:$ / *:-
 KFEAT:  - = floor
-FTILE:  R-~67ABXYfg$*| = floor_normal
+KFEAT:  _ = floor
+FTILE:  R-_~67ABXYfg$*| = floor_normal
 MAP
-ttttttttttttttttttttttttttttttttttttttttttt
-tttCCCCCCCCCCCCCCtttttttttttttttttttttttttt
-tttC-----O------CtttttttttTTTTTttTTTTtttttt
-tttC--B------A--CtttQTtttTT.T.Ttt.T.TTTtttt
-tttC----6--6----Ctt..ccccc....cccc.TT.Ttttt
-tttCCCCCC~~CCCCCC....c..1c....c.1c.t.TTtttt
-tttC---C6--6C$*|CtT..c.1.+....+..cT.TT.tttt
-tttC---~----~$*|Ctt..ccccc....cccc.TT.Ttttt
-tttC---C6--6C$*|CttQ..................ttttt
-tttCCCCCC~~CCCCCCttttccccc....cccc......ttt
-tttCgggC--X-CfffCttttchxLc....c1.c.....tttt
-tttCggg~----~fffCttttch..+....+.4c..1...ttt
-tttCgggCX--XCfffCttttccccc....cccc...1.tttt
-tttCCCCCC~~CCCCCCttttt...................tt
-tttCR-----X----RCccccccccc....5.........ttt
-tttC--X--------XCcKxKxKxKc......2......tttt
-tttCRX--Y--Y--XRCc.22.3..c.....22......tttt
-tttCCCCCC~~CCCCCCc+ccccccc....2.2.....ttttt
-ttt..................................tttttt
-@...................................ttttttt
-t..TTttttt............5..........ttt.tttttt
+ tttttttttttttttttt     ttttttttttttttt    
+ ttCCCCCCCCCCCCCCtttt ttttttttttttttttttt  
+ ttC-----O------CtttttttttTTTTTttTTTTttttt 
+tttC--B------A--CtttQTtttTT.T.Ttt.T.TTTttt 
+tttC----6__6----Ctt..ccccc....cccc.TT.Tttt 
+tttCCCCCC~~CCCCCC....c..1c....c.1c.t.TTttt 
+tttC||-C6__6C-||CtT..c.1.+....+..cT.TT.ttt 
+tttC||-~____~-||Ctt..ccccc....cccc.TT.Tttt 
+ ttC||-C6__6C-||CttQ..................ttttt
+ ttCCCCCC~~CCCCCCCCttccccc....cccc......ttt
+ ttC---C-_X-CfffffCttchxLc....c1.c.....tttt
+ ttC---~____~_____Cttch..+....+.4c..1...ttt
+ ttC---CX__XCgggggCttccccc....cccc...1.tttt
+ ttCCCCCC~~CCCCCCCCttt...................tt
+ ttCR---__X_---RCccccccccc....5.........ttt
+ ttC--X-____---XCcKxKxKxKc......2......tttt
+ ttCRX--Y__Y--XRCc.22.3..c.....22......tttt
+tttCCCCCC~~CCCCCCc+ccccccc....2.2.....tttt 
+ttt...PP....PP.......................tttt  
+@...................................ttttt  
+t..TTttttt............5..........ttt.ttttt 
 tttttttttttttttt...............tttttt...ttt
-ttttttttttttttttttt.........tttttttttttt<tt
-ttttttttttttttttttttttt....tttttttttttttttt
-tttttttttttttttttttttt@tt..@ttttttttttttttt
+  ttttttttttttttttt.........tttttttttttt<tt
+      ttttttttttttttttt....tttttttttttttt  
+           ttttttttttt@tt..@ttttttttttt    
 ENDMAP
 
 NAME:   grunt_forest_end_winery
 TAGS:   no_pool_fixup
 PLACE:  Forest:$
-ORIENT: northeast
+ORIENT: float
 KMONS:  O = the Enchantress band, Frances, spriggan defender
 MONS:   spriggan, spriggan berserker / spriggan defender
 MONS:   spriggan druid / spriggan air mage, plant
@@ -632,25 +636,27 @@ SUBST:  X = xt
 CLEAR:  x
 KFEAT:  : = floor
 ITEM:   ration q:1 / ration q:2 / nothing w:180
-ITEM:   any potion / ration q:1 / nothing w:30
+ITEM:   any potion / ration q:1 w:20 / nothing w:20
+NSUBST: $ = 12:* / 10:% / 20:$ / *:-
+NSUBST: * = 12:| / *:*
 TILE:   c = wall_vines
 FTILE:  e123+|%*$- = floor_vines
 MAP
-tttttttttttttttttttttttttttttttttttttttttttt
-Xttttttttttttttttttttttttttttttttttttttttttt
+  tttttttttttttttttttttttttttttttttttttttt  
+ tttttttttttttttttttttttttttttttttttttttttt 
 XttTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTtt
 XttT.5...................................Ttt
 XttT..4d4d4.cccccccccccccccccccccccccccc.Ttt
-XttT..4d4d4.ce-e-e-e-e-e-e-eceeeeee+|||c.Ttt
-XttT..4d4d4.c-e-e-e-c-e-e-e-c------c|||c.Ttt
-XttT..4d4d4.ce-e2e-ece-e2e-ec------cc+cc.Ttt
-XttT..4d4d4.cc+ccccccc+cccccc------c%**c.Ttt
-XttT..4d4d45c-----3---3-----+----O-c%**c.Ttt
-XttT..4d4d4.c-------2-------+------c%**c.Ttt
-XtT...4d4d4.c--wwwwwwwwwww--+------c%**c.Ttt
-XtT...4d4d4.c--wwwwwwwwwww--c------c$$$c.Ttt
-XtT...4d4d4.c-----3---3-----c------c$$$c.Ttt
-XtT...4d4d4.c---------------ceeeeee+$$$c.Ttt
+XttT..4d4d4.c$$$$$$$+$$$$$$$ceeeeeec|||c.Ttt
+XttT..4d4d4.c$$$$$$$c$$$$$$$c------c|||c.Ttt
+XttT..4d4d4.c$$$2$$$c$$$2$$$c------cc+cc.Ttt
+XttT..4d4d4.cc+ccccccc+cccccc------c***c.Ttt
+XttT..4d4d45c-----3---3-----+----O-c***c.Ttt
+XttT..4d4d4.c-------2-------+------c***c.Ttt
+XtT...4d4d4.c--wwwwwwwwwww--+------+***c.Ttt
+XtT...4d4d4.c--wwwwwwwwwww--c------c***c.Ttt
+XtT...4d4d4.c-----3---3-----c------c***c.Ttt
+XtT...4d4d4.c---------------ceeeeeec***c.Ttt
 XTT...4d4d4.cc++cccccccccccccccccccccccc.Ttt
 T.......5......5............5............Ttt
 @TT...44444444..444444444444..4444444444.Ttt
@@ -664,8 +670,8 @@ XttT.....................................Ttt
 XttT.....................................Ttt
 XttTTTTTT...........TTTT...........TTTTTTTtt
 XttttttttTTTTT.TTTTTTTTTTTTTT.TTTTTTTTTTTTtt
-XXtttttttttttT.TttttttttttttT.Tttttttttttttt
-XXXXXXXXXXXXT@TXXXXXXXXXXXXXXT@TXXXXXXXXXXXt
+ XtttttttttttT.TttttttttttttT.Ttttttttttttt 
+  XXXXXXXXXXT@TXXXXXXXXXXXXXXT@TXXXXXXXXXX  
 ENDMAP
 
 NAME:   grunt_forest_end_shrine
@@ -682,26 +688,28 @@ KFEAT:  _ = altar_xom
 KFEAT:  - = floor
 SUBST:  T = tx
 CLEAR:  x
+NSUBST: $ = 26:* / 4:% / 20:$ / *:.
+NSUBST: * = 12:| / *:*
 FTILE:  14|*$-+ = floor_dirt
 TILE:   c = wall_church
 MAP
-  TTTTTTTTTTTTT
- TTtttttttttttTT
-TTtt.........ttTT
-Ttt3.........3ttT
-Tt..ccccccccc..tTTTTTTTT
-Tt..c||c4$$$c..ttttttttt
-Tt..c|-c****c.2t..3....t
-Tt..cc+c-2-2+....G.G.G..
-Tt2.c-2--O_-+..2.......@
-Tt..cc+c-2-2+....G.G.G..
-Tt..c|-c****c.2t..3....t
-Tt..c||c4$$$c..ttttttttt
-Tt..ccccccccc..tTTTTTTTT
-Ttt3.........3ttT
-TTtt.........ttTT
- TTtttttttttttTT
-  TTTTTTTTTTTTT
+   TTTTTTTTTTTTT
+ TTTtttttttttttTT
+TTttt$$$$$$c..ttTT
+Ttt$3$$$$$$c..3ttT
+Ttt$$cccc+cccc..tTTTTTTTT
+Tt$$$c||c4***c..ttttttttt
+Tt$$$c||c.***c.2t..3....t
+Tt$$$cc+c-2-2+....G.G.G..
+Tt$2$+-2--O_-+..2.......@
+Tt$$$cc+c-2-2+....G.G.G..
+Tt$$$c||c.***c.2t..3....t
+Tt$$$c||c4***c..ttttttttt
+Tt$$$cccc+cccc..tTTTTTTTT
+Ttt$3$$$$$$c..3ttT
+TTttt$$$$$$c..ttTT
+ TTTtttttttttttTT
+   TTTTTTTTTTTTT
 ENDMAP
 
 ## A camper cannibalizes his companions to survive and turns into a wendigo
@@ -757,51 +765,54 @@ KMONS:    L = greenwood witch / wendigo w:30
 KMONS:    N = water nymph
 KMONS:    S = elemental wellspring
 KFEAT:    ALNS = shallow_water
+NSUBST:   * = 10:$ / *:*
+NSUBST:   $ = 4:% / *:$
 COLOUR:   c = white
 FTILE:    |*123456GTU+. = floor_pebble_cyan
 CLEAR:    E
 MAP
-ttttttttttttttttttttttttttttttttttttttttttttttttt
-Ett.....WWWWWWWWcccccccccccccccccWWWWWWWW.....ttE
-Ett....WWWWWWWWcc*..|||||||||..*ccWWWWWWWW....ttE
-Ett....WWWGLWWWc**.....585.....**cWWWLGWWW....ttE
-Ett....WWWWWWWWc**.4..........4**cWWWWWWWW....ttE
-Ett....WWWWWccccccccccc+++cccccccccccWWWWW....ttE
-Ett....WWWWccWWWWWWWWWWWWWWWWWWWWWWWccWWWW....ttE
-Ett.1..WWWWcWWWWWWWWWWWWWWWWWWWWWWWWWcWWWW..1.ttE
-Ett....WWLWcWWHHHWWSWWW.U.WWWSWWIIIWWcWWLW....ttE
-Ett....WWWWcWWHHHWWWWWU...UWWWWWIIIWWcWWWW....ttE
-Ett....WWWWcWWHHHWWWW.......WWWWIIIWWcWWWW....ttE
-Ett.1..WWWWcWWWWWWWWW..555..WWWWWWWWWcWWWW..1.ttE
-Ett....WWWWcWWWWWWWWW.......WWWWWWWWWcWWWW....ttE
-Ett....WWWWcWWWQQQWWWW.....WWWWRRRWWWcWWWW....ttE
-Ett....WWWWcWWWQQQWWWWW...WWWWWRRRWWWcWWWW....ttE
-Ett.1..WWLWcWWWQQQWWLWWWWWWWLWWRRRWWWcWWLW..1.ttE
-Ett....WWWWcWWWWWWWWWWWWWWWWWWWWWWWWWcWWWW....ttE
-Ett....WWWWcWWWWWWWWNWWWWWWWNWWWWWWWWcWWWW....ttE
-Ett....WWWWcWWWWWWWWWWWWWWWWWWWWWWWWWcWWWW....ttE
-Ett.1..WWWWcWWWcccWWWWW...WWWWWcccWWWcWWWW..1.ttE
-Ett....WWWWcWWWcTcWWWW.2.3.WWWWcTcWWWcWWWW....ttE
-Ett....WWWWcWWW.7.WWWW.....WWWW.7.WWWcWWWW....ttE
-Ett....WWWWcWWWWWWWWWW.3.2.WWWWWWWWWWcWWWW....ttE
-Ett....WWLWcWWWWLWWWWW.....WWWWWLWWWWcWWLW....ttE
-Ett.1..WWWWccWWWWWWWWW.....WWWWWWWWWccWWWW..1.ttE
-Ett....WWWWWccccccccccc+++cccccccccccWWWWW....ttE
-Ett....WWWWWWWWc.................cWWWWWWWW....ttE
-Ett....WWWWWWWWc..T...2...3...T..cWWWWWWWW....ttE
-Ett....WWcccWWWc......3...2......cWWWcccWW....ttE
-Ett....WWcGcWWWc...T..2...3..T...cWWWcGcWW....ttE
-Ett....WWWWWWWWcc...............ccWWWWWWWW....ttE
-Ett.....WWWWNWWWccccccc+++cccccccWWWNWWWW.....ttE
-Ettt......WWWWWWWAWWAWWWWWWAWWAWWWWWWWW......tttE
-Etttt......WWWWWWWWWWWWWWWWWWWWWWWWW........ttttE
-Etttttt............T.........T............ttttttE
-Etttttttt.....6...................6.....ttttttttE
-Etttttttttt........T.........T........ttttttttttE
-Ettttttttttttt.....................tttttttttttttE
-Ettttttttttttttttt.............tttttttttttttttttE
-Etttttttttttttttttttt.......ttttttttttttttttttttE
-EEEEEEEEEEEEEEEEEEEEEEE.@.EEEEEEEEEEEEEEEEEEEEEEE
+ ttttttttttttttttttttttttttttttttttttttttttttt 
+ttt....WWWWWWWcccccccccccccccccccWWWWWWW....ttt
+tt.....WWWWWWcc****|||||||||****ccWWWWWW.....tt
+tt....WWWWWWcc****|||||||||||****ccWWWWWW....tt
+tt....WWWGLWc*****....585....*****cWLGWWW....tt
+tt....WWWWWWc****.4..........4****cWWWWWW....tt
+tt....WWWWWccccccccccc+++cccccccccccWWWWW....tt
+tt....WWWWccWWWWWWWWWWWWWWWWWWWWWWWccWWWW....tt
+tt.1..WWWWcWWWWWWWWWWWWWWWWWWWWWWWWWcWWWW..1.tt
+tt....WWLWcWWHHHWWSWWW.U.WWWSWWIIIWWcWWLW....tt
+tt....WWWWcWWHHHWWWWWU...UWWWWWIIIWWcWWWW....tt
+tt....WWWWcWWHHHWWWW.......WWWWIIIWWcWWWW....tt
+tt.1..WWWWcWWWWWWWWW..555..WWWWWWWWWcWWWW..1.tt
+tt....WWWWcWWWWWWWWW.......WWWWWWWWWcWWWW....tt
+tt....WWWWcWWWQQQWWWW.....WWWWRRRWWWcWWWW....tt
+tt....WWWWcWWWQQQWWWWW...WWWWWRRRWWWcWWWW....tt
+tt.1..WWLWcWWWQQQWWLWWWWWWWLWWRRRWWWcWWLW..1.tt
+tt....WWWWcWWWWWWWWWWWWWWWWWWWWWWWWWcWWWW....tt
+tt....WWWWcWWWWWWWWNWWWWWWWNWWWWWWWWcWWWW....tt
+tt....WWWWcWWWWWWWWWWWWWWWWWWWWWWWWWcWWWW....tt
+tt.1..WWWWcWWWcccWWWWW...WWWWWcccWWWcWWWW..1.tt
+tt....WWWWcWWWcTcWWWW.2.3.WWWWcTcWWWcWWWW....tt
+tt....WWWWcWWW.7.WWWW.....WWWW.7.WWWcWWWW....tt
+tt....WWWWcWWWWWWWWWW.3.2.WWWWWWWWWWcWWWW....tt
+tt....WWLWcWWWWLWWWWW.....WWWWWLWWWWcWWLW....tt
+tt.1..WWWWccWWWWWWWWW.....WWWWWWWWWccWWWW..1.tt
+tt....WWWWWccccccccccc+++cccccccccccWWWWW....tt
+tt....WWWWWWWWc$$$...........$$$cWWWWWWWW....tt
+tt....WWWWWWWWc$.T...2...3...T.$cWWWWWWWW....tt
+tt....WWcccWWWc$.....3...2.....$cWWWcccWW....tt
+tt....WWcGcWWWc...T..2...3..T...cWWWcGcWW....tt
+tt....WWWWWWWWcc...............ccWWWWWWWW....tt
+tt.....WWWWNWWWccccccc+++cccccccWWWNWWWW.....tt
+ttt......WWWWWWWAWWAWWWWWWAWWAWWWWWWWW......ttt
+tttt......WWWWWWWWWWWWWWWWWWWWWWWWW........tttt
+tttttt............T.........T............tttttt
+ ttttttt.....6...................6.....ttttttt 
+   ttttttt........T.........T........ttttttt   
+     tttttttt.....................tttttttt     
+        ttttttttt.............ttttttttt        
+           ttttttttt.......ttttttttt           
+           EEEEEEEEEEEE.@.EEEEEEEEEE           
 ENDMAP
 
 NAME: gammafunk_forest_column

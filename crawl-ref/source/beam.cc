@@ -204,6 +204,7 @@ static void _ench_animation(int flavour, const monster* mon, bool force)
     case BEAM_NECROTIZE:
     case BEAM_AGONY:
     case BEAM_VILE_CLUTCH:
+    case BEAM_BLIGHT:
         elem = ETC_UNHOLY;
         break;
     case BEAM_DISPEL_UNDEAD:
@@ -3654,6 +3655,26 @@ void bolt::affect_player_enchantment(bool resistible)
         mpr("error: rupture shouldn't target players");
         break;
 
+    case BEAM_BLIGHT:
+        {
+        if (!in_explosion_phase)
+            break;
+
+        drain_player(40 + random2(15), false, true);
+        
+        int pois = 2 + ench_power/2 + random2(ench_power/2);
+        int rpois = player_res_poison();
+        if (rpois < 3)
+            poison_player((rpois ? pois / 2 : pois), get_source_name(), "vile blight");
+
+        coinflip() ? 
+            slow_player(10 + ench_power/2 + random2(ench_power/2))
+            : confuse_player(2 + random2(3));
+
+        obvious_effect = true;
+        break;
+        }
+
     default:
         // _All_ enchantments should be enumerated here!
         mpr("Software bugs nibble your toes!");
@@ -5206,6 +5227,7 @@ bool bolt::has_saving_throw() const
     case BEAM_UNRAVELLED_MAGIC:
     case BEAM_RUPTURE:
     case BEAM_RUPTURED_MAGIC:
+    case BEAM_BLIGHT:
     case BEAM_INFESTATION:
     case BEAM_IRRESISTIBLE_CONFUSION:
     case BEAM_VILE_CLUTCH:
@@ -5970,6 +5992,93 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         return MON_AFFECTED;
     }
     
+    case BEAM_BLIGHT:
+    {
+        if (!in_explosion_phase)
+            break;
+        
+        bool visible = you.can_see(*mon);
+        int HD = mon->get_experience_level();
+
+        // HD reduction = ENCH_DRAINED degree
+        // don't stack this additively
+        int drain_amount = div_rand_round(ench_power, 18);
+        
+        if (drain_amount >= HD)
+        {
+            simple_monster_message(*mon, " disintegrates into miasma!");
+            coord_def mon_pos = mon->pos();
+            if (mon->alive())
+                monster_die(*mon, KILL_YOU, NON_MONSTER, false);
+            place_cloud(CLOUD_MIASMA, mon_pos, 2 + random2avg(8, 2), &you);
+            return MON_AFFECTED;
+        }
+        
+        mon_enchant drain_ench = mon->get_ench(ENCH_DRAINED);
+        drain_amount -= drain_ench.degree;
+        {
+        int dur = 400 + random2(200);
+        dur = max(dur, drain_ench.duration);
+        if (drain_amount > 0)
+        {
+            mon->add_ench(mon_enchant(ENCH_DRAINED,
+                    drain_amount, &you, dur));
+            if (visible)
+                simple_monster_message(*mon, " is drained.");
+        }
+        }
+        
+        {
+        int relative_power = (ench_power * 10) / (HD + 3);
+        relative_power += random2(relative_power);
+        int dur = 0;
+        switch(random2(2))
+        {
+        case 0:
+            dur = relative_power + 10;
+            if (visible)
+                simple_monster_message(*mon, mon->has_ench(ENCH_SLOW)
+                                         ? " seems to be slow for longer."
+                                         : " seems to slow down.");
+            mon->add_ench(mon_enchant(ENCH_SLOW, 1, &you, dur));
+            break;
+        case 1:
+            {
+            dur = div_rand_round(relative_power, 3) + 10;
+            bool was_confused = mon->has_ench(ENCH_CONFUSION);
+            if (was_confused)
+            {
+                mon_enchant confuse_ench = mon->get_ench(ENCH_CONFUSION);
+                dur -= confuse_ench.duration;
+            }
+            if (dur > 0)
+            {
+                if (visible)
+                    simple_monster_message(*mon, was_confused
+                                             ? " appears more confused."
+                                             : " appears confused.");
+                mon->add_ench(mon_enchant(ENCH_CONFUSION, 1, &you, dur));
+            }
+            }
+            break;
+        default: break;
+        }
+        }
+        
+        int rpois = mon->res_poison();
+        if (rpois >= 3)
+            simple_monster_message(*mon, " completely resists the poison.");
+        else if (rpois)
+        {
+            simple_monster_message(*mon, " partially resists the poison.");
+            poison_monster(mon, &you, 2, true);
+        }
+        else
+            poison_monster(mon, &you, 4, true);
+        
+        return MON_AFFECTED;
+    }
+    
     case BEAM_MELEE:
     {
         obvious_effect = true;
@@ -6089,6 +6198,10 @@ const map<spell_type, explosion_sfx> spell_explosions = {
         "The unstable magic explodes!",
         "the sound of breaking glass",
     } },
+    { SPELL_BLIGHT, {
+        "The area erupts with magical blight!",
+        "a squelching noise", // ?
+    } },
     { SPELL_ICEBLAST, {
         "The mass of ice explodes!",
         "an explosion",
@@ -6150,10 +6263,18 @@ void bolt::refine_for_explosion()
         }
     }
 
-    if (origin_spell == SPELL_ORB_OF_ELECTRICITY)
+    switch (origin_spell)
     {
-        colour     = LIGHTCYAN;
-        ex_size    = 2;
+    case SPELL_ORB_OF_ELECTRICITY:
+        colour = LIGHTCYAN;
+        ex_size = 2;
+        break;
+    
+    case SPELL_BLIGHT:
+        ex_size = 2;
+        break;
+    
+    default: break;
     }
 
     if (!is_tracer && !seeMsg.empty() && !hearMsg.empty())
@@ -6400,7 +6521,7 @@ void bolt::determine_affected_cells(explosion_map& m, const coord_def& delta,
 
     // A bunch of tests for edge cases.
     if (delta.rdist() > centre.rdist()
-        || delta.rdist() > r
+        || delta.cdist() > r
         || count > 10*r
         || !map_bounds(loc)
         || is_sanctuary(loc) && flavour != BEAM_VISUAL)
@@ -6799,6 +6920,7 @@ static string _beam_type_name(beam_type type)
     case BEAM_UNRAVELLED_MAGIC:      return "unravelled magic";
     case BEAM_RUPTURE:               return "magical disruption";
     case BEAM_RUPTURED_MAGIC:        return "unstable magic";
+    case BEAM_BLIGHT:                return "vile blight";
     case BEAM_SHARED_PAIN:           return "shared pain";
     case BEAM_IRRESISTIBLE_CONFUSION:return "confusion";
     case BEAM_INFESTATION:           return "infestation";

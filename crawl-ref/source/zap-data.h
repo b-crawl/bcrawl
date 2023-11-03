@@ -1623,6 +1623,24 @@ _mon_hex_zap(ZAP_SLEEP, BEAM_SLEEP),
 },
 
 {
+    ZAP_BLIGHT,
+    "blight",
+    150,
+    nullptr,
+    new tohit_calculator<0, 1, 1>,
+    nullptr,
+    nullptr,
+    BLACK,
+    true,
+    BEAM_BLIGHT,
+    NUM_DCHAR_TYPES,
+    true,
+    false,
+    true,
+    0 // dubious
+},
+
+{
     ZAP_ICEBLAST,
     "iceblast",
     200,

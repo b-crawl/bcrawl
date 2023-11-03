@@ -687,14 +687,14 @@ static const struct spell_desc spelldata[] =
 },
 
 {
-    SPELL_BORGNJORS_REVIVIFICATION, "Borgnjor's Revivification",
-    SPTYP_NECROMANCY,
-    SPFLAG_UTILITY,
-    8,
-    200,
-    -1, -1,
-    6, 0,
-    TILEG_BORGNJORS_REVIVIFICATION,
+    SPELL_BLIGHT, "Blight",
+    SPTYP_NECROMANCY | SPTYP_POISON,
+    SPFLAG_DIR_OR_TARGET | SPFLAG_UNHOLY | SPFLAG_NEEDS_TRACER | SPFLAG_AREA,
+    7,
+    150,
+    4, 4,
+    8, 0,
+    TILEG_BLIGHT,
 },
 
 {

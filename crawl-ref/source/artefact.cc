@@ -1087,7 +1087,7 @@ int artefact_property(const item_def &item, artefact_prop_type prop)
 /**
  * Check whether a particular property's value is known to the player.
  */
-bool artefact_property_known(const item_def &item, artefact_prop_type prop)
+static bool artefact_property_known(const item_def &item, artefact_prop_type prop)
 {
     ASSERT(is_artefact(item));
     if (item_ident(item, ISFLAG_KNOW_PROPERTIES))

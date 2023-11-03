@@ -1171,7 +1171,7 @@ static bool _phial_of_floods()
     return false;
 }
 
-int _mirror_break_chance(int target_hd)
+static int _mirror_break_chance(int target_hd)
 {
     int xl = you.experience_level;
     int scaled_hd = target_hd + (target_hd - 1)/2;
@@ -1179,7 +1179,7 @@ int _mirror_break_chance(int target_hd)
     return min(100, break_chance);
 }
 
-vector<string> _desc_phantom_mirror_break(const monster_info& mi)
+static vector<string> _desc_phantom_mirror_break(const monster_info& mi)
 {
     int chance = _mirror_break_chance(mi.hd);
     vector<string> descs;

@@ -87,12 +87,12 @@ static bool _action_is_bad(xom_event_type action)
     return action > XOM_LAST_GOOD_ACT && action <= XOM_LAST_BAD_ACT;
 }
 
-int _get_xom_gift_timeout()
+static int _get_xom_gift_timeout()
 {
     return you_worship(GOD_XOM) ? you.gift_timeout : you.props[XOM_GIFT_KEY].get_int();
 }
 
-void _set_xom_gift_timeout(int val)
+static void _set_xom_gift_timeout(int val)
 {
     if (you_worship(GOD_XOM))
         you.gift_timeout = val;
@@ -100,12 +100,12 @@ void _set_xom_gift_timeout(int val)
         you.props[XOM_GIFT_KEY] = val;
 }
 
-int _get_xom_piety()
+static int _get_xom_piety()
 {
     return you_worship(GOD_XOM) ? you.piety : you.props[XOM_PIETY_KEY].get_int();
 }
 
-void _set_xom_piety(int val)
+static void _set_xom_piety(int val)
 {
     if (you_worship(GOD_XOM))
         you.piety = val;

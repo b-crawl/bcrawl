@@ -404,7 +404,7 @@ static hunger_state_t _max_chunk_state(bool like_chunks = player_likes_chunks())
     return like_chunks ? HS_VERY_FULL : HS_HUNGRY;
 }
 
-bool _auto_eat_chunks()
+static bool _auto_eat_chunks()
 {
     bool eating_heals = false;
     if (you.species == SP_GHOUL)

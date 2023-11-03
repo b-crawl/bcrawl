@@ -3261,7 +3261,7 @@ static bool _interesting_explore_pickup(const item_def& item)
     return false;
 }
 
-bool _interesting_item(const item_def &i)
+static bool _interesting_item(const item_def &i)
 {
     if (is_useless_item(i))
         return false;

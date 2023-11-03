@@ -204,6 +204,7 @@ static void _ench_animation(int flavour, const monster* mon, bool force)
     case BEAM_NECROTIZE:
     case BEAM_AGONY:
     case BEAM_VILE_CLUTCH:
+    case BEAM_BLIGHT:
         elem = ETC_UNHOLY;
         break;
     case BEAM_DISPEL_UNDEAD:
@@ -3656,6 +3657,9 @@ void bolt::affect_player_enchantment(bool resistible)
 
     case BEAM_BLIGHT:
         {
+        if (!in_explosion_phase)
+            break;
+
         drain_player(30 + random2(10), false, true);
         
         int pois = 2 + ench_power/2 + random2(ench_power/2);
@@ -5988,12 +5992,15 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
     
     case BEAM_BLIGHT:
     {
+        if (!in_explosion_phase)
+            break;
+        
         bool visible = you.can_see(*mon);
         int HD = mon->get_experience_level();
 
         // HD reduction = ENCH_DRAINED degree
         // don't stack this additively
-        int drain_amount = div_rand_round(ench_power, 30);
+        int drain_amount = div_rand_round(ench_power, 18);
         
         if (drain_amount >= HD)
         {
@@ -6008,7 +6015,7 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         mon_enchant drain_ench = mon->get_ench(ENCH_DRAINED);
         drain_amount -= drain_ench.degree;
         {
-        int dur = 200 + random2(100);
+        int dur = 400 + random2(200);
         dur = max(dur, drain_ench.duration);
         if (drain_amount > 0)
         {
@@ -6021,12 +6028,12 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         
         {
         int relative_power = (ench_power * 10) / (HD + 3);
+        relative_power += random2(relative_power);
         int dur = 0;
         switch(random2(2))
         {
         case 0:
-            dur = dur + random2(dur);
-            dur = div_rand_round(relative_power, 1);
+            dur = relative_power + 10;
             if (visible)
                 simple_monster_message(*mon, mon->has_ench(ENCH_SLOW)
                                          ? " seems to be slow for longer."
@@ -6034,8 +6041,7 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
             mon->add_ench(mon_enchant(ENCH_SLOW, 1, &you, dur));
             break;
         case 1:
-            dur = dur + random2(dur);
-            dur = div_rand_round(relative_power, 3);
+            dur = div_rand_round(relative_power, 3) + 10;
             if (visible)
                 simple_monster_message(*mon, mon->has_ench(ENCH_CONFUSION)
                                          ? " appears more confused."
@@ -6244,10 +6250,18 @@ void bolt::refine_for_explosion()
         }
     }
 
-    if (origin_spell == SPELL_ORB_OF_ELECTRICITY)
+    switch (origin_spell)
     {
-        colour     = LIGHTCYAN;
-        ex_size    = 2;
+    case SPELL_ORB_OF_ELECTRICITY:
+        colour = LIGHTCYAN;
+        ex_size = 2;
+        break;
+    
+    case SPELL_BLIGHT:
+        ex_size = 2;
+        break;
+    
+    default: break;
     }
 
     if (!is_tracer && !seeMsg.empty() && !hearMsg.empty())

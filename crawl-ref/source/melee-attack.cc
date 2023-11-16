@@ -3038,8 +3038,7 @@ void melee_attack::mons_apply_attack_flavour()
 
         if (defender->res_water_drowning() <= 0)
         {
-            special_damage = attacker->get_hit_dice() * 3 / 4
-                            + random2(attacker->get_hit_dice() * 3 / 4);
+            special_damage = base_damage;
             special_damage_flavour = BEAM_WATER;
             kill_type = KILLED_BY_WATER;
 

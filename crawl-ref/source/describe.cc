@@ -3939,13 +3939,15 @@ static void _add_speed_desc(const monster_info &mi, ostringstream &result)
     const mon_energy_usage me = mi.menergy;
     const mon_energy_usage DEFAULT = DEFAULT_ENERGY;
     const bool unusual_energy = !(me == DEFAULT);
+    /*
     const int travel_delay = me.move * 10 / speed;
     const int player_travel_delay = player_movement_speed();
     const int travel_delay_diff = travel_delay - player_travel_delay;
-    if (!unusual_speed && !unusual_energy && !travel_delay_diff)
+    */
+    if (!unusual_speed && !unusual_energy)
         return;
 
-    result << "\nSpeed: " << speed * 10 << "%";
+    result << "\nspeed: " << speed * 10 << "%";
 
     vector<string> unusuals;
 
@@ -3960,16 +3962,9 @@ static void _add_speed_desc(const monster_info &mi, ostringstream &result)
                      speed, unusuals);
 
     if (!unusuals.empty())
-        result << " (" << join_strings(unusuals.begin(), unusuals.end(), ", ") << ")";
+        result << "\n   " << join_strings(unusuals.begin(), unusuals.end(), ", ");
 
-    if (travel_delay_diff)
-    {
-        const bool slow = travel_delay_diff > 0;
-        const string diff_desc = slow ? "slower" : "faster";
-        result << " (normally travels " << diff_desc << " than you)";
-        // It would be interesting to qualify this with 'on land',
-        // if appropriate, but sort of annoying to get player swim speed.
-    }
+    result << "\n\n";
 }
 
 // Describe a monster's (intrinsic) resistances, speed and a few other

@@ -360,15 +360,19 @@ INT:     5
 LIFE:    1
 BOOL:    nogen, notac
 
-NAME:    demon blade "Leech"
-OBJ:     OBJ_WEAPONS/WPN_DEMON_BLADE
+NAME:    kris "Leech"
+OBJ:     OBJ_WEAPONS/WPN_SHORT_SWORD
+INSCRIP: manaleech,
 PLUS:    +8
+BASE_DAM: +6
+BASE_DELAY: +2
 COLOUR:  ETC_DARK
 TILE:    urand_leech
 TILE_EQ: leech
-BRAND:   SPWPN_VAMPIRISM
-AC:      -5
-LIFE:     1
+TYPE:    kris
+BOOL:    skip_ego
+BRAND:   SPWPN_ANTIMAGIC
+MAGIC:   1
 
 NAME:    sapphire dagger
 OBJ:     OBJ_WEAPONS/WPN_DAGGER

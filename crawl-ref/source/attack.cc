@@ -1608,7 +1608,7 @@ bool attack::apply_damage_brand(const char *what)
             || !actor_is_susceptible_to_vampirism(*defender)
             || attacker->stat_hp() == attacker->stat_maxhp()
             || attacker->is_player() && you.duration[DUR_DEATHS_DOOR]
-            || x_chance_in_y(2, 5) && !is_unrandom_artefact(*weapon, UNRAND_LEECH)
+            || x_chance_in_y(2, 5)
             || you.species == SP_DEEP_DWARF)
         {
             break;

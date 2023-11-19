@@ -1383,17 +1383,26 @@ static void _FROSTBITE_melee_effects(item_def* weapon, actor* attacker,
 
 ///////////////////////////////////////////////////
 
-// Vampiric effect triggers on every hit, see attack::apply_damage_brand()
-
 static void _LEECH_equip(item_def *item, bool *show_msgs, bool unmeld)
 {
-    if (you.undead_state() == US_ALIVE && !you_foodless())
-        _equip_mpr(show_msgs, "You feel a powerful hunger.");
-    else if (you.species != SP_VAMPIRE)
-        _equip_mpr(show_msgs, "You feel very empty.");
-    // else let player-equip.cc handle message
+    _equip_mpr(show_msgs, "Your kris thirsts for magical power.");
 }
 
+static void _LEECH_melee_effects(item_def* item, actor* attacker,
+                                        actor* defender, bool mondied, int dam)
+{
+    if (defender->is_monster())
+    {
+        int mana_gain = random2(dam);
+        if (mana_gain)
+        {
+            mprf("You draw magical power from %s.",
+                (attacker == defender ? defender->pronoun(PRONOUN_REFLEXIVE)
+                                    : defender->name(DESC_THE)).c_str());
+            inc_mp(dam);
+        }
+    }
+}
 
 ///////////////////////////////////////////////////
 

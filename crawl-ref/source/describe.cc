@@ -3931,14 +3931,14 @@ static bool _add_energy_desc(int energy, string name, int speed, vector<string> 
 
 static void _add_speed_desc(const monster_info &mi, ostringstream &result)
 {
-    const int speed = mi.base_speed();
+    int speed = mi.base_speed();
     if (!speed) // something weird - let's not touch it
         return;
 
-    const bool unusual_speed = speed != 10;
-    const mon_energy_usage me = mi.menergy;
-    const mon_energy_usage DEFAULT = DEFAULT_ENERGY;
-    const bool unusual_energy = !(me == DEFAULT);
+    bool unusual_speed = speed != 10;
+    mon_energy_usage me = mi.menergy;
+    mon_energy_usage DEFAULT = DEFAULT_ENERGY;
+    bool unusual_energy = !(me == DEFAULT);
     /*
     const int travel_delay = me.move * 10 / speed;
     const int player_travel_delay = player_movement_speed();

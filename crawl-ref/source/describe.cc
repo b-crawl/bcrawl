@@ -3947,22 +3947,34 @@ static void _add_speed_desc(const monster_info &mi, ostringstream &result)
     if (!unusual_speed && !unusual_energy)
         return;
 
-    result << "\nspeed: " << speed * 10 << "%";
+    switch(mi.type)
+    {
+    // see mon-act.cc
+    case MONS_SIXFIRHY:
+        speed /= 3;
+        break;
+    case MONS_JIANGSHI:
+        speed = speed * 8 / 15;
+        break;
+    default: break;
+    }
+
+    result << "Speed: " << speed * 10 << "%";
 
     vector<string> unusuals;
 
-    _add_energy_desc(me.attack, "attack", speed, unusuals);
-    _add_energy_desc(me.missile, "shoot", speed, unusuals);
-    _add_energy_desc(me.move, "travel", speed, unusuals);
+    _add_energy_desc(me.move, "Travel", speed, unusuals);
     if (me.swim != me.move)
-        _add_energy_desc(me.swim, "swim", speed, unusuals);
+        _add_energy_desc(me.swim, "Swimming", speed, unusuals);
+    _add_energy_desc(me.attack, "Melee", speed, unusuals);
+    _add_energy_desc(me.missile, "Firing", speed, unusuals);
     // If we ever add a non-magical monster with fast/slow abilities,
     // we'll need to update this.
-    _add_energy_desc(me.spell, mi.is_priest() ? "invocations" : "magic",
+    _add_energy_desc(me.spell, mi.is_priest() ? "Invocations" : "Magic",
                      speed, unusuals);
 
     if (!unusuals.empty())
-        result << "\n   " << join_strings(unusuals.begin(), unusuals.end(), ", ");
+        result << "\n   " << join_strings(unusuals.begin(), unusuals.end(), "\n   ");
 
     result << "\n\n";
 }
@@ -3980,8 +3992,9 @@ static string _monster_stat_description(const monster_info& mi)
     _describe_monster_ac(mi, result);
     _describe_monster_ev(mi, result);
     _describe_monster_mr(mi, result);
-
     result << "\n";
+
+    _add_speed_desc(mi, result);
 
     resists_t resist = mi.resists();
 
@@ -4124,13 +4137,16 @@ static string _monster_stat_description(const monster_info& mi)
         result << uppercase_first(pronoun) << " is intelligent.\n";
     }
 
-    _add_speed_desc(mi, result);
-
     switch(mi.type)
     {
-    // Cf. monster::action_energy() in monster.cc.
+    // see mon-act.cc
     case MONS_SHADOW:
         result << uppercase_first(pronoun) << " covers ground more quickly when invisible.\n";
+        break;
+    case MONS_SIXFIRHY:
+    case MONS_JIANGSHI:
+        result << uppercase_first(pronoun) << " moves erratically with bursts of speed.\n";
+        break;
     default: break;
     }
 

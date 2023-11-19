@@ -511,7 +511,7 @@ tileidx_t tileidx_feature(const coord_def &gc)
             bool slimy = false;
             for (adjacent_iterator ai(gc); ai; ++ai)
             {
-                if (env.map_knowledge(*ai).feat() == DNGN_SLIMY_WALL)
+                if (env.grid(*ai).feat() == DNGN_SLIMY_WALL)
                 {
                     slimy = true;
                     break;

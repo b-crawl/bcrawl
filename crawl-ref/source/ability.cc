@@ -1385,7 +1385,7 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
     switch (abil.ability)
     {
     case ABIL_WU_JIAN_WALLJUMP:
-        if (player_equip_unrand(UNRAND_AUTUMN_KATANA))
+        if (player_equip_unrand(UNRAND_AUTUMN_KATANA) && you.religion != GOD_WU_JIAN)
             goto post_god_abil_check;
         break;
     default: break;
@@ -3565,7 +3565,7 @@ vector<talent> your_talents(bool check_confused, bool include_unusable)
         _add_talent(talents, ABIL_EVOKE_THUNDER, check_confused);
     }
 
-    if (player_equip_unrand(UNRAND_AUTUMN_KATANA))
+    if (player_equip_unrand(UNRAND_AUTUMN_KATANA) && you.religion != GOD_WU_JIAN)
         _add_talent(talents, ABIL_WU_JIAN_WALLJUMP, check_confused);
 
     if (you.evokable_berserk() && !you.get_mutation_level(MUT_NO_ARTIFICE))

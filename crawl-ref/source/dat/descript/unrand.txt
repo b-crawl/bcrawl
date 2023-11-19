@@ -528,8 +528,8 @@ the amulet vanished from the pages of history.
 %%%%
 autumn katana
 
-An exquisitely crafted sword, enchanted to provide both mental and physical
-strength to the wielder.
+An exquisitely crafted sword that grants the wielder the ability to perform
+acrobatic attacks.
 %%%%
 shillelagh "Devastator"
 

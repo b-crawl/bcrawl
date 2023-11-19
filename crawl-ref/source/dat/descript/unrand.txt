@@ -528,8 +528,9 @@ the amulet vanished from the pages of history.
 %%%%
 autumn katana
 
-An exquisitely crafted sword that grants the wielder the ability to perform
-acrobatic attacks.
+An exquisitely crafted sword containing the spirit of a disgraced member of
+the Wu Jian Council. It thirsts for blood, and can grant the wielder the ability
+to perform acrobatic attacks.
 %%%%
 shillelagh "Devastator"
 

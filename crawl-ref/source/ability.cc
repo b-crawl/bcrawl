@@ -1385,17 +1385,19 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
     switch (abil.ability)
     {
     case ABIL_WU_JIAN_WALLJUMP:
-        if (player_equip_unrand(UNRAND_AUTUMN_KATANA)):
-            goto post_god_abil_check:
+        if (player_equip_unrand(UNRAND_AUTUMN_KATANA))
+            goto post_god_abil_check;
         break;
     default: break;
     }
+    {
     const god_power* god_power = god_power_from_ability(abil.ability);
     if (god_power && !god_power_usable(*god_power))
     {
         if (!quiet)
             canned_msg(MSG_GOD_DECLINES);
         return false;
+    }
     }
     post_god_abil_check:
 

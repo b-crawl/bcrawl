@@ -370,7 +370,7 @@ COLOUR:  ETC_DARK
 TILE:    urand_leech
 TILE_EQ: leech
 TYPE:    kris
-BOOL:    skip_ego
+BOOL:    skip_ego, drain
 BRAND:   SPWPN_ANTIMAGIC
 MAGIC:   1
 

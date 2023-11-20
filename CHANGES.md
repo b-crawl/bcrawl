@@ -127,6 +127,7 @@
   - v1.36.5: Missile attacks are automatically stopped at the targeted square when they could continue to hit a friendly target.
   - v1.36.5: GDR is shown with resistances.
   - v1.40.1: Vampires will drain blood from corpses while autoexploring if their auto_butcher setting is higher than their hunger state but lower than the maximum setting.
+  - v1.40.3: Monster speeds are described more precisely.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -638,6 +639,8 @@
   - v1.36.2: The Fencer's Gloves have a higher riposte chance. (1/3 -> 2/3)
   - v1.38.1: Hendrick's Axe no longer has a chance to frenzy on hit. Instead, it can be evoked for 1 mana to make noise and cast a weak Discord with power based on Axes skill. It keeps the chance to blind on hit.
   - v1.40.1: Eos can corona or blind monsters it hits.
+  - v1.40.3: The Autumn Katana is reworked: it's now a vampiric long blade with 13 base damage and 0.6 min delay at 14 skill, and grants the Wu Jian walljump ability to players that don't worship the Wu Jian Council.
+  - v1.40.3: Leech is reworked: it's now an antimagic short blade with 12 base damage and 0.5 min delay at 16 skill, gives MR+, and restores large amounts of mana when it deals damage.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -776,6 +779,7 @@
   - v1.40: Emperor scorpions have rF++ and rCorr.
   - v1.40: Naga mages have more HP and a reworked spell set: Mystic Blast, Spectral Cloud, Dimension Anchor, and Haste.
   - v1.40: Fire elementals are immune to Fire Storm.
+  - v1.40.3: Friendly simulacra aren't angered by player attacks.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

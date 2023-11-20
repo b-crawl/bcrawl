@@ -3795,40 +3795,6 @@ static string _monster_spells_description(const monster_info& mi)
     return description.to_colour_string();
 }
 
-static const char *_speed_description(int speed)
-{
-    // These thresholds correspond to the player mutations for fast and slow.
-    ASSERT(speed != 10);
-    if (speed < 7)
-        return "extremely slowly";
-    else if (speed < 8)
-        return "very slowly";
-    else if (speed < 10)
-        return "slowly";
-    else if (speed > 15)
-        return "extremely quickly";
-    else if (speed > 13)
-        return "very quickly";
-    else if (speed > 10)
-        return "quickly";
-
-    return "buggily";
-}
-
-static void _add_energy_to_string(int speed, int energy, string what,
-                                  vector<string> &fast, vector<string> &slow)
-{
-    if (energy == 10)
-        return;
-
-    const int act_speed = (speed * 10) / energy;
-    if (act_speed > 10)
-        fast.push_back(what + " " + _speed_description(act_speed));
-    if (act_speed < 10)
-        slow.push_back(what + " " + _speed_description(act_speed));
-}
-
-
 /**
  * Print a bar of +s and .s representing a given stat to a provided stream.
  *
@@ -3952,6 +3918,67 @@ const char* get_size_adj(const size_type size, bool ignore_medium)
     return size_adj[size];
 }
 
+static bool _add_energy_desc(int energy, string name, int speed, vector<string> &out)
+{
+    if (energy == 10)
+        return false;
+
+    ASSERT(energy);
+    const int perc = speed * 100 / energy;
+    out.push_back(make_stringf("%s: %d%%", name.c_str(), perc));
+    return true;
+}
+
+static void _add_speed_desc(const monster_info &mi, ostringstream &result)
+{
+    int speed = mi.base_speed();
+    if (!speed) // something weird - let's not touch it
+        return;
+
+    bool unusual_speed = speed != 10;
+    mon_energy_usage me = mi.menergy;
+    mon_energy_usage DEFAULT = DEFAULT_ENERGY;
+    bool unusual_energy = !(me == DEFAULT);
+    /*
+    const int travel_delay = me.move * 10 / speed;
+    const int player_travel_delay = player_movement_speed();
+    const int travel_delay_diff = travel_delay - player_travel_delay;
+    */
+    if (!unusual_speed && !unusual_energy)
+        return;
+
+    switch(mi.type)
+    {
+    // see mon-act.cc
+    case MONS_SIXFIRHY:
+        speed /= 3;
+        break;
+    case MONS_JIANGSHI:
+        speed = speed * 8 / 15;
+        break;
+    default: break;
+    }
+
+    result << "Speed: " << speed * 10 << "%";
+
+    vector<string> unusuals;
+
+    _add_energy_desc(me.move, "Travel", speed, unusuals);
+    if (me.swim != me.move)
+        _add_energy_desc(me.swim, "Swimming", speed, unusuals);
+    _add_energy_desc(me.attack, "Melee", speed, unusuals);
+    _add_energy_desc(me.missile, "Firing", speed, unusuals);
+    // If we ever add a non-magical monster with fast/slow abilities,
+    // we'll need to update this.
+    _add_energy_desc(me.spell, mi.is_priest() ? "Invocations" : "Magic",
+                     speed, unusuals);
+
+    if (!unusuals.empty())
+        result << "\n   " << join_strings(unusuals.begin(), unusuals.end(), "\n   ");
+
+    result << "\n\n";
+}
+
 // Describe a monster's (intrinsic) resistances, speed and a few other
 // attributes.
 static string _monster_stat_description(const monster_info& mi)
@@ -3965,8 +3992,9 @@ static string _monster_stat_description(const monster_info& mi)
     _describe_monster_ac(mi, result);
     _describe_monster_ev(mi, result);
     _describe_monster_mr(mi, result);
-
     result << "\n";
+
+    _add_speed_desc(mi, result);
 
     resists_t resist = mi.resists();
 
@@ -4109,82 +4137,17 @@ static string _monster_stat_description(const monster_info& mi)
         result << uppercase_first(pronoun) << " is intelligent.\n";
     }
 
-    // Unusual monster speed.
-    const int speed = mi.base_speed();
-    bool did_speed = false;
-    if (speed != 10 && speed != 0)
+    switch(mi.type)
     {
-        did_speed = true;
-        result << uppercase_first(pronoun) << " is " << mi.speed_description();
-    }
-    const mon_energy_usage def = DEFAULT_ENERGY;
-    if (!(mi.menergy == def))
-    {
-        const mon_energy_usage me = mi.menergy;
-        vector<string> fast, slow;
-        if (!did_speed)
-            result << uppercase_first(pronoun) << " ";
-        _add_energy_to_string(speed, me.move, "covers ground", fast, slow);
-        // since MOVE_ENERGY also sets me.swim
-        if (me.swim != me.move)
-            _add_energy_to_string(speed, me.swim, "swims", fast, slow);
-        _add_energy_to_string(speed, me.attack, "attacks", fast, slow);
-        if (mons_class_itemuse(mi.type) >= MONUSE_STARTING_EQUIPMENT)
-            _add_energy_to_string(speed, me.missile, "shoots", fast, slow);
-        _add_energy_to_string(
-            speed, me.spell,
-            mi.is_actual_spellcaster() ? "casts spells" :
-            mi.is_priest()             ? "uses invocations"
-                                       : "uses natural abilities", fast, slow);
-        _add_energy_to_string(speed, me.special, "uses special abilities",
-                              fast, slow);
-        if (mons_class_itemuse(mi.type) >= MONUSE_STARTING_EQUIPMENT)
-            _add_energy_to_string(speed, me.item, "uses items", fast, slow);
-
-        if (speed >= 10)
-        {
-            if (did_speed && fast.size() == 1)
-                result << " and " << fast[0];
-            else if (!fast.empty())
-            {
-                if (did_speed)
-                    result << ", ";
-                result << comma_separated_line(fast.begin(), fast.end());
-            }
-            if (!slow.empty())
-            {
-                if (did_speed || !fast.empty())
-                    result << ", but ";
-                result << comma_separated_line(slow.begin(), slow.end());
-            }
-        }
-        else if (speed < 10)
-        {
-            if (did_speed && slow.size() == 1)
-                result << " and " << slow[0];
-            else if (!slow.empty())
-            {
-                if (did_speed)
-                    result << ", ";
-                result << comma_separated_line(slow.begin(), slow.end());
-            }
-            if (!fast.empty())
-            {
-                if (did_speed || !slow.empty())
-                    result << ", but ";
-                result << comma_separated_line(fast.begin(), fast.end());
-            }
-        }
-        result << ".\n";
-    }
-    else if (did_speed)
-        result << ".\n";
-
-    if (mi.type == MONS_SHADOW)
-    {
-        // Cf. monster::action_energy() in monster.cc.
-        result << uppercase_first(pronoun) << " covers ground more"
-               << " quickly when invisible.\n";
+    // see mon-act.cc
+    case MONS_SHADOW:
+        result << uppercase_first(pronoun) << " covers ground more quickly when invisible.\n";
+        break;
+    case MONS_SIXFIRHY:
+    case MONS_JIANGSHI:
+        result << uppercase_first(pronoun) << " moves erratically with bursts of speed.\n";
+        break;
+    default: break;
     }
 
     if (mi.airborne())

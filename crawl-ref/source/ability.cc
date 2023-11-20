@@ -1381,6 +1381,16 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
         }
     }
 
+    // hacky special cases for god abilities from non-god sources
+    switch (abil.ability)
+    {
+    case ABIL_WU_JIAN_WALLJUMP:
+        if (player_equip_unrand(UNRAND_AUTUMN_KATANA) && you.religion != GOD_WU_JIAN)
+            goto post_god_abil_check;
+        break;
+    default: break;
+    }
+    {
     const god_power* god_power = god_power_from_ability(abil.ability);
     if (god_power && !god_power_usable(*god_power))
     {
@@ -1388,6 +1398,8 @@ static bool _check_ability_possible(const ability_def& abil, bool quiet = false)
             canned_msg(MSG_GOD_DECLINES);
         return false;
     }
+    }
+    post_god_abil_check:
 
     if (testbits(abil.flags, abflag::card) && !deck_cards(ability_deck(abil.ability)))
     {
@@ -3552,6 +3564,9 @@ vector<talent> your_talents(bool check_confused, bool include_unusable)
     {
         _add_talent(talents, ABIL_EVOKE_THUNDER, check_confused);
     }
+
+    if (player_equip_unrand(UNRAND_AUTUMN_KATANA) && you.religion != GOD_WU_JIAN)
+        _add_talent(talents, ABIL_WU_JIAN_WALLJUMP, check_confused);
 
     if (you.evokable_berserk() && !you.get_mutation_level(MUT_NO_ARTIFICE))
         _add_talent(talents, ABIL_EVOKE_BERSERK, check_confused);

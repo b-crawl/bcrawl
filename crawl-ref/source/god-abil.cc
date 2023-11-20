@@ -14,6 +14,7 @@
 
 #include "act-iter.h"
 #include "areas.h"
+#include "art-enum.h"
 #include "attitude-change.h"
 #include "bloodspatter.h"
 #include "branch.h"
@@ -7165,7 +7166,9 @@ void hepliaklqana_choose_identity()
 
 bool wu_jian_can_wall_jump_in_principle(const coord_def& target)
 {
-    if (!have_passive(passive_t::wu_jian_wall_jump)
+    bool have_abil = have_passive(passive_t::wu_jian_wall_jump)
+            || (player_equip_unrand(UNRAND_AUTUMN_KATANA) && you.religion != GOD_WU_JIAN);
+    if (!have_abil
         || !feat_can_wall_jump_against(grd(target))
         || you.is_stationary()
         || you.digging)

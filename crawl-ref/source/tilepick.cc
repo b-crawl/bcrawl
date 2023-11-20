@@ -502,14 +502,16 @@ tileidx_t tileidx_feature(const coord_def &gc)
     {
     case DNGN_FLOOR:
         // branches that can have slime walls (premature optimization?)
-        if (player_in_branch(BRANCH_SLIME)
-            || player_in_branch(BRANCH_TEMPLE)
-            || player_in_branch(BRANCH_LAIR))
+        switch (you.where_are_you)
+        {
+        case BRANCH_SLIME:
+        case BRANCH_TEMPLE:
+        case BRANCH_ORC:
         {
             bool slimy = false;
             for (adjacent_iterator ai(gc); ai; ++ai)
             {
-                if (env.map_knowledge(*ai).feat() == DNGN_SLIMY_WALL)
+                if (env.grid(*ai) == DNGN_SLIMY_WALL)
                 {
                     slimy = true;
                     break;
@@ -517,6 +519,9 @@ tileidx_t tileidx_feature(const coord_def &gc)
             }
             if (slimy)
                 return TILE_FLOOR_SLIME_ACIDIC;
+        }
+            break;
+        default: break;
         }
         // deliberate fall-through
     case DNGN_ROCK_WALL:

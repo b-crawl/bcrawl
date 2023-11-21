@@ -1397,13 +1397,30 @@ static void _LEECH_melee_effects(item_def* item, actor* attacker,
         int mana_gain = min(dam, mons->max_hit_points);
         mana_gain = random2(mana_gain);
         
-        if (mana_gain)
+        if (!mana_gain)
+            return;
+        
+        // bonus dmg to summons instead of mana gain
+        if (mons->has_ench(ENCH_ABJ)
+                || mons->has_ench(ENCH_FAKE_ABJURATION)
+                || mons->has_ench(ENCH_SHORT_LIVED)
+                || mons->type == MONS_FULMINANT_PRISM)
         {
-            mprf("You draw magical power from %s.",
-                (attacker == defender ? defender->pronoun(PRONOUN_REFLEXIVE)
-                                    : defender->name(DESC_THE)).c_str());
-            inc_mp(dam);
+            if (!mondied)
+            {
+                mprf("%s %s%s",
+                    defender->name(DESC_THE).c_str(),
+                    defender->conj_verb("shudders").c_str(),
+                    attack_strength_punctuation(mana_gain).c_str());
+                defender->hurt(attacker, mana_gain);
+            }
+            return;
         }
+        
+        mprf("You draw magical power from %s.",
+            (attacker == defender ? defender->pronoun(PRONOUN_REFLEXIVE)
+                                : defender->name(DESC_THE)).c_str());
+        inc_mp(dam);
     }
 }
 

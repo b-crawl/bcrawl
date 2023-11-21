@@ -2563,7 +2563,7 @@ KMONS:   L = fire dragon
 MONS:    hell knight / rakshasa w:5 / spriggan defender zombie w:5, fire giant
 MONS:    vampire knight, deep troll earth mage, tengu reaver
 KMONS:   6 : juggernaut w:15 / iron dragon
-KMONS:   7 : ancient lich / dread lich
+KMONS:   7 : ancient lich / ancient lich
 NSUBST:  V> = 1:} / 1 = ) >:6 / 1 = ] >:6
 :   else
 TAGS:    patrolling
@@ -2581,7 +2581,7 @@ MONS:    red draconian / red draconian monk w:5
 MONS:    red draconian knight, red draconian annihilator
 MONS:    red draconian scorcher, red draconian shifter
 KMONS:   6 : iron dragon / golden dragon
-KMONS:   7 : dread lich / orb of fire
+KMONS:   7 : ancient lich / orb of fire
 KMONS:   L = moth of wrath
 NSUBST:  V> = 1:} / 1 = ):6 >:1 / 1 = ]:6 >:1
 SUBST:   " = 1
@@ -2866,7 +2866,7 @@ SUBST:    })] = **|, ! = +, ? = c, ` = W:40 ., . = .:60 W
 : elseif you.branch() == "Depths" then
 MONS:    jiangshi / phantasmal warrior / spriggan defender zombie
 MONS:    spark wasp zombie, vampire knight, vampire mage
-MONS:    flayed ghost, ancient lich / dread lich
+MONS:    flayed ghost, ancient lich / ancient lich
 MONS:    spriggan berserker
 KMONS:   8 = spriggan defender
 KMONS:   9 = sphinx

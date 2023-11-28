@@ -387,7 +387,7 @@ public:
 
     virtual bool incapacitated() const
     {
-        return cannot_move()
+        return cannot_act()
             || asleep()
             || confused()
             || caught();

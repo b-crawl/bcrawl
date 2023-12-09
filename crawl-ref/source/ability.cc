@@ -440,7 +440,7 @@ static const ability_def Ability_List[] =
       0, 0, 200, 2, {fail_basis::invo, piety_breakpoint(2), 0, 1}, abflag::none },
     { ABIL_TROG_BROTHERS_IN_ARMS, "Brothers in Arms",
       0, 0, 0, generic_cost::range(5, 6),
-      {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::exhaustion },
+      {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::exhaustion | abflag::berserk_ok },
 
     // Elyvilon
     { ABIL_ELYVILON_LIFESAVING, "Divine Protection",

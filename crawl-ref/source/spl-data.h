@@ -567,7 +567,7 @@ static const struct spell_desc spelldata[] =
     3,
     100,
     6, 6,
-    4, 10,
+    4, 14,
     TILEG_ISKENDERUNS_MYSTIC_BLAST,
 },
 

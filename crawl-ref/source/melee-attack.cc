@@ -2328,6 +2328,8 @@ bool melee_attack::player_good_stab()
     return wpn_skill == SK_SHORT_BLADES
            || you.get_mutation_level(MUT_PAWS)
            || player_equip_unrand(UNRAND_BOOTS_ASSASSIN)
+           || you.form == transformation::spider
+           || you.form == transformation::tree
               && (!weapon || is_melee_weapon(*weapon));
 }
 

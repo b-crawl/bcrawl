@@ -350,6 +350,7 @@
   - v1.40: The Invisibility spell has less duration scaling with power. It's now equivalent to a potion of invisibility at 80 spell power instead of 40.
   - v1.40: Scorpion Form gives rF++ and rCorr.
   - v1.40: Spellforged servitors have rF+ rC+ instead of rF++ rC++.
+  - v1.??: Spiderform and Treeform can stab better, Treeform is stealthier.
 
 #### Removed Spells
   - Summon Guardian Golem

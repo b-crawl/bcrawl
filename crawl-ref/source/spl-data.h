@@ -1222,7 +1222,7 @@ static const struct spell_desc spelldata[] =
     4,
     0,
     -1, -1,
-    6, 0,
+    0, 0,
     TILEG_TREE_FORM,
 },
 

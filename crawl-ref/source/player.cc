@@ -3449,7 +3449,7 @@ int player_stealth()
         stealth /= umbra_div;
     }
 
-    if (you.form == transformation::shadow)
+    if (you.form == transformation::shadow || you.form == transformation::tree)
         stealth *= 2;
 
     // If you're surrounded by a storm, you're inherently pretty conspicuous.

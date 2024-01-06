@@ -1331,6 +1331,7 @@ Spider Form spell
 
 Transforms the caster into a venomous, spider-like creature. The caster becomes
 highly evasive and gains a poisonous bite, but gains vulnerability to poison.
+The caster also receives stabbing bonuses as if wielding a short blade.
 
 While transformed, any equipped weapons and armour are melded, and casting
 spells becomes slightly more difficult.

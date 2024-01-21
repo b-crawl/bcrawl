@@ -131,9 +131,8 @@ void start_recall(recall_t type)
             you.recall_list.push_back(entry.first);
             if (limited_recall)
             {
-                monster* mons = monster_by_mid(entry.first);
-                recalled_hd += mons->get_hit_dice();
-                if (recalled_hd >= you.experience_level)
+                recalled_hd += entry.second - random2(6);
+                if (recalled_hd > you.experience_level)
                     break;
             }
         }

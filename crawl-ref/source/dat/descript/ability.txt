@@ -247,8 +247,8 @@ cannot leave the level they were created on.
 %%%%
 Recall Undead Slaves ability
 
-Recalls your undead followers from anywhere in the dungeon to your immediate
-surroundings.
+Recalls some of your undead followers from anywhere in the dungeon to your
+immediate surroundings.
 %%%%
 Injury Mirror ability
 
@@ -473,8 +473,8 @@ Smiting ability
 %%%%
 Recall Orcish Followers ability
 
-Recalls your orcish followers from anywhere in the dungeon to your immediate
-surroundings.
+Recalls some of your orcish followers from anywhere in the dungeon to your
+immediate surroundings.
 %%%%
 Stop Recall ability
 

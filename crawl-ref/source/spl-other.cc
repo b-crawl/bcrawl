@@ -114,6 +114,8 @@ void start_recall(recall_t type)
 
     if (type != RECALL_SPELL && branch_allows_followers(you.where_are_you))
         populate_offlevel_recall_list(rlist);
+    
+    bool limited_recall = (type == RECALL_YRED) || (type == RECALL_BEOGH);
 
     if (!rlist.empty())
     {
@@ -123,8 +125,18 @@ void start_recall(recall_t type)
         sort(rlist.begin(), rlist.end(), greater_second<mid_hd>());
 
         you.recall_list.clear();
+        int recalled_hd = 0;
         for (mid_hd &entry : rlist)
+        {
             you.recall_list.push_back(entry.first);
+            if (limited_recall)
+            {
+                monster* mons = monster_by_mid(entry.first);
+                recalled_hd += mons->get_hit_dice();
+                if (recalled_hd >= you.experience_level)
+                    break;
+            }
+        }
 
         you.attribute[ATTR_NEXT_RECALL_INDEX] = 1;
         you.attribute[ATTR_NEXT_RECALL_TIME] = 0;

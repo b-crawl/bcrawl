@@ -583,9 +583,9 @@ void slimify_monster(monster* mon)
 
     if (x < 3)
         target = MONS_OOZE;
-    else if (x >= 3 && x < 7)
+    else if (x < 8)
         target = MONS_JELLY;
-    else if (x >= 7 && x <= 13)
+    else if (x <= 13)
         target = MONS_SLIME_CREATURE;
     else
     {

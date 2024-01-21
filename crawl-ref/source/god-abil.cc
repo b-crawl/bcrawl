@@ -1511,7 +1511,7 @@ void trog_remove_trogs_hand()
  *
  * @param mon the orc in question.
  * @returns whether you have given the monster a Beogh gift before now.
- */
+
 bool given_gift(const monster* mon)
 {
     return mon->props.exists(BEOGH_RANGE_WPN_GIFT_KEY)
@@ -1519,6 +1519,8 @@ bool given_gift(const monster* mon)
             || mon->props.exists(BEOGH_ARM_GIFT_KEY)
             || mon->props.exists(BEOGH_SH_GIFT_KEY);
 }
+ */
+
 
 /**
  * Checks whether the target monster is a valid target for beogh item-gifts.
@@ -1547,16 +1549,6 @@ bool beogh_can_gift_items_to(const monster* mons, bool quiet)
     {
         if (!quiet)
             mpr("That orc has not proved itself worthy of your gift.");
-        return false;
-    }
-
-    if (given_gift(mons))
-    {
-        if (!quiet)
-        {
-            mprf("%s has already been given a gift.",
-                 mons->name(DESC_THE, false).c_str());
-        }
         return false;
     }
 

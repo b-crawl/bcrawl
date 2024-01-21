@@ -1330,8 +1330,8 @@ destructive magic its creator is most skilled with, though the strongest of magi
 Spider Form spell
 
 Transforms the caster into a venomous, spider-like creature. The caster becomes
-highly evasive and gains a poisonous bite, but gains vulnerability to poison.
-The caster also receives stabbing bonuses as if wielding a short blade.
+highly evasive, gains a poisonous bite, and can pounce on unaware enemies for
+extra damage, but becomes more vulnerable to poison.
 
 While transformed, any equipped weapons and armour are melded, and casting
 spells becomes slightly more difficult.

@@ -6812,6 +6812,7 @@ spret uskayaw_grand_finale(bool fail)
     set_mp(you.max_magic_points);  // refill mana
     set_hp(you.hp_max);  // refill HP
     you.props[USKAYAW_AUDIENCE_TIMER] = 0;
+    you.increase_duration(DUR_EXHAUSTED, 19 + random2(9));
 
     return spret::success;
 }

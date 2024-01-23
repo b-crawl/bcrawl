@@ -115,34 +115,45 @@ void start_recall(recall_t type)
     if (type != RECALL_SPELL && branch_allows_followers(you.where_are_you))
         populate_offlevel_recall_list(rlist);
     
-    bool limited_recall = (type == RECALL_YRED) || (type == RECALL_BEOGH);
-
-    if (!rlist.empty())
+    if (rlist.empty())
     {
-        // Sort the recall list roughly
+        mpr("Nothing appears to have answered your call.");
+        return;
+    }
+    
+    bool limited_recall = false;
+    switch (type)
+    {
+    case RECALL_YRED:
+    case RECALL_BEOGH:
+        limited_recall = true;
+        shuffle_array(rlist);
+        break;
+    
+    default:
+        // Sort the recall list roughly by HD
         for (mid_hd &entry : rlist)
             entry.second += random2(10);
         sort(rlist.begin(), rlist.end(), greater_second<mid_hd>());
-
-        you.recall_list.clear();
-        int recalled_hd = 0;
-        for (mid_hd &entry : rlist)
-        {
-            you.recall_list.push_back(entry.first);
-            if (limited_recall)
-            {
-                recalled_hd += entry.second - random2(6);
-                if (recalled_hd > you.experience_level)
-                    break;
-            }
-        }
-
-        you.attribute[ATTR_NEXT_RECALL_INDEX] = 1;
-        you.attribute[ATTR_NEXT_RECALL_TIME] = 0;
-        mpr("You begin recalling your allies.");
+        break;
     }
-    else
-        mpr("Nothing appears to have answered your call.");
+
+    you.recall_list.clear();
+    int recalled_hd = 0;
+    for (mid_hd &entry : rlist)
+    {
+        you.recall_list.push_back(entry.first);
+        if (limited_recall)
+        {
+            recalled_hd += entry.second + random_range(-1, 1);
+            if (recalled_hd > you.experience_level)
+                break;
+        }
+    }
+
+    you.attribute[ATTR_NEXT_RECALL_INDEX] = 1;
+    you.attribute[ATTR_NEXT_RECALL_TIME] = 0;
+    mpr("You begin recalling your allies.");
 }
 
 // Remind a recalled ally (or one skipped due to proximity) not to run

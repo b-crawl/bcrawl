@@ -1131,12 +1131,11 @@ void behaviour_event(monster* mon, mon_event_type event, const actor *src,
         if (src == &you && mon->angered_by_attacks())
         {
             mon->attitude = ATT_HOSTILE;
+            if (mons_is_elven_twin(mon))
+                elven_twins_unpacify(mon);
+
             breakCharm    = true;
         }
-
-        // XXX: Somewhat hacky, this being here.
-        if (mons_is_elven_twin(mon))
-            elven_twins_unpacify(mon);
 
         // Now set target so that monster can whack back (once) at an
         // invisible foe.

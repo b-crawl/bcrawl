@@ -2669,7 +2669,7 @@ TILE:    HIJKLc : dngn_stone_dark / dngn_stone_wall
 # Swamp and Zot's versions are more decrepit and crumbling, heavily reducing
 # the cleaner splits and placement alongside either flooding or breaking doors.
 KMONS:   1 = swamp worm
-KMONS:   2 = bloated husk
+KMONS:   2 = alligator
 KMONS:   3 = bog body
 KMONS:   4 = ghoul
 KMONS:   5 = ghost crab
@@ -2850,10 +2850,10 @@ NSUBST:   D = 2:4 / 1:123, E = 1:3 / 1:4 / 1:9
 NSUBST:   F = 1:5 / 1:8 / 1:9, G = 1:234 / 1:5 / 1:9, HI = *:.
 SUBST:    })] = *%, ! = +, ? = c
 : elseif you.branch() == "Swamp" then
-MONS:     vampire mosquito, bog body, bloated husk
+MONS:     vampire mosquito, bog body, alligator
 MONS:     will-o-the-wisp, ghost crab, ghoul
 MONS:     spriggan rider / swamp worm / goliath frog
-KMONS:    8 = hydra / swamp dragon / bunyip w:2
+KMONS:    8 = hydra / swamp dragon / very ugly thing w:2
 KMONS:    9 = spriggan druid / spriggan berserker w:2
 KMONS:    0 = thorn hunter / shambling mangrove
 KFEAT:    Pp = W

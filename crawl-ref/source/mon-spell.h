@@ -1596,7 +1596,6 @@ static const mon_spellbook mspell_list[] =
       {
        { SPELL_BOLT_OF_DRAINING, 18, MON_SPELL_PRIEST },
        { SPELL_DISPEL_UNDEAD, 18, MON_SPELL_PRIEST },
-       { SPELL_BLACK_MARK, 28, MON_SPELL_PRIEST },
       }
     },
 

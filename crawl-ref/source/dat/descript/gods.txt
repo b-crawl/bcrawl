@@ -44,11 +44,10 @@ followers can convert to the Shining One or Zin while keeping some piety.
 Fedhas
 
 The god of plant and fungal life, Fedhas Madash grants a number of
-abilities that promote the growth of plants and fungi. These abilities may
-incidentally prove useful to adventurers. Fedhas also forbids followers from
-harming any species under Fedhas' protection, and from using any necromantic
-effects that interfere with corpses.
-Fedhas appreciates returning living and undead enemies to the soil.
+abilities that promote the growth of plants and fungi. Fedhas also prevents
+followers from harming any species under Fedhas' protection, and forbids them
+from using any necromantic effects that interfere with corpses. Fedhas
+appreciates returning living and undead enemies to the soil.
 %%%%
 Gozag
 

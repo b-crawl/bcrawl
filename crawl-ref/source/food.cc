@@ -404,6 +404,16 @@ static hunger_state_t _max_chunk_state(bool like_chunks = player_likes_chunks())
     return like_chunks ? HS_VERY_FULL : HS_HUNGRY;
 }
 
+bool autoeat_enabled()
+{
+    return Options.auto_eat_chunks
+           && Options.autopickup_on > 0
+           && (player_likes_chunks(true)
+               || !you.gourmand()
+               || you.duration[DUR_GOURMAND] >= GOURMAND_MAX / 4
+               || you.hunger_state < HS_SATIATED);
+}
+
 static bool _auto_eat_chunks()
 {
     bool eating_heals = false;

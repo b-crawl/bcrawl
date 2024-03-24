@@ -480,6 +480,8 @@ int prompt_eat_chunks(bool only_auto, bool allow_rations)
                 continue;
             if (!allow_rations && item.sub_type != FOOD_CHUNK)
                 continue;
+            if (item.sub_type == FOOD_RATION && item.quantity <= 1)
+                continue;
 
             // Don't prompt for bad food types.
             if (is_bad_food(item))

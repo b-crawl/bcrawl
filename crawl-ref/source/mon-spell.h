@@ -1574,7 +1574,7 @@ static const mon_spellbook mspell_list[] =
     {  MST_DEMONSPAWN_BLOOD_SAINT,
       {
        { SPELL_LEGENDARY_DESTRUCTION, 40, MON_SPELL_PRIEST },
-       { SPELL_CALL_OF_CHAOS, 20, MON_SPELL_PRIEST },
+       { SPELL_CALL_OF_CHAOS, 20, MON_SPELL_MAGICAL },
       }
     },
 

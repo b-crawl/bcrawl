@@ -37,6 +37,7 @@
 #include "religion.h"
 #include "shout.h"
 #include "spl-damage.h"
+#include "spl-summoning.h" // 
 #include "state.h"
 #include "stepdown.h"
 #include "stringutil.h"
@@ -3068,6 +3069,11 @@ void melee_attack::mons_apply_attack_flavour()
             you.increase_duration(DUR_WENDIGO, random_range(20, 40), 40);
             mesmerise_hungry_players(0, true);
         }
+        break;
+    
+    // properties are defined per-monster in spl-summoning
+    case AF_SUMMON:
+        melee_summoning(*attacker, *defender);
         break;
     }
 }

@@ -1029,6 +1029,9 @@ static monster* _place_monster_aux(const mgen_data &mg, const monster *leader,
         mon->god = GOD_QAZLAL;
         break;
     // Classed demonspawn.
+    case MONS_WARMONGER:
+        mon->god = GOD_YREDELEMNUL;
+        break;
     case MONS_BLOOD_SAINT:
         mon->god = GOD_MAKHLEB;
         break;

@@ -1080,6 +1080,9 @@ int main(int argc, char* argv[])
                 case AF_WENDIGO:
                     monsterattacks += colour(LIGHTMAGENTA, "(mesmerization)");
                     break;
+                case AF_SUMMON:
+                    monsterattacks += colour(CYAN, "(summon)");
+                    break;
                 case AF_CRUSH:
                 case AF_PLAIN:
                 case AF_REACH:

@@ -3410,14 +3410,14 @@ static string _describe_demonspawn_role(monster_type type)
     switch (type)
     {
     case MONS_BLOOD_SAINT:
-        return "It weaves powerful and unpredictable spells of devastation and enhancement.";
+        return "It can call down Makhleb's destructive might upon its foes, and weave spells of unpredictable enhancement.";
     case MONS_WARMONGER:
-        return "It is devoted to combat.";
+        return "It is devoted to combat, and its strikes can call spectral warriors enslaved by Yredelemnul.";
     case MONS_CORRUPTER:
         return "It corrupts space around itself, and can twist even the very "
                "flesh of its opponents.";
     case MONS_BLACK_SUN:
-        return "It shines with an unholy radiance, and effortlessly wields powers granted by deities of death.";
+        return "It shines with an unholy radiance, and effortlessly wields powers granted by Kikubaaqudgha.";
     default:
         return "";
     }
@@ -3580,6 +3580,7 @@ static string _flavour_base_desc(attack_flavour flavour)
         { AF_REACH_TONGUE,      "deal extra acid damage" },
         { AF_WEAKNESS,          "cause weakness" },
         { AF_WENDIGO,           "cause mesmerization" },
+        { AF_SUMMON,            "summon allies" },
         { AF_KITE,              "" },
         { AF_SWOOP,             "" },
         { AF_PLAIN,             "" },

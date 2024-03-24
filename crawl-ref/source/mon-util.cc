@@ -2123,13 +2123,20 @@ string mon_attack_name(attack_type attack, bool with_object)
  */
 bool flavour_triggers_damageless(attack_flavour flavour)
 {
-    return flavour == AF_CRUSH
-        || flavour == AF_ENGULF
-        || flavour == AF_PURE_FIRE
-        || flavour == AF_SHADOWSTAB
-        || flavour == AF_DROWN
-        || flavour == AF_CORRODE
-        || flavour == AF_HUNGER;
+    switch (flavour)
+    {
+    case AF_CRUSH:
+    case AF_ENGULF:
+    case AF_PURE_FIRE:
+    case AF_SHADOWSTAB:
+    case AF_DROWN:
+    case AF_CORRODE:
+    case AF_HUNGER:
+    case AF_SUMMON:
+        return true;
+    
+    default: return false;
+    }
 }
 
 /**

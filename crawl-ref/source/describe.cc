@@ -3410,16 +3410,14 @@ static string _describe_demonspawn_role(monster_type type)
     switch (type)
     {
     case MONS_BLOOD_SAINT:
-        return "It weaves powerful and unpredictable spells of devastation.";
+        return "It weaves powerful and unpredictable spells of devastation and enhancement.";
     case MONS_WARMONGER:
-        return "It is devoted to combat, disrupting the magic of its foes as "
-               "it battles endlessly.";
+        return "It is devoted to combat.";
     case MONS_CORRUPTER:
         return "It corrupts space around itself, and can twist even the very "
                "flesh of its opponents.";
     case MONS_BLACK_SUN:
-        return "It shines with an unholy radiance, and wields powers of "
-               "darkness from its devotion to the deities of death.";
+        return "It shines with an unholy radiance, and effortlessly wields powers granted by deities of death.";
     default:
         return "";
     }

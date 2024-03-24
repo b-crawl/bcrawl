@@ -1995,7 +1995,9 @@ mon_attack_def mons_attack_spec(const monster& m, int attk_number,
     ASSERT_smc();
     mon_attack_def attk = smc->attack[attk_number];
 
-    if (mons_is_demonspawn(mon.type) && attk_number == 0)
+    // only overwrite AF_PLAIN
+    if (mons_is_demonspawn(mon.type) && attk_number == 0
+            && attk.flavour == AF_PLAIN)
     {
         const monsterentry* mbase =
             get_monster_data (draco_or_demonspawn_subspecies(mon));

@@ -1227,7 +1227,7 @@ static int acquirement_create_item_general(object_class_type class_wanted,
         // Don't generate randart books in items(), we do that
         // ourselves.
         bool want_arts = (class_wanted != OBJ_BOOKS);
-        if (agent == GOD_TROG && !one_chance_in(3))
+        if (agent == GOD_TROG && !one_chance_in(2))
             want_arts = false;
 
         thing_created = items(want_arts, class_wanted, type_wanted,

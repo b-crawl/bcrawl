@@ -1046,7 +1046,8 @@ bool mons_is_plant(const monster& mon)
 
 bool mons_eats_items(const monster& mon)
 {
-    return mons_is_slime(mon) && have_passive(passive_t::jelly_eating);
+    return mons_is_slime(mon) && mon.attitude != ATT_FRIENDLY
+            && have_passive(passive_t::jelly_eating);
 }
 
 /* Is the actor susceptible to vampirism?
@@ -1995,7 +1996,9 @@ mon_attack_def mons_attack_spec(const monster& m, int attk_number,
     ASSERT_smc();
     mon_attack_def attk = smc->attack[attk_number];
 
-    if (mons_is_demonspawn(mon.type) && attk_number == 0)
+    // only overwrite AF_PLAIN
+    if (mons_is_demonspawn(mon.type) && attk_number == 0
+            && attk.flavour == AF_PLAIN)
     {
         const monsterentry* mbase =
             get_monster_data (draco_or_demonspawn_subspecies(mon));
@@ -2123,13 +2126,20 @@ string mon_attack_name(attack_type attack, bool with_object)
  */
 bool flavour_triggers_damageless(attack_flavour flavour)
 {
-    return flavour == AF_CRUSH
-        || flavour == AF_ENGULF
-        || flavour == AF_PURE_FIRE
-        || flavour == AF_SHADOWSTAB
-        || flavour == AF_DROWN
-        || flavour == AF_CORRODE
-        || flavour == AF_HUNGER;
+    switch (flavour)
+    {
+    case AF_CRUSH:
+    case AF_ENGULF:
+    case AF_PURE_FIRE:
+    case AF_SHADOWSTAB:
+    case AF_DROWN:
+    case AF_CORRODE:
+    case AF_HUNGER:
+    case AF_SUMMON:
+        return true;
+    
+    default: return false;
+    }
 }
 
 /**
@@ -2165,6 +2175,10 @@ int flavour_damage(attack_flavour flavour, int HD, bool random)
             if (random)
                 return HD * 3 / 2 + random2(HD);
             return HD * 5 / 2;
+        case AF_DROWN:
+            if (random)
+                return HD * 3 / 4 + random2(HD * 3 / 4);
+            return HD * 3 / 2;
         default:
             return 0;
     }

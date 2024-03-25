@@ -422,14 +422,6 @@ static peeve_map divine_peeves[] =
             "you use necromancy on corpses, chunks or skeletons", true,
             1, 1, " forgives your inadvertent necromancy, just this once."
         } },
-        { DID_KILL_PLANT, {
-            "you destroy plants", false,
-            1, 0
-        } },
-        { DID_ATTACK_FRIEND, _on_attack_friend(nullptr) },
-
-        { DID_FRIEND_DIED, _on_fedhas_friend_death("allied flora die") },
-        { DID_SOULED_FRIEND_DIED, _on_fedhas_friend_death(nullptr) },
     },
     // GOD_CHEIBRIADOS,
     {

@@ -4766,7 +4766,7 @@ KMONS:   eE = cyclops / manticore
 KMONS:   fF = water moccasin
 NSUBST:  dD = 2:d / 1:d. / *:., eE = 1:e / *:., fF = 2:f / 1:f. / *:.
 :   else
-MONS:    basilisk w:5 / wyvern, boulder beetle / catoblepas
+MONS:    basilisk w:5 / wyvern / catoblepas
 MONS:    orc knight / orc high priest / orc sorcerer
 MONS:    slime creature / very large slime creature w:1
 MONS:    great orb of eyes / glowing orange brain w:1
@@ -4789,7 +4789,7 @@ KMONS:   P = plant
 SUBST:   z = x, W = WWt
 NSUBST:  1 = 4:1 / 1:1. / 1:% / *:., 2 = 1:2 / 1:% / *:.
 : else -- Vaults
-MONS:    lindwurm / boulder beetle, dire elephant, orc warlord / orc knight
+MONS:    lindwurm / dire elephant, orc warlord / orc knight
 MONS:    great orb of eyes / glowing orange brain, titanic slime creature
 MONS:    crystal guardian / deep elf death mage / deep elf high priest
 MONS:    deep elf annihilator / deep elf sorcerer / deep elf demonologist

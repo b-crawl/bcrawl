@@ -2339,6 +2339,57 @@ bool twisted_resurrection(actor *caster, int pow, beh_type beha,
     return true;
 }
 
+bool melee_summoning(const actor &agent, const actor &defender)
+{
+    // Since this isn't used as a spell: count how many creatures
+    // this already summoned, and abort at our max defined here.
+    
+    const monster* caster = agent.as_monster();
+    int summon_cap = 0;
+    monster_type mon = MONS_NO_MONSTER;
+    switch (caster->type)
+    {
+        case MONS_RED_DEVIL:
+            if (random2(100) < 30)
+                return false;
+            mon = MONS_CRIMSON_IMP;
+            summon_cap = 4;
+            break;
+        
+        case MONS_WARMONGER:
+            if (random2(100) < 50)
+                return false;
+            mon = MONS_PHANTASMAL_WARRIOR;
+            summon_cap = 2;
+            break;
+        
+        default: return false;
+    }
+    
+    int count = 0;
+    for (monster_iterator mi; mi; ++mi)
+    {
+       if (mi->summoner == agent.mid)
+           ++count;
+
+        if (count >= summon_cap)
+           return false;
+    }
+
+    coord_def target_pos = defender.pos();
+    monster *mons = create_monster(
+            mgen_data(mon, SAME_ATTITUDE(caster), target_pos, caster->foe)
+                      .set_summoned(&agent, 2, SPELL_NO_SPELL, GOD_NO_GOD));
+    if (mons)
+    {
+        mprf("A hostile spirit coalesces around %s!",
+             defender.name(DESC_THE).c_str());
+        return true;
+    }
+
+    return false;
+}
+
 monster_type pick_random_wraith()
 {
     return random_choose_weighted(1, MONS_PHANTOM,

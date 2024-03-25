@@ -98,6 +98,8 @@ bool monster_simulacrum(monster *caster, bool actual);
 bool twisted_resurrection(actor *caster, int pow, beh_type beha,
                           unsigned short foe, god_type god, bool actual = true);
 
+bool melee_summoning(const actor &agent, const actor &defender);
+
 monster_type pick_random_wraith();
 spret cast_haunt(int pow, const coord_def& where, god_type god, bool fail);
 

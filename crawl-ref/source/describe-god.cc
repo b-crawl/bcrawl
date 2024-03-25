@@ -506,25 +506,32 @@ static formatted_string _beogh_extra_description()
             desc += formatted_string::parse_string(
                             " (<blue>on another level</blue>)");
         }
-        else if (given_gift(mons))
+        else
         {
-            mon_inv_type slot =
-                mons->props.exists(BEOGH_SH_GIFT_KEY) ? MSLOT_SHIELD :
-                mons->props.exists(BEOGH_ARM_GIFT_KEY) ? MSLOT_ARMOUR :
-                mons->props.exists(BEOGH_RANGE_WPN_GIFT_KEY) ? MSLOT_ALT_WEAPON :
-                MSLOT_WEAPON;
+            vector<mon_inv_type> gifted_slots;
+            if (mons->props.exists(BEOGH_SH_GIFT_KEY))
+                gifted_slots.push_back(MSLOT_SHIELD);
+            if (mons->props.exists(BEOGH_ARM_GIFT_KEY))
+                gifted_slots.push_back(MSLOT_ARMOUR);
+            if (mons->props.exists(BEOGH_RANGE_WPN_GIFT_KEY))
+                gifted_slots.push_back(MSLOT_ALT_WEAPON);
+            if (mons->props.exists(BEOGH_MELEE_WPN_GIFT_KEY))
+                gifted_slots.push_back(MSLOT_WEAPON);
 
             // An orc can still lose its gift, e.g. by being turned into a
             // shapeshifter via a chaos cloud. TODO: should the gift prop be
             // deleted at that point?
-            if (mons->inv[slot] != NON_ITEM)
+            for (auto slot : gifted_slots)
             {
-                desc.cprintf(" (");
+                if (mons->inv[slot] != NON_ITEM)
+                {
+                    desc.cprintf(" (");
 
-                item_def &gift = mitm[mons->inv[slot]];
-                desc += formatted_string::parse_string(
-                                    menu_colour_item_name(gift,DESC_PLAIN));
-                desc.cprintf(")");
+                    item_def &gift = mitm[mons->inv[slot]];
+                    desc += formatted_string::parse_string(
+                                        menu_colour_item_name(gift,DESC_PLAIN));
+                    desc.cprintf(")");
+                }
             }
         }
         desc.cprintf("\n");

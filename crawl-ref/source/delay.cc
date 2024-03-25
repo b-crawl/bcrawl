@@ -411,16 +411,6 @@ static void _xom_check_corpse_waste()
     xom_is_stimulated(50 + (151 * food_need / 6000));
 }
 
-static bool _auto_eat()
-{
-    return Options.auto_eat_chunks
-           && Options.autopickup_on > 0
-           && (player_likes_chunks(true)
-               || !you.gourmand()
-               || you.duration[DUR_GOURMAND] >= GOURMAND_MAX / 4
-               || you.hunger_state < HS_SATIATED);
-}
-
 void clear_macro_process_key_delay()
 {
     if (dynamic_cast<MacroProcessKeyDelay*>(current_delay().get()))
@@ -507,7 +497,7 @@ void BaseRunDelay::handle()
     }
     else
     {
-        if (want_autoeat() && _auto_eat())
+        if (want_autoeat() && autoeat_enabled())
         {
             const interrupt_block block_interrupts;
             if (prompt_eat_chunks(true, you.hunger_state < HS_NEAR_STARVING) == 1)
@@ -1302,7 +1292,7 @@ bool interrupt_activity(activity_interrupt_type ai,
     // If we get hungry while traveling, let's try to auto-eat a chunk.
     if (ai == AI_HUNGRY) 
     {
-        if (delay->want_autoeat() && _auto_eat()
+        if (delay->want_autoeat() && autoeat_enabled()
                 && prompt_eat_chunks(true, you.hunger_state < HS_NEAR_STARVING) == 1)
             return false;
         else if (you.species == SP_VAMPIRE)

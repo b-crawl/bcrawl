@@ -37,6 +37,7 @@
 #include "religion.h"
 #include "shout.h"
 #include "spl-damage.h"
+#include "spl-summoning.h" // 
 #include "state.h"
 #include "stepdown.h"
 #include "stringutil.h"
@@ -555,13 +556,15 @@ bool melee_attack::handle_phase_damaged()
     // chance to slimify monster, based on damage
     if (attacker->is_player() && you.duration[DUR_SLIMIFY])
     {
-        int current_hp = defender->as_monster()->hit_points;
+        monster* mon = defender->as_monster();
+        int current_hp = mon->hit_points;
         int slimify_dmg = min(damage_done, current_hp);
-        if(mon_can_be_slimified(defender->as_monster())
-                && x_chance_in_y((slimify_dmg * (you.skill(SK_INVOCATIONS, 10) + 90)),
-                    (current_hp * 385)))
+        int slimify_hd = max(3, min(12, mon->get_hit_dice()));
+        int slimify_chance = (slimify_dmg * (you.skill(SK_INVOCATIONS, 10) + 90) * 12) / slimify_hd;
+        if (mon_can_be_slimified(mon)
+                && x_chance_in_y(slimify_chance, current_hp * 385))
         {
-            slimify_monster(defender->as_monster());
+            slimify_monster(mon);
 
             // Bail out after sliming so we don't get aux unarmed and attack a fellow slime.
             did_hit = false;
@@ -2328,6 +2331,7 @@ bool melee_attack::player_good_stab()
     return wpn_skill == SK_SHORT_BLADES
            || you.get_mutation_level(MUT_PAWS)
            || player_equip_unrand(UNRAND_BOOTS_ASSASSIN)
+           || you.form == transformation::spider
               && (!weapon || is_melee_weapon(*weapon));
 }
 
@@ -3038,8 +3042,7 @@ void melee_attack::mons_apply_attack_flavour()
 
         if (defender->res_water_drowning() <= 0)
         {
-            special_damage = attacker->get_hit_dice() * 3 / 4
-                            + random2(attacker->get_hit_dice() * 3 / 4);
+            special_damage = base_damage;
             special_damage_flavour = BEAM_WATER;
             kill_type = KILLED_BY_WATER;
 
@@ -3066,6 +3069,11 @@ void melee_attack::mons_apply_attack_flavour()
             you.increase_duration(DUR_WENDIGO, random_range(20, 40), 40);
             mesmerise_hungry_players(0, true);
         }
+        break;
+    
+    // properties are defined per-monster in spl-summoning
+    case AF_SUMMON:
+        melee_summoning(*attacker, *defender);
         break;
     }
 }

@@ -1154,7 +1154,7 @@ static bool _give_trog_oka_gift(bool forced)
         break;
     case GOD_SHINING_ONE:
         if (_need_missile_gift(3))
-            if((you.piety >= piety_breakpoint(2) && random2(you.piety) > 70 && one_chance_in(10))
+            if((you.piety >= piety_breakpoint(2) && random2(min((int)you.piety, 75)) > 50 && one_chance_in(9))
                     || forced)
                 gift_type = OBJ_MISSILES;
         break;
@@ -2802,8 +2802,6 @@ bool god_hates_attacking_friend(god_type god, const monster& fr)
             return mons_genus(species) == MONS_ORC;
         case GOD_JIYVA:
             return mons_class_is_slime(species);
-        case GOD_FEDHAS:
-            return _fedhas_protects_species(species);
         default:
             return false;
     }

@@ -1571,17 +1571,10 @@ static const mon_spellbook mspell_list[] =
     },
 
     // ('6') Demonspawn.
-    {  MST_DEMONSPAWN_WARMONGER,
-      {
-       { SPELL_SAP_MAGIC, 18, MON_SPELL_PRIEST },
-       { SPELL_HASTE_OTHER, 32, MON_SPELL_PRIEST },
-      }
-    },
-
     {  MST_DEMONSPAWN_BLOOD_SAINT,
       {
        { SPELL_LEGENDARY_DESTRUCTION, 40, MON_SPELL_PRIEST },
-       { SPELL_CALL_OF_CHAOS, 20, MON_SPELL_PRIEST },
+       { SPELL_CALL_OF_CHAOS, 20, MON_SPELL_MAGICAL },
       }
     },
 
@@ -1594,9 +1587,9 @@ static const mon_spellbook mspell_list[] =
 
     {  MST_DEMONSPAWN_BLACK_SUN,
       {
-       { SPELL_BOLT_OF_DRAINING, 18, MON_SPELL_PRIEST },
-       { SPELL_DISPEL_UNDEAD, 18, MON_SPELL_PRIEST },
-       { SPELL_BLACK_MARK, 28, MON_SPELL_PRIEST },
+       { SPELL_BOLT_OF_DRAINING, 30, MON_SPELL_PRIEST | MON_SPELL_INSTANT },
+       { SPELL_DISPEL_UNDEAD, 30, MON_SPELL_PRIEST | MON_SPELL_INSTANT },
+       { SPELL_SAP_MAGIC, 30, MON_SPELL_PRIEST | MON_SPELL_INSTANT },
       }
     },
 

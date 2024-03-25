@@ -440,7 +440,7 @@ static const ability_def Ability_List[] =
       0, 0, 200, 2, {fail_basis::invo, piety_breakpoint(2), 0, 1}, abflag::none },
     { ABIL_TROG_BROTHERS_IN_ARMS, "Brothers in Arms",
       0, 0, 0, generic_cost::range(5, 6),
-      {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::exhaustion },
+      {fail_basis::invo, piety_breakpoint(5), 0, 1}, abflag::exhaustion | abflag::berserk_ok },
 
     // Elyvilon
     { ABIL_ELYVILON_LIFESAVING, "Divine Protection",
@@ -608,12 +608,12 @@ static const ability_def Ability_List[] =
 
     // Uskayaw
     { ABIL_USKAYAW_STOMP, "Stomp",
-        3, 0, 100, generic_cost::fixed(20), {fail_basis::invo}, abflag::none },
+        3, 0, 200, generic_cost::fixed(20), {fail_basis::invo}, abflag::none },
     { ABIL_USKAYAW_LINE_PASS, "Line Pass",
         4, 0, 200, 0, {fail_basis::invo}, abflag::exhaustion},
     { ABIL_USKAYAW_GRAND_FINALE, "Grand Finale",
-        8, 0, 500, generic_cost::fixed(0),
-        {fail_basis::invo, 120 + piety_breakpoint(4), 5, 1}, abflag::piety},
+        8, 0, 0, generic_cost::fixed(0),
+        {fail_basis::invo, 120 + piety_breakpoint(4), 5, 1}, abflag::piety | abflag::exhaustion},
 
     // Hepliaklqana
     { ABIL_HEPLIAKLQANA_RECALL, "Recall Ancestor",
@@ -3119,6 +3119,11 @@ static spret _do_ability(const ability_def& abil, bool fail)
         break;
 
     case ABIL_USKAYAW_GRAND_FINALE:
+        if (you.duration[DUR_EXHAUSTED])
+        {
+            mpr("You are too exhausted.");
+            return spret::abort;
+        }
         return uskayaw_grand_finale(fail);
 
     case ABIL_HEPLIAKLQANA_INCARNATE:

@@ -306,7 +306,7 @@ static const map<species_type, species_def> species_data =
     "Ds",
     "Demonspawn", "Demonic", nullptr,
     SPF_NONE,
-    -1, 0, 0, 3,
+    -1, 0, 1, 3,
     MONS_DEMONSPAWN,
     HT_LAND, US_ALIVE, SIZE_MEDIUM,
     8, 9, 8, // 25
@@ -386,7 +386,7 @@ static const map<species_type, species_def> species_data =
     "Fr",
     "Fairy", nullptr, nullptr,
     SPF_NO_HAIR,
-    0, -1, 2, 4,
+    0, -1, 1, 4,
     MONS_ACID_DRAGON,
     HT_LAND, US_ALIVE, SIZE_SMALL,
     6, 11, 7, // 24
@@ -555,7 +555,7 @@ static const map<species_type, species_def> species_data =
     "Mu",
     "Mummy", nullptr, nullptr,
     SPF_NONE,
-    -1, 0, 0, 5,
+    -1, 0, 1, 5,
     MONS_MUMMY,
     HT_LAND, US_UNDEAD, SIZE_MEDIUM,
     11, 7,  7, // 25

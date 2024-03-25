@@ -1606,8 +1606,11 @@ static void _do_rest()
 {
     if (apply_starvation_penalties())
     {
-        mpr("You're too hungry to rest.");
-        return;
+        if (!(autoeat_enabled() && prompt_eat_chunks(true, true)))
+        {
+            mpr("You're too hungry to rest.");
+            return;
+        }
     }
 
     if (i_feel_safe())

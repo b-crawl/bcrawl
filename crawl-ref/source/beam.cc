@@ -5882,9 +5882,13 @@ mon_resist_type bolt::apply_enchantment_to_monster(monster* mon)
         const int dur =
             random2(div_rand_round(ench_power, mon->get_hit_dice()) + 1)
                     * BASELINE_DELAY;
+        if (!dur)
+            break;
+
         mon->add_ench(mon_enchant(ENCH_ANTIMAGIC, 0,
                                   agent(), // doesn't matter
                                   dur));
+
         if (you.can_see(*mon))
         {
             mprf("%s magic leaks into the air.",

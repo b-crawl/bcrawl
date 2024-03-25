@@ -1046,7 +1046,8 @@ bool mons_is_plant(const monster& mon)
 
 bool mons_eats_items(const monster& mon)
 {
-    return mons_is_slime(mon) && have_passive(passive_t::jelly_eating);
+    return mons_is_slime(mon) && mon.attitude != ATT_FRIENDLY
+            && have_passive(passive_t::jelly_eating);
 }
 
 /* Is the actor susceptible to vampirism?

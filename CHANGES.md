@@ -91,6 +91,7 @@
   - v1.37.1: Air Elementalists start with 1 Charms skill.
   - v1.37.1: Air Elementalists start with a potion of resistance.
   - v1.38.3: When species that can't drink potions have a background that would start with potions, they start with scrolls instead, usually a scroll of teleportation.
+  - v1.41: Warpers start with Force Lance instead of Passage of Golubria.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -128,6 +129,8 @@
   - v1.36.5: GDR is shown with resistances.
   - v1.40.1: Vampires will drain blood from corpses while autoexploring if their auto_butcher setting is higher than their hunger state but lower than the maximum setting.
   - v1.40.3: Monster speeds are described more precisely.
+  - v1.41: The player automatically eats a ration when trying to rest while starving.
+  - v1.41: The player will not automatically eat their last ration.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -231,6 +234,7 @@
   - v1.35.2: When an octopode would be paralyzed, it's confused instead.
   - v1.36.3: Mummies have a Hexes enhancer from level 1 instead of gaining a Necromancy enhancer at levels 13 and 26.
   - v1.37.2: Ghouls are reworked: they have half torment resistance, rPois, rN+, 0.8 movement speed, range 4 hopping, adjusted aptitudes, and adjusted attributes. They don't rot randomly, but now have a chance to be mesmerised when they can see something edible and are above 75% health. Their mesmerisation is broken if they fall below 75% health.
+  - v1.41: The extra mana of some species is adjusted: fairies have less (2 -> 1), and demonspawn and mummies have more (0 -> 1).
 
 #### New Spells
   - Summon Scorpions summons one group of 1-4 scorpions.
@@ -350,7 +354,8 @@
   - v1.40: The Invisibility spell has less duration scaling with power. It's now equivalent to a potion of invisibility at 80 spell power instead of 40.
   - v1.40: Scorpion Form gives rF++ and rCorr.
   - v1.40: Spellforged servitors have rF+ rC+ instead of rF++ rC++.
-  - v1.40.4: Spider form gives increased stab damage for unarmed attacks, like Felids have.
+  - v1.41: Spider form gives increased stab damage for unarmed attacks, like Felids have. (by petercordia)
+  - v1.41: Iskenderun's Mystic Blast explosions are louder. (10 -> 14)
 
 #### Removed Spells
   - Summon Guardian Golem
@@ -502,6 +507,14 @@
   - v1.39.2: Hepliaklqana ancestor recall no longer fails in the Abyss.
   - v1.40: Hepliaklqana ancestors now respawn immediately when Incarnate ends.
   - v1.40.1: Lugonu's Bend Space ability is changed: mana cost is increased (1->2), it blinks monsters adjacent to the player's destination instead of their origin, and it has a (Invocations - 5)/25 chance to not cost a turn.
+  - v1.41: Trog's Brothers in Arms ability can be used while berserk.
+  - v1.41: Multiple items can be given to Beogh's allies.
+  - v1.41: The Recall ability granted by Beogh and Yredelemnul only recalls some allies, not all of them. The number of monsters recalled is based on player level and monster HD.
+  - v1.41: Uskayaw's Grand Finale ability causes exhaustion.
+  - v1.41: Jiyva's Slimify ability has a higher success rate on monsters with lower HD.
+  - v1.41: While worshipping Jiyva, friendly slimes no longer eat items, but neutral slimes still can.
+  - v1.41: TSO gives ammunition gifts earlier, but gives less ammunition at high piety.
+  - v1.41: Fedhas is no longer displeased by the player attacking plants.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -642,6 +655,7 @@
   - v1.40.1: Eos can corona or blind monsters it hits.
   - v1.40.3: The Autumn Katana is reworked: it's now a vampiric long blade with 13 base damage and 0.6 min delay at 14 skill, and grants the Wu Jian walljump ability to players that don't worship the Wu Jian Council.
   - v1.40.3: Leech is reworked: it's now an antimagic short blade with 12 base damage and 0.5 min delay at 16 skill, gives MR+, and restores large amounts of mana when it deals damage.
+  - v1.41: Wyrmbane is adjusted: it has more base damage (8 -> 9) but no longer gives +3 AC.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -781,6 +795,9 @@
   - v1.40: Naga mages have more HP and a reworked spell set: Mystic Blast, Spectral Cloud, Dimension Anchor, and Haste.
   - v1.40: Fire elementals are immune to Fire Storm.
   - v1.40.3: Friendly simulacra aren't angered by player attacks.
+  - v1.41: Orcs and merfolk carry less thrown ammunition.
+  - v1.41: Classed demonspawn spells are reworked. Black suns cast instantly and have Sap Magic instead of Black Mark. Warmongers have no spells but can summon phantasmal warriors on melee hits.
+  - v1.41: Red devils no longer move backwards when attacking. Instead, they can summon crimson imps on melee hits.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.
@@ -822,3 +839,4 @@
   - v1.37: Ignacio appears more often, and has higher melee damage but fewer attacks.
   - v1.37: Sonja has more HP, higher magic resistance, higher damage but fewer attacks, and carries an enchanted hand crossbow instead of a blowgun.
   - v1.38.1: The Enchantress is reworked. She now casts: Haste, Might Other, Slow, Dimension Anchor, Mass Confusion, and Deflect Missiles. Her melee attacks now cause magic vulnerability. She now acts quickly instead of moving quickly, deals slightly more melee damage, and always has a wand of digging.
+  - v1.38.1: Mnoleg has adjusted melee attacks and slightly more HP.

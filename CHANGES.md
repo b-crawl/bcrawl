@@ -839,4 +839,4 @@
   - v1.37: Ignacio appears more often, and has higher melee damage but fewer attacks.
   - v1.37: Sonja has more HP, higher magic resistance, higher damage but fewer attacks, and carries an enchanted hand crossbow instead of a blowgun.
   - v1.38.1: The Enchantress is reworked. She now casts: Haste, Might Other, Slow, Dimension Anchor, Mass Confusion, and Deflect Missiles. Her melee attacks now cause magic vulnerability. She now acts quickly instead of moving quickly, deals slightly more melee damage, and always has a wand of digging.
-  - v1.38.1: Mnoleg has adjusted melee attacks and slightly more HP.
+  - v1.41: Mnoleg has adjusted melee attacks and slightly more HP.

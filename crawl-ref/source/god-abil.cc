@@ -1470,6 +1470,7 @@ bool vehumet_supports_spell(spell_type spell)
     case SPELL_IGNITE_POISON:
     case SPELL_OZOCUBUS_REFRIGERATION:
     case SPELL_FREEZING_CLOUD:
+    case SPELL_FORCE_LANCE:
     case SPELL_VIOLENT_UNRAVELLING:
     case SPELL_INNER_FLAME:
     case SPELL_IGNITION:

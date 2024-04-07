@@ -54,8 +54,8 @@ Most adventurers find the Lair of Beasts to be an exciting change of climate.
 And indeed, there is something to be said about getting gored, mauled and eaten
 rather than sliced, burnt or stabbed.
 
-The Lair contains the entrances to one of the Swamp or the Shoals, one of the
-Snake Pit or the Spider Nest, and to the Pits of Slime.
+The Lair contains the entrances to two of the Swamp, the Shoals, the Snake Pit,
+and the Spider Nest, and to either the Elven Halls or the Spriggan Forest.
 
 Resistance to poison, cold, and hostile enchantments may be useful here.
 

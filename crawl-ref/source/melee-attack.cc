@@ -2556,8 +2556,18 @@ bool melee_attack::mons_attack_effects()
         return false;
     }
 
-    if (attacker != defender && attk_flavour == AF_TRAMPLE)
-        do_knockback();
+    switch (attk_flavour)
+    {
+    case AF_TRAMPLE:
+        if (attacker != defender)
+            do_knockback();
+        break;
+    case AF_DRAG:
+        if (attacker != defender)
+            do_drag();
+        break;
+    default: break;
+    }
 
     special_damage = 0;
     special_damage_message.clear();
@@ -3399,6 +3409,69 @@ bool melee_attack::do_knockback(bool trample)
     }
     else
         defender->move_to_pos(new_pos);
+
+    return true;
+}
+
+bool melee_attack::do_drag()
+{
+    if (defender->is_stationary())
+        return false;
+
+    if (attacker->cannot_move())
+        return false;
+
+    const int size_diff =
+        attacker->body_size(PSIZE_BODY) - defender->body_size(PSIZE_BODY);
+    const coord_def new_pos = attack_position + attack_position - defender->pos();
+
+    if (!x_chance_in_y(size_diff + 3, 6)
+        // need a valid tile
+        || !defender->is_habitable_feat(grd(attack_position))
+        // don't drag anywhere the attacker can't follow
+        || !attacker->is_habitable_feat(grd(new_pos))
+        // don't move into a monster
+        || actor_at(new_pos)
+        // Prevent drag/drown combo when flight is expiring
+        || defender->is_player() && need_expiration_warning(attack_position)
+        || defender->is_constricted())
+    {
+        if (needs_message)
+        {
+            if (defender->is_constricted())
+            {
+                mprf("%s %s held in place!",
+                     defender_name(false).c_str(),
+                     defender->conj_verb("are").c_str());
+            }
+            else
+            {
+                mprf("%s %s %s ground!",
+                     defender_name(false).c_str(),
+                     defender->conj_verb("hold").c_str(),
+                     defender->pronoun(PRONOUN_POSSESSIVE).c_str());
+            }
+        }
+
+        return false;
+    }
+
+    if (needs_message)
+    {
+        const string verb = "are dragged";
+        mprf("%s %s by %s!",
+             defender_name(false).c_str(),
+             defender->conj_verb(verb).c_str(),
+             attacker->name(DESC_THE).c_str());
+    }
+
+    attacker->move_to_pos(new_pos);
+
+    // Interrupt stair travel and passwall.
+    if (defender->is_player())
+        stop_delay(true);
+
+    defender->move_to_pos(attack_position);
 
     return true;
 }

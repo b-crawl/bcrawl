@@ -3581,6 +3581,7 @@ static string _flavour_base_desc(attack_flavour flavour)
         { AF_WEAKNESS,          "cause weakness" },
         { AF_WENDIGO,           "cause mesmerization" },
         { AF_SUMMON,            "summon allies" },
+        { AF_DRAG,              "drag the defender backwards" },
         { AF_KITE,              "" },
         { AF_SWOOP,             "" },
         { AF_PLAIN,             "" },

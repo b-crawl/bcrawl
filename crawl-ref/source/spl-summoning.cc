@@ -2392,12 +2392,10 @@ bool melee_summoning(const actor &agent, const actor &defender)
 
 monster_type pick_random_wraith()
 {
-    return random_choose_weighted(1, MONS_PHANTOM,
-                                  1, MONS_HUNGRY_GHOST,
-                                  1, MONS_SHADOW_WRAITH,
-                                  5, MONS_WRAITH,
+    return random_choose_weighted(2, MONS_SPECTRAL_THING,
+                                  4, MONS_WRAITH,
                                   2, MONS_FREEZING_WRAITH,
-                                  2, MONS_PHANTASMAL_WARRIOR);
+                                  1, MONS_PHANTASMAL_WARRIOR);
 }
 
 spret cast_haunt(int pow, const coord_def& where, god_type god, bool fail)
@@ -2426,18 +2424,28 @@ spret cast_haunt(int pow, const coord_def& where, god_type god, bool fail)
 
     bool friendly = true;
     int success = 0;
-    int to_summon = stepdown_value(2 + (random2(pow) / 10) + (random2(pow) / 10),
-                                   2, 2, 6, -1);
+    int mid = -1;
+    bool first = true;
+    int to_summon = min(7, 2 + random2avg(1 + div_rand_round(pow, 13), 2));
 
     while (to_summon--)
     {
         const monster_type mon = pick_random_wraith();
-
-        if (monster *mons = create_monster(
-                mgen_data(mon, BEH_FRIENDLY, where, mi, MG_FORCE_BEH)
-                .set_summoned(&you, 3, SPELL_HAUNT, god)))
+        mgen_data mdata = mgen_data(mon, BEH_FRIENDLY, where, mi, MG_FORCE_BEH);
+        mdata.set_summoned(&you, 4, SPELL_HAUNT, god);
+        mdata.flags |= MG_DONT_CAP;
+        
+        if (monster *mons = create_monster(mdata))
         {
             success++;
+            if (mid == -1)
+                mid = mons->mid;
+            mons->props["summon_id"].get_int() = mid;
+
+            // Handle cap only for the first of the batch being summoned
+            if (first)
+                summoned_monster(mons, &you, SPELL_HAUNT);
+            first = false;
 
             if (player_angers_monster(mons))
                 friendly = false;
@@ -3468,6 +3476,7 @@ static const map<spell_type, summon_cap> summonsdata =
 #endif
     { SPELL_SPELLFORGED_SERVITOR,       { 1, 2 } },
     { SPELL_FIRE_ELEMENTALS,            { 1, 2 } },
+    { SPELL_HAUNT,                      { 1, 6 } },
     // Monster spells
     { SPELL_SUMMON_UFETUBUS,            { 8, 2 } },
     { SPELL_SUMMON_HELL_BEAST,          { 8, 2 } },

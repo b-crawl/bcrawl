@@ -341,11 +341,10 @@ Allows the user to cast a single spell instantly.
 Berserk ability
 
 Sends the user into a berserk rage. Going berserk temporarily increases health,
-speed, and damage dealt in melee. It will time out quickly outside of combat,
-but may be extended by multiple kills. While berserk, almost all actions other
-than movement and melee combat are prevented. When the rage expires, the user
-will be briefly slowed and occasionally may even pass out, and will be unable
-to berserk again for a short time.
+speed, and damage dealt in melee, but prevents almost all actions other than
+movement and melee combat. It will time out quickly outside of combat. When the
+rage expires, the user will be briefly slowed and occasionally may even pass
+out, and will be unable to go berserk again for a short time.
 %%%%
 Trog's Hand ability
 

@@ -38,7 +38,6 @@ static bool _banned_combination(job_type job, species_type species)
             case JOB_ABYSSAL_KNIGHT:
             case JOB_REAVER:
             case JOB_SLOTH_APOSTLE:
-            case JOB_MONK:
             case JOB_MARTIAL_ARTIST:
                 return true;
             default: break;

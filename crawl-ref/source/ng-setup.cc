@@ -686,6 +686,8 @@ static void _setup_generic(const newgame_def& ng)
     {
         you.religion = GOD_DEMIGOD;
         you.piety = 15;
+        if (you.char_class == JOB_MONK)
+            you.piety = 50;
     }
 
     _give_starting_food();

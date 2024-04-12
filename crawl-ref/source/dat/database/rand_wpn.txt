@@ -494,25 +494,36 @@ Salmon
 Big Fish
 
 # birds
-Penguin
-
-Puffin
-
-Fulmar
 
 Dove
+
+Eagle
+
+Egret
 
 Hawk
 
 Hummingbird
 
+Ibis
+
+Fulmar
+
 Owl
+
+Penguin
+
+Puffin
+
+Raven
+
+Shrike
 
 Stork
 
 Vulture
 
-Shrike
+Wryneck
 
 # mammals
 w:5

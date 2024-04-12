@@ -1,6 +1,6 @@
 # bcrawl
 
-X-Crawl was a notable fork of Dungeon Crawl Stone Soup; bcrawl is a continuation of it.
+bcrawl is a fork of [Dungeon Crawl Stone Soup](https://github.com/crawl/crawl/) which originally continued the X-Crawl fork.
 
 For discussion, check out [the bcrawl Discord server](https://discord.gg/cJ2wPpZ).
 

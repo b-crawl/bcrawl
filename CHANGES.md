@@ -92,6 +92,7 @@
   - v1.37.1: Air Elementalists start with a potion of resistance.
   - v1.38.3: When species that can't drink potions have a background that would start with potions, they start with scrolls instead, usually a scroll of teleportation.
   - v1.41: Warpers start with Force Lance instead of Passage of Golubria.
+  - v1.41.1: Demigods can be Monks.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -798,6 +799,7 @@
   - v1.41: Orcs and merfolk carry less thrown ammunition.
   - v1.41: Classed demonspawn spells are reworked. Black suns cast instantly and have Sap Magic instead of Black Mark. Warmongers have no spells but can summon phantasmal warriors on melee hits.
   - v1.41: Red devils no longer move backwards when attacking. Instead, they can summon crimson imps on melee hits.
+  - v1.41.1: Crocodiles, alligators, and emperor scorpions can drag their foe backwards on melee hits.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

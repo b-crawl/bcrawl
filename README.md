@@ -11,11 +11,8 @@ Pull requests for new content are welcome.
 - [Windows builds](https://github.com/b-crawl/bcrawl/releases)
 
 #### online
-  - [CKO](https://crawl.kelbi.org/) (New York)
   - [CUE](https://underhound.eu:8080/) (Netherlands)
   - [CXC](https://crawl.xtahua.com/) (France)
-  - [CPO](https://crawl.project357.org/) (Australia)
-  - [x-crawl.de](https://x-crawl.de/) (Germany) (hosts an older version)
 
 #### [scoring for online games](http://bcrawl.montres.org.uk/)
 

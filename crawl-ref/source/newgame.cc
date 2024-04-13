@@ -1213,11 +1213,11 @@ static species_group species_groups[] =
         20,
         {
             SP_HUMAN,
-            SP_BASE_DRACONIAN,
+            SP_DEMIGOD,
             SP_DEMONSPAWN,
+            SP_BASE_DRACONIAN,
             SP_VINE_STALKER,
             SP_KOBOLD,
-            SP_SPRIGGAN,
             SP_AVARIEL,
             SP_OGRE,
             SP_ENT,
@@ -1238,8 +1238,8 @@ static species_group species_groups[] =
             SP_NAGA,
             SP_BARACHI,
             SP_OCTOPODE,
+            SP_SPRIGGAN,
             SP_FELID,
-            SP_DEMIGOD,
             SP_MUMMY,
         }
     },

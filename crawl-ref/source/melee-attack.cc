@@ -105,66 +105,82 @@ bool melee_attack::handle_phase_attempted()
 
     if (attacker->is_player() && defender && defender->is_monster())
     {
+        bool skip_check = false;
         // Unrands with secondary effects that can harm nearby friendlies.
         // Don't prompt for confirmation (and leak information about the
         // monster's position) if the player can't see the monster.
-        if (weapon && is_unrandom_artefact(*weapon, UNRAND_DEVASTATOR)
-            && you.can_see(*defender))
+        if (weapon && (weapon->flags & ISFLAG_UNRANDART) && you.can_see(*defender))
         {
-
-            targeter_smite hitfunc(attacker, 1, 1, 1, false);
-            hitfunc.set_aim(defender->pos());
-
-            if (stop_attack_prompt(hitfunc, "attack", nullptr, nullptr,
-                                   defender->as_monster()))
+            skip_check = true;
+            switch (weapon->unrand_idx)
             {
-                cancel_attack = true;
-                return false;
+            case UNRAND_DEVASTATOR:
+            {
+                targeter_smite hitfunc(attacker, 1, 1, 1, false);
+                hitfunc.set_aim(defender->pos());
+
+                if (stop_attack_prompt(hitfunc, "attack", nullptr, nullptr,
+                                       defender->as_monster()))
+                {
+                    cancel_attack = true;
+                    return false;
+                }
+                break;
+            }
+            
+            case UNRAND_VARIABILITY:
+            {
+                targeter_los hitfunc(&you, LOS_NO_TRANS);
+
+                if (stop_attack_prompt(hitfunc, "attack",
+                                       [](const actor *act)
+                                       {
+                                           return !(you.deity() == GOD_FEDHAS
+                                           && fedhas_protects(*act->as_monster()));
+                                       }, nullptr, defender->as_monster()))
+                {
+                    cancel_attack = true;
+                    return false;
+                }
+                break;
+            }
+
+            case UNRAND_TORMENT:
+            {
+                targeter_los hitfunc(&you, LOS_NO_TRANS);
+
+                if (stop_attack_prompt(hitfunc, "attack",
+                                       [] (const actor *m)
+                                       {
+                                           return !m->res_torment();
+                                       },
+                                       nullptr, defender->as_monster()))
+                {
+                    cancel_attack = true;
+                    return false;
+                }
+                break;
+            }
+
+            case UNRAND_ARC_BLADE:
+            {
+                vector<const actor *> exclude;
+                if (!safe_discharge(defender->pos(), exclude))
+                {
+                    cancel_attack = true;
+                    return false;
+                }
+                break;
+            }
+
+            default:
+                skip_check = false;
+                break;
             }
         }
-        else if (weapon &&
-                (is_unrandom_artefact(*weapon, UNRAND_VARIABILITY))
-                 && you.can_see(*defender))
-        {
-            targeter_los hitfunc(&you, LOS_NO_TRANS);
-
-            if (stop_attack_prompt(hitfunc, "attack",
-                                   [](const actor *act)
-                                   {
-                                       return !(you.deity() == GOD_FEDHAS
-                                       && fedhas_protects(*act->as_monster()));
-                                   }, nullptr, defender->as_monster()))
-            {
-                cancel_attack = true;
-                return false;
-            }
-        }
-        else if (weapon && is_unrandom_artefact(*weapon, UNRAND_TORMENT)
-                 && you.can_see(*defender))
-        {
-            targeter_los hitfunc(&you, LOS_NO_TRANS);
-
-            if (stop_attack_prompt(hitfunc, "attack",
-                                   [] (const actor *m)
-                                   {
-                                       return !m->res_torment();
-                                   },
-                                   nullptr, defender->as_monster()))
-            {
-                cancel_attack = true;
-                return false;
-            }
-        }
-        else if (weapon && is_unrandom_artefact(*weapon, UNRAND_ARC_BLADE)
-                 && you.can_see(*defender))
-        {
-            vector<const actor *> exclude;
-            if (!safe_discharge(defender->pos(), exclude))
-            {
-                cancel_attack = true;
-                return false;
-            }
-        }
+        
+        if (skip_check)
+        {}
         else if (!cleave_targets.empty())
         {
             targeter_cleave hitfunc(attacker, defender->pos());

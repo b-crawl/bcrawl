@@ -256,12 +256,10 @@ A triple sword made of weird glowing metal. It can channel the wielder's
 magical power to blast what it hits with magical radiation, and can be
 evoked to absorb both magical power and magical contamination.
 %%%%
-great mace "Undeadhunter"
+great mace "Sharur"
 
-A weapon imbued with magic to disrupt and destroy the forces binding undead
-creatures together. Legends say that, long ago, a lich lord created many
-such weapons to ensure the loyalty of his undead servants. Sadly, this mace
-might be the last one left.
+A heavy mace with fine engravings. When swung, its path seems to shift to make
+it hit multiple foes.
 %%%%
 whip "Snakebite"
 

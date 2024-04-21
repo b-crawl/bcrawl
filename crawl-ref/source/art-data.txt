@@ -611,14 +611,16 @@ MAGIC:   1
 STEALTH: -1
 VALUE:   1000
 
-NAME:     great mace "Undeadhunter"
-INSCRIP:  disrupt,
+NAME:     great mace "Sharur"
+BRAND:    SPWPN_VENOM
+INSCRIP:  cleave
 OBJ:      OBJ_WEAPONS/WPN_GREAT_MACE
 PLUS:     +7
 COLOUR:   LIGHTGREY
-TILE:     urand_undeadhunter
-TILE_EQ:  undeadhunter
-LIFE:     1
+TILE:     urand_sharur
+TILE_EQ:  sharur
+INT:      5
+BOOL:     drain, fly
 
 NAME:    whip "Snakebite"
 OBJ:     OBJ_WEAPONS/WPN_WHIP

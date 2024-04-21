@@ -537,7 +537,7 @@ thermic_engine THERMIC_ENGINE
 wucad_mu WUCAD_MU
 mace_of_variability MACE_OF_VARIABILITY
 mace_of_brilliance MACE_OF_BRILLIANCE
-undeadhunter UNDEADHUNTER
+sharur SHARUR
 eos EOS
 snakebite SNAKEBITE
 shillelagh SHILLELAGH

@@ -212,7 +212,7 @@ plutonium sword
 Une triple sword faite d'un étrange métal luisant. Vous vous demandez si cette
 radiation va vous faire pousser une nouvelle tête.
 %%%%
-great mace "Undeadhunter"
+great mace "Sharur"
 
 Les légendes racontent qu'il y a fort longtemps, un seigneur liche expérimenta
 la création de serviteurs conscient plutôt que de servants stupides. Afin

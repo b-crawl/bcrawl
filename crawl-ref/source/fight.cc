@@ -697,7 +697,9 @@ void get_cleave_targets(const actor &attacker, const coord_def& def,
 
     const item_def* weap = attacker.weapon(which_attack);
 
-    if ((weap && (item_attack_skill(*weap) == SK_AXES || is_giant_club_type(weap->sub_type)))
+    if ((weap && (item_attack_skill(*weap) == SK_AXES
+                || is_giant_club_type(weap->sub_type)
+                || is_unrandom_artefact(*weap, UNRAND_SHARUR)))
             || (attacker.is_player() && you.duration[DUR_CLEAVE]))
     {
         const coord_def atk = attacker.pos();

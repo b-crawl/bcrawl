@@ -87,7 +87,7 @@ function crypt_loot_plus(e)
   e.kitem("h = vampires_tooth / morg / " ..
           "bloodbane / leech / sword_of_zonguldrok / " ..
           "finisher / scythe_of_curses / majin-bo / sceptre_of_torment / " ..
-          "undeadhunter")
+          "sharur")
   e.kitem("i = necronomicon / " .. book .. "necromutation / " ..
           book .. "blight / " .. book .. "haunt / " ..
           book .. "borgnjor's_vile_clutch / " .. book .. "infestation")

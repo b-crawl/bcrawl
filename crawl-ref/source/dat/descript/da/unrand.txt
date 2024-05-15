@@ -146,7 +146,7 @@ plutonium sword
 En triple sword af et underligt, glødende metal. Du spekulerer over, om strålingen
 vil få et ekstra hoved til at vokse frem på dine skuldre.
 %%%%
-great mace "Undeadhunter"
+great mace "Sharur"
 
 Legenderne vil vide, at for længe siden eksperimenterede en dødningeherre med
 at skabe bevidste tjenere i stedet for tankeløse tingester. For at sikre sig

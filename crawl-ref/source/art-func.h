@@ -744,23 +744,6 @@ static void _WYRMBANE_melee_effects(item_def* weapon, actor* attacker,
 }
 
 ///////////////////////////////////////////////////
-
-static void _UNDEADHUNTER_melee_effects(item_def* item, actor* attacker,
-                                        actor* defender, bool mondied, int dam)
-{
-    if (defender->holiness() & MH_UNDEAD && !one_chance_in(3)
-        && !mondied && dam)
-    {
-        int bonus_dam = random2avg((1 + (dam * 3)), 3);
-        mprf("%s %s blasted by disruptive energy%s",
-              defender->name(DESC_THE).c_str(),
-              defender->conj_verb("be").c_str(),
-              attack_strength_punctuation(bonus_dam).c_str());
-        defender->hurt(attacker, bonus_dam);
-    }
-}
-
-///////////////////////////////////////////////////
 static void _EOS_equip(item_def *item, bool *show_msgs, bool unmeld)
 {
     invalidate_agrid(true);

@@ -657,6 +657,7 @@
   - v1.40.3: The Autumn Katana is reworked: it's now a vampiric long blade with 13 base damage and 0.6 min delay at 14 skill, and grants the Wu Jian walljump ability to players that don't worship the Wu Jian Council.
   - v1.40.3: Leech is reworked: it's now an antimagic short blade with 12 base damage and 0.5 min delay at 16 skill, gives MR+, and restores large amounts of mana when it deals damage.
   - v1.41: Wyrmbane is adjusted: it has more base damage (8 -> 9) but no longer gives +3 AC.
+  - v1.41.2: Undeadhunter is replaced by Sharur, a +7 great mace of venom with cleaving, \*Drain, +Fly, and +5 intelligence.
 
 #### Normal Monsters
   - The monster spell 'Twisted Resurrection' has been removed. Deep Elf Death mages now get the spell 'Haunt'.
@@ -800,6 +801,8 @@
   - v1.41: Classed demonspawn spells are reworked. Black suns cast instantly and have Sap Magic instead of Black Mark. Warmongers have no spells but can summon phantasmal warriors on melee hits.
   - v1.41: Red devils no longer move backwards when attacking. Instead, they can summon crimson imps on melee hits.
   - v1.41.1: Crocodiles, alligators, and emperor scorpions can drag their foe backwards on melee hits.
+  - v1.41.2: Mutant beast constriction attacks deal less damage.
+  - v1.41.2: Death ooze constriction attacks deal less damage. (32 -> 26)
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

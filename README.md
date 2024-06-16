@@ -1,10 +1,14 @@
 # bcrawl
 
-bcrawl is a fork of [Dungeon Crawl Stone Soup](https://github.com/crawl/crawl/) which originally continued the X-Crawl fork.
+bcrawl is a fork of [Dungeon Crawl Stone Soup](https://github.com/crawl/crawl/).
 
 For discussion, check out [the bcrawl Discord server](https://discord.gg/cJ2wPpZ).
 
+For more information, see [the bcrawl site](https://b-crawl.github.io/).
+
 Pull requests for new content are welcome.
+
+---
 
 ## How to Play
 #### offline
@@ -19,5 +23,3 @@ Pull requests for new content are welcome.
 ---
 
 ## [changes from vanilla DCSS](CHANGES.md)
-
-## [design philosophy](PHILOSOPHY.md)

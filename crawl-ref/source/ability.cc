@@ -3549,8 +3549,8 @@ vector<talent> your_talents(bool check_confused, bool include_unusable)
         _add_talent(talents, ABIL_EVOKE_BLINK, check_confused);
     }
 
-    if (you.wearing_ego(EQ_CLOAK, SPARM_CLOUD_IMMUNE)
-            || (player_equip_unrand(UNRAND_THIEF)
+    if ((you.wearing_ego(EQ_CLOAK, SPARM_CLOUD_IMMUNE)
+            || player_equip_unrand(UNRAND_THIEF)
             || player_equip_unrand(UNRAND_SALAMANDER))
         && !you.get_mutation_level(MUT_NO_ARTIFICE))
     {

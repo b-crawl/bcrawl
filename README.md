@@ -24,3 +24,5 @@ Pull requests for new content are welcome.
 ---
 
 ## [changes from vanilla DCSS](CHANGES.md)
+
+## [design philosophy](https://b-crawl.github.io/page/philosophy/)

@@ -17,6 +17,7 @@ Pull requests for new content are welcome.
 #### online
   - [CUE](https://underhound.eu:8080/) (Netherlands)
   - [CXC](https://crawl.xtahua.com/) (France)
+  - [CNC](https://crawl.nemelex.cards/) (Korea)
 
 #### [scoring for online games](http://bcrawl.montres.org.uk/)
 

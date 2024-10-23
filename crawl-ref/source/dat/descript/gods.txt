@@ -31,7 +31,8 @@ Dithmenos
 
 Dithmenos is the god of night and of things half-seen in flickering torchlight.
 Followers of Dithmenos gain an otherwordly affinity to shadows, darkening their
-surroundings as their own shadow becomes tangible.
+surroundings as their own shadow becomes tangible and dampens sounds from
+within it.
 %%%%
 Elyvilon
 

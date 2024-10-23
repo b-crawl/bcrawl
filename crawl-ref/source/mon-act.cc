@@ -1407,14 +1407,6 @@ static void _pre_monster_move(monster& mons)
 {
     mons.hit_points = min(mons.max_hit_points, mons.hit_points);
 
-    if (mons.has_ench(ENCH_HEXED))
-    {
-        const actor* const agent =
-            actor_by_mid(mons.get_ench(ENCH_HEXED).source);
-        if (!agent || !agent->alive())
-            mons.del_ench(ENCH_HEXED);
-    }
-
     switch (mons.type)
     {
     case MONS_SNAPLASHER_VINE:
@@ -1884,8 +1876,7 @@ void handle_monster_move(monster* mons)
             ASSERT(!crawl_state.game_is_arena());
 
             if (_unfriendly_or_impaired(*mons)
-                && !mons->has_ench(ENCH_CHARM)
-                && !mons->has_ench(ENCH_HEXED))
+                && !mons->has_ench(ENCH_CHARM))
             {
                 monster* new_target = 0;
                 if (!mons->wont_attack())
@@ -2607,7 +2598,7 @@ static bool _handle_pickup(monster* mons)
     const bool never_pickup
         = mons->neutral() || mons->friendly()
           || have_passive(passive_t::neutral_slimes) && mons_is_slime(*mons)
-          || mons->has_ench(ENCH_CHARM) || mons->has_ench(ENCH_HEXED);
+          || mons->has_ench(ENCH_CHARM);
 
 
     // Note: Monsters only look at stuff near the top of stacks.

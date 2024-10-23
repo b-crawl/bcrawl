@@ -93,7 +93,7 @@ static const char *skill_titles[NUM_SKILLS][6] =
     {"Conjurations",   "Conjurer",      "Destroyer",       "Devastator",      "Ruinous",        "Annihilator"},
     {"Hexes",          "Vexing",        "Jinx",            "Bewitcher",       "Maledictor",     "Spellbinder"},
     {"Charms",         "Charmwright",   "Infuser",         "Anointer",        "Gracecrafter",   "Miracle Worker"},
-    {"Summonings",     "Caller",        "Summoner",        "Convoker",        "Demonologist",   "Hellbinder"},
+    {"Summonings",     "Caller",        "Summoner",        "Convoker",        "Worldbinder",    "Planerender"},
     {"Necromancy",     "Grave Robber",  "Reanimator",      "Necromancer",     "Thanatomancer",  "@Genus_Short@ of Death"},
     {"Translocations", "Grasshopper",   "Placeless @Genus@", "Blinker",       "Portalist",      "Plane @Walker@"},
     {"Transmutations", "Changer",       "Transmogrifier",  "Alchemist",       "Malleable",      "Shapeless @Genus@"},
@@ -1744,13 +1744,12 @@ string skill_title_by_rank(skill_type best_skill, uint8_t skill_rank,
         switch (best_skill)
         {
         case SK_SUMMONINGS:
-            // don't call good disciples hellbinders or demonologists
-            if (is_good_god(god))
+            if (is_evil_god(god))
             {
                 if (skill_rank == 4)
-                    result = "Worldbinder";
+                    result = "Demonologist";
                 else if (skill_rank == 5)
-                    result = "Planerender";
+                    result = "Hellbinder";
             }
             break;
 
@@ -1778,13 +1777,23 @@ string skill_title_by_rank(skill_type best_skill, uint8_t skill_rank,
             {
             case SP_DEMONSPAWN:
                 if (is_evil_god(god))
-                {
                     result = "Blood Saint";
-                    break;
-                }
+                break;
             case SP_GARGOYLE:
                 if (god == GOD_JIYVA)
                     result = "Rockslime";
+                break;
+            case SP_MUMMY:
+                if (god == GOD_GOZAG)
+                    result = "Royal Mummy";
+                if (god == GOD_USKAYAW)
+                    result = "Necrodancer";
+                break;
+            case SP_VINE_STALKER:
+                if (god == GOD_NEMELEX_XOBEH)
+                    result = "Black Lotus";
+                if (god == GOD_DITHMENOS)
+                    result = "Nightshade";
                 break;
             }
             else if (god != GOD_NO_GOD)

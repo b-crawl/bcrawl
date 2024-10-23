@@ -15,9 +15,10 @@ Pull requests for new content are welcome.
 - [Windows builds](https://github.com/b-crawl/bcrawl/releases)
 
 #### online
-  - [CUE](https://underhound.eu:8080/) (Netherlands)
-  - [CXC](https://crawl.xtahua.com/) (France)
-  - [CNC](https://crawl.nemelex.cards/) (Korea)
+  - [underhound.eu](https://underhound.eu:8080/) (Netherlands)
+  - [xtahua.com](https://crawl.xtahua.com/) (France)
+  - [yiuf.org](https://crawl.yiuf.org/) (USA)
+  - [nemelex.cards](https://crawl.nemelex.cards/) (Korea)
 
 #### [scoring for online games](http://bcrawl.montres.org.uk/)
 

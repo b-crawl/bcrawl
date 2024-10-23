@@ -250,7 +250,7 @@ themselves from damage and other ill effects. Followers may also attempt to
 pacify hostile monsters and turn them neutral. Elyvilon may directly intervene
 to save a follower's life, and may also occasionally protect the follower's
 allies from death. Especially pious followers can be sure of aid when calling
-upon Elyvilon for protection.
+upon Elyvilon for protection, and can gain the power to walk on water.
 %%%%
 Fedhas powers
 

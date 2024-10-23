@@ -243,6 +243,7 @@ static const vector<god_passive> god_passives[] =
               "GOD can protect the life of your allies",
               "GOD NOW protects the life of your allies"
         },
+        {  6, passive_t::water_walk, "walk on water" },
     },
 
     // Lugonu

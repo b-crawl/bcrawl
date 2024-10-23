@@ -1022,9 +1022,7 @@ creatures.
 %%%%
 umbraed
 
-This area is wreathed by an umbra, improving your stealth if you are attuned to
-the shadows, and decreasing the accuracy of attacks by those unattuned to the
-shadows.
+This area is wreathed by a shadowy umbra that dampens all sound from within it.
 %%%%
 liquefied
 

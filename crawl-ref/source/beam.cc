@@ -3205,10 +3205,6 @@ bool bolt::misses_player()
         // Backlit is easier to hit:
         if (you.backlit(false))
             real_tohit += 2 + random2(8);
-
-        // Umbra is harder to hit:
-        if (!nightvision && you.umbra())
-            real_tohit -= 2 + random2(4);
     }
 
     const int SH = player_shield_class();
@@ -4987,10 +4983,6 @@ void bolt::affect_monster(monster* mon)
         // Backlit is easier to hit:
         if (mon->backlit(false))
             beam_hit += 2 + random2(8);
-
-        // Umbra is harder to hit:
-        if (!nightvision && mon->umbra())
-            beam_hit -= 2 + random2(4);
     }
 
     // The monster may block the beam.

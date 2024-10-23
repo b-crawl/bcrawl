@@ -187,7 +187,6 @@ static const vector<god_passive> god_passives[] =
 
     // Yredelemnul
     {
-        {  3, passive_t::nightvision, "can NOW see well in the dark" },
     },
 
     // Xom
@@ -336,7 +335,6 @@ static const vector<god_passive> god_passives[] =
 
     // Dithmenos
     {
-        {  1, passive_t::nightvision, "can NOW see well in the dark" },
         {  1, passive_t::umbra, "are NOW surrounded by an umbra" },
         // TODO: this one should work regardless of penance.
         {  3, passive_t::hit_smoke, "emit smoke when hit" },

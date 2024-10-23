@@ -796,7 +796,7 @@ bool noisy(int original_loudness, const coord_def& where,
 
     // high ambient noise makes sounds harder to hear
     const int ambient = ambient_noise();
-    const int loudness =
+    int loudness =
         ambient < 0 ? original_loudness + random2avg(abs(ambient), 3)
                     : original_loudness - random2avg(abs(ambient), 3);
 
@@ -810,6 +810,9 @@ bool noisy(int original_loudness, const coord_def& where,
     // faking it.
     if (silenced(where) && !fake_noise)
         return false;
+
+    if (umbraed(where))
+        loudness = loudness / 2;
 
     // [ds] Reduce noise propagation for Sprint.
     const int scaled_loudness =

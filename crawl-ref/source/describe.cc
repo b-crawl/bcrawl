@@ -1687,8 +1687,8 @@ static string _describe_armour(const item_def &item, bool verbose)
             if (crawl_state.need_save && get_armour_slot(item) == EQ_BODY_ARMOUR)
             {
                 description += make_stringf("\nWearing mundane armour of this type "
-                                            "will give the following: %d AC",
-                                             you.base_ac_from(item, 100) / 100);
+                                            "will give the following: %.1f AC",
+                                             you.base_ac_from(item, 100) / 100.0);
             }
         }
     }

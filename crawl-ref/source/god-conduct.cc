@@ -259,20 +259,6 @@ static dislike_response _on_attack_friend(const char* desc)
     };
 }
 
-/// Fedhas's response to a friend(ly plant) dying.
-static dislike_response _on_fedhas_friend_death(const char* desc)
-{
-    return
-    {
-        desc, false,
-        1, 0, nullptr, nullptr, [] (const monster* victim) -> bool {
-            // ballistomycetes are penalized separately.
-            return victim && fedhas_protects(*victim)
-            && victim->mons_species() != MONS_BALLISTOMYCETE;
-        }
-    };
-}
-
 typedef map<conduct_type, dislike_response> peeve_map;
 
 /// a per-god map of conducts to that god's angry reaction to those conducts.

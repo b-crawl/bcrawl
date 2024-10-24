@@ -866,11 +866,6 @@ bool mcache_monster::get_shield_offset(tileidx_t mon_tile,
     case TILEP_MONS_HUMAN_2:
     case TILEP_MONS_DEEP_ELF_BLADEMASTER: // second weapon
     case TILEP_MONS_LOUISE:
-    case TILEP_MONS_TENGU:
-    case TILEP_MONS_TENGU_CONJURER:
-    case TILEP_MONS_TENGU_WARRIOR:
-    case TILEP_MONS_TENGU_REAVER:
-    case TILEP_MONS_SOJOBO:
     case TILEP_MONS_FORMICID:
     case TILEP_MONS_VINE_STALKER:
     case TILEP_MONS_OCTOPODE:
@@ -896,6 +891,11 @@ bool mcache_monster::get_shield_offset(tileidx_t mon_tile,
         *ofs_y = 2;
         break;
 
+    case TILEP_MONS_TENGU:
+    case TILEP_MONS_TENGU_CONJURER:
+    case TILEP_MONS_TENGU_WARRIOR:
+    case TILEP_MONS_TENGU_REAVER:
+    case TILEP_MONS_SOJOBO:
     case TILEP_MONS_NAGA:
     case TILEP_MONS_NAGA_WARRIOR:
     case TILEP_MONS_NAGARAJA:

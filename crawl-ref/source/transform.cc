@@ -1606,7 +1606,7 @@ bool transform(int pow, transformation which_trans, bool involuntary,
 
     // Zin's protection.
     if (!just_check && have_passive(passive_t::resist_polymorph)
-        && x_chance_in_y(you.piety, MAX_PIETY)
+        && x_chance_in_y(you.piety, piety_breakpoint(3))
         && which_trans != transformation::none)
     {
         simple_god_message(" protects your body from unnatural transformation!");

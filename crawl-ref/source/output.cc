@@ -844,7 +844,7 @@ static void _print_stats_ac(int x, int y)
     else if (you.duration[DUR_CORROSION])
         text_col = RED;
 
-    string ac = make_stringf("%2d ", you.armour_class());
+    string ac = make_stringf("%2d ", you.armour_class_scaled()/100);
     textcolour(text_col);
     CGOTOXY(x+4, y, GOTO_STAT);
     CPRINTF("%-12s", ac.c_str());
@@ -869,7 +869,7 @@ static void _print_stats_ev(int x, int y)
                || you.cannot_move() ? RED
                                     : _boosted_ev() ? LIGHTBLUE
                                                     : HUD_VALUE_COLOUR);
-    CPRINTF("%2d ", you.evasion());
+    CPRINTF("%2d ", unscale_round_up(you.evasion_scaled(), 100));
 }
 
 /**
@@ -2196,7 +2196,7 @@ static vector<formatted_string> _get_overview_stats()
     else
         entry.textcolour(HUD_VALUE_COLOUR);
 
-    entry.cprintf("%2d", you.armour_class());
+    entry.cprintf("%2d", you.armour_class_scaled()/100);
 
     cols.add_formatted(1, entry.to_colour_string(), false);
     entry.clear();

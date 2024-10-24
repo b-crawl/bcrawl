@@ -2251,7 +2251,7 @@ static int _player_evasion(ev_ignore_type evit)
     const int final_evasion =
         _player_scale_evasion(prescaled_evasion, scale);
 
-    return unscale_round_up(final_evasion, scale);
+    return final_evasion;
 }
 
 // Returns the spellcasting penalty (increase in spell failure) for the
@@ -6232,7 +6232,7 @@ int player::racial_ac(bool temp) const
         && (!player_is_shapechanged() || form == transformation::dragon
             || !temp))
     {
-        AC = 400 + 100 * (experience_level / 3);  // max 13
+        AC = 400 + 100 * experience_level / 3;  // max 13
         if (species == SP_GREY_DRACONIAN) // no breath
             AC += 500;
     }
@@ -6361,6 +6361,12 @@ int player::base_ac(int scale) const
 
 int player::armour_class(bool /*calc_unid*/) const
 {
+    int base = armour_class_scaled();
+    return div_rand_round(base, 100);
+}
+
+int player::armour_class_scaled() const
+{
     const int scale = 100;
     int AC = base_ac(scale);
 
@@ -6381,7 +6387,7 @@ int player::armour_class(bool /*calc_unid*/) const
 
     AC += sanguine_armour_bonus();
 
-    return AC / scale;
+    return AC;
 }
  /**
   * Guaranteed damage reduction.
@@ -6463,15 +6469,22 @@ int player::gdr_perc() const
  *                 May be null.
  * @return         The player's relevant EV.
  */
+
 int player::evasion(ev_ignore_type evit, const actor* act) const
+{
+    int base = player::evasion_scaled(evit, act);
+    return div_rand_round(base, 100);
+}
+
+int player::evasion_scaled(ev_ignore_type evit, const actor* act) const
 {
     const int base_evasion = _player_evasion(evit);
 
-    const int constrict_penalty = is_constricted() ? 3 : 0;
+    const int constrict_penalty = is_constricted() ? 300 : 0;
 
     const bool attacker_invis = act && !act->visible_to(this);
     const int invis_penalty = attacker_invis && !(evit & EV_IGNORE_HELPLESS) ?
-                              10 : 0;
+                              1000 : 0;
 
     return base_evasion - constrict_penalty - invis_penalty;
 }

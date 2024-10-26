@@ -844,7 +844,7 @@ static void _print_stats_ac(int x, int y)
     else if (you.duration[DUR_CORROSION])
         text_col = RED;
 
-    string ac = make_stringf("%2.1f ", you.armour_class_scaled()/100.0);
+    string ac = make_stringf("%2d ", (int)(you.armour_class_scaled()/100.0 + 0.5));
     textcolour(text_col);
     CGOTOXY(x+4, y, GOTO_STAT);
     CPRINTF("%-12s", ac.c_str());
@@ -869,7 +869,7 @@ static void _print_stats_ev(int x, int y)
                || you.cannot_move() ? RED
                                     : _boosted_ev() ? LIGHTBLUE
                                                     : HUD_VALUE_COLOUR);
-    CPRINTF("%2.1f ", you.evasion_scaled()/100.0);
+    CPRINTF("%2d ", (int)(you.evasion_scaled()/100.0 + 0.5));
 }
 
 /**
@@ -2198,7 +2198,7 @@ static vector<formatted_string> _get_overview_stats()
 
     entry.cprintf("%2.1f", you.armour_class_scaled()/100.0);
 
-    cols.add_formatted(1, entry.to_colour_string(), false);
+    cols.add_formatted(0, entry.to_colour_string(), false);
     entry.clear();
 
     entry.textcolour(HUD_CAPTION_COLOUR);
@@ -2209,9 +2209,9 @@ static vector<formatted_string> _get_overview_stats()
     else
         entry.textcolour(HUD_VALUE_COLOUR);
 
-    entry.cprintf("%2d", you.evasion());
+    entry.cprintf("%2.1f", you.evasion_scaled()/100.0);
 
-    cols.add_formatted(1, entry.to_colour_string(), false);
+    cols.add_formatted(0, entry.to_colour_string(), false);
     entry.clear();
 
     entry.textcolour(HUD_CAPTION_COLOUR);
@@ -2224,7 +2224,7 @@ static vector<formatted_string> _get_overview_stats()
 
     entry.cprintf("%2d", player_displayed_shield_class());
 
-    cols.add_formatted(1, entry.to_colour_string(), false);
+    cols.add_formatted(0, entry.to_colour_string(), false);
     entry.clear();
 
     entry.textcolour(HUD_CAPTION_COLOUR);

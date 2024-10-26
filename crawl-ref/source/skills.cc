@@ -1795,8 +1795,11 @@ string skill_title_by_rank(skill_type best_skill, uint8_t skill_rank,
                 if (god == GOD_DITHMENOS)
                     result = "Nightshade";
                 break;
+
+            default: break;
             }
-            else if (god != GOD_NO_GOD)
+
+            if (result.empty() && god != GOD_NO_GOD)
                 result = god_title(god, species, piety);
             break;
 

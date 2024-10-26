@@ -132,6 +132,7 @@
   - v1.40.3: Monster speeds are described more precisely.
   - v1.41: The player automatically eats a ration when trying to rest while starving.
   - v1.41: The player will not automatically eat their last ration.
+  - v1.42: AC, EV, and SH are randomly rounded to remove breakpoints. Previously, AC was rounded down, EV was rounded up, and SH was rounded to the nearest 1/2. Their decimal values are shown in the overview screen.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -516,6 +517,9 @@
   - v1.41: While worshipping Jiyva, friendly slimes no longer eat items, but neutral slimes still can.
   - v1.41: TSO gives ammunition gifts earlier, but gives less ammunition at high piety.
   - v1.41: Fedhas is no longer displeased by the player attacking plants.
+  - v1.42: Umbra (such as from Dithmenos) no longer affects chance to hit or stealth. Instead, it halves all noise produced within it.
+  - v1.42: Elyvilon provides water walking at \*\*\*\*\*\*.
+  - v1.42: Zin is more likely to protect the player from polymorphs, and provides full protection at \*\*\*\*.
 
 #### New Items
   - The 'Ring of Insulation' gives rElec.
@@ -598,6 +602,7 @@
   - v1.39.1: Scrolls of magic mapping become scrolls of revelation, which also let the player see through walls for 1 turn.
   - v1.39.2: Large shields have a lower base shield penalty. (16 -> 15)
   - v1.40.1: Phials of floods never miss.
+  - v1.42: Amulets of the gourmand prevent player satiation from going above "Very Full".
 
 #### Removed Items
   - Amulet of Harm
@@ -803,6 +808,9 @@
   - v1.41.1: Crocodiles, alligators, and emperor scorpions can drag their foe backwards on melee hits.
   - v1.41.2: Mutant beast constriction attacks deal less damage.
   - v1.41.2: Death ooze constriction attacks deal less damage. (32 -> 26)
+  - v1.42: Frenzied slime monsters can only merge with other frenzied slime monsters, and are less likely to merge.
+  - v1.42: Mesmerization from wendigos is blocked by clarity.
+  - v1.42: Ancient automatons can be targeted by Lee's Rapid Deconstruction.
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

@@ -2222,7 +2222,7 @@ static vector<formatted_string> _get_overview_stats()
     else
         entry.textcolour(HUD_VALUE_COLOUR);
 
-    entry.cprintf("%2d", player_displayed_shield_class());
+    entry.cprintf("%2.1f", player_shield_class_scaled()/200.0);
 
     cols.add_formatted(1, entry.to_colour_string(), false);
     entry.clear();

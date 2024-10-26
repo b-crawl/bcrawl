@@ -2292,7 +2292,7 @@ int player_wizardry(spell_type spell)
  * Exactly twice the value displayed to players, for legacy reasons.
  * @return      The player's current SH value.
  */
-int player_shield_class()
+int player_shield_class_scaled()
 {
     int shield = 0;
 
@@ -2357,7 +2357,12 @@ int player_shield_class()
     if (you.species == SP_FAIRY)
         shield += 600 + 200 * you.experience_level / 3;
 
-    return (shield + 50) / 100;
+    return shield;
+}
+
+int player_shield_class()
+{
+    return div_rand_round(player_shield_class_scaled, 100);
 }
 
 /**
@@ -2368,7 +2373,7 @@ int player_shield_class()
  */
 int player_displayed_shield_class()
 {
-    return player_shield_class() / 2;
+    return (player_shield_class_scaled() + 100) / 200;
 }
 
 /**

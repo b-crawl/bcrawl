@@ -2198,7 +2198,7 @@ static vector<formatted_string> _get_overview_stats()
 
     entry.cprintf("%2.1f", you.armour_class_scaled()/100.0);
 
-    cols.add_formatted(0, entry.to_colour_string(), false);
+    cols.add_formatted(1, entry.to_colour_string(), false);
     entry.clear();
 
     entry.textcolour(HUD_CAPTION_COLOUR);
@@ -2211,7 +2211,7 @@ static vector<formatted_string> _get_overview_stats()
 
     entry.cprintf("%2.1f", you.evasion_scaled()/100.0);
 
-    cols.add_formatted(0, entry.to_colour_string(), false);
+    cols.add_formatted(1, entry.to_colour_string(), false);
     entry.clear();
 
     entry.textcolour(HUD_CAPTION_COLOUR);
@@ -2224,7 +2224,7 @@ static vector<formatted_string> _get_overview_stats()
 
     entry.cprintf("%2d", player_displayed_shield_class());
 
-    cols.add_formatted(0, entry.to_colour_string(), false);
+    cols.add_formatted(1, entry.to_colour_string(), false);
     entry.clear();
 
     entry.textcolour(HUD_CAPTION_COLOUR);

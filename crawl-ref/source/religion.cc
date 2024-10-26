@@ -220,6 +220,7 @@ const vector<god_power> god_powers[NUM_GODS] =
       { 4, ABIL_ELYVILON_GREATER_HEALING, "provide greater healing for yourself" },
       { 5, ABIL_ELYVILON_DIVINE_VIGOUR, "call upon Elyvilon for divine vigour" },
       { 1, ABIL_ELYVILON_LIFESAVING, "call on Elyvilon to save your life" },
+      { 6, "walk on water" },
     },
 
     // Lugonu

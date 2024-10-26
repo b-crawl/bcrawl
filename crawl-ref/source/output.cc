@@ -844,7 +844,7 @@ static void _print_stats_ac(int x, int y)
     else if (you.duration[DUR_CORROSION])
         text_col = RED;
 
-    string ac = make_stringf("%2d ", (int)(you.armour_class_scaled()/100.0 + 0.5));
+    string ac = make_stringf("%2d ", (you.armour_class_scaled() + 50) / 100);
     textcolour(text_col);
     CGOTOXY(x+4, y, GOTO_STAT);
     CPRINTF("%-12s", ac.c_str());
@@ -869,7 +869,7 @@ static void _print_stats_ev(int x, int y)
                || you.cannot_move() ? RED
                                     : _boosted_ev() ? LIGHTBLUE
                                                     : HUD_VALUE_COLOUR);
-    CPRINTF("%2d ", (int)(you.evasion_scaled()/100.0 + 0.5));
+    CPRINTF("%2d ", (you.evasion_scaled() + 50) / 100);
 }
 
 /**

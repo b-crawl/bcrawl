@@ -2362,7 +2362,7 @@ int player_shield_class_scaled()
 
 int player_shield_class()
 {
-    return div_rand_round(player_shield_class_scaled, 100);
+    return div_rand_round(player_shield_class_scaled(), 100);
 }
 
 /**

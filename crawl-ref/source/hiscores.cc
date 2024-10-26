@@ -1707,8 +1707,8 @@ void scorefile_entry::init(time_t dt)
     intel = you.stat(STAT_INT, false);
     dex   = you.stat(STAT_DEX, false);
 
-    ac    = you.armour_class();
-    ev    = you.evasion();
+    ac    = (you.armour_class_scaled() + 50) / 100;
+    ev    = (you.evasion_scaled() + 50) / 100;
     sh    = player_displayed_shield_class();
 
     god = you.religion;

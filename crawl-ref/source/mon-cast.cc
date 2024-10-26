@@ -1033,7 +1033,6 @@ static bool _set_hex_target(monster* caster, bolt& pbolt)
 
         if (mons_aligned(*targ, foe)
             && !targ->has_ench(ENCH_CHARM)
-            && !targ->has_ench(ENCH_HEXED)
             && !mons_is_firewood(**targ)
             && !_flavour_benefits_monster(pbolt.flavour, **targ))
         {
@@ -4726,8 +4725,7 @@ static int _mons_mass_confuse(monster* mons, bool actual)
 
         if (mons_immune_magic(**mi)
             || mons_is_firewood(**mi)
-            || mons_atts_aligned(mi->attitude, mons->attitude)
-            || mons->has_ench(ENCH_HEXED))
+            || mons_atts_aligned(mi->attitude, mons->attitude))
         {
             continue;
         }
@@ -6459,7 +6457,7 @@ void mons_cast(monster* mons, bolt pbolt, spell_type spell_cast,
         for (monster_near_iterator mi(mons, LOS_NO_TRANS); mi; ++mi)
         {
             if (mons_aligned(mons, *mi) && !mi->has_ench(ENCH_CHARM)
-                && !mi->has_ench(ENCH_HEXED) && *mi != mons)
+                && *mi != mons)
             {
                 mon_enchant bond = mon_enchant(ENCH_INJURY_BOND, 1, mons,
                                                40 + random2(80));
@@ -7757,7 +7755,6 @@ static bool _ms_waste_of_time(monster* mon, mon_spell_slot slot)
         for (monster_iterator mi; mi; ++mi)
         {
             if (mons_aligned(mon, *mi) && !mi->has_ench(ENCH_CHARM)
-                && !mi->has_ench(ENCH_HEXED)
                 && *mi != mon && mon->see_cell_no_trans(mi->pos())
                 && !mi->has_ench(ENCH_INJURY_BOND))
             {

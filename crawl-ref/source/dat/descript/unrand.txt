@@ -446,8 +446,7 @@ hand.
 ring of Shadows
 
 A black ring that can make its wearer one with the shadows. It creates a dark
-umbra that surrounds the wearer and increases stealth greatly, and reduces the
-accuracy of all those within it.
+umbra that surrounds the wearer and dampens sound from within it.
 %%%%
 # TAG_MAJOR_VERSION == 34
 amulet of Cekugob

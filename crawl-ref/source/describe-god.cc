@@ -858,8 +858,7 @@ static formatted_string _describe_god_powers(god_type which_god)
             desc.textcolour(DARKGREY);
         else
             desc.textcolour(god_colour(which_god));
-        desc.cprintf("You radiate a%s aura of darkness, enhancing your stealth "
-                "and reducing the accuracy of your foes.\n",
+        desc.cprintf("You radiate a%s aura of darkness that dampens sound from within it.\n",
                 umbra_size > 5 ? " large" :
                 umbra_size > 3 ? "n" :
                                  " small");

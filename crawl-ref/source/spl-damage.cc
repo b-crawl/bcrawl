@@ -959,6 +959,7 @@ static int _shatter_mon_dice(const monster *mon)
     case MONS_IRON_GOLEM:
     case MONS_PEACEKEEPER:
     case MONS_WAR_GARGOYLE:
+    case MONS_ANCIENT_AUTOMATON:
     case MONS_SALTLING:
     case MONS_CRYSTAL_GUARDIAN:
     case MONS_OBSIDIAN_STATUE:
@@ -1772,7 +1773,8 @@ spret cast_ignition(const actor *agent, int pow, bool fail)
         if (ai->is_monster()
             && !ai->as_monster()->wont_attack()
             && !mons_is_firewood(*ai->as_monster())
-            && !mons_is_tentacle_segment(ai->as_monster()->type))
+            && !mons_is_tentacle_segment(ai->as_monster()->type)
+            && !mons_is_projectile(*ai->as_monster()))
         {
             blast_sources.push_back(ai->position);
         }
@@ -2061,6 +2063,7 @@ bool setup_fragmentation_beam(bolt &beam, int pow, const actor *caster,
         case MONS_IRON_GOLEM:
         case MONS_PEACEKEEPER:
         case MONS_WAR_GARGOYLE:
+        case MONS_ANCIENT_AUTOMATON:
             beam.name       = "blast of metal fragments";
             beam.colour     = CYAN;
             beam.damage.num = 4;

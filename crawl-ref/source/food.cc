@@ -1001,6 +1001,10 @@ int you_max_hunger()
     if (you.species == SP_GHOUL)
         return hunger_threshold[HS_SATIATED];
 
+    // So players don't need to waste satiation before fights.
+    if (you.gourmand())
+        return hunger_threshold[HS_VERY_FULL];
+
     return hunger_threshold[HS_ENGORGED];
 }
 

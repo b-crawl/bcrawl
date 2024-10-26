@@ -160,8 +160,8 @@ enum enchant_type
     ENCH_CONDENSATION_SHIELD,
 #endif
     ENCH_RESISTANCE,
-    ENCH_HEXED,
 #if TAG_MAJOR_VERSION == 34
+    ENCH_HEXED,
     ENCH_BONE_ARMOUR,
     ENCH_CHANT_FIRE_STORM, // chanting the fire storm spell
     ENCH_CHANT_WORD_OF_ENTROPY, // chanting word of entropy

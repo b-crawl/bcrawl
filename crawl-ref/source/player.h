@@ -817,9 +817,12 @@ public:
     int racial_ac(bool temp) const;
     int base_ac(int scale) const;
     int armour_class(bool /*calc_unid*/ = true) const override;
+    int armour_class_scaled() const;
     int gdr_perc() const override;
     int evasion(ev_ignore_type evit = EV_IGNORE_NONE,
                 const actor *attacker = nullptr) const override;
+    int evasion_scaled(ev_ignore_type evit = EV_IGNORE_NONE,
+                const actor *attacker = nullptr) const;
 
     int stat_hp() const override     { return hp; }
     int stat_maxhp() const override  { return hp_max; }
@@ -1005,6 +1008,7 @@ int player_res_poison(bool calc_unid = true, bool temp = true,
 int player_res_magic(bool calc_unid = true, bool temp = true);
 
 int player_shield_class();
+int player_shield_class_scaled();
 int player_displayed_shield_class();
 bool player_omnireflects();
 

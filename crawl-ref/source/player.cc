@@ -2251,7 +2251,7 @@ static int _player_evasion(ev_ignore_type evit)
     const int final_evasion =
         _player_scale_evasion(prescaled_evasion, scale);
 
-    return unscale_round_up(final_evasion, scale);
+    return final_evasion;
 }
 
 // Returns the spellcasting penalty (increase in spell failure) for the
@@ -2292,7 +2292,7 @@ int player_wizardry(spell_type spell)
  * Exactly twice the value displayed to players, for legacy reasons.
  * @return      The player's current SH value.
  */
-int player_shield_class()
+int player_shield_class_scaled()
 {
     int shield = 0;
 
@@ -2357,7 +2357,12 @@ int player_shield_class()
     if (you.species == SP_FAIRY)
         shield += 600 + 200 * you.experience_level / 3;
 
-    return (shield + 50) / 100;
+    return shield;
+}
+
+int player_shield_class()
+{
+    return div_rand_round(player_shield_class_scaled(), 100);
 }
 
 /**
@@ -2368,7 +2373,7 @@ int player_shield_class()
  */
 int player_displayed_shield_class()
 {
-    return player_shield_class() / 2;
+    return (player_shield_class_scaled() + 100) / 200;
 }
 
 /**
@@ -3428,26 +3433,6 @@ int player_stealth()
     // makes you extremely unstealthy.
     if (you.backlit())
         stealth = stealth * 2 / 5;
-
-    // On the other hand, shrouding has the reverse effect, if you know
-    // how to make use of it:
-    if (you.umbra())
-    {
-        int umbra_mul = 1, umbra_div = 1;
-        if (you.nightvision())
-        {
-            umbra_mul = you.piety + MAX_PIETY;
-            umbra_div = MAX_PIETY;
-        }
-        if (player_equip_unrand(UNRAND_SHADOWS)
-            && 2 * umbra_mul < 3 * umbra_div)
-        {
-            umbra_mul = 3;
-            umbra_div = 2;
-        }
-        stealth *= umbra_mul;
-        stealth /= umbra_div;
-    }
 
     if (you.form == transformation::shadow)
         stealth *= 2;
@@ -6252,7 +6237,7 @@ int player::racial_ac(bool temp) const
         && (!player_is_shapechanged() || form == transformation::dragon
             || !temp))
     {
-        AC = 400 + 100 * (experience_level / 3);  // max 13
+        AC = 400 + 100 * experience_level / 3;  // max 13
         if (species == SP_GREY_DRACONIAN) // no breath
             AC += 500;
     }
@@ -6381,6 +6366,12 @@ int player::base_ac(int scale) const
 
 int player::armour_class(bool /*calc_unid*/) const
 {
+    int base = armour_class_scaled();
+    return div_rand_round(base, 100);
+}
+
+int player::armour_class_scaled() const
+{
     const int scale = 100;
     int AC = base_ac(scale);
 
@@ -6401,7 +6392,7 @@ int player::armour_class(bool /*calc_unid*/) const
 
     AC += sanguine_armour_bonus();
 
-    return AC / scale;
+    return AC;
 }
  /**
   * Guaranteed damage reduction.
@@ -6483,15 +6474,22 @@ int player::gdr_perc() const
  *                 May be null.
  * @return         The player's relevant EV.
  */
+
 int player::evasion(ev_ignore_type evit, const actor* act) const
+{
+    int base = player::evasion_scaled(evit, act);
+    return div_rand_round(base, 100);
+}
+
+int player::evasion_scaled(ev_ignore_type evit, const actor* act) const
 {
     const int base_evasion = _player_evasion(evit);
 
-    const int constrict_penalty = is_constricted() ? 3 : 0;
+    const int constrict_penalty = is_constricted() ? 300 : 0;
 
     const bool attacker_invis = act && !act->visible_to(this);
     const int invis_penalty = attacker_invis && !(evit & EV_IGNORE_HELPLESS) ?
-                              10 : 0;
+                              1000 : 0;
 
     return base_evasion - constrict_penalty - invis_penalty;
 }

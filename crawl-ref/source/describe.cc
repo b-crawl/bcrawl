@@ -3652,6 +3652,35 @@ static const item_def* _weapon_for_attack(const monster_info& mi, int atk)
     return nullptr;
 }
 
+// Return a monster's slaying bonus (not including weapon enchantment)
+static int _monster_slaying(const monster_info& mi)
+{
+    int slaying = 0;
+    const artefact_prop_type artp = ARTP_SLAYING;
+
+    // Largely a duplication of monster::scan_artefacts,
+    // but there's no equivalent for monster_info :(
+    const item_def* armour = mi.inv[MSLOT_ARMOUR].get();
+    const item_def* shield = mi.inv[MSLOT_SHIELD].get();
+    const item_def* jewellery = mi.inv[MSLOT_JEWELLERY].get();
+
+    if (jewellery && jewellery->base_type == OBJ_JEWELLERY)
+    {
+        if (jewellery->is_type(OBJ_JEWELLERY, RING_SLAYING))
+            slaying += jewellery->plus;
+        if (is_artefact(*jewellery))
+            slaying += artefact_property(*jewellery, artp);
+    }
+
+    if (armour && armour->base_type == OBJ_ARMOUR && is_artefact(*armour))
+        slaying += artefact_property(*armour, artp);
+
+    if (shield && shield->base_type == OBJ_ARMOUR && is_artefact(*shield))
+        slaying += artefact_property(*shield, artp);
+
+    return slaying;
+}
+
 static string _monster_attacks_description(const monster_info& mi)
 {
     ostringstream result;
@@ -3691,10 +3720,19 @@ static string _monster_attacks_description(const monster_info& mi)
               info.weapon ? info.weapon->name(DESC_PLAIN).c_str()
             : ghost_brand_name(special_flavour, mi.type).c_str();
         const string weapon_note = weapon_name.size() ?
-            make_stringf(" plus %s %s",
+            make_stringf(" with %s %s",
                         mi.pronoun(PRONOUN_POSSESSIVE), weapon_name.c_str())
             : "";
-
+        int weapon_damage = 0;
+        if (info.weapon)
+            weapon_damage = property(*info.weapon, PWPN_DAMAGE);
+        int enchant_bonus = 0;
+        // Weapon could be a staff, which cannot be enchanted.
+        if (weapon_damage && info.weapon->base_type != OBJ_STAVES)
+            enchant_bonus = info.weapon->plus;
+        const int slay_bonus = _monster_slaying(mi);
+        const bool ranged = info.weapon && is_range_weapon(*info.weapon);
+        
         const string count_desc =
               attack_count.second == 1 ? "" :
               attack_count.second == 2 ? " twice" :
@@ -3710,7 +3748,23 @@ static string _monster_attacks_description(const monster_info& mi)
             continue;
         }
 
-        int dam = attack.damage;
+        // In attack::calc_damage() maximum damage is the sum of
+        // monster damage, weapon damage, enchantment and slaying bonuses.
+        int dam = attack.damage + weapon_damage + enchant_bonus + slay_bonus;
+
+        if (ranged && mons_class_flag(mi.type, M_ARCHER))
+            dam += archer_bonus_damage(mi.hd);
+
+        // Show damage modified by any applicable effects.
+        if (!ranged)
+        {
+            if (mi.is(MB_STRONG) || mi.is(MB_BERSERK))
+                dam = dam * 3 / 2;
+            if (mi.is(MB_IDEALISED))
+                dam = dam * 2;
+            if (mi.is(MB_WEAK))
+                dam = dam * 2 / 3;
+        }
 
         // Damage is listed in parentheses for attacks with a flavour
         // description, but not for plain attacks.
@@ -3740,12 +3794,6 @@ static string _monster_attacks_description(const monster_info& mi)
                                                   attack_descs.end(),
                                                   "; and ", "; ");
         result << ".\n";
-    }
-
-    if (mons_class_flag(mi.type, M_ARCHER))
-    {
-        result << make_stringf("It can deal up to %d extra damage when attacking with ranged weaponry.\n",
-                                archer_bonus_damage(mi.hd));
     }
 
     if (mons_class_flag(mi.type, M_BURROWS))

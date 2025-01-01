@@ -3750,6 +3750,7 @@ static string _monster_attacks_description(const monster_info& mi)
 
         // In attack::calc_damage() maximum damage is the sum of
         // monster damage, weapon damage, enchantment and slaying bonuses.
+        weapon_damage = max(weapon_damage - 2, 0); // see attack::calc_damage in attack.cc
         int dam = attack.damage + weapon_damage + enchant_bonus + slay_bonus;
 
         if (ranged && mons_class_flag(mi.type, M_ARCHER))

@@ -1287,22 +1287,17 @@ int attack::calc_damage()
             damage -= 1;  // early-game balancing?
             // max is then weapon dmg - 2
 
-            int wpn_damage_plus = 0;
             if (weapon) // can be 0 for throwing projectiles
-                wpn_damage_plus = get_weapon_plus();
-
-            wpn_damage_plus += slay_bonus;
-            damage = _apply_slaying(damage, wpn_damage_plus);
-        }
-        else
-        {
-            damage = _apply_slaying(damage, slay_bonus);
+                slay_bonus += get_weapon_plus();
         }
 
         damage_max += attk_damage;
         damage     += 1 + random2(attk_damage);
 
         damage = apply_damage_modifiers(damage, damage_max);
+        
+        // enchantment effects are not affected by berserk/etc
+        damage = _apply_slaying(damage, slay_bonus);
 
         set_attack_verb(damage);
         return apply_defender_ac(damage, damage_max);

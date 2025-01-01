@@ -1257,36 +1257,46 @@ int attack::calc_base_unarmed_damage()
     return damage;
 }
 
+static int _apply_slaying(int damage, int plus)
+{
+    if (plus >= 0)   // +0 = random2(1) = 0
+        return damage + random2(1 + plus);
+    else
+        return damage - random2(1 - plus);
+}
+
 int attack::calc_damage()
 {
     if (attacker->is_monster())
     {
         int damage = 0;
         int damage_max = 0;
+        
+        int slay_bonus = attacker->scan_artefacts(ARTP_SLAYING);
+        const int jewellery = attacker->as_monster()->inv[MSLOT_JEWELLERY];
+        if (jewellery != NON_ITEM
+            && mitm[jewellery].is_type(OBJ_JEWELLERY, RING_SLAYING))
+        {
+            slay_bonus += mitm[jewellery].plus;
+        }
+
         if (using_weapon() || wpn_skill == SK_THROWING)
         {
             damage_max = weapon_damage();
             damage += random2(damage_max);
+            damage -= 1;  // early-game balancing?
+            // max is then weapon dmg - 2
 
             int wpn_damage_plus = 0;
             if (weapon) // can be 0 for throwing projectiles
                 wpn_damage_plus = get_weapon_plus();
 
-            const int jewellery = attacker->as_monster()->inv[MSLOT_JEWELLERY];
-            if (jewellery != NON_ITEM
-                && mitm[jewellery].is_type(OBJ_JEWELLERY, RING_SLAYING))
-            {
-                wpn_damage_plus += mitm[jewellery].plus;
-            }
-
-            wpn_damage_plus += attacker->scan_artefacts(ARTP_SLAYING);
-
-            if (wpn_damage_plus >= 0)
-                damage += random2(wpn_damage_plus);
-            else
-                damage -= random2(1 - wpn_damage_plus);
-
-            damage -= 1 + random2(3);
+            wpn_damage_plus += slay_bonus;
+            damage = _apply_slaying(damage, wpn_damage_plus);
+        }
+        else
+        {
+            damage = _apply_slaying(damage, slay_bonus);
         }
 
         damage_max += attk_damage;

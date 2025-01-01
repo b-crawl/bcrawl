@@ -3761,8 +3761,6 @@ static string _monster_attacks_description(const monster_info& mi)
         {
             if (mi.is(MB_STRONG) || mi.is(MB_BERSERK))
                 dam = dam * 3 / 2;
-            if (mi.is(MB_IDEALISED))
-                dam = dam * 2;
             if (mi.is(MB_WEAK))
                 dam = dam * 2 / 3;
         }

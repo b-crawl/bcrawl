@@ -110,7 +110,7 @@ static const map<job_type, job_def> job_data =
     4, 4, 4,
     { SP_HILL_ORC, SP_TROLL, SP_CENTAUR, SP_MERFOLK, SP_MINOTAUR,
       SP_BASE_DRACONIAN, SP_DEMONSPAWN },
-    { "leather armour plus:2", "scroll of teleportation" },
+    { "leather armour plus:2", "scroll of teleportation", "wand of polymorph charges:8" },
     WCHOICE_PLAIN,
     { { SK_FIGHTING, 3 }, { SK_ARMOUR, 1 }, { SK_DODGING, 1 },
       { SK_WEAPON, 3 } },

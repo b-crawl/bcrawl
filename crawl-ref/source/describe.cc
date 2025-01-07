@@ -3766,7 +3766,8 @@ static string _monster_attacks_description(const monster_info& mi)
         }
         
         // enchantment effects are not affected by berserk/etc
-        dam += enchant_bonus + slay_bonus;
+        // slaying rolls separately and can always be 0
+        dam += max(0, enchant_bonus + slay_bonus);
 
         // Damage is listed in parentheses for attacks with a flavour
         // description, but not for plain attacks.

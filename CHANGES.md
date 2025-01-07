@@ -93,6 +93,7 @@
   - v1.38.3: When species that can't drink potions have a background that would start with potions, they start with scrolls instead, usually a scroll of teleportation.
   - v1.41: Warpers start with Force Lance instead of Passage of Golubria.
   - v1.41.1: Demigods can be Monks.
+  - v1.42.1: Chaos Knights start with a wand of polymorph with 8 charges.
 
 #### Features
   - All items are automatically identified if the player has a rune.
@@ -133,6 +134,7 @@
   - v1.41: The player automatically eats a ration when trying to rest while starving.
   - v1.41: The player will not automatically eat their last ration.
   - v1.42: AC, EV, and SH are randomly rounded to remove breakpoints. Previously, AC was rounded down, EV was rounded up, and SH was rounded to the nearest 1/2. Their decimal values are shown in the overview screen.
+  - v1.42.1: Monster descriptions show their maximum damage with their current weapon.
 
 #### Balance Changes
   - The Paralyse spell duration is reduced to 2-4 turns.
@@ -179,6 +181,8 @@
   - v1.37.1: Base health regeneration of players is now 0.1 + HP/600 per turn. This is higher than before at low levels.
   - v1.39.2: The chance of player aux melee attacks is now scaled by (25 + dexterity \* 2.5)% instead of by ((strength + dexterity) \* 2)%.
   - v1.40.2: Large explosions are more circular.
+  - v1.42.1: Monster attack damage with a weapon has a smaller penalty. (2-4 -> 2, vs 1 in mainline DCSS)
+  - v1.42.1: Damage from slaying and weapon enchantments is no longer affected by monster statuses such as berserk and weakness.
 
 #### New Species
   - Fairy has great magic aptitudes, -1 MP costs on all spells, bonus defenses, and can't wear armour.
@@ -603,6 +607,7 @@
   - v1.39.2: Large shields have a lower base shield penalty. (16 -> 15)
   - v1.40.1: Phials of floods never miss.
   - v1.42: Amulets of the gourmand prevent player satiation from going above "Very Full".
+  - v1.42.1: Hostile polymorphs of monsters (such as from wands of polymorph) briefly cause magic vulnerability in addition to confusion.
 
 #### Removed Items
   - Amulet of Harm
@@ -811,6 +816,7 @@
   - v1.42: Frenzied slime monsters can only merge with other frenzied slime monsters, and are less likely to merge.
   - v1.42: Mesmerization from wendigos is blocked by clarity.
   - v1.42: Ancient automatons can be targeted by Lee's Rapid Deconstruction.
+  - v1.42.1: Orc priest cast delay is increased again. (16 -> 17)
 
 #### Unique Monsters
   - Ijyb always has a Polymorph wand, and gets a sling and branded dagger.

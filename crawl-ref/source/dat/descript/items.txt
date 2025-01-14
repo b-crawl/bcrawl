@@ -1257,7 +1257,8 @@ of its limbs.
 wand of polymorph
 
 A magical device which causes the user or another target to be transmogrified
-into another form.
+into another form. When used on another target, the transformation briefly
+causes confusion and increased vulnerability to enchantments.
 %%%%
 wand of random effects
 

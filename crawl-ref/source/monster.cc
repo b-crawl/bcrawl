@@ -3342,8 +3342,6 @@ int monster::armour_class(bool calc_unid) const
         ac += 4 + get_hit_dice() / 3;
     if (has_ench(ENCH_ICEMAIL))
         ac += ICEMAIL_MAX;
-    if (has_ench(ENCH_IDEALISED))
-        ac += 4 + get_hit_dice() / 3;
 
     // Penalty due to bad temp mutations.
     if (has_ench(ENCH_WRETCHED))
@@ -6647,8 +6645,6 @@ int monster::spell_hd(spell_type spell) const
     int hd = get_hit_dice();
     if (mons_is_hepliaklqana_ancestor(type))
         hd = max(1, hd * 2 / 3);
-    if (has_ench(ENCH_IDEALISED))
-        hd *= 2;
     if (has_ench(ENCH_EMPOWERED_SPELLS))
         hd += 5;
     return hd;
